@@ -17,12 +17,13 @@ Europeana Channels as a Rails + Blacklight application.
 
 ### Database
 
-1. Configure the database in config/database.yml
+1. Configure the database in config/database.yml (see
+  http://guides.rubyonrails.org/configuring.html#configuring-a-database)
 2. Initialize the database: `bundle exec rake db:setup`
 
 ### Secrets
 
-Create config/secrets.yml containing:
-* `:secret_key_base`: generated with `bundle exec rake secret`
-* `:europeana_api_key`: your Europeana API key
+Copy config/secrets.yml.example to config/secret.yml and edit to contain:
+* `secret_key_base`: generated with `bundle exec rake secret`
+* `europeana_api_key`: your Europeana API key
 
