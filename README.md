@@ -5,7 +5,7 @@ Europeana Channels as a Rails + Blacklight application.
 ## Requirements
 
 * Ruby >= 1.9
-* An key for the Europeana REST API, available from:
+* A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
 
 ## Installation
