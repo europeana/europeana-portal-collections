@@ -23,7 +23,7 @@ Europeana Channels as a Rails + Blacklight application.
 
 ### Secrets
 
-Copy config/secrets.yml.example to config/secret.yml and edit to contain:
+Copy config/secrets.yml.example to config/secrets.yml and edit to contain:
 * `secret_key_base`: generated with `bundle exec rake secret`
 * `europeana_api_key`: your Europeana API key
 
