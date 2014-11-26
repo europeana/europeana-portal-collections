@@ -18,3 +18,13 @@
 # Ignore config files containing secrets.
 /config/database.yml
 /config/secrets.yml
+
+# Ignore rvm files.
+.ruby-version
+.ruby-gemset
+
+# Ignore IDE files.
+*.komodoproject
+
+# Ignore os files.
+.DS_Store
