@@ -1,4 +1,4 @@
-module RSolr::Europeana::Routes
+module Channels::Routes
   extend ActiveSupport::Concern
   def solr_document(primary_resource)
     add_routes do |options|
@@ -10,7 +10,7 @@ module RSolr::Europeana::Routes
     end
   end
 end
-Blacklight::Routes.send(:include, RSolr::Europeana::Routes)
+Blacklight::Routes.send(:include, Channels::Routes)
 
 Rails.application.routes.draw do
   root :to => "catalog#index"
