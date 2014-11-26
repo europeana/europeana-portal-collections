@@ -45,4 +45,4 @@ gem 'blacklight', '>= 5.3.0'
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
 
-gem 'rsolr-europeana', '~> 0.0.1', :git => 'https://github.com/rwd/rsolr-europeana.git'
+gem 'rsolr-europeana', '~> 0.0.2', :git => 'https://github.com/rwd/rsolr-europeana.git'

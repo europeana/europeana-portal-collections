@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rwd/rsolr-europeana.git
-  revision: c23fa6158e465efb679df32c87c520dfc8fa6ce6
+  revision: 37e999360230837cd8000a7a3fcd2f4c9d762aa0
   specs:
-    rsolr-europeana (0.0.1)
+    rsolr-europeana (0.0.2)
       rsolr (~> 1.0.6)
 
 GEM
@@ -155,7 +155,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   rails (= 4.1.7)
-  rsolr-europeana (~> 0.0.1)!
+  rsolr-europeana (~> 0.0.2)!
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring

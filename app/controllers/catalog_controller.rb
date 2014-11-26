@@ -31,6 +31,7 @@ class CatalogController < ApplicationController
     # solr field configuration for search results/index views
     config.index.title_field = 'title'
     config.index.display_type_field = 'type'
+    config.index.thumbnail_field = 'edmPreview'
 
     # solr field configuration for document/show views
     #config.show.title_field = 'title_display'
@@ -89,33 +90,19 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display 
-    config.add_index_field 'title_display', :label => 'Title'
-    config.add_index_field 'title_vern_display', :label => 'Title'
-    config.add_index_field 'author_display', :label => 'Author'
-    config.add_index_field 'author_vern_display', :label => 'Author'
-    config.add_index_field 'format', :label => 'Format'
-    config.add_index_field 'language_facet', :label => 'Language'
-    config.add_index_field 'published_display', :label => 'Published'
-    config.add_index_field 'published_vern_display', :label => 'Published'
-    config.add_index_field 'lc_callnum_display', :label => 'Call number'
+#    config.add_index_field 'title_display', :label => 'Title'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display 
-    config.add_show_field 'title_display', :label => 'Title'
-    config.add_show_field 'title_vern_display', :label => 'Title'
-    config.add_show_field 'subtitle_display', :label => 'Subtitle'
-    config.add_show_field 'subtitle_vern_display', :label => 'Subtitle'
-    config.add_show_field 'author_display', :label => 'Author'
-    config.add_show_field 'author_vern_display', :label => 'Author'
-    config.add_show_field 'format', :label => 'Format'
-    config.add_show_field 'url_fulltext_display', :label => 'URL'
-    config.add_show_field 'url_suppl_display', :label => 'More Information'
-    config.add_show_field 'language_facet', :label => 'Language'
-    config.add_show_field 'published_display', :label => 'Published'
-    config.add_show_field 'published_vern_display', :label => 'Published'
-    config.add_show_field 'lc_callnum_display', :label => 'Call number'
-    config.add_show_field 'isbn_t', :label => 'ISBN'
-
+    config.add_show_field 'dcType', :label => 'Type'
+    config.add_show_field 'dctermsExtent', :label => 'Format'
+    config.add_show_field 'dcSubject', :label => 'Subject'
+    config.add_show_field 'dcIdentifier', :label => 'Identifier'
+    config.add_show_field 'dctermsProvenance', :label => 'Provenance'
+    config.add_show_field 'edmDataProvider', :label => 'Data provider'
+    config.add_show_field 'edmProvider', :label => 'Provider'
+    config.add_show_field 'edmCountry', :label => 'Providing country'
+    
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
@@ -153,10 +140,10 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc, pub_date_sort desc, title_sort asc', :label => 'relevance'
-    config.add_sort_field 'pub_date_sort desc, title_sort asc', :label => 'year'
-    config.add_sort_field 'author_sort asc, title_sort asc', :label => 'author'
-    config.add_sort_field 'title_sort asc, pub_date_sort desc', :label => 'title'
+#    config.add_sort_field 'score desc, pub_date_sort desc, title_sort asc', :label => 'relevance'
+#    config.add_sort_field 'pub_date_sort desc, title_sort asc', :label => 'year'
+#    config.add_sort_field 'author_sort asc, title_sort asc', :label => 'author'
+#    config.add_sort_field 'title_sort asc, pub_date_sort desc', :label => 'title'
 
     # If there are more than this many search results, no spelling ("did you 
     # mean") suggestion is offered.
