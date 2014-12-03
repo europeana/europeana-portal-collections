@@ -1,0 +1,5 @@
+---
+:hero: music.jpg
+:query: ! '"DISMARC+-+EuropeanaConnect" OR PROVIDER: "Cité+de+la+musique" OR PROVIDER:
+  "IRCAM-Institut+de+Recherche+et+Coordination+Acoustique%2FMusique" OR (what: Music)
+  OR (what: Sheet Music) OR (what: Musical Instrument)'
