@@ -15,7 +15,8 @@ Blacklight::Routes.send(:include, Channels::Routes)
 Rails.application.routes.draw do
   root :to => "catalog#index"
 
-  blacklight_for :catalog
-
   devise_for :users
+  
+  blacklight_for :catalog
+  get "channels/:id", :to => 'catalog#channel', :as => 'channel'
 end
