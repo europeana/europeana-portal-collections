@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/rwd/rsolr-europeana.git
-  revision: ea45789d26bd30ab8b5e80f2a3a98ee148083a73
-  ref: ea45789
+  revision: 073d74be3253a10c77e88c86a9fb0a84be23dfee
+  ref: 073d74b
   specs:
     rsolr-europeana (0.0.2)
       rsolr (~> 1.0.6)
