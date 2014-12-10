@@ -13,7 +13,7 @@ end
 Blacklight::Routes.send(:include, Channels::Routes)
 
 Rails.application.routes.draw do
-  root :to => "catalog#index"
+  root :to => "channels#index"
 
   devise_for :users
   

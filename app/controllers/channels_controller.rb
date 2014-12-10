@@ -5,6 +5,24 @@ class ChannelsController < ApplicationController
   
   helper_method :has_search_parameters?
   
+  def index
+    @channel = Channel.find(:home)
+    
+    (@response, @document_list) = get_search_results
+      
+    respond_to do |format|
+      format.html { render 'catalog/index' }
+      format.rss  { render 'catalog/index', :layout => false }
+      format.atom { render 'catalog/index', :layout => false }
+      format.json do
+        render json: render_search_results_as_json
+      end
+
+      additional_response_formats(format)
+      document_export_formats(format)
+    end
+  end
+  
   def show
     @channel = Channel.find(params[:id].to_sym)
     
@@ -28,10 +46,10 @@ class ChannelsController < ApplicationController
     end
   end
 
-  # Channels always have search parameters, even if none are entered by the user
+  # Channels may have a search query, even if none are entered by the user
   # @see Blacklight::Catalog#has_search_parameters?
   def has_search_parameters?
-    true
+    (@channel.present? and @channel.query.present?) or super
   end
   
   def _prefixes
@@ -39,6 +57,6 @@ class ChannelsController < ApplicationController
   end
   
   def search_action_url(options = {})
-    url_for(options.merge(:action => 'show'))
+    url_for(options.merge(:action => params[:action]))
   end
 end

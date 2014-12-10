@@ -26,7 +26,7 @@ class Channel
     if config.has_key?(meth)
       config[meth]
     else
-      super
+      nil
     end
   end
 end
