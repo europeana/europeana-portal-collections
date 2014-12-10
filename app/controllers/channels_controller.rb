@@ -8,10 +8,10 @@ class ChannelsController < ApplicationController
   def index
     @channel = Channel.find(:home)
     
-    (@response, @document_list) = get_search_results
+    (@response, @document_list) = get_search_results if has_search_parameters?
       
     respond_to do |format|
-      format.html { render 'catalog/index' }
+      format.html { render (has_search_parameters? ? 'search-results' : 'index') }
       format.rss  { render 'catalog/index', :layout => false }
       format.atom { render 'catalog/index', :layout => false }
       format.json do
@@ -24,17 +24,20 @@ class ChannelsController < ApplicationController
   end
   
   def show
+    redirect_to action: :index and return if params[:id] == 'home'
     @channel = Channel.find(params[:id].to_sym)
     
-    user_params = params.dup
-    if channel_query = @channel.query
-      user_params[:q] = user_params[:q] ? "(#{channel_query}) AND #{user_params[:q]}" : channel_query
+    if has_search_parameters?
+      user_params = params.dup
+      if channel_query = @channel.query
+        user_params[:q] = user_params[:q] ? "(#{channel_query}) AND #{user_params[:q]}" : channel_query
+      end
+      
+      (@response, @document_list) = get_search_results(user_params)
     end
-    
-    (@response, @document_list) = get_search_results(user_params)
       
     respond_to do |format|
-      format.html { render 'catalog/index' }
+      format.html { render (has_search_parameters? ? 'search-results' : 'show') }
       format.rss  { render 'catalog/index', :layout => false }
       format.atom { render 'catalog/index', :layout => false }
       format.json do
@@ -48,9 +51,9 @@ class ChannelsController < ApplicationController
 
   # Channels may have a search query, even if none are entered by the user
   # @see Blacklight::Catalog#has_search_parameters?
-  def has_search_parameters?
-    (@channel.present? and @channel.query.present?) or super
-  end
+#  def has_search_parameters?
+#    (@channel.present? and @channel.query.present?) or super
+#  end
   
   def _prefixes
     @_prefixes_with_partials ||= super | %w(catalog)
