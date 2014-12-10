@@ -3,6 +3,8 @@ class CatalogController < ApplicationController
   include ChannelsBlacklightConfig
   include EuropeanaBlacklightAdapter
   
+  helper_method :available_channels
+  
   def channel
     channel_id = params[:id]
     
@@ -30,5 +32,9 @@ class CatalogController < ApplicationController
   # @see Blacklight::Catalog#has_search_parameters?
   def has_search_parameters?
     true
+  end
+  
+  def available_channels
+    Channels::Application.config.channels.keys
   end
 end
