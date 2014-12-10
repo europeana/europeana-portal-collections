@@ -6,11 +6,11 @@ class CatalogController < ApplicationController
   helper_method :available_channels
   
   def channel
-    channel_id = params[:id]
+    @channel = Channel.find(params[:id].to_sym)
     
     user_params = params.dup
-    if channel_query = Channels::Application.config.channels[channel_id.to_sym][:query]
-      user_params[:q] = user_params[:q] ? "(#{channel_query}) AND #{params[:q]}" : channel_query
+    if channel_query = @channel.query
+      user_params[:q] = user_params[:q] ? "(#{channel_query}) AND #{user_params[:q]}" : channel_query
     end
     
     (@response, @document_list) = get_search_results(user_params)
