@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   # Please be sure to implement current_user and user_session. Blacklight depends on 
   # these methods in order to perform user specific actions. 
-
+  
   layout 'blacklight'
 
   # Prevent CSRF attacks by raising an exception.

@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   devise_for :users
   
   blacklight_for :catalog
-  get "channels/:id", :to => 'catalog#channel', :as => 'channel'
+  resources :channels, only: [ :show, :index ]
 end
