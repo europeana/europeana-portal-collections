@@ -3,41 +3,31 @@ class ChannelsController < ApplicationController
   include ChannelsBlacklightConfig
   include EuropeanaBlacklightAdapter
   
-  helper_method :has_search_parameters?
-  
   def index
     @channel = Channel.find(:home)
-    
-    (@response, @document_list) = get_search_results if has_search_parameters?
-      
-    respond_to do |format|
-      format.html { render (has_search_parameters? ? 'search-results' : 'index') }
-      format.rss  { render 'catalog/index', :layout => false }
-      format.atom { render 'catalog/index', :layout => false }
-      format.json do
-        render json: render_search_results_as_json
-      end
-
-      additional_response_formats(format)
-      document_export_formats(format)
-    end
+    show
   end
   
   def show
     redirect_to action: :index and return if params[:id] == 'home'
-    @channel = Channel.find(params[:id].to_sym)
+    @channel ||= Channel.find(params[:id].to_sym)
     
     if has_search_parameters?
       user_params = params.dup
-      if channel_query = @channel.query
-        user_params[:q] = user_params[:q] ? "(#{channel_query}) AND #{user_params[:q]}" : channel_query
-      end
+      query_params = []
+      query_params << "(#{@channel.query})" if @channel.query.present?
+      query_params << "(#{user_params[:q]})" if user_params[:q].present?
+      user_params[:q] = query_params.join(' AND ')
       
       (@response, @document_list) = get_search_results(user_params)
+      html_template = 'search-results'
+      @extra_body_classes = ['blacklight-' + controller_name, 'blacklight-' + controller_name + '-search']
+    else
+      html_template = (@channel.id == :home) ? 'index' : 'show'
     end
-      
+    
     respond_to do |format|
-      format.html { render (has_search_parameters? ? 'search-results' : 'show') }
+      format.html { render html_template }
       format.rss  { render 'catalog/index', :layout => false }
       format.atom { render 'catalog/index', :layout => false }
       format.json do
@@ -48,12 +38,6 @@ class ChannelsController < ApplicationController
       document_export_formats(format)
     end
   end
-
-  # Channels may have a search query, even if none are entered by the user
-  # @see Blacklight::Catalog#has_search_parameters?
-#  def has_search_parameters?
-#    (@channel.present? and @channel.query.present?) or super
-#  end
   
   def _prefixes
     @_prefixes_with_partials ||= super | %w(catalog)
