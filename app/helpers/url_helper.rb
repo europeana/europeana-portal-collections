@@ -11,4 +11,8 @@ module UrlHelper
       super
     end
   end
+  
+  def bookmark_path(doc, options = {})
+    url_for(options.merge(controller: :bookmarks, action: :show, provider_id: doc.provider_id, record_id: doc.record_id))
+  end
 end

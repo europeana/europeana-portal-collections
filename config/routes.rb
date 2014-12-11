@@ -9,6 +9,19 @@ module Channels::Routes
       post "#{primary_resource}/:provider_id/:record_id/track", args.merge(to: "#{primary_resource}#track", as: "track_solr_document")
     end
   end
+  
+  def bookmarks(_)
+    add_routes do |options|
+      delete "bookmarks/clear", to: "bookmarks#clear", as: "clear_bookmarks"
+      
+      resources :bookmarks, only: [ :index, :create, :new ]
+      get "bookmarks/:provider_id/:record_id/edit(.:format)", to: "bookmarks#edit", as: "edit_bookmark"
+      get "bookmarks/:provider_id/:record_id(.:format)", to: "bookmarks#show", as: "bookmark"
+      patch "bookmarks/:provider_id/:record_id(.:format)", to: "bookmarks#update"
+      put "bookmarks/:provider_id/:record_id(.:format)", to: "bookmarks#update"
+      delete "bookmarks/:provider_id/:record_id(.:format)", to: "bookmarks#destroy"
+    end
+  end
 end
 Blacklight::Routes.send(:include, Channels::Routes)
 
