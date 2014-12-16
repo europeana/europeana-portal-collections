@@ -27,4 +27,7 @@ Copy config/secrets.yml.example to config/secrets.yml and edit to contain:
   http://guides.rubyonrails.org/configuring.html#configuring-a-database)
 2. Initialize the database: `bundle exec rake db:setup`
 
+### Channels
 
+For each Channel, create a YAML file in config/channels/. See the bundled 
+files in that directory for example configuration settings.
