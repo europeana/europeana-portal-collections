@@ -57,8 +57,6 @@ module ChannelsBlacklightConfig
       #
       # :show may be set to false if you don't want the facet to be drawn in the 
       # facet bar
-  #    config.add_facet_field 'proxy_dc_type', :label => 'dc:type'
-  #    config.add_facet_field 'proxy_dc_subject', :label => 'dc:subject'
       config.add_facet_field 'UGC', :label => 'UGC'
       config.add_facet_field 'LANGUAGE', :label => 'LANGUAGE'
       config.add_facet_field 'TYPE', :label => 'TYPE'
@@ -95,14 +93,14 @@ module ChannelsBlacklightConfig
 
       # solr fields to be displayed in the show (single result) view
       #   The ordering of the field names is the order of the display 
-      config.add_show_field 'dcType', :label => 'Type'
-      config.add_show_field 'dctermsExtent', :label => 'Format'
-      config.add_show_field 'dcSubject', :label => 'Subject'
-      config.add_show_field 'dcIdentifier', :label => 'Identifier'
-      config.add_show_field 'dctermsProvenance', :label => 'Provenance'
-      config.add_show_field 'edmDataProvider', :label => 'Data provider'
-      config.add_show_field 'edmProvider', :label => 'Provider'
-      config.add_show_field 'edmCountry', :label => 'Providing country'
+      config.add_show_field 'dcType_def', :label => 'Type'
+      config.add_show_field 'dctermsExtent_def', :label => 'Format'
+      config.add_show_field 'dcSubject_def', :label => 'Subject'
+      config.add_show_field 'dcIdentifier_def', :label => 'Identifier'
+      config.add_show_field 'dctermsProvenance_def', :label => 'Provenance'
+      config.add_show_field 'edmDataProvider_def', :label => 'Data provider'
+      config.add_show_field 'edmProvider_def', :label => 'Provider'
+      config.add_show_field 'edmCountry_def', :label => 'Providing country'
       
       # "fielded" search configuration. Used by pulldown among other places.
       # For supported keys in hash, see rdoc for Blacklight::SearchFields
