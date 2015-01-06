@@ -60,9 +60,9 @@ module ChannelsBlacklightConfig
       config.add_facet_field 'UGC', :label => 'UGC'
       config.add_facet_field 'LANGUAGE', :label => 'LANGUAGE'
       config.add_facet_field 'TYPE', :label => 'TYPE'
-      config.add_facet_field 'YEAR', :label => 'YEAR'
+#      config.add_facet_field 'YEAR', :label => 'YEAR'
       config.add_facet_field 'PROVIDER', :label => 'PROVIDER'
-      config.add_facet_field 'DATA_PROVIDER', :label => 'DATA_PROVIDER'
+#      config.add_facet_field 'DATA_PROVIDER', :label => 'DATA_PROVIDER'
       config.add_facet_field 'COUNTRY', :label => 'COUNTRY'
       config.add_facet_field 'RIGHTS', :label => 'RIGHTS'
       
