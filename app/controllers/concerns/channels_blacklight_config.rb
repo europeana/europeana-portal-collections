@@ -93,6 +93,7 @@ module ChannelsBlacklightConfig
 
       # solr fields to be displayed in the show (single result) view
       #   The ordering of the field names is the order of the display 
+      config.add_show_field 'edmPreview', :label => 'Preview'
       config.add_show_field 'dcType_def', :label => 'Type'
       config.add_show_field 'dctermsExtent_def', :label => 'Format'
       config.add_show_field 'dcSubject_def', :label => 'Subject'
