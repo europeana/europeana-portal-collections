@@ -57,14 +57,14 @@ module ChannelsBlacklightConfig
       #
       # :show may be set to false if you don't want the facet to be drawn in the 
       # facet bar
-      config.add_facet_field 'UGC', :label => 'UGC'
-      config.add_facet_field 'LANGUAGE', :label => 'LANGUAGE'
-      config.add_facet_field 'TYPE', :label => 'TYPE'
-#      config.add_facet_field 'YEAR', :label => 'YEAR'
+      config.add_facet_field 'UGC', :label => 'UGC', :limit => 20
+      config.add_facet_field 'LANGUAGE', :label => 'LANGUAGE', :limit => 20
+      config.add_facet_field 'TYPE', :label => 'TYPE', :limit => 20
+      config.add_facet_field 'YEAR', :label => 'YEAR', :limit => 20
       config.add_facet_field 'PROVIDER', :label => 'PROVIDER'
-#      config.add_facet_field 'DATA_PROVIDER', :label => 'DATA_PROVIDER'
-      config.add_facet_field 'COUNTRY', :label => 'COUNTRY'
-      config.add_facet_field 'RIGHTS', :label => 'RIGHTS'
+      config.add_facet_field 'DATA_PROVIDER', :label => 'DATA_PROVIDER', :limit => 20
+      config.add_facet_field 'COUNTRY', :label => 'COUNTRY', :limit => 20
+      config.add_facet_field 'RIGHTS', :label => 'RIGHTS', :limit => 20
       
   #    config.add_facet_field 'pub_date', :label => 'Publication Year', :single => true
   #    config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20 
