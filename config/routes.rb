@@ -2,11 +2,11 @@ module Channels::Routes
   extend ActiveSupport::Concern
   def solr_document(primary_resource)
     add_routes do |options|
-      args = {only: [:show]}
+      args = { only: [:show] }
       args[:constraints] = options[:constraints] if options[:constraints]
       
-      get "#{primary_resource}/:provider_id/:record_id", args.merge(to: "#{primary_resource}#show", as: "solr_document")
-      post "#{primary_resource}/:provider_id/:record_id/track", args.merge(to: "#{primary_resource}#track", as: "track_solr_document")
+      get "record/:provider_id/:record_id", args.merge(to: "#{primary_resource}#show", as: "solr_document")
+      post "record/:provider_id/:record_id/track", args.merge(to: "#{primary_resource}#track", as: "track_solr_document")
     end
   end
   
