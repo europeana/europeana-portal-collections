@@ -37,7 +37,7 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
-    blacklight (5.7.2)
+    blacklight (5.8.2)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
@@ -83,11 +83,11 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
-    mini_portile (0.6.1)
+    mini_portile (0.6.2)
     minitest (5.4.3)
     multi_json (1.10.1)
     mysql2 (0.3.16)
-    nokogiri (1.6.4.1)
+    nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
     rack (1.5.2)
@@ -154,7 +154,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (>= 5.3.0)
+  blacklight (~> 5.8.2)
   coffee-rails (~> 4.0.0)
   devise
   devise-guests (~> 0.3)
