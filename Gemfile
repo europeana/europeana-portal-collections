@@ -42,8 +42,8 @@ gem 'spring', group: :development
 
 gem 'blacklight', '~> 5.7.2'
 
-gem 'devise'
-gem 'devise-guests', '~> 0.3'
+#gem 'devise'
+#gem 'devise-guests', '~> 0.3'
 
 gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => 'e74d4dd'
 
