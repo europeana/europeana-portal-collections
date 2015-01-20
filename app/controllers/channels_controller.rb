@@ -13,7 +13,7 @@ class ChannelsController < ApplicationController
     @channel ||= Channel.find(params[:id].to_sym)
     
     if has_search_parameters?
-      (@response, @document_list) = get_search_results(params.merge(current_search_session.query_params))
+      (@response, @document_list) = get_search_results(params.merge(channels_search_params))
       html_template = 'search-results'
       @extra_body_classes = ['blacklight-' + controller_name, 'blacklight-' + controller_name + '-search']
     else
