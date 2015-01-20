@@ -13,13 +13,7 @@ class ChannelsController < ApplicationController
     @channel ||= Channel.find(params[:id].to_sym)
     
     if has_search_parameters?
-      user_params = params.dup
-      query_params = []
-      query_params << "(#{@channel.query})" if @channel.query.present?
-      query_params << "(#{user_params[:q]})" if user_params[:q].present?
-      user_params[:q] = query_params.join(' AND ')
-      
-      (@response, @document_list) = get_search_results(user_params)
+      (@response, @document_list) = get_search_results(params.merge(current_search_session.query_params))
       html_template = 'search-results'
       @extra_body_classes = ['blacklight-' + controller_name, 'blacklight-' + controller_name + '-search']
     else
@@ -45,5 +39,9 @@ class ChannelsController < ApplicationController
   
   def search_action_url(options = {})
     url_for(options.merge(:action => params[:action]))
+  end
+  
+  def start_new_search_session?
+    [ "index", "show" ].include?(action_name)
   end
 end
