@@ -45,7 +45,7 @@ gem 'blacklight', '~> 5.7.2'
 #gem 'devise'
 #gem 'devise-guests', '~> 0.3'
 
-gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => 'e74d4dd'
+gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => '2bbeca5'
 
 # thin > webrick
 gem 'thin', group: :development

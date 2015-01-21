@@ -17,8 +17,8 @@ module EuropeanaBlacklightAdapter
         if current_search_session.query_params[:id]
           channel = Channel.find(current_search_session.query_params[:id].to_sym)
           query_parts = []
+          query_parts << "#{current_search_session.query_params[:q]}" if current_search_session.query_params[:q].present?
           query_parts << "(#{channel.query})" if channel.query.present?
-          query_parts << "(#{current_search_session.query_params[:q]})" if current_search_session.query_params[:q].present?
           @channels_search_params[:q] = query_parts.join(' AND ')
         end
       end
