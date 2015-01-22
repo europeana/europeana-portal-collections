@@ -1,0 +1,7 @@
+<% if available_channels.present? %>
+<ul class="nav navbar-nav">
+  <% for channel in available_channels %>
+  <li><%= link_to channel, channel_path(channel) %></li>
+  <% end %>
+</ul>
+<% end %>

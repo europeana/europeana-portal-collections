@@ -1,8 +1,6 @@
 class CatalogController < ApplicationController  
-  include Blacklight::Catalog
-  include ChannelsBlacklightConfig
-  include EuropeanaBlacklightAdapter
-  
+  include EuropeanaCatalog
+
   def show
     # Fake ID param for Blacklight::Catalog#show
     params[:id] = [ params[:provider_id], params[:record_id] ].join('/')

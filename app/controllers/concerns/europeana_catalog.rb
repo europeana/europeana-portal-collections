@@ -1,5 +1,13 @@
-module EuropeanaBlacklightAdapter
+module EuropeanaCatalog
   extend ActiveSupport::Concern
+  
+  include Blacklight::Catalog
+  include ChannelsBlacklightConfig
+  
+  included do
+    # Adds Blacklight nav action for Channels
+    add_nav_action(:channels, partial: 'channels/nav')
+  end
   
   def solr_repository
     @solr_repository ||= Europeana::SolrRepository.new(blacklight_config)

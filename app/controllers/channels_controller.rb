@@ -1,7 +1,5 @@
 class ChannelsController < ApplicationController
-  include Blacklight::Catalog
-  include ChannelsBlacklightConfig
-  include EuropeanaBlacklightAdapter
+  include EuropeanaCatalog
   
   def index
     @channel = Channel.find(:home)
