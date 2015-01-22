@@ -28,7 +28,7 @@ Blacklight::Routes.send(:include, Channels::Routes)
 Rails.application.routes.draw do
   root :to => "channels#index"
 
-  devise_for :users
+#  devise_for :users
   
   blacklight_for :catalog
   resources :channels, only: [ :show, :index ]

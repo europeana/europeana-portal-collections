@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.7'
+gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record in development and test
 gem 'sqlite3', group: [:development, :test]
 # Use MySQL in production
@@ -23,10 +23,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+gem 'spring', group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -42,10 +42,13 @@ gem 'spring',        group: :development
 
 gem 'blacklight', '~> 5.8.2'
 
-gem 'devise'
-gem 'devise-guests', '~> 0.3'
+#gem 'devise'
+#gem 'devise-guests', '~> 0.3'
 
-gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => 'e74d4dd'
+gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => '2bbeca5'
 
 # thin > webrick
 gem 'thin', group: :development
+
+# Access an IRB console on exception pages or by using <%= console %> in views
+gem 'web-console', '~> 2.0', group: :development
