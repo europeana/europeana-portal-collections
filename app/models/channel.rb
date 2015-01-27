@@ -1,4 +1,5 @@
 # A "Channel" of Europeana content, e.g. Music or Fashion
+# @todo Use ActiveModel
 class Channel
   # @!attribute [r] id
   #   @return [Symbol] the ID of the Channel

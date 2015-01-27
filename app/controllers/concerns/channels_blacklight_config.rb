@@ -1,6 +1,16 @@
 # -*- encoding : utf-8 -*-
 #
 
+# Never use deep_dup, per issue https://github.com/projectblacklight/blacklight/issues/1061
+# @todo Remove when fixed upstream
+module Blacklight
+  class Configuration
+    def deep_copy
+      Marshal.load(Marshal.dump(self))
+    end
+  end
+end
+
 module ChannelsBlacklightConfig
   extend ActiveSupport::Concern
   
@@ -11,6 +21,9 @@ module ChannelsBlacklightConfig
         :qt => 'search',
         :rows => 24
       }
+      
+      config.solr_document_model = Europeana::Document
+      config.solr_response_model = Europeana::Response
       
       # solr path which will be added to solr base url before the other solr params.
       #config.solr_path = 'select' 
