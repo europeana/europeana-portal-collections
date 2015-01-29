@@ -4,11 +4,6 @@ module Europeana
     
     attr_reader :hierarchy
     
-    def initialize(*args)
-      super
-      load_hierarchy
-    end
-    
     def to_param
       "#{provider_id}/#{record_id}"
     end
@@ -27,13 +22,11 @@ module Europeana
     
     def load_hierarchy
       record = Europeana::Record.new(self.id)
-      ancestor_self_siblings = record.ancestor_self_siblings
+      @hierarchy = record.hierarchy("ancestor-self-siblings")
       
-      @hierarchy = {
-        'self' => ancestor_self_siblings['self'],
-        'ancestors' => ancestor_self_siblings['ancestors'],
-        'following-siblings' => ancestor_self_siblings['following-siblings']
-      }
+      if @hierarchy['self']['hasChildren']
+        @hierarchy = record.hierarchy("ancestor-self-siblings", :children)
+      end
     rescue Europeana::Errors::RequestError => error
       if error.message == "This record has no hierarchical structure!"
         @hierarchy = false

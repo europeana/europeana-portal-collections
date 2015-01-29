@@ -1,0 +1,7 @@
+<h2>Related items:</h2>
+<h3><%= document.hierarchy['self']['title']['def'].first %> (<%= document.hierarchy['self']['childrenCount'] %>)</h3>
+<ol start="1">
+  <%- for child in document.hierarchy['children'] -%>
+  <li><%= link_to child['title']['def'].first, "/record#{child['id']}.html" %></li>
+  <%- end -%>
+</ol>
