@@ -1,0 +1,11 @@
+<% parent = document.hierarchy['ancestors'].select { |a| a['id'] == document.hierarchy['self']['parent'] }.first %>
+<!--<pre><%= document.hierarchy.inspect %></pre>-->
+
+<h2>Related items:</h2>
+<h3><%= link_to parent['title']['def'].first, "/record#{parent['id']}.html" %> (<%= parent['childrenCount'] %>)</h3>
+<ol start="<%= document.hierarchy['self']['index'] + 1 %>">
+  <li><%= document.hierarchy['self']['title']['def'].first %></li>
+  <%- for sibling in document.hierarchy['following-siblings'] -%>
+  <li><%= link_to sibling['title']['def'].first, "/record#{sibling['id']}.html" %></li>
+  <%- end -%>
+</ol>

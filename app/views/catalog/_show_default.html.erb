@@ -13,3 +13,5 @@
     <% end -%>
   <% end -%>
 </dl>
+
+<%= render partial: "document_hierarchy", locals: {document: document} if document.hierarchy && document.hierarchy['following-siblings'] %>

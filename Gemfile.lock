@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/rwd/europeana-client-ruby.git
+  revision: f2b166b6916d896b6f2cb375118144874807e7cf
+  branch: hierarchies
+  specs:
+    europeana (0.1.0)
+      activesupport (>= 3.0)
+      multi_json (~> 1.0)
+
+GIT
   remote: https://github.com/rwd/rsolr-europeana.git
   revision: 23a7312a7fcfebe9dee043eb12917ce5b5ba5afa
   ref: 23a7312
@@ -174,6 +183,7 @@ PLATFORMS
 DEPENDENCIES
   blacklight (~> 5.8.2)
   coffee-rails (~> 4.0.0)
+  europeana!
   jbuilder (~> 2.0)
   jquery-rails
   mysql2
