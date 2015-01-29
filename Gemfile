@@ -47,7 +47,7 @@ gem 'blacklight', '~> 5.8.2'
 
 gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => '23a7312'
 
-gem 'europeana', :git => 'https://github.com/rwd/europeana-client-ruby.git', :branch => 'hierarchies'
+gem 'europeana', :git => 'https://github.com/rwd/europeana-client-ruby.git', :ref => '5b93d41'
 
 # thin > webrick
 gem 'thin', group: :development
