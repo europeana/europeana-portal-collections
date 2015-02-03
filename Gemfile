@@ -40,7 +40,7 @@ gem 'spring', group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'blacklight', '~> 5.8.2'
+gem 'blacklight', '~> 5.9.0'
 
 #gem 'devise'
 #gem 'devise-guests', '~> 0.3'

@@ -1,16 +1,5 @@
 # -*- encoding : utf-8 -*-
 #
-
-# Never use deep_dup, per issue https://github.com/projectblacklight/blacklight/issues/1061
-# @todo Remove when fixed upstream
-module Blacklight
-  class Configuration
-    def deep_copy
-      Marshal.load(Marshal.dump(self))
-    end
-  end
-end
-
 module ChannelsBlacklightConfig
   extend ActiveSupport::Concern
   
