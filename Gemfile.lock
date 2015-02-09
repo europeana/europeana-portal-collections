@@ -188,6 +188,7 @@ DEPENDENCIES
   blacklight (~> 5.9.0)
   coffee-rails (~> 4.0.0)
   europeana!
+  eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
   jquery-rails
   mysql2

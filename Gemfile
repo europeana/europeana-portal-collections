@@ -49,6 +49,9 @@ gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :re
 
 gem 'europeana', :git => 'https://github.com/rwd/europeana-client-ruby.git', :ref => 'e0d9828'
 
+# Ruby 2.2 compatible version
+gem 'eventmachine', '~> 1.0.6'
+
 # thin > webrick
 gem 'thin', group: :development
 
