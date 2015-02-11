@@ -1,10 +1,11 @@
 # Europeana Channels
 
-Europeana Channels as a Rails + Blacklight application.
+Europeana Channels as a Rails + [Blacklight](https://github.com/projectblacklight/blacklight)
+application.
 
 ## Requirements
 
-* Ruby >= 1.9
+* Ruby 2.2
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
 
@@ -15,11 +16,27 @@ Europeana Channels as a Rails + Blacklight application.
 
 ## Configuration
 
-### Secrets
+### Environment variables
 
-Copy config/secrets.yml.example to config/secrets.yml and edit to contain:
-* `secret_key_base`: generated with `bundle exec rake secret`
-* `europeana_api_key`: your Europeana API key
+Most configuration settings are read from environment variables, described in
+detail below.
+
+In development and test environments, these can be placed in a 
+[.env](https://github.com/bkeepers/dotenv) file in your application root.
+
+#### SECRET_KEY_BASE
+
+Your secret key is used for verifying the integrity of signed cookies.
+If you change this key, all old signed cookies will become invalid!
+
+Make sure the secret is at least 30 characters and all random,
+no regular words or you'll be exposed to dictionary attacks.
+You can use `bunde exec rake secret` to generate a secure secret key.
+
+#### EUROPEANA_API_KEY
+
+This is the API key used by the application to authenticate requests to the
+Europeana REST API. One can be obtained at: http://labs.europeana.eu/api/registration/
 
 ### Database
 
