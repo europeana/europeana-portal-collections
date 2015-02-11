@@ -15,9 +15,8 @@
 /log/*.log
 /tmp
 
-# Ignore config files containing secrets.
+# Ignore database config file.
 /config/database.yml
-/config/secrets.yml
 
 # Ignore rvm files.
 .ruby-version
@@ -31,3 +30,7 @@
 
 # Ignore compiled assets
 /public/assets
+
+# Ignore dotenv config files.
+/.env
+/.env.*

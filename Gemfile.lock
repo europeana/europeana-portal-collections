@@ -80,6 +80,9 @@ GEM
     debug_inspector (0.0.2)
     deprecation (0.1.0)
       activesupport
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     erubis (2.7.0)
     eventmachine (1.0.6)
     execjs (2.2.2)
@@ -189,6 +192,7 @@ PLATFORMS
 DEPENDENCIES
   blacklight (~> 5.9.0)
   coffee-rails (~> 4.0.0)
+  dotenv-rails (~> 1.0.2)
   europeana!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
@@ -196,7 +200,7 @@ DEPENDENCIES
   mysql2
   puma (~> 2.11.0)
   rails (= 4.2.0)
-  rails_12factor
+  rails_12factor (~> 0.0.3)
   rsolr-europeana!
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
