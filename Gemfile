@@ -61,3 +61,7 @@ gem 'dotenv-rails', '~> 1.0.2', groups: [ :development, :test ]
 
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0', group: :development
+
+# Security analysis
+gem "brakeman", :require => false, groups: [ :development, :test ]
+

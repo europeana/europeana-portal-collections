@@ -9,6 +9,10 @@ module EuropeanaCatalog
     add_nav_action(:channels, partial: 'channels/nav')
   end
   
+  def search_facet_url options = {}
+    url_for params.merge(controller: "catalog", action: "facet").merge(options).except(:page)
+  end
+  
   def solr_repository
     @solr_repository ||= Europeana::SolrRepository.new(blacklight_config)
   end
