@@ -55,7 +55,9 @@ gem 'eventmachine', '~> 1.0.6'
 
 gem 'puma', '~> 2.11.0'
 
-gem 'rails_12factor', group: :production
+# 12-factorisation
+gem 'rails_12factor', '~> 0.0.3', group: :production
+gem 'dotenv-rails', '~> 1.0.2', groups: [ :development, :test ]
 
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0', group: :development
