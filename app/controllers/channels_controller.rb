@@ -1,45 +1,60 @@
+##
+# Provides Blacklight search and browse, within a content Channel
 class ChannelsController < ApplicationController
   include EuropeanaCatalog
-  
+
+  before_filter :find_channel, only: [:index, :show]
+  before_filter :retrieve_response_and_document_list,
+                if: :has_search_parameters?
+  before_filter :redirect_show_home_to_index, only: :show
+
   def index
-    @channel = Channel.find(:home)
     show
   end
-  
+
   def show
-    redirect_to action: :index and return if params[:id] == 'home'
-    @channel ||= Channel.find(params[:id].to_sym)
-    
-    if has_search_parameters?
-      (@response, @document_list) = get_search_results(params.merge(channels_search_params))
-      html_template = 'search-results'
-      @extra_body_classes = ['blacklight-' + controller_name, 'blacklight-' + controller_name + '-search']
-    else
-      html_template = (@channel.id == :home) ? 'index' : 'show'
-    end
-    
     respond_to do |format|
-      format.html { render html_template }
-      format.rss  { render 'catalog/index', :layout => false }
-      format.atom { render 'catalog/index', :layout => false }
-      format.json do
-        render json: render_search_results_as_json
-      end
+      format.html { render show_html_template }
+      format.rss  { render 'catalog/index', layout: false }
+      format.atom { render 'catalog/index', layout: false }
+      format.json { render json: render_search_results_as_json }
 
       additional_response_formats(format)
       document_export_formats(format)
     end
   end
-  
+
   def _prefixes
     @_prefixes_with_partials ||= super | %w(catalog)
   end
-  
+
   def search_action_url(options = {})
-    url_for(options.merge(:action => params[:action]))
+    url_for(options.merge(action: params[:action]))
   end
-  
+
   def start_new_search_session?
-    [ "index", "show" ].include?(action_name)
+    %w(index show).include?(action_name)
+  end
+
+  def show_html_template
+    if has_search_parameters?
+      'search-results'
+    else
+      (@channel.id == :home) ? 'index' : 'show'
+    end
+  end
+
+  def find_channel
+    id = (params[:action] == :index ? :home : params[:id].to_sym)
+    @channel ||= Channel.find(id)
+  end
+
+  def retrieve_response_and_document_list
+    params_for_channels = params.merge(channels_search_params)
+    (@response, @document_list) = get_search_results(params_for_channels)
+  end
+
+  def redirect_show_home_to_index
+    redirect_to action: :index && return if params[:id] == 'home'
   end
 end
