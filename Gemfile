@@ -52,3 +52,5 @@ gem 'web-console', '~> 2.0', group: :development
 # Security analysis
 gem 'brakeman', require: false, groups: [ :development, :test ]
 
+# Ruby Style Guide compliance
+gem 'rubocop', '~> 0.29.1', require: false, groups: [ :development, :test ]
