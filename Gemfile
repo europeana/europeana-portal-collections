@@ -5,7 +5,7 @@ ruby '2.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record in development and test
-gem 'sqlite3', group: [:development, :test]
+gem 'sqlite3', group: [ :development, :test ]
 # Use MySQL in production
 gem 'mysql2', group: :production
 # Use SCSS for stylesheets
@@ -14,8 +14,6 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -29,30 +27,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring', group: :development
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
+# Use Blacklight for searching and browsing
 gem 'blacklight', '~> 5.9.0'
 
-#gem 'devise'
-#gem 'devise-guests', '~> 0.3'
+# Use the Europeana REST API
+gem 'europeana', git: 'https://github.com/rwd/europeana-client-ruby.git', ref: 'e0d9828'
 
-gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => '0387465'
-
-gem 'europeana', :git => 'https://github.com/rwd/europeana-client-ruby.git', :ref => 'e0d9828'
+# Use the Europeana REST API as though it was Solr
+gem 'rsolr-europeana', git: 'https://github.com/rwd/rsolr-europeana.git', ref: '0387465'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
 
+# Use puma as the app server
 gem 'puma', '~> 2.11.0'
 
 # 12-factorisation
@@ -63,5 +50,5 @@ gem 'dotenv-rails', '~> 1.0.2', groups: [ :development, :test ]
 gem 'web-console', '~> 2.0', group: :development
 
 # Security analysis
-gem "brakeman", :require => false, groups: [ :development, :test ]
+gem 'brakeman', require: false, groups: [ :development, :test ]
 
