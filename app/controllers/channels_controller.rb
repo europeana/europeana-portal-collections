@@ -45,7 +45,7 @@ class ChannelsController < ApplicationController
   end
 
   def find_channel
-    id = (params[:action] == :index ? :home : params[:id].to_sym)
+    id = (params[:action] == 'index' ? :home : params[:id].to_sym)
     @channel ||= Channel.find(id)
   end
 
