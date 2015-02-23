@@ -38,7 +38,7 @@ gem 'europeana', git: 'https://github.com/rwd/europeana-client-ruby.git',
 
 # Use the Europeana REST API as though it was Solr
 gem 'rsolr-europeana', git: 'https://github.com/rwd/rsolr-europeana.git',
-                       ref: '3758ebe'
+                       ref: 'e1a56de'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
