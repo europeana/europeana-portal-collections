@@ -58,3 +58,6 @@ gem 'brakeman', require: false, groups: [:development, :test]
 
 # Ruby Style Guide compliance
 gem 'rubocop', '~> 0.29.1', require: false, groups: [:development, :test]
+
+# Rails best practices: code metrics for Rails
+gem 'rails_best_practices', require: false, groups: [:development, :test]

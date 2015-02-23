@@ -19,10 +19,6 @@ module Europeana
       @record_id ||= id.to_s.split('/')[2]
     end
 
-    def cache_key
-      "#{provider_id}/#{record_id}-#{self['timestamp_update_epoch']}"
-    end
-
     def load_hierarchy
       record = Europeana::Record.new(id)
       @hierarchy = record.hierarchy('ancestor-self-siblings')
