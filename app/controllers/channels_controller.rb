@@ -24,6 +24,8 @@ class ChannelsController < ApplicationController
     end
   end
 
+  protected
+
   def _prefixes
     @_prefixes_with_partials ||= super | %w(catalog)
   end

@@ -6,12 +6,11 @@ module EuropeanaCatalog
 
   include Blacklight::Catalog
   include ChannelsBlacklightConfig
+  include ChannelsHelper
 
   included do
     # Adds Blacklight nav action for Channels
     add_nav_action(:channels, partial: 'channels/nav')
-
-    helper_method :within_channel? if respond_to?(:helper_method)
   end
 
   def search_facet_url(options = {})
@@ -21,11 +20,6 @@ module EuropeanaCatalog
 
   def solr_repository
     @solr_repository ||= Europeana::SolrRepository.new(blacklight_config)
-  end
-
-  def within_channel?(localized_params = params)
-    localized_params['controller'] == 'channels' &&
-      localized_params['id'].present?
   end
 
   ##
