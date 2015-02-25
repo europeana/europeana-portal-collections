@@ -1,7 +1,13 @@
 # Europeana Channels
 
-Europeana Channels as a Rails + [Blacklight](https://github.com/projectblacklight/blacklight)
-application.
+Europeana Channels as a Rails + 
+[Blacklight](https://github.com/projectblacklight/blacklight) application.
+
+## License
+
+Licensed under the EUPL V.1.1.
+
+For full details, see [LICENSE.md](LICENSE.md).
 
 ## Requirements
 
@@ -36,7 +42,8 @@ You can use `bunde exec rake secret` to generate a secure secret key.
 #### EUROPEANA_API_KEY
 
 This is the API key used by the application to authenticate requests to the
-Europeana REST API. One can be obtained at: http://labs.europeana.eu/api/registration/
+Europeana REST API. One can be obtained at:
+http://labs.europeana.eu/api/registration/
 
 ### Database
 
