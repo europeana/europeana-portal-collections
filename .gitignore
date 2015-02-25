@@ -37,3 +37,6 @@
 
 # Ignore code coverage analysis output.
 /coverage
+
+# Ignore Cloud Foundry manifest
+/manifest.yml
