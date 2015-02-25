@@ -14,4 +14,4 @@
   <% end -%>
 </dl>
 
-<%= render partial: "document_hierarchy", locals: {document: document} if document.hierarchy %>
+<%= render 'document_hierarchy', locals: {document: document} if document.hierarchy %>
