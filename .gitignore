@@ -34,3 +34,6 @@
 # Ignore dotenv config files.
 /.env
 /.env.*
+
+# Ignore code coverage analysis output.
+/coverage
