@@ -1,5 +1,6 @@
 ---
-:query: '(what: paintings) OR (what: sculpture) OR (what: drawing) OR (what: poster)
-  OR (what: tapestry) OR (what: jewellery) OR (what: "art history") OR (what: "histoire
-  de l''art") OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte")
+:query: '(what: paintings) OR (what: sculpture) OR (what: drawing) OR
+  (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature)
+  OR (what: prints) OR (what: "art history") OR (what: "histoire de l''art")
+  OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte")
   OR (what: Kunstgeschiedenis)'
