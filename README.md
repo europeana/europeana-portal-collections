@@ -47,7 +47,7 @@ http://labs.europeana.eu/api/registration/
 
 ### Database
 
-1. Configure the database in config/database.yml (see
+1. Create a MySQL database, and configure in config/database.yml (see
   http://guides.rubyonrails.org/configuring.html#configuring-a-database)
 2. Initialize the database: `bundle exec rake db:setup`
 
@@ -55,3 +55,10 @@ http://labs.europeana.eu/api/registration/
 
 For each Channel, create a YAML file in config/channels/. See the bundled 
 files in that directory for example configuration settings.
+
+## Execution
+
+Run the app with the Puma web server: `bundle exec puma`
+
+By default, Puma will listen on port 9292. This can be changed with the `-p`
+switch: `bundle exec puma -p 3000`
