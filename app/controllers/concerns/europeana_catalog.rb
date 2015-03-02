@@ -71,11 +71,19 @@ module EuropeanaCatalog
   def setup_next_and_previous_documents
     return unless search_session['counter'] && current_search_session
     index = search_session['counter'].to_i - 1
-    response, documents = get_previous_and_next_documents_for_search index, current_search_session.query_params.with_indifferent_access, channels_search_params
+    response, documents = get_previous_and_next_documents_for_search(
+      index, current_search_session.query_params.with_indifferent_access,
+      channels_search_params
+    )
 
     search_session['total'] = response.total
     @search_context_response = response
     @previous_document = documents.first
     @next_document = documents.last
   end
+
+  def doc_id
+    @doc_id ||= [params[:provider_id], params[:record_id]].join('/')
+  end
+
 end

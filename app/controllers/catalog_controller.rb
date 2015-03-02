@@ -3,9 +3,9 @@
 class CatalogController < ApplicationController
   include EuropeanaCatalog
 
-  before_filter :retrieve_response_and_document, only: :show
-
   def show
+    @response, @document = get_solr_response_for_doc_id(doc_id)
+
     respond_to do |format|
       format.html { setup_next_and_previous_documents }
 
@@ -21,16 +21,5 @@ class CatalogController < ApplicationController
         end
       end
     end
-  end
-
-  protected
-
-  def retrieve_response_and_document
-    @response, @document = get_solr_response_for_doc_id doc_id
-    @document.load_hierarchy
-  end
-
-  def doc_id
-    @doc_id ||= [params[:provider_id], params[:record_id]].join('/')
   end
 end

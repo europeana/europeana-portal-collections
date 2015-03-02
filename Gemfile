@@ -44,6 +44,9 @@ gem 'eventmachine', '~> 1.0.6'
 # Use puma as the app server
 gem 'puma', '~> 2.11.0'
 
+# Use Redis for caching
+gem 'redis-rails', '~> 4.0'
+
 # 12-factorisation
 gem 'rails_12factor', '~> 0.0.3', group: :production
 gem 'dotenv-rails', '~> 1.0.2', groups: [:development, :test]

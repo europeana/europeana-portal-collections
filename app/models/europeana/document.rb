@@ -7,6 +7,11 @@ module Europeana
     attr_writer :provider_id, :record_id
     attr_reader :hierarchy
 
+    def initialize(source_doc = {}, solr_response = nil)
+      @hierarchy = source_doc.delete('hierarchy')
+      super
+    end
+
     def to_param
       "#{provider_id}/#{record_id}"
     end
@@ -19,19 +24,8 @@ module Europeana
       @record_id ||= id.to_s.split('/')[2]
     end
 
-    def load_hierarchy
-      record = Europeana::Record.new(id)
-      @hierarchy = record.hierarchy('ancestor-self-siblings')
-
-      if @hierarchy['self']['hasChildren']
-        @hierarchy = record.hierarchy('ancestor-self-siblings', :children)
-      end
-    rescue Europeana::Errors::RequestError => error
-      if error.message == 'This record has no hierarchical structure!'
-        @hierarchy = false
-      else
-        raise
-      end
+    def as_json(options = nil)
+      super.merge('hierarchy' => @hierarchy.as_json(options))
     end
   end
 end
