@@ -31,7 +31,7 @@ module ChannelsBlacklightConfig
       config.add_facet_field 'LANGUAGE', label: 'LANGUAGE', limit: 7
       config.add_facet_field 'TYPE', label: 'TYPE', limit: 7
       config.add_facet_field 'YEAR', label: 'YEAR', limit: 7
-      config.add_facet_field 'PROVIDER', label: 'PROVIDER'
+      config.add_facet_field 'PROVIDER', label: 'PROVIDER', limit: 7
       config.add_facet_field 'DATA_PROVIDER', label: 'DATA_PROVIDER', limit: 7
       config.add_facet_field 'COUNTRY', label: 'COUNTRY', limit: 7
       config.add_facet_field 'RIGHTS', label: 'RIGHTS', limit: 7
