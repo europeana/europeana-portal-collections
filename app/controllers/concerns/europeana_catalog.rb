@@ -85,5 +85,4 @@ module EuropeanaCatalog
   def doc_id
     @doc_id ||= [params[:provider_id], params[:record_id]].join('/')
   end
-
 end
