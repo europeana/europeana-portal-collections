@@ -56,7 +56,33 @@ http://labs.europeana.eu/api/registration/
 For each Channel, create a YAML file in config/channels/. See the bundled 
 files in that directory for example configuration settings.
 
-## Execution
+### Cache store
+
+If the file config/redis.yml exists, the application will use Redis as a cache
+store.
+
+Example configuration:
+
+```yaml
+# config/redis.yml
+development:
+  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
+  port: <%= ENV['REDIS_PORT'] || 6379 %>
+  name: <%= ENV['REDIS_NAME'] || 'redis' %>
+
+test:
+  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
+  port: <%= ENV['REDIS_PORT'] || 6379 %>
+  name: <%= ENV['REDIS_NAME'] || 'redis' %>
+
+production:
+  host: <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['hostname'] rescue 'localhost' %>
+  port: <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['port'] rescue 6379 %>
+  password:  <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['password'] rescue '' %>
+  name: <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['name'] rescue 'redis' %>
+```
+
+## Usage
 
 Run the app with the Puma web server: `bundle exec puma`
 
