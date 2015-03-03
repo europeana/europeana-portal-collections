@@ -21,12 +21,12 @@ class Channel
   end
 
   def self.find(id)
-    unless Channels::Application.config.channels.key?(id)
+    unless Europeana::Portal::Application.config.channels.key?(id)
       fail Channels::Errors::NoChannelConfiguration,
            "Channel \"#{id}\" is not configured"
     end
     channel = new(id)
-    channel.config = Channels::Application.config.channels[id]
+    channel.config = Europeana::Portal::Application.config.channels[id]
     channel
   end
 
