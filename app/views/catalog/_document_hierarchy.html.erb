@@ -1,5 +1,5 @@
 <% if document.hierarchy['self']['hasChildren'] %>
-  <%= render 'document_hierarchy_children', locals: {document: document} %>
+  <%= render partial: 'document_hierarchy_children', locals: {document: document} %>
 <% else %>
-  <%= render 'document_hierarchy_siblings', locals: {document: document} %>
+  <%= render partial: 'document_hierarchy_siblings', locals: {document: document} %>
 <% end %>
