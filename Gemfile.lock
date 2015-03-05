@@ -9,11 +9,11 @@ GIT
 
 GIT
   remote: https://github.com/rwd/rsolr-europeana.git
-  revision: e1a56de3e3932a3384d3b607de630d50e6a49eb2
-  ref: e1a56de
+  revision: 04df84cb7d940b184eed641b1c418399c2b24068
+  tag: v0.0.3
   specs:
-    rsolr-europeana (0.0.2)
-      rsolr (~> 1.0.6)
+    rsolr-europeana (0.0.3)
+      rsolr (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
