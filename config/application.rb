@@ -32,10 +32,9 @@ module Europeana
       end
 
       # Load Channels configuration files from config/channels/*.yml files
-      config.channels = Dir[Rails.root.join('config', 'channels', '*.yml').to_s].inject({}) do |hash, yml|
+      config.channels = Dir[Rails.root.join('config', 'channels', '*.yml').to_s].each_with_object({}) do |yml, hash|
         channel = File.basename(yml, '.yml').to_sym
         hash[channel] = YAML::load_file(yml)
-        hash
       end
     end
   end

@@ -5,6 +5,14 @@ module ChannelsBlacklightConfig
   extend ActiveSupport::Concern
 
   included do
+    def self.channels_query_facet
+      channels = Europeana::Portal::Application.config.channels.dup
+      channels.reject! { |k, channel| channel[:query].blank? }
+      channels.each_with_object({}) do |(k, v), hash|
+        hash[k] = { label: k, fq: v[:query] }
+      end
+    end
+
     configure_blacklight do |config|
       # Default parameters to send to solr for all search-like requests.
       # See also SolrHelper#solr_search_params
@@ -27,14 +35,16 @@ module ChannelsBlacklightConfig
       config.index.thumbnail_field = 'edmPreview'
 
       # Facet fields in the order they should be displayed.
+      config.add_facet_field 'CHANNEL', label: 'Channel',
+                                        query: channels_query_facet
       config.add_facet_field 'UGC', label: 'UGC', limit: 7
-      config.add_facet_field 'LANGUAGE', label: 'LANGUAGE', limit: 7
-      config.add_facet_field 'TYPE', label: 'TYPE', limit: 7
-      config.add_facet_field 'YEAR', label: 'YEAR', limit: 7
-      config.add_facet_field 'PROVIDER', label: 'PROVIDER', limit: 7
-      config.add_facet_field 'DATA_PROVIDER', label: 'DATA_PROVIDER', limit: 7
-      config.add_facet_field 'COUNTRY', label: 'COUNTRY', limit: 7
-      config.add_facet_field 'RIGHTS', label: 'RIGHTS', limit: 7
+      config.add_facet_field 'LANGUAGE', label: 'Language', limit: 7
+      config.add_facet_field 'TYPE', label: 'Type', limit: 7
+      config.add_facet_field 'YEAR', label: 'Year', limit: 7
+      config.add_facet_field 'PROVIDER', label: 'Provider', limit: 7
+      config.add_facet_field 'DATA_PROVIDER', label: 'Data provider', limit: 7
+      config.add_facet_field 'COUNTRY', label: 'Country', limit: 7
+      config.add_facet_field 'RIGHTS', label: 'Rights', limit: 7
 
       # Send all facet field names to Solr.
       config.add_facet_fields_to_solr_request!
