@@ -30,10 +30,6 @@ class ChannelsController < ApplicationController
     @_prefixes_with_partials ||= super | %w(catalog)
   end
 
-  def search_action_url(options = {})
-    url_for(options.merge(action: params[:action]))
-  end
-
   def start_new_search_session?
     %w(index show).include?(action_name)
   end
@@ -52,8 +48,7 @@ class ChannelsController < ApplicationController
   end
 
   def retrieve_response_and_document_list
-    params_for_channels = params.merge(channels_search_params)
-    (@response, @document_list) = get_search_results(params_for_channels)
+    (@response, @document_list) = get_search_results(params, channels_search_params)
   end
 
   def redirect_show_home_to_index
