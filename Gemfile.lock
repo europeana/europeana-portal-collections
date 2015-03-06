@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: https://github.com/rwd/rsolr-europeana.git
-  revision: 04df84cb7d940b184eed641b1c418399c2b24068
-  tag: v0.0.3
+  revision: 172e72c307838951d2c1ad9124e7e48f0f335f9c
+  ref: 172e72c
   specs:
     rsolr-europeana (0.0.3)
       rsolr (~> 1.0)
