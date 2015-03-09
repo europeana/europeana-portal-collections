@@ -48,7 +48,8 @@ class ChannelsController < ApplicationController
   end
 
   def retrieve_response_and_document_list
-    (@response, @document_list) = get_search_results(params, channels_search_params)
+    search_results = get_search_results(params, channels_search_params)
+    (@response, @document_list) = search_results
   end
 
   def redirect_show_home_to_index

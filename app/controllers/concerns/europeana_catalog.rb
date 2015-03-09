@@ -96,7 +96,8 @@ module EuropeanaCatalog
   end
 
   def query_solr(user_params = params || {}, extra_controller_params = {})
-    solr_params = self.solr_search_params(user_params).merge(extra_controller_params)
+    solr_params = solr_search_params(user_params)
+    solr_params.merge!(extra_controller_params)
     solr_response = solr_repository.search(solr_params)
     emulate_query_faceting(solr_params, solr_response)
   end
@@ -104,23 +105,28 @@ module EuropeanaCatalog
   def emulate_query_faceting(solr_params, solr_response)
     return solr_response unless solr_params.key?('facet.query')
 
-    solr_response['facet_counts']['facet_queries'] ||= {}
+    query_facet_counts = count_query_facets(solr_params)
+
+    solr_facet_queries = query_facet_counts.each_with_object({}) do |qf, hash|
+      hash[qf.first] = qf.last
+    end
+
+    solr_response['facet_counts']['facet_queries'] = solr_facet_queries
+
+    solr_response
+  end
+
+  def count_query_facets(solr_params)
     query_facet_counts = []
 
     solr_params['facet.query'].each do |query_facet_query|
       query_facet_params = solr_params.dup
-      query_facet_params[:qf] = [query_facet_query]
-      query_facet_params[:rows] = 0
-      query_facet_params[:start] = 0
+      query_facet_params.merge!(qf: [query_facet_query], rows: 0, start: 0)
       query_facet_response = solr_repository.search(query_facet_params)
-      query_facet_counts.push([query_facet_query, query_facet_response['response']['numFound']])
+      query_facet_num_found = query_facet_response['response']['numFound']
+      query_facet_counts.push([query_facet_query, query_facet_num_found])
     end
 
-    query_facet_counts.sort_by! { |v| v.last }.reverse!
-    solr_response['facet_counts']['facet_queries'] = query_facet_counts.each_with_object({}) do |qf, hash|
-      hash[qf.first] = qf.last
-    end
-
-    solr_response
+    query_facet_counts.sort_by(&:last).reverse
   end
 end
