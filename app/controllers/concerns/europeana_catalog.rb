@@ -13,11 +13,6 @@ module EuropeanaCatalog
     add_nav_action(:channels, partial: 'channels/nav')
   end
 
-  def search_facet_url(options = {})
-    facet_url_params = { controller: 'catalog', action: 'facet' }
-    url_for params.merge(facet_url_params).merge(options).except(:page)
-  end
-
   def solr_repository
     @solr_repository ||= Europeana::SolrRepository.new(blacklight_config)
   end
@@ -52,14 +47,10 @@ module EuropeanaCatalog
   # @return [Hash]
   def lookup_channels_search_params
     channel = current_channel || current_search_channel
-    if channel.nil?
+    if channel.nil? || channel.query.blank?
       {}
     else
-      user_query = current_search_session.query_params[:q]
-      query_parts = []
-      query_parts << user_query if user_query.present?
-      query_parts << "(#{channel.query})" if channel.query.present?
-      { q: query_parts.join(' AND ') }
+      { qf: [channel.query] }
     end
   end
 
@@ -86,4 +77,50 @@ module EuropeanaCatalog
     @doc_id ||= [params[:provider_id], params[:record_id]].join('/')
   end
 
+  protected
+
+  def search_action_url(options = {})
+    case
+    when options[:controller]
+      url_for(options)
+    when params[:controller] == 'channels'
+      url_for(options.merge(controller: 'channels', action: params[:action]))
+    else
+      super
+    end
+  end
+
+  def search_facet_url(options = {})
+    facet_url_params = { controller: 'catalog', action: 'facet' }
+    url_for params.merge(facet_url_params).merge(options).except(:page)
+  end
+
+  def query_solr(user_params = params || {}, extra_controller_params = {})
+    solr_params = self.solr_search_params(user_params).merge(extra_controller_params)
+    solr_response = solr_repository.search(solr_params)
+    emulate_query_faceting(solr_params, solr_response)
+  end
+
+  def emulate_query_faceting(solr_params, solr_response)
+    return solr_response unless solr_params.key?('facet.query')
+
+    solr_response['facet_counts']['facet_queries'] ||= {}
+    query_facet_counts = []
+
+    solr_params['facet.query'].each do |query_facet_query|
+      query_facet_params = solr_params.dup
+      query_facet_params[:qf] = [query_facet_query]
+      query_facet_params[:rows] = 0
+      query_facet_params[:start] = 0
+      query_facet_response = solr_repository.search(query_facet_params)
+      query_facet_counts.push([query_facet_query, query_facet_response['response']['numFound']])
+    end
+
+    query_facet_counts.sort_by! { |v| v.last }.reverse!
+    solr_response['facet_counts']['facet_queries'] = query_facet_counts.each_with_object({}) do |qf, hash|
+      hash[qf.first] = qf.last
+    end
+
+    solr_response
+  end
 end
