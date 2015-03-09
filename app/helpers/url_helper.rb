@@ -20,4 +20,12 @@ module UrlHelper
                           provider_id: doc.provider_id,
                           record_id: doc.record_id))
   end
+
+  def remove_qf_param(value, source_params = params)
+    p = reset_search_params(source_params)
+    p[:qf] = (p[:qf] || []).dup
+    p[:qf] = p[:qf] - [value]
+    p.delete(:qf) if p[:qf].empty?
+    p
+  end
 end

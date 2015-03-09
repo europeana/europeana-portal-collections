@@ -11,6 +11,9 @@ module EuropeanaCatalog
   included do
     # Adds Blacklight nav action for Channels
     add_nav_action(:channels, partial: 'channels/nav')
+
+    before_filter :retrieve_response_and_document_list,
+              if: :has_search_parameters?
   end
 
   def solr_repository
@@ -41,17 +44,15 @@ module EuropeanaCatalog
   #
   # @return (see #lookup_channels_search_params)
   def channels_search_params
-    @channels_search_params ||= lookup_channels_search_params
-  end
+    return @channels_search_params if @channels_search_params.present?
 
-  # @return [Hash]
-  def lookup_channels_search_params
     channel = current_channel || current_search_channel
-    if channel.nil? || channel.query.blank?
-      {}
-    else
-      { qf: [channel.query] }
-    end
+
+    qfs = []
+    qfs.push(channel.query) unless channel.nil? || channel.query.blank?
+    qfs = qfs + params[:qf] unless params[:qf].blank?
+
+    @channels_search_params = { qf: qfs }
   end
 
   ##
@@ -121,12 +122,19 @@ module EuropeanaCatalog
 
     solr_params['facet.query'].each do |query_facet_query|
       query_facet_params = solr_params.dup
-      query_facet_params.merge!(qf: [query_facet_query], rows: 0, start: 0)
+      query_facet_params[:qf] ||= []
+      query_facet_params[:qf] = query_facet_params[:qf] + [query_facet_query]
+      query_facet_params.merge!(rows: 0, start: 0)
       query_facet_response = solr_repository.search(query_facet_params)
       query_facet_num_found = query_facet_response['response']['numFound']
       query_facet_counts.push([query_facet_query, query_facet_num_found])
     end
 
     query_facet_counts.sort_by(&:last).reverse
+  end
+
+  def retrieve_response_and_document_list
+    search_results = get_search_results(params, channels_search_params)
+    (@response, @document_list) = search_results
   end
 end
