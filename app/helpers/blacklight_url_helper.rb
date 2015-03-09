@@ -35,7 +35,7 @@ module BlacklightUrlHelper
 
     # Delete any request params from facet-specific action, needed
     # to redir to index action properly.
-    new_params.except! *Blacklight::Solr::FacetPaginator.request_keys.values
+    new_params.except!(*Blacklight::Solr::FacetPaginator.request_keys.values)
 
     new_params
   end
