@@ -1,0 +1,24 @@
+{
+	"bodyClass": "europeana_blog",
+	"title": "Europeana Blog",
+
+	"css_files": [
+		{
+			"path": "../../css/blog/screen.css",
+			"media": "all"
+		}
+	],
+
+	"blogPosts": [
+		{
+			"title" : "TEST VERSION: Stories and testimonies of Italian soldiers who fought and perished in the Great War",
+			"description" : "Following the ‘Documenting the Great War‘ blogpost, Istituto Centrale per il Catalogo Unico delle Biblioteche Italiane e per le Informazioni Bibliografiche (ICCU) – Central Institute for the Union Catalogue (ICCU) highlights some of the memories contributed by citizens at the ‘Seminario formativo e raccolta di fotografie, lettere, ricordi della Grande guerra’ community collection day held in Rome at the National Central Library on 5 May 2013",
+			"img" : "http://blog.europeana.eu/wp-content/uploads/2014/04/ICCU-blog-post-Featured-Image.jpg"
+		},
+		{
+			"title" : "The Past But Not As You Know It",
+			"description" : "A child riding a hog, doctors trying to locate a bullet using a telephone probe, David Bowie performing with a pirate eye patch, and before and after pictures of nose jobs from the early 20th century. Not strange enough? What about professional rat-catchers from Liverpool at work or people painting the Eiffel Tower by hand?Our photo exhibition takes you on a journey to the past; the past like you’ve never seen it before. Explore the exhibition.",
+			"img" : "http://blog.europeana.eu/wp-content/uploads/2014/04/the-past_featured.jpg"
+		}
+	]
+}

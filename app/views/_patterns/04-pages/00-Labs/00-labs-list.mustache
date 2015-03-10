@@ -1,0 +1,43 @@
+<div class="site_labs site_wrapper">
+
+{{> organisms-header }}
+
+{{> molecules-block-content-header }}
+
+<section role="main" class="grid_wrapper">
+
+	<div class="grid">
+		<div class="sidebar">
+
+			<div class="subnav">
+
+				<h4 class="label epsilon"> Filter by:</h4>
+
+				{{> molecules-labs-subnav }}
+
+			</div>
+
+			{{> molecules-tertiary-nav }}
+		</div><!--
+
+	 --><div class="main-content">
+
+			<ul class="post-list" >
+			{{# mainprojects }}<li>{{> molecules-labs-item-main }}</li><!-- 
+			-->{{/ mainprojects }}
+
+			{{# projects }}<li>{{> molecules-labs-item }}</li><!-- 
+			-->{{/ projects }}
+			</ul>
+
+
+			{{> molecules-pagination }}
+
+		</div>
+	</div>
+
+</section>
+
+{{> organisms-footer(newsletter: true) }}
+
+</div>

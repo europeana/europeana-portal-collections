@@ -1,0 +1,42 @@
+{{> atoms-svgicons-pro }}
+
+{{> 02-organisms/00-global/00-header }}
+
+{{> organisms-site-hero }}
+
+<!-- Start Main page content -->
+<main  id="maincontent" role="main" class="pro-home">
+
+
+<div class="promo-abouteuropeana section">
+<div class="lc">
+
+	Europeana Research is all about ..........
+
+</div>
+</div>
+
+<div class="section home-news">
+	<div class="lc">
+
+	<h2 class="section-title">Latest Updates</h2>
+
+	<div class="grid cf">
+
+		<div class="l-news">
+			<div class="grid">
+			{{#listItems.three}}<div class="l-post">{{> molecules-inset-block}}</div>{{/listItems.three}}
+			</div>
+
+			<a class="link-more" href="{{ link.ListPage~blog }}">More from the Europeana Research Blog</a>
+		</div>
+
+	</div>
+	</div>
+</div>
+
+
+<!-- End main content -->
+</main>
+
+{{> organisms-footer }}

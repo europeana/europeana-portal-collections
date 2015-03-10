@@ -1,0 +1,22 @@
+{
+	"bodyClass": "pattern specific body classes",
+
+	"css_files": [
+		{
+			"path": "../../css/common/screen.css",
+			"media": "all"
+		},
+		{
+			"path": "../../css/blog/screen.css",
+			"media": "all"
+		},
+		{
+			"path": "../../css/whatever_you_want.css",
+			"media": "screen"
+		},
+		{
+			"path": "you_could/add/some/individual/print_style_sheets.css",
+			"media": "print"
+		}
+	]
+}

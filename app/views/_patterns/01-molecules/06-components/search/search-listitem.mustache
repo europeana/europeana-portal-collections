@@ -1,0 +1,75 @@
+
+<article class="search-list-item cf">
+
+	<div class="item-preview">
+		{{# type-image }}
+			<div class="item-image">
+        	<img src="{{ img.rectangle.src }}" alt="{{ img.rectangle.alt }}" />
+        	</div>
+    	{{/ type-image }}
+
+   		{{# type-audio }}
+        	@TODO --audio preview--
+    	{{/ type-audio }}
+
+   		{{# type-text }}
+        	@TODO --text preview--
+    	{{/ type-text }}
+
+    	{{# type-video }}
+        	@TODO --video preview--
+    	{{/ type-video }}
+
+	</div>
+
+	<div class="item-info">
+
+		<h1><a href="">{{ title }} <span class="date">({{ year.long }})</span></a></h1>
+
+		<p class="excerpt">
+			{{ excerpt.medium}}
+		</p>
+
+		<a href="http://google.com" class="item-origin link-external">View at: Rijksmuseum</a>
+
+		<footer>
+
+			<div class="item-metadata">
+
+			{{# type-image }}
+	        	<a href="#paintings" class="highlight item-type-image">
+					<svg class="icon icon-image">
+						<use xlink:href="#icon-image"></use>
+					</svg>Painting
+	        	</a>
+	    	{{/ type-image }}
+
+	    	{{# type-audio }}
+	        	<a href="#recordings" class="highlight item-type-audio">Recording</a>
+	    	{{/ type-audio }}
+
+
+				<span class="item-themes">
+					In theme:
+					<a href="" class="highlight">Art History</a>,
+					<a href="" class="highlight">Military History</a>
+				</span>
+			</div>
+
+			<div class="item-actions">
+
+				<a href="path/to/save" class="action-save">
+					<svg class="icon icon-star">
+						<use xlink:href="#icon-star"></use>
+					</svg>Save
+				</a>
+
+				<div class="action-select">
+					<input type="checkbox" name="selected[]" id="itemx">
+				</div>
+			</div>
+
+		</footer>
+	</div>
+
+</article>

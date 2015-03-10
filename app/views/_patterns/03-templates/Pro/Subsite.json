@@ -1,0 +1,11 @@
+{
+	"bodyClass": "europeana_subsite_cloud",
+	"pagetitle": "Europeana Pro",
+
+	"css_files": [
+		{
+			"path": "../../css/pro/screen.css",
+			"media": "all"
+		}
+	]
+}

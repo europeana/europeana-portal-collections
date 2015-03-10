@@ -1,0 +1,11 @@
+{
+	"bodyClass": "europeana_pro",
+	"pagetitle": "Europeana Pro - Press Release",
+
+	"css_files": [
+		{
+			"path": "../../css/pro/screen.css",
+			"media": "all"
+		}
+	]
+}

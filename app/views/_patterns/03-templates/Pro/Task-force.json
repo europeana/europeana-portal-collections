@@ -1,0 +1,14 @@
+{
+	"bodyClass": "europeana_pro",
+	"pagetitle": "Europeana Pro - Task Force",
+
+	"css_files": [
+		{
+			"path": "../../css/pro/screen.css",
+			"media": "all"
+		}
+	],
+	"headline": {
+		"medium": "Task Force title goes here"
+	}
+}

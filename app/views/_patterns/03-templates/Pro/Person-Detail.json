@@ -1,0 +1,11 @@
+{
+	"bodyClass": "europeana_pro",
+	"pagetitle": "Europeana Pro - Person Listing",
+
+	"css_files": [
+		{
+			"path": "../../css/pro/screen.css",
+			"media": "all"
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"bodyClass": "europeana_pro",
+	"pagetitle": "Europeana Pro - Job Listing",
+
+	"css_files": [
+		{
+			"path": "../../css/pro/screen.css",
+			"media": "all"
+		}
+	],
+	"headline": {
+		"medium": "Job Listing Generation Supervisor"
+	}
+}

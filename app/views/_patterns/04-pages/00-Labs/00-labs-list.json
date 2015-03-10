@@ -1,0 +1,156 @@
+{
+	"hero" : [
+		{
+			"headline" : {
+				"short" : "Application Gallery"
+			},
+			"excerpt" : {
+				"short" : "Applications of creative re-use of Europeana content based on the use of the Europeana Search API, semantic web and Linked Open Data technologies."
+			}
+		}
+	],
+	"mainprojects" : [
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?2",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "ATHENA"
+			},
+			"excerpt" : {
+				"short" : "ATHENA is a project developing metadata exchange standards for the museum domain and aggregating museum content for Europeana. Through our API, they have built a search service where users can perform keyword searches and structured searches to find and view Europeana items. Example: search for the famous photographer, Man Ray"
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?3",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "Digital Humanities Observatory"
+			},
+			"excerpt" : {
+				"short" : "The Digital Humanities Observatory has extended its API implementation to harvest the Irish related Europeana 1914-1918 stories relating to Ireland, making them available on their portal and displaying them in their experimental 'Exhibit Visualizations'."
+			}
+		}
+	],
+	"projects" : [
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?4",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "DISMARC"
+			},
+			"excerpt" : {
+				"short" : "DISMARC aggregates music from archives all across Europe and makes it available in their own portal and in Europeana. Through our API, searches in their portal also return results from Europeana."
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?5",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "CERL Thesaurus Search"
+			},
+			"excerpt" : {
+				"short" : "The thesaurus of the Consortium of European Research Libraries (CERL) provides authority data from the early print era of publishing (persons, places, and publishers). Through the Europeana API, users can now see the number of results in Europeana related to the authority and click through to view them. CERL uses its own name synonyms for maximum recall and precision in Europeana."
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?6",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "Europeana Remix"
+			},
+			"excerpt" : {
+				"short" : "This short film was produced for the project Europeana Erster Weltkrieg, encouraging families to share photos, letters and memorabilia of World War One. Now, the film forms the basis of the Remix initiative, combining cutting-edge technology (Popcorn.js, the HTML5 video framework) and a variety of resources from Europeana (via the API) and across the web."
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?7",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "Open Pics app"
+			},
+			"excerpt" : {
+				"short" : "This open source app allows search for images in multiple online collections, such as Europeana, New York Public Library, Library of Congress, California Digital Library, Digital Public Library of America, LIFE Magazine photo archive, National Library of Australia (Trove) and Flickr Commons Project. The app is designed for both iPad and iPhone and is available in 15+ languages."
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?8",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "Twitter EuropeanaBot"
+			},
+			"excerpt" : {
+				"short" : "The program takes a list of \"seed terms\" from a file, searches for corresponding images on Europeana and posts the URL of the first result to the Twitter-Account EuropeanaBot. The current implementation has used Austrian place names and a list of Nobel Prize winners."
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?9",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "Royal Museum for Central Africa search"
+			},
+			"excerpt" : {
+				"short" : "The Royal Museum for Central Africa in Belgium is one of Europeana's content providers. On their Plone powered website, they have made their contributed content searchable using the Europeana API."
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?10",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "National Library of Ireland catalogue widget"
+			},
+			"excerpt" : {
+				"short" : "A new feature is that results from Europeana are also returned for every search, using a sidebar widget. The widget shows six items from Europeana with an option to see the full search result on the Europeana portal. Results from the National Library's contributions to Europeana are filtered out to remove duplicates."
+			}
+		},
+		{
+			"img": {
+				"square": {
+					"src": "http://placeimg.com/300/300/tech?11",
+					"alt": "Post Thumbnail"	
+				}
+			},
+			"headline" : {
+				"short" : "Wandora's Europeana Extractor"
+			},
+			"excerpt" : {
+				"short" : "Wandora is a general purpose information extraction, management and publishing application based on Topic Maps and Java. It has graphical user interface, layered and merging information model, multiple visualization models, huge collection of information extraction, import and export options, embedded HTTP server with several output modules and open plug-in architecture. Wandora is an open source application with GNU GPL license. The latest Wandora release (2013-01-28) introduced the Europeana extractor which is an enabler technology for developers and professionals who want to use the Europeana as an information source. Wandora user can search the Europeana collections via the Europeana API (v2.0), export and visualize the search results as topic maps. The user can also merge the Europeana extractions with information from other sources, such as DBPedia, YouTube and SPARQL endpoints. Wandora has over 50 different extractors to aggregate an information mash-up."
+			}
+		}
+	]
+}

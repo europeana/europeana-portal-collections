@@ -1,0 +1,51 @@
+
+
+{{> organisms-header }}
+
+<main role="main">
+
+{{> molecules-block-content-header }}
+
+<section class="grid_wrapper">
+
+	<div class="grid">
+		<div class="sidebar">
+
+			<div class="subnav">
+
+				<h4 class="label epsilon"> Filter by:</h4>
+
+				{{> molecules-labs-subnav }}
+
+			</div>
+
+			{{> molecules-tertiary-nav }}
+		</div><!--
+
+	 --><div class="main-content">
+
+			<ul class="post-list l-post-list" >
+
+				<li>{{> molecules-labs-item-main }}</li><!-- 
+			 --><li>{{> molecules-labs-item-main }}</li><!-- 
+			 --><li>{{> molecules-labs-item }}</li><!-- 
+			 --><li>{{> molecules-labs-item }}</li><!-- 
+			 --><li>{{> molecules-labs-item }}</li><!-- 
+			 --><li>{{> molecules-labs-item }}</li><!-- 
+			 --><li>{{> molecules-labs-item }}</li><!-- 
+			 --><li>{{> molecules-labs-item }}</li><!-- 
+			 -->
+			</ul>
+
+
+			{{> molecules-pagination }}
+
+		</div>
+	</div>
+
+</section>
+
+</main>
+<!-- End Content -->
+
+{{> organisms-footer(newsletter: true) }}

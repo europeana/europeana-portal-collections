@@ -1,0 +1,11 @@
+{
+	"bodyClass": "europeana_pro",
+	"pagetitle": "Europeana Pro - we can't find anything for that search term.",
+
+	"css_files": [
+		{
+			"path": "../../css/pro/screen.css",
+			"media": "all"
+		}
+	]
+}

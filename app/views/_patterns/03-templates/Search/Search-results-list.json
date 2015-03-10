@@ -1,0 +1,23 @@
+{
+	"bodyClass": "europeana_search",
+	"pagetitle": "Europeana Search",
+	"globalnav_options": {
+		"search": false,
+		"myeuropeana": true
+	},
+
+	"css_files": [
+		{
+			"path": "../../css/search/screen.css",
+			"media": "all"
+		}
+	],
+	"js_files": [
+		{
+			"path": "../../js/dist/global-min.js"
+		},
+		{
+			"path": "../../js/dist/search-min.js"
+		}
+	]
+}

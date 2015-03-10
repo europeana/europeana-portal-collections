@@ -1,0 +1,267 @@
+
+
+{{> organisms-header }}
+
+
+<main role="main">
+
+
+{{> molecules-block-content-header }}
+
+
+<div class="grid_wrapper">
+<div class="grid grid--rev"><!--Start main content 
+
+--><div id="documentation" class="main-content prose">
+
+	 	<section>
+	 		<h1>Getting Started</h1>
+			<p>In this section you will find all information necessary to jump-start using Europeana API.</p>
+		</section>
+
+		<section id="request">
+
+			<h2>Request</h2>
+
+			<p>Every Europeana Search API call is an HTTP request in a specified format that is sent to the Europeana API service. The API root URL is located at:</p>
+
+			<pre><code>http://www.europeana.eu/api/v2</code></pre>
+
+			<p>For obligatory request parameters look into the documentation of specific calls. The <a href="http://labs.europeana.eu/api/authentication/">authentication</a> section provides information on the obligatory authentication parameter <em>wskey</em>.</p>
+
+		</section>
+
+
+		<section id="response">
+
+			<h2>Response</h2>
+
+			<p>A response to an API call will always contain a number of standard fields that precede the fields specific for the call. The standard part contains the following fields:</p>
+
+			<table class="table-responsive"><thead><tr><th>Field</th><th>Datatype</th><th>Description</th></tr></thead><tbody><tr><td>apikey</td><td>String</td><td>the authentication parameter sent out by the client (the wskey parameter)</td></tr>
+			<tr><td>action</td><td>String</td><td>the name of the API method that was called</td></tr>
+			<tr><td>success</td><td>Boolean</td><td>a boolean (true/false) flag denoting the successful execution of the call</td></tr>
+			<tr><td>statsDuration</td><td>Number</td><td>the time (in milliseconds) taken to serve the request</td></tr>
+			<tr><td>requestNumber</td><td>Number</td><td>a positive number denoting the number of request by this API key within the last 24 hours</td></tr>
+			<tr><td>error</td><td>String</td><td>if the call was not successful this fields will contain a detailed text message. See <a href="labs.europeana.eu/documentation/error-codes.html">Error Codes</a> for more information.</td></tr>
+			<tr><td>params</td><td>Object</td><td>original request parameters. If an invalid request parameter was submitted, this response parameter will contain the default value (see individual calls for the default values). Shown up only if the profile parameter contains “params”.</td></tr>
+			</tbody></table>
+
+		</section>
+
+
+		<section id="datatypes">
+
+			<h2>Datatypes</h2>
+
+			<p>Europeana API uses the following datatypes:</p>
+			<table class="table-responsive"><thead><tr><th>Datatype</th><th>Description</th></tr></thead><tbody><tr><td>Number</td><td>integer or double precision floating-point number</td></tr>
+			<tr><td>String</td><td>double-quoted Unicode, with backslash escaping</td></tr>
+			<tr><td>Boolean</td><td>true or false</td></tr>
+			<tr><td>Array</td><td>an ordered sequence of values, comma-separated and enclosed in square brackets; the values do not need to be of the same type</td></tr>
+			<tr><td>Array([Datatype])</td><td>an ordered sequence values of Datatype (e.g. String or Object), comma-separated and enclosed in square brackets</td></tr>
+			<tr><td>Object</td><td>an unordered collection of key:value pairs with the ‘:’ character separating the key and the value, comma-separated and enclosed in curly braces; the keys must be strings and should be distinct from each other</td></tr>
+			<tr><td>LangMap</td><td>TBD</td></tr>
+			</tbody></table>
+
+		</section>
+
+		<section id="error_codes">
+
+			<h2>Error Codes</h2>
+
+			<p>An error during processing of an API method is reported by (1) a relevant HTTP status code, (2) a value of the success field and (3) a meaningful error message in the error field (see the Response section).</p>
+
+			<p>The following HTTP status codes are returned:</p>
+			<table>
+				<thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead>
+				<tbody><tr><td>200</td><td>The request was executed successfully.</td></tr>
+				<tr><td>401</td><td>Authentication credentials were missing or authentication failed.</td></tr>
+				<tr><td>404</td><td>The requested record was not found.</td></tr>
+				<tr><td>429</td><td>The request could be served because the application has reached its usage limit.</td></tr>
+				<tr><td>500</td><td>Internal Server Error. Something has gone wrong, tell us!</td></tr>
+				</tbody>
+			</table> 
+
+			<h2>edm:TimeSpan</h2>
+
+			<table class="table-responsive table-code">
+				<thead>
+					<tr>
+						<th>EDM Field</th>
+						<th>Name in search</th>
+						<th>Datatype</th>
+						<th>Name in search result</th>
+						<th>Name (record)</th>
+						<th>Aggregated Field/Facet</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>@rdf:about</td>
+						<td>edm_timespan (?)</td>
+						<td>text</td><td>edmTimespan</td>
+						<td>TimeSpan.about</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>skos:prefLabel</td>
+						<td>ts_skos_prefLabel</td>
+						<td>text</td>
+						<td>edmTimespanLabel</td>
+						<td>TimeSpan.prefLabel</td>
+						<td>when</td>
+					</tr>
+					<tr>
+						<td>skos:altLabel</td>
+						<td>ts_skos_altLabel</td>
+						<td>text</td>
+						<td>&nbsp;</td>
+						<td>TimeSpan.altLabel</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>skos:hiddenLabel</td>
+						<td>ts_skos_hiddenLabel</td>
+						<td>string</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr><td>skos:note</td><td>ts_skos_note</td><td>string</td><td>&nbsp;</td><td>TimeSpan.note</td><td>&nbsp;</td></tr>
+					<tr>
+						<td>dcterms:hasPart</td>
+						<td>ts_dcterms_hasPart</td>
+						<td>string</td>
+						<td>&nbsp;</td>
+						<td>TimeSpan.dcTermsHasPart</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>dcterms:isPartOf</td>
+						<td>ts_dcterms_isPartOf</td>
+						<td>string</td>
+						<td>edmTimespanBroaderTerm</td>
+						<td>TimeSpan.isPartOf</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>ts_dcterms_isPartOf</td>
+						<td>string</td>
+						<td>edmTimespanBroaderLabel</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>edm:begin</td>
+						<td>ts_edm_begin</td>
+						<td>string</td>
+						<td>edmTimespanBegin</td>
+						<td>TimeSpan.begin</td>
+						<td>&nbsp;</td>
+					</tr>
+						<tr>
+							<td>edm:end</td>
+						<td>ts_edm_end</td>
+						<td>string</td>
+						<td>edmTimespanEnd</td>
+						<td>TimeSpan.end</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>crm:P79F.beginning_is_qualified_by</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>TimeSpan.crmP79FBeginningIsQualifiedBy</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>crm:P80F.end_is_qualified_by</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>TimeSpan.crmP80FEndIsQualifiedBy</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>owl:sameAs</td>
+						<td>ts_owl_sameAs</td>
+						<td>string</td>
+						<td>&nbsp;</td>
+						<td>TimeSpan.owlSameAs</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>ts_dcterms_isPartOf_label (?)</td>
+						<td>string</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</section>
+
+
+		<section>
+			
+		</section>
+
+
+	</div><!-- End main content 
+
+
+Start navigation
+ --><div class="sidebar">
+		<ul class="nav_secondary">
+			<li><a href="/api" title="API Introduction">Introduction</a></li>
+			<li class="is_open">
+				<a class="js-menuTrigger">REST API</a>
+
+				<ul>
+                    <li><a href="/api/introduction" title="Introduction">Introduction</a></li>
+                    <li><a href="/api/getting-started" title="Getting Started with the Europeana REST API">Getting Started</a></li>
+					<li><a href="/api/registration" title="API Registration">Get an API-key</a></li>
+					<li><a href="/api/console" title="API Console">Console</a></li>
+					<li><a href="/api/authentication" title="Authentication">Authentication</a></li>
+					<li><a href="/api/search" title="Search">Search</a></li>
+					<li><a href="/api/query" title="Query">Query Syntax</a></li>
+					<li><a href="/api/record" title="Record">Record</a></li>
+					<li><a href="/api/myeuropeana" title="Accessing MyEuropeana">MyEuropeana</a></li>
+					<li><a href="/api/provider" title="Querying Providers and Datasets">Provider and Datasets</a></li>
+					<li><a href="/api/data-hierarchy" title="Data Hierarchy">Data Hierarchy</a></li>
+                    <li><a href="/api/data-fields" title="Data Fields">Data Fields</a></li>
+					<li><a href="/api/error" title="Error Codes">Error Codes</a></li>	
+					<li><a href="/api/changelog" title="API ChangeLog">Change Log</a></li>
+				</ul>
+			</li>
+			<li>
+				<a class="js-menuTrigger">Linked Open Data</a>
+				<ul>
+					<li><a href="/api/linked-open-data/introduction">Introduction</a></li>
+					<li><a href="/api/linked-open-data/data-downloads">Data Downloads</a></li>
+					<li><a href="/api/linked-open-data/SPARQL-endpoint">SPARQL-endpoint</a></li>
+					<li><a href="/api/linked-open-data/data-structure">Data Structure</a></li>
+					<li><a href="/api/linked-open-data/FAQ">FAQ</a></li>
+					<li><a href="/api/linked-open-data/credits">Credits</a></li>
+				</ul>
+			</li>
+			<li><a href="/api/search-widget" title="Search Widget">Search Widget</a></li>			
+			<li><a href="http://www.europeana.eu/portal/rights/api-terms-of-use.html" title="API Data Fields Reference">Terms of Use</a></li>				
+		</ul>	
+	</div>
+</div>
+</div>
+
+
+</main>
+<!-- End Content -->
+
+
+{{> organisms-footer(newsletter: true) }}
+

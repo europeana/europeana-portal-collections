@@ -1,0 +1,89 @@
+<!-- Begin .header -->
+<a href="#maincontent" class="is-vishidden">Skip to main content</a>
+
+<!-- Super global navigation -->
+
+
+<header class="header">
+
+<div class="menu-top">
+	{{> molecules-global-topdrawer }}
+</div>
+
+<!-- Off canvas search bar -->
+{{#globalnav_options.search}}
+{{> molecules-global-search }}
+{{/globalnav_options.search}}
+
+<!-- wrapper for navigation bar -->
+<div class="cf">
+
+
+	{{> atoms-logo }}
+
+
+	<div class="nav-global">
+
+		<a href="#" class="nav-toggle nav-toggle-sites">
+			<span>Our Sites</span>
+		</a>
+
+		{{#globalnav_options.search}}
+		<a href="#search" class="nav-toggle nav-toggle-search">
+			<svg class="icon icon-search">
+				<use xlink:href="#icon-search"></use>
+			</svg>
+			<span class="is-vishidden">Search</span>
+		</a>
+		{{/globalnav_options.search}}
+
+		{{#globalnav_options.myeuropeana}}
+		<a href="#" class="nav-toggle nav-toggle-settings">
+			<svg class="icon icon-settings">
+				<use xlink:href="#icon-settings"></use>
+			</svg>
+			<span>My Europeana</span>
+		</a>
+		{{/globalnav_options.myeuropeana}}
+
+		<a href="#" class="nav-toggle nav-toggle-menu">
+			<svg class="icon icon-menu">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+
+			<span>Menu</span>
+		</a>
+
+	</div>
+
+	{{> molecules-primary-nav }}
+
+
+</div>
+</header>
+<!-- End .header -->
+
+
+<nav class="drawer menu-right">
+
+	<div class="search">
+		{{> molecules-search }}
+	</div>
+
+    <ul class="nav_primary">
+        <li><a href="#" class="current">Primary 1</a></li>
+        <li><a href="#">Primary 2</a></li>
+        <li><a href="#">Primary 3</a></li>
+    </ul>
+
+    <ul class="nav_secondary">
+        <li><a href="#">Secondary 1</a></li>
+        <li><a href="#">Secondary 2</a></li>
+        <li><a href="#">Secondary 3</a></li>
+    </ul>
+</nav>
+
+
+
+<!-- Main site wrapper for offcanvas navigation -->
+<div class="pusher">

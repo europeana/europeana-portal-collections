@@ -1,0 +1,11 @@
+{
+	"bodyClass": "europeana_research",
+	"pagetitle": "Europeana Research",
+
+	"css_files": [
+		{
+			"path": "../../css/research/screen.css",
+			"media": "all"
+		}
+	]
+}
