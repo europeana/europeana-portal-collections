@@ -4,8 +4,6 @@ class ChannelsController < ApplicationController
   include EuropeanaCatalog
 
   before_filter :find_channel, only: [:index, :show]
-  before_filter :retrieve_response_and_document_list,
-                if: :has_search_parameters?
   before_filter :redirect_show_home_to_index, only: :show
 
   def index
@@ -45,10 +43,6 @@ class ChannelsController < ApplicationController
   def find_channel
     id = (params[:action] == 'index' ? :home : params[:id].to_sym)
     @channel ||= Channel.find(id)
-  end
-
-  def retrieve_response_and_document_list
-    (@response, @document_list) = get_search_results(params, channels_search_params)
   end
 
   def redirect_show_home_to_index
