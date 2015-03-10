@@ -1,3 +1,4 @@
 <%# render 'search_sidebar' %>
 <%# render 'catalog/search_results' %>
+<!-- this template needs to be split up into more modules in order to better integrate it. the modules would be integrated rather than the template -->
 <%= render template: '_patterns/03-templates/Search/Search-results-list@inprogress', locals: { document_list: @document_list }  %>
