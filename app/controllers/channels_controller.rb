@@ -5,6 +5,7 @@ class ChannelsController < ApplicationController
 
   before_filter :find_channel, only: [:index, :show]
   before_filter :redirect_show_home_to_index, only: :show
+  Mustache.template_path = File.join( Rails.root, 'app', 'views', '_patterns' )
 
   def index
     show

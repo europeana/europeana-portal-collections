@@ -68,3 +68,6 @@ gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
 
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test
+
+# Use mustache
+gem 'mustache'
