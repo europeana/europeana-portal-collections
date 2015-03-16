@@ -69,5 +69,13 @@ gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test
 
-# Use mustache
-gem 'mustache'
+#############################
+
+gem 'mustache', '~> 1.0.1'
+gem 'stache', git: 'https://github.com/agoragames/stache.git'
+
+gem 'europeana-styleguide',
+  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
+  branch: 'develop'
+
+

@@ -14,6 +14,7 @@ module EuropeanaCatalog
 
     before_filter :retrieve_response_and_document_list,
               if: :has_search_parameters?
+    before_filter :fix_model
   end
 
   def solr_repository
@@ -133,8 +134,14 @@ module EuropeanaCatalog
     query_facet_counts.sort_by(&:last).reverse
   end
 
+  
   def retrieve_response_and_document_list
     search_results = get_search_results(params, channels_search_params)
     (@response, @document_list) = search_results
   end
+  
+  def fix_model
+    @searchresults = @document_list
+  end
+  
 end
