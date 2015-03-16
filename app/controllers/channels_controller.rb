@@ -5,8 +5,9 @@ class ChannelsController < ApplicationController
 
   before_filter :find_channel, only: [:index, :show]
   before_filter :redirect_show_home_to_index, only: :show
-
-  
+  #Mustache.template_path =  '/home/andy/.rvm/gems/ruby-2.2.0/bundler/gems/europeana-styleguide-ruby-e4ce8f3ab1b5/app/templates/' 
+  Mustache.template_path =  '/home/andy/.rvm/gems/ruby-2.2.0@channels/bundler/gems/europeana-styleguide-ruby-f893a577a4c0/app/templates/'
+    
   def index
     show
   end
