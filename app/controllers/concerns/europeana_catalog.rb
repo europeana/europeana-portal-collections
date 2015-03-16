@@ -142,6 +142,16 @@ module EuropeanaCatalog
   
   def fix_model
     @searchresults = @document_list
+    @pagetitle = params['q']
+    @headmeta = [
+      {"name":"HandheldFriendly",   "content": "True"},
+      {"name":"X-UA-Compatible",    "content": "IE=edge"},
+      {"name":"viewport",           "content": "width=device-width,initial-scale=1.0"},        
+      {"httpequiv":"Content-Type",  "content": "text/html; charset=utf-8" },
+      {"name":"csrf-param",         "content": "authenticity_token"},
+      {"name":"csrf-token",         "content": form_authenticity_token }
+    ]
+    
   end
   
 end
