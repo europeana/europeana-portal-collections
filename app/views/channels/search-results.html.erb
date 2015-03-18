@@ -1,11 +1,2 @@
-<h1><%= @channel.id %></h1>
-<h2>search results</h2>
-<p>generic search results page for each channel including the home channel. needs to be branded accordingly using the channel.id</p>
-
-<div id="sidebar" class="col-md-3 col-sm-4">
-  <%= render 'search_sidebar' %>
-</div>
-
-<div id="content" class="col-md-9 col-sm-8">
-  <%= render 'catalog/search_results' %>
-</div>
+<!-- this template needs to be split up into more modules in order to better integrate it. the modules would be integrated rather than the template -->
+<%= render template: 'templates/Search/Search-results-list@inprogress'  %>
