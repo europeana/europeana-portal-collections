@@ -31,9 +31,8 @@ gem 'spring', group: :development
 gem 'blacklight', '~> 5.11.0'
 
 # Use the Europeana REST API
-gem 'europeana',
-  git: 'https://github.com/rwd/europeana-client-ruby.git',
-  ref: '7a339bc'
+gem 'europeana-api',
+  git: 'https://github.com/rwd/europeana-api-client-ruby.git'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'

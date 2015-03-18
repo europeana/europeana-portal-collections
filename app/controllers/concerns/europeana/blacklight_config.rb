@@ -63,7 +63,8 @@ module Europeana
         config.add_show_field 'europeanaAggregation.edmCountry', label: 'Providing country'
 
         # "fielded" search configuration.
-        %w(all_fields title who what when where subject).each do |field_name|
+        config.add_search_field('', :label => 'All Fields')
+        %w(title who what when where subject).each do |field_name|
           config.add_search_field(field_name)
         end
 

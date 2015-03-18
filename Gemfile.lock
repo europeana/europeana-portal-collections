@@ -14,11 +14,10 @@ GIT
       stache
 
 GIT
-  remote: https://github.com/rwd/europeana-client-ruby.git
-  revision: 7a339bc99da2dd1e9af0b1e198806af8690d6a8e
-  ref: 7a339bc
+  remote: https://github.com/rwd/europeana-api-client-ruby.git
+  revision: e9a9b32812e75ddbd0c46b06ed279298ae5ba46b
   specs:
-    europeana (0.1.0)
+    europeana-api (0.2.0)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
 
@@ -290,7 +289,7 @@ DEPENDENCIES
   brakeman
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
-  europeana!
+  europeana-api!
   europeana-styleguide!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)

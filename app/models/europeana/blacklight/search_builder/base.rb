@@ -39,7 +39,7 @@ module Europeana
         def add_query_to_api(api_parameters)
           if blacklight_params[:q].blank?
             api_parameters[:query] = '*:*'
-          elsif search_field
+          elsif search_field && search_field.field.present?
             api_parameters[:query] = "#{search_field.field}:#{blacklight_params[:q]}"
           elsif blacklight_params[:q].is_a?(Hash)
             # @todo when would it be a Hash?
