@@ -33,19 +33,20 @@ module RenderConstraintsHelper
   end
 
   def render_constraints_qfs(localized_params = params)
-    return "".html_safe unless localized_params[:qf]
-     content = []
-     localized_params[:qf].each do |value|
-       content << render_qf_element(value, localized_params)
-     end
+    return ''.html_safe unless localized_params[:qf]
+    content = []
+    localized_params[:qf].each do |value|
+      content << render_qf_element(value, localized_params)
+    end
 
-     safe_join(content.flatten, "\n")
+    safe_join(content.flatten, "\n")
   end
 
   def render_qf_element(value, localized_params)
+    remove_path = search_action_path(remove_qf_param(value, localized_params))
     render_constraint_element(nil, value,
-      :remove => search_action_path(remove_qf_param(value, localized_params)),
-      :classes => ['filter']
+                              remove: remove_path,
+                              classes: ['filter']
     )
   end
 end
