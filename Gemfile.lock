@@ -15,8 +15,8 @@ GIT
 
 GIT
   remote: https://github.com/rwd/europeana-client-ruby.git
-  revision: ad40799cd862a5d50c98192aeab70ec12a05aacf
-  ref: ad40799
+  revision: 7a339bc99da2dd1e9af0b1e198806af8690d6a8e
+  ref: 7a339bc
   specs:
     europeana (0.1.0)
       activesupport (>= 3.0)
@@ -69,7 +69,7 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.10.2)
+    blacklight (5.11.0)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
@@ -286,7 +286,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 5.10.2)
+  blacklight (~> 5.11.0)
   brakeman
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
