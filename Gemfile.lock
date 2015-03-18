@@ -1,19 +1,26 @@
 GIT
+  remote: https://github.com/agoragames/stache.git
+  revision: 29132bd5ed9895f470842445cf1bf2433ec780d7
+  specs:
+    stache (1.1.0)
+
+GIT
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: eb16a36b2115a1bd3ad33279f56b8a3bef5d78ca
+  branch: develop
+  specs:
+    europeana-styleguide (0.0.1)
+      mustache
+      stache
+
+GIT
   remote: https://github.com/rwd/europeana-client-ruby.git
-  revision: e0d9828f188d6aa902a73833c9b81e255566531d
-  ref: e0d9828
+  revision: ad40799cd862a5d50c98192aeab70ec12a05aacf
+  ref: ad40799
   specs:
     europeana (0.1.0)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-
-GIT
-  remote: https://github.com/rwd/rsolr-europeana.git
-  revision: 172e72c307838951d2c1ad9124e7e48f0f335f9c
-  ref: 172e72c
-  specs:
-    rsolr-europeana (0.0.3)
-      rsolr (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -57,19 +64,19 @@ GEM
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
-    autoprefixer-rails (5.1.7)
+    autoprefixer-rails (5.1.7.1)
       execjs
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.9.3)
+    blacklight (5.10.2)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.6)
-    bootstrap-sass (3.3.3)
+      rsolr (~> 1.0.11)
+    bootstrap-sass (3.3.4)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     brakeman (3.0.1)
@@ -94,7 +101,7 @@ GEM
     coffee-script-source (1.8.0)
     colored (1.2)
     debug_inspector (0.0.2)
-    deprecation (0.2.0)
+    deprecation (0.2.2)
       activesupport
     diff-lcs (1.2.5)
     docile (1.1.5)
@@ -202,7 +209,7 @@ GEM
     redis-store (1.1.4)
       redis (>= 2.2)
     require_all (1.3.2)
-    rsolr (1.0.10)
+    rsolr (1.0.12)
       builder (>= 2.1.2)
     rspec-core (3.2.1)
       rspec-support (~> 3.2.0)
@@ -279,28 +286,30 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 5.9.3)
+  blacklight (~> 5.10.2)
   brakeman
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
   europeana!
+  europeana-styleguide!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
   jquery-rails
-  mustache
+  kaminari
+  mustache (~> 1.0.1)
   mysql2
   puma (~> 2.11.0)
   rails (= 4.2.0)
   rails_12factor (~> 0.0.3)
   rails_best_practices
   redis-rails (~> 4.0)
-  rsolr-europeana!
   rspec-rails (~> 3.0)
   rubocop (~> 0.29.1)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   simplecov
   spring
+  stache!
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
