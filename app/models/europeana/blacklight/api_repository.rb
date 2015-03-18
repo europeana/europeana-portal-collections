@@ -1,7 +1,9 @@
 module Europeana
   module Blacklight
     ##
-    # Repository hooked up to Europeana REST API
+    # Repository hooked up to Europeana REST API via europeana-api gem
+    #
+    # @see Europeana::API
     class ApiRepository < ::Blacklight::AbstractRepository
       ##
       # Finds a single Europeana record, with hierarchy data
@@ -9,9 +11,9 @@ module Europeana
       # @return (see Blacklight::SolrRepository#find)
       # @param (see Blacklight::SolrRepository#find)
       def find(id, params = {})
-        cache_key = { "Europeana::Record/#{id}#object" => params }
+        cache_key = { "Europeana::API::Record/#{id}#object" => params }
         res_object = Rails.cache.fetch(cache_key) do
-          Europeana.record("/#{id}", params)['object']
+          Europeana::API.record("/#{id}", params)['object']
         end
         doc = blacklight_config.document_model.new(res_object)
         doc.hierarchy = fetch_document_hierarchy("/#{id}")
@@ -19,8 +21,8 @@ module Europeana
       end
 
       def search(params = {})
-        res = Rails.cache.fetch('Europeana::Search' => params) do
-          Europeana.search(params)
+        res = Rails.cache.fetch('Europeana::API::Search' => params) do
+          Europeana::API.search(params)
         end
 
         res['facet_queries'] = query_facet_counts(params)
@@ -45,9 +47,9 @@ module Europeana
             query_facet_params[:qf] ||= []
             query_facet_params[:qf] << query_field[:fq]
             query_facet_params.merge!(rows: 0, start: 1)
-            cache_key = { 'Europeana::Search' => query_facet_params }
+            cache_key = { 'Europeana::API::Search' => query_facet_params }
             query_facet_response = Rails.cache.fetch(cache_key) do
-              Europeana.search(query_facet_params)
+              Europeana::API.search(query_facet_params)
             end
 
             query_facet_total = query_facet_response[:totalResults]
@@ -71,10 +73,10 @@ module Europeana
       # @param id [String] Europeana record ID, with leading slash
       # @return [Hash] Record's hierarchy data, or false if it has none
       def fetch_document_hierarchy(id)
-        Rails.cache.fetch("Europeana::Record/#{id}#hierarchy") do
+        Rails.cache.fetch("Europeana::API::Record/#{id}#hierarchy") do
           begin
             europeana_api_document_hierarchy(id)
-          rescue Europeana::Errors::RequestError => error
+          rescue Europeana::API::Errors::RequestError => error
             unless error.message == 'This record has no hierarchical structure!'
               raise
             end
@@ -92,7 +94,7 @@ module Europeana
       # @param id [String] Europeana record ID, with leading slash
       # @return [Hash] Record's hierarchy data
       def europeana_api_document_hierarchy(id)
-        record = Europeana::Record.new(id)
+        record = Europeana::API::Record.new(id)
         hierarchy = record.hierarchy('ancestor-self-siblings')
 
         if hierarchy['self']['hasChildren']
