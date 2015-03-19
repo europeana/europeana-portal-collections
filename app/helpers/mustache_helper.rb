@@ -1,12 +1,4 @@
 module MustacheHelper
-  def pagetitle
-    params['q']
-  end
-
-  def searchresults
-    @document_list
-  end
-
   def head_meta
     [
       #{'name':'X-UA-Compatible',    'content': 'IE=edge'},
