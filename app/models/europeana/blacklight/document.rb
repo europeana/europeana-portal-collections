@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module Europeana
   module Blacklight
     ##
@@ -44,7 +46,7 @@ module Europeana
         end
       end
 
-      def get(key, opts = {})
+      def get(key, opts = { sep: ', ', default: nil })
         keys = split_edm_key(key)
         return opts[:default] unless key?(keys.first)
 
@@ -54,6 +56,10 @@ module Europeana
 
         val.compact!
         (val.is_a?(Array) && opts[:sep]) ? val.join(opts[:sep]) : val
+      end
+
+      def title
+        get(:title)
       end
 
       def get_localized_edm_value(val)
