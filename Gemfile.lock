@@ -1,4 +1,19 @@
 GIT
+  remote: https://github.com/agoragames/stache.git
+  revision: 29132bd5ed9895f470842445cf1bf2433ec780d7
+  specs:
+    stache (1.1.0)
+
+GIT
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: e82877d4b58778ee17319e31858faa643b5f0270
+  branch: develop
+  specs:
+    europeana-styleguide (0.0.1)
+      mustache
+      stache
+
+GIT
   remote: https://github.com/rwd/europeana-api-client-ruby.git
   revision: 608d4ecb237a22406827b3026952a6c271220bec
   specs:
@@ -122,6 +137,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.5.1)
     multi_json (1.11.0)
+    mustache (1.0.1)
     mysql2 (0.3.18)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -274,10 +290,12 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
   europeana-api!
+  europeana-styleguide!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  mustache (~> 1.0.1)
   mysql2
   puma (~> 2.11.0)
   rails (= 4.2.0)
@@ -290,6 +308,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simplecov
   spring
+  stache!
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
