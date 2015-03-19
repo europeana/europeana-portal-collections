@@ -1,23 +1,8 @@
 GIT
-  remote: https://github.com/agoragames/stache.git
-  revision: 29132bd5ed9895f470842445cf1bf2433ec780d7
-  specs:
-    stache (1.1.0)
-
-GIT
-  remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: eb16a36b2115a1bd3ad33279f56b8a3bef5d78ca
-  branch: develop
-  specs:
-    europeana-styleguide (0.0.1)
-      mustache
-      stache
-
-GIT
   remote: https://github.com/rwd/europeana-api-client-ruby.git
-  revision: e9a9b32812e75ddbd0c46b06ed279298ae5ba46b
+  revision: 608d4ecb237a22406827b3026952a6c271220bec
   specs:
-    europeana-api (0.2.0)
+    europeana-api (0.3.0)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
 
@@ -68,24 +53,24 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.11.0)
+    blacklight (5.11.1)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.11)
-    bootstrap-sass (3.3.4)
+    bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
-    brakeman (3.0.1)
+    brakeman (3.0.2)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
       haml (>= 3.0, < 5.0)
       highline (~> 1.6.20)
       multi_json (~> 1.2)
       ruby2ruby (~> 2.1.1)
-      ruby_parser (~> 3.5.0)
+      ruby_parser (~> 3.6.2)
       sass (~> 3.0)
       terminal-table (~> 1.4)
     builder (3.2.2)
@@ -97,7 +82,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
+    coffee-script-source (1.9.1)
     colored (1.2)
     debug_inspector (0.0.2)
     deprecation (0.2.2)
@@ -108,21 +93,22 @@ GEM
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
-    eventmachine (1.0.6)
-    execjs (2.2.2)
+    eventmachine (1.0.7)
+    execjs (2.4.0)
     fastercsv (1.5.5)
-    globalid (0.3.0)
+    globalid (0.3.3)
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
     highline (1.6.21)
     hike (1.2.3)
     i18n (0.7.0)
-    jbuilder (2.2.4)
+    jbuilder (2.2.11)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jquery-rails (3.1.2)
-      railties (>= 3.0, < 5.0)
+    jquery-rails (4.0.3)
+      rails-dom-testing (~> 1.0)
+      railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.2)
     kaminari (0.16.3)
@@ -135,15 +121,14 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
-    multi_json (1.10.1)
-    mustache (1.0.1)
-    mysql2 (0.3.16)
-    nokogiri (1.6.5)
+    multi_json (1.11.0)
+    mysql2 (0.3.18)
+    nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     parser (2.2.0.3)
       ast (>= 1.1, < 3.0)
     powerpack (0.1.0)
-    puma (2.11.0)
+    puma (2.11.1)
       rack (>= 1.1, < 2.0)
     rack (1.6.0)
     rack-test (0.6.3)
@@ -161,16 +146,16 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.5)
+    rails-dom-testing (1.0.6)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.1)
+    rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_best_practices (1.15.6)
+    rails_best_practices (1.15.7)
       activesupport
       code_analyzer (>= 0.4.3)
       colored
@@ -188,8 +173,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
-    rdoc (4.1.2)
-      json (~> 1.4)
+    rdoc (4.2.0)
     redis (3.2.1)
     redis-actionpack (4.0.0)
       actionpack (~> 4)
@@ -210,7 +194,7 @@ GEM
     require_all (1.3.2)
     rsolr (1.0.12)
       builder (>= 2.1.2)
-    rspec-core (3.2.1)
+    rspec-core (3.2.2)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -237,48 +221,48 @@ GEM
     ruby2ruby (2.1.3)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
-    ruby_parser (3.5.0)
+    ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
     sass (3.2.19)
-    sass-rails (4.0.4)
+    sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.2)
-      sprockets (~> 2.8, < 2.12)
+      sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sexp_processor (4.4.5)
+    sexp_processor (4.5.0)
     simplecov (0.9.2)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
       simplecov-html (~> 0.9.0)
     simplecov-html (0.9.0)
-    spring (1.1.3)
-    sprockets (2.11.3)
+    spring (1.3.3)
+    sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.3)
+    sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     terminal-table (1.4.5)
     thor (0.19.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tilt (1.4.1)
-    turbolinks (2.5.2)
+    turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.5.3)
+    uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    web-console (2.0.0)
-      activemodel (~> 4.0)
+    web-console (2.1.2)
+      activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
-      railties (~> 4.0)
+      railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
 
 PLATFORMS
@@ -290,12 +274,10 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
   europeana-api!
-  europeana-styleguide!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
-  mustache (~> 1.0.1)
   mysql2
   puma (~> 2.11.0)
   rails (= 4.2.0)
@@ -308,7 +290,6 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simplecov
   spring
-  stache!
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
