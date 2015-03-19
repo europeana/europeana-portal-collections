@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rwd/europeana-api-client-ruby.git
-  revision: e9a9b32812e75ddbd0c46b06ed279298ae5ba46b
+  revision: 608d4ecb237a22406827b3026952a6c271220bec
   specs:
-    europeana-api (0.2.0)
+    europeana-api (0.3.0)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
 
@@ -53,14 +53,14 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.11.0)
+    blacklight (5.11.1)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.11)
-    bootstrap-sass (3.3.4)
+    bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     brakeman (3.0.2)
@@ -146,7 +146,7 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.5)
+    rails-dom-testing (1.0.6)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
@@ -221,7 +221,7 @@ GEM
     ruby2ruby (2.1.3)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
-    ruby_parser (3.6.4)
+    ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
     sass (3.2.19)
     sass-rails (4.0.5)
