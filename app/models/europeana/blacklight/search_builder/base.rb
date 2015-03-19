@@ -23,9 +23,9 @@ module Europeana
 
         def add_profile_to_api(api_parameters)
           if blacklight_config.facet_fields
-            api_parameters[:profile] = 'params facets'
+            api_parameters[:profile] = 'params facets rich'
           else
-            api_parameters[:profile] = 'params'
+            api_parameters[:profile] = 'params rich'
           end
         end
 
