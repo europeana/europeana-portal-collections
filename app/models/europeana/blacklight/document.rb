@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Europeana
   module Blacklight
     ##
@@ -56,10 +54,6 @@ module Europeana
 
         val.compact!
         (val.is_a?(Array) && opts[:sep]) ? val.join(opts[:sep]) : val
-      end
-
-      def title
-        get(:title)
       end
 
       def get_localized_edm_value(val)
