@@ -5,6 +5,22 @@ module Templates
         params['q']
       end
 
+      def filters
+        facets_from_request(facet_field_names).collect do |f|
+          {
+            simple: true,
+            title: f.name,
+            items: f.items.collect do |i|
+              {
+                url: search_action_path(add_facet_params_and_redirect(f.name, i)),
+                text: i.value,
+                num_results: i.hits
+              }
+            end
+          }
+        end
+      end
+
       def searchresults
         @document_list.collect do |doc|
           {
