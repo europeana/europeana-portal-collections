@@ -44,7 +44,7 @@ module Europeana
         end
       end
 
-      def get(key, opts = {})
+      def get(key, opts = { sep: ', ', default: nil })
         keys = split_edm_key(key)
         return opts[:default] unless key?(keys.first)
 
