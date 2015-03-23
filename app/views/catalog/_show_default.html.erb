@@ -1,11 +1,19 @@
-<%# default partial to display solr document fields in catalog show view -%>
-<dl class="dl-horizontal  dl-invert">
-  <% document_show_fields(document).each do |field_name, field| -%>
-    <% if should_render_show_field?(document, field) %>
-      <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
-      <dd class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_value document, field: field_name %></dd>
+<%# default partial to display solr document documents in catalog show view -%>
+<% if document.is_a?(Hash) || document.is_a?(Blacklight::Document) %>
+  <dl class="dl-horizontal dl-invert">
+    <% document.each_pair do |k, v| %>
+      <dt class="blacklight-<%= k.parameterize %>"><%= k %></dt>
+      <%= render partial: 'show_default', locals: { document: v } %>
     <% end -%>
-  <% end -%>
-</dl>
+  </dl>
+<% elsif document.is_a?(Array) %>
+  <ul>
+    <% document.each do |v| %>
+      <li><%= render partial: 'show_default', locals: { document: v } %></li>
+    <% end -%>
+  </ul>
+<% else %>
+  <%= document %>
+<% end %>
 
-<%= render partial: 'document_hierarchy', locals: {document: document} if document.hierarchy %>
+<%= render partial: 'document_hierarchy', locals: { document: document } if document.respond_to?(:hierarchy) && document.hierarchy %>
