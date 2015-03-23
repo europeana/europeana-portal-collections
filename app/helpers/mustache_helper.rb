@@ -134,4 +134,13 @@ module MustacheHelper
       }
     }
   end
+
+  def channels_nav_links
+    available_channels.collect do |c|
+      {
+        url: channel_path(c),
+        text: c
+      }
+    end
+  end
 end

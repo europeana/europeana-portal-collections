@@ -8,17 +8,23 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <%= link_to application_name, root_path, class: "navbar-brand" %>
+    <a href="{{root_path}}" class="navbar-brand">{{application_name}}</a>
     </div>
 
     <div class="collapse navbar-collapse" id="user-util-collapse">
-      <%= render :partial=>'/user_util_links' %>
+      <ul class="nav navbar-nav">
+        {{#channels_nav_links}}
+        <li><a href="{{url}}">{{text}}</a></li>
+        {{/channels_nav_links}}
+      </ul>
     </div>
   </div>
 </div>
 
 <div id="search-navbar" class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
-    <%= render_search_bar  %>
+    <div class="searchbar">
+    {{> molecules/components/search/search-form }}
+    </div>
   </div>
 </div>

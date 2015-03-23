@@ -78,6 +78,10 @@ module Europeana
       api_params
     end
 
+    def has_search_parameters?
+      super || (params[:controller] == 'channels' && params.key?(:q))
+    end
+
     protected
 
     def search_action_url(options = {})
