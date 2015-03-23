@@ -1,9 +1,13 @@
+<style>
+dl > dd, dt > ul { margin-left: 2em; }
+ul > li { list-style-type: disc; }
+</style>
 <%# default partial to display solr document documents in catalog show view -%>
 <% if document.is_a?(Hash) || document.is_a?(Blacklight::Document) %>
   <dl class="dl-horizontal dl-invert">
     <% document.each_pair do |k, v| %>
       <dt class="blacklight-<%= k.parameterize %>"><%= k %></dt>
-      <%= render partial: 'show_default', locals: { document: v } %>
+      <dd><%= render partial: 'show_default', locals: { document: v } %></dd>
     <% end -%>
   </dl>
 <% elsif document.is_a?(Array) %>
