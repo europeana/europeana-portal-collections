@@ -31,6 +31,7 @@ module Templates
       def searchresults
         @document_list.collect do |doc|
           {
+            objectUrl: '/record' + doc.id,
             title: doc.get(:title),
             text: {
               medium: truncate(doc.get(:dcDescription), length: 140, separator: ' ')
