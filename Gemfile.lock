@@ -1,25 +1,11 @@
 GIT
-  remote: https://github.com/agoragames/stache.git
-  revision: 29132bd5ed9895f470842445cf1bf2433ec780d7
-  specs:
-    stache (1.1.0)
-
-GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: bb1d5e9a174ec7844ffd1045f13e9b8b615b7bad
-  branch: develop
+  revision: 03d487ac35f93976672a4e286a50e2c4aca01664
+  ref: 03d487a
   specs:
     europeana-styleguide (0.0.1)
-      mustache
-      stache
-
-GIT
-  remote: https://github.com/rwd/europeana-api-client-ruby.git
-  revision: 608d4ecb237a22406827b3026952a6c271220bec
-  specs:
-    europeana-api (0.3.0)
-      activesupport (>= 3.0)
-      multi_json (~> 1.0)
+      mustache (~> 1.0.1)
+      stache (~> 1.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -108,6 +94,9 @@ GEM
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
+    europeana-api (0.3.0)
+      activesupport (>= 3.0)
+      multi_json (~> 1.0)
     eventmachine (1.0.7)
     execjs (2.4.0)
     fastercsv (1.5.5)
@@ -264,6 +253,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    stache (1.1.1)
     terminal-table (1.4.5)
     thor (0.19.1)
     thread_safe (0.3.5)
@@ -289,13 +279,12 @@ DEPENDENCIES
   brakeman
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
-  europeana-api!
+  europeana-api
   europeana-styleguide!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
-  mustache (~> 1.0.1)
   mysql2
   puma (~> 2.11.0)
   rails (= 4.2.0)
@@ -308,7 +297,6 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simplecov
   spring
-  stache!
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
