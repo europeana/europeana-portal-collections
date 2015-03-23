@@ -21,22 +21,12 @@ module Templates
         end
       end
 
-
       def header_text
-        text = ''
-        ccat = ' and '
-        res4 = 'results for'
-        arrQ = params['q'].split(' ')
-        arrQ.each do | query_term |
-          query_term = query_term.html_safe
-          text += '<strong>' + CGI.escapeHTML(query_term) + '</strong>'
-          if (query_term != arrQ.last)
-            text += ccat
-          end
+        query_terms = params['q'].split(' ').collect do |query_term|
+          content_tag(:strong, query_term)
         end
-        @header_text = "#{response.total} #{res4} #{text}"
+        "#{response.total} results for " + query_terms.join(' and ')
       end
-
       
       def searchresults
         @document_list.collect do |doc|
