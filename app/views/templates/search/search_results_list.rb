@@ -26,7 +26,9 @@ module Templates
         query_terms = params['q'].split(' ').collect do |query_term|
           content_tag(:strong, query_term)
         end
-        number_with_delimiter(response.total) + ' results for ' + query_terms.join(' and ')
+        query_terms = safe_join(query_terms, ' and ')
+        header_text_fragments = [number_with_delimiter(response.total), 'results for', query_terms]
+        safe_join(header_text_fragments, ' ')
       end
 
       def searchresults
