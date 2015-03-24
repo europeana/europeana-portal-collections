@@ -10,6 +10,7 @@ module Templates
           {
             simple: true,
             title: sanitize(facet.name),
+            select_one: (facet.name == 'CHANNEL'),
             items: facet.items.collect do |item|
               {
                 url: facet_item_url(facet.name, item),
