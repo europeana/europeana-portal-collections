@@ -22,7 +22,7 @@ module Europeana
 
         # Response models
         config.repository_class = Europeana::Blacklight::ApiRepository
-        config.search_builder_class = Europeana::Blacklight::SearchBuilder::Base
+        config.search_builder_class = Europeana::Blacklight::SearchBuilder
         config.response_model = Europeana::Blacklight::Response
         config.document_model = Europeana::Blacklight::Document
         config.document_presenter_class = Europeana::Blacklight::DocumentPresenter
