@@ -6,15 +6,16 @@ module Templates
       end
 
       def filters
-        facets_from_request(facet_field_names).collect do |f|
+        facets_from_request(facet_field_names).collect do |facet|
           {
             simple: true,
-            title: f.name,
-            items: f.items.collect do |i|
+            title: facet.name,
+            items: facet.items.collect do |item|
               {
-                url: search_action_path(add_facet_params_and_redirect(f.name, i)),
-                text: i.value,
-                num_results: i.hits
+                url: facet_item_url(facet.name, item),
+                text: item.value,
+                num_results: number_with_delimiter(item.hits),
+                'is-checked': facet_in_params?(facet.name, item)
               }
             end
           }
@@ -25,13 +26,13 @@ module Templates
         query_terms = params['q'].split(' ').collect do |query_term|
           content_tag(:strong, query_term)
         end
-        "#{response.total} results for " + query_terms.join(' and ')
+        number_with_delimiter(response.total) + ' results for ' + query_terms.join(' and ')
       end
-      
+
       def searchresults
         @document_list.collect do |doc|
           {
-            objectUrl: '/record' + doc.id,
+            objectUrl: url_for_document(doc),
             title: doc.get(:title),
             text: {
               medium: truncate(doc.get(:dcDescription), length: 140, separator: ' ')
@@ -54,6 +55,16 @@ module Templates
               }
             }
           }
+        end
+      end
+
+      private
+
+      def facet_item_url(facet, item)
+        if facet_in_params?(facet, item)
+          search_action_path(remove_facet_params(facet, item, params))
+        else
+           search_action_path(add_facet_params_and_redirect(facet, item))
         end
       end
     end
