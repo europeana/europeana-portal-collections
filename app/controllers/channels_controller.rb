@@ -6,11 +6,10 @@ class ChannelsController < ApplicationController
   configure_blacklight do |config|
     config.search_builder_class = Europeana::Blacklight::SearchBuilder::Channels
   end
-  search_params_logic << :add_channel_qf_to_api
 
   before_filter :find_channel, only: [:index, :show]
   before_filter :redirect_show_home_to_index, only: :show
-      
+
   def index
     show
   end
