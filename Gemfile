@@ -67,7 +67,7 @@ gem 'simplecov', require: false, group: :test
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: 'aa20af698b'
+  ref: 'f1d03a2c0a'
 
 # Use Kaminari for Europeana search result pagination
 gem 'kaminari'

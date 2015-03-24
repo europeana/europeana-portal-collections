@@ -5,6 +5,20 @@ module Templates
         'page title'
       end
 
+      def back_link
+         link_back_to_catalog(label: 'return to search results')
+      end
+      
+      def prev_link
+        link_to_previous_document(@previous_document)
+      end
+
+      def next_link
+        link_to_next_document(@next_document)
+      end
+
+      # Object data - needs grouped
+      
       def edmPreview
         if document.is_a?(Blacklight::Document)
           document.get('europeanaAggregation.edmPreview')
@@ -24,6 +38,8 @@ module Templates
           document['proxies'][0]['dcTitle']['def']
         end
       end
+
+      # All
       
       def doc
         document.as_json.to_s 
