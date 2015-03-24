@@ -9,6 +9,20 @@ module MustacheHelper
       { meta_name: 'csrf-token',         content: form_authenticity_token }
     ]
   end
+    
+  def page_title
+    if(@response == nil)
+      'Europeana Channels'
+    elsif(@response['action'].to_s == "search.json")
+      'Europeana Search: ' + sanitize(params[:q]) 
+    elsif(params[:action].to_s == "show")
+      if @document.is_a?(Blacklight::Document)
+        if defined?(@document['proxies'])
+          'Europeana Record: ' + @document['proxies'][0]['dcTitle']['def'].join
+        end
+      end
+    end
+  end
 
   def form_action_search
     request.protocol + request.host_with_port + '/'
