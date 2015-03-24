@@ -21,6 +21,10 @@ module Europeana
           end
         end
 
+        ##
+        # Set the profile type
+        #
+        # @see http://labs.europeana.eu/api/search/#profile-parameter
         def add_profile_to_api(api_parameters)
           if blacklight_config.facet_fields
             api_parameters[:profile] = 'params facets rich'
@@ -29,6 +33,10 @@ module Europeana
           end
         end
 
+        ##
+        # Add the Europeana REST API key
+        #
+        # @see http://labs.europeana.eu/api/authentication/#basic-authentication
         def add_wskey_to_api(api_parameters)
           api_parameters[:wskey] = Rails.application.secrets.europeana_api_key
         end
@@ -36,6 +44,8 @@ module Europeana
         ##
         # Take the user-entered query, and put it in the API params,
         # including config's "search field" params for current search field.
+        #
+        # @see http://labs.europeana.eu/api/query/
         def add_query_to_api(api_parameters)
           if blacklight_params[:q].blank?
             api_parameters[:query] = '*:*'
@@ -70,7 +80,7 @@ module Europeana
             Array(value_list).each do |value|
               next if value.blank? # skip empty strings
               api_parameters[:qf] ||= []
-              api_parameters[:qf] << "#{facet_field}:#{value}"
+              api_parameters[:qf] << "#{facet_field}:\"#{value}\""
             end
           end
         end
