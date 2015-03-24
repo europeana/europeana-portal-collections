@@ -22,13 +22,13 @@ module Templates
       
       # Object data - needs grouped
       
-      def edmPreview
+      def edm_preview
         if document.is_a?(Blacklight::Document)
           document.get('europeanaAggregation.edmPreview')
         end
       end
       
-      def edmDatasetName
+      def edm_dataset_name
         document['edmDatasetName'] 
       end
       
