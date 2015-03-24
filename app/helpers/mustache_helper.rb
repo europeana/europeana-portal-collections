@@ -57,9 +57,9 @@ module MustacheHelper
   def menus
     {
       actions: {
-        'button-title':'Actions',
+        button_title:'Actions',
         menu_id: 'dropdown-result-actions',
-        'menu-title': 'Save to:',
+        menu_title: 'Save to:',
         items: [
           {
             url: 'http://europeana.eu',
@@ -96,9 +96,9 @@ module MustacheHelper
         ]
       },
       sort: {
-        'button-title': 'Relevance',
+        button_title: 'Relevance',
         menu_id: 'dropdown-result-sort',
-        'menu-title': 'Sort by:',
+        menu_title: 'Sort by:',
         items: [
           {
             text: 'Date',
