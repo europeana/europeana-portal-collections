@@ -4,6 +4,13 @@ module Europeana
       ##
       # Core search builder for {Europeana::Blacklight::ApiRepository}
       class Base < ::Blacklight::SearchBuilder
+        self.default_processor_chain = [
+          :default_api_parameters, :add_profile_to_api,
+          :add_wskey_to_api, :add_query_to_api, :add_qf_to_api,
+          :add_facet_qf_to_api, :add_facetting_to_api,
+          :add_paging_to_api, :add_sorting_to_api
+        ]
+
         ##
         # Start with general defaults from BL config. Need to use custom
         # merge to dup values, to avoid later mutating the original by mistake.
