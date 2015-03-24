@@ -39,12 +39,20 @@ module Europeana
           blacklight_config.add_facet_fields_to_solr_request))
         end
 
+        query_facet_fqs = query_facets.collect do |_facet_name, query_facet|
+          query_facet.query.collect do |_field_name, query_field|
+            query_field[:fq]
+          end
+        end.flatten
+
         query_facet_counts = []
 
         query_facets.each_pair do |_facet_name, query_facet|
           query_facet.query.each_pair do |_field_name, query_field|
             query_facet_params = base_params.dup
             query_facet_params[:qf] ||= []
+            # Prevent other qf params overlapping with query facets
+            query_facet_params[:qf].reject! { |qf| query_facet_fqs.include?(qf) }
             query_facet_params[:qf] << query_field[:fq]
             query_facet_params.merge!(rows: 0, start: 1)
             cache_key = { 'Europeana::API::Search' => query_facet_params }

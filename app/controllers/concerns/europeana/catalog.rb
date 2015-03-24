@@ -18,12 +18,7 @@ module Europeana
       before_filter :retrieve_response_and_document_list,
                     if: :has_search_parameters?
 
-      self.search_params_logic = [
-        :default_api_parameters, :add_profile_to_api,
-        :add_wskey_to_api, :add_query_to_api, :add_qf_to_api,
-        :add_facet_qf_to_api, :add_facetting_to_api,
-        :add_paging_to_api, :add_sorting_to_api
-      ]
+      self.search_params_logic = true
     end
 
     def fetch_one(id, _extra_controller_params)

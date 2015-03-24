@@ -3,6 +3,11 @@
 module FacetsHelper
   include Blacklight::FacetsHelperBehavior
 
+  def facet_in_params?(field, item)
+    value = facet_value_for_facet_item(item)
+    super || (field =='CHANNEL' && within_channel? && (params[:id] == value))
+  end
+
   private
 
   def create_facet_field_response_for_query_facet_field(facet_name, facet_field)
