@@ -1,12 +1,9 @@
 module Europeana
   module Blacklight
-    module SearchBuilder
+    class SearchBuilder
       ##
       # Search builder with content channel qf
-      class Channels < Base
-        self.default_processor_chain = Base.default_processor_chain +
-          [:add_channel_qf_to_api]
-
+      module Channels
         def add_channel_qf_to_api(api_parameters)
           return unless blacklight_params[:controller] == 'channels' && blacklight_params[:id].present?
           channel_qf = scope.channels_search_query

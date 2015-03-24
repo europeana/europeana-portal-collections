@@ -3,9 +3,8 @@
 class ChannelsController < ApplicationController
   include Europeana::Catalog
 
-  configure_blacklight do |config|
-    config.search_builder_class = Europeana::Blacklight::SearchBuilder::Channels
-  end
+  self.search_params_logic = Europeana::Blacklight::SearchBuilder.default_processor_chain +
+    [:add_channel_qf_to_api]
 
   before_filter :find_channel, only: [:index, :show]
   before_filter :redirect_show_home_to_index, only: :show
