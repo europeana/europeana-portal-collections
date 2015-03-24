@@ -2,18 +2,18 @@ module Templates
   module Search
     class SearchResultsList < Stache::Mustache::View
       def pagetitle
-        params['q']
+        sanitize(params[:q])
       end
 
       def filters
         facets_from_request(facet_field_names).collect do |facet|
           {
             simple: true,
-            title: facet.name,
+            title: sanitize(facet.name),
             items: facet.items.collect do |item|
               {
                 url: facet_item_url(facet.name, item),
-                text: item.value,
+                text: sanitize(item.value),
                 num_results: number_with_delimiter(item.hits),
                 'is-checked': facet_in_params?(facet.name, item)
               }
@@ -23,7 +23,7 @@ module Templates
       end
 
       def header_text
-        query_terms = params['q'].split(' ').collect do |query_term|
+        query_terms = params[:q].split(' ').collect do |query_term|
           content_tag(:strong, query_term)
         end
         query_terms = safe_join(query_terms, ' and ')
@@ -35,16 +35,16 @@ module Templates
         @document_list.collect do |doc|
           {
             objectUrl: url_for_document(doc),
-            title: doc.get(:title),
+            title: sanitize(doc.get(:title)),
             text: {
-              medium: truncate(doc.get(:dcDescription), length: 140, separator: ' ')
+              medium: sanitize(truncate(doc.get(:dcDescription), length: 140, separator: ' '))
             },
             year: {
-              long: doc.get(:year)
+              long: sanitize(doc.get(:year))
             },
             origin: {
-              text: doc.get(:dataProvider),
-              url: doc.get(:edmIsShownAt)
+              text: sanitize(doc.get(:dataProvider)),
+              url: sanitize(doc.get(:edmIsShownAt))
             },
             isImage: doc.get(:type) == 'IMAGE',
             isAudio: doc.get(:type) == 'SOUND',
@@ -52,7 +52,7 @@ module Templates
             isVideo: doc.get(:type) == 'VIDEO',
             img: {
               rectangle: {
-                src: doc.get(:edmPreview),
+                src: sanitize(doc.get(:edmPreview)),
                 alt: ''
               }
             }
@@ -66,7 +66,7 @@ module Templates
         if facet_in_params?(facet, item)
           search_action_path(remove_facet_params(facet, item, params))
         else
-           search_action_path(add_facet_params_and_redirect(facet, item))
+          search_action_path(add_facet_params_and_redirect(facet, item))
         end
       end
     end
