@@ -1,10 +1,7 @@
 module Templates
   module Search
     class SearchResultsList < Stache::Mustache::View
-      def pagetitle
-        sanitize(params[:q])
-      end
-
+        
       def filters
         facets_from_request(facet_field_names).collect do |facet|
           {
@@ -32,7 +29,7 @@ module Templates
         safe_join(header_text_fragments, ' ')
       end
 
-      def searchresults
+      def search_results
         @document_list.collect do |doc|
           {
             object_url: url_for_document(doc),

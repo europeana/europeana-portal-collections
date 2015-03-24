@@ -1,10 +1,7 @@
 module Templates
   module Search
     class SearchObject < Stache::Mustache::View
-      def pagetitle
-        'page title'
-      end
-
+      
       def back_link
          link_back_to_catalog(label: 'return to search results')
       end
@@ -17,6 +14,12 @@ module Templates
         link_to_next_document(@next_document)
       end
 
+      def links
+        res = {
+          :download  => document.is_a?(Blacklight::Document) ? document.get('europeanaAggregation.edmPreview') : ''
+        }
+      end
+      
       # Object data - needs grouped
       
       def edmPreview
@@ -35,7 +38,13 @@ module Templates
       
       def title
         if defined?(document['proxies'])
-          document['proxies'][0]['dcTitle']['def']
+          document['proxies'][0]['dcTitle']['def'].join
+        end
+      end
+
+      def rights
+        if defined?(document['aggregations'])
+          document['aggregations'][0]['edmRights']['def'].join
         end
       end
 
