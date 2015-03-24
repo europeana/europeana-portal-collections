@@ -1,8 +1,10 @@
 <style>
-dl > dd, dt > ul { margin-left: 2em; }
-ul > li { list-style-type: disc; }
+  dl > dd, dt > ul { margin-left: 2em; }
+  ul > li { list-style-type: disc; }
 </style>
-<%# default partial to display solr document documents in catalog show view -%>
+<% if document.is_a?(Blacklight::Document) %>
+  <img src="<%= document.get('europeanaAggregation.edmPreview') %>">
+<% end %>
 <% if document.is_a?(Hash) || document.is_a?(Blacklight::Document) %>
   <dl class="dl-horizontal dl-invert">
     <% document.each_pair do |k, v| %>
