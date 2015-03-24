@@ -16,7 +16,7 @@ module Templates
                 url: facet_item_url(facet.name, item),
                 text: sanitize(item.value),
                 num_results: number_with_delimiter(item.hits),
-                'is-checked': facet_in_params?(facet.name, item)
+                is_checked: facet_in_params?(facet.name, item)
               }
             end
           }
@@ -35,7 +35,7 @@ module Templates
       def searchresults
         @document_list.collect do |doc|
           {
-            objectUrl: url_for_document(doc),
+            object_url: url_for_document(doc),
             title: sanitize(doc.get(:title)),
             text: {
               medium: sanitize(truncate(doc.get(:dcDescription), length: 140, separator: ' '))
@@ -47,10 +47,10 @@ module Templates
               text: sanitize(doc.get(:dataProvider)),
               url: sanitize(doc.get(:edmIsShownAt))
             },
-            isImage: doc.get(:type) == 'IMAGE',
-            isAudio: doc.get(:type) == 'SOUND',
-            isText: doc.get(:type) == 'TEXT',
-            isVideo: doc.get(:type) == 'VIDEO',
+            is_image: doc.get(:type) == 'IMAGE',
+            is_audio: doc.get(:type) == 'SOUND',
+            is_text: doc.get(:type) == 'TEXT',
+            is_video: doc.get(:type) == 'VIDEO',
             img: {
               rectangle: {
                 src: sanitize(doc.get(:edmPreview)),
