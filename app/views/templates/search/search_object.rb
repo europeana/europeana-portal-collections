@@ -22,30 +22,44 @@ module Templates
       
       # Object data - needs grouped
       
-      def edm_preview
-        if document.is_a?(Blacklight::Document)
-          document.get('europeanaAggregation.edmPreview')
-        end
-      end
-      
-      def edm_dataset_name
-        document['edmDatasetName'] 
-      end
-      
-      def type
-        document['type'] 
-      end
-      
-      def title
-        if defined?(document['proxies'])
-          document['proxies'][0]['dcTitle']['def'].join
-        end
-      end
+      def data 
+        {
+          :agent_pref_label => document.get('agents.prefLabel'),
+            
+          :dc_description => document.get('proxies.dcDescription'),
+          :dc_type => document.get('proxies.dcType'),
+          :dc_creator => document.get('proxies.dcCreator'),
+          
+          :dc_format => document.get('proxies.dcFormat'),
+          :dc_identifier => document.get('proxies.dcIdentifier'),
+                    
+          
+          :dc_terms_created => document.get('proxies.dctermsCreated'),
+           
+           # :dc_terms_created_web => document.get('aggregations.webResources.dctermsCreated'),
+           # = Error: Too many levels of EDM key requested: max is 2; got 3
+           # (see http://localhost:9292/record/90402/SK_A_2344.html)
+          
+          :dc_terms_extent => document.get('proxies.dctermsExtent'),
+          :dc_title => document.get('proxies.dcTitle'),
+          
+          :edm_country => document.get('europeanaAggregation.edmCountry'),
+          :edm_dataset_name => document.get('edmDatasetName'),
+          :edm_is_shown_at => document.get('aggregations.edmIsShownAt'),
+          :edm_is_shown_by => document.get('aggregations.edmIsShownBy'),
+          :edm_language => document.get('europeanaAggregation.edmLanguage'),
+          :edm_preview => document.get('europeanaAggregation.edmPreview'),
+          :edm_provider => document.get('aggregations.edmProvider'),
+          :edm_rights =>  document.get('aggregations.edmRights'),
 
-      def rights
-        if defined?(document['aggregations'])
-          document['aggregations'][0]['edmRights']['def'].join
-        end
+          :latitude => document.get('places.latitude'),
+          :longitude => document.get('places.longitude'),
+            
+          :title => document.get('title'),
+          :type => document.get('type'),
+          
+          :year => document.get('year')
+        }
       end
 
       # All

@@ -14,12 +14,10 @@ module MustacheHelper
     if(@response == nil)
       'Europeana Channels'
     elsif(@response['action'].to_s == "search.json")
-      'Europeana Search: ' + sanitize(params[:q]) 
+        'Europeana Search' + (params[:q] == nil ? '' : ': ' + sanitize(params[:q]))
     elsif(params[:action].to_s == "show")
       if @document.is_a?(Blacklight::Document)
-        if defined?(@document['proxies'])
-          'Europeana Record: ' + @document['proxies'][0]['dcTitle']['def'].join
-        end
+        'Europeana Record: ' + @document.get('title')
       end
     end
   end
@@ -47,9 +45,13 @@ module MustacheHelper
     }
   end
 
+  def image_root
+    'http://develop.styleguide.eanadev.org/images/'
+  end
+
   def js_files
-    # All theses are blacklight's dependencies - getting the via the helper would be nicer
     [
+      # Blacklight dependencies (unused)
       { path: asset_path('jquery.js') },
       { path: asset_path('turbolinks.js') },
       { path: asset_path('blacklight/core.js') },
@@ -64,9 +66,13 @@ module MustacheHelper
       { path: asset_path('bootstrap/dropdown.js') },
       { path: asset_path('bootstrap/alert.js') },
       { path: asset_path('bootstrap/modal.js') },
-      { path: asset_path('blacklight/blacklight.js') }
+      { path: asset_path('blacklight/blacklight.js') },
+        
+      # Non Blacklight dependencies
+      { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' }
     ]
   end
+
 
   def menus
     {
