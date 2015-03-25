@@ -42,7 +42,7 @@ module Europeana
         # Facet fields in the order they should be displayed.
         config.add_facet_field 'CHANNEL', query: channels_query_facet
         config.add_facet_field 'TYPE', limit: true
-        config.add_facet_field 'YEAR', limit: true
+        config.add_facet_field 'YEAR', limit: 30, range: true
         config.add_facet_field 'REUSABILITY', limit: true
         config.add_facet_field 'COUNTRY', limit: true
         config.add_facet_field 'LANGUAGE', limit: true

@@ -1,22 +1,14 @@
 module Templates
   module Search
     class SearchResultsList < Stache::Mustache::View
-        
       def filters
         facets_from_request(facet_field_names).collect do |facet|
-          {
-            simple: true,
-            title: sanitize(facet.name),
-            select_one: (facet.name == 'CHANNEL'),
-            items: facet.items.collect do |item|
-              {
-                url: facet_item_url(facet.name, item),
-                text: sanitize(item.value),
-                num_results: number_with_delimiter(item.hits),
-                is_checked: facet_in_params?(facet.name, item)
-              }
-            end
-          }
+          facet_config = blacklight_config.facet_fields[facet.name]
+          if facet_config.range
+            range_facet_template_data(facet)
+          else
+            simple_facet_template_data(facet)
+          end
         end
       end
 
@@ -66,6 +58,55 @@ module Templates
         else
           search_action_path(add_facet_params_and_redirect(facet, item))
         end
+      end
+
+      def simple_facet_template_data(facet)
+        {
+          simple: true,
+          title: sanitize(facet.name),
+          select_one: (facet.name == 'CHANNEL'),
+          items: facet.items.collect do |item|
+            {
+              url: facet_item_url(facet.name, item),
+              text: sanitize(item.value),
+              num_results: number_with_delimiter(item.hits),
+              is_checked: facet_in_params?(facet.name, item)
+            }
+          end
+        }
+      end
+
+      def range_facet_template_data(facet)
+        range_min = facet.items.collect(&:value).min
+        range_max = facet.items.collect(&:value).max
+        hits_max = facet.items.collect(&:hits).max
+        {
+          date: true,
+          title: sanitize(facet.name),
+          form: {
+            action_url: search_action_url(params)
+          },
+          range: {
+            start: {
+              input_name: "range[#{facet.name}][begin]",
+              input_value: range_min,
+              label_text: 'From:'
+            },
+            end: {
+              input_name: "range[#{facet.name}][end]",
+              input_value: range_max,
+              label_text: 'To:'
+            }
+          },
+          data: facet.items.sort_by(&:value).collect do |item|
+            {
+              percent_of_max: (item.hits.to_f / hits_max.to_f * 100).to_i,
+              value: "#{item.value} (#{item.hits})"
+            }
+          end,
+          date_start: range_min,
+          date_end: range_max
+        }
       end
     end
   end

@@ -4,8 +4,7 @@ module Europeana
     # Core search builder for {Europeana::Blacklight::ApiRepository}
     class SearchBuilder < ::Blacklight::SearchBuilder
       require 'europeana/blacklight/search_builder/channels'
-
-      include Channels
+      require 'europeana/blacklight/search_builder/ranges'
 
       self.default_processor_chain = [
         :default_api_parameters, :add_profile_to_api,
@@ -13,6 +12,9 @@ module Europeana
         :add_facet_qf_to_api, :add_facetting_to_api,
         :add_paging_to_api, :add_sorting_to_api
       ]
+
+      include Channels
+      include Ranges
 
       ##
       # Start with general defaults from BL config. Need to use custom
