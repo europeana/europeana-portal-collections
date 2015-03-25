@@ -25,16 +25,16 @@ module Templates
         @document_list.collect do |doc|
           {
             object_url: url_for_document(doc),
-            title: sanitize(doc.get(:title)),
+            title: (doc.get(:title)),
             text: {
-              medium: sanitize(truncate(doc.get(:dcDescription), length: 140, separator: ' '))
+              medium: truncate(doc.get(:dcDescription), length: 140, separator: ' ')
             },
             year: {
-              long: sanitize(doc.get(:year))
+              long: doc.get(:year)
             },
             origin: {
-              text: sanitize(doc.get(:dataProvider)),
-              url: sanitize(doc.get(:edmIsShownAt))
+              text: doc.get(:dataProvider),
+              url: doc.get(:edmIsShownAt)
             },
             is_image: doc.get(:type) == 'IMAGE',
             is_audio: doc.get(:type) == 'SOUND',
@@ -42,7 +42,7 @@ module Templates
             is_video: doc.get(:type) == 'VIDEO',
             img: {
               rectangle: {
-                src: sanitize(doc.get(:edmPreview)),
+                src: doc.get(:edmPreview),
                 alt: ''
               }
             }
@@ -63,12 +63,12 @@ module Templates
       def simple_facet_template_data(facet)
         {
           simple: true,
-          title: sanitize(facet.name),
+          title: facet.name,
           select_one: (facet.name == 'CHANNEL'),
           items: facet.items.collect do |item|
             {
               url: facet_item_url(facet.name, item),
-              text: sanitize(item.value),
+              text: item.value,
               num_results: number_with_delimiter(item.hits),
               is_checked: facet_in_params?(facet.name, item)
             }
@@ -82,7 +82,7 @@ module Templates
         hits_max = facet.items.collect(&:hits).max
         {
           date: true,
-          title: sanitize(facet.name),
+          title: facet.name,
           form: {
             action_url: search_action_url,
             hidden_inputs: hidden_inputs_for_search
@@ -100,9 +100,13 @@ module Templates
             }
           },
           data: facet.items.sort_by(&:value).collect do |item|
+            p = reset_search_params(params)
+            p[:f] ||= {}
+            p[:f][facet.name] = [item.value]
             {
               percent_of_max: (item.hits.to_f / hits_max.to_f * 100).to_i,
-              value: "#{item.value} (#{item.hits})"
+              value: "#{item.value} (#{item.hits})",
+              url: search_action_path(p)
             }
           end,
           date_start: range_min,
