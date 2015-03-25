@@ -1,4 +1,21 @@
 module MustacheHelper
+  class Translator
+    def [](key)
+      I18n.translate(key)
+    end
+    def to_hash
+      self
+    end
+    def key?(key)
+      I18n.exists?(key)
+    end
+    alias_method :has_key?, :key?
+  end
+
+  def i18n
+    @_translator ||= Translator.new
+  end
+
   def head_meta
     [
       #{'name':'X-UA-Compatible',    content: 'IE=edge' },
