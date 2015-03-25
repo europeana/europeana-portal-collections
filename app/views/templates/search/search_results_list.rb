@@ -84,7 +84,8 @@ module Templates
           date: true,
           title: sanitize(facet.name),
           form: {
-            action_url: search_action_url(params)
+            action_url: search_action_url,
+            hidden_inputs: hidden_inputs_for_search
           },
           range: {
             start: {
@@ -107,6 +108,17 @@ module Templates
           date_start: range_min,
           date_end: range_max
         }
+      end
+
+      def hidden_inputs_for_search
+        flatten_hash(params_for_search.except(:page, :utf8)).collect do |name, value|
+          [value].flatten.collect do |v|
+            {
+              name: name,
+              value: v.to_s
+            }
+          end
+        end.flatten
       end
     end
   end
