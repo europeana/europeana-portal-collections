@@ -22,7 +22,7 @@ module Europeana
 
         # Response models
         config.repository_class = Europeana::Blacklight::ApiRepository
-        config.search_builder_class = Europeana::Blacklight::SearchBuilder::Base
+        config.search_builder_class = Europeana::Blacklight::SearchBuilder
         config.response_model = Europeana::Blacklight::Response
         config.document_model = Europeana::Blacklight::Document
         config.document_presenter_class = Europeana::Blacklight::DocumentPresenter
@@ -43,7 +43,7 @@ module Europeana
         config.add_facet_field 'CHANNEL', query: channels_query_facet
         config.add_facet_field 'TYPE', limit: true
         config.add_facet_field 'YEAR', limit: true
-        config.add_facet_field 'RIGHTS', limit: true
+        config.add_facet_field 'REUSABILITY', limit: true
         config.add_facet_field 'COUNTRY', limit: true
         config.add_facet_field 'LANGUAGE', limit: true
         config.add_facet_field 'PROVIDER', limit: true
