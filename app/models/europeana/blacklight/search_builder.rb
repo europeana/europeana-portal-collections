@@ -91,8 +91,14 @@ module Europeana
         blacklight_params[:f].each_pair do |facet_field, value_list|
           Array(value_list).each do |value|
             next if value.blank? # skip empty strings
-            api_parameters[:qf] ||= []
-            api_parameters[:qf] << "#{facet_field}:\"#{value}\""
+            # bizarrely, reusability is a distinct API param, even though it
+            # is returned with the facets in a search response
+            if facet_field == 'REUSABILITY'
+              api_parameters[:reusability] = value
+            else
+              api_parameters[:qf] ||= []
+              api_parameters[:qf] << "#{facet_field}:\"#{value}\""
+            end
           end
         end
       end
