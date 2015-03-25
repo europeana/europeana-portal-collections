@@ -28,12 +28,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 
 # Use Blacklight for searching and browsing
-gem 'blacklight', '~> 5.10.2'
+gem 'blacklight', '~> 5.11.0'
 
 # Use the Europeana REST API
-gem 'europeana',
-  git: 'https://github.com/rwd/europeana-client-ruby.git',
-  ref: 'ad40799'
+gem 'europeana-api',
+  git: 'https://github.com/rwd/europeana-api-client-ruby.git'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
