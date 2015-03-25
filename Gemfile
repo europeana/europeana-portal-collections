@@ -28,15 +28,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 
 # Use Blacklight for searching and browsing
-gem 'blacklight', '~> 5.9.3'
+gem 'blacklight', '~> 5.10.2'
 
 # Use the Europeana REST API
-gem 'europeana', git: 'https://github.com/rwd/europeana-client-ruby.git',
-                 ref: 'e0d9828'
-
-# Use the Europeana REST API as though it was Solr
-gem 'rsolr-europeana', git: 'https://github.com/rwd/rsolr-europeana.git',
-                       ref: '172e72c'
+gem 'europeana',
+  git: 'https://github.com/rwd/europeana-client-ruby.git',
+  ref: 'ad40799'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
@@ -68,3 +65,6 @@ gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
 
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test
+
+# Use Kaminari for Europeana search result pagination
+gem 'kaminari'
