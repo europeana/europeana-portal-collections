@@ -34,7 +34,8 @@ module MustacheHelper
         'Europeana Search' + (params[:q] == nil ? '' : ': ' + sanitize(params[:q]))
     elsif(params[:action].to_s == "show")
       if @document.is_a?(Blacklight::Document)
-        'Europeana Record: ' + @document.get('title')
+        rec = @document.get('title') || ''
+        'Europeana Record' + (rec.size > 0 ? ': ' : rec || rec) 
       end
     end
   end
