@@ -17,7 +17,7 @@ module Europeana
         # Default parameters to send to solr for all search-like requests.
         # See also SolrHelper#solr_search_params
         config.default_solr_params = {
-          rows: 24
+          rows: 12
         }
 
         # Response models
@@ -42,7 +42,7 @@ module Europeana
         # Facet fields in the order they should be displayed.
         config.add_facet_field 'CHANNEL', query: channels_query_facet
         config.add_facet_field 'TYPE', limit: true
-        config.add_facet_field 'YEAR', limit: true
+        config.add_facet_field 'YEAR', limit: 30, range: true
         config.add_facet_field 'REUSABILITY', limit: true
         config.add_facet_field 'COUNTRY', limit: true
         config.add_facet_field 'LANGUAGE', limit: true

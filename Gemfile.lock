@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: cebb4b6b60f9b242d7b973cc7742298aade9c4f4
-  ref: cebb4b6b60
+  revision: f61d87d49c7fd5142cd974075ed5753ec3845a1e
+  ref: f61d87d
   specs:
     europeana-styleguide (0.0.1)
       mustache (~> 1.0.1)
@@ -222,7 +222,7 @@ GEM
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
-    ruby-progressbar (1.7.4)
+    ruby-progressbar (1.7.5)
     ruby2ruby (2.1.3)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)

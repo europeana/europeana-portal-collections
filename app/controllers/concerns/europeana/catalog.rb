@@ -125,7 +125,7 @@ module Europeana
       when params[:controller] == 'channels'
         url_for(options.merge(controller: 'channels', action: params[:action]))
       else
-        super
+        root_path(options)
       end
     end
 
