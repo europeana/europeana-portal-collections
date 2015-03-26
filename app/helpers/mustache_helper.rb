@@ -86,8 +86,11 @@ module MustacheHelper
       { path: asset_path('bootstrap/modal.js') },
       { path: asset_path('blacklight/blacklight.js') },
         
+
       # Non Blacklight dependencies
       { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' }
+      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' }
+
     ]
   end
 

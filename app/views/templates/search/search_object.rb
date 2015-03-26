@@ -15,15 +15,30 @@ module Templates
 
       def links
         res = {
-          :download  => document.get('europeanaAggregation.edmPreview')
+          :download  => document.get('europeanaAggregation.edmPreview'),
+          :original_context => document.get('aggregations.edmIsShownAt')
         }
       end
 
-      # Object data - needs grouped
+      def labels
+        {
+          :show_more_meta => "show more object data",
+          :download => "download",
+          :rights => "rights:",
+          :description => "description:",
+          :agent => get_agent_label,
+          :mlt => "similar items"
+        }
+      end
+            
       def data
         {
           :agent_pref_label => document.get('agents.prefLabel'),
-
+          :agent_begin  => document.get('agents.begin'),
+          :agent_end  => document.get('agents.end'),
+          
+          :concepts => get_doc_concepts,
+          
           :dc_description => document.get('proxies.dcDescription'),
           :dc_type => document.get('proxies.dcType'),
           :dc_creator => document.get('proxies.dcCreator'),
@@ -50,7 +65,8 @@ module Templates
           :latitude => document.get('places.latitude'),
           :longitude => document.get('places.longitude'),
 
-          :title => document.get('title'),
+          :title => get_doc_title,
+          :title_extra => get_doc_title_extra,
           :type => document.get('type'),
 
           :year => document.get('year')
@@ -61,6 +77,43 @@ module Templates
       def doc
         document.as_json.to_s 
       end
+
+      private
+      
+      def get_doc_title
+        
+        # force array return with empty default
+
+        title = document.get('title', :default=>'')
+        title = title.size == 0 ? document.get('proxies.dcTitle') : title[0]
+        title
+      end
+      
+      def get_doc_title_extra
+        
+        # force array return with empty default
+        
+        title = document.get('title', :default=>'')
+        if title.size > 1
+          title.shift
+          title
+        else
+          nil
+        end
+      end
+
+      def get_agent_label
+        x = document.get('agents.rdaGr2ProfessionOrOccupation')
+        x ||= 'creator'
+        x        
+      end
+      
+      
+      def get_doc_concepts
+        concepts = document.get('concepts.prefLabel', :default => '')
+        concepts.size > 0 ? concepts.flatten : nil 
+      end
+      
     end
   end
 end
