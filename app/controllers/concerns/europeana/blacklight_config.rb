@@ -17,7 +17,7 @@ module Europeana
         # Default parameters to send to solr for all search-like requests.
         # See also SolrHelper#solr_search_params
         config.default_solr_params = {
-          rows: 24
+          rows: 12
         }
 
         # Response models
