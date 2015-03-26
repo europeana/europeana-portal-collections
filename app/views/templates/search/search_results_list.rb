@@ -22,10 +22,18 @@ module Templates
       end
 
       def search_results
+        counter = 0
         @document_list.collect do |doc|
+          counter += 1
           {
             object_url: url_for_document(doc),
-            title: (doc.get(:title)),
+            link_attrs: [
+              {
+                name: 'data-context-href',
+                value: track_solr_document_path(doc, per_page: params.fetch(:per_page, search_session['per_page']), counter: counter, search_id: current_search_session.try(:id))
+              }
+            ],
+            title: doc.get(:title),
             text: {
               medium: truncate(doc.get(:dcDescription), length: 140, separator: ' ')
             },
