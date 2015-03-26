@@ -1,11 +1,10 @@
 module Templates
   module Search
     class SearchObject < Stache::Mustache::View
-      
       def back_link
          link_back_to_catalog(label: 'return to search results')
       end
-      
+
       def prev_link
         link_to_previous_document(@previous_document)
       end
@@ -16,33 +15,29 @@ module Templates
 
       def links
         res = {
-          :download  => document.is_a?(Blacklight::Document) ? document.get('europeanaAggregation.edmPreview') : ''
+          :download  => document.get('europeanaAggregation.edmPreview')
         }
       end
-      
+
       # Object data - needs grouped
-      
-      def data 
+      def data
         {
           :agent_pref_label => document.get('agents.prefLabel'),
-            
+
           :dc_description => document.get('proxies.dcDescription'),
           :dc_type => document.get('proxies.dcType'),
           :dc_creator => document.get('proxies.dcCreator'),
-          
+
           :dc_format => document.get('proxies.dcFormat'),
           :dc_identifier => document.get('proxies.dcIdentifier'),
-                    
-          
+
           :dc_terms_created => document.get('proxies.dctermsCreated'),
            
-           # :dc_terms_created_web => document.get('aggregations.webResources.dctermsCreated'),
-           # = Error: Too many levels of EDM key requested: max is 2; got 3
-           # (see http://localhost:9292/record/90402/SK_A_2344.html)
-          
+          :dc_terms_created_web => document.get('aggregations.webResources.dctermsCreated'),
+
           :dc_terms_extent => document.get('proxies.dctermsExtent'),
           :dc_title => document.get('proxies.dcTitle'),
-          
+
           :edm_country => document.get('europeanaAggregation.edmCountry'),
           :edm_dataset_name => document.get('edmDatasetName'),
           :edm_is_shown_at => document.get('aggregations.edmIsShownAt'),
@@ -54,22 +49,18 @@ module Templates
 
           :latitude => document.get('places.latitude'),
           :longitude => document.get('places.longitude'),
-            
+
           :title => document.get('title'),
           :type => document.get('type'),
-          
+
           :year => document.get('year')
         }
       end
 
       # All
-      
       def doc
         document.as_json.to_s 
       end
-      
-      private
-
     end
   end
 end
