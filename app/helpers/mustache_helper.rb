@@ -35,7 +35,7 @@ module MustacheHelper
     elsif(params[:action].to_s == "show")
       if @document.is_a?(Blacklight::Document)
         rec = @document.get('title') || ''
-        'Europeana Record' + (rec.size > 0 ? ': ' : rec || rec) 
+        'Europeana Record' + (rec.size > 0 ? ': ' + rec : rec) 
       end
     end
   end
