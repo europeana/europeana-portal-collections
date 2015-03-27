@@ -46,13 +46,12 @@ module UrlHelper
                                record_id: doc.record_id))
   end
 
-  def bookmark_path(doc, options = {})
-    url_for(options.merge(controller: :bookmarks,
-                          action: :show,
-                          provider_id: doc.provider_id,
-                          record_id: doc.record_id))
-  end
-
+  ##
+  # Remove one value from qf params
+  #
+  # @param value Value to remove from qf params
+  # @param source_params [Hash] params to use
+  # @return [Hash] a copy of params with the passed value removed from qf
   def remove_qf_param(value, source_params = params)
     p = reset_search_params(source_params)
     p[:qf] = (p[:qf] || []).dup
