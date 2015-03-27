@@ -20,4 +20,34 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  site:
+    results:
+      page:
+        actions: Actions
+        actions-configure-actions: Configure actions
+        actions-downloaddata: Download data
+        actions-dutchmasters: Dutch masters
+        actions-favouriteart: Favourite art
+        actions-newcollection: New collection
+        actions-saveto: Save to
+        actions-show-all-collections: Show all collections
+        all-results:
+          3D: 3D
+          images: Images
+          text: Text
+          video: Video
+        count-and-terms: "%{count} results for %{terms}"
+        in-channel: in Channel
+        product-3D: 3D
+        product-image: Image
+        product-save: Save
+        product-sound: Sound
+        product-text: Text
+        product-video: Video
+        results: Results for
+        results-and: and
+        results-relevance: Relevance
+        results-view:
+          grid: Grid
+          list: List
+        view-at-provider: View at
