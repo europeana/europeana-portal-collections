@@ -38,6 +38,7 @@ module UrlHelper
                           provider_id: doc.provider_id,
                           record_id: doc.record_id))
   end
+  alias_method :track_solr_document_path, :track_document_path
 
   def polymorphic_url(record_or_hash_or_array, options = {})
     doc = record_or_hash_or_array
