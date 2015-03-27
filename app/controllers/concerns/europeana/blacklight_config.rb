@@ -7,7 +7,6 @@ module Europeana
     included do
       def self.channels_query_facet
         channels = Europeana::Portal::Application.config.channels.dup
-        channels.reject! { |_k, channel| channel[:query].blank? }
         channels.each_with_object({}) do |(k, v), hash|
           hash[k] = { label: k, fq: v[:query] }
         end

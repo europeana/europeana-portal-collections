@@ -20,5 +20,66 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  Symphonies: Symphonies
   global:
-    refine-your-search: "Refine your search"
+    about-us: About us
+    blog: blog
+    channel: Channel
+    channel-all: All
+    channels: Channels
+    choose-language: Language
+    email-address: email address
+    exhibitions: Exhibitions
+    find-us-elsewhere: Who is afraid of the jabberwocky?
+    forgot-password: Forgot your password?
+    genres: genres
+    genres-chamber-music: Chamber music
+    genres-classical-music: Classical music
+    genres-concertos: Concertos
+    genres-non-western-classical-music: Non-western classica music
+    genres-opera: Opera
+    genres-popular-music: Popular music
+    genres-traditional-music: Traditional music
+    home: Home
+    language-basque: Basque
+    language-bulgarian: Bulgarian
+    language-catalan: Catalan
+    language-croatian: Croatian
+    language-czech: Czech
+    language-danish: Danish
+    language-dutch: Dutch
+    language-english: English
+    language-estonian: Estionian
+    language-finnish: Finnish
+    language-french: French
+    language-gaelic: Gaelic
+    language-german: German
+    language-greek: Greek
+    language-hungarian: Hungarian
+    language-icelandic: Icelandic
+    language-italian: Italian
+    language-latvian: Latvian
+    language-lithuanian: Lithuanian
+    language-maltese: Maltese
+    language-norwegian: Norwegian
+    language-polish: Polish
+    language-portuguese: Portuguese
+    language-romanian: Romanian
+    language-russian: Russian
+    language-slovakian: Slovakian
+    language-slovenian: Slovenian
+    language-spanish: Spanish
+    language-swedish: Swedish
+    language-ukranian: Ukranian
+    login: Login
+    more-info: More information
+    our-mission: Our mission
+    our-mission-text: Who is afraid of the jabberwocky?
+    our-sites: Our sites
+    password: Password
+    refine-your-search: Refine your search
+    register: Register
+    search-collections: search collections
+    sitemap: Sitemap
+    terms-and-policies: Terms and policies
+    type: type

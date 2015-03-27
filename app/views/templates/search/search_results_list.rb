@@ -30,7 +30,7 @@ module Templates
             link_attrs: [
               {
                 name: 'data-context-href',
-                value: track_solr_document_path(doc, per_page: params.fetch(:per_page, search_session['per_page']), counter: counter, search_id: current_search_session.try(:id))
+                value: track_document_path(doc, per_page: params.fetch(:per_page, search_session['per_page']), counter: counter, search_id: current_search_session.try(:id))
               }
             ],
             title: doc.get(:title),

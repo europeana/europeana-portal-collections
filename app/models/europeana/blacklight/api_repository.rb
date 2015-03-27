@@ -6,10 +6,11 @@ module Europeana
     # @see Europeana::API
     class ApiRepository < ::Blacklight::AbstractRepository
       ##
-      # Finds a single Europeana record, with hierarchy data
+      # Finds a single Europeana record via the API, with hierarchy data
       #
-      # @return (see Blacklight::SolrRepository#find)
-      # @param (see Blacklight::SolrRepository#find)
+      # @param id [String] record ID, with no leading slash
+      # @params params [Hash] request params to send to API
+      # @return (see blacklight_config.document_model)
       def find(id, params = {})
         cache_key = { "Europeana::API::Record/#{id}#object" => params }
         res_object = Rails.cache.fetch(cache_key) do
