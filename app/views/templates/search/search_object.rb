@@ -6,11 +6,19 @@ module Templates
       end
 
       def prev_link
-        link_to_previous_document(@previous_document)
+        begin
+          link_to_previous_document(@previous_document)
+        rescue
+          '(prev link error)'
+        end
       end
 
       def next_link
-        link_to_next_document(@next_document)
+        begin
+          link_to_next_document(@next_document)
+        rescue
+          '(next link error)'
+        end
       end
 
       def links
