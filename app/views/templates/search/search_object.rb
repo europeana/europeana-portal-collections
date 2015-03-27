@@ -9,7 +9,7 @@ module Templates
         begin
           link_to_previous_document(@previous_document)
         rescue
-          '(prev link error)'
+          content_tag(:span, '(prev link error)', class: 'previous')
         end
       end
 
@@ -17,7 +17,7 @@ module Templates
         begin
           link_to_next_document(@next_document)
         rescue
-          '(next link error)'
+          content_tag(:span, '(next link error)', class: 'next')
         end
       end
 
