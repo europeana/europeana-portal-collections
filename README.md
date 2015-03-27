@@ -63,7 +63,9 @@ The number of Puma workers to run. Defaults to 2.
 
 The number of threads to run per Puma worker. Defaults to 5.
 
-####
+#### LOCALEAPP_API_KEY
+
+The Localeapp API key to retrieve locale files from a localeapp.com project.
 
 ### Database
 
