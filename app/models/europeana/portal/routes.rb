@@ -7,7 +7,7 @@ module Europeana
 
       included do |klass|
         klass.default_route_sets -= [:solr_document]
-        klass.default_route_sets += [:europeana_document]
+        klass.default_route_sets += [:europeana_document] unless klass.default_route_sets.include?(:europeana_document)
       end
 
       def europeana_document(primary_resource)
