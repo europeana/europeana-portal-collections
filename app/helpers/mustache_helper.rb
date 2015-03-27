@@ -1,27 +1,4 @@
 module MustacheHelper
-  class Translator
-    def [](key)
-      I18n.translate(key)
-    end
-
-    def to_hash
-      self
-    end
-
-    def key?(key)
-      I18n.exists?(key)
-    end
-    alias_method :has_key?, :key?
-
-    def fetch(key, default = nil)
-      self[key] || default
-    end
-  end
-
-  def i18n
-    @_translator ||= Translator.new
-  end
-
   def head_meta
     [
       #{'name':'X-UA-Compatible',    content: 'IE=edge' },
@@ -32,13 +9,13 @@ module MustacheHelper
       { meta_name: 'csrf-token',         content: form_authenticity_token }
     ]
   end
-    
+
   def page_title
-    if(@response == nil)
+    if @response.nil?
       'Europeana Channels'
-    elsif(@response['action'].to_s == "search.json")
+    elsif @response['action'].to_s == 'search.json'
         'Europeana Search' + (params[:q] == nil ? '' : ': ' + sanitize(params[:q]))
-    elsif(params[:action].to_s == "show")
+    elsif params[:action].to_s == 'show'
       if @document.is_a?(Blacklight::Document)
         rec = @document.get('title') || ''
         'Europeana Record' + (rec.size > 0 ? ': ' + rec : rec) 
@@ -91,15 +68,11 @@ module MustacheHelper
       { path: asset_path('bootstrap/alert.js') },
       { path: asset_path('bootstrap/modal.js') },
       { path: asset_path('blacklight/blacklight.js') },
-        
 
       # Non Blacklight dependencies
       { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' }
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' }
-
     ]
   end
-
 
   def menus
     {
