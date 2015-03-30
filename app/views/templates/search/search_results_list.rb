@@ -1,6 +1,6 @@
 module Templates
   module Search
-    class SearchResultsList < Stache::Mustache::View
+    class SearchResultsList < View
       def filters
         facets_from_request(facet_field_names).collect do |facet|
           facet_config = blacklight_config.facet_fields[facet.name]
