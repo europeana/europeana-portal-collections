@@ -58,8 +58,11 @@ gem 'rubocop', '~> 0.29.1', require: false, groups: [:development, :test]
 # Rails best practices: code metrics for Rails
 gem 'rails_best_practices', require: false, groups: [:development, :test]
 
-# Use RSpec for tests
+# Use RSpec & Capybara for tests
 gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
+gem 'selenium-webdriver', '>=2.35.1', groups: [:development, :test]
+gem 'capybara', groups: [:development, :test]
+
 
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test
