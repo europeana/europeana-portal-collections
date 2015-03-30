@@ -17,11 +17,23 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+
+# Add this to load Capybara integration:
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
+require 'capybara/rspec'
+require 'capybara/rails'
+
+
 # Code coverage analysis, output to coverage/ dir
 require 'simplecov'
+
 SimpleCov.start
 
 RSpec.configure do |config|
+  
+  config.include Capybara::DSL
+  
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
