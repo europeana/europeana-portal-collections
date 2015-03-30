@@ -35,7 +35,7 @@ module Templates
             ],
             title: doc.get(:title),
             text: {
-              medium: truncate(doc.get(:dcDescription), length: 140, separator: ' ')
+              medium: CGI::unescapeHTML( '' + truncate(doc.get(:dcDescription), length: 140, separator: ' ')  )
             },
             year: {
               long: doc.get(:year)
