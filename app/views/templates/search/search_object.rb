@@ -1,8 +1,8 @@
 module Templates
   module Search
     class SearchObject < Stache::Mustache::View
-      
-      
+
+
       ##
       # Link to the previous document in the current search context
       #
@@ -13,7 +13,7 @@ module Templates
           content_tag :span, label, :class => 'previous'
         end
       end
-      
+
       ##
       # Link to the next document in the current search context
       #
@@ -24,7 +24,11 @@ module Templates
           content_tag :span, label, :class => 'next'
         end
       end
-      
+
+      def debug
+        'this is sample debug output'
+      end
+
       def back_link
          link_back_to_catalog(label: 'return to search results', class: 'return')
       end
@@ -62,15 +66,15 @@ module Templates
           :mlt => "similar items"
         }
       end
-            
+
       def data
         {
           :agent_pref_label => document.get('agents.prefLabel'),
           :agent_begin  => document.get('agents.begin'),
           :agent_end  => document.get('agents.end'),
-          
+
           :concepts => get_doc_concepts,
-          
+
           :dc_description => get_doc_description,
           :dc_type => document.get('proxies.dcType'),
           :dc_creator => document.get('proxies.dcCreator'),
@@ -106,24 +110,24 @@ module Templates
 
       # All
       def doc
-        document.as_json.to_s 
+        document.as_json.to_s
       end
 
       private
-      
+
       def get_doc_title
-        
+
         # force array return with empty default
 
         title = document.get('title', :default=>'')
         title = title.size == 0 ? document.get('proxies.dcTitle') : title[0]
         title
       end
-      
+
       def get_doc_title_extra
-        
+
         # force array return with empty default
-        
+
         title = document.get('title', :default=>'')
         if title.size > 1
           title.shift
@@ -134,27 +138,27 @@ module Templates
       end
 
       def get_doc_description
-        
+
         # This line returns what looks like a Ruby hash for some records, see here:
         #
         # http://localhost:3000/record/2048217/MUDE_M_0656_01.html
-        
+
         desc = document.get('proxies.dcDescription')
         desc.size > 0 ? desc : nil
       end
-    
+
       def get_agent_label
         label = document.get('agents.rdaGr2ProfessionOrOccupation')
         label ||= 'creator'
-        label        
+        label
       end
-      
-      
+
+
       def get_doc_concepts
         concepts = document.get('concepts.prefLabel', :default => '')
-        concepts.size > 0 ? concepts.flatten : nil 
+        concepts.size > 0 ? concepts.flatten : nil
       end
-      
+
     end
   end
 end
