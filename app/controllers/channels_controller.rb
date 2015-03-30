@@ -3,10 +3,8 @@
 class ChannelsController < ApplicationController
   include Europeana::Catalog
 
-  configure_blacklight do |config|
-    config.search_builder_class = Europeana::Blacklight::SearchBuilder::Channels
-  end
-  search_params_logic << :add_channel_qf_to_api
+  self.search_params_logic = Europeana::Blacklight::SearchBuilder.default_processor_chain +
+    [:add_channel_qf_to_api]
 
   before_filter :find_channel, only: [:index, :show]
   before_filter :redirect_show_home_to_index, only: :show
@@ -39,7 +37,7 @@ class ChannelsController < ApplicationController
 
   def show_html_template
     if has_search_parameters?
-      'search-results'
+      'templates/Search/Search-results-list'
     else
       (@channel.id == :home) ? 'index' : 'show'
     end

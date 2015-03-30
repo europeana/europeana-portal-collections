@@ -31,8 +31,7 @@ gem 'spring', group: :development
 gem 'blacklight', '~> 5.11.0'
 
 # Use the Europeana REST API
-gem 'europeana-api',
-  git: 'https://github.com/rwd/europeana-api-client-ruby.git'
+gem 'europeana-api'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
@@ -65,5 +64,10 @@ gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test
 
+# Use the Europeana styleguide for UI components (templates)
+gem 'europeana-styleguide',
+  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
+  ref: '85ee238'
+  
 # Use Kaminari for Europeana search result pagination
 gem 'kaminari'
