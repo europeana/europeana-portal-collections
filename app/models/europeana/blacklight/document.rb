@@ -41,29 +41,49 @@ module Europeana
 
         target = self
         keys.each do |k|
-          target = get_edm_child(target, k)
+          target = get_edm_child(target, k) unless target.nil?
         end
 
         val = get_localized_edm_value(target)
+        
+        if val.is_a?(Array)
+          val = val.compact.flatten
+          if opts[:sep]
+            return val.join(opts[:sep])
+          end
+        end
 
-        val.compact!
-        (val.is_a?(Array) && opts[:sep]) ? val.join(opts[:sep]) : val
+        val
+      end
+
+      # BL expects document to respond to MLT method
+      # @todo Remove once BL expectation loosened, or; implement if Europeana
+      #   API supports it
+      def more_like_this
+        []
+      end
+
+      protected
+
+      def split_edm_key(key)
+        key.to_s.split('.')
       end
 
       def get_localized_edm_value(val)
-        val = [val] unless val.is_a?(Array)
-        val.collect do |v|
-          if v.is_a?(Hash)
-            if v.key?(I18n.locale)
-              v[I18n.locale]
-            elsif v.key?(:def)
-              v[:def]
-            else
-              v
-            end
-          else
-            v
+        if val.is_a?(Array)
+          val.collect do |v|
+            get_localized_edm_value(v)
           end
+        elsif val.is_a?(Hash)
+          if val.key?(I18n.locale)
+            val[I18n.locale]
+          elsif val.key?(:def)
+            val[:def]
+          else
+            val.values
+          end
+        else
+          val
         end
       end
 
@@ -73,7 +93,7 @@ module Europeana
           parent.compact.each do |v|
             if v[child_key].is_a?(Array)
               child = child + v[child_key]
-            else
+            elsif v.key?(child_key)
               child << v[child_key]
             end
           end
@@ -81,17 +101,6 @@ module Europeana
         elsif parent.respond_to?(:'[]')
           parent[child_key]
         end
-      end
-
-      def split_edm_key(key)
-        key.to_s.split('.')
-      end
-
-      # BL expects document to respond to MLT method
-      # @todo Remove once BL expectation loosened, or; implement if Europeana
-      #   API supports it
-      def more_like_this
-        []
       end
     end
   end
