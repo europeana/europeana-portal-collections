@@ -7,7 +7,6 @@ module Europeana
     included do
       def self.channels_query_facet
         channels = Europeana::Portal::Application.config.channels.dup
-        channels.reject! { |_k, channel| channel[:query].blank? }
         channels.each_with_object({}) do |(k, v), hash|
           hash[k] = { label: k, fq: v[:query] }
         end
@@ -17,12 +16,12 @@ module Europeana
         # Default parameters to send to solr for all search-like requests.
         # See also SolrHelper#solr_search_params
         config.default_solr_params = {
-          rows: 24
+          rows: 12
         }
 
         # Response models
         config.repository_class = Europeana::Blacklight::ApiRepository
-        config.search_builder_class = Europeana::Blacklight::SearchBuilder::Base
+        config.search_builder_class = Europeana::Blacklight::SearchBuilder
         config.response_model = Europeana::Blacklight::Response
         config.document_model = Europeana::Blacklight::Document
         config.document_presenter_class = Europeana::Blacklight::DocumentPresenter
@@ -36,17 +35,18 @@ module Europeana
         config.index.display_type_field = 'type'
         config.index.thumbnail_field = 'edmPreview'
 
+        # Max number of rows to retrieve for each facet
+        config.default_facet_limit = 7
+
         # Facet fields in the order they should be displayed.
-        config.add_facet_field 'CHANNEL', label: 'Channel',
-                                          query: channels_query_facet
-        config.add_facet_field 'UGC', label: 'UGC', limit: 7
-        config.add_facet_field 'LANGUAGE', label: 'Language', limit: 7
-        config.add_facet_field 'TYPE', label: 'Type', limit: 7
-        config.add_facet_field 'YEAR', label: 'Year', limit: 7
-        config.add_facet_field 'PROVIDER', label: 'Provider', limit: 7
-        config.add_facet_field 'DATA_PROVIDER', label: 'Data provider', limit: 7
-        config.add_facet_field 'COUNTRY', label: 'Country', limit: 7
-        config.add_facet_field 'RIGHTS', label: 'Rights', limit: 7
+        config.add_facet_field 'CHANNEL', query: channels_query_facet
+        config.add_facet_field 'TYPE', limit: true
+        config.add_facet_field 'YEAR', limit: 30, range: true
+        config.add_facet_field 'REUSABILITY', limit: true
+        config.add_facet_field 'COUNTRY', limit: true
+        config.add_facet_field 'LANGUAGE', limit: true
+        config.add_facet_field 'PROVIDER', limit: true
+        config.add_facet_field 'DATA_PROVIDER', limit: true
 
         # Send all facet field names to Solr.
         config.add_facet_fields_to_solr_request!
