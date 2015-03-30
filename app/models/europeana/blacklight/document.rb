@@ -70,7 +70,7 @@ module Europeana
       def get_edm_child(parent, child_key)
         if parent.is_a?(Array)
           child = []
-          parent.each do |v|
+          parent.compact.each do |v|
             if v[child_key].is_a?(Array)
               child = child + v[child_key]
             else
