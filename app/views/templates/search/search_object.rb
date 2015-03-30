@@ -79,12 +79,7 @@ module Templates
           :dc_identifier => document.get('proxies.dcIdentifier'),
 
           :dc_terms_created => document.get('proxies.dctermsCreated'),
-           
-          # This line crashes the helper with some records - see here:
-          # 
-          #     http://localhost:3000/record/2022703/oai_euromuseos_mcu_es_euromuseos_MNAD_CE25145.html
-          #
-          #:dc_terms_created_web => document.get('aggregations.webResources.dctermsCreated'),
+          :dc_terms_created_web => document.get('aggregations.webResources.dctermsCreated'),
 
           :dc_terms_extent => document.get('proxies.dctermsExtent'),
           :dc_title => document.get('proxies.dcTitle'),
