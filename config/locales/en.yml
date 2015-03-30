@@ -36,7 +36,7 @@ en:
           images: Images
           text: Text
           video: Video
-        count-and-terms: "%{count} results for %{terms}"
+        count-and-terms: "%{results_count} results for %{query_terms}"
         in-channel: in Channel
         product-3D: 3D
         product-image: Image
