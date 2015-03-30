@@ -1,6 +1,6 @@
 module Templates
   module Search
-    class SearchResultsList < Stache::Mustache::View
+    class SearchResultsList < View
       def filters
         facets_from_request(facet_field_names).collect do |facet|
           facet_config = blacklight_config.facet_fields[facet.name]
@@ -19,6 +19,17 @@ module Templates
         query_terms = safe_join(query_terms, ' and ')
         header_text_fragments = [number_with_delimiter(response.total), 'results for', query_terms]
         safe_join(header_text_fragments, ' ')
+      end
+
+      def results_count
+        number_with_delimiter(response.total)
+      end
+
+      def query_terms
+        query_terms = params[:q].split(' ').collect do |query_term|
+          content_tag(:strong, query_term)
+        end
+        query_terms = safe_join(query_terms, ' and ')
       end
 
       def search_results

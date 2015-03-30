@@ -1,0 +1,82 @@
+{{> atoms/iconography/svgicons-search }}
+
+{{> organisms/global/header}}
+
+<div role="main" class="page l-page">
+
+	<section class="search-hero">
+		<div class="searchbar">
+		{{> molecules/components/search/search-form }}
+		</div>
+	</section>
+
+	<section class="search-results">
+		<div class="container">
+			<div class="results-list">
+
+				<!-- Start of results header - sort controls, actions etc. -->
+				<div class="results-header">
+					<div class="action-select">
+						<input type="checkbox" name="allselected" id="action_select_all">
+					</div>
+
+					<div class="result-actions">
+						{{# menus.actions }}
+							{{> molecules/controls/dropdown-menu }}
+						{{/ menus.actions }}
+					</div>
+
+					<div class="result-info">
+						{{{ i18n.site.results.page.count-and-terms }}}
+					</div>
+
+					<div class="result-controls">
+						{{! List and grid view buttons }}
+						<div class="result-viewtype">
+							{{# menus.viewoptions }}
+								{{> molecules/controls/buttonbar-viewtype }}
+							{{/ menus.viewoptions }}
+						</div>
+
+						<div class="result-sort">
+							{{# menus.sort }}
+								{{> molecules/controls/dropdown-menu }}
+							{{/ menus.sort }}
+						</div>
+					</div>
+				</div>
+				<!-- End of results header -->
+				<ol>
+					{{# search_results }}
+					<li>
+					    {{> molecules/components/search/search-listitem }}
+					</li>
+					{{/ search_results }}
+				</ol>
+			</div>
+
+			<div class="refine">
+				<h2>Refine your search</h2>
+				{{#filters}}
+					{{#simple}}
+						{{> molecules/controls/filter-simple }}
+					{{/simple}}
+					{{#date}}
+						{{> molecules/controls/filter-date }}
+					{{/date}}
+					{{#language}}
+						{{> molecules/controls/filter-language }}
+					{{/language}}
+					{{#license}}
+						{{> molecules/controls/filter-license }}
+					{{/license}}
+				{{/filters}}
+				<a href="#refine-advanced">More refinements…</a>
+				<div class="refine-advanced">
+					@TODO add advanced search
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{{> organisms/global/footer }}
