@@ -12,6 +12,10 @@ module Templates
         end
       end
 
+      def debug
+        'this is sample debug output'
+      end
+
       def results_count
         number_with_delimiter(response.total)
       end
