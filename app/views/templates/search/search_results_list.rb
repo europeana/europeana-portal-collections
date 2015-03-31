@@ -219,7 +219,8 @@ module Templates
           total_pages: @response.total_pages,
           current_page: @response.current_page,
           per_page: @response.limit_value,
-          remote: false
+          remote: false,
+          window: 3
         }
         pages = []
         Kaminari::Helpers::Paginator.new(self, opts).each_relevant_page do |p|
