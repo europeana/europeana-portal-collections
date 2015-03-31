@@ -1,4 +1,4 @@
-class View
+module View
   class Translator
     def initialize(scope, data = {})
       @scope = scope

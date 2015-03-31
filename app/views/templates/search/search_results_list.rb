@@ -1,6 +1,6 @@
 module Templates
   module Search
-    class SearchResultsList < View
+    class SearchResultsList < ApplicationView
       def filters
         facets_from_request(facet_field_names).collect do |facet|
           facet_config = blacklight_config.facet_fields[facet.name]
@@ -10,10 +10,6 @@ module Templates
             simple_facet_template_data(facet)
           end
         end
-      end
-
-      def debug
-        'this is sample debug output'
       end
 
       def results_count
