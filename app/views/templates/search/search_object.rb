@@ -1,8 +1,6 @@
 module Templates
   module Search
-    class SearchObject < Stache::Mustache::View
-
-
+    class SearchObject < ApplicationView
       ##
       # Link to the previous document in the current search context
       #
