@@ -13,7 +13,7 @@ class ApplicationView < Stache::Mustache::View
   #   {{i18n.site.name}}
   # @return [View::Translator.new]
   def i18n
-    @_translator ||= View::Translator.new(self)
+    @_translator ||= View::Translator.new(context)
   end
 
   ##
