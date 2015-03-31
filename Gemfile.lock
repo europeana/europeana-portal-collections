@@ -295,7 +295,7 @@ PLATFORMS
 DEPENDENCIES
   blacklight (~> 5.11.0)
   brakeman
-  capybara
+  capybara (~> 2.4.0)
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
   europeana-api
@@ -314,7 +314,7 @@ DEPENDENCIES
   rubocop (~> 0.29.1)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  selenium-webdriver (>= 2.35.1)
+  selenium-webdriver (~> 2.45.0)
   simplecov
   spring
   turbolinks
