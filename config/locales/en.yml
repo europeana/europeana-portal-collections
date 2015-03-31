@@ -50,4 +50,4 @@ en:
         results-view:
           grid: Grid
           list: List
-        view-at-provider: View at
+        view-at-provider: "View at %{text}"

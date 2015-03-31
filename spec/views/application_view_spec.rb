@@ -7,9 +7,9 @@ RSpec.describe ApplicationView, type: :model do
     subject { described_class.new.i18n }
     it { is_expected.to be_instance_of(View::Translator) }
 
-    it 'sets the view as the translator scope' do
+    it 'sets the context as the translator scope' do
       view = described_class.new
-      expect(view.i18n.instance_variable_get(:@scope)).to eq(view)
+      expect(view.i18n.instance_variable_get(:@scope)).to eq(view.context)
     end
   end
 
