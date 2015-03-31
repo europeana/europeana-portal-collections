@@ -176,6 +176,7 @@ module Templates
                                          total_pages: @response.total_pages,
                                          current_page: @response.current_page,
                                          per_page: @response.limit_value,
+                                         window: 3,
                                          remote: false).each_relevant_page
       end
     end
