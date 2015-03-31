@@ -3,7 +3,7 @@ module Templates
     class SearchObject < ApplicationView
 
       def debug
-        'this is sample debug output'
+        JSON.pretty_generate(document.as_json)
       end
 
       def navigation
@@ -22,13 +22,14 @@ module Templates
         else
           self.url_for(query_params)
         end
-      
+        
+        # old arrows '❬ ' + ' ❭'
         {
           :next_prev  => {
             :next_url  => @next_document.nil? ? '' : link_to_document(@next_document),
-            :next_text => 'next document' + ' ❭',
+            :next_text => 'next document',
             :prev_url  => @previous_document.nil? ? '' : link_to_document(@previous_document),
-            :prev_text =>  '❬ ' + 'previous result',
+            :prev_text =>  'previous result',
             :back_url  => back_link_url,
             :back_text => "return to search results"
           }
@@ -95,10 +96,6 @@ module Templates
         }
       end
 
-      # All
-      def doc
-        document.as_json.to_s
-      end
 
       private
 
