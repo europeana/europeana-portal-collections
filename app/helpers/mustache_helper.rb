@@ -52,8 +52,11 @@ module MustacheHelper
 
   def js_files
     [
-      # Blacklight dependencies (unused)
-      #{ path: asset_path('jquery.js') },
+      { path: asset_path('jquery.js') },
+      { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' }
+      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' }
+        
+      # Blacklight dependencies
       #{ path: asset_path('turbolinks.js') },
       #{ path: asset_path('blacklight/core.js') },
       #{ path: asset_path('blacklight/autofocus.js') },
@@ -67,10 +70,7 @@ module MustacheHelper
       #{ path: asset_path('bootstrap/dropdown.js') },
       #{ path: asset_path('bootstrap/alert.js') },
       #{ path: asset_path('bootstrap/modal.js') },
-      #{ path: asset_path('blacklight/blacklight.js') },
-
-      # Non Blacklight dependencies
-      { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' }
+      #{ path: asset_path('blacklight/blacklight.js') }
     ]
   end
 
