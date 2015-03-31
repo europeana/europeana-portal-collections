@@ -131,7 +131,6 @@ module Templates
         }
       end
 
->>>>>>> 4e0c997... Re #99: Optimize pagination separator inclusion detection.
       def facet_item_url(facet, item)
         if facet_in_params?(facet, item)
           search_action_path(remove_facet_params(facet, item, params))
