@@ -1,5 +1,7 @@
 module Templates
   module Search
+    ##
+    # View class for search results list
     class SearchResultsList < ApplicationView
       def filters
         facets_from_request(facet_field_names).collect do |facet|
@@ -20,47 +22,18 @@ module Templates
         query_terms = params[:q].split(' ').collect do |query_term|
           content_tag(:strong, query_term)
         end
-        query_terms = safe_join(query_terms, ' and ')
+        safe_join(query_terms, ' and ')
       end
 
       def search_results
         counter = 0
         @document_list.collect do |doc|
           counter += 1
-          {
-            object_url: url_for_document(doc),
-            link_attrs: [
-              {
-                name: 'data-context-href',
-                value: track_document_path(doc, per_page: params.fetch(:per_page, search_session['per_page']), counter: counter, search_id: current_search_session.try(:id))
-              }
-            ],
-            title: doc.get(:title),
-            text: {
-              medium: doc.get(:dcDescription) == nil ? '' :  CGI::unescapeHTML( '' + truncate(doc.get(:dcDescription), length: 140, separator: ' ')  )
-            },
-            year: {
-              long: doc.get(:year)
-            },
-            origin: {
-              text: doc.get(:dataProvider),
-              url: doc.get(:edmIsShownAt)
-            },
-            is_image: doc.get(:type) == 'IMAGE',
-            is_audio: doc.get(:type) == 'SOUND',
-            is_text: doc.get(:type) == 'TEXT',
-            is_video: doc.get(:type) == 'VIDEO',
-            img: {
-              rectangle: {
-                src: doc.get(:edmPreview),
-                alt: ''
-              }
-            }
-          }
+          search_result_for_document(doc, counter)
         end
       end
 
-     def navigation
+      def navigation
         {
           pagination: {
             prev_url: previous_page_url,
@@ -79,6 +52,50 @@ module Templates
       end
 
       private
+
+      def search_result_for_document(doc, counter)
+        {
+          object_url: url_for_document(doc),
+          link_attrs: [
+            {
+              name: 'data-context-href',
+              value: track_document_path(doc, track_document_path_opts(counter))
+            }
+          ],
+          title: doc.get(:title),
+          text: {
+            medium: truncate(doc.get(:dcDescription),
+                             length: 140,
+                             separator: ' ',
+                             escape: false)
+          },
+          year: {
+            long: doc.get(:year)
+          },
+          origin: {
+            text: doc.get(:dataProvider),
+            url: doc.get(:edmIsShownAt)
+          },
+          is_image: doc.get(:type) == 'IMAGE',
+          is_audio: doc.get(:type) == 'SOUND',
+          is_text: doc.get(:type) == 'TEXT',
+          is_video: doc.get(:type) == 'VIDEO',
+          img: {
+            rectangle: {
+              src: doc.get(:edmPreview),
+              alt: ''
+            }
+          }
+        }
+      end
+
+      def track_document_path_opts(counter)
+        {
+          per_page: params.fetch(:per_page, search_session['per_page']),
+          counter: counter,
+          search_id: current_search_session.try(:id)
+        }
+      end
 
       def facet_item_url(facet, item)
         if facet_in_params?(facet, item)
@@ -143,7 +160,8 @@ module Templates
       end
 
       def hidden_inputs_for_search
-        flatten_hash(params_for_search.except(:page, :utf8)).collect do |name, value|
+        salient_params = flatten_hash(params_for_search.except(:page, :utf8))
+        salient_params.collect do |name, value|
           [value].flatten.collect do |v|
             {
               name: name,
@@ -154,13 +172,13 @@ module Templates
       end
 
       def previous_page_url
-        prev_page = Kaminari::Helpers::PrevPage.new(self, current_page: @response.current_page)
-        prev_page.url
+        opts = { current_page: @response.current_page }
+        Kaminari::Helpers::PrevPage.new(self, opts).url
       end
 
       def next_page_url
-        next_page = Kaminari::Helpers::NextPage.new(self, current_page: @response.current_page)
-        next_page.url
+        opts = { current_page: @response.current_page }
+        Kaminari::Helpers::NextPage.new(self, opts).url
       end
 
       def pages
