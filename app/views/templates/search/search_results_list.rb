@@ -60,13 +60,8 @@ module Templates
         end
       end
 
-     def navigation
-       
-        p_count = 0
-        pages.collect do |page|
-          p_count += 1
-        end
-
+      def navigation
+        pages = pages_of_search_results
         {
           pagination: {
             prev_url: previous_page_url,
@@ -78,8 +73,7 @@ module Templates
                 url: Kaminari::Helpers::Page.new(self, page: page.number).url,
                 index: number_with_delimiter(page.number),
                 is_current: (@response.current_page == page.number),
-                
-                separator: (i == 1 && @response.current_page > 2) || (i==(p_count-2) && (page.number+1)<@response.total_pages)
+                separator: show_pagination_separator(i, page.number, pages.size)
               }
             end
           }
@@ -88,6 +82,56 @@ module Templates
 
       private
 
+      def show_pagination_separator(page_index, page_number, pages_shown)
+        (page_index == 1 && @response.current_page > 2) ||
+        (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
+      end
+
+      def search_result_for_document(doc, counter)
+        {
+          object_url: url_for_document(doc),
+          link_attrs: [
+            {
+              name: 'data-context-href',
+              value: track_document_path(doc, track_document_path_opts(counter))
+            }
+          ],
+          title: doc.get(:title),
+          text: {
+            medium: truncate(doc.get(:dcDescription),
+                             length: 140,
+                             separator: ' ',
+                             escape: false)
+          },
+          year: {
+            long: doc.get(:year)
+          },
+          origin: {
+            text: doc.get(:dataProvider),
+            url: doc.get(:edmIsShownAt)
+          },
+          is_image: doc.get(:type) == 'IMAGE',
+          is_audio: doc.get(:type) == 'SOUND',
+          is_text: doc.get(:type) == 'TEXT',
+          is_video: doc.get(:type) == 'VIDEO',
+          img: {
+            rectangle: {
+              src: doc.get(:edmPreview),
+              alt: ''
+            }
+          }
+        }
+      end
+
+      def track_document_path_opts(counter)
+        {
+          per_page: params.fetch(:per_page, search_session['per_page']),
+          counter: counter,
+          search_id: current_search_session.try(:id)
+        }
+      end
+
+>>>>>>> 4e0c997... Re #99: Optimize pagination separator inclusion detection.
       def facet_item_url(facet, item)
         if facet_in_params?(facet, item)
           search_action_path(remove_facet_params(facet, item, params))
@@ -171,13 +215,18 @@ module Templates
         next_page.url
       end
 
-      def pages
-        Kaminari::Helpers::Paginator.new(self,
-                                         total_pages: @response.total_pages,
-                                         current_page: @response.current_page,
-                                         per_page: @response.limit_value,
-                                         window: 3,
-                                         remote: false).each_relevant_page
+      def pages_of_search_results
+        opts = {
+          total_pages: @response.total_pages,
+          current_page: @response.current_page,
+          per_page: @response.limit_value,
+          remote: false
+        }
+        pages = []
+        Kaminari::Helpers::Paginator.new(self, opts).each_relevant_page do |p|
+          pages << p
+        end
+        pages
       end
     end
   end
