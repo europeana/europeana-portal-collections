@@ -60,9 +60,8 @@ gem 'rails_best_practices', require: false, groups: [:development, :test]
 
 # Use RSpec & Capybara for tests
 gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
-gem 'selenium-webdriver', '>=2.35.1', groups: [:development, :test]
-gem 'capybara', groups: [:development, :test]
-
+gem 'selenium-webdriver', '~> 2.45.0', groups: [:development, :test]
+gem 'capybara', '~> 2.4.0', groups: [:development, :test]
 
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test

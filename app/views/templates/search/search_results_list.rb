@@ -33,18 +33,24 @@ module Templates
         end
       end
 
-      def navigation
+     def navigation
+        p_count = 0
+        pages.collect do |page|
+          p_count += 1
+        end
         {
           pagination: {
             prev_url: previous_page_url,
             next_url: next_page_url,
             is_first_page: @response.first_page?,
             is_last_page: @response.last_page?,
-            pages: pages.collect do |page|
+            pages: pages.collect.each_with_index do |page, i|
               {
                 url: Kaminari::Helpers::Page.new(self, page: page.number).url,
                 index: number_with_delimiter(page.number),
-                is_current: (@response.current_page == page.number)
+                is_current: (@response.current_page == page.number),
+                
+                separator: (i == 1 && @response.current_page > 2) || (i==(p_count-2) && (page.number+1)<@response.total_pages)
               }
             end
           }
