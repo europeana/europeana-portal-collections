@@ -1,15 +1,9 @@
 module Templates
   module Search
-    class SearchHome < Stache::Mustache::View
-
+    class SearchHome < ApplicationView
       def test
          'hello'
       end
-
-      def debug
-        'this is sample debug output'
-      end
-
     end
   end
 end
