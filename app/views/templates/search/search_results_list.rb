@@ -1,6 +1,6 @@
 module Templates
   module Search
-    class SearchResultsList < Stache::Mustache::View
+    class SearchResultsList < ApplicationView
       def filters
         facets_from_request(facet_field_names).collect do |facet|
           facet_config = blacklight_config.facet_fields[facet.name]
@@ -12,13 +12,15 @@ module Templates
         end
       end
 
-      def header_text
+      def results_count
+        number_with_delimiter(response.total)
+      end
+
+      def query_terms
         query_terms = params[:q].split(' ').collect do |query_term|
           content_tag(:strong, query_term)
         end
         query_terms = safe_join(query_terms, ' and ')
-        header_text_fragments = [number_with_delimiter(response.total), 'results for', query_terms]
-        safe_join(header_text_fragments, ' ')
       end
 
       def search_results
@@ -35,7 +37,7 @@ module Templates
             ],
             title: doc.get(:title),
             text: {
-              medium: truncate(doc.get(:dcDescription), length: 140, separator: ' ')
+              medium: doc.get(:dcDescription) == nil ? '' :  CGI::unescapeHTML( '' + truncate(doc.get(:dcDescription), length: 140, separator: ' ')  )
             },
             year: {
               long: doc.get(:year)
@@ -58,7 +60,76 @@ module Templates
         end
       end
 
+      def navigation
+        pages = pages_of_search_results
+        {
+          pagination: {
+            prev_url: previous_page_url,
+            next_url: next_page_url,
+            is_first_page: @response.first_page?,
+            is_last_page: @response.last_page?,
+            pages: pages.collect.each_with_index do |page, i|
+              {
+                url: Kaminari::Helpers::Page.new(self, page: page.number).url,
+                index: number_with_delimiter(page.number),
+                is_current: (@response.current_page == page.number),
+                separator: show_pagination_separator(i, page.number, pages.size)
+              }
+            end
+          }
+        }
+      end
+
       private
+
+      def show_pagination_separator(page_index, page_number, pages_shown)
+        (page_index == 1 && @response.current_page > 2) ||
+        (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
+      end
+
+      def search_result_for_document(doc, counter)
+        {
+          object_url: url_for_document(doc),
+          link_attrs: [
+            {
+              name: 'data-context-href',
+              value: track_document_path(doc, track_document_path_opts(counter))
+            }
+          ],
+          title: doc.get(:title),
+          text: {
+            medium: truncate(doc.get(:dcDescription),
+                             length: 140,
+                             separator: ' ',
+                             escape: false)
+          },
+          year: {
+            long: doc.get(:year)
+          },
+          origin: {
+            text: doc.get(:dataProvider),
+            url: doc.get(:edmIsShownAt)
+          },
+          is_image: doc.get(:type) == 'IMAGE',
+          is_audio: doc.get(:type) == 'SOUND',
+          is_text: doc.get(:type) == 'TEXT',
+          is_video: doc.get(:type) == 'VIDEO',
+          img: {
+            rectangle: {
+              src: doc.get(:edmPreview),
+              alt: ''
+            }
+          }
+        }
+      end
+
+      def track_document_path_opts(counter)
+        {
+          per_page: params.fetch(:per_page, search_session['per_page']),
+          counter: counter,
+          search_id: current_search_session.try(:id)
+        }
+      end
 
       def facet_item_url(facet, item)
         if facet_in_params?(facet, item)
@@ -131,6 +202,31 @@ module Templates
             }
           end
         end.flatten
+      end
+
+      def previous_page_url
+        prev_page = Kaminari::Helpers::PrevPage.new(self, current_page: @response.current_page)
+        prev_page.url
+      end
+
+      def next_page_url
+        next_page = Kaminari::Helpers::NextPage.new(self, current_page: @response.current_page)
+        next_page.url
+      end
+
+      def pages_of_search_results
+        opts = {
+          total_pages: @response.total_pages,
+          current_page: @response.current_page,
+          per_page: @response.limit_value,
+          remote: false,
+          window: 3
+        }
+        pages = []
+        Kaminari::Helpers::Paginator.new(self, opts).each_relevant_page do |p|
+          pages << p
+        end
+        pages
       end
     end
   end

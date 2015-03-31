@@ -53,21 +53,21 @@ module MustacheHelper
   def js_files
     [
       # Blacklight dependencies (unused)
-      { path: asset_path('jquery.js') },
-      { path: asset_path('turbolinks.js') },
-      { path: asset_path('blacklight/core.js') },
-      { path: asset_path('blacklight/autofocus.js') },
-      { path: asset_path('blacklight/checkbox_submit.js') },
-      { path: asset_path('blacklight/bookmark_toggle.js') },
-      { path: asset_path('blacklight/ajax_modal.js') },
-      { path: asset_path('blacklight/search_context.js') },
-      { path: asset_path('blacklight/collapsable.js') },
-      { path: asset_path('bootstrap/transition.js') },
-      { path: asset_path('bootstrap/collapse.js') },
-      { path: asset_path('bootstrap/dropdown.js') },
-      { path: asset_path('bootstrap/alert.js') },
-      { path: asset_path('bootstrap/modal.js') },
-      { path: asset_path('blacklight/blacklight.js') },
+      #{ path: asset_path('jquery.js') },
+      #{ path: asset_path('turbolinks.js') },
+      #{ path: asset_path('blacklight/core.js') },
+      #{ path: asset_path('blacklight/autofocus.js') },
+      #{ path: asset_path('blacklight/checkbox_submit.js') },
+      #{ path: asset_path('blacklight/bookmark_toggle.js') },
+      #{ path: asset_path('blacklight/ajax_modal.js') },
+      #{ path: asset_path('blacklight/search_context.js') },
+      #{ path: asset_path('blacklight/collapsable.js') },
+      #{ path: asset_path('bootstrap/transition.js') },
+      #{ path: asset_path('bootstrap/collapse.js') },
+      #{ path: asset_path('bootstrap/dropdown.js') },
+      #{ path: asset_path('bootstrap/alert.js') },
+      #{ path: asset_path('bootstrap/modal.js') },
+      #{ path: asset_path('blacklight/blacklight.js') },
 
       # Non Blacklight dependencies
       { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' }
