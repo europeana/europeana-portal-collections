@@ -1,51 +1,40 @@
 module Templates
   module Search
     class SearchObject < ApplicationView
-      ##
-      # Link to the previous document in the current search context
-      #
-      # Copied from blacklight to be able to customise label
-      def link_to_previous_document(previous_document, label)
-        link_opts = session_tracking_params(previous_document, search_session['counter'].to_i - 1).merge(:class => "previous", :rel => 'prev')
-        link_to_unless previous_document.nil?, label, url_for_document(previous_document), link_opts do
-          content_tag :span, label, :class => 'previous'
-        end
-      end
-
-      ##
-      # Link to the next document in the current search context
-      #
-      # Copied from blacklight to be able to customise label
-      def link_to_next_document(next_document, label)
-        link_opts = session_tracking_params(next_document, search_session['counter'].to_i + 1).merge(:class => "next", :rel => 'next')
-        link_to_unless next_document.nil?, label, url_for_document(next_document), link_opts do
-          content_tag :span, label, :class => 'next'
-        end
-      end
 
       def debug
         'this is sample debug output'
       end
 
-      def back_link
-         link_back_to_catalog(label: 'return to search results', class: 'return')
+      def navigation
+        query_params = current_search_session.try(:query_params) || {}
+          
+        if search_session['counter']
+          per_page = (search_session['per_page'] || default_per_page).to_i
+          counter = search_session['counter'].to_i
+      
+          query_params[:per_page] = per_page unless search_session['per_page'].to_i == default_per_page
+          query_params[:page] = ((counter - 1)/ per_page) + 1
+        end
+      
+        back_link_url = if query_params.empty?
+          search_action_path(only_path: true)
+        else
+          self.url_for(query_params)
+        end
+      
+        {
+          :next_prev  => {
+            :next_url  => @next_document.nil? ? '' : link_to_document(@next_document),
+            :next_text => 'next document' + ' ❭',
+            :prev_url  => @previous_document.nil? ? '' : link_to_document(@previous_document),
+            :prev_text =>  '❬ ' + 'previous result',
+            :back_url  => back_link_url,
+            :back_text => "return to search results"
+          }
+        }
       end
 
-      def prev_link
-        begin
-          link_to_previous_document(@previous_document, '❬ ' +  'previous document')
-        rescue
-          '(prev link error)'
-        end
-      end
-
-      def next_link
-        begin
-        link_to_next_document(@next_document, 'next document' + ' ❭')
-        rescue
-          '(next link error)'
-        end
-      end
 
       def links
         res = {
