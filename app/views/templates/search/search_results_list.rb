@@ -60,6 +60,24 @@ module Templates
         end
       end
 
+     def navigation
+        {
+          pagination: {
+            prev_url: previous_page_url,
+            next_url: next_page_url,
+            is_first_page: @response.first_page?,
+            is_last_page: @response.last_page?,
+            pages: pages.collect do |page|
+              {
+                url: Kaminari::Helpers::Page.new(self, page: page.number).url,
+                index: number_with_delimiter(page.number),
+                is_current: (@response.current_page == page.number)
+              }
+            end
+          }
+        }
+      end
+
       private
 
       def facet_item_url(facet, item)
@@ -133,6 +151,24 @@ module Templates
             }
           end
         end.flatten
+      end
+
+      def previous_page_url
+        prev_page = Kaminari::Helpers::PrevPage.new(self, current_page: @response.current_page)
+        prev_page.url
+      end
+
+      def next_page_url
+        next_page = Kaminari::Helpers::NextPage.new(self, current_page: @response.current_page)
+        next_page.url
+      end
+
+      def pages
+        Kaminari::Helpers::Paginator.new(self,
+                                         total_pages: @response.total_pages,
+                                         current_page: @response.current_page,
+                                         per_page: @response.limit_value,
+                                         remote: false).each_relevant_page
       end
     end
   end
