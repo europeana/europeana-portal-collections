@@ -33,12 +33,8 @@ module Templates
         end
       end
 
-     def navigation
-        p_count = 0
-        pages.collect do |page|
-          p_count += 1
-        end
-        
+      def navigation
+        pages = pages_of_search_results
         {
           pagination: {
             prev_url: previous_page_url,
@@ -50,8 +46,7 @@ module Templates
                 url: Kaminari::Helpers::Page.new(self, page: page.number).url,
                 index: number_with_delimiter(page.number),
                 is_current: (@response.current_page == page.number),
-                
-                separator: (i == 1 && @response.current_page > 2) || (i==(p_count-2) && (page.number+1)<@response.total_pages)
+                separator: show_pagination_separator(i, page.number, pages.size)
               }
             end
           }
@@ -59,6 +54,11 @@ module Templates
       end
 
       private
+
+      def show_pagination_separator(page_index, page_number, pages_shown)
+        (page_index == 1 && @response.current_page > 2) ||
+        (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
+      end
 
       def search_result_for_document(doc, counter)
         {
@@ -188,12 +188,18 @@ module Templates
         Kaminari::Helpers::NextPage.new(self, opts).url
       end
 
-      def pages
-        Kaminari::Helpers::Paginator.new(self,
-                                         total_pages: @response.total_pages,
-                                         current_page: @response.current_page,
-                                         per_page: @response.limit_value,
-                                         remote: false).each_relevant_page
+      def pages_of_search_results
+        opts = {
+          total_pages: @response.total_pages,
+          current_page: @response.current_page,
+          per_page: @response.limit_value,
+          remote: false
+        }
+        pages = []
+        Kaminari::Helpers::Paginator.new(self, opts).each_relevant_page do |p|
+          pages << p
+        end
+        pages
       end
     end
   end
