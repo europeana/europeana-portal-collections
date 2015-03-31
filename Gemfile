@@ -73,3 +73,5 @@ gem 'europeana-styleguide',
 
 # Use Kaminari for Europeana search result pagination
 gem 'kaminari'
+
+gem 'localeapp', '~> 0.9.0'

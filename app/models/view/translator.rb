@@ -1,12 +1,3 @@
-require 'mustache/context'
-
-class Mustache
-  class Context
-    # Let {I18n.translate} query Mustache contexts with #key?
-    alias_method :key?, :has_key?
-  end
-end
-
 module View
   class Translator
     def initialize(scope, data = {})
