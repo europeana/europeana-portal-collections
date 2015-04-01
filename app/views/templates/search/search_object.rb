@@ -8,34 +8,55 @@ module Templates
 
       def navigation
         query_params = current_search_session.try(:query_params) || {}
-          
+
         if search_session['counter']
           per_page = (search_session['per_page'] || default_per_page).to_i
           counter = search_session['counter'].to_i
-      
+
           query_params[:per_page] = per_page unless search_session['per_page'].to_i == default_per_page
           query_params[:page] = ((counter - 1)/ per_page) + 1
         end
-      
+
         back_link_url = if query_params.empty?
           search_action_path(only_path: true)
         else
           self.url_for(query_params)
         end
-        
+
         # old arrows '❬ ' + ' ❭'
-        {
-          :next_prev  => {
-            :next_url  => @next_document.nil? ? '' : link_to_document(@next_document),
-            :next_text => 'next document',
-            :prev_url  => @previous_document.nil? ? '' : link_to_document(@previous_document),
-            :prev_text =>  'previous result',
-            :back_url  => back_link_url,
-            :back_text => "return to search results"
+        navigation = {
+          next_prev: {
+            prev_text: 'previous result',
+            back_url: back_link_url,
+            back_text: 'return to search results',
+            next_text: 'next document'
           }
         }
-      end
+        if @previous_document
+          navigation[:next_prev].merge!({
+            prev_url: url_for_document(@previous_document),
+            prev_link_attrs: [
+              {
+                name: 'data-context-href',
+                value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
+              }
+            ],
+          })
+        end
+        if @next_document
+          navigation[:next_prev].merge!({
+            next_url: url_for_document(@next_document),
+            next_link_attrs: [
+              {
+                name: 'data-context-href',
+                value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
+              }
+            ],
+          })
+        end
 
+        navigation
+      end
 
       def links
         res = {
@@ -98,6 +119,14 @@ module Templates
 
 
       private
+
+      def session_tracking_path_opts(counter)
+        {
+          per_page: params.fetch(:per_page, search_session['per_page']),
+          counter: counter,
+          search_id: current_search_session.try(:id)
+        }
+      end
 
       def get_doc_title
 
