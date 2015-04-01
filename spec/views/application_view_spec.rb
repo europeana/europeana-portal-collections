@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationView, type: :model do
+RSpec.describe ApplicationView, type: :view do
   it { is_expected.to be_a(Stache::Mustache::View) }
 
   describe '#i18n' do
