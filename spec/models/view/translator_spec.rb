@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe I18nHelper::Translator, type: 'model' do
-  subject { I18nHelper::Translator.new(scope) }
+RSpec.describe View::Translator, type: :model do
+  subject { View::Translator.new(scope) }
   let(:scope) { { count: 10 } }
 
   let(:locale) { :en }
