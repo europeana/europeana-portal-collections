@@ -140,6 +140,7 @@ module Templates
       end
 
       def simple_facet_template_data(facet)
+        capitalise_labels = true unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet.name)
         {
           simple: true,
           title: facet.name,
@@ -147,7 +148,7 @@ module Templates
           items: facet.items.collect do |item|
             {
               url: facet_item_url(facet.name, item),
-              text: item.value,
+              text: capitalise_labels ? item.value.split.map(&:capitalize).join(' ') : item.value,
               num_results: number_with_delimiter(item.hits),
               is_checked: facet_in_params?(facet.name, item)
             }
