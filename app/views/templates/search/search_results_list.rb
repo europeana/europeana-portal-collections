@@ -179,7 +179,7 @@ module Templates
             }
           },
           data: facet.items.sort_by(&:value).collect do |item|
-            p = reset_search_params(params)
+            p = reset_search_params(params).deep_dup
             p[:f] ||= {}
             p[:f][facet.name] = [item.value]
             {
