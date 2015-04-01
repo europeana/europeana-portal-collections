@@ -6,9 +6,7 @@ module UrlHelper
   include Blacklight::UrlHelperBehavior
 
   def url_for_document(doc, options = {})
-    unless doc.respond_to?(:provider_id) && doc.respond_to?(:record_id)
-      return super
-    end
+    return super unless doc.is_a?(Europeana::Blacklight::Document)
     europeana_doc_url_params = {
       provider_id: doc.provider_id, record_id: doc.record_id, format: 'html'
     }
@@ -33,15 +31,18 @@ module UrlHelper
   end
 
   def track_document_path(doc, options = {})
+    return super unless doc.is_a?(Europeana::Blacklight::Document)
     url_for(options.merge(controller: :catalog,
                           action: :track,
                           provider_id: doc.provider_id,
                           record_id: doc.record_id))
   end
   alias_method :track_solr_document_path, :track_document_path
+  alias_method :track_europeana_blacklight_document_path, :track_document_path
 
   def polymorphic_url(record_or_hash_or_array, options = {})
     doc = record_or_hash_or_array
+    return super unless doc.is_a?(Europeana::Blacklight::Document)
     document_url(options.merge(provider_id: doc.provider_id,
                                record_id: doc.record_id))
   end
