@@ -58,8 +58,10 @@ gem 'rubocop', '~> 0.29.1', require: false, groups: [:development, :test]
 # Rails best practices: code metrics for Rails
 gem 'rails_best_practices', require: false, groups: [:development, :test]
 
-# Use RSpec for tests
+# Use RSpec & Capybara for tests
 gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
+gem 'selenium-webdriver', '~> 2.45.0', groups: [:development, :test]
+gem 'capybara', '~> 2.4.0', groups: [:development, :test]
 
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test
@@ -67,7 +69,9 @@ gem 'simplecov', require: false, group: :test
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '85ee238'
-  
+  ref: '9e81d7ca70'
+
 # Use Kaminari for Europeana search result pagination
 gem 'kaminari'
+
+gem 'localeapp', '~> 0.9.0'

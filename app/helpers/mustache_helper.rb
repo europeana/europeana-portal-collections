@@ -9,17 +9,16 @@ module MustacheHelper
       { meta_name: 'csrf-token',         content: form_authenticity_token }
     ]
   end
-    
+
   def page_title
-    if(@response == nil)
+    if @response.nil?
       'Europeana Channels'
-    elsif(@response['action'].to_s == "search.json")
-      'Europeana Search: ' + sanitize(params[:q]) 
-    elsif(params[:action].to_s == "show")
+    elsif @response['action'].to_s == 'search.json'
+        'Europeana Search' + (params[:q] == nil ? '' : ': ' + sanitize(params[:q]))
+    elsif params[:action].to_s == 'show'
       if @document.is_a?(Blacklight::Document)
-        if defined?(@document['proxies'])
-          'Europeana Record: ' + @document['proxies'][0]['dcTitle']['def'].join
-        end
+        rec = @document.get('title') || ''
+        'Europeana Record' + (rec.size > 0 ? ': ' + rec : rec) 
       end
     end
   end
@@ -47,24 +46,34 @@ module MustacheHelper
     }
   end
 
+  def image_root
+    'http://develop.styleguide.eanadev.org/images/'
+  end
+
   def js_files
-    # All theses are blacklight's dependencies - getting the via the helper would be nicer
     [
       { path: asset_path('jquery.js') },
-      { path: asset_path('turbolinks.js') },
-      { path: asset_path('blacklight/core.js') },
-      { path: asset_path('blacklight/autofocus.js') },
-      { path: asset_path('blacklight/checkbox_submit.js') },
-      { path: asset_path('blacklight/bookmark_toggle.js') },
-      { path: asset_path('blacklight/ajax_modal.js') },
-      { path: asset_path('blacklight/search_context.js') },
-      { path: asset_path('blacklight/collapsable.js') },
-      { path: asset_path('bootstrap/transition.js') },
-      { path: asset_path('bootstrap/collapse.js') },
-      { path: asset_path('bootstrap/dropdown.js') },
-      { path: asset_path('bootstrap/alert.js') },
-      { path: asset_path('bootstrap/modal.js') },
-      { path: asset_path('blacklight/blacklight.js') }
+      { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' },
+      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' },
+        
+      # Blacklight dependencies
+      
+      #{ path: asset_path('turbolinks.js') },
+      #{ path: asset_path('blacklight/core.js') },
+      #{ path: asset_path('blacklight/autofocus.js') },
+      #{ path: asset_path('blacklight/checkbox_submit.js') },
+      #{ path: asset_path('blacklight/bookmark_toggle.js') },
+      #{ path: asset_path('blacklight/ajax_modal.js') },
+      { path: asset_path('blacklight/search_context.js') }
+      #{ path: asset_path('blacklight/collapsable.js') },
+      
+        
+      #{ path: asset_path('bootstrap/transition.js') },
+      #{ path: asset_path('bootstrap/collapse.js') },
+      #{ path: asset_path('bootstrap/dropdown.js') },
+      #{ path: asset_path('bootstrap/alert.js') },
+      #{ path: asset_path('bootstrap/modal.js') },
+      #{ path: asset_path('blacklight/blacklight.js') }
     ]
   end
 

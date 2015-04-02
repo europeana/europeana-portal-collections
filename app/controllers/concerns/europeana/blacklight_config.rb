@@ -7,7 +7,6 @@ module Europeana
     included do
       def self.channels_query_facet
         channels = Europeana::Portal::Application.config.channels.dup
-        channels.reject! { |_k, channel| channel[:query].blank? }
         channels.each_with_object({}) do |(k, v), hash|
           hash[k] = { label: k, fq: v[:query] }
         end
@@ -17,7 +16,7 @@ module Europeana
         # Default parameters to send to solr for all search-like requests.
         # See also SolrHelper#solr_search_params
         config.default_solr_params = {
-          rows: 24
+          rows: 12
         }
 
         # Response models

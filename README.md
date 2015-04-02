@@ -45,6 +45,28 @@ This is the API key used by the application to authenticate requests to the
 Europeana REST API. One can be obtained at:
 http://labs.europeana.eu/api/registration/
 
+#### PORT
+
+This sets the TCP port on which the Puma web server will listen for HTTP
+connections. If unset, it will default to 3000.
+
+#### RACK_ENV
+
+The application environment to run, i.e. development, test or production.
+Defaults to development.
+
+#### WEB_CONCURRENCY
+
+The number of Puma workers to run. Defaults to 2.
+
+#### MAX_THREADS
+
+The number of threads to run per Puma worker. Defaults to 5.
+
+#### LOCALEAPP_API_KEY
+
+The Localeapp API key to retrieve locale files from a localeapp.com project.
+
 ### Database
 
 1. Create a MySQL database, and configure in config/database.yml (see
@@ -84,7 +106,7 @@ production:
 
 ## Usage
 
-Run the app with the Puma web server: `bundle exec puma`
+Run the app with the Puma web server: `bundle exec puma -C config/puma.rb`
 
-By default, Puma will listen on port 9292. This can be changed with the `-p`
-switch: `bundle exec puma -p 3000`
+By default, Puma will listen on the port defined in the `PORT` environment
+variable, or 3000 by default.
