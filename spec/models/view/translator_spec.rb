@@ -42,6 +42,10 @@ RSpec.describe View::Translator, type: :model do
       expect(subject['siblings.brother']).to eq(translations[:siblings][:brother])
     end
 
+    it 'handles parent keys' do
+      expect(subject['siblings']).to be_a(described_class)
+    end
+
     it 'interpolates placeholders from scope' do
       expect(subject['size']).to eq('10 members')
     end

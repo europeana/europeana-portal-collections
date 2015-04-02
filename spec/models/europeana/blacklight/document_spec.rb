@@ -5,6 +5,7 @@ RSpec.describe Europeana::Blacklight::Document, type: :model do
 
   let(:edm) {
     {
+      id: '/abc/123',
       type: 'IMAGE',
       title: ['title1', 'title2'],
       proxies: [
@@ -35,8 +36,26 @@ RSpec.describe Europeana::Blacklight::Document, type: :model do
     }
   }
 
+  describe '#provider_id' do
+    it 'returns first part of ID' do
+      expect(described_class.new(edm).provider_id).to eq('abc')
+    end
+  end
+
+  describe '#record_id' do
+    it 'returns second part of ID' do
+      expect(described_class.new(edm).record_id).to eq('123')
+    end
+  end
+
+  describe '#to_param' do
+    it 'joins provider ID and record ID with /' do
+      expect(described_class.new(edm).to_param).to eq('abc/123')
+    end
+  end
+
   describe '#has?' do
-    context 'without values arg' do
+    context 'with unnested key' do
       context 'when key is present' do
         subject { described_class.new(edm).has?('title') }
         it { is_expected.to eq(true) }
@@ -46,6 +65,33 @@ RSpec.describe Europeana::Blacklight::Document, type: :model do
         subject { described_class.new(edm).has?('missing') }
         it { is_expected.to eq(false) }
       end
+    end
+
+    context 'with nested key' do
+      context 'when key is present' do
+        subject { described_class.new(edm).has?('proxies.about') }
+        it { is_expected.to eq(true) }
+      end
+
+      context 'when key is absent' do
+        subject { described_class.new(edm).has?('foo.bar') }
+        it { is_expected.to eq(false) }
+      end
+
+      context 'with values arg' do
+        subject { described_class.new(edm).has?('proxies.about', '/proxy/provider/abc/123') }
+        it 'is not implemented' do
+          expect { subject }.to raise_error(NotImplementedError)
+        end
+      end
+    end
+  end
+
+  describe '#as_json' do
+    it 'includes hierarchy' do
+      doc = described_class.new(edm)
+      doc.hierarchy = double('hierarchy')
+      expect(doc.as_json).to include('hierarchy')
     end
   end
 
