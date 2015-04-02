@@ -1,3 +1,4 @@
+
 module Templates
   module Search
     class SearchObject < ApplicationView
@@ -71,7 +72,9 @@ module Templates
           :download => "download",
           :rights => "rights:",
           :description => "description:",
+          :dc_type => "type:",
           :agent => get_agent_label,
+          :creator => "Creator",
           :mlt => "similar items"
         }
       end
@@ -96,6 +99,7 @@ module Templates
 
           :dc_terms_extent => document.get('proxies.dctermsExtent'),
           :dc_title => document.get('proxies.dcTitle'),
+          :dc_type => document.get('proxies.dcType'),
 
           :edm_country => document.get('europeanaAggregation.edmCountry'),
           :edm_dataset_name => document.get('edmDatasetName'),
@@ -104,6 +108,7 @@ module Templates
           :edm_language => document.get('europeanaAggregation.edmLanguage'),
           :edm_preview => document.get('europeanaAggregation.edmPreview'),
           :edm_provider => document.get('aggregations.edmProvider'),
+          :edm_data_provider => document.get('aggregations.edmDataProvider'),
           :edm_rights =>  document.get('aggregations.edmRights'),
 
           :latitude => document.get('places.latitude'),
