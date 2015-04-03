@@ -12,14 +12,6 @@ class Channel
   #   @return [Hash] the configuration for the Channel
   attr_accessor :config
 
-  # @param [Symbol] id The Channel ID
-  def initialize(id)
-    unless id.is_a?(Symbol)
-      fail ArgumentError, "Channel ID must be a Symbol, but is a #{id.class}"
-    end
-    @id = id
-  end
-
   def self.find(id)
     unless Europeana::Portal::Application.config.channels.key?(id)
       fail Channels::Errors::NoChannelConfiguration,
@@ -28,6 +20,14 @@ class Channel
     channel = new(id)
     channel.config = Europeana::Portal::Application.config.channels[id]
     channel
+  end
+
+  # @param [Symbol] id The Channel ID
+  def initialize(id)
+    unless id.is_a?(Symbol)
+      fail ArgumentError, "Channel ID must be a Symbol, but is a #{id.class}"
+    end
+    @id = id
   end
 
   def method_missing(meth, *_args, &_block)

@@ -16,8 +16,12 @@ module Templates
         number_with_delimiter(response.total)
       end
 
+      def has_results
+        response.total  > 0
+      end
+
       def query_terms
-        query_terms = params[:q].split(' ').collect do |query_term|
+        query_terms = (params[:q] || '').split(' ').collect do |query_term|
           content_tag(:strong, query_term)
         end
         query_terms = safe_join(query_terms, ' and ')

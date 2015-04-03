@@ -3,6 +3,8 @@
 class ChannelsController < ApplicationController
   include Europeana::Catalog
 
+  rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
+
   self.search_params_logic = Europeana::Blacklight::SearchBuilder.default_processor_chain +
     [:add_channel_qf_to_api]
 
@@ -48,7 +50,14 @@ class ChannelsController < ApplicationController
     @channel ||= Channel.find(id)
   end
 
+  def channel_not_found
+    render file: 'public/404.html', status: 404
+  end
+
   def redirect_show_home_to_index
-    redirect_to action: :index && return if params[:id] == 'home'
+    if params[:id] == 'home'
+      redirect_to action: :index
+      return false
+    end
   end
 end
