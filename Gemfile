@@ -28,7 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 
 # Use Blacklight for searching and browsing
-gem 'blacklight', '~> 5.11.0'
+gem 'blacklight', '~> 5.12.1'
 
 # Use the Europeana REST API
 gem 'europeana-api'
@@ -60,8 +60,10 @@ gem 'rails_best_practices', require: false, groups: [:development, :test]
 
 # Use RSpec & Capybara for tests
 gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
-gem 'selenium-webdriver', '~> 2.45.0', groups: [:development, :test]
+# gem 'selenium-webdriver', '~> 2.45.0', groups: [:development, :test]
 gem 'capybara', '~> 2.4.0', groups: [:development, :test]
+gem 'poltergeist', groups: [:development, :test]
+gem 'phantomjs', require: 'phantomjs/poltergeist', groups: [:development, :test]
 
 # Use Simplecov for code coverage analysis
 gem 'simplecov', require: false, group: :test

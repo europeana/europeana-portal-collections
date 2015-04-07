@@ -126,17 +126,25 @@ module Europeana
       # copy paging params from BL app over to API, changing
       # app level per_page and page to API rows and start.
       def add_paging_to_api(api_parameters)
-        # user-provided parameters should override any default row
-        api_parameters[:rows] = rows(api_parameters[:rows])
-        return unless page > 1
-        api_parameters[:start] = (api_parameters[:rows].to_i * (page - 1)) + 1
+        rows(api_parameters[:rows] || 10) if rows.nil?
+        api_parameters[:rows] = rows
+
+        if start != 0
+          api_parameters[:start] = start
+        end
       end
 
       ##
-      # copy sorting params from BL app over to API
       # @todo Implement when the API supports sorting
       def add_sorting_to_api(_api_parameters)
         fail NotImplementedError, 'Europeana REST API does not support sorting' unless sort.blank?
+      end
+
+      ##
+      # Europeana API start param counts from 1
+      def start(start = nil)
+        super_start = super
+        super_start == self ? super_start : super_start + 1
       end
 
       protected
