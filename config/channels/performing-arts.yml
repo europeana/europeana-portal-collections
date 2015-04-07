@@ -1,0 +1,12 @@
+---
+:query: '(what: "performance art") OR (what: "performing arts") OR (what:
+  theatre) OR (what: pantomime) OR (what: puppetry) OR (what: "puppet theatre")
+  OR (what: ballet) OR (what: opera) OR (what: dance) OR (what: circus) OR
+  (what: cirkus) OR (what: noh) OR (kabuki) OR ("wayang kulit") OR (Karagöz) OR
+  (what: choreography) OR (DATA_PROVIDER:"Österreichisches Theatermuseum") OR
+  (DATA_PROVIDER: "Arts and Theatre Institute") OR (PROVIDER: "ECLAP, e-library
+  for Performing Arts") OR (who: aischylos) OR (who: euripedes) OR (who:
+  aristophanes) OR (who: sofokles) OR (who: (william shakespeare)) OR (who:
+  (lope de vega)) OR (who: (jean racine)) OR (who: Molière) OR (who: (friedrich
+  schiller)) OR (who: (henrik ibsen)) NOT (DATA_PROVIDER: "Progetto ArtPast-
+  CulturaItalia")'
