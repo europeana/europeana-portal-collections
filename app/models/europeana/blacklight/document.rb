@@ -20,6 +20,10 @@ module Europeana
         @record_id ||= id.to_s.split('/')[2]
       end
 
+      def id
+        self[self.class.unique_key]
+      end
+
       def as_json(options = nil)
         super.merge('hierarchy' => @hierarchy.as_json(options))
       end

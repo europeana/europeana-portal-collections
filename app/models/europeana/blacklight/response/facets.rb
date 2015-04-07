@@ -45,54 +45,25 @@ module Europeana
             @options[:limit] || default_limit
           end
 
-          def sort
-            @options[:sort] || default_sort
-          end
-
           def offset
             @options[:offset] || default_offset
           end
 
           private
 
+          # @see http://labs.europeana.eu/api/search/#offset-and-limit-of-facets
           def default_limit
             100
           end
 
-          def default_sort
-            nil
-          end
-
+          # @see http://labs.europeana.eu/api/search/#offset-and-limit-of-facets
           def default_offset
             0
           end
         end
 
-        def facets
-          @facets ||= begin
-            facet_fields.map do |facet_field|
-              facet_field_name = facet_field['name']
-              items = facet_field['fields'].map do |item|
-                FacetItem.new(value: item['label'], hits: item['count'])
-              end
-              options = {}
-              options[:sort] = (params[:"f.#{facet_field_name}.facet.sort"] || params[:'facet.sort'])
-              if params[:"f.#{facet_field_name}.facet.limit"] || params[:"facet.limit"]
-                options[:limit] = (params[:"f.#{facet_field_name}.facet.limit"] || params[:"facet.limit"]).to_i
-              end
-              if params[:"f.#{facet_field_name}.facet.offset"] || params[:'facet.offset']
-                options[:offset] = (params[:"f.#{facet_field_name}.facet.offset"] || params[:'facet.offset']).to_i
-              end
-              FacetField.new(facet_field_name, items, options)
-            end
-          end
-        end
-
-        def facet_by_field_name(name)
-          @facets_by_field_name ||= {}
-          @facets_by_field_name[name] ||= (
-            facets.detect { |facet| facet.name.to_s == name.to_s }
-          )
+        def aggregations
+          @aggregations ||= {}.merge(facet_field_aggregations).merge(facet_query_aggregations)
         end
 
         def facet_fields
@@ -103,8 +74,55 @@ module Europeana
           @facet_queries ||= self['facet_queries'] || {}
         end
 
-        def facet_pivot
-          @facet_pivot ||= {}
+        private
+
+        ##
+        # Convert API's facets response into a hash of
+        # {Europeana::Blacklight::Response::Facet::FacetField} objects
+        def facet_field_aggregations
+          facet_fields.each_with_object({}) do |facet, hash|
+            facet_field_name = facet['name']
+            options = {}
+            items = facet['fields'].collect do |value|
+              FacetItem.new(value: value['label'], hits: value['count'])
+            end
+
+            if params[:"f.#{facet_field_name}.facet.limit"] || params[:"facet.limit"]
+              options[:limit] = (params[:"f.#{facet_field_name}.facet.limit"] || params[:"facet.limit"]).to_i
+            end
+
+            if params[:"f.#{facet_field_name}.facet.offset"] || params[:'facet.offset']
+              options[:offset] = (params[:"f.#{facet_field_name}.facet.offset"] || params[:'facet.offset']).to_i
+            end
+
+            hash[facet_field_name] = FacetField.new(facet_field_name, items, options)
+
+            if blacklight_config and !blacklight_config.facet_fields[facet_field_name]
+              # alias all the possible blacklight config names..
+              blacklight_config.facet_fields.select { |k,v| v.field == facet_field_name }.each do |key, _|
+                hash[key] = hash[facet_field_name]
+              end
+            end
+          end
+        end
+
+        ##
+        # Aggregate API's facet_query response into the virtual facet fields
+        # defined in the blacklight configuration
+        def facet_query_aggregations
+          return {} unless blacklight_config
+
+          blacklight_config.facet_fields.select { |k, v| v.query }.each_with_object({}) do |(field_name, facet_field), hash|
+            salient_facet_queries = facet_field.query.map { |k, x| x[:fq] }
+            items = []
+            facet_queries.select { |k, v| salient_facet_queries.include?(k) }.reject { |value, hits| hits == 0 }.map do |value,hits|
+              salient_fields = facet_field.query.select { |key, val| val[:fq] == value }
+              key = ((salient_fields.keys if salient_fields.respond_to? :keys) || salient_fields.first).first
+              items << FacetItem.new(value: key, hits: hits, label: facet_field.query[key][:label])
+            end
+
+            hash[field_name] = FacetField.new(field_name, items)
+          end
         end
       end
     end
