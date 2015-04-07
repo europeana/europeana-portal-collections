@@ -54,10 +54,10 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.11.3)
+    blacklight (5.12.1)
       bootstrap-sass (~> 3.2)
       deprecation
-      kaminari (~> 0.13)
+      kaminari (>= 0.15)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.11)
@@ -314,7 +314,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 5.11.0)
+  blacklight (~> 5.12.1)
   brakeman
   capybara (~> 2.4.0)
   coffee-rails (~> 4.0.0)

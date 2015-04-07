@@ -28,7 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 
 # Use Blacklight for searching and browsing
-gem 'blacklight', '~> 5.11.0'
+gem 'blacklight', '~> 5.12.1'
 
 # Use the Europeana REST API
 gem 'europeana-api'

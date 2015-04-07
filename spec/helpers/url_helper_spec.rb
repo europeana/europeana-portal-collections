@@ -38,7 +38,7 @@ end
 RSpec.describe UrlHelper, type: :helper do
   it { is_expected.to include(Blacklight::UrlHelperBehavior) }
 
-  let(:europeana_document) { double('europeana_document') }
+  let(:europeana_document) { Europeana::Blacklight::Document.new }
   before do
     allow(europeana_document).to receive(:provider_id).and_return('abcd')
     allow(europeana_document).to receive(:record_id).and_return('1234')
