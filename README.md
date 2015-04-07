@@ -71,7 +71,7 @@ The Localeapp API key to retrieve locale files from a localeapp.com project.
 
 1. Create a MySQL database, and configure in config/database.yml (see
   http://guides.rubyonrails.org/configuring.html#configuring-a-database)
-2. Include a "development" section in the database configuration if you 
+2. Include a "test" section in the database configuration if you 
   plan on running the unit and integration tests
 3. Initialize the database: `bundle exec rake db:setup`
 
@@ -87,37 +87,10 @@ Use the command `rpec` from the project root to run the unit tests.
 
 Use the command `rspec spec/features` from the project root to run the integration tests.
 
-The integration tests use the poltergeist gem which has an external dependency on phantomjs.  This can be installed on Linux with the following commands:
+The integration tests use the poltergeist gem which has an external dependency on phantomjs.  See here for installation instructions:
 
+https://github.com/teampoltergeist/poltergeist/tree/v1.6.0#installing-phantomjs
 
-```shell
-
-# dependecies
-
-sudo apt-get update
-sudo apt-get install build-essential chrpath libssl-dev libxft-dev
-sudo apt-get install libfreetype6 libfreetype6-dev
-sudo apt-get install libfontconfig1 libfontconfig1-dev
-
-
-# download & unpack
-
-cd ~
-export PHANTOM_JS="phantomjs-1.9.8-linux-x86_64"
-wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
-sudo tar xvjf $PHANTOM_JS.tar.bz2
-
-
-# add to path
-
-sudo mv $PHANTOM_JS /usr/local/share
-sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
-
-# test it works
-
-phantomjs --version
-
-```
 
 ### Cache store
 
