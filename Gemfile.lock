@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/europeana/europeana-blacklight.git
+  revision: 1f9760d3347b0350d3864c3c22840892d12cd873
+  branch: develop
+  specs:
+    europeana-blacklight (0.1.0)
+      blacklight (~> 5.12.0)
+      europeana-api (~> 0.3.0)
+
+GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
   revision: 2fd4c988fe9b74cd37cdcf14105ec77f7535eb66
   ref: 2fd4c988fe
@@ -319,7 +328,7 @@ DEPENDENCIES
   capybara (~> 2.4.0)
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
-  europeana-api
+  europeana-blacklight!
   europeana-styleguide!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)

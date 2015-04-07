@@ -30,8 +30,11 @@ gem 'spring', group: :development
 # Use Blacklight for searching and browsing
 gem 'blacklight', '~> 5.12.1'
 
-# Use the Europeana REST API
-gem 'europeana-api'
+# Use Europeana's REST API as the Blacklight catalog data source
+gem 'europeana-blacklight',
+  require: 'europeana/blacklight',
+  git: 'https://github.com/europeana/europeana-blacklight.git',
+  branch: 'develop'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
