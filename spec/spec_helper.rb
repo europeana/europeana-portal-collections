@@ -20,40 +20,10 @@
 # Code coverage analysis, output to coverage/ dir
 require 'simplecov'
 
-
-# Capybara integration
-
-require File.expand_path("../../config/environment", __FILE__)
-
-require 'rspec/rails'
-require 'capybara/rspec'
-require 'capybara/rails'
-require 'capybara/poltergeist'
-
-
-Capybara.register_driver :poltergeist do |app|
-    options = {
-        :js_errors => true,
-        :timeout => 120,
-        :debug => false,
-        #:phantomjs_options => ['--load-images=no', '--disk-cache=false'],
-        :inspector => true,
-        :ignore_ssl_errors=>true
-    }
-    Capybara::Poltergeist::Driver.new(app, options)
-end
-
-Capybara.javascript_driver = :poltergeist
-Capybara.default_selector  = :css
-
 # Start SimpleCov
 SimpleCov.start
 
-
 RSpec.configure do |config|
-  # Include Capybara for integration testing.
-  config.include Capybara::DSL
-  
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -79,8 +49,7 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-  
-   
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
