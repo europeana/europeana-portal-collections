@@ -21,12 +21,12 @@ module Templates
       end
 
       def query_terms
-        query_terms = (params[:q] || '').split(' ').collect do |query_term|
+        query_terms = (params[:q] || '').split(' ').flatten.collect do |query_term|
           content_tag(:strong, query_term)
         end
         query_terms = safe_join(query_terms, ' and ')
       end
-
+      
       def search_results
         counter = 0
         @document_list.collect do |doc|

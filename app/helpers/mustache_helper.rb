@@ -14,7 +14,7 @@ module MustacheHelper
     if @response.nil?
       'Europeana Channels'
     elsif @response['action'].to_s == 'search.json'
-        'Europeana Search' + (params[:q] == nil ? '' : ': ' + sanitize(params[:q]))
+      'Europeana Search' + (params[:q] == nil ? '' : ': ' + (params[:q].is_a?(Array) ? params[:q].each{|x| sanitize(x)}.join(', ') : params[:q]))
     elsif params[:action].to_s == 'show'
       if @document.is_a?(Blacklight::Document)
         rec = @document.get('title') || ''
@@ -37,11 +37,27 @@ module MustacheHelper
     ]
   end
 
+
+  def input_search_values(qs)
+    if qs != nil
+      qs.collect do |q|
+        if q.size>0
+          {
+            value:  q,
+            remove: '?q[]=' +   (qs - [q]).join('&q[]=')
+          }
+        end
+      end
+    end
+  end
+  
+  # model for the search form
   def input_search
     {
       title: 'Search',
-      input_name: 'q',
-      input_value: params['q'] ? params['q'] : '',
+      input_name: 'q[]',
+      empty: params['q'] && params['q'].size > 0,
+      input_values: input_search_values(params['q']),
       placeholder: 'Add a search term'
     }
   end
@@ -55,7 +71,7 @@ module MustacheHelper
       { path: asset_path('jquery.js') },
       { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' },
       #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' },
-        
+              
       # Blacklight dependencies
       
       #{ path: asset_path('turbolinks.js') },
@@ -80,7 +96,7 @@ module MustacheHelper
   def menus
     {
       actions: {
-        button_title:'Actions',
+        button_title: 'Actions',
         menu_id: 'dropdown-result-actions',
         menu_title: 'Save to:',
         items: [
