@@ -34,7 +34,7 @@ gem 'blacklight', '~> 5.12.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   git: 'https://github.com/europeana/europeana-blacklight.git',
-  branch: 'develop'
+  ref: 'a1bd0e2'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
