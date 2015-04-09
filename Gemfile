@@ -75,7 +75,7 @@ gem 'simplecov', require: false, group: :test
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
   ref: '8ae39b119c'
-  
+
 # Use Kaminari for Europeana search result pagination
 gem 'kaminari'
 

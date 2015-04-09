@@ -55,13 +55,28 @@ module UrlHelper
   # Remove one value from qf params
   #
   # @param value Value to remove from qf params
-  # @param source_params [Hash] params to use
+  # @param source_params [Hash] params to remove from
   # @return [Hash] a copy of params with the passed value removed from qf
   def remove_qf_param(value, source_params = params)
+    remove_search_param(:qf, value, source_params)
+  end
+
+  def remove_q_param(value, source_params = params)
+    remove_search_param(:q, value, source_params)
+  end
+
+  ##
+  # Remove one value from an Array of params
+  #
+  # @param key [Symbol, String] Key of parameter to remove
+  # @param value Value to remove from params
+  # @param source_params [Hash] params to remove from
+  # @return [Hash] a copy of params with the passed value removed
+  def remove_search_param(key, value, source_params = params)
     p = reset_search_params(source_params)
-    p[:qf] = (p[:qf] || []).dup
-    p[:qf] = p[:qf] - [value]
-    p.delete(:qf) if p[:qf].empty?
+    p[key] = (p[key] || []).dup
+    p[key] = p[key] - [value]
+    p.delete(key) if p[key].empty?
     p
   end
 end

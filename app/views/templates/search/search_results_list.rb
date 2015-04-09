@@ -21,46 +21,17 @@ module Templates
       end
 
       def query_terms
-        query_terms = (params[:q] || '').split(' ').flatten.collect do |query_term|
+        query_terms = [(params[:q] || [])].flatten.collect do |query_term|
           content_tag(:strong, query_term)
         end
-        query_terms = safe_join(query_terms, ' and ')
+        safe_join(query_terms, ' and ')
       end
-      
+
       def search_results
         counter = 0
         @document_list.collect do |doc|
           counter += 1
-          {
-            object_url: url_for_document(doc),
-            link_attrs: [
-              {
-                name: 'data-context-href',
-                value: track_document_path(doc, per_page: params.fetch(:per_page, search_session['per_page']), counter: counter, search_id: current_search_session.try(:id))
-              }
-            ],
-            title: doc.get(:title),
-            text: {
-              medium: doc.get(:dcDescription) == nil ? '' :  CGI::unescapeHTML( '' + truncate(doc.get(:dcDescription), length: 140, separator: ' ')  )
-            },
-            year: {
-              long: doc.get(:year)
-            },
-            origin: {
-              text: doc.get(:dataProvider),
-              url: doc.get(:edmIsShownAt)
-            },
-            is_image: doc.get(:type) == 'IMAGE',
-            is_audio: doc.get(:type) == 'SOUND',
-            is_text: doc.get(:type) == 'TEXT',
-            is_video: doc.get(:type) == 'VIDEO',
-            img: {
-              rectangle: {
-                src: doc.get(:edmPreview),
-                alt: ''
-              }
-            }
-          }
+          search_result_for_document(doc, counter)
         end
       end
 
@@ -77,7 +48,7 @@ module Templates
                 url: Kaminari::Helpers::Page.new(self, page: page.number).url,
                 index: number_with_delimiter(page.number),
                 is_current: (@response.current_page == page.number),
-                separator: show_pagination_separator(i, page.number, pages.size)
+                separator: show_pagination_separator?(i, page.number, pages.size)
               }
             end
           }
@@ -86,7 +57,7 @@ module Templates
 
       private
 
-      def show_pagination_separator(page_index, page_number, pages_shown)
+      def show_pagination_separator?(page_index, page_number, pages_shown)
         (page_index == 1 && @response.current_page > 2) ||
         (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
       end
