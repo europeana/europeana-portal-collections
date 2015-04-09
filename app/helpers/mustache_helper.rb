@@ -163,14 +163,10 @@ module MustacheHelper
     end
   end
 
-  private
-
   def search_page_title
-    if params[:q].nil?
-      ''
-    else
-      ': ' + safe_join([params[:q]].flatten, ', ')
-    end
+    return '' if params[:q].nil?
+
+    ': ' + [params[:q]].flatten.join(', ')
   end
 
   # @param qs [Array] q params
