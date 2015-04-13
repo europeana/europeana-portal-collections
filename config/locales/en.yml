@@ -29,4 +29,4 @@ en:
         results-view:
           grid: Grid
           list: List
-        view-at-provider: View at %{text}
+        view-at-provider: View at
