@@ -85,10 +85,11 @@ files in that directory for example configuration settings.
 
 Use the command `rpec` from the project root to run the unit tests.
 
-Use the command `rspec spec/features` from the project root to run the integration tests.
+Use the command `rspec spec/features` from the project root to run the
+integration tests.
 
-The integration tests use the poltergeist gem which has an external dependency on phantomjs.  See here for installation instructions:
-
+The integration tests use the poltergeist gem which has an external dependency
+on phantomjs. See here for installation instructions:
 https://github.com/teampoltergeist/poltergeist/tree/v1.6.0#installing-phantomjs
 
 
@@ -124,3 +125,14 @@ Run the app with the Puma web server: `bundle exec puma -C config/puma.rb`
 
 By default, Puma will listen on the port defined in the `PORT` environment
 variable, or 3000 by default.
+
+## Contributing
+
+Follow the [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide),
+checking your code for compliance with [Rubocop](https://github.com/bbatsov/rubocop).
+
+A quick summary of coding conventions:
+* Use two spaces for indentation
+* Do not leave trailing white space at the end of any line
+* Underscore variable names
+* Use Ruby 1.9 Hash keys

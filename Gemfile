@@ -30,8 +30,11 @@ gem 'spring', group: :development
 # Use Blacklight for searching and browsing
 gem 'blacklight', '~> 5.12.1'
 
-# Use the Europeana REST API
-gem 'europeana-api'
+# Use Europeana's REST API as the Blacklight catalog data source
+gem 'europeana-blacklight',
+  require: 'europeana/blacklight',
+  git: 'https://github.com/europeana/europeana-blacklight.git',
+  ref: 'a1bd0e2'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
@@ -71,7 +74,7 @@ gem 'simplecov', require: false, group: :test
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '2fd4c988fe'
+  ref: '8ae39b119c'
 
 # Use Kaminari for Europeana search result pagination
 gem 'kaminari'
