@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/europeana/europeana-blacklight.git
-  revision: a1bd0e2f3f9ac52207cbdfdb05a1b3e2a563a2c1
-  ref: a1bd0e2
+  revision: 19d92d4b478a6b02c65659b31a22f3c6f1218ec7
+  ref: 19d92d4
   specs:
     europeana-blacklight (0.1.0)
       blacklight (~> 5.12.0)
       europeana-api (~> 0.3.0)
+      kaminari
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
@@ -333,7 +334,6 @@ DEPENDENCIES
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
   jquery-rails
-  kaminari
   localeapp (~> 0.9.0)
   mysql2
   phantomjs

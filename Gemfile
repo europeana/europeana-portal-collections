@@ -34,7 +34,7 @@ gem 'blacklight', '~> 5.12.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   git: 'https://github.com/europeana/europeana-blacklight.git',
-  ref: 'a1bd0e2'
+  ref: '19d92d4'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
@@ -75,8 +75,5 @@ gem 'simplecov', require: false, group: :test
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
   ref: '8ae39b119c'
-
-# Use Kaminari for Europeana search result pagination
-gem 'kaminari'
 
 gem 'localeapp', '~> 0.9.0'
