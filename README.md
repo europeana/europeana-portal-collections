@@ -71,12 +71,26 @@ The Localeapp API key to retrieve locale files from a localeapp.com project.
 
 1. Create a MySQL database, and configure in config/database.yml (see
   http://guides.rubyonrails.org/configuring.html#configuring-a-database)
-2. Initialize the database: `bundle exec rake db:setup`
+2. Include a "test" section in the database configuration if you 
+  plan on running the unit and integration tests
+3. Initialize the database: `bundle exec rake db:setup`
 
 ### Channels
 
 For each Channel, create a YAML file in config/channels/. See the bundled 
 files in that directory for example configuration settings.
+
+
+### Testing
+
+Use the command `rpec` from the project root to run the unit tests.
+
+Use the command `rspec spec/features` from the project root to run the integration tests.
+
+The integration tests use the poltergeist gem which has an external dependency on phantomjs.  See here for installation instructions:
+
+https://github.com/teampoltergeist/poltergeist/tree/v1.6.0#installing-phantomjs
+
 
 ### Cache store
 

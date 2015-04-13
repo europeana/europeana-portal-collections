@@ -12,6 +12,7 @@ RSpec.describe FacetsHelper, type: :helper do
       allow(helper).to receive(:params).and_return(params)
       allow(helper).to receive(:within_channel?).and_return(within_channel)
       allow(helper).to receive(:facet_value_for_facet_item).and_return(channel_id)
+      helper.class.send(:include, Blacklight::Configurable)
     end
 
     context 'when field is "CHANNEL"' do

@@ -12,12 +12,13 @@ module Europeana
       include MoreLikeThis
 
       attr_reader :request_params
-      attr_accessor :document_model
+      attr_accessor :document_model, :blacklight_config
 
       def initialize(data, request_params, options = {})
         super(force_to_utf8(data))
         @request_params = request_params
         self.document_model = options[:document_model] || Document
+        self.blacklight_config = options[:blacklight_config]
       end
 
       def update(other_hash)
