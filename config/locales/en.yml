@@ -1,5 +1,18 @@
 en:
+  global:
+    labs-link: 
+    labs-text: 
+    pro-link: 
+    pro-text: 
+    settings: 
   site:
+    blog-link: 
+    facet:
+      language:
+        show:
+          results: 
+    my-europeana: 
+    my-europeana-link: 
     results:
       page:
         actions: Actions
@@ -29,4 +42,6 @@ en:
         results-view:
           grid: Grid
           list: List
-        view-at-provider: View at %{text}
+        view-at-provider: View at
+    site-name-link: 
+    sitemap-link: 
