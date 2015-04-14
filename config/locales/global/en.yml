@@ -38,25 +38,6 @@ en:
           paintings:
             genre: 
             medium: 
-      can-i-use-it:
-        advanced: Advanced
-        advanced-cc-by: CC-BY
-        advanced-cc-by-nc: CC-By-NC
-        advanced-cc-by-nc-nd: CC-BY-NC-ND
-        advanced-cc-by-nc-sa: CC-BY-NC-SA
-        advanced-cc-by-nd: CC-BY-ND
-        advanced-cc-by-sa: CC-BY-SA
-        advanced-cc0: CC0
-        advanced-orphan-work: Orphan Work
-        advanced-pdm: Public Domain Marked
-        advanced-rarr: Restricted access - Rights reserved
-        advanced-rrfa: Rights reserved - Free access
-        advanced-rrpa: Rights reserved - Paid access
-        advanced-ucs: Unknown copyright status
-        open: Yes with attribution
-        permission: Only with permission
-        restricted: Yes with restrictions
-        simple: Simple
       carrier: Carrier
       colour: Colour
       colour-black-and-white: Black and white
@@ -99,19 +80,16 @@ en:
         ukraine: Ukraine
         unitedkingdom: United Kingdom
       creator: 
-      date:
-        from: from
-        to: to
       header:
-        can-i-use-it: Can I use it?
         channel: Channels
         country: Country
-        data-provider: Data Provider
-        date: Date
+        data_provider: Data Provider
         language: Language
-        language-of-description: Language of Description
-        media: Media
+        language_of_description: Language of Description
         provider: Provider
+        reusability: Can I use it?
+        type: Media
+        year: Date
       language:
         de: German
         en: English
@@ -121,22 +99,55 @@ en:
         nl: Dutch
         sv: Swedish
         yi: Yiddish
-      media:
-        3d: 3D
-        image: Image
-        sound: Sound
-        text: Text
-        type:
-          image-orientation: Image orientation
-          image-orientation-landscape: Landscape
-          image-orientation-portrait: portrait
-          image-size: Image size
-        video: Video
+        it: Italian
       more: 
       more-refinements: More refinements
       resource:
         type: 
+      reusability:
+        advanced: Advanced
+        advanced-cc-by: CC-BY
+        advanced-cc-by-nc: CC-By-NC
+        advanced-cc-by-nc-nd: CC-BY-NC-ND
+        advanced-cc-by-nc-sa: CC-BY-NC-SA
+        advanced-cc-by-nd: CC-BY-ND
+        advanced-cc-by-sa: CC-BY-SA
+        advanced-cc0: CC0
+        advanced-orphan-work: Orphan Work
+        advanced-pdm: Public Domain Marked
+        advanced-rarr: Restricted access - Rights reserved
+        advanced-rrfa: Rights reserved - Free access
+        advanced-rrpa: Rights reserved - Paid access
+        advanced-ucs: Unknown copyright status
+        open: Yes with attribution
+        permission: Only with permission
+        restricted: Yes with restrictions
+        simple: Simple
       source: Source
+      type:
+        3d: 3D
+        image: Image
+        sound: Sound
+        text: Text
+        video: Video
+      type-image:
+        orientation:
+          label: Image orientation
+          landscape: Landscape
+          portrait: Portrait
+        quality:
+          all: Show all
+          hq-only: Show only high quality
+          label: Quality
+        size:
+          label: Image size
+          large: Large
+          medium: Medium
+          small: Small
+          xl: Extra large
+      year:
+        from: from
+        to: to
     find-us-elsewhere: Who is afraid of the jabberwocky?
     forgot-password: Forgot your password?
     genres: genres
