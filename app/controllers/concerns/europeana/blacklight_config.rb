@@ -34,12 +34,13 @@ module Europeana
         config.add_index_field 'title'
         config.add_index_field 'type'
         config.add_index_field 'edmPreview'
+        config.add_index_field 'edmAgentLabelLangAware'
 
         # Max number of rows to retrieve for each facet
         config.default_facet_limit = 7
 
         # Facet fields in the order they should be displayed.
-        config.add_facet_field 'CHANNEL', query: channels_query_facet
+#        config.add_facet_field 'CHANNEL', query: channels_query_facet
         config.add_facet_field 'TYPE', limit: true
         config.add_facet_field 'YEAR', limit: 30, range: true
         config.add_facet_field 'REUSABILITY', limit: true

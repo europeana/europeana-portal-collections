@@ -94,7 +94,8 @@ module Templates
               src: render_index_field_value(doc, :edmPreview),
               alt: ''
             }
-          }
+          },
+          agent: agent_label(doc)
         }
       end
 
@@ -203,6 +204,13 @@ module Templates
           pages << p
         end
         pages
+      end
+
+      def agent_label(doc)
+        label = render_index_field_value(doc, :edmAgentLabelLangAware)
+        label ||= render_index_field_value(doc, :edmAgentLabel)
+        label ||= render_index_field_value(doc, :dcCreator)
+        label
       end
     end
   end
