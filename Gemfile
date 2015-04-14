@@ -34,7 +34,7 @@ gem 'blacklight', '~> 5.12.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   git: 'https://github.com/europeana/europeana-blacklight.git',
-  ref: 'dbcd07b'
+  ref: 'e60944d'
 
 # Ruby 2.2 compatible version
 gem 'eventmachine', '~> 1.0.6'
@@ -74,6 +74,6 @@ gem 'simplecov', require: false, group: :test
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '8ae39b119c'
+  ref: '0369de65a5f8bd9edf8915da00d9deeea8cd55b5'
 
 gem 'localeapp', '~> 0.9.0'
