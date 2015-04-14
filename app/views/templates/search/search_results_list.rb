@@ -28,7 +28,7 @@ module Templates
       end
 
       def search_results
-        counter = 0
+        counter = 0 + (@response.limit_value * (@response.current_page - 1))
         @document_list.collect do |doc|
           counter += 1
           search_result_for_document(doc, counter)
