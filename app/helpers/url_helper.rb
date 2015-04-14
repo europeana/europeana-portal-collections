@@ -70,7 +70,7 @@ module UrlHelper
   # @return [Hash] a copy of params with the passed value removed
   def remove_search_param(key, value, source_params = params)
     p = reset_search_params(source_params)
-    p[key] = (p[key] || []).dup
+    p[key] = ([p[key]].flatten || []).dup
     p[key] = p[key] - [value]
     p.delete(key) if p[key].empty?
     p
