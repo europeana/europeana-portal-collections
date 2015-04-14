@@ -24,7 +24,7 @@ module Templates
         query_terms = [(params[:q] || [])].flatten.collect do |query_term|
           content_tag(:strong, query_term)
         end
-        safe_join(query_terms, ' and ')
+        safe_join(query_terms, ' AND ')
       end
 
       def search_results
