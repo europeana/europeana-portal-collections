@@ -54,6 +54,52 @@ module Templates
           }
         }
       end
+      
+      def facet_map(facet_name, facet_value = nil)
+        case facet_name.upcase
+          when 'CHANNEL'
+            if facet_value.nil?
+              t('global.facet.header.channel')
+            else
+              t('global.channel.' + facet_value.downcase)
+            end
+          when 'YEAR'
+            t('global.facet.header.date')            
+          when 'TYPE'
+            if facet_value.nil?
+              t('global.facet.header.media')
+            else
+              t('global.facet.media.' + facet_value.downcase)
+            end
+          when 'REUSABILITY'
+            if facet_value.nil?
+              t('global.facet.header.can-i-use-it')
+            else
+              t('global.facet.can-i-use-it.' + facet_value.downcase)
+            end
+          when 'COUNTRY'
+            if facet_value.nil?
+              t('global.facet.header.country')
+            else
+              t('global.facet.country.' + facet_value.gsub(/\s+/, "").downcase)
+            end
+          when 'LANGUAGE'
+            if facet_value.nil?
+              t('global.facet.header.language')
+            else
+              t('global.facet.language.' + facet_value.downcase)
+            end
+          when 'LANGUAGE-OF-DESCRIPTION'
+            t('global.facet.header.language-of-description')
+          when 'PROVIDER'
+            t('global.facet.header.provider')
+          when 'DATA_PROVIDER'
+            t('global.facet.header.data-provider')
+          else
+            'not found: ' + facet_name
+        end
+      end
+      
 
       private
 
@@ -118,12 +164,12 @@ module Templates
         capitalise_labels = true unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet.name)
         {
           simple: true,
-          title: facet.name,
+          title: facet_map(facet.name),
           select_one: (facet.name == 'CHANNEL'),
           items: facet.items.collect do |item|
             {
               url: facet_item_url(facet.name, item),
-              text: capitalise_labels ? item.value.split.map(&:capitalize).join(' ') : item.value,
+              text: facet_map(facet.name, item.value).split.map{|x| (capitalise_labels ? x.capitalize : x) }.join(' '),                
               num_results: number_with_delimiter(item.hits),
               is_checked: facet_in_params?(facet.name, item)
             }
@@ -137,7 +183,7 @@ module Templates
         hits_max = facet.items.collect(&:hits).max
         {
           date: true,
-          title: facet.name,
+          title: facet_map(facet.name),
           form: {
             action_url: search_action_url,
             hidden_inputs: hidden_inputs_for_search

@@ -3,8 +3,17 @@ en:
   global:
     about-us: About us
     blog: blog
-    channel: Channel
-    channel-all: All
+    channel:
+      archaeology: archaeology
+      architecture: architecture
+      art: art
+      fashion: fashion
+      home: Home (all)
+      maps: maps
+      music: music
+      natural-history: natural history
+      newspapers: newspapers
+      performing-arts: performing-arts
     channels: Channels
     channels-art: beware of the jabberwocky
     channels-art-image: Beware of the jabberwocky
@@ -44,10 +53,10 @@ en:
         advanced-rrfa: Rights reserved - Free access
         advanced-rrpa: Rights reserved - Paid access
         advanced-ucs: Unknown copyright status
+        open: Yes with attribution
+        permission: Only with permission
+        restricted: Yes with restrictions
         simple: Simple
-        simple-owp: Only with permission
-        simple-ywa: Yes with attribution
-        simple-ywr: Yes with restrictions
       carrier: Carrier
       colour: Colour
       colour-black-and-white: Black and white
@@ -95,12 +104,25 @@ en:
         to: to
       header:
         can-i-use-it: Can I use it?
+        channel: Channels
         country: Country
+        data-provider: Data Provider
+        date: Date
+        language: Language
+        language-of-description: Language of Description
         media: Media
         provider: Provider
-      language: 
+      language:
+        de: German
+        en: English
+        es: Spanish
+        fr: French
+        mul: Multi
+        nl: Dutch
+        sv: Swedish
+        yi: Yiddish
       media:
-        3D: 3D
+        3d: 3D
         image: Image
         sound: Sound
         text: Text
