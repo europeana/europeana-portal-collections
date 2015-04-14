@@ -17,7 +17,7 @@ module Templates
       end
 
       def has_results
-        response.total  > 0
+        response.total > 0
       end
 
       def query_terms
@@ -71,27 +71,27 @@ module Templates
               value: track_document_path(doc, track_document_path_opts(counter))
             }
           ],
-          title: doc.get(:title),
+          title: render_index_field_value(doc, :title),
           text: {
-            medium: truncate(doc.get(:dcDescription),
+            medium: truncate(render_index_field_value(doc, :dcDescription),
                              length: 140,
                              separator: ' ',
                              escape: false)
           },
           year: {
-            long: doc.get(:year)
+            long: render_index_field_value(doc, :year)
           },
           origin: {
-            text: doc.get(:dataProvider),
-            url: doc.get(:edmIsShownAt)
+            text: render_index_field_value(doc, :dataProvider),
+            url: render_index_field_value(doc, :edmIsShownAt)
           },
-          is_image: doc.get(:type) == 'IMAGE',
-          is_audio: doc.get(:type) == 'SOUND',
-          is_text: doc.get(:type) == 'TEXT',
-          is_video: doc.get(:type) == 'VIDEO',
+          is_image: doc.fetch(:type) == 'IMAGE',
+          is_audio: doc.fetch(:type) == 'SOUND',
+          is_text: doc.fetch(:type) == 'TEXT',
+          is_video: doc.fetch(:type) == 'VIDEO',
           img: {
             rectangle: {
-              src: doc.get(:edmPreview),
+              src: render_index_field_value(doc, :edmPreview),
               alt: ''
             }
           }
