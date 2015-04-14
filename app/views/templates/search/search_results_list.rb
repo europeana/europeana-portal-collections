@@ -54,6 +54,26 @@ module Templates
           }
         }
       end
+      
+      def facet_map(facet_name, facet_value = nil)
+        if facet_value.nil?
+          t('global.facet.header.' + facet_name.downcase)
+        else
+          facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, "") : facet_value)
+          
+          case facet_name.upcase
+            when 'CHANNEL'
+              t('global.channel.' + facet_value.downcase)
+            when 'PROVIDER'
+              facet_value
+            when 'DATA_PROVIDER'
+              facet_value
+            else
+              t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
+          end
+        end
+      end
+      
 
       private
 
@@ -119,12 +139,12 @@ module Templates
         capitalise_labels = true unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet.name)
         {
           simple: true,
-          title: facet.name,
+          title: facet_map(facet.name),
           select_one: (facet.name == 'CHANNEL'),
           items: facet.items.collect do |item|
             {
               url: facet_item_url(facet.name, item),
-              text: capitalise_labels ? item.value.split.map(&:capitalize).join(' ') : item.value,
+              text: facet_map(facet.name, item.value).split.map{|x| (capitalise_labels ? x.capitalize : x) }.join(' '),                
               num_results: number_with_delimiter(item.hits),
               is_checked: facet_in_params?(facet.name, item)
             }
@@ -138,7 +158,7 @@ module Templates
         hits_max = facet.items.collect(&:hits).max
         {
           date: true,
-          title: facet.name,
+          title: facet_map(facet.name),
           form: {
             action_url: search_action_url,
             hidden_inputs: hidden_inputs_for_search
