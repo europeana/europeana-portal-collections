@@ -173,7 +173,7 @@ module MustacheHelper
   # @return [Array<Hash>]
   def input_search_values(qs)
     return [] if qs.nil?
-    qs.reject(&:blank?).collect do |q|
+    [qs].flatten.reject(&:blank?).collect do |q|
       {
         value: q,
         remove: search_action_path(remove_q_param(q, params))
