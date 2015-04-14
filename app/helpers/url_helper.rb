@@ -42,10 +42,6 @@ module UrlHelper
 
   def polymorphic_url(record_or_hash_or_array, options = {})
     doc = record_or_hash_or_array
-    if ! doc.is_a?(Europeana::Blacklight::Document)
-      puts "No... #{doc.class}"
-      sleep 2
-    end
     return super unless doc.is_a?(Europeana::Blacklight::Document)
     document_url(options.merge(provider_id: doc.provider_id,
                                record_id: doc.record_id))
