@@ -3,15 +3,151 @@ en:
   global:
     about-us: About us
     blog: blog
-    channel: Channel
-    channel-all: All
+    channel:
+      archaeology: archaeology
+      architecture: architecture
+      art: art
+      fashion: fashion
+      home: Home (all)
+      maps: maps
+      music: music
+      natural-history: natural history
+      newspapers: newspapers
+      performing-arts: performing-arts
     channels: Channels
     channels-art: beware of the jabberwocky
     channels-art-image: Beware of the jabberwocky
     channels-art-link: beware of the jabberwocky
+    channels-art-url: 
+    channels-fashion: 
+    channels-music: 
+    channels-music-link: 
     choose-language: Language
     email-address: email address
     exhibitions: Exhibitions
+    facet:
+      advanced:
+        options: Options
+        show:
+          direct:
+            links: 
+          thumbnails: 
+          ugc: 
+      art:
+        form:
+          paintings:
+            genre: 
+            medium: 
+      carrier: Carrier
+      colour: Colour
+      colour-black-and-white: Black and white
+      country:
+        austria: Austria
+        belgium: Belgium
+        bulgaria: Bulgaria
+        croatia: Croatia
+        cyprus: Cyprus
+        czech: Czech Republic
+        denmark: Denmark
+        estonia: Estonia
+        europe: Europe
+        finland: Finland
+        france: France
+        germany: Germany
+        greece: Greece
+        hungary: Hungary
+        iceland: Iceland
+        ireland: Ireland
+        israel: Israel
+        italy: Italy
+        latvia: Latvia
+        lithuania: Lithuania
+        luxembourg: Luxembourg
+        malta: Malta
+        netherlands: The Netherlands
+        norway: Norway
+        poland: Poland
+        portugal: Portugal
+        romania: Romania
+        russia: Russia
+        serbia: Serbia
+        slovakia: Slovakia
+        slovenia: Slovenia
+        spain: Spain
+        sweden: Sweden
+        switzerland: Switzerland
+        turkey: Turkey
+        ukraine: Ukraine
+        unitedkingdom: United Kingdom
+      creator: 
+      header:
+        channel: Channels
+        country: Country
+        data_provider: Data Provider
+        language: Language
+        language_of_description: Language of Description
+        provider: Provider
+        reusability: Can I use it?
+        type: Media
+        year: Date
+      language:
+        de: German
+        en: English
+        es: Spanish
+        fr: French
+        it: Italian
+        mul: Multi
+        nl: Dutch
+        sv: Swedish
+        yi: Yiddish
+      more: 
+      more-refinements: More refinements
+      resource:
+        type: 
+      reusability:
+        advanced: Advanced
+        advanced-cc-by: CC-BY
+        advanced-cc-by-nc: CC-By-NC
+        advanced-cc-by-nc-nd: CC-BY-NC-ND
+        advanced-cc-by-nc-sa: CC-BY-NC-SA
+        advanced-cc-by-nd: CC-BY-ND
+        advanced-cc-by-sa: CC-BY-SA
+        advanced-cc0: CC0
+        advanced-orphan-work: Orphan Work
+        advanced-pdm: Public Domain Marked
+        advanced-rarr: Restricted access - Rights reserved
+        advanced-rrfa: Rights reserved - Free access
+        advanced-rrpa: Rights reserved - Paid access
+        advanced-ucs: Unknown copyright status
+        open: Yes with attribution
+        permission: Only with permission
+        restricted: Yes with restrictions
+        simple: Simple
+      source: Source
+      type:
+        3d: 3D
+        image: Image
+        sound: Sound
+        text: Text
+        video: Video
+      type-image:
+        orientation:
+          label: Image orientation
+          landscape: Landscape
+          portrait: Portrait
+        quality:
+          all: Show all
+          hq-only: Show only high quality
+          label: Quality
+        size:
+          label: Image size
+          large: Large
+          medium: Medium
+          small: Small
+          xl: Extra large
+      year:
+        from: from
+        to: to
     find-us-elsewhere: Who is afraid of the jabberwocky?
     forgot-password: Forgot your password?
     genres: genres
@@ -54,6 +190,7 @@ en:
     language-swedish: Swedish
     language-ukranian: Ukranian
     login: Login
+    logo-image: 
     more-info: More information
     our-mission: Our mission
     our-mission-text: Who is afraid of the jabberwocky?
@@ -61,8 +198,23 @@ en:
     password: Password
     refine-your-search: Refine your search
     register: Register
+    rights-box:
+      background-image-provider: 
+      background-image-provider-url: 
+      background-image-rights-icons-alt: 
+      background-image-title: 
+      background-image-title-url: 
+    search-area:
+      search-button-image-alt: 
+      search-placeholder-text: 
     search-collections: search collections
     search-collections-text: 
     sitemap: Sitemap
     terms-and-policies: Terms and policies
     type: type
+  site:
+    facet:
+      language:
+        show:
+          results: 
+        show-results-all: 

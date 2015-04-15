@@ -1,7 +1,17 @@
 GIT
+  remote: https://github.com/europeana/europeana-blacklight.git
+  revision: e60944d8ce681d3b1b1ff5ce204b1c75c060e063
+  ref: e60944d
+  specs:
+    europeana-blacklight (0.1.0)
+      blacklight (~> 5.12.0)
+      europeana-api (~> 0.3.0)
+      kaminari
+
+GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 5238a1ed57c03d64010fad054e2b78d2b3564ed6
-  ref: 5238a1ed57
+  revision: 8d3b0488513e771ab708f86037238b01dcb07220
+  ref: 8d3b048851
   specs:
     europeana-styleguide (0.0.1)
       mustache (~> 1.0.1)
@@ -54,10 +64,10 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.11.3)
+    blacklight (5.12.1)
       bootstrap-sass (~> 3.2)
       deprecation
-      kaminari (~> 0.13)
+      kaminari (>= 0.15)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.11)
@@ -314,17 +324,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 5.11.0)
+  blacklight (~> 5.12.1)
   brakeman
   capybara (~> 2.4.0)
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
-  europeana-api
+  europeana-blacklight!
   europeana-styleguide!
   eventmachine (~> 1.0.6)
   jbuilder (~> 2.0)
   jquery-rails
-  kaminari
   localeapp (~> 0.9.0)
   mysql2
   phantomjs

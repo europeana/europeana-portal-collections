@@ -49,6 +49,10 @@ RSpec.describe RenderConstraintsHelper, type: :helper do
     end
 
     context 'with qf params' do
+      before do
+        def helper.search_action_path(*args)
+        end
+      end
       let(:params) { { q: 'hat', qf: ['scarf', 'glasses'] } }
       it { is_expected.not_to eq('') }
     end

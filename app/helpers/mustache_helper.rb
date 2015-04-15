@@ -14,11 +14,11 @@ module MustacheHelper
     if @response.nil?
       'Europeana Channels'
     elsif @response['action'].to_s == 'search.json'
-      'Europeana Search' + (params[:q] == nil ? '' : ': ' + (params[:q].is_a?(Array) ? params[:q].each{|x| sanitize(x)}.join(', ') : params[:q]))
+      'Europeana Search' + search_page_title
     elsif params[:action].to_s == 'show'
       if @document.is_a?(Blacklight::Document)
-        rec = @document.get('title') || ''
-        'Europeana Record' + (rec.size > 0 ? ': ' + rec : rec) 
+        rec = @document.get(:title) || ''
+        'Europeana Record' + (rec.present? ? ': ' + rec : rec)
       end
     end
   end
@@ -37,27 +37,13 @@ module MustacheHelper
     ]
   end
 
-
-  def input_search_values(qs)
-    if qs != nil
-      qs.collect do |q|
-        if q.size>0
-          {
-            value:  q,
-            remove: '?q[]=' +   (qs - [q]).join('&q[]=')
-          }
-        end
-      end
-    end
-  end
-  
   # model for the search form
   def input_search
     {
       title: 'Search',
       input_name: 'q[]',
-      empty: params['q'] && params['q'].size > 0,
-      input_values: input_search_values(params['q']),
+      empty: params[:q].blank?,
+      input_values: input_search_values(params[:q]),
       placeholder: 'Add a search term'
     }
   end
@@ -71,9 +57,7 @@ module MustacheHelper
       { path: asset_path('jquery.js') },
       { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' },
       #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' },
-              
       # Blacklight dependencies
-      
       #{ path: asset_path('turbolinks.js') },
       #{ path: asset_path('blacklight/core.js') },
       #{ path: asset_path('blacklight/autofocus.js') },
@@ -82,8 +66,6 @@ module MustacheHelper
       #{ path: asset_path('blacklight/ajax_modal.js') },
       { path: asset_path('blacklight/search_context.js') }
       #{ path: asset_path('blacklight/collapsable.js') },
-      
-        
       #{ path: asset_path('bootstrap/transition.js') },
       #{ path: asset_path('bootstrap/collapse.js') },
       #{ path: asset_path('bootstrap/dropdown.js') },
@@ -177,6 +159,24 @@ module MustacheHelper
       {
         url: channel_path(c),
         text: c
+      }
+    end
+  end
+
+  def search_page_title
+    return '' if params[:q].nil?
+
+    ': ' + [params[:q]].flatten.join(', ')
+  end
+
+  # @param qs [Array] q params
+  # @return [Array<Hash>]
+  def input_search_values(qs)
+    return [] if qs.nil?
+    [qs].flatten.reject(&:blank?).collect do |q|
+      {
+        value: q,
+        remove: search_action_path(remove_q_param(q, params))
       }
     end
   end
