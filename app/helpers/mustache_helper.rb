@@ -48,6 +48,22 @@ module MustacheHelper
     }
   end
 
+  # model for the search form
+  def input_search
+    {
+      title: t('global.search-area.search-button-image-alt'),
+      input_name: params[:q].blank? ? 'q' : 'qf[]',
+      has_original: !params[:q].blank?,
+      input_original: {
+        value:  params[:q].blank? ? nil : params[:q],
+        remove: (params[:qf].nil? || params[:qf].size == 0) ? search_action_path : '?q=' + params[:qf].join('&qf[]=')
+      },
+      input_values: input_search_values(params[:qf]),
+      placeholder: t('global.search-area.search-placeholder-text')
+    }
+  end
+
+  
   def image_root
     'http://develop.styleguide.eanadev.org/images/'
   end
@@ -176,7 +192,7 @@ module MustacheHelper
     [qs].flatten.reject(&:blank?).collect do |q|
       {
         value: q,
-        remove: search_action_path(remove_q_param(q, params))
+        remove: search_action_path(remove_qf_param(q, params))
       }
     end
   end

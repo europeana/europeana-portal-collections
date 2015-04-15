@@ -93,7 +93,7 @@ module Templates
           ],
           title: render_index_field_value(doc, :title),
           text: {
-            medium: truncate(render_index_field_value(doc, :dcDescription),
+            medium: truncate(render_index_field_value(doc, 'dcDescription'),
                              length: 140,
                              separator: ' ',
                              escape: false)
@@ -102,8 +102,8 @@ module Templates
             long: render_index_field_value(doc, :year)
           },
           origin: {
-            text: render_index_field_value(doc, :dataProvider),
-            url: render_index_field_value(doc, :edmIsShownAt)
+            text: render_index_field_value(doc, 'dataProvider'),
+            url: render_index_field_value(doc, 'edmIsShownAt')
           },
           is_image: doc.fetch(:type) == 'IMAGE',
           is_audio: doc.fetch(:type) == 'SOUND',
@@ -111,12 +111,18 @@ module Templates
           is_video: doc.fetch(:type) == 'VIDEO',
           img: {
             rectangle: {
-              src: render_index_field_value(doc, :edmPreview),
+              src: render_index_field_value(doc, 'edmPreview'),
               alt: ''
             }
           },
-          agent: agent_label(doc)
+          agent: agent_label(doc),
+          concepts: concept_labels(doc),
+          has_concepts: doc.has?('edmConceptPrefLabelLangAware')
         }
+      end
+
+      def doc_concepts(doc)
+        
       end
 
       def track_document_path_opts(counter)
@@ -227,10 +233,18 @@ module Templates
       end
 
       def agent_label(doc)
-        label = render_index_field_value(doc, :edmAgentLabelLangAware)
-        label ||= render_index_field_value(doc, :edmAgentLabel)
-        label ||= render_index_field_value(doc, :dcCreator)
+        label = render_index_field_value(doc, 'edmAgentLabelLangAware')
+        label ||= render_index_field_value(doc, 'edmAgentLabel')
+        label ||= render_index_field_value(doc, 'dcCreator')
         label
+      end
+
+      def concept_labels(doc)
+        doc.fetch('edmConceptPrefLabelLangAware')[0..3].collect do |c|
+          { text: c }
+        end
+      rescue KeyError
+        []
       end
     end
   end
