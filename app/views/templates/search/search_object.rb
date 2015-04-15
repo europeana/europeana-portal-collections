@@ -133,7 +133,12 @@ module Templates
 
       def doc_title
         # force array return with empty default
-        title = document.fetch(:title)
+        begin 
+          title = document.fetch(:title)
+        rescue KeyError
+          title = nil
+        end
+
         if title.blank?
           render_document_show_field_value(document, 'proxies.dcTitle')
         else
@@ -143,7 +148,12 @@ module Templates
 
       def doc_title_extra
         # force array return with empty default
-        title = document.fetch(:title)
+        begin
+          title = document.fetch(:title)
+        rescue KeyError
+          title = []
+        end
+
         if title.size > 1
           title[1..-1]
         else
