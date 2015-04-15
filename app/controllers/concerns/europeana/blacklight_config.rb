@@ -30,17 +30,27 @@ module Europeana
         # option to choose from.
         config.per_page = [12, 24, 48, 96]
 
-        # solr field configuration for search results/index views
+        # Field configuration for search results/index views
+        config.index.title_field = 'title'
+        config.index.display_type_field = 'type'
+
+        # Fields to be displayed in the index (search results) view
+        #   The ordering of the field names is the order of the display 
         config.add_index_field 'title'
-        config.add_index_field 'type'
         config.add_index_field 'edmPreview'
         config.add_index_field 'edmAgentLabelLangAware'
+        config.add_index_field 'dcDescription'
+        config.add_index_field 'edmConceptPrefLabelLangAware',
+          separator: '; ', limit: 4
+        config.add_index_field 'year'
+        config.add_index_field 'dataProvider'
+        config.add_index_field 'edmIsShownAt'
 
         # Max number of rows to retrieve for each facet
         config.default_facet_limit = 7
 
         # Facet fields in the order they should be displayed.
-#        config.add_facet_field 'CHANNEL', query: channels_query_facet
+        config.add_facet_field 'CHANNEL', query: channels_query_facet
         config.add_facet_field 'TYPE', limit: true
         config.add_facet_field 'YEAR', limit: 30, range: true
         config.add_facet_field 'REUSABILITY', limit: true
