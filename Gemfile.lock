@@ -10,12 +10,19 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 06c3d15d560289c3b8ea3976703ebe60915bfa7f
-  ref: 06c3d15d56
+  revision: 051f21442d79f342dd8f000c55a9a49c26d2d8af
+  ref: 051f21442d79f342dd8f000c55a9a49c26d2d8af
   specs:
     europeana-styleguide (0.0.1)
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
+
+GIT
+  remote: https://github.com/rwd/stache.git
+  revision: d1408f18d14c1d1697e522a397d2c7bbb38bdd93
+  ref: d1408f1
+  specs:
+    stache (1.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -293,7 +300,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    stache (1.1.1)
     terminal-table (1.4.5)
     thor (0.19.1)
     thread_safe (0.3.5)
@@ -349,6 +355,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simplecov
   spring
+  stache!
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
