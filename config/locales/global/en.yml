@@ -205,13 +205,15 @@ en:
       background-image-title: 
       background-image-title-url: 
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
+      search-button-image-alt: Search
+      search-placeholder-text: Add a search term
     search-collections: search collections
     search-collections-text: 
     sitemap: Sitemap
     terms-and-policies: Terms and policies
     type: type
+  'no': Norway
+  pl: Portugal
   site:
     facet:
       language:
