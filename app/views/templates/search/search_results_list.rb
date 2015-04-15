@@ -73,7 +73,6 @@ module Templates
           end
         end
       end
-      
 
       private
 
@@ -116,8 +115,7 @@ module Templates
             }
           },
           agent: agent_label(doc),
-          concepts: concept_labels(doc),
-          has_concepts: doc.has?('edmConceptPrefLabelLangAware')
+          concepts: concept_labels(doc)
         }
       end
 
@@ -240,9 +238,7 @@ module Templates
       end
 
       def concept_labels(doc)
-        doc.fetch('edmConceptPrefLabelLangAware')[0..3].collect do |c|
-          { text: c }
-        end
+        { items: doc.fetch('edmConceptPrefLabelLangAware')[0..3].map { |c| { text: c } } }
       rescue KeyError
         []
       end
