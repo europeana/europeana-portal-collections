@@ -95,9 +95,11 @@ en:
         en: English
         es: Spanish
         fr: French
+        hu: Hungarian
         it: Italian
         mul: Multi
         nl: Dutch
+        pt: Portugese
         sv: Swedish
         yi: Yiddish
       more: 
@@ -140,11 +142,25 @@ en:
           hq-only: Show only high quality
           label: Quality
         size:
+          explanation: What do these sizes mean?
           label: Image size
-          large: Large
-          medium: Medium
-          small: Small
-          xl: Extra large
+          large: Large (%{data})
+          medium: Medium (%{data})
+          small: Small (%{data})
+          xl: Extra large (%{data})
+      type-sound:
+        duration:
+          label: Audio duration
+          long: Long (%{data})
+          medium: Medium (%{data})
+          short: Short (%{data})
+          very-short: Very short (%{data})
+      type-video:
+        duration:
+          label: Video duration
+          long: Long (%{data})
+          medium: Medium (%{data})
+          short: Short (%{data})
       year:
         from: from
         to: to

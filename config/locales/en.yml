@@ -14,32 +14,35 @@ en:
     my-europeana: 
     my-europeana-link: 
     results:
-      page:
-        actions: Actions
-        actions-configure-actions: Configure actions
-        actions-downloaddata: Download data
-        actions-dutchmasters: Dutch masters
-        actions-favouriteart: Favourite art
-        actions-newcollection: New collection
-        actions-saveto: Save to
-        actions-show-all-collections: Show all collections
+      actions:
+        configure-actions: Configure actions
+        downloaddata: Download data
+        dutchmasters: Dutch masters
+        favouriteart: Favourite art
+        label: Actions
+        newcollection: New collection
+        product-save: Save
+        saveto: Save to
+        show-all-collections: Show all collections
+      list:
         all-results:
           3D: 3D
           images: Images
           text: Text
           video: Video
         count-and-terms: "%{results_count} results for %{query_terms}"
+        empty: No Results
+        empty-with-terms: Your search for %{query_terms} returned no results
+        header: Results for
+        header-and: and
         in-channel: in Channel
         product-3D: 3D
         product-image: Image
-        product-save: Save
         product-sound: Sound
         product-text: Text
         product-video: Video
-        results: Results for
-        results-and: and
         results-relevance: Relevance
-        results-view:
+        view:
           grid: Grid
           list: List
         view-at-provider: View at
