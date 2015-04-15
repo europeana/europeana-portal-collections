@@ -77,3 +77,7 @@ gem 'europeana-styleguide',
   ref: '22b21060133c06aaacc1b821a3553704147543f3'
 
 gem 'localeapp', '~> 0.9.0'
+
+gem 'stache',
+  git: 'https://github.com/rwd/stache.git',
+  ref: 'd1408f1'
