@@ -17,18 +17,18 @@ module Templates
       end
 
       def has_results
-        response.total  > 0
+        response.total > 0
       end
 
       def query_terms
         query_terms = [(params[:q] || [])].flatten.collect do |query_term|
           content_tag(:strong, query_term)
         end
-        safe_join(query_terms, ' and ')
+        safe_join(query_terms, ' AND ')
       end
 
       def search_results
-        counter = 0
+        counter = 0 + (@response.limit_value * (@response.current_page - 1))
         @document_list.collect do |doc|
           counter += 1
           search_result_for_document(doc, counter)
@@ -91,30 +91,31 @@ module Templates
               value: track_document_path(doc, track_document_path_opts(counter))
             }
           ],
-          title: doc.get(:title),
+          title: render_index_field_value(doc, :title),
           text: {
-            medium: truncate(doc.get(:dcDescription),
+            medium: truncate(render_index_field_value(doc, :dcDescription),
                              length: 140,
                              separator: ' ',
                              escape: false)
           },
           year: {
-            long: doc.get(:year)
+            long: render_index_field_value(doc, :year)
           },
           origin: {
-            text: doc.get(:dataProvider),
-            url: doc.get(:edmIsShownAt)
+            text: render_index_field_value(doc, :dataProvider),
+            url: render_index_field_value(doc, :edmIsShownAt)
           },
-          is_image: doc.get(:type) == 'IMAGE',
-          is_audio: doc.get(:type) == 'SOUND',
-          is_text: doc.get(:type) == 'TEXT',
-          is_video: doc.get(:type) == 'VIDEO',
+          is_image: doc.fetch(:type) == 'IMAGE',
+          is_audio: doc.fetch(:type) == 'SOUND',
+          is_text: doc.fetch(:type) == 'TEXT',
+          is_video: doc.fetch(:type) == 'VIDEO',
           img: {
             rectangle: {
-              src: doc.get(:edmPreview),
+              src: render_index_field_value(doc, :edmPreview),
               alt: ''
             }
-          }
+          },
+          agent: agent_label(doc)
         }
       end
 
@@ -223,6 +224,13 @@ module Templates
           pages << p
         end
         pages
+      end
+
+      def agent_label(doc)
+        label = render_index_field_value(doc, :edmAgentLabelLangAware)
+        label ||= render_index_field_value(doc, :edmAgentLabel)
+        label ||= render_index_field_value(doc, :dcCreator)
+        label
       end
     end
   end

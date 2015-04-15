@@ -24,22 +24,23 @@ module Europeana
         config.search_builder_class = Europeana::Blacklight::SearchBuilder
         config.response_model = Europeana::Blacklight::Response
         config.document_model = Europeana::Blacklight::Document
-        config.document_presenter_class = Europeana::Blacklight::DocumentPresenter
+        config.document_presenter_class = MustacheDocumentPresenter
 
         # items to show per page, each number in the array represents another
         # option to choose from.
         config.per_page = [12, 24, 48, 96]
 
         # solr field configuration for search results/index views
-        config.index.title_field = 'title'
-        config.index.display_type_field = 'type'
-        config.index.thumbnail_field = 'edmPreview'
+        config.add_index_field 'title'
+        config.add_index_field 'type'
+        config.add_index_field 'edmPreview'
+        config.add_index_field 'edmAgentLabelLangAware'
 
         # Max number of rows to retrieve for each facet
         config.default_facet_limit = 7
 
         # Facet fields in the order they should be displayed.
-        config.add_facet_field 'CHANNEL', query: channels_query_facet
+#        config.add_facet_field 'CHANNEL', query: channels_query_facet
         config.add_facet_field 'TYPE', limit: true
         config.add_facet_field 'YEAR', limit: 30, range: true
         config.add_facet_field 'REUSABILITY', limit: true
@@ -52,15 +53,30 @@ module Europeana
         config.add_facet_fields_to_solr_request!
 
         # Fields to be displayed in the object view, in the order of display.
-        config.add_show_field 'europeanaAggregation.edmPreview', label: 'Preview'
-        config.add_show_field 'proxies.dcType', label: 'Type'
-        config.add_show_field 'proxies.dctermsExtent', label: 'Format'
-        config.add_show_field 'proxies.dcSubject', label: 'Subject'
-        config.add_show_field 'proxies.dcIdentifier', label: 'Identifier'
-        config.add_show_field 'proxies.dctermsProvenance', label: 'Provenance'
-        config.add_show_field 'aggregations.edmDataProvider', label: 'Data provider'
-        config.add_show_field 'aggregations.edmProvider', label: 'Provider'
-        config.add_show_field 'europeanaAggregation.edmCountry', label: 'Providing country'
+        config.add_show_field 'agents.prefLabel'
+        config.add_show_field 'agents.begin'
+        config.add_show_field 'agents.end'
+        config.add_show_field 'proxies.dcType'
+        config.add_show_field 'proxies.dcCreator'
+        config.add_show_field 'proxies.dcFormat'
+        config.add_show_field 'proxies.dcIdentifier'
+        config.add_show_field 'proxies.dctermsCreated'
+        config.add_show_field 'aggregations.webResources.dctermsCreated'
+        config.add_show_field 'proxies.dctermsExtent'
+        config.add_show_field 'proxies.dcTitle'
+        config.add_show_field 'europeanaAggregation.edmCountry'
+        config.add_show_field 'edmDatasetName'
+        config.add_show_field 'aggregations.edmIsShownAt'
+        config.add_show_field 'aggregations.edmIsShownBy'
+        config.add_show_field 'europeanaAggregation.edmLanguage'
+        config.add_show_field 'europeanaAggregation.edmPreview'
+        config.add_show_field 'aggregations.edmProvider'
+        config.add_show_field 'aggregations.edmDataProvider'
+        config.add_show_field 'aggregations.edmRights'
+        config.add_show_field 'places.latitude'
+        config.add_show_field 'places.longitude'
+        config.add_show_field 'type'
+        config.add_show_field 'year'
 
         # "fielded" search configuration.
         config.add_search_field('', :label => 'All Fields')

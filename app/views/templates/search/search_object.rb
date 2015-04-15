@@ -1,4 +1,3 @@
-
 module Templates
   module Search
     class SearchObject < ApplicationView
@@ -21,7 +20,7 @@ module Templates
         back_link_url = if query_params.empty?
           search_action_path(only_path: true)
         else
-          self.url_for(query_params)
+          url_for(query_params)
         end
 
         # old arrows '❬ ' + ' ❭'
@@ -61,8 +60,8 @@ module Templates
 
       def links
         res = {
-          :download  => document.get('europeanaAggregation.edmPreview'),
-          :original_context => document.get('aggregations.edmIsShownAt')
+          :download  => render_document_show_field_value(document, 'europeanaAggregation.edmPreview'),
+          :original_context => render_document_show_field_value(document, 'aggregations.edmIsShownAt')
         }
       end
 
@@ -73,7 +72,7 @@ module Templates
           :rights => "rights:",
           :description => "description:",
           :dc_type => "type:",
-          :agent => get_agent_label,
+          :agent => render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || 'creator',
           :creator => "Creator",
           :mlt => "similar items"
         }
@@ -81,47 +80,46 @@ module Templates
 
       def data
         {
-          :agent_pref_label => document.get('agents.prefLabel'),
-          :agent_begin  => document.get('agents.begin'),
-          :agent_end  => document.get('agents.end'),
+          :agent_pref_label => render_document_show_field_value(document, 'agents.prefLabel'),
+          :agent_begin  => render_document_show_field_value(document, 'agents.begin'),
+          :agent_end  => render_document_show_field_value(document, 'agents.end'),
 
-          :concepts => get_doc_concepts,
+          :concepts => render_document_show_field_value(document, 'concepts.prefLabel'),
 
-          :dc_description => get_doc_description,
-          :dc_type => document.get('proxies.dcType'),
-          :dc_creator => document.get('proxies.dcCreator'),
+          :dc_description => render_document_show_field_value(document, 'proxies.dcDescription'),
+          :dc_type => render_document_show_field_value(document, 'proxies.dcType'),
+          :dc_creator => render_document_show_field_value(document, 'proxies.dcCreator'),
 
-          :dc_format => document.get('proxies.dcFormat'),
-          :dc_identifier => document.get('proxies.dcIdentifier'),
+          :dc_format => render_document_show_field_value(document, 'proxies.dcFormat'),
+          :dc_identifier => render_document_show_field_value(document, 'proxies.dcIdentifier'),
 
-          :dc_terms_created => document.get('proxies.dctermsCreated'),
-          :dc_terms_created_web => document.get('aggregations.webResources.dctermsCreated'),
+          :dc_terms_created => render_document_show_field_value(document, 'proxies.dctermsCreated'),
+          :dc_terms_created_web => render_document_show_field_value(document, 'aggregations.webResources.dctermsCreated'),
 
-          :dc_terms_extent => document.get('proxies.dctermsExtent'),
-          :dc_title => document.get('proxies.dcTitle'),
-          :dc_type => document.get('proxies.dcType'),
+          :dc_terms_extent => render_document_show_field_value(document, 'proxies.dctermsExtent'),
+          :dc_title => render_document_show_field_value(document, 'proxies.dcTitle'),
+          :dc_type => render_document_show_field_value(document, 'proxies.dcType'),
 
-          :edm_country => document.get('europeanaAggregation.edmCountry'),
-          :edm_dataset_name => document.get('edmDatasetName'),
-          :edm_is_shown_at => document.get('aggregations.edmIsShownAt'),
-          :edm_is_shown_by => document.get('aggregations.edmIsShownBy'),
-          :edm_language => document.get('europeanaAggregation.edmLanguage'),
-          :edm_preview => document.get('europeanaAggregation.edmPreview'),
-          :edm_provider => document.get('aggregations.edmProvider'),
-          :edm_data_provider => document.get('aggregations.edmDataProvider'),
-          :edm_rights =>  document.get('aggregations.edmRights'),
+          :edm_country => render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
+          :edm_dataset_name => render_document_show_field_value(document, 'edmDatasetName'),
+          :edm_is_shown_at => render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+          :edm_is_shown_by => render_document_show_field_value(document, 'aggregations.edmIsShownBy'),
+          :edm_language => render_document_show_field_value(document, 'europeanaAggregation.edmLanguage'),
+          :edm_preview => render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false),
+          :edm_provider => render_document_show_field_value(document, 'aggregations.edmProvider'),
+          :edm_data_provider => render_document_show_field_value(document, 'aggregations.edmDataProvider'),
+          :edm_rights =>  render_document_show_field_value(document, 'aggregations.edmRights'),
 
-          :latitude => document.get('places.latitude'),
-          :longitude => document.get('places.longitude'),
+          :latitude => render_document_show_field_value(document, 'places.latitude'),
+          :longitude => render_document_show_field_value(document, 'places.longitude'),
 
-          :title => get_doc_title,
-          :title_extra => get_doc_title_extra,
-          :type => document.get('type'),
+          :title => doc_title,
+          :title_extra => doc_title_extra,
+          :type => render_document_show_field_value(document, 'type'),
 
-          :year => document.get('year')
+          :year => render_document_show_field_value(document, 'year')
         }
       end
-
 
       private
 
@@ -133,50 +131,25 @@ module Templates
         }
       end
 
-      def get_doc_title
-
+      def doc_title
         # force array return with empty default
-
-        title = document.get('title', :default=>'')
-        title = title.size == 0 ? document.get('proxies.dcTitle') : title[0]
-        title
+        title = document.fetch(:title)
+        if title.blank?
+          render_document_show_field_value(document, 'proxies.dcTitle')
+        else
+          title.first
+        end
       end
 
-      def get_doc_title_extra
-
+      def doc_title_extra
         # force array return with empty default
-
-        title = document.get('title', :default=>'')
+        title = document.fetch(:title)
         if title.size > 1
-          title.shift
-          title
+          title[1..-1]
         else
           nil
         end
       end
-
-      def get_doc_description
-
-        # This line returns what looks like a Ruby hash for some records, see here:
-        #
-        # http://localhost:3000/record/2048217/MUDE_M_0656_01.html
-
-        desc = document.get('proxies.dcDescription')
-        desc.size > 0 ? desc : nil
-      end
-
-      def get_agent_label
-        label = document.get('agents.rdaGr2ProfessionOrOccupation')
-        label ||= 'creator'
-        label
-      end
-
-
-      def get_doc_concepts
-        concepts = document.get('concepts.prefLabel', :default => '')
-        concepts.size > 0 ? concepts.flatten : nil
-      end
-
     end
   end
 end
