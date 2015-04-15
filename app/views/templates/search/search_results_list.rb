@@ -116,7 +116,12 @@ module Templates
             }
           },
           agent: agent_label(doc),
-          concepts: render_index_field_value(doc, 'edmConceptPrefLabelLangAware')
+          concepts: doc.fetch('edmConceptPrefLabelLangAware').collect do |c|
+            {
+              text: c
+            }
+          end,
+          has_concepts: doc.has?('edmConceptPrefLabelLangAware')
         }
       end
 
