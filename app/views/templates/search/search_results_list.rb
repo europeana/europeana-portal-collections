@@ -116,11 +116,7 @@ module Templates
             }
           },
           agent: agent_label(doc),
-          concepts: doc.fetch('edmConceptPrefLabelLangAware').collect do |c|
-            {
-              text: c
-            }
-          end,
+          concepts: concept_labels(doc),
           has_concepts: doc.has?('edmConceptPrefLabelLangAware')
         }
       end
@@ -241,6 +237,14 @@ module Templates
         label ||= render_index_field_value(doc, 'edmAgentLabel')
         label ||= render_index_field_value(doc, 'dcCreator')
         label
+      end
+
+      def concept_labels(doc)
+        doc.fetch('edmConceptPrefLabelLangAware')[0..3].collect do |c|
+          { text: c }
+        end
+      rescue KeyError
+        []
       end
     end
   end
