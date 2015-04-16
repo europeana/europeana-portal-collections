@@ -67,14 +67,15 @@ module Templates
 
       def labels
         {
-          :show_more_meta => "show more object data",
-          :download       =>  t('site.object.actions.downloaddata'),
-          :rights => "rights:",
-          :description => "description:",
-          :dc_type => "type:",
-          :agent => render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || 'creator',
-          :creator => "Creator",
-          :mlt => "similar items"
+          :show_more_meta => t('site.object.actions.show-more-data'),
+          :download       => t('site.object.actions.downloaddata'),
+          
+          :creator        => t('site.object.meta-label.creator') + ':',
+          :description    => t('site.object.meta-label.description') + ':',
+          :rights         => t('site.object.meta-label.rights'),
+          :dc_type        => t('site.object.meta-label.type') + ':',
+          :agent          => (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
+          :mlt            => t('site.object.similar-items') + ':'
         }
       end
 

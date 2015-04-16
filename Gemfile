@@ -74,7 +74,7 @@ gem 'simplecov', require: false, group: :test
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '7de71b67ab'
+  ref: '9cd819993c'
 
 gem 'localeapp', '~> 0.9.0'
 
