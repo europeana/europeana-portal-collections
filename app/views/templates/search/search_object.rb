@@ -26,10 +26,10 @@ module Templates
         # old arrows '❬ ' + ' ❭'
         navigation = {
           next_prev: {
-            prev_text: 'previous result',
-            back_url: back_link_url,
-            back_text: 'return to search results',
-            next_text: 'next document'
+            prev_text:  t('site.object.nav.prev'),
+            back_url:   back_link_url,
+            back_text:  t('site.object.nav.return-to-search'),
+            next_text:  t('site.object.nav.next')
           }
         }
         if @previous_document
@@ -68,7 +68,7 @@ module Templates
       def labels
         {
           :show_more_meta => "show more object data",
-          :download => "download",
+          :download       =>  t('site.object.actions.downloaddata'),
           :rights => "rights:",
           :description => "description:",
           :dc_type => "type:",
