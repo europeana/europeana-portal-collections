@@ -13,10 +13,23 @@ en:
           results: 
     my-europeana: 
     my-europeana-link: 
+    object:
+      actions:
+        downloaddata: Download data
+        show-more-data: Show more data
+      meta-label:
+        creator: Creator
+        description: Description
+        rights: Can I use this?
+        type: Type
+      nav:
+        next: Next
+        prev: Previous
+        return-to-search: Return to search results
+      similar-items: Similar items
     results:
       actions:
         configure-actions: Configure actions
-        downloaddata: Download data
         dutchmasters: Dutch masters
         favouriteart: Favourite art
         label: Actions
