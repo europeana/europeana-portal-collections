@@ -125,6 +125,102 @@ module Templates
         }
       }
       end
+      
+      def navigation
+      {
+        :global => {
+          :options => {
+            :search_active  => false,
+            :settings_active  => true
+          },
+          :primary_nav  => {
+            :items  => [
+              {
+                :url  => "#",
+                :text  => "Home",
+                :is_current  => true
+              },
+              {
+                :url  => "",
+                :text  => "Channels",
+                :submenu  => {
+                  :items  => [
+                    {
+                      :url  => "http://google.com",
+                      :text  => "Channel 1"
+                    },
+                    {
+                      :url  => "http://google.com",
+                      :text  => "Channel 2",
+                      :is_current  => true
+                    },
+                    {
+                      :url  => "http://google.com",
+                      :text  => "Channel 3"
+                    }
+                  ]
+                }
+              },
+              {
+                :url   =>  "",
+                :text  =>  "Exhibitions"
+              },
+              {
+                :url   => "",
+                :text  => "Blog"
+              },
+              {
+                :url   => "",
+                :text  => "My Europeana"
+              }
+            ]
+          }
+        },
+    
+        :footer  => {
+          :linklist1  => {
+            :title  => "More info",
+            :items  =>  [
+              {
+                :text  => "New collections",
+                :url   => "http://google.com"
+              },
+              {
+                :text => "All data providers",
+                :url  => "http://google.com"
+              },
+              {
+                :text =>  "Become a data provider",
+                :url  => "http://google.com"
+              }
+            ]
+          },
+          :linklist2 => {
+            :title  =>  "Help",
+            :items  =>  [
+              {
+                :text => "Search tips",
+                :url  => "http://google.com"
+              },
+              {
+                :text =>  "Using My Europeana",
+                :url  => "http://google.com"
+              },
+              {
+                :text  => "Copyright",
+                :url   => "http://google.com"
+              }
+            ]
+          },
+          :social  => {
+            :googleplus =>  false,
+            :github     =>  false
+          }
+        }    
+      }
+      end
+      
+      
     end  
     
   end
