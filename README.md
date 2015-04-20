@@ -11,7 +11,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 
 ## Requirements
 
-* Ruby 2.2
+* Ruby 2.2.1
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
 
