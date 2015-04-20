@@ -19,8 +19,8 @@ en:
     channels-art-image: Beware of the jabberwocky
     channels-art-link: beware of the jabberwocky
     channels-art-url: 
-    channels-fashion: 
-    channels-music: 
+    channels-fashion: Fashion
+    channels-music: Music
     channels-music-link: 
     choose-language: Language
     email-address: email address
@@ -36,8 +36,8 @@ en:
       art:
         form:
           paintings:
-            genre: 
-            medium: 
+            genre: Genre
+            medium: Medium
       carrier: Carrier
       colour: Colour
       colour-black-and-white: Black and white
