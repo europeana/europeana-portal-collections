@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.2.1'
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 
 # Use Europeana's REST API as the Blacklight catalog data source
 gem 'europeana-blacklight',
