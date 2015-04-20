@@ -26,10 +26,10 @@ module Templates
         # old arrows '❬ ' + ' ❭'
         navigation = {
           next_prev: {
-            prev_text: 'previous result',
-            back_url: back_link_url,
-            back_text: 'return to search results',
-            next_text: 'next document'
+            prev_text:  t('site.object.nav.prev'),
+            back_url:   back_link_url,
+            back_text:  t('site.object.nav.return-to-search'),
+            next_text:  t('site.object.nav.next')
           }
         }
         if @previous_document
@@ -67,14 +67,15 @@ module Templates
 
       def labels
         {
-          :show_more_meta => "show more object data",
-          :download => "download",
-          :rights => "rights:",
-          :description => "description:",
-          :dc_type => "type:",
-          :agent => render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || 'creator',
-          :creator => "Creator",
-          :mlt => "similar items"
+          :show_more_meta => t('site.object.actions.show-more-data'),
+          :download       => t('site.object.actions.downloaddata'),
+          
+          :creator        => t('site.object.meta-label.creator') + ':',
+          :description    => t('site.object.meta-label.description') + ':',
+          :rights         => t('site.object.meta-label.rights'),
+          :dc_type        => t('site.object.meta-label.type') + ':',
+          :agent          => (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
+          :mlt            => t('site.object.similar-items') + ':'
         }
       end
 
