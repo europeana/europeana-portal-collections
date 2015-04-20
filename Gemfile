@@ -7,7 +7,7 @@ gem 'rails', '4.2.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   git: 'https://github.com/europeana/europeana-blacklight.git',
-  ref: 'e60944d'
+  ref: 'eff5ed4'
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
@@ -20,7 +20,7 @@ gem 'stache',
   git: 'https://github.com/rwd/stache.git',
   ref: 'd1408f1'
 
-gem 'blacklight', '~> 5.12.1'
+gem 'blacklight', '~> 5.13.1'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'jbuilder', '~> 2.0'
