@@ -67,6 +67,11 @@ The number of threads to run per Puma worker. Defaults to 5.
 
 The Localeapp API key to retrieve locale files from a localeapp.com project.
 
+**NB:** This is only required on a deployment where translations are to be
+retrieved from localeapp.com in order to update the repo. This should be part
+of an automated build workflow, and so a typical development or production
+deployment will not require this API key.
+
 ### Database
 
 1. Create a MySQL database, and configure in config/database.yml (see
