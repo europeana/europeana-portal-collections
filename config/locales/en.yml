@@ -15,6 +15,7 @@ en:
     my-europeana-link: 
     object:
       actions:
+        download: Download
         downloaddata: Download data
         show-less-data: Show less data
         show-more-data: Show more data
