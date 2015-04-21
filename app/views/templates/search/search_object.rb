@@ -59,10 +59,21 @@ module Templates
       end
 
       def links
-        {
-          download: render_document_show_field_value(document, 'aggregations.edmIsShownBy'),
+        links = {
           original_context: render_document_show_field_value(document, 'aggregations.edmIsShownAt')
         }
+
+        if ENV['EDM_IS_SHOWN_BY_HOST']
+          begin
+            edm_is_shown_by = document.fetch('aggregations.edmIsShownBy')
+            links[:download] = ENV['EDM_IS_SHOWN_BY_HOST'] + document.fetch('about')
+          rescue KeyError
+          end
+        else
+          links[:download] = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+        end
+
+        links
       end
 
       def labels
