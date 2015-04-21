@@ -68,7 +68,9 @@ module Templates
       def labels
         {
           show_more_meta: t('site.object.actions.show-more-data'),
+          show_less_meta: t('site.object.actions.show-less-data'),
           download:       t('site.object.actions.downloaddata'),
+          
           creator:        t('site.object.meta-label.creator') + ':',
           description:    t('site.object.meta-label.description') + ':',
           rights:         t('site.object.meta-label.rights'),
