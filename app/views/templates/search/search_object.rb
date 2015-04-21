@@ -71,12 +71,23 @@ module Templates
           :show_less_meta => t('site.object.actions.show-less-data'),
           :download       => t('site.object.actions.downloaddata'),
           
-          :creator        => t('site.object.meta-label.creator') + ':',
-          :description    => t('site.object.meta-label.description') + ':',
-          :rights         => t('site.object.meta-label.rights'),
-          :dc_type        => t('site.object.meta-label.type') + ':',
           :agent          => (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
-          :mlt            => t('site.object.similar-items') + ':'
+          :creator        => t('site.object.meta-label.creator') + ':',
+          :dc_type        => t('site.object.meta-label.type') + ':',
+          :description    => t('site.object.meta-label.description') + ':',
+          
+          :longitude      => t('site.object.meta-label.longitude') + ':',
+          :latitude       => t('site.object.meta-label.latitude') + ':',
+          :map            => t('site.object.meta-label.map') + ':',
+          
+          :points         => {
+              :n          => t('site.object.points.north'),
+              :s          => t('site.object.points.south'),
+              :e          => t('site.object.points.east'),
+              :w          => t('site.object.points.west')
+          },
+          :mlt            => t('site.object.similar-items') + ':',
+          :rights         => t('site.object.meta-label.rights')
         }
       end
 
@@ -114,7 +125,10 @@ module Templates
 
           :latitude => render_document_show_field_value(document, 'places.latitude'),
           :longitude => render_document_show_field_value(document, 'places.longitude'),
-
+          :long_and_lat => has_long_and_lat,
+          
+          :placeName => render_document_show_field_value(document, 'places.prefLabel'),
+          
           :title => doc_title,
           :title_extra => doc_title_extra,
           :type => render_document_show_field_value(document, 'type'),
@@ -124,6 +138,12 @@ module Templates
       end
 
       private
+      
+      def has_long_and_lat
+        latitude = render_document_show_field_value(document, 'places.latitude')
+        longitude = render_document_show_field_value(document, 'places.longitude')
+        !latitude.nil? && latitude.size > 0 && !longitude.nil? && longitude.size > 0
+      end
 
       def session_tracking_path_opts(counter)
         {

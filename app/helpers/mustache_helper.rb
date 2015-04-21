@@ -68,11 +68,18 @@ module MustacheHelper
     'http://develop.styleguide.eanadev.org/images/'
   end
 
+  def js_variables
+    'var js_path= "http://develop.styleguide.eanadev.org/js/dist/";'
+    #'var js_path= "http://localhost/Europeana-Patternlab/public/js/dist/";'
+  end
+  
   def js_files
     [
       { path: asset_path('jquery.js') },
+     
       { path: 'http://develop.styleguide.eanadev.org/js/dist/application.js' },
       #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' },
+        
       # Blacklight dependencies
       #{ path: asset_path('turbolinks.js') },
       #{ path: asset_path('blacklight/core.js') },
