@@ -12,7 +12,7 @@ gem 'europeana-blacklight',
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '4fe8564537be6b8cc56c61049060e5c67f929d74'
+  ref: '901fe9ebb8'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
