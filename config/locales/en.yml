@@ -16,6 +16,7 @@ en:
     object:
       actions:
         downloaddata: Download data
+        show-less-data: Show less data
         show-more-data: Show more data
       meta-label:
         creator: Creator
