@@ -54,12 +54,14 @@ module Templates
           }
         }
       end
-      
+
+      private
+
       def facet_map(facet_name, facet_value = nil)
         if facet_value.nil?
           t('global.facet.header.' + facet_name.downcase)
         else
-          facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, "") : facet_value)
+          facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, '') : facet_value)
           
           case facet_name.upcase
             when 'CHANNEL'
@@ -73,8 +75,6 @@ module Templates
           end
         end
       end
-
-      private
 
       def show_pagination_separator?(page_index, page_number, pages_shown)
         (page_index == 1 && @response.current_page > 2) ||
@@ -115,12 +115,12 @@ module Templates
             }
           },
           agent: agent_label(doc),
-          concepts: concept_labels(doc)
+          concepts: concept_labels(doc),
+          item_type: {
+            name: t('site.results.list.product-' + doc.fetch(:type).downcase),
+#            url: facet_item_url('TYPE', doc.fetch(:type))
+          }
         }
-      end
-
-      def doc_concepts(doc)
-        
       end
 
       def track_document_path_opts(counter)
