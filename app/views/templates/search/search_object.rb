@@ -216,10 +216,10 @@ module Templates
       private
 
       def edm_is_shown_by_download_url
-        if ENV['EDM_IS_SHOWN_BY_HOST']
+        if ENV['EDM_IS_SHOWN_BY_PROXY']
           begin
             document.fetch('aggregations.edmIsShownBy')
-            return ENV['EDM_IS_SHOWN_BY_HOST'] + document.fetch('about')
+            return ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
           rescue KeyError
           end
         end
