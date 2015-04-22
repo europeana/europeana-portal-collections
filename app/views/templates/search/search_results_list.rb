@@ -118,7 +118,7 @@ module Templates
           concepts: concept_labels(doc),
           item_type: {
             name: t('site.results.list.product-' + doc.fetch(:type).downcase),
-#            url: facet_item_url('TYPE', doc.fetch(:type))
+            url: facet_item_url('TYPE', doc.fetch(:type))
           }
         }
       end
