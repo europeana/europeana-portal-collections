@@ -58,8 +58,6 @@ module Templates
         navigation
       end
 
-      
-      
       def content
         
         {
@@ -90,7 +88,7 @@ module Templates
             :download  => {
               :primary  => {
                 :text  => t('site.object.actions.download'),
-                :url => render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+                :url => edm_is_shown_by_download_url
               },
               :secondary  => {
                 :items => [
@@ -148,24 +146,6 @@ module Templates
             ]
           }
         }  
-      end
-      
-      def links
-        links = {
-          original_context: render_document_show_field_value(document, 'aggregations.edmIsShownAt')
-        }
-
-        if ENV['EDM_IS_SHOWN_BY_HOST']
-          begin
-            edm_is_shown_by = document.fetch('aggregations.edmIsShownBy')
-            links[:download] = ENV['EDM_IS_SHOWN_BY_HOST'] + document.fetch('about')
-          rescue KeyError
-          end
-        else
-          links[:download] = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
-        end
-
-        links
       end
 
       def labels
@@ -234,7 +214,18 @@ module Templates
       end
 
       private
-      
+
+      def edm_is_shown_by_download_url
+        if ENV['EDM_IS_SHOWN_BY_PROXY']
+          begin
+            document.fetch('aggregations.edmIsShownBy')
+            return ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
+          rescue KeyError
+          end
+        end
+        render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+      end
+
       def has_long_and_lat
         latitude = render_document_show_field_value(document, 'places.latitude')
         longitude = render_document_show_field_value(document, 'places.longitude')
