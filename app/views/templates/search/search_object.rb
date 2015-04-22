@@ -85,20 +85,7 @@ module Templates
             :creation_date => render_document_show_field_value(document, 'proxies.dctermsCreated'),
             :description => render_document_show_field_value(document, 'proxies.dcDescription'),
             
-            :download  => {
-              :primary  => {
-                :text  => t('site.object.actions.download'),
-                :url => edm_is_shown_by_download_url
-              },
-              :secondary  => {
-                :items => [
-                  #{
-                  # :text => "Epub",
-                  # :url  => "http://europeana.eu"
-                  #}
-                ]
-              }
-            },
+            :download  => content_object_download,
 
             :geo => {
               :latitude => render_document_show_field_value(document, 'places.latitude'),
@@ -215,15 +202,41 @@ module Templates
 
       private
 
+      def content_object_download
+        links = []
+
+        if edm_is_shown_by_download_url.present?
+          links << {
+            text: t('site.object.actions.download'),
+            url: edm_is_shown_by_download_url
+          }
+        end
+
+        if false # add more links on useful conditions
+          links << {
+            text: 'Epub',
+            url: 'http://www.europeana.eu/'
+          }
+        end
+
+        return nil unless links.present?
+
+        {
+          primary: links.first,
+          secondary: {
+            items: (links.size == 1) ? nil : links[1..-1]
+          }
+        }
+      end
+
       def edm_is_shown_by_download_url
-        if ENV['EDM_IS_SHOWN_BY_PROXY']
-          begin
-            document.fetch('aggregations.edmIsShownBy')
-            return ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
-          rescue KeyError
+        @edm_is_shown_by_download_url ||= begin
+          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.fetch('aggregations.edmIsShownBy', false)
+            ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
+          else
+            render_document_show_field_value(document, 'aggregations.edmIsShownBy')
           end
         end
-        render_document_show_field_value(document, 'aggregations.edmIsShownBy')
       end
 
       def has_long_and_lat
@@ -242,11 +255,7 @@ module Templates
 
       def doc_title
         # force array return with empty default
-        begin 
-          title = document.fetch(:title)
-        rescue KeyError
-          title = nil
-        end
+        title = document.fetch(:title, nil)
 
         if title.blank?
           render_document_show_field_value(document, 'proxies.dcTitle')
@@ -257,11 +266,7 @@ module Templates
 
       def doc_title_extra
         # force array return with empty default
-        begin
-          title = document.fetch(:title)
-        rescue KeyError
-          title = []
-        end
+        title = document.fetch(:title, [])
 
         if title.size > 1
           title[1..-1]
