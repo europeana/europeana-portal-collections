@@ -1,5 +1,4 @@
 ---
-:hero: music.jpg
 :query: ! 'PROVIDER: "DISMARC+-+EuropeanaConnect" OR PROVIDER:
   "Cité+de+la+musique" OR PROVIDER:
   "IRCAM-Institut+de+Recherche+et+Coordination+Acoustique%2FMusique" OR (what:
@@ -16,3 +15,4 @@
   "Lind, Jenny" OR "Faustina Bordoni" OR Farinelli OR Senesino OR "Kirsten
   Flagstad" OR "Flagstad, Kirsten" OR "Göta Ljungberg" OR "Ljungberg, Göta" NOT
   DATA_PROVIDER: "Progetto ArtPast- CulturaItalia"'
+:home_bg_image: sample/thumb-music.jpg
