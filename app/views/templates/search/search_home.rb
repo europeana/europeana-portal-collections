@@ -23,36 +23,20 @@ module Templates
             :url   => "http://blog.europeana.eu/2015/03/its-your-world-explore-it-europeana-stories-now-in-googles-field-trip-app/"
           },
       
-          :promoted => [
+          :promoted => Europeana::Portal::Application.config.channels.select { |k, v| v[:home_bg_image].present? }.collect { |k, v|
             {
-              :title  => "Art",
-              :url  => "urlhere",
-              :is_channel  => true,
-              :bg_image  => "sample/thumb-art.jpg"
-            },
-            {
-              :title      => "Music",
-              :url        => "urlhere",
-              :is_channel =>  true,
-              :bg_image   => "sample/thumb-music.jpg"
-            },
-            {
-              :title =>   "Maps and Cartography",
-              :url   => "urlhere",
-              :is_channel  =>  true,
-              :bg_image  => "sample/thumb-maps.jpg"
-            },
+              title:      t(k, scope: 'global.channel'),
+              url:        channel_path(k),
+              is_channel: true,
+              bg_image:   v[:home_bg_image]
+            }
+          } +
+          [
             {
               :title  =>  "Europeana 1914—1918",
               :url  =>  "urlhere",
               :is_exhibition  =>  true,
               :bg_image  => "sample/thumb-1418.jpg"
-            },
-            {
-              :title  => "Natural History",
-              :url  =>  "urlhere",
-              :is_channel  =>  true,
-              :bg_image  => "sample/thumb-naturalhistory.jpg"
             },
             {
               :title  => "Photography on a Silver Plate",
