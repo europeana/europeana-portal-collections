@@ -2,3 +2,4 @@
 :query: '(what: natural history) OR (what: biology) OR (what: geology) OR
   (what: zoology) OR what: (PROVIDER:"OpenUp!") OR (PROVIDER:"STERNA") OR
   (PROVIDER:"The Natural Europe Project") OR (PROVIDER:"BHL Europe")'
+:home_bg_image: sample/thumb-naturalhistory.jpg
