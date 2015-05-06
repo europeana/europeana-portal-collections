@@ -3,6 +3,10 @@ module Templates
     
     class SearchHome < ApplicationView
     
+      def total_item_count
+        '13'
+      end
+      
       def content
         {
           :hero_config => {
@@ -14,7 +18,7 @@ module Templates
             :license_CC_ND_NC_SA => false,
             :license_public  => true
           },
-          :strapline  => "Explore 41,629,020 items from Europe's libraries, archives and museums. Books and manuscripts, photos and paintings, television and film, sculpture and crafts, diaries and maps, sheet music and recordings, they’re all here.",
+          :strapline  => t('site.home.strapline'),
       
           :total_items  => "40,173,111",
       

@@ -11,6 +11,8 @@ en:
       language:
         show:
           results: 
+    home:
+      strapline: Explore %{total_item_count} items from Europe's libraries, archives and museums. Books and manuscripts, photos and paintings, television and film, sculpture and crafts, diaries and maps, sheet music and recordings, they’re all here.
     my-europeana: 
     my-europeana-link: 
     object:
@@ -71,5 +73,8 @@ en:
           grid: Grid
           list: List
         view-at-provider: View at
+    search:
+      placeholder:
+        text: Add a search term
     site-name-link: 
     sitemap-link: 

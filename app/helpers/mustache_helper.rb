@@ -59,7 +59,7 @@ module MustacheHelper
         remove: (params[:qf].nil? || params[:qf].size == 0) ? search_action_path : '?q=' + params[:qf].join('&qf[]=')
       },
       input_values: input_search_values(params[:qf]),
-      placeholder: t('global.search-area.search-placeholder-text')
+      placeholder: t('site.search.placeholder.text')
     }
   end
 
@@ -177,6 +177,10 @@ module MustacheHelper
     }
   end
 
+  def total_item_count
+    '12345'
+  end
+  
   def channels_nav_links
     available_channels.collect do |c|
       {
