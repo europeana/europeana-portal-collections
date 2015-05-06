@@ -59,7 +59,6 @@ module Templates
       end
 
       def content
-        
         {
           :object => {
             :creator => {
@@ -107,10 +106,22 @@ module Templates
               }
             },
             
-            :images => {
-              :thumbnail => render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+            :media => {
+              :thumbnail => render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false),
+                
+              :primary => {
+                :preview =>  render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false),
+                :is_image => true
+              },
+              :items => [
+                {
+                  :url => render_document_show_field_value(document, 'aggregations.webResources.about')
+                }
+              ]
             },
-              
+
+            :test => media_items,
+                          
             :origin => {
               :url => render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
               :institution_name => render_document_show_field_value(document, 'aggregations.edmDataProvider')
@@ -126,10 +137,67 @@ module Templates
           :related => {
             :title => t('site.object.similar-items') + ':',
             :items => [
-              {:title => 'one'},
-              {:title => 'two'},
-              {:title => 'three'},
-              {:title => 'four'}
+              {
+                :title => 'one',
+                :img => {
+                 :rectangle => {
+                   :alt => 'one',
+                   :src => 'one'
+                 }
+                },
+                :headline => {
+                  :medium => 'M'
+                },
+                :text => {
+                  :short => 'short-excerpt'
+                }
+              },
+              {
+                :title => 'two',
+                :img => {
+                  :rectangle => {
+                    :alt => 'one',
+                    :src => 'one'
+                  }
+                 },
+                :headline => {
+                  :medium => 'M'
+                },
+                :text => {
+                  :short => 'short-excerpt'
+                }
+              },
+              {
+                :title => 'three',
+                :img => {
+                  :rectangle => {
+                    :alt => 'one',
+                    :src => 'one'
+                  }
+                 },
+                :headline => {
+                  :medium => 'M'
+                },
+                :text => {
+                  :short => 'short-excerpt'
+                }
+              },
+              {
+                :title => 'four',
+                :img => {
+                  :rectangle => {
+                    :alt => 'one',
+                    :src => 'one'
+                  }
+                 },
+                :headline => {
+                  :medium => 'M'
+                },
+                :text => {
+                  :short => 'short-excerpt'
+                }
+
+              }
             ]
           }
         }  
@@ -274,6 +342,21 @@ module Templates
           nil
         end
       end
+      
+      
+      def media_items
+        res = []
+        
+        document.fetch('aggregations.webResources').each do |web_resource|
+          res << {
+            preview: web_resource.fetch('about'),
+            rights:  web_resource.fetch('webResourceDcRights')
+          }
+        end
+        
+        res
+      end
+      
     end
   end
 end
