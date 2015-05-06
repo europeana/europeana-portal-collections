@@ -1,0 +1,75 @@
+nl:
+  global:
+    labs-link: 
+    labs-text: 
+    pro-link: 
+    pro-text: 
+    settings: 
+  site:
+    blog-link: 
+    facet:
+      language:
+        show:
+          results: 
+    my-europeana: 
+    my-europeana-link: 
+    object:
+      actions:
+        download: Download
+        download-additional: 
+        downloaddata: Download informatie
+        show-less-data: Toon minder informatie
+        show-more-data: Toon meer informatie
+      meta-label:
+        creator: Van
+        description: Omschrijving
+        latitude: Breedtegraad
+        longitude: Lengtegraad
+        map: Kaart
+        map-tiles: Tegel
+        rights: Mag ik dit gebruiken?
+        type: 
+      nav:
+        next: 
+        prev: 
+        return-to-search: 
+      points:
+        east: 
+        north: 
+        south: 
+        west: 
+      similar-items: 
+    results:
+      actions:
+        configure-actions: 
+        dutchmasters: 
+        favouriteart: 
+        label: 
+        newcollection: 
+        product-save: 
+        saveto: 
+        show-all-collections: 
+      list:
+        all-results:
+          3D: 
+          images: 
+          text: 
+          video: 
+        count-and-terms: 
+        empty: 
+        empty-with-terms: 
+        header: 
+        header-and: 
+        in-channel: 
+        product-3D: 
+        product-image: 
+        product-sound: 
+        product-text: 
+        product-video: 
+        results-relevance: 
+        view:
+          grid: 
+          list: 
+        view-at-provider: 
+    site-name-link: 
+    sitemap-link: 

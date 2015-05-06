@@ -11,11 +11,15 @@ en:
       language:
         show:
           results: 
+    home:
+      strapline: Explore %{total_item_count} items from Europe's libraries, archives and museums. 
+      
     my-europeana: 
     my-europeana-link: 
     object:
       actions:
         download: Download
+        download-additional: Also available as
         downloaddata: Download data
         show-less-data: Show less data
         show-more-data: Show more data
@@ -70,5 +74,8 @@ en:
           grid: Grid
           list: List
         view-at-provider: View at
+    search:
+      placeholder:
+        text: Add a search term
     site-name-link: 
     sitemap-link: 

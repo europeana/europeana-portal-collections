@@ -17,7 +17,7 @@ module MustacheHelper
       'Europeana Search' + search_page_title
     elsif params[:action].to_s == 'show'
       if @document.is_a?(Blacklight::Document)
-        rec = @document.get(:title) || ''
+        rec = @document.fetch(:title, ['']).join(', ')
         'Europeana Record' + (rec.present? ? ': ' + rec : rec)
       end
     end
@@ -59,7 +59,7 @@ module MustacheHelper
         remove: (params[:qf].nil? || params[:qf].size == 0) ? search_action_path : '?q=' + params[:qf].join('&qf[]=')
       },
       input_values: input_search_values(params[:qf]),
-      placeholder: t('global.search-area.search-placeholder-text')
+      placeholder: t('site.search.placeholder.text')
     }
   end
 
@@ -177,6 +177,10 @@ module MustacheHelper
     }
   end
 
+  def total_item_count
+    '12345'
+  end
+  
   def channels_nav_links
     available_channels.collect do |c|
       {
@@ -186,12 +190,64 @@ module MustacheHelper
     end
   end
 
+  def page_config
+    {
+      :newsletter  => true
+    }
+  end
+
   def search_page_title
     return '' if params[:q].nil?
 
     ': ' + [params[:q]].flatten.join(', ')
   end
 
+  
+  def common_footer
+    {
+      :linklist1  => {
+        :title  => "More info",
+        :items  =>  [
+          {
+            :text  => "New collections",
+            :url   => "http://google.com"
+          },
+          {
+            :text => "All data providers",
+            :url  => "http://google.com"
+          },
+          {
+            :text =>  "Become a data provider",
+            :url  => "http://google.com"
+          }
+        ]
+      },
+      :linklist2 => {
+        :title  =>  "Help",
+        :items  =>  [
+          {
+            :text => "Search tips",
+            :url  => "http://google.com"
+          },
+          {
+            :text =>  "Using My Europeana",
+            :url  => "http://google.com"
+          },
+          {
+            :text  => "Copyright",
+            :url   => "http://google.com"
+          }
+        ]
+      },
+      :social  => {
+        :facebook   => true,
+        :pinterest  => true,
+        :twitter    => true,
+        :googleplus => true
+      }
+    }    
+  end
+  
   # @param qs [Array] q params
   # @return [Array<Hash>]
   def input_search_values(qs)
