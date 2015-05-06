@@ -190,12 +190,64 @@ module MustacheHelper
     end
   end
 
+  def page_config
+    {
+      :newsletter  => true
+    }
+  end
+
   def search_page_title
     return '' if params[:q].nil?
 
     ': ' + [params[:q]].flatten.join(', ')
   end
 
+  
+  def common_footer
+    {
+      :linklist1  => {
+        :title  => "More info",
+        :items  =>  [
+          {
+            :text  => "New collections",
+            :url   => "http://google.com"
+          },
+          {
+            :text => "All data providers",
+            :url  => "http://google.com"
+          },
+          {
+            :text =>  "Become a data provider",
+            :url  => "http://google.com"
+          }
+        ]
+      },
+      :linklist2 => {
+        :title  =>  "Help",
+        :items  =>  [
+          {
+            :text => "Search tips",
+            :url  => "http://google.com"
+          },
+          {
+            :text =>  "Using My Europeana",
+            :url  => "http://google.com"
+          },
+          {
+            :text  => "Copyright",
+            :url   => "http://google.com"
+          }
+        ]
+      },
+      :social  => {
+        :facebook   => true,
+        :pinterest  => true,
+        :twitter    => true,
+        :googleplus => true
+      }
+    }    
+  end
+  
   # @param qs [Array] q params
   # @return [Array<Hash>]
   def input_search_values(qs)
