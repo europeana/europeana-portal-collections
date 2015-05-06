@@ -17,7 +17,7 @@ module MustacheHelper
       'Europeana Search' + search_page_title
     elsif params[:action].to_s == 'show'
       if @document.is_a?(Blacklight::Document)
-        rec = @document.get(:title) || ''
+        rec = @document.fetch(:title, ['']).join(', ')
         'Europeana Record' + (rec.present? ? ': ' + rec : rec)
       end
     end
