@@ -3,6 +3,10 @@ module Templates
     
     class SearchHome < ApplicationView
     
+      def total_item_count
+        '13'
+      end
+      
       def content
         {
           :hero_config => {
@@ -14,15 +18,15 @@ module Templates
             :license_CC_ND_NC_SA => false,
             :license_public  => true
           },
-          :strapline  => "Explore 41,629,020 items from Europe's libraries, archives and museums. Books and manuscripts, photos and paintings, television and film, sculpture and crafts, diaries and maps, sheet music and recordings, they’re all here.",
+          :strapline  => t('site.home.strapline'),
       
           :total_items  => "40,173,111",
-      
-          :important  => {
-            :text  => "It’s your world, explore it! — Europeana stories are now in Google’s Field Trip app",
-            :url   => "http://blog.europeana.eu/2015/03/its-your-world-explore-it-europeana-stories-now-in-googles-field-trip-app/"
+            
+          :important_removed  => {
+            :text   => "Europeana stories are now in Google’s Field Trip app",
+            :url    => "http://blog.europeana.eu/2015/03/its-your-world-explore-it-europeana-stories-now-in-googles-field-trip-app/"
           },
-      
+
           :promoted => Europeana::Portal::Application.config.channels.select { |k, v| v[:home_bg_image].present? }.collect { |k, v|
             {
               title:      t(k, scope: 'global.channel'),
@@ -113,10 +117,17 @@ module Templates
       def navigation
       {
         :global => {
+          
           :options => {
             :search_active  => false,
             :settings_active  => true
           },
+            
+          :logo  => {
+            :url  => "../templates-Search-Search-home/templates-Search-Search-home.html",
+            :text  => "Europeana Search"
+          },
+          
           :primary_nav  => {
             :items  => [
               {
@@ -161,46 +172,7 @@ module Templates
           }
         },
     
-        :footer  => {
-          :linklist1  => {
-            :title  => "More info",
-            :items  =>  [
-              {
-                :text  => "New collections",
-                :url   => "http://google.com"
-              },
-              {
-                :text => "All data providers",
-                :url  => "http://google.com"
-              },
-              {
-                :text =>  "Become a data provider",
-                :url  => "http://google.com"
-              }
-            ]
-          },
-          :linklist2 => {
-            :title  =>  "Help",
-            :items  =>  [
-              {
-                :text => "Search tips",
-                :url  => "http://google.com"
-              },
-              {
-                :text =>  "Using My Europeana",
-                :url  => "http://google.com"
-              },
-              {
-                :text  => "Copyright",
-                :url   => "http://google.com"
-              }
-            ]
-          },
-          :social  => {
-            :googleplus =>  false,
-            :github     =>  false
-          }
-        }    
+        :footer  => common_footer
       }
       end
       
