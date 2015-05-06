@@ -298,7 +298,7 @@ module Templates
 
       def edm_is_shown_by_download_url
         @edm_is_shown_by_download_url ||= begin
-          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.fetch('aggregations.edmIsShownBy', false)
+          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.first.fetch('edmIsShownBy', false)
             ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
           else
             render_document_show_field_value(document, 'aggregations.edmIsShownBy')
