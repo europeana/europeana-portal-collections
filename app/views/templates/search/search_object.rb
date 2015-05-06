@@ -343,7 +343,9 @@ module Templates
       end
 
       def media_items
-        document.aggregations.first.webResources.collect do |web_resource|
+        aggregation = document.aggregations.first
+        return [] unless aggregation.respond_to?(:webResources)
+        aggregation.webResources.collect do |web_resource|
           {
             preview: render_document_show_field_value(web_resource, 'about'),
             rights:  render_document_show_field_value(web_resource, 'webResourceDcRights')
