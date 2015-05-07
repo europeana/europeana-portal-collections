@@ -7,7 +7,7 @@ gem 'rails', '4.2.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   git: 'https://github.com/europeana/europeana-blacklight.git',
-  ref: '655c8aa'
+  ref: '265461c'
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
