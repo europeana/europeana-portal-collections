@@ -51,8 +51,10 @@ module Templates
                 separator: show_pagination_separator?(i, page.number, pages.size)
               }
             end
-          }
+          },
+          global: navigation_global
         }
+        
       end
 
       private
@@ -238,10 +240,21 @@ module Templates
       end
 
       def concept_labels(doc)
-        { items: doc.fetch('edmConceptPrefLabelLangAware')[0..3].map { |c| { text: c } } }
-      rescue KeyError
-        []
+        begin
+          labels =  doc.fetch('edmConceptPrefLabelLangAware')
+          if(!labels[0..3].nil?)
+          {
+            items: labels[0..3].map { |c| { text: c } } 
+          }
+          else
+            []
+          end
+        rescue KeyError
+          []
+        end
       end
+
+            
     end
   end
 end

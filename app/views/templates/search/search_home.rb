@@ -7,6 +7,12 @@ module Templates
         '13'
       end
       
+      def navigation
+        {
+          :global => navigation_global
+        }
+      end
+      
       def content
         {
           :hero_config => {
@@ -113,69 +119,6 @@ module Templates
         }
       }
       end
-      
-      def navigation
-      {
-        :global => {
-          
-          :options => {
-            :search_active  => false,
-            :settings_active  => true
-          },
-            
-          :logo  => {
-            :url  => "../templates-Search-Search-home/templates-Search-Search-home.html",
-            :text  => "Europeana Search"
-          },
-          
-          :primary_nav  => {
-            :items  => [
-              {
-                :url  => "#",
-                :text  => "Home",
-                :is_current  => true
-              },
-              {
-                :url  => "",
-                :text  => "Channels",
-                :submenu  => {
-                  :items  => [
-                    {
-                      :url  => "http://google.com",
-                      :text  => "Channel 1"
-                    },
-                    {
-                      :url  => "http://google.com",
-                      :text  => "Channel 2",
-                      :is_current  => true
-                    },
-                    {
-                      :url  => "http://google.com",
-                      :text  => "Channel 3"
-                    }
-                  ]
-                }
-              },
-              {
-                :url   =>  "",
-                :text  =>  "Exhibitions"
-              },
-              {
-                :url   => "",
-                :text  => "Blog"
-              },
-              {
-                :url   => "",
-                :text  => "My Europeana"
-              }
-            ]
-          }
-        },
-    
-        :footer  => common_footer
-      }
-      end
-      
       
     end  
     

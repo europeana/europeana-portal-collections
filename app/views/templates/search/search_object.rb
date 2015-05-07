@@ -25,6 +25,7 @@ module Templates
 
         # old arrows '❬ ' + ' ❭'
         navigation = {
+          global: navigation_global,
           next_prev: {
             prev_text: t('site.object.nav.prev'),
             back_url:  back_link_url,
@@ -60,147 +61,147 @@ module Templates
 
       def content
         {
-          :object => {
-            :creator => {
-              :name => render_document_show_field_value(document, 'proxies.dcCreator'),
-              :life  => {
-                  :from  => {
-                      :long  => render_document_show_field_value(document, 'agents.begin'),
-                      :short => render_document_show_field_value(document, 'agents.end')
+          object: {
+            creator: {
+              name: render_document_show_field_value(document, 'proxies.dcCreator'),
+              life: {
+                  from: {
+                      long: render_document_show_field_value(document, 'agents.begin'),
+                      short: render_document_show_field_value(document, 'agents.end')
                   },
-                  :to => {
-                      :long   => render_document_show_field_value(document, 'agents.end'),
-                      :short  => render_document_show_field_value(document, 'agents.end')
+                  to: {
+                      long: render_document_show_field_value(document, 'agents.end'),
+                      short: render_document_show_field_value(document, 'agents.end')
                   }
               },
-              :title => (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
-              :biography => {
-                  :text =>        nil,
-                  :source  =>     nil,
-                  :source_url  => nil
+              title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
+              biography: {
+                  text:        nil,
+                  source:     nil,
+                  source_url: nil
               }
             },
-            
-            :creation_date => render_document_show_field_value(document, 'proxies.dctermsCreated'),
-            :description => render_document_show_field_value(document, 'proxies.dcDescription'),
-            
-            :download  => content_object_download,
 
-            :geo => {
-              :latitude => render_document_show_field_value(document, 'places.latitude'),
-              :longitude => render_document_show_field_value(document, 'places.longitude'),
-              :long_and_lat => has_long_and_lat,
-              :placeName => render_document_show_field_value(document, 'places.prefLabel'),
-              :labels => {
-                
-                :longitude      => t('site.object.meta-label.longitude') + ':',
-                :latitude       => t('site.object.meta-label.latitude') + ':',
-                :map            => t('site.object.meta-label.map') + ':',   
-                :points         => {
-                    :n          => t('site.object.points.north'),
-                    :s          => t('site.object.points.south'),
-                    :e          => t('site.object.points.east'),
-                    :w          => t('site.object.points.west')
+            creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
+            description: render_document_show_field_value(document, 'proxies.dcDescription'),
+
+            download: content_object_download,
+
+            geo: {
+              latitude: render_document_show_field_value(document, 'places.latitude'),
+              longitude: render_document_show_field_value(document, 'places.longitude'),
+              long_and_lat: has_long_and_lat,
+              placeName: render_document_show_field_value(document, 'places.prefLabel'),
+              labels: {
+
+                longitude: t('site.object.meta-label.longitude') + ':',
+                latitude: t('site.object.meta-label.latitude') + ':',
+                map: t('site.object.meta-label.map') + ':',
+                points: {
+                    n: t('site.object.points.north'),
+                    s: t('site.object.points.south'),
+                    e: t('site.object.points.east'),
+                    w: t('site.object.points.west')
                 }
 
               }
             },
-            
-            :media => {
-              :thumbnail => render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false),
-                
-              :primary => {
-                :preview =>  render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false),
-                :is_image => true
+
+            media: {
+              thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false),
+
+              primary: {
+                preview:  render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false),
+                is_image: true
               },
-              :items => [
+              items: [
                 {
-                  :url => render_document_show_field_value(document, 'aggregations.webResources.about')
+                  url: render_document_show_field_value(document, 'aggregations.webResources.about')
                 }
               ]
             },
 
-            :test => media_items,
-                          
-            :origin => {
-              :url => render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-              :institution_name => render_document_show_field_value(document, 'aggregations.edmDataProvider')
+            test: media_items,
+
+            origin: {
+              url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+              institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider')
             },
-            :rights  => {
-              :license_public  => false,
-              :license_human   => render_document_show_field_value(document, 'aggregations.edmRights')
+            rights: {
+              license_public: false,
+              license_human: render_document_show_field_value(document, 'aggregations.edmRights')
             },
-            :title => render_document_show_field_value(document, 'proxies.dcTitle'),
-            :type => render_document_show_field_value(document, 'proxies.dcType')
+            title: render_document_show_field_value(document, 'proxies.dcTitle'),
+            type: render_document_show_field_value(document, 'proxies.dcType')
 
           },
-          :related => {
-            :title => t('site.object.similar-items') + ':',
-            :items => [
+          related: {
+            title: t('site.object.similar-items') + ':',
+            items: [
               {
-                :title => 'one',
-                :img => {
-                 :rectangle => {
-                   :alt => 'one',
-                   :src => 'one'
+                title: 'one',
+                img: {
+                 rectangle: {
+                   alt: 'one',
+                   src: 'one'
                  }
                 },
-                :headline => {
-                  :medium => 'M'
+                headline: {
+                  medium: 'M'
                 },
-                :text => {
-                  :short => 'short-excerpt'
+                text: {
+                  short: 'short-excerpt'
                 }
               },
               {
-                :title => 'two',
-                :img => {
-                  :rectangle => {
-                    :alt => 'one',
-                    :src => 'one'
+                title: 'two',
+                img: {
+                  rectangle: {
+                    alt: 'one',
+                    src: 'one'
                   }
                  },
-                :headline => {
-                  :medium => 'M'
+                headline: {
+                  medium: 'M'
                 },
-                :text => {
-                  :short => 'short-excerpt'
+                text: {
+                  short: 'short-excerpt'
                 }
               },
               {
-                :title => 'three',
-                :img => {
-                  :rectangle => {
-                    :alt => 'one',
-                    :src => 'one'
+                title: 'three',
+                img: {
+                  rectangle: {
+                    alt: 'one',
+                    src: 'one'
                   }
                  },
-                :headline => {
-                  :medium => 'M'
+                headline: {
+                  medium: 'M'
                 },
-                :text => {
-                  :short => 'short-excerpt'
+                text: {
+                  short: 'short-excerpt'
                 }
               },
               {
-                :title => 'four',
-                :img => {
-                  :rectangle => {
-                    :alt => 'one',
-                    :src => 'one'
+                title: 'four',
+                img: {
+                  rectangle: {
+                    alt: 'one',
+                    src: 'one'
                   }
                  },
-                :headline => {
-                  :medium => 'M'
+                headline: {
+                  medium: 'M'
                 },
-                :text => {
-                  :short => 'short-excerpt'
+                text: {
+                  short: 'short-excerpt'
                 }
 
               }
             ]
           }
-        }  
+        }
       end
 
       def labels
@@ -208,18 +209,18 @@ module Templates
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
           download:       t('site.object.actions.downloaddata'),
-          
-          :agent          => t('site.object.meta-label.creator') + ':',
-          :creator        => t('site.object.meta-label.creator') + ':',
-          :dc_type        => t('site.object.meta-label.type') + ':',
-          :description    => t('site.object.meta-label.description') + ':',
-          
-          #:longitude      => t('site.object.meta-label.longitude') + ':',
-          #:latitude       => t('site.object.meta-label.latitude') + ':',
-          #:map            => t('site.object.meta-label.map') + ':',
-          
-          #:mlt            => t('site.object.similar-items') + ':',
-          :rights         => t('site.object.meta-label.rights')
+
+          agent: t('site.object.meta-label.creator') + ':',
+          creator: t('site.object.meta-label.creator') + ':',
+          dc_type: t('site.object.meta-label.type') + ':',
+          description: t('site.object.meta-label.description') + ':',
+
+          #longitude: t('site.object.meta-label.longitude') + ':',
+          #latitude: t('site.object.meta-label.latitude') + ':',
+          #map: t('site.object.meta-label.map') + ':',
+
+          #mlt: t('site.object.similar-items') + ':',
+          rights: t('site.object.meta-label.rights')
         }
       end
 
@@ -232,7 +233,6 @@ module Templates
           concepts: render_document_show_field_value(document, 'concepts.prefLabel'),
 
           dc_description: render_document_show_field_value(document, 'proxies.dcDescription'),
-          dc_type: render_document_show_field_value(document, 'proxies.dcType'),
           dc_creator: render_document_show_field_value(document, 'proxies.dcCreator'),
 
           dc_format: render_document_show_field_value(document, 'proxies.dcFormat'),
@@ -258,12 +258,12 @@ module Templates
           title: doc_title,
           title_extra: doc_title_extra,
           type: render_document_show_field_value(document, 'type'),
-          
-          #:latitude => render_document_show_field_value(document, 'places.latitude'),
-          #:longitude => render_document_show_field_value(document, 'places.longitude'),
-          #:long_and_lat => has_long_and_lat,
-          #:placeName => render_document_show_field_value(document, 'places.prefLabel'),
-          
+
+          #latitude: render_document_show_field_value(document, 'places.latitude'),
+          #longitude: render_document_show_field_value(document, 'places.longitude'),
+          #long_and_lat: has_long_and_lat,
+          #placeName: render_document_show_field_value(document, 'places.prefLabel'),
+
           year: render_document_show_field_value(document, 'year')
         }
       end
@@ -299,7 +299,7 @@ module Templates
 
       def edm_is_shown_by_download_url
         @edm_is_shown_by_download_url ||= begin
-          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.fetch('aggregations.edmIsShownBy', false)
+          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.first.fetch('edmIsShownBy', false)
             ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
           else
             render_document_show_field_value(document, 'aggregations.edmIsShownBy')
@@ -342,21 +342,17 @@ module Templates
           nil
         end
       end
-      
-      
+
       def media_items
-        res = []
-        
-        document.fetch('aggregations.webResources').each do |web_resource|
-          res << {
-            preview: web_resource.fetch('about'),
-            rights:  web_resource.fetch('webResourceDcRights')
+        aggregation = document.aggregations.first
+        return [] unless aggregation.respond_to?(:webResources)
+        aggregation.webResources.collect do |web_resource|
+          {
+            preview: render_document_show_field_value(web_resource, 'about'),
+            rights:  render_document_show_field_value(web_resource, 'webResourceDcRights')
           }
         end
-        
-        res
       end
-      
     end
   end
 end
