@@ -1,31 +1,45 @@
 en:
   global:
-    labs-link: 
-    labs-text: 
-    pro-link: 
-    pro-text: 
-    settings: 
+    labs-link: 'link to labs '
+    labs-text: text for labs
+    pro-link: 'link to pro '
+    pro-text: text for pro
+    settings: settings text
   site:
-    blog-link: 
+    blog-link: link to blog
     facet:
       language:
         show:
-          results: 
-    my-europeana: 
-    my-europeana-link: 
+          results: Results
+    home:
+      strapline: "Explore %{total_item_count} items from Europe's libraries, archives and museums. \n"
+    my-europeana: My Europeana
+    my-europeana-link: link to my Europeana
     object:
       actions:
+        download: Download
+        download-additional: Also available as
         downloaddata: Download data
+        show-less-data: Show less data
         show-more-data: Show more data
       meta-label:
         creator: Creator
         description: Description
+        latitude: Latitude
+        longitude: Longitude
+        map: Map
+        map-tiles: Tiles
         rights: Can I use this?
         type: Type
       nav:
         next: Next
         prev: Previous
         return-to-search: Return to search results
+      points:
+        east: East
+        north: North
+        south: South
+        west: West
       similar-items: Similar items
     results:
       actions:
@@ -59,5 +73,8 @@ en:
           grid: Grid
           list: List
         view-at-provider: View at
+    search:
+      placeholder:
+        text: Add a search term
     site-name-link: 
     sitemap-link: 

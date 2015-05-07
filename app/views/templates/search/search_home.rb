@@ -3,6 +3,16 @@ module Templates
     
     class SearchHome < ApplicationView
     
+      def total_item_count
+        '13'
+      end
+      
+      def navigation
+        {
+          :global => navigation_global
+        }
+      end
+      
       def content
         {
           :hero_config => {
@@ -14,45 +24,29 @@ module Templates
             :license_CC_ND_NC_SA => false,
             :license_public  => true
           },
-          :strapline  => "Explore 41,629,020 items from Europe's libraries, archives and museums. Books and manuscripts, photos and paintings, television and film, sculpture and crafts, diaries and maps, sheet music and recordings, they’re all here.",
+          :strapline  => t('site.home.strapline'),
       
           :total_items  => "40,173,111",
-      
-          :important  => {
-            :text  => "It’s your world, explore it! — Europeana stories are now in Google’s Field Trip app",
-            :url   => "http://blog.europeana.eu/2015/03/its-your-world-explore-it-europeana-stories-now-in-googles-field-trip-app/"
+            
+          :important_removed  => {
+            :text   => "Europeana stories are now in Google’s Field Trip app",
+            :url    => "http://blog.europeana.eu/2015/03/its-your-world-explore-it-europeana-stories-now-in-googles-field-trip-app/"
           },
-      
-          :promoted => [
+
+          :promoted => Europeana::Portal::Application.config.channels.select { |k, v| v[:home_bg_image].present? }.collect { |k, v|
             {
-              :title  => "Art",
-              :url  => "urlhere",
-              :is_channel  => true,
-              :bg_image  => "sample/thumb-art.jpg"
-            },
-            {
-              :title      => "Music",
-              :url        => "urlhere",
-              :is_channel =>  true,
-              :bg_image   => "sample/thumb-music.jpg"
-            },
-            {
-              :title =>   "Maps and Cartography",
-              :url   => "urlhere",
-              :is_channel  =>  true,
-              :bg_image  => "sample/thumb-maps.jpg"
-            },
+              title:      t(k, scope: 'global.channel'),
+              url:        channel_path(k),
+              is_channel: true,
+              bg_image:   v[:home_bg_image]
+            }
+          } +
+          [
             {
               :title  =>  "Europeana 1914—1918",
               :url  =>  "urlhere",
               :is_exhibition  =>  true,
               :bg_image  => "sample/thumb-1418.jpg"
-            },
-            {
-              :title  => "Natural History",
-              :url  =>  "urlhere",
-              :is_channel  =>  true,
-              :bg_image  => "sample/thumb-naturalhistory.jpg"
             },
             {
               :title  => "Photography on a Silver Plate",
@@ -126,99 +120,6 @@ module Templates
       }
       end
       
-      def navigation
-      {
-        :global => {
-          :options => {
-            :search_active  => false,
-            :settings_active  => true
-          },
-          :primary_nav  => {
-            :items  => [
-              {
-                :url  => "#",
-                :text  => "Home",
-                :is_current  => true
-              },
-              {
-                :url  => "",
-                :text  => "Channels",
-                :submenu  => {
-                  :items  => [
-                    {
-                      :url  => "http://google.com",
-                      :text  => "Channel 1"
-                    },
-                    {
-                      :url  => "http://google.com",
-                      :text  => "Channel 2",
-                      :is_current  => true
-                    },
-                    {
-                      :url  => "http://google.com",
-                      :text  => "Channel 3"
-                    }
-                  ]
-                }
-              },
-              {
-                :url   =>  "",
-                :text  =>  "Exhibitions"
-              },
-              {
-                :url   => "",
-                :text  => "Blog"
-              },
-              {
-                :url   => "",
-                :text  => "My Europeana"
-              }
-            ]
-          }
-        },
-    
-        :footer  => {
-          :linklist1  => {
-            :title  => "More info",
-            :items  =>  [
-              {
-                :text  => "New collections",
-                :url   => "http://google.com"
-              },
-              {
-                :text => "All data providers",
-                :url  => "http://google.com"
-              },
-              {
-                :text =>  "Become a data provider",
-                :url  => "http://google.com"
-              }
-            ]
-          },
-          :linklist2 => {
-            :title  =>  "Help",
-            :items  =>  [
-              {
-                :text => "Search tips",
-                :url  => "http://google.com"
-              },
-              {
-                :text =>  "Using My Europeana",
-                :url  => "http://google.com"
-              },
-              {
-                :text  => "Copyright",
-                :url   => "http://google.com"
-              }
-            ]
-          },
-          :social  => {
-            :googleplus =>  false,
-            :github     =>  false
-          }
-        }    
-      }
-      end
       
       
     end  
