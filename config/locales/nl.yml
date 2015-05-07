@@ -1,18 +1,20 @@
 nl:
   global:
-    labs-link: 
-    labs-text: 
-    pro-link: 
-    pro-text: 
-    settings: 
+    labs-link: 'link naar labs '
+    labs-text: tekst over labs
+    pro-link: link naar pro
+    pro-text: tekst voor pro
+    settings: tekst voor settings
   site:
-    blog-link: 
+    blog-link: link naar de blog
     facet:
       language:
         show:
-          results: 
-    my-europeana: 
-    my-europeana-link: 
+          results: Resulaten
+    home:
+      strapline: 'Ontdek %{total_item_count} items van Europa''s bibliotheken, archiven en musea.  '
+    my-europeana: Mijn Europeana
+    my-europeana-link: Link naar mijn Europeana
     object:
       actions:
         download: Download
@@ -71,5 +73,8 @@ nl:
           grid: 
           list: 
         view-at-provider: 
+    search:
+      placeholder:
+        text: 
     site-name-link: 
     sitemap-link: 

@@ -1,21 +1,20 @@
 en:
   global:
-    labs-link: 
-    labs-text: 
-    pro-link: 
-    pro-text: 
-    settings: 
+    labs-link: 'link to labs '
+    labs-text: text for labs
+    pro-link: 'link to pro '
+    pro-text: text for pro
+    settings: settings text
   site:
-    blog-link: 
+    blog-link: link to blog
     facet:
       language:
         show:
-          results: 
+          results: Results
     home:
-      strapline: Explore %{total_item_count} items from Europe's libraries, archives and museums. 
-      
-    my-europeana: 
-    my-europeana-link: 
+      strapline: "Explore %{total_item_count} items from Europe's libraries, archives and museums. \n"
+    my-europeana: My Europeana
+    my-europeana-link: link to my Europeana
     object:
       actions:
         download: Download
