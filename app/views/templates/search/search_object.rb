@@ -299,7 +299,7 @@ module Templates
 
       def edm_is_shown_by_download_url
         @edm_is_shown_by_download_url ||= begin
-          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.fetch('aggregations.edmIsShownBy', false)
+          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.first.fetch('edmIsShownBy', false)
             ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
           else
             render_document_show_field_value(document, 'aggregations.edmIsShownBy')
@@ -344,7 +344,9 @@ module Templates
       end
 
       def media_items
-        document.aggregations.first.webResources.collect do |web_resource|
+        aggregation = document.aggregations.first
+        return [] unless aggregation.respond_to?(:webResources)
+        aggregation.webResources.collect do |web_resource|
           {
             preview: render_document_show_field_value(web_resource, 'about'),
             rights:  render_document_show_field_value(web_resource, 'webResourceDcRights')
