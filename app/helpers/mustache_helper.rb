@@ -203,6 +203,65 @@ module MustacheHelper
   end
 
   
+  def navigation_global
+  {
+      :options => {
+        :search_active  => false,
+        :settings_active  => true
+      },
+        
+      :logo  => {
+        :url  => "/",
+        :text  => "Europeana Search"
+      },
+      
+      :primary_nav  => {
+        :items  => [
+          {
+            :url  => "#",
+            :text  => "Home",
+            :is_current  => true
+          },
+          {
+            :url  => "",
+            :text  => "Channels",
+            :submenu  => {
+              :items  => [
+                {
+                  :url  => "http://google.com",
+                  :text  => "Channel 1"
+                },
+                {
+                  :url  => "http://google.com",
+                  :text  => "Channel 2",
+                  :is_current  => true
+                },
+                {
+                  :url  => "http://google.com",
+                  :text  => "Channel 3"
+                }
+              ]
+            }
+          },
+          {
+            :url   =>  "",
+            :text  =>  "Exhibitions"
+          },
+          {
+            :url   => "",
+            :text  => "Blog"
+          },
+          {
+            :url   => "",
+            :text  => "My Europeana"
+          }
+        ]
+    },
+  
+    :footer  => common_footer
+  }
+  end
+
   def common_footer
     {
       :linklist1  => {
