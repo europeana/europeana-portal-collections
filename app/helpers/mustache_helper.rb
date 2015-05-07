@@ -262,7 +262,6 @@ module MustacheHelper
   }
   end
 
-  
   def common_footer
     {
       :linklist1  => {

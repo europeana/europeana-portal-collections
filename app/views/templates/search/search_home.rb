@@ -120,8 +120,6 @@ module Templates
       }
       end
       
-      
-      
     end  
     
   end
