@@ -23,12 +23,14 @@ en:
         show-less-data: Show less data
         show-more-data: Show more data
       meta-label:
+        concepts: This is
         creator: Creator
         description: Description
         latitude: Latitude
         longitude: Longitude
         map: Map
         map-tiles: Tiles
+        provided-by: Provided by
         rights: Can I use this?
         type: Type
       nav:
@@ -69,6 +71,7 @@ en:
         product-text: Text
         product-video: Video
         results-relevance: Relevance
+        single-result: 1 result for %{query_terms}
         view:
           grid: Grid
           list: List
