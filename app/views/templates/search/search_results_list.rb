@@ -19,6 +19,14 @@ module Templates
       def has_results
         response.total > 0
       end
+      
+      def has_single_result
+        response.total == 1
+      end
+      
+      def has_multiple_results
+        response.total > 1
+      end
 
       def query_terms
         query_terms = [(params[:q] || [])].flatten.collect do |query_term|

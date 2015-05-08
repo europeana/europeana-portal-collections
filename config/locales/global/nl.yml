@@ -121,10 +121,11 @@ nl:
         advanced-rrfa: 
         advanced-rrpa: 
         advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
         simple: 
+        simple-label:
+          open: 
+          permission: 
+          restricted: 
       source: 
       type:
         3d: 
@@ -210,7 +211,7 @@ nl:
     more-info: 
     our-mission: 
     our-mission-text: 
-    our-sites: 
+    our-sites: onze sites
     password: 
     refine-your-search: 
     register: 
@@ -221,8 +222,8 @@ nl:
       background-image-title: 
       background-image-title-url: 
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
+      search-button-image-alt: Zoek
+      search-placeholder-text: Voeg een zoekfunctie toe
     search-collections: 
     search-collections-text: 
     sitemap: 

@@ -3,9 +3,6 @@ module Templates
     
     class SearchHome < ApplicationView
     
-      def total_item_count
-        '13'
-      end
       
       def navigation
         {
@@ -24,7 +21,7 @@ module Templates
             :license_CC_ND_NC_SA => false,
             :license_public  => true
           },
-          :strapline  => t('site.home.strapline'),
+          :strapline  => t('site.home.strapline', total_item_count: total_item_count),
       
           :total_items  => "40,173,111",
             
