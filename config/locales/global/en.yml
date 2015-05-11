@@ -121,10 +121,10 @@ en:
         advanced-rrfa: Rights reserved - Free access
         advanced-rrpa: Rights reserved - Paid access
         advanced-ucs: Unknown copyright status
-        simple: Simple
         open: Yes with attribution
         permission: Only with permission
         restricted: Yes with restrictions
+        simple: Simple
       source: Source
       type:
         3d: 3D
