@@ -23,12 +23,14 @@ nl:
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
       meta-label:
+        concepts: 
         creator: Van
         description: Omschrijving
         latitude: Breedtegraad
         longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
+        provided-by: 
         rights: Mag ik dit gebruiken?
         type: 
       nav:
@@ -69,6 +71,7 @@ nl:
         product-text: 
         product-video: 
         results-relevance: 
+        single-result: 
         view:
           grid: 
           list: 
