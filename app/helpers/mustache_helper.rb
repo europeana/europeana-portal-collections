@@ -178,7 +178,7 @@ module MustacheHelper
   end
 
   def total_item_count
-    '12345'
+    @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
   end
   
   def channels_nav_links
