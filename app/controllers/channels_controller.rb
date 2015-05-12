@@ -10,6 +10,7 @@ class ChannelsController < ApplicationController
 
   before_filter :find_channel, only: [:index, :show]
   before_filter :redirect_show_home_to_index, only: :show
+  before_filter :count_all, only: :index, unless: :has_search_parameters?
 
   def index
     show
@@ -59,5 +60,12 @@ class ChannelsController < ApplicationController
       redirect_to action: :index
       return false
     end
+  end
+
+  ##
+  # Gets the total number of items available over the Europeana API
+  def count_all
+    all_params = { query: '*:*', rows: 0, profile: 'minimal' }
+    @europeana_item_count = repository.search(all_params).total
   end
 end
