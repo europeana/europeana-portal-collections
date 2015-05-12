@@ -42,10 +42,6 @@ module UrlHelper
 
   def polymorphic_url(record_or_hash_or_array, options = {})
     doc = record_or_hash_or_array
-    if ! doc.is_a?(Europeana::Blacklight::Document)
-      puts "No... #{doc.class}"
-      sleep 2
-    end
     return super unless doc.is_a?(Europeana::Blacklight::Document)
     document_url(options.merge(provider_id: doc.provider_id,
                                record_id: doc.record_id))
@@ -74,7 +70,7 @@ module UrlHelper
   # @return [Hash] a copy of params with the passed value removed
   def remove_search_param(key, value, source_params = params)
     p = reset_search_params(source_params)
-    p[key] = (p[key] || []).dup
+    p[key] = ([p[key]].flatten || []).dup
     p[key] = p[key] - [value]
     p.delete(key) if p[key].empty?
     p

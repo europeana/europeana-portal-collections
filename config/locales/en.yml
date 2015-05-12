@@ -1,32 +1,83 @@
 en:
+  global:
+    labs-link: 'link to labs '
+    labs-text: text for labs
+    pro-link: 'link to pro '
+    pro-text: text for pro
+    settings: settings text
   site:
+    blog-link: link to blog
+    facet:
+      language:
+        show:
+          results: Results
+    home:
+      strapline: "Explore %{total_item_count} items from Europe's libraries, archives and museums. \n"
+    my-europeana: My Europeana
+    my-europeana-link: link to my Europeana
+    object:
+      actions:
+        download: Download
+        download-additional: Also available as
+        downloaddata: Download data
+        show-less-data: Show less data
+        show-more-data: Show more data
+      meta-label:
+        concepts: This is
+        creator: Creator
+        description: Description
+        latitude: Latitude
+        longitude: Longitude
+        map: Map
+        map-tiles: Tiles
+        provided-by: Provided by
+        rights: Can I use this?
+        type: Type
+      nav:
+        next: Next
+        prev: Previous
+        return-to-search: Return to search results
+      points:
+        east: East
+        north: North
+        south: South
+        west: West
+      similar-items: Similar items
     results:
-      page:
-        actions: Actions
-        actions-configure-actions: Configure actions
-        actions-downloaddata: Download data
-        actions-dutchmasters: Dutch masters
-        actions-favouriteart: Favourite art
-        actions-newcollection: New collection
-        actions-saveto: Save to
-        actions-show-all-collections: Show all collections
+      actions:
+        configure-actions: Configure actions
+        dutchmasters: Dutch masters
+        favouriteart: Favourite art
+        label: Actions
+        newcollection: New collection
+        product-save: Save
+        saveto: Save to
+        show-all-collections: Show all collections
+      list:
         all-results:
           3D: 3D
           images: Images
           text: Text
           video: Video
         count-and-terms: "%{results_count} results for %{query_terms}"
+        empty: No Results
+        empty-with-terms: Your search for %{query_terms} returned no results
+        header: Results for
+        header-and: and
         in-channel: in Channel
         product-3D: 3D
         product-image: Image
-        product-save: Save
         product-sound: Sound
         product-text: Text
         product-video: Video
-        results: Results for
-        results-and: and
         results-relevance: Relevance
-        results-view:
+        single-result: 1 result for %{query_terms}
+        view:
           grid: Grid
           list: List
-        view-at-provider: View at %{text}
+        view-at-provider: View at
+    search:
+      placeholder:
+        text: Add a search term
+    site-name-link: 
+    sitemap-link: 

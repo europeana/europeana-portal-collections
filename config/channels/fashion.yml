@@ -1,4 +1,3 @@
 ---
-:hero: fashion.jpg
 :query: ! '(PROVIDER: "Europeana Fashion") OR (what: Fashion) OR (what: mode) OR (what:
   moda)'
