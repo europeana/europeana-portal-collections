@@ -88,28 +88,30 @@ module Templates
             description: render_document_show_field_value(document, 'proxies.dcDescription'),
 
             download: content_object_download,
+            media: media_items,
 
-            geo: {
-              latitude: render_document_show_field_value(document, 'places.latitude'),
-              longitude: render_document_show_field_value(document, 'places.longitude'),
-              long_and_lat: has_long_and_lat,
-              placeName: render_document_show_field_value(document, 'places.prefLabel'),
-              labels: {
-
-                longitude: t('site.object.meta-label.longitude') + ':',
-                latitude: t('site.object.meta-label.latitude') + ':',
-                map: t('site.object.meta-label.map') + ':',
-                points: {
-                    n: t('site.object.points.north'),
-                    s: t('site.object.points.south'),
-                    e: t('site.object.points.east'),
-                    w: t('site.object.points.west')
+            meta_additional: {
+              geo: {
+                latitude: render_document_show_field_value(document, 'places.latitude'),
+                longitude: render_document_show_field_value(document, 'places.longitude'),
+                long_and_lat: has_long_and_lat,
+                placeName: render_document_show_field_value(document, 'places.prefLabel'),
+                labels: {
+  
+                  longitude: t('site.object.meta-label.longitude') + ':',
+                  latitude: t('site.object.meta-label.latitude') + ':',
+                  map: t('site.object.meta-label.map') + ':',
+                  points: {
+                      n: t('site.object.points.north'),
+                      s: t('site.object.points.south'),
+                      e: t('site.object.points.east'),
+                      w: t('site.object.points.west')
+                  }
+  
                 }
-
               }
             },
 
-            media: media_items,
             test: media_items,
 
             origin: {
