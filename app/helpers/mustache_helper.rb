@@ -78,7 +78,7 @@ module MustacheHelper
       { path: asset_path('jquery.js') },
      
       { path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
-      { path: 'http://develop.styleguide.eanadev.org/js/dist/site.js' },
+      { path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
         
       #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' },
         
