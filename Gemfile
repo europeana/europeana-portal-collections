@@ -7,7 +7,7 @@ gem 'rails', '4.2.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   github: 'europeana/europeana-blacklight',
-  branch: 'develop'
+  ref: 'e0cecc3'
 
 gem 'europeana-api',
   require: 'europeana/api',
