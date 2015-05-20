@@ -9,9 +9,9 @@ GIT
       kaminari
 
 GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 365d796ebd63f3d8796f615972ea41a740d8be9d
-  ref: 365d796ebd
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: 4b5f79b6b5f336339316d466d5bc7c8cc49fd31f
+  ref: 4b5f79b6b5
   specs:
     europeana-styleguide (0.0.1)
       mustache (~> 1.0.1)

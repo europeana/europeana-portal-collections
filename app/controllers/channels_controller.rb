@@ -42,7 +42,7 @@ class ChannelsController < ApplicationController
     if has_search_parameters?
       'templates/Search/Search-results-list'
     else
-      (@channel.id == :home) ? 'templates/Search/Search-home' : 'show'
+      (@channel.id == :home) ? 'templates/Search/Search-home' : 'templates/Search/Channels-landing'
     end
   end
 
