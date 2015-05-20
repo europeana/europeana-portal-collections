@@ -63,3 +63,12 @@ end
 group :localeapp do
   gem 'localeapp', '~> 0.9.0'
 end
+
+gem 'blacklight-spotlight', github: 'sul-dlss/spotlight'
+gem 'sir_trevor_rails', github: 'madebymany/sir-trevor-rails'
+gem 'devise'
+gem 'devise-guests', '~> 0.3'
+gem 'friendly_id'
+gem 'blacklight-gallery', '>= 0.3.0'
+gem 'blacklight-oembed'
+gem 'social-share-button'

@@ -25,6 +25,9 @@ module Europeana
       # Do not swallow errors in after_commit/after_rollback callbacks.
       config.active_record.raise_in_transactional_callbacks = true
 
+      # Required by Spotlight
+      config.action_mailer.default_url_options = { host: 'www.europeana.eu', from: 'no-reply@europeana.eu' }
+
       # Load Redis config from config/redis.yml, if it exists
       begin
         config.cache_store = :redis_store, Rails.application.config_for(:redis)
