@@ -13,15 +13,15 @@ module Europeana
       end
 
       configure_blacklight do |config|
-        # Default parameters to send to solr for all search-like requests.
-        # See also SolrHelper#solr_search_params
+        # Default parameters to send to Europeana for all search-like requests.
+        # @see SolrHelper#solr_search_params
         config.default_solr_params = {
           rows: 12
         }
 
         # Response models
         config.repository_class = Europeana::Blacklight::ApiRepository
-        config.search_builder_class = Europeana::Blacklight::SearchBuilder
+        config.search_builder_class = SearchBuilder
         config.response_model = Europeana::Blacklight::Response
         config.document_model = Europeana::Blacklight::Document
         config.document_presenter_class = MustacheDocumentPresenter
@@ -89,7 +89,7 @@ module Europeana
         config.add_show_field 'year'
 
         # "fielded" search configuration.
-        config.add_search_field('', :label => 'All Fields')
+        config.add_search_field('', label: 'All Fields')
         %w(title who what when where subject).each do |field_name|
           config.add_search_field(field_name)
         end
