@@ -6,18 +6,23 @@ gem 'rails', '4.2.1'
 # Use Europeana's REST API as the Blacklight catalog data source
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
-  git: 'https://github.com/europeana/europeana-blacklight.git',
-  ref: '265461c'
+  github: 'europeana/europeana-blacklight',
+  branch: 'develop'
+
+gem 'europeana-api',
+  require: 'europeana/api',
+  github: 'rwd/europeana-api-client-ruby',
+  branch: 'master'
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
-  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
+  github: 'europeana/europeana-styleguide-ruby',
   ref: '365d796ebd'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
 gem 'stache',
-  git: 'https://github.com/rwd/stache.git',
+  github: 'rwd/stache',
   ref: 'd1408f1'
 
 gem 'blacklight', '~> 5.13.1'
@@ -48,7 +53,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'spring'
+  gem 'spring', '~> 1.3.6'
   gem 'web-console', '~> 2.0'
 end
 
