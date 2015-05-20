@@ -4,6 +4,7 @@ module Europeana
   # with extensions specific to Europeana.
   #
   # @todo Break up into sub-modules
+  # @todo Does any of this belong in {Europeana::Blacklight}?
   module Catalog
     extend ActiveSupport::Concern
 
@@ -13,7 +14,9 @@ module Europeana
 
     included do
       # Adds Blacklight nav action for Channels
-      add_nav_action(:channels, partial: 'channels/nav')
+      # @todo move to europeana-blacklight gem; not used by europeana-styleguide
+      #   mustache templates
+      #add_nav_action(:channels, partial: 'channels/nav')
 
       before_filter :retrieve_response_and_document_list,
                     if: :has_search_parameters?
@@ -22,8 +25,7 @@ module Europeana
     end
 
     def fetch_one(id, _extra_controller_params)
-      api_parameters = { wskey: Rails.application.secrets.europeana_api_key }
-      api_response = repository.find(id, api_parameters)
+      api_response = repository.find(id)
       [api_response, api_response]
     end
 
