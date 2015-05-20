@@ -80,7 +80,8 @@ module MustacheHelper
       { path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
       { path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
         
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/application.js' },
+      #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/channels.js' },
+      #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/global.js' },
         
       # Blacklight dependencies
       #{ path: asset_path('turbolinks.js') },
