@@ -9,15 +9,6 @@ GIT
       kaminari
 
 GIT
-  remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 4b5f79b6b5f336339316d466d5bc7c8cc49fd31f
-  ref: 4b5f79b6b5
-  specs:
-    europeana-styleguide (0.0.1)
-      mustache (~> 1.0.1)
-      stache (~> 1.1.1)
-
-GIT
   remote: git://github.com/rwd/europeana-api-client-ruby.git
   revision: f5d0f6f25da8e22cb9a021248eb0cbff9db67835
   branch: master
@@ -32,6 +23,15 @@ GIT
   ref: d1408f1
   specs:
     stache (1.1.1)
+
+GIT
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: 611a926a5eafe869ebd21672259e0150d761a1cb
+  ref: 611a926a5e
+  specs:
+    europeana-styleguide (0.0.1)
+      mustache (~> 1.0.1)
+      stache (~> 1.1.1)
 
 GEM
   remote: https://rubygems.org/
