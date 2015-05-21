@@ -13,8 +13,10 @@ nl:
           results: Resulaten
     home:
       strapline: 'Ontdek %{total_item_count} items van Europa''s bibliotheken, archiven en musea.  '
+    more: Meer...
     my-europeana: Mijn Europeana
     my-europeana-link: Link naar mijn Europeana
+    news: Nieuws
     object:
       actions:
         download: Download
