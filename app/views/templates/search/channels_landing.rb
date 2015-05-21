@@ -271,7 +271,7 @@ module Templates
               :settings_active => true
             },
             :logo =>{
-              :url => "../templates-Search-Search-home/templates-Search-Search-home.html",
+              :url => "../../",
               :text => "Europeana Search"
             },
             :primary_nav =>{
