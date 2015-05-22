@@ -27,6 +27,7 @@ en:
       meta-label:
         concepts: This is
         creator: Creator
+        dates: Dates
         description: Description
         latitude: Latitude
         longitude: Longitude
