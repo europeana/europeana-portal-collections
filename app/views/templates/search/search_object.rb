@@ -92,8 +92,8 @@ module Templates
 
             meta_additional: {
               geo: {
-                latitude: render_document_show_field_value(document, 'places.latitude'),
-                longitude: render_document_show_field_value(document, 'places.longitude'),
+                latitude:  "\"" + render_document_show_field_value(document, 'places.latitude')  + "\"",
+                longitude: "\"" + render_document_show_field_value(document, 'places.longitude') + "\"",
                 long_and_lat: has_long_and_lat,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
                 labels: {
