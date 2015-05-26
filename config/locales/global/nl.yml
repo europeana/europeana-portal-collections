@@ -121,11 +121,10 @@ nl:
         advanced-rrfa: 
         advanced-rrpa: 
         advanced-ucs: 
+        open: 
+        permission: 
+        restricted: 
         simple: 
-        simple-label:
-          open: 
-          permission: 
-          restricted: 
       source: 
       type:
         3d: 

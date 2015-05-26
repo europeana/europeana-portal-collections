@@ -13,8 +13,10 @@ en:
           results: Results
     home:
       strapline: "Explore %{total_item_count} items from Europe's libraries, archives and museums. \n"
+    more: More...
     my-europeana: My Europeana
     my-europeana-link: link to my Europeana
+    news: News
     object:
       actions:
         download: Download
@@ -25,6 +27,7 @@ en:
       meta-label:
         concepts: This is
         creator: Creator
+        dates: Dates
         description: Description
         latitude: Latitude
         longitude: Longitude
