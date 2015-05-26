@@ -65,7 +65,11 @@ module Templates
           object: {
             concepts: concept_data,
             creator: {
-              name: render_document_show_field_value(document, 'proxies.dcCreator'),
+              #name:     render_document_show_field_value(document, 'proxies.dcCreator'),
+              name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
+              #agent_pref_label: render_document_show_field_value(document, 'agents.prefLabel'),
+              
+              name_url: root_url + 'q=' + render_document_show_field_value(document, 'proxies.dcCreator'),
               life: {
                   from: {
                       long: render_document_show_field_value(document, 'agents.begin'),
@@ -76,7 +80,8 @@ module Templates
                       short: render_document_show_field_value(document, 'agents.end')
                   }
               },
-              title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
+              #title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
+              title: t('site.object.meta-label.creator') + ':',
               biography: {
                   text:        nil,
                   source:     nil,
@@ -85,6 +90,9 @@ module Templates
             },
 
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
+              
+            dates: render_document_show_field_value(document, 'proxies.dcDate'),
+            
             description: render_document_show_field_value(document, 'proxies.dcDescription'),
 
             download: content_object_download,
@@ -92,8 +100,8 @@ module Templates
 
             meta_additional: {
               geo: {
-                latitude:  "\"" + render_document_show_field_value(document, 'places.latitude')  + "\"",
-                longitude: "\"" + render_document_show_field_value(document, 'places.longitude') + "\"",
+                latitude:  "\"" + (render_document_show_field_value(document, 'places.latitude')  || '' ) + "\"",
+                longitude: "\"" + (render_document_show_field_value(document, 'places.longitude') || '' ) + "\"",
                 long_and_lat: has_long_and_lat,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
                 labels: {
@@ -112,14 +120,15 @@ module Templates
               }
             },
 
-            test: media_items,
-
             origin: {
               url:                 render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
               institution_name:    render_document_show_field_value(document, 'aggregations.edmDataProvider'),
-              institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry') 
+              institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
+              content_present:     collect_values(['aggregations.edmDataProvider', 'europeanaAggregation.edmCountry']).length > 0
             },
               
+            properties: property_data,
+            
             # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             title: render_document_show_field_value(document, 'proxies.dcTitle'),
@@ -252,11 +261,25 @@ module Templates
       private
 
       
+      def collect_values(fields)
+        values = []
+        fields.each { |field| 
+          value = render_document_show_field_value(document, field)
+          values << value unless value.nil?
+        }
+        values
+      end
+      
+      def merge_values(fields, separator = ' ')
+        collect_values(fields).join(separator)
+      end
+      
+      
       def concept_data
         
-        concepts = render_document_show_field_value(document, 'concepts.prefLabel')
-        
-        if(concepts.nil?)
+        concepts = collect_values(['concepts.prefLabel', 'proxies.dcType', 'proxies.dcSubject'])
+                
+        if(concepts.nil? || concepts.empty?)
           return 
         end
         
@@ -268,13 +291,33 @@ module Templates
           items: concepts.collect do |concept|
             {
               text: concept,
-              url:  'http://europeana.eu'
+              url:  root_url + URI.escape('?q=what:' + concept)
             }
           end          
-        }
-        
+        }        
       end
 
+      def property_data
+        
+        properties = collect_values(['proxies.dctermsExtent', 'aggregations.webResources.dcFormat', 'proxies.dcMedium', 'proxies.dcDuration'])
+        
+        if(properties.nil? || properties.empty?)
+          return 
+        end
+        
+        if(properties.is_a? String)
+          properties = [properties] 
+        end
+        
+        {
+          items: properties.collect do |property|
+            {
+              text: property,
+              url:  root_url + URI.escape('?q=what:' + property)
+            }
+          end          
+        }        
+      end
       
       def content_object_download
         links = []
