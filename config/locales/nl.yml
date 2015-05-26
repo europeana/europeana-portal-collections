@@ -25,13 +25,16 @@ nl:
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
       meta-label:
-        concepts: 
+        concepts: Categorieën
         creator: Van
+        dates: 
         description: Omschrijving
         latitude: Breedtegraad
         longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
+        properties: Eigenschappen
+        provenance: Herkomst
         provided-by: 
         rights: Mag ik dit gebruiken?
         type: 
