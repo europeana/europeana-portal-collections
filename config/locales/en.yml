@@ -25,13 +25,16 @@ en:
         show-less-data: Show less data
         show-more-data: Show more data
       meta-label:
-        concepts: This is
+        concepts: Categories
         creator: Creator
+        dates: Dates
         description: Description
         latitude: Latitude
         longitude: Longitude
         map: Map
         map-tiles: Tiles
+        properties: Properties
+        provenance: Provenance
         provided-by: Provided by
         rights: Can I use this?
         type: Type
