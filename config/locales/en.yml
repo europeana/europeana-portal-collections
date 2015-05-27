@@ -35,6 +35,7 @@ en:
         format: Format
         latitude: Latitude
         longitude: Longitude
+        location: Location
         map: Map
         map-tiles: Tiles
         period: Period

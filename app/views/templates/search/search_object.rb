@@ -105,7 +105,7 @@ module Templates
   
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
-                  map: t('site.object.meta-label.map') + ':',
+                  map: t('site.object.meta-label.map'),
                   points: {
                       n: t('site.object.points.north'),
                       s: t('site.object.points.south'),

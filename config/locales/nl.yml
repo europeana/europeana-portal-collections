@@ -35,6 +35,7 @@ nl:
         format: Formaat
         latitude: Breedtegraad
         longitude: Lengtegraad
+        location: Plaats
         map: Kaart
         map-tiles: Tegel
         period: Tijdvak
