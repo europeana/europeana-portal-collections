@@ -61,15 +61,15 @@ module Templates
 
       
       def content
+        
+        dcCreator = render_document_show_field_value(document, 'proxies.dcCreator')
+        
         {
           object: {
             concepts: concept_data,
             creator: {
-              #name:     render_document_show_field_value(document, 'proxies.dcCreator'),
               name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
-              #agent_pref_label: render_document_show_field_value(document, 'agents.prefLabel'),
-              
-              name_url: root_url + 'q=' + render_document_show_field_value(document, 'proxies.dcCreator'),
+              name_url: dcCreator ? root_url + 'q=' + dcCreator : nil,
               life: {
                   from: {
                       long: render_document_show_field_value(document, 'agents.begin'),
