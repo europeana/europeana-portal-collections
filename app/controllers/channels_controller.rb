@@ -2,6 +2,7 @@
 # Provides Blacklight search and browse, within a content Channel
 class ChannelsController < ApplicationController
   include Europeana::Catalog
+  include Europeana::Styleguide
 
   rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
 
