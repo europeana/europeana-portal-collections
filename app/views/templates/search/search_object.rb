@@ -81,7 +81,7 @@ module Templates
                   }
               },
               #title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
-              title: t('site.object.meta-label.creator') + ':',
+              title: t('site.object.meta-label.creator'),
               biography: {
                   text:        nil,
                   source:     nil,
@@ -90,11 +90,8 @@ module Templates
             },
 
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
-              
-            dates: render_document_show_field_value(document, 'proxies.dcDate'),
-            
+            dates: date_data,
             description: render_document_show_field_value(document, 'proxies.dcDescription'),
-
             download: content_object_download,
             media: media_items,
 
@@ -108,7 +105,7 @@ module Templates
   
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
-                  map: t('site.object.meta-label.map') + ':',
+                  map: t('site.object.meta-label.map'),
                   points: {
                       n: t('site.object.points.north'),
                       s: t('site.object.points.south'),
@@ -126,7 +123,8 @@ module Templates
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
               content_present:     collect_values(['aggregations.edmDataProvider', 'europeanaAggregation.edmCountry']).length > 0
             },
-              
+
+            provenance: provenance_data,
             properties: property_data,
             
             # note: view is currently showing the rights attached to the first media-item and not this value
@@ -267,8 +265,9 @@ module Templates
           value = render_document_show_field_value(document, field)
           values << value unless value.nil?
         }
-        values
+        values.uniq
       end
+      
       
       def merge_values(fields, separator = ' ')
         collect_values(fields).join(separator)
@@ -277,47 +276,97 @@ module Templates
       
       def concept_data
         
-        concepts = collect_values(['concepts.prefLabel', 'proxies.dcType', 'proxies.dcSubject'])
+        conceptsType  = collect_values(['proxies.dcType'])
+        conceptsOther = collect_values(['concepts.prefLabel', 'proxies.dcSubject'])
+        concepts      = [].push(*conceptsType).push(*conceptsOther)
                 
-        if(concepts.nil? || concepts.empty?)
+        if(concepts.empty?)
           return 
         end
         
-        if(concepts.is_a? String)
-          concepts = [concepts] 
-        end
-        
         {
+          content_present: concepts.size > 0,
           items: concepts.collect do |concept|
             {
               text: concept,
-              url:  root_url + URI.escape('?q=what:' + concept)
+              url:  root_url + URI.escape('?q=what:' + concept),
+              label:  conceptsType.index(concept)  == 0 ? t('site.object.meta-label.type') + ':' : 
+                      conceptsOther.index(concept) == 0 ? t('site.object.meta-label.concept') + ':' : false
             }
           end          
         }        
       end
 
+      
+      def date_data
+        datesPL = collect_values([
+          'timespans.prefLabel'
+        ])
+        datesCS = collect_values(['proxies.dctermsIssued', 'proxies.dctermsCreated', 'proxies.dctermsPublished', 'proxies.dcDate'])
+        dates   = [].push(*datesPL).push(*datesCS).uniq
+        {
+          content_present: dates.size > 0,
+          items: dates.collect do |date|
+            {
+              label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' : 
+                      datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
+              text: date,
+              url:  datesCS.index(date) ? root_url + URI.escape('?q=when:' + date) : false
+            }
+          end
+        }
+      end
+
+      
+      def provenance_data
+        # origin
+
+        originsPublisher     = collect_values(['proxies.dcPublisher'])
+        originsProvider      = collect_values(['aggregations.edmProvider'])
+        originsDataProvider  = collect_values(['aggregations.edmDataProvider'])
+        originsCountry       = collect_values(['europeanaAggregation.edmCountry'])
+        originsOther         = collect_values(['proxies.dctermsProvenance', 'proxies.dcSource', 'proxies.dctermsReferences', 'proxies.dcIdentifier'])
+          
+        origins = [].push(*originsPublisher).push(*originsProvider).push(*originsDataProvider).push(*originsCountry).push(*originsOther)
+        {
+          content_present: origins.size > 0,
+          items: origins.uniq.collect do |origin|
+            {
+              label: originsPublisher.index(origin)    == 0 ? t('site.object.meta-label.publisher') + ':' : 
+                     originsProvider.index(origin)     == 0 ? t('site.object.meta-label.provider') + ':' : 
+                     originsDataProvider.index(origin) == 0 ? t('site.object.meta-label.data-provider') + ':' :
+                     originsCountry.index(origin)      == 0 ? t('site.object.meta-label.providing-country') + ':' : false,
+              text: origin,
+              url:  originsDataProvider.index(origin) ? render_document_show_field_value(document, 'aggregations.edmIsShownAt') : false
+            }
+          end
+        }
+      end
+      
       def property_data
         
-        properties = collect_values(['proxies.dctermsExtent', 'aggregations.webResources.dcFormat', 'proxies.dcMedium', 'proxies.dcDuration'])
-        
-        if(properties.nil? || properties.empty?)
+        properties    = collect_values(['proxies.dctermsExtent'])
+        propertiesCS  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
+        propertiesFmt = collect_values(['aggregations.webResources.dcFormat'])
+          
+        props = [].push(*propertiesFmt).push(*properties).push(*propertiesCS)
+ 
+        if(props.empty?)
           return 
         end
         
-        if(properties.is_a? String)
-          properties = [properties] 
-        end
-        
         {
-          items: properties.collect do |property|
+          content_present: props.size > 0,
+          items: props.collect do |property|
             {
-              text: property,
-              url:  root_url + URI.escape('?q=what:' + property)
+              text:  property,
+              url:   propertiesCS.index(property)       ? root_url + URI.escape('?q=what:' + property) : false,
+              label: propertiesFmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : false
             }
-          end          
-        }        
+          end
+        }
       end
+      
       
       def content_object_download
         links = []
