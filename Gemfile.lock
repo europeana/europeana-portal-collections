@@ -340,7 +340,6 @@ DEPENDENCIES
   blacklight (~> 5.13.1)
   brakeman
   capybara (~> 2.4.0)
-  coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
   europeana-api!
   europeana-blacklight!
