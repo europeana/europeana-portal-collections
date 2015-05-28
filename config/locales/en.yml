@@ -34,8 +34,8 @@ en:
         description: Description
         format: Format
         latitude: Latitude
-        longitude: Longitude
         location: Location
+        longitude: Longitude
         map: Map
         map-tiles: Tiles
         period: Period
