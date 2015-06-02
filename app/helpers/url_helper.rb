@@ -26,13 +26,9 @@ module UrlHelper
     p
   end
 
-  def add_facet_params_and_redirect(field, item)
-    add_facet_params(field, item)
-  end
-
   def track_document_path(doc, options = {})
     return super unless doc.is_a?(Europeana::Blacklight::Document)
-    url_for(options.merge(controller: :catalog,
+    url_for(options.merge(controller: :portal,
                           action: :track,
                           provider_id: doc.provider_id,
                           record_id: doc.record_id))

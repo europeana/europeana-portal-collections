@@ -8,9 +8,9 @@ module Europeana
   module Catalog
     extend ActiveSupport::Concern
 
-    include ::Blacklight::Catalog
+    include ::Blacklight::Base
     include BlacklightConfig
-    include ChannelsHelper
+    include ::Blacklight::Catalog
 
     included do
       # Adds Blacklight nav action for Channels
@@ -68,34 +68,6 @@ module Europeana
       end
     end
 
-    ##
-    # Returns the current channel being viewed by the user
-    #
-    # @return [Channel]
-    def current_channel
-      return nil unless within_channel?
-      Channel.find(params[:id].to_sym)
-    end
-
-    ##
-    # Returns the current channel the current search was performed in
-    #
-    # @return [Channel]
-    def current_search_channel
-      return nil unless current_search_session.query_params[:id]
-      Channel.find(current_search_session.query_params[:id].to_sym)
-    end
-
-    ##
-    # Looks up and returns any additional hidden query parameters used to
-    # restrict results to the active channel.
-    #
-    # @return [String]
-    def channels_search_query
-      channel = current_channel || current_search_channel
-      channel.nil? ? nil : channel.query
-    end
-
     def doc_id
       @doc_id ||= [params[:provider_id], params[:record_id]].join('/')
     end
@@ -114,10 +86,6 @@ module Europeana
       api_params
     end
 
-    def has_search_parameters?
-      super || (params[:controller] == 'channels' && params.key?(:q))
-    end
-
     protected
 
     def search_action_url(options = {})
@@ -127,17 +95,24 @@ module Europeana
       when params[:controller] == 'channels'
         url_for(options.merge(controller: 'channels', action: params[:action]))
       else
-        root_url(options)
+        search_url(options.except(:controller, :action))
       end
     end
 
     def search_facet_url(options = {})
-      facet_url_params = { controller: 'catalog', action: 'facet' }
+      facet_url_params = { controller: 'portal', action: 'facet' }
       url_for params.merge(facet_url_params).merge(options).except(:page)
     end
 
     def retrieve_response_and_document_list
       (@response, @document_list) = search_results(params, search_params_logic)
+    end
+
+    ##
+    # Gets the total number of items available over the Europeana API
+    def count_all
+      all_params = { query: '*:*', rows: 0, profile: 'minimal' }
+      @europeana_item_count = repository.search(all_params).total
     end
   end
 end

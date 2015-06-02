@@ -3,6 +3,7 @@ module Europeana
   # Configures Blacklight for Europeana Portal & Channels
   module BlacklightConfig
     extend ActiveSupport::Concern
+    include ::Blacklight::Base
 
     included do
       def self.channels_query_facet
