@@ -25,15 +25,26 @@ en:
         show-less-data: Show less data
         show-more-data: Show more data
       meta-label:
-        concepts: This is
+        concept: Concept
+        concepts: Categories
+        creation-date: Creation date
         creator: Creator
+        data-provider: Data provider
         dates: Dates
         description: Description
+        format: Format
         latitude: Latitude
+        location: Location
         longitude: Longitude
         map: Map
         map-tiles: Tiles
+        period: Period
+        properties: Properties
+        provenance: Provenance
         provided-by: Provided by
+        provider: Provider
+        providing-country: Providing country
+        publisher: Publisher
         rights: Can I use this?
         type: Type
       nav:
