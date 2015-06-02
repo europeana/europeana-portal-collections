@@ -56,7 +56,7 @@ module MustacheHelper
       has_original: !params[:q].blank?,
       input_original: {
         value:  params[:q].blank? ? nil : params[:q],
-        remove: (params[:qf].nil? || params[:qf].size == 0) ? search_action_path : '?q=' + params[:qf].join('&qf[]=')
+        remove: params[:qf].blank? ? search_action_path : '?q=' + params[:qf].join('&qf[]=')
       },
       input_values: input_search_values(params[:qf]),
       placeholder: t('site.search.placeholder.text')
