@@ -1,6 +1,7 @@
 ##
 # Home page
 class HomeController < ApplicationController
+  include Europeana::Catalog
   include Europeana::Styleguide
 
   # GET /

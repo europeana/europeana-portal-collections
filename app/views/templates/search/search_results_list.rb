@@ -93,7 +93,7 @@ module Templates
 
       def search_result_for_document(doc, counter)
         {
-          object_url: url_for_document(doc),
+          object_url: document_path(doc, format: 'html'),
           link_attrs: [
             {
               name: 'data-context-href',

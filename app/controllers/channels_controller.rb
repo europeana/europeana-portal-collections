@@ -1,6 +1,7 @@
 ##
 # Provides Blacklight search and browse, within a content Channel
 class ChannelsController < ApplicationController
+  include Europeana::Catalog
   include Europeana::Channels
   include Europeana::Styleguide
 

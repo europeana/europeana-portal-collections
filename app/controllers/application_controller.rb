@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   # Adds a few additional behaviors into the application controller
   include Blacklight::Controller
   include Spotlight::Controller
-  include Europeana::Catalog
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

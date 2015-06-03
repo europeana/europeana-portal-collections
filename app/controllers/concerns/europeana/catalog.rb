@@ -69,7 +69,7 @@ module Europeana
     end
 
     def doc_id
-      @doc_id ||= [params[:provider_id], params[:record_id]].join('/')
+      @doc_id ||= '/' + params[:id]
     end
 
     def previous_and_next_document_params(index, window = 1)
