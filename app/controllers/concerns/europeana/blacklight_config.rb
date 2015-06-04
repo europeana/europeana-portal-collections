@@ -34,6 +34,7 @@ module Europeana
         # Field configuration for search results/index views
         config.index.title_field = 'title'
         config.index.display_type_field = 'type'
+        config.index.timestamp_field = nil # Europeana's is in microseconds
 
         # Fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display 
