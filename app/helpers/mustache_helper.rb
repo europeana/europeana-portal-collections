@@ -33,7 +33,7 @@ module MustacheHelper
     [
       { rel: 'search',         type: 'application/opensearchdescription+xml', href: request.host_with_port + '/catalog/opensearch.xml', title: 'Blacklight' },
       { rel: 'shortcut icon',  type: 'image/x-icon',                          href: asset_path('favicon.ico') },
-      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
+#      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
       { rel: 'stylesheet',     href: asset_path('europeana.css'),             media: 'all' }
     ]
   end
