@@ -1,1 +1,0 @@
-Spotlight::Search.search_params_logic = ApplicationController.search_params_logic

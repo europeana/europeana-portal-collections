@@ -28,6 +28,19 @@ GIT
       twitter-text (~> 1.4)
 
 GIT
+  remote: git://github.com/rwd/blacklight.git
+  revision: 5132db4da0eb724c8861eca738cf0a925a4cf944
+  ref: 5132db4
+  specs:
+    blacklight (5.13.1)
+      bootstrap-sass (~> 3.2)
+      deprecation
+      kaminari (>= 0.15)
+      nokogiri (~> 1.6)
+      rails (>= 3.2.6, < 5)
+      rsolr (~> 1.0.11)
+
+GIT
   remote: git://github.com/rwd/europeana-api-client-ruby.git
   revision: f5d0f6f25da8e22cb9a021248eb0cbff9db67835
   branch: master
@@ -45,7 +58,7 @@ GIT
 
 GIT
   remote: git://github.com/sul-dlss/spotlight.git
-  revision: 4624e2aba9a4dfcae80d5878b2969314b13fad8a
+  revision: 031fb9a9646389234d0164c578fda3e6ae36c2a2
   specs:
     blacklight-spotlight (0.4.1)
       acts-as-taggable-on (~> 3.5)
@@ -133,13 +146,6 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.13.1)
-      bootstrap-sass (~> 3.2)
-      deprecation
-      kaminari (>= 0.15)
-      nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.11)
     blacklight-gallery (0.4.0)
       blacklight (~> 5.12)
       bootstrap-sass (~> 3.0)
@@ -523,7 +529,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 5.13.1)
+  blacklight!
   blacklight-gallery (>= 0.3.0)
   blacklight-oembed
   blacklight-spotlight!

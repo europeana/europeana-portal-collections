@@ -20,8 +20,6 @@ module Europeana
 
       before_filter :retrieve_response_and_document_list,
                     if: :has_search_parameters?
-
-      self.search_params_logic = true
     end
 
     def fetch_one(id, _extra_controller_params)

@@ -23,7 +23,9 @@ gem 'europeana-styleguide',
 # @see https://github.com/agoragames/stache/pull/53
 gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 
-gem 'blacklight', '~> 5.13.1'
+# pending merge of https://github.com/projectblacklight/blacklight/pull/1210
+gem 'blacklight',
+  github: 'rwd/blacklight', ref: '5132db4'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
@@ -35,7 +37,8 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
 # For Spotlight
-gem 'blacklight-spotlight', github: 'sul-dlss/spotlight'
+gem 'blacklight-spotlight',
+  github: 'sul-dlss/spotlight'
 gem 'sir_trevor_rails', github: 'madebymany/sir-trevor-rails'
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
