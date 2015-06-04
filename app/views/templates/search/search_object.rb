@@ -61,11 +61,15 @@ module Templates
 
       
       def content
+        
+        dcCreator = render_document_show_field_value(document, 'proxies.dcCreator')
+        
         {
           object: {
             concepts: concept_data,
             creator: {
-              name: render_document_show_field_value(document, 'proxies.dcCreator'),
+              name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
+              name_url: dcCreator ? root_url + 'q=' + dcCreator : nil,
               life: {
                   from: {
                       long: render_document_show_field_value(document, 'agents.begin'),
@@ -76,7 +80,8 @@ module Templates
                       short: render_document_show_field_value(document, 'agents.end')
                   }
               },
-              title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
+              #title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
+              title: t('site.object.meta-label.creator'),
               biography: {
                   text:        nil,
                   source:     nil,
@@ -85,22 +90,22 @@ module Templates
             },
 
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
+            dates: date_data,
             description: render_document_show_field_value(document, 'proxies.dcDescription'),
-
             download: content_object_download,
             media: media_items,
 
             meta_additional: {
               geo: {
-                latitude:  "\"" + render_document_show_field_value(document, 'places.latitude')  + "\"",
-                longitude: "\"" + render_document_show_field_value(document, 'places.longitude') + "\"",
+                latitude:  "\"" + (render_document_show_field_value(document, 'places.latitude')  || '' ) + "\"",
+                longitude: "\"" + (render_document_show_field_value(document, 'places.longitude') || '' ) + "\"",
                 long_and_lat: has_long_and_lat,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
                 labels: {
   
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
-                  map: t('site.object.meta-label.map') + ':',
+                  map: t('site.object.meta-label.map'),
                   points: {
                       n: t('site.object.points.north'),
                       s: t('site.object.points.south'),
@@ -112,14 +117,16 @@ module Templates
               }
             },
 
-            test: media_items,
-
             origin: {
               url:                 render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
               institution_name:    render_document_show_field_value(document, 'aggregations.edmDataProvider'),
-              institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry') 
+              institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
+              content_present:     collect_values(['aggregations.edmDataProvider', 'europeanaAggregation.edmCountry']).length > 0
             },
-              
+
+            provenance: provenance_data,
+            properties: property_data,
+            
             # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             title: render_document_show_field_value(document, 'proxies.dcTitle'),
@@ -252,29 +259,114 @@ module Templates
       private
 
       
+      def collect_values(fields)
+        values = []
+        fields.each { |field| 
+          value = render_document_show_field_value(document, field)
+          values << value unless value.nil?
+        }
+        values.uniq
+      end
+      
+      
+      def merge_values(fields, separator = ' ')
+        collect_values(fields).join(separator)
+      end
+      
+      
       def concept_data
         
-        concepts = render_document_show_field_value(document, 'concepts.prefLabel')
-        
-        if(concepts.nil?)
+        conceptsType  = collect_values(['proxies.dcType'])
+        conceptsOther = collect_values(['concepts.prefLabel', 'proxies.dcSubject'])
+        concepts      = [].push(*conceptsType).push(*conceptsOther)
+                
+        if(concepts.empty?)
           return 
         end
         
-        if(concepts.is_a? String)
-          concepts = [concepts] 
-        end
-        
         {
+          content_present: concepts.size > 0,
           items: concepts.collect do |concept|
             {
               text: concept,
-              url:  'http://europeana.eu'
+              url:  root_url + URI.escape('?q=what:' + concept),
+              label:  conceptsType.index(concept)  == 0 ? t('site.object.meta-label.type') + ':' : 
+                      conceptsOther.index(concept) == 0 ? t('site.object.meta-label.concept') + ':' : false
             }
           end          
-        }
-        
+        }        
       end
 
+      
+      def date_data
+        datesPL = collect_values([
+          'timespans.prefLabel'
+        ])
+        datesCS = collect_values(['proxies.dctermsIssued', 'proxies.dctermsCreated', 'proxies.dctermsPublished', 'proxies.dcDate'])
+        dates   = [].push(*datesPL).push(*datesCS).uniq
+        {
+          content_present: dates.size > 0,
+          items: dates.collect do |date|
+            {
+              label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' : 
+                      datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
+              text: date,
+              url:  datesCS.index(date) ? root_url + URI.escape('?q=when:' + date) : false
+            }
+          end
+        }
+      end
+
+      
+      def provenance_data
+        # origin
+
+        originsPublisher     = collect_values(['proxies.dcPublisher'])
+        originsProvider      = collect_values(['aggregations.edmProvider'])
+        originsDataProvider  = collect_values(['aggregations.edmDataProvider'])
+        originsCountry       = collect_values(['europeanaAggregation.edmCountry'])
+        originsOther         = collect_values(['proxies.dctermsProvenance', 'proxies.dcSource', 'proxies.dctermsReferences', 'proxies.dcIdentifier'])
+          
+        origins = [].push(*originsPublisher).push(*originsProvider).push(*originsDataProvider).push(*originsCountry).push(*originsOther)
+        {
+          content_present: origins.size > 0,
+          items: origins.uniq.collect do |origin|
+            {
+              label: originsPublisher.index(origin)    == 0 ? t('site.object.meta-label.publisher') + ':' : 
+                     originsProvider.index(origin)     == 0 ? t('site.object.meta-label.provider') + ':' : 
+                     originsDataProvider.index(origin) == 0 ? t('site.object.meta-label.data-provider') + ':' :
+                     originsCountry.index(origin)      == 0 ? t('site.object.meta-label.providing-country') + ':' : false,
+              text: origin,
+              url:  originsDataProvider.index(origin) ? render_document_show_field_value(document, 'aggregations.edmIsShownAt') : false
+            }
+          end
+        }
+      end
+      
+      def property_data
+        
+        properties    = collect_values(['proxies.dctermsExtent'])
+        propertiesCS  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
+        propertiesFmt = collect_values(['aggregations.webResources.dcFormat'])
+          
+        props = [].push(*propertiesFmt).push(*properties).push(*propertiesCS)
+ 
+        if(props.empty?)
+          return 
+        end
+        
+        {
+          content_present: props.size > 0,
+          items: props.collect do |property|
+            {
+              text:  property,
+              url:   propertiesCS.index(property)       ? root_url + URI.escape('?q=what:' + property) : false,
+              label: propertiesFmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : false
+            }
+          end
+        }
+      end
+      
       
       def content_object_download
         links = []

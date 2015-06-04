@@ -2,6 +2,7 @@
 # Catalog controller using Blacklight for search and browse
 class CatalogController < ApplicationController
   include Europeana::Catalog
+  include Europeana::Styleguide
 
   def show
     @response, @document = fetch(doc_id)

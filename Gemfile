@@ -17,7 +17,7 @@ gem 'europeana-api',
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '611a926a5e'
+  ref: 'd839999794'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
@@ -26,7 +26,6 @@ gem 'stache',
   ref: 'd1408f1'
 
 gem 'blacklight', '~> 5.13.1'
-gem 'coffee-rails', '~> 4.0.0'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'

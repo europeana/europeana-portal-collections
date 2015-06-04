@@ -25,16 +25,28 @@ nl:
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
       meta-label:
-        concepts: 
+        concept: Soort object
+        concepts: Categorieën
+        creation-date: Datum vervaardigd
         creator: Van
+        data-provider: 
+        dates: 
         description: Omschrijving
+        format: Formaat
         latitude: Breedtegraad
         longitude: Lengtegraad
+        location: Plaats
         map: Kaart
         map-tiles: Tegel
+        period: Tijdvak
+        properties: Eigenschappen
+        provenance: Herkomst
         provided-by: 
+        provider: 
+        providing-country: 
+        publisher: Uitgeverij
         rights: Mag ik dit gebruiken?
-        type: 
+        type: Type
       nav:
         next: 
         prev: 

@@ -26,10 +26,11 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 611a926a5eafe869ebd21672259e0150d761a1cb
-  ref: 611a926a5e
+  revision: d83999979447d71e9d31deb09cb0578c7e917f38
+  ref: d839999794
   specs:
-    europeana-styleguide (0.0.1)
+    europeana-styleguide (0.0.2)
+      activesupport (~> 4.0)
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
 
@@ -339,7 +340,6 @@ DEPENDENCIES
   blacklight (~> 5.13.1)
   brakeman
   capybara (~> 2.4.0)
-  coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
   europeana-api!
   europeana-blacklight!
