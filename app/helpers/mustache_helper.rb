@@ -326,13 +326,14 @@ module MustacheHelper
   def news_items
     @blog_items[0..2].collect do |item|
       {
+        image_root: nil,
         headline: {
           medium: CGI.unescapeHTML(item.title)
         },
         url: CGI.unescapeHTML(item.url),
         img: {
           rectangle: {
-            src: nil,
+            src: news_item_img_src(item),
             alt: nil
           }
         },
@@ -341,5 +342,11 @@ module MustacheHelper
         }
       }
     end
+  end
+
+  def news_item_img_src(item)
+    img_tag = item.content.match(/<img [^>]*>/i)[0]
+    return nil unless img_tag.present?
+    img_tag.match(/src="([^"]*)"/i)[1]
   end
 end
