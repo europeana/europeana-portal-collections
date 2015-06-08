@@ -1,19 +1,8 @@
 ##
 # Catalog controller using Blacklight for search and browse
+#
+# Be aware that Spotlight subclasses this. Any changes made here affect all of
+# Spotlight.
 class CatalogController < ApplicationController
-  include Europeana::Catalog
-  include Europeana::Styleguide
-
-  def show
-    @response, @document = fetch(doc_id)
-
-    respond_to do |format|
-      format.html do
-        setup_next_and_previous_documents
-        render template: 'templates/Search/Search-object'
-      end
-      format.json { render json: { response: { document: @document } } }
-      additional_export_formats(@document, format)
-    end
-  end
+  include Europeana::BlacklightConfig
 end
