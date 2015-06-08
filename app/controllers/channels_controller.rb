@@ -4,11 +4,13 @@ class ChannelsController < ApplicationController
   include Europeana::Catalog
   include Europeana::Channels
   include Europeana::Styleguide
+  include BlogFetcher
 
   rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
 
   before_filter :find_channel, only: :show
   before_filter :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
+  before_filter :fetch_blog_items, only: :show
 
   def index
     redirect_to_root
