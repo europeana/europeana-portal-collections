@@ -45,6 +45,11 @@ This is the API key used by the application to authenticate requests to the
 Europeana REST API. One can be obtained at:
 http://labs.europeana.eu/api/registration/
 
+#### EUROPEANA_API_URL
+
+The base URL of the Europeana API. This only needs to be set if you are not
+using the live production version of the API.
+
 #### EDM_IS_SHOWN_BY_PROXY
 
 The HTTP address of a proxy capabable of receiving Europeana record IDs as URL
