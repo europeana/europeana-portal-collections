@@ -35,7 +35,7 @@ module Templates
         }
         if @previous_document
           navigation[:next_prev].merge!({
-            prev_url: url_for_document(@previous_document),
+            prev_url: document_path(@previous_document, format: 'html'),
             prev_link_attrs: [
               {
                 name: 'data-context-href',
@@ -46,7 +46,7 @@ module Templates
         end
         if @next_document
           navigation[:next_prev].merge!({
-            next_url: url_for_document(@next_document),
+            next_url: document_path(@next_document, format: 'html'),
             next_link_attrs: [
               {
                 name: 'data-context-href',

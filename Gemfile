@@ -16,17 +16,18 @@ gem 'europeana-api',
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
-  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
+  github: 'europeana/europeana-styleguide-ruby',
   ref: 'd839999794'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
-gem 'stache',
-  github: 'rwd/stache',
-  ref: 'd1408f1'
+gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 
-gem 'blacklight', '~> 5.13.1'
+# pending merge of https://github.com/projectblacklight/blacklight/pull/1210
+gem 'blacklight',
+  github: 'rwd/blacklight', ref: '5132db4'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
+gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mysql2'
@@ -58,6 +59,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'webmock', '~> 1.21.0'
 end
 
 group :doc do
