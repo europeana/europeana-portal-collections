@@ -12,7 +12,7 @@ gem 'europeana-blacklight',
 gem 'europeana-api',
   require: 'europeana/api',
   github: 'rwd/europeana-api-client-ruby',
-  branch: 'master'
+  ref: '102e7dc'
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
