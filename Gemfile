@@ -27,6 +27,7 @@ gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 gem 'blacklight',
   github: 'rwd/blacklight', ref: '5132db4'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
+gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mysql2'

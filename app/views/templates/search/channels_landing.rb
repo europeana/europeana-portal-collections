@@ -212,53 +212,7 @@ module Templates
             ]
           },
           :news => {
-            :items =>[
-            {
-              :headline => {
-                :medium =>"The miniature magic of Japanese netsuke"
-              },
-              :url => "http://blog.europeana.eu/2015/04/the-miniature-magic-of-japanese-netsuke/",
-              :img => {
-                :rectangle => {
-                  :src =>"sample/netsuke.jpg",
-                  :alt =>"Japanese scroll with netsuke illustration"
-                }
-              },
-              :excerpt => {
-                :short => "Netsuke, the small sculptural objects worn by men in Japan since the seventeenth century, first shot to fame in Europe with the publication of Edmund de Waal’s popular memoir, The Hare With Amber Eyes in 2010."
-              } 
-            },
-            {
-              :headline =>{
-                :medium =>"Celebrating World Theatre Day 2015"
-              },
-              :url => "http://blog.europeana.eu/2015/03/celebrating-world-theatre-day-2015/",
-              :img => {
-                :rectangle => {
-                  :src =>"sample/theatreday.jpg",
-                  :alt =>"Theatre Day"
-                }
-              },
-              :excerpt => {
-                :short => "Today we celebrate World Theatre Day, an annual celebration where all International Theatre Institutes and the international theatre community organises theatre events."
-              } 
-            },
-            {
-              :headline =>{
-                :medium =>"Europeana takes part in #MuseumWeek 2015"
-              },
-              :url => "http://blog.europeana.eu/2015/03/europeana-takes-part-in-museumweek-2015/",
-              :img => {
-                :rectangle => {
-                  :src =>"sample/Museumweek.jpg",
-                  :alt =>"Museum Week 2015"
-                }
-              },
-              :excerpt => {
-                :short => "Today marks the beginning of #MuseumWeek, an event to celebrate culture on Twitter. Museums from all over the world will be tweeting about their collections or sharing fun facts with their followers."
-              } 
-            }
-            ]
+            :items => news_items
           }
         }
       end
