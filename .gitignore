@@ -45,4 +45,4 @@
 /manifest.yml
 
 # Ignore Redis snapshot
-/dump.rdb
+*.rdb
