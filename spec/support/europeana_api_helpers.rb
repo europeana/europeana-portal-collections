@@ -2,7 +2,7 @@ module EuropeanaAPIHelpers
   RSpec.configure do |config|
     config.before(:each) do
       # webmock stubbed requests
-      stub_request(:get, 'www.europeana.eu/api/v2/search.json').
+      stub_request(:get, Europeana::API.url + '/search.json').
         with(query: hash_including(wskey: 'test')).
         to_return(body: '{"success":true,"items":[]}',
                   status: 200,
@@ -17,6 +17,6 @@ module EuropeanaAPIHelpers
   end
 
   def an_api_search_request
-    a_request(:get, 'www.europeana.eu/api/v2/search.json')
+    a_request(:get, Europeana::API.url + '/search.json')
   end
 end

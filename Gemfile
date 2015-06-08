@@ -36,17 +36,6 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
-# For Spotlight
-gem 'blacklight-spotlight',
-  github: 'sul-dlss/spotlight'
-gem 'sir_trevor_rails', github: 'madebymany/sir-trevor-rails'
-gem 'devise'
-gem 'devise-guests', '~> 0.3'
-gem 'friendly_id'
-gem 'blacklight-gallery', '>= 0.3.0'
-gem 'blacklight-oembed'
-gem 'social-share-button'
-
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
 end
