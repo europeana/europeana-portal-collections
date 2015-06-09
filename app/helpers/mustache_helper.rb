@@ -23,17 +23,18 @@ module MustacheHelper
     end
   end
 
-  def form_action_search
-    request.protocol + request.host_with_port + '/'
+  def form_search
+    {
+      action: search_action_path(only_path: true)
+    }
   end
 
   def head_links
     [
       { rel: 'search',         type: 'application/opensearchdescription+xml', href: request.host_with_port + '/catalog/opensearch.xml', title: 'Blacklight' },
       { rel: 'shortcut icon',  type: 'image/x-icon',                          href: asset_path('favicon.ico') },
-      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
-      { rel: 'stylesheet',     href: asset_path('europeana.css'),             media: 'all' },
-      { rel: 'stylesheet',     href: asset_path('application.css'),           media: 'all' }
+#      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
+      { rel: 'stylesheet',     href: asset_path('europeana.css'),             media: 'all' }
     ]
   end
 
@@ -56,7 +57,7 @@ module MustacheHelper
       has_original: !params[:q].blank?,
       input_original: {
         value:  params[:q].blank? ? nil : params[:q],
-        remove: (params[:qf].nil? || params[:qf].size == 0) ? search_action_path : '?q=' + params[:qf].join('&qf[]=')
+        remove: params[:qf].blank? ? search_action_path : search_action_path + '?q=' + params[:qf].join('&qf[]=')
       },
       input_values: input_search_values(params[:qf]),
       placeholder: t('site.search.placeholder.text')
@@ -320,5 +321,32 @@ module MustacheHelper
         remove: search_action_path(remove_qf_param(q, params))
       }
     end
+  end
+
+  def news_items
+    @blog_items[0..2].collect do |item|
+      {
+        image_root: nil,
+        headline: {
+          medium: CGI.unescapeHTML(item.title)
+        },
+        url: CGI.unescapeHTML(item.url),
+        img: {
+          rectangle: {
+            src: news_item_img_src(item),
+            alt: nil
+          }
+        },
+        excerpt: {
+          short: CGI.unescapeHTML(item.summary)
+        }
+      }
+    end
+  end
+
+  def news_item_img_src(item)
+    img_tag = item.content.match(/<img [^>]*>/i)[0]
+    return nil unless img_tag.present?
+    img_tag.match(/src="([^"]*)"/i)[1]
   end
 end
