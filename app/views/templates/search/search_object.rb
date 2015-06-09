@@ -136,58 +136,19 @@ module Templates
             
           related: {
             title: t('site.object.similar-items') + ':',
-              
-            items: [
+            items: @similar.map { |doc|
               {
-                url:  root_url + '?q=The+Lace+Maker',
+                url: document_path(doc, format: 'html'),
                 text: {
-                    title: 'The Lace Maker',
-                    date:   '(1661) ',
-                    similiar_item_data:  'Johannes Vermeer'
+                  title: render_document_show_field_value(doc, 'dcTitleLangAware'),
+                  date: render_document_show_field_value(doc, 'year')
                 },
                 img: {
-                   alt: 'The Lace Maker',
-                   src: 'http://upload.wikimedia.org/wikipedia/commons/0/03/Johannes_Vermeer_-_The_lacemaker_%28c.1669-1671%29.jpg'
+                  alt: render_document_show_field_value(doc, 'dcTitleLangAware'),
+                  src: render_document_show_field_value(doc, 'edmPreview')
                 }
-              },
-              {
-                url:  root_url + '?q=Zittende+jongeman+bij+ton+met+het+hoofd+naar+links',
-                text: {
-                  title: 'Zittende jongeman bij ton met het hoofd naar links',
-                  date:  '(1661)',
-                  similiar_item_data:  'Johannes Vermeer'
-                },
-                img: {
-                    alt: 'Zittende jongeman bij ton met het hoofd naar links',
-                    src: 'http://teylers.adlibhosting.com/wwwopacx/wwwopac.ashx?command=getcontent&server=images&value=R%20010.jpg'
-                 }
-              },
-              {
-                url: root_url + '?q=Delft',
-                text: {
-                  title: 'Delft',
-                  date:   '(1660)',
-                  similiar_item_data:  'Johannes Vermeer'
-                },
-                img: {
-                    alt: 'Delft',
-                    src: 'http://upload.wikimedia.org/wikipedia/commons/a/a2/Vermeer-view-of-delft.jpg'
-                 }
-              },
-              {
-                url: root_url + '?q=Girl+with+the+pearl+earring',
-                text: {
-                  title: 'Girl with the pearl earring',
-                  date:   '(1661)',
-                  similiar_item_data: 'Johannes Vermeer'
-                },
-                img: {
-                    alt: 'Girl with the pearl earring',
-                    src: 'http://resources21.kb.nl/gvn/MAU01/MAU01_0670_W.JPG'
-                 }
-
               }
-            ]
+            }
           }
         }
       end

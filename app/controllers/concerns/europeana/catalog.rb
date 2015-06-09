@@ -22,11 +22,6 @@ module Europeana
                     if: :has_search_parameters?
     end
 
-    def fetch_one(id, _extra_controller_params)
-      api_response = repository.find(id)
-      [api_response, api_response]
-    end
-
     def search_results(user_params, search_params_logic)
       super.tap do |results|
         results.first[:facet_queries] = query_facet_counts(user_params)
@@ -108,6 +103,8 @@ module Europeana
 
     ##
     # Gets the total number of items available over the Europeana API
+    #
+    # @return [Fixnum]
     def count_all
       all_params = { query: '*:*', rows: 0, profile: 'minimal' }
       @europeana_item_count = repository.search(all_params).total
