@@ -20,6 +20,7 @@ class PortalController < ApplicationController
   # GET /record/:provider_id/:record_id
   def show
     @response, @document = fetch(doc_id)
+    @similar = @document.more_like_this
 
     respond_to do |format|
       format.html do
