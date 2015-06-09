@@ -56,6 +56,7 @@ en:
         north: North
         south: South
         west: West
+      show-more-similar-items: show more
       similar-items: Similar items
     results:
       actions:
