@@ -9,16 +9,6 @@ GIT
       kaminari
 
 GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: d83999979447d71e9d31deb09cb0578c7e917f38
-  ref: d839999794
-  specs:
-    europeana-styleguide (0.0.2)
-      activesupport (~> 4.0)
-      mustache (~> 1.0.1)
-      stache (~> 1.1.1)
-
-GIT
   remote: git://github.com/rwd/blacklight.git
   revision: 5132db4da0eb724c8861eca738cf0a925a4cf944
   ref: 5132db4
