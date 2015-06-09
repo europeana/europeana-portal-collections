@@ -34,8 +34,8 @@ nl:
         description: Omschrijving
         format: Formaat
         latitude: Breedtegraad
-        longitude: Lengtegraad
         location: Plaats
+        longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
         period: Tijdvak
@@ -56,6 +56,7 @@ nl:
         north: 
         south: 
         west: 
+      show-more-similar-items: toon meer
       similar-items: 
     results:
       actions:
