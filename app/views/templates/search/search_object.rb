@@ -135,69 +135,21 @@ module Templates
           },
           related: {
             title: t('site.object.similar-items') + ':',
-            items: [
+            items: @similar.map { |doc|
               {
-                title: 'one',
+                title: render_document_show_field_value(doc, 'dcTitleLangAware'),
                 img: {
-                 rectangle: {
-                   alt: 'one',
-                   src: 'one'
-                 }
+                  alt: nil,
+                  src: render_document_show_field_value(doc, 'edmPreview')
                 },
                 headline: {
-                  medium: 'M'
+                  medium: nil
                 },
                 text: {
-                  short: 'short-excerpt'
+                  short: render_document_show_field_value(doc, 'dcDescriptionLangAware')
                 }
-              },
-              {
-                title: 'two',
-                img: {
-                  rectangle: {
-                    alt: 'one',
-                    src: 'one'
-                  }
-                 },
-                headline: {
-                  medium: 'M'
-                },
-                text: {
-                  short: 'short-excerpt'
-                }
-              },
-              {
-                title: 'three',
-                img: {
-                  rectangle: {
-                    alt: 'one',
-                    src: 'one'
-                  }
-                 },
-                headline: {
-                  medium: 'M'
-                },
-                text: {
-                  short: 'short-excerpt'
-                }
-              },
-              {
-                title: 'four',
-                img: {
-                  rectangle: {
-                    alt: 'one',
-                    src: 'one'
-                  }
-                 },
-                headline: {
-                  medium: 'M'
-                },
-                text: {
-                  short: 'short-excerpt'
-                }
-
               }
-            ]
+            }
           }
         }
       end
