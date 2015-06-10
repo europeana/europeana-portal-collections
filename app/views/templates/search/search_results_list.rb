@@ -92,7 +92,6 @@ module Templates
       end
 
       def search_result_for_document(doc, counter)
-        Rails.logger.debug("==== doc: #{doc.id}")
         doc_type = doc.fetch(:type, nil)
         {
           object_url: document_path(doc, format: 'html'),

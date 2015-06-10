@@ -136,24 +136,21 @@ module Templates
             
           related: {
             title: t('site.object.similar-items') + ':',
-              
-            # TODO: this query needs to be calculated
-            more_items_query: root_url + 'search?q=(title:(%22The%20Milkmaid%22%20OR%20%22Het%20melkmeisje%22)^0.3%20OR%20who:(%22RM0001.PEOPLE.2529%22%20OR%20%22Vermeer,%20Johannes%22)^0.5%20OR%20DATA_PROVIDER:(%22Rijksmuseum%22)^0.2%20OR%20what:(%22http://vocab.getty.edu/aat/300177435%22%20OR%20%22http://iconclass.org/41C222%22%20OR%20%22http://vocab.getty.edu/aat/300015029%22)^0.8%20OR%20skos_concept:(%22http://vocab.getty.edu/aat/300014078%22%20OR%20%22http://vocab.getty.edu/aat/300015050%22%20OR%20%22http://vocab.getty.edu/aat/300177435%22)^0.8)%20NOT%20europeana_id:%22/90402/SK_A_2344%22',
+            more_items_query: search_path(q: document.more_like_this_query),
             items: @similar.map { |doc|
-                {
-                  url: render_document_show_field_value(doc, 'guid'),
-                  text: {
-                      title: render_document_show_field_value(doc, 'dcTitleLangAware'),
-                      date: render_document_show_field_value(doc, 'year'),
-                      similiar_item_data: get_first_found(['agents.prefLabel', 'proxies.dcContributor', 'proxies.dcCreator'], doc)
-                  },
-                  img: {
-                    alt: render_document_show_field_value(doc, 'dcTitleLangAware'),
-                    src: render_document_show_field_value(doc, 'edmPreview')
-                  }
-               }
+              {
+                url: document_path(doc, format: 'html'),
+                text: {
+                  title: render_document_show_field_value(doc, 'dcTitleLangAware'),
+                  date: render_document_show_field_value(doc, 'year'),
+                  similiar_item_data: get_first_found(['agents.prefLabel', 'proxies.dcContributor', 'proxies.dcCreator'], doc)
+                },
+                img: {
+                  alt: render_document_show_field_value(doc, 'dcTitleLangAware'),
+                  src: render_document_show_field_value(doc, 'edmPreview')
+                }
+              }
             }
-            # end items map
           }
         }
       end
