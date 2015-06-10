@@ -23,7 +23,7 @@ module Europeana
     end
 
     def has_search_parameters?
-      super || params.key?(:q)
+      super || params.key?(:q) || params.key?(:mlt)
     end
 
     def search_results(user_params, search_params_logic)

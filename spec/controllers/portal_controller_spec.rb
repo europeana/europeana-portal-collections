@@ -23,7 +23,6 @@ RSpec.describe PortalController, type: :controller do
         end
 
         it 'renders the search results Mustache template' do
-          get :index, params
           expect(response.status).to eq(200)
           expect(response).to render_template('templates/Search/Search-results-list')
         end
@@ -38,9 +37,23 @@ RSpec.describe PortalController, type: :controller do
         end
 
         it 'renders the search results Mustache template' do
-          get :index, params
           expect(response.status).to eq(200)
           expect(response).to render_template('templates/Search/Search-results-list')
+        end
+      end
+
+      context 'with mlt param' do
+        let(:params) { { mlt: '/abc/123' } }
+
+        it 'queries the API for the named record' do
+          expect(an_api_record_request_for(params[:mlt])).
+            to have_been_made.at_least_once
+        end
+
+        it 'queries the API for MLT records' do
+          expect(an_api_search_request.
+            with(query: hash_including(qf: [/NOT europeana_id:"#{params[:mlt]}"/]))).
+            to have_been_made
         end
       end
     end

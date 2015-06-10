@@ -13,7 +13,8 @@ module RenderConstraintsHelper
   def render_constraints(localized_params = params)
     render_constraints_query(localized_params) +
       render_constraints_filters(localized_params) +
-      render_constraints_qfs(localized_params)
+      render_constraints_qfs(localized_params) +
+      render_constraints_similar_to(localized_params)
   end
 
   # Based on
@@ -46,7 +47,14 @@ module RenderConstraintsHelper
     remove_path = search_action_path(remove_qf_param(value, localized_params))
     render_constraint_element(nil, value,
                               remove: remove_path,
-                              classes: ['filter']
-    )
+                              classes: ['filter'])
+  end
+
+  def render_constraints_similar_to(localized_params = params)
+    return ''.html_safe unless localized_params[:mlt]
+    remove_path = search_action_path(localized_params.without(:mlt))
+    render_constraint_element('similar to: ', localized_params[:mlt],
+                              remove: remove_path,
+                              classes: ['filter'])
   end
 end

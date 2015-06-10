@@ -136,7 +136,7 @@ module Templates
             
           related: {
             title: t('site.object.similar-items') + ':',
-            more_items_query: search_path(q: document.more_like_this_query),
+            more_items_query: search_path(mlt: document.id),
             items: @similar.map { |doc|
               {
                 url: document_path(doc, format: 'html'),
