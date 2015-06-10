@@ -69,7 +69,7 @@ module Templates
             concepts: concept_data,
             creator: {
               name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
-              name_url: dcCreator ? search_path(q: dcCreator) : nil,
+              name_url: dcCreator ? search_path(q: "\"#{dcCreator}\"") : nil,
               life: {
                   from: {
                       long: render_document_show_field_value(document, 'agents.begin'),
@@ -248,7 +248,7 @@ module Templates
           items: concepts.collect do |concept|
             {
               text: concept,
-              url:  search_path(q: "what:#{concept}"),
+              url:  search_path(q: "what:\"#{concept}\""),
               label:  conceptsType.index(concept)  == 0 ? t('site.object.meta-label.type') + ':' : 
                       conceptsOther.index(concept) == 0 ? t('site.object.meta-label.concept') + ':' : false
             }
@@ -270,7 +270,7 @@ module Templates
               label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' : 
                       datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
               text: date,
-              url:  datesCS.index(date) ? search_path(q: "when:#{date}") : false
+              url:  datesCS.index(date) ? search_path(q: "when:\"#{date}\"") : false
             }
           end
         }
@@ -319,7 +319,7 @@ module Templates
           items: props.collect do |property|
             {
               text:  property,
-              url:   propertiesCS.index(property)       ? search_path(q: "what:#{property}") : false,
+              url:   propertiesCS.index(property)       ? search_path(q: "what:\"#{property}\"") : false,
               label: propertiesFmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : false
             }
           end
