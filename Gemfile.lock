@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 9bf669feb4b79b4c553fab79ac2dc895135824bb
-  ref: 9bf669f
+  revision: 4fb4ca6bd514c6aecfed38fb838cb6e2066b0238
+  ref: 4fb4ca6
   specs:
     europeana-blacklight (0.1.0)
       blacklight (>= 5.12.0, < 6.0.0)

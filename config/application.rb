@@ -27,7 +27,9 @@ module Europeana
 
       # Load Redis config from config/redis.yml, if it exists
       begin
-        config.cache_store = :redis_store, Rails.application.config_for(:redis)
+        redis_config = Rails.application.config_for(:redis)
+        fail StandardError unless redis_config.present?
+        config.cache_store = :redis_store, redis_config
       rescue
         config.cache_store = :null_store
       end
