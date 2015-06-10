@@ -101,9 +101,9 @@ module Templates
               value: track_document_path(doc, track_document_path_opts(counter))
             }
           ],
-          title: render_index_field_value(doc, :dcTitleLangAware),
+          title: render_index_field_value(doc, ['dcTitleLangAware', 'title']),
           text: {
-            medium: truncate(render_index_field_value(doc, 'dcDescriptionLangAware'),
+            medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription']),
                              length: 140,
                              separator: ' ',
                              escape: false)
