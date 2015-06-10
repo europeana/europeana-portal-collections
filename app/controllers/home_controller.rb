@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   include Europeana::Styleguide
   include BlogFetcher
 
+  before_filter :count_all, only: :index
   before_filter :fetch_blog_items, only: :index
 
   # GET /
