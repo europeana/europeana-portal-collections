@@ -8,7 +8,6 @@ class PortalController < ApplicationController
   include Europeana::Styleguide
 
   before_filter :redirect_to_root, only: :index, unless: :has_search_parameters?
-  before_filter :count_all, only: :home
 
   # GET /search
   def index

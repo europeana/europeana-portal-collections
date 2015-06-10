@@ -6,7 +6,9 @@ RSpec.describe ChannelsController, type: :controller do
       get :index
     end
 
-    it { is_expected.not_to query_europeana_api }
+    it 'does not query API' do
+      expect(an_api_search_request).not_to have_been_made
+    end
 
     it 'redirects to root' do
       expect(response).to redirect_to(root_url)
@@ -21,7 +23,9 @@ RSpec.describe ChannelsController, type: :controller do
     context 'with id=home' do
       let(:params) { { id: 'home' } }
 
-      it { is_expected.not_to query_europeana_api }
+      it 'does not query API' do
+        expect(an_api_search_request).not_to have_been_made
+      end
 
       it 'redirects to root' do
         expect(response).to redirect_to(root_url)
@@ -30,6 +34,10 @@ RSpec.describe ChannelsController, type: :controller do
 
     context 'with id=[unknown channel]' do
       let(:params) { { id: 'unknown' } }
+
+      it 'does not query API' do
+        expect(an_api_search_request).not_to have_been_made
+      end
 
       it 'responds with 404' do
         expect(response.status).to eq(404)
@@ -48,6 +56,14 @@ RSpec.describe ChannelsController, type: :controller do
       context 'without search params' do
         let(:params) { { id: channel_id } }
 
+        it 'does not query API' do
+          expect(an_api_search_request).not_to have_been_made
+        end
+
+        it 'gets RSS blog posts' do
+          expect(a_europeana_blog_request).to have_been_made
+        end
+
         it 'renders channels landing template' do
           expect(response.status).to eq(200)
           expect(response).to render_template('templates/Search/Channels-landing')
@@ -56,6 +72,10 @@ RSpec.describe ChannelsController, type: :controller do
 
       context 'with search params' do
         let(:params) { { id: channel_id, q: 'search' } }
+
+        it 'queries API' do
+          expect(an_api_search_request).to have_been_made.at_least_once
+        end
 
         it 'renders search results template' do
           expect(response.status).to eq(200)

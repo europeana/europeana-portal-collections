@@ -18,7 +18,7 @@ RSpec.describe PortalController, type: :controller do
 
       it 'searches the API' do
         expect(an_api_search_request.
-          with(query: hash_including(query: 'paris'))).to have_been_made
+          with(query: hash_including(query: 'paris'))).to have_been_made.at_least_once
       end
 
       it 'renders the search results Mustache template' do
