@@ -22,6 +22,10 @@ module Europeana
                     if: :has_search_parameters?
     end
 
+    def has_search_parameters?
+      super || params.key?(:q) || params.key?(:mlt)
+    end
+
     def search_results(user_params, search_params_logic)
       super.tap do |results|
         results.first[:facet_queries] = query_facet_counts(user_params)

@@ -69,7 +69,7 @@ module Templates
             concepts: concept_data,
             creator: {
               name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
-              name_url: dcCreator ? root_url + 'q=' + dcCreator : nil,
+              name_url: dcCreator ? search_path(q: "\"#{dcCreator}\"") : nil,
               life: {
                   from: {
                       long: render_document_show_field_value(document, 'agents.begin'),
@@ -97,8 +97,8 @@ module Templates
 
             meta_additional: {
               geo: {
-                latitude:  "\"" + (render_document_show_field_value(document, 'places.latitude')  || '' ) + "\"",
-                longitude: "\"" + (render_document_show_field_value(document, 'places.longitude') || '' ) + "\"",
+                latitude:  '"' + (render_document_show_field_value(document, 'places.latitude')  || '' ) + '"',
+                longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '' ) + '"',
                 long_and_lat: has_long_and_lat,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
                 labels: {
@@ -136,17 +136,15 @@ module Templates
             
           related: {
             title: t('site.object.similar-items') + ':',
-            more_items_query: search_path(q: document.more_like_this_query),
+            more_items_query: search_path(mlt: document.id),
             items: @similar.map { |doc|
               {
                 url: document_path(doc, format: 'html'),
                 text: {
-                  title: render_document_show_field_value(doc, 'dcTitleLangAware'),
-                  date: render_document_show_field_value(doc, 'year'),
-                  similiar_item_data: get_first_found(['agents.prefLabel', 'proxies.dcContributor', 'proxies.dcCreator'], doc)
+                  title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title'])
                 },
                 img: {
-                  alt: render_document_show_field_value(doc, 'dcTitleLangAware'),
+                  alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
                   src: render_document_show_field_value(doc, 'edmPreview')
                 }
               }
@@ -211,13 +209,6 @@ module Templates
 
       private
 
-      def get_first_found(fields, doc = document)
-        fields.each { |field| 
-          value = render_document_show_field_value(doc, field)
-          return value unless value.nil?
-        }
-      end
-      
       def collect_values(fields, doc = document)
         values = []
         fields.each { |field| 
@@ -248,7 +239,7 @@ module Templates
           items: concepts.collect do |concept|
             {
               text: concept,
-              url:  root_url + URI.escape('?q=what:' + concept),
+              url:  search_path(q: "what:\"#{concept}\""),
               label:  conceptsType.index(concept)  == 0 ? t('site.object.meta-label.type') + ':' : 
                       conceptsOther.index(concept) == 0 ? t('site.object.meta-label.concept') + ':' : false
             }
@@ -270,7 +261,7 @@ module Templates
               label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' : 
                       datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
               text: date,
-              url:  datesCS.index(date) ? root_url + URI.escape('?q=when:' + date) : false
+              url:  datesCS.index(date) ? search_path(q: "when:\"#{date}\"") : false
             }
           end
         }
@@ -319,7 +310,7 @@ module Templates
           items: props.collect do |property|
             {
               text:  property,
-              url:   propertiesCS.index(property)       ? root_url + URI.escape('?q=what:' + property) : false,
+              url:   propertiesCS.index(property)       ? search_path(q: "what:\"#{property}\"") : false,
               label: propertiesFmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : false
             }
           end

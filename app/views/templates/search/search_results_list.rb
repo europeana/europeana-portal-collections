@@ -101,9 +101,9 @@ module Templates
               value: track_document_path(doc, track_document_path_opts(counter))
             }
           ],
-          title: render_index_field_value(doc, :dcTitleLangAware),
+          title: render_index_field_value(doc, ['dcTitleLangAware', 'title']),
           text: {
-            medium: truncate(render_index_field_value(doc, 'dcDescriptionLangAware'),
+            medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription']),
                              length: 140,
                              separator: ' ',
                              escape: false)
@@ -144,9 +144,9 @@ module Templates
 
       def facet_item_url(facet, item)
         if facet_in_params?(facet, item)
-          search_action_path(remove_facet_params(facet, item, params))
+          search_action_url(remove_facet_params(facet, item, params))
         else
-          search_action_path(add_facet_params_and_redirect(facet, item))
+          search_action_url(add_facet_params_and_redirect(facet, item))
         end
       end
 
