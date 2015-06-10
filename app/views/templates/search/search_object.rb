@@ -141,12 +141,10 @@ module Templates
               {
                 url: document_path(doc, format: 'html'),
                 text: {
-                  title: render_document_show_field_value(doc, 'dcTitleLangAware'),
-                  date: render_document_show_field_value(doc, 'year'),
-                  similiar_item_data: get_first_found(['agents.prefLabel', 'proxies.dcContributor', 'proxies.dcCreator'], doc)
+                  title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title'])
                 },
                 img: {
-                  alt: render_document_show_field_value(doc, 'dcTitleLangAware'),
+                  alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
                   src: render_document_show_field_value(doc, 'edmPreview')
                 }
               }
@@ -211,13 +209,6 @@ module Templates
 
       private
 
-      def get_first_found(fields, doc = document)
-        fields.each { |field| 
-          value = render_document_show_field_value(doc, field)
-          return value unless value.nil?
-        }
-      end
-      
       def collect_values(fields, doc = document)
         values = []
         fields.each { |field| 
