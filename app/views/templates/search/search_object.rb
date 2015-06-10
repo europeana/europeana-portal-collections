@@ -140,9 +140,7 @@ module Templates
             items: @similar.map { |doc|
               {
                 url: document_path(doc, format: 'html'),
-                text: {
-                  title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title'])
-                },
+                title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
                 img: {
                   alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
                   src: render_document_show_field_value(doc, 'edmPreview')
