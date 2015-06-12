@@ -1,4 +1,4 @@
-require 'europeana/api'
-
-# Set the API key for the europeana-api gem
-Europeana::API.api_key = Rails.application.secrets.europeana_api_key
+if ENV['EUROPEANA_API_URL']
+  require 'europeana/api'
+  Europeana::API.url = ENV['EUROPEANA_API_URL']
+end

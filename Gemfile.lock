@@ -1,79 +1,104 @@
 GIT
-  remote: https://github.com/europeana/europeana-blacklight.git
-  revision: a1bd0e2f3f9ac52207cbdfdb05a1b3e2a563a2c1
-  ref: a1bd0e2
+  remote: git://github.com/europeana/europeana-blacklight.git
+  revision: 52f7ab48804d12d989d1a2b67f654364612b1135
+  ref: 52f7ab4
   specs:
     europeana-blacklight (0.1.0)
-      blacklight (~> 5.12.0)
-      europeana-api (~> 0.3.0)
+      blacklight (>= 5.12.0, < 6.0.0)
+      europeana-api (~> 0.3.2)
+      kaminari
 
 GIT
-  remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 8ae39b119cab70f123b1480845af7d419dba39c7
-  ref: 8ae39b119c
+  remote: git://github.com/rwd/blacklight.git
+  revision: 5132db4da0eb724c8861eca738cf0a925a4cf944
+  ref: 5132db4
   specs:
-    europeana-styleguide (0.0.1)
-      mustache (~> 1.0.1)
-      stache (~> 1.1.1)
-
-GEM
-  remote: https://rubygems.org/
-  specs:
-    actionmailer (4.2.0)
-      actionpack (= 4.2.0)
-      actionview (= 4.2.0)
-      activejob (= 4.2.0)
-      mail (~> 2.5, >= 2.5.4)
-      rails-dom-testing (~> 1.0, >= 1.0.5)
-    actionpack (4.2.0)
-      actionview (= 4.2.0)
-      activesupport (= 4.2.0)
-      rack (~> 1.6.0)
-      rack-test (~> 0.6.2)
-      rails-dom-testing (~> 1.0, >= 1.0.5)
-      rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    actionview (4.2.0)
-      activesupport (= 4.2.0)
-      builder (~> 3.1)
-      erubis (~> 2.7.0)
-      rails-dom-testing (~> 1.0, >= 1.0.5)
-      rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    activejob (4.2.0)
-      activesupport (= 4.2.0)
-      globalid (>= 0.3.0)
-    activemodel (4.2.0)
-      activesupport (= 4.2.0)
-      builder (~> 3.1)
-    activerecord (4.2.0)
-      activemodel (= 4.2.0)
-      activesupport (= 4.2.0)
-      arel (~> 6.0)
-    activesupport (4.2.0)
-      i18n (~> 0.7)
-      json (~> 1.7, >= 1.7.7)
-      minitest (~> 5.1)
-      thread_safe (~> 0.3, >= 0.3.4)
-      tzinfo (~> 1.1)
-    arel (6.0.0)
-    ast (2.0.0)
-    astrolabe (1.3.0)
-      parser (>= 2.2.0.pre.3, < 3.0)
-    autoprefixer-rails (5.1.8)
-      execjs
-      json
-    binding_of_caller (0.7.2)
-      debug_inspector (>= 0.0.1)
-    blacklight (5.12.1)
+    blacklight (5.13.1)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (>= 0.15)
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.11)
+
+GIT
+  remote: git://github.com/rwd/europeana-api-client-ruby.git
+  revision: 102e7dc693ae421e377481362ef33141989e4311
+  ref: 102e7dc
+  specs:
+    europeana-api (0.3.2)
+      activesupport (>= 3.0)
+      multi_json (~> 1.0)
+
+GIT
+  remote: git://github.com/rwd/stache.git
+  revision: d1408f18d14c1d1697e522a397d2c7bbb38bdd93
+  ref: d1408f1
+  specs:
+    stache (1.1.1)
+
+GIT
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: f45e3cccffc031a1b3de33f9068f8dc631f41809
+  ref: f45e3cccff
+  specs:
+    europeana-styleguide (0.0.2)
+      activesupport (~> 4.0)
+      mustache (~> 1.0.1)
+      stache (~> 1.1.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actionmailer (4.2.1)
+      actionpack (= 4.2.1)
+      actionview (= 4.2.1)
+      activejob (= 4.2.1)
+      mail (~> 2.5, >= 2.5.4)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+    actionpack (4.2.1)
+      actionview (= 4.2.1)
+      activesupport (= 4.2.1)
+      rack (~> 1.6)
+      rack-test (~> 0.6.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    actionview (4.2.1)
+      activesupport (= 4.2.1)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    activejob (4.2.1)
+      activesupport (= 4.2.1)
+      globalid (>= 0.3.0)
+    activemodel (4.2.1)
+      activesupport (= 4.2.1)
+      builder (~> 3.1)
+    activerecord (4.2.1)
+      activemodel (= 4.2.1)
+      activesupport (= 4.2.1)
+      arel (~> 6.0)
+    activesupport (4.2.1)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    addressable (2.3.8)
+    arel (6.0.0)
+    ast (2.0.0)
+    astrolabe (1.3.0)
+      parser (>= 2.2.0.pre.3, < 3.0)
+    autoprefixer-rails (5.1.11)
+      execjs
+      json
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
-    brakeman (3.0.2)
+    brakeman (3.0.3)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
       haml (>= 3.0, < 5.0)
@@ -96,30 +121,38 @@ GEM
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.9.1.1)
     colored (1.2)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     debug_inspector (0.0.2)
     deprecation (0.2.2)
       activesupport
     diff-lcs (1.2.5)
     docile (1.1.5)
-    domain_name (0.5.23)
+    domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
-    europeana-api (0.3.0)
-      activesupport (>= 3.0)
-      multi_json (~> 1.0)
     eventmachine (1.0.7)
-    execjs (2.4.0)
+    execjs (2.5.2)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     fastercsv (1.5.5)
+    feedjira (2.0.0)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.9)
+      loofah (~> 2.0)
+      sax-machine (~> 1.0)
     gli (2.13.0)
-    globalid (0.3.3)
+    globalid (0.3.5)
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
@@ -128,7 +161,7 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
-    jbuilder (2.2.12)
+    jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)
@@ -139,27 +172,28 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    localeapp (0.9.0)
+    localeapp (0.9.3)
       gli
       i18n
       json
       rack
       rest-client
       ya2yaml
-    loofah (2.0.1)
+    loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.4.3)
+    mime-types (2.5)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.1)
     multi_json (1.11.0)
+    multipart-post (2.0.0)
     mustache (1.0.1)
     mysql2 (0.3.18)
     netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    parser (2.2.0.3)
+    parser (2.2.2.2)
       ast (>= 1.1, < 3.0)
     phantomjs (1.9.8.0)
     poltergeist (1.6.0)
@@ -167,22 +201,22 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-    powerpack (0.1.0)
-    puma (2.11.1)
+    powerpack (0.1.1)
+    puma (2.11.2)
       rack (>= 1.1, < 2.0)
-    rack (1.6.0)
+    rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.2.0)
-      actionmailer (= 4.2.0)
-      actionpack (= 4.2.0)
-      actionview (= 4.2.0)
-      activejob (= 4.2.0)
-      activemodel (= 4.2.0)
-      activerecord (= 4.2.0)
-      activesupport (= 4.2.0)
+    rails (4.2.1)
+      actionmailer (= 4.2.1)
+      actionpack (= 4.2.1)
+      actionview (= 4.2.1)
+      activejob (= 4.2.1)
+      activemodel (= 4.2.1)
+      activerecord (= 4.2.1)
+      activesupport (= 4.2.1)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.0)
+      railties (= 4.2.1)
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -206,9 +240,9 @@ GEM
       ruby-progressbar
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.3)
-    railties (4.2.0)
-      actionpack (= 4.2.0)
-      activesupport (= 4.2.0)
+    railties (4.2.1)
+      actionpack (= 4.2.1)
+      activesupport (= 4.2.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
@@ -238,9 +272,9 @@ GEM
       netrc (~> 0.7)
     rsolr (1.0.12)
       builder (>= 2.1.2)
-    rspec-core (3.2.2)
+    rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.0)
+    rspec-expectations (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-mocks (3.2.1)
@@ -262,27 +296,29 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.5)
-    ruby2ruby (2.1.3)
+    ruby2ruby (2.1.4)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
-    ruby_parser (3.6.5)
+    ruby_parser (3.6.6)
       sexp_processor (~> 4.1)
+    safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.2)
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
+    sax-machine (1.3.2)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sexp_processor (4.5.0)
-    simplecov (0.9.2)
+    sexp_processor (4.5.1)
+    simplecov (0.10.0)
       docile (~> 1.1.0)
-      multi_json (~> 1.0)
-      simplecov-html (~> 0.9.0)
-    simplecov-html (0.9.0)
-    spring (1.3.3)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
+    spring (1.3.6)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -292,7 +328,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    stache (1.1.1)
     terminal-table (1.4.5)
     thor (0.19.1)
     thread_safe (0.3.5)
@@ -306,12 +341,15 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.6)
+    unf_ext (0.0.7.1)
     web-console (2.1.2)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
     websocket-driver (0.5.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -323,23 +361,23 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 5.12.1)
+  blacklight!
   brakeman
   capybara (~> 2.4.0)
-  coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
+  europeana-api!
   europeana-blacklight!
   europeana-styleguide!
   eventmachine (~> 1.0.6)
+  feedjira (~> 2.0)
   jbuilder (~> 2.0)
   jquery-rails
-  kaminari
   localeapp (~> 0.9.0)
   mysql2
   phantomjs
   poltergeist
   puma (~> 2.11.0)
-  rails (= 4.2.0)
+  rails (= 4.2.1)
   rails_12factor (~> 0.0.3)
   rails_best_practices
   redis-rails (~> 4.0)
@@ -348,7 +386,9 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   simplecov
-  spring
+  spring (~> 1.3.6)
+  stache!
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+  webmock (~> 1.21.0)

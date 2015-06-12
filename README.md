@@ -11,7 +11,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 
 ## Requirements
 
-* Ruby 2.2
+* Ruby 2.2.1
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
 
@@ -45,6 +45,17 @@ This is the API key used by the application to authenticate requests to the
 Europeana REST API. One can be obtained at:
 http://labs.europeana.eu/api/registration/
 
+#### EUROPEANA_API_URL
+
+The base URL of the Europeana API. This only needs to be set if you are not
+using the live production version of the API.
+
+#### EDM_IS_SHOWN_BY_PROXY
+
+The HTTP address of a proxy capabable of receiving Europeana record IDs as URL
+paths, looking up edm:isShownBy for that record, and downloading the target to
+the user agent.
+
 #### PORT
 
 This sets the TCP port on which the Puma web server will listen for HTTP
@@ -66,6 +77,11 @@ The number of threads to run per Puma worker. Defaults to 5.
 #### LOCALEAPP_API_KEY
 
 The Localeapp API key to retrieve locale files from a localeapp.com project.
+
+**NB:** This is only required on a deployment where translations are to be
+retrieved from localeapp.com in order to update the repo. This should be part
+of an automated build workflow, and so a typical development or production
+deployment will not require this API key.
 
 ### Database
 
