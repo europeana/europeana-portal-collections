@@ -41,17 +41,6 @@ module MustacheHelper
   # model for the search form
   def input_search
     {
-      title: 'Search',
-      input_name: 'q[]',
-      empty: params[:q].blank?,
-      input_values: input_search_values(params[:q]),
-      placeholder: 'Add a search term'
-    }
-  end
-
-  # model for the search form
-  def input_search
-    {
       title: t('global.search-area.search-button-image-alt'),
       input_name: params[:q].blank? ? 'q' : 'qf[]',
       has_original: !params[:q].blank?,
