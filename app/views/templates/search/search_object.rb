@@ -227,18 +227,26 @@ module Templates
         concepts_other = []
 
         document.proxies.each{|proxy|
-          val = render_document_show_field_value(proxy, 'dcType')
-          concept_types <<  val.downcase unless val.nil?
+          val = proxy.fetch('dcType', nil)
+          val.each{|type|
+            concept_types <<  type.downcase 
+          } unless val.blank?
         }
 
-        document.concepts.each{|concept|
-          val = render_document_show_field_value(concept, 'prefLabel')
-          concepts_other <<  val.downcase unless (val.nil? || concept_types.index(val)  )
-        }
-                    
+        if (collect_values(['concepts.prefLabel']).size > 0)
+          document.concepts.each{|concept|
+            val = concept.fetch('prefLabel', nil)
+            val.each{|prefLabel|
+              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)   
+            } unless  val.blank?
+          }
+        end
+        
         document.proxies.each{|proxy|
-          val = render_document_show_field_value(proxy, 'dcSubject')
-          concepts_other << val.downcase unless (val.nil? || concept_types.index(val)  )
+          val = proxy.fetch('dcSubject', nil)
+          val.each{|subject|
+            (concepts_other << subject.downcase) unless  concept_types.index(subject.downcase) 
+          } unless val.blank?
         }
         
         concept_types = concept_types.uniq
@@ -251,7 +259,6 @@ module Templates
               items: concept_types.collect do |concept|
                 {
                   text:   concept,
-                  comma:  concept != concept_types.last,
                   url:    search_path(q: "what:\"#{concept}\""),
                 }
               end
@@ -262,7 +269,6 @@ module Templates
             items: concepts_other.collect do |concept|
               {
                 text:   concept,
-                comma:  concept != concepts_other.last,
                 url:    search_path(q: "what:\"#{concept}\""),
               }
             end          
