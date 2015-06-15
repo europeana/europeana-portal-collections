@@ -48,7 +48,7 @@ module MustacheHelper
         value:  params[:q].blank? ? nil : params[:q],
         remove: params[:qf].blank? ? search_action_path : search_action_path + '?q=' + params[:qf].join('&qf[]=')
       },
-      input_values: input_search_values(params[:qf]),
+      input_values: input_search_values(:qf, :mlt),
       placeholder: t('site.search.placeholder.text')
     }
   end
@@ -300,16 +300,19 @@ module MustacheHelper
     }    
   end
   
-  # @param qs [Array] q params
+  # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]
-  def input_search_values(qs)
-    return [] if qs.nil?
-    [qs].flatten.reject(&:blank?).collect do |q|
-      {
-        value: q,
-        remove: search_action_path(remove_qf_param(q, params))
-      }
-    end
+  def input_search_values(*keys)
+    return [] if keys.blank?
+    keys.map do |k|
+      [params[k]].flatten.compact.map do |v|
+        {
+          name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
+          value: v,
+          remove: search_action_url(remove_search_param(k, v, params))
+        }
+      end
+    end.flatten.compact
   end
 
   def news_items
