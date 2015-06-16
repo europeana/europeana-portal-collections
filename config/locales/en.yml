@@ -10,6 +10,7 @@ en:
     channels:
       art:
         title: Europeana Art History
+        description: The <strong>Europeana Music Channel</strong> brings together the best music rcordings, sheet music, and other music related collections from Europeana's audio-visual archives, libraries, archives and museums. Curated by Europeana Sounds.
       data-types:
         3d: 3D objects
         count: items
@@ -22,7 +23,7 @@ en:
         recent: Recent additions
         spotlight-on: 
       music:
-        description: '"The <strong>Europeana Art History Channel</strong> brings you the lesser known as well as the famous pieces of European art combined with the books, letters, articles, videos and other material collated from our partner libraries, archives, and museums."'
+        description: The <strong>Europeana Art History Channel</strong> brings you the lesser known as well as the famous pieces of European art combined with the books, letters, articles, videos and other material collated from our partner libraries, archives, and museums.
         title: Europeana Music
     facet:
       language:
