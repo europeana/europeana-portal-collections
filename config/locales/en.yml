@@ -9,8 +9,8 @@ en:
     blog-link: link to blog
     channels:
       art:
-        title: Europeana Art History
         description: The <strong>Europeana Music Channel</strong> brings together the best music rcordings, sheet music, and other music related collections from Europeana's audio-visual archives, libraries, archives and museums. Curated by Europeana Sounds.
+        title: Europeana Art History
       data-types:
         3d: 3D objects
         count: items
@@ -33,9 +33,9 @@ en:
       menu:
         become-a-provider: Become a data provider
         copyright: Copyright
+        data-providers: All data providers
         new-collections: New Collections
         search-tips: Search tips
-        data-providers: All data providers
         using-myeuropeana: Using My Europeana
     home:
       strapline: "Explore %{total_item_count} items from Europe's libraries, archives and museums. \n"
@@ -101,7 +101,7 @@ en:
           images: Images
           text: Text
           video: Video
-        count-and-terms: "%{results_count} results for %{query_terms}"
+        count-and-terms: "%{results_count} results"
         empty: No Results
         empty-with-terms: Your search for %{query_terms} returned no results
         header: Results for
@@ -121,5 +121,7 @@ en:
     search:
       placeholder:
         text: Add a search term
+      similar:
+        prefix: 'Similar to: %{mlt_item}'
     site-name-link: 
     sitemap-link: 
