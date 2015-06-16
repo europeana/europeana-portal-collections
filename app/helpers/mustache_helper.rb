@@ -12,7 +12,7 @@ module MustacheHelper
 
   def page_title
     if @response.nil?
-      'Europeana Channels'
+      @channel ? t('site.channels.' + @channel.id.to_s + '.title') : 'Europeana Channels'
     elsif @response['action'].to_s == 'search.json'
       'Europeana Search' + search_page_title
     elsif params[:action].to_s == 'show'

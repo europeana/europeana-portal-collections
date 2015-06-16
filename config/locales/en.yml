@@ -28,6 +28,14 @@ en:
       language:
         show:
           results: Results
+    footer:
+      menu:
+        become-a-provider: Become a data provider
+        copyright: Copyright
+        new-collections: New Collections
+        search-tips: Search tips
+        data-providers: All data providers
+        using-myeuropeana: Using My Europeana
     home:
       strapline: "Explore %{total_item_count} items from Europe's libraries, archives and museums. \n"
     more: More...
