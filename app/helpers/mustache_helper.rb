@@ -307,11 +307,27 @@ module MustacheHelper
       [params[k]].flatten.compact.map do |v|
         {
           name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
-          value: v,
+          value: input_search_param_value(k, v),
           remove: search_action_url(remove_search_param(k, v, params))
         }
       end
     end.flatten.compact
+  end
+
+  ##
+  # Returns text to display on-screen for an active search param
+  #
+  # @param key [Symbol] parameter key
+  # @param value value of the parameter
+  # @return [String] text to display
+  def input_search_param_value(key, value)
+    case key
+    when :mlt
+      response, doc = controller.fetch(value)
+      render_index_field_value(doc, ['dcTitleLangAware', 'title'])
+    else
+      value.to_s
+    end
   end
 
   ##
