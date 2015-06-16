@@ -32,4 +32,19 @@ module UrlHelper
     p.delete(key) if p[key].empty?
     p
   end
+
+  ##
+  # Remove q param, shifting first qf param (if any) to q
+  #
+  # @param source_params [Hash] params to operate on
+  # @return [Hash] modified params
+  def remove_q_param(source_params = params)
+    reset_search_params(source_params).tap do |p|
+      if p[:qf].blank?
+        p.delete(:q)
+      else
+        p[:q] = p[:qf].shift
+      end
+    end
+  end
 end

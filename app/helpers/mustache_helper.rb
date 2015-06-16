@@ -46,14 +46,13 @@ module MustacheHelper
       has_original: !params[:q].blank?,
       input_original: {
         value:  params[:q].blank? ? nil : params[:q],
-        remove: params[:qf].blank? ? search_action_path : search_action_path + '?q=' + params[:qf].join('&qf[]=')
+        remove: search_action_url(remove_q_param(params))
       },
-      input_values: input_search_values(:qf, :mlt),
+      input_values: input_search_values(*search_param_keys),
       placeholder: t('site.search.placeholder.text')
     }
   end
 
-  
   def image_root
     'http://develop.styleguide.eanadev.org/images/'
   end
@@ -62,17 +61,17 @@ module MustacheHelper
     'var js_path= "http://develop.styleguide.eanadev.org/js/dist/";'
     #'var js_path= "http://localhost/Europeana-Patternlab/public/js/dist/";'
   end
-  
+
   def js_files
     [
       { path: asset_path('jquery.js') },
-     
+
       { path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
       { path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
-        
+
       #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/channels.js' },
       #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/global.js' },
-        
+
       # Blacklight dependencies
       #{ path: asset_path('turbolinks.js') },
       #{ path: asset_path('blacklight/core.js') },
@@ -173,7 +172,7 @@ module MustacheHelper
   def total_item_count
     @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
   end
-  
+
   def channels_nav_links
     available_channels.collect do |c|
       {
@@ -195,19 +194,19 @@ module MustacheHelper
     ': ' + [params[:q]].flatten.join(', ')
   end
 
-  
+
   def navigation_global
   {
       :options => {
         :search_active  => false,
         :settings_active  => true
       },
-        
+
       :logo  => {
         :url  => "/",
         :text  => "Europeana Search"
       },
-      
+
       :primary_nav  => {
         :items  => [
           {
@@ -250,7 +249,7 @@ module MustacheHelper
           }
         ]
     },
-  
+
     :footer  => common_footer
   }
   end
@@ -297,9 +296,9 @@ module MustacheHelper
         :twitter    => true,
         :googleplus => true
       }
-    }    
+    }
   end
-  
+
   # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]
   def input_search_values(*keys)
@@ -313,6 +312,14 @@ module MustacheHelper
         }
       end
     end.flatten.compact
+  end
+
+  ##
+  # Keys of parameters to preserve across searches as hidden input fields
+  #
+  # @return [Array<Symbol>]
+  def search_param_keys
+    [:qf, :mlt]
   end
 
   def news_items
