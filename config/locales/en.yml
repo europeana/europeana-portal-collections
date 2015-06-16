@@ -7,6 +7,23 @@ en:
     settings: settings text
   site:
     blog-link: link to blog
+    channels:
+      art:
+        title: Europeana Art History
+      data-types:
+        3d: 3D objects
+        count: items
+        images: Images
+        moving-images: Moving images
+        sound: Sound recordings
+        texts: Texts
+      labels:
+        credits: Curated by
+        recent: Recent additions
+        spotlight-on: 
+      music:
+        description: '"The <strong>Europeana Art History Channel</strong> brings you the lesser known as well as the famous pieces of European art combined with the books, letters, articles, videos and other material collated from our partner libraries, archives, and museums."'
+        title: Europeana Music
     facet:
       language:
         show:
