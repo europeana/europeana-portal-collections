@@ -44,7 +44,7 @@ module RenderConstraintsHelper
   end
 
   def render_qf_element(value, localized_params)
-    remove_path = search_action_path(remove_qf_param(value, localized_params))
+    remove_path = search_action_path(remove_search_param(:qf, value, localized_params))
     render_constraint_element(nil, value,
                               remove: remove_path,
                               classes: ['filter'])
