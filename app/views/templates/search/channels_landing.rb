@@ -61,37 +61,7 @@ module Templates
       def content_common
         {
           :name => t('site.channels.' + @channel.id.to_s + '.title'),
-          :description => t('site.channels.' + @channel.id.to_s + '.description'),
-          :stats  => {
-            :items => [
-
-                {
-                  :count => "1,459,423",
-                  :text => t('site.channels.data-types.images'),
-                  :url => "#"
-                },
-                {
-                  :count => "393,117",
-                  :text => t('site.channels.data-types.texts'),
-                  :url => "#"
-                },
-                {
-                  :count => "1417",
-                  :text => t('site.channels.data-types.moving-images'),
-                  :url => "#"
-                },
-                {
-                  :count => "1001",
-                  :text => t('site.channels.data-types.3d'),
-                  :url => "#"
-                },
-                {
-                  :count => "300",
-                  :text => t('site.channels.data-types.sound'),
-                  :url => "#"
-                }
-            ]
-          }
+          :description => t('site.channels.' + @channel.id.to_s + '.description')
         }
       end
       
@@ -102,9 +72,35 @@ module Templates
           :channel_info  => {
             :name => content_common[:name],
             :description => content_common[:description],
-            :stats => content_common[:stats],
-
-                            
+            :stats  => {
+              :items => [
+                  {
+                    :count => "1,459,423",
+                    :text => t('site.channels.data-types.images'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "393,117",
+                    :text => t('site.channels.data-types.texts'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "1417",
+                    :text => t('site.channels.data-types.moving-images'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "1001",
+                    :text => t('site.channels.data-types.3d'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "300",
+                    :text => t('site.channels.data-types.sound'),
+                    :url => "#"
+                  }
+              ]
+            },
             :recent => {
               :title => t('site.channels.labels.recent'),
               :items => [
@@ -306,13 +302,41 @@ module Templates
         }
       end
       
+      
       def content_music
         {
           :channel_info  => {
             :name => content_common[:name],
             :description => content_common[:description],
-            :stats => content_common[:stats],
-              
+            :stats  => {
+              :items => [
+                  {
+                    :count => "216,014",
+                    :text => t('site.channels.data-types.images'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "102,558",
+                    :text => t('site.channels.data-types.texts'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "13,925",
+                    :text => t('site.channels.data-types.moving-images'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "1001",
+                    :text => t('site.channels.data-types.3d'),
+                    :url => "#"
+                  },
+                  {
+                    :count => "450,068",
+                    :text => t('site.channels.data-types.sound'),
+                    :url => "#"
+                  }
+              ]
+            },
             :recent => {
               :title => t('site.channels.labels.recent'),
               :items => [
