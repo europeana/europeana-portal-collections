@@ -7,10 +7,36 @@ nl:
     settings: tekst voor settings
   site:
     blog-link: link naar de blog
+    channels:
+      art:
+        description: 
+        title: 
+      data-types:
+        3d: 
+        count: 
+        images: 
+        moving-images: 
+        sound: 
+        texts: 
+      labels:
+        credits: 
+        recent: 
+        spotlight-on: 
+      music:
+        description: 
+        title: 
     facet:
       language:
         show:
           results: Resulaten
+    footer:
+      menu:
+        become-a-provider: 
+        copyright: 
+        data-providers: 
+        new-collections: 
+        search-tips: 
+        using-myeuropeana: 
     home:
       strapline: 'Ontdek %{total_item_count} items van Europa''s bibliotheken, archiven en musea.  '
     more: Meer...
@@ -34,8 +60,8 @@ nl:
         description: Omschrijving
         format: Formaat
         latitude: Breedtegraad
-        longitude: Lengtegraad
         location: Plaats
+        longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
         period: Tijdvak
@@ -56,6 +82,7 @@ nl:
         north: 
         south: 
         west: 
+      show-more-similar-items: toon meer
       similar-items: 
     results:
       actions:
@@ -93,5 +120,7 @@ nl:
     search:
       placeholder:
         text: 
+      similar:
+        prefix: 
     site-name-link: 
     sitemap-link: 

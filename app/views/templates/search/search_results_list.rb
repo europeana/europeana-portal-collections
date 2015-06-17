@@ -92,17 +92,18 @@ module Templates
       end
 
       def search_result_for_document(doc, counter)
+        doc_type = doc.fetch(:type, nil)
         {
-          object_url: url_for_document(doc),
+          object_url: document_path(doc, format: 'html'),
           link_attrs: [
             {
               name: 'data-context-href',
               value: track_document_path(doc, track_document_path_opts(counter))
             }
           ],
-          title: render_index_field_value(doc, :dcTitleLangAware),
+          title: render_index_field_value(doc, ['dcTitleLangAware', 'title']),
           text: {
-            medium: truncate(render_index_field_value(doc, 'dcDescriptionLangAware'),
+            medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription']),
                              length: 140,
                              separator: ' ',
                              escape: false)
@@ -114,10 +115,10 @@ module Templates
             text: render_index_field_value(doc, 'dataProvider'),
             url: render_index_field_value(doc, 'edmIsShownAt')
           },
-          is_image: doc.fetch(:type) == 'IMAGE',
-          is_audio: doc.fetch(:type) == 'SOUND',
-          is_text: doc.fetch(:type) == 'TEXT',
-          is_video: doc.fetch(:type) == 'VIDEO',
+          is_image: doc_type == 'IMAGE',
+          is_audio: doc_type == 'SOUND',
+          is_text: doc_type == 'TEXT',
+          is_video: doc_type == 'VIDEO',
           img: {
             rectangle: {
               src: render_index_field_value(doc, 'edmPreview'),
@@ -127,8 +128,8 @@ module Templates
           agent: agent_label(doc),
           concepts: concept_labels(doc),
           item_type: {
-            name: t('site.results.list.product-' + doc.fetch(:type).downcase),
-            url: facet_item_url('TYPE', doc.fetch(:type))
+            name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase),
+            url: doc_type.nil? ? nil : facet_item_url('TYPE', doc_type)
           }
         }
       end
@@ -143,9 +144,9 @@ module Templates
 
       def facet_item_url(facet, item)
         if facet_in_params?(facet, item)
-          search_action_path(remove_facet_params(facet, item, params))
+          search_action_url(remove_facet_params(facet, item, params))
         else
-          search_action_path(add_facet_params_and_redirect(facet, item))
+          search_action_url(add_facet_params_and_redirect(facet, item))
         end
       end
 

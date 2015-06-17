@@ -12,7 +12,7 @@ module MustacheHelper
 
   def page_title
     if @response.nil?
-      'Europeana Channels'
+      @channel ? t('site.channels.' + @channel.id.to_s + '.title') : 'Europeana Channels'
     elsif @response['action'].to_s == 'search.json'
       'Europeana Search' + search_page_title
     elsif params[:action].to_s == 'show'
@@ -23,29 +23,19 @@ module MustacheHelper
     end
   end
 
-  def form_action_search
-    request.protocol + request.host_with_port + '/'
+  def form_search
+    {
+      action: search_action_path(only_path: true)
+    }
   end
 
   def head_links
     [
       { rel: 'search',         type: 'application/opensearchdescription+xml', href: request.host_with_port + '/catalog/opensearch.xml', title: 'Blacklight' },
       { rel: 'shortcut icon',  type: 'image/x-icon',                          href: asset_path('favicon.ico') },
-      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
-      { rel: 'stylesheet',     href: asset_path('europeana.css'),             media: 'all' },
-      { rel: 'stylesheet',     href: asset_path('application.css'),           media: 'all' }
+#      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
+      { rel: 'stylesheet',     href: asset_path('europeana.css'),             media: 'all' }
     ]
-  end
-
-  # model for the search form
-  def input_search
-    {
-      title: 'Search',
-      input_name: 'q[]',
-      empty: params[:q].blank?,
-      input_values: input_search_values(params[:q]),
-      placeholder: 'Add a search term'
-    }
   end
 
   # model for the search form
@@ -56,14 +46,13 @@ module MustacheHelper
       has_original: !params[:q].blank?,
       input_original: {
         value:  params[:q].blank? ? nil : params[:q],
-        remove: (params[:qf].nil? || params[:qf].size == 0) ? search_action_path : '?q=' + params[:qf].join('&qf[]=')
+        remove: search_action_url(remove_q_param(params))
       },
-      input_values: input_search_values(params[:qf]),
+      input_values: input_search_values(*search_param_keys),
       placeholder: t('site.search.placeholder.text')
     }
   end
 
-  
   def image_root
     'http://develop.styleguide.eanadev.org/images/'
   end
@@ -72,17 +61,17 @@ module MustacheHelper
     'var js_path= "http://develop.styleguide.eanadev.org/js/dist/";'
     #'var js_path= "http://localhost/Europeana-Patternlab/public/js/dist/";'
   end
-  
+
   def js_files
     [
       { path: asset_path('jquery.js') },
-     
+
       { path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
       { path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
-        
+
       #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/channels.js' },
       #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/global.js' },
-        
+
       # Blacklight dependencies
       #{ path: asset_path('turbolinks.js') },
       #{ path: asset_path('blacklight/core.js') },
@@ -183,7 +172,7 @@ module MustacheHelper
   def total_item_count
     @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
   end
-  
+
   def channels_nav_links
     available_channels.collect do |c|
       {
@@ -205,19 +194,19 @@ module MustacheHelper
     ': ' + [params[:q]].flatten.join(', ')
   end
 
-  
+
   def navigation_global
   {
       :options => {
         :search_active  => false,
         :settings_active  => true
       },
-        
+
       :logo  => {
         :url  => "/",
         :text  => "Europeana Search"
       },
-      
+
       :primary_nav  => {
         :items  => [
           {
@@ -260,7 +249,7 @@ module MustacheHelper
           }
         ]
     },
-  
+
     :footer  => common_footer
   }
   end
@@ -307,18 +296,73 @@ module MustacheHelper
         :twitter    => true,
         :googleplus => true
       }
-    }    
+    }
   end
-  
-  # @param qs [Array] q params
+
+  # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]
-  def input_search_values(qs)
-    return [] if qs.nil?
-    [qs].flatten.reject(&:blank?).collect do |q|
+  def input_search_values(*keys)
+    return [] if keys.blank?
+    keys.map do |k|
+      [params[k]].flatten.compact.map do |v|
+        {
+          name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
+          value: input_search_param_value(k, v),
+          remove: search_action_url(remove_search_param(k, v, params))
+        }
+      end
+    end.flatten.compact
+  end
+
+  ##
+  # Returns text to display on-screen for an active search param
+  #
+  # @param key [Symbol] parameter key
+  # @param value value of the parameter
+  # @return [String] text to display
+  def input_search_param_value(key, value)
+    case key
+    when :mlt
+      response, doc = controller.fetch(value)
+      item = render_index_field_value(doc, ['dcTitleLangAware', 'title'])
+      t('site.search.similar.prefix', mlt_item: item)
+    else
+      value.to_s
+    end
+  end
+
+  ##
+  # Keys of parameters to preserve across searches as hidden input fields
+  #
+  # @return [Array<Symbol>]
+  def search_param_keys
+    [:qf, :mlt]
+  end
+
+  def news_items
+    @blog_items[0..2].collect do |item|
       {
-        value: q,
-        remove: search_action_path(remove_qf_param(q, params))
+        image_root: nil,
+        headline: {
+          medium: CGI.unescapeHTML(item.title)
+        },
+        url: CGI.unescapeHTML(item.url),
+        img: {
+          rectangle: {
+            src: news_item_img_src(item),
+            alt: nil
+          }
+        },
+        excerpt: {
+          short: CGI.unescapeHTML(item.summary)
+        }
       }
     end
+  end
+
+  def news_item_img_src(item)
+    img_tag = item.content.match(/<img [^>]*>/i)[0]
+    return nil unless img_tag.present?
+    img_tag.match(/src="([^"]*)"/i)[1]
   end
 end

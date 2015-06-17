@@ -2,19 +2,18 @@
 # Provides Blacklight search and browse, within a content Channel
 class ChannelsController < ApplicationController
   include Europeana::Catalog
+  include Europeana::Channels
   include Europeana::Styleguide
+  include BlogFetcher
 
   rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
 
-  self.search_params_logic = Europeana::Blacklight::SearchBuilder.default_processor_chain +
-    [:add_channel_qf_to_api]
-
-  before_filter :find_channel, only: [:index, :show]
-  before_filter :redirect_show_home_to_index, only: :show
-  before_filter :count_all, only: :index, unless: :has_search_parameters?
+  before_filter :find_channel, only: :show
+  before_filter :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
+  before_filter :fetch_blog_items, only: :show
 
   def index
-    show
+    redirect_to_root
   end
 
   def show
@@ -36,15 +35,11 @@ class ChannelsController < ApplicationController
   end
 
   def start_new_search_session?
-    %w(index show).include?(action_name)
+    has_search_parameters?
   end
 
   def show_html_template
-    if has_search_parameters?
-      'templates/Search/Search-results-list'
-    else
-      (@channel.id == :home) ? 'templates/Search/Search-home' : 'templates/Search/Channels-landing'
-    end
+    'templates/Search/' + (has_search_parameters? ? 'Search-results-list' : 'Channels-landing')
   end
 
   def find_channel
@@ -54,19 +49,5 @@ class ChannelsController < ApplicationController
 
   def channel_not_found
     render file: 'public/404.html', status: 404
-  end
-
-  def redirect_show_home_to_index
-    if params[:id] == 'home'
-      redirect_to action: :index
-      return false
-    end
-  end
-
-  ##
-  # Gets the total number of items available over the Europeana API
-  def count_all
-    all_params = { query: '*:*', rows: 0, profile: 'minimal' }
-    @europeana_item_count = repository.search(all_params).total
   end
 end

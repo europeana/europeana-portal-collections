@@ -35,7 +35,7 @@ module Templates
         }
         if @previous_document
           navigation[:next_prev].merge!({
-            prev_url: url_for_document(@previous_document),
+            prev_url: document_path(@previous_document, format: 'html'),
             prev_link_attrs: [
               {
                 name: 'data-context-href',
@@ -46,7 +46,7 @@ module Templates
         end
         if @next_document
           navigation[:next_prev].merge!({
-            next_url: url_for_document(@next_document),
+            next_url: document_path(@next_document, format: 'html'),
             next_link_attrs: [
               {
                 name: 'data-context-href',
@@ -69,7 +69,7 @@ module Templates
             concepts: concept_data,
             creator: {
               name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
-              name_url: dcCreator ? root_url + 'q=' + dcCreator : nil,
+              name_url: dcCreator ? search_path(q: "\"#{dcCreator}\"") : nil,
               life: {
                   from: {
                       long: render_document_show_field_value(document, 'agents.begin'),
@@ -97,8 +97,8 @@ module Templates
 
             meta_additional: {
               geo: {
-                latitude:  "\"" + (render_document_show_field_value(document, 'places.latitude')  || '' ) + "\"",
-                longitude: "\"" + (render_document_show_field_value(document, 'places.longitude') || '' ) + "\"",
+                latitude:  '"' + (render_document_show_field_value(document, 'places.latitude')  || '' ) + '"',
+                longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '' ) + '"',
                 long_and_lat: has_long_and_lat,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
                 labels: {
@@ -133,71 +133,20 @@ module Templates
             type: render_document_show_field_value(document, 'proxies.dcType')
 
           },
+            
           related: {
             title: t('site.object.similar-items') + ':',
-            items: [
+            more_items_query: search_path(mlt: document.id),
+            items: @similar.map { |doc|
               {
-                title: 'one',
+                url: document_path(doc, format: 'html'),
+                title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
                 img: {
-                 rectangle: {
-                   alt: 'one',
-                   src: 'one'
-                 }
-                },
-                headline: {
-                  medium: 'M'
-                },
-                text: {
-                  short: 'short-excerpt'
+                  alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+                  src: render_document_show_field_value(doc, 'edmPreview')
                 }
-              },
-              {
-                title: 'two',
-                img: {
-                  rectangle: {
-                    alt: 'one',
-                    src: 'one'
-                  }
-                 },
-                headline: {
-                  medium: 'M'
-                },
-                text: {
-                  short: 'short-excerpt'
-                }
-              },
-              {
-                title: 'three',
-                img: {
-                  rectangle: {
-                    alt: 'one',
-                    src: 'one'
-                  }
-                 },
-                headline: {
-                  medium: 'M'
-                },
-                text: {
-                  short: 'short-excerpt'
-                }
-              },
-              {
-                title: 'four',
-                img: {
-                  rectangle: {
-                    alt: 'one',
-                    src: 'one'
-                  }
-                 },
-                headline: {
-                  medium: 'M'
-                },
-                text: {
-                  short: 'short-excerpt'
-                }
-
               }
-            ]
+            }
           }
         }
       end
@@ -258,11 +207,10 @@ module Templates
 
       private
 
-      
-      def collect_values(fields)
+      def collect_values(fields, doc = document)
         values = []
         fields.each { |field| 
-          value = render_document_show_field_value(document, field)
+          value = render_document_show_field_value(doc, field)
           values << value unless value.nil?
         }
         values.uniq
@@ -272,31 +220,61 @@ module Templates
       def merge_values(fields, separator = ' ')
         collect_values(fields).join(separator)
       end
-      
-      
+
       def concept_data
-        
-        conceptsType  = collect_values(['proxies.dcType'])
-        conceptsOther = collect_values(['concepts.prefLabel', 'proxies.dcSubject'])
-        concepts      = [].push(*conceptsType).push(*conceptsOther)
-                
-        if(concepts.empty?)
-          return 
+
+        concept_types  = []
+        concepts_other = []
+
+        document.proxies.each{|proxy|
+          val = proxy.fetch('dcType', nil)
+          val.each{|type|
+            concept_types <<  type.downcase 
+          } unless val.blank?
+        }
+
+        if (collect_values(['concepts.prefLabel']).size > 0)
+          document.concepts.each{|concept|
+            val = concept.fetch('prefLabel', nil)
+            val.each{|prefLabel|
+              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)   
+            } unless  val.blank?
+          }
         end
         
+        document.proxies.each{|proxy|
+          val = proxy.fetch('dcSubject', nil)
+          val.each{|subject|
+            (concepts_other << subject.downcase) unless  concept_types.index(subject.downcase) 
+          } unless val.blank?
+        }
+        
+        concept_types = concept_types.uniq
+        concepts_other = concepts_other.uniq
+        
         {
-          content_present: concepts.size > 0,
-          items: concepts.collect do |concept|
+          type_items: (concept_types.size == 0) ? {} :
             {
-              text: concept,
-              url:  root_url + URI.escape('?q=what:' + concept),
-              label:  conceptsType.index(concept)  == 0 ? t('site.object.meta-label.type') + ':' : 
-                      conceptsOther.index(concept) == 0 ? t('site.object.meta-label.concept') + ':' : false
-            }
-          end          
+              label:  t('site.object.meta-label.type'),
+              items: concept_types.collect do |concept|
+                {
+                  text:   concept,
+                  url:    search_path(q: "what:\"#{concept}\""),
+                }
+              end
+            },
+            
+          concept_items:  (concepts_other.size == 0) ? {} :{
+            label:  t('site.object.meta-label.concept'),
+            items: concepts_other.collect do |concept|
+              {
+                text:   concept,
+                url:    search_path(q: "what:\"#{concept}\""),
+              }
+            end          
+          }
         }        
       end
-
       
       def date_data
         datesPL = collect_values([
@@ -311,7 +289,7 @@ module Templates
               label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' : 
                       datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
               text: date,
-              url:  datesCS.index(date) ? root_url + URI.escape('?q=when:' + date) : false
+              url:  datesCS.index(date) ? search_path(q: "when:\"#{date}\"") : false
             }
           end
         }
@@ -360,7 +338,7 @@ module Templates
           items: props.collect do |property|
             {
               text:  property,
-              url:   propertiesCS.index(property)       ? root_url + URI.escape('?q=what:' + property) : false,
+              url:   propertiesCS.index(property)       ? search_path(q: "what:\"#{property}\"") : false,
               label: propertiesFmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : false
             }
           end
