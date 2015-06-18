@@ -324,7 +324,8 @@ module MustacheHelper
     case key
     when :mlt
       response, doc = controller.fetch(value)
-      render_index_field_value(doc, ['dcTitleLangAware', 'title'])
+      item = render_index_field_value(doc, ['dcTitleLangAware', 'title'])
+      t('site.search.similar.prefix', mlt_item: item)
     else
       value.to_s
     end

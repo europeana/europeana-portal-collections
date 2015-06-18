@@ -9,6 +9,7 @@ nl:
     blog-link: link naar de blog
     channels:
       art:
+        description: 
         title: 
       data-types:
         3d: 
@@ -32,10 +33,9 @@ nl:
       menu:
         become-a-provider: 
         copyright: 
+        data-providers: 
         new-collections: 
         search-tips: 
-        site:
-          data-providers: 
         using-myeuropeana: 
     home:
       strapline: 'Ontdek %{total_item_count} items van Europa''s bibliotheken, archiven en musea.  '
@@ -120,5 +120,7 @@ nl:
     search:
       placeholder:
         text: 
+      similar:
+        prefix: 
     site-name-link: 
     sitemap-link: 
