@@ -220,31 +220,61 @@ module Templates
       def merge_values(fields, separator = ' ')
         collect_values(fields).join(separator)
       end
-      
-      
+
       def concept_data
-        
-        conceptsType  = collect_values(['proxies.dcType'])
-        conceptsOther = collect_values(['concepts.prefLabel', 'proxies.dcSubject'])
-        concepts      = [].push(*conceptsType).push(*conceptsOther)
-                
-        if(concepts.empty?)
-          return 
+
+        concept_types  = []
+        concepts_other = []
+
+        document.proxies.each{|proxy|
+          val = proxy.fetch('dcType', nil)
+          val.each{|type|
+            concept_types <<  type.downcase 
+          } unless val.blank?
+        }
+
+        if (collect_values(['concepts.prefLabel']).size > 0)
+          document.concepts.each{|concept|
+            val = concept.fetch('prefLabel', nil)
+            val.each{|prefLabel|
+              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)   
+            } unless  val.blank?
+          }
         end
         
+        document.proxies.each{|proxy|
+          val = proxy.fetch('dcSubject', nil)
+          val.each{|subject|
+            (concepts_other << subject.downcase) unless  concept_types.index(subject.downcase) 
+          } unless val.blank?
+        }
+        
+        concept_types = concept_types.uniq
+        concepts_other = concepts_other.uniq
+        
         {
-          content_present: concepts.size > 0,
-          items: concepts.collect do |concept|
+          type_items: (concept_types.size == 0) ? {} :
             {
-              text: concept,
-              url:  search_path(q: "what:\"#{concept}\""),
-              label:  conceptsType.index(concept)  == 0 ? t('site.object.meta-label.type') + ':' : 
-                      conceptsOther.index(concept) == 0 ? t('site.object.meta-label.concept') + ':' : false
-            }
-          end          
+              label:  t('site.object.meta-label.type'),
+              items: concept_types.collect do |concept|
+                {
+                  text:   concept,
+                  url:    search_path(q: "what:\"#{concept}\""),
+                }
+              end
+            },
+            
+          concept_items:  (concepts_other.size == 0) ? {} :{
+            label:  t('site.object.meta-label.concept'),
+            items: concepts_other.collect do |concept|
+              {
+                text:   concept,
+                url:    search_path(q: "what:\"#{concept}\""),
+              }
+            end          
+          }
         }        
       end
-
       
       def date_data
         datesPL = collect_values([
