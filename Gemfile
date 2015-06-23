@@ -49,7 +49,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'rails_best_practices', require: false
   gem 'rspec-rails', '~> 3.0'
-  gem 'rubocop', '~> 0.29.1', require: false
+  gem 'rubocop', '0.29.1', require: false
 end
 
 group :development do
