@@ -364,6 +364,7 @@ module MustacheHelper
   end
 
   def news_item_img_src(item)
+    return nil unless item.content.present?
     img_tag = item.content.match(/<img [^>]*>/i)[0]
     return nil unless img_tag.present?
     img_tag.match(/src="([^"]*)"/i)[1]
