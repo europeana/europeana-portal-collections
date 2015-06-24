@@ -83,6 +83,12 @@ module Europeana
       api_params
     end
 
+    def fetch_with_hierarchy(id = nil, extra_controller_params = {})
+      response, _document = fetch(id)
+      response.documents.first.hierarchy = repository.fetch_document_hierarchy(id)
+      [response, response.documents.first]
+    end
+
     protected
 
     def search_action_url(options = {})
