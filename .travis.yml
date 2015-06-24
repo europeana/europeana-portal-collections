@@ -1,0 +1,6 @@
+notifications:
+  email: false
+
+sudo: false
+language: ruby
+
