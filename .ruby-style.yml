@@ -1,24 +1,12 @@
 AllCops:
   Include:
-  - "**/*.gemspec"
-  - "**/*.podspec"
-  - "**/*.jbuilder"
   - "**/*.rake"
-  - "**/*.opal"
   - "**/Gemfile"
   - "**/Rakefile"
-  - "**/Capfile"
-  - "**/Guardfile"
-  - "**/Podfile"
-  - "**/Thorfile"
-  - "**/Vagrantfile"
-  - "**/Berksfile"
-  - "**/Cheffile"
-  - "**/Vagabondfile"
   Exclude:
   - "vendor/**/*"
-  - "db/schema.rb"
-  RunRailsCops: false
+  - "db/**/*"
+  RunRailsCops: true
   DisplayCopNames: false
   StyleGuideCopsOnly: false
 Style/AccessModifierIndentation:
@@ -102,9 +90,10 @@ Style/CollectionMethods:
   PreferredMethods:
     collect: map
     collect!: map!
-    find: detect
+    inject: reduce
+    detect: find
     find_all: select
-    reduce: inject
+    find: detect
 Style/CommentAnnotation:
   Description: Checks formatting of special comments (TODO, FIXME, OPTIMIZE, HACK,
     REVIEW).
@@ -265,7 +254,7 @@ Style/MethodName:
 Style/MultilineOperationIndentation:
   Description: Checks indentation of binary operations that span more than one line.
   Enabled: true
-  EnforcedStyle: aligned
+  EnforcedStyle: indented
   SupportedStyles:
   - aligned
   - indented
@@ -492,7 +481,7 @@ Metrics/AbcSize:
 Metrics/BlockNesting:
   Description: Avoid excessive block nesting
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#three-is-the-number-thou-shalt-count
-  Enabled: false
+  Enabled: true
   Max: 3
 Metrics/ClassLength:
   Description: Avoid classes longer than 100 lines of code.
@@ -502,7 +491,7 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Description: A complexity metric that is strongly correlated to the number of test
     cases needed to validate a method.
-  Enabled: false
+  Enabled: true
   Max: 6
 Metrics/LineLength:
   Description: Limit lines to 80 characters.
@@ -516,19 +505,21 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Description: Avoid methods longer than 10 lines of code.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#short-methods
-  Enabled: false
-  CountComments: false
+  Enabled: true
+  CountComments: true
   Max: 10
+  Exclude:
+  - "spec/**/*"
 Metrics/ParameterLists:
-  Description: Avoid parameter lists longer than three or four parameters.
+  Description: Avoid long parameter lists.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#too-many-params
-  Enabled: false
+  Enabled: true
   Max: 5
   CountKeywordArgs: true
 Metrics/PerceivedComplexity:
   Description: A complexity metric geared towards measuring complexity for a human
     reader.
-  Enabled: false
+  Enabled: true
   Max: 7
 Lint/AssignmentInCondition:
   Description: Don't use assignment in conditions.
@@ -551,7 +542,7 @@ Lint/DefEndAlignment:
   - def
 Rails/ActionFilter:
   Description: Enforces consistent use of action filter methods.
-  Enabled: false
+  Enabled: true
   EnforcedStyle: action
   SupportedStyles:
   - action
