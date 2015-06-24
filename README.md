@@ -1,5 +1,7 @@
 # Europeana Channels
 
+[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight)
+
 Europeana Channels as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
 
