@@ -1,0 +1,10 @@
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  host: localhost
+  adapter: mysql2
+  username: root
+  password:
+test:
+  database: europeana_channels_blacklight_test
+  <<: *defaults
