@@ -1,0 +1,243 @@
+en:
+  Symphonies: Symphonies
+  global:
+    about-us: About us
+    blog: blog
+    channel:
+      archaeology: archaeology
+      architecture: architecture
+      art: art
+      fashion: fashion
+      home: Home (all)
+      maps: maps
+      music: music
+      natural-history: natural history
+      newspapers: newspapers
+      performing-arts: performing-arts
+    channels: Channels
+    channels-art: beware of the jabberwocky
+    channels-art-image: Beware of the jabberwocky
+    channels-art-link: beware of the jabberwocky
+    channels-art-url: 
+    channels-fashion: Fashion
+    channels-music: Music
+    channels-music-link: 
+    choose-language: Language
+    email-address: email address
+    exhibitions: Exhibitions
+    facet:
+      advanced:
+        options: Options
+        show:
+          direct:
+            links: 
+          thumbnails: 
+          ugc: 
+      art:
+        form:
+          paintings:
+            genre: Genre
+            medium: Medium
+      carrier: Carrier
+      colour: Colour
+      colour-black-and-white: Black and white
+      country:
+        austria: Austria
+        belgium: Belgium
+        bulgaria: Bulgaria
+        croatia: Croatia
+        cyprus: Cyprus
+        czech: Czech Republic
+        denmark: Denmark
+        estonia: Estonia
+        europe: Europe
+        finland: Finland
+        france: France
+        germany: Germany
+        greece: Greece
+        hungary: Hungary
+        iceland: Iceland
+        ireland: Ireland
+        israel: Israel
+        italy: Italy
+        latvia: Latvia
+        lithuania: Lithuania
+        luxembourg: Luxembourg
+        malta: Malta
+        netherlands: The Netherlands
+        norway: Norway
+        poland: Poland
+        portugal: Portugal
+        romania: Romania
+        russia: Russia
+        serbia: Serbia
+        slovakia: Slovakia
+        slovenia: Slovenia
+        spain: Spain
+        sweden: Sweden
+        switzerland: Switzerland
+        turkey: Turkey
+        ukraine: Ukraine
+        unitedkingdom: United Kingdom
+      creator: 
+      header:
+        channel: Channels
+        country: Country
+        data_provider: Data Provider
+        language: Language
+        language_of_description: Language of Description
+        provider: Provider
+        reusability: Can I use it?
+        type: Media
+        year: Date
+      language:
+        de: German
+        en: English
+        es: Spanish
+        fr: French
+        hu: Hungarian
+        it: Italian
+        mul: Multi
+        nl: Dutch
+        pt: Portugese
+        sv: Swedish
+        yi: Yiddish
+      more: 
+      more-refinements: More refinements
+      resource:
+        type: 
+      reusability:
+        advanced: Advanced
+        advanced-cc-by: CC-BY
+        advanced-cc-by-nc: CC-By-NC
+        advanced-cc-by-nc-nd: CC-BY-NC-ND
+        advanced-cc-by-nc-sa: CC-BY-NC-SA
+        advanced-cc-by-nd: CC-BY-ND
+        advanced-cc-by-sa: CC-BY-SA
+        advanced-cc0: CC0
+        advanced-orphan-work: Orphan Work
+        advanced-pdm: Public Domain Marked
+        advanced-rarr: Restricted access - Rights reserved
+        advanced-rrfa: Rights reserved - Free access
+        advanced-rrpa: Rights reserved - Paid access
+        advanced-ucs: Unknown copyright status
+        open: Yes with attribution
+        permission: Only with permission
+        restricted: Yes with restrictions
+        simple: Simple
+      source: Source
+      type:
+        3d: 3D
+        image: Image
+        sound: Sound
+        text: Text
+        video: Video
+      type-image:
+        orientation:
+          label: Image orientation
+          landscape: Landscape
+          portrait: Portrait
+        quality:
+          all: Show all
+          hq-only: Show only high quality
+          label: Quality
+        size:
+          explanation: What do these sizes mean?
+          label: Image size
+          large: Large (%{data})
+          medium: Medium (%{data})
+          small: Small (%{data})
+          xl: Extra large (%{data})
+      type-sound:
+        duration:
+          label: Audio duration
+          long: Long (%{data})
+          medium: Medium (%{data})
+          short: Short (%{data})
+          very-short: Very short (%{data})
+      type-video:
+        duration:
+          label: Video duration
+          long: Long (%{data})
+          medium: Medium (%{data})
+          short: Short (%{data})
+      year:
+        from: from
+        to: to
+    find-us-elsewhere: Who is afraid of the jabberwocky?
+    forgot-password: Forgot your password?
+    genres: genres
+    genres-chamber-music: Chamber music
+    genres-classical-music: Classical music
+    genres-concertos: Concertos
+    genres-non-western-classical-music: Non-western classica music
+    genres-opera: Opera
+    genres-popular-music: Popular music
+    genres-traditional-music: Traditional music
+    help: Help
+    home: Home
+    language-basque: Basque
+    language-bulgarian: Bulgarian
+    language-catalan: Catalan
+    language-croatian: Croatian
+    language-czech: Czech
+    language-danish: Danish
+    language-dutch: Dutch
+    language-english: English
+    language-estonian: Estionian
+    language-finnish: Finnish
+    language-french: French
+    language-gaelic: Gaelic
+    language-german: German
+    language-greek: Greek
+    language-hungarian: Hungarian
+    language-icelandic: Icelandic
+    language-italian: Italian
+    language-latvian: Latvian
+    language-lithuanian: Lithuanian
+    language-maltese: Maltese
+    language-norwegian: Norwegian
+    language-polish: Polish
+    language-portuguese: Portuguese
+    language-romanian: Romanian
+    language-russian: Russian
+    language-slovakian: Slovakian
+    language-slovenian: Slovenian
+    language-spanish: Spanish
+    language-swedish: Swedish
+    language-ukranian: Ukranian
+    login: Login
+    logo-image: 
+    more:
+      load-more: Load more
+      show-more: Show more
+      view-more: View more
+    more-info: More information
+    our-mission: Our mission
+    our-mission-text: Who is afraid of the jabberwocky?
+    our-sites: our sites
+    password: Password
+    refine-your-search: Refine your search
+    register: Register
+    rights-box:
+      background-image-provider: 
+      background-image-provider-url: 
+      background-image-rights-icons-alt: 
+      background-image-title: 
+      background-image-title-url: 
+    search-area:
+      search-button-image-alt: Search
+      search-placeholder-text: Add a search term
+    search-collections: search collections
+    search-collections-text: 
+    sitemap: Sitemap
+    terms-and-policies: Terms and policies
+    type: type
+  'no': Norway
+  pl: Portugal
+  site:
+    facet:
+      language:
+        show:
+          results: 
+        show-results-all: 

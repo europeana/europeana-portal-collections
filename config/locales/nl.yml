@@ -1,0 +1,126 @@
+nl:
+  global:
+    labs-link: 'link naar labs '
+    labs-text: tekst over labs
+    pro-link: link naar pro
+    pro-text: tekst voor pro
+    settings: tekst voor settings
+  site:
+    blog-link: link naar de blog
+    channels:
+      art:
+        description: 
+        title: 
+      data-types:
+        3d: 
+        count: 
+        images: 
+        moving-images: 
+        sound: 
+        texts: 
+      labels:
+        credits: 
+        recent: 
+        spotlight-on: 
+      music:
+        description: 
+        title: 
+    facet:
+      language:
+        show:
+          results: Resulaten
+    footer:
+      menu:
+        become-a-provider: 
+        copyright: 
+        data-providers: 
+        new-collections: 
+        search-tips: 
+        using-myeuropeana: 
+    home:
+      strapline: 'Ontdek %{total_item_count} items van Europa''s bibliotheken, archiven en musea.  '
+    more: Meer...
+    my-europeana: Mijn Europeana
+    my-europeana-link: Link naar mijn Europeana
+    news: Nieuws
+    object:
+      actions:
+        download: Download
+        download-additional: 
+        downloaddata: Download informatie
+        show-less-data: Toon minder informatie
+        show-more-data: Toon meer informatie
+      meta-label:
+        concept: Soort object
+        concepts: Categorieën
+        creation-date: Datum vervaardigd
+        creator: Van
+        data-provider: 
+        dates: 
+        description: Omschrijving
+        format: Formaat
+        latitude: Breedtegraad
+        location: Plaats
+        longitude: Lengtegraad
+        map: Kaart
+        map-tiles: Tegel
+        period: Tijdvak
+        properties: Eigenschappen
+        provenance: Herkomst
+        provided-by: 
+        provider: 
+        providing-country: 
+        publisher: Uitgeverij
+        rights: Mag ik dit gebruiken?
+        type: Type
+      nav:
+        next: 
+        prev: 
+        return-to-search: 
+      points:
+        east: 
+        north: 
+        south: 
+        west: 
+      show-more-similar-items: toon meer
+      similar-items: 
+    results:
+      actions:
+        configure-actions: 
+        dutchmasters: 
+        favouriteart: 
+        label: 
+        newcollection: 
+        product-save: 
+        saveto: 
+        show-all-collections: 
+      list:
+        all-results:
+          3D: 
+          images: 
+          text: 
+          video: 
+        count-and-terms: 
+        empty: 
+        empty-with-terms: 
+        header: 
+        header-and: 
+        in-channel: 
+        product-3D: 
+        product-image: 
+        product-sound: 
+        product-text: 
+        product-video: 
+        results-relevance: 
+        single-result: 
+        view:
+          grid: 
+          list: 
+        view-at-provider: 
+    search:
+      placeholder:
+        text: 
+      similar:
+        prefix: 
+    site-name-link: 
+    sitemap-link: 

@@ -1,15 +1,19 @@
 ##
 # Provides Blacklight search and browse, within a content Channel
 class ChannelsController < ApplicationController
-  include EuropeanaCatalog
+  include Europeana::Catalog
+  include Europeana::Channels
+  include Europeana::Styleguide
+  include BlogFetcher
 
-  before_filter :find_channel, only: [:index, :show]
-  before_filter :retrieve_response_and_document_list,
-                if: :has_search_parameters?
-  before_filter :redirect_show_home_to_index, only: :show
+  rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
+
+  before_filter :find_channel, only: :show
+  before_filter :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
+  before_filter :fetch_blog_items, only: :show
 
   def index
-    show
+    redirect_to_root
   end
 
   def show
@@ -30,20 +34,12 @@ class ChannelsController < ApplicationController
     @_prefixes_with_partials ||= super | %w(catalog)
   end
 
-  def search_action_url(options = {})
-    url_for(options.merge(action: params[:action]))
-  end
-
   def start_new_search_session?
-    %w(index show).include?(action_name)
+    has_search_parameters?
   end
 
   def show_html_template
-    if has_search_parameters?
-      'search-results'
-    else
-      (@channel.id == :home) ? 'index' : 'show'
-    end
+    'templates/Search/' + (has_search_parameters? ? 'Search-results-list' : 'Channels-landing')
   end
 
   def find_channel
@@ -51,12 +47,7 @@ class ChannelsController < ApplicationController
     @channel ||= Channel.find(id)
   end
 
-  def retrieve_response_and_document_list
-    params_for_channels = params.merge(channels_search_params)
-    (@response, @document_list) = get_search_results(params_for_channels)
-  end
-
-  def redirect_show_home_to_index
-    redirect_to action: :index && return if params[:id] == 'home'
+  def channel_not_found
+    render file: 'public/404.html', status: 404
   end
 end

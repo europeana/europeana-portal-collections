@@ -1,8 +1,3 @@
 ---
-:hero: music.jpg
-:query: ! 'PROVIDER: "DISMARC+-+EuropeanaConnect" OR PROVIDER:
-  "Cité+de+la+musique" OR PROVIDER:
-  "IRCAM-Institut+de+Recherche+et+Coordination+Acoustique%2FMusique" OR
-  (what: Music) OR (what: Sheet Music) OR (what: Musical Instrument) OR
-  (what: sound) OR (what: partitur) OR (what: oper) NOT DATA_PROVIDER:
-  "Progetto ArtPast- CulturaItalia"'
+:query: ! 'PROVIDER: "DISMARC+-+EuropeanaConnect" OR PROVIDER: "Cité+de+la+musique" OR PROVIDER: "IRCAM-Institut+de+Recherche+et+Coordination+Acoustique%2FMusique" OR (what: Music) OR (what: Música) OR (what: musique) OR (what: Musik) OR (what: musica) OR (what: muziek) OR (what: muzyka) OR (what: "traditional and folk music") OR (what: "western classical music") OR (what: "folk songs") OR (what: jazz) OR (what: "popular music") OR (what: Sheet Music) OR (what: Musical Instrument) OR (what: sound) OR (what: partitur) OR (what: libretto) OR (what: oper) OR (what: (Concerto OR Symphony OR Sonata OR Fugue OR Motet OR Estampie OR "Gregorian Chant" OR Saltarello OR Organum OR Ballade OR Chanson OR Galliard OR Laude OR Madrigal OR Pavane OR Ricercar OR Tiento OR Toccata OR Cantata OR Chaconne OR Gavotte OR Gigue OR Minuet OR Oratorio OR Partita OR Passacaglia OR Sarabande OR Sinfonia OR Lied OR Mazurka OR "Music hall" OR Polonaise OR Quartet OR Quintet OR Requiem OR Rhapsody OR Rondo OR Scherzo OR "Sinfonia concertante" OR Waltz)) OR "Jussi Björling" OR "Björling, Jussi" OR "Enrico Caruso" OR "Caruso, Enrico" OR "Maria Callas" OR "Callas, Maria" OR "Jenny Lind" OR "Lind, Jenny" OR "Faustina Bordoni" OR Farinelli OR Senesino OR "Kirsten Flagstad" OR "Flagstad, Kirsten" OR "Göta Ljungberg" OR "Ljungberg, Göta" NOT DATA_PROVIDER: "Progetto ArtPast- CulturaItalia"'
+:home_bg_image: sample/thumb-music.jpg

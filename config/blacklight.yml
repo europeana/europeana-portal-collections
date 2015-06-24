@@ -1,0 +1,8 @@
+default: &default
+  europeana_api_key: <%= ENV['EUROPEANA_API_KEY'] %>
+development:
+  <<: *default
+test:
+  <<: *default
+production:
+  <<: *default

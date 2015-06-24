@@ -1,66 +1,71 @@
 source 'https://rubygems.org'
 
 ruby '2.2.1'
+gem 'rails', '4.2.1'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
-# Use MySQL
-gem 'mysql2'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+# Use Europeana's REST API as the Blacklight catalog data source
+gem 'europeana-blacklight',
+  require: 'europeana/blacklight',
+  github: 'europeana/europeana-blacklight',
+  ref: '52f7ab4'
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster.
-# Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'europeana-api',
+  require: 'europeana/api',
+  github: 'rwd/europeana-api-client-ruby',
+  ref: '102e7dc'
+
+# Use the Europeana styleguide for UI components (templates)
+gem 'europeana-styleguide',
+  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
+  ref: '8933a2e'
+
+# Use a forked version of stache with a downstream fix, until merged upstream
+# @see https://github.com/agoragames/stache/pull/53
+gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
+
+# pending merge of https://github.com/projectblacklight/blacklight/pull/1210
+gem 'blacklight',
+  github: 'rwd/blacklight', ref: '5132db4'
+gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
+gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
-
-# Spring speeds up development by keeping your application running in the
-# background. Read more: https://github.com/rails/spring
-gem 'spring', group: :development
-
-# Use Blacklight for searching and browsing
-gem 'blacklight', '~> 5.9.3'
-
-# Use the Europeana REST API
-gem 'europeana', git: 'https://github.com/rwd/europeana-client-ruby.git',
-                 ref: 'e0d9828'
-
-# Use the Europeana REST API as though it was Solr
-gem 'rsolr-europeana', git: 'https://github.com/rwd/rsolr-europeana.git',
-                       ref: 'e1a56de'
-
-# Ruby 2.2 compatible version
-gem 'eventmachine', '~> 1.0.6'
-
-# Use puma as the app server
+gem 'jquery-rails'
+gem 'mysql2'
 gem 'puma', '~> 2.11.0'
+gem 'redis-rails', '~> 4.0'
+gem 'sass-rails', '~> 4.0.3'
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
 
-# 12-factorisation
-gem 'rails_12factor', '~> 0.0.3', group: :production
-gem 'dotenv-rails', '~> 1.0.2', groups: [:development, :test]
+group :production do
+  gem 'rails_12factor', '~> 0.0.3'
+end
 
-# Access an IRB console on exception pages or by using <%= console %> in views
-gem 'web-console', '~> 2.0', group: :development
+group :development, :test do
+  gem 'brakeman', require: false
+  gem 'capybara', '~> 2.4.0'
+  gem 'dotenv-rails', '~> 1.0.2'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'poltergeist'
+  gem 'rails_best_practices', require: false
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rubocop', '~> 0.29.1', require: false
+end
 
-# Security analysis
-gem 'brakeman', require: false, groups: [:development, :test]
+group :development do
+  gem 'spring', '~> 1.3.6'
+  gem 'web-console', '~> 2.0'
+end
 
-# Ruby Style Guide compliance
-gem 'rubocop', '0.29.1', require: false, groups: [:development, :test]
+group :test do
+  gem 'coveralls', require: false
+  gem 'webmock', '~> 1.21.0'
+end
 
-# Rails best practices: code metrics for Rails
-gem 'rails_best_practices', require: false, groups: [:development, :test]
+group :doc do
+  gem 'sdoc', '~> 0.4.0'
+end
 
-# Use RSpec for tests
-gem 'rspec-rails', '~> 3.0', groups: [:development, :test]
-
-gem 'coveralls', require: false, group: :test
+group :localeapp do
+  gem 'localeapp', '~> 0.9.0'
+end

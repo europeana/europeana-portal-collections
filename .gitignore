@@ -12,11 +12,14 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
+/log/*
 /tmp
 
 # Ignore database config file.
 /config/database.yml
+
+# Ignore Redis config file.
+/config/redis.yml
 
 # Ignore rvm files.
 .ruby-version
@@ -40,3 +43,6 @@
 
 # Ignore Cloud Foundry manifest
 /manifest.yml
+
+# Ignore Redis snapshot
+*.rdb
