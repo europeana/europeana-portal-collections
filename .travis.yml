@@ -4,3 +4,5 @@ notifications:
 sudo: false
 language: ruby
 
+rvm:
+  - 2.2.1
