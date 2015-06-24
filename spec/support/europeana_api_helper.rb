@@ -12,14 +12,14 @@ module EuropeanaAPIHelper
       # API Record
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+.json}).
         with(query: hash_including(wskey: 'test')).
-        to_return { |request|
+        to_return do |request|
           id = request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
           {
             body: '{"success":true,"object":{"about": "' + id + '"}}',
             status: 200,
             headers: { 'Content-Type' => 'text/json' }
           }
-        }
+        end
 
       # Hierarchy API
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).

@@ -84,8 +84,9 @@ module Europeana
     end
 
     def fetch_with_hierarchy(id = nil, extra_controller_params = {})
-      response, _document = fetch(id)
-      response.documents.first.hierarchy = repository.fetch_document_hierarchy(id)
+      response, _document = fetch(id, extra_controller_params)
+      hierarchy = repository.fetch_document_hierarchy(id)
+      response.documents.first.hierarchy = hierarchy
       [response, response.documents.first]
     end
 
