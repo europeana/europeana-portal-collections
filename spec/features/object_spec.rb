@@ -14,8 +14,8 @@ RSpec.feature 'Object page', :type => :feature do
       # without the following 'expect' assertion the subsequent 'find' will fail
       
       expect(page).to have_css('.searchbar button.search-submit')
-      find('.searchbar button.search-submit').trigger('click')
-
+      
+      page.execute_script '$(".searchbar button.search-submit").trigger("click")'
 
       sleep 2
             

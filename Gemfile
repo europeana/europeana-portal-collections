@@ -17,7 +17,7 @@ gem 'europeana-api',
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '9857740ec2'
+  ref: 'e941a695a7'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rails_best_practices', require: false
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '~> 0.29.1', require: false
+  gem 'selenium-webdriver'
 end
 
 group :development do

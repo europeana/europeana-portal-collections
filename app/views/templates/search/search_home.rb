@@ -68,7 +68,7 @@ module Templates
           :news  =>  {
             :items  => news_items,
             :blogurl => 'http://blog.europeana.eu/'
-        },
+          }
         
       }
       end

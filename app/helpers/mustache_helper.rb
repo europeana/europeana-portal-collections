@@ -73,7 +73,10 @@ module MustacheHelper
       #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/global.js' },
       
       #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/require.js',  data_main: 'http://localhost/Europeana-Patternlab/public/js/dist/main'},
-      { path: 'http://develop.styleguide.eanadev.org/js/dist/require.js',  data_main: 'http://develop.styleguide.eanadev.org/js/dist/main'},
+      {
+        path: 'http://develop.styleguide.eanadev.org/js/dist/require.js',
+        data_main: 'http://develop.styleguide.eanadev.org/js/dist/main'
+      },
 
       # Blacklight dependencies
       #{ path: asset_path('turbolinks.js') },
@@ -82,7 +85,7 @@ module MustacheHelper
       #{ path: asset_path('blacklight/checkbox_submit.js') },
       #{ path: asset_path('blacklight/bookmark_toggle.js') },
       #{ path: asset_path('blacklight/ajax_modal.js') },
-#      { path: asset_path('blacklight/search_context.js') }
+      #{ path: asset_path('blacklight/search_context.js') }
       #{ path: asset_path('blacklight/collapsable.js') },
       #{ path: asset_path('bootstrap/transition.js') },
       #{ path: asset_path('bootstrap/collapse.js') },
@@ -342,24 +345,28 @@ module MustacheHelper
     [:qf, :mlt]
   end
 
+  #[@blog_items.size, 2, 0].min
+  
   def news_items
-    @blog_items[0..2].collect do |item|
-      {
-        image_root: nil,
-        headline: {
-          medium: CGI.unescapeHTML(item.title)
-        },
-        url: CGI.unescapeHTML(item.url),
-        img: {
-          rectangle: {
-            src: news_item_img_src(item),
-            alt: nil
+    if(@blog_items.size>1)
+      @blog_items[0..2].collect do |item|
+        {
+          image_root: nil,
+          headline: {
+            medium: CGI.unescapeHTML(item.title)
+          },
+          url: CGI.unescapeHTML(item.url),
+          img: {
+            rectangle: {
+              src: news_item_img_src(item),
+              alt: nil
+            }
+          },
+          excerpt: {
+            short: CGI.unescapeHTML(item.summary)
           }
-        },
-        excerpt: {
-          short: CGI.unescapeHTML(item.summary)
         }
-      }
+      end
     end
   end
 
