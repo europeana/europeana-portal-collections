@@ -147,6 +147,10 @@ module Templates
                 }
               }
             }
+          },
+          timestamps: {
+            created: "2014-05-27T20:14:08.870Z",
+            updated: "2014-09-07T15:50:25.953Z"
           }
         }
       end
@@ -166,44 +170,11 @@ module Templates
         }
       end
 
-      def data
-        {
-          #agent_pref_label: render_document_show_field_value(document, 'agents.prefLabel'),
-          #agent_begin: render_document_show_field_value(document, 'agents.begin'),
-          #agent_end: render_document_show_field_value(document, 'agents.end'),
-
-          #concepts: render_document_show_field_value(document, 'concepts.prefLabel'),
-
-          #dc_description: render_document_show_field_value(document, 'proxies.dcDescription'),
-          #dc_creator: render_document_show_field_value(document, 'proxies.dcCreator'),
-
-          #dc_format: render_document_show_field_value(document, 'proxies.dcFormat'),
-          #dc_identifier: render_document_show_field_value(document, 'proxies.dcIdentifier'),
-
-          #dc_terms_created: render_document_show_field_value(document, 'proxies.dctermsCreated'),
-          #dc_terms_created_web: render_document_show_field_value(document, 'aggregations.webResources.dctermsCreated'),
-
-          #dc_terms_extent: render_document_show_field_value(document, 'proxies.dctermsExtent'),
-          #dc_title: render_document_show_field_value(document, 'proxies.dcTitle'),
-          #dc_type: render_document_show_field_value(document, 'proxies.dcType'),
-
-          #edm_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
-          #edm_dataset_name: render_document_show_field_value(document, 'edmDatasetName'),
-          #edm_is_shown_at: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-          edm_is_shown_by: render_document_show_field_value(document, 'aggregations.edmIsShownBy'),
-          #edm_language: render_document_show_field_value(document, 'europeanaAggregation.edmLanguage'),
-          #edm_preview: render_document_show_field_value(document, 'europeanaAggregation.edmPreview'),
-          #edm_provider: render_document_show_field_value(document, 'aggregations.edmProvider'),
-          #edm_data_provider: render_document_show_field_value(document, 'aggregations.edmDataProvider'),
-          #edm_rights:  render_document_show_field_value(document, 'aggregations.edmRights'),
-
-          #title: doc_title,
-          #title_extra: doc_title_extra,
-          #type: render_document_show_field_value(document, 'type'),
-
-          #year: render_document_show_field_value(document, 'year')
-        }
-      end
+      #def data
+      #  {
+      #    edm_is_shown_by: render_document_show_field_value(document, 'aggregations.edmIsShownBy'),
+      #  }
+      #end
 
       private
 
@@ -223,8 +194,9 @@ module Templates
 
       def concept_data
 
-        concept_types  = []
-        concepts_other = []
+        concept_types    = []
+        concepts_other   = []
+        concept_subjects = []
 
         document.proxies.each{|proxy|
           val = proxy.fetch('dcType', nil)
@@ -237,20 +209,25 @@ module Templates
           document.concepts.each{|concept|
             val = concept.fetch('prefLabel', nil)
             val.each{|prefLabel|
-              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)   
+              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)
             } unless  val.blank?
           }
+        end
+
+        if(collect_values(['aggregations.edmUgc']).size > 0)
+          concepts_other << t('site.object.meta-label.ugc')
         end
         
         document.proxies.each{|proxy|
           val = proxy.fetch('dcSubject', nil)
           val.each{|subject|
-            (concepts_other << subject.downcase) unless  concept_types.index(subject.downcase) 
+            (concept_subjects << subject.downcase) unless  concept_types.index(subject.downcase)
           } unless val.blank?
         }
         
-        concept_types = concept_types.uniq
-        concepts_other = concepts_other.uniq
+        concept_types    = concept_types.uniq
+        concepts_other   = concepts_other.uniq
+        concept_subjects = concept_subjects.uniq
         
         {
           type_items: (concept_types.size == 0) ? {} :
@@ -267,6 +244,16 @@ module Templates
           concept_items:  (concepts_other.size == 0) ? {} :{
             label:  t('site.object.meta-label.concept'),
             items: concepts_other.collect do |concept|
+              {
+                text:   concept,
+                url:    concept == t('site.object.meta-label.ugc') ? root_url + ("search?f[UGC][]=true") : search_path(q: "what:\"#{concept}\""),
+              }
+            end          
+          },
+          
+          concept_subjects:  (concept_subjects.size == 0) ? {} :{
+            label:  t('site.object.meta-label.subject'),
+            items: concept_subjects.collect do |concept|
               {
                 text:   concept,
                 url:    search_path(q: "what:\"#{concept}\""),
@@ -297,25 +284,52 @@ module Templates
 
       
       def provenance_data
-        # origin
 
-        originsPublisher     = collect_values(['proxies.dcPublisher'])
-        originsProvider      = collect_values(['aggregations.edmProvider'])
-        originsDataProvider  = collect_values(['aggregations.edmDataProvider'])
-        originsCountry       = collect_values(['europeanaAggregation.edmCountry'])
-        originsOther         = collect_values(['proxies.dctermsProvenance', 'proxies.dcSource', 'proxies.dctermsReferences', 'proxies.dcIdentifier'])
-          
-        origins = [].push(*originsPublisher).push(*originsProvider).push(*originsDataProvider).push(*originsCountry).push(*originsOther)
+        require 'time'
+
+        origins_publisher     = collect_values(['proxies.dcPublisher'])
+        origins_provider      = collect_values(['aggregations.edmProvider'])
+        origins_provenance    = collect_values(['proxies.dctermsProvenance'])
+        origins_data_provider = collect_values(['aggregations.edmDataProvider'])
+        origins_country       = collect_values(['europeanaAggregation.edmCountry'])
+        origins_identifier    = collect_values(['proxies.dcIdentifier'])
+        originsOther          = collect_values(['proxies.dcSource', 'proxies.dctermsReferences', 'proxies.dcIdentifier'])
+        origins_t_created     = collect_values(['timestamp_created'])
+        origins_t_updated     = collect_values(['timestamp_created'])
+        origins_t             = []
+        
+        strf = "%Y-%m-%d";
+        
+        if(origins_t_created.size > 0)
+          date = Time.parse(origins_t_created[0]) rescue nil
+          if(!date.nil?)
+            origins_t.push(t('site.object.meta-label.timestamp_created', timestamp_created: date.strftime(strf) ))
+          end
+        end
+        if(origins_t_updated.size > 0)
+          date = Time.parse(origins_t_updated[0]) rescue nil
+          if(!date.nil?)
+            origins_t.push(t('site.object.meta-label.timestamp_updated', timestamp_updated: date.strftime(strf) ))
+          end
+        end
+        
+        origins = []
+        origins.push(*origins_identifier).push(*origins_provenance).push(*origins_t).push(*origins_publisher)
+        origins.push(*origins_provider).push(*origins_data_provider).push(*origins_country)
+        origins.push(*originsOther)
+
         {
           content_present: origins.size > 0,
           items: origins.uniq.collect do |origin|
             {
-              label: originsPublisher.index(origin)    == 0 ? t('site.object.meta-label.publisher') + ':' : 
-                     originsProvider.index(origin)     == 0 ? t('site.object.meta-label.provider') + ':' : 
-                     originsDataProvider.index(origin) == 0 ? t('site.object.meta-label.data-provider') + ':' :
-                     originsCountry.index(origin)      == 0 ? t('site.object.meta-label.providing-country') + ':' : false,
+              label: origins_publisher.index(origin)     == 0 ? t('site.object.meta-label.publisher') + ':' : 
+                     origins_provider.index(origin)      == 0 ? t('site.object.meta-label.provider') + ':' : 
+                     origins_provenance.index(origin)    == 0 ? t('site.object.meta-label.provenance') + ':' : 
+                     origins_data_provider.index(origin) == 0 ? t('site.object.meta-label.data-provider') + ':' :
+                     origins_identifier.index(origin)    == 0 ? t('site.object.meta-label.identifier') + ':' :
+                     origins_country.index(origin)       == 0 ? t('site.object.meta-label.providing-country') + ':' : false,
               text: origin,
-              url:  originsDataProvider.index(origin) ? render_document_show_field_value(document, 'aggregations.edmIsShownAt') : false
+              url:  origins_data_provider.index(origin) ? render_document_show_field_value(document, 'aggregations.edmIsShownAt') : false
             }
           end
         }

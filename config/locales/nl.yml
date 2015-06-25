@@ -59,6 +59,7 @@ nl:
         dates: 
         description: Omschrijving
         format: Formaat
+        identifier: 
         latitude: Breedtegraad
         location: Plaats
         longitude: Lengtegraad
@@ -66,13 +67,19 @@ nl:
         map-tiles: Tegel
         period: Tijdvak
         properties: Eigenschappen
-        provenance: Herkomst
+        provenance: Bron
         provided-by: 
         provider: 
         providing-country: 
         publisher: Uitgeverij
         rights: Mag ik dit gebruiken?
+        source: Bron
+        subject: 
+        timestamp_created: 
+        timestamp_updated: 
+        toc: 
         type: Type
+        ugc: 
       nav:
         next: 
         prev: 
