@@ -19,7 +19,7 @@ class PortalController < ApplicationController
   # GET /record/:provider_id/:record_id
   def show
     @response, @document = fetch_with_hierarchy(doc_id)
-    _mlt_response, @similar = @document.more_like_this
+    _mlt_response, @similar = repository.more_like_this(@document, 'who')
 
     respond_to do |format|
       format.html do
