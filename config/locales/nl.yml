@@ -53,6 +53,7 @@ nl:
       meta-label:
         concept: Soort object
         concepts: Categorieën
+        contributor: 
         creation-date: Datum vervaardigd
         creator: Van
         data-provider: 
@@ -60,11 +61,13 @@ nl:
         description: Omschrijving
         format: Formaat
         identifier: 
+        language: Taal
         latitude: Breedtegraad
         location: Plaats
         longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
+        people: 
         period: Tijdvak
         properties: Eigenschappen
         provenance: Bron

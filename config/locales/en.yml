@@ -53,6 +53,7 @@ en:
       meta-label:
         concept: Concept
         concepts: Categories
+        contributor: Contributor
         creation-date: Creation date
         creator: Creator
         data-provider: Data provider
@@ -60,11 +61,13 @@ en:
         description: Description
         format: Format
         identifier: Identifier
+        language: Language
         latitude: Latitude
         location: Location
         longitude: Longitude
         map: Map
         map-tiles: Tiles
+        people: People
         period: Period
         properties: Properties
         provenance: Provenance
@@ -75,8 +78,8 @@ en:
         rights: Can I use this?
         source: Source
         subject: Subject
-        timestamp_created: 'Added to Europeana (%{timestamp_created})'
-        timestamp_updated: 'Last updated in Europeana (%{timestamp_updated})'
+        timestamp_created: Added to Europeana (%{timestamp_created})
+        timestamp_updated: Last updated in Europeana (%{timestamp_updated})
         toc: Table of Contents
         type: Type
         ugc: User contributed content

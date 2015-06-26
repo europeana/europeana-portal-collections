@@ -61,34 +61,9 @@ module Templates
 
       
       def content
-        
-        dcCreator = render_document_show_field_value(document, 'proxies.dcCreator')
-        
         {
           object: {
             concepts: concept_data,
-            creator: {
-              name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
-              name_url: dcCreator ? search_path(q: "\"#{dcCreator}\"") : nil,
-              life: {
-                  from: {
-                      long: render_document_show_field_value(document, 'agents.begin'),
-                      short: render_document_show_field_value(document, 'agents.end')
-                  },
-                  to: {
-                      long: render_document_show_field_value(document, 'agents.end'),
-                      short: render_document_show_field_value(document, 'agents.end')
-                  }
-              },
-              #title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
-              title: t('site.object.meta-label.creator'),
-              biography: {
-                  text:        nil,
-                  source:     nil,
-                  source_url: nil
-              }
-            },
-
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
             dates: date_data,
             description: render_document_show_field_value(document, 'proxies.dcDescription'),
@@ -124,6 +99,7 @@ module Templates
               content_present:     collect_values(['aggregations.edmDataProvider', 'europeanaAggregation.edmCountry']).length > 0
             },
 
+            people: people_data,
             provenance: provenance_data,
             properties: property_data,
             
@@ -159,13 +135,6 @@ module Templates
         {
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
-          #download:       t('site.object.actions.downloaddata'),
-
-          #agent:       t('site.object.meta-label.creator') + ':',
-          #creator:     t('site.object.meta-label.creator') + ':',
-          #dc_type:     t('site.object.meta-label.type') + ':',
-          #description: t('site.object.meta-label.description') + ':',
-
           rights: t('site.object.meta-label.rights')
         }
       end
@@ -192,6 +161,47 @@ module Templates
         collect_values(fields).join(separator)
       end
 
+      def people_data
+        
+        dc_creator     = render_document_show_field_value(document, 'proxies.dcCreator')
+        dc_contributor = render_document_show_field_value(document, 'proxies.dcContributor')
+        
+        dc_creator_begin = render_document_show_field_value(document, 'agents.begin') 
+        dc_creator_end   = render_document_show_field_value(document, 'agents.end')
+        
+        {
+          content_present: true,
+          title: t('site.object.meta-label.people'),
+          creator: {
+            title: t('site.object.meta-label.creator'),
+            name:  merge_values(['proxies.dcCreator', 'agents.prefLabel'], ', '),
+            url:   dc_creator ? search_path(q: "\"#{dc_creator}\"") : nil,
+            life: {
+                content_present: (!dc_creator_begin.nil? || !dc_creator_end.nil?),
+                from: {
+                    long:  dc_creator_begin,
+                    short: dc_creator_begin
+                },
+                to: {
+                    long:  dc_creator_end,
+                    short: dc_creator_end
+                }
+            },
+            biography: {
+                text:        nil,
+                source:     nil,
+                source_url: nil
+            }
+          },
+          contributor: {
+            title: t('site.object.meta-label.contributor'),            
+            name: dc_contributor,
+            url:  dc_contributor ? search_path(q: "\"#{dc_contributor}\"") : nil,
+          } 
+          
+        }
+      end
+      
       def concept_data
 
         concept_types    = []
@@ -337,11 +347,12 @@ module Templates
       
       def property_data
         
-        properties    = collect_values(['proxies.dctermsExtent'])
-        propertiesCS  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
-        propertiesFmt = collect_values(['aggregations.webResources.dcFormat'])
-          
-        props = [].push(*propertiesFmt).push(*properties).push(*propertiesCS)
+        properties     = collect_values(['proxies.dctermsExtent'])
+        properties_cs  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
+        properties_fmt = collect_values(['aggregations.webResources.dcFormat'])
+        properties_lng = collect_values(['proxies.dcLanguage'])
+                    
+        props = [].push(*properties_fmt).push(*properties_cs).push(*properties).push(*properties_lng)
  
         if(props.empty?)
           return 
@@ -351,9 +362,10 @@ module Templates
           content_present: props.size > 0,
           items: props.collect do |property|
             {
+              label:  properties_fmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : 
+                      properties_lng.index(property) == 0 ? t('site.object.meta-label.language') + ':' : false,
               text:  property,
-              url:   propertiesCS.index(property)       ? search_path(q: "what:\"#{property}\"") : false,
-              label: propertiesFmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : false
+              url:   properties_cs.index(property)       ? search_path(q: "what:\"#{property}\"") : false
             }
           end
         }
