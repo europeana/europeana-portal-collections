@@ -25,7 +25,7 @@ gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight',
-  github: 'rwd/blacklight', ref: '5132db4'
+  github: 'rwd/blacklight', branch: 'abstract_facet_paginator'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
