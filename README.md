@@ -1,5 +1,7 @@
 # Europeana Channels
 
+[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=188-coveralls)](https://coveralls.io/r/europeana/europeana-channels-blacklight?branch=master)
+
 Europeana Channels as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
 

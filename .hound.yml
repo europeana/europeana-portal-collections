@@ -1,0 +1,9 @@
+coffeescript:
+  enabled: false
+haml:
+  enabled: false
+javascript:
+  enabled: false
+scss:
+  enabled: false
+

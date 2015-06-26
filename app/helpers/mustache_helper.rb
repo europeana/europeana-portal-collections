@@ -64,13 +64,16 @@ module MustacheHelper
 
   def js_files
     [
-      { path: asset_path('jquery.js') },
+      #{ path: asset_path('jquery.js') },
 
-      { path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
-      { path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
+      #{ path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
+      #{ path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
 
-      #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/channels.js' },
-      #{ path: 'http://localhost/x/Europeana-Patternlab/public/js/dist/global.js' },
+      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/channels.js' },
+      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/global.js' },
+      
+      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/require.js',  data_main: 'http://localhost/Europeana-Patternlab/public/js/dist/main'},
+      { path: 'http://develop.styleguide.eanadev.org/js/dist/require.js',  data_main: 'http://develop.styleguide.eanadev.org/js/dist/main'},
 
       # Blacklight dependencies
       #{ path: asset_path('turbolinks.js') },
@@ -79,7 +82,7 @@ module MustacheHelper
       #{ path: asset_path('blacklight/checkbox_submit.js') },
       #{ path: asset_path('blacklight/bookmark_toggle.js') },
       #{ path: asset_path('blacklight/ajax_modal.js') },
-      { path: asset_path('blacklight/search_context.js') }
+#      { path: asset_path('blacklight/search_context.js') }
       #{ path: asset_path('blacklight/collapsable.js') },
       #{ path: asset_path('bootstrap/transition.js') },
       #{ path: asset_path('bootstrap/collapse.js') },
@@ -361,6 +364,7 @@ module MustacheHelper
   end
 
   def news_item_img_src(item)
+    return nil unless item.content.present?
     img_tag = item.content.match(/<img [^>]*>/i)[0]
     return nil unless img_tag.present?
     img_tag.match(/src="([^"]*)"/i)[1]

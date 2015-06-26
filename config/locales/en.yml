@@ -59,6 +59,7 @@ en:
         dates: Dates
         description: Description
         format: Format
+        identifier: Identifier
         latitude: Latitude
         location: Location
         longitude: Longitude
@@ -73,7 +74,13 @@ en:
         providing-country: Providing country
         publisher: Publisher
         rights: Can I use this?
+        source: Source
+        subject: Subject
+        timestamp_created: Added to Europeana (%{timestamp_created})
+        timestamp_updated: Last updated in Europeana (%{timestamp_updated})
+        toc: Table of Contents
         type: Type
+        ugc: User contributed content
       nav:
         next: Next
         prev: Previous

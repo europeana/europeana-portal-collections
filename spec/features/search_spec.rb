@@ -9,12 +9,13 @@ RSpec.feature 'Search page', :type => :feature do
 
       expect(page).to have_css('.searchbar button.search-submit')
       find('.searchbar button.search-submit').trigger('click')
-      
+
       sleep 2
-            
+
       expect(page).to have_css('.results-list ol.result-items li')
     end
-    
+
+    # @todo stub a webmock request for no results from API
     it 'expects no results', js: true do
       visit '/'
       expect(page).to have_css('input[name=q]')
@@ -22,7 +23,7 @@ RSpec.feature 'Search page', :type => :feature do
 
       expect(page).to have_css('.searchbar button.search-submit')
       find('.searchbar button.search-submit').trigger('click')
-      
+
       sleep 2
 
       expect(page).to_not have_css('.results-list ol.result-items li')
