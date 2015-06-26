@@ -7,7 +7,7 @@ gem 'rails', '4.2.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   github: 'europeana/europeana-blacklight',
-  ref: '52f7ab4'
+  ref: 'c4ecd40'
 
 gem 'europeana-api',
   require: 'europeana/api',
@@ -17,7 +17,7 @@ gem 'europeana-api',
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '8933a2e'
+  ref: '9857740ec2'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
@@ -25,7 +25,7 @@ gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight',
-  github: 'rwd/blacklight', ref: '5132db4'
+  github: 'rwd/blacklight', branch: 'abstract_facet_paginator'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
@@ -49,7 +49,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'rails_best_practices', require: false
   gem 'rspec-rails', '~> 3.0'
-  gem 'rubocop', '~> 0.29.1', require: false
+  gem 'rubocop', '0.29.1', require: false
 end
 
 group :development do
@@ -58,7 +58,7 @@ group :development do
 end
 
 group :test do
-  gem 'simplecov', require: false
+  gem 'coveralls', require: false
   gem 'webmock', '~> 1.21.0'
 end
 

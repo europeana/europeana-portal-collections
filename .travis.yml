@@ -1,0 +1,11 @@
+notifications:
+  email: false
+sudo: false
+language: ruby
+rvm:
+  - 2.2.1
+before_script:
+  - "mysql -e 'create database europeana_channels_blacklight_test;'"
+  - "cp ./config/database.travis.yml ./config/database.yml"
+env:
+  - RAILS_ENV=test
