@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+log = Logger.new(STDOUT)
+log.level = Logger::DEBUG
+
 
 RSpec.feature 'Object page', :type => :feature do
   
@@ -10,29 +13,24 @@ RSpec.feature 'Object page', :type => :feature do
       visit '/'
       fill_in('q', with: 'Paris')
       
-      
       # without the following 'expect' assertion the subsequent 'find' will fail
       
-      expect(page).to have_css('.searchbar button.search-submit')
-      find('.searchbar button.search-submit').trigger('click')
-
-
+      expect(page).to have_css('.searchbar button.search-submit')      
+      page.execute_script '$(".searchbar button.search-submit").trigger("click")'
       sleep 2
-            
-      # without the following 'expect' assertion the subsequent 'find' will fail
 
+      # without the following 'expect' assertion the subsequent 'find' will fail
       expect(page).to have_css('.results-list ol.result-items li h1 a')
       first('.results-list ol.result-items li h1 a').click
+      sleep 2
 
-            
       expect(page).to have_selector('.next')
-      
       page_title = page.title
 
-      
       # next 
             
       find('.next a').click
+      sleep 2
 
       expect(page).to have_css('.next a')
       expect(page).to have_css('.previous a')
@@ -45,16 +43,5 @@ RSpec.feature 'Object page', :type => :feature do
       assert page.title == page_title
       
     end
-    
-    it 'expects javascript to load large images', js: true  do
-    
-      visit '/record/90402/SK_A_2344.html?js=1'
-
-      expect(page).to have_selector('.object-image')
-      expect(page).to have_css('.js-img-frame')
-      
-    end
-    
   end
-
 end

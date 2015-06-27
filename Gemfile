@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rails_best_practices', require: false
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '0.29.1', require: false
+  gem 'selenium-webdriver'
 end
 
 group :development do
