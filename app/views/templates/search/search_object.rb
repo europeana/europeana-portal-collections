@@ -100,6 +100,7 @@ module Templates
             },
 
             people: people_data,
+            places: place_data,
             provenance: provenance_data,
             properties: property_data,
             
@@ -109,8 +110,10 @@ module Templates
             type: render_document_show_field_value(document, 'proxies.dcType')
 
           },
+          
+          refs_rels: ref_rel_data,
             
-          related: {
+          similar: {
             title: t('site.object.similar-items') + ':',
             more_items_query: search_path(mlt: document.id),
             items: @similar.map { |doc|
@@ -124,6 +127,7 @@ module Templates
               }
             }
           },
+          times: time_data,
           timestamps: {
             created: "2014-05-27T20:14:08.870Z",
             updated: "2014-09-07T15:50:25.953Z"
@@ -170,7 +174,7 @@ module Templates
         dc_creator_end   = render_document_show_field_value(document, 'agents.end')
         
         {
-          content_present: true,
+          content_present: (!dc_creator.nil? || !dc_contributor.nil?),
           title: t('site.object.meta-label.people'),
           creator: {
             title: t('site.object.meta-label.creator'),
@@ -202,6 +206,90 @@ module Templates
         }
       end
       
+      def place_data
+        spatial  = collect_values(['proxies.dctermsSpatial'])
+        coverage = collect_values(['proxies.dcCoverage'])
+        places   = [].push(*spatial).push(*coverage)
+          
+        {
+          content_present: places.size > 0,
+          spatial: {
+            content_present: spatial.size > 0,
+            label:  t('site.object.meta-label.location'),
+            items: spatial.collect do |space|
+              {
+                text: space
+              }
+            end            
+          },
+          coverage: {
+            content_present: coverage.size > 0,
+            label:  t('site.object.meta-label.place-time'),
+            items: coverage.collect do |space|
+              {
+                text: space
+              }
+            end            
+          }
+        }        
+      end
+      
+      def time_data
+        issued   = collect_values(['proxies.dctermsIssued'])
+        temporal = collect_values(['proxies.dctermsTemporal'])
+        times    = [].push(*issued).push(*temporal)
+          
+        {
+          content_present: times.size > 0,
+          issued: {
+            content_present: issued.size > 0,
+            label: t('site.object.meta-label.issued'),
+            items: issued.collect do |item|
+              {
+                text: item
+              }
+            end            
+          },
+          temporal: {
+            content_present: temporal.size > 0,
+            label: t('site.object.meta-label.temporal'),
+            items: temporal.collect do |item|
+              {
+                text: item
+              }
+            end            
+          }
+        }        
+      end
+      
+      def ref_rel_data
+        relations  = collect_values(['proxies.dcRelation'])
+        references = collect_values(['proxies.dctermsReferences'])
+        ref_rels   = [].push(*relations).push(*references)
+          
+        {
+          content_present: ref_rels.size > 0,
+          relations: {
+            content_present: relations.size > 0,
+            label:  t('site.object.meta-label.relations'),
+            items: relations.collect do |rel|
+              {
+                text: rel
+              }
+            end            
+          },
+          references: {
+            content_present: references.size > 0,
+            label:  t('site.object.meta-label.references'),
+            items: references.collect do |ref|
+              {
+                text: ref
+              }
+            end            
+          }
+        }        
+      end
+
       def concept_data
 
         concept_types    = []
@@ -347,12 +435,12 @@ module Templates
       
       def property_data
         
-        properties     = collect_values(['proxies.dctermsExtent'])
         properties_cs  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
         properties_fmt = collect_values(['aggregations.webResources.dcFormat'])
+        properties_xt  = collect_values(['proxies.dctermsExtent'])
         properties_lng = collect_values(['proxies.dcLanguage'])
                     
-        props = [].push(*properties_fmt).push(*properties_cs).push(*properties).push(*properties_lng)
+        props = [].push(*properties_fmt).push(*properties_cs).push(*properties_xt).push(*properties_lng)
  
         if(props.empty?)
           return 
@@ -363,6 +451,7 @@ module Templates
           items: props.collect do |property|
             {
               label:  properties_fmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : 
+                      properties_xt.index(property) == 0 ? t('site.object.meta-label.extent') + ':' :
                       properties_lng.index(property) == 0 ? t('site.object.meta-label.language') + ':' : false,
               text:  property,
               url:   properties_cs.index(property)       ? search_path(q: "what:\"#{property}\"") : false

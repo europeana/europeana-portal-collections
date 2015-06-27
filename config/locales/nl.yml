@@ -59,8 +59,10 @@ nl:
         data-provider: 
         dates: 
         description: Omschrijving
+        extent: 
         format: Formaat
         identifier: 
+        issued: 
         language: Taal
         latitude: Breedtegraad
         location: Plaats
@@ -69,15 +71,22 @@ nl:
         map-tiles: Tegel
         people: 
         period: Tijdvak
+        place: 
+        place-time: 
         properties: Eigenschappen
         provenance: Bron
         provided-by: 
         provider: 
         providing-country: 
         publisher: Uitgeverij
+        references: 
+        refs-rels: 
+        relations: 
         rights: Mag ik dit gebruiken?
         source: Bron
         subject: 
+        temporal: 
+        time: 
         timestamp_created: 
         timestamp_updated: 
         toc: 
