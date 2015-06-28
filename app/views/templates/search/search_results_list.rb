@@ -60,7 +60,8 @@ module Templates
               }
             end
           },
-          global: navigation_global
+          global: navigation_global,
+          footer: common_footer
         }
         
       end

@@ -26,6 +26,7 @@ module Templates
         # old arrows '❬ ' + ' ❭'
         navigation = {
           global: navigation_global,
+          footer: common_footer,
           next_prev: {
             prev_text: t('site.object.nav.prev'),
             back_url:  back_link_url,
