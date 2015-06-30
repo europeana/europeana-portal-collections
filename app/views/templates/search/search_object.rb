@@ -55,15 +55,13 @@ module Templates
             ],
           })
         end
-
         navigation
       end
 
-      
+
       def content
-        
         dcCreator = render_document_show_field_value(document, 'proxies.dcCreator')
-        
+
         {
           object: {
             concepts: concept_data,
@@ -102,7 +100,7 @@ module Templates
                 long_and_lat: has_long_and_lat,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
                 labels: {
-  
+
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
                   map: t('site.object.meta-label.map'),
@@ -112,7 +110,7 @@ module Templates
                       e: t('site.object.points.east'),
                       w: t('site.object.points.west')
                   }
-  
+
                 }
               }
             },
@@ -126,14 +124,14 @@ module Templates
 
             provenance: provenance_data,
             properties: property_data,
-            
+
             # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             title: render_document_show_field_value(document, 'proxies.dcTitle'),
             type: render_document_show_field_value(document, 'proxies.dcType')
 
           },
-            
+
           related: {
             title: t('site.object.similar-items') + ':',
             more_items_query: search_path(mlt: document.id),
@@ -209,14 +207,14 @@ module Templates
 
       def collect_values(fields, doc = document)
         values = []
-        fields.each { |field| 
+        fields.each { |field|
           value = render_document_show_field_value(doc, field)
           values << value unless value.nil?
         }
         values.uniq
       end
-      
-      
+
+
       def merge_values(fields, separator = ' ')
         collect_values(fields).join(separator)
       end
@@ -229,7 +227,7 @@ module Templates
         document.proxies.each{|proxy|
           val = proxy.fetch('dcType', nil)
           val.each{|type|
-            concept_types <<  type.downcase 
+            concept_types <<  type.downcase
           } unless val.blank?
         }
 
@@ -237,21 +235,21 @@ module Templates
           document.concepts.each{|concept|
             val = concept.fetch('prefLabel', nil)
             val.each{|prefLabel|
-              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)   
+              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)
             } unless  val.blank?
           }
         end
-        
+
         document.proxies.each{|proxy|
           val = proxy.fetch('dcSubject', nil)
           val.each{|subject|
-            (concepts_other << subject.downcase) unless  concept_types.index(subject.downcase) 
+            (concepts_other << subject.downcase) unless  concept_types.index(subject.downcase)
           } unless val.blank?
         }
-        
+
         concept_types = concept_types.uniq
         concepts_other = concepts_other.uniq
-        
+
         {
           type_items: (concept_types.size == 0) ? {} :
             {
@@ -263,7 +261,7 @@ module Templates
                 }
               end
             },
-            
+
           concept_items:  (concepts_other.size == 0) ? {} :{
             label:  t('site.object.meta-label.concept'),
             items: concepts_other.collect do |concept|
@@ -271,11 +269,11 @@ module Templates
                 text:   concept,
                 url:    search_path(q: "what:\"#{concept}\""),
               }
-            end          
+            end
           }
-        }        
+        }
       end
-      
+
       def date_data
         datesPL = collect_values([
           'timespans.prefLabel'
@@ -286,7 +284,7 @@ module Templates
           content_present: dates.size > 0,
           items: dates.collect do |date|
             {
-              label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' : 
+              label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' :
                       datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
               text: date,
               url:  datesCS.index(date) ? search_path(q: "when:\"#{date}\"") : false
@@ -295,7 +293,7 @@ module Templates
         }
       end
 
-      
+
       def provenance_data
         # origin
 
@@ -304,14 +302,14 @@ module Templates
         originsDataProvider  = collect_values(['aggregations.edmDataProvider'])
         originsCountry       = collect_values(['europeanaAggregation.edmCountry'])
         originsOther         = collect_values(['proxies.dctermsProvenance', 'proxies.dcSource', 'proxies.dctermsReferences', 'proxies.dcIdentifier'])
-          
+
         origins = [].push(*originsPublisher).push(*originsProvider).push(*originsDataProvider).push(*originsCountry).push(*originsOther)
         {
           content_present: origins.size > 0,
           items: origins.uniq.collect do |origin|
             {
-              label: originsPublisher.index(origin)    == 0 ? t('site.object.meta-label.publisher') + ':' : 
-                     originsProvider.index(origin)     == 0 ? t('site.object.meta-label.provider') + ':' : 
+              label: originsPublisher.index(origin)    == 0 ? t('site.object.meta-label.publisher') + ':' :
+                     originsProvider.index(origin)     == 0 ? t('site.object.meta-label.provider') + ':' :
                      originsDataProvider.index(origin) == 0 ? t('site.object.meta-label.data-provider') + ':' :
                      originsCountry.index(origin)      == 0 ? t('site.object.meta-label.providing-country') + ':' : false,
               text: origin,
@@ -320,19 +318,19 @@ module Templates
           end
         }
       end
-      
+
       def property_data
-        
+
         properties    = collect_values(['proxies.dctermsExtent'])
         propertiesCS  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
         propertiesFmt = collect_values(['aggregations.webResources.dcFormat'])
-          
+
         props = [].push(*propertiesFmt).push(*properties).push(*propertiesCS)
- 
+
         if(props.empty?)
-          return 
+          return
         end
-        
+
         {
           content_present: props.size > 0,
           items: props.collect do |property|
@@ -344,8 +342,8 @@ module Templates
           end
         }
       end
-      
-      
+
+
       def content_object_download
         links = []
 
@@ -375,7 +373,7 @@ module Templates
 
       def edm_is_shown_by_download_url
         @edm_is_shown_by_download_url ||= begin
-          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.first.fetch('edmIsShownBy', false)
+          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.size > 0 && document.aggregations.first.fetch('edmIsShownBy', false)
             ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
           else
             render_document_show_field_value(document, 'aggregations.edmIsShownBy')
@@ -419,9 +417,9 @@ module Templates
         end
       end
 
-      
+
       # Media
-      
+
       def media_type(url)
         ext = url[/\.[^.]*$/].downcase
         if(!['.avi', '.mp3'].index(ext).nil?)
@@ -436,31 +434,33 @@ module Templates
           'unknown'
         end
       end
-      
+
       def simple_rights_label_data(rights)
-        
+        return nil unless rights.present?
         # global.facet.reusability.permission      Only with permission
         # global.facet.reusability.open            Yes with attribution
         # global.facet.reusability.restricted      Yes with restrictions
 
         prefix = t('global.facet.header.reusability') + ' '
-        
-        if(rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0)
+
+        if rights.nil?
+          nil
+        elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
           {
             license_public: false,
             license_human:  prefix + t('global.facet.reusability.restricted')
           }
-        elsif(rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0)
+        elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
           {
             license_public: true,
             license_human:  prefix + t('global.facet.reusability.open')
           }
-        elsif(rights.index('http://www.europeana.eu/rights/rr-f') == 0)
+        elsif rights.index('http://www.europeana.eu/rights/rr-f') == 0
           {
             license_public: false,
             license_human:  prefix + t('global.facet.reusability.permission')
           }
-        elsif(rights.index('http://creativecommons.org/publicdomain/mark') == 0)
+        elsif rights.index('http://creativecommons.org/publicdomain/mark') == 0
           {
             license_public: true,
             license_human:  prefix + t('global.facet.reusability.open')
@@ -471,19 +471,18 @@ module Templates
             license_human:  'todo: map this rights value(' + rights + ')'
           }
         end
-            
       end
-      
+
       def media_items
-        
+
         aggregation = document.aggregations.first
         return [] unless aggregation.respond_to?(:webResources)
-        
+
         # main item
-            
-        media_type  = render_document_show_field_value(document, 'type').downcase          
+
+        media_type  = render_document_show_field_value(document, 'type').downcase
         edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-        
+
         primary_media = {
           preview:    edm_preview,
           thumbnail:  edm_preview,
@@ -492,7 +491,7 @@ module Templates
           rights:     simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights'))
           #  json: document.as_json
         }
-        
+
         if(media_type == 'image')
           primary_media['is_image']  = true
         elsif(media_type == 'audio')
@@ -506,12 +505,12 @@ module Templates
         end
 
         # additional items
-          
+
         additional_items = aggregation.webResources.collect do |web_resource|
-          
+
           preview_url  = render_document_show_field_value(web_resource, 'about')
           preview_type = media_type(preview_url)
-          
+
           item = {
             alt:  preview_type + ' - ' + preview_url,
             file: preview_url,
@@ -522,7 +521,7 @@ module Templates
             media_type: preview_type
             #  json: web_resource.as_json
           }
-          
+
           if(preview_type == 'image')
             item['thumbnail'] = preview_url
           elsif(preview_type == 'audio')
@@ -537,7 +536,7 @@ module Templates
             #    - http://localhost:3000/record/90402/SK_A_2344.html
             item['thumbnail'] = preview_url
           end
-          
+
           item
         end
 
@@ -547,7 +546,7 @@ module Templates
               items: additional_items
             }
         }
-          
+
       end
     end
   end
