@@ -26,6 +26,7 @@ module Templates
         # old arrows '❬ ' + ' ❭'
         navigation = {
           global: navigation_global,
+          footer: common_footer,
           next_prev: {
             prev_text: t('site.object.nav.prev'),
             back_url:  back_link_url,
@@ -58,37 +59,110 @@ module Templates
         navigation
       end
 
-
-      def content
-        dcCreator = render_document_show_field_value(document, 'proxies.dcCreator')
-
+      
+      def content          
         {
           object: {
-            concepts: concept_data,
-            creator: {
-              name:     merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel'], ', '),
-              name_url: dcCreator ? search_path(q: "\"#{dcCreator}\"") : nil,
-              life: {
-                  from: {
-                      long: render_document_show_field_value(document, 'agents.begin'),
-                      short: render_document_show_field_value(document, 'agents.end')
-                  },
-                  to: {
-                      long: render_document_show_field_value(document, 'agents.end'),
-                      short: render_document_show_field_value(document, 'agents.end')
-                  }
-              },
-              #title: (render_document_show_field_value(document, 'agents.rdaGr2ProfessionOrOccupation') || t('site.object.meta-label.creator')) + ':',
-              title: t('site.object.meta-label.creator'),
-              biography: {
-                  text:        nil,
-                  source:     nil,
-                  source_url: nil
-              }
-            },
-
+            #concepts: concept_data,
+              
+            concepts: data_section({
+              :title => 'site.object.meta-label.concepts',
+              :sections  => [
+                {
+                  :title  => 'site.object.meta-label.type',
+                  :fields => ['dcType'],
+                  :collected => document.proxies.collect do |proxy|
+                      res = []
+                      val = proxy.fetch('dcType', nil)
+                      val.each{|subject|
+                        res << subject
+                      } unless val.blank?
+                      res
+                  end,
+                  :url => 'what'
+                },
+                {
+                  :title  => 'site.object.meta-label.concept',
+                  :url    => 'what',
+                  :fields => ['aggregations.edmUgc'],
+                  :collected => collect_values(['concepts.prefLabel']).size == 0 ? [] : document.concepts.collect do  |concept|
+                    res = ''
+                    val = concept.fetch('prefLabel', nil)
+                    val.each{|prefLabel|
+                      res << prefLabel
+                    } unless  val.blank?
+                    res
+                  end,
+                  :override_val => 'true',
+                  :overrides => [
+                    {
+                      :field_title  => t('site.object.meta-label.ugc'),
+                      :field_url    => root_url + ("search?f[UGC][]=true")
+                    }
+                  ]
+                },
+                {
+                  :title  => 'site.object.meta-label.subject',
+                  :url    => 'what',
+                  :fields => [],
+                  :collected => document.proxies.collect do |proxy|
+                      res = []
+                      val = proxy.fetch('dcSubject', nil)
+                      val.each{|subject|
+                        res << subject
+                      } unless val.blank?
+                      res
+                  end
+                }
+              ]
+            }),
+              
+            
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
-            dates: date_data,
+              
+            #dates: date_data,
+            
+            dates:  data_section( {
+              :title => 'site.object.meta-label.time',
+              :sections  => [
+                {
+                  :title  => 'site.object.meta-label.date',
+                  :fields => ['proxies.dcDate']
+                },
+                {
+                  :title  => 'site.object.meta-label.period',
+                  :fields => ['timespans.prefLabel']
+                },
+                {
+                  :title  => 'site.object.meta-label.publication-date',
+                  :fields => ['proxies.dctermsPublished']
+                },
+                {
+                  :title  => 'site.object.meta-label.issued',
+                  :fields => ['proxies.dctermsIssued']
+                },
+                {
+                  :title   => 'site.object.meta-label.temporal',
+                  :fields  => ['proxies.dctermsTemporal']
+                },
+                {
+                  :title   => 'site.object.meta-label.creation-date',
+                  :fields  => ['proxies.dctermsIssued'],
+                  :collected => document.proxies.collect do |proxy|
+                      res = []
+                      val = proxy.fetch('dctermsCreated', nil)
+                      val.each{|subject|
+                        res << subject
+                      } unless val.blank?
+                      res.join(', ') unless res.size == 0
+                  end
+                }
+              ]
+            }),
+              
+            
+            
+            
             description: render_document_show_field_value(document, 'proxies.dcDescription'),
             download: content_object_download,
             media: media_items,
@@ -122,17 +196,156 @@ module Templates
               content_present:     collect_values(['aggregations.edmDataProvider', 'europeanaAggregation.edmCountry']).length > 0
             },
 
-            provenance: provenance_data,
-            properties: property_data,
+            
+            
+            #people: people_data,
 
-            # note: view is currently showing the rights attached to the first media-item and not this value
+            people: data_section({
+              :title => 'site.object.meta-label.people',
+              :sections  => [
+                {
+                  :title  => 'site.object.meta-label.creator',
+                  :fields => ['agents.prefLabel'],
+                  :collected => document.proxies.collect do |proxy|
+                                        res = []
+                                        val = proxy.fetch('dcCreator', nil)
+                                        val.each{|subject|
+                                          res << subject
+                                        } unless val.blank?
+                                        res
+                                    end,
+                  :url    => 'q',
+                  :extra  => [
+                      {
+                        :field  => 'agents.begin',
+                        :map_to =>  'life.from.short'
+                      },
+                      {
+                        :field  => 'agents.end',
+                        :map_to => 'life.to.short'
+                      }
+                    ]
+                },
+                {
+                  :title   => 'site.object.meta-label.contributor',
+                  :fields  => ['proxies.dcContributor']
+                }
+              ]
+            }),
+
+            #places: place_data,
+            
+            places: data_section( {
+              :title => 'site.object.meta-label.place',
+              :sections  => [
+                {
+                  :title  => 'site.object.meta-label.location',
+                  :fields => ['proxies.dctermsSpatial']
+                },
+                {
+                  :title   => 'site.object.meta-label.place-time',
+                  :fields  => ['proxies.dcCoverage']
+                }
+              ]
+            }),            
+
+            #provenance: provenance_data,
+            
+            provenance:  data_section( {
+              :title => 'site.object.meta-label.source',
+              :sections  => [
+                {
+                  :title  => 'site.object.meta-label.publisher',
+                  :fields => ['proxies.dcPublisher'],
+                  :url    => 'aggregations.edmIsShownAt'
+                },
+                {
+                  :title   => 'site.object.meta-label.provider',
+                  :fields  => ['aggregations.edmProvider']
+                },
+                {
+                  :title   => 'site.object.meta-label.data-provider',
+                  :fields  => ['aggregations.edmDataProvider']
+                },
+                {
+                  :title   => 'site.object.meta-label.providing-country',
+                  :fields  => ['europeanaAggregation.edmCountry']
+                },
+                {
+                  :title   => 'site.object.meta-label.identifier',
+                  :fields  => ['proxies.dcIdentifier']
+                },
+                {
+                  :title   => 'site.object.meta-label.provenance',
+                  :fields  => ['proxies.dctermsProvenance']
+                },
+                {
+                  :title   => 'site.object.meta-label.source',
+                  :fields  => ['proxies.dcSource']
+                },
+                {
+                  :fields      => ['timestamp_created'],
+                  :format_date => "%Y-%m-%d",
+                  :wrap        => {
+                    t_key: 'site.object.meta-label.timestamp_created',
+                    param: :timestamp_created
+                  }
+                },
+                {
+                  :fields      => ['timestamp_updated'],
+                  :format_date => "%Y-%m-%d",
+                  :wrap        => {
+                    t_key: 'site.object.meta-label.timestamp_created',
+                    param: :timestamp_updated
+                  }
+                }
+
+              ]
+            }),
+
+            #properties: property_data,
+            
+            properties: data_section( {
+              :title => 'site.object.meta-label.properties',
+              :sections  => [
+                {
+                  :title  => 'site.object.meta-label.format',
+                  :fields => ['aggregations.webResources.dcFormat', 'proxies.dcMedium', 'proxies.dcDuration']
+                },
+                {
+                  :title   => 'site.object.meta-label.extent',
+                  :fields  => ['proxies.dctermsExtent']
+                },
+                {
+                  :title   => 'site.object.meta-label.language',
+                  :fields  => ['proxies.dcLanguage'],
+                  :url     => 'what'
+                }
+              ]
+            }),
+            
+           # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             title: render_document_show_field_value(document, 'proxies.dcTitle'),
             type: render_document_show_field_value(document, 'proxies.dcType')
 
           },
-
-          related: {
+          
+          refs_rels: data_section( {
+            :title => 'site.object.meta-label.refs-rels',
+            :sections  => [
+              {
+                :title  => 'site.object.meta-label.relations',
+                :fields => ['proxies.dcRelation']
+              },
+              {
+                :title  => 'site.object.meta-label.references',
+                :fields => ['proxies.dctermsReferences']
+              }
+            ]
+          }),
+              
+          similar: {
             title: t('site.object.similar-items') + ':',
             more_items_query: search_path(mlt: document.id),
             items: @similar.map { |doc|
@@ -145,7 +358,16 @@ module Templates
                 }
               }
             }
-          }
+          },
+          #times: time_data,
+          
+
+            
+          #timestamps: {
+          #  created: "2014-05-27T20:14:08.870Z",
+          #  updated: "2014-09-07T15:50:25.953Z"
+          #}
+          
         }
       end
 
@@ -153,55 +375,10 @@ module Templates
         {
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
-          #download:       t('site.object.actions.downloaddata'),
-
-          #agent:       t('site.object.meta-label.creator') + ':',
-          #creator:     t('site.object.meta-label.creator') + ':',
-          #dc_type:     t('site.object.meta-label.type') + ':',
-          #description: t('site.object.meta-label.description') + ':',
-
           rights: t('site.object.meta-label.rights')
         }
       end
 
-      def data
-        {
-          #agent_pref_label: render_document_show_field_value(document, 'agents.prefLabel'),
-          #agent_begin: render_document_show_field_value(document, 'agents.begin'),
-          #agent_end: render_document_show_field_value(document, 'agents.end'),
-
-          #concepts: render_document_show_field_value(document, 'concepts.prefLabel'),
-
-          #dc_description: render_document_show_field_value(document, 'proxies.dcDescription'),
-          #dc_creator: render_document_show_field_value(document, 'proxies.dcCreator'),
-
-          #dc_format: render_document_show_field_value(document, 'proxies.dcFormat'),
-          #dc_identifier: render_document_show_field_value(document, 'proxies.dcIdentifier'),
-
-          #dc_terms_created: render_document_show_field_value(document, 'proxies.dctermsCreated'),
-          #dc_terms_created_web: render_document_show_field_value(document, 'aggregations.webResources.dctermsCreated'),
-
-          #dc_terms_extent: render_document_show_field_value(document, 'proxies.dctermsExtent'),
-          #dc_title: render_document_show_field_value(document, 'proxies.dcTitle'),
-          #dc_type: render_document_show_field_value(document, 'proxies.dcType'),
-
-          #edm_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
-          #edm_dataset_name: render_document_show_field_value(document, 'edmDatasetName'),
-          #edm_is_shown_at: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-          edm_is_shown_by: render_document_show_field_value(document, 'aggregations.edmIsShownBy'),
-          #edm_language: render_document_show_field_value(document, 'europeanaAggregation.edmLanguage'),
-          #edm_preview: render_document_show_field_value(document, 'europeanaAggregation.edmPreview'),
-          #edm_provider: render_document_show_field_value(document, 'aggregations.edmProvider'),
-          #edm_data_provider: render_document_show_field_value(document, 'aggregations.edmDataProvider'),
-          #edm_rights:  render_document_show_field_value(document, 'aggregations.edmRights'),
-
-          #title: doc_title,
-          #title_extra: doc_title_extra,
-          #type: render_document_show_field_value(document, 'type'),
-
-          #year: render_document_show_field_value(document, 'year')
-        }
-      end
 
       private
 
@@ -210,6 +387,21 @@ module Templates
         fields.each { |field|
           value = render_document_show_field_value(doc, field)
           values << value unless value.nil?
+
+          log = Logger.new(STDOUT)
+          log.level = Logger::INFO
+                  
+        
+          # TODO: find out why this is necessary
+          #if(!value && field == 'proxies.dcType')
+          #  doc.proxies.each{|proxy|
+          #    val = proxy.fetch('dcType', nil)
+          #    val.each{|type|
+          #      values <<  type 
+          #    } unless val.blank?
+          #  }
+          # end
+          
         }
         values.uniq
       end
@@ -219,131 +411,418 @@ module Templates
         collect_values(fields).join(separator)
       end
 
-      def concept_data
+      def data_section(data)
+      
+        section_data   = []
+        section_labels = []
+        
+        log = Logger.new(STDOUT)
+        log.level = Logger::INFO
+               
+        data[:sections].collect do | section |
 
-        concept_types  = []
-        concepts_other = []
+          f_data = []
+                    
+          if(section[:collected])
+            f_data.push(* section[:collected])
+          end
+          f_data.push(*collect_values(section[:fields]))
+          f_data = f_data.flatten.uniq
+            
+          
+          if(f_data.size > 0)
 
-        document.proxies.each{|proxy|
-          val = proxy.fetch('dcType', nil)
-          val.each{|type|
-            concept_types <<  type.downcase
-          } unless val.blank?
-        }
-
-        if (collect_values(['concepts.prefLabel']).size > 0)
-          document.concepts.each{|concept|
-            val = concept.fetch('prefLabel', nil)
-            val.each{|prefLabel|
-              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)
-            } unless  val.blank?
-          }
-        end
-
-        document.proxies.each{|proxy|
-          val = proxy.fetch('dcSubject', nil)
-          val.each{|subject|
-            (concepts_other << subject.downcase) unless  concept_types.index(subject.downcase)
-          } unless val.blank?
-        }
-
-        concept_types = concept_types.uniq
-        concepts_other = concepts_other.uniq
-
-        {
-          type_items: (concept_types.size == 0) ? {} :
-            {
-              label:  t('site.object.meta-label.type'),
-              items: concept_types.collect do |concept|
-                {
-                  text:   concept,
-                  url:    search_path(q: "what:\"#{concept}\""),
-                }
+            subsection = []
+            
+            f_data.collect do | f_datum |
+              
+              ob = {}
+              text = f_datum
+              
+              if(section[:url])
+                if(section[:url] == 'q')
+                  ob[:url] = search_path(q: "\"#{f_datum}\"")
+                elsif(section[:url] == 'what')
+                  ob[:url] = search_path(q: "what:\"#{f_datum}\"")
+                else
+                  ob[:url] = render_document_show_field_value(document, section[:url])
+                end
               end
-            },
 
-          concept_items:  (concepts_other.size == 0) ? {} :{
-            label:  t('site.object.meta-label.concept'),
-            items: concepts_other.collect do |concept|
-              {
-                text:   concept,
-                url:    search_path(q: "what:\"#{concept}\""),
-              }
+              # text manipulation
+                
+              if(section[:format_date].nil?)
+                text = f_datum
+              else
+                date = Time.parse(f_datum) rescue nil
+                if(!date.nil?)
+                  text = date.strftime(section[:format_date])
+                end
+              end
+              
+              if(section[:wrap])
+                text = t(section[:wrap][:t_key], {section[:wrap][:param] => text} )
+              end
+
+              # overrides
+                
+              if(section[:overrides] && text == section[:override_val])
+                section[:overrides].collect do | override |
+                  if(override[:field_title])
+                    text = override[:field_title]
+                  end
+                  if(override[:field_url])
+                    ob[:url] = override[:field_url]
+                  end
+                end
+              end      
+
+              # extra info on last
+                
+              if(f_datum == f_data.last)
+                if(!section[:extra].nil?)
+                  
+                  extra_info = {}
+                  section[:extra].collect do | xtra |
+                    extra_val = render_document_show_field_value(document, xtra[:field]) 
+                    if(extra_val)
+                      extra_info_builder = extra_info
+                      path_segments      = (xtra[:map_to] ? xtra[:map_to] : xtra[:field]).split('.')
+                        
+                      path_segments.each.collect do |path_segment|
+                        is_last = path_segment == path_segments.last
+                        extra_info_builder[path_segment] = extra_info_builder[path_segment] ? extra_info_builder[path_segment] : is_last ? extra_val : {}
+                        extra_info_builder = extra_info_builder[path_segment]
+                      end
+                    end
+                    ob['extra_info'] = extra_info
+                  end
+                end
+              end
+                
+              ob['text'] = text
+              subsection << ob unless text.nil? || text.blank?
             end
-          }
-        }
-      end
-
-      def date_data
-        datesPL = collect_values([
-          'timespans.prefLabel'
-        ])
-        datesCS = collect_values(['proxies.dctermsIssued', 'proxies.dctermsCreated', 'proxies.dctermsPublished', 'proxies.dcDate'])
-        dates   = [].push(*datesPL).push(*datesCS).uniq
-        {
-          content_present: dates.size > 0,
-          items: dates.collect do |date|
-            {
-              label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' :
-                      datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
-              text: date,
-              url:  datesCS.index(date) ? search_path(q: "when:\"#{date}\"") : false
-            }
+              
+            if(subsection.size > 0)
+              section_data   << subsection 
+              section_labels << (section[:title].nil? ? false : t(section[:title]))
+            end
           end
-        }
-      end
-
-
-      def provenance_data
-        # origin
-
-        originsPublisher     = collect_values(['proxies.dcPublisher'])
-        originsProvider      = collect_values(['aggregations.edmProvider'])
-        originsDataProvider  = collect_values(['aggregations.edmDataProvider'])
-        originsCountry       = collect_values(['europeanaAggregation.edmCountry'])
-        originsOther         = collect_values(['proxies.dctermsProvenance', 'proxies.dcSource', 'proxies.dctermsReferences', 'proxies.dcIdentifier'])
-
-        origins = [].push(*originsPublisher).push(*originsProvider).push(*originsDataProvider).push(*originsCountry).push(*originsOther)
+        end     
+        
+        
+                
         {
-          content_present: origins.size > 0,
-          items: origins.uniq.collect do |origin|
+          title:    t(data[:title]),
+          sections: section_data.each_with_index.collect do | subsection, index |
+            subsection.size > 0 ?
             {
-              label: originsPublisher.index(origin)    == 0 ? t('site.object.meta-label.publisher') + ':' :
-                     originsProvider.index(origin)     == 0 ? t('site.object.meta-label.provider') + ':' :
-                     originsDataProvider.index(origin) == 0 ? t('site.object.meta-label.data-provider') + ':' :
-                     originsCountry.index(origin)      == 0 ? t('site.object.meta-label.providing-country') + ':' : false,
-              text: origin,
-              url:  originsDataProvider.index(origin) ? render_document_show_field_value(document, 'aggregations.edmIsShownAt') : false
-            }
+              title:      section_labels[index],
+              items:      subsection
+            } : false
           end
-        }
+        } unless section_data.size == 0
+
       end
 
-      def property_data
+      
+#      def people_data
+#        
+#        dc_creator     = render_document_show_field_value(document, 'proxies.dcCreator')
+#        dc_contributor = render_document_show_field_value(document, 'proxies.dcContributor')
+#        
+#        dc_creator_begin = render_document_show_field_value(document, 'agents.begin') 
+#        dc_creator_end   = render_document_show_field_value(document, 'agents.end')
+#        
+#        {
+#          content_present: (!dc_creator.nil? || !dc_contributor.nil?),
+#          title: t('site.object.meta-label.people'),
+#          creator: {
+#            title: t('site.object.meta-label.creator'),
+#            name:  merge_values(['proxies.dcCreator', 'agents.prefLabel'], ', '),
+#            url:   dc_creator ? search_path(q: "\"#{dc_creator}\"") : nil,
+#            life: {
+#                content_present: (!dc_creator_begin.nil? || !dc_creator_end.nil?),
+#                from: {
+#                    long:  dc_creator_begin,
+#                    short: dc_creator_begin
+#                },
+#                to: {
+#                    long:  dc_creator_end,
+#                    short: dc_creator_end
+#                }
+#            },
+#            biography: {
+#                text:        nil,
+#                source:     nil,
+#                source_url: nil
+#            }
+#          },
+#          contributor: {
+#            title: t('site.object.meta-label.contributor'),            
+#            name: dc_contributor,
+#            url:  dc_contributor ? search_path(q: "\"#{dc_contributor}\"") : nil,
+#          }
+#        }
+#      end
 
-        properties    = collect_values(['proxies.dctermsExtent'])
-        propertiesCS  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
-        propertiesFmt = collect_values(['aggregations.webResources.dcFormat'])
+      
+#      def place_data
+#        spatial  = collect_values(['proxies.dctermsSpatial'])
+#        coverage = collect_values(['proxies.dcCoverage'])
+#        places   = [].push(*spatial).push(*coverage)
+#          
+#        {
+#          content_present: places.size > 0,
+#          spatial: {
+#            content_present: spatial.size > 0,
+#            label:  t('site.object.meta-label.location'),
+#            items: spatial.collect do |space|
+#              {
+#                text: space
+#              }
+#            end            
+#          },
+#          coverage: {
+#            content_present: coverage.size > 0,
+#            label:  t('site.object.meta-label.place-time'),
+#            items: coverage.collect do |space|
+#              {
+#                text: space
+#              }
+#            end            
+#          }
+#        }        
+#      end
+      
+#      def time_data
+#        issued   = collect_values(['proxies.dctermsIssued'])
+#        temporal = collect_values(['proxies.dctermsTemporal'])
+#        times    = [].push(*issued).push(*temporal)
+#          
+#        {
+#          content_present: times.size > 0,
+#          issued: {
+#            content_present: issued.size > 0,
+#            label: t('site.object.meta-label.issued'),
+#            items: issued.collect do |item|
+#              {
+#                text: item
+#              }
+#            end            
+#          },
+#          temporal: {
+#            content_present: temporal.size > 0,
+#            label: t('site.object.meta-label.temporal'),
+#            items: temporal.collect do |item|
+#              {
+#                text: item
+#              }
+#            end            
+#          }
+#        }        
+#      end
+      
+#      def ref_rel_data
+#        relations  = collect_values(['proxies.dcRelation'])
+#        references = collect_values(['proxies.dctermsReferences'])
+#        ref_rels   = [].push(*relations).push(*references)
+#          
+#        {
+#          content_present: ref_rels.size > 0,
+#          relations: {
+#            content_present: relations.size > 0,
+#            label:  t('site.object.meta-label.relations'),
+#            items: relations.collect do |rel|
+#              {
+#                text: rel
+#              }
+#            end            
+#          },
+#          references: {
+#            content_present: references.size > 0,
+#            label:  t('site.object.meta-label.references'),
+#            items: references.collect do |ref|
+#              {
+#                text: ref
+#              }
+#            end            
+#          }
+#        }        
+#      end
 
-        props = [].push(*propertiesFmt).push(*properties).push(*propertiesCS)
+#      def concept_data
+#
+#        concept_types    = []
+#        concepts_other   = []
+#        concept_subjects = []
+#
+#        document.proxies.each{|proxy|
+#          val = proxy.fetch('dcType', nil)
+#          val.each{|type|
+#            concept_types <<  type.downcase 
+#          } unless val.blank?
+#        }
+#
+#        if (collect_values(['concepts.prefLabel']).size > 0)
+#          document.concepts.each{|concept|
+#            val = concept.fetch('prefLabel', nil)
+#            val.each{|prefLabel|
+#              (concepts_other <<  prefLabel.downcase) unless concept_types.index(prefLabel.downcase)
+#            } unless  val.blank?
+#          }
+#        end
+#
+#        if(collect_values(['aggregations.edmUgc']).size > 0)
+#          concepts_other << t('site.object.meta-label.ugc')
+#        end
+#        
+#        document.proxies.each{|proxy|
+#          val = proxy.fetch('dcSubject', nil)
+#          val.each{|subject|
+#            (concept_subjects << subject.downcase) unless  concept_types.index(subject.downcase)
+#          } unless val.blank?
+#        }
+#        
+#        concept_types    = concept_types.uniq
+#        concepts_other   = concepts_other.uniq
+#        concept_subjects = concept_subjects.uniq
+#        
+#        {
+#          type_items: (concept_types.size == 0) ? {} :
+#            {
+#              label:  t('site.object.meta-label.type'),
+#              items: concept_types.collect do |concept|
+#                {
+#                  text:   concept,
+#                  url:    search_path(q: "what:\"#{concept}\""),
+#                }
+#              end
+#            },
+#            
+#          concept_items:  (concepts_other.size == 0) ? {} :{
+#            label:  t('site.object.meta-label.concept'),
+#            items: concepts_other.collect do |concept|
+#              {
+#                text:   concept,
+#                url:    concept == t('site.object.meta-label.ugc') ? root_url + ("search?f[UGC][]=true") : search_path(q: "what:\"#{concept}\""),
+#              }
+#            end          
+#          },
+#          
+#          concept_subjects:  (concept_subjects.size == 0) ? {} :{
+#            label:  t('site.object.meta-label.subject'),
+#            items: concept_subjects.collect do |concept|
+#              {
+#                text:   concept,
+#                url:    search_path(q: "what:\"#{concept}\""),
+#              }
+#            end          
+#          }
+#        }        
+#      end
+      
+#      def date_data
+#        datesPL = collect_values([
+#          'timespans.prefLabel'
+#        ])
+#        datesCS = collect_values(['proxies.dctermsIssued', 'proxies.dctermsCreated', 'proxies.dctermsPublished', 'proxies.dcDate'])
+#        dates   = [].push(*datesPL).push(*datesCS).uniq
+#        {
+#          content_present: dates.size > 0,
+#          items: dates.collect do |date|
+#            {
+#              label:  datesPL.index(date) == 0 ? t('site.object.meta-label.period') + ':' : 
+#                      datesCS.index(date) == 0 ? t('site.object.meta-label.creation-date') + ':' : false,
+#              text: date,
+#              url:  datesCS.index(date) ? search_path(q: "when:\"#{date}\"") : false
+#            }
+#          end
+#        }
+#      end
 
-        if(props.empty?)
-          return
-        end
-
-        {
-          content_present: props.size > 0,
-          items: props.collect do |property|
-            {
-              text:  property,
-              url:   propertiesCS.index(property)       ? search_path(q: "what:\"#{property}\"") : false,
-              label: propertiesFmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : false
-            }
-          end
-        }
-      end
-
-
+      
+#      def provenance_data
+#
+#        require 'time'
+#
+#        origins_publisher     = collect_values(['proxies.dcPublisher'])
+#        origins_provider      = collect_values(['aggregations.edmProvider'])
+#        origins_provenance    = collect_values(['proxies.dctermsProvenance'])
+#        origins_data_provider = collect_values(['aggregations.edmDataProvider'])
+#        origins_country       = collect_values(['europeanaAggregation.edmCountry'])
+#        origins_identifier    = collect_values(['proxies.dcIdentifier'])
+#        originsOther          = collect_values(['proxies.dcSource', 'proxies.dctermsReferences', 'proxies.dcIdentifier'])
+#        origins_t_created     = collect_values(['timestamp_created'])
+#        origins_t_updated     = collect_values(['timestamp_created'])
+#        origins_t             = []
+#        
+#        strf = "%Y-%m-%d";
+#        
+#        if(origins_t_created.size > 0)
+#          date = Time.parse(origins_t_created[0]) rescue nil
+#          if(!date.nil?)
+#            origins_t.push(t('site.object.meta-label.timestamp_created', timestamp_created: date.strftime(strf) ))
+#          end
+#        end
+#        if(origins_t_updated.size > 0)
+#          date = Time.parse(origins_t_updated[0]) rescue nil
+#          if(!date.nil?)
+#            origins_t.push(t('site.object.meta-label.timestamp_updated', timestamp_updated: date.strftime(strf) ))
+#          end
+#        end
+#        
+#        origins = []
+#        origins.push(*origins_identifier).push(*origins_provenance).push(*origins_t).push(*origins_publisher)
+#        origins.push(*origins_provider).push(*origins_data_provider).push(*origins_country)
+#        origins.push(*originsOther)
+#
+#        {
+#          content_present: origins.size > 0,
+#          items: origins.uniq.collect do |origin|
+#            {
+#              label: origins_publisher.index(origin)     == 0 ? t('site.object.meta-label.publisher') + ':' : 
+#                     origins_provider.index(origin)      == 0 ? t('site.object.meta-label.provider') + ':' : 
+#                     origins_provenance.index(origin)    == 0 ? t('site.object.meta-label.provenance') + ':' : 
+#                     origins_data_provider.index(origin) == 0 ? t('site.object.meta-label.data-provider') + ':' :
+#                     origins_identifier.index(origin)    == 0 ? t('site.object.meta-label.identifier') + ':' :
+#                     origins_country.index(origin)       == 0 ? t('site.object.meta-label.providing-country') + ':' : false,
+#              text: origin,
+#              url:  origins_data_provider.index(origin) ? render_document_show_field_value(document, 'aggregations.edmIsShownAt') : false
+#            }
+#          end
+#        }
+#      end
+      
+#      def property_data
+#        
+#        properties_cs  = collect_values(['proxies.dcMedium', 'proxies.dcDuration'])
+#        properties_fmt = collect_values(['aggregations.webResources.dcFormat'])
+#        properties_xt  = collect_values(['proxies.dctermsExtent'])
+#        properties_lng = collect_values(['proxies.dcLanguage'])
+#                    
+#        props = [].push(*properties_fmt).push(*properties_cs).push(*properties_xt).push(*properties_lng)
+# 
+#        if(props.empty?)
+#          return 
+#        end
+#        
+#        {
+#          content_present: props.size > 0,
+#          items: props.collect do |property|
+#            {
+#              label:  properties_fmt.index(property) == 0 ? t('site.object.meta-label.format') + ':' : 
+#                      properties_xt.index(property) == 0 ? t('site.object.meta-label.extent') + ':' :
+#                      properties_lng.index(property) == 0 ? t('site.object.meta-label.language') + ':' : false,
+#              text:  property,
+#              url:   properties_cs.index(property)       ? search_path(q: "what:\"#{property}\"") : false
+#            }
+#          end
+#        }
+#      end
+      
+      
       def content_object_download
         links = []
 

@@ -6,7 +6,8 @@ module Templates
       
       def navigation
         {
-          :global => navigation_global
+          :global => navigation_global,
+          :footer => common_footer
         }
       end
       

@@ -223,9 +223,7 @@ module MustacheHelper
             :text  => "My Europeana"
           }
         ]
-    },
-
-    :footer  => common_footer
+    }
   }
   end
 
