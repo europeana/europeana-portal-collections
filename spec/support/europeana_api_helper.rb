@@ -11,8 +11,8 @@ module EuropeanaAPIHelper
       stub_request(:get, Europeana::API.url + '/search.json').
         with(query: hash_including(wskey: 'test')).
         to_return(body: '{"success":true,"itemsCount":' + items.size.to_s + ',"totalResults":' + items.size.to_s + ',"items":[' + items + ']}',
-        status: 200,
-        headers: { 'Content-Type' => 'text/json' })
+                  status: 200,
+                  headers: { 'Content-Type' => 'text/json' })
 
       # API Record
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+.json}).
