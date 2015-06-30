@@ -1,9 +1,3 @@
-require 'rails_helper'
-
-log = Logger.new(STDOUT)
-log.level = Logger::DEBUG
-
-
 RSpec.feature 'Object page', :type => :feature do
   
   describe 'Navigation' do

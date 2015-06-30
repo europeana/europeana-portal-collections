@@ -60,10 +60,6 @@ module Templates
 
       
       def content
-        if(document.id.index("/sample/record"))
-          return {object: { title: document.id, concepts: [], proxies: [], aggregations: [] }}
-        end
-        
         dcCreator = render_document_show_field_value(document, 'proxies.dcCreator')
         
         {

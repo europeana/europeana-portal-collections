@@ -7,7 +7,7 @@ gem 'rails', '4.2.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   github: 'europeana/europeana-blacklight',
-  ref: 'c4ecd40'
+  ref: 'ca329fa'
 
 gem 'europeana-api',
   require: 'europeana/api',
@@ -16,8 +16,8 @@ gem 'europeana-api',
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
-  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '9857740ec2'
+  github: 'europeana/europeana-styleguide-ruby',
+  ref: 'd5cfc13'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
@@ -26,6 +26,7 @@ gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight',
   github: 'rwd/blacklight', branch: 'abstract_facet_paginator'
+gem 'compass-rails'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
@@ -33,7 +34,7 @@ gem 'jquery-rails'
 gem 'mysql2'
 gem 'puma', '~> 2.11.0'
 gem 'redis-rails', '~> 4.0'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
@@ -60,7 +61,6 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver'
-  gem 'factory_girl'
   gem 'webmock', '~> 1.21.0'
 end
 

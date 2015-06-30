@@ -3,23 +3,11 @@ module EuropeanaAPIHelper
   RSpec.configure do |config|
     config.before(:each) do
       # API Search
-      
-      items = ''
-      
-      (0..20).each do |index|
+      items = (0..20).map do |index|
         id = '/sample/record' + index.to_s
-        items +=  '{"id":"' + id + '","title":["' + id + '"],"concepts":[],"proxies":[],"aggregations":[]}'
-        if(index < 20)
-          items += ','
-        end 
-      end
-      
-    
-    
-      log = Logger.new(STDOUT)
-      log.level = Logger::DEBUG
-      log.debug(items)
-      
+        '{"id":"' + id + '","title":["' + id + '"]}'
+      end.join(',')
+
       stub_request(:get, Europeana::API.url + '/search.json').
         with(query: hash_including(wskey: 'test')).
         to_return(body: '{"success":true,"itemsCount":' + items.size.to_s + ',"totalResults":' + items.size.to_s + ',"items":[' + items + ']}',

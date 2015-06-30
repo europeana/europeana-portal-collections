@@ -101,10 +101,8 @@ files in that directory for example configuration settings.
 
 ### Testing
 
-Use the command `rpec` from the project root to run the unit tests.
-
-Use the command `rspec spec/features` from the project root to run the
-integration tests.
+Use the command `bundle exec rspec` from the project root to run the RSpec
+tests.
 
 The integration tests use the poltergeist gem which has an external dependency
 on phantomjs. See here for installation instructions:
