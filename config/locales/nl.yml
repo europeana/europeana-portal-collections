@@ -53,26 +53,45 @@ nl:
       meta-label:
         concept: Soort object
         concepts: Categorieën
+        contributor: 
         creation-date: Datum vervaardigd
         creator: Van
         data-provider: 
         dates: 
         description: Omschrijving
+        extent: 
         format: Formaat
+        identifier: 
+        issued: 
+        language: Taal
         latitude: Breedtegraad
         location: Plaats
         longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
+        people: 
         period: Tijdvak
+        place: 
+        place-time: 
         properties: Eigenschappen
-        provenance: Herkomst
+        provenance: Bron
         provided-by: 
         provider: 
         providing-country: 
         publisher: Uitgeverij
+        references: 
+        refs-rels: 
+        relations: 
         rights: Mag ik dit gebruiken?
+        source: Bron
+        subject: 
+        temporal: 
+        time: 
+        timestamp_created: 
+        timestamp_updated: 
+        toc: 
         type: Type
+        ugc: 
       nav:
         next: 
         prev: 

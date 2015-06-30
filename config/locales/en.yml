@@ -57,6 +57,7 @@ en:
         creation-date: Creation date
         creator: Creator
         data-provider: Data provider
+        date: Date
         dates: Dates
         description: Description
         extent: Extent
@@ -79,6 +80,7 @@ en:
         provider: Provider
         providing-country: Providing country
         publisher: Publisher
+        publication-date: Date of Publication
         references: References
         refs-rels: References and Relations
         relations: Relations
@@ -86,7 +88,7 @@ en:
         source: Source
         subject: Subject
         temporal: Temporal
-        time: Time
+        time: Time 
         timestamp_created: Added to Europeana (%{timestamp_created})
         timestamp_updated: Last updated in Europeana (%{timestamp_updated})
         toc: Table of Contents
