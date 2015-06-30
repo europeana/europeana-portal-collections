@@ -13,6 +13,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+*.log
 /tmp
 
 # Ignore database config file.
@@ -21,12 +22,16 @@
 # Ignore Redis config file.
 /config/redis.yml
 
+# Ignore MongoDB config file.
+/config/mongoid.yml
+
 # Ignore rvm files.
 .ruby-version
 .ruby-gemset
 
 # Ignore IDE files.
 *.komodoproject
+/.idea
 
 # Ignore os files.
 .DS_Store
