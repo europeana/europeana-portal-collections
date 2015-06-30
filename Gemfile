@@ -26,6 +26,7 @@ gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight',
   github: 'rwd/blacklight', branch: 'abstract_facet_paginator'
+gem 'bootstrap-sass', '3.3.5.1'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
@@ -33,7 +34,7 @@ gem 'jquery-rails'
 gem 'mysql2'
 gem 'puma', '~> 2.11.0'
 gem 'redis-rails', '~> 4.0'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.3'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
