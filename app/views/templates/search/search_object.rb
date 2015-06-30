@@ -347,19 +347,6 @@ module Templates
         fields.each { |field|
           value = render_document_show_field_value(doc, field)
           values << value unless value.nil?
-
-          log = Logger.new(STDOUT)
-          log.level = Logger::INFO
-
-          # TODO: find out why this is necessary
-          #if(!value && field == 'proxies.dcType')
-          #  doc.proxies.each{|proxy|
-          #    val = proxy.fetch('dcType', nil)
-          #    val.each{|type|
-          #      values <<  type
-          #    } unless val.blank?
-          #  }
-          # end
         }
         values.uniq
       end
@@ -373,9 +360,6 @@ module Templates
 
         section_data   = []
         section_labels = []
-
-        log = Logger.new(STDOUT)
-        log.level = Logger::INFO
 
         data[:sections].collect do | section |
           f_data = []
