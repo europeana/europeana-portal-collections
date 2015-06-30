@@ -52,6 +52,11 @@ http://labs.europeana.eu/api/registration/
 The base URL of the Europeana API. This only needs to be set if you are not
 using the live production version of the API.
 
+#### EUROPEANA_STYLEGUIDE_CDN
+
+The base URL of the Europeana styleguide from which images, stylesheets and
+javascripts will be loaded.
+
 #### EDM_IS_SHOWN_BY_PROXY
 
 The HTTP address of a proxy capabable of receiving Europeana record IDs as URL
@@ -101,10 +106,8 @@ files in that directory for example configuration settings.
 
 ### Testing
 
-Use the command `rpec` from the project root to run the unit tests.
-
-Use the command `rspec spec/features` from the project root to run the
-integration tests.
+Use the command `bundle exec rspec` from the project root to run the RSpec
+tests.
 
 The integration tests use the poltergeist gem which has an external dependency
 on phantomjs. See here for installation instructions:

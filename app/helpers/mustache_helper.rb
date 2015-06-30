@@ -33,8 +33,7 @@ module MustacheHelper
     [
       { rel: 'search',         type: 'application/opensearchdescription+xml', href: request.host_with_port + '/catalog/opensearch.xml', title: 'Blacklight' },
       { rel: 'shortcut icon',  type: 'image/x-icon',                          href: asset_path('favicon.ico') },
-#      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
-      { rel: 'stylesheet',     href: asset_path('europeana.css'),             media: 'all' }
+      { rel: 'stylesheet',     href: styleguide_path('/css/search/screen.css'),             media: 'all' }
     ]
   end
 
@@ -54,43 +53,16 @@ module MustacheHelper
   end
 
   def image_root
-    'http://develop.styleguide.eanadev.org/images/'
+    styleguide_path('/images/')
   end
 
   def js_variables
-    'var js_path= "http://develop.styleguide.eanadev.org/js/dist/";'
-    #'var js_path= "http://localhost/Europeana-Patternlab/public/js/dist/";'
+    "var js_path='" + styleguide_path('/public/js/dist/') + "';"
   end
 
   def js_files
-    [
-      #{ path: asset_path('jquery.js') },
-
-      #{ path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
-      #{ path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
-
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/channels.js' },
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/global.js' },
-      
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/require.js',  data_main: 'http://localhost/Europeana-Patternlab/public/js/dist/main'},
-      { path: 'http://develop.styleguide.eanadev.org/js/dist/require.js',  data_main: 'http://develop.styleguide.eanadev.org/js/dist/main'},
-
-      # Blacklight dependencies
-      #{ path: asset_path('turbolinks.js') },
-      #{ path: asset_path('blacklight/core.js') },
-      #{ path: asset_path('blacklight/autofocus.js') },
-      #{ path: asset_path('blacklight/checkbox_submit.js') },
-      #{ path: asset_path('blacklight/bookmark_toggle.js') },
-      #{ path: asset_path('blacklight/ajax_modal.js') },
-#      { path: asset_path('blacklight/search_context.js') }
-      #{ path: asset_path('blacklight/collapsable.js') },
-      #{ path: asset_path('bootstrap/transition.js') },
-      #{ path: asset_path('bootstrap/collapse.js') },
-      #{ path: asset_path('bootstrap/dropdown.js') },
-      #{ path: asset_path('bootstrap/alert.js') },
-      #{ path: asset_path('bootstrap/modal.js') },
-      #{ path: asset_path('blacklight/blacklight.js') }
-    ]
+    [{ path: styleguide_path('/js/dist/require.js'),
+       data_main: styleguide_path('/js/dist/main') }]
   end
 
   def menus
@@ -251,9 +223,7 @@ module MustacheHelper
             :text  => "My Europeana"
           }
         ]
-    },
-
-    :footer  => common_footer
+    }
   }
   end
 
@@ -300,6 +270,10 @@ module MustacheHelper
         :googleplus => true
       }
     }
+  end
+
+  def styleguide_path(asset = nil)
+    ENV['EUROPEANA_STYLEGUIDE_CDN'] + (asset.present? ? asset : '')
   end
 
   # @param keys [Symbol] keys of params to gather template input field data for

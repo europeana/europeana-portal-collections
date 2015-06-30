@@ -7,7 +7,7 @@ gem 'rails', '4.2.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   github: 'europeana/europeana-blacklight',
-  ref: 'c4ecd40'
+  ref: 'ca329fa'
 
 gem 'europeana-api',
   require: 'europeana/api',
@@ -16,8 +16,8 @@ gem 'europeana-api',
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
-  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '9857740ec2'
+  github: 'europeana/europeana-styleguide-ruby',
+  ref: '03e78e21e5'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
@@ -27,6 +27,7 @@ gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 gem 'blacklight',
   github: 'rwd/blacklight', branch: 'abstract_facet_paginator'
 gem 'bootstrap-sass', '3.3.5.1'
+gem 'compass-rails'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
@@ -34,7 +35,7 @@ gem 'jquery-rails'
 gem 'mysql2'
 gem 'puma', '~> 2.11.0'
 gem 'redis-rails', '~> 4.0'
-gem 'sass-rails', '~> 5.0.3'
+gem 'sass-rails'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
@@ -43,12 +44,9 @@ group :production do
 end
 
 group :development, :test do
-  gem 'brakeman', require: false
-  gem 'capybara', '~> 2.4.0'
+  gem 'brakeman', require: false # @todo add to CI suite
   gem 'dotenv-rails', '~> 1.0.2'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
-  gem 'rails_best_practices', require: false
+  gem 'rails_best_practices', require: false # @todo add to CI suite
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '0.29.1', require: false
 end
@@ -59,7 +57,11 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', '~> 2.4.0'
   gem 'coveralls', require: false
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
   gem 'webmock', '~> 1.21.0'
 end
 
