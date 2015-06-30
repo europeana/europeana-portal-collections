@@ -149,6 +149,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.5.2)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
@@ -389,6 +391,7 @@ DEPENDENCIES
   europeana-blacklight!
   europeana-styleguide!
   eventmachine (~> 1.0.6)
+  factory_girl
   feedjira (~> 2.0)
   jbuilder (~> 2.0)
   jquery-rails

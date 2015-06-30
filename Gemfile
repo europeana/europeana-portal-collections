@@ -42,15 +42,11 @@ group :production do
 end
 
 group :development, :test do
-  gem 'brakeman', require: false
-  gem 'capybara', '~> 2.4.0'
+  gem 'brakeman', require: false # @todo add to CI suite
   gem 'dotenv-rails', '~> 1.0.2'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
-  gem 'rails_best_practices', require: false
+  gem 'rails_best_practices', require: false # @todo add to CI suite
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '0.29.1', require: false
-  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -59,7 +55,12 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', '~> 2.4.0'
   gem 'coveralls', require: false
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'factory_girl'
   gem 'webmock', '~> 1.21.0'
 end
 
