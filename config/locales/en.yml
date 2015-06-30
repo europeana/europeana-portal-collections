@@ -53,29 +53,41 @@ en:
       meta-label:
         concept: Concept
         concepts: Categories
+        contributor: Contributor
         creation-date: Creation date
         creator: Creator
         data-provider: Data provider
         dates: Dates
         description: Description
+        extent: Extent
         format: Format
         identifier: Identifier
+        issued: Issued
+        language: Language
         latitude: Latitude
         location: Location
         longitude: Longitude
         location: Location
         map: Map
         map-tiles: Tiles
+        people: People
         period: Period
+        place: Place
+        place-time: Place/Time
         properties: Properties
         provenance: Provenance
         provided-by: Provided by
         provider: Provider
         providing-country: Providing country
         publisher: Publisher
+        references: References
+        refs-rels: References and Relations
+        relations: Relations
         rights: Can I use this?
         source: Source
         subject: Subject
+        temporal: Temporal
+        time: Time
         timestamp_created: Added to Europeana (%{timestamp_created})
         timestamp_updated: Last updated in Europeana (%{timestamp_updated})
         toc: Table of Contents
