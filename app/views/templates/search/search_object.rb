@@ -500,7 +500,7 @@ module Templates
 
       def edm_is_shown_by_download_url
         @edm_is_shown_by_download_url ||= begin
-          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.first.fetch('edmIsShownBy', false)
+          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.size > 0 && document.aggregations.first.fetch('edmIsShownBy', false)
             ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
           else
             render_document_show_field_value(document, 'aggregations.edmIsShownBy')
@@ -563,44 +563,45 @@ module Templates
       end
 
       def simple_rights_label_data(rights)
+         return nil unless rights.present?
+         # global.facet.reusability.permission      Only with permission
+         # global.facet.reusability.open            Yes with attribution
+         # global.facet.reusability.restricted      Yes with restrictions
+      
+         prefix = t('global.facet.header.reusability') + ' '
+      
+         if rights.nil?
+           nil
+         elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
+           {
+             license_public: false,
+             license_human:  prefix + t('global.facet.reusability.restricted')
+           }
+         elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
+           {
+             license_public: true,
+             license_human:  prefix + t('global.facet.reusability.open')
+           }
+         elsif rights.index('http://www.europeana.eu/rights/rr-f') == 0
+           {
+             license_public: false,
+             license_human:  prefix + t('global.facet.reusability.permission')
+           }
+         elsif rights.index('http://creativecommons.org/publicdomain/mark') == 0
+           {
+             license_public: true,
+             license_human:  prefix + t('global.facet.reusability.open')
+           }
+         else
+           {
+             license_public: true,
+             license_human:  'todo: map this rights value(' + rights + ')'
+           }
+         end
+       end
 
-        # global.facet.reusability.permission      Only with permission
-        # global.facet.reusability.open            Yes with attribution
-        # global.facet.reusability.restricted      Yes with restrictions
-
-        prefix = t('global.facet.header.reusability') + ' '
-
-        if(rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0)
-          {
-            license_public: false,
-            license_human:  prefix + t('global.facet.reusability.restricted')
-          }
-        elsif(rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0)
-          {
-            license_public: true,
-            license_human:  prefix + t('global.facet.reusability.open')
-          }
-        elsif(rights.index('http://www.europeana.eu/rights/rr-f') == 0)
-          {
-            license_public: false,
-            license_human:  prefix + t('global.facet.reusability.permission')
-          }
-        elsif(rights.index('http://creativecommons.org/publicdomain/mark') == 0)
-          {
-            license_public: true,
-            license_human:  prefix + t('global.facet.reusability.open')
-          }
-        else
-          {
-            license_public: true,
-            license_human:  'todo: map this rights value(' + rights + ')'
-          }
-        end
-
-      end
 
       def media_items
-
         aggregation = document.aggregations.first
         return [] unless aggregation.respond_to?(:webResources)
 

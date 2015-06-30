@@ -3,9 +3,14 @@ module EuropeanaAPIHelper
   RSpec.configure do |config|
     config.before(:each) do
       # API Search
+      items = (0..20).map do |index|
+        id = '/sample/record' + index.to_s
+        '{"id":"' + id + '","title":["' + id + '"]}'
+      end.join(',')
+
       stub_request(:get, Europeana::API.url + '/search.json').
         with(query: hash_including(wskey: 'test')).
-        to_return(body: '{"success":true,"itemsCount":1,"totalResults":1,"items":[{"id":"/abc/123","title":["sample record"]}]}',
+        to_return(body: '{"success":true,"itemsCount":' + items.size.to_s + ',"totalResults":' + items.size.to_s + ',"items":[' + items + ']}',
                   status: 200,
                   headers: { 'Content-Type' => 'text/json' })
 
@@ -15,7 +20,7 @@ module EuropeanaAPIHelper
         to_return do |request|
           id = request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
           {
-            body: '{"success":true,"object":{"about": "' + id + '"}}',
+            body: '{"success":true,"object":{"about": "' + id + '", "title":["' + id + '"]}}',
             status: 200,
             headers: { 'Content-Type' => 'text/json' }
           }
