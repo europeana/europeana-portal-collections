@@ -14,3 +14,12 @@ Most templates for the application will come from the
 Individual templates present in the app/views directory of 
 europeana-styleguide can be overriden for this application by creating
 a template of the same file name beneath this directory.
+
+## File naming
+
+View classes need to be named according to Ruby file naming conventions, but
+the Mustache templates may have other characters in their file names, such as
+uppercase letters and dashes. This may result in directory structures like so:
+
+* /app/views/templates/search/search_home.rb
+* /app/views/templates/Search/Search-home.mustache
