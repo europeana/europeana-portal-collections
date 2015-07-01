@@ -1,15 +1,16 @@
 module Templates
   module Search
-    
+
     class SearchHome < ApplicationView
-    
-      
+
+
       def navigation
         {
-          :global => navigation_global
+          :global => navigation_global,
+          :footer => common_footer
         }
       end
-      
+
       def content
         {
           :hero_config => {
@@ -23,8 +24,6 @@ module Templates
           },
           :strapline  => t('site.home.strapline', total_item_count: total_item_count),
       
-          :total_items  => "40,173,111",
-            
           :important_removed  => {
             :text   => "Europeana stories are now in Google’s Field Trip app",
             :url    => "http://blog.europeana.eu/2015/03/its-your-world-explore-it-europeana-stories-now-in-googles-field-trip-app/"
@@ -64,12 +63,12 @@ module Templates
               :bg_image  => "sample/thumb-news.jpg"
             }
           ],
-    
+
           :news  =>  {
             :items  => news_items,
             :blogurl => 'http://blog.europeana.eu/'
         },
-        
+
       }
       end
     end

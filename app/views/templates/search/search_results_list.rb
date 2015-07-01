@@ -19,11 +19,11 @@ module Templates
       def has_results
         response.total > 0
       end
-      
+
       def has_single_result
         response.total == 1
       end
-      
+
       def has_multiple_results
         response.total > 1
       end
@@ -60,9 +60,10 @@ module Templates
               }
             end
           },
-          global: navigation_global
+          global: navigation_global,
+          footer: common_footer
         }
-        
+
       end
 
       private
@@ -72,7 +73,7 @@ module Templates
           t('global.facet.header.' + facet_name.downcase)
         else
           facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, '') : facet_value)
-          
+
           case facet_name.upcase
             when 'CHANNEL'
               t('global.channel.' + facet_value.downcase)
@@ -159,7 +160,7 @@ module Templates
           items: facet.items.collect do |item|
             {
               url: facet_item_url(facet.name, item),
-              text: facet_map(facet.name, item.value).split.map{|x| (capitalise_labels ? x.capitalize : x) }.join(' '),                
+              text: facet_map(facet.name, item.value).split.map{|x| (capitalise_labels ? x.capitalize : x) }.join(' '),
               num_results: number_with_delimiter(item.hits),
               is_checked: facet_in_params?(facet.name, item)
             }
@@ -253,7 +254,7 @@ module Templates
           labels =  doc.fetch('edmConceptPrefLabelLangAware')
           if(!labels[0..3].nil?)
           {
-            items: labels[0..3].map { |c| { text: c } } 
+            items: labels[0..3].map { |c| { text: c } }
           }
           else
             []
@@ -263,7 +264,7 @@ module Templates
         end
       end
 
-            
+
     end
   end
 end
