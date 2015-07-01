@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'support/shared_examples/more_like_this_api_request'
 
 RSpec.describe PortalController, type: :controller do
   describe 'GET index' do
@@ -45,21 +45,38 @@ RSpec.describe PortalController, type: :controller do
       context 'with mlt param' do
         let(:params) { { mlt: '/abc/123' } }
 
-        it 'queries the API for the named record' do
-          expect(an_api_record_request_for(params[:mlt])).
-            to have_been_made.at_least_once
+        it_behaves_like 'a more like this api request' do
+          let(:record_id) { params[:mlt] }
         end
+      end
+    end
+  end
 
-        it 'does not query the API for the record hierarchy' do
-          expect(an_api_hierarchy_request_for(params[:mlt])).
-            not_to have_been_made
-        end
+  describe 'GET similar' do
+    context 'when format is JSON' do
+      before do
+        get :similar, params
+      end
+      let(:params) { { id: 'abc/123', format: 'json' } }
+      it_behaves_like 'a more like this api request' do
+        let(:record_id) { '/' + params[:id] }
+      end
+      it 'responds with JSON' do
+        expect(response.content_type).to eq('application/json')
+      end
+      it 'has 200 status code' do
+        expect(response.status).to eq(200)
+      end
+      it 'renders JSON ERB template' do
+        expect(response).to render_template('portal/similar')
+      end
+      it 'accepts pagination params'
+    end
 
-        it 'queries the API for MLT records' do
-          expect(an_api_search_request.
-            with(query: hash_including(query: /NOT europeana_id:"#{params[:mlt]}"/))).
-            to have_been_made.at_least_once
-        end
+    context 'when format is HTML' do
+      let(:params) { { id: 'abc/123', format: 'html' } }
+      it 'returns an unknown format error' do
+        expect { get :similar, params }.to raise_error(ActionController::UnknownFormat)
       end
     end
   end

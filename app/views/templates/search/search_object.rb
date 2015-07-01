@@ -314,16 +314,7 @@ module Templates
           similar: {
             title: t('site.object.similar-items') + ':',
             more_items_query: search_path(mlt: document.id),
-            items: @similar.map { |doc|
-              {
-                url: document_path(doc, format: 'html'),
-                title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-                img: {
-                  alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-                  src: render_document_show_field_value(doc, 'edmPreview')
-                }
-              }
-            }
+            items: more_like_this(@similar)
           },
           #timestamps: {
           #  created: "2014-05-27T20:14:08.870Z",
