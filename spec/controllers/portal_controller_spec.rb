@@ -92,8 +92,8 @@ RSpec.describe PortalController, type: :controller do
       context 'with page param' do
         let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
         it 'paginates' do
-          expect(an_api_search_request.with(query: hash_including(start: '5')))
-            .to have_been_made
+          expect(an_api_search_request.with(query: hash_including(start: '5'))).
+            to have_been_made
         end
         it 'defaults per_page to 4' do
           expect(an_api_search_request.with(query: hash_including(start: '5', rows: '4'))).
