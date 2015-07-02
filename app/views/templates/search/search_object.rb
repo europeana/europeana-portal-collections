@@ -138,6 +138,10 @@ module Templates
                   :fields  => ['proxies.dctermsTemporal']
                 },
                 {
+                  :title   => 'site.object.meta-label.place-time',
+                  :fields  => ['proxies.dcCoverage']
+                },
+                {
                   :title   => 'site.object.meta-label.creation-date',
                   :fields  => ['proxies.dctermsIssued'],
                   :collected => document.proxies.collect do |proxy|
@@ -151,8 +155,19 @@ module Templates
                 }
               ]
             }),
-
-            description: render_document_show_field_value(document, 'proxies.dcDescription'),
+            description: data_section( {
+               :title => 'site.object.meta-label.description',
+               :sections  => [
+                 {
+                   :title  => false,
+                   :collected => render_document_show_field_value(document, 'proxies.dcDescription')
+                 },
+                 {
+                   :title   => false,
+                   :collected  => render_document_show_field_value(document, 'proxies.dctermsTOC')
+                 }
+               ]
+             }),
             download: content_object_download,
             media: media_items,
             meta_additional: {
@@ -178,7 +193,6 @@ module Templates
               url:                 render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
               institution_name:    render_document_show_field_value(document, 'aggregations.edmDataProvider'),
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
-              content_present:     collect_values(['aggregations.edmDataProvider', 'europeanaAggregation.edmCountry']).length > 0
             },
             people: data_section({
               :title => 'site.object.meta-label.people',
@@ -366,7 +380,9 @@ module Templates
           if(section[:collected])
             f_data.push(* section[:collected])
           end
-          f_data.push(*collect_values(section[:fields]))
+          if(section[:fields])
+            f_data.push(*collect_values(section[:fields]))
+          end
           f_data = f_data.flatten.uniq
 
 
