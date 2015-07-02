@@ -551,9 +551,9 @@ module Templates
          # global.facet.reusability.permission      Only with permission
          # global.facet.reusability.open            Yes with attribution
          # global.facet.reusability.restricted      Yes with restrictions
-      
+
          prefix = t('global.facet.header.reusability') + ' '
-      
+
          if rights.nil?
            nil
          elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
