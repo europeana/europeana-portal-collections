@@ -173,7 +173,7 @@ module Templates
               geo: {
                 latitude: '"' + (render_document_show_field_value(document, 'places.latitude')  || '' ) + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '' ) + '"',
-                long_and_lat: has_long_and_lat,
+                long_and_lat: long_and_lat?,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
                 labels: {
                   longitude: t('site.object.meta-label.longitude') + ':',
@@ -200,7 +200,7 @@ module Templates
                   title: 'site.object.meta-label.creator',
                   fields: ['agents.prefLabel'],
                   collected: document.proxies.collect do |proxy|
-                    proxy.fetch('dcCreator', nil).
+                    proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
                   url: 'q',
                   extra: [
@@ -457,16 +457,18 @@ module Templates
 
         {
           title:    t(data[:title]),
-          sections: section_data.each_with_index.collect do | subsection, index |
-            subsection.size > 0 ?
-            {
-              title:      section_labels[index],
-              items:      subsection
-            } : false
+          sections: section_data.each_with_index.collect do |subsection, index|
+            if subsection.size > 0
+              {
+                title: section_labels[index],
+                items: subsection
+              }
+            else
+              false
+            end
           end
         } unless section_data.size == 0
       end
-
 
       def content_object_download
         links = []
@@ -498,7 +500,7 @@ module Templates
         end
       end
 
-      def has_long_and_lat
+      def long_and_lat?
         latitude = render_document_show_field_value(document, 'places.latitude')
         longitude = render_document_show_field_value(document, 'places.longitude')
         !latitude.nil? && latitude.size > 0 && !longitude.nil? && longitude.size > 0
@@ -527,13 +529,8 @@ module Templates
         # force array return with empty default
         title = document.fetch(:title, [])
 
-        if title.size > 1
-          title[1..-1]
-        else
-          nil
-        end
+        title.size > 1 ? title[1..-1] : nil
       end
-
 
       # Media
 
@@ -553,42 +550,42 @@ module Templates
       end
 
       def simple_rights_label_data(rights)
-         return nil unless rights.present?
-         # global.facet.reusability.permission      Only with permission
-         # global.facet.reusability.open            Yes with attribution
-         # global.facet.reusability.restricted      Yes with restrictions
+        return nil unless rights.present?
+        # global.facet.reusability.permission      Only with permission
+        # global.facet.reusability.open            Yes with attribution
+        # global.facet.reusability.restricted      Yes with restrictions
 
-         prefix = t('global.facet.header.reusability') + ' '
+        prefix = t('global.facet.header.reusability') + ' '
 
-         if rights.nil?
-           nil
-         elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
-           {
-             license_public: false,
-             license_human: prefix + t('global.facet.reusability.restricted')
-           }
-         elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
-           {
-             license_public: true,
-             license_human: prefix + t('global.facet.reusability.open')
-           }
-         elsif rights.index('http://www.europeana.eu/rights/rr-f') == 0
-           {
-             license_public: false,
-             license_human: prefix + t('global.facet.reusability.permission')
-           }
-         elsif rights.index('http://creativecommons.org/publicdomain/mark') == 0
-           {
-             license_public: true,
-             license_human: prefix + t('global.facet.reusability.open')
-           }
-         else
-           {
-             license_public: true,
-             license_human: 'todo: map this rights value(' + rights + ')'
-           }
-         end
-       end
+        if rights.nil?
+          nil
+        elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
+          {
+            license_public: false,
+            license_human: prefix + t('global.facet.reusability.restricted')
+          }
+        elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
+          {
+            license_public: true,
+            license_human: prefix + t('global.facet.reusability.open')
+          }
+        elsif rights.index('http://www.europeana.eu/rights/rr-f') == 0
+          {
+            license_public: false,
+            license_human: prefix + t('global.facet.reusability.permission')
+          }
+        elsif rights.index('http://creativecommons.org/publicdomain/mark') == 0
+          {
+            license_public: true,
+            license_human: prefix + t('global.facet.reusability.open')
+          }
+        else
+          {
+            license_public: true,
+            license_human: 'todo: map this rights value(' + rights + ')'
+          }
+        end
+      end
 
       def media_items
         aggregation = document.aggregations.first
@@ -621,7 +618,7 @@ module Templates
             file: preview_url,
             rights: {
               license_public: true,
-              license_human:  render_document_show_field_value(web_resource, 'webResourceDcRights'),
+              license_human:  render_document_show_field_value(web_resource, 'webResourceDcRights')
             },
             media_type: preview_type
             #  json: web_resource.as_json
@@ -644,9 +641,9 @@ module Templates
         end
         {
           primary: primary_media,
-            additional: {
-              items: additional_items
-            }
+          additional: {
+            items: additional_items
+          }
         }
       end
     end
