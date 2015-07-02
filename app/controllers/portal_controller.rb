@@ -34,7 +34,7 @@ class PortalController < ApplicationController
   # GET /record/:id/similar
   def similar
     _response, document = fetch(doc_id)
-    @response, @similar = more_like_this(document, params[:mltf], { per_page: 4 })
+    @response, @similar = more_like_this(document, params[:mltf], { per_page: params[:per_page] || 4 })
     respond_to do |format|
       format.json { render :similar, layout: false }
     end
