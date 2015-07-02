@@ -34,7 +34,7 @@ module Templates
           }
         }
         if @previous_document
-          navigation[:next_prev].merge!({
+          navigation[:next_prev].merge!(
             prev_url: document_path(@previous_document, format: 'html'),
             prev_link_attrs: [
               {
@@ -42,10 +42,10 @@ module Templates
                 value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
               }
             ],
-          })
+          )
         end
         if @next_document
-          navigation[:next_prev].merge!({
+          navigation[:next_prev].merge!(
             next_url: document_path(@next_document, format: 'html'),
             next_link_attrs: [
               {
@@ -53,7 +53,7 @@ module Templates
                 value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
               }
             ],
-          })
+          )
         end
         navigation
       end
@@ -61,7 +61,7 @@ module Templates
       def content
         {
           object: {
-            concepts: data_section({
+            concepts: data_section(
               title: 'site.object.meta-label.concepts',
               sections: [
                 {
@@ -93,7 +93,7 @@ module Templates
                   overrides: [
                     {
                       field_title: t('site.object.meta-label.ugc'),
-                      field_url: root_url + ("search?f[UGC][]=true")
+                      field_url: root_url + ('search?f[UGC][]=true')
                     }
                   ]
                 },
@@ -111,9 +111,9 @@ module Templates
                   end
                 }
               ]
-            }),
+            ),
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
-            dates: data_section({
+            dates: data_section(
               title: 'site.object.meta-label.time',
               sections: [
                 {
@@ -153,20 +153,20 @@ module Templates
                   end
                 }
               ]
-            }),
-            description: data_section( {
-               title: 'site.object.meta-label.description',
-               sections: [
-                 {
-                   title: false,
-                   collected: render_document_show_field_value(document, 'proxies.dcDescription')
-                 },
-                 {
-                   title: false,
-                   collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
-                 }
-               ]
-             }),
+            ),
+            description: data_section(
+              title: 'site.object.meta-label.description',
+              sections: [
+                {
+                  title: false,
+                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
+                },
+                {
+                  title: false,
+                  collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
+                }
+              ]
+            ),
             download: content_object_download,
             media: media_items,
             meta_additional: {
@@ -193,20 +193,15 @@ module Templates
               institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider'),
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
             },
-            people: data_section({
+            people: data_section(
               title: 'site.object.meta-label.people',
               sections: [
                 {
                   title: 'site.object.meta-label.creator',
                   fields: ['agents.prefLabel'],
                   collected: document.proxies.collect do |proxy|
-                      res = []
-                      val = proxy.fetch('dcCreator', nil)
-                      val.each{|subject|
-                        res << subject
-                      } unless val.blank?
-                      res
-                  end,
+                    proxy.fetch('dcCreator', nil).
+                  end.flatten.compact,
                   url: 'q',
                   extra: [
                       {
@@ -224,8 +219,8 @@ module Templates
                   fields: ['proxies.dcContributor']
                 }
               ]
-            }),
-            places: data_section( {
+            ),
+            places: data_section(
               title: 'site.object.meta-label.place',
               sections: [
                 {
@@ -237,8 +232,8 @@ module Templates
                   fields: ['proxies.dcCoverage']
                 }
               ]
-            }),
-            provenance: data_section( {
+            ),
+            provenance: data_section(
               title: 'site.object.meta-label.source',
               sections: [
                 {
@@ -272,7 +267,7 @@ module Templates
                 },
                 {
                   fields: ['timestamp_created'],
-                  format_date: "%Y-%m-%d",
+                  format_date: '%Y-%m-%d',
                   wrap: {
                     t_key: 'site.object.meta-label.timestamp_created',
                     param: :timestamp_created
@@ -280,15 +275,15 @@ module Templates
                 },
                 {
                   fields: ['timestamp_updated'],
-                  format_date: "%Y-%m-%d",
+                  format_date: '%Y-%m-%d',
                   wrap: {
                     t_key: 'site.object.meta-label.timestamp_created',
                     param: :timestamp_updated
                   }
                 }
               ]
-            }),
-            properties: data_section( {
+            ),
+            properties: data_section(
               title: 'site.object.meta-label.properties',
               sections: [
                 {
@@ -305,13 +300,13 @@ module Templates
                   url: 'what'
                 }
               ]
-            }),
+            ),
             # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             title: render_document_show_field_value(document, 'proxies.dcTitle'),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
-          refs_rels: data_section( {
+          refs_rels: data_section(
             title: 'site.object.meta-label.refs-rels',
             sections: [
               {
@@ -323,7 +318,7 @@ module Templates
                 fields: ['proxies.dctermsReferences']
               }
             ]
-          }),
+          ),
           similar: {
             title: t('site.object.similar-items') + ':',
             more_items_query: search_path(mlt: document.id),
