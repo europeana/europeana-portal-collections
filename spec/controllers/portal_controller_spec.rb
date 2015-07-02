@@ -96,25 +96,25 @@ RSpec.describe PortalController, type: :controller do
             .to have_been_made
         end
         it 'defaults per_page to 4' do
-          expect(an_api_search_request.with(query: hash_including(start: '5', rows: '4')))
-            .to have_been_made
+          expect(an_api_search_request.with(query: hash_including(start: '5', rows: '4'))).
+            to have_been_made
         end
       end
       context 'without field limiting param' do
         it 'gets MLT items for all fields' do
-          expect(an_api_search_request.with(query: hash_including(query: /title:/)))
-            .to have_been_made
-          expect(an_api_search_request.with(query: hash_including(query: /who:/)))
-            .to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /title:/))).
+            to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /who:/))).
+            to have_been_made
         end
       end
       context 'with field limiting param' do
         let(:params) { { id: 'abc/123', format: 'json', mltf: 'title' } }
         it 'limits MLT items to that field' do
-          expect(an_api_search_request.with(query: hash_including(query: /title:/)))
-            .to have_been_made
-          expect(an_api_search_request.with(query: hash_including(query: /who:/)))
-            .not_to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /title:/))).
+            to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /who:/))).
+            not_to have_been_made
         end
       end
     end
