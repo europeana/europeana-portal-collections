@@ -67,7 +67,7 @@ module Templates
                 {
                   title: 'site.object.meta-label.type',
                   fields: ['dcType'],
-                  collected: document.proxies.collect do |proxy|
+                  collected: document.proxies.map do |proxy|
                       res = []
                       val = proxy.fetch('dcType', nil)
                       val.each{|subject|
@@ -81,7 +81,7 @@ module Templates
                   title: 'site.object.meta-label.concept',
                   url: 'what',
                   fields: ['aggregations.edmUgc'],
-                  collected: collect_values(['concepts.prefLabel']).size == 0 ? [] : document.concepts.collect do  |concept|
+                  collected: collect_values(['concepts.prefLabel']).size == 0 ? [] : document.concepts.map do  |concept|
                     res = ''
                     val = concept.fetch('prefLabel', nil)
                     val.each{|prefLabel|
@@ -101,7 +101,7 @@ module Templates
                   title: 'site.object.meta-label.subject',
                   url: 'what',
                   fields: [],
-                  collected: document.proxies.collect do |proxy|
+                  collected: document.proxies.map do |proxy|
                       res = []
                       val = proxy.fetch('dcSubject', nil)
                       val.each{|subject|
@@ -143,13 +143,8 @@ module Templates
                 {
                   title: 'site.object.meta-label.creation-date',
                   fields: ['proxies.dctermsIssued'],
-                  collected: document.proxies.collect do |proxy|
-                      res = []
-                      val = proxy.fetch('dctermsCreated', nil)
-                      val.each{|subject|
-                        res << subject
-                      } unless val.blank?
-                      res.join(', ') unless res.size == 0
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dctermsCreated', nil).flatten.compactjoin(', ')
                   end
                 }
               ]
@@ -171,7 +166,7 @@ module Templates
             media: media_items,
             meta_additional: {
               geo: {
-                latitude: '"' + (render_document_show_field_value(document, 'places.latitude')  || '' ) + '"',
+                latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '' ) + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '' ) + '"',
                 long_and_lat: long_and_lat?,
                 placeName: render_document_show_field_value(document, 'places.prefLabel'),
@@ -199,7 +194,7 @@ module Templates
                 {
                   title: 'site.object.meta-label.creator',
                   fields: ['agents.prefLabel'],
-                  collected: document.proxies.collect do |proxy|
+                  collected: document.proxies.map do |proxy|
                     proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
                   url: 'q',
@@ -322,7 +317,7 @@ module Templates
           similar: {
             title: t('site.object.similar-items') + ':',
             more_items_query: search_path(mlt: document.id),
-            items: @similar.map { |doc|
+            items: @similar.map do |doc|
               {
                 url: document_path(doc, format: 'html'),
                 title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
@@ -331,7 +326,7 @@ module Templates
                   src: render_document_show_field_value(doc, 'edmPreview')
                 }
               }
-            }
+            end
           }
         }
       end
@@ -365,7 +360,7 @@ module Templates
         section_data   = []
         section_labels = []
 
-        data[:sections].collect do | section |
+        data[:sections].map do |section|
           f_data = []
           if section[:collected]
             f_data.push(* section[:collected])
@@ -378,7 +373,7 @@ module Templates
 
           if f_data.size > 0
             subsection = []
-            f_data.collect do | f_datum |
+            f_data.map do |f_datum|
 
               ob = {}
               text = f_datum
@@ -411,7 +406,7 @@ module Templates
               # overrides
 
               if section[:overrides] && text == section[:override_val]
-                section[:overrides].collect do | override |
+                section[:overrides].map do |override|
                   if override[:field_title]
                     text = override[:field_title]
                   end
@@ -427,13 +422,13 @@ module Templates
                 if !section[:extra].nil?
 
                   extra_info = {}
-                  section[:extra].collect do | xtra |
+                  section[:extra].map do |xtra|
                     extra_val = render_document_show_field_value(document, xtra[:field])
                     if extra_val
                       extra_info_builder = extra_info
-                      path_segments      = (xtra[:map_to] ? xtra[:map_to] : xtra[:field]).split('.')
+                      path_segments = (xtra[:map_to] ? xtra[:map_to] : xtra[:field]).split('.')
 
-                      path_segments.each.collect do |path_segment|
+                      path_segments.each.map do |path_segment|
                         is_last = path_segment == path_segments.last
                         extra_info_builder[path_segment] = extra_info_builder[path_segment] ? extra_info_builder[path_segment] : is_last ? extra_val : {}
                         extra_info_builder = extra_info_builder[path_segment]
@@ -456,8 +451,8 @@ module Templates
         end
 
         {
-          title:    t(data[:title]),
-          sections: section_data.each_with_index.collect do |subsection, index|
+          title: t(data[:title]),
+          sections: section_data.each_with_index.map do |subsection, index|
             if subsection.size > 0
               {
                 title: section_labels[index],
@@ -610,7 +605,7 @@ module Templates
         else
           primary_media['is_unkown_type']  = media_type
         end
-        additional_items = aggregation.webResources.collect do |web_resource|
+        additional_items = aggregation.webResources.map do |web_resource|
           preview_url  = render_document_show_field_value(web_resource, 'about')
           preview_type = media_type(preview_url)
           item = {
@@ -618,7 +613,7 @@ module Templates
             file: preview_url,
             rights: {
               license_public: true,
-              license_human:  render_document_show_field_value(web_resource, 'webResourceDcRights')
+              license_human: render_document_show_field_value(web_resource, 'webResourceDcRights')
             },
             media_type: preview_type
             #  json: web_resource.as_json
