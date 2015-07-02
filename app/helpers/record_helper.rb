@@ -11,4 +11,13 @@ module RecordHelper
       }
     end
   end
+
+  def paginated_more_like_this(response, similar)
+    {
+      page: response.current_page,
+      per_page: response.limit_value,
+      total: response.total_count,
+      documents: more_like_this(similar)
+    }
+  end
 end

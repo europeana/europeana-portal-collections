@@ -1,4 +1,4 @@
-require 'support/shared_examples/more_like_this_api_request'
+require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController, type: :controller do
   describe 'GET index' do
@@ -44,11 +44,29 @@ RSpec.describe PortalController, type: :controller do
 
       context 'with mlt param' do
         let(:params) { { mlt: '/abc/123' } }
-
-        it_behaves_like 'a more like this api request' do
-          let(:record_id) { params[:mlt] }
-        end
+        let(:record_id) { params[:mlt] }
+        it_behaves_like 'a record API request'
+        it_behaves_like 'a more like this API request'
+        it_behaves_like 'no hierarchy API request'
       end
+    end
+  end
+
+  describe 'GET show' do
+    before do
+      get :show, params
+    end
+    let(:params) { { id: 'abc/123' } }
+    let(:record_id) { '/' + params[:id] }
+    it_behaves_like 'a record API request'
+    it_behaves_like 'a more like this API request'
+    it_behaves_like 'a hierarchy API request'
+    context 'when format is HTML' do
+      it 'renders the object display page'
+    end
+    context 'when format is JSON' do
+      it 'requests JSON-LD from the API'
+      it 'renders the API JSON-LD response'
     end
   end
 
@@ -58,9 +76,10 @@ RSpec.describe PortalController, type: :controller do
         get :similar, params
       end
       let(:params) { { id: 'abc/123', format: 'json' } }
-      it_behaves_like 'a more like this api request' do
-        let(:record_id) { '/' + params[:id] }
-      end
+      let(:record_id) { '/' + params[:id] }
+      it_behaves_like 'a record API request'
+      it_behaves_like 'a more like this API request'
+      it_behaves_like 'no hierarchy API request'
       it 'responds with JSON' do
         expect(response.content_type).to eq('application/json')
       end
@@ -70,7 +89,34 @@ RSpec.describe PortalController, type: :controller do
       it 'renders JSON ERB template' do
         expect(response).to render_template('portal/similar')
       end
-      it 'accepts pagination params'
+      context 'with page param' do
+        let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
+        it 'paginates' do
+          expect(an_api_search_request.with(query: hash_including(start: '5')))
+            .to have_been_made
+        end
+        it 'defaults per_page to 4' do
+          expect(an_api_search_request.with(query: hash_including(start: '5', rows: '4')))
+            .to have_been_made
+        end
+      end
+      context 'without field limiting param' do
+        it 'gets MLT items for all fields' do
+          expect(an_api_search_request.with(query: hash_including(query: /title:/)))
+            .to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /who:/)))
+            .to have_been_made
+        end
+      end
+      context 'with field limiting param' do
+        let(:params) { { id: 'abc/123', format: 'json', mltf: 'title' } }
+        it 'limits MLT items to that field' do
+          expect(an_api_search_request.with(query: hash_including(query: /title:/)))
+            .to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /who:/)))
+            .not_to have_been_made
+        end
+      end
     end
 
     context 'when format is HTML' do
