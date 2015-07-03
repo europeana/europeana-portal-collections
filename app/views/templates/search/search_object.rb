@@ -40,7 +40,7 @@ module Templates
                 name: 'data-context-href',
                 value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
               }
-            ],
+            ]
           )
         end
         if @next_document
@@ -51,7 +51,7 @@ module Templates
                 name: 'data-context-href',
                 value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
               }
-            ],
+            ]
           )
         end
         navigation
@@ -128,8 +128,8 @@ module Templates
                   title: 'site.object.meta-label.creation-date',
                   fields: ['proxies.dctermsIssued'],
                   collected: document.proxies.map do |proxy|
-                    proxy.fetch('dctermsCreated', nil).flatten.compactjoin(', ')
-                  end
+                    proxy.fetch('dctermsCreated', nil)
+                  end.flatten.compact.join(', ')
                 }
               ]
             ),
