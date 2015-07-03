@@ -7,34 +7,28 @@ RSpec.feature 'Object page', :type => :feature do
       # without the following 'expect' assertion the subsequent 'find' will fail
 
       expect(page).to have_css('.searchbar button.search-submit')
-      page.execute_script '$(".searchbar button.search-submit").trigger("click")'
+      page.execute_script '$(".searchbar button.search-submit").trigger("click");'
       sleep 2
 
       # without the following 'expect' assertion the subsequent 'find' will fail
       expect(page).to have_css('.results-list ol.result-items li h1 a')
-      first('.results-list ol.result-items li h1 a').click
+
+      page.execute_script '$(".results-list ol.result-items li:first h1 a").trigger("click");'
       sleep 2
 
       expect(page).to have_selector('.next')
       page_title = page.title
 
-      # #click on these links in capybara does not trigger the POST action to
-      # the data-context-href attribute (/record/abc/123/track) of the <a>
-      # elements, and so always fail
-#      # next
+      find('.next a').click
+      sleep 2
 
-#      find('.next a').click
-#      sleep 2
+      expect(page).to have_css('.next a')
+      expect(page).to have_css('.previous a')
 
-#      expect(page).to have_css('.next a')
-#      expect(page).to have_css('.previous a')
+      assert page.title != page_title
 
-#      assert page.title != page_title
-
-#      # prev
-
-#      find('.previous a').click
-#      assert page.title == page_title
+      find('.previous a').click
+      assert page.title == page_title
     end
   end
 end
