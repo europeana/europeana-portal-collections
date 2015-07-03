@@ -128,9 +128,8 @@ module Templates
                   title: 'site.object.meta-label.creation-date',
                   fields: ['proxies.dctermsIssued'],
                   collected: document.proxies.map do |proxy|
-                    termsCreated = proxy.fetch('dctermsCreated', nil)
-                    termsCreated.flatten.compactjoin(', ') unless termsCreated.nil?
-                  end
+                    proxy.fetch('dctermsCreated', nil)
+                  end.flatten.compact.join(', ')
                 }
               ]
             ),
