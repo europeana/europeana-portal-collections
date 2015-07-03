@@ -57,7 +57,7 @@ module MustacheHelper
   end
 
   def js_variables
-    "var js_path='" + styleguide_path('/public/js/dist/') + "';"
+    "var js_path='" + styleguide_path('/js/dist/') + "';"
   end
 
   def js_files
