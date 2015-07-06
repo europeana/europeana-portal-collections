@@ -95,7 +95,7 @@ module Europeana
     end
 
     def more_like_this(document, field = nil, extra_controller_params = {})
-      mlt_params = params.dup
+      mlt_params = params.dup.slice(:page, :per_page)
       mlt_params.merge!(mlt: document.id, mltf: field)
       mlt_params.merge!(extra_controller_params)
       search_results(mlt_params, search_params_logic)
