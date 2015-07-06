@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: b4d01223875a1f3448e34a88573f4e36f8cf4081
-  ref: b4d0122
+  revision: 6ab6a68084adba4b3a5829a8731b4e9e2e07ae4c
+  ref: 6ab6a68
   specs:
     europeana-blacklight (0.1.0)
       blacklight (>= 5.12.0, < 6.0.0)
@@ -435,3 +435,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   webmock (~> 1.21.0)
+
+BUNDLED WITH
+   1.10.5
