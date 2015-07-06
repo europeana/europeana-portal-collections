@@ -76,8 +76,8 @@ module Templates
                   url: 'what',
                   fields: ['aggregations.edmUgc'],
                   collected: collect_values(['concepts.prefLabel']).size == 0 ? [] : document.concepts.map do |concept|
-                    concept.fetch('prefLabel', nil).compact.join('')
-                  end,
+                    concept.fetch('prefLabel', nil)
+                  end.compact.join(''),
                   override_val: 'true',
                   overrides: [
                     {
