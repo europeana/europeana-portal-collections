@@ -22,17 +22,17 @@ else
   end
 
   Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app,
-      :phantomjs_options => [
-          '--debug=no',
-          '--load-images=no',
-          '--ignore-ssl-errors=true',
-          '--local-to-remote-url-access=yes',
-          '--ssl-protocol=TLSv1',
-          '--web-security=false',
-           '--local-to-remote-url-access=true'
-          ], 
-          extensions: ['http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'])
+    Capybara::Poltergeist::Driver.new(app,
+      phantomjs_options: [
+        '--debug=no',
+        '--load-images=no',
+        '--ignore-ssl-errors=true',
+        '--local-to-remote-url-access=yes',
+        '--ssl-protocol=TLSv1',
+        '--web-security=false',
+         '--local-to-remote-url-access=true'
+      ],
+    extensions: ['http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'])
   end
     
   Capybara.javascript_driver = :poltergeist
