@@ -2,39 +2,43 @@ RSpec.feature 'Object page', :type => :feature do
   describe 'Navigation' do
     it 'expects working previous / next links', js: true do
       visit '/'
-      fill_in('q', with: 'Paris')
 
-      # without the following 'expect' assertion the subsequent 'find' will fail
+      sleep 3
+
+      page.execute_script '$("input[name=q]").val("paris")'
 
       expect(page).to have_css('.searchbar button.search-submit')
       page.execute_script '$(".searchbar button.search-submit").trigger("click")'
-      sleep 2
+
+      sleep 3
 
       # without the following 'expect' assertion the subsequent 'find' will fail
       expect(page).to have_css('.results-list ol.result-items li h1 a')
-      first('.results-list ol.result-items li h1 a').click
-      sleep 2
+
+      page.execute_script '$(".results-list ol.result-items li:first h1 a").trigger("click")'
+
+      sleep 3
 
       expect(page).to have_selector('.next')
-      page_title = page.title
 
-      # #click on these links in capybara does not trigger the POST action to
-      # the data-context-href attribute (/record/abc/123/track) of the <a>
-      # elements, and so always fail
-#      # next
+      page_title_1 = page.title
 
-#      find('.next a').click
-#      sleep 2
+      page.execute_script '$(".next a").trigger("click")'
 
-#      expect(page).to have_css('.next a')
-#      expect(page).to have_css('.previous a')
+      sleep 3
 
-#      assert page.title != page_title
+      page_title_2 = page.title
 
-#      # prev
+      expect(page).to have_css('.next a')
+      expect(page).to have_css('.previous a')
 
-#      find('.previous a').click
-#      assert page.title == page_title
+      assert page_title_1 != page_title_2
+
+      page.execute_script '$(".previous a").trigger("click")'
+
+      sleep 3
+
+      assert page.title == page_title_1
     end
   end
 end
