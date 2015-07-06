@@ -12,4 +12,8 @@ RSpec.describe 'routes for the portal controller', :type => :routing do
   it 'routes POST /record/:id/track to portal#track' do
     expect(post('/record/abc/123/track')).to route_to('portal#track', id: 'abc/123')
   end
+
+  it 'routes GET /record/:id/similar to portal#similar' do
+    expect(get('/record/abc/123/similar')).to route_to('portal#similar', id: 'abc/123')
+  end
 end

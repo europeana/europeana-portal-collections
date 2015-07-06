@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: ca329faddb85f9272906e6039dd75c617b8a5d32
-  ref: ca329fa
+  revision: b4d01223875a1f3448e34a88573f4e36f8cf4081
+  ref: b4d0122
   specs:
     europeana-blacklight (0.1.0)
       blacklight (>= 5.12.0, < 6.0.0)
@@ -10,8 +10,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 03e78e21e5c00fb41fb9700ec0e86b31ce2ab987
-  ref: 03e78e21e5
+  revision: c5f5cecee9591353ba2d6983b6f3022e897e89ef
+  ref: c5f5cecee9
   specs:
     europeana-styleguide (0.0.2)
       activesupport (~> 4.0)

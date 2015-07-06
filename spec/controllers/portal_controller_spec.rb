@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController, type: :controller do
   describe 'GET index' do
@@ -44,22 +44,85 @@ RSpec.describe PortalController, type: :controller do
 
       context 'with mlt param' do
         let(:params) { { mlt: '/abc/123' } }
+        let(:record_id) { params[:mlt] }
+        it_behaves_like 'a record API request'
+        it_behaves_like 'a more like this API request'
+        it_behaves_like 'no hierarchy API request'
+      end
+    end
+  end
 
-        it 'queries the API for the named record' do
-          expect(an_api_record_request_for(params[:mlt])).
-            to have_been_made.at_least_once
+  describe 'GET show' do
+    before do
+      get :show, params
+    end
+    let(:params) { { id: 'abc/123' } }
+    let(:record_id) { '/' + params[:id] }
+    it_behaves_like 'a record API request'
+    it_behaves_like 'a more like this API request'
+    it_behaves_like 'a hierarchy API request'
+    context 'when format is HTML' do
+      it 'renders the object display page'
+    end
+    context 'when format is JSON' do
+      it 'requests JSON-LD from the API'
+      it 'renders the API JSON-LD response'
+    end
+  end
+
+  describe 'GET similar' do
+    context 'when format is JSON' do
+      before do
+        get :similar, params
+      end
+      let(:params) { { id: 'abc/123', format: 'json' } }
+      let(:record_id) { '/' + params[:id] }
+      it_behaves_like 'a record API request'
+      it_behaves_like 'a more like this API request'
+      it_behaves_like 'no hierarchy API request'
+      it 'responds with JSON' do
+        expect(response.content_type).to eq('application/json')
+      end
+      it 'has 200 status code' do
+        expect(response.status).to eq(200)
+      end
+      it 'renders JSON ERB template' do
+        expect(response).to render_template('portal/similar')
+      end
+      context 'with page param' do
+        let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
+        it 'paginates' do
+          expect(an_api_search_request.with(query: hash_including(start: '5'))).
+            to have_been_made
         end
-
-        it 'does not query the API for the record hierarchy' do
-          expect(an_api_hierarchy_request_for(params[:mlt])).
+        it 'defaults per_page to 4' do
+          expect(an_api_search_request.with(query: hash_including(start: '5', rows: '4'))).
+            to have_been_made
+        end
+      end
+      context 'without field limiting param' do
+        it 'gets MLT items for all fields' do
+          expect(an_api_search_request.with(query: hash_including(query: /title:/))).
+            to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /who:/))).
+            to have_been_made
+        end
+      end
+      context 'with field limiting param' do
+        let(:params) { { id: 'abc/123', format: 'json', mltf: 'title' } }
+        it 'limits MLT items to that field' do
+          expect(an_api_search_request.with(query: hash_including(query: /title:/))).
+            to have_been_made
+          expect(an_api_search_request.with(query: hash_including(query: /who:/))).
             not_to have_been_made
         end
+      end
+    end
 
-        it 'queries the API for MLT records' do
-          expect(an_api_search_request.
-            with(query: hash_including(query: /NOT europeana_id:"#{params[:mlt]}"/))).
-            to have_been_made.at_least_once
-        end
+    context 'when format is HTML' do
+      let(:params) { { id: 'abc/123', format: 'html' } }
+      it 'returns an unknown format error' do
+        expect { get :similar, params }.to raise_error(ActionController::UnknownFormat)
       end
     end
   end

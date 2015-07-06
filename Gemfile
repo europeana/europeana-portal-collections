@@ -7,7 +7,7 @@ gem 'rails', '4.2.1'
 gem 'europeana-blacklight',
   require: 'europeana/blacklight',
   github: 'europeana/europeana-blacklight',
-  ref: 'ca329fa'
+  ref: 'b4d0122'
 
 gem 'europeana-api',
   require: 'europeana/api',
@@ -17,7 +17,7 @@ gem 'europeana-api',
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   github: 'europeana/europeana-styleguide-ruby',
-  ref: '03e78e21e5'
+  ref: 'c5f5cecee9'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53

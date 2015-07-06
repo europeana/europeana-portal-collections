@@ -21,7 +21,7 @@ en:
       labels:
         credits: Curated by
         recent: Recent additions
-        spotlight-on: 
+        spotlight-on: 'Spotlight on '
       music:
         description: The <strong>Europeana Art History Channel</strong> brings you the lesser known as well as the famous pieces of European art combined with the books, letters, articles, videos and other material collated from our partner libraries, archives, and museums.
         title: Europeana Music

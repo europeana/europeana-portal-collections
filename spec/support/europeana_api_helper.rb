@@ -20,7 +20,7 @@ module EuropeanaAPIHelper
         to_return do |request|
           id = request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
           {
-            body: '{"success":true,"object":{"about": "' + id + '", "title":["' + id + '"]}}',
+            body: '{"success":true,"object":{"about": "' + id + '", "title":["' + id + '"], "proxies": [{"dcCreator":{"def":["Mister Smith"]}}]}}',
             status: 200,
             headers: { 'Content-Type' => 'text/json' }
           }
