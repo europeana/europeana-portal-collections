@@ -4,8 +4,8 @@
 # @todo Use ActiveModel
 class Channel
   # @!attribute [r] id
-  #   @return [Symbol] the ID of the Channel
-  #   @example :music
+  #   @return [String] the ID of the Channel
+  #   @example 'music'
   attr_reader :id
 
   # @!attribute [rw] config
@@ -22,10 +22,10 @@ class Channel
     channel
   end
 
-  # @param [Symbol] id The Channel ID
+  # @param [String] id The Channel ID
   def initialize(id)
-    unless id.is_a?(Symbol)
-      fail ArgumentError, "Channel ID must be a Symbol, but is a #{id.class}"
+    unless id.is_a?(String)
+      fail ArgumentError, "Channel ID must be a String, but is a #{id.class}"
     end
     @id = id
   end
