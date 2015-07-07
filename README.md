@@ -1,6 +1,6 @@
 # Europeana Channels
 
-[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=188-coveralls)](https://coveralls.io/r/europeana/europeana-channels-blacklight?branch=master)
+[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=188-coveralls)](https://coveralls.io/r/europeana/europeana-channels-blacklight?branch=master) [![security](https://hakiri.io/github/europeana/europeana-channels-blacklight/master.svg)](https://hakiri.io/github/europeana/europeana-channels-blacklight/master)
 
 Europeana Channels as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
@@ -13,7 +13,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 
 ## Requirements
 
-* Ruby 2.2.1
+* Ruby 2.2.2
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
 
