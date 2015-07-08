@@ -3,17 +3,6 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.2.3'
 
-# Use Europeana's REST API as the Blacklight catalog data source
-gem 'europeana-blacklight',
-  require: 'europeana/blacklight',
-  github: 'europeana/europeana-blacklight',
-  ref: 'b189fb5'
-
-gem 'europeana-api',
-  require: 'europeana/api',
-  github: 'rwd/europeana-api-client-ruby',
-  ref: '102e7dc'
-
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   github: 'europeana/europeana-styleguide-ruby',
@@ -24,10 +13,11 @@ gem 'europeana-styleguide',
 gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
-gem 'blacklight',
-  github: 'rwd/blacklight', branch: 'abstract_facet_paginator'
+gem 'blacklight', '~> 5.14.0'
 gem 'bootstrap-sass', '3.3.5.1'
 gem 'compass-rails'
+gem 'europeana-api', '~> 0.3.3'
+gem 'europeana-blacklight', '0.1.0'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
