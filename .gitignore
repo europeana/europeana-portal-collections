@@ -19,11 +19,17 @@
 # Ignore database config file.
 /config/database.yml
 
+# Ignore Fog config file
+/config/fog.yml
+
 # Ignore Redis config file.
 /config/redis.yml
 
 # Ignore MongoDB config file.
 /config/mongoid.yml
+
+# Ignore Spring config file.
+/config/spring.rb
 
 # Ignore rvm files.
 .ruby-version

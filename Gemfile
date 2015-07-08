@@ -20,6 +20,7 @@ gem 'europeana-api', '~> 0.3.3'
 gem 'europeana-blacklight', '0.1.0'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
+gem 'fog'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mysql2'

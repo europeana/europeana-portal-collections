@@ -26,12 +26,20 @@ module Europeana
       config.active_record.raise_in_transactional_callbacks = true
 
       # Load Redis config from config/redis.yml, if it exists
-      begin
+      config.cache_store = begin
         redis_config = Rails.application.config_for(:redis)
-        fail StandardError unless redis_config.present?
-        config.cache_store = :redis_store, redis_config
-      rescue
-        config.cache_store = :null_store
+        fail RuntimeError unless redis_config.present?
+        [:redis_store, redis_config]
+      rescue RuntimeError
+        :null_store
+      end
+
+      config.fog = begin
+        fog_config = Rails.application.config_for(:fog)
+        fail RuntimeError unless redis_config.present?
+        HashWithIndifferentAccess.new(fog_config)
+      rescue RuntimeError
+        {}
       end
 
       # Load Channels configuration files from config/channels/*.yml files
