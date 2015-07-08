@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/europeana/europeana-blacklight.git
-  revision: b189fb59d9ea9b075cf914eb4a40155e246ccc53
-  ref: b189fb5
-  specs:
-    europeana-blacklight (0.1.0)
-      blacklight (>= 5.12.0, < 6.0.0)
-      europeana-api (~> 0.3.2)
-      kaminari
-
-GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
   revision: c5f5cecee9591353ba2d6983b6f3022e897e89ef
   ref: c5f5cecee9
@@ -17,28 +7,6 @@ GIT
       activesupport (~> 4.0)
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
-
-GIT
-  remote: git://github.com/rwd/blacklight.git
-  revision: 40ae458574c8ea6540da27a9e61d089750fce9d6
-  branch: abstract_facet_paginator
-  specs:
-    blacklight (5.13.1)
-      bootstrap-sass (~> 3.2)
-      deprecation
-      kaminari (>= 0.15)
-      nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.11)
-
-GIT
-  remote: git://github.com/rwd/europeana-api-client-ruby.git
-  revision: 102e7dc693ae421e377481362ef33141989e4311
-  ref: 102e7dc
-  specs:
-    europeana-api (0.3.2)
-      activesupport (>= 3.0)
-      multi_json (~> 1.0)
 
 GIT
   remote: git://github.com/rwd/stache.git
@@ -95,6 +63,13 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    blacklight (5.14.0)
+      bootstrap-sass (~> 3.2)
+      deprecation
+      kaminari (>= 0.15)
+      nokogiri (~> 1.6)
+      rails (>= 3.2.6, < 5)
+      rsolr (~> 1.0.11)
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
@@ -164,6 +139,13 @@ GEM
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
+    europeana-api (0.3.3)
+      activesupport (>= 3.0)
+      multi_json (~> 1.0)
+    europeana-blacklight (0.1.0)
+      blacklight (>= 5.12.0, < 6.0.0)
+      europeana-api (~> 0.3.2)
+      kaminari (~> 0.16)
     eventmachine (1.0.7)
     execjs (2.5.2)
     faraday (0.9.1)
@@ -401,15 +383,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight!
+  blacklight (~> 5.14.0)
   bootstrap-sass (= 3.3.5.1)
   brakeman
   capybara (~> 2.4.0)
   compass-rails
   coveralls
   dotenv-rails (~> 1.0.2)
-  europeana-api!
-  europeana-blacklight!
+  europeana-api (~> 0.3.3)
+  europeana-blacklight (= 0.1.0)
   europeana-styleguide!
   eventmachine (~> 1.0.6)
   feedjira (~> 2.0)
