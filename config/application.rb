@@ -13,6 +13,9 @@ module Europeana
       # Application configuration should go into files in config/initializers
       # -- all .rb files in that directory are automatically loaded.
 
+      # Load job classes
+      config.autoload_paths += %W(#{config.root}/app/jobs)
+
       # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
       # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
       # config.time_zone = 'Central Time (US & Canada)'
@@ -25,6 +28,9 @@ module Europeana
       # Do not swallow errors in after_commit/after_rollback callbacks.
       config.active_record.raise_in_transactional_callbacks = true
 
+      # Use Delayed::Job as the job queue adapter
+      config.active_job.queue_adapter = :delayed_job
+
       # Load Redis config from config/redis.yml, if it exists
       config.cache_store = begin
         redis_config = Rails.application.config_for(:redis)
@@ -36,7 +42,7 @@ module Europeana
 
       config.fog = begin
         fog_config = Rails.application.config_for(:fog)
-        fail RuntimeError unless redis_config.present?
+        fail RuntimeError unless fog_config.present?
         HashWithIndifferentAccess.new(fog_config)
       rescue RuntimeError
         {}
@@ -47,6 +53,12 @@ module Europeana
         channel = File.basename(yml, '.yml')
         hash[channel] = YAML::load_file(yml)
       end
+
+      config.paperclip_defaults = {
+        styles: { small: '200>', medium: '400>', large: '600>' }, # max-width
+        storage: :fog,
+        fog_credentials: config.fog
+      }
     end
   end
 end

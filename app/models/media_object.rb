@@ -1,11 +1,17 @@
 require 'digest/md5'
 
 class MediaObject < ActiveRecord::Base
+  has_attached_file :file, fog_directory: 'portal'
+
+  do_not_validate_attachment_file_type :file
+
   before_save :hash_source_url!, if: :source_url?
-  has_attached_file :file,
-    styles: { small: '200>', medium: '400>', large: '600>' } # max-width
 
   def hash_source_url!
-    self.source_url_hash = Digest::MD5.hexdigest(source_url)
+    self.source_url_hash = self.class.hash_source_url(source_url)
+  end
+
+  def self.hash_source_url(source_url)
+    Digest::MD5.hexdigest(source_url)
   end
 end

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe MediaObject, type: :model do
   subject { described_class.new }
 

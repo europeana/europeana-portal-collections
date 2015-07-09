@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: c5f5cecee9591353ba2d6983b6f3022e897e89ef
-  ref: c5f5cecee9
+  revision: 24c62c5faec80eef903326c04b59eb3a50a42149
+  ref: 24c62c5
   specs:
     europeana-styleguide (0.0.2)
       activesupport (~> 4.0)
@@ -134,6 +134,11 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     debug_inspector (0.0.2)
+    delayed_job (4.0.6)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.0.3)
+      activerecord (>= 3.0, < 5.0)
+      delayed_job (>= 3.0, < 4.1)
     deprecation (0.2.2)
       activesupport
     diff-lcs (1.2.5)
@@ -504,6 +509,7 @@ DEPENDENCIES
   capybara (~> 2.4.0)
   compass-rails
   coveralls
+  delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 1.0.2)
   europeana-api (~> 0.3.3)
   europeana-blacklight (= 0.1.0)

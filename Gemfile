@@ -6,7 +6,7 @@ gem 'rails', '4.2.3'
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   github: 'europeana/europeana-styleguide-ruby',
-  ref: 'c5f5cecee9'
+  ref: '24c62c5'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
@@ -16,6 +16,7 @@ gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 gem 'blacklight', '~> 5.14.0'
 gem 'bootstrap-sass', '3.3.5.1'
 gem 'compass-rails'
+gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'europeana-api', '~> 0.3.3'
 gem 'europeana-blacklight', '0.1.0'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
