@@ -1,0 +1,3 @@
+test:
+  provider: Local
+  local_root: ./tmp/test/fog
