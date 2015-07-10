@@ -283,6 +283,13 @@ module Templates
             ),
             # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
+            social_share: {
+              url: URI.escape(request.original_url),
+              facebook: true,
+              pinterest: true,
+              twitter: true,
+              googleplus: true
+            },
             title: render_document_show_field_value(document, 'proxies.dcTitle'),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
