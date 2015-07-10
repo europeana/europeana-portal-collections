@@ -60,6 +60,7 @@ module Templates
       def content
         {
           object: {
+            creator: creator_title,
             concepts: data_section(
               title: 'site.object.meta-label.concepts',
               sections: [
@@ -146,7 +147,7 @@ module Templates
                 }
               ]
             ),
-            download: content_object_download,
+            # download: content_object_download,
             media: media_items,
             meta_additional: {
               geo: {
@@ -325,6 +326,16 @@ module Templates
 
       private
 
+      def edm_is_shown_by_download_url
+        @edm_is_shown_by_download_url ||= begin
+          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.size > 0 && document.aggregations.first.fetch('edmIsShownBy', false)
+            ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
+          else
+            render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+          end
+        end
+      end
+
       def collect_values(fields, doc = document)
         fields.map do |field|
           render_document_show_field_value(doc, field)
@@ -447,35 +458,25 @@ module Templates
         } unless section_data.size == 0
       end
 
-      def content_object_download
-        links = []
-
-        if edm_is_shown_by_download_url.present?
-          links << {
-            text: t('site.object.actions.download'),
-            url: edm_is_shown_by_download_url
-          }
-        end
-
-        return nil unless links.present?
-
-        {
-          primary: links.first,
-          secondary: {
-            items: (links.size == 1) ? nil : links[1..-1]
-          }
-        }
-      end
-
-      def edm_is_shown_by_download_url
-        @edm_is_shown_by_download_url ||= begin
-          if ENV['EDM_IS_SHOWN_BY_PROXY'] && document.aggregations.size > 0 && document.aggregations.first.fetch('edmIsShownBy', false)
-            ENV['EDM_IS_SHOWN_BY_PROXY'] + document.fetch('about')
-          else
-            render_document_show_field_value(document, 'aggregations.edmIsShownBy')
-          end
-        end
-      end
+#      def content_object_download
+#        links = []
+#
+#        if edm_is_shown_by_download_url.present?
+#          links << {
+#            text: t('site.object.actions.download'),
+#            url: edm_is_shown_by_download_url
+#          }
+#        end
+#
+#        return nil unless links.present?
+#
+#        {
+#          primary: links.first,
+#          secondary: {
+#            items: (links.size == 1) ? nil : links[1..-1]
+#          }
+#        }
+#      end
 
       def long_and_lat?
         latitude = render_document_show_field_value(document, 'places.latitude')
@@ -564,30 +565,137 @@ module Templates
         end
       end
 
+      #def media_items
+      #  aggregation = document.aggregations.first
+      #  return [] unless aggregation.respond_to?(:webResources)
+      #  media_type = render_document_show_field_value(document, 'type').downcase
+      #  edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+      #  primary_media = {
+      #    preview: edm_preview,
+      #    thumbnail: edm_preview,
+      #    file: edm_preview,
+      #    media_type: media_type,
+      #    rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights'))
+      #  }
+      #  if media_type == 'image'
+      #    primary_media['is_image'] = true
+      #  elsif media_type == 'audio'
+      #    primary_media['is_audio'] = true
+      #  elsif media_type == 'text'
+      #    primary_media['is_text'] = true
+      #  elsif media_type == 'video'
+      #    primary_media['is_video'] = true
+      #  else
+      #    primary_media['is_unkown_type'] = media_type
+      #  end
+      #  additional_items = aggregation.webResources.map do |web_resource|
+      #    preview_url = render_document_show_field_value(web_resource, 'about')
+      #    preview_type = media_type(preview_url)
+      #    item = {
+      #      alt: preview_type + ' - ' + preview_url,
+      #      file: preview_url,
+      #      rights: {
+      #        license_public: true,
+      #        license_human: render_document_show_field_value(web_resource, 'webResourceDcRights')
+      #      },
+      #      media_type: preview_type
+      #      #  json: web_resource.as_json
+      #    }
+      #    if preview_type == 'image'
+      #      item['thumbnail'] = preview_url
+      #    elsif preview_type == 'audio'
+      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
+      #    elsif preview_type == 'text'
+      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=TEXT'
+      #    elsif preview_type == 'video'
+      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=VIDEO'
+      #    else
+      #      # unknown value mapped to thumbnail in view.
+      #      #  - needed to see hi-res of this record:
+      #      #    - http://localhost:3000/record/90402/SK_A_2344.html
+      #      item['thumbnail'] = preview_url
+      #    end
+      #    item
+      #  end
+      #  {
+      #    primary: primary_media,
+      #    additional: {
+      #      items: additional_items
+      #    }
+      #  }
+      #end
+
+      def creator_title
+        text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
+        text.size > 0 ? text : false
+      end
+
       def media_items
+
+        players = []
+        items = []
+
         aggregation = document.aggregations.first
+
+        # what if it has an edmisShownBy????
         return [] unless aggregation.respond_to?(:webResources)
+
         media_type = render_document_show_field_value(document, 'type').downcase
         edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-        primary_media = {
+
+        item = {
+          is_current: true,
           preview: edm_preview,
           thumbnail: edm_preview,
-          file: edm_preview,
+          file: edm_is_shown_by_download_url,
           media_type: media_type,
           rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights'))
         }
         if media_type == 'image'
-          primary_media['is_image'] = true
+          item['is_image'] = true
+          players << {image: true}
         elsif media_type == 'audio'
-          primary_media['is_audio'] = true
+          item['is_audio'] = true
+          players << {audio: true}
+        elsif media_type == 'pdf'
+          item['is_pdf'] = true
+          players << {pdf: true}
         elsif media_type == 'text'
-          primary_media['is_text'] = true
+
+          item['is_text'] = true
+          # This is wrong but needed for now to show pdfs
+          players << {pdf: true}
+
         elsif media_type == 'video'
-          primary_media['is_video'] = true
+          item['is_video'] = true
+          players << {video: true}
         else
-          primary_media['is_unkown_type'] = media_type
+          item['is_unkown_type'] = media_type
         end
-        additional_items = aggregation.webResources.map do |web_resource|
+        if edm_is_shown_by_download_url.size > 0
+          item['download'] = {
+            url: edm_is_shown_by_download_url,
+            text: t('site.object.actions.download')
+          }
+          item['technical_metadata']  = {
+            # language: "English",
+            # format: "jpg",
+            # file_size: "23.2",
+            # file_unit: "MB",
+            # codec: "MPEG-2",
+            # fps: "30",
+            # fps_unit: "fps",
+            # width: "1200",
+            # height: "900",
+            # size_unit: "pixels",
+            # runtime: "34",
+            # runtime_unit: "minutes"
+          }
+        end
+
+        items << item
+
+        aggregation.webResources.map do |web_resource|
           preview_url = render_document_show_field_value(web_resource, 'about')
           preview_type = media_type(preview_url)
           item = {
@@ -606,6 +714,8 @@ module Templates
             item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
           elsif preview_type == 'text'
             item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=TEXT'
+          elsif preview_type == 'pdf'
+            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=PDF'
           elsif preview_type == 'video'
             item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=VIDEO'
           else
@@ -614,15 +724,17 @@ module Templates
             #    - http://localhost:3000/record/90402/SK_A_2344.html
             item['thumbnail'] = preview_url
           end
-          item
+          items << item
         end
         {
-          primary: primary_media,
-          additional: {
-            items: additional_items
-          }
+          required_players: players.uniq,
+          items: items
         }
       end
+
+
+
+
     end
   end
 end

@@ -24,7 +24,7 @@ nl:
     channels-music-link: 
     choose-language: 
     email-address: 
-    exhibitions: 
+    exhibitions: Tentoonstelling
     facet:
       advanced:
         options: 
@@ -176,6 +176,7 @@ nl:
     genres-traditional-music: 
     help: 
     home: 
+    javascript-required: 
     language-basque: 
     language-bulgarian: 
     language-catalan: 

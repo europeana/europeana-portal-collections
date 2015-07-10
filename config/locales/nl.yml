@@ -9,22 +9,22 @@ nl:
     blog-link: link naar de blog
     channels:
       art:
-        description: 
-        title: 
+        description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
+        title: Kunst Kanaal
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D objecten
+        count: objecten
+        images: Afbeeldingen
+        moving-images: Bewegende afbeeldingen
+        sound: Geluidsopnames
+        texts: Tekst
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Gecureerd door
+        recent: Recent toegevoegd
+        spotlight-on: In de spotlight
       music:
-        description: 
-        title: 
+        description: 'Het Kunst Kanaal brengt u de bekende en minder bekende Europeese kunst collecties! De collectie combineert boeken, brieven, artikelen, video''s en ander materiaal uit collecties van onze partner bibliotheken, archieven en musea! '
+        title: Europeana Muziek
     facet:
       language:
         show:
@@ -50,17 +50,23 @@ nl:
         downloaddata: Download informatie
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
+        technicalmetadata: 
       meta-label:
+        codec: 
         concept: Soort object
         concepts: Categorieën
         contributor: 
         creation-date: Datum vervaardigd
         creator: Van
         data-provider: 
+        date: 
         dates: 
         description: Omschrijving
+        dimensions: 
         extent: 
+        file-size: 
         format: Formaat
+        fps: 
         identifier: 
         issued: 
         language: Taal
@@ -78,12 +84,14 @@ nl:
         provided-by: 
         provider: 
         providing-country: 
+        publication-date: 
         publisher: Uitgeverij
         references: 
         refs-rels: 
         relations: 
         rights: Mag ik dit gebruiken?
-        source: Bron
+        runtime: 
+        source: Bron en Herkomst
         subject: 
         temporal: 
         time: 

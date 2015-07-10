@@ -9,7 +9,7 @@ en:
     blog-link: link to blog
     channels:
       art:
-        description: The <strong>Europeana Music Channel</strong> brings together the best music rcordings, sheet music, and other music related collections from Europeana's audio-visual archives, libraries, archives and museums. Curated by Europeana Sounds.
+        description: The <strong>Europeana Art History Channel</strong> brings you the lesser known as well as the famous pieces of European art combined with the books, letters, articles, videos and other material collated from our partner libraries, archives, and museums.
         title: Europeana Art History
       data-types:
         3d: 3D objects
@@ -50,7 +50,9 @@ en:
         downloaddata: Download data
         show-less-data: Show less data
         show-more-data: Show more data
+        technicalmetadata: Technical Metadata
       meta-label:
+        codec: Codec
         concept: Concept
         concepts: Categories
         contributor: Contributor
@@ -60,8 +62,11 @@ en:
         date: Date
         dates: Dates
         description: Description
+        dimensions: Dimensions
         extent: Extent
+        file-size: File size
         format: Format
+        fps: Frames per second
         identifier: Identifier
         issued: Issued
         language: Language
@@ -85,6 +90,7 @@ en:
         refs-rels: References and Relations
         relations: Relations
         rights: Can I use this?
+        runtime: Run time
         source: Source
         subject: Subject
         temporal: Temporal
