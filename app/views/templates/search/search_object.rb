@@ -465,25 +465,25 @@ module Templates
         } unless section_data.size == 0
       end
 
-#      def content_object_download
-#        links = []
-#
-#        if edm_is_shown_by_download_url.present?
-#          links << {
-#            text: t('site.object.actions.download'),
-#            url: edm_is_shown_by_download_url
-#          }
-#        end
-#
-#        return nil unless links.present?
-#
-#        {
-#          primary: links.first,
-#          secondary: {
-#            items: (links.size == 1) ? nil : links[1..-1]
-#          }
-#        }
-#      end
+      #def content_object_download
+      #  links = []
+
+      #  if edm_is_shown_by_download_url.present?
+      #    links << {
+      #      text: t('site.object.actions.download'),
+      #      url: edm_is_shown_by_download_url
+      #    }
+      #  end
+
+      #  return nil unless links.present?
+
+      #  {
+      #    primary: links.first,
+      #    secondary: {
+      #      items: (links.size == 1) ? nil : links[1..-1]
+      #    }
+      #  }
+      #end
 
       def long_and_lat?
         latitude = render_document_show_field_value(document, 'places.latitude')
@@ -638,10 +638,8 @@ module Templates
       end
 
       def media_items
-
         players = []
         items = []
-
         aggregation = document.aggregations.first
 
         # what if it has an edmisShownBy????
@@ -660,10 +658,10 @@ module Templates
         }
         if media_type == 'image'
           item['is_image'] = true
-          players << {image: true}
+          players << { image: true }
         elsif media_type == 'audio'
           item['is_audio'] = true
-          players << {audio: true}
+          players << { audio: true }
         elsif media_type == 'pdf'
           item['is_pdf'] = true
           players << {pdf: true}
@@ -684,7 +682,7 @@ module Templates
             url: edm_is_shown_by_download_url,
             text: t('site.object.actions.download')
           }
-          item['technical_metadata']  = {
+          item['technical_metadata'] = {
             # language: "English",
             # format: "jpg",
             # file_size: "23.2",
@@ -738,10 +736,6 @@ module Templates
           items: items
         }
       end
-
-
-
-
     end
   end
 end
