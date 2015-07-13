@@ -1,7 +1,7 @@
 require 'digest/md5'
 
 class MediaObject < ActiveRecord::Base
-  has_attached_file :file, fog_directory: 'portal'
+  has_attached_file :file
 
   do_not_validate_attachment_file_type :file
 

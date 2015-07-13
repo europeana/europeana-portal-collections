@@ -1,3 +1,0 @@
-test:
-  provider: Local
-  local_root: <%= File.join(Rails.root, 'tmp', 'test', 'fog') %>

@@ -40,25 +40,24 @@ module Europeana
         :null_store
       end
 
-      config.fog = begin
-        fog_config = Rails.application.config_for(:fog)
-        fail RuntimeError unless fog_config.present?
-        HashWithIndifferentAccess.new(fog_config)
-      rescue RuntimeError
-        {}
-      end
-
       # Load Channels configuration files from config/channels/*.yml files
       config.channels = Dir[Rails.root.join('config', 'channels', '*.yml').to_s].each_with_object({}) do |yml, hash|
         channel = File.basename(yml, '.yml')
         hash[channel] = YAML::load_file(yml)
       end
 
+      # Paperclip file storage config
       config.paperclip_defaults = {
-        styles: { small: '200>', medium: '400>', large: '600>' }, # max-width
-        storage: :fog,
-        fog_credentials: config.fog
+        path: ':class/:id/:attachment/:fingerprint.:style.:extension',
+        styles: { small: '200>', medium: '400>', large: '600>' } # max-width
       }
+      config.paperclip_defaults.merge! begin
+        paperclip_config = Rails.application.config_for(:paperclip)
+        fail RuntimeError unless paperclip_config.present?
+        paperclip_config.deep_symbolize_keys
+      rescue RuntimeError
+        {}
+      end
     end
   end
 end

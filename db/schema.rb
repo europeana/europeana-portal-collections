@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150709132921) do
     t.string   "file_content_type", limit: 255
     t.integer  "file_file_size",    limit: 4
     t.datetime "file_updated_at"
+    t.string   "file_fingerprint",  limit: 255
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end

@@ -4,6 +4,7 @@ class CreateMediaObjects < ActiveRecord::Migration
       t.text :source_url
       t.string :source_url_hash, limit: 32, index: :unique
       t.attachment :file
+      t.string :file_fingerprint
       t.timestamps null: false
     end
   end
