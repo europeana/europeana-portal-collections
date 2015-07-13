@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: c5f5cecee9591353ba2d6983b6f3022e897e89ef
-  ref: c5f5cecee9
+  revision: 24c62c5faec80eef903326c04b59eb3a50a42149
+  ref: 24c62c5
   specs:
     europeana-styleguide (0.0.2)
       activesupport (~> 4.0)
@@ -94,7 +94,14 @@ GEM
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
     chunky_png (1.3.4)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
     cliver (0.3.2)
+    clockwork (1.2.0)
+      activesupport
+      tzinfo
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     code_analyzer (0.4.5)
       sexp_processor
     coffee-rails (4.1.0)
@@ -130,6 +137,11 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     debug_inspector (0.0.2)
+    delayed_job (4.0.6)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.0.3)
+      activerecord (>= 3.0, < 5.0)
+      delayed_job (>= 3.0, < 4.1)
     deprecation (0.2.2)
       activesupport
     diff-lcs (1.2.5)
@@ -293,6 +305,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.1)
+    mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.2)
@@ -305,6 +318,12 @@ GEM
     netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    paperclip (4.3.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (= 0.3.0)
     parser (2.3.0.pre.2)
       ast (>= 1.1, < 3.0)
     phantomjs (1.9.8.0)
@@ -491,8 +510,10 @@ DEPENDENCIES
   bootstrap-sass (= 3.3.5.1)
   brakeman
   capybara (~> 2.4.0)
+  clockwork (~> 1.2)
   compass-rails
   coveralls
+  delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 1.0.2)
   europeana-api (~> 0.3.3)
   europeana-blacklight (= 0.1.0)
@@ -504,6 +525,7 @@ DEPENDENCIES
   jquery-rails
   localeapp (~> 0.9.0)
   mysql2
+  paperclip (~> 4.3)
   phantomjs
   poltergeist
   puma (~> 2.11.0)
