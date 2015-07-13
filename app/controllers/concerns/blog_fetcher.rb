@@ -1,6 +1,5 @@
 module BlogFetcher
   extend ActiveSupport::Concern
-  include ActiveSupport::Benchmarkable
 
   protected
 
@@ -9,12 +8,7 @@ module BlogFetcher
     url << "tag/#{@channel.id}/" if @channel
     url << 'feed/'
 
-    feed = Rails.cache.fetch(url) do
-      benchmark("[Feedjira] #{url}", level: :info) do
-        Feedjira::Feed.fetch_and_parse(url)
-      end
-    end
-
-    @blog_items = feed.entries
+    feed = Rails.cache.fetch("feed/#{url}")
+    @blog_items = feed.present? ? feed.entries : []
   end
 end

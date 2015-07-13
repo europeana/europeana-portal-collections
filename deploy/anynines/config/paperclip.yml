@@ -1,0 +1,9 @@
+production:
+  storage: :fog
+  fog_credentials:
+    provider: OpenStack
+    openstack_auth_url: "https://auth.hydranodes.de:5000/v2.0/tokens"
+    openstack_username: "b699f336-4565-40f4-8d12-a81e92ef2feb.swift.user@a9s.eu"
+    openstack_api_key: et7lF5UNf2AuhqolHM2N
+    openstack_temp_url_key: kBoidB84cxdUqZOGGzMy
+  fog_directory: 'europeana-portal-test'

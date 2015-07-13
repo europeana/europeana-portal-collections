@@ -1,6 +1,0 @@
-production:
-  provider: OpenStack
-  openstack_auth_url: <%= JSON.parse(ENV['VCAP_SERVICES'])['swift-1.0'].first['credentials']['authentication_uri'] %>/tokens
-  openstack_username: <%= JSON.parse(ENV['VCAP_SERVICES'])['swift-1.0'].first['credentials']['user_name'] %>
-  openstack_api_key: <%= JSON.parse(ENV['VCAP_SERVICES'])['swift-1.0'].first['credentials']['password'] %>
-  openstack_temp_url_key: <%= JSON.parse(ENV['VCAP_SERVICES'])['swift-1.0'].first['credentials']['account_meta_key'] %>

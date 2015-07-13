@@ -19,8 +19,8 @@
 # Ignore database config file.
 /config/database.yml
 
-# Ignore Fog config file
-/config/fog.yml
+# Ignore Paperclip config file
+/config/paperclip.yml
 
 # Ignore Redis config file.
 /config/redis.yml
