@@ -12,4 +12,3 @@ class FeedCacheJob < ActiveJob::Base
     Rails.cache.write("feed/#{url}", @feed)
   end
 end
-

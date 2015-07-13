@@ -10,8 +10,7 @@ if paperclip_config[:storage] == :fog
       directory.public = true if directory.respond_to?(:public=)
       directory.save
     elsif directory.respond_to?(:public?) && !directory.public?
-      fail RuntimeError, "Fog storage directory not public: #{fog_directory}"
+      fail "Fog storage directory not public: #{fog_directory}"
     end
-    connection = nil
   end
 end
