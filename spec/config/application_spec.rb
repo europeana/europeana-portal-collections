@@ -5,11 +5,7 @@ describe Europeana::Portal::Application, 'configuration' do
     expect(config.channels).not_to be_blank
   end
 
-  it 'has fog config' do
-    expect(config.fog).not_to be_blank
-  end
-
   it 'sets paperclip defaults' do
-    expect(config.paperclip_defaults[:storage]).to eq(:fog)
+    expect(config.paperclip_defaults[:styles]).to have_key(:small)
   end
 end
