@@ -4,7 +4,7 @@ module Templates
     class ChannelsLanding < ApplicationView
 
       def body_class
-         "channel_landing"
+         'channel_landing'
       end
 
       def globalnav_options
@@ -50,29 +50,29 @@ module Templates
             stats: {
               items: [
                   {
-                    count: "1,459,423",
+                    count: '1,459,423',
                     text: t('site.channels.data-types.images'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "393,117",
+                    count: '393,117',
                     text: t('site.channels.data-types.texts'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "1417",
+                    count: '1417',
                     text: t('site.channels.data-types.moving-images'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "1001",
+                    count: '1001',
                     text: t('site.channels.data-types.3d'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "300",
+                    count: '300',
                     text: t('site.channels.data-types.sound'),
-                    url: "#"
+                    url: '#'
                   }
               ]
             },
@@ -80,47 +80,47 @@ module Templates
               title: t('site.channels.labels.recent'),
               items: [
                 {
-                  text: "Prado Museum",
-                  url: "#",
+                  text: 'Prado Museum',
+                  url: '#',
                   number: '113' + ' ' + t('site.channels.data-types.count'),
-                  date: "May 2015"
+                  date: 'May 2015'
                 },
                 {
-                  text: "Royal Armouries",
-                  url: "#",
+                  text: 'Royal Armouries',
+                  url: '#',
                   number: '6480' + ' ' + t('site.channels.data-types.count'),
-                  date: "May 2015"
+                  date: 'May 2015'
                 },
                 {
-                  text: "British Library",
-                  url: "#",
+                  text: 'British Library',
+                  url: '#',
                   number: '33,326' + ' ' + t('site.channels.data-types.count'),
-                  date: "May 2015"
+                  date: 'May 2015'
                 }
               ],
               more_link: {
                 text: t('global.more.load_more'),
-                url: "#777"
+                url: '#777'
               }
             },
             credits: {
               title: t('site.channels.labels.credits'),
               items: [
                 {
-                  text: "National Gallery of Denmark",
-                  url: "#777"
+                  text: 'National Gallery of Denmark',
+                  url: '#777'
                 },
                 {
-                  text: "Rijksmuseum",
-                  url: "#777"
+                  text: 'Rijksmuseum',
+                  url: '#777'
                 }
               ]
             }
           },
           hero_config: {
-            hero_image: "sample/channel_hero_art.jpg",
-            attribution_text: "The Riding School by Philips Wouverman",
-            attribution_url: "http://www.europeana.eu/portal/record/90402/SK_A_477.html",
+            hero_image: 'sample/channel_hero_art.jpg',
+            attribution_text: 'The Riding School by Philips Wouverman',
+            attribution_url: 'http://www.europeana.eu/portal/record/90402/SK_A_477.html',
             license_public: true
           },
           channel_entry: {
@@ -145,40 +145,40 @@ module Templates
                 image_alt: 'alt'
               },
               {
-                title: "All Art history publications",
-                url: root_url + "channels/art?q=%28what%3A+%22art+history%22%29+OR+%28what%3A+%22http%3A%2F%2Fvocab.getty.edu%2Faat%2F300041273%22%29+OR+%28what%3A+histoire%20art%29+OR+%28what%3A+kunstgeschichte%29+OR+%28what%3A+%22estudio+de+la+historia+del+arte%22%29+OR+%28what%3A+Kunstgeschiedenis%29",
-                count: "2,333",
-                media_type: "Documents",
+                title: 'All Art history publications',
+                url: root_url + 'channels/art?q=%28what%3A+%22art+history%22%29+OR+%28what%3A+%22http%3A%2F%2Fvocab.getty.edu%2Faat%2F300041273%22%29+OR+%28what%3A+histoire%20art%29+OR+%28what%3A+kunstgeschichte%29+OR+%28what%3A+%22estudio+de+la+historia+del+arte%22%29+OR+%28what%3A+Kunstgeschiedenis%29',
+                count: '2,333',
+                media_type: 'Documents',
                 is_search: true,
-                image: "sample/entry-documents-square.jpg",
-                image_alt: "alt"
+                image: 'sample/entry-documents-square.jpg',
+                image_alt: 'alt'
               },
               {
                 title: 'Spotlight on Botticelli',
-                url: root_url + "channels/art?q=who:%20sandro%20botticelli",
-                count: "76",
-                media_type: "Images and videos",
+                url: root_url + 'channels/art?q=who:%20sandro%20botticelli',
+                count: '76',
+                media_type: 'Images and videos',
                 is_spotlight: true,
-                image: "sample/entry-botticelli-square.jpg",
+                image: 'sample/entry-botticelli-square.jpg',
                 image_alt: t('site.channels.featured.item-4')
               },
               {
-                title: "Spotlight on Alexander Roslin",
-                url: root_url + "channels/art?q=who:alexander%20roslin",
-                count: "46",
-                media_type: "Images and documents",
+                title: 'Spotlight on Alexander Roslin',
+                url: root_url + 'channels/art?q=who:alexander%20roslin',
+                count: '46',
+                media_type: 'Images and documents',
                 is_spotlight: true,
-                image: "sample/entry-roslin-square.jpg",
-                image_alt: "alt"
+                image: 'sample/entry-roslin-square.jpg',
+                image_alt: 'alt'
               },
               {
-                title: "Spotlight on Hokusai",
-                url: root_url + "channels/art?q=who:hokusai",
-                count: "240",
-                media_type: "Images",
+                title: 'Spotlight on Hokusai',
+                url: root_url + 'channels/art?q=who:hokusai',
+                count: '240',
+                media_type: 'Images',
                 is_spotlight: true,
-                image: "sample/entry-hokusai-square.jpg",
-                image_alt: "alt"
+                image: 'sample/entry-hokusai-square.jpg',
+                image_alt: 'alt'
               }
             ]
           },
@@ -238,29 +238,29 @@ module Templates
             stats: {
               items: [
                   {
-                    count: "216,014",
+                    count: '216,014',
                     text: t('site.channels.data-types.images'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "102,558",
+                    count: '102,558',
                     text: t('site.channels.data-types.texts'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "13,925",
+                    count: '13,925',
                     text: t('site.channels.data-types.moving-images'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "1001",
+                    count: '1001',
                     text: t('site.channels.data-types.3d'),
-                    url: "#"
+                    url: '#'
                   },
                   {
-                    count: "450,068",
+                    count: '450,068',
                     text: t('site.channels.data-types.sound'),
-                    url: "#"
+                    url: '#'
                   }
               ]
             },
@@ -268,52 +268,51 @@ module Templates
               title: t('site.channels.labels.recent'),
               items: [
                 {
-                  text: "Scala museum, Milan",
-                  url: "#",
+                  text: 'Scala museum, Milan',
+                  url: '#',
                   number: '1234' + ' ' + t('site.channels.data-types.count'),
-                  date: "July 2015"
+                  date: 'July 2015'
                 },
                 {
-                  text: "Dresden Library",
-                  url: "#",
+                  text: 'Dresden Library',
+                  url: '#',
                   number: '4377' + ' ' + t('site.channels.data-types.count'),
-                  date: "November 2014"
+                  date: 'November 2014'
                 },
                 {
-                  text: "Rijksmuseum, Amsterdam",
-                  url: "#",
+                  text: 'Rijksmuseum, Amsterdam',
+                  url: '#',
                   number: '2169' + ' ' + t('site.channels.data-types.count'),
-                  date: "September 2014"
+                  date: 'September 2014'
                 }
               ],
               more_link: {
-                text: "Load more",
-                url: "#777"
+                text: 'Load more',
+                url: '#777'
               }
             },
             credits: {
               title: t('site.channels.labels.credits'),
               items: [
                 {
-                  text: "Deutsche National Bibliothek",
-                  url: "#777"
+                  text: 'Deutsche National Bibliothek',
+                  url: '#777'
                 },
                 {
-                  text: "Netherlands institute for sound and vision",
-                  url: "#777"
+                  text: 'Netherlands institute for sound and vision',
+                  url: '#777'
                 },
                 {
-                  text: "Cité de la Musique",
-                  url: "#777"
+                  text: 'Cité de la Musique',
+                  url: '#777'
                 }
               ]
             }
           },
           hero_config: {
-            hero_image: "sample/channel_hero_music.jpg",
-            attribution_text: "This is a placeholder image found somewhere",
-            attribution_url: "http://europeana.eu",
-           # license_CC-ND-NC-SA: true
+            hero_image: 'sample/channel_hero_music.jpg',
+            attribution_text: 'This is a placeholder image found somewhere',
+            attribution_url: 'http://europeana.eu',
             license_CC_ND_NC_SA: true
           },
           channel_entry: {
@@ -457,15 +456,15 @@ module Templates
                items: [
                  {
                    text: t('site.footer.menu.new-collections'),
-                   url: 'javascript:alert("todo - add url")'
+                   url: '#'
                  },
                  {
                    text: t('site.footer.menu.data-providers'),
-                   url: 'javascript:alert("todo - add url")'
+                   url: '#'
                  },
                  {
                    text: t('site.footer.menu.become-a-provider'),
-                   url: 'javascript:alert("todo - add url")'
+                   url: '#'
                  }
                ]
              },
@@ -474,15 +473,15 @@ module Templates
                items: [
                  {
                    text: t('site.footer.menu.search-tips'),
-                   url: 'javascript:alert("todo - add url")'
+                   url: '#'
                  },
                  {
                    text: t('site.footer.menu.using-myeuropeana'),
-                   url: 'javascript:alert("todo - add url")'
+                   url: '#'
                  },
                  {
                    text: t('site.footer.menu.copyright'),
-                   url: 'javascript:alert("todo - add url")'
+                   url: '#'
                  }
                ]
              },
