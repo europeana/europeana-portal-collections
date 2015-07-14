@@ -420,33 +420,33 @@ module Templates
                   is_current: false
                 },
                 {
-                  url: root_url + "channels/art",
-                  text: "Channels",
+                  url: root_url + 'channels/art',
+                  text: 'Channels',
                   is_current: true,
                   submenu: {
                     items: [
                       {
-                        url: root_url + "channels/art",
-                        text: "Art History"
+                        url: root_url + 'channels/art',
+                        text: 'Art History'
                       },
                       {
-                        url: root_url + "channels/music ",
-                        text: "Music"
+                        url: root_url + 'channels/music',
+                        text: 'Music'
                       }
                     ]
                   }
                 },
                 {
-                  url: "http://exhibitions.europeana.eu/",
-                  text: "Exhibitions"
+                  url: 'http://exhibitions.europeana.eu/',
+                  text: 'Exhibitions'
                 },
                 {
-                  url: "http://blog.europeana.eu/",
-                  text: "Blog"
+                  url: 'http://blog.europeana.eu/',
+                  text: 'Blog'
                 },
                 {
-                  url: root_url + "myeuropeana#login",
-                  text: "My Europeana"
+                  url: root_url + 'myeuropeana#login',
+                  text: 'My Europeana'
                 }
               ]
             }  # end prim nav

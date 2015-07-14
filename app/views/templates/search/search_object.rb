@@ -465,25 +465,25 @@ module Templates
         } unless section_data.size == 0
       end
 
-      #def content_object_download
-      #  links = []
+      # def content_object_download
+      #   links = []
 
-      #  if edm_is_shown_by_download_url.present?
-      #    links << {
-      #      text: t('site.object.actions.download'),
-      #      url: edm_is_shown_by_download_url
-      #    }
-      #  end
+      #   if edm_is_shown_by_download_url.present?
+      #     links << {
+      #       text: t('site.object.actions.download'),
+      #       url: edm_is_shown_by_download_url
+      #     }
+      #   end
 
-      #  return nil unless links.present?
+      #   return nil unless links.present?
 
-      #  {
-      #    primary: links.first,
-      #    secondary: {
-      #      items: (links.size == 1) ? nil : links[1..-1]
-      #    }
-      #  }
-      #end
+      #   {
+      #     primary: links.first,
+      #     secondary: {
+      #       items: (links.size == 1) ? nil : links[1..-1]
+      #     }
+      #   }
+      # end
 
       def long_and_lat?
         latitude = render_document_show_field_value(document, 'places.latitude')
@@ -664,16 +664,15 @@ module Templates
           players << { audio: true }
         elsif media_type == 'pdf'
           item['is_pdf'] = true
-          players << {pdf: true}
+          players << { pdf: true }
         elsif media_type == 'text'
-
           item['is_text'] = true
           # This is wrong but needed for now to show pdfs
-          players << {pdf: true}
+          players << { pdf: true }
 
         elsif media_type == 'video'
           item['is_video'] = true
-          players << {video: true}
+          players << { video: true }
         else
           item['is_unkown_type'] = media_type
         end
