@@ -124,25 +124,25 @@ module Templates
             license_public: true
           },
           channel_entry: {
-            title: "Promoted title",
+            title: 'Promoted title',
             items: [
               {
-                title: "All Paintings",
-                url: root_url + "channels/art?q=what:%20paintings",
-                count: "190,226",
-                media_type: "Images",
+                title: 'All Paintings',
+                url: root_url + 'channels/art?q=what:%20paintings',
+                count: '190,226',
+                media_type: 'Images',
                 is_search: true,
-                image: "sample/entry-painting-square.jpg",
-                image_alt: "alt"
+                image: 'sample/entry-painting-square.jpg',
+                image_alt: 'alt'
               },
               {
-                title: "All Sculptures",
-                url: root_url + "channels/art?q=what%3A%28sculpture+OR+sculptuur%20OR%20skulptur%29",
-                count: "7,029",
-                media_type: "Images and video",
+                title: 'All Sculptures',
+                url: root_url + 'channels/art?q=what%3A%28sculpture+OR+sculptuur%20OR%20skulptur%29',
+                count: '7,029',
+                media_type: 'Images and video',
                 is_search: true,
-                image: "sample/entry-sculpture-square.jpg",
-                image_alt: "alt"
+                image: 'sample/entry-sculpture-square.jpg',
+                image_alt: 'alt'
               },
               {
                 title: "All Art history publications",
@@ -183,43 +183,43 @@ module Templates
             ]
           },
           promoted: {
-            title: "Promoted title",
+            title: 'Promoted title',
             items: [
               {
-                title: " Royal Book Collections",
-                url: "http://exhibitions.europeana.eu/exhibits/show/royal-book-collections-en",
+                title: 'Royal Book Collections',
+                url: 'http://exhibitions.europeana.eu/exhibits/show/royal-book-collections-en',
                 is_exhibition: true,
-                bg_image: "sample/thumb-book.jpg"
+                bg_image: 'sample/thumb-book.jpg'
               },
               {
-                title: "From Dada to Surrealism",
-                url: "http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en",
+                title: 'From Dada to Surrealism',
+                url: 'http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en',
                 is_exhibition: true,
-                bg_image: "sample/thumb-dada.jpg"
+                bg_image: 'sample/thumb-dada.jpg'
               },
               {
-                title: "Art Nouveau",
-                url: "http://exhibitions.europeana.eu/exhibits/show/art-nouveau-en%C2%A0",
+                title: 'Art Nouveau',
+                url: 'http://exhibitions.europeana.eu/exhibits/show/art-nouveau-en%C2%A0',
                 is_exhibition: true,
-                bg_image: "sample/thumb-artnouveau.jpg"
+                bg_image: 'sample/thumb-artnouveau.jpg'
               },
               {
-                title: "Explore the World of Musical Instruments",
-                url: "http://exhibitions.europeana.eu/exhibits/show/musical-instruments-en",
+                title: 'Explore the World of Musical Instruments',
+                url: 'http://exhibitions.europeana.eu/exhibits/show/musical-instruments-en',
                 is_exhibition: true,
-                bg_image: "sample/thumb-instruments.jpg"
+                bg_image: 'sample/thumb-instruments.jpg'
               },
               {
-                title: "Pablo Picasso",
-                url: "http://dizbi.hazu.hr/picasso/",
+                title: 'Pablo Picasso',
+                url: 'http://dizbi.hazu.hr/picasso/',
                 is_exhibition: true,
-                bg_image: "sample/thumb-picasso.jpg"
+                bg_image: 'sample/thumb-picasso.jpg'
               },
               {
-                title: "From Dada to Surrealism",
-                url: "http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en",
+                title: 'From Dada to Surrealism',
+                url: 'http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en',
                 is_exhibition: true,
-                bg_image: "sample/thumb-dada.jpg"
+                bg_image: 'sample/thumb-dada.jpg'
               }
             ]
           },
@@ -362,34 +362,34 @@ module Templates
             title: "Promoted title",
             items: [
               {
-                title: "The legacy of Punk",
-                url: "urlhere",
+                title: 'The legacy of Punk',
+                url: 'urlhere',
                 is_exhibition: true,
-                bg_image: "sample/thumb-music.jpg"
+                bg_image: 'sample/thumb-music.jpg'
               },
               {
-                title: "Russian conductors in the EU",
-                url: "urlhere",
+                title: 'Russian conductors in the EU',
+                url: 'urlhere',
                 is_exhibition: true,
-                bg_image: "sample/thumb-music.jpg"
+                bg_image: 'sample/thumb-music.jpg'
               },
               {
-                title: "Famous Concert halls",
-                url: "urlhere",
+                title: 'Famous Concert halls',
+                url: 'urlhere',
                 is_exhibition: true,
-                bg_image: "sample/thumb-music.jpg"
+                bg_image: 'sample/thumb-music.jpg'
               },
               {
-                title: "Pop Music in 1980's Berlin",
-                url: "urlhere",
+                title: 'Pop Music in 1980\'s Berlin',
+                url: 'urlhere',
                 is_exhibition: true,
-                bg_image: "sample/thumb-music.jpg"
+                bg_image: 'sample/thumb-music.jpg'
               },
               {
-                title: "Music piracy",
-                url: "urlhere",
+                title: 'Music piracy',
+                url: 'urlhere',
                 is_exhibition: true,
-                bg_image: "sample/thumb-music.jpg"
+                bg_image: 'sample/thumb-music.jpg'
               }
             ]
           },
@@ -410,13 +410,13 @@ module Templates
             },
             logo: {
               url: root_url,
-              text: "Europeana Search"
+              text: 'Europeana Search'
             },
             primary_nav: {
               items: [
                 {
                   url: root_url,
-                  text: "Home",
+                  text: 'Home',
                   is_current: false
                 },
                 {
