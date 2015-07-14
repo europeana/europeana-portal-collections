@@ -1,38 +1,32 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
-gem 'rails', '4.2.1'
-
-# Use Europeana's REST API as the Blacklight catalog data source
-gem 'europeana-blacklight',
-  require: 'europeana/blacklight',
-  github: 'europeana/europeana-blacklight',
-  ref: 'ca329fa'
-
-gem 'europeana-api',
-  require: 'europeana/api',
-  github: 'rwd/europeana-api-client-ruby',
-  ref: '102e7dc'
+ruby '2.2.2'
+gem 'rails', '4.2.3'
 
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   github: 'europeana/europeana-styleguide-ruby',
-  ref: '03e78e21e5'
+  ref: '24c62c5'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
 gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
 
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
-gem 'blacklight',
-  github: 'rwd/blacklight', branch: 'abstract_facet_paginator'
+gem 'blacklight', '~> 5.14.0'
 gem 'bootstrap-sass', '3.3.5.1'
+gem 'clockwork', '~> 1.2'
 gem 'compass-rails'
+gem 'delayed_job_active_record', '~> 4.0.3'
+gem 'europeana-api', '~> 0.3.3'
+gem 'europeana-blacklight', '0.1.0'
 gem 'eventmachine', '~> 1.0.6' # Ruby 2.2 compatible version
 gem 'feedjira', '~> 2.0'
+gem 'fog'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mysql2'
+gem 'paperclip', '~> 4.3'
 gem 'puma', '~> 2.11.0'
 gem 'redis-rails', '~> 4.0'
 gem 'sass-rails'

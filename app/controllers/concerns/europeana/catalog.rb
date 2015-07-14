@@ -30,7 +30,9 @@ module Europeana
 
     def search_results(user_params, search_params_logic)
       super.tap do |results|
-        results.first[:facet_queries] = query_facet_counts(user_params)
+        if has_search_parameters?
+          results.first[:facet_queries] = query_facet_counts(user_params)
+        end
       end
     end
 
@@ -90,6 +92,13 @@ module Europeana
       hierarchy = repository.fetch_document_hierarchy(id)
       response.documents.first.hierarchy = hierarchy
       [response, response.documents.first]
+    end
+
+    def more_like_this(document, field = nil, extra_controller_params = {})
+      mlt_params = params.dup.slice(:page, :per_page)
+      mlt_params.merge!(mlt: document.id, mltf: field)
+      mlt_params.merge!(extra_controller_params)
+      search_results(mlt_params, search_params_logic)
     end
 
     protected

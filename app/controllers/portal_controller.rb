@@ -16,10 +16,10 @@ class PortalController < ApplicationController
     end
   end
 
-  # GET /record/:provider_id/:record_id
+  # GET /record/:id
   def show
     @response, @document = fetch_with_hierarchy(doc_id)
-    _mlt_response, @similar = repository.more_like_this(@document, 'who')
+    _mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
 
     respond_to do |format|
       format.html do
@@ -28,6 +28,15 @@ class PortalController < ApplicationController
       end
       format.json { render json: { response: { document: @document } } }
       additional_export_formats(@document, format)
+    end
+  end
+
+  # GET /record/:id/similar
+  def similar
+    _response, document = fetch(doc_id)
+    @response, @similar = more_like_this(document, params[:mltf], per_page: params[:per_page] || 4)
+    respond_to do |format|
+      format.json { render :similar, layout: false }
     end
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe ChannelsHelper, type: :helper do
       expect(subject).to eq(Europeana::Portal::Application.config.channels.keys.sort)
     end
     it { is_expected.to be_instance_of(Array) }
-    it { is_expected.to include(:home) }
+    it { is_expected.to include('home') }
   end
   
   describe '#within_channel?' do

@@ -27,6 +27,10 @@ module Europeana
         config.document_model = Europeana::Blacklight::Document
         config.document_presenter_class = MustacheDocumentPresenter
 
+        # Europeana API caching
+        config.europeana_api_cache = Rails.cache
+        config.europeana_api_cache_expires_in = 24.hours
+
         # items to show per page, each number in the array represents another
         # option to choose from.
         config.per_page = [12, 24, 48, 96]

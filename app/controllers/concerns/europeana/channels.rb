@@ -18,7 +18,7 @@ module Europeana
     # @return [Channel]
     def current_channel
       return nil unless within_channel?
-      Channel.find(params[:id].to_sym)
+      Channel.find(params[:id])
     end
 
     ##
@@ -27,7 +27,7 @@ module Europeana
     # @return [Channel]
     def current_search_channel
       return nil unless current_search_session.query_params[:id]
-      Channel.find(current_search_session.query_params[:id].to_sym)
+      Channel.find(current_search_session.query_params[:id])
     end
 
     ##

@@ -46,7 +46,7 @@ RSpec.describe ChannelsController, type: :controller do
     end
 
     context 'with id=[known channel]' do
-      let(:channel_id) { Europeana::Portal::Application.config.channels.keys.reject { |k| k == :home }.first }
+      let(:channel_id) { Europeana::Portal::Application.config.channels.keys.reject { |k| k == 'home' }.first }
       before do
 #        channel = class_double(Channel).as_stubbed_const
 #        allow(channel).to receive(:find).and_return(instance_double('Channel'))

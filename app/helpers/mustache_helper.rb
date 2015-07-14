@@ -57,7 +57,7 @@ module MustacheHelper
   end
 
   def js_variables
-    "var js_path='" + styleguide_path('/public/js/dist/') + "';"
+    "var js_path='" + styleguide_path('/js/dist/') + "';"
   end
 
   def js_files
@@ -276,6 +276,8 @@ module MustacheHelper
     ENV['EUROPEANA_STYLEGUIDE_CDN'] + (asset.present? ? asset : '')
   end
 
+  private
+
   # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]
   def input_search_values(*keys)
@@ -341,6 +343,8 @@ module MustacheHelper
     return nil unless item.content.present?
     img_tag = item.content.match(/<img [^>]*>/i)[0]
     return nil unless img_tag.present?
-    img_tag.match(/src="([^"]*)"/i)[1]
+    url = img_tag.match(/src="([^"]*)"/i)[1]
+    mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
+    mo.nil? ? nil : mo.file.url(:medium)
   end
 end
