@@ -317,49 +317,49 @@ module Templates
             license_CC_ND_NC_SA: true
           },
           channel_entry: {
-            title: "Promoted title",
+            title: 'Promoted title',
             items: [
               {
-                title: "Erlkonig",
-                url: "urlhere",
-                url: root_url + "channels/music?q=erlkonig",
-                count: "12",
-                media_type: "audio recordings"
+                title: 'Erlkonig',
+                url: 'urlhere',
+                url: root_url + 'channels/music?q=erlkonig',
+                count: '12',
+                media_type: 'audio recordings'
               },
               {
-                title: "Mahler 5",
-                url: root_url + "channels/music?q=mahler",
-                count: "15",
-                media_type: "video recordings"
+                title: 'Mahler 5',
+                url: root_url + 'channels/music?q=mahler',
+                count: '15',
+                media_type: 'video recordings'
               },
               {
-                title: "Beethoven’s handwriting",
-                url: root_url + "channels/music?q=beethoven+writing",
-                count: "2",
-                media_type: "scores"
+                title: 'Beethoven\’s handwriting',
+                url: root_url + 'channels/music?q=beethoven+writing',
+                count: '2',
+                media_type: 'scores'
               },
               {
-                title: "Haitink in Berlin",
-                url: root_url + "channels/music?q=Haitink",
-                count: "12",
-                media_type: "letters"
+                title: 'Haitink in Berlin',
+                url: root_url + 'channels/music?q=Haitink',
+                count: '12',
+                media_type: 'letters'
               },
               {
-                title: "Papageno costumes",
-                url: root_url + "channels/music?q=Papageno+costumes",
-                count: "42",
-                media_type: "images"
+                title: 'Papageno costumes',
+                url: root_url + 'channels/music?q=Papageno+costumes',
+                count: '42',
+                media_type: 'images'
               },
               {
-                title: "Baroque wedding music",
-                url: root_url + "channels/music?q=Baroque+wedding",
-                count: "5",
-                media_type: "audio recordings"
+                title: 'Baroque wedding music',
+                url: root_url + 'channels/music?q=Baroque+wedding',
+                count: '5',
+                media_type: 'audio recordings'
               }
             ]
           },
           promoted: {
-            title: "Promoted title",
+            title: 'Promoted title',
             items: [
               {
                 title: 'The legacy of Punk',
@@ -395,7 +395,7 @@ module Templates
           },
           news: {
             items: news_items,
-            blogurl: "http://blog.europeana.eu/tag/#{@channel.id}"
+            blogurl: 'http://blog.europeana.eu/tag/#' + @channel.id
           }
         }
       end
@@ -457,15 +457,15 @@ module Templates
                items: [
                  {
                    text: t('site.footer.menu.new-collections'),
-                   url: "javascript:alert('todo - add url')"
+                   url: 'javascript:alert("todo - add url")'
                  },
                  {
                    text: t('site.footer.menu.data-providers'),
-                   url: "javascript:alert('todo - add url')"
+                   url: 'javascript:alert("todo - add url")'
                  },
                  {
                    text: t('site.footer.menu.become-a-provider'),
-                   url: "javascript:alert('todo - add url')"
+                   url: 'javascript:alert("todo - add url")'
                  }
                ]
              },
@@ -474,15 +474,15 @@ module Templates
                items: [
                  {
                    text: t('site.footer.menu.search-tips'),
-                   url: "javascript:alert('todo - add url')"
+                   url: 'javascript:alert("todo - add url")'
                  },
                  {
                    text: t('site.footer.menu.using-myeuropeana'),
-                   url: "javascript:alert('todo - add url')"
+                   url: 'javascript:alert("todo - add url")'
                  },
                  {
                    text: t('site.footer.menu.copyright'),
-                   url: "javascript:alert('todo - add url')"
+                   url: 'javascript:alert("todo - add url")'
                  }
                ]
              },
@@ -491,7 +491,6 @@ module Templates
                github: false
              }
            }
-
         }
       end
 
