@@ -48,7 +48,7 @@ module Europeana
 
       # Paperclip file storage config
       config.paperclip_defaults = {
-        path: ':class/:id/:attachment/:fingerprint.:style.:extension',
+        path: ':class/:id_partition/:attachment/:fingerprint.:style.:extension',
         styles: { small: '200>', medium: '400>', large: '600>' } # max-width
       }
       config.paperclip_defaults.merge! begin
