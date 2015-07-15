@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 24c62c5faec80eef903326c04b59eb3a50a42149
-  ref: 24c62c5
+  revision: 0c81b6a3dcf3b67af43c2f2939f9cafc24ec09ef
+  ref: 0c81b6a3dc
   specs:
     europeana-styleguide (0.0.2)
       activesupport (~> 4.0)
@@ -55,10 +55,10 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
-    arel (6.0.0)
+    arel (6.0.2)
     ast (2.0.0)
-    astrolabe (1.3.0)
-      parser (>= 2.2.0.pre.3, < 3.0)
+    astrolabe (1.3.1)
+      parser (~> 2.2)
     autoprefixer-rails (5.2.1)
       execjs
       json
@@ -160,11 +160,11 @@ GEM
       europeana-api (~> 0.3.2)
       kaminari (~> 0.16)
     eventmachine (1.0.7)
-    excon (0.45.3)
+    excon (0.45.4)
     execjs (2.5.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.1)
+    faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
     fastercsv (1.5.5)
     feedjira (2.0.0)
@@ -172,7 +172,7 @@ GEM
       faraday_middleware (~> 0.9)
       loofah (~> 2.0)
       sax-machine (~> 1.0)
-    ffi (1.9.9)
+    ffi (1.9.10)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.32.0)
@@ -201,7 +201,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.7.2)
+    fog-aws (0.7.3)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -282,7 +282,7 @@ GEM
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
-    jbuilder (2.3.0)
+    jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.4)
@@ -324,7 +324,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
-    parser (2.3.0.pre.2)
+    parser (2.2.2.6)
       ast (>= 1.1, < 3.0)
     phantomjs (1.9.8.0)
     poltergeist (1.6.0)
@@ -387,7 +387,7 @@ GEM
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
       redis-store (~> 1.1.0)
-    redis-activesupport (4.0.0)
+    redis-activesupport (4.1.0)
       activesupport (~> 4)
       redis-store (~> 1.1.0)
     redis-rack (1.5.0)
@@ -437,7 +437,7 @@ GEM
       sexp_processor (~> 4.1)
     rubyzip (1.1.7)
     safe_yaml (1.0.4)
-    sass (3.4.15)
+    sass (3.4.16)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -486,7 +486,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    web-console (2.1.3)
+    web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
@@ -495,7 +495,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
     websocket (1.2.2)
-    websocket-driver (0.5.4)
+    websocket-driver (0.6.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     xpath (2.0.0)
@@ -544,6 +544,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   webmock (~> 1.21.0)
-
-BUNDLED WITH
-   1.10.5
