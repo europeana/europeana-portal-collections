@@ -10,8 +10,8 @@ RSpec.describe HomeController, type: :controller do
       expect(an_api_search_request).to have_been_made
     end
 
-    it 'gets RSS blog posts' do
-      expect(a_europeana_blog_request).to have_been_made
+    it 'does not get RSS blog posts' do
+      expect(a_europeana_blog_request).not_to have_been_made
     end
 
     it 'renders the homepage Mustache template' do
