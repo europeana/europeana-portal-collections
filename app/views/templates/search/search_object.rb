@@ -676,7 +676,7 @@ module Templates
         else
           item['is_unkown_type'] = media_type
         end
-        if edm_is_shown_by_download_url.size > 0
+        if !edm_is_shown_by_download_url.nil? && edm_is_shown_by_download_url.size > 0
           item['download'] = {
             url: edm_is_shown_by_download_url,
             text: t('site.object.actions.download')
