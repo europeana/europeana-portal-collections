@@ -19,15 +19,15 @@ module Templates
       end
 
       def content
-        if @channel.id == 'art'
+        if (@channel.id == 'art')
           content_art
-        elsif  @channel.id == 'music'
+        elsif  (@channel.id == 'music')
           content_music
         end
       end
 
       def navigation
-        if @channel.id == :music
+        if (@channel.id == 'music')
           return navigation_music
         end
         navigation_art
