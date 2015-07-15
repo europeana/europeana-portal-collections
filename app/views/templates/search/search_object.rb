@@ -682,6 +682,8 @@ module Templates
             text: t('site.object.actions.download')
           }
           item['technical_metadata'] = {
+
+            mime_type: @mime_type
             # language: "English",
             # format: "jpg",
             # file_size: "23.2",
