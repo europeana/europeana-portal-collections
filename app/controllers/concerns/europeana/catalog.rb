@@ -1,3 +1,5 @@
+require 'net/http'
+
 module Europeana
   ##
   # Include this concern in a controller to give it Blacklight catalog features
@@ -11,6 +13,7 @@ module Europeana
     include ::Blacklight::Base
     include BlacklightConfig
     include ::Blacklight::Catalog
+    include ActiveSupport::Benchmarkable
 
     included do
       # Adds Blacklight nav action for Channels
@@ -99,6 +102,26 @@ module Europeana
       mlt_params.merge!(mlt: document.id, mltf: field)
       mlt_params.merge!(extra_controller_params)
       search_results(mlt_params, search_params_logic)
+    end
+
+    def media_mime_type(document)
+      edm_is_shown_by = document.fetch('aggregations.edmIsShownBy', []).first
+      return nil if edm_is_shown_by.nil?
+
+      cache_key = "Europeana/MediaProxy/#{edm_is_shown_by}"
+      mime_type = Rails.cache.fetch(cache_key)
+      return mime_type unless mime_type.nil?
+
+      url = URI(ENV['EDM_IS_SHOWN_BY_PROXY'] + document.id)
+      benchmark("[Media Proxy] #{url}", level: :info) do
+        Net::HTTP.start(url.host, url.port) do |http|
+          response = http.head(url.path)
+          mime_type = response['content-type']
+        end
+      end
+
+      Rails.cache.write(cache_key, mime_type) unless mime_type.nil?
+      mime_type
     end
 
     protected

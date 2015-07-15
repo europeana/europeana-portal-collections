@@ -20,7 +20,7 @@ module EuropeanaAPIHelper
         to_return do |request|
           id = request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
           {
-            body: '{"success":true,"object":{"about": "' + id + '", "title":["' + id + '"], "proxies": [{"dcCreator":{"def":["Mister Smith"]}}]}}',
+            body: '{"success":true,"object":{"about": "' + id + '", "title":["' + id + '"], "proxies": [{"dcCreator":{"def":["Mister Smith"]}}], "aggregations": [{"edmIsShownBy":"http://provider.example.com/ ' + id + '"}]}}',
             status: 200,
             headers: { 'Content-Type' => 'text/json' }
           }
@@ -32,6 +32,11 @@ module EuropeanaAPIHelper
         to_return(body: '{"success":false,"message":"This record has no hierarchical structure!"}',
                   status: 200,
                   headers: { 'Content-Type' => 'text/json' })
+
+      # Media proxy
+      stub_request(:head, %r{#{ENV['EDM_IS_SHOWN_BY_PROXY']}/[^/]+/[^/]+}).
+        to_return(status: 200,
+                  headers: { 'Content-Type' => 'application/pdf' })
     end
   end
 
@@ -52,5 +57,9 @@ module EuropeanaAPIHelper
   def an_api_hierarchy_request_for(id)
     a_request(:get, %r{#{Europeana::API.url}/record#{id}/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
       with(query: hash_including(wskey: api_key))
+  end
+
+  def a_media_proxy_request_for(id)
+    a_request(:head, ENV['EDM_IS_SHOWN_BY_PROXY'] + id)
   end
 end

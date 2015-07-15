@@ -56,14 +56,29 @@ RSpec.describe PortalController, type: :controller do
     before do
       get :show, params
     end
+
     let(:params) { { id: 'abc/123' } }
     let(:record_id) { '/' + params[:id] }
+
     it_behaves_like 'a record API request'
     it_behaves_like 'a more like this API request'
     it_behaves_like 'a hierarchy API request'
-    context 'when format is HTML' do
-      it 'renders the object display page'
+
+    it 'requests the mime-type from the proxy service' do
+      expect(a_media_proxy_request_for(record_id)).to have_been_made
     end
+    it 'does not break if there is no edm:isShownBy'
+    it 'does not make a request to the service if record has no edm:isshownby'
+    it 'checks that the edm:isShownBy value is sane, i.e. http:// or https://'
+    it 'caches the mime-type response'
+
+    context 'when format is HTML' do
+      let(:params) { { id: 'abc/123', format: 'html' } }
+      it 'renders the object display page' do
+        expect(response).to render_template('templates/Search/Search-object')
+      end
+    end
+
     context 'when format is JSON' do
       it 'requests JSON-LD from the API'
       it 'renders the API JSON-LD response'
