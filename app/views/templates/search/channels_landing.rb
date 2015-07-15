@@ -19,15 +19,15 @@ module Templates
       end
 
       def content
-        if(@channel.id == 'art')
+        if @channel.id == 'art'
           content_art
-        elsif(@channel.id == 'music')
+        elsif  @channel.id == 'music'
           content_music
         end
       end
 
       def navigation
-        if(@channel.id == :music)
+        if @channel.id == :music
           return navigation_music
         end
         navigation_art
@@ -145,10 +145,10 @@ module Templates
               {
                 title: 'All Art history publications',
                 url: root_url + 'channels/art?q=%28what%3A+%22art+history' +
-                '%22%29+OR+%28what%3A+%22http%3A%2F%2Fvocab.getty.edu%2Faat' +
-                '%2F300041273%22%29+OR+%28what%3A+histoire%20art%29+OR+%28' +
-                'what%3A+kunstgeschichte%29+OR+%28what%3A+%22estudio+de+la+historia+del+arte' +
-                '%22%29+OR+%28what%3A+Kunstgeschiedenis%29',
+                  '%22%29+OR+%28what%3A+%22http%3A%2F%2Fvocab.getty.edu%2Faat' +
+                  '%2F300041273%22%29+OR+%28what%3A+histoire%20art%29+OR+%28' +
+                  'what%3A+kunstgeschichte%29+OR+%28what%3A+%22estudio+de+la+historia+del+arte' +
+                  '%22%29+OR+%28what%3A+Kunstgeschiedenis%29',
                 count: '2,333',
                 media_type: 'Documents',
                 is_search: true,
