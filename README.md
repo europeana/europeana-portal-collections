@@ -14,6 +14,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 ## Requirements
 
 * Ruby 2.2.2
+* ImageMagick
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
 
@@ -113,6 +114,18 @@ The integration tests use the poltergeist gem which has an external dependency
 on phantomjs. See here for installation instructions:
 https://github.com/teampoltergeist/poltergeist/tree/v1.6.0#installing-phantomjs
 
+### File storage
+
+Files are stored using Paperclip. To configure it, create config/paperclip.yml
+with any options required to configure your file storage system, e.g. fog.
+
+In a development environment, the following will suffice:
+
+```yaml
+# config/paperclip.yml
+development:
+  storage: :filesystem
+```
 
 ### Cache store
 
@@ -142,10 +155,22 @@ production:
 
 ## Usage
 
-Run the app with the Puma web server: `bundle exec puma -C config/puma.rb`
+The application consists of three components:
 
-By default, Puma will listen on the port defined in the `PORT` environment
-variable, or 3000 by default.
+1. Web: `bundle exec puma -C config/puma.rb`
+
+  By default, Puma will listen on the port defined in the `PORT` environment
+  variable, or 3000 by default.
+2. Worker: `bundle exec rake jobs:work`
+3. Scheduler: `bundle exec clockwork lib/clock.rb`
+
+The commands for these components are declared in the [Procfile](Procfile).
+
+In production, if your environment supports it you can use this Procfile.
+Otherwise, you will need to configure deployment scripts to run each process.
+
+In development, you can launch the application with all processes using foreman:
+`foreman start`
 
 ## Contributing
 
