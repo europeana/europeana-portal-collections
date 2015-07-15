@@ -20,6 +20,7 @@ class PortalController < ApplicationController
   def show
     @response, @document = fetch_with_hierarchy(doc_id)
     _mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
+    @mime_type = media_mime_type(@document)
 
     respond_to do |format|
       format.html do
