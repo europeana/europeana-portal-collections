@@ -64,8 +64,11 @@ RSpec.describe PortalController, type: :controller do
     it_behaves_like 'a more like this API request'
     it_behaves_like 'a hierarchy API request'
 
-    it 'requests the mime-type from the proxy service' do
+    it 'requests the MIME type from the proxy service' do
       expect(a_media_proxy_request_for(record_id)).to have_been_made
+    end
+    it 'assigns the MIME type to @mime_type' do
+      expect(assigns(:mime_type)).to eq('application/pdf')
     end
     it 'does not break if there is no edm:isShownBy'
     it 'does not make a request to the service if record has no edm:isshownby'

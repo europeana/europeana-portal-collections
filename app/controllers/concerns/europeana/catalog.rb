@@ -19,9 +19,9 @@ module Europeana
       # Adds Blacklight nav action for Channels
       # @todo move to europeana-blacklight gem; not used by europeana-styleguide
       #   mustache templates
-      #add_nav_action(:channels, partial: 'channels/nav')
+      # add_nav_action(:channels, partial: 'channels/nav')
 
-      before_filter :retrieve_response_and_document_list,
+      before_action :retrieve_response_and_document_list,
                     if: :has_search_parameters?
 
       self.search_params_logic = true
@@ -45,9 +45,9 @@ module Europeana
 
       query_facets = blacklight_config.facet_fields.select do |_, facet|
         facet.query &&
-        (facet.include_in_request ||
-        (facet.include_in_request.nil? &&
-        blacklight_config.add_facet_fields_to_solr_request))
+          (facet.include_in_request ||
+          (facet.include_in_request.nil? &&
+          blacklight_config.add_facet_fields_to_solr_request))
       end
 
       query_facet_counts = []
@@ -110,21 +110,25 @@ module Europeana
 
       cache_key = "Europeana/MediaProxy/#{edm_is_shown_by}"
       mime_type = Rails.cache.fetch(cache_key)
-      return mime_type unless mime_type.nil?
-
-      url = URI(ENV['EDM_IS_SHOWN_BY_PROXY'] + document.id)
-      benchmark("[Media Proxy] #{url}", level: :info) do
-        Net::HTTP.start(url.host, url.port) do |http|
-          response = http.head(url.path)
-          mime_type = response['content-type']
-        end
+      if mime_type.nil?
+        mime_type = remote_content_type_header(document)
+        Rails.cache.write(cache_key, mime_type) unless mime_type.nil?
       end
 
-      Rails.cache.write(cache_key, mime_type) unless mime_type.nil?
       mime_type
     end
 
     protected
+
+    def remote_content_type_header(document)
+      url = URI(ENV['EDM_IS_SHOWN_BY_PROXY'] + document.id)
+      benchmark("[Media Proxy] #{url}", level: :info) do
+        Net::HTTP.start(url.host, url.port) do |http|
+          response = http.head(url.path)
+          response['content-type']
+        end
+      end
+    end
 
     def search_action_url(options = {})
       case
