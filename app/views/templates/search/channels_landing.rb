@@ -1,8 +1,6 @@
 module Templates
   module Search
-
     class ChannelsLanding < ApplicationView
-
       def body_class
          'channel_landing'
       end
