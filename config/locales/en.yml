@@ -151,5 +151,5 @@ en:
         text: Add a search term
       similar:
         prefix: 'Similar to: %{mlt_item}'
-    site-name-link: 
-    sitemap-link: 
+    site-name-link:
+    sitemap-link:
