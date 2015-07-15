@@ -662,6 +662,9 @@ module Templates
         elsif media_type == 'audio'
           item['is_audio'] = true
           players << { audio: true }
+        elsif media_type == 'sound'
+          item['is_audio'] = true
+          players << { audio: true }
         elsif media_type == 'pdf'
           item['is_pdf'] = true
           players << { pdf: true }
@@ -682,7 +685,6 @@ module Templates
             text: t('site.object.actions.download')
           }
           item['technical_metadata'] = {
-
             mime_type: @mime_type
             # language: "English",
             # format: "jpg",
@@ -697,6 +699,9 @@ module Templates
             # runtime: "34",
             # runtime_unit: "minutes"
           }
+        end
+        if @mime_type == 'audio/flac'
+          item['technical_metadata']['tech_order'] = 'aurora'
         end
 
         items << item
