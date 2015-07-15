@@ -62,7 +62,7 @@ module MustacheHelper
 
   def js_files
     [{ path: styleguide_path('/js/dist/require.js'),
-       data_main: styleguide_path('/js/dist/main') }]
+       data_main: styleguide_path('/js/dist/main/main') }]
   end
 
   def menus

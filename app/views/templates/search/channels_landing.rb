@@ -229,7 +229,6 @@ module Templates
         }
       end
 
-
       def content_music
         {
           channel_info: {
@@ -399,7 +398,6 @@ module Templates
         }
       end
 
-
       def navigation_common
         {
           global: {
@@ -493,14 +491,12 @@ module Templates
         }
       end
 
-
       def navigation_art
         {
           global: navigation_common[:global],
           footer: navigation_common[:footer]
         }
       end
-
 
       def navigation_music
         {
