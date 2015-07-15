@@ -447,45 +447,45 @@ module Templates
             }  # end prim nav
           },
           footer: {
-             linklist1: {
-               title: t('global.more-info'),
-               items: [
-                 {
-                   text: t('site.footer.menu.new-collections'),
-                   url: '#'
-                 },
-                 {
-                   text: t('site.footer.menu.data-providers'),
-                   url: '#'
-                 },
-                 {
-                   text: t('site.footer.menu.become-a-provider'),
-                   url: '#'
-                 }
-               ]
-             },
-             linklist2: {
-               title: t('global.help'),
-               items: [
-                 {
-                   text: t('site.footer.menu.search-tips'),
-                   url: '#'
-                 },
-                 {
-                   text: t('site.footer.menu.using-myeuropeana'),
-                   url: '#'
-                 },
-                 {
-                   text: t('site.footer.menu.copyright'),
-                   url: '#'
-                 }
-               ]
-             },
-             social: {
-               googleplus: true,
-               github: false
-             }
-           }
+            linklist1: {
+              title: t('global.more-info'),
+              items: [
+                {
+                  text: t('site.footer.menu.new-collections'),
+                  url: '#'
+                },
+                {
+                  text: t('site.footer.menu.data-providers'),
+                  url: '#'
+                },
+                {
+                  text: t('site.footer.menu.become-a-provider'),
+                  url: '#'
+                }
+              ]
+            },
+            linklist2: {
+              title: t('global.help'),
+              items: [
+                {
+                  text: t('site.footer.menu.search-tips'),
+                  url: '#'
+                },
+                {
+                  text: t('site.footer.menu.using-myeuropeana'),
+                  url: '#'
+                },
+                {
+                  text: t('site.footer.menu.copyright'),
+                  url: '#'
+                }
+              ]
+            },
+            social: {
+              googleplus: true,
+              github: false
+            }
+          }
         }
       end
 
