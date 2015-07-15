@@ -47,11 +47,6 @@ RSpec.describe ChannelsController, type: :controller do
 
     context 'with id=[known channel]' do
       let(:channel_id) { Europeana::Portal::Application.config.channels.keys.reject { |k| k == 'home' }.first }
-      before do
-#        channel = class_double(Channel).as_stubbed_const
-#        allow(channel).to receive(:find).and_return(instance_double('Channel'))
-        # stub portal channels config to know about this channel
-      end
 
       context 'without search params' do
         let(:params) { { id: channel_id } }
@@ -60,8 +55,8 @@ RSpec.describe ChannelsController, type: :controller do
           expect(an_api_search_request).not_to have_been_made
         end
 
-        it 'gets RSS blog posts' do
-          expect(a_europeana_blog_request).to have_been_made
+        it 'does not get RSS blog posts' do
+          expect(a_europeana_blog_request).not_to have_been_made
         end
 
         it 'renders channels landing template' do

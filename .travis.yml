@@ -6,6 +6,6 @@ rvm:
   - 2.2.2
 before_script:
   - "mysql -e 'create database europeana_channels_blacklight_test;'"
-  - "cp -r ./deploy/travis/* ."
+  - "cp -r ./deploy/travis/. ."
 env:
   - RAILS_ENV=test
