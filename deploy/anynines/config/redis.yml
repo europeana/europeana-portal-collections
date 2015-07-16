@@ -1,5 +1,5 @@
 production:
   host: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['hostname'] %>
   port: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['port'] %>
-  password:  <%= JSON.parse( ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['password'] %>
+  password: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['password'] %>
   name: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['name'] %>
