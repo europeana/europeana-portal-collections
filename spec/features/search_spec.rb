@@ -39,8 +39,6 @@ RSpec.feature 'Search page', :type => :feature do
       fill_in('q', with: 'paris')
       find('button.search-submit').click
 
-      #find('button.search-submit').click
-
       expect(page.all('li.search-tag').size).to eq(1)
     end
 
