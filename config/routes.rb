@@ -1,4 +1,4 @@
-Blacklight::Routes.send(:include, Europeana::Portal::Routes)
+Blacklight::Routes.send(:include, BlacklightRoutes)
 
 Rails.application.routes.draw do
   root to: 'home#index'
