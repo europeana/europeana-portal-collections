@@ -26,19 +26,19 @@ RSpec.feature 'Search page', :type => :feature do
 
     it 'permits empty searches' do
       visit '/'
-      sleep 1
+      sleep 3
       fill_in('q', with: '')
       find('button.search-submit').click
-      sleep 1
+      sleep 2
       expect(current_path).to eq('/search')
     end
 
     it 'does not sumit placeholder text' do
       visit '/'
-      sleep 1
+      sleep 3
       fill_in('q', with: '')
       find('button.search-submit').click
-      sleep 1
+      sleep 2
       placeholder = find('.searchbar input.search-input')[:placeholder]
       expect(page.all('li.search-tag', text: placeholder)).to be_blank
     end
