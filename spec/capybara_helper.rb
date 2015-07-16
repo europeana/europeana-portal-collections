@@ -25,7 +25,7 @@ else
   Capybara.configure do |config|
     config.javascript_driver = :poltergeist
     config.default_wait_time = 10
-    config.default_selector  = :css
+    config.default_selector = :css
   end
 
   RSpec.configure do |config|
