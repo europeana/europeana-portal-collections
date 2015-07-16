@@ -33,7 +33,7 @@ RSpec.feature 'Search page', :type => :feature do
       expect(current_path).to eq('/search')
     end
 
-    it 'does not sumit placeholder text' do
+    it 'does not submit placeholder text' do
       visit '/'
       sleep 3
       fill_in('q', with: '')
