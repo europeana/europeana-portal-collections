@@ -416,22 +416,20 @@ module Templates
 
               if f_datum == f_data.last && !section[:extra].nil?
                 extra_info = {}
+
                 section[:extra].map do |xtra|
                   extra_val = render_document_show_field_value(document, xtra[:field])
-                  if extra_val
-                    extra_info_builder = extra_info
-                    path_segments = (xtra[:map_to] || xtra[:field]).split('.')
+                  if !extra_val
+                    next
+                  end
+                  extra_info_builder = extra_info
+                  path_segments = xtra[:map_to] || xtra[:field]
+                  path_segments = path_segments.split('.')
 
-                    path_segments.each.map do |path_segment|
-                      extra_info_builder = case
-                                           when extra_info_builder[path_segment]
-                                             extra_info_builder[path_segment]
-                                           when path_segment == path_segments.last
-                                             extra_val
-                                           else
-                                             {}
-                                           end
-                    end
+                  path_segments.each.map do |path_segment|
+                    is_last = path_segment == path_segments.last
+                    extra_info_builder[path_segment] ||= (is_last ? extra_val : {})
+                    extra_info_builder = extra_info_builder[path_segment]
                   end
                   ob['extra_info'] = extra_info
                 end
