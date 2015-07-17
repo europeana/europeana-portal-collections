@@ -414,28 +414,24 @@ module Templates
 
               # extra info on last
 
-              if f_datum == f_data.last
-                if !section[:extra].nil?
-                  extra_info = {}
-                  section[:extra].map do |xtra|
-                    extra_val = render_document_show_field_value(document, xtra[:field])
-                    if extra_val
-                      extra_info_builder = extra_info
-                      path_segments = (xtra[:map_to] || xtra[:field]).split('.')
+              if f_datum == f_data.last && !section[:extra].nil?
+                extra_info = {}
 
-                      path_segments.each.map do |path_segment|
-                        extra_info_builder = case
-                                             when extra_info_builder[path_segment]
-                                               extra_info_builder[path_segment]
-                                             when path_segment == path_segments.last
-                                               extra_val
-                                             else
-                                               {}
-                                             end
-                      end
-                    end
-                    ob['extra_info'] = extra_info
+                section[:extra].map do |xtra|
+                  extra_val = render_document_show_field_value(document, xtra[:field])
+                  if !extra_val
+                    next
                   end
+                  extra_info_builder = extra_info
+                  path_segments = xtra[:map_to] || xtra[:field]
+                  path_segments = path_segments.split('.')
+
+                  path_segments.each.map do |path_segment|
+                    is_last = path_segment == path_segments.last
+                    extra_info_builder[path_segment] ||= (is_last ? extra_val : {})
+                    extra_info_builder = extra_info_builder[path_segment]
+                  end
+                  ob['extra_info'] = extra_info
                 end
               end
 
@@ -517,20 +513,26 @@ module Templates
         title.size > 1 ? title[1..-1] : nil
       end
 
-      # Media
+      # Media type function normalises mime types
+      # Current @mime_type variable only workd for edm_is_shown_by
+      # Once it works for web_resources we change this function so
+      # that  it accepts a mime type rather than a url, and
 
       def media_type(url)
-        ext = url[/\.[^.]*$/].downcase
+        ext = url[/\.[^.]*$/]
+        if ext.nil?
+          return nil
+        end
+
+        ext = ext.downcase
         if !['.avi', '.mp3'].index(ext).nil?
           'audio'
         elsif !['.jpg', '.jpeg'].index(ext).nil?
           'image'
-        elsif !['.mp4', '.ogg'].index(ext).nil?
+        elsif !['.flac', '.flv', '.mp4', '.mp2', '.mpeg', '.mpg', '.ogg'].index(ext).nil?
           'video'
         elsif !['.txt', '.pdf'].index(ext).nil?
           'text'
-        else
-          'unknown'
         end
       end
 
@@ -567,70 +569,10 @@ module Templates
         else
           {
             license_public: true,
-            license_human: 'todo: map this rights value(' + rights + ')'
+            license_human: prefix + t('global.facet.reusability.open')
           }
         end
       end
-
-      #def media_items
-      #  aggregation = document.aggregations.first
-      #  return [] unless aggregation.respond_to?(:webResources)
-      #  media_type = render_document_show_field_value(document, 'type').downcase
-      #  edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-      #  primary_media = {
-      #    preview: edm_preview,
-      #    thumbnail: edm_preview,
-      #    file: edm_preview,
-      #    media_type: media_type,
-      #    rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights'))
-      #  }
-      #  if media_type == 'image'
-      #    primary_media['is_image'] = true
-      #  elsif media_type == 'audio'
-      #    primary_media['is_audio'] = true
-      #  elsif media_type == 'text'
-      #    primary_media['is_text'] = true
-      #  elsif media_type == 'video'
-      #    primary_media['is_video'] = true
-      #  else
-      #    primary_media['is_unkown_type'] = media_type
-      #  end
-      #  additional_items = aggregation.webResources.map do |web_resource|
-      #    preview_url = render_document_show_field_value(web_resource, 'about')
-      #    preview_type = media_type(preview_url)
-      #    item = {
-      #      alt: preview_type + ' - ' + preview_url,
-      #      file: preview_url,
-      #      rights: {
-      #        license_public: true,
-      #        license_human: render_document_show_field_value(web_resource, 'webResourceDcRights')
-      #      },
-      #      media_type: preview_type
-      #      #  json: web_resource.as_json
-      #    }
-      #    if preview_type == 'image'
-      #      item['thumbnail'] = preview_url
-      #    elsif preview_type == 'audio'
-      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
-      #    elsif preview_type == 'text'
-      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=TEXT'
-      #    elsif preview_type == 'video'
-      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=VIDEO'
-      #    else
-      #      # unknown value mapped to thumbnail in view.
-      #      #  - needed to see hi-res of this record:
-      #      #    - http://localhost:3000/record/90402/SK_A_2344.html
-      #      item['thumbnail'] = preview_url
-      #    end
-      #    item
-      #  end
-      #  {
-      #    primary: primary_media,
-      #    additional: {
-      #      items: additional_items
-      #    }
-      #  }
-      #end
 
       def creator_title
         text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
@@ -638,104 +580,103 @@ module Templates
       end
 
       def media_items
-        players = []
-        items = []
         aggregation = document.aggregations.first
-
-        # what if it has an edmisShownBy????
         return [] unless aggregation.respond_to?(:webResources)
 
-        media_type = render_document_show_field_value(document, 'type').downcase
-        edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-
-        item = {
-          is_current: true,
-          preview: edm_preview,
-          thumbnail: edm_preview,
-          file: edm_is_shown_by_download_url,
-          media_type: media_type,
-          rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights'))
-        }
-        if media_type == 'image'
-          item['is_image'] = true
-          players << { image: true }
-        elsif media_type == 'audio'
-          item['is_audio'] = true
-          players << { audio: true }
-        elsif media_type == 'sound'
-          item['is_audio'] = true
-          players << { audio: true }
-        elsif media_type == 'pdf'
-          item['is_pdf'] = true
-          players << { pdf: true }
-        elsif media_type == 'text'
-          item['is_text'] = true
-          # This is wrong but needed for now to show pdfs
-          players << { pdf: true }
-
-        elsif media_type == 'video'
-          item['is_video'] = true
-          players << { video: true }
-        else
-          item['is_unkown_type'] = media_type
-        end
-        if edm_is_shown_by_download_url.present?
-          item['download'] = {
-            url: edm_is_shown_by_download_url,
-            text: t('site.object.actions.download')
-          }
-          item['technical_metadata'] = {
-            mime_type: @mime_type
-            # language: "English",
-            # format: "jpg",
-            # file_size: "23.2",
-            # file_unit: "MB",
-            # codec: "MPEG-2",
-            # fps: "30",
-            # fps_unit: "fps",
-            # width: "1200",
-            # height: "900",
-            # size_unit: "pixels",
-            # runtime: "34",
-            # runtime_unit: "minutes"
-          }
-        end
-        if @mime_type == 'audio/flac'
-          item['technical_metadata']['tech_order'] = 'aurora'
-        end
-
-        items << item
+        players = []
+        items = []
+        prefix_def_thumb = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type='
 
         aggregation.webResources.map do |web_resource|
-          preview_url = render_document_show_field_value(web_resource, 'about')
-          preview_type = media_type(preview_url)
-          item = {
-            alt: preview_type + ' - ' + preview_url,
-            file: preview_url,
-            rights: {
-              license_public: true,
-              license_human: render_document_show_field_value(web_resource, 'webResourceDcRights')
-            },
-            media_type: preview_type
-            #  json: web_resource.as_json
-          }
-          if preview_type == 'image'
-            item['thumbnail'] = preview_url
-          elsif preview_type == 'audio'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
-          elsif preview_type == 'text'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=TEXT'
-          elsif preview_type == 'pdf'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=PDF'
-          elsif preview_type == 'video'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=VIDEO'
-          else
-            # unknown value mapped to thumbnail in view.
-            #  - needed to see hi-res of this record:
-            #    - http://localhost:3000/record/90402/SK_A_2344.html
-            item['thumbnail'] = preview_url
+          # TODO: we're using 'document' values instead of 'web_resource' values
+          # -this until the mime_type/edm_download / mimetypes start working for multiple items
+
+          web_resource_url = render_document_show_field_value(web_resource, 'about')
+          edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+          edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+          media_rights = render_document_show_field_value(web_resource, 'webResourceDcRights')
+          if media_rights.nil?
+            media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
           end
-          items << item
+          media_type = media_type(web_resource_url)
+          media_type = media_type || media_type(render_document_show_field_value(document, 'type'))
+          media_type = media_type || render_document_show_field_value(document, 'type')
+          media_type = media_type.downcase
+
+          item = {
+            is_current: true,
+            media_type: media_type,
+            rights: simple_rights_label_data(media_rights)
+          }
+
+          if media_type == 'image'
+            item['is_image'] = true
+            players << { image: true }
+
+            # we only have a thumbnail for the first - full image needed for the others
+            if web_resource_url == edm_resource_url
+              item['thumbnail'] = edm_preview
+            else
+              item['thumbnail'] = web_resource_url
+            end
+          elsif media_type == 'audio'
+            item['is_audio'] = true
+            item['thumbnail'] = prefix_def_thumb + 'SOUND'
+            players << { audio: true }
+          elsif media_type == 'pdf'
+            item['is_pdf'] = true
+            item['thumbnail'] = prefix_def_thumb + 'PDF'
+            players << { pdf: true }
+          elsif media_type == 'text'
+            if @mime_type == 'application/pdf'
+              item['is_pdf'] = true
+              item['thumbnail'] = prefix_def_thumb + 'PDF'
+              players << { pdf: true }
+            else
+              item['is_text'] = true
+              item['thumbnail'] = prefix_def_thumb + 'TEXT'
+            end
+          elsif media_type == 'video'
+            item['is_video'] = true
+            players << { video: true }
+            item['thumbnail'] = prefix_def_thumb + 'VIDEO'
+          else
+            item['is_unknown_type'] = render_document_show_field_value(web_resource, 'about')
+          end
+
+          # TODO: this should check the download-ability of the web resource
+          if edm_is_shown_by_download_url.present?
+            item['download'] = {
+              url: @mime_type == 'application/pdf' ? edm_is_shown_by_download_url : web_resource_url,
+              text: t('site.object.actions.download')
+            }
+            item['technical_metadata'] = {
+              mime_type: @mime_type
+              # language: "English",
+              # format: "jpg",
+              # file_size: "23.2",
+              # file_unit: "MB",
+              # codec: "MPEG-2",
+              # fps: "30",
+              # fps_unit: "fps",
+              # width: "1200",
+              # height: "900",
+              # size_unit: "pixels",
+              # runtime: "34",
+              # runtime_unit: "minutes"
+            }
+          end
+          # TODO: this should check the mime-type of the web resource
+          if @mime_type == 'audio/flac'
+            item['technical_metadata']['tech_order'] = 'aurora'
+          end
+
+          # make sure the edm_is_shown_by is the first item
+          if web_resource_url == edm_resource_url
+            items.unshift(item)
+          else
+            items << item
+          end
         end
         {
           required_players: players.uniq,
