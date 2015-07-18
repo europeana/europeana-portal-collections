@@ -585,7 +585,6 @@ module Templates
 
         players = []
         items = []
-        prefix_def_thumb = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type='
 
         aggregation.webResources.map do |web_resource|
           # TODO: we're using 'document' values instead of 'web_resource' values
@@ -609,37 +608,34 @@ module Templates
             rights: simple_rights_label_data(media_rights)
           }
 
+          item['thumbnail'] = edm_preview
+
           if media_type == 'image'
             item['is_image'] = true
             players << { image: true }
 
-            # we only have a thumbnail for the first - full image needed for the others
-            if web_resource_url == edm_resource_url
-              item['thumbnail'] = edm_preview
-            else
+            # we only have a thumbnail for the first
+            # - full image needed for the others
+            # - metadata service needed
+            if web_resource_url != edm_resource_url
               item['thumbnail'] = web_resource_url
             end
           elsif media_type == 'audio'
             item['is_audio'] = true
-            item['thumbnail'] = prefix_def_thumb + 'SOUND'
             players << { audio: true }
           elsif media_type == 'pdf'
             item['is_pdf'] = true
-            item['thumbnail'] = prefix_def_thumb + 'PDF'
             players << { pdf: true }
           elsif media_type == 'text'
             if @mime_type == 'application/pdf'
               item['is_pdf'] = true
-              item['thumbnail'] = prefix_def_thumb + 'PDF'
               players << { pdf: true }
             else
               item['is_text'] = true
-              item['thumbnail'] = prefix_def_thumb + 'TEXT'
             end
           elsif media_type == 'video'
             item['is_video'] = true
             players << { video: true }
-            item['thumbnail'] = prefix_def_thumb + 'VIDEO'
           else
             item['is_unknown_type'] = render_document_show_field_value(web_resource, 'about')
           end
