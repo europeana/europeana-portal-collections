@@ -31,9 +31,8 @@ module MustacheHelper
 
   def head_links
     [
-      { rel: 'search',         type: 'application/opensearchdescription+xml', href: request.host_with_port + '/catalog/opensearch.xml', title: 'Blacklight' },
-      { rel: 'shortcut icon',  type: 'image/x-icon',                          href: asset_path('favicon.ico') },
-      { rel: 'stylesheet',     href: styleguide_path('/css/search/screen.css'),             media: 'all' }
+      { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
+      { rel: 'stylesheet', href: styleguide_path('/css/search/screen.css'), media: 'all' }
     ]
   end
 
