@@ -603,7 +603,6 @@ module Templates
           media_type = media_type.downcase
 
           item = {
-            is_current: true,
             media_type: media_type,
             rights: simple_rights_label_data(media_rights)
           }
@@ -677,6 +676,7 @@ module Templates
 
           # make sure the edm_is_shown_by is the first item
           if web_resource_url == edm_resource_url
+            item[:is_current] = true
             items.unshift(item)
           else
             items << item
