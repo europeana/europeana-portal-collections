@@ -6,7 +6,7 @@ gem 'rails', '4.2.3'
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   github: 'europeana/europeana-styleguide-ruby',
-  ref: '5d8f035c2f'
+  ref: '11c2e45f'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
