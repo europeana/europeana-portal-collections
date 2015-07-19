@@ -525,11 +525,11 @@ module Templates
         end
 
         ext = ext.downcase
-        if !['.avi', '.mp3'].index(ext).nil?
+        if !['.avi', '.flac', '.mp3'].index(ext).nil?
           'audio'
         elsif !['.jpg', '.jpeg'].index(ext).nil?
           'image'
-        elsif !['.flac', '.flv', '.mp4', '.mp2', '.mpeg', '.mpg', '.ogg'].index(ext).nil?
+        elsif !['.flv', '.mp4', '.mp2', '.mpeg', '.mpg', '.ogg'].index(ext).nil?
           'video'
         elsif !['.txt', '.pdf'].index(ext).nil?
           'text'
@@ -642,10 +642,18 @@ module Templates
 
           # TODO: this should check the download-ability of the web resource
           if edm_is_shown_by_download_url.present?
-            item['download'] = {
-              url: @mime_type == 'application/pdf' ? edm_is_shown_by_download_url : web_resource_url,
-              text: t('site.object.actions.download')
-            }
+            if @mime_type == 'application/pdf' || @mime_type == 'audio/flac'
+              item['download'] = {
+                url: edm_is_shown_by_download_url,
+                text: t('site.object.actions.download')
+              }
+            else
+              item['download'] = {
+                url: web_resource_url,
+                text: t('site.object.actions.download')
+              }
+            end
+
             item['technical_metadata'] = {
               mime_type: @mime_type
               # language: "English",
