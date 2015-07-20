@@ -679,11 +679,13 @@ module Templates
             item[:is_current] = true
             items.unshift(item)
           else
-            items << item
+            # disable all web resources apart from the edm_is_shown_by for the beta launch
+            # items << item
           end
         end
         {
           required_players: players.uniq,
+          single_item: items.size == 1,
           items: items
         }
       end
