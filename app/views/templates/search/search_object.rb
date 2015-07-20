@@ -680,7 +680,7 @@ module Templates
             items.unshift(item)
           else
             # disable all web resources apart from the edm_is_shown_by for the beta launch
-            #items << item
+            # items << item
           end
         end
         {
