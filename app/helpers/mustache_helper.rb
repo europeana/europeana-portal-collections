@@ -31,7 +31,7 @@ module MustacheHelper
 
   def head_links
     [
-      { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
+#      { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
       { rel: 'stylesheet', href: styleguide_path('/css/search/screen.css'), media: 'all' }
     ]
   end
