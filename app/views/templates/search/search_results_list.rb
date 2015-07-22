@@ -1,6 +1,10 @@
 module Templates
   module Search
     class SearchResultsList < ApplicationView
+      def form_search
+        super.merge(hidden: form_search_hidden)
+      end
+
       def filters
         facets_from_request(facet_field_names).collect do |facet|
           facet_config = blacklight_config.facet_fields[facet.name]
@@ -264,7 +268,16 @@ module Templates
         end
       end
 
-
+      def form_search_hidden
+        (params[:f] || []).map do |f, vs|
+          [vs].flatten.map do |v|
+            {
+              hidden_name: "f[#{f}][]",
+              hidden_value: v
+            }
+          end
+        end.flatten
+      end
     end
   end
 end
