@@ -73,12 +73,23 @@ module Templates
                   url: 'what'
                 },
                 {
+                  title: 'site.object.meta-label.subject',
+                  url: 'what',
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dcSubject', nil)
+                  end.flatten.compact
+                },
+                {
+                  title: 'site.object.meta-label.has-type',
+                  fields: ['proxies.edmHasType']
+                },
+                {
                   title: 'site.object.meta-label.concept',
                   url: 'what',
                   fields: ['aggregations.edmUgc'],
                   collected: collect_values(['concepts.prefLabel']).size == 0 ? [] : document.concepts.map do |concept|
                     concept.fetch('prefLabel', nil)
-                  end.compact.join(''),
+                  end.compact.join(' '),
                   override_val: 'true',
                   overrides: [
                     {
@@ -86,14 +97,15 @@ module Templates
                       field_url: root_url + ('search?f[UGC][]=true')
                     }
                   ]
-                },
+                }
+              ]
+            ),
+            copyright: data_section(
+              title: 'site.object.meta-label.copyright',
+              sections: [
                 {
-                  title: 'site.object.meta-label.subject',
-                  url: 'what',
-                  fields: [],
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dcSubject', nil)
-                  end.flatten.compact
+                  title: 'site.object.meta-label.rights',
+                  fields: ['proxies.dcRights', 'aggregations.edmRights']
                 }
               ]
             ),
@@ -104,6 +116,13 @@ module Templates
                 {
                   title: 'site.object.meta-label.date',
                   fields: ['proxies.dcDate']
+                },
+                {
+                  title: 'site.object.meta-label.creation-date',
+                  fields: ['proxies.dctermsIssued'],
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dctermsCreated', nil)
+                  end.flatten.compact.join(', ')
                 },
                 {
                   title: 'site.object.meta-label.period',
@@ -124,13 +143,6 @@ module Templates
                 {
                   title: 'site.object.meta-label.place-time',
                   fields: ['proxies.dcCoverage']
-                },
-                {
-                  title: 'site.object.meta-label.creation-date',
-                  fields: ['proxies.dctermsIssued'],
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dctermsCreated', nil)
-                  end.flatten.compact.join(', ')
                 }
               ]
             ),
@@ -139,11 +151,11 @@ module Templates
               sections: [
                 {
                   title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
+                  collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
                 },
                 {
                   title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
+                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
                 }
               ]
             ),
@@ -179,18 +191,21 @@ module Templates
                 {
                   title: 'site.object.meta-label.creator',
                   fields: ['agents.prefLabel'],
+                  fields_then_fallback: true,
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
                   url: 'q',
                   extra: [
                     {
-                      field: 'agents.begin',
-                      map_to: 'life.from.short'
+                      field: 'agents.rdaGr2DateOfBirth',
+                      map_to: 'life.from.short',
+                      format_date: '%Y-%m-%d'
                     },
                     {
-                      field: 'agents.end',
-                      map_to: 'life.to.short'
+                      field: 'agents.rdaGr2DateOfDeath',
+                      map_to: 'life.to.short',
+                      format_date: '%Y-%m-%d'
                     }
                   ]
                 },
@@ -201,15 +216,19 @@ module Templates
               ]
             ),
             places: data_section(
-              title: 'site.object.meta-label.place',
+              title: 'site.object.meta-label.location',
               sections: [
                 {
                   title: 'site.object.meta-label.location',
-                  fields: ['proxies.dctermsSpatial']
+                  fields: ['proxies.dctermsSpatial', 'places.prefLabel']
                 },
                 {
                   title: 'site.object.meta-label.place-time',
                   fields: ['proxies.dcCoverage']
+                },
+                {
+                  title: 'site.object.meta-label.current-location',
+                  fields: ['proxies.edmCurrentLocation']
                 }
               ]
             ),
@@ -217,33 +236,33 @@ module Templates
               title: 'site.object.meta-label.source',
               sections: [
                 {
-                  title: 'site.object.meta-label.publisher',
-                  fields: ['proxies.dcPublisher'],
-                  url: 'aggregations.edmIsShownAt'
-                },
-                {
-                  title: 'site.object.meta-label.provider',
-                  fields: ['aggregations.edmProvider']
-                },
-                {
-                  title: 'site.object.meta-label.data-provider',
-                  fields: ['aggregations.edmDataProvider']
-                },
-                {
-                  title: 'site.object.meta-label.providing-country',
-                  fields: ['europeanaAggregation.edmCountry']
-                },
-                {
-                  title: 'site.object.meta-label.identifier',
-                  fields: ['proxies.dcIdentifier']
-                },
-                {
                   title: 'site.object.meta-label.provenance',
                   fields: ['proxies.dctermsProvenance']
                 },
                 {
                   title: 'site.object.meta-label.source',
                   fields: ['proxies.dcSource']
+                },
+                {
+                  title: 'site.object.meta-label.publisher',
+                  fields: ['proxies.dcPublisher'],
+                  url: 'aggregations.edmIsShownAt'
+                },
+                {
+                  title: 'site.object.meta-label.identifier',
+                  fields: ['proxies.dcIdentifier']
+                },
+                {
+                  title: 'site.object.meta-label.data-provider',
+                  fields: ['aggregations.edmDataProvider']
+                },
+                {
+                  title: 'site.object.meta-label.provider',
+                  fields: ['aggregations.edmProvider']
+                },
+                {
+                  title: 'site.object.meta-label.providing-country',
+                  fields: ['europeanaAggregation.edmCountry']
                 },
                 {
                   fields: ['timestamp_created'],
@@ -257,7 +276,7 @@ module Templates
                   fields: ['timestamp_updated'],
                   format_date: '%Y-%m-%d',
                   wrap: {
-                    t_key: 'site.object.meta-label.timestamp_created',
+                    t_key: 'site.object.meta-label.timestamp_updated',
                     param: :timestamp_updated
                   }
                 }
@@ -267,12 +286,20 @@ module Templates
               title: 'site.object.meta-label.properties',
               sections: [
                 {
-                  title: 'site.object.meta-label.format',
-                  fields: ['aggregations.webResources.dcFormat', 'proxies.dcMedium', 'proxies.dcDuration']
-                },
-                {
                   title: 'site.object.meta-label.extent',
                   fields: ['proxies.dctermsExtent']
+                },
+                {
+                  title: 'site.object.meta-label.duration',
+                  fields: ['proxies.dcDuration']
+                },
+                {
+                  title: 'site.object.meta-label.medium',
+                  fields: ['proxies.dcMedium']
+                },
+                {
+                  title: 'site.object.meta-label.format',
+                  fields: ['aggregations.webResources.dcFormat']
                 },
                 {
                   title: 'site.object.meta-label.language',
@@ -290,7 +317,11 @@ module Templates
               twitter: true,
               googleplus: true
             },
-            title: render_document_show_field_value(document, 'proxies.dcTitle'),
+            subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
+            # compact alone = display error - reject() needed too
+            title: [(collect_values(['proxies.dcTitle'])),
+                    (document.fetch('proxies.dcCreator', []).first)
+                   ].compact.reject(&:empty?).join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
@@ -327,7 +358,7 @@ module Templates
         {
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
-          rights: t('site.object.meta-label.rights')
+          rights: t('site.object.meta-label.rights-human')
         }
       end
 
@@ -359,12 +390,27 @@ module Templates
 
         data[:sections].map do |section|
           f_data = []
+          field_values = []
+
           if section[:collected]
             f_data.push(* section[:collected])
           end
           if section[:fields]
-            f_data.push(*collect_values(section[:fields]))
+            # field_values = collect_values(section[:fields])
+            field_values = []
+            section[:fields].each do |field|
+              values = document.fetch(field, [])
+              if values.is_a? Array
+                values = values - field_values
+              end
+              field_values << [*values]
+            end
+            if section[:fields_then_fallback] && field_values.size > 0
+              f_data = []
+            end
+            f_data.push(*field_values)
           end
+
           f_data = f_data.flatten.uniq
 
           if f_data.size > 0
@@ -421,6 +467,14 @@ module Templates
                   extra_val = render_document_show_field_value(document, xtra[:field])
                   if !extra_val
                     next
+                  end
+                  if xtra[:format_date]
+                    begin
+                      date = Time.parse(extra_val)
+                      formatted = date.strftime(xtra[:format_date])
+                      extra_val = formatted
+                    rescue
+                    end
                   end
                   extra_info_builder = extra_info
                   path_segments = xtra[:map_to] || xtra[:field]
