@@ -269,14 +269,14 @@ module Templates
       end
 
       def form_search_hidden
-        (params[:f] || []).map { |f, vs|
-          [vs].flatten.map { |v|
+        (params[:f] || []).map do |f, vs|
+          [vs].flatten.map do |v|
             {
               hidden_name: "f[#{f}][]",
               hidden_value: v
             }
-          }
-        }.flatten
+          end
+        end.flatten
       end
     end
   end
