@@ -669,10 +669,6 @@ module Templates
               # runtime_unit: "minutes"
             }
           end
-          # TODO: this should check the mime-type of the web resource
-          if @mime_type == 'audio/flac'
-            item['technical_metadata']['tech_order'] = 'aurora'
-          end
 
           # make sure the edm_is_shown_by is the first item
           if web_resource_url == edm_resource_url
