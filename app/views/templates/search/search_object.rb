@@ -86,10 +86,7 @@ module Templates
                 {
                   title: 'site.object.meta-label.concept',
                   url: 'what',
-                  fields: ['aggregations.edmUgc'],
-                  collected: collect_values(['concepts.prefLabel']).size == 0 ? [] : document.concepts.map do |concept|
-                    concept.fetch('prefLabel', nil)
-                  end.compact.join(' '),
+                  fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
                   override_val: 'true',
                   overrides: [
                     {
@@ -629,8 +626,14 @@ module Templates
       end
 
       def creator_title
-        text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
-        text.size > 0 ? text : false
+        [
+          (collect_values(['proxies.dcTitle'])),
+          (document.fetch('proxies.dcCreator', []).first)
+        ].compact.reject(&:empty?).join(' | ')
+
+        #text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
+        #text.size > 0 ? text : false
+        #nil
       end
 
       def media_items
