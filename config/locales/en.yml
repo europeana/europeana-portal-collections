@@ -56,21 +56,25 @@ en:
       meta-label:
         codec: Codec
         concept: Concept
-        concepts: Categories
+        concepts: Classifications
         contributor: Contributor
+        copyright: Copyright
         creation-date: Creation date
         creator: Creator
+        current-location: Current location
         data-provider: Data provider
         date: Date
         dates: Dates
         description: Description
         dimensions: Dimensions
-        extent: Extent
+        duration: Duration
+        extent: Size
         file-size: File size
         format: Format
         fps: Frames per second
+        has-type: Has type
         identifier: Identifier
-        issued: Issued
+        issued: First issued
         language: Language
         latitude: Latitude
         location: Location
@@ -78,6 +82,7 @@ en:
         location: Location
         map: Map
         map-tiles: Tiles
+        medium: Medium
         people: People
         period: Period
         place: Place
@@ -92,13 +97,14 @@ en:
         references: References
         refs-rels: References and Relations
         relations: Relations
-        rights: Can I use this?
+        rights: Rights
+        rights-human: Can I use this?
         runtime: Run time
-        source: Source
+        source: Sources and provenance
         subject: Subject
         temporal: Temporal
         time: Time
-        timestamp_created: Added to Europeana (%{timestamp_created})
+        timestamp_created: First published in Europeana (%{timestamp_created})
         timestamp_updated: Last updated in Europeana (%{timestamp_updated})
         toc: Table of Contents
         type: Type
