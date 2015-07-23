@@ -12,7 +12,7 @@ RSpec.describe 'templates/Search/Search-object.html.mustache' do
       'about' => id,
       'title' => [id],
       'proxies' => [
-        { 'dcCreator' => { 'def'  => ['Mister Smith'] } }
+        { 'dcCreator' => { 'def' => ['Mister Smith'] } }
       ],
       'aggregations' => [
         { 'edmIsShownBy' => "http://provider.example.com#{id}" }
