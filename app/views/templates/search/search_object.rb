@@ -315,8 +315,7 @@ module Templates
               googleplus: true
             },
             subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
-            # compact alone = display error - reject() needed too
-            title: render_document_show_field_value(document, 'proxies.dcTitle'),
+            title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
@@ -394,8 +393,6 @@ module Templates
                 title: 'site.object.meta-label.edm.was-present-at',
                 fields: ['proxies.edmRealizes']
               }
-
-
             ]
           ),
           similar: {
@@ -690,10 +687,7 @@ module Templates
       end
 
       def creator_title
-        res = document.fetch('agents.prefLabel', []).first
-        if res.nil?
-          res = render_document_show_field_value(document, 'dcCreator')
-        end
+        document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
       end
 
       def media_items
