@@ -25,7 +25,8 @@ RSpec.feature 'Search page', :type => :feature do
       fill_in('q', with: '')
       find('button.search-submit').click
 
-      expect(current_path).to eq('/search')
+      path_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
+      expect(current_path).to eq(path_root + '/search')
     end
 
     it 'ignores 2nd empty search' do
