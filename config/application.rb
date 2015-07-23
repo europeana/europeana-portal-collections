@@ -22,6 +22,9 @@ module Europeana
       # Application configuration should go into files in config/initializers
       # -- all .rb files in that directory are automatically loaded.
 
+      # Compress HTTP responses
+      config.middleware.use Rack::Deflater
+
       # Load job classes
       config.autoload_paths += %W(#{config.root}/app/jobs #{config.root}/app/routes)
 
