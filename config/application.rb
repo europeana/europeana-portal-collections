@@ -26,7 +26,7 @@ module Europeana
       config.middleware.use Rack::Deflater
 
       # Minify HTML
-      config.middleware.use HtmlCompressor::Rack, {
+      config.middleware.use HtmlCompressor::Rack,
         enabled: true,
         remove_multi_spaces: true,
         remove_comments: true,
@@ -46,7 +46,6 @@ module Europeana
         preserve_line_breaks: false,
         simple_boolean_attributes: false,
         compress_js_templates: false
-      }
 
       # Load job classes
       config.autoload_paths += %W(#{config.root}/app/jobs #{config.root}/app/routes)
