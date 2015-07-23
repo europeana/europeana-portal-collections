@@ -270,7 +270,7 @@ module Templates
                   }
                 },
                 {
-                  fields: ['timestamp_updated'],
+                  fields: ['timestamp_update'],
                   format_date: '%Y-%m-%d',
                   wrap: {
                     t_key: 'site.object.meta-label.timestamp_updated',
@@ -316,14 +316,20 @@ module Templates
             },
             subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
             # compact alone = display error - reject() needed too
-            title: [(collect_values(['proxies.dcTitle'])),
-                    (document.fetch('proxies.dcCreator', []).first)
-                   ].compact.reject(&:empty?).join(' | '),
+            title: render_document_show_field_value(document, 'proxies.dcTitle'),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
             title: 'site.object.meta-label.refs-rels',
             sections: [
+              {
+                title: 'site.object.meta-label.is-part-of',
+                fields: ['proxies.dctermsIsPartOf']
+              },
+              {
+                title: 'site.object.meta-label.collection-name',
+                fields: ['europeanaCollectionName']
+              },
               {
                 title: 'site.object.meta-label.relations',
                 fields: ['proxies.dcRelation']
@@ -331,7 +337,65 @@ module Templates
               {
                 title: 'site.object.meta-label.references',
                 fields: ['proxies.dctermsReferences']
+              },
+              {
+                title: 'site.object.meta-label.consists-of',
+                fields: ['proxies.dctermsHasPart']
+              },
+              {
+                title: 'site.object.meta-label.version',
+                fields: ['proxies.dctermsHasVersion']
+              },
+              {
+                title: 'site.object.meta-label.is-format-of',
+                fields: ['proxies.dctermsIsFormatOf']
+              },
+              {
+                title: 'site.object.meta-label.is-referenced-by',
+                fields: ['proxies.dctermsIsReferencedBy']
+              },
+              {
+                title: 'site.object.meta-label.is-replaced-by',
+                fields: ['proxies.dctermsIsReplacedBy']
+              },
+              {
+                title: 'site.object.meta-label.is-required-by',
+                fields: ['proxies.dctermsIsRequiredBy']
+              },
+              {
+                title: 'site.object.meta-label.edm.has-met',
+                fields: ['proxies.edmHasMet']
+              },
+              {
+                title: 'site.object.meta-label.edm.incorporates',
+                fields: ['proxies.edmIncorporates']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-derivative-of',
+                fields: ['proxies.edmIsDerivativeOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-representation-of',
+                fields: ['proxies.edmIsRepresentationOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-similar-to',
+                fields: ['proxies.edmIsSimilarTo']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-successor-of',
+                fields: ['proxies.edmIsSuccessorOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.realises',
+                fields: ['proxies.edmRealizes']
+              },
+              {
+                title: 'site.object.meta-label.edm.was-present-at',
+                fields: ['proxies.edmRealizes']
               }
+
+
             ]
           ),
           similar: {
@@ -626,14 +690,10 @@ module Templates
       end
 
       def creator_title
-        [
-          (collect_values(['proxies.dcTitle'])),
-          (document.fetch('proxies.dcCreator', []).first)
-        ].compact.reject(&:empty?).join(' | ')
-
-        #text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
-        #text.size > 0 ? text : false
-        #nil
+        res = document.fetch('agents.prefLabel', []).first
+        if res.nil?
+          res = render_document_show_field_value(document, 'dcCreator')
+        end
       end
 
       def media_items
