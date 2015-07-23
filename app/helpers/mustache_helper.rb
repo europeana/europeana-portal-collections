@@ -318,23 +318,25 @@ module MustacheHelper
   end
 
   def news_items
-    @blog_items[0..2].collect do |item|
-      {
-        image_root: nil,
-        headline: {
-          medium: CGI.unescapeHTML(item.title)
-        },
-        url: CGI.unescapeHTML(item.url),
-        img: {
-          rectangle: {
-            src: news_item_img_src(item),
-            alt: nil
+    @news_items ||= begin
+      @blog_items[0..2].collect do |item|
+        {
+          image_root: nil,
+          headline: {
+            medium: CGI.unescapeHTML(item.title)
+          },
+          url: CGI.unescapeHTML(item.url),
+          img: {
+            rectangle: {
+              src: news_item_img_src(item),
+              alt: nil
+            }
+          },
+          excerpt: {
+            short: CGI.unescapeHTML(item.summary)
           }
-        },
-        excerpt: {
-          short: CGI.unescapeHTML(item.summary)
         }
-      }
+      end
     end
   end
 

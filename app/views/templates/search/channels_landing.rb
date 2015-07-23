@@ -225,7 +225,7 @@ module Templates
               }
             ]
           },
-          news: {
+          news: news_items.blank? ? nil : {
             items: news_items,
           }
         }
