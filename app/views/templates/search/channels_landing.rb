@@ -225,8 +225,8 @@ module Templates
               }
             ]
           },
-          news: news_items.blank? ? nil : {
-            items: news_items,
+          news: blog_news_items.blank? ? nil : {
+            items: blog_news_items,
           }
         }
       end
@@ -393,8 +393,8 @@ module Templates
               }
             ]
           },
-          news: {
-            items: news_items,
+          news: blog_news_items.blank? ? nil : {
+            items: blog_news_items,
             blogurl: 'http://blog.europeana.eu/tag/#' + @channel.id
           }
         }
@@ -505,6 +505,12 @@ module Templates
           global: navigation_common[:global],
           footer: navigation_common[:footer]
         }
+      end
+
+      private
+
+      def blog_news_items
+        @blog_news_items ||= news_items(@blog_items)
       end
     end
   end

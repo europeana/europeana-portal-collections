@@ -317,26 +317,24 @@ module MustacheHelper
     [:qf, :mlt]
   end
 
-  def news_items
-    @news_items ||= begin
-      @blog_items[0..2].collect do |item|
-        {
-          image_root: nil,
-          headline: {
-            medium: CGI.unescapeHTML(item.title)
-          },
-          url: CGI.unescapeHTML(item.url),
-          img: {
-            rectangle: {
-              src: news_item_img_src(item),
-              alt: nil
-            }
-          },
-          excerpt: {
-            short: CGI.unescapeHTML(item.summary)
+  def news_items(items)
+    items[0..2].map do |item|
+      {
+        image_root: nil,
+        headline: {
+          medium: CGI.unescapeHTML(item.title)
+        },
+        url: CGI.unescapeHTML(item.url),
+        img: {
+          rectangle: {
+            src: news_item_img_src(item),
+            alt: nil
           }
+        },
+        excerpt: {
+          short: CGI.unescapeHTML(item.summary)
         }
-      end
+      }
     end
   end
 

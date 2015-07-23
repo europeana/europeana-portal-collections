@@ -50,14 +50,18 @@ module Templates
               bg_image: 'sample/thumb-news.jpg'
             }
           ],
-          news: news_items.blank? ? nil : {
-            items: news_items,
+          news: blog_news_items.blank? ? nil : {
+            items: blog_news_items,
             blogurl: 'http://blog.europeana.eu/'
           }
         }
       end
 
       private
+
+      def blog_news_items
+        @blog_news_items ||= news_items(@blog_items)
+      end
 
       def promoted_channels
         chans = Europeana::Portal::Application.config.channels.dup
