@@ -8,9 +8,14 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( favicon.ico blacklight/logo.png )
-Rails.application.config.assets.precompile += %w( europeana.css blacklight.css )
-Rails.application.config.assets.precompile += %w( jquery.js turbolinks.js )
-Rails.application.config.assets.precompile += %w( blacklight/core.js blacklight/autofocus.js blacklight/checkbox_submit.js blacklight/bookmark_toggle.js blacklight/ajax_modal.js blacklight/search_context.js blacklight/collapsable.js blacklight/blacklight.js )
-Rails.application.config.assets.precompile += %w( bootstrap/transition.js bootstrap/collapse.js bootstrap/dropdown.js bootstrap/alert.js bootstrap/modal.js )
+# Rails.application.config.assets.precompile += %w(
+#   favicon.ico blacklight/logo.png
+#   europeana.css blacklight.css
+#   search.js jquery.js turbolinks.js
+#   blacklight/core.js blacklight/autofocus.js blacklight/checkbox_submit.js blacklight/bookmark_toggle.js
+#   blacklight/ajax_modal.js blacklight/search_context.js blacklight/collapsable.js blacklight/blacklight.js
+#   bootstrap/transition.js bootstrap/collapse.js bootstrap/dropdown.js bootstrap/alert.js bootstrap/modal.js
+# )
+
+# Prevent default behaviour that adds all non-JS/CSS assets
+Rails.application.config.assets.precompile.delete(Sprockets::Railtie::LOOSE_APP_ASSETS)

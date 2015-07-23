@@ -1,9 +1,7 @@
 module Templates
   module Search
     class SearchObject < ApplicationView
-      def debug
-        JSON.pretty_generate(document.as_json)
-      end
+      attr_accessor :document, :debug
 
       def navigation
         query_params = current_search_session.try(:query_params) || {}
@@ -73,12 +71,20 @@ module Templates
                   url: 'what'
                 },
                 {
+                  title: 'site.object.meta-label.subject',
+                  url: 'what',
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dcSubject', nil)
+                  end.flatten.compact
+                },
+                {
+                  title: 'site.object.meta-label.has-type',
+                  fields: ['proxies.edmHasType']
+                },
+                {
                   title: 'site.object.meta-label.concept',
                   url: 'what',
-                  fields: ['aggregations.edmUgc'],
-                  collected: collect_values(['concepts.prefLabel']).size == 0 ? [] : document.concepts.map do |concept|
-                    concept.fetch('prefLabel', nil)
-                  end.compact.join(''),
+                  fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
                   override_val: 'true',
                   overrides: [
                     {
@@ -86,14 +92,15 @@ module Templates
                       field_url: root_url + ('search?f[UGC][]=true')
                     }
                   ]
-                },
+                }
+              ]
+            ),
+            copyright: data_section(
+              title: 'site.object.meta-label.copyright',
+              sections: [
                 {
-                  title: 'site.object.meta-label.subject',
-                  url: 'what',
-                  fields: [],
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dcSubject', nil)
-                  end.flatten.compact
+                  title: 'site.object.meta-label.rights',
+                  fields: ['proxies.dcRights', 'aggregations.edmRights']
                 }
               ]
             ),
@@ -104,6 +111,13 @@ module Templates
                 {
                   title: 'site.object.meta-label.date',
                   fields: ['proxies.dcDate']
+                },
+                {
+                  title: 'site.object.meta-label.creation-date',
+                  fields: ['proxies.dctermsIssued'],
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dctermsCreated', nil)
+                  end.flatten.compact.join(', ')
                 },
                 {
                   title: 'site.object.meta-label.period',
@@ -124,13 +138,6 @@ module Templates
                 {
                   title: 'site.object.meta-label.place-time',
                   fields: ['proxies.dcCoverage']
-                },
-                {
-                  title: 'site.object.meta-label.creation-date',
-                  fields: ['proxies.dctermsIssued'],
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dctermsCreated', nil)
-                  end.flatten.compact.join(', ')
                 }
               ]
             ),
@@ -139,11 +146,11 @@ module Templates
               sections: [
                 {
                   title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
+                  collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
                 },
                 {
                   title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
+                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
                 }
               ]
             ),
@@ -179,18 +186,21 @@ module Templates
                 {
                   title: 'site.object.meta-label.creator',
                   fields: ['agents.prefLabel'],
+                  fields_then_fallback: true,
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
                   url: 'q',
                   extra: [
                     {
-                      field: 'agents.begin',
-                      map_to: 'life.from.short'
+                      field: 'agents.rdaGr2DateOfBirth',
+                      map_to: 'life.from.short',
+                      format_date: '%Y-%m-%d'
                     },
                     {
-                      field: 'agents.end',
-                      map_to: 'life.to.short'
+                      field: 'agents.rdaGr2DateOfDeath',
+                      map_to: 'life.to.short',
+                      format_date: '%Y-%m-%d'
                     }
                   ]
                 },
@@ -201,15 +211,19 @@ module Templates
               ]
             ),
             places: data_section(
-              title: 'site.object.meta-label.place',
+              title: 'site.object.meta-label.location',
               sections: [
                 {
                   title: 'site.object.meta-label.location',
-                  fields: ['proxies.dctermsSpatial']
+                  fields: ['proxies.dctermsSpatial', 'places.prefLabel']
                 },
                 {
                   title: 'site.object.meta-label.place-time',
                   fields: ['proxies.dcCoverage']
+                },
+                {
+                  title: 'site.object.meta-label.current-location',
+                  fields: ['proxies.edmCurrentLocation']
                 }
               ]
             ),
@@ -217,33 +231,33 @@ module Templates
               title: 'site.object.meta-label.source',
               sections: [
                 {
-                  title: 'site.object.meta-label.publisher',
-                  fields: ['proxies.dcPublisher'],
-                  url: 'aggregations.edmIsShownAt'
-                },
-                {
-                  title: 'site.object.meta-label.provider',
-                  fields: ['aggregations.edmProvider']
-                },
-                {
-                  title: 'site.object.meta-label.data-provider',
-                  fields: ['aggregations.edmDataProvider']
-                },
-                {
-                  title: 'site.object.meta-label.providing-country',
-                  fields: ['europeanaAggregation.edmCountry']
-                },
-                {
-                  title: 'site.object.meta-label.identifier',
-                  fields: ['proxies.dcIdentifier']
-                },
-                {
                   title: 'site.object.meta-label.provenance',
                   fields: ['proxies.dctermsProvenance']
                 },
                 {
                   title: 'site.object.meta-label.source',
                   fields: ['proxies.dcSource']
+                },
+                {
+                  title: 'site.object.meta-label.publisher',
+                  fields: ['proxies.dcPublisher'],
+                  url: 'aggregations.edmIsShownAt'
+                },
+                {
+                  title: 'site.object.meta-label.identifier',
+                  fields: ['proxies.dcIdentifier']
+                },
+                {
+                  title: 'site.object.meta-label.data-provider',
+                  fields: ['aggregations.edmDataProvider']
+                },
+                {
+                  title: 'site.object.meta-label.provider',
+                  fields: ['aggregations.edmProvider']
+                },
+                {
+                  title: 'site.object.meta-label.providing-country',
+                  fields: ['europeanaAggregation.edmCountry']
                 },
                 {
                   fields: ['timestamp_created'],
@@ -257,7 +271,7 @@ module Templates
                   fields: ['timestamp_updated'],
                   format_date: '%Y-%m-%d',
                   wrap: {
-                    t_key: 'site.object.meta-label.timestamp_created',
+                    t_key: 'site.object.meta-label.timestamp_updated',
                     param: :timestamp_updated
                   }
                 }
@@ -267,12 +281,20 @@ module Templates
               title: 'site.object.meta-label.properties',
               sections: [
                 {
-                  title: 'site.object.meta-label.format',
-                  fields: ['aggregations.webResources.dcFormat', 'proxies.dcMedium', 'proxies.dcDuration']
-                },
-                {
                   title: 'site.object.meta-label.extent',
                   fields: ['proxies.dctermsExtent']
+                },
+                {
+                  title: 'site.object.meta-label.duration',
+                  fields: ['proxies.dcDuration']
+                },
+                {
+                  title: 'site.object.meta-label.medium',
+                  fields: ['proxies.dcMedium']
+                },
+                {
+                  title: 'site.object.meta-label.format',
+                  fields: ['aggregations.webResources.dcFormat']
                 },
                 {
                   title: 'site.object.meta-label.language',
@@ -290,7 +312,11 @@ module Templates
               twitter: true,
               googleplus: true
             },
-            title: render_document_show_field_value(document, 'proxies.dcTitle'),
+            subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
+            # compact alone = display error - reject() needed too
+            title: [(collect_values(['proxies.dcTitle'])),
+                    (document.fetch('proxies.dcCreator', []).first)
+                   ].compact.reject(&:empty?).join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
@@ -327,7 +353,7 @@ module Templates
         {
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
-          rights: t('site.object.meta-label.rights')
+          rights: t('site.object.meta-label.rights-human')
         }
       end
 
@@ -359,12 +385,27 @@ module Templates
 
         data[:sections].map do |section|
           f_data = []
+          field_values = []
+
           if section[:collected]
             f_data.push(* section[:collected])
           end
           if section[:fields]
-            f_data.push(*collect_values(section[:fields]))
+            # field_values = collect_values(section[:fields])
+            field_values = []
+            section[:fields].each do |field|
+              values = document.fetch(field, [])
+              if values.is_a? Array
+                values = values - field_values
+              end
+              field_values << [*values]
+            end
+            if section[:fields_then_fallback] && field_values.size > 0
+              f_data = []
+            end
+            f_data.push(*field_values)
           end
+
           f_data = f_data.flatten.uniq
 
           if f_data.size > 0
@@ -414,28 +455,32 @@ module Templates
 
               # extra info on last
 
-              if f_datum == f_data.last
-                if !section[:extra].nil?
-                  extra_info = {}
-                  section[:extra].map do |xtra|
-                    extra_val = render_document_show_field_value(document, xtra[:field])
-                    if extra_val
-                      extra_info_builder = extra_info
-                      path_segments = (xtra[:map_to] || xtra[:field]).split('.')
+              if f_datum == f_data.last && !section[:extra].nil?
+                extra_info = {}
 
-                      path_segments.each.map do |path_segment|
-                        extra_info_builder = case
-                                             when extra_info_builder[path_segment]
-                                               extra_info_builder[path_segment]
-                                             when path_segment == path_segments.last
-                                               extra_val
-                                             else
-                                               {}
-                                             end
-                      end
-                    end
-                    ob['extra_info'] = extra_info
+                section[:extra].map do |xtra|
+                  extra_val = render_document_show_field_value(document, xtra[:field])
+                  if !extra_val
+                    next
                   end
+                  if xtra[:format_date]
+                    begin
+                      date = Time.parse(extra_val)
+                      formatted = date.strftime(xtra[:format_date])
+                      extra_val = formatted
+                    rescue
+                    end
+                  end
+                  extra_info_builder = extra_info
+                  path_segments = xtra[:map_to] || xtra[:field]
+                  path_segments = path_segments.split('.')
+
+                  path_segments.each.map do |path_segment|
+                    is_last = path_segment == path_segments.last
+                    extra_info_builder[path_segment] ||= (is_last ? extra_val : {})
+                    extra_info_builder = extra_info_builder[path_segment]
+                  end
+                  ob['extra_info'] = extra_info
                 end
               end
 
@@ -517,20 +562,26 @@ module Templates
         title.size > 1 ? title[1..-1] : nil
       end
 
-      # Media
+      # Media type function normalises mime types
+      # Current @mime_type variable only workd for edm_is_shown_by
+      # Once it works for web_resources we change this function so
+      # that  it accepts a mime type rather than a url, and
 
       def media_type(url)
-        ext = url[/\.[^.]*$/].downcase
-        if !['.avi', '.mp3'].index(ext).nil?
+        ext = url[/\.[^.]*$/]
+        if ext.nil?
+          return nil
+        end
+
+        ext = ext.downcase
+        if !['.avi', '.flac', '.mp3'].index(ext).nil?
           'audio'
         elsif !['.jpg', '.jpeg'].index(ext).nil?
           'image'
-        elsif !['.mp4', '.ogg'].index(ext).nil?
+        elsif !['.flv', '.mp4', '.mp2', '.mpeg', '.mpg', '.ogg'].index(ext).nil?
           'video'
         elsif !['.txt', '.pdf'].index(ext).nil?
           'text'
-        else
-          'unknown'
         end
       end
 
@@ -567,178 +618,125 @@ module Templates
         else
           {
             license_public: true,
-            license_human: 'todo: map this rights value(' + rights + ')'
+            license_human: prefix + t('global.facet.reusability.open')
           }
         end
       end
 
-      #def media_items
-      #  aggregation = document.aggregations.first
-      #  return [] unless aggregation.respond_to?(:webResources)
-      #  media_type = render_document_show_field_value(document, 'type').downcase
-      #  edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-      #  primary_media = {
-      #    preview: edm_preview,
-      #    thumbnail: edm_preview,
-      #    file: edm_preview,
-      #    media_type: media_type,
-      #    rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights'))
-      #  }
-      #  if media_type == 'image'
-      #    primary_media['is_image'] = true
-      #  elsif media_type == 'audio'
-      #    primary_media['is_audio'] = true
-      #  elsif media_type == 'text'
-      #    primary_media['is_text'] = true
-      #  elsif media_type == 'video'
-      #    primary_media['is_video'] = true
-      #  else
-      #    primary_media['is_unkown_type'] = media_type
-      #  end
-      #  additional_items = aggregation.webResources.map do |web_resource|
-      #    preview_url = render_document_show_field_value(web_resource, 'about')
-      #    preview_type = media_type(preview_url)
-      #    item = {
-      #      alt: preview_type + ' - ' + preview_url,
-      #      file: preview_url,
-      #      rights: {
-      #        license_public: true,
-      #        license_human: render_document_show_field_value(web_resource, 'webResourceDcRights')
-      #      },
-      #      media_type: preview_type
-      #      #  json: web_resource.as_json
-      #    }
-      #    if preview_type == 'image'
-      #      item['thumbnail'] = preview_url
-      #    elsif preview_type == 'audio'
-      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
-      #    elsif preview_type == 'text'
-      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=TEXT'
-      #    elsif preview_type == 'video'
-      #      item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=VIDEO'
-      #    else
-      #      # unknown value mapped to thumbnail in view.
-      #      #  - needed to see hi-res of this record:
-      #      #    - http://localhost:3000/record/90402/SK_A_2344.html
-      #      item['thumbnail'] = preview_url
-      #    end
-      #    item
-      #  end
-      #  {
-      #    primary: primary_media,
-      #    additional: {
-      #      items: additional_items
-      #    }
-      #  }
-      #end
-
       def creator_title
-        text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
-        text.size > 0 ? text : false
+        [
+          (collect_values(['proxies.dcTitle'])),
+          (document.fetch('proxies.dcCreator', []).first)
+        ].compact.reject(&:empty?).join(' | ')
+
+        #text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
+        #text.size > 0 ? text : false
+        #nil
       end
 
       def media_items
-        players = []
-        items = []
         aggregation = document.aggregations.first
-
-        # what if it has an edmisShownBy????
         return [] unless aggregation.respond_to?(:webResources)
 
-        media_type = render_document_show_field_value(document, 'type').downcase
-        edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-
-        item = {
-          is_current: true,
-          preview: edm_preview,
-          thumbnail: edm_preview,
-          file: edm_is_shown_by_download_url,
-          media_type: media_type,
-          rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights'))
-        }
-        if media_type == 'image'
-          item['is_image'] = true
-          players << { image: true }
-        elsif media_type == 'audio'
-          item['is_audio'] = true
-          players << { audio: true }
-        elsif media_type == 'sound'
-          item['is_audio'] = true
-          players << { audio: true }
-        elsif media_type == 'pdf'
-          item['is_pdf'] = true
-          players << { pdf: true }
-        elsif media_type == 'text'
-          item['is_text'] = true
-          # This is wrong but needed for now to show pdfs
-          players << { pdf: true }
-
-        elsif media_type == 'video'
-          item['is_video'] = true
-          players << { video: true }
-        else
-          item['is_unkown_type'] = media_type
-        end
-        if edm_is_shown_by_download_url.present?
-          item['download'] = {
-            url: edm_is_shown_by_download_url,
-            text: t('site.object.actions.download')
-          }
-          item['technical_metadata'] = {
-            mime_type: @mime_type
-            # language: "English",
-            # format: "jpg",
-            # file_size: "23.2",
-            # file_unit: "MB",
-            # codec: "MPEG-2",
-            # fps: "30",
-            # fps_unit: "fps",
-            # width: "1200",
-            # height: "900",
-            # size_unit: "pixels",
-            # runtime: "34",
-            # runtime_unit: "minutes"
-          }
-        end
-        if @mime_type == 'audio/flac'
-          item['technical_metadata']['tech_order'] = 'aurora'
-        end
-
-        items << item
+        players = []
+        items = []
 
         aggregation.webResources.map do |web_resource|
-          preview_url = render_document_show_field_value(web_resource, 'about')
-          preview_type = media_type(preview_url)
-          item = {
-            alt: preview_type + ' - ' + preview_url,
-            file: preview_url,
-            rights: {
-              license_public: true,
-              license_human: render_document_show_field_value(web_resource, 'webResourceDcRights')
-            },
-            media_type: preview_type
-            #  json: web_resource.as_json
-          }
-          if preview_type == 'image'
-            item['thumbnail'] = preview_url
-          elsif preview_type == 'audio'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
-          elsif preview_type == 'text'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=TEXT'
-          elsif preview_type == 'pdf'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=PDF'
-          elsif preview_type == 'video'
-            item['thumbnail'] = 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=VIDEO'
-          else
-            # unknown value mapped to thumbnail in view.
-            #  - needed to see hi-res of this record:
-            #    - http://localhost:3000/record/90402/SK_A_2344.html
-            item['thumbnail'] = preview_url
+          # TODO: we're using 'document' values instead of 'web_resource' values
+          # -this until the mime_type/edm_download / mimetypes start working for multiple items
+
+          web_resource_url = render_document_show_field_value(web_resource, 'about')
+          edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+          edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+          media_rights = render_document_show_field_value(web_resource, 'webResourceDcRights')
+          if media_rights.nil?
+            media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
           end
-          items << item
+          media_type = media_type(web_resource_url)
+          media_type = media_type || media_type(render_document_show_field_value(document, 'type'))
+          media_type = media_type || render_document_show_field_value(document, 'type')
+          media_type = media_type.downcase
+
+          item = {
+            media_type: media_type,
+            rights: simple_rights_label_data(media_rights)
+          }
+
+          item['thumbnail'] = edm_preview
+
+          if media_type == 'image'
+            item['is_image'] = true
+            players << { image: true }
+
+            # we only have a thumbnail for the first
+            # - full image needed for the others
+            # - metadata service needed
+            if web_resource_url != edm_resource_url
+              item['thumbnail'] = web_resource_url
+            end
+          elsif media_type == 'audio'
+            item['is_audio'] = true
+            players << { audio: true }
+          elsif media_type == 'pdf'
+            item['is_pdf'] = true
+            players << { pdf: true }
+          elsif media_type == 'text'
+            if @mime_type == 'application/pdf'
+              item['is_pdf'] = true
+              players << { pdf: true }
+            else
+              item['is_text'] = true
+            end
+          elsif media_type == 'video'
+            item['is_video'] = true
+            players << { video: true }
+          else
+            item['is_unknown_type'] = render_document_show_field_value(web_resource, 'about')
+          end
+
+          # TODO: this should check the download-ability of the web resource
+          if edm_is_shown_by_download_url.present?
+            if @mime_type == 'application/pdf' || @mime_type == 'audio/flac'
+              item['download'] = {
+                url: edm_is_shown_by_download_url,
+                text: t('site.object.actions.download')
+              }
+            else
+              item['download'] = {
+                url: web_resource_url,
+                text: t('site.object.actions.download')
+              }
+            end
+
+            item['technical_metadata'] = {
+              mime_type: @mime_type
+              # language: "English",
+              # format: "jpg",
+              # file_size: "23.2",
+              # file_unit: "MB",
+              # codec: "MPEG-2",
+              # fps: "30",
+              # fps_unit: "fps",
+              # width: "1200",
+              # height: "900",
+              # size_unit: "pixels",
+              # runtime: "34",
+              # runtime_unit: "minutes"
+            }
+          end
+
+          # make sure the edm_is_shown_by is the first item
+          if web_resource_url == edm_resource_url
+            item[:is_current] = true
+            items.unshift(item)
+          else
+            # disable all web resources apart from the edm_is_shown_by for the beta launch
+            # items << item
+          end
         end
         {
           required_players: players.uniq,
+          single_item: items.size == 1,
           items: items
         }
       end

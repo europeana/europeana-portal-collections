@@ -1,0 +1,4 @@
+development:
+  storage: :filesystem
+  path: ":rails_root/public/system/<%= Rails.application.config.paperclip_defaults[:path] %>"
+  url: /system/<%= Rails.application.config.paperclip_defaults[:path] %>

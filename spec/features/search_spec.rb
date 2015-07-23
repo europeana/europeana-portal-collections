@@ -23,5 +23,34 @@ RSpec.feature 'Search page', :type => :feature do
       item_count = page.evaluate_script '$(".results-list ol.result-items li").length'
       expect(item_count).to be_between(1, 24)
     end
+
+    it 'permits empty searches' do
+      visit '/'
+
+      fill_in('q', with: '')
+      find('button.search-submit').click
+
+      expect(current_path).to eq('/search')
+    end
+
+    it 'ignores 2nd empty search' do
+      visit '/'
+
+      fill_in('q', with: 'paris')
+      find('button.search-submit').click
+
+      expect(page.all('li.search-tag').size).to eq(1)
+    end
+
+    it 'does not submit placeholder text' do
+      visit '/'
+
+      fill_in('q', with: '')
+      find('button.search-submit').click
+
+      placeholder = find('.searchbar input.search-input')[:placeholder]
+
+      expect(page.all('li.search-tag', text: placeholder)).to be_blank
+    end
   end
 end
