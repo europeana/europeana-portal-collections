@@ -260,20 +260,14 @@ module Templates
                   fields: ['europeanaAggregation.edmCountry']
                 },
                 {
+                  title: 'site.object.meta-label.timestamp-created',
                   fields: ['timestamp_created'],
-                  format_date: '%Y-%m-%d',
-                  wrap: {
-                    t_key: 'site.object.meta-label.timestamp_created',
-                    param: :timestamp_created
-                  }
+                  format_date: '%Y-%m-%d'
                 },
                 {
+                  title: 'site.object.meta-label.timestamp-updated',
                   fields: ['timestamp_update'],
-                  format_date: '%Y-%m-%d',
-                  wrap: {
-                    t_key: 'site.object.meta-label.timestamp_updated',
-                    param: :timestamp_updated
-                  }
+                  format_date: '%Y-%m-%d'
                 }
               ]
             ),
@@ -312,7 +306,7 @@ module Templates
               twitter: true,
               googleplus: true
             },
-            subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
+            subtitle: creator_subtitle.to_s,
             title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
@@ -497,10 +491,6 @@ module Templates
                        rescue
                        end
                      end
-
-              if section[:wrap]
-                text = t(section[:wrap][:t_key], section[:wrap][:param] => text)
-              end
 
               # overrides
 
@@ -687,6 +677,10 @@ module Templates
 
       def creator_title
         document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
+      end
+
+      def creator_subtitle
+        document.fetch('proxies.dctermsAlternative', []).first || render_document_show_field_value(document, 'proxies.dcTitle')
       end
 
       def media_items

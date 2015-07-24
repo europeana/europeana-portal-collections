@@ -2,10 +2,17 @@ en:
   global:
     labs-link: 'link to labs '
     labs-text: text for labs
+    navigation:
+      home: Home
     pro-link: 'link to pro '
     pro-text: text for pro
     settings: settings text
   site:
+    alpha:
+      feedback_banner:
+        description: An alpha release means that this website will change frequently and may not work as well as we'd like.
+        link-text: Help us to make it better
+        title: 'This is an Alpha release of the new Europeana search website '
     blog-link: link to blog
     channels:
       art:
@@ -122,6 +129,8 @@ en:
         subject: Subject
         temporal: Temporal
         time: Time
+        timestamp-created: First published in Europeana
+        timestamp-updated: Last updated in Europeana
         timestamp_created: First published in Europeana (%{timestamp_created})
         timestamp_updated: Last updated in Europeana (%{timestamp_updated})
         toc: Table of Contents
@@ -177,5 +186,5 @@ en:
         text: Add a search term
       similar:
         prefix: 'Similar to: %{mlt_item}'
-    site-name-link:
-    sitemap-link:
+    site-name-link: 
+    sitemap-link: 
