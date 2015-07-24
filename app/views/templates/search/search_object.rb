@@ -297,7 +297,6 @@ module Templates
                 }
               ]
             ),
-            # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             social_share: {
               url: URI.escape(request.original_url),
@@ -306,7 +305,7 @@ module Templates
               twitter: true,
               googleplus: true
             },
-            subtitle: creator_subtitle.to_s,
+            subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title)[1],
             title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
@@ -607,13 +606,6 @@ module Templates
         end
       end
 
-      def doc_title_extra
-        # force array return with empty default
-        title = document.fetch(:title, [])
-
-        title.size > 1 ? title[1..-1] : nil
-      end
-
       # Media type function normalises mime types
       # Current @mime_type variable only workd for edm_is_shown_by
       # Once it works for web_resources we change this function so
@@ -677,10 +669,6 @@ module Templates
 
       def creator_title
         document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
-      end
-
-      def creator_subtitle
-        document.fetch('proxies.dctermsAlternative', []).first || render_document_show_field_value(document, 'proxies.dcTitle')
       end
 
       def media_items
