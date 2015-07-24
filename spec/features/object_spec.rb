@@ -4,13 +4,11 @@ RSpec.feature 'Object page' do
       it 'expects working previous / next links' do
         visit '/'
 
-        sleep 5
+        sleep 3
 
         fill_in('q', with: 'paris')
 
-        expect(page).to have_css('.searchbar button.search-submit')
-
-        find('.searchbar button.search-submit').click
+        click_button('Search')
 
         sleep 3
 
@@ -47,9 +45,7 @@ RSpec.feature 'Object page' do
 
         fill_in('q', with: 'paris')
 
-        expect(page).to have_css('.searchbar button.search-submit')
-
-        find('.searchbar button.search-submit').click
+        click_button('Search')
 
         page.all('.results-list ol.result-items li h1 a')[2].click
 

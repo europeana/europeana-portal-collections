@@ -7,17 +7,15 @@ RSpec.feature 'Search page' do
         it 'expects results' do
           visit '/'
 
-          sleep 5 if js
+          sleep 3 if js
 
           expect(page).to have_css('input[name=q]')
 
           fill_in('q', with: 'paris')
 
-          expect(page).to have_css('.searchbar button.search-submit')
+          click_button('Search')
 
-          find('.searchbar button.search-submit').click
-
-          sleep 5 if js
+          sleep 2 if js
 
           expect(page.all('.results-list').size).to be > (0)
 
@@ -27,13 +25,13 @@ RSpec.feature 'Search page' do
         it 'permits empty searches' do
           visit '/'
 
-          sleep 5 if js
+          sleep 3 if js
 
           fill_in('q', with: '')
 
-          expect(page).to have_css('.searchbar button.search-submit')
+          click_button('Search')
 
-          find('.searchbar button.search-submit').click
+          sleep 2 if js
 
           path_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
           expect(current_path).to eq(path_root + '/search')
@@ -42,13 +40,13 @@ RSpec.feature 'Search page' do
         it 'ignores 2nd empty search' do
           visit '/'
 
-          sleep 5 if js
+          sleep 3 if js
 
           fill_in('q', with: 'paris')
 
-          expect(page).to have_css('.searchbar button.search-submit')
+          click_button('Search')
 
-          find('.searchbar button.search-submit').click
+          sleep 2 if js
 
           expect(page.all('li.search-tag').size).to eq(1)
         end
@@ -56,13 +54,13 @@ RSpec.feature 'Search page' do
         it 'does not submit placeholder text' do
           visit '/'
 
-          sleep 5 if js
+          sleep 3 if js
 
           fill_in('q', with: '')
 
-          expect(page).to have_css('.searchbar button.search-submit')
+          click_button('Search')
 
-          find('.searchbar button.search-submit').click
+          sleep 2 if js
 
           placeholder = find('.searchbar input.search-input')[:placeholder]
 
