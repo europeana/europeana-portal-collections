@@ -1,6 +1,11 @@
 RSpec.feature 'Object page' do
   describe 'Navigation' do
     context 'with JS', js: true do
+      it 'needs a preload on Travis' do
+        visit '/'
+        sleep 10
+      end
+
       it 'expects working previous / next links' do
         visit '/'
 

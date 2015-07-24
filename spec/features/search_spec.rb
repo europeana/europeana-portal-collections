@@ -4,6 +4,11 @@ RSpec.feature 'Search page' do
   [false, true].each do |js|
     context (js ? 'with JS' : 'without JS'), js: js do
       describe 'search page' do
+        it 'needs a preload on Travis' do
+          visit '/'
+          sleep 10
+        end
+
         it 'expects results' do
           visit '/'
 
