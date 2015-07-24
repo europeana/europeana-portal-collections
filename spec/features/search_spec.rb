@@ -2,14 +2,17 @@ require 'rails_helper'
 
 RSpec.feature 'Search page', :type => :feature do
   describe 'search page' do
-    it 'expects results', js: true do
+    it 'expects results' do
       visit '/'
 
       sleep 3
 
       expect(page).to have_css('input[name=q]')
+
       fill_in('q', with: 'paris')
+
       expect(page).to have_css('.searchbar button.search-submit')
+
       find('.searchbar button.search-submit').click
 
       sleep 2
