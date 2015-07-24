@@ -18,7 +18,8 @@ else
       phantomjs_options: [
         '--local-to-remote-url-access=true'
       ],
-      js_errors: true
+      js_errors: true,
+      extensions: ENV['EUROPEANA_STYLEGUIDE_CDN'] + '/js/dist/require.js'
     )
   end
 
