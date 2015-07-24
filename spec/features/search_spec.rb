@@ -13,7 +13,9 @@ RSpec.feature 'Search page' do
 
           fill_in('q', with: 'paris')
 
-          find('button.search-submit').click
+          expect(page).to have_css('.searchbar button.search-submit')
+
+          find('.searchbar button.search-submit').click
 
           sleep 2
 
@@ -26,7 +28,10 @@ RSpec.feature 'Search page' do
           visit '/'
 
           fill_in('q', with: '')
-          find('button.search-submit').click
+
+          expect(page).to have_css('.searchbar button.search-submit')
+
+          find('.searchbar button.search-submit').click
 
           path_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
           expect(current_path).to eq(path_root + '/search')
@@ -36,7 +41,10 @@ RSpec.feature 'Search page' do
           visit '/'
 
           fill_in('q', with: 'paris')
-          find('button.search-submit').click
+
+          expect(page).to have_css('.searchbar button.search-submit')
+
+          find('.searchbar button.search-submit').click
 
           expect(page.all('li.search-tag').size).to eq(1)
         end
@@ -45,7 +53,10 @@ RSpec.feature 'Search page' do
           visit '/'
 
           fill_in('q', with: '')
-          find('button.search-submit').click
+
+          expect(page).to have_css('.searchbar button.search-submit')
+
+          find('.searchbar button.search-submit').click
 
           placeholder = find('.searchbar input.search-input')[:placeholder]
 

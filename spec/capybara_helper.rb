@@ -5,7 +5,6 @@ require 'capybara/rails'
 Capybara.configure do |config|
   config.default_wait_time = 10
   config.default_selector = :css
-  config.ignore_hidden_elements = false
 end
 
 if ENV['CAPYBARA_DRIVER'] == 'selenium'

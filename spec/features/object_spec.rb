@@ -8,7 +8,9 @@ RSpec.feature 'Object page' do
 
         fill_in('q', with: 'paris')
 
-        find('button.search-submit').click
+        expect(page).to have_css('.searchbar button.search-submit')
+
+        find('.searchbar button.search-submit').click
 
         sleep 3
 
