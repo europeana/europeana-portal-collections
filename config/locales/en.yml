@@ -55,8 +55,10 @@ en:
         technicalmetadata: Technical Metadata
       meta-label:
         codec: Codec
+        collection-name: Collection
         concept: Concept
         concepts: Classifications
+        consists-of: Consists of
         contributor: Contributor
         copyright: Copyright
         creation-date: Creation date
@@ -68,12 +70,26 @@ en:
         description: Description
         dimensions: Dimensions
         duration: Duration
+        edm:
+          has-met: Is related to
+          incorporates: Incorporates
+          is-derivative-of: Is derivative of
+          is-representation-of: Is representation of
+          is-similar-to: Is similar to
+          is-successor-of: Is successor of
+          realises: Realises
+          was-present-at: Present at
         extent: Size
         file-size: File size
         format: Format
         fps: Frames per second
         has-type: Has type
         identifier: Identifier
+        is-format-of: Is format of
+        is-part-of: Is part of
+        is-referenced-by: Is referenced by
+        is-replaced-by: Is replaced by
+        is-required-by: Is required by
         issued: First issued
         language: Language
         latitude: Latitude
@@ -89,6 +105,7 @@ en:
         properties: Properties
         provenance: Provenance
         provided-by: Provided by
+        provided-by-detail: Go to <a href="%{url}">%{institution_name}</a> who may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
         publication-date: Date of Publication
@@ -108,6 +125,7 @@ en:
         toc: Table of Contents
         type: Type
         ugc: User contributed content
+        version: Version
       nav:
         next: Next
         prev: Previous

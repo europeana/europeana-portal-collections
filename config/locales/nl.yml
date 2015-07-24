@@ -53,8 +53,10 @@ nl:
         technicalmetadata: 
       meta-label:
         codec: 
+        collection-name: 
         concept: Soort object
         concepts: Categorieën
+        consists-of: 
         contributor: 
         copyright: 
         creation-date: Datum vervaardigd
@@ -66,12 +68,26 @@ nl:
         description: Omschrijving
         dimensions: 
         duration: 
+        edm:
+          has-met: 
+          incorporates: 
+          is-derivative-of: 
+          is-representation-of: 
+          is-similar-to: 
+          is-successor-of: 
+          realises: 
+          was-present-at: 
         extent: 
         file-size: 
         format: Formaat
         fps: 
         has-type: 
         identifier: 
+        is-format-of: 
+        is-part-of: 
+        is-referenced-by: 
+        is-replaced-by: 
+        is-required-by: 
         issued: 
         language: Taal
         latitude: Breedtegraad
@@ -87,6 +103,7 @@ nl:
         properties: Eigenschappen
         provenance: Bron
         provided-by: 
+        provided-by-detail: 
         provider: 
         providing-country: 
         publication-date: 
@@ -106,6 +123,7 @@ nl:
         toc: 
         type: Type
         ugc: 
+        version: 
       nav:
         next: 
         prev: 
