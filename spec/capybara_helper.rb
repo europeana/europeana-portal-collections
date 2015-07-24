@@ -2,11 +2,18 @@
 require 'capybara/rspec'
 require 'capybara/rails'
 
+Capybara.configure do |config|
+  config.default_wait_time = 10
+  config.default_selector = :css
+end
+
 if ENV['CAPYBARA_DRIVER'] == 'selenium'
   require 'selenium-webdriver'
 
   Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, browser: (ENV['CAPYBARA_BROWSER'] || :firefox).to_sym)
+    Capybara::Selenium::Driver.new(app,
+      browser: (ENV['CAPYBARA_BROWSER'] || :firefox).to_sym
+    )
   end
 
   Capybara.javascript_driver = :selenium
@@ -22,14 +29,10 @@ else
     )
   end
 
-  Capybara.configure do |config|
-    config.javascript_driver = :poltergeist
-    config.default_wait_time = 10
-    config.default_selector = :css
-  end
+  Capybara.javascript_driver = :poltergeist
+end
 
-  RSpec.configure do |config|
-    # Include Capybara for integration testing.
-    config.include Capybara::DSL
-  end
+RSpec.configure do |config|
+  # Include Capybara for integration testing.
+  config.include Capybara::DSL
 end
