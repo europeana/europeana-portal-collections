@@ -406,7 +406,8 @@ module Templates
                 }
               }
             end
-          }
+          },
+          thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }
       end
 
@@ -791,6 +792,7 @@ module Templates
         {
           required_players: players.uniq,
           single_item: items.size == 1,
+          empty_item: items.size == 0,
           items: items
         }
       end

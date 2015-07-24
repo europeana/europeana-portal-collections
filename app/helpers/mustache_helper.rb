@@ -55,6 +55,10 @@ module MustacheHelper
     styleguide_path('/images/')
   end
 
+  def version
+    { is_alpha: true }
+  end
+
   def js_variables
     "var js_path='" + styleguide_path('/js/dist/') + "';"
   end
