@@ -50,6 +50,7 @@ en:
         download: Download
         download-additional: Also available as
         downloaddata: Download data
+        open-media: Open this media item
         show-less-data: Show less data
         show-more-data: Show more data
         technicalmetadata: Technical Metadata
@@ -175,5 +176,5 @@ en:
         text: Add a search term
       similar:
         prefix: 'Similar to: %{mlt_item}'
-    site-name-link: 
-    sitemap-link: 
+    site-name-link:
+    sitemap-link:

@@ -700,6 +700,10 @@ module Templates
           # TODO: we're using 'document' values instead of 'web_resource' values
           # -this until the mime_type/edm_download / mimetypes start working for multiple items
 
+          if @mime_type == 'video/mpeg'
+            next
+          end
+
           web_resource_url = render_document_show_field_value(web_resource, 'about')
           edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
           edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
