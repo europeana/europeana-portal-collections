@@ -317,8 +317,8 @@ module MustacheHelper
     [:qf, :mlt]
   end
 
-  def news_items
-    @blog_items[0..2].collect do |item|
+  def news_items(items)
+    items[0..2].map do |item|
       {
         image_root: nil,
         headline: {

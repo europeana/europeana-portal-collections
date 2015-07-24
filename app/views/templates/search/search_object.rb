@@ -1,9 +1,7 @@
 module Templates
   module Search
     class SearchObject < ApplicationView
-      def debug
-        JSON.pretty_generate(document.as_json)
-      end
+      attr_accessor :document, :debug
 
       def navigation
         query_params = current_search_session.try(:query_params) || {}

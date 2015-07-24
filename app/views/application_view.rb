@@ -49,6 +49,7 @@ class ApplicationView < Stache::Mustache::View
   # Whether or not to enable debugging in Mustache templates
   #
   # Override this in a template-specific view class to enable debugging there.
+  # The overriden method should return the textual debug output.
   #
   # This method is required here to prevent templates hitting the helper
   # method {ActionView::Helpers::DebugHelper#debug} which will raise an
