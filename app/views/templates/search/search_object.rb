@@ -315,7 +315,7 @@ module Templates
               googleplus: true
             },
             subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
-            title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].join(' | '),
+            title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
