@@ -5,17 +5,15 @@ RSpec.feature 'Object page', :type => :feature do
 
       sleep 3
 
-      page.execute_script '$("input[name=q]").val("paris")'
+      fill_in('q', with: 'paris')
 
       expect(page).to have_css('.searchbar button.search-submit')
-      page.execute_script '$(".searchbar button.search-submit").trigger("click")'
+
+      find('.searchbar button.search-submit').click
 
       sleep 3
 
-      # without the following 'expect' assertion the subsequent 'find' will fail
-      expect(page).to have_css('.results-list ol.result-items li h1 a')
-
-      page.execute_script '$(".results-list ol.result-items li:first h1 a").trigger("click")'
+      find('.results-list ol.result-items li:first-child h1 a').click
 
       sleep 3
 
@@ -23,7 +21,7 @@ RSpec.feature 'Object page', :type => :feature do
 
       page_title_1 = page.title
 
-      page.execute_script '$(".next a").trigger("click")'
+      find('.next a').click
 
       sleep 3
 
@@ -32,13 +30,13 @@ RSpec.feature 'Object page', :type => :feature do
       expect(page).to have_css('.next a')
       expect(page).to have_css('.previous a')
 
-      assert page_title_1 != page_title_2
+      expect(page_title_1).not_to eq(page_title_2)
 
-      page.execute_script '$(".previous a").trigger("click")'
+      find('.previous a').click
 
       sleep 3
 
-      assert page.title == page_title_1
+      expect(page.title).to eq(page_title_1)
     end
   end
 end
