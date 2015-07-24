@@ -7,6 +7,6 @@ RSpec.configure do |config|
     WebMock.disable_net_connect!(allow_localhost: true) # for poltergeist
   end
 
-  config.include EuropeanaAPIHelper#, type: :controller
-  config.include EuropeanaBlogHelper#, type: :controller
+  config.include EuropeanaAPIHelper
+  config.include EuropeanaBlogHelper
 end
