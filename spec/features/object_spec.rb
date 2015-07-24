@@ -1,44 +1,57 @@
-RSpec.feature 'Object page', :type => :feature do
+RSpec.feature 'Object page' do
   describe 'Navigation' do
-    it 'expects working previous / next links', js: true do
-      visit '/'
+    context 'with JS', js: true do
+      it 'expects working previous / next links' do
+        visit '/'
 
-      sleep 3
+        sleep 3
 
-      page.execute_script '$("input[name=q]").val("paris")'
+        fill_in('q', with: 'paris')
 
-      expect(page).to have_css('.searchbar button.search-submit')
-      page.execute_script '$(".searchbar button.search-submit").trigger("click")'
+        click_button('Search')
 
-      sleep 3
+        sleep 3
 
-      # without the following 'expect' assertion the subsequent 'find' will fail
-      expect(page).to have_css('.results-list ol.result-items li h1 a')
+        find('.results-list ol.result-items li:first-child h1 a').click
 
-      page.execute_script '$(".results-list ol.result-items li:first h1 a").trigger("click")'
+        sleep 3
 
-      sleep 3
+        expect(page).to have_css('.next')
 
-      expect(page).to have_selector('.next')
+        page_title_1 = page.title
 
-      page_title_1 = page.title
+        find('.next a').click
 
-      page.execute_script '$(".next a").trigger("click")'
+        sleep 3
 
-      sleep 3
+        page_title_2 = page.title
 
-      page_title_2 = page.title
+        expect(page).to have_css('.next a')
+        expect(page).to have_css('.previous a')
 
-      expect(page).to have_css('.next a')
-      expect(page).to have_css('.previous a')
+        expect(page_title_1).not_to eq(page_title_2)
 
-      assert page_title_1 != page_title_2
+        find('.previous a').click
 
-      page.execute_script '$(".previous a").trigger("click")'
+        sleep 3
 
-      sleep 3
+        expect(page.title).to eq(page_title_1)
+      end
+    end
 
-      assert page.title == page_title_1
+    context 'without JS', js: false do
+      it 'expects no working previous / next links' do
+        visit '/'
+
+        fill_in('q', with: 'paris')
+
+        click_button('Search')
+
+        page.all('.results-list ol.result-items li h1 a')[2].click
+
+        expect(page).not_to have_css('.next')
+        expect(page).not_to have_css('.previous')
+      end
     end
   end
 end

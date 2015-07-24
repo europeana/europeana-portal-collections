@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: fc39460a5c131ed13bea9e87952bbfde06429ac1
-  ref: fc39460a5c
+  revision: f3a763b5b1c0bdfee89c3f8c7dba064111ffcc2f
+  ref: f3a763b5b1
   specs:
     europeana-styleguide (0.0.2)
       activesupport (~> 4.0)
@@ -74,16 +74,6 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
-    brakeman (3.0.5)
-      erubis (~> 2.6)
-      fastercsv (~> 1.5)
-      haml (>= 3.0, < 5.0)
-      highline (~> 1.6.20)
-      multi_json (~> 1.2)
-      ruby2ruby (~> 2.1.1)
-      ruby_parser (~> 3.7.0)
-      sass (~> 3.0)
-      terminal-table (~> 1.4)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -93,7 +83,6 @@ GEM
       xpath (~> 2.0)
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
-    chunky_png (1.3.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cliver (0.3.2)
@@ -102,32 +91,6 @@ GEM
       tzinfo
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
-    code_analyzer (0.4.5)
-      sexp_processor
-    coffee-rails (4.1.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.9.1.1)
-    colored (1.2)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
-    compass-rails (2.0.4)
-      compass (~> 1.0.0)
-      sass-rails (<= 5.0.1)
-      sprockets (< 2.13)
     coveralls (0.8.2)
       json (~> 1.8)
       rest-client (>= 1.6.8, < 2)
@@ -152,21 +115,19 @@ GEM
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
-    europeana-api (0.3.3)
+    europeana-api (0.3.4)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-    europeana-blacklight (0.1.0)
+    europeana-blacklight (0.2.0)
       blacklight (>= 5.12.0, < 6.0.0)
-      europeana-api (~> 0.3.2)
+      europeana-api (~> 0.3.4)
       kaminari (~> 0.16)
-    eventmachine (1.0.7)
     excon (0.45.4)
     execjs (2.5.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
-    fastercsv (1.5.5)
     feedjira (2.0.0)
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
@@ -273,22 +234,13 @@ GEM
     gli (2.13.1)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    haml (4.0.6)
-      tilt
-    highline (1.6.21)
     hike (1.2.3)
+    htmlcompressor (0.2.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
-    jbuilder (2.3.1)
-      activesupport (>= 3.0.0, < 5)
-      multi_json (~> 1.2)
-    jquery-rails (4.0.4)
-      rails-dom-testing (~> 1.0)
-      railties (>= 4.2.0)
-      thor (>= 0.14, < 2.0)
     json (1.8.3)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -360,15 +312,6 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_best_practices (1.15.7)
-      activesupport
-      code_analyzer (>= 0.4.3)
-      colored
-      erubis
-      i18n
-      json
-      require_all
-      ruby-progressbar
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.3)
     railties (4.2.3)
@@ -378,9 +321,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
-    rb-fsevent (0.9.5)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
     rdoc (4.2.0)
     redis (3.2.1)
     redis-actionpack (4.0.0)
@@ -399,7 +339,6 @@ GEM
       redis-store (~> 1.1.0)
     redis-store (1.1.6)
       redis (>= 2.2)
-    require_all (1.3.2)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -430,15 +369,10 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.5)
-    ruby2ruby (2.1.4)
-      ruby_parser (~> 3.1)
-      sexp_processor (~> 4.0)
-    ruby_parser (3.7.0)
-      sexp_processor (~> 4.1)
     rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.4.16)
-    sass-rails (5.0.1)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -453,7 +387,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    sexp_processor (4.6.0)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -471,13 +404,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
     term-ansicolor (1.3.2)
       tins (~> 1.0)
-    terminal-table (1.5.2)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
     tins (1.5.4)
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -507,22 +437,17 @@ PLATFORMS
 
 DEPENDENCIES
   blacklight (~> 5.14.0)
-  bootstrap-sass (= 3.3.5.1)
-  brakeman
   capybara (~> 2.4.0)
   clockwork (~> 1.2)
-  compass-rails
   coveralls
   delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 1.0.2)
-  europeana-api (~> 0.3.3)
-  europeana-blacklight (= 0.1.0)
+  europeana-api (~> 0.3.4)
+  europeana-blacklight (= 0.2.0)
   europeana-styleguide!
-  eventmachine (~> 1.0.6)
   feedjira (~> 2.0)
   fog
-  jbuilder (~> 2.0)
-  jquery-rails
+  htmlcompressor
   localeapp (~> 0.9.0)
   mysql2
   paperclip (~> 4.3)
@@ -531,7 +456,6 @@ DEPENDENCIES
   puma (~> 2.11.0)
   rails (= 4.2.3)
   rails_12factor (~> 0.0.3)
-  rails_best_practices
   redis-rails (~> 4.0)
   rspec-rails (~> 3.0)
   rubocop (= 0.29.1)
@@ -540,7 +464,6 @@ DEPENDENCIES
   selenium-webdriver
   spring (~> 1.3.6)
   stache!
-  turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   webmock (~> 1.21.0)

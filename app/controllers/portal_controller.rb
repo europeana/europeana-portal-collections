@@ -7,7 +7,7 @@ class PortalController < ApplicationController
   include Europeana::Catalog
   include Europeana::Styleguide
 
-  before_filter :redirect_to_root, only: :index, unless: :has_search_parameters?
+  before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
 
   # GET /search
   def index
@@ -21,6 +21,7 @@ class PortalController < ApplicationController
     @response, @document = fetch_with_hierarchy(doc_id)
     _mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @mime_type = media_mime_type(@document)
+    @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
       format.html do

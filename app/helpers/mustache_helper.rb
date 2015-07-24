@@ -31,7 +31,7 @@ module MustacheHelper
 
   def head_links
     [
-      { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
+      # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
       { rel: 'stylesheet', href: styleguide_path('/css/search/screen.css'), media: 'all' }
     ]
   end
@@ -53,6 +53,10 @@ module MustacheHelper
 
   def image_root
     styleguide_path('/images/')
+  end
+
+  def version
+    { is_alpha: true }
   end
 
   def js_variables
@@ -317,8 +321,8 @@ module MustacheHelper
     [:qf, :mlt]
   end
 
-  def news_items
-    @blog_items[0..2].collect do |item|
+  def news_items(items)
+    items[0..2].map do |item|
       {
         image_root: nil,
         headline: {

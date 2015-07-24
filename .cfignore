@@ -25,5 +25,8 @@
 # Ignore compiled assets
 /public/assets
 
+# Ignore uploaded files
+/public/system
+
 # Ignore Redis snapshot
 /dump.rdb

@@ -1,6 +1,9 @@
 require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController, type: :controller do
+  # workaround for https://github.com/jnicklas/capybara/issues/1396
+  include RSpec::Matchers.clone
+
   describe 'GET index' do
     context 'without q param' do
       it 'redirects to root' do
@@ -64,6 +67,20 @@ RSpec.describe PortalController, type: :controller do
     it_behaves_like 'a more like this API request'
     it_behaves_like 'a hierarchy API request'
 
+    it 'assigns the response to @response' do
+      expect(assigns(:response)).to be_a(Europeana::Blacklight::Response)
+    end
+
+    it 'assigns the document to @document' do
+      expect(assigns(:document)).to be_a(Europeana::Blacklight::Document)
+      expect(assigns(:document)).to eq(assigns(:response).documents.first)
+    end
+
+    it 'assigns similar items to @similar' do
+      expect(assigns(:similar)).to be_a(Array)
+      expect(assigns(:similar)).to all(be_a(Europeana::Blacklight::Document))
+    end
+
     it 'requests the MIME type from the proxy service' do
       expect(a_media_proxy_request_for(record_id)).to have_been_made
     end
@@ -77,8 +94,22 @@ RSpec.describe PortalController, type: :controller do
 
     context 'when format is HTML' do
       let(:params) { { id: 'abc/123', format: 'html' } }
+
       it 'renders the object display page' do
         expect(response).to render_template('templates/Search/Search-object')
+      end
+
+      context 'without param debug' do
+        it 'does not assign @debug' do
+          expect(assigns(:debug)).to be_nil
+        end
+      end
+
+      context 'with param debug=json' do
+        let(:params) { { id: 'abc/123', format: 'html', debug: 'json' } }
+        it 'assigns pretty JSON document to @debug' do
+          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json))
+        end
       end
     end
 

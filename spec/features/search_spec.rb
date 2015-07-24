@@ -1,56 +1,72 @@
 require 'rails_helper'
 
-RSpec.feature 'Search page', :type => :feature do
-  describe 'search page' do
-    it 'expects results', js: true do
-      visit '/'
+RSpec.feature 'Search page' do
+  [false, true].each do |js|
+    context (js ? 'with JS' : 'without JS'), js: js do
+      describe 'search page' do
+        it 'expects results' do
+          visit '/'
 
-      sleep 3
+          sleep 3 if js
 
-      expect(page).to have_css('input[name=q]')
+          expect(page).to have_css('input[name=q]')
 
-      page.execute_script '$("input[name=q]").val("paris")'
+          fill_in('q', with: 'paris')
 
-      expect(page).to have_css('.searchbar button.search-submit')
+          click_button('Search')
 
-      page.execute_script '$(".searchbar button.search-submit").trigger("click")'
+          sleep 2 if js
 
-      sleep 2
+          expect(page.all('.results-list').size).to be > (0)
 
-      list_present = page.evaluate_script '$(".results-list").length > 0'
-      expect(list_present).to be true
+          expect(page.all('.results-list ol.result-items li').size).to be_between(1, 24)
+        end
 
-      item_count = page.evaluate_script '$(".results-list ol.result-items li").length'
-      expect(item_count).to be_between(1, 24)
-    end
+        it 'permits empty searches' do
+          visit '/'
 
-    it 'permits empty searches' do
-      visit '/'
+          sleep 3 if js
 
-      fill_in('q', with: '')
-      find('button.search-submit').click
+          fill_in('q', with: '')
 
-      expect(current_path).to eq('/search')
-    end
+          click_button('Search')
 
-    it 'ignores 2nd empty search' do
-      visit '/'
+          sleep 2 if js
 
-      fill_in('q', with: 'paris')
-      find('button.search-submit').click
+          path_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
+          expect(current_path).to eq(path_root + '/search')
+        end
 
-      expect(page.all('li.search-tag').size).to eq(1)
-    end
+        it 'ignores 2nd empty search' do
+          visit '/'
 
-    it 'does not submit placeholder text' do
-      visit '/'
+          sleep 3 if js
 
-      fill_in('q', with: '')
-      find('button.search-submit').click
+          fill_in('q', with: 'paris')
 
-      placeholder = find('.searchbar input.search-input')[:placeholder]
+          click_button('Search')
 
-      expect(page.all('li.search-tag', text: placeholder)).to be_blank
+          sleep 2 if js
+
+          expect(page.all('li.search-tag').size).to eq(1)
+        end
+
+        it 'does not submit placeholder text' do
+          visit '/'
+
+          sleep 3 if js
+
+          fill_in('q', with: '')
+
+          click_button('Search')
+
+          sleep 2 if js
+
+          placeholder = find('.searchbar input.search-input')[:placeholder]
+
+          expect(page.all('li.search-tag', text: placeholder)).to be_blank
+        end
+      end
     end
   end
 end
