@@ -3,3 +3,5 @@ production:
   port: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['port'] %>
   password: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['password'] %>
   name: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['name'] %>
+  db: 0
+  namespace: cache
