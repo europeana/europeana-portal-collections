@@ -66,12 +66,6 @@ module MustacheHelper
   def js_files
     js_entry_point = ENV['JS_ENTRYPOINT'] || '/js/dist/'
     js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
-
-    log = Logger.new(STDOUT)
-    log.level = Logger::WARN
-    log.warn("js_entry_point = " + js_entry_point)
-
-
     [{ path: styleguide_path(js_entry_point + 'require.js'),
        data_main: styleguide_path(js_entry_point + 'main/main') }]
   end
