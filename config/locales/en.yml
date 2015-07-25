@@ -103,7 +103,6 @@ en:
         latitude: Latitude
         location: Location
         longitude: Longitude
-        location: Location
         map: Map
         map-tiles: Tiles
         medium: Medium

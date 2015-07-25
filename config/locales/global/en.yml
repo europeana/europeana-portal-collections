@@ -15,9 +15,9 @@ en:
       newspapers: newspapers
       performing-arts: performing-arts
     channels: Channels
-    channels-art: beware of the jabberwocky
-    channels-art-image: Beware of the jabberwocky
-    channels-art-link: beware of the jabberwocky
+    channels-art: 'Channels art channel '
+    channels-art-image: 'Channels art image '
+    channels-art-link: Channels art link
     channels-art-url: 
     channels-fashion: Fashion
     channels-music: Music
