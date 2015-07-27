@@ -2,10 +2,17 @@ nl:
   global:
     labs-link: 'link naar labs '
     labs-text: tekst over labs
+    navigation:
+      home: 
     pro-link: link naar pro
     pro-text: tekst voor pro
     settings: tekst voor settings
   site:
+    alpha:
+      feedback_banner:
+        description: 
+        link-text: 
+        title: 
     blog-link: link naar de blog
     channels:
       art:
@@ -48,6 +55,7 @@ nl:
         download: Download
         download-additional: 
         downloaddata: Download informatie
+        open-media: 
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
         technicalmetadata: 
@@ -118,6 +126,8 @@ nl:
         subject: 
         temporal: 
         time: 
+        timestamp-created: 
+        timestamp-updated: 
         timestamp_created: 
         timestamp_updated: 
         toc: 

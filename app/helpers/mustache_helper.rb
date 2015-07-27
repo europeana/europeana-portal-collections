@@ -55,13 +55,19 @@ module MustacheHelper
     styleguide_path('/images/')
   end
 
+  def version
+    { is_alpha: true }
+  end
+
   def js_variables
     "var js_path='" + styleguide_path('/js/dist/') + "';"
   end
 
   def js_files
-    [{ path: styleguide_path('/js/dist/require.js'),
-       data_main: styleguide_path('/js/dist/main/main') }]
+    js_entry_point = ENV['JS_ENTRYPOINT'] || '/js/dist/'
+    js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
+    [{ path: styleguide_path(js_entry_point + 'require.js'),
+       data_main: styleguide_path(js_entry_point + 'main/main') }]
   end
 
   def menus

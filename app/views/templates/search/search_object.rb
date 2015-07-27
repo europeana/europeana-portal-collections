@@ -260,20 +260,14 @@ module Templates
                   fields: ['europeanaAggregation.edmCountry']
                 },
                 {
+                  title: 'site.object.meta-label.timestamp-created',
                   fields: ['timestamp_created'],
-                  format_date: '%Y-%m-%d',
-                  wrap: {
-                    t_key: 'site.object.meta-label.timestamp_created',
-                    param: :timestamp_created
-                  }
+                  format_date: '%Y-%m-%d'
                 },
                 {
-                  fields: ['timestamp_updated'],
-                  format_date: '%Y-%m-%d',
-                  wrap: {
-                    t_key: 'site.object.meta-label.timestamp_updated',
-                    param: :timestamp_updated
-                  }
+                  title: 'site.object.meta-label.timestamp-updated',
+                  fields: ['timestamp_update'],
+                  format_date: '%Y-%m-%d'
                 }
               ]
             ),
@@ -303,7 +297,6 @@ module Templates
                 }
               ]
             ),
-            # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             social_share: {
               url: URI.escape(request.original_url),
@@ -312,16 +305,21 @@ module Templates
               twitter: true,
               googleplus: true
             },
-            subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
-            # compact alone = display error - reject() needed too
-            title: [(collect_values(['proxies.dcTitle'])),
-                    (document.fetch('proxies.dcCreator', []).first)
-                   ].compact.reject(&:empty?).join(' | '),
+            subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title)[1],
+            title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
             title: 'site.object.meta-label.refs-rels',
             sections: [
+              {
+                title: 'site.object.meta-label.is-part-of',
+                fields: ['proxies.dctermsIsPartOf']
+              },
+              {
+                title: 'site.object.meta-label.collection-name',
+                fields: ['europeanaCollectionName']
+              },
               {
                 title: 'site.object.meta-label.relations',
                 fields: ['proxies.dcRelation']
@@ -329,6 +327,62 @@ module Templates
               {
                 title: 'site.object.meta-label.references',
                 fields: ['proxies.dctermsReferences']
+              },
+              {
+                title: 'site.object.meta-label.consists-of',
+                fields: ['proxies.dctermsHasPart']
+              },
+              {
+                title: 'site.object.meta-label.version',
+                fields: ['proxies.dctermsHasVersion']
+              },
+              {
+                title: 'site.object.meta-label.is-format-of',
+                fields: ['proxies.dctermsIsFormatOf']
+              },
+              {
+                title: 'site.object.meta-label.is-referenced-by',
+                fields: ['proxies.dctermsIsReferencedBy']
+              },
+              {
+                title: 'site.object.meta-label.is-replaced-by',
+                fields: ['proxies.dctermsIsReplacedBy']
+              },
+              {
+                title: 'site.object.meta-label.is-required-by',
+                fields: ['proxies.dctermsIsRequiredBy']
+              },
+              {
+                title: 'site.object.meta-label.edm.has-met',
+                fields: ['proxies.edmHasMet']
+              },
+              {
+                title: 'site.object.meta-label.edm.incorporates',
+                fields: ['proxies.edmIncorporates']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-derivative-of',
+                fields: ['proxies.edmIsDerivativeOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-representation-of',
+                fields: ['proxies.edmIsRepresentationOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-similar-to',
+                fields: ['proxies.edmIsSimilarTo']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-successor-of',
+                fields: ['proxies.edmIsSuccessorOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.realises',
+                fields: ['proxies.edmRealizes']
+              },
+              {
+                title: 'site.object.meta-label.edm.was-present-at',
+                fields: ['proxies.edmRealizes']
               }
             ]
           ),
@@ -345,7 +399,8 @@ module Templates
                 }
               }
             end
-          }
+          },
+          thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }
       end
 
@@ -435,10 +490,6 @@ module Templates
                        rescue
                        end
                      end
-
-              if section[:wrap]
-                text = t(section[:wrap][:t_key], section[:wrap][:param] => text)
-              end
 
               # overrides
 
@@ -555,13 +606,6 @@ module Templates
         end
       end
 
-      def doc_title_extra
-        # force array return with empty default
-        title = document.fetch(:title, [])
-
-        title.size > 1 ? title[1..-1] : nil
-      end
-
       # Media type function normalises mime types
       # Current @mime_type variable only workd for edm_is_shown_by
       # Once it works for web_resources we change this function so
@@ -624,14 +668,7 @@ module Templates
       end
 
       def creator_title
-        [
-          (collect_values(['proxies.dcTitle'])),
-          (document.fetch('proxies.dcCreator', []).first)
-        ].compact.reject(&:empty?).join(' | ')
-
-        #text = merge_values(['proxies.dcCreator', 'proxies.dcContributor', 'agents.prefLabel', false], ', ')
-        #text.size > 0 ? text : false
-        #nil
+        document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
       end
 
       def media_items
@@ -644,6 +681,10 @@ module Templates
         aggregation.webResources.map do |web_resource|
           # TODO: we're using 'document' values instead of 'web_resource' values
           # -this until the mime_type/edm_download / mimetypes start working for multiple items
+
+          if @mime_type == 'video/mpeg'
+            next
+          end
 
           web_resource_url = render_document_show_field_value(web_resource, 'about')
           edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
@@ -737,6 +778,7 @@ module Templates
         {
           required_players: players.uniq,
           single_item: items.size == 1,
+          empty_item: items.size == 0,
           items: items
         }
       end
