@@ -260,20 +260,14 @@ module Templates
                   fields: ['europeanaAggregation.edmCountry']
                 },
                 {
+                  title: 'site.object.meta-label.timestamp-created',
                   fields: ['timestamp_created'],
-                  format_date: '%Y-%m-%d',
-                  wrap: {
-                    t_key: 'site.object.meta-label.timestamp_created',
-                    param: :timestamp_created
-                  }
+                  format_date: '%Y-%m-%d'
                 },
                 {
+                  title: 'site.object.meta-label.timestamp-updated',
                   fields: ['timestamp_update'],
-                  format_date: '%Y-%m-%d',
-                  wrap: {
-                    t_key: 'site.object.meta-label.timestamp_updated',
-                    param: :timestamp_updated
-                  }
+                  format_date: '%Y-%m-%d'
                 }
               ]
             ),
@@ -303,7 +297,6 @@ module Templates
                 }
               ]
             ),
-            # note: view is currently showing the rights attached to the first media-item and not this value
             rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
             social_share: {
               url: URI.escape(request.original_url),
@@ -312,7 +305,7 @@ module Templates
               twitter: true,
               googleplus: true
             },
-            subtitle: render_document_show_field_value(document, 'proxies.dctermsAlternative'),
+            subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title)[1],
             title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
@@ -498,10 +491,6 @@ module Templates
                        end
                      end
 
-              if section[:wrap]
-                text = t(section[:wrap][:t_key], section[:wrap][:param] => text)
-              end
-
               # overrides
 
               if section[:overrides] && text == section[:override_val]
@@ -615,13 +604,6 @@ module Templates
         else
           title.first
         end
-      end
-
-      def doc_title_extra
-        # force array return with empty default
-        title = document.fetch(:title, [])
-
-        title.size > 1 ? title[1..-1] : nil
       end
 
       # Media type function normalises mime types
