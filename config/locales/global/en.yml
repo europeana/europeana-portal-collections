@@ -116,10 +116,12 @@ en:
         advanced-cc-by-sa: CC-BY-SA
         advanced-cc0: CC0
         advanced-orphan-work: Orphan Work
+        advanced-out-of-copyright-non-commercial: 'Out of copyright - non commercial re-use '
         advanced-pdm: Public Domain Marked
         advanced-rarr: Restricted access - Rights reserved
         advanced-rrfa: Rights reserved - Free access
         advanced-rrpa: Rights reserved - Paid access
+        advanced-rrra: Rights Reserved - Restricted Access
         advanced-ucs: Unknown copyright status
         open: Yes with attribution
         permission: Only with permission

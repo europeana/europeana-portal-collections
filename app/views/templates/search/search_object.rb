@@ -629,40 +629,107 @@ module Templates
         end
       end
 
+      def download_disabled(rights)
+        disabled = false
+        [ 'http://www.europeana.eu/rights/rr-p',
+          'http://www.europeana.eu/rights/rr-r/' ].map do | blacklisted |
+            if rights.index(blacklisted) == 0
+              disabled = true
+            end
+        end
+        disabled
+      end
+
       def simple_rights_label_data(rights)
         return nil unless rights.present?
         # global.facet.reusability.permission      Only with permission
         # global.facet.reusability.open            Yes with attribution
         # global.facet.reusability.restricted      Yes with restrictions
 
-        prefix = t('global.facet.header.reusability') + ' '
-
         if rights.nil?
           nil
+        elsif rights.index('http://creativecommons.org/publicdomain/zero') == 0
+         {
+           license_human: t('global.facet.reusability.open'),
+           license_name: t('global.facet.reusability.advanced-cc0'),
+           license_CC0: true
+        }
+        elsif rights.index('http://creativecommons.org/licenses/by/') == 0
+         {
+           license_human: t('global.facet.reusability.open'),
+           license_name: t('global.facet.reusability.advanced-cc-by'),
+           license_CC_BY: true
+        }
+        elsif rights.index('http://creativecommons.org/licenses/by-nc/') == 0
+         {
+           license_human: t('global.facet.reusability.open'),
+           license_name: t('global.facet.reusability.advanced-cc-by-nc'),
+           license_CC_BY_NC: true
+        }
         elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
           {
-            license_public: false,
-            license_human: prefix + t('global.facet.reusability.restricted')
+            license_human: t('global.facet.reusability.restricted'),
+            license_name: t('global.facet.reusability.advanced-cc-by-nc-nd'),
+            license_CC_BY_NC_ND: true
           }
         elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
           {
-            license_public: true,
-            license_human: prefix + t('global.facet.reusability.open')
+            license_human: t('global.facet.reusability.open'),
+            license_name: t('global.facet.reusability.advanced-cc-by-nc-sa'),
+            license_CC_BY_NC_SA: true
+          }
+        elsif rights.index('http://creativecommons.org/licenses/by-sa') == 0
+          {
+            license_human: t('global.facet.reusability.open'),
+            license_name: t('global.facet.reusability.advanced-cc-by-sa'),
+            license_CC_BY_SA: true
+          }
+        elsif rights.index('http://www.europeana.eu/rights/out-of-copyright-non-commercial') == 0
+          {
+            license_human: t('global.facet.reusability.open'),
+            license_name: t('global.facet.reusability.advanced-out-of-copyright-non-commercial'),
+            license_OOC: true
           }
         elsif rights.index('http://www.europeana.eu/rights/rr-f') == 0
           {
-            license_public: false,
-            license_human: prefix + t('global.facet.reusability.permission')
+            license_human: t('global.facet.reusability.permission'),
+            license_name: t('global.facet.reusability.advanced-rrfa'),
+            license_RR_free: true
+          }
+        elsif rights.index('http://www.europeana.eu/rights/rr-p') == 0
+          {
+            license_human: t('global.facet.reusability.permission'),
+            license_name: t('global.facet.reusability.advanced-rrpa'),
+            license_RR_paid: true
+          }
+        elsif rights.index('http://www.europeana.eu/rights/rr-r/') == 0
+          {
+            license_human: t('global.facet.reusability.permission'),
+            license_name: t('global.facet.reusability.advanced-rrra'),
+            license_RR_restricted: true
           }
         elsif rights.index('http://creativecommons.org/publicdomain/mark') == 0
           {
             license_public: true,
-            license_human: prefix + t('global.facet.reusability.open')
+            license_name: t('global.facet.reusability.advanced-pdm'),
+            license_human: t('global.facet.reusability.open')
+          }
+        elsif rights.index('http://www.europeana.eu/rights/unknown') == 0
+          {
+            license_unknown: true,
+            license_name: t('global.facet.reusability.advanced-ucs'),
+            license_human: t('global.facet.reusability.open')
+          }
+        elsif rights.index('http://www.europeana.eu/rights/test-orphan') == 0
+          {
+            license_orphan: true,
+            license_name: t('global.facet.reusability.advanced-orphan-work'),
+            license_human: t('global.facet.reusability.open')
           }
         else
           {
-            license_public: true,
-            license_human: prefix + t('global.facet.reusability.open')
+            license_public: false,
+            license_name: 'unmatched rights: ' + rights
           }
         end
       end
@@ -682,10 +749,6 @@ module Templates
           # TODO: we're using 'document' values instead of 'web_resource' values
           # -this until the mime_type/edm_download / mimetypes start working for multiple items
 
-          if @mime_type == 'video/mpeg'
-            next
-          end
-
           web_resource_url = render_document_show_field_value(web_resource, 'about')
           edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
           edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
@@ -700,8 +763,18 @@ module Templates
 
           item = {
             media_type: media_type,
-            rights: simple_rights_label_data(media_rights)
+            rights: simple_rights_label_data(media_rights),
+            downloadable: true,
+            playable:  true
           }
+
+          if download_disabled(media_rights)
+            item[:downloadable] = false
+          end
+
+          if @mime_type == 'video/mpeg'
+            item[:playable] = false
+          end
 
           item['thumbnail'] = edm_preview
 
