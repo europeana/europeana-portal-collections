@@ -776,6 +776,11 @@ module Templates
             item[:playable] = false
           end
 
+          if media_type == 'video' && @mime_type == 'text/plain; charset=utf-8'
+            item[:playable] = false
+            item[:downloadable] = false
+          end
+
           item['thumbnail'] = edm_preview
 
           if media_type == 'image'
