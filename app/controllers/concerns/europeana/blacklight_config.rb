@@ -1,6 +1,13 @@
 module Europeana
   ##
   # Configures Blacklight for Europeana Portal & Channels
+  #
+  # In the configuration for query facet fields, the :fq option is a Hash, to
+  # permit specification of multiple parameters to be passed to the API.
+  #
+  # *Warning:* query facets are achieved by sending additional queries to the
+  # API. If you configure 10 query facets, this will result in an additional
+  # 10 queries being sent to the API.
   module BlacklightConfig
     extend ActiveSupport::Concern
     include ::Blacklight::Base
@@ -9,7 +16,7 @@ module Europeana
       def self.channels_query_facet
         channels = Europeana::Portal::Application.config.channels.dup
         channels.each_with_object({}) do |(k, v), hash|
-          hash[k] = { label: k, fq: v[:query] }
+          hash[k] = { label: k, fq: v[:params] }
         end
       end
 

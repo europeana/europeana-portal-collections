@@ -1,5 +1,6 @@
 ---
-:query: '(what: architecture) OR (what: arkitektur) OR (what: architektur) OR
+:params:
+  :qf: '(what: architecture) OR (what: arkitektur) OR (what: architektur) OR
   (what: buildings) OR (what: ruin) OR DATA_PROVIDER: "Architekturmuseum der
   Technischen Universität Berlin in der Universitätsbibliothek" OR
   DATA_PROVIDER: "Nederlands Architectuurinstituut" OR DATA_PROVIDER:

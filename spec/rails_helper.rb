@@ -7,6 +7,7 @@ require 'rspec/rails'
 
 require 'capybara_helper'
 require 'webmock_helper'
+require 'support/relative_url_root_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -50,4 +51,6 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.include RelativeUrlRootHelper
 end
