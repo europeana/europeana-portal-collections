@@ -88,9 +88,12 @@ module Europeana
       end
 
       # Load Channels configuration files from config/channels/*.yml files
-      config.channels = Dir[Rails.root.join('config', 'channels', '*.yml').to_s].each_with_object({}) do |yml, hash|
-        channel = File.basename(yml, '.yml')
-        hash[channel] = YAML::load_file(yml)
+      config.channels = begin
+        channel_yamls = Dir[Rails.root.join('config', 'channels', '*.yml')]
+        channel_yamls.each_with_object(HashWithIndifferentAccess.new) do |yml, hash|
+          channel = File.basename(yml, '.yml')
+          hash[channel] = YAML::load_file(yml)
+        end
       end
 
       # Paperclip file storage config
