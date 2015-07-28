@@ -360,38 +360,7 @@ module Templates
           },
           promoted: {
             title: 'Promoted title',
-            items: [
-              {
-                title: 'The legacy of Punk',
-                url: 'urlhere',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-music.jpg'
-              },
-              {
-                title: 'Russian conductors in the EU',
-                url: 'urlhere',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-music.jpg'
-              },
-              {
-                title: 'Famous Concert halls',
-                url: 'urlhere',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-music.jpg'
-              },
-              {
-                title: 'Pop Music in 1980\'s Berlin',
-                url: 'urlhere',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-music.jpg'
-              },
-              {
-                title: 'Music piracy',
-                url: 'urlhere',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-music.jpg'
-              }
-            ]
+            items: channel_config[:promoted]
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
@@ -511,6 +480,10 @@ module Templates
 
       def blog_news_items
         @blog_news_items ||= news_items(@blog_items)
+      end
+
+      def channel_config
+        Rails.application.config.channels[@channel.id]
       end
     end
   end
