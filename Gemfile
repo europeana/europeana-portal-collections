@@ -41,6 +41,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'foreman'
   gem 'spring', '~> 1.3.6'
   gem 'web-console', '~> 2.0'
 end
