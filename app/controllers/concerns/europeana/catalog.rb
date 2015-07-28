@@ -62,9 +62,9 @@ module Europeana
             query_facet_params[k] += [v].flatten
           end
 
-          query = search_builder(qf_search_params_logic)
-            .with(query_facet_params).query
-            .merge(rows: 0, start: 1, profile: 'minimal')
+          query = search_builder(qf_search_params_logic).
+            with(query_facet_params).query.
+            merge(rows: 0, start: 1, profile: 'minimal')
           query_facet_response = repository.search(query)
 
           query_facet_counts.push([query_field[:fq], query_facet_response.total])
