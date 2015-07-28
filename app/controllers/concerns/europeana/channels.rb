@@ -35,9 +35,9 @@ module Europeana
     # restrict results to the active channel.
     #
     # @return [String]
-    def channels_search_query
+    def channel_filter_params
       channel = current_channel || current_search_channel
-      channel.nil? ? nil : channel.query
+      channel.nil? ? nil : channel.params
     end
   end
 end
