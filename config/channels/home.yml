@@ -1,2 +1,19 @@
 ---
 :hero: '//www.rijksmuseum.nl/assetimage2.jsp?id=SK-A-2725'
+:promoted:
+  - :is_channel: true
+    :title: Music
+    :url: /portal/channels/music
+    :wide: true
+    :bg_image: sample/thumb-music.jpg
+  - :is_exhibition: true
+    :title: Recording and Playing Machines
+    :bg_image: sample/thumb-machines.jpg
+  - :is_exhibition: true
+    :title: Photography on a Silver Plate
+    :bg_image: sample/thumb-photography.jpg
+  - :is_exhibition: true
+    :title: European Film and the First World War
+    :bg_image: sample/thumb-expo-film.jpg
+  - :is_new: true
+    :title: Europeana monuments now in Google Field Trip
