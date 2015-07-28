@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Search requests', :type => :request do
   context 'without query params' do
     it 'redirects /search to /' do
-      get(ENV['RAILS_RELATIVE_URL_ROOT'] + '/search')
+      get(relative_url_root + '/search')
       expect(response).to redirect_to(root_url)
     end
   end
 
   context 'with q param' do
     before do
-      get(ENV['RAILS_RELATIVE_URL_ROOT'] + '/search?q=paris')
+      get(relative_url_root + '/search?q=paris')
     end
 
     it 'searches the API' do
