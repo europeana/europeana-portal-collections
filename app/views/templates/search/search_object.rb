@@ -674,7 +674,7 @@ module Templates
           }
         elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
           {
-            license_human: t('global.facet.reusability.open'),
+            license_human: t('global.facet.reusability.restricted'),
             license_name: t('global.facet.reusability.advanced-cc-by-nc-sa'),
             license_CC_BY_NC_SA: true
           }
@@ -686,7 +686,7 @@ module Templates
           }
         elsif rights.index('http://www.europeana.eu/rights/out-of-copyright-non-commercial') == 0
           {
-            license_human: t('global.facet.reusability.open'),
+            license_human: t('global.facet.reusability.restricted'),
             license_name: t('global.facet.reusability.advanced-out-of-copyright-non-commercial'),
             license_OOC: true
           }
@@ -718,13 +718,13 @@ module Templates
           {
             license_unknown: true,
             license_name: t('global.facet.reusability.advanced-ucs'),
-            license_human: t('global.facet.reusability.open')
+            license_human: t('global.facet.reusability.permission')
           }
         elsif rights.index('http://www.europeana.eu/rights/test-orphan') == 0
           {
             license_orphan: true,
             license_name: t('global.facet.reusability.advanced-orphan-work'),
-            license_human: t('global.facet.reusability.open')
+            license_human: t('global.facet.reusability.permission')
           }
         else
           {
