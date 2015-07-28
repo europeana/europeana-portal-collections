@@ -1,5 +1,6 @@
 ---
-:query: '(what: archaeology) OR (what: archäologie) OR (what: Altertümerkunde)
+:params:
+  :qf: '(what: archaeology) OR (what: archäologie) OR (what: Altertümerkunde)
   OR (what: fornminne) OR (what: arqueologia) OR (what: archéologie) OR (what:
   arkeologi) OR (what: artefact) OR (what: artifact) OR (what: prehistory) OR
   (what: préhistoire) OR (what: urgeschichte) OR Palaeolit OR Paleoli OR

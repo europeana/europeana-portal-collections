@@ -1,5 +1,6 @@
 ---
-:query: '(what: "performance art") OR (what: "performing arts") OR (what:
+:params:
+  :qf: '(what: "performance art") OR (what: "performing arts") OR (what:
   theatre) OR (what: pantomime) OR (what: puppetry) OR (what: "puppet theatre")
   OR (what: ballet) OR (what: opera) OR (what: dance) OR (what: circus) OR
   (what: cirkus) OR (what: noh) OR (kabuki) OR ("wayang kulit") OR (Karagöz) OR

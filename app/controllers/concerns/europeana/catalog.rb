@@ -39,8 +39,9 @@ module Europeana
       end
     end
 
+    # @todo Move to europeana-blacklight gem?
     def query_facet_counts(user_params)
-      # Ensure channels specific processors do not get triggered
+      # Ensure controller-specific processors (e.g. channels) do not get triggered
       qf_search_params_logic = Europeana::Blacklight::SearchBuilder.default_processor_chain
 
       query_facets = blacklight_config.facet_fields.select do |_, facet|
@@ -55,10 +56,15 @@ module Europeana
       query_facets.each_pair do |_facet_name, query_facet|
         query_facet.query.each_pair do |_field_name, query_field|
           query_facet_params = user_params.dup
-          query_facet_params[:qf] ||= []
-          query_facet_params[:qf] << query_field[:fq]
 
-          query = search_builder(qf_search_params_logic).with(query_facet_params).query.merge(rows: 0, start: 1, profile: 'minimal')
+          (query_field[:fq] || {}).each_pair do |k, v|
+            query_facet_params[k] ||= []
+            query_facet_params[k] += [v].flatten
+          end
+
+          query = search_builder(qf_search_params_logic).
+            with(query_facet_params).query.
+            merge(rows: 0, start: 1, profile: 'minimal')
           query_facet_response = repository.search(query)
 
           query_facet_counts.push([query_field[:fq], query_facet_response.total])
