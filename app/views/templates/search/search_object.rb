@@ -808,20 +808,18 @@ module Templates
             item['is_unknown_type'] = render_document_show_field_value(web_resource, 'about')
           end
 
+          if @mime_type == 'application/pdf' || @mime_type == 'audio/flac'
+            item['play_url'] = edm_is_shown_by_download_url
+          else
+            item['play_url'] = web_resource_url
+          end
+
           # TODO: this should check the download-ability of the web resource
           if edm_is_shown_by_download_url.present?
-            if @mime_type == 'application/pdf' || @mime_type == 'audio/flac'
-              item['download'] = {
-                url: edm_is_shown_by_download_url,
-                text: t('site.object.actions.download')
-              }
-            else
-              item['download'] = {
-                url: web_resource_url,
-                text: t('site.object.actions.download')
-              }
-            end
-
+            item['download'] = {
+              url: edm_is_shown_by_download_url,
+              text: t('site.object.actions.download')
+            }
             item['technical_metadata'] = {
               mime_type: @mime_type
               # language: "English",
