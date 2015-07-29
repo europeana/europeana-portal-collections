@@ -89,7 +89,7 @@ module Templates
               ]
             }
           },
-          hero_config: @channel.config[:content][:hero_config],
+          hero_config: channel_content[:hero_config],
           channel_entry: {
             title: 'Promoted title',
             items: [
@@ -237,7 +237,7 @@ module Templates
             },
             credits: {
               title: t('site.channels.labels.credits'),
-              items: @channel.config[:content][:credits]
+              items: channel_content[:credits]
             }
           },
           hero_config: {
@@ -252,7 +252,7 @@ module Templates
           },
           promoted: {
             title: 'Promoted title',
-            items: @channel.config[:content][:promoted]
+            items: channel_content[:promoted]
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
@@ -369,6 +369,10 @@ module Templates
       end
 
       private
+
+      def channel_content
+        @channel_content ||= @channel.config[:content] || {}
+      end
 
       def blog_news_items
         @blog_news_items ||= news_items(@blog_items)
