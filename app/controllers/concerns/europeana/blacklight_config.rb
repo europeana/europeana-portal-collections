@@ -59,18 +59,14 @@ module Europeana
         config.add_index_field 'dataProvider'
         config.add_index_field 'edmIsShownAt'
 
-        # Max number of rows to retrieve for each facet
-        config.default_facet_limit = 7
-
         # Facet fields in the order they should be displayed.
-        config.add_facet_field 'CHANNEL', query: channels_query_facet
-        config.add_facet_field 'TYPE', limit: true
-        config.add_facet_field 'YEAR', limit: 30, range: true
-        config.add_facet_field 'REUSABILITY', limit: true
-        config.add_facet_field 'COUNTRY', limit: true
-        config.add_facet_field 'LANGUAGE', limit: true
-        config.add_facet_field 'PROVIDER', limit: true
-        config.add_facet_field 'DATA_PROVIDER', limit: true
+        # config.add_facet_field 'CHANNEL', query: channels_query_facet
+        config.add_facet_field 'TYPE'
+        config.add_facet_field 'REUSABILITY'
+        config.add_facet_field 'COUNTRY'
+        config.add_facet_field 'LANGUAGE'
+        config.add_facet_field 'PROVIDER'
+        config.add_facet_field 'DATA_PROVIDER'
 
         # Send all facet field names to Solr.
         config.add_facet_fields_to_solr_request!

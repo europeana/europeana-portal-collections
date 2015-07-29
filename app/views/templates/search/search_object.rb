@@ -618,7 +618,7 @@ module Templates
         end
 
         ext = ext.downcase
-        if !['.avi', '.flac', '.mp3'].index(ext).nil?
+        if !['.avi', '.flac', '.mp3', '.mpga'].index(ext).nil?
           'audio'
         elsif !['.jpg', '.jpeg'].index(ext).nil?
           'image'
@@ -752,12 +752,11 @@ module Templates
           web_resource_url = render_document_show_field_value(web_resource, 'about')
           edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
           edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-          media_rights = render_document_show_field_value(web_resource, 'webResourceDcRights')
+          media_rights = render_document_show_field_value(web_resource, 'webResourceEdmRights')
           if media_rights.nil?
             media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
           end
           media_type = media_type(web_resource_url)
-          media_type = media_type || media_type(render_document_show_field_value(document, 'type'))
           media_type = media_type || render_document_show_field_value(document, 'type')
           media_type = media_type.downcase
 
@@ -774,6 +773,15 @@ module Templates
 
           if @mime_type == 'video/mpeg'
             item[:playable] = false
+          end
+
+          if @mime_type == 'audio/flac'
+            item[:playable] = false
+          end
+
+          if media_type == 'text' && @mime_type == 'text/plain; charset=utf-8'
+            item[:playable] = false
+            item[:downloadable] = false
           end
 
           if media_type == 'video' && @mime_type == 'text/plain; charset=utf-8'
@@ -793,7 +801,7 @@ module Templates
             if web_resource_url != edm_resource_url
               item['thumbnail'] = web_resource_url
             end
-          elsif media_type == 'audio'
+          elsif media_type == 'audio' || media_type == 'sound'
             item['is_audio'] = true
             players << { audio: true }
           elsif media_type == 'pdf'
