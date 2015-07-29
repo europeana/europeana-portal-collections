@@ -31,7 +31,7 @@ en:
         recent: Recent additions
         spotlight-on: 'Spotlight on '
       music:
-        description: 'The <strong>Europeana Music Channel</strong> brings together the best music rcordings, sheet music, and other music related collections from Europeana''s audio-visual archives, libraries, archives and museums. <a href="http://test.europeana.eu/portal/channels/music/about">Find out more about the Music Channel</a>. '
+        description: The <strong>Europeana Music Channel</strong> brings together the best music recordings, sheet music, and other music related collections from Europeana's audio-visual archives, libraries, archives and museums. <a href="/portal/channels/music/about">Find out more about the Music Channel.</a>
         title: Europeana Music
     facet:
       language:
