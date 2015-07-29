@@ -240,18 +240,11 @@ module Templates
               items: channel_content[:credits]
             }
           },
-          hero_config: {
-            hero_image: 'sample/channel_hero_music.jpg',
-            attribution_text: 'This is a placeholder image found somewhere',
-            attribution_url: 'http://europeana.eu',
-            license_CC_ND_NC_SA: true
-          },
+          hero_config: channel_content[:hero_config],
           channel_entry: {
-            title: 'Promoted title',
             items: stylised_channel_entry
           },
           promoted: {
-            title: 'Promoted title',
             items: channel_content[:promoted]
           },
           news: blog_news_items.blank? ? nil : {
