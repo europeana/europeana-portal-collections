@@ -13,6 +13,7 @@ class ChannelsController < ApplicationController
   before_action :fetch_blog_items, only: :show
   before_action :populate_channel_entry, only: :show, unless: :has_search_parameters?
   before_action :populate_channel_stats, only: :show, unless: :has_search_parameters?
+  before_action :populate_recent_additions, only: :show, unless: :has_search_parameters?
 
   def index
     redirect_to_root
@@ -92,5 +93,39 @@ class ChannelsController < ApplicationController
 
   def channel_content
     @channel.config[:content] || {}
+  end
+
+  def populate_recent_additions
+    @recent_additions = []
+
+    time_now = Time.now
+    month_now = time_now.month
+
+    (0..2).each do |months_ago|
+      time_from = Time.new(time_now.year, time_now.month) - months_ago.month
+      time_to = time_from + 1.month - 1.second
+
+      time_from_param = time_from.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
+      time_to_param = time_to.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
+      time_range_query = "timestamp_created:[#{time_from_param} TO #{time_to_param}]"
+
+      api_query = search_builder(self.search_params_logic).
+        with(q: time_range_query).query.
+        merge(rows: 0, start: 1, profile: 'minimal facets')
+      api_response = repository.search(api_query)
+      next if api_response.total == 0
+
+      data_provider_facet = api_response.facet_fields.find { |f| f['name'] == 'DATA_PROVIDER' }
+      next if data_provider_facet.blank?
+
+      data_provider_facet['fields'][0..2].each do |field|
+        @recent_additions << {
+          text: field['label'],
+          number: field['count'],
+          date: time_from.strftime('%B %Y'),
+          url: channel_path(q: time_range_query, f: { 'DATA_PROVIDER' => [field['label']] })
+        }
+      end
+    end
   end
 end
