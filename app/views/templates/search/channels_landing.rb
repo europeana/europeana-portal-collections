@@ -115,7 +115,7 @@ module Templates
               ]
             }
           },
-          hero_config: @channel.config[:hero_config],
+          hero_config: @channel.config[:content][:hero_config],
           channel_entry: {
             title: 'Promoted title',
             items: [
@@ -289,20 +289,7 @@ module Templates
             },
             credits: {
               title: t('site.channels.labels.credits'),
-              items: [
-                {
-                  text: 'Deutsche National Bibliothek',
-                  url: '#777'
-                },
-                {
-                  text: 'Netherlands institute for sound and vision',
-                  url: '#777'
-                },
-                {
-                  text: 'Cité de la Musique',
-                  url: '#777'
-                }
-              ]
+              items: @channel.config[:content][:credits]
             }
           },
           hero_config: {
@@ -317,7 +304,7 @@ module Templates
           },
           promoted: {
             title: 'Promoted title',
-            items: @channel.config[:promoted]
+            items: @channel.config[:content][:promoted]
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
