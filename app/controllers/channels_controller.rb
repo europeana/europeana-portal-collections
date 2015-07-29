@@ -53,7 +53,7 @@ class ChannelsController < ApplicationController
   end
 
   def populate_channel_entry
-    @channel_entry = (@channel.config[:channel_entry] || []).tap do |entry_config|
+    @channel_entry = (channel_content[:channel_entry] || []).tap do |entry_config|
       entry_config.each do |entry|
         entry.merge!(
           url: channel_path(@channel.id, q: entry[:query]),
@@ -88,5 +88,9 @@ class ChannelsController < ApplicationController
         url: channel_path(q: "TYPE:#{type[0]}")
       }
     end
+  end
+
+  def channel_content
+    @channel.config[:content] || {}
   end
 end

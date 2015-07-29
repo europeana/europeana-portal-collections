@@ -10,9 +10,9 @@ module Templates
 
       def content
         {
-          hero_config: config[:hero_config],
+          hero_config: config[:content][:hero_config],
           strapline: t('site.home.strapline', total_item_count: total_item_count),
-          promoted: config[:promoted],
+          promoted: config[:content][:promoted],
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
             blogurl: 'http://blog.europeana.eu/'
