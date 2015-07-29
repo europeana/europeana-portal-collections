@@ -116,6 +116,8 @@ class ChannelsController < ApplicationController
       next if api_response.total == 0
 
       data_provider_facet = api_response.facet_fields.find { |f| f['name'] == 'DATA_PROVIDER' }
+      next if data_provider_facet.blank?
+
       data_provider_facet['fields'][0..2].each do |field|
         @recent_additions << {
           text: field['label'],
