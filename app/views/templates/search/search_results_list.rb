@@ -6,7 +6,7 @@ module Templates
       end
 
       def filters
-        facets_from_request(facet_field_names).collect do |facet|
+        facets_from_request(facet_field_names).map do |facet|
           facet_config = blacklight_config.facet_fields[facet.name]
           if facet_config.range
             range_facet_template_data(facet)
@@ -67,10 +67,30 @@ module Templates
           global: navigation_global,
           footer: common_footer
         }
+      end
 
+      def facets_selected
+        facets_selected_items.blank? ? nil : { items: facets_selected_items }
       end
 
       private
+
+      def facets_selected_items
+        return @facets_selected_items unless @facets_selected_items.nil?
+
+        @facets_selected_items = [].tap do |items|
+          facets_from_request(facet_field_names).each do |facet|
+            facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
+              items << {
+                filter: facet_map(facet.name),
+                value: facet_map(facet.name, item.value),
+                remove: facet_item_url(facet.name, item),
+                name: "f[#{facet.name}][]"
+              }
+            end
+          end
+        end
+      end
 
       def facet_map(facet_name, facet_value = nil)
         if facet_value.nil?
@@ -78,7 +98,7 @@ module Templates
         else
           facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, '') : facet_value)
 
-          case facet_name.upcase
+          mapped_value = case facet_name.upcase
             when 'CHANNEL'
               t('global.channel.' + facet_value.downcase)
             when 'PROVIDER'
@@ -88,6 +108,12 @@ module Templates
             else
               t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
           end
+
+          unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet_name)
+            mapped_value = mapped_value.split.map { |v| v.capitalize }.join(' ')
+          end
+
+          mapped_value
         end
       end
 
@@ -133,8 +159,7 @@ module Templates
           agent: agent_label(doc),
           concepts: concept_labels(doc),
           item_type: {
-            name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase),
-            url: doc_type.nil? ? nil : facet_item_url('TYPE', doc_type)
+            name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase)
           }
         }
       end
@@ -156,19 +181,23 @@ module Templates
       end
 
       def simple_facet_template_data(facet)
-        capitalise_labels = true unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet.name)
         {
           simple: true,
           title: facet_map(facet.name),
           select_one: (facet.name == 'CHANNEL'),
-          items: facet.items.collect do |item|
-            {
-              url: facet_item_url(facet.name, item),
-              text: facet_map(facet.name, item.value).split.map{|x| (capitalise_labels ? x.capitalize : x) }.join(' '),
-              num_results: number_with_delimiter(item.hits),
-              is_checked: facet_in_params?(facet.name, item)
-            }
-          end
+          items: facet.items[0..3].map { |item| simple_facet_item(facet, item) },
+          extra_items: facet.items.size <= 4 ? nil : {
+            items: facet.items[4..-1].map { |item| simple_facet_item(facet, item) }
+          }
+        }
+      end
+
+      def simple_facet_item(facet, item)
+        {
+          url: facet_item_url(facet.name, item),
+          text: facet_map(facet.name, item.value),
+          num_results: number_with_delimiter(item.hits),
+          is_checked: facet_in_params?(facet.name, item)
         }
       end
 

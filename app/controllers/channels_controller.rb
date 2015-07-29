@@ -128,6 +128,11 @@ class ChannelsController < ApplicationController
           url: channel_path(q: time_range_query, f: { 'DATA_PROVIDER' => [field['label']] })
         }
       end
+
+      break if @recent_additions.size >= 3
     end
+
+    @recent_additions = @recent_additions[0..2]
+    @recent_additions.sort_by! { |addition| addition[:number] }.reverse!
   end
 end
