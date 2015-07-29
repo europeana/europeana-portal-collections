@@ -618,7 +618,7 @@ module Templates
         end
 
         ext = ext.downcase
-        if !['.avi', '.flac', '.mp3'].index(ext).nil?
+        if !['.avi', '.flac', '.mp3', '.mpga'].index(ext).nil?
           'audio'
         elsif !['.jpg', '.jpeg'].index(ext).nil?
           'image'
@@ -757,7 +757,6 @@ module Templates
             media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
           end
           media_type = media_type(web_resource_url)
-          media_type = media_type || media_type(render_document_show_field_value(document, 'type'))
           media_type = media_type || render_document_show_field_value(document, 'type')
           media_type = media_type.downcase
 
@@ -798,7 +797,7 @@ module Templates
             if web_resource_url != edm_resource_url
               item['thumbnail'] = web_resource_url
             end
-          elsif media_type == 'audio'
+          elsif media_type == 'audio' || media_type == 'sound'
             item['is_audio'] = true
             players << { audio: true }
           elsif media_type == 'pdf'
