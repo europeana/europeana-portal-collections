@@ -62,7 +62,5 @@ content:
     title: 'Spotlight: The Harpsichord'
     media_type: Texts and Recordings
   credits:
-  - text: National Gallery of Denmark
-    url: 'http://www.smk.dk/'
-  - text: Rijksmuseum
-    url: 'https://www.rijksmuseum.nl/'
+  - text: Europeana Sounds
+    url: 'http://www.europeanasounds.eu/'
