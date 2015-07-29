@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 1c0782c34365d79b0a477c561ae1aa61eb06d0bf
-  ref: 1c0782c
+  revision: 200d015c69d41daac4fd49ed73eaed64046aeff4
+  ref: 200d015c69
   specs:
     europeana-styleguide (0.0.2)
       activesupport (~> 4.0)
@@ -470,6 +470,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   webmock (~> 1.21.0)
-
-BUNDLED WITH
-   1.10.6
