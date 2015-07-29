@@ -110,7 +110,7 @@ module Templates
           end
 
           unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet_name)
-            mapped_value = mapped_value.split.map { |v| v.capitalize }.join(' ')
+            mapped_value = mapped_value.split.map(&:capitalize).join(' ')
           end
 
           mapped_value

@@ -752,7 +752,7 @@ module Templates
           web_resource_url = render_document_show_field_value(web_resource, 'about')
           edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
           edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-          media_rights = render_document_show_field_value(web_resource, 'webResourceDcRights')
+          media_rights = render_document_show_field_value(web_resource, 'webResourceEdmRights')
           if media_rights.nil?
             media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
           end
