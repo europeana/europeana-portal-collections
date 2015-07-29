@@ -50,26 +50,7 @@ module Templates
             },
             recent: {
               title: t('site.channels.labels.recent'),
-              items: [
-                {
-                  text: 'Prado Museum',
-                  url: '#',
-                  number: '113' + ' ' + t('site.channels.data-types.count'),
-                  date: 'May 2015'
-                },
-                {
-                  text: 'Royal Armouries',
-                  url: '#',
-                  number: '6480' + ' ' + t('site.channels.data-types.count'),
-                  date: 'May 2015'
-                },
-                {
-                  text: 'British Library',
-                  url: '#',
-                  number: '33,326' + ' ' + t('site.channels.data-types.count'),
-                  date: 'May 2015'
-                }
-              ],
+              items: stylised_recent_additions,
               more_link: {
                 text: t('global.more.load_more'),
                 url: '#777'
@@ -210,30 +191,7 @@ module Templates
             },
             recent: {
               title: t('site.channels.labels.recent'),
-              items: [
-                {
-                  text: 'Scala museum, Milan',
-                  url: '#',
-                  number: '1234' + ' ' + t('site.channels.data-types.count'),
-                  date: 'July 2015'
-                },
-                {
-                  text: 'Dresden Library',
-                  url: '#',
-                  number: '4377' + ' ' + t('site.channels.data-types.count'),
-                  date: 'November 2014'
-                },
-                {
-                  text: 'Rijksmuseum, Amsterdam',
-                  url: '#',
-                  number: '2169' + ' ' + t('site.channels.data-types.count'),
-                  date: 'September 2014'
-                }
-              ],
-              more_link: {
-                text: 'Load more',
-                url: '#777'
-              }
+              items: stylised_recent_additions,
             },
             credits: {
               title: t('site.channels.labels.credits'),
@@ -388,6 +346,16 @@ module Templates
         @stylised_channel_stats = @channel_stats.deep_dup.tap do |channel_stats|
           channel_stats.each do |stats|
             stats[:count] = number_with_delimiter(stats[:count])
+          end
+        end
+      end
+
+      def stylised_recent_additions
+        return @stylised_recent_additions unless @stylised_recent_additions.blank?
+        return nil unless @recent_additions.present?
+        @stylised_recent_additions = @recent_additions.deep_dup.tap do |recent_additions|
+          recent_additions.each do |addition|
+            addition[:number] = number_with_delimiter(addition[:number]) + ' ' + t('site.channels.data-types.count')
           end
         end
       end
