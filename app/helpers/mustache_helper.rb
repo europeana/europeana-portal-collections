@@ -12,14 +12,16 @@ module MustacheHelper
 
   def page_title
     if @response.nil?
-      @channel ? t('site.channels.' + @channel.id.to_s + '.title') : 'Europeana Channels'
-    elsif @response['action'].to_s == 'search.json'
-      'Europeana Search' + search_page_title
-    elsif params[:action].to_s == 'show'
-      if @document.is_a?(Blacklight::Document)
-        rec = @document.fetch(:title, ['']).join(', ')
-        'Europeana Record' + (rec.present? ? ': ' + rec : rec)
+      if @channel.nil?
+        'Europeana Collections - Alpha'
+      else
+        t('site.channels.' + @channel.id.to_s + '.title') + ' Channel - Alpha'
       end
+    elsif @response['action'].to_s == 'search.json'
+      search_page_title + ' - Europeana - Search results'
+    elsif @document.is_a?(Blacklight::Document)
+      rec = @document.fetch(:title, ['']).join(', ')
+      (rec.present? ? rec + ' - ' : '') + 'Europeana'
     end
   end
 
@@ -169,9 +171,7 @@ module MustacheHelper
   end
 
   def search_page_title
-    return '' if params[:q].nil?
-
-    ': ' + [params[:q]].flatten.join(', ')
+    params[:q].nil? ? '' : [params[:q]].flatten.join(', ')
   end
 
 
