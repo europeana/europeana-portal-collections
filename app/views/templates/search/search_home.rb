@@ -10,15 +10,7 @@ module Templates
 
       def content
         {
-          hero_config: {
-            hero_image: 'sample/search_hero_1.jpg',
-            brand_position: 'brand-bottomleft',
-            brand_opacity: 'brand-opacity75',
-            attribution_text: 'Insects and Fruit, Jan van Kessel',
-            attribution_url: 'http://www.europeana.eu/portal/record/90402/SK_A_793.html',
-            license_CC_ND_NC_SA: false,
-            license_public: true
-          },
+          hero_config: config[:hero_config],
           strapline: t('site.home.strapline', total_item_count: total_item_count),
           important_removed: {
             text: 'Europeana stories are now in Google’s Field Trip app',
