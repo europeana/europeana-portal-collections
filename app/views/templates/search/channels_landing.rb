@@ -318,49 +318,11 @@ module Templates
           },
           channel_entry: {
             title: 'Promoted title',
-            items: [
-              {
-                title: 'Erlkonig',
-                url: 'urlhere',
-                url: root_url + 'channels/music?q=erlkonig',
-                count: '12',
-                media_type: 'audio recordings'
-              },
-              {
-                title: 'Mahler 5',
-                url: root_url + 'channels/music?q=mahler',
-                count: '15',
-                media_type: 'video recordings'
-              },
-              {
-                title: 'Beethoven\’s handwriting',
-                url: root_url + 'channels/music?q=beethoven+writing',
-                count: '2',
-                media_type: 'scores'
-              },
-              {
-                title: 'Haitink in Berlin',
-                url: root_url + 'channels/music?q=Haitink',
-                count: '12',
-                media_type: 'letters'
-              },
-              {
-                title: 'Papageno costumes',
-                url: root_url + 'channels/music?q=Papageno+costumes',
-                count: '42',
-                media_type: 'images'
-              },
-              {
-                title: 'Baroque wedding music',
-                url: root_url + 'channels/music?q=Baroque+wedding',
-                count: '5',
-                media_type: 'audio recordings'
-              }
-            ]
+            items: stylised_channel_entry
           },
           promoted: {
             title: 'Promoted title',
-            items: channel_config[:promoted]
+            items: @channel.config[:promoted]
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
@@ -482,8 +444,15 @@ module Templates
         @blog_news_items ||= news_items(@blog_items)
       end
 
-      def channel_config
-        Rails.application.config.channels[@channel.id]
+      def stylised_channel_entry
+        return @stylised_channel_entry unless @stylised_channel_entry.blank?
+        return nil unless @channel_entry.present?
+        @stylised_channel_entry = @channel_entry.deep_dup.tap do |channel_entry|
+          channel_entry.each do |entry|
+            entry[:count] = number_with_delimiter(entry[:count])
+            entry[:image_alt] ||= nil
+          end
+        end
       end
     end
   end
