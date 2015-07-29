@@ -19,169 +19,10 @@ module Templates
       end
 
       def content
-        if (@channel.id == 'art')
-          content_art
-        elsif  (@channel.id == 'music')
-          content_music
-        end
-      end
-
-      def navigation
-        if (@channel.id == 'music')
-          return navigation_music
-        end
-        navigation_art
-      end
-
-      def content_common
-        {
-          name: t('site.channels.' + @channel.id.to_s + '.title'),
-          description: t('site.channels.' + @channel.id.to_s + '.description')
-        }
-      end
-
-      def content_art
         {
           channel_info: {
-            name: content_common[:name],
-            description: content_common[:description],
-            stats: {
-              items: stylised_channel_stats
-            },
-            recent: stylised_recent_additions.blank? ? nil : {
-              title: t('site.channels.labels.recent'),
-              items: stylised_recent_additions
-            },
-            credits: {
-              title: t('site.channels.labels.credits'),
-              items: [
-                {
-                  text: 'National Gallery of Denmark',
-                  url: '#777'
-                },
-                {
-                  text: 'Rijksmuseum',
-                  url: '#777'
-                }
-              ]
-            }
-          },
-          hero_config: channel_content[:hero_config],
-          channel_entry: {
-            title: 'Promoted title',
-            items: [
-              {
-                title: 'All Paintings',
-                url: root_url + 'channels/art?q=what:%20paintings',
-                count: '190,226',
-                media_type: 'Images',
-                is_search: true,
-                image: 'sample/entry-painting-square.jpg',
-                image_alt: 'alt'
-              },
-              {
-                title: 'All Sculptures',
-                url: root_url + 'channels/art?q=what%3A%28sculpture+OR+sculptuur%20OR%20skulptur%29',
-                count: '7,029',
-                media_type: 'Images and video',
-                is_search: true,
-                image: 'sample/entry-sculpture-square.jpg',
-                image_alt: 'alt'
-              },
-              {
-                title: 'All Art history publications',
-                url: root_url + 'channels/art?q=%28what%3A+%22art+history' +
-                  '%22%29+OR+%28what%3A+%22http%3A%2F%2Fvocab.getty.edu%2Faat' +
-                  '%2F300041273%22%29+OR+%28what%3A+histoire%20art%29+OR+%28' +
-                  'what%3A+kunstgeschichte%29+OR+%28what%3A+%22estudio+de+la+historia+del+arte' +
-                  '%22%29+OR+%28what%3A+Kunstgeschiedenis%29',
-                count: '2,333',
-                media_type: 'Documents',
-                is_search: true,
-                image: 'sample/entry-documents-square.jpg',
-                image_alt: 'alt'
-              },
-              {
-                title: 'Spotlight on Botticelli',
-                url: root_url + 'channels/art?q=who:%20sandro%20botticelli',
-                count: '76',
-                media_type: 'Images and videos',
-                is_spotlight: true,
-                image: 'sample/entry-botticelli-square.jpg',
-                image_alt: t('site.channels.featured.item-4')
-              },
-              {
-                title: 'Spotlight on Alexander Roslin',
-                url: root_url + 'channels/art?q=who:alexander%20roslin',
-                count: '46',
-                media_type: 'Images and documents',
-                is_spotlight: true,
-                image: 'sample/entry-roslin-square.jpg',
-                image_alt: 'alt'
-              },
-              {
-                title: 'Spotlight on Hokusai',
-                url: root_url + 'channels/art?q=who:hokusai',
-                count: '240',
-                media_type: 'Images',
-                is_spotlight: true,
-                image: 'sample/entry-hokusai-square.jpg',
-                image_alt: 'alt'
-              }
-            ]
-          },
-          promoted: {
-            title: 'Promoted title',
-            items: [
-              {
-                title: 'Royal Book Collections',
-                url: 'http://exhibitions.europeana.eu/exhibits/show/royal-book-collections-en',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-book.jpg'
-              },
-              {
-                title: 'From Dada to Surrealism',
-                url: 'http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-dada.jpg'
-              },
-              {
-                title: 'Art Nouveau',
-                url: 'http://exhibitions.europeana.eu/exhibits/show/art-nouveau-en%C2%A0',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-artnouveau.jpg'
-              },
-              {
-                title: 'Explore the World of Musical Instruments',
-                url: 'http://exhibitions.europeana.eu/exhibits/show/musical-instruments-en',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-instruments.jpg'
-              },
-              {
-                title: 'Pablo Picasso',
-                url: 'http://dizbi.hazu.hr/picasso/',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-picasso.jpg'
-              },
-              {
-                title: 'From Dada to Surrealism',
-                url: 'http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en',
-                is_exhibition: true,
-                bg_image: 'sample/thumb-dada.jpg'
-              }
-            ]
-          },
-          news: blog_news_items.blank? ? nil : {
-            items: blog_news_items,
-          }
-        }
-      end
-
-      def content_music
-        {
-          channel_info: {
-            name: content_common[:name],
-            description: content_common[:description],
+            name: t('site.channels.' + @channel.id.to_s + '.title'),
+            description: t('site.channels.' + @channel.id.to_s + '.description'),
             stats: {
               items: stylised_channel_stats
             },
@@ -206,6 +47,10 @@ module Templates
             blogurl: 'http://blog.europeana.eu/tag/#' + @channel.id
           }
         }
+      end
+
+      def navigation
+        @channel.id == 'music' ? navigation_music : navigation_art
       end
 
       def navigation_common
