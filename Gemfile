@@ -6,7 +6,7 @@ gem 'rails', '4.2.3'
 # Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
   github: 'europeana/europeana-styleguide-ruby',
-  ref: 'dec2f55632'
+  ref: 'd1bc63500d'
 
 # Use a forked version of stache with a downstream fix, until merged upstream
 # @see https://github.com/agoragames/stache/pull/53
@@ -17,7 +17,7 @@ gem 'blacklight', '~> 5.14.0'
 gem 'clockwork', '~> 1.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'europeana-api', '~> 0.3.4'
-gem 'europeana-blacklight', '0.2.0'
+gem 'europeana-blacklight', '0.2.1'
 gem 'feedjira', '~> 2.0'
 gem 'fog'
 gem 'htmlcompressor'
@@ -41,6 +41,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'foreman'
   gem 'spring', '~> 1.3.6'
   gem 'web-console', '~> 2.0'
 end
