@@ -109,7 +109,7 @@ module Templates
           title: render_index_field_value(doc, ['dcTitleLangAware', 'title']),
           text: {
             medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription']),
-                             length: 140,
+                             length: 277,
                              separator: ' ',
                              escape: false)
           },
