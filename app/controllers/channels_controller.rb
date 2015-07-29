@@ -56,7 +56,8 @@ class ChannelsController < ApplicationController
       entry_config.each do |entry|
         entry.merge!(
           url: channel_path(@channel.id, q: entry[:query]),
-          count: channel_entry_count(entry[:query])
+          # uncomment next line to add dynamic item counts
+          # count: channel_entry_count(entry[:query])
         )
       end
     end
