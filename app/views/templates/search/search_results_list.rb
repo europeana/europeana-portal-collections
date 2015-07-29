@@ -133,8 +133,7 @@ module Templates
           agent: agent_label(doc),
           concepts: concept_labels(doc),
           item_type: {
-            name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase),
-            url: doc_type.nil? ? nil : facet_item_url('TYPE', doc_type)
+            name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase)
           }
         }
       end
