@@ -51,8 +51,11 @@ RSpec.describe ChannelsController, type: :controller do
       context 'without search params' do
         let(:params) { { id: channel_id } }
 
-        it 'does not query API' do
-          expect(an_api_search_request).not_to have_been_made
+        it 'queries API for channel stats' do
+          expect(an_api_search_request).to have_been_made.times(5)
+          %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
+            expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).to have_been_made.once
+          end
         end
 
         it 'does not get RSS blog posts' do
