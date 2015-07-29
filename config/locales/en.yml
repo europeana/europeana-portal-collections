@@ -10,9 +10,9 @@ en:
   site:
     alpha:
       feedback_banner:
-        description: An alpha release means that this website will change frequently and may not work as well as we'd like.
-        link-text: Help us to make it better
-        title: 'This is an Alpha release of the new Europeana search website '
+        description: An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
+        link-text: Give us your input!
+        title: This is an Alpha release of our new collections search and Music Channel
     blog-link: link to blog
     channels:
       art:
@@ -27,11 +27,11 @@ en:
         sound: Sound recordings
         texts: Texts
       labels:
-        credits: Curated by
+        credits: 'Curated by '
         recent: Recent additions
         spotlight-on: 'Spotlight on '
       music:
-        description: The <strong>Europeana Music Channel</strong> brings together the best music rcordings, sheet music, and other music related collections from Europeana's audio-visual archives, libraries, archives and museums. Curated by Europeana Sounds.
+        description: 'The <strong>Europeana Music Channel</strong> brings together the best music rcordings, sheet music, and other music related collections from Europeana''s audio-visual archives, libraries, archives and museums. <a href="http://test.europeana.eu/portal/channels/music/about">Find out more about the Music Channel</a>. '
         title: Europeana Music
     facet:
       language:
@@ -113,7 +113,7 @@ en:
         properties: Properties
         provenance: Provenance
         provided-by: Provided by
-        provided-by-detail: Go to <a href="%{url}">%{institution_name}</a> who may have more information and media for this item.
+        provided-by-detail: <a href="%{url}">%{institution_name}</a> who may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
         publication-date: Date of Publication
