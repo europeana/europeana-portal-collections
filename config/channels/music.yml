@@ -1,56 +1,62 @@
 ---
-:params:
-  :qf: '(PROVIDER:"Europeana Sounds" AND (what:music)) OR (PROVIDER:"DISMARC") OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library"))'
-  :reusability:
+params:
+  qf: '(PROVIDER:"Europeana Sounds" AND (what:music)) OR (PROVIDER:"DISMARC") OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library"))'
+  reusability:
   - open
   - restricted
-:home_bg_image: sample/thumb-music.jpg
-:promoted:
-- :is_exhibition: true
-  :title: Explore the World of Musical Instruments
-  :bg_image: sample/thumb-instruments.jpg
-  :url: 'http://exhibitions.europeana.eu/exhibits/show/musical-instruments-en'
-- :is_exhibition: true
-  :title: Weddings in Eastern Europe
-  :bg_image: sample/thumb-wedding.jpg
-  :url: 'http://exhibitions.europeana.eu/exhibits/show/weddings-in-eastern-europe'
-- :is_exhibition: true
-  :title: Recording and playing Machines
-  :bg_image: sample/thumb-machines.jpg
-  :url: 'http://exhibitions.europeana.eu//exhibits/show/recording-and-playing-machines'
-- :title: Find more from Europeana Music on Soundcloud
-  :wide: true
-  :url: 'http://soundcloud.com/'
-  :bg_image: sample/sc_st_white_240x140.png
-  :class_custom: soundcloud
-:channel_entry:
-- :query: 'what:opera'
-  :image: sample/entry-opera-square.jpg
-  :is_search: true
-  :title: Opera
-  :media_type: Images
-- :query: 'what:folk music'
-  :image: sample/entry-folk-square.jpg
-  :is_search: true
-  :title: Folk Music
-  :media_type: Recordings
-- :query: 'PROVIDER:"MIMO - Musical Instrument Museums Online"'
-  :image: sample/entry-lute-square.jpg
-  :is_search: true
-  :title: Musical Instruments
-  :media_type: Images
-- :query: (edvard grieg)
-  :image: sample/entry-grieg-square.jpg
-  :is_spotlight: true
-  :title: Life and music of Edvard Grieg
-  :media_type: Recordings and Videos
-- :query: (lithuanian folk music) OR (lithuanian folk song)
-  :image: sample/entry-lute-square.jpg
-  :is_spotlight: true
-  :title: 'Spotlight: The Lute'
-  :media_type: Images and documents
-- :query: harpsichord
-  :image: sample/entry-harpsichord-square.jpg
-  :is_spotlight: true
-  :title: 'Spotlight: The Harpsichord'
-  :media_type: Texts and Recordings
+hero_config:
+  hero_image: sample/channel_hero_music.jpg
+  attribution_title: Danse de trois faunes et trois bacchantes
+  attribution_creator: Hieronymus Hopfer
+  attribution_institution: Bibliothèque municipale de Lyon
+  attribution_url: 'http://www.europeana.eu/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html'
+  license_public: true
+promoted:
+- is_exhibition: true
+  title: Explore the World of Musical Instruments
+  bg_image: sample/thumb-instruments.jpg
+  url: 'http://exhibitions.europeana.eu/exhibits/show/musical-instruments-en'
+- is_exhibition: true
+  title: Weddings in Eastern Europe
+  bg_image: sample/thumb-wedding.jpg
+  url: 'http://exhibitions.europeana.eu/exhibits/show/weddings-in-eastern-europe'
+- is_exhibition: true
+  title: Recording and playing Machines
+  bg_image: sample/thumb-machines.jpg
+  url: 'http://exhibitions.europeana.eu//exhibits/show/recording-and-playing-machines'
+- title: Find more from Europeana Music on Soundcloud
+  wide: true
+  url: 'http://soundcloud.com/'
+  bg_image: sample/sc_st_white_240x140.png
+  class_custom: soundcloud
+channel_entry:
+- query: 'what:opera'
+  image: sample/entry-opera-square.jpg
+  is_search: true
+  title: Opera
+  media_type: Images
+- query: 'what:folk music'
+  image: sample/entry-folk-square.jpg
+  is_search: true
+  title: Folk Music
+  media_type: Recordings
+- query: 'PROVIDER:"MIMO - Musical Instrument Museums Online"'
+  image: sample/entry-lute-square.jpg
+  is_search: true
+  title: Musical Instruments
+  media_type: Images
+- query: (edvard grieg)
+  image: sample/entry-grieg-square.jpg
+  is_spotlight: true
+  title: Life and music of Edvard Grieg
+  media_type: Recordings and Videos
+- query: (lithuanian folk music) OR (lithuanian folk song)
+  image: sample/entry-lute-square.jpg
+  is_spotlight: true
+  title: 'Spotlight: The Lute'
+  media_type: Images and documents
+- query: harpsichord
+  image: sample/entry-harpsichord-square.jpg
+  is_spotlight: true
+  title: 'Spotlight: The Harpsichord'
+  media_type: Texts and Recordings
