@@ -51,7 +51,7 @@ content:
     is_spotlight: true
     title: Life and music of Edvard Grieg
     media_type: Recordings and Videos
-  - query: (lithuanian folk music) OR (lithuanian folk song)
+  - query: 'title:(lute OR luth) OR what:(lute OR luth)'
     image: sample/entry-lute-square.jpg
     is_spotlight: true
     title: 'Spotlight: The Lute'
