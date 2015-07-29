@@ -775,6 +775,10 @@ module Templates
             item[:playable] = false
           end
 
+          if @mime_type == 'audio/flac'
+            item[:playable] = false
+          end
+
           if media_type == 'text' && @mime_type == 'text/plain; charset=utf-8'
             item[:playable] = false
             item[:downloadable] = false
