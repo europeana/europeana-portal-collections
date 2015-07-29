@@ -20,6 +20,7 @@ promoted:
 - title: Europeana 1914-1918
   url: 'http://www.europeana1914-1918.eu'
   bg_image: sample/thumb-1418.jpg
+  is_featured_site: true
 - is_new: true
   title: Europeana monuments now in Google Field Trip
   url: 'http//pro.europeana.eu/blogpost/reach-cultural-tourists-through-europeana-in-googles-field-trip'
