@@ -89,6 +89,8 @@ class ChannelsController < ApplicationController
         url: channel_path(q: "TYPE:#{type[0]}")
       }
     end
+    @channel_stats.reject! { |stats| stats[:count] == 0 }
+    @channel_stats.sort_by! { |stats| stats[:count] }.reverse!
   end
 
   def channel_content
