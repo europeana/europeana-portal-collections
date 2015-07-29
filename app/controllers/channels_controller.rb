@@ -103,7 +103,7 @@ class ChannelsController < ApplicationController
     time_now = Time.now
     month_now = time_now.month
 
-    (0..2).each do |months_ago|
+    (0..3).each do |months_ago|
       time_from = Time.new(time_now.year, time_now.month) - months_ago.month
       time_to = time_from + 1.month - 1.second
 
@@ -128,6 +128,11 @@ class ChannelsController < ApplicationController
           url: channel_path(q: time_range_query, f: { 'DATA_PROVIDER' => [field['label']] })
         }
       end
+
+      break if @recent_additions.size >= 3
     end
+
+    @recent_additions = @recent_additions[0..2]
+    @recent_additions.sort_by! { |addition| addition[:number] }.reverse!
   end
 end
