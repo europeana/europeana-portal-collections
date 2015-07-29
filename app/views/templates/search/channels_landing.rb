@@ -115,12 +115,7 @@ module Templates
               ]
             }
           },
-          hero_config: {
-            hero_image: 'sample/channel_hero_art.jpg',
-            attribution_text: 'The Riding School by Philips Wouverman',
-            attribution_url: 'http://www.europeana.eu/portal/record/90402/SK_A_477.html',
-            license_public: true
-          },
+          hero_config: @channel.config[:hero_config],
           channel_entry: {
             title: 'Promoted title',
             items: [
