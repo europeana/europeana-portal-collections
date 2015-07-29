@@ -1,4 +1,72 @@
 ---
-:params:
-  :qf: '(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l''art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d''Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
-:home_bg_image: sample/thumb-art.jpg
+params:
+  qf: '(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l''art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d''Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
+content:
+  credits:
+  - text: National Gallery of Denmark
+    url: 'http://www.smk.dk/'
+  - text: Rijksmuseum
+    url: 'https://www.rijksmuseum.nl/'
+  hero_config:
+    hero_image: sample/channel_hero_art.jpg
+    attribution_title: Ships in a storm off a rocky coast
+    attribution_creator: Jan Porcellis
+    attribution_institution: Hallwylska museet
+    attribution_url: 'http://www.europeana.eu/portal/record/2048007/Athena_Plus_ProvidedCHO_Hallwylska_museet_14152.html'
+    license_public: true
+  channel_entry:
+  - title: All Paintings
+    query: 'what:paintings'
+    media_type: Images
+    is_search: true
+    image: sample/entry-painting-square.jpg
+  - title: All Sculptures
+    query: 'what:(sculpture OR sculptuur OR skulptur)'
+    media_type: Images and video
+    is_search: true
+    image: sample/entry-sculpture-square.jpg
+  - title: All Art history publications
+    query: '(what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: histoire art) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis)'
+    media_type: Documents
+    is_search: true
+    image: sample/entry-documents-square.jpg
+  - title: Spotlight on Botticelli
+    query: 'who:sandro botticelli'
+    media_type: Images and videos
+    is_spotlight: true
+    image: sample/entry-botticelli-square.jpg
+  - title: Spotlight on Alexander Roslin
+    query: 'who:alexander roslin'
+    media_type: Images and documents
+    is_spotlight: true
+    image: sample/entry-roslin-square.jpg
+  - title: Spotlight on Hokusai
+    query: 'who:hokusai'
+    media_type: Images
+    is_spotlight: true
+    image: sample/entry-hokusai-square.jpg
+  promoted:
+  - title: Royal Book Collections
+    url: http://exhibitions.europeana.eu/exhibits/show/royal-book-collections-en
+    is_exhibition: true
+    bg_image: sample/thumb-book.jpg
+  - title: From Dada to Surrealism
+    url: http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en
+    is_exhibition: true
+    bg_image: sample/thumb-dada.jpg
+  - title: Art Nouveau
+    url: http://exhibitions.europeana.eu/exhibits/show/art-nouveau-en%C2%A0
+    is_exhibition: true
+    bg_image: sample/thumb-artnouveau.jpg
+  - title: Explore the World of Musical Instruments
+    url: http://exhibitions.europeana.eu/exhibits/show/musical-instruments-en
+    is_exhibition: true
+    bg_image: sample/thumb-instruments.jpg
+  - title: Pablo Picasso
+    url: http://dizbi.hazu.hr/picasso/
+    is_exhibition: true
+    bg_image: sample/thumb-picasso.jpg
+  - title: From Dada to Surrealism
+    url: http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en
+    is_exhibition: true
+    bg_image: sample/thumb-dada.jpg
