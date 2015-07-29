@@ -46,33 +46,7 @@ module Templates
             name: content_common[:name],
             description: content_common[:description],
             stats: {
-              items: [
-                  {
-                    count: '1,459,423',
-                    text: t('site.channels.data-types.images'),
-                    url: '#'
-                  },
-                  {
-                    count: '393,117',
-                    text: t('site.channels.data-types.texts'),
-                    url: '#'
-                  },
-                  {
-                    count: '1417',
-                    text: t('site.channels.data-types.moving-images'),
-                    url: '#'
-                  },
-                  {
-                    count: '1001',
-                    text: t('site.channels.data-types.3d'),
-                    url: '#'
-                  },
-                  {
-                    count: '300',
-                    text: t('site.channels.data-types.sound'),
-                    url: '#'
-                  }
-              ]
+              items: stylised_channel_stats
             },
             recent: {
               title: t('site.channels.labels.recent'),
@@ -115,7 +89,7 @@ module Templates
               ]
             }
           },
-          hero_config: @channel.config[:hero_config],
+          hero_config: channel_content[:hero_config],
           channel_entry: {
             title: 'Promoted title',
             items: [
@@ -232,33 +206,7 @@ module Templates
             name: content_common[:name],
             description: content_common[:description],
             stats: {
-              items: [
-                  {
-                    count: '216,014',
-                    text: t('site.channels.data-types.images'),
-                    url: '#'
-                  },
-                  {
-                    count: '102,558',
-                    text: t('site.channels.data-types.texts'),
-                    url: '#'
-                  },
-                  {
-                    count: '13,925',
-                    text: t('site.channels.data-types.moving-images'),
-                    url: '#'
-                  },
-                  {
-                    count: '1001',
-                    text: t('site.channels.data-types.3d'),
-                    url: '#'
-                  },
-                  {
-                    count: '450,068',
-                    text: t('site.channels.data-types.sound'),
-                    url: '#'
-                  }
-              ]
+              items: stylised_channel_stats
             },
             recent: {
               title: t('site.channels.labels.recent'),
@@ -289,35 +237,15 @@ module Templates
             },
             credits: {
               title: t('site.channels.labels.credits'),
-              items: [
-                {
-                  text: 'Deutsche National Bibliothek',
-                  url: '#777'
-                },
-                {
-                  text: 'Netherlands institute for sound and vision',
-                  url: '#777'
-                },
-                {
-                  text: 'Cité de la Musique',
-                  url: '#777'
-                }
-              ]
+              items: channel_content[:credits]
             }
           },
-          hero_config: {
-            hero_image: 'sample/channel_hero_music.jpg',
-            attribution_text: 'This is a placeholder image found somewhere',
-            attribution_url: 'http://europeana.eu',
-            license_CC_ND_NC_SA: true
-          },
+          hero_config: channel_content[:hero_config],
           channel_entry: {
-            title: 'Promoted title',
             items: stylised_channel_entry
           },
           promoted: {
-            title: 'Promoted title',
-            items: @channel.config[:promoted]
+            items: channel_content[:promoted]
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
@@ -435,6 +363,10 @@ module Templates
 
       private
 
+      def channel_content
+        @channel_content ||= @channel.config[:content] || {}
+      end
+
       def blog_news_items
         @blog_news_items ||= news_items(@blog_items)
       end
@@ -446,6 +378,16 @@ module Templates
           channel_entry.each do |entry|
             entry[:count] = number_with_delimiter(entry[:count])
             entry[:image_alt] ||= nil
+          end
+        end
+      end
+
+      def stylised_channel_stats
+        return @stylised_channel_stats unless @stylised_channel_stats.blank?
+        return nil unless @channel_stats.present?
+        @stylised_channel_stats = @channel_stats.deep_dup.tap do |channel_stats|
+          channel_stats.each do |stats|
+            stats[:count] = number_with_delimiter(stats[:count])
           end
         end
       end
