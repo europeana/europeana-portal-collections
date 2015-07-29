@@ -155,21 +155,27 @@ module Templates
       end
 
       def simple_facet_template_data(facet)
-        capitalise_labels = true unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet.name)
         {
           simple: true,
           title: facet_map(facet.name),
           select_one: (facet.name == 'CHANNEL'),
-          items: facet.items.collect do |item|
-            {
-              url: facet_item_url(facet.name, item),
-              text: facet_map(facet.name, item.value).split.map{|x| (capitalise_labels ? x.capitalize : x) }.join(' '),
-              num_results: number_with_delimiter(item.hits),
-              is_checked: facet_in_params?(facet.name, item)
-            }
-          end
+          items: facet.items[0..3].map { |item| simple_facet_item(facet, item) },
+          extra_items: facet.items.size <= 4 ? nil : {
+            items: facet.items[4..-1].map { |item| simple_facet_item(facet, item) }
+          }
         }
       end
+
+      def simple_facet_item(facet, item)
+        capitalise_labels = true unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet.name)
+        {
+          url: facet_item_url(facet.name, item),
+          text: facet_map(facet.name, item.value).split.map { |x| capitalise_labels ? x.capitalize : x }.join(' '),
+          num_results: number_with_delimiter(item.hits),
+          is_checked: facet_in_params?(facet.name, item)
+        }
+      end
+
 
       def range_facet_template_data(facet)
         range_min = facet.items.collect(&:value).min
