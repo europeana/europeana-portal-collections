@@ -46,33 +46,7 @@ module Templates
             name: content_common[:name],
             description: content_common[:description],
             stats: {
-              items: [
-                  {
-                    count: '1,459,423',
-                    text: t('site.channels.data-types.images'),
-                    url: '#'
-                  },
-                  {
-                    count: '393,117',
-                    text: t('site.channels.data-types.texts'),
-                    url: '#'
-                  },
-                  {
-                    count: '1417',
-                    text: t('site.channels.data-types.moving-images'),
-                    url: '#'
-                  },
-                  {
-                    count: '1001',
-                    text: t('site.channels.data-types.3d'),
-                    url: '#'
-                  },
-                  {
-                    count: '300',
-                    text: t('site.channels.data-types.sound'),
-                    url: '#'
-                  }
-              ]
+              items: stylised_channel_stats
             },
             recent: {
               title: t('site.channels.labels.recent'),
@@ -232,33 +206,7 @@ module Templates
             name: content_common[:name],
             description: content_common[:description],
             stats: {
-              items: [
-                  {
-                    count: '216,014',
-                    text: t('site.channels.data-types.images'),
-                    url: '#'
-                  },
-                  {
-                    count: '102,558',
-                    text: t('site.channels.data-types.texts'),
-                    url: '#'
-                  },
-                  {
-                    count: '13,925',
-                    text: t('site.channels.data-types.moving-images'),
-                    url: '#'
-                  },
-                  {
-                    count: '1001',
-                    text: t('site.channels.data-types.3d'),
-                    url: '#'
-                  },
-                  {
-                    count: '450,068',
-                    text: t('site.channels.data-types.sound'),
-                    url: '#'
-                  }
-              ]
+              items: stylised_channel_stats
             },
             recent: {
               title: t('site.channels.labels.recent'),
@@ -433,6 +381,16 @@ module Templates
           channel_entry.each do |entry|
             entry[:count] = number_with_delimiter(entry[:count])
             entry[:image_alt] ||= nil
+          end
+        end
+      end
+
+      def stylised_channel_stats
+        return @stylised_channel_stats unless @stylised_channel_stats.blank?
+        return nil unless @channel_stats.present?
+        @stylised_channel_stats = @channel_stats.deep_dup.tap do |channel_stats|
+          channel_stats.each do |stats|
+            stats[:count] = number_with_delimiter(stats[:count])
           end
         end
       end

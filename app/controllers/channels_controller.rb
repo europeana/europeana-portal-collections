@@ -12,6 +12,7 @@ class ChannelsController < ApplicationController
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
   before_action :fetch_blog_items, only: :show
   before_action :populate_channel_entry, only: :show, unless: :has_search_parameters?
+  before_action :populate_channel_stats, only: :show, unless: :has_search_parameters?
 
   def index
     redirect_to_root
@@ -68,5 +69,24 @@ class ChannelsController < ApplicationController
       with(q: entry_query).query.
       merge(rows: 0, start: 1, profile: 'minimal')
     repository.search(api_query).total
+  end
+
+  ##
+  # Gets from the API the number of items of each media type within the current channel
+  def populate_channel_stats
+    # ['EDM value', 'i18n key']
+    types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
+             ['3D', '3d'], ['SOUND', 'sound']]
+    @channel_stats = types.map do |type|
+      api_query = search_builder(self.search_params_logic).
+        with(q: "TYPE:#{type[0]}").query.
+        merge(rows: 0, start: 1, profile: 'minimal')
+      type_count = repository.search(api_query).total
+      {
+        count: type_count,
+        text: t(type[1], scope: 'site.channels.data-types'),
+        url: channel_path(q: "TYPE:#{type[0]}")
+      }
+    end
   end
 end
