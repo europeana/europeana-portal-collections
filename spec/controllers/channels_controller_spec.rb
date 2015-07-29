@@ -52,10 +52,13 @@ RSpec.describe ChannelsController, type: :controller do
         let(:params) { { id: channel_id } }
 
         it 'queries API for channel stats' do
-          expect(an_api_search_request).to have_been_made.times(5)
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
             expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).to have_been_made.once
           end
+        end
+
+        it 'queries API for recent additions' do
+          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.times(3)
         end
 
         it 'does not get RSS blog posts' do
