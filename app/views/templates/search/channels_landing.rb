@@ -48,13 +48,9 @@ module Templates
             stats: {
               items: stylised_channel_stats
             },
-            recent: {
+            recent: stylised_recent_additions.blank? ? nil : {
               title: t('site.channels.labels.recent'),
-              items: stylised_recent_additions,
-              more_link: {
-                text: t('global.more.load_more'),
-                url: '#777'
-              }
+              items: stylised_recent_additions
             },
             credits: {
               title: t('site.channels.labels.credits'),
@@ -189,9 +185,9 @@ module Templates
             stats: {
               items: stylised_channel_stats
             },
-            recent: {
+            recent: stylised_recent_additions.blank? ? nil : {
               title: t('site.channels.labels.recent'),
-              items: stylised_recent_additions,
+              items: stylised_recent_additions
             },
             credits: {
               title: t('site.channels.labels.credits'),
