@@ -24,7 +24,7 @@ content:
     is_featured_site: true
   - is_new: true
     title: Europeana monuments now in Google Field Trip
-    url: 'http//pro.europeana.eu/blogpost/reach-cultural-tourists-through-europeana-in-googles-field-trip'
+    url: 'http://pro.europeana.eu/blogpost/reach-cultural-tourists-through-europeana-in-googles-field-trip'
   hero_config:
     hero_image: sample/search_hero_1.jpg
     brand_position: brand-bottomleft
@@ -32,6 +32,6 @@ content:
     attribution_title: Insects and Fruit
     attribution_creator: Jan van Kessel
     attribution_institution: Rijksmuseum
-    attribution_url: http://www.europeana.eu/portal/record/90402/SK_A_793.html
+    attribution_url: /portal/record/90402/SK_A_793.html
     license_CC-ND-NC-SA: false
     license_public: true

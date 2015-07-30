@@ -63,7 +63,7 @@ en:
         technicalmetadata: Technical Metadata
       meta-label:
         codec: Codec
-        collection-name: Collection
+        collection-name: Dataset
         concept: Concept
         concepts: Classifications
         consists-of: Consists of
@@ -124,7 +124,7 @@ en:
         rights: Rights
         rights-human: Can I use this?
         runtime: Run time
-        source: Sources and provenance
+        source: Provenance
         subject: Subject
         temporal: Temporal
         time: Time
@@ -169,6 +169,8 @@ en:
         header: Results for
         header-and: and
         in-channel: in Channel
+        less: Less
+        more: More
         product-3D: 3D
         product-image: Image
         product-sound: Sound
