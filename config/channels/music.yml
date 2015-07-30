@@ -46,10 +46,10 @@ content:
     is_search: true
     title: Musical Instruments
     media_type: Images
-  - query: (edvard grieg)
-    image: sample/entry-grieg-square.jpg
+  - query: georges bizet carmen
+    image: sample/entry-carmen-square.jpg
     is_spotlight: true
-    title: Life and music of Edvard Grieg
+    title: 'Georges Bizet''s Carmen'
     media_type: Recordings and Videos
   - query: 'title:(lute OR luth) OR what:(lute OR luth)'
     image: sample/entry-lute-square.jpg
