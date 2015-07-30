@@ -24,10 +24,10 @@ content:
   - is_exhibition: true
     title: Recording and playing Machines
     bg_image: sample/thumb-machines.jpg
-    url: 'http://exhibitions.europeana.eu//exhibits/show/recording-and-playing-machines'
+    url: 'http://exhibitions.europeana.eu/exhibits/show/recording-and-playing-machines'
   - title: Find more from Europeana Music on Soundcloud
     wide: true
-    url: 'http://soundcloud.com/'
+    url: 'https://soundcloud.com/europeana'
     bg_image: sample/sc_st_white_240x140.png
     class_custom: soundcloud
   channel_entry:
@@ -46,10 +46,10 @@ content:
     is_search: true
     title: Musical Instruments
     media_type: Images
-  - query: (edvard grieg)
-    image: sample/entry-grieg-square.jpg
+  - query: georges bizet carmen
+    image: sample/entry-carmen-square.jpg
     is_spotlight: true
-    title: Life and music of Edvard Grieg
+    title: 'Georges Bizet''s Carmen'
     media_type: Recordings and Videos
   - query: 'title:(lute OR luth) OR what:(lute OR luth)'
     image: sample/entry-lute-square.jpg

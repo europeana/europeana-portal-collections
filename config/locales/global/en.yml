@@ -79,7 +79,7 @@ en:
         turkey: Turkey
         ukraine: Ukraine
         unitedkingdom: United Kingdom
-      creator: 
+      creator: creator
       header:
         channel: Channels
         country: Country
@@ -91,18 +91,30 @@ en:
         type: Media
         year: Date
       language:
-        de: German
+        bg: "български език"
+        de: Deutsch
+        el: " ellinikí glóssa"
         en: English
-        es: Spanish
-        fr: French
-        hu: Hungarian
-        it: Italian
-        mul: Multi
-        nl: Dutch
-        pt: Portugese
-        sv: Swedish
+        es: español
+        et: Eesti
+        fi: Suomi
+        fr: le français
+        ga: Gaeilge
+        hu: Hrvatski
+        it: Italiano
+        lt: lietuvių kalba
+        lv: latviešu valoda
+        mt: Malti
+        mul: Multilingue
+        nl: Nederlands
+        pl: polszczyzna
+        pt: português
+        ro: română
+        sk: slovenský jazyk
+        sl: slovenščina
+        sv: svenska
         yi: Yiddish
-      more: 
+      more: More
       more-refinements: More refinements
       resource:
         type: 
@@ -212,7 +224,7 @@ en:
     login: Login
     logo-image: 
     more:
-      load-more: Load more
+      load-more: More
       show-more: Show more
       view-more: View more
     more-info: More information
