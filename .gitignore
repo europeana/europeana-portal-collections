@@ -55,8 +55,8 @@
 # Ignore code coverage analysis output.
 /coverage
 
-# Ignore Cloud Foundry manifest
-/manifest.yml
+# Ignore Cloud Foundry manifests
+/manifest*.yml
 
 # Ignore Redis snapshot
 *.rdb
