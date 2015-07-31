@@ -101,7 +101,10 @@ en:
         fi: Suomi
         fr: le français
         ga: Gaeilge
+        he: "עברית"
+        hr: 'hrvatski '
         hu: Hrvatski
+        is: "íslenska"
         it: Italiano
         lt: lietuvių kalba
         lv: latviešu valoda
@@ -114,8 +117,9 @@ en:
         sk: slovenský jazyk
         sl: slovenščina
         sv: svenska
+        tr: " Türkçe"
         yi: Yiddish
-      less: Less
+      less: Fewer
       more: More
       more-refinements: More refinements
       resource:
