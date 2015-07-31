@@ -10,7 +10,7 @@ content:
     attribution_title: Danse de trois faunes et trois bacchantes
     attribution_creator: Hieronymus Hopfer
     attribution_institution: Bibliothèque municipale de Lyon
-    attribution_url: 'http://www.europeana.eu/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html'
+    attribution_url: '/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html'
     license_public: true
   promoted:
   - is_exhibition: true
