@@ -174,105 +174,97 @@ module MustacheHelper
     params[:q].nil? ? '' : [params[:q]].flatten.join(', ')
   end
 
-
-  def navigation_global
-  {
-      :options => {
-        :search_active  => false,
-        :settings_active  => true
-      },
-
-      :logo  => {
-        :url  => "/",
-        :text  => "Europeana Search"
-      },
-
-      :primary_nav  => {
-        :items  => [
-          {
-            :url  => "#",
-            :text  => "Home",
-            :is_current  => true
-          },
-          {
-            :url  => "",
-            :text  => "Channels",
-            :submenu  => {
-              :items  => [
-                {
-                  :url  => "http://google.com",
-                  :text  => "Channel 1"
-                },
-                {
-                  :url  => "http://google.com",
-                  :text  => "Channel 2",
-                  :is_current  => true
-                },
-                {
-                  :url  => "http://google.com",
-                  :text  => "Channel 3"
-                }
-              ]
-            }
-          },
-          {
-            :url   =>  "",
-            :text  =>  "Exhibitions"
-          },
-          {
-            :url   => "",
-            :text  => "Blog"
-          },
-          {
-            :url   => "",
-            :text  => "My Europeana"
-          }
-        ]
-    }
-  }
-  end
-
-  def common_footer
+  def navigation
     {
-      :linklist1  => {
-        :title  => "More info",
-        :items  =>  [
-          {
-            :text  => "New collections",
-            :url   => "http://google.com"
-          },
-          {
-            :text => "All data providers",
-            :url  => "http://google.com"
-          },
-          {
-            :text =>  "Become a data provider",
-            :url  => "http://google.com"
-          }
-        ]
+      global: {
+        options: {
+          search_active: false,
+          settings_active: true
+        },
+        logo: {
+          url: root_url,
+          text: 'Europeana Search'
+        },
+        primary_nav: {
+          items: [
+            {
+              url: root_url,
+              text: 'Home',
+              is_current: controller.controller_name != 'channels'
+            },
+            {
+              url: channel_url('music'),
+              text: 'Channels',
+              is_current: controller.controller_name == 'channels',
+              submenu: {
+                items: [
+                  {
+                    url: channel_url('art'),
+                    text: 'Art History'
+                  },
+                  {
+                    url: channel_url('music'),
+                    text: 'Music'
+                  }
+                ]
+              }
+            },
+            {
+              url: 'http://exhibitions.europeana.eu/',
+              text: 'Exhibitions'
+            },
+            {
+              url: 'http://blog.europeana.eu/',
+              text: 'Blog'
+            },
+            {
+              url: 'http://www.europeana.eu/portal/myeuropeana#login',
+              text: 'My Europeana'
+            }
+          ]
+        }  # end prim nav
       },
-      :linklist2 => {
-        :title  =>  "Help",
-        :items  =>  [
-          {
-            :text => "Search tips",
-            :url  => "http://google.com"
-          },
-          {
-            :text =>  "Using My Europeana",
-            :url  => "http://google.com"
-          },
-          {
-            :text  => "Copyright",
-            :url   => "http://google.com"
-          }
-        ]
-      },
-      :social  => {
-        :facebook   => true,
-        :pinterest  => true,
-        :twitter    => true,
-        :googleplus => true
+      footer: {
+        linklist1: {
+          title: t('global.more-info'),
+          items: [
+            {
+              text: t('site.footer.menu.new-collections'),
+              url: '#'
+            },
+            {
+              text: t('site.footer.menu.data-providers'),
+              url: '#'
+            },
+            {
+              text: t('site.footer.menu.become-a-provider'),
+              url: '#'
+            }
+          ]
+        },
+        linklist2: {
+          title: t('global.help'),
+          items: [
+            {
+              text: t('site.footer.menu.search-tips'),
+              url: '#'
+            },
+            {
+              text: t('site.footer.menu.using-myeuropeana'),
+              url: '#'
+            },
+            {
+              text: t('site.footer.menu.copyright'),
+              url: '#'
+            }
+          ]
+        },
+        social: {
+          facebook: true,
+          pinterest: true,
+          twitter: true,
+          googleplus: true
+        }
       }
     }
   end

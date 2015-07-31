@@ -63,10 +63,8 @@ module Templates
                 separator: show_pagination_separator?(i, page.number, pages.size)
               }
             end
-          },
-          global: navigation_global,
-          footer: common_footer
-        }
+          }
+        }.reverse_merge(helpers.navigation)
       end
 
       def facets_selected
