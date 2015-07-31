@@ -45,7 +45,8 @@ module Templates
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
             blogurl: 'http://blog.europeana.eu/tag/#' + @channel.id
-          }
+          },
+          social: channel_content[:social]
         }
       end
 
