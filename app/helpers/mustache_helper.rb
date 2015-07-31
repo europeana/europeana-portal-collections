@@ -225,21 +225,25 @@ module MustacheHelper
         }  # end prim nav
       },
       footer: {
-        xxx_linklist1: {
+        linklist1: {
           title: t('global.more-info'),
           items: [
             {
-              text: t('site.footer.menu.new-collections'),
-              url: '#'
-            },
-            {
-              text: t('site.footer.menu.data-providers'),
-              url: '#'
-            },
-            {
-              text: t('site.footer.menu.become-a-provider'),
-              url: '#'
+              text: t('site.footer.menu.about'),
+              url: root_url + '/about.html'
             }
+            # {
+            #   text: t('site.footer.menu.new-collections'),
+            #   url: '#'
+            # },
+            # {
+            #   text: t('site.footer.menu.data-providers'),
+            #   url: '#'
+            # },
+            # {
+            #   text: t('site.footer.menu.become-a-provider'),
+            #   url: '#'
+            # }
           ]
         },
         xxx_linklist2: {
