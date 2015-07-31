@@ -166,7 +166,7 @@ module MustacheHelper
 
   def page_config
     {
-      :newsletter  => false
+      newsletter: false
     }
   end
 
