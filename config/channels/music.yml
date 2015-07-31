@@ -42,7 +42,7 @@ content:
     title: Folk Music
     media_type: Recordings
   - query: 'PROVIDER:"MIMO - Musical Instrument Museums Online"'
-    image: sample/entry-lute-square.jpg
+    image: sample/entry-intruments-square.jpg
     is_search: true
     title: Musical Instruments
     media_type: Images
