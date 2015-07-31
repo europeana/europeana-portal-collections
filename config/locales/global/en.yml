@@ -47,7 +47,7 @@ en:
         bulgaria: Bulgaria
         croatia: Croatia
         cyprus: Cyprus
-        czech: Czech Republic
+        czechrepublic: Czech Republic
         denmark: Denmark
         estonia: Estonia
         europe: Europe
@@ -79,6 +79,7 @@ en:
         turkey: Turkey
         ukraine: Ukraine
         unitedkingdom: United Kingdom
+        unitedstatesofamerica: USA
       creator: creator
       header:
         channel: Channels
@@ -114,6 +115,7 @@ en:
         sl: slovenščina
         sv: svenska
         yi: Yiddish
+      less: Less
       more: More
       more-refinements: More refinements
       resource:

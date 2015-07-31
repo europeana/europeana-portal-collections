@@ -39,6 +39,7 @@ en:
           results: Results
     footer:
       menu:
+        about: About
         become-a-provider: Become a data provider
         copyright: Copyright
         data-providers: All data providers

@@ -166,7 +166,7 @@ module MustacheHelper
 
   def page_config
     {
-      :newsletter  => true
+      newsletter: false
     }
   end
 
@@ -179,7 +179,7 @@ module MustacheHelper
       global: {
         options: {
           search_active: false,
-          settings_active: true
+          settings_active: false
         },
         logo: {
           url: root_url,
@@ -192,35 +192,35 @@ module MustacheHelper
               text: 'Home',
               is_current: controller.controller_name != 'channels'
             },
-            {
-              url: channel_url('music'),
-              text: 'Channels',
-              is_current: controller.controller_name == 'channels',
-              submenu: {
-                items: [
-                  {
-                    url: channel_url('art'),
-                    text: 'Art History'
-                  },
-                  {
-                    url: channel_url('music'),
-                    text: 'Music'
-                  }
-                ]
-              }
-            },
-            {
-              url: 'http://exhibitions.europeana.eu/',
-              text: 'Exhibitions'
-            },
-            {
-              url: 'http://blog.europeana.eu/',
-              text: 'Blog'
-            },
-            {
-              url: 'http://www.europeana.eu/portal/myeuropeana#login',
-              text: 'My Europeana'
-            }
+            # {
+            #   url: channel_url('music'),
+            #   text: 'Channels',
+            #   is_current: controller.controller_name == 'channels',
+            #   submenu: {
+            #     items: [
+            #       {
+            #         url: channel_url('art'),
+            #         text: 'Art History'
+            #       },
+            #       {
+            #         url: channel_url('music'),
+            #         text: 'Music'
+            #       }
+            #     ]
+            #   }
+            # },
+            # {
+            #   url: 'http://exhibitions.europeana.eu/',
+            #   text: 'Exhibitions'
+            # },
+            # {
+            #   url: 'http://blog.europeana.eu/',
+            #   text: 'Blog'
+            # },
+            # {
+            #   url: 'http://www.europeana.eu/portal/myeuropeana#login',
+            #   text: 'My Europeana'
+            # }
           ]
         }  # end prim nav
       },
@@ -229,20 +229,24 @@ module MustacheHelper
           title: t('global.more-info'),
           items: [
             {
-              text: t('site.footer.menu.new-collections'),
-              url: '#'
-            },
-            {
-              text: t('site.footer.menu.data-providers'),
-              url: '#'
-            },
-            {
-              text: t('site.footer.menu.become-a-provider'),
-              url: '#'
+              text: t('site.footer.menu.about'),
+              url: root_url + '/about.html'
             }
+            # {
+            #   text: t('site.footer.menu.new-collections'),
+            #   url: '#'
+            # },
+            # {
+            #   text: t('site.footer.menu.data-providers'),
+            #   url: '#'
+            # },
+            # {
+            #   text: t('site.footer.menu.become-a-provider'),
+            #   url: '#'
+            # }
           ]
         },
-        linklist2: {
+        xxx_linklist2: {
           title: t('global.help'),
           items: [
             {
