@@ -1,13 +1,6 @@
 module Templates
   module Search
     class SearchHome < ApplicationView
-      def navigation
-        {
-          global: navigation_global,
-          footer: common_footer
-        }
-      end
-
       def content
         {
           hero_config: config[:content][:hero_config],
