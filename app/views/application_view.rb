@@ -1,3 +1,5 @@
+require 'stache/mustache/view/method_missing_view_arity'
+
 ##
 # A custom class for this project's Mustache templates
 #
@@ -59,6 +61,8 @@ class ApplicationView < Stache::Mustache::View
   def debug
     false
   end
+
+  protected
 
   def only_call_once(key)
     @only_call_once ||= {}
