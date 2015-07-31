@@ -17,7 +17,7 @@ module MustacheHelper
                      when 'about'
                        t('site.pages.about.title')
                      when 'channels/music/about'
-                       t('site.pages.about.title')
+                       t('site.pages.music-channel-about.title')
                      end
       [static_title, 'Europeana'].compact.join(' - ')
     elsif @response.nil?
