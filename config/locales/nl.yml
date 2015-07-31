@@ -145,6 +145,13 @@ nl:
         west: 
       show-more-similar-items: toon meer
       similar-items: 
+    pages:
+      about:
+        text: 
+        title: 
+      music-channel-about:
+        text: 
+        title: 
     results:
       actions:
         configure-actions: 
