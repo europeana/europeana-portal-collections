@@ -47,7 +47,7 @@ nl:
         bulgaria: 
         croatia: 
         cyprus: 
-        czech: 
+        czechrepublic: 
         denmark: 
         estonia: 
         europe: 
@@ -79,6 +79,7 @@ nl:
         turkey: 
         ukraine: 
         unitedkingdom: 
+        unitedstatesofamerica: Amerika
       creator: 
       header:
         channel: 
@@ -114,6 +115,7 @@ nl:
         sl: 
         sv: 
         yi: 
+      less: Minder
       more: 
       more-refinements: 
       resource:

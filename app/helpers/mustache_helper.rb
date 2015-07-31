@@ -166,7 +166,7 @@ module MustacheHelper
 
   def page_config
     {
-      :newsletter  => true
+      :newsletter  => false
     }
   end
 
@@ -179,7 +179,7 @@ module MustacheHelper
       global: {
         options: {
           search_active: false,
-          settings_active: true
+          settings_active: false
         },
         logo: {
           url: root_url,
@@ -192,40 +192,40 @@ module MustacheHelper
               text: 'Home',
               is_current: controller.controller_name != 'channels'
             },
-            {
-              url: channel_url('music'),
-              text: 'Channels',
-              is_current: controller.controller_name == 'channels',
-              submenu: {
-                items: [
-                  {
-                    url: channel_url('art'),
-                    text: 'Art History'
-                  },
-                  {
-                    url: channel_url('music'),
-                    text: 'Music'
-                  }
-                ]
-              }
-            },
-            {
-              url: 'http://exhibitions.europeana.eu/',
-              text: 'Exhibitions'
-            },
-            {
-              url: 'http://blog.europeana.eu/',
-              text: 'Blog'
-            },
-            {
-              url: 'http://www.europeana.eu/portal/myeuropeana#login',
-              text: 'My Europeana'
-            }
+            #{
+            #  url: channel_url('music'),
+            #  text: 'Channels',
+            #  is_current: controller.controller_name == 'channels',
+            #  submenu: {
+            #    items: [
+            #      {
+            #        url: channel_url('art'),
+            #        text: 'Art History'
+            #      },
+            #      {
+            #        url: channel_url('music'),
+            #        text: 'Music'
+            #      }
+            #    ]
+            #  }
+            #},
+            #{
+            #  url: 'http://exhibitions.europeana.eu/',
+            #  text: 'Exhibitions'
+            #},
+            #{
+            #  url: 'http://blog.europeana.eu/',
+            #  text: 'Blog'
+            #},
+            #{
+            #  url: 'http://www.europeana.eu/portal/myeuropeana#login',
+            #  text: 'My Europeana'
+            #}
           ]
         }  # end prim nav
       },
       footer: {
-        linklist1: {
+        xxx_linklist1: {
           title: t('global.more-info'),
           items: [
             {
@@ -242,7 +242,7 @@ module MustacheHelper
             }
           ]
         },
-        linklist2: {
+        xxx_linklist2: {
           title: t('global.help'),
           items: [
             {
