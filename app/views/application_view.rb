@@ -60,8 +60,41 @@ class ApplicationView < Stache::Mustache::View
     false
   end
 
+  protected
+
   def only_call_once(key)
     @only_call_once ||= {}
     @only_call_once[key] ||= yield
+  end
+
+  def method_missing(method, *args, &block)
+    if view_method_arity_matches?(method, *args)
+      view.send(method, *args, &block)
+    else
+      nil
+    end
+  end
+
+  def respond_to?(method, include_private = false)
+    super(method, include_private) || view.respond_to?(method, include_private)
+  end
+
+  ##
+  # Do a crude sanity check on number of parameters for method delegation to view
+  def view_method_arity_matches?(method, *args)
+    return false unless view.respond_to?(method)
+
+    view_method_parameters = view.method(method).parameters
+    req_parameters = view_method_parameters.select { |p| p.first == :req }
+    opt_parameters = view_method_parameters.select { |p| p.first == :opt }
+    rest_parameters = view_method_parameters.select { |p| p.first == :rest }
+
+    if args.size < req_parameters.size
+      false
+    elsif rest_parameters.blank? && args.size > (req_parameters.size + opt_parameters.size)
+      false
+    else
+      true
+    end
   end
 end
