@@ -10,8 +10,17 @@ module MustacheHelper
     ]
   end
 
+  # @todo This belongs in individual view classes
   def page_title
-    if @response.nil?
+    if @page
+      static_title = case @page
+                     when 'about'
+                       t('site.pages.about.title')
+                     when 'channels/music/about'
+                       t('site.pages.about.title')
+                     end
+      [static_title, 'Europeana'].compact.join(' - ')
+    elsif @response.nil?
       if @channel.nil?
         'Europeana Collections - Alpha'
       else
