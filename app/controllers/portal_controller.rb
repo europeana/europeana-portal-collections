@@ -41,4 +41,9 @@ class PortalController < ApplicationController
       format.json { render :similar, layout: false }
     end
   end
+
+  def static
+    @page = params[:page]
+    render 'templates/Search/search-static-page'
+  end
 end

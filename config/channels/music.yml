@@ -10,7 +10,7 @@ content:
     attribution_title: Danse de trois faunes et trois bacchantes
     attribution_creator: Hieronymus Hopfer
     attribution_institution: Bibliothèque municipale de Lyon
-    attribution_url: 'http://www.europeana.eu/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html'
+    attribution_url: '/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html'
     license_public: true
   promoted:
   - is_exhibition: true
@@ -42,7 +42,7 @@ content:
     title: Folk Music
     media_type: Recordings
   - query: 'PROVIDER:"MIMO - Musical Instrument Museums Online"'
-    image: sample/entry-lute-square.jpg
+    image: sample/entry-intruments-square.jpg
     is_search: true
     title: Musical Instruments
     media_type: Images
@@ -64,3 +64,13 @@ content:
   credits:
   - text: Europeana Sounds
     url: 'http://www.europeanasounds.eu/'
+  social:
+    twitter:
+      url: 'https://twitter.com/eu_sounds'
+      text: Europeana sounds on twitter (@eu_sounds)
+    facebook:
+      url: 'https://www.facebook.com/soundseuropeana'
+      text: Europeana Sounds on facebook
+    soundcloud:
+      url: 'https://soundcloud.com/europeana'
+      text: Europeana on Soundcloud

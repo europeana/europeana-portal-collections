@@ -9,7 +9,7 @@ content:
   - is_exhibition: true
     title: Recording and Playing Machines
     bg_image: sample/thumb-machines.jpg
-    url: 'http://europeana.exhibitions.eu/exhibits/show/recording-and-playing-machines'
+    url: 'http://exhibitions.europeana.eu/exhibits/show/recording-and-playing-machines'
   - is_exhibition: true
     title: Photography on a Silver Plate
     bg_image: sample/thumb-photography.jpg
