@@ -192,35 +192,35 @@ module MustacheHelper
               text: 'Home',
               is_current: controller.controller_name != 'channels'
             },
-            #{
-            #  url: channel_url('music'),
-            #  text: 'Channels',
-            #  is_current: controller.controller_name == 'channels',
-            #  submenu: {
-            #    items: [
-            #      {
-            #        url: channel_url('art'),
-            #        text: 'Art History'
-            #      },
-            #      {
-            #        url: channel_url('music'),
-            #        text: 'Music'
-            #      }
-            #    ]
-            #  }
-            #},
-            #{
-            #  url: 'http://exhibitions.europeana.eu/',
-            #  text: 'Exhibitions'
-            #},
-            #{
-            #  url: 'http://blog.europeana.eu/',
-            #  text: 'Blog'
-            #},
-            #{
-            #  url: 'http://www.europeana.eu/portal/myeuropeana#login',
-            #  text: 'My Europeana'
-            #}
+            # {
+            #   url: channel_url('music'),
+            #   text: 'Channels',
+            #   is_current: controller.controller_name == 'channels',
+            #   submenu: {
+            #     items: [
+            #       {
+            #         url: channel_url('art'),
+            #         text: 'Art History'
+            #       },
+            #       {
+            #         url: channel_url('music'),
+            #         text: 'Music'
+            #       }
+            #     ]
+            #   }
+            # },
+            # {
+            #   url: 'http://exhibitions.europeana.eu/',
+            #   text: 'Exhibitions'
+            # },
+            # {
+            #   url: 'http://blog.europeana.eu/',
+            #   text: 'Blog'
+            # },
+            # {
+            #   url: 'http://www.europeana.eu/portal/myeuropeana#login',
+            #   text: 'My Europeana'
+            # }
           ]
         }  # end prim nav
       },
