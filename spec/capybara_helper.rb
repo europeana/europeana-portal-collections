@@ -1,22 +1,36 @@
 # Capybara integration
 require 'capybara/rspec'
 require 'capybara/rails'
-require 'capybara/poltergeist'
 
-Capybara.register_driver :poltergeist do |app|
-  options = {
-    js_errors: true,
-    timeout: 120,
-    debug: false,
-    #phantomjs_options: ['--load-images=no', '--disk-cache=false'],
-    inspector: true,
-    ignore_ssl_errors: true
-  }
-  Capybara::Poltergeist::Driver.new(app, options)
+Capybara.configure do |config|
+  config.default_wait_time = 10
+  config.default_selector = :css
 end
 
-Capybara.javascript_driver = :poltergeist
-Capybara.default_selector  = :css
+if ENV['CAPYBARA_DRIVER'] == 'selenium'
+  require 'selenium-webdriver'
+
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app,
+      browser: (ENV['CAPYBARA_BROWSER'] || :firefox).to_sym
+    )
+  end
+
+  Capybara.javascript_driver = :selenium
+else
+  require 'capybara/poltergeist'
+
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app,
+      phantomjs_options: [
+        '--local-to-remote-url-access=true'
+      ],
+      js_errors: true
+    )
+  end
+
+  Capybara.javascript_driver = :poltergeist
+end
 
 RSpec.configure do |config|
   # Include Capybara for integration testing.

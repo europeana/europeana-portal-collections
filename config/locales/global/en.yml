@@ -15,9 +15,9 @@ en:
       newspapers: newspapers
       performing-arts: performing-arts
     channels: Channels
-    channels-art: beware of the jabberwocky
-    channels-art-image: Beware of the jabberwocky
-    channels-art-link: beware of the jabberwocky
+    channels-art: 'Channels art channel '
+    channels-art-image: 'Channels art image '
+    channels-art-link: Channels art link
     channels-art-url: 
     channels-fashion: Fashion
     channels-music: Music
@@ -47,7 +47,7 @@ en:
         bulgaria: Bulgaria
         croatia: Croatia
         cyprus: Cyprus
-        czech: Czech Republic
+        czechrepublic: Czech Republic
         denmark: Denmark
         estonia: Estonia
         europe: Europe
@@ -79,7 +79,8 @@ en:
         turkey: Turkey
         ukraine: Ukraine
         unitedkingdom: United Kingdom
-      creator: 
+        unitedstatesofamerica: USA
+      creator: creator
       header:
         channel: Channels
         country: Country
@@ -91,35 +92,54 @@ en:
         type: Media
         year: Date
       language:
-        de: German
+        bg: "български език"
+        de: Deutsch
+        el: " ellinikí glóssa"
         en: English
-        es: Spanish
-        fr: French
-        hu: Hungarian
-        it: Italian
-        mul: Multi
-        nl: Dutch
-        pt: Portugese
-        sv: Swedish
+        es: español
+        et: Eesti
+        fi: Suomi
+        fr: le français
+        ga: Gaeilge
+        he: "עברית"
+        hr: 'hrvatski '
+        hu: Hrvatski
+        is: "íslenska"
+        it: Italiano
+        lt: lietuvių kalba
+        lv: latviešu valoda
+        mt: Malti
+        mul: Multilingue
+        nl: Nederlands
+        pl: polszczyzna
+        pt: português
+        ro: română
+        sk: slovenský jazyk
+        sl: slovenščina
+        sv: svenska
+        tr: " Türkçe"
         yi: Yiddish
-      more: 
+      less: Fewer
+      more: More
       more-refinements: More refinements
       resource:
         type: 
       reusability:
         advanced: Advanced
         advanced-cc-by: CC-BY
-        advanced-cc-by-nc: CC-By-NC
+        advanced-cc-by-nc: CC-BY-NC
         advanced-cc-by-nc-nd: CC-BY-NC-ND
         advanced-cc-by-nc-sa: CC-BY-NC-SA
         advanced-cc-by-nd: CC-BY-ND
         advanced-cc-by-sa: CC-BY-SA
         advanced-cc0: CC0
         advanced-orphan-work: Orphan Work
+        advanced-out-of-copyright-non-commercial: 'Out of copyright - non commercial re-use '
         advanced-pdm: Public Domain Marked
         advanced-rarr: Restricted access - Rights reserved
         advanced-rrfa: Rights reserved - Free access
         advanced-rrpa: Rights reserved - Paid access
+        advanced-rrra: Rights Reserved - Restricted Access
         advanced-ucs: Unknown copyright status
         open: Yes with attribution
         permission: Only with permission
@@ -210,7 +230,7 @@ en:
     login: Login
     logo-image: 
     more:
-      load-more: Load more
+      load-more: More
       show-more: Show more
       view-more: View more
     more-info: More information
@@ -231,6 +251,7 @@ en:
       search-placeholder-text: Add a search term
     search-collections: search collections
     search-collections-text: 
+    share: Share
     sitemap: Sitemap
     terms-and-policies: Terms and policies
     type: type

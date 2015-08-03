@@ -24,7 +24,7 @@ nl:
     channels-music-link: 
     choose-language: 
     email-address: 
-    exhibitions: 
+    exhibitions: Tentoonstelling
     facet:
       advanced:
         options: 
@@ -47,7 +47,7 @@ nl:
         bulgaria: 
         croatia: 
         cyprus: 
-        czech: 
+        czechrepublic: 
         denmark: 
         estonia: 
         europe: 
@@ -79,6 +79,7 @@ nl:
         turkey: 
         ukraine: 
         unitedkingdom: 
+        unitedstatesofamerica: Amerika
       creator: 
       header:
         channel: 
@@ -91,17 +92,34 @@ nl:
         type: 
         year: 
       language:
+        bg: 
         de: 
+        el: 
         en: 
         es: 
+        et: 
+        fi: 
         fr: 
+        ga: 
+        he: 
+        hr: 
         hu: 
+        is: 
         it: 
+        lt: 
+        lv: 
+        mt: 
         mul: 
         nl: 
+        pl: 
         pt: 
+        ro: 
+        sk: 
+        sl: 
         sv: 
+        tr: 
         yi: 
+      less: Minder
       more: 
       more-refinements: 
       resource:
@@ -116,10 +134,12 @@ nl:
         advanced-cc-by-sa: 
         advanced-cc0: 
         advanced-orphan-work: 
+        advanced-out-of-copyright-non-commercial: 
         advanced-pdm: 
         advanced-rarr: 
         advanced-rrfa: 
         advanced-rrpa: 
+        advanced-rrra: 
         advanced-ucs: 
         open: 
         permission: 
@@ -176,6 +196,7 @@ nl:
     genres-traditional-music: 
     help: 
     home: 
+    javascript-required: 
     language-basque: 
     language-bulgarian: 
     language-catalan: 
@@ -230,6 +251,7 @@ nl:
       search-placeholder-text: Voeg een zoekfunctie toe
     search-collections: 
     search-collections-text: 
+    share: 
     sitemap: 
     terms-and-policies: 
     type: 

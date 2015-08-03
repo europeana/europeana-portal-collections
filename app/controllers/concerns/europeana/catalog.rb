@@ -1,3 +1,5 @@
+require 'net/http'
+
 module Europeana
   ##
   # Include this concern in a controller to give it Blacklight catalog features
@@ -11,14 +13,15 @@ module Europeana
     include ::Blacklight::Base
     include BlacklightConfig
     include ::Blacklight::Catalog
+    include ActiveSupport::Benchmarkable
 
     included do
       # Adds Blacklight nav action for Channels
       # @todo move to europeana-blacklight gem; not used by europeana-styleguide
       #   mustache templates
-      #add_nav_action(:channels, partial: 'channels/nav')
+      # add_nav_action(:channels, partial: 'channels/nav')
 
-      before_filter :retrieve_response_and_document_list,
+      before_action :retrieve_response_and_document_list,
                     if: :has_search_parameters?
 
       self.search_params_logic = true
@@ -30,32 +33,29 @@ module Europeana
 
     def search_results(user_params, search_params_logic)
       super.tap do |results|
-        results.first[:facet_queries] = query_facet_counts(user_params)
+        if has_search_parameters?
+          results.first[:facet_queries] = query_facet_counts(user_params)
+        end
       end
     end
 
+    # @todo Move to europeana-blacklight gem?
     def query_facet_counts(user_params)
-      # Ensure channels specific processors do not get triggered
-      qf_search_params_logic = Europeana::Blacklight::SearchBuilder.default_processor_chain
-
       query_facets = blacklight_config.facet_fields.select do |_, facet|
         facet.query &&
-        (facet.include_in_request ||
-        (facet.include_in_request.nil? &&
-        blacklight_config.add_facet_fields_to_solr_request))
+          (facet.include_in_request ||
+          (facet.include_in_request.nil? &&
+          blacklight_config.add_facet_fields_to_solr_request))
       end
 
       query_facet_counts = []
 
       query_facets.each_pair do |_facet_name, query_facet|
         query_facet.query.each_pair do |_field_name, query_field|
-          query_facet_params = user_params.dup
-          query_facet_params[:qf] ||= []
-          query_facet_params[:qf] << query_field[:fq]
-
-          query = search_builder(qf_search_params_logic).with(query_facet_params).query.merge(rows: 0, start: 1, profile: 'minimal')
+          query = search_builder_class.new(search_params_logic, self).
+            with(user_params).with_overlay_params(query_field[:fq] || {}).query.
+            merge(rows: 0, start: 1, profile: 'minimal')
           query_facet_response = repository.search(query)
-
           query_facet_counts.push([query_field[:fq], query_facet_response.total])
         end
       end
@@ -92,7 +92,38 @@ module Europeana
       [response, response.documents.first]
     end
 
+    def more_like_this(document, field = nil, extra_controller_params = {})
+      mlt_params = params.dup.slice(:page, :per_page)
+      mlt_params.merge!(mlt: document.id, mltf: field)
+      mlt_params.merge!(extra_controller_params)
+      search_results(mlt_params, search_params_logic)
+    end
+
+    def media_mime_type(document)
+      edm_is_shown_by = document.fetch('aggregations.edmIsShownBy', []).first
+      return nil if edm_is_shown_by.nil?
+
+      cache_key = "Europeana/MediaProxy/#{edm_is_shown_by}"
+      mime_type = Rails.cache.fetch(cache_key)
+      if mime_type.nil?
+        mime_type = remote_content_type_header(document)
+        Rails.cache.write(cache_key, mime_type) unless mime_type.nil?
+      end
+
+      mime_type
+    end
+
     protected
+
+    def remote_content_type_header(document)
+      url = URI(ENV['EDM_IS_SHOWN_BY_PROXY'] + document.id)
+      benchmark("[Media Proxy] #{url}", level: :info) do
+        Net::HTTP.start(url.host, url.port) do |http|
+          response = http.head(url.path)
+          response['content-type']
+        end
+      end
+    end
 
     def search_action_url(options = {})
       case

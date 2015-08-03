@@ -1,6 +1,6 @@
 # Europeana Channels
 
-[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=188-coveralls)](https://coveralls.io/r/europeana/europeana-channels-blacklight?branch=master)
+[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=master&service=github)](https://coveralls.io/github/europeana/europeana-channels-blacklight?branch=master) [![security](https://hakiri.io/github/europeana/europeana-channels-blacklight/master.svg)](https://hakiri.io/github/europeana/europeana-channels-blacklight/master)
 
 Europeana Channels as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
@@ -13,7 +13,8 @@ For full details, see [LICENSE.md](LICENSE.md).
 
 ## Requirements
 
-* Ruby 2.2.1
+* Ruby 2.2.2
+* ImageMagick
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
 
@@ -51,6 +52,11 @@ http://labs.europeana.eu/api/registration/
 
 The base URL of the Europeana API. This only needs to be set if you are not
 using the live production version of the API.
+
+#### EUROPEANA_STYLEGUIDE_CDN
+
+The base URL of the Europeana styleguide from which images, stylesheets and
+javascripts will be loaded.
 
 #### EDM_IS_SHOWN_BY_PROXY
 
@@ -101,15 +107,25 @@ files in that directory for example configuration settings.
 
 ### Testing
 
-Use the command `rpec` from the project root to run the unit tests.
-
-Use the command `rspec spec/features` from the project root to run the
-integration tests.
+Use the command `bundle exec rspec` from the project root to run the RSpec
+tests.
 
 The integration tests use the poltergeist gem which has an external dependency
 on phantomjs. See here for installation instructions:
 https://github.com/teampoltergeist/poltergeist/tree/v1.6.0#installing-phantomjs
 
+### File storage
+
+Files are stored using Paperclip. To configure it, create config/paperclip.yml
+with any options required to configure your file storage system, e.g. fog.
+
+In a development environment, the following will suffice:
+
+```yaml
+# config/paperclip.yml
+development:
+  storage: :filesystem
+```
 
 ### Cache store
 
@@ -139,10 +155,22 @@ production:
 
 ## Usage
 
-Run the app with the Puma web server: `bundle exec puma -C config/puma.rb`
+The application consists of three components:
 
-By default, Puma will listen on the port defined in the `PORT` environment
-variable, or 3000 by default.
+1. Web: `bundle exec puma -C config/puma.rb`
+
+  By default, Puma will listen on the port defined in the `PORT` environment
+  variable, or 3000 by default.
+2. Worker: `bundle exec rake jobs:work`
+3. Scheduler: `bundle exec clockwork lib/clock.rb`
+
+The commands for these components are declared in the [Procfile](Procfile).
+
+In production, if your environment supports it you can use this Procfile.
+Otherwise, you will need to configure deployment scripts to run each process.
+
+In development, you can launch the application with all processes using foreman:
+`foreman start`
 
 ## Contributing
 

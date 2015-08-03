@@ -1,60 +1,57 @@
-require 'rails_helper'
-
-
-RSpec.feature 'Object page', :type => :feature do
-  
+RSpec.feature 'Object page' do
   describe 'Navigation' do
-      
-    it 'expects working previous / next links', js: true   do
-      
-      visit '/'
-      fill_in('q', with: 'Paris')
-      
-      
-      # without the following 'expect' assertion the subsequent 'find' will fail
-      
-      expect(page).to have_css('.searchbar button.search-submit')
-      find('.searchbar button.search-submit').trigger('click')
+    context 'with JS', js: true do
+      it 'expects working previous / next links' do
+        visit '/'
 
+        sleep 3
 
-      sleep 2
-            
-      # without the following 'expect' assertion the subsequent 'find' will fail
+        fill_in('q', with: 'paris')
 
-      expect(page).to have_css('.results-list ol.result-items li h1 a')
-      first('.results-list ol.result-items li h1 a').click
+        click_button('Search')
 
-            
-      expect(page).to have_selector('.next')
-      
-      page_title = page.title
+        sleep 3
 
-      
-      # next 
-            
-      find('.next a').click
+        find('.results-list ol.result-items li:first-child h1 a').click
 
-      expect(page).to have_css('.next a')
-      expect(page).to have_css('.previous a')
+        sleep 3
 
-      assert page.title != page_title
+        expect(page).to have_css('.next')
 
-      # prev 
-            
-      find('.previous a').click
-      assert page.title == page_title
-      
+        page_title_1 = page.title
+
+        find('.next a').click
+
+        sleep 3
+
+        page_title_2 = page.title
+
+        expect(page).to have_css('.next a')
+        expect(page).to have_css('.previous a')
+
+        expect(page_title_1).not_to eq(page_title_2)
+
+        find('.previous a').click
+
+        sleep 3
+
+        expect(page.title).to eq(page_title_1)
+      end
     end
-    
-    it 'expects javascript to load large images', js: true  do
-    
-      visit '/record/90402/SK_A_2344.html?js=1'
 
-      expect(page).to have_selector('.object-image')
-      expect(page).to have_css('.js-img-frame')
-      
+    context 'without JS', js: false do
+      it 'expects no working previous / next links' do
+        visit '/'
+
+        fill_in('q', with: 'paris')
+
+        click_button('Search')
+
+        page.all('.results-list ol.result-items li h1 a')[2].click
+
+        expect(page).not_to have_css('.next')
+        expect(page).not_to have_css('.previous')
+      end
     end
-    
   end
-
 end

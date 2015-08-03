@@ -7,7 +7,7 @@ class PortalController < ApplicationController
   include Europeana::Catalog
   include Europeana::Styleguide
 
-  before_filter :redirect_to_root, only: :index, unless: :has_search_parameters?
+  before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
 
   # GET /search
   def index
@@ -16,10 +16,12 @@ class PortalController < ApplicationController
     end
   end
 
-  # GET /record/:provider_id/:record_id
+  # GET /record/:id
   def show
     @response, @document = fetch_with_hierarchy(doc_id)
-    _mlt_response, @similar = @document.more_like_this
+    _mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
+    @mime_type = media_mime_type(@document)
+    @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
       format.html do
@@ -29,5 +31,19 @@ class PortalController < ApplicationController
       format.json { render json: { response: { document: @document } } }
       additional_export_formats(@document, format)
     end
+  end
+
+  # GET /record/:id/similar
+  def similar
+    _response, document = fetch(doc_id)
+    @response, @similar = more_like_this(document, params[:mltf], per_page: params[:per_page] || 4)
+    respond_to do |format|
+      format.json { render :similar, layout: false }
+    end
+  end
+
+  def static
+    @page = params[:page]
+    render 'templates/Search/search-static-page'
   end
 end

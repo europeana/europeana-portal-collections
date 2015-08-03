@@ -2,35 +2,43 @@ nl:
   global:
     labs-link: 'link naar labs '
     labs-text: tekst over labs
+    navigation:
+      home: 
     pro-link: link naar pro
     pro-text: tekst voor pro
     settings: tekst voor settings
   site:
+    alpha:
+      feedback_banner:
+        description: 
+        link-text: 
+        title: 
     blog-link: link naar de blog
     channels:
       art:
-        description: 
-        title: 
+        description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
+        title: Kunst Kanaal
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D objecten
+        count: objecten
+        images: Afbeeldingen
+        moving-images: Bewegende afbeeldingen
+        sound: Geluidsopnames
+        texts: Tekst
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Gecureerd door
+        recent: Recent toegevoegd
+        spotlight-on: In de spotlight
       music:
         description: 
-        title: 
+        title: Europeana Muziek
     facet:
       language:
         show:
           results: Resulaten
     footer:
       menu:
+        about: 
         become-a-provider: 
         copyright: 
         data-providers: 
@@ -48,31 +56,85 @@ nl:
         download: Download
         download-additional: 
         downloaddata: Download informatie
+        open-media: 
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
+        technicalmetadata: 
       meta-label:
+        codec: 
+        collection-name: 
         concept: Soort object
         concepts: Categorieën
+        consists-of: 
+        contributor: 
+        copyright: 
         creation-date: Datum vervaardigd
         creator: Van
+        current-location: 
         data-provider: 
+        date: 
         dates: 
         description: Omschrijving
+        dimensions: 
+        duration: 
+        edm:
+          has-met: 
+          incorporates: 
+          is-derivative-of: 
+          is-representation-of: 
+          is-similar-to: 
+          is-successor-of: 
+          realises: 
+          was-present-at: 
+        extent: 
+        file-size: 
         format: Formaat
+        fps: 
+        has-type: 
+        identifier: 
+        is-format-of: 
+        is-part-of: 
+        is-referenced-by: 
+        is-replaced-by: 
+        is-required-by: 
+        issued: 
+        language: Taal
         latitude: Breedtegraad
         location: Plaats
         longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
+        medium: 
+        people: 
         period: Tijdvak
+        place: 
+        place-time: 
         properties: Eigenschappen
-        provenance: Herkomst
+        provenance: Bron
         provided-by: 
+        provided-by-detail: 
         provider: 
         providing-country: 
+        publication-date: 
         publisher: Uitgeverij
-        rights: Mag ik dit gebruiken?
+        references: 
+        refs-rels: 
+        relations: 
+        rights: 
+        rights-human: Mag ik dit gebruiken?
+        runtime: 
+        source: Bron en Herkomst
+        subject: 
+        temporal: 
+        time: 
+        timestamp-created: 
+        timestamp-updated: 
+        timestamp_created: 
+        timestamp_updated: 
+        toc: 
         type: Type
+        ugc: 
+        version: 
       nav:
         next: 
         prev: 
@@ -84,6 +146,13 @@ nl:
         west: 
       show-more-similar-items: toon meer
       similar-items: 
+    pages:
+      about:
+        text: 
+        title: 
+      music-channel-about:
+        text: 
+        title: 
     results:
       actions:
         configure-actions: 
@@ -106,6 +175,8 @@ nl:
         header: 
         header-and: 
         in-channel: 
+        less: 
+        more: 
         product-3D: 
         product-image: 
         product-sound: 

@@ -1,3 +1,5 @@
+require 'stache/mustache/view/method_missing_view_arity'
+
 ##
 # A custom class for this project's Mustache templates
 #
@@ -49,6 +51,7 @@ class ApplicationView < Stache::Mustache::View
   # Whether or not to enable debugging in Mustache templates
   #
   # Override this in a template-specific view class to enable debugging there.
+  # The overriden method should return the textual debug output.
   #
   # This method is required here to prevent templates hitting the helper
   # method {ActionView::Helpers::DebugHelper#debug} which will raise an
@@ -58,6 +61,8 @@ class ApplicationView < Stache::Mustache::View
   def debug
     false
   end
+
+  protected
 
   def only_call_once(key)
     @only_call_once ||= {}

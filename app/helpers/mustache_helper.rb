@@ -10,16 +10,27 @@ module MustacheHelper
     ]
   end
 
+  # @todo This belongs in individual view classes
   def page_title
-    if @response.nil?
-      @channel ? t('site.channels.' + @channel.id.to_s + '.title') : 'Europeana Channels'
-    elsif @response['action'].to_s == 'search.json'
-      'Europeana Search' + search_page_title
-    elsif params[:action].to_s == 'show'
-      if @document.is_a?(Blacklight::Document)
-        rec = @document.fetch(:title, ['']).join(', ')
-        'Europeana Record' + (rec.present? ? ': ' + rec : rec)
+    if @page
+      static_title = case @page
+                     when 'about'
+                       t('site.pages.about.title')
+                     when 'channels/music/about'
+                       t('site.pages.music-channel-about.title')
+                     end
+      [static_title, 'Europeana'].compact.join(' - ')
+    elsif @response.nil?
+      if @channel.nil?
+        'Europeana Collections - Alpha'
+      else
+        t('site.channels.' + @channel.id.to_s + '.title') + ' Channel - Alpha'
       end
+    elsif @response['action'].to_s == 'search.json'
+      search_page_title + ' - Europeana - Search results'
+    elsif @document.is_a?(Blacklight::Document)
+      rec = @document.fetch(:title, ['']).join(', ')
+      (rec.present? ? rec + ' - ' : '') + 'Europeana'
     end
   end
 
@@ -31,10 +42,8 @@ module MustacheHelper
 
   def head_links
     [
-      { rel: 'search',         type: 'application/opensearchdescription+xml', href: request.host_with_port + '/catalog/opensearch.xml', title: 'Blacklight' },
-      { rel: 'shortcut icon',  type: 'image/x-icon',                          href: asset_path('favicon.ico') },
-#      { rel: 'stylesheet',     href: asset_path('blacklight.css'),            media: 'all' },
-      { rel: 'stylesheet',     href: asset_path('europeana.css'),             media: 'all' }
+      # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
+      { rel: 'stylesheet', href: styleguide_path('/css/search/screen.css'), media: 'all' }
     ]
   end
 
@@ -54,43 +63,22 @@ module MustacheHelper
   end
 
   def image_root
-    'http://develop.styleguide.eanadev.org/images/'
+    styleguide_path('/images/')
+  end
+
+  def version
+    { is_alpha: true }
   end
 
   def js_variables
-    'var js_path= "http://develop.styleguide.eanadev.org/js/dist/";'
-    #'var js_path= "http://localhost/Europeana-Patternlab/public/js/dist/";'
+    "var js_path='" + styleguide_path('/js/dist/') + "';"
   end
 
   def js_files
-    [
-      #{ path: asset_path('jquery.js') },
-
-      #{ path: 'http://develop.styleguide.eanadev.org/js/dist/global.js' },
-      #{ path: 'http://develop.styleguide.eanadev.org/js/dist/channels.js' },
-
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/channels.js' },
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/global.js' },
-      
-      #{ path: 'http://localhost/Europeana-Patternlab/public/js/dist/require.js',  data_main: 'http://localhost/Europeana-Patternlab/public/js/dist/main'},
-      { path: 'http://develop.styleguide.eanadev.org/js/dist/require.js',  data_main: 'http://develop.styleguide.eanadev.org/js/dist/main'},
-
-      # Blacklight dependencies
-      #{ path: asset_path('turbolinks.js') },
-      #{ path: asset_path('blacklight/core.js') },
-      #{ path: asset_path('blacklight/autofocus.js') },
-      #{ path: asset_path('blacklight/checkbox_submit.js') },
-      #{ path: asset_path('blacklight/bookmark_toggle.js') },
-      #{ path: asset_path('blacklight/ajax_modal.js') },
-#      { path: asset_path('blacklight/search_context.js') }
-      #{ path: asset_path('blacklight/collapsable.js') },
-      #{ path: asset_path('bootstrap/transition.js') },
-      #{ path: asset_path('bootstrap/collapse.js') },
-      #{ path: asset_path('bootstrap/dropdown.js') },
-      #{ path: asset_path('bootstrap/alert.js') },
-      #{ path: asset_path('bootstrap/modal.js') },
-      #{ path: asset_path('blacklight/blacklight.js') }
-    ]
+    js_entry_point = ENV['JS_ENTRYPOINT'] || '/js/dist/'
+    js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
+    [{ path: styleguide_path(js_entry_point + 'require.js'),
+       data_main: styleguide_path(js_entry_point + 'main/main') }]
   end
 
   def menus
@@ -187,120 +175,118 @@ module MustacheHelper
 
   def page_config
     {
-      :newsletter  => true
+      newsletter: false
     }
   end
 
   def search_page_title
-    return '' if params[:q].nil?
-
-    ': ' + [params[:q]].flatten.join(', ')
+    params[:q].nil? ? '' : [params[:q]].flatten.join(', ')
   end
 
-
-  def navigation_global
-  {
-      :options => {
-        :search_active  => false,
-        :settings_active  => true
-      },
-
-      :logo  => {
-        :url  => "/",
-        :text  => "Europeana Search"
-      },
-
-      :primary_nav  => {
-        :items  => [
-          {
-            :url  => "#",
-            :text  => "Home",
-            :is_current  => true
-          },
-          {
-            :url  => "",
-            :text  => "Channels",
-            :submenu  => {
-              :items  => [
-                {
-                  :url  => "http://google.com",
-                  :text  => "Channel 1"
-                },
-                {
-                  :url  => "http://google.com",
-                  :text  => "Channel 2",
-                  :is_current  => true
-                },
-                {
-                  :url  => "http://google.com",
-                  :text  => "Channel 3"
-                }
-              ]
-            }
-          },
-          {
-            :url   =>  "",
-            :text  =>  "Exhibitions"
-          },
-          {
-            :url   => "",
-            :text  => "Blog"
-          },
-          {
-            :url   => "",
-            :text  => "My Europeana"
-          }
-        ]
-    },
-
-    :footer  => common_footer
-  }
-  end
-
-  def common_footer
+  def navigation
     {
-      :linklist1  => {
-        :title  => "More info",
-        :items  =>  [
-          {
-            :text  => "New collections",
-            :url   => "http://google.com"
-          },
-          {
-            :text => "All data providers",
-            :url  => "http://google.com"
-          },
-          {
-            :text =>  "Become a data provider",
-            :url  => "http://google.com"
-          }
-        ]
+      global: {
+        options: {
+          search_active: false,
+          settings_active: false
+        },
+        logo: {
+          url: root_url,
+          text: 'Europeana Search'
+        },
+        primary_nav: {
+          items: [
+            {
+              url: root_url,
+              text: 'Home',
+              is_current: controller.controller_name != 'channels'
+            },
+            # {
+            #   url: channel_url('music'),
+            #   text: 'Channels',
+            #   is_current: controller.controller_name == 'channels',
+            #   submenu: {
+            #     items: [
+            #       {
+            #         url: channel_url('art'),
+            #         text: 'Art History'
+            #       },
+            #       {
+            #         url: channel_url('music'),
+            #         text: 'Music'
+            #       }
+            #     ]
+            #   }
+            # },
+            # {
+            #   url: 'http://exhibitions.europeana.eu/',
+            #   text: 'Exhibitions'
+            # },
+            # {
+            #   url: 'http://blog.europeana.eu/',
+            #   text: 'Blog'
+            # },
+            # {
+            #   url: 'http://www.europeana.eu/portal/myeuropeana#login',
+            #   text: 'My Europeana'
+            # }
+          ]
+        }  # end prim nav
       },
-      :linklist2 => {
-        :title  =>  "Help",
-        :items  =>  [
-          {
-            :text => "Search tips",
-            :url  => "http://google.com"
-          },
-          {
-            :text =>  "Using My Europeana",
-            :url  => "http://google.com"
-          },
-          {
-            :text  => "Copyright",
-            :url   => "http://google.com"
-          }
-        ]
-      },
-      :social  => {
-        :facebook   => true,
-        :pinterest  => true,
-        :twitter    => true,
-        :googleplus => true
+      footer: {
+        linklist1: {
+          title: t('global.more-info'),
+          items: [
+            {
+              text: t('site.footer.menu.about'),
+              url: root_url + '/about.html'
+            }
+            # {
+            #   text: t('site.footer.menu.new-collections'),
+            #   url: '#'
+            # },
+            # {
+            #   text: t('site.footer.menu.data-providers'),
+            #   url: '#'
+            # },
+            # {
+            #   text: t('site.footer.menu.become-a-provider'),
+            #   url: '#'
+            # }
+          ]
+        },
+        xxx_linklist2: {
+          title: t('global.help'),
+          items: [
+            {
+              text: t('site.footer.menu.search-tips'),
+              url: '#'
+            },
+            {
+              text: t('site.footer.menu.using-myeuropeana'),
+              url: '#'
+            },
+            {
+              text: t('site.footer.menu.copyright'),
+              url: '#'
+            }
+          ]
+        },
+        social: {
+          facebook: true,
+          pinterest: true,
+          twitter: true,
+          googleplus: true
+        }
       }
     }
   end
+
+  def styleguide_path(asset = nil)
+    ENV['EUROPEANA_STYLEGUIDE_CDN'] + (asset.present? ? asset : '')
+  end
+
+  private
 
   # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]
@@ -342,8 +328,8 @@ module MustacheHelper
     [:qf, :mlt]
   end
 
-  def news_items
-    @blog_items[0..2].collect do |item|
+  def news_items(items)
+    items[0..2].map do |item|
       {
         image_root: nil,
         headline: {
@@ -367,6 +353,8 @@ module MustacheHelper
     return nil unless item.content.present?
     img_tag = item.content.match(/<img [^>]*>/i)[0]
     return nil unless img_tag.present?
-    img_tag.match(/src="([^"]*)"/i)[1]
+    url = img_tag.match(/src="([^"]*)"/i)[1]
+    mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
+    mo.nil? ? nil : mo.file.url(:medium)
   end
 end

@@ -3,9 +3,10 @@ module Europeana
     extend ActiveSupport::Concern
     include ChannelsHelper
 
-    included do
-      self.search_params_logic = Europeana::Blacklight::SearchBuilder.default_processor_chain +
-        [:add_channel_qf_to_api]
+    ##
+    # Adds channel filter params to the API query
+    def search_builder(processor_chain = search_params_logic)
+      super(processor_chain).with_overlay_params(current_channel.config[:params])
     end
 
     def has_search_parameters?
@@ -18,7 +19,7 @@ module Europeana
     # @return [Channel]
     def current_channel
       return nil unless within_channel?
-      Channel.find(params[:id].to_sym)
+      Channel.find(params[:id])
     end
 
     ##
@@ -27,17 +28,7 @@ module Europeana
     # @return [Channel]
     def current_search_channel
       return nil unless current_search_session.query_params[:id]
-      Channel.find(current_search_session.query_params[:id].to_sym)
-    end
-
-    ##
-    # Looks up and returns any additional hidden query parameters used to
-    # restrict results to the active channel.
-    #
-    # @return [String]
-    def channels_search_query
-      channel = current_channel || current_search_channel
-      channel.nil? ? nil : channel.query
+      Channel.find(current_search_session.query_params[:id])
     end
   end
 end

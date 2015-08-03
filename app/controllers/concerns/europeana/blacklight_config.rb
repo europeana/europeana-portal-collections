@@ -1,6 +1,13 @@
 module Europeana
   ##
   # Configures Blacklight for Europeana Portal & Channels
+  #
+  # In the configuration for query facet fields, the :fq option is a Hash, to
+  # permit specification of multiple parameters to be passed to the API.
+  #
+  # *Warning:* query facets are achieved by sending additional queries to the
+  # API. If you configure 10 query facets, this will result in an additional
+  # 10 queries being sent to the API.
   module BlacklightConfig
     extend ActiveSupport::Concern
     include ::Blacklight::Base
@@ -9,7 +16,7 @@ module Europeana
       def self.channels_query_facet
         channels = Europeana::Portal::Application.config.channels.dup
         channels.each_with_object({}) do |(k, v), hash|
-          hash[k] = { label: k, fq: v[:query] }
+          hash[k] = { label: k, fq: v[:params] }
         end
       end
 
@@ -26,6 +33,10 @@ module Europeana
         config.response_model = Europeana::Blacklight::Response
         config.document_model = Europeana::Blacklight::Document
         config.document_presenter_class = MustacheDocumentPresenter
+
+        # Europeana API caching
+        config.europeana_api_cache = Rails.cache
+        config.europeana_api_cache_expires_in = 24.hours
 
         # items to show per page, each number in the array represents another
         # option to choose from.
@@ -48,18 +59,14 @@ module Europeana
         config.add_index_field 'dataProvider'
         config.add_index_field 'edmIsShownAt'
 
-        # Max number of rows to retrieve for each facet
-        config.default_facet_limit = 7
-
         # Facet fields in the order they should be displayed.
-        config.add_facet_field 'CHANNEL', query: channels_query_facet
-        config.add_facet_field 'TYPE', limit: true
-        config.add_facet_field 'YEAR', limit: 30, range: true
-        config.add_facet_field 'REUSABILITY', limit: true
-        config.add_facet_field 'COUNTRY', limit: true
-        config.add_facet_field 'LANGUAGE', limit: true
-        config.add_facet_field 'PROVIDER', limit: true
-        config.add_facet_field 'DATA_PROVIDER', limit: true
+        # config.add_facet_field 'CHANNEL', query: channels_query_facet
+        config.add_facet_field 'TYPE'
+        config.add_facet_field 'REUSABILITY'
+        config.add_facet_field 'COUNTRY'
+        config.add_facet_field 'LANGUAGE'
+        config.add_facet_field 'PROVIDER'
+        config.add_facet_field 'DATA_PROVIDER'
 
         # Send all facet field names to Solr.
         config.add_facet_fields_to_solr_request!

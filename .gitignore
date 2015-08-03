@@ -13,13 +13,23 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+*.log
 /tmp
 
 # Ignore database config file.
 /config/database.yml
 
+# Ignore Paperclip config file
+/config/paperclip.yml
+
 # Ignore Redis config file.
 /config/redis.yml
+
+# Ignore MongoDB config file.
+/config/mongoid.yml
+
+# Ignore Spring config file.
+/config/spring.rb
 
 # Ignore rvm files.
 .ruby-version
@@ -27,12 +37,16 @@
 
 # Ignore IDE files.
 *.komodoproject
+/.idea
 
 # Ignore os files.
 .DS_Store
 
 # Ignore compiled assets
 /public/assets
+
+# Ignore uploaded files
+/public/system
 
 # Ignore dotenv config files.
 /.env
@@ -41,8 +55,8 @@
 # Ignore code coverage analysis output.
 /coverage
 
-# Ignore Cloud Foundry manifest
-/manifest.yml
+# Ignore Cloud Foundry manifests
+/manifest*.yml
 
 # Ignore Redis snapshot
 *.rdb
