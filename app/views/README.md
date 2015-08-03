@@ -17,9 +17,26 @@ a template of the same file name beneath this directory.
 
 ## File naming
 
-View classes need to be named according to Ruby file naming conventions, but
-the Mustache templates may have other characters in their file names, such as
-uppercase letters and dashes. This may result in directory structures like so:
+To remain consistent with Rails conventions, it is recommended to follow its
+naming convention for templates, and then render within them the required
+styleguide page template.
 
-* /app/views/templates/search/search_home.rb
-* /app/views/templates/Search/Search-home.mustache
+## Example
+
+**/app/views/portal/index.rb**
+```ruby
+module Portal
+  class Index < ApplicationView
+    def page_title
+      'Europeana Portal'
+    end
+  end
+end
+```
+
+**/app/views/portal/index.html.mustache**
+```mustache
+{{>atoms/meta/_head}}
+{{>templates/Search/Search-results-list}}
+{{>atoms/meta/_foot}}
+```

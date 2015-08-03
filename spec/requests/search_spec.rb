@@ -19,7 +19,7 @@ RSpec.describe 'Search requests', :type => :request do
     end
 
     it 'renders the search results Mustache template' do
-      expect(response).to render_template('templates/Search/Search-results-list')
+      expect(response).to render_template('portal/index')
     end
 
     it 'displays the query term' do

@@ -12,7 +12,7 @@ class PortalController < ApplicationController
   # GET /search
   def index
     respond_to do |format|
-      format.html { render 'templates/Search/Search-results-list' }
+      format.html
     end
   end
 
@@ -26,7 +26,7 @@ class PortalController < ApplicationController
     respond_to do |format|
       format.html do
         setup_next_and_previous_documents
-        render template: 'templates/Search/Search-object'
+        render action: 'show'
       end
       format.json { render json: { response: { document: @document } } }
       additional_export_formats(@document, format)
@@ -44,6 +44,8 @@ class PortalController < ApplicationController
 
   def static
     @page = params[:page]
-    render 'templates/Search/search-static-page'
+    respond_to do |format|
+      format.html
+    end
   end
 end
