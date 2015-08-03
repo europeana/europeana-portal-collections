@@ -12,12 +12,6 @@ module Templates
         }
       end
 
-      def page_config
-        {
-          newsletter: true
-        }
-      end
-
       def content
         {
           channel_info: {
