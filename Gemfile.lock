@@ -118,7 +118,7 @@ GEM
     europeana-api (0.3.4)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-    europeana-blacklight (0.2.4)
+    europeana-blacklight (0.2.5)
       blacklight (>= 5.12.0, < 6.0.0)
       europeana-api (~> 0.3.4)
       kaminari (~> 0.16)
@@ -445,7 +445,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 1.0.2)
   europeana-api (~> 0.3.4)
-  europeana-blacklight (= 0.2.4)
+  europeana-blacklight (= 0.2.5)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog
