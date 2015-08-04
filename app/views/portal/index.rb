@@ -120,7 +120,7 @@ module Portal
 
     def show_pagination_separator?(page_index, page_number, pages_shown)
       (page_index == 1 && @response.current_page > 2) ||
-      (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
+        (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
     end
 
     def search_result_for_document(doc, counter)
@@ -284,18 +284,10 @@ module Portal
     end
 
     def concept_labels(doc)
-      begin
-        labels =  doc.fetch('edmConceptPrefLabelLangAware')
-        if(!labels[0..3].nil?)
-        {
-          items: labels[0..3].map { |c| { text: c } }
-        }
-        else
-          []
-        end
-      rescue KeyError
-        []
-      end
+      labels =  doc.fetch('edmConceptPrefLabelLangAware', [])
+      {
+        items: labels[0..3].map { |c| { text: c } }
+      }
     end
 
     def form_search_hidden

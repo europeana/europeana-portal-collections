@@ -633,7 +633,7 @@ module Portal
     def download_disabled(rights)
       disabled = false
       ['http://www.europeana.eu/rights/rr-p',
-       'http://www.europeana.eu/rights/rr-r/'].map do | blacklisted |
+       'http://www.europeana.eu/rights/rr-r/'].map do |blacklisted|
         if rights.index(blacklisted) == 0
           disabled = true
         end
