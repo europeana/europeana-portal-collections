@@ -1,7 +1,7 @@
 ##
 # Home page
 class HomeController < ApplicationController
-  include Europeana::Catalog
+  include Catalog
   include Europeana::Styleguide
   include BlogFetcher
 

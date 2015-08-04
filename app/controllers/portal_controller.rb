@@ -4,7 +4,7 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
-  include Europeana::Catalog
+  include Catalog
   include Europeana::Styleguide
 
   before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
