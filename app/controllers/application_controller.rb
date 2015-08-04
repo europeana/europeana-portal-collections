@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
-  layout proc { kind_of?(Europeana::Styleguide) ? 'portal' : 'application' }
+  layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale

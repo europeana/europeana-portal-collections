@@ -1,4 +1,4 @@
-RSpec.describe 'templates/Search/Search-object.html.mustache' do
+RSpec.describe 'portal/show.html.mustache' do
   let(:blacklight_config) do
     Blacklight::Configuration.new do |config|
       config.index.title_field = 'title_display'

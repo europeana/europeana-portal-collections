@@ -68,7 +68,7 @@ RSpec.describe ChannelsController, type: :controller do
 
         it 'renders channels landing template' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('templates/Search/Channels-landing')
+          expect(response).to render_template('channels/show')
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe ChannelsController, type: :controller do
 
         it 'renders search results template' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('templates/Search/Search-results-list')
+          expect(response).to render_template('portal/index')
         end
       end
     end
