@@ -1,3 +1,4 @@
+
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
@@ -765,12 +766,15 @@ module Portal
           media_type: media_type,
           rights: simple_rights_label_data(media_rights),
           downloadable: true,
-          playable: true
+          playable: true,
+          thumbnail: edm_preview
         }
 
         if download_disabled(media_rights)
           item[:downloadable] = false
         end
+
+        # disable play / download
 
         if @mime_type == 'video/mpeg'
           item[:playable] = false
@@ -790,8 +794,6 @@ module Portal
           item[:downloadable] = false
         end
 
-        item['thumbnail'] = edm_preview
-
         if media_type == 'image'
           item['is_image'] = true
           players << { image: true }
@@ -800,11 +802,12 @@ module Portal
           # - full image needed for the others
           # - metadata service needed
           if web_resource_url != edm_resource_url
-            item['thumbnail'] = web_resource_url
+            item[:thumbnail] = web_resource_url
           end
         elsif media_type == 'audio' || media_type == 'sound'
           item['is_audio'] = true
           players << { audio: true }
+          item[:thumbnail] = item[:thumbnail] || 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
         elsif media_type == 'pdf'
           item['is_pdf'] = true
           players << { pdf: true }
