@@ -8,9 +8,9 @@ gem 'europeana-styleguide',
   ref: 'c17b7a381d'
 
 
-# Use a forked version of stache with a downstream fix, until merged upstream
-# @see https://github.com/agoragames/stache/pull/53
-gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
+# Use a forked version of stache with downstream changes, until merged upstream
+# @see https://github.com/agoragames/stache/pulls/rwd
+gem 'stache', github: 'rwd/stache', ref: '819ff88'
 
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight', '~> 5.14.0'
