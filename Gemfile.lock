@@ -1,19 +1,19 @@
 GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 4f07ab1ee5bcac6064b12fd5656537792261b41f
-  ref: 4f07ab1ee5
-  specs:
-    europeana-styleguide (0.1.0)
-      activesupport (~> 4.0)
-      mustache (~> 1.0.1)
-      stache (~> 1.1.1)
-
-GIT
   remote: git://github.com/rwd/stache.git
   revision: d1408f18d14c1d1697e522a397d2c7bbb38bdd93
   ref: d1408f1
   specs:
     stache (1.1.1)
+
+GIT
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: c17b7a381d5aa80c871174cd522f6dd47a3dca24
+  ref: c17b7a381d
+  specs:
+    europeana-styleguide (0.1.0)
+      activesupport (~> 4.0)
+      mustache (~> 1.0.1)
+      stache (~> 1.1.1)
 
 GEM
   remote: https://rubygems.org/
