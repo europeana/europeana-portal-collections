@@ -754,7 +754,7 @@ module Portal
       # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
       # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
       collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
-        identifier.sub( identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
+        identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
 
       ids[identifier] || collections[collection]
     end
@@ -787,7 +787,7 @@ module Portal
         collection = render_document_show_field_value(document, 'europeanaCollectionName')
         manifesto = iiif_manifesto(identifier, collection)
 
-        if(manifesto)
+        if manifesto
           media_type = 'iiif'
         end
 
@@ -893,9 +893,10 @@ module Portal
           item[:is_current] = true
           items.unshift(item)
         else
-          # disable all web resources apart from the edm_is_shown_by for the beta launch
           items << item
         end
+        # only show first (the edm_is_shown_by or an iiiif manifest)
+        items = [items.first]
       end
       {
         required_players: players.uniq,
