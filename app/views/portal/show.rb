@@ -1,3 +1,4 @@
+
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
@@ -739,6 +740,25 @@ module Portal
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
+    # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis
+    def iiif_manifesto(identifier, collection)
+      ids = Hash.new
+      collections = Hash.new
+
+      # test url: http://localhost:3000/portal/record/9200365/BibliographicResource_3000094705862.html?debug=json
+      ids['http://gallica.bnf.fr/ark:/12148/btv1b84539771'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
+
+      # test url: http://localhost:3000/portal/record/92082/BibliographicResource_1000157170184.html?debug=json
+      ids['http://gallica.bnf.fr/ark:/12148/btv1b530193948'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
+
+      # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
+      # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
+      collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
+        identifier.sub( identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
+
+      ids[identifier] || collections[collection]
+    end
+
     def media_items
       aggregation = document.aggregations.first
       return [] unless aggregation.respond_to?(:webResources)
@@ -754,23 +774,36 @@ module Portal
         edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
         edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         media_rights = render_document_show_field_value(web_resource, 'webResourceEdmRights')
+
         if media_rights.nil?
           media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
         end
+
         media_type = media_type(web_resource_url)
         media_type = media_type || render_document_show_field_value(document, 'type')
         media_type = media_type.downcase
+
+        identifier = render_document_show_field_value(document, 'proxies.dcIdentifier')
+        collection = render_document_show_field_value(document, 'europeanaCollectionName')
+        manifesto = iiif_manifesto(identifier, collection)
+
+        if(manifesto)
+          media_type = 'iiif'
+        end
 
         item = {
           media_type: media_type,
           rights: simple_rights_label_data(media_rights),
           downloadable: true,
-          playable: true
+          playable: true,
+          thumbnail: edm_preview
         }
 
         if download_disabled(media_rights)
           item[:downloadable] = false
         end
+
+        # disable play / download
 
         if @mime_type == 'video/mpeg'
           item[:playable] = false
@@ -790,8 +823,6 @@ module Portal
           item[:downloadable] = false
         end
 
-        item['thumbnail'] = edm_preview
-
         if media_type == 'image'
           item['is_image'] = true
           players << { image: true }
@@ -800,11 +831,15 @@ module Portal
           # - full image needed for the others
           # - metadata service needed
           if web_resource_url != edm_resource_url
-            item['thumbnail'] = web_resource_url
+            item[:thumbnail] = web_resource_url
           end
         elsif media_type == 'audio' || media_type == 'sound'
           item['is_audio'] = true
           players << { audio: true }
+          item[:thumbnail] = item[:thumbnail] || 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
+        elsif media_type == 'iiif'
+          item['is_iiif'] = true
+          players << { iiif: true }
         elsif media_type == 'pdf'
           item['is_pdf'] = true
           players << { pdf: true }
@@ -824,6 +859,8 @@ module Portal
 
         if @mime_type == 'application/pdf' || @mime_type == 'audio/flac'
           item['play_url'] = edm_is_shown_by_download_url
+        elsif !manifesto.nil?
+          item['play_url'] = manifesto
         else
           item['play_url'] = web_resource_url
         end
@@ -857,14 +894,14 @@ module Portal
           items.unshift(item)
         else
           # disable all web resources apart from the edm_is_shown_by for the beta launch
-          # items << item
+          items << item
         end
       end
       {
         required_players: players.uniq,
-        single_item: items.size == 1,
+        single_item: items.uniq.size == 1,
         empty_item: items.size == 0,
-        items: items
+        items: items.uniq
       }
     end
   end
