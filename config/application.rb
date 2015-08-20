@@ -59,6 +59,11 @@ module Europeana
       rescue RuntimeError
         :null_store
       end
+
+      # Read settings from env vars
+      config.x.edm_is_shown_by_proxy = ENV['EDM_IS_SHOWN_BY_PROXY']
+      config.x.europeana_styleguide_cdn = ENV['EUROPEANA_STYLEGUIDE_CDN']
+      config.x.js_entrypoint = ENV['JS_ENTRYPOINT']
     end
   end
 end
