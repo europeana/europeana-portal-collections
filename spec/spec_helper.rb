@@ -17,8 +17,17 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'simplecov'
 require 'coveralls'
-Coveralls.wear!('rails') unless Coveralls.will_run?.nil?
+
+if Coveralls.will_run?.nil?
+  # Generate Simplecov report during local testing
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+  SimpleCov.start
+else
+  # Submit Coveralls report in CI env
+  Coveralls.wear!('rails')
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
