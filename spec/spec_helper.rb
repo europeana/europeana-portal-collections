@@ -22,7 +22,6 @@ require 'coveralls'
 
 if Coveralls.will_run?.nil?
   # Generate Simplecov report during local testing
-  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
   SimpleCov.start
 else
   # Submit Coveralls report in CI env
