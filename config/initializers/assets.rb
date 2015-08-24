@@ -30,6 +30,6 @@ Rails.application.config.assets.precompile.delete(Sprockets::Railtie::LOOSE_APP_
 Rails.application.config.assets.precompile << lambda do |filename, path|
   path =~ /rails_admin/ && !%w(.js .css).include?(File.extname(filename))
 end
-Rails.application.config.assets.precompile << lambda do |filename, path|
+Rails.application.config.assets.precompile << lambda do |_filename, path|
   path =~ /fontawesome-/
 end

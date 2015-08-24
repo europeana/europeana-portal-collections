@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   # Devise modules.
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
-    :validatable
+         :validatable
 
   before_save do
     self.role = 'user' if role.blank?
