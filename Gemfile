@@ -3,21 +3,21 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.2.3'
 
-# Use the Europeana styleguide for UI components (templates)
 gem 'europeana-styleguide',
-  github: 'europeana/europeana-styleguide-ruby',
-  tag: 'v0.1.0'
+  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
+  ref: '86ba4d7480'
 
-# Use a forked version of stache with a downstream fix, until merged upstream
-# @see https://github.com/agoragames/stache/pull/53
-gem 'stache', github: 'rwd/stache', ref: 'd1408f1'
+
+# Use a forked version of stache with downstream changes, until merged upstream
+# @see https://github.com/agoragames/stache/pulls/rwd
+gem 'stache', github: 'rwd/stache', ref: '819ff88'
 
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight', '~> 5.14.0'
 gem 'clockwork', '~> 1.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'europeana-api', '~> 0.3.4'
-gem 'europeana-blacklight', '0.2.3'
+gem 'europeana-blacklight', '0.2.5'
 gem 'feedjira', '~> 2.0'
 gem 'fog'
 gem 'htmlcompressor'

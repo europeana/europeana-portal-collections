@@ -149,6 +149,9 @@ en:
       show-more-similar-items: show more
       similar-items: Similar items
     pages:
+      '404':
+        intro: Sorry, we can't find that page
+        text: Unfortunately we couldn't find the page you were looking for. Try searching Europeana or you might like the selected items below.
       about:
         text: |-
           <p>Whether you came here for inspiration, to work on your research, looking for your next coffee mug design or just to snoop around, we hope you will find what you need somewhere amongst the 45 million objects we host here.</p>

@@ -10,30 +10,6 @@ module MustacheHelper
     ]
   end
 
-  # @todo This belongs in individual view classes
-  def page_title
-    if @page
-      static_title = case @page
-                     when 'about'
-                       t('site.pages.about.title')
-                     when 'channels/music/about'
-                       t('site.pages.music-channel-about.title')
-                     end
-      [static_title, 'Europeana'].compact.join(' - ')
-    elsif @response.nil?
-      if @channel.nil?
-        'Europeana Collections - Alpha'
-      else
-        t('site.channels.' + @channel.id.to_s + '.title') + ' Channel - Alpha'
-      end
-    elsif @response['action'].to_s == 'search.json'
-      search_page_title + ' - Europeana - Search results'
-    elsif @document.is_a?(Blacklight::Document)
-      rec = @document.fetch(:title, ['']).join(', ')
-      (rec.present? ? rec + ' - ' : '') + 'Europeana'
-    end
-  end
-
   def form_search
     {
       action: search_action_path(only_path: true)
@@ -177,10 +153,6 @@ module MustacheHelper
     {
       newsletter: false
     }
-  end
-
-  def search_page_title
-    params[:q].nil? ? '' : [params[:q]].flatten.join(', ')
   end
 
   def navigation

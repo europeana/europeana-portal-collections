@@ -147,6 +147,9 @@ nl:
       show-more-similar-items: toon meer
       similar-items: 
     pages:
+      '404':
+        intro: 
+        text: 
       about:
         text: 
         title: 

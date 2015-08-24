@@ -1,19 +1,19 @@
 GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 351281fef8a6216c0ea9e18b3710b31456293443
-  tag: v0.1.0
+  remote: git://github.com/rwd/stache.git
+  revision: 819ff888bf0c109f4592ffd26fb2c1e2922980ef
+  ref: 819ff88
+  specs:
+    stache (1.1.1)
+
+GIT
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: 86ba4d74804070820d0212ad2fc82aab45cf3e1e
+  ref: 86ba4d7480
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
-
-GIT
-  remote: git://github.com/rwd/stache.git
-  revision: d1408f18d14c1d1697e522a397d2c7bbb38bdd93
-  ref: d1408f1
-  specs:
-    stache (1.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -118,7 +118,7 @@ GEM
     europeana-api (0.3.4)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-    europeana-blacklight (0.2.3)
+    europeana-blacklight (0.2.5)
       blacklight (>= 5.12.0, < 6.0.0)
       europeana-api (~> 0.3.4)
       kaminari (~> 0.16)
@@ -445,7 +445,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 1.0.2)
   europeana-api (~> 0.3.4)
-  europeana-blacklight (= 0.2.3)
+  europeana-blacklight (= 0.2.5)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog
@@ -470,6 +470,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   webmock (~> 1.21.0)
-
-BUNDLED WITH
-   1.10.6
