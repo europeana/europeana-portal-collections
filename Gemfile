@@ -14,8 +14,10 @@ gem 'stache', github: 'rwd/stache', ref: '819ff88'
 
 # pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight', '~> 5.14.0'
+gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
+gem 'devise', '~> 3.5'
 gem 'europeana-api', '~> 0.3.4'
 gem 'europeana-blacklight', '0.2.5'
 gem 'feedjira', '~> 2.0'
@@ -23,12 +25,14 @@ gem 'fog'
 gem 'htmlcompressor'
 gem 'mysql2'
 gem 'paperclip', '~> 4.3'
+gem 'paper_trail', '~> 4.0'
 gem 'puma', '~> 2.11.0'
+gem 'rails_admin', '~> 0.7.0'
 gem 'redis-rails', '~> 4.0'
+gem 'sass-rails'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
-  gem 'sass-rails'
   gem 'uglifier', '>= 1.3.0'
 end
 

@@ -15,5 +15,8 @@ Rails.application.routes.draw do
 
     # Static pages
     get ':page', to: 'portal#static', constraints: { page: %r{(about|channels/music/about)} }
+
+    mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
+    devise_for :users
   end
 end
