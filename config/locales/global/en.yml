@@ -184,7 +184,7 @@ en:
       year:
         from: from
         to: to
-    find-us-elsewhere: Who is afraid of the jabberwocky?
+    find-us-elsewhere: 
     forgot-password: Forgot your password?
     genres: genres
     genres-chamber-music: Chamber music
@@ -194,9 +194,16 @@ en:
     genres-opera: Opera
     genres-popular-music: Popular music
     genres-traditional-music: Traditional music
+    header:
+      connect: connect
+      develop: develop
+      discover: discover
+      network: network
     help: Help
     home: Home
     javascript-required: To view this content please enable JavaScript, and consider upgrading to a web browser that supports HTML5 content.
+    labs: labs
+    labs-text: A playground for remixing cultural content
     language-basque: Basque
     language-bulgarian: Bulgarian
     language-catalan: Catalan
@@ -238,8 +245,12 @@ en:
     our-mission-text: Who is afraid of the jabberwocky?
     our-sites: our sites
     password: Password
+    professional: professional
+    professional-text: For Culture Professionals
     refine-your-search: Refine your search
     register: Register
+    research: research
+    research-text: Connecting to the academic community
     rights-box:
       background-image-provider: 
       background-image-provider-url: 
@@ -250,7 +261,7 @@ en:
       search-button-image-alt: Search
       search-placeholder-text: Add a search term
     search-collections: search collections
-    search-collections-text: 
+    search-collections-text: Search through Europe's cultural heritage
     share: Share
     sitemap: Sitemap
     terms-and-policies: Terms and policies
