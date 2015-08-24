@@ -6,11 +6,11 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     unless user.role.blank?
-      send(:"is_#{user.role}!") # e.g. is_admin!
+      send(:"{user.role}!") # e.g. admin!
     end
   end
 
-  def is_admin!
+  def admin!
     can :access, :rails_admin
     can :dashboard
     can :manage, [User]
