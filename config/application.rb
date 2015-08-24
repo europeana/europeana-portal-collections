@@ -22,34 +22,7 @@ module Europeana
       # Application configuration should go into files in config/initializers
       # -- all .rb files in that directory are automatically loaded.
 
-      # Compress HTTP responses
-      config.middleware.use Rack::Deflater unless ENV['DISABLE_RACK_HTML_DEFLATER']
-
-      # Minify HTML
-      unless ENV['DISABLE_RACK_HTML_COMPRESSOR']
-        config.middleware.use HtmlCompressor::Rack,
-                              enabled: true,
-                              remove_multi_spaces: true,
-                              remove_comments: true,
-                              remove_intertag_spaces: false,
-                              remove_quotes: false,
-                              compress_css: false,
-                              compress_javascript: false,
-                              simple_doctype: false,
-                              remove_script_attributes: false,
-                              remove_style_attributes: false,
-                              remove_link_attributes: false,
-                              remove_form_attributes: false,
-                              remove_input_attributes: false,
-                              remove_javascript_protocol: false,
-                              remove_http_protocol: false,
-                              remove_https_protocol: false,
-                              preserve_line_breaks: false,
-                              simple_boolean_attributes: false,
-                              compress_js_templates: false
-      end
-
-      # Load job classes
+      # Load job and routing classes
       config.autoload_paths += %W(#{config.root}/app/jobs #{config.root}/app/routes)
 
       # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
@@ -87,27 +60,10 @@ module Europeana
         :null_store
       end
 
-      # Load Channels configuration files from config/channels/*.yml files
-      config.channels = begin
-        channel_yamls = Dir[Rails.root.join('config', 'channels', '*.yml')]
-        channel_yamls.each_with_object(HashWithIndifferentAccess.new) do |yml, hash|
-          channel = File.basename(yml, '.yml')
-          hash[channel] = YAML::load_file(yml)
-        end
-      end
-
-      # Paperclip file storage config
-      config.paperclip_defaults = {
-        path: ':class/:id_partition/:attachment/:fingerprint.:style.:extension',
-        styles: { small: '200>', medium: '400>', large: '600>' } # max-width
-      }
-      config.paperclip_defaults.merge! begin
-        paperclip_config = Rails.application.config_for(:paperclip)
-        fail RuntimeError unless paperclip_config.present?
-        paperclip_config.deep_symbolize_keys
-      rescue RuntimeError
-        {}
-      end
+      # Read settings from env vars
+      config.x.edm_is_shown_by_proxy = ENV['EDM_IS_SHOWN_BY_PROXY']
+      config.x.europeana_styleguide_cdn = ENV['EUROPEANA_STYLEGUIDE_CDN']
+      config.x.js_entrypoint = ENV['JS_ENTRYPOINT']
     end
   end
 end

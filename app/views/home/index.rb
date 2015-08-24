@@ -19,7 +19,7 @@ module Home
     private
 
     def config
-      Rails.application.config.channels[:home]
+      Rails.application.config.x.channels[:home]
     end
 
     def blog_news_items

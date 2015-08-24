@@ -13,7 +13,7 @@ module BlacklightConfig
 
   included do
     def self.channels_query_facet
-      channels = Europeana::Portal::Application.config.channels.dup
+      channels = Rails.application.config.x.channels.dup
       channels.each_with_object({}) do |(k, v), hash|
         hash[k] = { label: k, fq: v[:params] }
       end

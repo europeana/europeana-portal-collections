@@ -115,7 +115,7 @@ module Catalog
   protected
 
   def remote_content_type_header(document)
-    url = URI(ENV['EDM_IS_SHOWN_BY_PROXY'] + document.id)
+    url = URI(Rails.application.config.x.edm_is_shown_by_proxy + document.id)
     benchmark("[Media Proxy] #{url}", level: :info) do
       Net::HTTP.start(url.host, url.port) do |http|
         response = http.head(url.path)

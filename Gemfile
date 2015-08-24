@@ -52,6 +52,7 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'webmock', '~> 1.21.0'
 end
 
