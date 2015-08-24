@@ -3,6 +3,12 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
+if Rails.application.config.relative_url_root
+  Rails.application.config.assets.prefix = "#{Rails.application.config.relative_url_root}/assets"
+else
+  Rails.application.config.assets.prefix = '/assets'
+end
+
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
@@ -19,3 +25,11 @@ Rails.application.config.assets.version = '1.0'
 
 # Prevent default behaviour that adds all non-JS/CSS assets
 Rails.application.config.assets.precompile.delete(Sprockets::Railtie::LOOSE_APP_ASSETS)
+
+# RailsAdmin assets
+Rails.application.config.assets.precompile << lambda do |filename, path|
+  path =~ /rails_admin/ && !%w(.js .css).include?(File.extname(filename))
+end
+Rails.application.config.assets.precompile << lambda do |filename, path|
+  path =~ /fontawesome-/
+end
