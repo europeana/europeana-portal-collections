@@ -2,7 +2,7 @@
 # Channels helpers
 module ChannelsHelper
   def available_channels
-    Europeana::Portal::Application.config.channels.keys.sort
+    Rails.application.config.x.channels.keys.sort
   end
 
   def within_channel?(localized_params = params)

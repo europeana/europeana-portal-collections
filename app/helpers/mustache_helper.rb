@@ -51,7 +51,7 @@ module MustacheHelper
   end
 
   def js_files
-    js_entry_point = ENV['JS_ENTRYPOINT'] || '/js/dist/'
+    js_entry_point = Rails.application.config.x.js_entrypoint || '/js/dist/'
     js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
     [{ path: styleguide_path(js_entry_point + 'require.js'),
        data_main: styleguide_path(js_entry_point + 'main/main') }]
@@ -255,7 +255,7 @@ module MustacheHelper
   end
 
   def styleguide_path(asset = nil)
-    ENV['EUROPEANA_STYLEGUIDE_CDN'] + (asset.present? ? asset : '')
+    Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
   end
 
   private

@@ -194,9 +194,16 @@ nl:
     genres-opera: 
     genres-popular-music: 
     genres-traditional-music: 
+    header:
+      connect: 
+      develop: 
+      discover: 
+      network: 
     help: 
     home: 
     javascript-required: 
+    labs: 
+    labs-text: 
     language-basque: 
     language-bulgarian: 
     language-catalan: 
@@ -238,8 +245,12 @@ nl:
     our-mission-text: 
     our-sites: onze sites
     password: 
+    professional: 
+    professional-text: 
     refine-your-search: 
     register: 
+    research: 
+    research-text: 
     rights-box:
       background-image-provider: 
       background-image-provider-url: 
