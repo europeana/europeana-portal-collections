@@ -2,11 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Channel, type: :model do
   before do
-    app = class_double('Europeana::Portal::Application').as_stubbed_const
+    rails = class_double('Rails').as_stubbed_const
+    app = double('app')
     app_config = double('app config')
+    custom_config = double('custom config')
     channels_config = { 'art' => { query: 'pictures' }, 'music' => { query: 'sounds' } }
-    allow(app_config).to receive(:channels).and_return(channels_config)
+
+    allow(rails).to receive(:application).and_return(app)
     allow(app).to receive(:config).and_return(app_config)
+    allow(app_config).to receive(:x).and_return(custom_config)
+    allow(custom_config).to receive(:channels).and_return(channels_config)
   end
 
   describe '.find' do
@@ -15,7 +20,7 @@ RSpec.describe Channel, type: :model do
     end
 
     it 'looks to app config for a channel' do
-      expect(Europeana::Portal::Application).to receive(:config)
+      expect(Rails.application).to receive(:config)
       channel = Channel.find('art')
       expect(channel).to be_a(Channel)
       expect(channel.config).to eq({ query: 'pictures' })

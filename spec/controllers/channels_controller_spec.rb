@@ -46,7 +46,7 @@ RSpec.describe ChannelsController, type: :controller do
     end
 
     context 'with id=[known channel]' do
-      let(:channel_id) { Europeana::Portal::Application.config.channels.keys.reject { |k| k == 'home' }.first }
+      let(:channel_id) { Rails.application.config.x.channels.keys.reject { |k| k == 'home' }.first }
 
       context 'without search params' do
         let(:params) { { id: channel_id } }
