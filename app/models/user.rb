@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  delegate :can?, :cannot?, to: :ability
+
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
@@ -43,5 +45,9 @@ class User < ActiveRecord::Base
 
   def role_enum
     ROLES
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
   end
 end
