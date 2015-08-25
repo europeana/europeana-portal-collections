@@ -753,8 +753,10 @@ module Portal
 
       # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
       # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
-      collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
-        identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
+      if identifier
+        collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
+          identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
+      end
 
       ids[identifier] || collections[collection]
     end
