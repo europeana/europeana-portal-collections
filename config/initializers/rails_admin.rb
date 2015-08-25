@@ -24,4 +24,20 @@ RailsAdmin.config do |config|
     history_index
     history_show
   end
+
+  config.model 'User' do
+    object_label_method :email
+    list do
+      field :email
+      field :guest
+      field :role
+      field :current_sign_in_at
+    end
+    edit do
+      field :email
+      field :password
+      field :password_confirmation
+      field :role
+    end
+  end
 end

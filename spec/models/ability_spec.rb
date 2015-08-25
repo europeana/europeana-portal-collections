@@ -20,7 +20,7 @@ RSpec.describe Ability do
       expect(user.can?(:manage, MediaObject.new)).to be false
     end
   end
-  
+
   context 'when user role is "user"' do
     let(:role) { 'user' }
     it 'permits access to RailsAdmin' do

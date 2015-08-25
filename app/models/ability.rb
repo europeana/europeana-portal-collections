@@ -7,9 +7,11 @@ class Ability
     user ||= User.new # guest user (not logged in)
     unless user.role.blank?
       meth = :"#{user.role}!"
-      send(meth) if respond_to?(meth) # e.g. admin!
+      send(meth) if respond_to?(meth, true) # e.g. admin!
     end
   end
+
+  protected
 
   def admin!
     can :access, :rails_admin
