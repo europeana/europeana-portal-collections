@@ -8,7 +8,7 @@ RSpec.describe User do
     [Devise::Models::Trackable, Devise::Models::Validatable,
      Devise::Models::Recoverable, Devise::Models::Rememberable,
      Devise::Models::DatabaseAuthenticatable, Devise::Models::Authenticatable
-    ].each do |mod|      
+    ].each do |mod|
       it { is_expected.to include(mod) }
     end
   end
