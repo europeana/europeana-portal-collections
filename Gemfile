@@ -42,6 +42,7 @@ group :development, :test do
   # gem 'rails_best_practices', require: false # @todo add to CI suite
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '0.29.1', require: false
+  gem 'shoulda-matchers', '~> 2.8.0', require: false
 end
 
 group :development do

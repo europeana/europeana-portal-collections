@@ -5,8 +5,12 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+# Gem requires
 require 'capybara_helper'
+require 'shoulda/matchers'
 require 'webmock_helper'
+
+# Local requires
 require 'support/relative_url_root_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
