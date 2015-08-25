@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
-gem 'rails', '4.2.3'
+ruby '2.2.3'
+gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
@@ -19,11 +19,11 @@ gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'europeana-api', '~> 0.3.4'
 gem 'europeana-blacklight', '0.2.5'
 gem 'feedjira', '~> 2.0'
-gem 'fog'
-gem 'htmlcompressor'
-gem 'mysql2'
+gem 'fog', '~> 1.33'
+gem 'htmlcompressor', '0.2'
+gem 'mysql2', '~> 0.3.20'
 gem 'paperclip', '~> 4.3'
-gem 'puma', '~> 2.11.0'
+gem 'puma', '~> 2.13'
 gem 'redis-rails', '~> 4.0'
 
 group :production do
@@ -34,10 +34,10 @@ end
 
 group :development, :test do
   # gem 'brakeman', require: false # @todo add to CI suite
-  gem 'dotenv-rails', '~> 1.0.2'
+  gem 'dotenv-rails', '~> 2.0'
   # gem 'rails_best_practices', require: false # @todo add to CI suite
   gem 'rspec-rails', '~> 3.0'
-  gem 'rubocop', '0.29.1', require: false
+  gem 'rubocop', '0.29.1', require: false # only update when Hound does
 end
 
 group :development do
@@ -51,7 +51,7 @@ group :test do
   gem 'coveralls', require: false
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.47'
   gem 'simplecov', require: false
   gem 'webmock', '~> 1.21.0'
 end
