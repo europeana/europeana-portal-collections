@@ -100,6 +100,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    colorize (0.7.7)
     coveralls (0.8.2)
       json (~> 1.8)
       rest-client (>= 1.6.8, < 2)
@@ -505,6 +506,7 @@ DEPENDENCIES
   cancancan (~> 1.12)
   capybara (~> 2.4.0)
   clockwork (~> 1.2)
+  colorize
   coveralls
   database_cleaner (~> 1.4)
   delayed_job_active_record (~> 4.0.3)
