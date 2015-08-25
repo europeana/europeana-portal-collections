@@ -37,14 +37,14 @@ RSpec.describe User do
     context 'when blank' do
       it 'is set to "user"' do
         user = described_class.new(email: 'test@example.com', password: 'secret!!')
-        expect { user.save }.to change{ user.role }.to('user')
+        expect { user.save }.to change { user.role }.to('user')
       end
     end
 
     context 'when set' do
       let(:user) { described_class.new(email: 'test@example.com', password: 'secret!!', role: 'admin') }
       it 'is preserved' do
-        expect { user.save }.not_to change{ user.role }
+        expect { user.save }.not_to change { user.role }
       end
     end
   end
