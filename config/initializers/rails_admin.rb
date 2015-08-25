@@ -25,6 +25,14 @@ RailsAdmin.config do |config|
     history_show
   end
 
+  config.model 'Channel' do
+    object_label_method :title
+    list do
+      field :key
+      field :title
+    end
+  end
+
   config.model 'User' do
     object_label_method :email
     list do

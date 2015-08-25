@@ -5,7 +5,7 @@ module Channels
   ##
   # Adds channel filter params to the API query
   def search_builder(processor_chain = search_params_logic)
-    super(processor_chain).with_overlay_params(current_channel.config[:params])
+    super(processor_chain).with_overlay_params(current_channel.api_params)
   end
 
   def has_search_parameters?
@@ -18,7 +18,7 @@ module Channels
   # @return [Channel]
   def current_channel
     return nil unless within_channel?
-    Channel.find(params[:id])
+    Channel.find_by_key!(params[:id])
   end
 
   ##
@@ -27,6 +27,6 @@ module Channels
   # @return [Channel]
   def current_search_channel
     return nil unless current_search_session.query_params[:id]
-    Channel.find(current_search_session.query_params[:id])
+    Channel.find_by_key!(current_search_session.query_params[:id])
   end
 end

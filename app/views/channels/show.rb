@@ -1,7 +1,7 @@
 module Channels
   class Show < ApplicationView
     def page_title
-      t('site.channels.' + @channel.id.to_s + '.title') + ' Channel - Alpha'
+      t('site.channels.' + @channel.key + '.title') + ' Channel - Alpha'
     end
 
     def body_class
@@ -18,8 +18,8 @@ module Channels
     def content
       {
         channel_info: {
-          name: t('site.channels.' + @channel.id.to_s + '.title'),
-          description: t('site.channels.' + @channel.id.to_s + '.description'),
+          name: t('site.channels.' + @channel.key + '.title'),
+          description: t('site.channels.' + @channel.key + '.description'),
           stats: {
             items: stylised_channel_stats
           },
@@ -50,7 +50,7 @@ module Channels
     private
 
     def channel_content
-      @channel_content ||= @channel.config[:content] || {}
+      @channel_content ||= {} #@channel.config[:content] || {}
     end
 
     def blog_news_items

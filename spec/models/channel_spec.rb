@@ -1,45 +1,23 @@
-require 'rails_helper'
+RSpec.describe Channel do
+  it { should validate_presence_of(:key) }
+  it { should validate_uniqueness_of(:key) }
+  it { should validate_presence_of(:api_params) }
 
-RSpec.describe Channel, type: :model do
-  before do
-    rails = class_double('Rails').as_stubbed_const
-    app = double('app')
-    app_config = double('app config')
-    custom_config = double('custom config')
-    channels_config = { 'art' => { query: 'pictures' }, 'music' => { query: 'sounds' } }
-
-    allow(rails).to receive(:application).and_return(app)
-    allow(app).to receive(:config).and_return(app_config)
-    allow(app_config).to receive(:x).and_return(custom_config)
-    allow(custom_config).to receive(:channels).and_return(channels_config)
-  end
-
-  describe '.find' do
-    it 'validates requested channel' do
-      expect { Channel.find('unknown') }.to raise_error(Channels::Errors::NoChannelConfiguration)
-    end
-
-    it 'looks to app config for a channel' do
-      expect(Rails.application).to receive(:config)
-      channel = Channel.find('art')
-      expect(channel).to be_a(Channel)
-      expect(channel.config).to eq({ query: 'pictures' })
+  describe '#title' do
+    let(:channel_title) { 'All about fishing' }
+    it 'should be looked up in I18n locale' do
+      I18n.locale = :en
+      I18n.backend.store_translations(:en, site: { channels: { fishing: { title: channel_title } } })
+      channel = FactoryGirl.create(:channel, key: 'fishing')
+      expect(channel.title).to eq(channel_title)
     end
   end
 
-  describe '#initialize' do
-    it 'requires Symbol arg' do
-      expect { Channel.new(:art) }.to raise_error(/Channel ID must be a String/)
-      expect { Channel.new('art') }.not_to raise_error
-    end
-  end
-
-  describe '#method_missing' do
-    it 'looks up data in config' do
-      channel = Channel.new('history')
-      channel.config = { query: 'old' }
-      expect { channel.query }.not_to raise_error
-      expect(channel.query).to eq('old')
+  describe '#to_param' do
+    context 'when key eq "literature"' do
+      let(:channel) { FactoryGirl.create(:channel, key: 'literature') }
+      subject { channel.to_param }
+      it { is_expected.to eq(channel.key) }
     end
   end
 end

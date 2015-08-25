@@ -21,7 +21,8 @@ RSpec.describe ChannelsController, type: :controller do
     end
 
     context 'with id=home' do
-      let(:params) { { id: 'home' } }
+      let(:channel) { FactoryGirl.create(:channel, key: 'home') }
+      let(:params) { { id: channel.key } }
 
       it 'does not query API' do
         expect(an_api_search_request).not_to have_been_made
@@ -46,10 +47,10 @@ RSpec.describe ChannelsController, type: :controller do
     end
 
     context 'with id=[known channel]' do
-      let(:channel_id) { Rails.application.config.x.channels.keys.reject { |k| k == 'home' }.first }
+      let(:channel) { FactoryGirl.create(:channel, :music) }
 
       context 'without search params' do
-        let(:params) { { id: channel_id } }
+        let(:params) { { id: channel.key } }
 
         it 'queries API for channel stats' do
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
@@ -73,7 +74,7 @@ RSpec.describe ChannelsController, type: :controller do
       end
 
       context 'with search params' do
-        let(:params) { { id: channel_id, q: 'search' } }
+        let(:params) { { id: channel.key, q: 'search' } }
 
         it 'queries API' do
           expect(an_api_search_request).to have_been_made.at_least_once

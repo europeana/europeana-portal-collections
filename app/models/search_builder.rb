@@ -7,7 +7,7 @@ class SearchBuilder < Europeana::Blacklight::SearchBuilder
   # "Overlay" params do not replace others, but are combined with them, into
   # multiple values for those param keys
   def with_overlay_params(overlay_params = {})
-    @overlay_params = overlay_params
+    @overlay_params = overlay_params.is_a?(String) ? Rack::Utils.parse_query(overlay_params) : overlay_params
     self
   end
 
