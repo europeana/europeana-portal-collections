@@ -830,9 +830,9 @@ module Portal
           # we only have a thumbnail for the first
           # - full image needed for the others
           # - metadata service needed
-          if web_resource_url != edm_resource_url
-            item[:thumbnail] = web_resource_url
-          end
+          #if web_resource_url != edm_resource_url
+          #  item[:thumbnail] = web_resource_url
+          #end
         elsif media_type == 'audio' || media_type == 'sound'
           item['is_audio'] = true
           players << { audio: true }
