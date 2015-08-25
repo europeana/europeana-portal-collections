@@ -11,7 +11,7 @@ RSpec.describe Ability do
       expect(user.can?(:access, :rails_admin)).to be false
     end
     it 'permits access to admin dashboard' do
-      expect(user.can?(:access, :dashboard)).to be false
+      expect(user.can?(:dashboard, nil)).to be false
     end
     it 'permits access to manage users' do
       expect(user.can?(:manage, User.new)).to be false
@@ -27,7 +27,7 @@ RSpec.describe Ability do
       expect(user.can?(:access, :rails_admin)).to be false
     end
     it 'permits access to admin dashboard' do
-      expect(user.can?(:access, :dashboard)).to be false
+      expect(user.can?(:dashboard, nil)).to be false
     end
     it 'permits access to manage users' do
       expect(user.can?(:manage, User.new)).to be false
@@ -43,7 +43,7 @@ RSpec.describe Ability do
       expect(user.can?(:access, :rails_admin)).to be true
     end
     it 'permits access to admin dashboard' do
-      expect(user.can?(:access, :dashboard)).to be true
+      expect(user.can?(:dashboard, nil)).to be true
     end
     it 'permits access to manage users' do
       expect(user.can?(:manage, User.new)).to be true
