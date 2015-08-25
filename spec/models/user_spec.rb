@@ -3,12 +3,13 @@ RSpec.describe User do
     expect(described_class).to include(Blacklight::User)
   end
 
-  [Devise::Models::Trackable, Devise::Models::Validatable,
-   Devise::Models::Recoverable, Devise::Models::Rememberable,
-   Devise::Models::DatabaseAuthenticatable, Devise::Models::Authenticatable
-  ].each do |mod|
-    it "is #{mod.to_s.demodulize.titleize} with Devise" do
-      expect(described_class).to include(mod)
+  describe 'Devise modules' do
+    subject { described_class }
+    [Devise::Models::Trackable, Devise::Models::Validatable,
+     Devise::Models::Recoverable, Devise::Models::Rememberable,
+     Devise::Models::DatabaseAuthenticatable, Devise::Models::Authenticatable
+    ].each do |mod|      
+      it { is_expected.to include(mod) }
     end
   end
 
@@ -17,17 +18,15 @@ RSpec.describe User do
   end
 
   describe '::ROLES' do
-    it 'contains required user roles for the app' do
-      expect(described_class::ROLES).to eq(%w(user admin))
-    end
+    subject { described_class::ROLES }
+    it { is_expected.to eq(%w(user admin)) }
   end
 
   it { is_expected.to validate_inclusion_of(:role).in_array(%w(user admin)) }
 
   describe '#ability' do
-    it 'returns instance of Ability for the user' do
-      expect(described_class.new.ability).to be_a(Ability)
-    end
+    subject { FactoryGirl.create(:user).ability }
+    it { is_expected.to be_a(Ability) }
   end
 
   it { is_expected.to delegate_method(:can?).to(:ability) }
@@ -35,14 +34,14 @@ RSpec.describe User do
 
   describe '#role' do
     context 'when blank' do
+      let(:user) { FactoryGirl.build(:user, :guest) }
       it 'is set to "user"' do
-        user = described_class.new(email: 'test@example.com', password: 'secret!!')
         expect { user.save }.to change { user.role }.to('user')
       end
     end
 
     context 'when set' do
-      let(:user) { described_class.new(email: 'test@example.com', password: 'secret!!', role: 'admin') }
+      let(:user) { FactoryGirl.create(:user, :admin) }
       it 'is preserved' do
         expect { user.save }.not_to change { user.role }
       end
@@ -50,8 +49,7 @@ RSpec.describe User do
   end
 
   describe '#role_enum' do
-    it 'returns valid roles' do
-      expect(described_class.new.role_enum).to eq(described_class::ROLES)
-    end
+    subject { FactoryGirl.create(:user).role_enum }
+    it { is_expected.to eq(described_class::ROLES) }
   end
 end
