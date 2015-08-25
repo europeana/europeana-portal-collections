@@ -1,4 +1,6 @@
 module Portal
+  ##
+  # Portal search results view
   class Index < ApplicationView
     def page_title
       [params[:q], 'Europeana - Search results'].compact.join(' - ')

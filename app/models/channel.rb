@@ -13,12 +13,12 @@ class Channel
   attr_accessor :config
 
   def self.find(id)
-    unless Europeana::Portal::Application.config.channels.key?(id)
+    unless Rails.application.config.x.channels.key?(id)
       fail Channels::Errors::NoChannelConfiguration,
            "Channel \"#{id}\" is not configured"
     end
     channel = new(id)
-    channel.config = Europeana::Portal::Application.config.channels[id]
+    channel.config = Rails.application.config.x.channels[id]
     channel
   end
 

@@ -7,8 +7,8 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 86ba4d74804070820d0212ad2fc82aab45cf3e1e
-  ref: 86ba4d7480
+  revision: 1d2fbc628f5f4302455aa69bf68ce420b053fb14
+  ref: 1d2fbc628f
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -465,6 +465,7 @@ DEPENDENCIES
   sass-rails
   sdoc (~> 0.4.0)
   selenium-webdriver
+  simplecov
   spring (~> 1.3.6)
   stache!
   uglifier (>= 1.3.0)
