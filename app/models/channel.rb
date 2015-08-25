@@ -5,7 +5,7 @@ class Channel < ActiveRecord::Base
   validates :api_params, presence: true
 
   def title
-    I18n.t("site.channels.#{self.key}.title")
+    I18n.t("site.channels.#{key}.title")
   end
 
   def to_param

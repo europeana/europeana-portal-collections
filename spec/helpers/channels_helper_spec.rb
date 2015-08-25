@@ -9,7 +9,7 @@ RSpec.describe ChannelsHelper, type: :helper do
     end
     subject { helper.available_channels }
     it 'should eq channel keys' do
-      expect(subject).to eq(Channel.all.collect(&:key))
+      expect(subject).to eq(Channel.all.map(&:key))
     end
   end
   
