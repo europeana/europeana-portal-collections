@@ -1,6 +1,6 @@
 # Europeana Channels
 
-[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=master&service=github)](https://coveralls.io/github/europeana/europeana-channels-blacklight?branch=master) [![security](https://hakiri.io/github/europeana/europeana-channels-blacklight/master.svg)](https://hakiri.io/github/europeana/europeana-channels-blacklight/master)
+[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=master&service=github)](https://coveralls.io/github/europeana/europeana-channels-blacklight?branch=master) [![security](https://hakiri.io/github/europeana/europeana-channels-blacklight/master.svg)](https://hakiri.io/github/europeana/europeana-channels-blacklight/master) [![Dependency Status](https://gemnasium.com/europeana/europeana-channels-blacklight.svg)](https://gemnasium.com/europeana/europeana-channels-blacklight)
 
 Europeana Channels as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
