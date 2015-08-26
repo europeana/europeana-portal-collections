@@ -1,11 +1,13 @@
 RSpec.describe User do
-  it 'includes Blacklight::User' do
-    expect(described_class).to include(Blacklight::User)
-  end
+  it { is_expected.to delegate_method(:role_enum).to(:class) }
+  it { is_expected.to validate_inclusion_of(:role).in_array(%w(user admin)) }
+  it { is_expected.to delegate_method(:can?).to(:ability) }
+  it { is_expected.to delegate_method(:cannot?).to(:ability) }
 
-  describe 'Devise modules' do
+  describe 'included modules' do
     subject { described_class }
-    [Devise::Models::Trackable, Devise::Models::Validatable,
+    [PaperTrail::Model::InstanceMethods, Blacklight::User,
+     Devise::Models::Trackable, Devise::Models::Validatable,
      Devise::Models::Recoverable, Devise::Models::Rememberable,
      Devise::Models::DatabaseAuthenticatable, Devise::Models::Authenticatable
     ].each do |mod|
@@ -13,24 +15,15 @@ RSpec.describe User do
     end
   end
 
-  it 'has paper trail' do
-    expect(described_class).to include(PaperTrail::Model::InstanceMethods)
-  end
-
-  describe '::ROLES' do
-    subject { described_class::ROLES }
+  describe '.role_enum' do
+    subject { described_class.role_enum }
     it { is_expected.to eq(%w(user admin)) }
   end
-
-  it { is_expected.to validate_inclusion_of(:role).in_array(%w(user admin)) }
 
   describe '#ability' do
     subject { FactoryGirl.create(:user).ability }
     it { is_expected.to be_a(Ability) }
   end
-
-  it { is_expected.to delegate_method(:can?).to(:ability) }
-  it { is_expected.to delegate_method(:cannot?).to(:ability) }
 
   describe '#role' do
     context 'when blank' do
@@ -46,10 +39,5 @@ RSpec.describe User do
         expect { user.save }.not_to change { user.role }
       end
     end
-  end
-
-  describe '#role_enum' do
-    subject { FactoryGirl.create(:user).role_enum }
-    it { is_expected.to eq(described_class::ROLES) }
   end
 end

@@ -6,6 +6,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Gem requires
+require 'cancan/matchers'
 require 'capybara_helper'
 require 'shoulda/matchers'
 require 'webmock_helper'

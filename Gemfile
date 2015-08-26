@@ -7,7 +7,6 @@ gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
   ref: '2eb1f49084'
 
-
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'rwd/stache', ref: '819ff88'

@@ -16,6 +16,6 @@ class Ability
   def admin!
     can :access, :rails_admin
     can :dashboard
-    can :manage, [Channel, User]
+    can :manage, [Channel, HeroImage, LandingPage, Link, MediaObject, User]
   end
 end
