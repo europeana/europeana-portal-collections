@@ -119,7 +119,7 @@ GEM
     europeana-api (0.3.4)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-    europeana-blacklight (0.2.5)
+    europeana-blacklight (0.2.6)
       blacklight (>= 5.12.0, < 6.0.0)
       europeana-api (~> 0.3.4)
       kaminari (~> 0.16)
@@ -413,7 +413,7 @@ GEM
     tins (1.5.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unf (0.1.4)
@@ -446,7 +446,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.3.4)
-  europeana-blacklight (= 0.2.5)
+  europeana-blacklight (= 0.2.6)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
@@ -469,7 +469,7 @@ DEPENDENCIES
   simplecov
   spring (~> 1.3.6)
   stache!
-  uglifier (>= 1.3.0)
+  uglifier (~> 2.7.2)
   web-console (~> 2.0)
   webmock (~> 1.21.0)
 
