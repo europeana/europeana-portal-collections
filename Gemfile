@@ -29,7 +29,7 @@ gem 'redis-rails', '~> 4.0'
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'sass-rails'
-  gem 'uglifier', '>= 1.3.0'
+  gem 'uglifier', '~> 2.7.2'
 end
 
 group :development, :test do
