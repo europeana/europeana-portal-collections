@@ -1,22 +1,16 @@
 Blacklight::Routes.send(:include, BlacklightRoutes)
 
 Rails.application.routes.draw do
-  unless Rails.application.config.relative_url_root.blank?
-    get '/', to: redirect(Rails.application.config.relative_url_root)
-  end
+  root to: 'home#index'
+  get 'search', to: 'portal#index'
 
-  scope Rails.application.config.relative_url_root || '/' do
-    root to: 'home#index'
-    get 'search', to: 'portal#index'
+  blacklight_for :portal
 
-    blacklight_for :portal
+  resources :channels, only: [:show, :index]
 
-    resources :channels, only: [:show, :index]
+  # Static pages
+  get ':page', to: 'portal#static', constraints: { page: %r{(about|channels/music/about)} }
 
-    # Static pages
-    get ':page', to: 'portal#static', constraints: { page: %r{(about|channels/music/about)} }
-
-    mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
-    devise_for :users
-  end
+  mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
+  devise_for :users
 end

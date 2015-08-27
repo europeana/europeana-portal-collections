@@ -3,12 +3,6 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
-if Rails.application.config.relative_url_root
-  Rails.application.config.assets.prefix = "#{Rails.application.config.relative_url_root}/assets"
-else
-  Rails.application.config.assets.prefix = '/assets'
-end
-
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
