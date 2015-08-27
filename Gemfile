@@ -17,7 +17,7 @@ gem 'blacklight', '~> 5.14.0'
 gem 'clockwork', '~> 1.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'europeana-api', '~> 0.3.4'
-gem 'europeana-blacklight', '0.2.5'
+gem 'europeana-blacklight', '0.2.6'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'htmlcompressor', '0.2'
@@ -29,7 +29,7 @@ gem 'redis-rails', '~> 4.0'
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'sass-rails'
-  gem 'uglifier', '>= 1.3.0'
+  gem 'uglifier', '~> 2.7.2'
 end
 
 group :development, :test do
