@@ -753,8 +753,10 @@ module Portal
 
       # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
       # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
-      collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
-        identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
+      if identifier
+        collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
+          identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
+      end
 
       ids[identifier] || collections[collection]
     end
@@ -770,6 +772,8 @@ module Portal
         # TODO: we're using 'document' values instead of 'web_resource' values
         # -this until the mime_type/edm_download / mimetypes start working for multiple items
 
+        mime_type = @mime_type
+
         web_resource_url = render_document_show_field_value(web_resource, 'about')
         edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
         edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
@@ -782,6 +786,12 @@ module Portal
         media_type = media_type(web_resource_url)
         media_type = media_type || render_document_show_field_value(document, 'type')
         media_type = media_type.downcase
+
+        if media_type == 'audio' && mime_type == 'application/octet-stream'
+          if !web_resource_url.index('.mp3').nil?
+            mime_type = 'audio/mpeg'
+          end
+        end
 
         identifier = render_document_show_field_value(document, 'proxies.dcIdentifier')
         collection = render_document_show_field_value(document, 'europeanaCollectionName')
@@ -805,20 +815,20 @@ module Portal
 
         # disable play / download
 
-        if @mime_type == 'video/mpeg'
+        if mime_type == 'video/mpeg'
           item[:playable] = false
         end
 
-        if @mime_type == 'audio/flac'
-          item[:playable] = false
+        if mime_type == 'audio/flac'
+          item[:playable] = true
         end
 
-        if media_type == 'text' && @mime_type == 'text/plain; charset=utf-8'
+        if media_type == 'text' && mime_type == 'text/plain; charset=utf-8'
           item[:playable] = false
           item[:downloadable] = false
         end
 
-        if media_type == 'video' && @mime_type == 'text/plain; charset=utf-8'
+        if media_type == 'video' && mime_type == 'text/plain; charset=utf-8'
           item[:playable] = false
           item[:downloadable] = false
         end
@@ -830,9 +840,9 @@ module Portal
           # we only have a thumbnail for the first
           # - full image needed for the others
           # - metadata service needed
-          if web_resource_url != edm_resource_url
-            item[:thumbnail] = web_resource_url
-          end
+          # if web_resource_url != edm_resource_url
+          #   item[:thumbnail] = web_resource_url
+          # end
         elsif media_type == 'audio' || media_type == 'sound'
           item['is_audio'] = true
           players << { audio: true }
@@ -844,7 +854,7 @@ module Portal
           item['is_pdf'] = true
           players << { pdf: true }
         elsif media_type == 'text'
-          if @mime_type == 'application/pdf'
+          if mime_type == 'application/pdf'
             item['is_pdf'] = true
             players << { pdf: true }
           else
@@ -857,7 +867,7 @@ module Portal
           item['is_unknown_type'] = render_document_show_field_value(web_resource, 'about')
         end
 
-        if @mime_type == 'application/pdf' || @mime_type == 'audio/flac'
+        if mime_type == 'application/pdf' || mime_type == 'audio/flac'
           item['play_url'] = edm_is_shown_by_download_url
         elsif !manifesto.nil?
           item['play_url'] = manifesto
@@ -872,7 +882,7 @@ module Portal
             text: t('site.object.actions.download')
           }
           item['technical_metadata'] = {
-            mime_type: @mime_type
+            mime_type: mime_type
             # language: "English",
             # format: "jpg",
             # file_size: "23.2",
