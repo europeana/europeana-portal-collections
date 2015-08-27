@@ -1,12 +1,16 @@
 class HeroImage < ActiveRecord::Base
   belongs_to :media_object
   accepts_nested_attributes_for :media_object
+  attr_accessor :delete_media_object
+  before_validation { self.media_object.clear if self.delete_media_object == '1' }
 
   serialize :attribution, HashWithIndifferentAccess
   serialize :brand, HashWithIndifferentAccess
 
   delegate :brand_circles_opacity_enum, :brand_circles_position_enum,
            :brand_circles_colour_enum, to: :class
+
+  delegate :file, to: :media_object
 
   has_paper_trail
 

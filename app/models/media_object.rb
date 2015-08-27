@@ -2,6 +2,10 @@ require 'digest/md5'
 
 class MediaObject < ActiveRecord::Base
   has_attached_file :file
+  attr_accessor :delete_file
+  before_validation { self.file.clear if self.delete_file == '1' }
+
+  has_many :hero_images, dependent: :nullify
 
   do_not_validate_attachment_file_type :file
 

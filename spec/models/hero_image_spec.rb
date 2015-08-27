@@ -2,6 +2,7 @@ RSpec.describe HeroImage do
   subject { FactoryGirl.create(:hero_image) }
 
   it { is_expected.to belong_to(:media_object) }
+  it { is_expected.to delegate_method(:file).to(:media_object) }
   it { is_expected.to serialize(:attribution) }
   it { is_expected.to serialize(:brand) }
   it { is_expected.to delegate_method(:brand_circles_opacity_enum).to(:class) }

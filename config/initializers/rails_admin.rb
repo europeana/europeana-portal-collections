@@ -33,12 +33,42 @@ RailsAdmin.config do |config|
       field :key
       field :title
     end
+    edit do
+      field :key
+      field :title
+    end
   end
 
   config.model 'HeroImage' do
     visible false
-    edit do
+    list do
       field :media_object
+      field :license
+    end
+    show do
+      field :file, :paperclip do
+        thumb_method :medium
+      end
+      field :license
+      group :brand do
+        field :brand_circles_opacity, :enum do
+          enum do
+            HeroImage.brand_circles_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
+          end
+        end
+        field :brand_circles_position, :enum
+        field :brand_circles_colour, :enum
+      end
+      group :attribution do
+        field :attribution_title
+        field :attribution_creator
+        field :attribution_institution
+        field :attribution_url
+        field :attribution_text, :text
+      end
+    end
+    edit do
+      field :file, :paperclip
       field :license
       group :brand do
         field :brand_circles_opacity, :enum do
@@ -60,6 +90,10 @@ RailsAdmin.config do |config|
   end
 
   config.model 'LandingPage' do
+    list do
+      field :channel
+      field :hero_image_file, :paperclip
+    end
     edit do
       field :channel
       field :credits
@@ -77,7 +111,9 @@ RailsAdmin.config do |config|
 
   config.model 'MediaObject' do
     visible false
-    field :file
+    field :file do
+      thumb_method :medium
+    end
   end
 
   config.model 'User' do

@@ -9,6 +9,7 @@ class ChannelsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :channel_not_found
 
   before_action :find_channel, only: :show
+  before_action :find_landing_page, only: :show
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
   before_action :fetch_blog_items, only: :show
 #  before_action :populate_channel_entry, only: :show, unless: :has_search_parameters?
@@ -49,6 +50,10 @@ class ChannelsController < ApplicationController
 
   def channel_not_found
     render file: 'public/404.html', status: 404
+  end
+
+  def find_landing_page
+    @landing_page = @channel.landing_page || LandingPage.new
   end
 
   def populate_channel_entry

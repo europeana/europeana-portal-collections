@@ -71,6 +71,13 @@ RSpec.describe ChannelsController, type: :controller do
           expect(response.status).to eq(200)
           expect(response).to render_template('channels/show')
         end
+
+        context 'with associated landing page' do
+          let(:landing_page) { FactoryGirl.create(:landing_page, :music_channel) }
+          it 'assigns @landing_page' do
+            expect(assigns(:landing_page)).to eq(landing_page)
+          end
+        end
       end
 
       context 'with search params' do
