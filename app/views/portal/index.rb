@@ -286,9 +286,9 @@ module Portal
     end
 
     def concept_labels(doc)
-      labels =  doc.fetch('edmConceptPrefLabelLangAware', [])
+      labels = doc.fetch('edmConceptPrefLabelLangAware', []) || []
       {
-        items: labels[0..3] ? labels[0..3].map { |c| { text: c } } : nil
+        items: labels[0..3].map { |c| { text: c } }
       }
     end
 
