@@ -202,8 +202,9 @@ en:
     help: Help
     home: Home
     javascript-required: To view this content please enable JavaScript, and consider upgrading to a web browser that supports HTML5 content.
-    labs: labs
-    labs-text: A playground for remixing cultural content
+    labs: Labs
+    labs-text: |
+      Remix cultural content with our APIs & datasets
     language-basque: Basque
     language-bulgarian: Bulgarian
     language-catalan: Catalan
@@ -245,11 +246,11 @@ en:
     our-mission-text: Who is afraid of the jabberwocky?
     our-sites: our sites
     password: Password
-    professional: professional
-    professional-text: For Culture Professionals
+    professional: Professional
+    professional-text: Get involved, share your data or use ours
     refine-your-search: Refine your search
     register: Register
-    research: research
+    research: Research
     research-text: Connecting to the academic community
     rights-box:
       background-image-provider: 
@@ -260,8 +261,8 @@ en:
     search-area:
       search-button-image-alt: Search
       search-placeholder-text: Add a search term
-    search-collections: search collections
-    search-collections-text: Search through Europe's cultural heritage
+    search-collections: Collections
+    search-collections-text: Explore Europe’s cultural heritage
     share: Share
     sitemap: Sitemap
     terms-and-policies: Terms and policies
