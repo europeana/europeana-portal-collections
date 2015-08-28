@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.2.2'
 gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '1d2fbc628f'
+  ref: '4852d6a'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -19,7 +19,7 @@ gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'devise', '~> 3.5'
 gem 'europeana-api', '~> 0.3.4'
-gem 'europeana-blacklight', '0.2.5'
+gem 'europeana-blacklight', '0.2.7'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'htmlcompressor', '0.2'
@@ -33,7 +33,7 @@ gem 'sass-rails'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
-  gem 'uglifier', '>= 1.3.0'
+  gem 'uglifier', '~> 2.7.2'
 end
 
 group :development, :test do
