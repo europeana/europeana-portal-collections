@@ -823,6 +823,10 @@ module Portal
           item[:playable] = true
         end
 
+        if media_type == 'audio' && mime_type.index('text/plain')
+          item[:playable] = false
+        end
+
         if media_type == 'text' && mime_type == 'text/plain; charset=utf-8'
           item[:playable] = false
           item[:downloadable] = false
