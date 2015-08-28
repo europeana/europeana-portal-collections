@@ -51,13 +51,13 @@ RailsAdmin.config do |config|
       end
       field :license
       group :brand do
-        field :brand_circles_opacity, :enum do
+        field :brand_opacity, :enum do
           enum do
-            HeroImage.brand_circles_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
+            HeroImage.brand_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
           end
         end
-        field :brand_circles_position, :enum
-        field :brand_circles_colour, :enum
+        field :brand_position, :enum
+        field :brand_colour, :enum
       end
       group :attribution do
         field :attribution_title
@@ -71,13 +71,13 @@ RailsAdmin.config do |config|
       field :file, :paperclip
       field :license
       group :brand do
-        field :brand_circles_opacity, :enum do
+        field :brand_opacity, :enum do
           enum do
-            HeroImage.brand_circles_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
+            HeroImage.brand_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
           end
         end
-        field :brand_circles_position, :enum
-        field :brand_circles_colour, :enum
+        field :brand_position, :enum
+        field :brand_colour, :enum
       end
       group :attribution do
         field :attribution_title

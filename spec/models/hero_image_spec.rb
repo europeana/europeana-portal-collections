@@ -5,9 +5,9 @@ RSpec.describe HeroImage do
   it { is_expected.to delegate_method(:file).to(:media_object) }
   it { is_expected.to serialize(:attribution) }
   it { is_expected.to serialize(:brand) }
-  it { is_expected.to delegate_method(:brand_circles_opacity_enum).to(:class) }
-  it { is_expected.to delegate_method(:brand_circles_position_enum).to(:class) }
-  it { is_expected.to delegate_method(:brand_circles_colour_enum).to(:class) }
+  it { is_expected.to delegate_method(:brand_opacity_enum).to(:class) }
+  it { is_expected.to delegate_method(:brand_position_enum).to(:class) }
+  it { is_expected.to delegate_method(:brand_colour_enum).to(:class) }
   it { is_expected.to accept_nested_attributes_for(:media_object) }
   it { is_expected.to validate_inclusion_of(:license).in_array(%w(CC0 CC-BY CC-BY-SA CC-BY-NC CC-BY-NC-ND CC-ND-NC-SA public)) }
 
@@ -21,25 +21,25 @@ RSpec.describe HeroImage do
     it { is_expected.to eq(%w(CC0 CC-BY CC-BY-SA CC-BY-NC CC-BY-NC-ND CC-ND-NC-SA public)) }
   end
 
-  describe '.brand_circles_opacity_enum' do
-    subject { described_class.brand_circles_opacity_enum }
+  describe '.brand_opacity_enum' do
+    subject { described_class.brand_opacity_enum }
     it { is_expected.to eq([25, 50, 75, 100]) }
   end
 
-  describe '.brand_circles_position_enum' do
-    subject { described_class.brand_circles_position_enum }
+  describe '.brand_position_enum' do
+    subject { described_class.brand_position_enum }
     it { is_expected.to eq(%w(topleft topright bottomleft bottomright)) }
   end
 
-  describe '.brand_circles_colour_enum' do
-    subject { described_class.brand_circles_colour_enum }
+  describe '.brand_colour_enum' do
+    subject { described_class.brand_colour_enum }
     it { is_expected.to eq(%w(site white black)) }
   end
 
   describe 'dynamic methods' do
     {
       attribution: %w(title creator institution url text),
-      brand: %w(circles_opacity circles_position circles_colour),
+      brand: %w(opacity position colour),
     }.each_pair do |attr, attr_meths|
       attr_meths.each do |meth|
         reader_meth = "#{attr}_#{meth}"

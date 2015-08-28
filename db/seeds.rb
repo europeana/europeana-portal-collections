@@ -1,11 +1,41 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-art_channel = Channel.create(
-  key: 'art',
-  api_params: '(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l\'art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d\'Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
-)
+# @return [MediaObject]
+def find_or_download_styleguide_image(path)
+  url = "http://styleguide.europeana.eu/images/#{path}"
+  url_hash = MediaObject.hash_source_url(url)
+  media_object = MediaObject.find_or_initialize_by(source_url_hash: url_hash)
+  if media_object.new_record?
+    media_object.source_url = url
+    media_object.save
+    DownloadRemoteMediaObjectJob.perform_later(url)
+  end
+  media_object
+end
 
+ActiveRecord::Base.transaction do
+  art_channel = Channel.create(
+    key: 'art',
+    api_params: '(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l\'art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d\'Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
+  )
+  art_hero = HeroImage.create(
+    attribution_title: 'Ships in a storm off a rocky coast',
+    attribution_creator: 'Jan Porcellis',
+    attribution_institution: 'Hallwylska museet',
+    attribution_url: '/portal/record/2048007/Athena_Plus_ProvidedCHO_Hallwylska_museet_14152.html',
+    license: 'public',
+    media_object: find_or_download_styleguide_image('sample/channel_hero_art.jpg')
+  )
+  art_landing = LandingPage.create(
+    channel: art_channel,
+    credits: [
+      Link.new(url: 'http://www.smk.dk/', text: 'National Gallery of Denmark'),
+      Link.new(url: 'https://www.rijksmuseum.nl/', text: 'Rijksmuseum')
+    ],
+    hero_image: art_hero
+  )
+end
 
 Channel.create(
   key: 'archaeology',
@@ -37,10 +67,26 @@ Channel.create(
   api_params: '(PROVIDER: "Europeana Fashion") OR (what: Fashion) OR (what: mode) OR (what: moda) OR (what: costume) OR (what: clothes) OR (what: shoes) OR (what: jewellery)'
 )
 
-Channel.create(
-  key: 'home',
-  api_params: '*:*'
-)
+ActiveRecord::Base.transaction do
+  home_channel = Channel.create(
+    key: 'home',
+    api_params: '*:*'
+  )
+  home_hero = HeroImage.create(
+    attribution_title: 'Insects and Fruit',
+    attribution_creator: 'Jan van Kessel',
+    attribution_institution: 'Rijksmuseum',
+    attribution_url: '/portal/record/90402/SK_A_793.html',
+    brand_opacity: 75,
+    brand_position: 'bottomleft',
+    license: 'public',
+    media_object: find_or_download_styleguide_image('sample/search_hero_1.jpg')
+  )
+  home_landing = LandingPage.create(
+    channel: home_channel,
+    hero_image: home_hero
+  )
+end
 
 Channel.create(
   key: 'maps',
@@ -50,22 +96,15 @@ Channel.create(
 ActiveRecord::Base.transaction do
   music_channel = Channel.create(
     key: 'music',
-    api_params: 'qf=(PROVIDER:"Europeana Sounds" AND (what:music)) OR (PROVIDER:"DISMARC") OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library"))&reusability=open&reusability=restricted'
+    api_params: 'qf=(PROVIDER:"Europeana Sounds" AND (what:music)) OR (DATA_PROVIDER:"National Library of Spain" AND TYPE:SOUND) OR (DATA_PROVIDER:"Sächsische Landesbibliothek - Staats- und Universitätsbibliothek Dresden" AND TYPE:SOUND) OR (PROVIDER:"DISMARC" AND NOT RIGHTS:*rr-p*) OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library")) OR ((what:musik OR what:oper OR title:musik OR title:oper) AND (DATA_PROVIDER:"Österreichische Nationalbibliothek - Austrian National Library") AND (TYPE:IMAGE))'
   )
-  music_hero_media_url = 'http://styleguide.europeana.eu/images/sample/channel_hero_music.jpg'
-  url_hash = MediaObject.hash_source_url(music_hero_media_url)
-  media_object = MediaObject.find_or_initialize_by(source_url_hash: url_hash)
-  if media_object.new_record?
-    media_object.source_url = music_hero_media_url
-    DownloadRemoteMediaObjectJob.perform_later(music_hero_media_url)
-  end
   music_hero = HeroImage.create(
     attribution_title: 'Danse de trois faunes et trois bacchantes',
     attribution_creator: 'Hieronymus Hopfer',
     attribution_institution: 'Bibliothèque municipale de Lyon',
     attribution_url: '/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html',
     license: 'public',
-    media_object: media_object
+    media_object: find_or_download_styleguide_image('sample/channel_hero_music.jpg')
   )
   music_landing = LandingPage.create(
     channel: music_channel,

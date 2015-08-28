@@ -32,17 +32,7 @@ module Channels
             items: @landing_page.credits
           }
         },
-        hero_config:  {
-          hero_image: @landing_page.hero_image_file,
-          attribution_title: @landing_page.hero_image.attribution_title,
-          attribution_creator: @landing_page.hero_image.attribution_creator,
-          attribution_institution: @landing_page.hero_image.attribution_institution,
-          attribution_url: @landing_page.hero_image.attribution_url,
-          attribution_text: @landing_page.hero_image.attribution_text,
-          brand_circles_opacity: @landing_page.hero_image.brand_circles_opacity,
-          brand_circles_position: @landing_page.hero_image.brand_circles_position,
-          brand_circles_colour: @landing_page.hero_image.brand_circles_colour
-        }.merge(@landing_page.hero_image.license.blank? ? {} : { license_template_var_name(@landing_page.hero_image.license) => true }),
+        hero_config: hero_config(@landing_page.hero_image),
         channel_entry: {
           items: stylised_channel_entry
         },
@@ -58,10 +48,6 @@ module Channels
     end
 
     private
-
-    def license_template_var_name(license)
-      "license_#{license.gsub('-', '_')}"
-    end
 
     def channel_content
       @channel_content ||= {} #@channel.config[:content] || {}

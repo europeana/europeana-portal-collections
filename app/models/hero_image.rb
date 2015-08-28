@@ -7,8 +7,8 @@ class HeroImage < ActiveRecord::Base
   serialize :attribution, HashWithIndifferentAccess
   serialize :brand, HashWithIndifferentAccess
 
-  delegate :brand_circles_opacity_enum, :brand_circles_position_enum,
-           :brand_circles_colour_enum, to: :class
+  delegate :brand_opacity_enum, :brand_position_enum,
+           :brand_colour_enum, to: :class
 
   delegate :file, to: :media_object
 
@@ -34,15 +34,15 @@ class HeroImage < ActiveRecord::Base
       %w(CC0 CC-BY CC-BY-SA CC-BY-NC CC-BY-NC-ND CC-ND-NC-SA public)
     end
 
-    def brand_circles_opacity_enum
+    def brand_opacity_enum
       [25, 50, 75, 100]
     end
 
-    def brand_circles_position_enum
+    def brand_position_enum
       %w(topleft topright bottomleft bottomright)
     end
 
-    def brand_circles_colour_enum
+    def brand_colour_enum
       %w(site white black)
     end
   end
@@ -53,6 +53,6 @@ class HeroImage < ActiveRecord::Base
 
   define_dynamic_accessor_methods(
     attribution: %w(title creator institution url text),
-    brand: %w(circles_opacity circles_position circles_colour)
+    brand: %w(opacity position colour)
   )
 end

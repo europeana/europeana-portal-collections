@@ -5,7 +5,7 @@ FactoryGirl.define do
       url: 'http://firm.example.com/', text: 'description'
     )
     brand HashWithIndifferentAccess.new(
-      circles_opacity: '50', circles_position: 'topleft', circles_colour: 'site'
+      opacity: '50', position: 'topleft', colour: 'site'
     )
     license 'CC0'
   end

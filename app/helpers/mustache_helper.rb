@@ -329,4 +329,23 @@ module MustacheHelper
     mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
     mo.nil? ? nil : mo.file.url(:medium)
   end
+
+  def hero_config(hero_image)
+    hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
+    {
+      hero_image: hero_image.file.url(:medium),
+      attribution_title: hero_image.attribution_title,
+      attribution_creator: hero_image.attribution_creator,
+      attribution_institution: hero_image.attribution_institution,
+      attribution_url: hero_image.attribution_url,
+      attribution_text: hero_image.attribution_text,
+      brand_opacity: "brand-opacity#{hero_image.brand_opacity}",
+      brand_position: "brand-#{hero_image.brand_position}",
+      brand_colour: "brand-colour-#{hero_image.brand_colour}"
+    }.merge(hero_license)
+  end
+
+  def license_template_var_name(license)
+    "license_#{license.gsub('-', '_')}"
+  end
 end
