@@ -29,10 +29,12 @@ ActiveRecord::Base.transaction do
   )
   art_landing = LandingPage.create(
     channel: art_channel,
-    credits: [
-      Link.new(url: 'http://www.smk.dk/', text: 'National Gallery of Denmark'),
-      Link.new(url: 'https://www.rijksmuseum.nl/', text: 'Rijksmuseum')
-    ],
+    credits: LinkSet.create(
+      links: [
+        Link.new(url: 'http://www.smk.dk/', text: 'National Gallery of Denmark', position: 1),
+        Link.new(url: 'https://www.rijksmuseum.nl/', text: 'Rijksmuseum', position: 2)
+      ]
+    ),
     hero_image: art_hero
   )
 end
@@ -108,9 +110,18 @@ ActiveRecord::Base.transaction do
   )
   music_landing = LandingPage.create(
     channel: music_channel,
-    credits: [
-      Link.new(url: 'http://www.europeanasounds.eu/', text: 'Europeana Sounds')
-    ],
+    credits: LinkSet.create(
+      links: [
+        Link.new(url: 'http://www.europeanasounds.eu/', text: 'Europeana Sounds')
+      ]
+    ),
+    social_media: LinkSet.create(
+      links: [
+        Link.new(url: 'https://twitter.com/eu_sounds', text: 'Europeana sounds on twitter (@eu_sounds)'),
+        Link.new(url: 'https://www.facebook.com/soundseuropeana', text: 'Europeana Sounds on facebook'),
+        Link.new(url: 'https://soundcloud.com/europeana', text: 'Europeana on Soundcloud')
+      ]
+    ),
     hero_image: music_hero
   )
 end

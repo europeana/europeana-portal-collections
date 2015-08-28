@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826152510) do
+ActiveRecord::Schema.define(version: 20150828075515) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",       limit: 4,   null: false
@@ -60,29 +60,34 @@ ActiveRecord::Schema.define(version: 20150826152510) do
   add_index "hero_images", ["media_object_id"], name: "fk_rails_491dc63aec", using: :btree
 
   create_table "landing_pages", force: :cascade do |t|
-    t.integer  "channel_id",    limit: 4
-    t.integer  "hero_image_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "channel_id",      limit: 4
+    t.integer  "hero_image_id",   limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "credits_id",      limit: 4
+    t.integer  "social_media_id", limit: 4
   end
 
   add_index "landing_pages", ["channel_id"], name: "fk_rails_8b1a2f89f6", using: :btree
+  add_index "landing_pages", ["credits_id"], name: "fk_rails_3fedd2f9a9", using: :btree
   add_index "landing_pages", ["hero_image_id"], name: "fk_rails_a59254ed81", using: :btree
+  add_index "landing_pages", ["social_media_id"], name: "fk_rails_dfc9eb9a50", using: :btree
 
-  create_table "landing_pages_links", id: false, force: :cascade do |t|
-    t.integer "landing_page_id", limit: 4, null: false
-    t.integer "link_id",         limit: 4, null: false
+  create_table "link_sets", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "landing_pages_links", ["landing_page_id"], name: "index_landing_pages_links_on_landing_page_id", using: :btree
-  add_index "landing_pages_links", ["link_id"], name: "index_landing_pages_links_on_link_id", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.text     "text",       limit: 65535
     t.text     "url",        limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "set_id",     limit: 4
+    t.integer  "position",   limit: 4
   end
+
+  add_index "links", ["set_id"], name: "fk_rails_da12ad70b8", using: :btree
 
   create_table "media_objects", force: :cascade do |t|
     t.text     "source_url",        limit: 65535
@@ -143,4 +148,7 @@ ActiveRecord::Schema.define(version: 20150826152510) do
   add_foreign_key "hero_images", "media_objects"
   add_foreign_key "landing_pages", "channels"
   add_foreign_key "landing_pages", "hero_images"
+  add_foreign_key "landing_pages", "link_sets", column: "credits_id"
+  add_foreign_key "landing_pages", "link_sets", column: "social_media_id"
+  add_foreign_key "links", "link_sets", column: "set_id"
 end

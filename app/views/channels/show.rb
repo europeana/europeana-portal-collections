@@ -29,7 +29,7 @@ module Channels
           },
           credits: {
             title: t('site.channels.labels.credits'),
-            items: @landing_page.credits
+            items: @landing_page.credits.links
           }
         },
         hero_config: hero_config(@landing_page.hero_image),
@@ -43,11 +43,23 @@ module Channels
           items: blog_news_items,
           blogurl: 'http://blog.europeana.eu/tag/#' + @channel.id
         },
-        social: channel_content[:social]
+        social: social_media_links
       }
     end
 
     private
+
+    def detect_link_in_set(set, matcher)
+      set.links.detect { |l| l.url =~ matcher }
+    end
+
+    def social_media_links
+      {
+        twitter: detect_link_in_set(@landing_page.social_media, %r(://([^/]*.)?twitter.com/)),
+        facebook: detect_link_in_set(@landing_page.social_media, %r(://([^/]*.)?facebook.com/)),
+        soundcloud: detect_link_in_set(@landing_page.social_media, %r(://([^/]*.)?soundcloud.com/))
+      }
+    end
 
     def channel_content
       @channel_content ||= {} #@channel.config[:content] || {}
