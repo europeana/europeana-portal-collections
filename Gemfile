@@ -5,7 +5,7 @@ gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide',
   git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '1d2fbc628f'
+  ref: 'b99484f3b6'
 
 
 # Use a forked version of stache with downstream changes, until merged upstream
