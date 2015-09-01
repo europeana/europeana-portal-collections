@@ -8,7 +8,7 @@ content:
   - text: Rijksmuseum
     url: 'https://www.rijksmuseum.nl/'
   hero_config:
-    hero_image: sample/channel_hero_art.jpg
+    hero_image: http://styleguide.europeana.eu/images/sample/channel_hero_art.jpg
     attribution_title: Ships in a storm off a rocky coast
     attribution_creator: Jan Porcellis
     attribution_institution: Hallwylska museet
