@@ -28,7 +28,7 @@ content:
     bg_image: sample/sc_st_white_240x140.png
     class_custom: soundcloud
   channel_entry:
-  - query: 'what:opera'
+  - query: 'what:(oper OR Óperas) OR title:oper OR (oper AND what:gesang)'
     image: sample/entry-opera-square.jpg
     is_search: true
     title: Opera
