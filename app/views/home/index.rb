@@ -6,7 +6,7 @@ module Home
 
     def content
       {
-        hero_config: config[:content][:hero_config],
+        hero_config: helpers.styleguide_hero_config(config[:content][:hero_config]),
         strapline: t('site.home.strapline', total_item_count: total_item_count),
         promoted: config[:content][:promoted],
         news: blog_news_items.blank? ? nil : {
