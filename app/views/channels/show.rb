@@ -32,7 +32,7 @@ module Channels
             items: channel_content[:credits]
           }
         },
-        hero_config: channel_content[:hero_config],
+        hero_config: helpers.styleguide_hero_config(channel_content[:hero_config]),
         channel_entry: {
           items: stylised_channel_entry
         },
