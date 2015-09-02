@@ -1,7 +1,7 @@
 RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }
-    it { is_expected.to eq(%w(Channel HeroImage LandingPage Link LinkSet MediaObject User)) }
+    it { is_expected.to eq(%w(Channel HeroImage LandingPage Link MediaObject User)) }
   end
 
   describe '#model' do
@@ -33,14 +33,6 @@ RSpec.describe RailsAdmin.config do
 
     context 'when model is Link' do
       let(:model_name) { 'Link' }
-      describe '.visible' do
-        subject { model.visible }
-        it { is_expected.to be false }
-      end
-    end
-
-    context 'when model is LinkSet' do
-      let(:model_name) { 'LinkSet' }
       describe '.visible' do
         subject { model.visible }
         it { is_expected.to be false }

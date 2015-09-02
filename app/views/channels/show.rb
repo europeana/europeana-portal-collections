@@ -27,17 +27,17 @@ module Channels
             title: t('site.channels.labels.recent'),
             items: stylised_recent_additions
           },
-          credits: @landing_page.credits.links.blank? ? {} : {
+          credits: @landing_page.credits.blank? ? {} : {
             title: t('site.channels.labels.credits'),
-            items: @landing_page.credits.links.to_a
+            items: @landing_page.credits.to_a
           }
         },
         hero_config: hero_config(@landing_page.hero_image),
         channel_entry: {
           items: stylised_channel_entry
         },
-        promoted: {
-          items: channel_content[:promoted]
+        promoted: @landing_page.promotions.blank? ? nil : {
+          items: promoted_items(@landing_page.promotions)
         },
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
@@ -49,15 +49,15 @@ module Channels
 
     private
 
-    def detect_link_in_set(set, matcher)
-      set.links.detect { |l| l.url =~ matcher }
+    def detect_link_in_array(links, matcher)
+      links.detect { |l| l.url =~ matcher }
     end
 
     def social_media_links
       {
-        twitter: detect_link_in_set(@landing_page.social_media, %r(://([^/]*.)?twitter.com/)),
-        facebook: detect_link_in_set(@landing_page.social_media, %r(://([^/]*.)?facebook.com/)),
-        soundcloud: detect_link_in_set(@landing_page.social_media, %r(://([^/]*.)?soundcloud.com/))
+        twitter: detect_link_in_array(@landing_page.social_media, %r(://([^/]*.)?twitter.com/)),
+        facebook: detect_link_in_array(@landing_page.social_media, %r(://([^/]*.)?facebook.com/)),
+        soundcloud: detect_link_in_array(@landing_page.social_media, %r(://([^/]*.)?soundcloud.com/))
       }
     end
 

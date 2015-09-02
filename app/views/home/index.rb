@@ -8,7 +8,7 @@ module Home
       {
         hero_config: hero_config(@landing_page.hero_image),
         strapline: t('site.home.strapline', total_item_count: total_item_count),
-#        promoted: config[:content][:promoted],
+        promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
           blogurl: 'http://blog.europeana.eu/'

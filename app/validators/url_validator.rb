@@ -3,7 +3,8 @@ class UrlValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     valid = false
     begin
-      valid = URI(value).is_a?(URI::HTTP)
+      uri = URI(value)
+      valid = uri.is_a?(URI::HTTP) || (options[:allow_local] && uri.scheme.nil? && uri.host.nil?)
     rescue URI::InvalidURIError
       valid = false
     end

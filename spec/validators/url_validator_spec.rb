@@ -3,6 +3,8 @@ RSpec.describe UrlValidator do
     include ActiveModel::Model
     attr_accessor :url
     validates :url, url: true
+#    attr_accessor :local_url
+#    validates :local_url, url: true#, { allow_local: true }
   end
 
   it 'sub-classes ActiveModel::EachValidator' do
@@ -24,6 +26,15 @@ RSpec.describe UrlValidator do
       context "when value is \"#{url}\"" do
         subject { TestLink.new(url: url) }
         it { is_expected.not_to be_valid }
+      end
+    end
+
+    context 'when options[:allow_local] is true' do
+      ['/', '/sub/path/to.png'].each do |url|
+        context "when value is \"#{url}\"" do
+          subject { TestLink.new(local_url: url) }
+          it { is_expected.to be_valid }
+        end
       end
     end
   end

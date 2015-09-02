@@ -345,6 +345,19 @@ module MustacheHelper
     }.merge(hero_license)
   end
 
+  def promoted_items(promotions)
+    promotions.map do |promo|
+      cat_flag = promo.settings_category.blank? ? {} : { :"is_#{promo.settings_category}" => true }
+      {
+        url: promo.url,
+        title: promo.text,
+        custom_class: promo.settings_class,
+        wide: promo.settings_wide,
+        bg_image: promo.file.url
+      }.merge(cat_flag)
+    end
+  end
+
   def license_template_var_name(license)
     "license_#{license.gsub('-', '_')}"
   end

@@ -1,18 +1,13 @@
 class HeroImage < ActiveRecord::Base
-  include DynamicAccessorMethods
+  include RecordSettingsHash
 
-  has_dynamic_accessor_methods(
-    attribution: %w(title creator institution url text),
-    brand: %w(opacity position colour)
-  )
+  has_record_settings_hash(:attribution, %w(title creator institution url text))
+  has_record_settings_hash(:brand, %w(opacity position colour))
 
   belongs_to :media_object
   accepts_nested_attributes_for :media_object
   attr_accessor :delete_media_object
   before_validation { self.media_object.clear if self.delete_media_object == '1' }
-
-  serialize :attribution, HashWithIndifferentAccess
-  serialize :brand, HashWithIndifferentAccess
 
   delegate :brand_opacity_enum, :brand_position_enum,
            :brand_colour_enum, to: :class
@@ -39,9 +34,7 @@ class HeroImage < ActiveRecord::Base
     end
   end
 
-  validates :license, inclusion: {
-    in: license_enum
-  }, allow_nil: true
+  validates :license, inclusion: { in: license_enum }, allow_nil: true
 
   after_initialize do
     build_media_object if self.media_object.nil?

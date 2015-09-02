@@ -1,4 +1,4 @@
-RSpec.describe MediaObject, type: :model do
+RSpec.describe MediaObject do
   subject { described_class.new }
 
   it 'has Paperclip attachment' do

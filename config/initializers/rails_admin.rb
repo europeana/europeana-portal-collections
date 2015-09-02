@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   # PaperTrail
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
-  config.included_models = %w(Channel HeroImage LandingPage Link LinkSet MediaObject User)
+  config.included_models = %w(Channel HeroImage LandingPage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Promotion User)
 
   config.actions do
     dashboard
@@ -94,11 +94,19 @@ RailsAdmin.config do |config|
       field :channel
       field :hero_image_file, :paperclip
     end
+    show do
+      field :channel
+      field :hero_image_file, :paperclip
+      field :credits
+      field :social_media
+      field :promotions
+    end
     edit do
       field :channel
       field :hero_image
-      field :credit_links
-      field :social_media_links
+      field :credits
+      field :social_media
+      field :promotions
     end
   end
 
@@ -110,10 +118,32 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'LinkSet' do
+  config.model 'Link::Promotion' do
     visible false
     edit do
-      field :links
+      field :url, :string
+      field :text, :string
+      field :position
+      field :settings_category, :enum
+      field :settings_wide, :boolean
+      field :settings_class, :string
+      field :file, :paperclip
+    end
+  end
+
+  config.model 'Link::SocialMedia' do
+    visible false
+    edit do
+      field :url, :string
+      field :text, :string
+    end
+  end
+
+  config.model 'Link::Credit' do
+    visible false
+    edit do
+      field :url, :string
+      field :text, :string
     end
   end
 
