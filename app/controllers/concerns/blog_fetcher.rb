@@ -5,7 +5,7 @@ module BlogFetcher
 
   def fetch_blog_items
     url = 'http://blog.europeana.eu/'
-    url << "tag/#{@channel.id}/" if @channel
+    url << "tag/#{@channel.key}/" if @channel
     url << 'feed/'
 
     feed = Rails.cache.fetch("feed/#{url}")

@@ -27,9 +27,9 @@ module Channels
             title: t('site.channels.labels.recent'),
             items: stylised_recent_additions
           },
-          credits: {
+          credits: @landing_page.credits.links.blank? ? {} : {
             title: t('site.channels.labels.credits'),
-            items: @landing_page.credits.links
+            items: @landing_page.credits.links.to_a
           }
         },
         hero_config: hero_config(@landing_page.hero_image),
@@ -41,7 +41,7 @@ module Channels
         },
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
-          blogurl: 'http://blog.europeana.eu/tag/#' + @channel.id
+          blogurl: 'http://blog.europeana.eu/tag/#' + @channel.key
         },
         social: social_media_links
       }

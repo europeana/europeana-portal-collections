@@ -36,6 +36,7 @@ RSpec.describe HeroImage do
     it { is_expected.to eq(%w(site white black)) }
   end
 
+  # @todo move into spec for DynamicAccessorMethods concern
   describe 'dynamic methods' do
     {
       attribution: %w(title creator institution url text),
@@ -58,6 +59,13 @@ RSpec.describe HeroImage do
           end
         end
       end
+    end
+  end
+
+  context 'new record' do
+    subject { FactoryGirl.build(:hero_image) }
+    it 'has a media object built' do
+      expect(subject.media_object).not_to be_nil
     end
   end
 end
