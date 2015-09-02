@@ -97,8 +97,8 @@ RailsAdmin.config do |config|
     edit do
       field :channel
       field :hero_image
-      field :credits
-      field :social_media
+      field :credit_links
+      field :social_media_links
     end
   end
 
