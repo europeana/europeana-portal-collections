@@ -27,7 +27,7 @@ RSpec.describe PortalController, type: :controller do
 
         it 'renders the search results Mustache template' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('templates/Search/Search-results-list')
+          expect(response).to render_template('portal/index')
         end
       end
 
@@ -41,7 +41,7 @@ RSpec.describe PortalController, type: :controller do
 
         it 'renders the search results Mustache template' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('templates/Search/Search-results-list')
+          expect(response).to render_template('portal/index')
         end
       end
 
@@ -96,7 +96,7 @@ RSpec.describe PortalController, type: :controller do
       let(:params) { { id: 'abc/123', format: 'html' } }
 
       it 'renders the object display page' do
-        expect(response).to render_template('templates/Search/Search-object')
+        expect(response).to render_template('portal/show')
       end
 
       context 'without param debug' do

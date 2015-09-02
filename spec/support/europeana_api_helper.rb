@@ -34,7 +34,7 @@ module EuropeanaAPIHelper
                   headers: { 'Content-Type' => 'text/json' })
 
       # Media proxy
-      stub_request(:head, %r{#{ENV['EDM_IS_SHOWN_BY_PROXY']}/[^/]+/[^/]+}).
+      stub_request(:head, %r{#{Rails.application.config.x.edm_is_shown_by_proxy}/[^/]+/[^/]+}).
         to_return(status: 200,
                   headers: { 'Content-Type' => 'application/pdf' })
     end
@@ -56,6 +56,6 @@ module EuropeanaAPIHelper
   end
 
   def a_media_proxy_request_for(id)
-    a_request(:head, ENV['EDM_IS_SHOWN_BY_PROXY'] + id)
+    a_request(:head, Rails.application.config.x.edm_is_shown_by_proxy + id)
   end
 end

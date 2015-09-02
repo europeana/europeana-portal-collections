@@ -46,7 +46,7 @@ RSpec.describe ChannelsController, type: :controller do
     end
 
     context 'with id=[known channel]' do
-      let(:channel_id) { Europeana::Portal::Application.config.channels.keys.reject { |k| k == 'home' }.first }
+      let(:channel_id) { Rails.application.config.x.channels.keys.reject { |k| k == 'home' }.first }
 
       context 'without search params' do
         let(:params) { { id: channel_id } }
@@ -68,7 +68,7 @@ RSpec.describe ChannelsController, type: :controller do
 
         it 'renders channels landing template' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('templates/Search/Channels-landing')
+          expect(response).to render_template('channels/show')
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe ChannelsController, type: :controller do
 
         it 'renders search results template' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('templates/Search/Search-results-list')
+          expect(response).to render_template('portal/index')
         end
       end
     end

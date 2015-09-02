@@ -4,7 +4,7 @@ RSpec.describe ChannelsHelper, type: :helper do
   describe '#available_channels' do
     subject { helper.available_channels }
     it 'should get available channels from app config' do
-      expect(subject).to eq(Europeana::Portal::Application.config.channels.keys.sort)
+      expect(subject).to eq(Rails.application.config.x.channels.keys.sort)
     end
     it { is_expected.to be_instance_of(Array) }
     it { is_expected.to include('home') }

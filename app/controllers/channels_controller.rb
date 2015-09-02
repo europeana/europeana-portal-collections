@@ -1,8 +1,8 @@
 ##
 # Provides Blacklight search and browse, within a content Channel
 class ChannelsController < ApplicationController
-  include Europeana::Catalog
-  include Europeana::Channels
+  include Catalog
+  include Channels
   include Europeana::Styleguide
   include BlogFetcher
 
@@ -21,8 +21,10 @@ class ChannelsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html { render show_html_template }
-      format.rss  { render 'catalog/index', layout: false }
+      format.html do
+        render has_search_parameters? ? { template: '/portal/index' } : { action: 'show' }
+      end
+      format.rss { render 'catalog/index', layout: false }
       format.atom { render 'catalog/index', layout: false }
       format.json { render json: render_search_results_as_json }
 
@@ -39,10 +41,6 @@ class ChannelsController < ApplicationController
 
   def start_new_search_session?
     has_search_parameters?
-  end
-
-  def show_html_template
-    'templates/Search/' + (has_search_parameters? ? 'Search-results-list' : 'Channels-landing')
   end
 
   def find_channel
@@ -103,7 +101,7 @@ class ChannelsController < ApplicationController
     time_now = Time.now
     month_now = time_now.month
 
-    (0..2).each do |months_ago|
+    (0..23).each do |months_ago|
       time_from = Time.new(time_now.year, time_now.month) - months_ago.month
       time_to = time_from + 1.month - 1.second
 

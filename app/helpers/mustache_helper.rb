@@ -10,30 +10,6 @@ module MustacheHelper
     ]
   end
 
-  # @todo This belongs in individual view classes
-  def page_title
-    if @page
-      static_title = case @page
-                     when 'about'
-                       t('site.pages.about.title')
-                     when 'channels/music/about'
-                       t('site.pages.music-channel-about.title')
-                     end
-      [static_title, 'Europeana'].compact.join(' - ')
-    elsif @response.nil?
-      if @channel.nil?
-        'Europeana Collections - Alpha'
-      else
-        t('site.channels.' + @channel.id.to_s + '.title') + ' Channel - Alpha'
-      end
-    elsif @response['action'].to_s == 'search.json'
-      search_page_title + ' - Europeana - Search results'
-    elsif @document.is_a?(Blacklight::Document)
-      rec = @document.fetch(:title, ['']).join(', ')
-      (rec.present? ? rec + ' - ' : '') + 'Europeana'
-    end
-  end
-
   def form_search
     {
       action: search_action_path(only_path: true)
@@ -75,7 +51,7 @@ module MustacheHelper
   end
 
   def js_files
-    js_entry_point = ENV['JS_ENTRYPOINT'] || '/js/dist/'
+    js_entry_point = Rails.application.config.x.js_entrypoint || '/js/dist/'
     js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
     [{ path: styleguide_path(js_entry_point + 'require.js'),
        data_main: styleguide_path(js_entry_point + 'main/main') }]
@@ -179,10 +155,6 @@ module MustacheHelper
     }
   end
 
-  def search_page_title
-    params[:q].nil? ? '' : [params[:q]].flatten.join(', ')
-  end
-
   def navigation
     {
       global: {
@@ -283,7 +255,13 @@ module MustacheHelper
   end
 
   def styleguide_path(asset = nil)
-    ENV['EUROPEANA_STYLEGUIDE_CDN'] + (asset.present? ? asset : '')
+    Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
+  end
+
+  def styleguide_hero_config(hero_config)
+    hero_config.deep_dup.tap do |hc|
+      hc[:hero_image] = image_root + hc[:hero_image]
+    end
   end
 
   private

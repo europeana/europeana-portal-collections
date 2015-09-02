@@ -1,9 +1,6 @@
 ---
 params:
-  qf: '(PROVIDER:"Europeana Sounds" AND (what:music)) OR (PROVIDER:"DISMARC") OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library"))'
-  reusability:
-  - open
-  - restricted
+  qf: '(PROVIDER:"Europeana Sounds" AND (what:music)) OR (DATA_PROVIDER:"National Library of Spain" AND TYPE:SOUND) OR (DATA_PROVIDER:"Sächsische Landesbibliothek - Staats- und Universitätsbibliothek Dresden" AND TYPE:SOUND) OR (PROVIDER:"DISMARC" AND NOT RIGHTS:*rr-p*) OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library")) OR ((what:musik OR what:oper OR title:musik OR title:oper) AND (DATA_PROVIDER:"Österreichische Nationalbibliothek - Austrian National Library") AND (TYPE:IMAGE))'
 content:
   hero_config:
     hero_image: sample/channel_hero_music.jpg
@@ -31,7 +28,7 @@ content:
     bg_image: sample/sc_st_white_240x140.png
     class_custom: soundcloud
   channel_entry:
-  - query: 'what:opera'
+  - query: 'what:(oper OR Óperas) OR title:oper OR (oper AND what:gesang)'
     image: sample/entry-opera-square.jpg
     is_search: true
     title: Opera

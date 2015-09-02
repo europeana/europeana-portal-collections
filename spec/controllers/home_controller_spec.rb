@@ -16,7 +16,7 @@ RSpec.describe HomeController, type: :controller do
 
     it 'renders the homepage Mustache template' do
       expect(response.status).to eq(200)
-      expect(response).to render_template('templates/Search/Search-home')
+      expect(response).to render_template('home/index')
     end
   end
 end

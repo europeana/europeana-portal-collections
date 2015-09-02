@@ -1,5 +1,20 @@
+# Basic Paperclip file storage settings
+Paperclip::Attachment.default_options.merge!(
+  path: ':class/:id_partition/:attachment/:fingerprint.:style.:extension',
+  styles: { small: '200>', medium: '400>', large: '600>' } # max-width
+)
+
+# Load settings from paperclip.yml config file if present
+Paperclip::Attachment.default_options.merge! begin
+  paperclip_config = Rails.application.config_for(:paperclip)
+  fail RuntimeError unless paperclip_config.present?
+  paperclip_config.deep_symbolize_keys
+rescue RuntimeError
+  {}
+end
+
 # Create public Fog directory/bucket if required
-paperclip_config = Rails.application.config.paperclip_defaults
+paperclip_config = Paperclip::Attachment.default_options
 fog_directory = paperclip_config[:fog_directory]
 
 if paperclip_config[:storage] == :fog && fog_directory.present?

@@ -1,3 +1,4 @@
+
 ---
 content:
   promoted:
@@ -26,7 +27,7 @@ content:
     title: Europeana monuments now in Google Field Trip
     url: 'http://pro.europeana.eu/blogpost/reach-cultural-tourists-through-europeana-in-googles-field-trip'
   hero_config:
-    hero_image: sample/search_hero_1.jpg
+    hero_image: 'sample/search_hero_1.jpg'
     brand_position: brand-bottomleft
     brand_opacity: brand-opacity75
     attribution_title: Insects and Fruit
@@ -35,3 +36,5 @@ content:
     attribution_url: /portal/record/90402/SK_A_793.html
     license_CC-ND-NC-SA: false
     license_public: true
+
+
