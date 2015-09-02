@@ -103,7 +103,7 @@ class ChannelsController < ApplicationController
     time_now = Time.now
     month_now = time_now.month
 
-    (0..2).each do |months_ago|
+    (0..23).each do |months_ago|
       time_from = Time.new(time_now.year, time_now.month) - months_ago.month
       time_to = time_from + 1.month - 1.second
 
