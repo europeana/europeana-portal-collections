@@ -258,6 +258,12 @@ module MustacheHelper
     Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
   end
 
+  def styleguide_hero_config(hero_config)
+    hero_config.deep_dup.tap do |hc|
+      hc[:hero_image] = image_root + hc[:hero_image]
+    end
+  end
+
   private
 
   # @param keys [Symbol] keys of params to gather template input field data for
