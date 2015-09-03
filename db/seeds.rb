@@ -20,10 +20,10 @@ ActiveRecord::Base.transaction do
     api_params: 'qf=(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l\'art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d\'Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
   )
   art_hero = HeroImage.create!(
-    attribution_title: 'Ships in a storm off a rocky coast',
-    attribution_creator: 'Jan Porcellis',
-    attribution_institution: 'Hallwylska museet',
-    attribution_url: '/portal/record/2048007/Athena_Plus_ProvidedCHO_Hallwylska_museet_14152.html',
+    settings_attribution_title: 'Ships in a storm off a rocky coast',
+    settings_attribution_creator: 'Jan Porcellis',
+    settings_attribution_institution: 'Hallwylska museet',
+    settings_attribution_url: '/portal/record/2048007/Athena_Plus_ProvidedCHO_Hallwylska_museet_14152.html',
     license: 'public',
     media_object: find_or_download_styleguide_image('sample/channel_hero_art.jpg')
   )
@@ -115,12 +115,12 @@ ActiveRecord::Base.transaction do
     api_params: '*:*'
   )
   home_hero = HeroImage.create!(
-    attribution_title: 'Insects and Fruit',
-    attribution_creator: 'Jan van Kessel',
-    attribution_institution: 'Rijksmuseum',
-    attribution_url: '/portal/record/90402/SK_A_793.html',
-    brand_opacity: 75,
-    brand_position: 'bottomleft',
+    settings_attribution_title: 'Insects and Fruit',
+    settings_attribution_creator: 'Jan van Kessel',
+    settings_attribution_institution: 'Rijksmuseum',
+    settings_attribution_url: '/portal/record/90402/SK_A_793.html',
+    settings_brand_opacity: 75,
+    settings_brand_position: 'bottomleft',
     license: 'public',
     media_object: find_or_download_styleguide_image('sample/search_hero_1.jpg')
   )
@@ -183,10 +183,10 @@ ActiveRecord::Base.transaction do
     api_params: 'qf=(PROVIDER:"Europeana Sounds" AND (what:music)) OR (DATA_PROVIDER:"National Library of Spain" AND TYPE:SOUND) OR (DATA_PROVIDER:"Sächsische Landesbibliothek - Staats- und Universitätsbibliothek Dresden" AND TYPE:SOUND) OR (PROVIDER:"DISMARC" AND NOT RIGHTS:*rr-p*) OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library")) OR ((what:musik OR what:oper OR title:musik OR title:oper) AND (DATA_PROVIDER:"Österreichische Nationalbibliothek - Austrian National Library") AND (TYPE:IMAGE))'
   )
   music_hero = HeroImage.create!(
-    attribution_title: 'Danse de trois faunes et trois bacchantes',
-    attribution_creator: 'Hieronymus Hopfer',
-    attribution_institution: 'Bibliothèque municipale de Lyon',
-    attribution_url: '/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html',
+    settings_attribution_title: 'Danse de trois faunes et trois bacchantes',
+    settings_attribution_creator: 'Hieronymus Hopfer',
+    settings_attribution_institution: 'Bibliothèque municipale de Lyon',
+    settings_attribution_url: '/portal/record/15802/eDipRouteurBML_eDipRouteurBML_aspx_Application_ESTA_26Action_RechercherDirectement_NUID___554__ESTA_3BAfficherVueSurEnregistrement_Vue_Fiche_Principal_3BAfficherFrameset.html',
     license: 'public',
     media_object: find_or_download_styleguide_image('sample/channel_hero_music.jpg')
   )

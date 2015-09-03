@@ -13,7 +13,7 @@ class LandingPage < ActiveRecord::Base
 
   delegate :file, to: :hero_image, prefix: true
 
-  validates :channel_id, uniqueness: true
+  validates :channel_id, uniqueness: true, allow_nil: true
 
   has_paper_trail
 end

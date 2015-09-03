@@ -53,6 +53,7 @@ module Channels
       links.detect { |l| l.url =~ matcher }
     end
 
+    # @todo move into {Link::SocialMedia} as {#twitter?} etc
     def social_media_links
       {
         twitter: detect_link_in_array(@landing_page.social_media, %r(://([^/]*.)?twitter.com/)),

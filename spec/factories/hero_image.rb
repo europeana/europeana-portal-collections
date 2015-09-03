@@ -1,11 +1,10 @@
 FactoryGirl.define do
   factory :hero_image do
-    attribution HashWithIndifferentAccess.new(
-      title: 'website', creator: 'author', institution: 'The Firm',
-      url: 'http://firm.example.com/', text: 'description'
-    )
-    brand HashWithIndifferentAccess.new(
-      opacity: '50', position: 'topleft', colour: 'site'
+    settings HashWithIndifferentAccess.new(
+      attribution_title: 'website', attribution_creator: 'author',
+      attribution_institution: 'The Firm', attribution_url: 'http://firm.example.com/',
+      text: 'description', brand_opacity: '50', brand_position: 'topleft',
+      brand_colour: 'site'
     )
     license 'CC0'
   end

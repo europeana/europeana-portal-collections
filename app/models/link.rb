@@ -1,5 +1,4 @@
 class Link < ActiveRecord::Base
-  belongs_to :link_set, foreign_key: :set_id
   belongs_to :linkable, polymorphic: true
 
   validates :url, presence: true

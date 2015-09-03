@@ -51,40 +51,40 @@ RailsAdmin.config do |config|
       end
       field :license
       group :brand do
-        field :brand_opacity, :enum do
+        field :settings_brand_opacity, :enum do
           enum do
-            HeroImage.brand_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
+            HeroImage.settings_brand_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
           end
         end
-        field :brand_position, :enum
-        field :brand_colour, :enum
+        field :settings_brand_position, :enum
+        field :settings_brand_colour, :enum
       end
       group :attribution do
-        field :attribution_title
-        field :attribution_creator
-        field :attribution_institution
-        field :attribution_url
-        field :attribution_text, :text
+        field :settings_attribution_title
+        field :settings_attribution_creator
+        field :settings_attribution_institution
+        field :settings_attribution_url
+        field :settings_attribution_text, :text
       end
     end
     edit do
       field :file, :paperclip
       field :license
       group :brand do
-        field :brand_opacity, :enum do
+        field :settings_brand_opacity, :enum do
           enum do
-            HeroImage.brand_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
+            HeroImage.settings_brand_opacity_enum.map { |opacity| ["#{opacity}%", opacity] }
           end
         end
-        field :brand_position, :enum
-        field :brand_colour, :enum
+        field :settings_brand_position, :enum
+        field :settings_brand_colour, :enum
       end
       group :attribution do
-        field :attribution_title
-        field :attribution_creator
-        field :attribution_institution
-        field :attribution_url
-        field :attribution_text, :text
+        field :settings_attribution_title
+        field :settings_attribution_creator
+        field :settings_attribution_institution
+        field :settings_attribution_url
+        field :settings_attribution_text, :text
       end
     end
   end

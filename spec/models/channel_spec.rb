@@ -2,8 +2,6 @@ RSpec.describe Channel do
   it { is_expected.to validate_presence_of(:key) }
   it { is_expected.to validate_uniqueness_of(:key) }
   it { is_expected.to validate_presence_of(:api_params) }
-  it { is_expected.to have_one(:landing_page) }
-  it { is_expected.to validate_uniqueness_of(:landing_page) }
 
   describe '#title' do
     let(:channel_title) { 'All about fishing' }

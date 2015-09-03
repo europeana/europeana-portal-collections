@@ -1,9 +1,9 @@
 class Link::Promotion < Link
-  include RecordSettingsHash
+  include HasSettingsAttribute
 
   belongs_to :media_object, dependent: :destroy
 
-  has_record_settings_hash(:settings, %w(wide category class))
+  has_settings(:wide, :category, :class)
 
   delegate :file, to: :media_object
   attr_accessor :delete_file
