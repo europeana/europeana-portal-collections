@@ -346,4 +346,14 @@ ActiveRecord::Base.transaction do
     schiller)) OR (who: (henrik ibsen)) NOT (DATA_PROVIDER: "Progetto ArtPast-
     CulturaItalia")'
   )
+
+  Banner.create!(
+    key: 'alpha',
+    title: 'This is an Alpha release of our new collections search and Music Channel',
+    body: 'An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.',
+    link: Link.new(
+      url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
+      text: 'Give us your input!'
+    )
+  )
 end

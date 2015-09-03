@@ -8,6 +8,8 @@ RSpec.describe Ability do
 
     it { is_expected.not_to be_able_to(:access, :rails_admin) }
     it { is_expected.not_to be_able_to(:dashboard, nil) }
+    it { is_expected.not_to be_able_to(:manage, Banner.new) }
+    it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Channel.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, LandingPage.new) }
@@ -21,6 +23,8 @@ RSpec.describe Ability do
 
     it { is_expected.not_to be_able_to(:access, :rails_admin) }
     it { is_expected.not_to be_able_to(:dashboard, nil) }
+    it { is_expected.not_to be_able_to(:manage, Banner.new) }
+    it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Channel.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, LandingPage.new) }
@@ -34,6 +38,8 @@ RSpec.describe Ability do
 
     it { is_expected.to be_able_to(:access, :rails_admin) }
     it { is_expected.to be_able_to(:dashboard, nil) }
+    it { is_expected.to be_able_to(:manage, Banner.new) }
+    it { is_expected.to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.to be_able_to(:manage, Channel.new) }
     it { is_expected.to be_able_to(:manage, HeroImage.new) }
     it { is_expected.to be_able_to(:manage, LandingPage.new) }
