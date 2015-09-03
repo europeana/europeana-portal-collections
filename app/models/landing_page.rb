@@ -5,11 +5,13 @@ class LandingPage < ActiveRecord::Base
   has_many :credits, as: :linkable, class_name: 'Link::Credit', dependent: :destroy
   has_many :social_media, as: :linkable, class_name: 'Link::SocialMedia', dependent: :destroy
   has_many :promotions, as: :linkable, class_name: 'Link::Promotion', dependent: :destroy
+  has_many :browse_entries, dependent: :destroy
 
   accepts_nested_attributes_for :hero_image
   accepts_nested_attributes_for :credits
   accepts_nested_attributes_for :social_media
   accepts_nested_attributes_for :promotions
+  accepts_nested_attributes_for :browse_entries
 
   delegate :file, to: :hero_image, prefix: true
 

@@ -13,7 +13,6 @@ class ChannelsController < ApplicationController
   before_action :find_landing_page, only: :show
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
   before_action :fetch_blog_items, only: :show
-#  before_action :populate_channel_entry, only: :show, unless: :has_search_parameters?
   before_action :populate_channel_stats, only: :show, unless: :has_search_parameters?
   before_action :populate_recent_additions, only: :show, unless: :has_search_parameters?
 
@@ -53,25 +52,6 @@ class ChannelsController < ApplicationController
     render file: 'public/404.html', status: 404
   end
 
-  def populate_channel_entry
-    @channel_entry = (channel_content[:channel_entry] || []).tap do |entry_config|
-      entry_config.each do |entry|
-        entry.merge!(
-          url: channel_path(@channel.id, q: entry[:query]),
-          # uncomment next line to add dynamic item counts
-          # count: channel_entry_count(entry[:query])
-        )
-      end
-    end
-  end
-
-  def channel_entry_count(entry_query)
-    api_query = search_builder(self.search_params_logic).
-      with(q: entry_query).query.
-      merge(rows: 0, start: 1, profile: 'minimal')
-    repository.search(api_query).total
-  end
-
   ##
   # Gets from the API the number of items of each media type within the current channel
   def populate_channel_stats
@@ -79,10 +59,7 @@ class ChannelsController < ApplicationController
     types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
              ['3D', '3d'], ['SOUND', 'sound']]
     @channel_stats = types.map do |type|
-      api_query = search_builder(self.search_params_logic).
-        with(q: "TYPE:#{type[0]}").query.
-        merge(rows: 0, start: 1, profile: 'minimal')
-      type_count = repository.search(api_query).total
+      type_count = api_query_count("TYPE:#{type[0]}")
       {
         count: type_count,
         text: t(type[1], scope: 'site.channels.data-types'),
@@ -91,10 +68,6 @@ class ChannelsController < ApplicationController
     end
     @channel_stats.reject! { |stats| stats[:count] == 0 }
     @channel_stats.sort_by! { |stats| stats[:count] }.reverse!
-  end
-
-  def channel_content
-    @channel.config[:content] || {}
   end
 
   def populate_recent_additions

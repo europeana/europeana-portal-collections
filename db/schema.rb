@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 20150903092136) do
 
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
 
+  create_table "browse_entries", force: :cascade do |t|
+    t.string   "title",           limit: 255
+    t.text     "query",           limit: 65535
+    t.integer  "landing_page_id", limit: 4
+    t.integer  "media_object_id", limit: 4
+    t.integer  "position",        limit: 4
+    t.text     "settings",        limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "browse_entries", ["landing_page_id"], name: "index_browse_entries_on_landing_page_id", using: :btree
+  add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree
+
   create_table "channels", force: :cascade do |t|
     t.string   "key",        limit: 255
     t.text     "api_params", limit: 65535
@@ -140,6 +154,8 @@ ActiveRecord::Schema.define(version: 20150903092136) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "browse_entries", "landing_pages"
+  add_foreign_key "browse_entries", "media_objects"
   add_foreign_key "hero_images", "media_objects"
   add_foreign_key "landing_pages", "channels"
   add_foreign_key "landing_pages", "hero_images"

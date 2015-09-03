@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   # PaperTrail
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
-  config.included_models = %w(Channel HeroImage LandingPage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Promotion User)
+  config.included_models = %w(BrowseEntry Channel HeroImage LandingPage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject User)
 
   config.actions do
     dashboard
@@ -25,6 +25,16 @@ RailsAdmin.config do |config|
     show_in_app
     history_index
     history_show
+  end
+
+  config.model 'BrowseEntry' do
+    visible false
+    edit do
+      field :title
+      field :query
+      field :file, :paperclip
+      field :settings_category, :enum
+    end
   end
 
   config.model 'Channel' do
@@ -100,6 +110,7 @@ RailsAdmin.config do |config|
       field :credits
       field :social_media
       field :promotions
+      field :browse_entries
     end
     edit do
       field :channel
@@ -107,6 +118,7 @@ RailsAdmin.config do |config|
       field :credits
       field :social_media
       field :promotions
+      field :browse_entries
     end
   end
 

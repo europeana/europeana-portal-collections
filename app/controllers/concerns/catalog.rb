@@ -149,7 +149,15 @@ module Catalog
   #
   # @return [Fixnum]
   def count_all
-    all_params = { query: '*:*', rows: 0, profile: 'minimal' }
-    @europeana_item_count = repository.search(all_params).total
+    @europeana_total_item_count ||= api_query_count('*:*')
+  end
+
+  ##
+  # Runs API query to count number of results
+  def api_query_count(query)
+    api_query = search_builder(self.search_params_logic).
+      with(q: query).query.
+      merge(rows: 0, start: 1, profile: 'minimal')
+    repository.search(api_query).total
   end
 end

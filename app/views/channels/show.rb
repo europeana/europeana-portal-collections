@@ -33,8 +33,8 @@ module Channels
           }
         },
         hero_config: hero_config(@landing_page.hero_image),
-        channel_entry: {
-          items: stylised_channel_entry
+        channel_entry: @landing_page.browse_entries.blank? ? nil : {
+          items: channel_entry_items(@landing_page.browse_entries)
         },
         promoted: @landing_page.promotions.blank? ? nil : {
           items: promoted_items(@landing_page.promotions)
@@ -68,17 +68,6 @@ module Channels
 
     def blog_news_items
       @blog_news_items ||= news_items(@blog_items)
-    end
-
-    def stylised_channel_entry
-      return @stylised_channel_entry unless @stylised_channel_entry.blank?
-      return nil unless @channel_entry.present?
-      @stylised_channel_entry = @channel_entry.deep_dup.tap do |channel_entry|
-        channel_entry.each do |entry|
-          entry[:count] = number_with_delimiter(entry[:count])
-          entry[:image_alt] ||= nil
-        end
-      end
     end
 
     def stylised_channel_stats

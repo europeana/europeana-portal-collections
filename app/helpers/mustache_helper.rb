@@ -334,14 +334,14 @@ module MustacheHelper
     hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
     {
       hero_image: hero_image.file.url,
-      attribution_title: hero_image.attribution_title,
-      attribution_creator: hero_image.attribution_creator,
-      attribution_institution: hero_image.attribution_institution,
-      attribution_url: hero_image.attribution_url,
-      attribution_text: hero_image.attribution_text,
-      brand_opacity: "brand-opacity#{hero_image.brand_opacity}",
-      brand_position: "brand-#{hero_image.brand_position}",
-      brand_colour: "brand-colour-#{hero_image.brand_colour}"
+      attribution_title: hero_image.settings_attribution_title,
+      attribution_creator: hero_image.settings_attribution_creator,
+      attribution_institution: hero_image.settings_attribution_institution,
+      attribution_url: hero_image.settings_attribution_url,
+      attribution_text: hero_image.settings_attribution_text,
+      brand_opacity: "brand-opacity#{hero_image.settings_brand_opacity}",
+      brand_position: "brand-#{hero_image.settings_brand_position}",
+      brand_colour: "brand-colour-#{hero_image.settings_brand_colour}"
     }.merge(hero_license)
   end
 
@@ -357,6 +357,31 @@ module MustacheHelper
       }.merge(cat_flag)
     end
   end
+
+  ##
+  # @param [ActiveRecord::Associations::CollectionProxy<BrowseEntry>
+  def channel_entry_items(browse_entries)
+    browse_entries.map do |entry|
+      cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
+      {
+        title: entry.title,
+        url: channel_path(entry.landing_page.channel.key, q: entry.query),
+        image: entry.file.url,
+        image_alt: nil
+      }.merge(cat_flag)
+    end
+  end
+
+    def stylised_channel_entry
+      return @stylised_channel_entry unless @stylised_channel_entry.blank?
+      return nil unless @channel_entry.present?
+      @stylised_channel_entry = @channel_entry.deep_dup.tap do |channel_entry|
+        channel_entry.each do |entry|
+          entry[:count] = number_with_delimiter(entry[:count])
+          entry[:image_alt] ||= nil
+        end
+      end
+    end
 
   def license_template_var_name(license)
     "license_#{license.gsub('-', '_')}"
