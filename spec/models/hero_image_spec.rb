@@ -9,7 +9,7 @@ RSpec.describe HeroImage do
   it { is_expected.to delegate_method(:brand_position_enum).to(:class) }
   it { is_expected.to delegate_method(:brand_colour_enum).to(:class) }
   it { is_expected.to accept_nested_attributes_for(:media_object) }
-  it { is_expected.to validate_inclusion_of(:license).in_array(%w(CC0 CC-BY CC-BY-SA CC-BY-NC CC-BY-NC-ND CC-ND-NC-SA public)) }
+  it { is_expected.to validate_inclusion_of(:license).in_array(described_class.license_enum) }
 
   describe 'modules' do
     subject { described_class }
@@ -18,7 +18,7 @@ RSpec.describe HeroImage do
 
   describe '.license_enum' do
     subject { described_class.license_enum }
-    it { is_expected.to eq(%w(CC0 CC-BY CC-BY-SA CC-BY-NC CC-BY-NC-ND CC-ND-NC-SA public)) }
+    it { is_expected.to eq(%w(CC0 CC_BY CC_BY_SA CC_BY_ND CC_BY_NC CC_BY_NC_SA CC_BY_NC_ND OOC PD_NC public RR_free RR_paid RR_restricted unknown orphan)) }
   end
 
   describe '.brand_opacity_enum' do

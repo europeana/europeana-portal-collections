@@ -18,7 +18,7 @@ class HeroImage < ActiveRecord::Base
 
   class << self
     def license_enum
-      %w(CC0 CC-BY CC-BY-SA CC-BY-NC CC-BY-NC-ND CC-ND-NC-SA public)
+      %w(CC0 CC_BY CC_BY_SA CC_BY_ND CC_BY_NC CC_BY_NC_SA CC_BY_NC_ND OOC PD_NC public RR_free RR_paid RR_restricted unknown orphan)
     end
 
     def brand_opacity_enum
