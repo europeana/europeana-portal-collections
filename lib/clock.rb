@@ -8,8 +8,8 @@ every(1.day, 'blog.home', at: ENV['SCHEDULE_BLOG_HOME']) do
   BlogFeedCacheJob.perform_later('http://blog.europeana.eu/feed/')
 end
 
-every(1.day, 'blog.art', at: ENV['SCHEDULE_BLOG_ART']) do
-  BlogFeedCacheJob.perform_later('http://blog.europeana.eu/tag/art/feed/')
+every(1.day, 'blog.art-history', at: ENV['SCHEDULE_BLOG_ART_HISTORY']) do
+  BlogFeedCacheJob.perform_later('http://blog.europeana.eu/tag/art-history/feed/')
 end
 
 every(1.day, 'blog.music', at: ENV['SCHEDULE_BLOG_MUSIC']) do
