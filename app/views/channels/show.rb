@@ -37,7 +37,7 @@ module Channels
           items: stylised_channel_entry
         },
         promoted: {
-          items: channel_content[:promoted]
+          items: stylised_promoted
         },
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
@@ -57,6 +57,16 @@ module Channels
       @blog_news_items ||= news_items(@blog_items)
     end
 
+    def stylised_promoted
+      return @stylised_promoted unless @stylised_promoted.blank?
+      return nil unless channel_content[:promoted].present?
+      @stylised_channel_entry = channel_content[:promoted].deep_dup.tap do |promoted|
+        promoted.each do |item|
+          item[:bg_image] = image_root + item[:bg_image] unless item[:bg_image].nil?
+        end
+      end
+    end
+
     def stylised_channel_entry
       return @stylised_channel_entry unless @stylised_channel_entry.blank?
       return nil unless @channel_entry.present?
@@ -64,6 +74,7 @@ module Channels
         channel_entry.each do |entry|
           entry[:count] = number_with_delimiter(entry[:count])
           entry[:image_alt] ||= nil
+          entry[:image] = image_root + entry[:image] unless entry[:image].nil?
         end
       end
     end
