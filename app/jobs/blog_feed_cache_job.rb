@@ -11,6 +11,6 @@ class BlogFeedCacheJob < FeedCacheJob
     return nil unless entry.content.present?
     img_tag = entry.content.match(/<img [^>]*>/i)[0]
     return nil unless img_tag.present?
-    img_tag.match(/src="([^"]*)"/i)[1]
+    img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
   end
 end
