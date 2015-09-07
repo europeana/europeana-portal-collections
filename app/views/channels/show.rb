@@ -62,10 +62,6 @@ module Channels
       }
     end
 
-    def channel_content
-      @channel_content ||= {} #@channel.config[:content] || {}
-    end
-
     def blog_news_items
       @blog_news_items ||= news_items(@blog_items)
     end
