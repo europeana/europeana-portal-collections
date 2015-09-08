@@ -44,7 +44,7 @@ module Channels
           blogurl: 'http://blog.europeana.eu/tag/' + @channel.id
         },
         social: channel_content[:social]
-      }
+      }.merge(helpers.content)
     end
 
     private
