@@ -254,6 +254,18 @@ module MustacheHelper
     }
   end
 
+  def content
+    banner = Banner.find_by_key('alpha')
+    {
+      phase_feedback: {
+        title: b.title,
+        text: b.body,
+        cta_url: b.link.url,
+        cta_text: b.link.text
+      }
+    }
+  end
+
   def styleguide_path(asset = nil)
     Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
   end

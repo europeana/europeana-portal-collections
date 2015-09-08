@@ -44,7 +44,7 @@ module Channels
           blogurl: 'http://blog.europeana.eu/tag/#' + @channel.key
         },
         social: social_media_links
-      }
+      }.merge(helpers.content)
     end
 
     private
