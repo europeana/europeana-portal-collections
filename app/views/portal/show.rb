@@ -403,7 +403,7 @@ module Portal
           end
         },
         thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-      }
+      }.merge(helpers.content)
     end
 
     def labels

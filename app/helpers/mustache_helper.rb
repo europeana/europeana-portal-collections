@@ -254,6 +254,17 @@ module MustacheHelper
     }
   end
 
+  def content
+    {
+      phase_feedback: {
+        title: t('site.alpha.feedback_banner.title'),
+        text: t('site.alpha.feedback_banner.description'),
+        cta_url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
+        cta_text: t('site.alpha.feedback_banner.link-text')
+      }
+    }
+  end
+
   def styleguide_path(asset = nil)
     Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
   end
