@@ -348,7 +348,7 @@ ActiveRecord::Base.transaction do
   )
 
   Banner.create!(
-    key: 'alpha',
+    key: 'phase-feedback',
     title: 'This is an Alpha release of our new collections search and Music Channel',
     body: 'An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.',
     link: Link.new(

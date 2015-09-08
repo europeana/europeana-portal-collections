@@ -255,13 +255,13 @@ module MustacheHelper
   end
 
   def content
-    banner = Banner.find_by_key('alpha')
+    banner = Banner.find_or_initialize_by(key: 'phase-feedback')
     {
       phase_feedback: {
-        title: b.title,
-        text: b.body,
-        cta_url: b.link.url,
-        cta_text: b.link.text
+        title: banner.title,
+        text: banner.body,
+        cta_url: banner.link.url,
+        cta_text: banner.link.text
       }
     }
   end

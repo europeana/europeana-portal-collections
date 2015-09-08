@@ -3,8 +3,11 @@ class Banner < ActiveRecord::Base
 
   accepts_nested_attributes_for :link
 
-  delegate :url, to: :link, prefix: true
-  delegate :text, to: :link, prefix: true
+  delegate :url, :url=, :text, :text=, to: :link, prefix: true
 
   validates :key, uniqueness: true, allow_nil: true
+
+  after_initialize do
+    build_link if self.link.nil?
+  end
 end
