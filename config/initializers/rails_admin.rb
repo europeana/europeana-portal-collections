@@ -142,6 +142,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Link' do
+    object_label_method :text
     visible false
     edit do
       field :url, :string
@@ -150,6 +151,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Link::Promotion' do
+    object_label_method :text
     visible false
     edit do
       field :url, :string
@@ -163,6 +165,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Link::SocialMedia' do
+    object_label_method :text
     visible false
     edit do
       field :url, :string
@@ -171,6 +174,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Link::Credit' do
+    object_label_method :text
     visible false
     edit do
       field :url, :string
