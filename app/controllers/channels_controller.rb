@@ -48,6 +48,7 @@ class ChannelsController < ApplicationController
     @channel ||= Channel.find_by_key!(params[:id])
   end
 
+  # @todo fail with error rescued in ApplicationController to render 404 page
   def channel_not_found
     render file: 'public/404.html', status: 404
   end
