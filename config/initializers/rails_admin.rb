@@ -53,12 +53,18 @@ RailsAdmin.config do |config|
   config.model 'Channel' do
     object_label_method :title
     list do
+      sort_by :key
       field :key
       field :title
     end
-    edit do
+    show do
       field :key
       field :title
+      field :api_params
+    end
+    edit do
+      field :key
+      field :api_params
     end
   end
 
