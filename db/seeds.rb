@@ -177,7 +177,7 @@ ActiveRecord::Base.transaction do
         url: '/portal/channels/music',
         text: 'Music',
         settings_category: 'channel',
-        settings_wide: true,
+        settings_wide: '1',
         media_object: find_or_download_styleguide_image('sample/thumb-music.jpg')
       ),
       Link::Promotion.new(
@@ -271,7 +271,7 @@ ActiveRecord::Base.transaction do
         position: 4,
         url: 'https://soundcloud.com/europeana',
         text: 'Find more from Europeana Music on Soundcloud',
-        settings_wide: true,
+        settings_wide: '1',
         settings_class: 'soundcloud',
         media_object: find_or_download_styleguide_image('sample/sc_st_white_240x140.png')
       )

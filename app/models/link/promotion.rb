@@ -18,11 +18,11 @@ class Link::Promotion < Link
     end
 
     def settings_wide_enum
-      [true, false]
+      ['0', '1']
     end
   end
 
-  validates :settings_category, inclusion: { in: settings_category_enum }, allow_nil: true
+  validates :settings_category, inclusion: { in: settings_category_enum }, allow_nil: true, allow_blank: true
   validates :settings_wide, inclusion: { in: settings_wide_enum }, allow_nil: true
 
   after_initialize do
