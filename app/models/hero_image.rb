@@ -5,15 +5,15 @@ class HeroImage < ActiveRecord::Base
                :attribution_url, :attribution_text, :brand_opacity, :brand_position,
                :brand_colour)
 
-  belongs_to :media_object
-  accepts_nested_attributes_for :media_object
-  attr_accessor :delete_media_object
-  before_validation { self.media_object.clear if self.delete_media_object == '1' }
+  belongs_to :media_object, dependent: :destroy
+  accepts_nested_attributes_for :media_object, allow_destroy: true
 
   delegate :settings_brand_opacity_enum, :settings_brand_position_enum,
            :settings_brand_colour_enum, to: :class
 
   delegate :file, :file=, to: :media_object
+  attr_accessor :delete_file
+  before_validation { self.file.clear if self.delete_file == '1' }
 
   has_paper_trail
 

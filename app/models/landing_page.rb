@@ -7,13 +7,15 @@ class LandingPage < ActiveRecord::Base
   has_many :promotions, as: :linkable, class_name: 'Link::Promotion', dependent: :destroy
   has_many :browse_entries, dependent: :destroy
 
-  accepts_nested_attributes_for :hero_image
-  accepts_nested_attributes_for :credits
-  accepts_nested_attributes_for :social_media
-  accepts_nested_attributes_for :promotions
-  accepts_nested_attributes_for :browse_entries
+  accepts_nested_attributes_for :hero_image, allow_destroy: true
+  accepts_nested_attributes_for :credits, allow_destroy: true
+  accepts_nested_attributes_for :social_media, allow_destroy: true
+  accepts_nested_attributes_for :promotions, allow_destroy: true
+  accepts_nested_attributes_for :browse_entries, allow_destroy: true
 
   delegate :file, :file=, to: :hero_image, prefix: true
+  attr_accessor :delete_file
+  before_validation { self.file.clear if self.delete_file == '1' }
 
   validates :channel_id, uniqueness: true, allow_nil: true
 
