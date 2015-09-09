@@ -4,9 +4,7 @@ ruby '2.2.2'
 gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide',
-  git: 'https://github.com/europeana/europeana-styleguide-ruby.git',
-  ref: '942ace1589'
-
+  github: 'europeana/europeana-styleguide-ruby', ref: '540ad0e'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd

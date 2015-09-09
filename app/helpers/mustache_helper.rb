@@ -254,6 +254,17 @@ module MustacheHelper
     }
   end
 
+  def content
+    {
+      phase_feedback: {
+        title: t('site.alpha.feedback_banner.title'),
+        text: t('site.alpha.feedback_banner.description'),
+        cta_url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
+        cta_text: t('site.alpha.feedback_banner.link-text')
+      }
+    }
+  end
+
   def styleguide_path(asset = nil)
     Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
   end
@@ -331,7 +342,7 @@ module MustacheHelper
     return nil unless item.content.present?
     img_tag = item.content.match(/<img [^>]*>/i)[0]
     return nil unless img_tag.present?
-    url = img_tag.match(/src="([^"]*)"/i)[1]
+    url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
     mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
     mo.nil? ? nil : mo.file.url(:medium)
   end
