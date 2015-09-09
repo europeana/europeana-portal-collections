@@ -18,4 +18,8 @@ class LandingPage < ActiveRecord::Base
   validates :channel_id, uniqueness: true, allow_nil: true
 
   has_paper_trail
+
+  after_initialize do
+    build_hero_image if self.hero_image.nil?
+  end
 end
