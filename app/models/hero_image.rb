@@ -13,7 +13,7 @@ class HeroImage < ActiveRecord::Base
   delegate :settings_brand_opacity_enum, :settings_brand_position_enum,
            :settings_brand_colour_enum, to: :class
 
-  delegate :file, to: :media_object
+  delegate :file, :file=, to: :media_object
 
   has_paper_trail
 

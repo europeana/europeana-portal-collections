@@ -13,7 +13,7 @@ class LandingPage < ActiveRecord::Base
   accepts_nested_attributes_for :promotions
   accepts_nested_attributes_for :browse_entries
 
-  delegate :file, to: :hero_image, prefix: true
+  delegate :file, :file=, to: :hero_image, prefix: true
 
   validates :channel_id, uniqueness: true, allow_nil: true
 

@@ -6,7 +6,7 @@ class BrowseEntry < ActiveRecord::Base
 
   has_settings(:category)
 
-  delegate :file, to: :media_object
+  delegate :file, :file=, to: :media_object
   delegate :settings_category_enum, to: :class
 
   accepts_nested_attributes_for :media_object
