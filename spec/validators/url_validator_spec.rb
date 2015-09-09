@@ -2,9 +2,9 @@ RSpec.describe UrlValidator do
   class TestLink
     include ActiveModel::Model
     attr_accessor :url
-    validates :url, url: true
-#    attr_accessor :local_url
-#    validates :local_url, url: true#, { allow_local: true }
+    validates :url, url: true, allow_nil: true
+    attr_accessor :local_url
+    validates :local_url, url: { allow_local: true }, allow_nil: true
   end
 
   it 'sub-classes ActiveModel::EachValidator' do
@@ -21,7 +21,7 @@ RSpec.describe UrlValidator do
       end
     end
 
-    ['ftp://www.example.com', '://www.example.com/',
+    ['ftp://www.example.com', '://www.example.com/', '/', '/sub/path/to.png',
      'www.example.com/sub/path.html', 'fish.png', 'cookery', ''].each do |url|
       context "when value is \"#{url}\"" do
         subject { TestLink.new(url: url) }
