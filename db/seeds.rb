@@ -70,13 +70,6 @@ ActiveRecord::Base.transaction do
         text: 'Pablo Picasso',
         settings_category: 'exhibition',
         media_object: find_or_download_styleguide_image('sample/thumb-picasso.jpg')
-      ),
-      Link::Promotion.new(
-        position: 6,
-        url: 'http://exhibitions.europeana.eu/exhibits/show/dada-to-surrealism-en',
-        text: 'From Dada to Surrealism',
-        settings_category: 'exhibition',
-        media_object: find_or_download_styleguide_image('sample/thumb-dada.jpg')
       )
     ],
     browse_entries: [
