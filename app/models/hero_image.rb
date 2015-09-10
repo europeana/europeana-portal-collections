@@ -13,7 +13,7 @@ class HeroImage < ActiveRecord::Base
 
   delegate :file, :file=, to: :media_object
   attr_accessor :delete_file
-  before_validation { self.file.clear if self.delete_file == '1' }
+  before_validation { file.clear if delete_file == '1' }
 
   has_paper_trail
 
@@ -38,6 +38,6 @@ class HeroImage < ActiveRecord::Base
   validates :license, inclusion: { in: license_enum }, allow_nil: true
 
   after_initialize do
-    build_media_object if self.media_object.nil?
+    build_media_object if media_object.nil?
   end
 end

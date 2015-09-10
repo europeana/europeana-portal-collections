@@ -3,7 +3,7 @@ class LandingPage < ActiveRecord::Base
 
   belongs_to :channel
   belongs_to :hero_image
-  
+
   has_many :credits, as: :linkable, class_name: 'Link::Credit', dependent: :destroy
   has_many :social_media, as: :linkable, class_name: 'Link::SocialMedia', dependent: :destroy
   has_many :promotions, as: :linkable, class_name: 'Link::Promotion', dependent: :destroy
@@ -17,13 +17,13 @@ class LandingPage < ActiveRecord::Base
 
   delegate :file, :file=, to: :hero_image, prefix: true
   attr_accessor :delete_file
-  before_validation { self.file.clear if self.delete_file == '1' }
+  before_validation { file.clear if delete_file == '1' }
 
   validates :channel_id, uniqueness: true, allow_nil: true
 
   has_paper_trail
 
   after_initialize do
-    build_hero_image if self.hero_image.nil?
+    build_hero_image if hero_image.nil?
   end
 end

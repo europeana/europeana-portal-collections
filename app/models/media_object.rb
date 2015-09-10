@@ -3,7 +3,7 @@ require 'digest/md5'
 class MediaObject < ActiveRecord::Base
   has_attached_file :file
   attr_accessor :delete_file
-  before_validation { self.file.clear if self.delete_file == '1' }
+  before_validation { file.clear if delete_file == '1' }
 
   has_many :hero_images, dependent: :nullify
 
@@ -12,7 +12,7 @@ class MediaObject < ActiveRecord::Base
   before_save :hash_source_url!, if: :source_url?
 
   def hash_source_url!
-    self.source_url_hash = self.class.hash_source_url(source_url)
+    source_url_hash = self.class.hash_source_url(source_url)
   end
 
   def self.hash_source_url(source_url)
