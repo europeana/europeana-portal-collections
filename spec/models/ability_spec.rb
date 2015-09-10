@@ -4,11 +4,11 @@ RSpec.describe Ability do
   end
 
   let(:draft_banner) { FactoryGirl.create(:banner) }
-  let(:published_banner) { FactoryGirl.create(:banner).tap(&:publish!)
+  let(:published_banner) { FactoryGirl.create(:banner).tap(&:publish!) }
   let(:draft_channel) { FactoryGirl.create(:channel) }
-  let(:published_channel) { FactoryGirl.create(:channel).tap(&:publish!)
+  let(:published_channel) { FactoryGirl.create(:channel).tap(&:publish!) }
   let(:draft_landing_page) { FactoryGirl.create(:landing_page) }
-  let(:published_landing_page) { FactoryGirl.create(:landing_page).tap(&:publish!)
+  let(:published_landing_page) { FactoryGirl.create(:landing_page).tap(&:publish!) }
 
   context 'without user role (guest)' do
     subject { FactoryGirl.create(:user, :guest) }
