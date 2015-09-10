@@ -43,7 +43,7 @@ module MustacheHelper
   end
 
   def version
-    { is_alpha: true }
+    { is_alpha: content[:phase_feedback].present? }
   end
 
   def js_variables
@@ -255,9 +255,9 @@ module MustacheHelper
   end
 
   def content
-    banner = Banner.find_or_initialize_by(key: 'phase-feedback')
+    banner = Banner.published.find_by_key('phase-feedback') || Banner.new
     {
-      phase_feedback: {
+      phase_feedback: banner.new_record? ? nil : {
         title: banner.title,
         text: banner.body,
         cta_url: banner.link.url,

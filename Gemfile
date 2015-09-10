@@ -10,7 +10,7 @@ gem 'europeana-styleguide',
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'rwd/stache', ref: '819ff88'
 
-# pending merge of https://github.com/projectblacklight/blacklight/pull/1210
+gem 'aasm', '~> 4.2'
 gem 'blacklight', '~> 5.14.0'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'

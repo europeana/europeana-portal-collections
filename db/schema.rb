@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150903133657) do
+ActiveRecord::Schema.define(version: 20150910100318) do
 
   create_table "banners", force: :cascade do |t|
     t.string   "key",        limit: 255
     t.string   "title",      limit: 255
     t.text     "body",       limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "state",      limit: 4,     default: 0
   end
 
   add_index "banners", ["key"], name: "index_banners_on_key", using: :btree
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150903133657) do
     t.text     "api_params", limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "state",      limit: 4
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -85,15 +87,16 @@ ActiveRecord::Schema.define(version: 20150903133657) do
   create_table "landing_pages", force: :cascade do |t|
     t.integer  "channel_id",    limit: 4
     t.integer  "hero_image_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "state",         limit: 4, default: 0
   end
 
   add_index "landing_pages", ["channel_id"], name: "fk_rails_8b1a2f89f6", using: :btree
   add_index "landing_pages", ["hero_image_id"], name: "fk_rails_a59254ed81", using: :btree
 
   create_table "links", force: :cascade do |t|
-    t.text     "text",            limit: 65535
+    t.string   "text",            limit: 255
     t.text     "url",             limit: 65535
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -152,6 +155,15 @@ ActiveRecord::Schema.define(version: 20150903133657) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "version_associations", force: :cascade do |t|
+    t.integer "version_id",       limit: 4
+    t.string  "foreign_key_name", limit: 255, null: false
+    t.integer "foreign_key_id",   limit: 4
+  end
+
+  add_index "version_associations", ["foreign_key_name", "foreign_key_id"], name: "index_version_associations_on_foreign_key", using: :btree
+  add_index "version_associations", ["version_id"], name: "index_version_associations_on_version_id", using: :btree
+
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",      limit: 255,        null: false
     t.integer  "item_id",        limit: 4,          null: false
@@ -160,9 +172,11 @@ ActiveRecord::Schema.define(version: 20150903133657) do
     t.text     "object",         limit: 4294967295
     t.datetime "created_at"
     t.text     "object_changes", limit: 4294967295
+    t.integer  "transaction_id", limit: 4
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+  add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
   add_foreign_key "browse_entries", "landing_pages"
   add_foreign_key "browse_entries", "media_objects"

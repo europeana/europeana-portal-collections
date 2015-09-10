@@ -19,6 +19,7 @@ ActiveRecord::Base.transaction do
     key: 'art-history',
     api_params: 'qf=(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l\'art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d\'Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
   )
+  art_history_channel.publish!
   art_history_hero = HeroImage.create!(
     settings_attribution_title: 'Ships in a storm off a rocky coast',
     settings_attribution_creator: 'Jan Porcellis',
@@ -122,7 +123,7 @@ ActiveRecord::Base.transaction do
         media_object: find_or_download_styleguide_image('sample/entry-hokusai-square.jpg')
       ),
     ]
-  )
+  ).publish!
 
   Channel.create!(
     key: 'archaeology',
@@ -137,7 +138,7 @@ ActiveRecord::Base.transaction do
     NOT (DATA_PROVIDER: "Nederlands Architectuurinstituut" OR DATA_PROVIDER: "The
     National Architectural Heritage Board" OR DATA_PROVIDER: "Europeana
     1914-1918")'
-  )
+  ).publish!
 
   Channel.create!(
     key: 'architecture',
@@ -147,17 +148,18 @@ ActiveRecord::Base.transaction do
     DATA_PROVIDER: "Nederlands Architectuurinstituut" OR DATA_PROVIDER:
     "The National Architectural Heritage Board" OR DATA_PROVIDER:
     "Vereniging De Hollandsche Molen"'
-  )
+  ).publish!
 
   Channel.create!(
     key: 'fashion',
     api_params: 'qf=(PROVIDER: "Europeana Fashion") OR (what: Fashion) OR (what: mode) OR (what: moda) OR (what: costume) OR (what: clothes) OR (what: shoes) OR (what: jewellery)'
-  )
+  ).publish!
 
   home_channel = Channel.create!(
     key: 'home',
     api_params: '*:*'
   )
+  home_channel.publish!
   home_hero = HeroImage.create!(
     settings_attribution_title: 'Insects and Fruit',
     settings_attribution_creator: 'Jan van Kessel',
@@ -215,17 +217,18 @@ ActiveRecord::Base.transaction do
         settings_category: 'new'
       )
     ]
-  )
+  ).publish!
 
   Channel.create!(
     key: 'maps',
     api_params: 'qf=what:maps OR what:cartography OR what:kartografi OR what:cartographic OR what:geography OR what:geografi OR what:navigation OR what:chart OR what: portolan OR what: "mappa mundi" OR what: cosmography OR what:kosmografi OR what: "astronomical instrument" OR what:"celestial globe" OR title:cosmographia OR title:geographia OR title:geographica OR what:"aerial photograph" OR what:periplus OR what:atlas OR what:"armillary sphere" OR what:"terrestrial globe" OR what:"jordglob" OR what:globus NOT (PROVIDER:"OpenUp!")'
-  )
+  ).publish!
 
   music_channel = Channel.create!(
     key: 'music',
     api_params: 'qf=(PROVIDER:"Europeana Sounds" AND (what:music)) OR (DATA_PROVIDER:"National Library of Spain" AND TYPE:SOUND) OR (DATA_PROVIDER:"Sächsische Landesbibliothek - Staats- und Universitätsbibliothek Dresden" AND TYPE:SOUND) OR (PROVIDER:"DISMARC" AND NOT RIGHTS:*rr-p*) OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library")) OR ((what:musik OR what:oper OR title:musik OR title:oper) AND (DATA_PROVIDER:"Österreichische Nationalbibliothek - Austrian National Library") AND (TYPE:IMAGE))'
   )
+  music_channel.publish!
   music_hero = HeroImage.create!(
     settings_attribution_title: 'Danse de trois faunes et trois bacchantes',
     settings_attribution_creator: 'Hieronymus Hopfer',
@@ -320,17 +323,17 @@ ActiveRecord::Base.transaction do
         media_object: find_or_download_styleguide_image('sample/entry-harpsichord-square.jpg')
       )
     ]
-  )
+  ).publish!
 
   Channel.create!(
     key: 'natural-history',
     api_params: 'qf=(what: natural history) OR ("histoire naturelle") OR (naturgeschichte) OR ("historia naturalna") OR ("historia natural") OR (what: biology) OR (what: geology) OR (what: zoology) OR (what:entomology) OR (what:ornithology) OR (what:mycology) OR (what: specimen) OR (what: fossil) OR (what:animal) OR (what:flower) OR (what:palaeontology) OR (what:paleontology) OR (what:flora) OR (what:fauna) OR ((title:fauna AND TYPE:TEXT)) OR ((title:flora AND TYPE:TEXT)) OR (what:evolution) OR (what:systematics) OR (what:systematik) OR (what:plant) OR (what:insect) OR (what:insekt) OR (herbarium) OR (carl linnaeus) OR (Carl von Linné) OR (Leonhart Fuchs) OR (Otto Brunfels) OR (Hieronymus Bock) OR (Valerius Cordus) OR (Konrad Gesner) OR (Frederik Ruysch) OR (Gaspard Bauhin) OR (Henry Walter Bates) OR (Charles Darwin) OR (Alfred Russel Wallace) OR (Georges Buffon) OR (Jean-Baptiste de Lamarck) OR (Maria Sibylla Merian) OR (naturalist) OR (de materia media) OR (historiae animalium) OR (systema naturae) OR (botanica) OR (plantarum) OR (PROVIDER:"OpenUp!") OR (PROVIDER:"STERNA") OR (PROVIDER:"The Natural Europe Project") OR (PROVIDER:"BHL Europe") NOT (DATA_PROVIDER:"askabaoutireland.ie")'
-  )
+  ).publish!
 
   Channel.create!(
     key: 'newspapers',
     api_params: 'qf=what:newspapers'
-  )
+  ).publish!
 
   Channel.create!(
     key: 'performing-arts',
@@ -345,7 +348,7 @@ ActiveRecord::Base.transaction do
     (lope de vega)) OR (who: (jean racine)) OR (who: Molière) OR (who: (friedrich
     schiller)) OR (who: (henrik ibsen)) NOT (DATA_PROVIDER: "Progetto ArtPast-
     CulturaItalia")'
-  )
+  ).publish!
 
   Banner.create!(
     key: 'phase-feedback',
@@ -355,5 +358,5 @@ ActiveRecord::Base.transaction do
       url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
       text: 'Give us your input!'
     )
-  )
+  ).publish!
 end

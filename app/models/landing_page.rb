@@ -1,4 +1,6 @@
 class LandingPage < ActiveRecord::Base
+  include HasPublicationStates
+
   belongs_to :channel
   belongs_to :hero_image
   

@@ -1,3 +1,6 @@
+require 'rails_admin/config/actions/publish'
+require 'rails_admin/config/actions/unpublish'
+
 RailsAdmin.config do |config|
   # Devise
   config.authenticate_with do
@@ -25,10 +28,27 @@ RailsAdmin.config do |config|
     show_in_app
     history_index
     history_show
+    publish
+    unpublish
   end
 
   config.model 'Banner' do
     visible true
+    list do
+      field :key
+      field :title
+      field :state
+    end
+    show do
+      field :key
+      field :title
+      field :state
+      field :body
+      group :link do
+        field :link_url
+        field :link_text
+      end
+    end
     edit do
       field :key
       field :title
@@ -56,10 +76,12 @@ RailsAdmin.config do |config|
       sort_by :key
       field :key
       field :title
+      field :state
     end
     show do
       field :key
       field :title
+      field :state
       field :api_params
     end
     edit do
@@ -122,10 +144,12 @@ RailsAdmin.config do |config|
     list do
       field :channel
       field :hero_image_file, :paperclip
+      field :state
     end
     show do
       field :channel
       field :hero_image_file, :paperclip
+      field :state
       field :credits
       field :social_media
       field :promotions

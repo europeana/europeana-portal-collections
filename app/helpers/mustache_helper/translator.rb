@@ -1,4 +1,6 @@
 module MustacheHelper
+  # @todo move into extension of Mustache renderer, detecting template variables
+  #   starting with "i18n."?
   class Translator
     include ActionView::Helpers::TagHelper
 

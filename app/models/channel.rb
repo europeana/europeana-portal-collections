@@ -1,4 +1,6 @@
 class Channel < ActiveRecord::Base
+  include HasPublicationStates
+
   has_one :landing_page, dependent: :nullify
 
   has_paper_trail
