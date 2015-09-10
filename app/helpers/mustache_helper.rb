@@ -364,7 +364,7 @@ module MustacheHelper
         url: promo.url,
         title: promo.text,
         custom_class: promo.settings_class,
-        wide: promo.settings_wide,
+        wide: promo.settings_wide == '1',
         bg_image: promo.file.url
       }.merge(cat_flag)
     end
@@ -383,17 +383,6 @@ module MustacheHelper
       }.merge(cat_flag)
     end
   end
-
-    def stylised_channel_entry
-      return @stylised_channel_entry unless @stylised_channel_entry.blank?
-      return nil unless @channel_entry.present?
-      @stylised_channel_entry = @channel_entry.deep_dup.tap do |channel_entry|
-        channel_entry.each do |entry|
-          entry[:count] = number_with_delimiter(entry[:count])
-          entry[:image_alt] ||= nil
-        end
-      end
-    end
 
   def license_template_var_name(license)
     "license_#{license.gsub('-', '_')}"
