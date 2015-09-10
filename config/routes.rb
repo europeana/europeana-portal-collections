@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   blacklight_for :portal
 
   resources :channels, only: [:show, :index]
+  resources :landing_pages, only: [:show]
 
   # Static pages
   get ':page', to: 'portal#static', constraints: { page: %r{(about|channels/music/about)} }

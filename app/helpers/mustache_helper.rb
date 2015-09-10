@@ -255,7 +255,8 @@ module MustacheHelper
   end
 
   def content
-    banner = Banner.published.find_by_key('phase-feedback') || Banner.new
+    banner = Banner.find_by_key('phase-feedback')
+    banner = Banner.new unless current_user.can? :show, banner
     {
       phase_feedback: banner.new_record? ? nil : {
         title: banner.title,

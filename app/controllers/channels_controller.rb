@@ -45,7 +45,8 @@ class ChannelsController < ApplicationController
   end
 
   def find_channel
-    @channel ||= Channel.published.find_by_key!(params[:id])
+    @channel ||= Channel.find_by_key!(params[:id])
+    authorize! :show, @channel
   end
 
   # @todo fail with error rescued in ApplicationController to render 404 page

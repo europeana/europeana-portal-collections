@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
     return false
   end
+
+  def current_user
+    super || User.new
+  end
 end
