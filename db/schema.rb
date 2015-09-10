@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910100318) do
+ActiveRecord::Schema.define(version: 20150910110528) do
 
   create_table "banners", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -178,10 +178,4 @@ ActiveRecord::Schema.define(version: 20150910100318) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
-  add_foreign_key "browse_entries", "landing_pages"
-  add_foreign_key "browse_entries", "media_objects"
-  add_foreign_key "hero_images", "media_objects"
-  add_foreign_key "landing_pages", "channels"
-  add_foreign_key "landing_pages", "hero_images"
-  add_foreign_key "links", "media_objects"
 end
