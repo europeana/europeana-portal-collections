@@ -3,11 +3,20 @@ RSpec.describe Ability do
     expect(described_class).to include(CanCan::Ability)
   end
 
+  let(:draft_banner) { FactoryGirl.create(:banner) }
+  let(:published_banner) { FactoryGirl.create(:banner).tap { |banner| banner.publish! } }
+  let(:draft_channel) { FactoryGirl.create(:channel) }
+  let(:published_channel) { FactoryGirl.create(:channel).tap { |channel| channel.publish! } }
+  let(:draft_landing_page) { FactoryGirl.create(:landing_page) }
+  let(:published_landing_page) { FactoryGirl.create(:landing_page).tap { |landing_page| landing_page.publish! } }
+
   context 'without user role (guest)' do
     subject { FactoryGirl.create(:user, :guest) }
 
     it { is_expected.not_to be_able_to(:access, :rails_admin) }
+
     it { is_expected.not_to be_able_to(:dashboard, nil) }
+
     it { is_expected.not_to be_able_to(:manage, Banner.new) }
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Channel.new) }
@@ -16,13 +25,22 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, Link.new) }
     it { is_expected.not_to be_able_to(:manage, MediaObject.new) }
     it { is_expected.not_to be_able_to(:manage, User.new) }
+
+    it { is_expected.not_to be_able_to(:show, draft_banner) }
+    it { is_expected.to be_able_to(:show, published_banner) }
+    it { is_expected.not_to be_able_to(:show, draft_channel) }
+    it { is_expected.to be_able_to(:show, published_channel) }
+    it { is_expected.not_to be_able_to(:show, draft_landing_page) }
+    it { is_expected.to be_able_to(:show, published_landing_page) }
   end
 
   context 'when user role is "user"' do
     subject { FactoryGirl.create(:user) }
 
     it { is_expected.not_to be_able_to(:access, :rails_admin) }
+
     it { is_expected.not_to be_able_to(:dashboard, nil) }
+
     it { is_expected.not_to be_able_to(:manage, Banner.new) }
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Channel.new) }
@@ -31,6 +49,13 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, Link.new) }
     it { is_expected.not_to be_able_to(:manage, MediaObject.new) }
     it { is_expected.not_to be_able_to(:manage, User.new) }
+
+    it { is_expected.not_to be_able_to(:show, draft_banner) }
+    it { is_expected.to be_able_to(:show, published_banner) }
+    it { is_expected.not_to be_able_to(:show, draft_channel) }
+    it { is_expected.to be_able_to(:show, published_channel) }
+    it { is_expected.not_to be_able_to(:show, draft_landing_page) }
+    it { is_expected.to be_able_to(:show, published_landing_page) }
   end
 
   context 'when user role is "admin"' do
@@ -38,6 +63,7 @@ RSpec.describe Ability do
 
     it { is_expected.to be_able_to(:access, :rails_admin) }
     it { is_expected.to be_able_to(:dashboard, nil) }
+
     it { is_expected.to be_able_to(:manage, Banner.new) }
     it { is_expected.to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.to be_able_to(:manage, Channel.new) }
@@ -46,5 +72,12 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:manage, Link.new) }
     it { is_expected.to be_able_to(:manage, MediaObject.new) }
     it { is_expected.to be_able_to(:manage, User.new) }
+
+    it { is_expected.to be_able_to(:show, draft_banner) }
+    it { is_expected.to be_able_to(:show, published_banner) }
+    it { is_expected.to be_able_to(:show, draft_channel) }
+    it { is_expected.to be_able_to(:show, published_channel) }
+    it { is_expected.to be_able_to(:show, draft_landing_page) }
+    it { is_expected.to be_able_to(:show, published_landing_page) }
   end
 end
