@@ -49,16 +49,19 @@ module Channels
 
     private
 
-    def detect_link_in_array(links, matcher)
+    def detect_link_in_array(links, domain)
+      matcher = %r(://([^/]*.)?#{domain}/)
       links.detect { |l| l.url =~ matcher }
     end
 
     # @todo move into {Link::SocialMedia} as {#twitter?} etc
     def social_media_links
       {
-        twitter: detect_link_in_array(@landing_page.social_media, %r(://([^/]*.)?twitter.com/)),
-        facebook: detect_link_in_array(@landing_page.social_media, %r(://([^/]*.)?facebook.com/)),
-        soundcloud: detect_link_in_array(@landing_page.social_media, %r(://([^/]*.)?soundcloud.com/))
+        twitter: detect_link_in_array(@landing_page.social_media, 'twitter.com'),
+        facebook: detect_link_in_array(@landing_page.social_media, 'facebook.com'),
+        soundcloud: detect_link_in_array(@landing_page.social_media, 'soundcloud.com'),
+        pinterest: detect_link_in_array(@landing_page.social_media, 'pinterest.com'),
+        googleplus: detect_link_in_array(@landing_page.social_media, 'plus.google.com')
       }
     end
 
