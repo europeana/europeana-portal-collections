@@ -202,7 +202,7 @@ nl:
     help: 
     home: 
     javascript-required: 
-    labs: 
+    labs: Labs
     labs-text: Gebruik onze APIs en datasets
     language-basque: 
     language-bulgarian: 
@@ -245,11 +245,11 @@ nl:
     our-mission-text: 
     our-sites: onze sites
     password: 
-    professional: 
+    professional: Professional
     professional-text: Doe mee; deel uw collectie met ons!
     refine-your-search: 
     register: 
-    research: 
+    research: Research
     research-text: Voor academici
     rights-box:
       background-image-provider: 
