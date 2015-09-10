@@ -43,7 +43,7 @@ module Channels
           items: blog_news_items,
           blogurl: 'http://blog.europeana.eu/tag/#' + @channel.key
         },
-        social: social_media_links
+        social: @landing_page.social_media.blank? ? nil : social_media_links
       }.merge(helpers.content)
     end
 
