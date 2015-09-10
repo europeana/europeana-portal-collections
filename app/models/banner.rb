@@ -11,6 +11,9 @@ class Banner < ActiveRecord::Base
 
   has_paper_trail
 
+  translates :title, :body
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   after_initialize do
     build_link if self.link.nil?
   end

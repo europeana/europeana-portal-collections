@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910110528) do
+ActiveRecord::Schema.define(version: 20150910125115) do
+
+  create_table "banner_translations", force: :cascade do |t|
+    t.integer  "banner_id",  limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "title",      limit: 255
+    t.text     "body",       limit: 65535
+  end
+
+  add_index "banner_translations", ["banner_id"], name: "index_banner_translations_on_banner_id", using: :btree
+  add_index "banner_translations", ["locale"], name: "index_banner_translations_on_locale", using: :btree
 
   create_table "banners", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -49,6 +61,17 @@ ActiveRecord::Schema.define(version: 20150910110528) do
 
   add_index "browse_entries", ["landing_page_id"], name: "index_browse_entries_on_landing_page_id", using: :btree
   add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree
+
+  create_table "browse_entry_translations", force: :cascade do |t|
+    t.integer  "browse_entry_id", limit: 4,   null: false
+    t.string   "locale",          limit: 255, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "title",           limit: 255
+  end
+
+  add_index "browse_entry_translations", ["browse_entry_id"], name: "index_browse_entry_translations_on_browse_entry_id", using: :btree
+  add_index "browse_entry_translations", ["locale"], name: "index_browse_entry_translations_on_locale", using: :btree
 
   create_table "channels", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -94,6 +117,17 @@ ActiveRecord::Schema.define(version: 20150910110528) do
 
   add_index "landing_pages", ["channel_id"], name: "fk_rails_8b1a2f89f6", using: :btree
   add_index "landing_pages", ["hero_image_id"], name: "fk_rails_a59254ed81", using: :btree
+
+  create_table "link_translations", force: :cascade do |t|
+    t.integer  "link_id",    limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "text",       limit: 65535
+  end
+
+  add_index "link_translations", ["link_id"], name: "index_link_translations_on_link_id", using: :btree
+  add_index "link_translations", ["locale"], name: "index_link_translations_on_locale", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.string   "text",            limit: 255

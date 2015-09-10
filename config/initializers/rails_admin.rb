@@ -14,7 +14,10 @@ RailsAdmin.config do |config|
   # PaperTrail
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
-  config.included_models = %w(Banner BrowseEntry Channel HeroImage LandingPage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject User)
+  config.included_models = %w(
+    Banner Banner::Translation BrowseEntry BrowseEntry::Translation Channel HeroImage LandingPage
+    Link Link::Translation Link::Promotion Link::Credit Link::SocialMedia MediaObject User
+  )
 
   config.actions do
     dashboard
@@ -34,6 +37,7 @@ RailsAdmin.config do |config|
 
   config.model 'Banner' do
     visible true
+    configure :translations, :globalize_tabs
     list do
       field :key
       field :title
@@ -51,23 +55,36 @@ RailsAdmin.config do |config|
     end
     edit do
       field :key
-      field :title
-      field :body
-      group :link do
-        field :link_url
-        field :link_text
-      end
+      field :translations
+      field :link
     end
+  end
+
+  config.model 'Banner::Translation' do
+    visible false
+    configure :locale, :hidden do
+      help ''
+    end
+    include_fields :locale, :title, :body
   end
 
   config.model 'BrowseEntry' do
     visible false
+    configure :translations, :globalize_tabs
     edit do
-      field :title
+      field :translations
       field :query
       field :file, :paperclip
       field :settings_category, :enum
     end
+  end
+
+  config.model 'BrowseEntry::Translation' do
+    visible false
+    configure :locale, :hidden do
+      help ''
+    end
+    include_fields :locale, :title
   end
 
   config.model 'Channel' do
@@ -168,18 +185,28 @@ RailsAdmin.config do |config|
   config.model 'Link' do
     object_label_method :text
     visible false
+    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :text, :string
+      field :translations
     end
+  end
+
+  config.model 'Link::Translation' do
+    visible false
+    configure :locale, :hidden do
+      help ''
+    end
+    include_fields :locale, :text
   end
 
   config.model 'Link::Promotion' do
     object_label_method :text
     visible false
+    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :text, :string
+      field :translations
       field :position
       field :settings_category, :enum
       field :settings_wide, :boolean
@@ -191,18 +218,20 @@ RailsAdmin.config do |config|
   config.model 'Link::SocialMedia' do
     object_label_method :text
     visible false
+    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :text, :string
+      field :translations
     end
   end
 
   config.model 'Link::Credit' do
     object_label_method :text
     visible false
+    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :text, :string
+      field :translations
     end
   end
 

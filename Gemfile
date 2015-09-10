@@ -10,6 +10,9 @@ gem 'europeana-styleguide',
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'rwd/stache', ref: '819ff88'
 
+gem 'rails_admin_globalize_field', github: 'rwd/rails_admin_globalize_field',
+  branch: 'globalize-5-rails-4.2'
+
 gem 'aasm', '~> 4.2'
 gem 'blacklight', '~> 5.14.0'
 gem 'cancancan', '~> 1.12'
@@ -21,6 +24,8 @@ gem 'europeana-api', '~> 0.3.4'
 gem 'europeana-blacklight', '0.2.7'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
+gem 'globalize', '~> 5.0'
+gem 'globalize-versioning', github: 'globalize/globalize-versioning'
 gem 'htmlcompressor', '0.2'
 gem 'mysql2', '~> 0.3.20'
 gem 'paperclip', '~> 4.3'

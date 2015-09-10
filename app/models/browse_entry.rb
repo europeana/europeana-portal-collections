@@ -21,6 +21,9 @@ class BrowseEntry < ActiveRecord::Base
 
   validates :settings_category, inclusion: { in: settings_category_enum }, allow_nil: true
 
+  translates :title
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   after_initialize do
     build_media_object if self.media_object.nil?
   end

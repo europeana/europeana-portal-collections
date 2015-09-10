@@ -9,6 +9,26 @@ GIT
       stache (~> 1.1.1)
 
 GIT
+  remote: git://github.com/globalize/globalize-versioning.git
+  revision: 10ae04a77d765134f7d527b70693637d5937fba6
+  specs:
+    globalize-versioning (0.2.0)
+      activemodel (>= 3.2.0, < 5)
+      activerecord (>= 3.2.0, < 5)
+      globalize (>= 3.0.4, < 6)
+      paper_trail (>= 3.0.0, < 5)
+
+GIT
+  remote: git://github.com/rwd/rails_admin_globalize_field.git
+  revision: 59b87f63a1c017d5851f610cd7e6faefacd2dd03
+  branch: globalize-5-rails-4.2
+  specs:
+    rails_admin_globalize_field (0.3.3)
+      globalize (>= 5.0)
+      rails (>= 4.2)
+      rails_admin (>= 0.6.2)
+
+GIT
   remote: git://github.com/rwd/stache.git
   revision: 819ff888bf0c109f4592ffd26fb2c1e2922980ef
   ref: 819ff88
@@ -269,6 +289,9 @@ GEM
     gli (2.13.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    globalize (5.0.1)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
     haml (4.0.7)
       tilt
     htmlcompressor (0.2.0)
@@ -524,6 +547,8 @@ DEPENDENCIES
   feedjira (~> 2.0)
   fog (~> 1.33)
   foreman
+  globalize (~> 5.0)
+  globalize-versioning!
   htmlcompressor (= 0.2)
   localeapp (~> 0.9.0)
   mysql2 (~> 0.3.20)
@@ -535,6 +560,7 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails_12factor (~> 0.0.3)
   rails_admin (~> 0.7.0)
+  rails_admin_globalize_field!
   redis-rails (~> 4.0)
   rspec-rails (~> 3.0)
   rubocop (= 0.29.1)
