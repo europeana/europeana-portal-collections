@@ -12,7 +12,7 @@ RSpec.describe HeroImage do
 
   describe 'modules' do
     subject { described_class }
-    it { is_expected.to include(PaperTrail::Model::InstanceMethods)  }
+    it { is_expected.to include(PaperTrail::Model::InstanceMethods) }
   end
 
   describe '.license_enum' do
