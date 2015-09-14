@@ -740,8 +740,9 @@ module Portal
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
-    # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis
+    # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls
     def iiif_manifesto(identifier, collection)
+      url_match = nil
       ids = Hash.new
       collections = Hash.new
 
@@ -758,7 +759,13 @@ module Portal
           identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
       end
 
-      ids[identifier] || collections[collection]
+      path = request.original_fullpath
+      if path.match('/portal/record/07927/diglit_')
+        url_match = path.sub(path.match('/portal/record/07927/diglit_')[0], 'http://digi.ub.uni-heidelberg.de/diglit/iiif/')
+        url_match = url_match.sub('.html', '/manifest.json')
+      end
+
+      url_match || ids[identifier] || collections[collection]
     end
 
     def media_items
