@@ -69,7 +69,7 @@ module Portal
             }
           end
         }
-      }.reverse_merge(helpers.navigation)
+      }.reverse_merge(helpers ? helpers.navigation : {})
     end
 
     def facets_selected

@@ -54,7 +54,7 @@ module Portal
           ]
         )
       end
-      navigation.merge(helpers.navigation)
+      navigation.merge(helpers ? helpers.navigation : {})
     end
 
     def content
@@ -403,7 +403,7 @@ module Portal
           end
         },
         thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-      }.merge(helpers.content)
+      }.merge(helpers ? helpers.content : {})
     end
 
     def labels
