@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe View::Translator, type: :model do
-  subject { View::Translator.new(scope) }
+RSpec.describe MustacheHelper::Translator, type: :model do
+  subject { described_class.new(scope) }
   let(:scope) { { count: 10 } }
 
   let(:locale) { :en }
