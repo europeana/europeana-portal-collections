@@ -746,7 +746,6 @@ module Portal
       ids = Hash.new
       collections = Hash.new
 
-
       # test url: http://localhost:3000/portal/record/9200365/BibliographicResource_3000094705862.html?debug=json
       ids['http://gallica.bnf.fr/ark:/12148/btv1b84539771'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
 
@@ -762,7 +761,8 @@ module Portal
 
       path = request.original_fullpath
       if path.match('/portal/record/07927/diglit_')
-        url_match = path.sub(path.match('/portal/record/07927/diglit_')[0], 'http://digi.ub.uni-heidelberg.de/diglit/iiif/').sub('.html', '/manifest.json')
+        url_match = path.sub(path.match('/portal/record/07927/diglit_')[0], 'http://digi.ub.uni-heidelberg.de/diglit/iiif/')
+        url_match = url_match.sub('.html', '/manifest.json')
       end
 
       url_match || ids[identifier] || collections[collection]
