@@ -14,7 +14,7 @@ class Banner < ActiveRecord::Base
   translates :title, :body
   accepts_nested_attributes_for :translations, allow_destroy: true
 
-  after_initialize do
-    build_link if self.link.nil?
+  def link(*args)
+    super || Link.new
   end
 end

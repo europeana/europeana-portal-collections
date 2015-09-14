@@ -23,7 +23,7 @@ class LandingPage < ActiveRecord::Base
 
   has_paper_trail
 
-  after_initialize do
-    build_hero_image if hero_image.nil?
+  def hero_image(*args)
+    super || HeroImage.new
   end
 end
