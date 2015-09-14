@@ -5,7 +5,7 @@ RSpec.describe ApplicationView, type: :view do
 
   describe '#i18n' do
     subject { described_class.new.i18n }
-    it { is_expected.to be_instance_of(View::Translator) }
+    it { is_expected.to be_instance_of(MustacheHelper::Translator) }
 
     it 'sets the context as the translator scope' do
       view = described_class.new

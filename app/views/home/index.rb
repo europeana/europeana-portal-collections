@@ -13,7 +13,7 @@ module Home
           items: blog_news_items,
           blogurl: 'http://blog.europeana.eu/'
         }
-      }.merge(helpers.content)
+      }.merge(helpers ? helpers.content : {})
     end
 
     private
