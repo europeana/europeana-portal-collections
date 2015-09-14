@@ -21,7 +21,7 @@ class BrowseEntry < ActiveRecord::Base
 
   validates :settings_category, inclusion: { in: settings_category_enum }, allow_nil: true
 
-  translates :title
+  translates :title, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   def media_object(*args)

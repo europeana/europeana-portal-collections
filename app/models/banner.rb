@@ -11,7 +11,7 @@ class Banner < ActiveRecord::Base
 
   has_paper_trail
 
-  translates :title, :body
+  translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   def link(*args)

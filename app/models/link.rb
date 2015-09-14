@@ -6,6 +6,6 @@ class Link < ActiveRecord::Base
 
   has_paper_trail
 
-  translates :text
+  translates :text, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
 end
