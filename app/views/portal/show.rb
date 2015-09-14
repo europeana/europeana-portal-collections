@@ -749,7 +749,7 @@ module Portal
       ids['http://gallica.bnf.fr/ark:/12148/btv1b84539771'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
 
       # test url: http://localhost:3000/portal/record/92082/BibliographicResource_1000157170184.html?debug=json
-      ids['http://gallica.bnf.fr/ark:/12148/btv1b530193948'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
+      ids['http://gallica.bnf.fr/ark:/12148/btv1b10500687r'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
 
       # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
       # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
@@ -823,8 +823,9 @@ module Portal
           item[:playable] = true
         end
 
-        if media_type == 'audio' && mime_type.index('text/plain')
+        if media_type == 'text' && (mime_type == 'text/plain; charset=utf-8' || !mime_type)
           item[:playable] = false
+          item[:downloadable] = false
         end
 
         if media_type == 'text' && mime_type == 'text/plain; charset=utf-8'
