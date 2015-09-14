@@ -4,10 +4,10 @@ class LandingPage < ActiveRecord::Base
   belongs_to :channel
   belongs_to :hero_image
 
-  has_many :credits, as: :linkable, class_name: 'Link::Credit', dependent: :destroy
-  has_many :social_media, as: :linkable, class_name: 'Link::SocialMedia', dependent: :destroy
-  has_many :promotions, as: :linkable, class_name: 'Link::Promotion', dependent: :destroy
-  has_many :browse_entries, dependent: :destroy
+  has_many :credits, -> { order(:position) }, as: :linkable, class_name: 'Link::Credit', dependent: :destroy
+  has_many :social_media, -> { order(:position) }, as: :linkable, class_name: 'Link::SocialMedia', dependent: :destroy
+  has_many :promotions, -> { order(:position) }, as: :linkable, class_name: 'Link::Promotion', dependent: :destroy
+  has_many :browse_entries, -> { order(:position) }, dependent: :destroy
 
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :credits, allow_destroy: true
