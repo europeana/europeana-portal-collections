@@ -1,5 +1,11 @@
 module Channels
   class Show < ApplicationView
+    def head_meta
+      [
+        { meta_name: 'description', content: strip_tags(t("site.channels.#{@channel.id}.description")) }
+      ] + helpers.head_meta
+    end
+
     def page_title
       t('site.channels.' + @channel.id.to_s + '.title') + ' Channel - Alpha'
     end
@@ -18,8 +24,8 @@ module Channels
     def content
       {
         channel_info: {
-          name: t('site.channels.' + @channel.id.to_s + '.title'),
-          description: t('site.channels.' + @channel.id.to_s + '.description'),
+          name: t("site.channels.#{@channel.id}.title"),
+          description: t("site.channels.#{@channel.id}.description"),
           stats: {
             items: stylised_channel_stats
           },
@@ -41,10 +47,10 @@ module Channels
         },
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
-          blogurl: 'http://blog.europeana.eu/tag/' + @channel.id
+          blogurl: "http://blog.europeana.eu/tag/#{@channel.id}"
         },
         social: channel_content[:social]
-      }.merge(helpers ? helpers.content : {})
+      }.reverse_merge(helpers.content)
     end
 
     private
