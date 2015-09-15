@@ -9,13 +9,16 @@ RSpec.describe 'portal/show.html.mustache' do
     # @todo Move to factory
     id = '/abc/123'
     source = {
-      'about' => id,
-      'title' => [id],
-      'proxies' => [
-        { 'dcCreator' => { 'def' => ['Mister Smith'] } }
+      about: id,
+      title: [id],
+      proxies: [
+        {
+          dcCreator: { def: ['Mister Smith'] },
+          dcDescription: { en: ['About Mr Smith'] }
+        }
       ],
-      'aggregations' => [
-        { 'edmIsShownBy' => "http://provider.example.com#{id}" }
+      aggregations: [
+        { edmIsShownBy: "http://provider.example.com#{id}" }
       ]
     }
     Europeana::Blacklight::Document.new(source)
@@ -27,18 +30,32 @@ RSpec.describe 'portal/show.html.mustache' do
         mocks.verify_partial_doubles = false
       end
     end
+
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:current_search_session).and_return nil
     allow(view).to receive(:search_session).and_return({})
     allow(view).to receive(:search_action_path).and_return('/search')
+    Stache::ViewContext.current = view
+
+    assign(:document, blacklight_document)
+    assign(:similar, [])
+  end
+
+  it 'should have meta description' do
+    render
+    # expect(rendered).to have_selector("meta[name=\"description\"][content=\"About Mr Smith\"]", visible: false)
+    expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
+  end
+
+  it 'should have meta HandheldFriendly' do
+    render
+    expect(rendered).to have_selector("meta[name=\"HandheldFriendly\"]", visible: false)
   end
 
   context 'with @debug' do
     let(:msg) { 'Useful information for debugging' }
 
     it 'displays debug output' do
-      assign(:document, blacklight_document)
-      assign(:similar, [])
       assign(:debug, msg)
       render
       expect(rendered).to have_selector('pre.utility_debug')
@@ -48,8 +65,6 @@ RSpec.describe 'portal/show.html.mustache' do
 
   context 'without @debug' do
     it 'hides debug output' do
-      assign(:document, blacklight_document)
-      assign(:similar, [])
       render
       expect(rendered).not_to have_selector('pre.utility_debug')
     end
