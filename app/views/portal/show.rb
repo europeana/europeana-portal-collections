@@ -416,9 +416,16 @@ module Portal
 
     private
 
+    def use_edm_is_shown_by_proxy?
+      Rails.application.config.x.edm_is_shown_by_proxy &&
+        document.aggregations.size > 0 &&
+        document.aggregations.first.fetch('edmIsShownBy', false) &&
+        @mime_type.match('image/').nil?
+    end
+
     def edm_is_shown_by_download_url
       @edm_is_shown_by_download_url ||= begin
-        if Rails.application.config.x.edm_is_shown_by_proxy && document.aggregations.size > 0 && document.aggregations.first.fetch('edmIsShownBy', false)
+        if use_edm_is_shown_by_proxy?
           Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/')
         else
           render_document_show_field_value(document, 'aggregations.edmIsShownBy')
@@ -812,7 +819,7 @@ module Portal
           media_type: media_type,
           rights: simple_rights_label_data(media_rights),
           downloadable: true,
-          playable: true,
+          playable: edm_is_shown_by_download_url.present?,
           thumbnail: edm_preview
         }
 
@@ -883,6 +890,7 @@ module Portal
           item['play_url'] = edm_is_shown_by_download_url
         elsif !manifesto.nil?
           item['play_url'] = manifesto
+          item[:playable] = true
         else
           item['play_url'] = web_resource_url
         end
