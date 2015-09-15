@@ -318,6 +318,7 @@ module MustacheHelper
   end
 
   def news_items(items)
+    return nil if items.blank?
     items[0..2].map do |item|
       {
         image_root: nil,
