@@ -43,7 +43,7 @@ class ApplicationView < Stache::Mustache::View
   #   {{i18n.site.name}}
   # @return [View::Translator.new]
   def i18n
-    View::Translator.new(context)
+    MustacheHelper::Translator.new(context)
   end
   only_call_once :i18n
 
