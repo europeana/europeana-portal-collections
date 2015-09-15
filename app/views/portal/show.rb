@@ -1,7 +1,12 @@
-
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
+
+    def head_meta
+      [
+        { meta_name: 'description', content: strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')) }
+      ] + helpers.head_meta
+    end
 
     def page_title
       [@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - ')
@@ -54,7 +59,7 @@ module Portal
           ]
         )
       end
-      navigation.merge(helpers ? helpers.navigation : {})
+      navigation.reverse_merge(helpers.navigation)
     end
 
     def content
@@ -403,7 +408,7 @@ module Portal
           end
         },
         thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-      }.merge(helpers ? helpers.content : {})
+      }.reverse_merge(helpers.content)
     end
 
     def labels
