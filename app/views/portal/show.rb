@@ -812,7 +812,7 @@ module Portal
           media_type: media_type,
           rights: simple_rights_label_data(media_rights),
           downloadable: true,
-          playable: true,
+          playable: edm_is_shown_by_download_url.present?,
           thumbnail: edm_preview
         }
 
@@ -883,6 +883,7 @@ module Portal
           item['play_url'] = edm_is_shown_by_download_url
         elsif !manifesto.nil?
           item['play_url'] = manifesto
+          item[:playable] = true
         else
           item['play_url'] = web_resource_url
         end
