@@ -4,13 +4,12 @@ ruby '2.2.2'
 gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide',
-  github: 'europeana/europeana-styleguide-ruby', ref: '540ad0e'
+  github: 'europeana/europeana-styleguide-ruby', ref: '980c153'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'rwd/stache', ref: '819ff88'
 
-# pending merge of https://github.com/projectblacklight/blacklight/pull/1210
 gem 'blacklight', '~> 5.14.0'
 gem 'clockwork', '~> 1.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
