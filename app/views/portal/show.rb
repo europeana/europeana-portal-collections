@@ -416,9 +416,16 @@ module Portal
 
     private
 
+    def use_edm_is_shown_by_proxy?
+      Rails.application.config.x.edm_is_shown_by_proxy &&
+        document.aggregations.size > 0 &&
+        document.aggregations.first.fetch('edmIsShownBy', false) &&
+        @mime_type.match('image/').nil?
+    end
+
     def edm_is_shown_by_download_url
       @edm_is_shown_by_download_url ||= begin
-        if Rails.application.config.x.edm_is_shown_by_proxy && document.aggregations.size > 0 && document.aggregations.first.fetch('edmIsShownBy', false)
+        if use_edm_is_shown_by_proxy?
           Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/')
         else
           render_document_show_field_value(document, 'aggregations.edmIsShownBy')
