@@ -43,7 +43,7 @@ RSpec.describe 'portal/show.html.mustache' do
 
   it 'should have meta description' do
     render
-#    expect(rendered).to have_selector("meta[name=\"description\"][content=\"About Mr Smith\"]", visible: false)
+    # expect(rendered).to have_selector("meta[name=\"description\"][content=\"About Mr Smith\"]", visible: false)
     expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
   end
 
