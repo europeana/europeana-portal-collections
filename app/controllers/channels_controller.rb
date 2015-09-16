@@ -47,7 +47,7 @@ class ChannelsController < ApplicationController
   end
 
   def find_landing_page
-    @landing_page = LandingPage.or_initialize_by(slug: "channels/#{@channel.key}")
+    @landing_page = Page::Landing.find_or_initialize_by(slug: "channels/#{@channel.key}")
     authorize! :show, @landing_page
   end
 

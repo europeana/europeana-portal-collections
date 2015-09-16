@@ -25,7 +25,7 @@ class HomeController < ApplicationController
   end
 
   def find_landing_page
-    @landing_page = LandingPage.or_initialize_by(slug: '')
+    @landing_page = Page::Landing.find_or_initialize_by(slug: '')
     authorize! :show, @landing_page
   end
 end
