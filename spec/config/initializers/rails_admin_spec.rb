@@ -79,7 +79,6 @@ RSpec.describe RailsAdmin.config do
       end
     end
 
-
     context 'when model is User' do
       let(:model_name) { 'User' }
       describe '.visible' do

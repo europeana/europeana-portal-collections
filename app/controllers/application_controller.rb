@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
-  rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError do |exception|
+  rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError
     render_error_page(404)
   end
 
