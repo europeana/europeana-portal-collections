@@ -423,8 +423,10 @@ module Portal
 
     def use_edm_is_shown_by_proxy?
       Rails.application.config.x.edm_is_shown_by_proxy &&
+        document.fetch('type', false) != 'IMAGE' &&
         document.aggregations.size > 0 &&
         document.aggregations.first.fetch('edmIsShownBy', false) &&
+        @mime_type.present? &&
         @mime_type.match('image/').nil?
     end
 

@@ -102,14 +102,18 @@ module Catalog
     edm_is_shown_by = document.fetch('aggregations.edmIsShownBy', []).first
     return nil if edm_is_shown_by.nil?
 
-    cache_key = "Europeana/MediaProxy/#{edm_is_shown_by}"
-    mime_type = Rails.cache.fetch(cache_key)
-    if mime_type.nil?
-      mime_type = remote_content_type_header(document)
-      Rails.cache.write(cache_key, mime_type) unless mime_type.nil?
+    cache_key = "Europeana/MediaProxy/Response/#{edm_is_shown_by}"
+    response = Rails.cache.fetch(cache_key)
+    if response.nil?
+      response = remote_content_type_header(document)
+      Rails.cache.write(cache_key, response)
     end
 
-    mime_type
+    if [Net::HTTPClientError, Net::HTTPServerError].include?(response.class.superclass)
+      nil
+    else
+      response['content-type']
+    end
   end
 
   protected
@@ -118,8 +122,7 @@ module Catalog
     url = URI(Rails.application.config.x.edm_is_shown_by_proxy + document.id)
     benchmark("[Media Proxy] #{url}", level: :info) do
       Net::HTTP.start(url.host, url.port) do |http|
-        response = http.head(url.path)
-        response['content-type']
+        http.head(url.path)
       end
     end
   end
