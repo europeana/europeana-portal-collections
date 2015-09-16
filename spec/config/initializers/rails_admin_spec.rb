@@ -1,7 +1,7 @@
 RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }
-    it { is_expected.to eq(%w(Banner Banner::Translation BrowseEntry BrowseEntry::Translation Channel HeroImage LandingPage Link Link::Translation Link::Promotion Link::Credit Link::SocialMedia MediaObject User)) }
+    it { is_expected.to eq(%w(Banner Banner::Translation BrowseEntry BrowseEntry::Translation Channel HeroImage Link Link::Translation Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing Page::Translation User)) }
   end
 
   describe '#model' do
@@ -39,14 +39,6 @@ RSpec.describe RailsAdmin.config do
       end
     end
 
-    context 'when model is LandingPage' do
-      let(:model_name) { 'LandingPage' }
-      describe '.visible' do
-        subject { model.visible }
-        it { is_expected.to be true }
-      end
-    end
-
     context 'when model is Link' do
       let(:model_name) { 'Link' }
       describe '.visible' do
@@ -62,6 +54,31 @@ RSpec.describe RailsAdmin.config do
         it { is_expected.to be false }
       end
     end
+
+    context 'when model is Page' do
+      let(:model_name) { 'Page' }
+      describe '.visible' do
+        subject { model.visible }
+        it { is_expected.to be true }
+      end
+    end
+
+    context 'when model is Page::Error' do
+      let(:model_name) { 'Page::Error' }
+      describe '.visible' do
+        subject { model.visible }
+        it { is_expected.to be true }
+      end
+    end
+
+    context 'when model is Page::Landing' do
+      let(:model_name) { 'Page::Landing' }
+      describe '.visible' do
+        subject { model.visible }
+        it { is_expected.to be true }
+      end
+    end
+
 
     context 'when model is User' do
       let(:model_name) { 'User' }

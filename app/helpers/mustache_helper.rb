@@ -378,7 +378,7 @@ module MustacheHelper
       cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
       {
         title: entry.title,
-        url: channel_path(entry.landing_page.channel.key, q: entry.query),
+        url: channel_path(entry.page.channel.key, q: entry.query),
         image: entry.file.url,
         image_alt: nil
       }.merge(cat_flag)

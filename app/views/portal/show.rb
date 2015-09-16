@@ -1,4 +1,3 @@
-
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug

@@ -15,8 +15,9 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner Banner::Translation BrowseEntry BrowseEntry::Translation Channel HeroImage LandingPage
-    Link Link::Translation Link::Promotion Link::Credit Link::SocialMedia MediaObject User
+    Banner Banner::Translation BrowseEntry BrowseEntry::Translation Channel HeroImage
+    Link Link::Translation Link::Promotion Link::Credit Link::SocialMedia MediaObject Page
+    Page::Error Page::Landing Page::Translation User
   )
 
   config.actions do
@@ -88,16 +89,13 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Channel' do
-    object_label_method :title
     list do
       sort_by :key
       field :key
-      field :title
       field :state
     end
     show do
       field :key
-      field :title
       field :state
       field :api_params
     end
@@ -154,31 +152,6 @@ RailsAdmin.config do |config|
         field :settings_attribution_url
         field :settings_attribution_text, :text
       end
-    end
-  end
-
-  config.model 'LandingPage' do
-    list do
-      field :channel
-      field :hero_image_file, :paperclip
-      field :state
-    end
-    show do
-      field :channel
-      field :hero_image_file, :paperclip
-      field :state
-      field :credits
-      field :social_media
-      field :promotions
-      field :browse_entries
-    end
-    edit do
-      field :channel
-      field :hero_image
-      field :credits
-      field :social_media
-      field :promotions
-      field :browse_entries
     end
   end
 
@@ -239,6 +212,100 @@ RailsAdmin.config do |config|
     visible false
     field :file do
       thumb_method :medium
+    end
+  end
+
+  config.model 'Page' do
+    object_label_method :title
+    configure :translations, :globalize_tabs
+    list do
+      field :slug
+      field :title
+      field :hero_image_file, :paperclip
+      field :state
+    end
+    show do
+      field :slug
+      field :title
+      field :hero_image_file, :paperclip
+      field :body
+      field :state
+      field :browse_entries
+    end
+    edit do
+      field :slug
+      field :translations
+      field :hero_image
+      field :browse_entries
+    end
+  end
+
+  config.model 'Page::Error' do
+    object_label_method :title
+    configure :translations, :globalize_tabs
+    list do
+      field :slug
+      field :http_code
+      field :title
+      field :hero_image_file, :paperclip
+      field :state
+    end
+    show do
+      field :slug
+      field :http_code
+      field :title
+      field :hero_image_file, :paperclip
+      field :body
+      field :state
+      field :browse_entries
+    end
+    edit do
+      field :slug
+      field :http_code
+      field :translations
+      field :hero_image
+      field :browse_entries
+    end
+  end
+
+  config.model 'Page::Landing' do
+    object_label_method :title
+    configure :translations, :globalize_tabs
+    list do
+      field :slug
+      field :title
+      field :hero_image_file, :paperclip
+      field :state
+    end
+    show do
+      field :slug
+      field :title
+      field :hero_image_file, :paperclip
+      field :state
+      field :credits
+      field :social_media
+      field :promotions
+      field :browse_entries
+    end
+    edit do
+      field :slug
+      field :translations
+      field :hero_image
+      field :credits
+      field :social_media
+      field :promotions
+      field :browse_entries
+    end
+  end
+
+  config.model 'Page::Translation' do
+    visible false
+    configure :locale, :hidden do
+      help ''
+    end
+    include_fields :locale, :title, :body
+    edit do
+      field :body, :wysihtml5
     end
   end
 

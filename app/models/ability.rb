@@ -15,18 +15,18 @@ class Ability
   def guest!
     can :show, Banner.published
     can :show, Channel.published
-    can :show, LandingPage.published
+    can :show, Page.published
   end
 
   def user!
     can :show, Banner.published
     can :show, Channel.published
-    can :show, LandingPage.published
+    can :show, Page.published
   end
 
   def admin!
     can :access, :rails_admin
     can :dashboard
-    can :manage, [Banner, BrowseEntry, Channel, HeroImage, LandingPage, Link, MediaObject, User]
+    can :manage, [Banner, BrowseEntry, Channel, HeroImage, Link, MediaObject, Page, User]
   end
 end

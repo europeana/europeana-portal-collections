@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
 
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
+  rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError do |exception|
+    render_error_page(404)
+  end
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
@@ -23,5 +27,12 @@ class ApplicationController < ActionController::Base
 
   def current_user
     super || User.new
+  end
+
+  private
+
+  def render_error_page(status)
+    @page = Page::Error.find_by_http_code!(status)
+    render 'portal/static', status: status
   end
 end

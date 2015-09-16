@@ -1,7 +1,7 @@
 module Channels
   class Show < ApplicationView
     def page_title
-      t('site.channels.' + @channel.key + '.title') + ' Channel - Alpha'
+      @landing_page.title + ' Channel - Alpha'
     end
 
     def body_class
@@ -18,8 +18,8 @@ module Channels
     def content
       {
         channel_info: {
-          name: t('site.channels.' + @channel.key + '.title'),
-          description: t('site.channels.' + @channel.key + '.description'),
+          name: @landing_page.title,
+          description: @landing_page.body,
           stats: {
             items: stylised_channel_stats
           },

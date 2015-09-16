@@ -43,7 +43,7 @@ class PortalController < ApplicationController
   end
 
   def static
-    @page = params[:page]
+    @page = Page.find_by_slug!(params[:page])
     respond_to do |format|
       format.html
     end

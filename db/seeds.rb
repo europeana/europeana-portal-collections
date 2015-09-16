@@ -15,11 +15,6 @@ def find_or_download_styleguide_image(path)
 end
 
 ActiveRecord::Base.transaction do
-  art_history_channel = Channel.create!(
-    key: 'art-history',
-    api_params: 'qf=(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l\'art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d\'Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
-  )
-  art_history_channel.publish!
   art_history_hero = HeroImage.create!(
     settings_attribution_title: 'Ships in a storm off a rocky coast',
     settings_attribution_creator: 'Jan Porcellis',
@@ -28,8 +23,10 @@ ActiveRecord::Base.transaction do
     license: 'public',
     media_object: find_or_download_styleguide_image('sample/channel_hero_art.jpg')
   )
-  art_landing = LandingPage.create!(
-    channel: art_history_channel,
+  art_history_landing = Page::Landing.create!(
+    slug: 'channels/art-history',
+    title: 'Europeana Art History',
+    body: 'From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Channel introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]',
     credits: [
       Link::Credit.new(url: 'http://www.smk.dk/', text: 'National Gallery of Denmark', position: 1),
       Link::Credit.new(url: 'https://www.rijksmuseum.nl/', text: 'Rijksmuseum', position: 2)
@@ -116,7 +113,13 @@ ActiveRecord::Base.transaction do
         media_object: find_or_download_styleguide_image('sample/entry-hokusai-square.jpg')
       ),
     ]
-  ).publish!
+  )
+  art_history_landing.publish!
+  art_history_channel = Channel.create!(
+    key: 'art-history',
+    api_params: 'qf=(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l\'art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d\'Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
+  )
+  art_history_channel.publish!
 
   Channel.create!(
     key: 'archaeology',
@@ -148,11 +151,6 @@ ActiveRecord::Base.transaction do
     api_params: 'qf=(PROVIDER: "Europeana Fashion") OR (what: Fashion) OR (what: mode) OR (what: moda) OR (what: costume) OR (what: clothes) OR (what: shoes) OR (what: jewellery)'
   ).publish!
 
-  home_channel = Channel.create!(
-    key: 'home',
-    api_params: '*:*'
-  )
-  home_channel.publish!
   home_hero = HeroImage.create!(
     settings_attribution_title: 'Insects and Fruit',
     settings_attribution_creator: 'Jan van Kessel',
@@ -163,8 +161,9 @@ ActiveRecord::Base.transaction do
     license: 'public',
     media_object: find_or_download_styleguide_image('sample/search_hero_1.jpg')
   )
-  home_landing = LandingPage.create!(
-    channel: home_channel,
+  home_landing = Page::Landing.create!(
+    slug: '',
+    title: 'Home',
     hero_image: home_hero,
     promotions: [
       Link::Promotion.new(
@@ -210,18 +209,19 @@ ActiveRecord::Base.transaction do
         settings_category: 'new'
       )
     ]
-  ).publish!
+  )
+  home_landing.publish!
+  home_channel = Channel.create!(
+    key: 'home',
+    api_params: '*:*'
+  )
+  home_channel.publish!
 
   Channel.create!(
     key: 'maps',
     api_params: 'qf=what:maps OR what:cartography OR what:kartografi OR what:cartographic OR what:geography OR what:geografi OR what:navigation OR what:chart OR what: portolan OR what: "mappa mundi" OR what: cosmography OR what:kosmografi OR what: "astronomical instrument" OR what:"celestial globe" OR title:cosmographia OR title:geographia OR title:geographica OR what:"aerial photograph" OR what:periplus OR what:atlas OR what:"armillary sphere" OR what:"terrestrial globe" OR what:"jordglob" OR what:globus NOT (PROVIDER:"OpenUp!")'
   ).publish!
 
-  music_channel = Channel.create!(
-    key: 'music',
-    api_params: 'qf=(PROVIDER:"Europeana Sounds" AND (what:music)) OR (DATA_PROVIDER:"National Library of Spain" AND TYPE:SOUND) OR (DATA_PROVIDER:"Sächsische Landesbibliothek - Staats- und Universitätsbibliothek Dresden" AND TYPE:SOUND) OR (PROVIDER:"DISMARC" AND NOT RIGHTS:*rr-p*) OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library")) OR ((what:musik OR what:oper OR title:musik OR title:oper) AND (DATA_PROVIDER:"Österreichische Nationalbibliothek - Austrian National Library") AND (TYPE:IMAGE))'
-  )
-  music_channel.publish!
   music_hero = HeroImage.create!(
     settings_attribution_title: 'Danse de trois faunes et trois bacchantes',
     settings_attribution_creator: 'Hieronymus Hopfer',
@@ -230,8 +230,10 @@ ActiveRecord::Base.transaction do
     license: 'public',
     media_object: find_or_download_styleguide_image('sample/channel_hero_music.jpg')
   )
-  music_landing = LandingPage.create!(
-    channel: music_channel,
+  music_landing = Page::Landing.create!(
+    slug: 'channels/music',
+    title: 'Europeana Music',
+    body: 'The <strong>Europeana Music Channel</strong> brings together the best music recordings, sheet music, and other music related collections from Europe\'s audio-visual archives, libraries, archives and museums. <a href="/portal/channels/music/about">Find out more about the Music Channel.</a>',
     hero_image: music_hero,
     credits: [
       Link::Credit.new(url: 'http://www.europeanasounds.eu/', text: 'Europeana Sounds')
@@ -316,7 +318,13 @@ ActiveRecord::Base.transaction do
         media_object: find_or_download_styleguide_image('sample/entry-harpsichord-square.jpg')
       )
     ]
-  ).publish!
+  )
+  music_landing.publish!
+  music_channel = Channel.create!(
+    key: 'music',
+    api_params: 'qf=(PROVIDER:"Europeana Sounds" AND (what:music)) OR (DATA_PROVIDER:"National Library of Spain" AND TYPE:SOUND) OR (DATA_PROVIDER:"Sächsische Landesbibliothek - Staats- und Universitätsbibliothek Dresden" AND TYPE:SOUND) OR (PROVIDER:"DISMARC" AND NOT RIGHTS:*rr-p*) OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library")) OR ((what:musik OR what:oper OR title:musik OR title:oper) AND (DATA_PROVIDER:"Österreichische Nationalbibliothek - Austrian National Library") AND (TYPE:IMAGE))'
+  )
+  music_channel.publish!
 
   Channel.create!(
     key: 'natural-history',
@@ -352,4 +360,26 @@ ActiveRecord::Base.transaction do
       text: 'Give us your input!'
     )
   ).publish!
+
+  error_404_page = Page::Error.create!(
+    slug: 'errors/404',
+    http_code: '404',
+    title: 'Sorry, we can\'t find that page',
+    body: 'Unfortunately we couldn\'t find the page you were looking for. Try searching Europeana or you might like the selected items below.'
+  )
+  error_404_page.publish!
+
+  about_page = Page.create!(
+    slug: 'about',
+    title: 'Welcome, culture lover!',
+    body: '<p>Whether you came here for inspiration, to work on your research, looking for your next coffee mug design or just to snoop around, we hope you will find what you need somewhere amongst the 45 million objects we host here.</p><p>Our material comes from all over Europe and the scope of the collections is really quite astonishing. Our aim is help you find your way round so you discover treasures of your own.</p><p>Over the last few years, we’ve been expanding our collections and learning more and more about them, and what you want to do with them. Now it’s time to change a few things and make some improvements to our service!</p><p>We’re trying out a new version of Europeana Collections. We are working hard to improve your experience here and make it as easy as possible for you to find the information you are looking for. So we’ll probably ask you to help us by answering some questions. Your answers will be really helpful to us, so please do take a moment to give us your thoughts. Thanks!</p><p>In the meantime, we hope you enjoy your cultural journey with us.</p>'
+  )
+  about_page.publish!
+
+  music_channel_about_page = Page.create!(
+    slug: 'channels/music/about',
+    title: 'About the Music Channel',
+    body: '<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Channel, you can.</p><p><a href="http://www.europeanasounds.eu/">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p><p>We’ve made this early test version of the Music Channel available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p><p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Channel. All logs are kept private and anonymised and will only be used to improve our service.</p><p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>'
+  )
+  music_channel_about_page.publish!
 end

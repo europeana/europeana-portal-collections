@@ -15,6 +15,7 @@ gem 'rails_admin_globalize_field', github: 'rwd/rails_admin_globalize_field',
 
 gem 'aasm', '~> 4.2'
 gem 'blacklight', '~> 5.14.0'
+gem 'bootstrap-wysihtml5-rails', '~> 0.3.3'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
 gem 'colorize'

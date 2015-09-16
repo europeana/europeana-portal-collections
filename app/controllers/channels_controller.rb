@@ -5,9 +5,6 @@ class ChannelsController < ApplicationController
   include Channels
   include Europeana::Styleguide
   include BlogFetcher
-  include WithLandingPage
-
-  rescue_from ActiveRecord::RecordNotFound, with: :channel_not_found
 
   before_action :find_channel, only: :show
   before_action :find_landing_page, only: :show
@@ -49,9 +46,9 @@ class ChannelsController < ApplicationController
     authorize! :show, @channel
   end
 
-  # @todo fail with error rescued in ApplicationController to render 404 page
-  def channel_not_found
-    render file: 'public/404.html', status: 404
+  def find_landing_page
+    @landing_page = LandingPage.or_initialize_by(slug: "channels/#{@channel.key}")
+    authorize! :show, @landing_page
   end
 
   ##

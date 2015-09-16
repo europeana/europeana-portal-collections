@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910125115) do
+ActiveRecord::Schema.define(version: 20150916074832) do
 
   create_table "banner_translations", force: :cascade do |t|
     t.integer  "banner_id",  limit: 4,     null: false
@@ -27,11 +27,9 @@ ActiveRecord::Schema.define(version: 20150910125115) do
 
   create_table "banners", force: :cascade do |t|
     t.string   "key",        limit: 255
-    t.string   "title",      limit: 255
-    t.text     "body",       limit: 65535
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.integer  "state",      limit: 4,     default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "state",      limit: 4,   default: 0
   end
 
   add_index "banners", ["key"], name: "index_banners_on_key", using: :btree
@@ -49,9 +47,8 @@ ActiveRecord::Schema.define(version: 20150910125115) do
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
 
   create_table "browse_entries", force: :cascade do |t|
-    t.string   "title",           limit: 255
     t.text     "query",           limit: 65535
-    t.integer  "landing_page_id", limit: 4
+    t.integer  "page_id",         limit: 4
     t.integer  "media_object_id", limit: 4
     t.integer  "position",        limit: 4
     t.text     "settings",        limit: 65535
@@ -59,8 +56,8 @@ ActiveRecord::Schema.define(version: 20150910125115) do
     t.datetime "updated_at",                    null: false
   end
 
-  add_index "browse_entries", ["landing_page_id"], name: "index_browse_entries_on_landing_page_id", using: :btree
   add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree
+  add_index "browse_entries", ["page_id"], name: "index_browse_entries_on_page_id", using: :btree
 
   create_table "browse_entry_translations", force: :cascade do |t|
     t.integer  "browse_entry_id", limit: 4,   null: false
@@ -74,11 +71,12 @@ ActiveRecord::Schema.define(version: 20150910125115) do
   add_index "browse_entry_translations", ["locale"], name: "index_browse_entry_translations_on_locale", using: :btree
 
   create_table "channels", force: :cascade do |t|
-    t.string   "key",        limit: 255
-    t.text     "api_params", limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "state",      limit: 4
+    t.string   "key",             limit: 255
+    t.text     "api_params",      limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "state",           limit: 4
+    t.integer  "landing_page_id", limit: 4
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -107,17 +105,6 @@ ActiveRecord::Schema.define(version: 20150910125115) do
 
   add_index "hero_images", ["media_object_id"], name: "fk_rails_491dc63aec", using: :btree
 
-  create_table "landing_pages", force: :cascade do |t|
-    t.integer  "channel_id",    limit: 4
-    t.integer  "hero_image_id", limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "state",         limit: 4, default: 0
-  end
-
-  add_index "landing_pages", ["channel_id"], name: "fk_rails_8b1a2f89f6", using: :btree
-  add_index "landing_pages", ["hero_image_id"], name: "fk_rails_a59254ed81", using: :btree
-
   create_table "link_translations", force: :cascade do |t|
     t.integer  "link_id",    limit: 4,     null: false
     t.string   "locale",     limit: 255,   null: false
@@ -130,7 +117,6 @@ ActiveRecord::Schema.define(version: 20150910125115) do
   add_index "link_translations", ["locale"], name: "index_link_translations_on_locale", using: :btree
 
   create_table "links", force: :cascade do |t|
-    t.string   "text",            limit: 255
     t.text     "url",             limit: 65535
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -158,6 +144,34 @@ ActiveRecord::Schema.define(version: 20150910125115) do
   end
 
   add_index "media_objects", ["source_url_hash"], name: "index_media_objects_on_source_url_hash", using: :btree
+
+  create_table "page_translations", force: :cascade do |t|
+    t.integer  "page_id",    limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "title",      limit: 255
+    t.text     "body",       limit: 65535
+  end
+
+  add_index "page_translations", ["locale"], name: "index_page_translations_on_locale", using: :btree
+  add_index "page_translations", ["page_id"], name: "index_page_translations_on_page_id", using: :btree
+
+  create_table "pages", force: :cascade do |t|
+    t.integer  "hero_image_id", limit: 4
+    t.string   "slug",          limit: 255
+    t.integer  "state",         limit: 4,   default: 0
+    t.string   "type",          limit: 255
+    t.integer  "http_code",     limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "pages", ["hero_image_id"], name: "index_pages_on_hero_image_id", using: :btree
+  add_index "pages", ["http_code"], name: "index_pages_on_http_code", using: :btree
+  add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
+  add_index "pages", ["state"], name: "index_pages_on_state", using: :btree
+  add_index "pages", ["type"], name: "index_pages_on_type", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.text     "query_params", limit: 65535

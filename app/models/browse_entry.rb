@@ -1,7 +1,7 @@
 class BrowseEntry < ActiveRecord::Base
   include HasSettingsAttribute
 
-  belongs_to :landing_page
+  belongs_to :page
   belongs_to :media_object, dependent: :destroy
 
   has_settings(:category)
