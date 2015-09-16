@@ -33,6 +33,8 @@ class ApplicationController < ActionController::Base
 
   def render_error_page(status)
     @page = Page::Error.find_by_http_code!(status)
-    render 'portal/static', status: status
+    status_template = 'pages/errors/' + Rack::Utils::HTTP_STATUS_CODES[status].downcase.gsub(' ', '_')
+    template = template_exists?(status_template) ? status_template : 'pages/static'
+    render template, status: status
   end
 end
