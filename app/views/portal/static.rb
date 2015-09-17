@@ -7,7 +7,10 @@ module Portal
     def content
       {
         title: @page.title,
-        text: @page.body
+        text: @page.body,
+        channel_entry: @page.browse_entries.blank? ? nil : {
+          items: channel_entry_items(@page.browse_entries)
+        },
       }.merge(helpers.content)
     end
   end

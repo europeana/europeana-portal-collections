@@ -379,7 +379,7 @@ module MustacheHelper
       {
         title: entry.title,
         url: browse_entry_url(entry),
-        image: entry.file.url,
+        image: entry.file.nil? ? nil : entry.file.url,
         image_alt: nil
       }.merge(cat_flag)
     end

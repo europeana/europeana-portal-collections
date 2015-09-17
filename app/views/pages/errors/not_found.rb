@@ -5,7 +5,7 @@ module Pages
         {
           intro: @page.title,
           text: @page.body
-        }.merge(helpers.content)
+        }.reverse_merge(super)
       end
     end
   end
