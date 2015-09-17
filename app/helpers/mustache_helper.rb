@@ -170,7 +170,7 @@ module MustacheHelper
         },
         logo: {
           url: root_url,
-          text: 'Europeana Search'
+          text: 'Europeana ' + t('global.search-collections')
         },
         primary_nav: {
           items: [
