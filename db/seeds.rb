@@ -362,7 +362,6 @@ ActiveRecord::Base.transaction do
   ).publish!
 
   error_404_page = Page::Error.create!(
-    slug: 'errors/404',
     http_code: '404',
     title: 'Sorry, we can\'t find that page',
     body: 'Unfortunately we couldn\'t find the page you were looking for. Try searching Europeana or you might like the selected items below.'

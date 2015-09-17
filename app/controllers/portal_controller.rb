@@ -44,8 +44,13 @@ class PortalController < ApplicationController
 
   def static
     @page = Page.find_by_slug!(params[:page])
+    authorize! :show, @page
+
     respond_to do |format|
-      format.html
+      format.html do
+        page_template = "pages/#{@page.slug}"
+        render template_exists?(page_template) ? page_template : 'portal/static'
+      end
     end
   end
 end

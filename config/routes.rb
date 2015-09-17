@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   resources :channels, only: [:show, :index]
   resources :landing_pages, only: [:show]
 
-  # Static pages
-  get ':page', to: 'portal#static', constraints: { page: %r{(about|channels/music/about)} }
-
   mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
   devise_for :users
+
+  # Static pages
+  get '*page', to: 'portal#static'
 end

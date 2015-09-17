@@ -260,7 +260,6 @@ RailsAdmin.config do |config|
       field :browse_entries
     end
     edit do
-      field :slug
       field :http_code
       field :translations
       field :hero_image

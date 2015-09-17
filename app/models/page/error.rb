@@ -6,4 +6,8 @@ class Page::Error < Page
 
   translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
+
+  before_validation do |page|
+    page.slug = 'errors/' + Rack::Utils::HTTP_STATUS_CODES[page.http_code].downcase.gsub(' ', '_')
+  end
 end
