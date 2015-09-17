@@ -366,7 +366,7 @@ module MustacheHelper
         title: promo.text,
         custom_class: promo.settings_class,
         wide: promo.settings_wide == '1',
-        bg_image: promo.file.url
+        bg_image: promo.file.nil? ? nil : promo.file.url
       }.merge(cat_flag)
     end
   end
