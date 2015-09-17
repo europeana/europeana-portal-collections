@@ -160,7 +160,7 @@ module MustacheHelper
       global: {
         options: {
           search_active: false,
-          settings_active: false
+          settings_active: true
         },
         logo: {
           url: root_url,
@@ -170,38 +170,34 @@ module MustacheHelper
           items: [
             {
               url: root_url,
-              text: 'Home',
+              text: t('global.navigation.home'),
               is_current: controller.controller_name != 'channels'
             },
-            # {
-            #   url: channel_url('music'),
-            #   text: 'Channels',
-            #   is_current: controller.controller_name == 'channels',
-            #   submenu: {
-            #     items: [
-            #       {
-            #         url: channel_url('art'),
-            #         text: 'Art History'
-            #       },
-            #       {
-            #         url: channel_url('music'),
-            #         text: 'Music'
-            #       }
-            #     ]
-            #   }
-            # },
-            # {
-            #   url: 'http://exhibitions.europeana.eu/',
-            #   text: 'Exhibitions'
-            # },
-            # {
-            #   url: 'http://blog.europeana.eu/',
-            #   text: 'Blog'
-            # },
-            # {
-            #   url: 'http://www.europeana.eu/portal/myeuropeana#login',
-            #   text: 'My Europeana'
-            # }
+            {
+              url: channel_url('music'),
+              text: t('global.navigation.channels'),
+              is_current: controller.controller_name == 'channels',
+              submenu: {
+                items: ['art-history', 'music'].map do |channel|
+                  {
+                    url: channel_url(channel),
+                    text: t("site.channels.#{channel}.title")
+                  }
+                end
+              }
+            },
+            {
+              url: 'http://exhibitions.europeana.eu/',
+              text: t('global.navigation.exhibitions')
+            },
+            {
+              url: 'http://blog.europeana.eu/',
+              text: t('global.navigation.blog')
+            },
+            {
+              url: 'http://www.europeana.eu/portal/myeuropeana#login',
+              text: 'My Europeana'
+            }
           ]
         }  # end prim nav
       },
