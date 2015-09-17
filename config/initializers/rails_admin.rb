@@ -305,7 +305,10 @@ RailsAdmin.config do |config|
     end
     include_fields :locale, :title, :body
     edit do
-      field :body, :wysihtml5
+      field :title
+      field :body, :text do
+        html_attributes rows: 15, cols: 80
+      end
     end
   end
 
