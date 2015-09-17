@@ -18,7 +18,7 @@ module Home
 
     def head_meta
       [
-        { meta_name: 'description', content: I18n.t('site.home.strapline', total_item_count: @europeana_item_count) }
+        { meta_name: 'description', content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ') }
       ] + helpers.head_meta
     end
 

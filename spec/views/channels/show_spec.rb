@@ -1,4 +1,6 @@
 RSpec.describe 'channels/show.html.mustache' do
+  include ActionView::Helpers::TextHelper
+
   before(:each) do
     RSpec.configure do |config|
       config.mock_with :rspec do |mocks|
@@ -13,7 +15,7 @@ RSpec.describe 'channels/show.html.mustache' do
   end
 
   it 'should have meta description' do
-    meta_content = ActionView::Base.full_sanitizer.sanitize(I18n.t('site.channels.music.description'))
+    meta_content = truncate(ActionView::Base.full_sanitizer.sanitize(I18n.t('site.channels.music.description')), length: 350, separator: ' ')
     render
     expect(rendered).to have_selector("meta[name=\"description\"][content=\"#{meta_content}\"]", visible: false)
   end
