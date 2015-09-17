@@ -15,7 +15,7 @@ module Portal
 
     def head_meta
       [
-        { meta_name: 'description', content: strip_tags(Nokogiri::HTML(content[:text]).xpath('//p').first.text) }
+        { meta_name: 'description', content: truncate(strip_tags(Nokogiri::HTML(content[:text]).xpath('//p').first.text), length: 350, separator: ' ') }
       ] + helpers.head_meta
     end
 

@@ -4,7 +4,7 @@ module Portal
 
     def head_meta
       [
-        { meta_name: 'description', content: strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')) }
+        { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') }
       ] + helpers.head_meta
     end
 
