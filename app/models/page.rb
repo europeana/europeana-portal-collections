@@ -7,9 +7,7 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries, allow_destroy: true
 
-  delegate :file, :file=, to: :hero_image, prefix: true
-  attr_accessor :delete_file
-  before_validation { file.clear if delete_file == '1' }
+  delegate :file, to: :hero_image, prefix: true, allow_nil: true
 
   has_paper_trail
 
@@ -19,8 +17,4 @@ class Page < ActiveRecord::Base
   validates :slug, uniqueness: true
 
   scope :static, -> { where(type: nil) }
-
-  def hero_image(*args)
-    super || build_hero_image
-  end
 end

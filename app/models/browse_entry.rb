@@ -6,9 +6,8 @@ class BrowseEntry < ActiveRecord::Base
 
   has_settings(:category)
 
-  delegate :file, :file=, to: :media_object
-  attr_accessor :delete_file
-  before_validation { self.file.clear if self.delete_file == '1' }
+  delegate :file, to: :media_object, allow_nil: true
+
   delegate :settings_category_enum, to: :class
 
   accepts_nested_attributes_for :media_object, allow_destroy: true
@@ -24,7 +23,7 @@ class BrowseEntry < ActiveRecord::Base
   translates :title, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
 
-  def media_object(*args)
-    super || build_media_object
+  def file=(*args)
+    (media_object || build_media_object).send(:file=, *args)
   end
 end

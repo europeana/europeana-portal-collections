@@ -5,7 +5,7 @@ class Banner < ActiveRecord::Base
 
   accepts_nested_attributes_for :link
 
-  delegate :url, :url=, :text, :text=, to: :link, prefix: true
+  delegate :url, :text, to: :link, prefix: true
 
   validates :key, uniqueness: true, allow_nil: true
 
@@ -13,8 +13,4 @@ class Banner < ActiveRecord::Base
 
   translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
-
-  def link(*args)
-    super || Link.new
-  end
 end

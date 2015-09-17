@@ -6,9 +6,7 @@ class Link::Promotion < Link
 
   has_settings(:wide, :category, :class)
 
-  delegate :file, :file=, to: :media_object
-  attr_accessor :delete_file
-  before_validation { self.file.clear if self.delete_file == '1' }
+  delegate :file, to: :media_object, allow_nil: true
 
   delegate :settings_category_enum, to: :class
   delegate :settings_wide_enum, to: :class
@@ -26,7 +24,7 @@ class Link::Promotion < Link
   validates :settings_category, inclusion: { in: settings_category_enum }, allow_nil: true, allow_blank: true
   validates :settings_wide, inclusion: { in: settings_wide_enum }, allow_nil: true
 
-  def media_object(*args)
-    super || build_media_object
+  def file=(*args)
+    (media_object || build_media_object).send(:file=, *args)
   end
 end

@@ -11,9 +11,7 @@ class HeroImage < ActiveRecord::Base
   delegate :settings_brand_opacity_enum, :settings_brand_position_enum,
            :settings_brand_colour_enum, to: :class
 
-  delegate :file, :file=, to: :media_object
-  attr_accessor :delete_file
-  before_validation { file.clear if delete_file == '1' }
+  delegate :file, to: :media_object, allow_nil: true
 
   has_paper_trail
 
@@ -35,9 +33,9 @@ class HeroImage < ActiveRecord::Base
     end
   end
 
-  validates :license, inclusion: { in: license_enum }, allow_nil: true
-
-  def media_object(*args)
-    super || build_media_object
+  def file=(*args)
+    (media_object || build_media_object).send(:file=, *args)
   end
+
+  validates :license, inclusion: { in: license_enum }, allow_nil: true
 end
