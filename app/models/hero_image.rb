@@ -38,6 +38,6 @@ class HeroImage < ActiveRecord::Base
   validates :license, inclusion: { in: license_enum }, allow_nil: true
 
   def media_object(*args)
-    super || MediaObject.new
+    super || build_media_object
   end
 end

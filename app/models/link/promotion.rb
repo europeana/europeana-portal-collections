@@ -27,6 +27,6 @@ class Link::Promotion < Link
   validates :settings_wide, inclusion: { in: settings_wide_enum }, allow_nil: true
 
   def media_object(*args)
-    super || MediaObject.new
+    super || build_media_object
   end
 end

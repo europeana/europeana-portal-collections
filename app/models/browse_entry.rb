@@ -25,6 +25,6 @@ class BrowseEntry < ActiveRecord::Base
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   def media_object(*args)
-    super || MediaObject.new
+    super || build_media_object
   end
 end

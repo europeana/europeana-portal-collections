@@ -18,7 +18,9 @@ class Page < ActiveRecord::Base
 
   validates :slug, uniqueness: true
 
+  scope :static, -> { where(type: nil) }
+
   def hero_image(*args)
-    super || HeroImage.new
+    super || build_hero_image
   end
 end

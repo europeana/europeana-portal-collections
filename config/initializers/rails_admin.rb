@@ -223,6 +223,7 @@ RailsAdmin.config do |config|
       field :title
       field :hero_image_file, :paperclip
       field :state
+      scopes [:static]
     end
     show do
       field :slug
