@@ -154,10 +154,8 @@ module Portal
         is_text: doc_type == 'TEXT',
         is_video: doc_type == 'VIDEO',
         img: {
-          rectangle: {
-            src: render_index_field_value(doc, 'edmPreview'),
-            alt: ''
-          }
+          src: render_index_field_value(doc, 'edmPreview'),
+          alt: ''
         },
         agent: agent_label(doc),
         concepts: concept_labels(doc),
