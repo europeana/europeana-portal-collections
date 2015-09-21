@@ -180,11 +180,11 @@ module MustacheHelper
               is_current: controller.controller_name != 'channels'
             },
             {
-              url: channel_url('music'),
+#              url: channel_url('music'),
               text: t('global.navigation.channels'),
               is_current: controller.controller_name == 'channels',
               submenu: {
-                items: ['art-history', 'music'].map do |channel|
+                items: ['music'].map do |channel|
                   {
                     url: channel_url(channel),
                     text: t("site.channels.#{channel}.title")
@@ -194,15 +194,27 @@ module MustacheHelper
             },
             {
               url: 'http://exhibitions.europeana.eu/',
-              text: t('global.navigation.exhibitions')
+              text: t('global.navigation.exhibitions'),
+              submenu: {
+                items: [
+                  {
+                    url: 'http://exhibitions.europeana.eu/',
+                    text: t('global.navigation.all_exhibitions')
+                  }
+                ]
+              }
             },
             {
               url: 'http://blog.europeana.eu/',
-              text: t('global.navigation.blog')
-            },
-            {
-              url: 'http://www.europeana.eu/portal/myeuropeana#login',
-              text: 'My Europeana'
+              text: t('global.navigation.blog'),
+              submenu: {
+                items: [
+                  {
+                    url: 'http://blog.europeana.eu/',
+                    text: t('global.navigation.all_blog_posts')
+                  }
+                ]
+              }
             }
           ]
         }  # end prim nav
