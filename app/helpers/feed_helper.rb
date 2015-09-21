@@ -1,10 +1,4 @@
-module CachedFeedEntries
-  extend ActiveSupport::Concern
-
-  included do
-    helper_method :feed_entries
-  end
-
+module FeedHelper
   def feed_entries(url)
     @cached_feed_entries ||= {}
     @cached_feed_entries[url] ||= begin

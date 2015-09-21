@@ -1,6 +1,5 @@
 require 'webmock/rspec'
 require 'support/europeana_api_helper'
-require 'support/europeana_blog_helper'
 
 RSpec.configure do |config|
   config.before(:each) do
@@ -8,5 +7,4 @@ RSpec.configure do |config|
   end
 
   config.include EuropeanaAPIHelper
-  config.include EuropeanaBlogHelper
 end
