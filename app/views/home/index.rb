@@ -13,7 +13,13 @@ module Home
           items: blog_news_items,
           blogurl: 'http://blog.europeana.eu/'
         }
-      }.merge(helpers ? helpers.content : {})
+      }.reverse_merge(helpers.content)
+    end
+
+    def head_meta
+      [
+        { meta_name: 'description', content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ') }
+      ] + helpers.head_meta
     end
 
     private
