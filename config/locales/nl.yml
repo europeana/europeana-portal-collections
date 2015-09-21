@@ -2,6 +2,8 @@ nl:
   global:
     labs-link: 'link naar labs '
     navigation:
+      all_blog_posts: 
+      all_exhibitions: 
       blog: 
       channels: 
       exhibitions: 
