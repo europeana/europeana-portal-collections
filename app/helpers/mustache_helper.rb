@@ -195,12 +195,7 @@ module MustacheHelper
               url: 'http://exhibitions.europeana.eu/',
               text: t('global.navigation.exhibitions'),
               submenu: {
-                items: feed_entries(FeedCacheJob::URLS[:exhibitions][:all])[0..5].map { |item|
-                  {
-                    url: CGI.unescapeHTML(item.url),
-                    text: CGI.unescapeHTML(item.title)
-                  }
-                } + [
+                items: feed_entry_nav_items(FeedCacheJob::URLS[:exhibitions][:all], 6) + [
                   {
                     url: 'http://exhibitions.europeana.eu/',
                     text: t('global.navigation.all_exhibitions'),
@@ -213,12 +208,7 @@ module MustacheHelper
               url: 'http://blog.europeana.eu/',
               text: t('global.navigation.blog'),
               submenu: {
-                items: feed_entries(FeedCacheJob::URLS[:blog][:all])[0..5].map { |item|
-                  {
-                    url: CGI.unescapeHTML(item.url),
-                    text: CGI.unescapeHTML(item.title)
-                  }
-                } + [
+                items: feed_entry_nav_items(FeedCacheJob::URLS[:blog][:all], 6) + [
                   {
                     url: 'http://blog.europeana.eu/',
                     text: t('global.navigation.all_blog_posts'),
@@ -277,6 +267,15 @@ module MustacheHelper
         }
       }
     }
+  end
+
+  def feed_entry_nav_items(url, max)
+    feed_entries(url)[0..(max-1)].map do |item|
+      {
+        url: CGI.unescapeHTML(item.url),
+        text: CGI.unescapeHTML(item.title)
+      }
+    end
   end
 
   def content
