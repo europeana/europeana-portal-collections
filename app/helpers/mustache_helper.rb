@@ -329,10 +329,8 @@ module MustacheHelper
         },
         url: CGI.unescapeHTML(item.url),
         img: {
-          rectangle: {
-            src: news_item_img_src(item),
-            alt: nil
-          }
+          src: news_item_img_src(item),
+          alt: nil
         },
         excerpt: {
           short: CGI.unescapeHTML(item.summary)
