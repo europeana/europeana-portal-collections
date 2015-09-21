@@ -2,6 +2,9 @@ en:
   global:
     labs-link: 'link to labs '
     navigation:
+      blog: Blog
+      channels: Channels
+      exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
     pro-text: text for pro

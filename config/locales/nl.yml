@@ -2,6 +2,9 @@ nl:
   global:
     labs-link: 'link naar labs '
     navigation:
+      blog: 
+      channels: 
+      exhibitions: 
       home: Home
     pro-link: link naar pro
     pro-text: tekst voor pro
