@@ -1,7 +1,6 @@
 en:
   global:
     labs-link: 'link to labs '
-    labs-text: text for labs
     navigation:
       home: Home
     pro-link: 'link to pro '
@@ -15,7 +14,7 @@ en:
         title: This is an Alpha release of our new collections search and Music Channel
     blog-link: link to blog
     channels:
-      art:
+      art-history:
         description: |
           From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Channel introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
         title: Europeana Art History

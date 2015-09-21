@@ -46,15 +46,21 @@ module MustacheHelper
     { is_alpha: true }
   end
 
+  def js_version
+    Rails.application.config.x.js_version || ''
+  end
+
   def js_variables
-    "var js_path='" + styleguide_path('/js/dist/') + "';"
+    'var js_path="' + styleguide_path('/js/dist/') + '"; ' +
+    'var require = {"urlArgs": "' + js_version  + '"};'
   end
 
   def js_files
     js_entry_point = Rails.application.config.x.js_entrypoint || '/js/dist/'
     js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
-    [{ path: styleguide_path(js_entry_point + 'require.js'),
-       data_main: styleguide_path(js_entry_point + 'main/main') }]
+    [{ path: styleguide_path(js_entry_point + 'require.js?cache=' + js_version),
+       data_main: styleguide_path(js_entry_point + 'main/main'),
+       js_version: js_version}]
   end
 
   def menus
@@ -164,7 +170,7 @@ module MustacheHelper
         },
         logo: {
           url: root_url,
-          text: 'Europeana Search'
+          text: 'Europeana ' + t('global.search-collections')
         },
         primary_nav: {
           items: [
@@ -254,6 +260,17 @@ module MustacheHelper
     }
   end
 
+  def content
+    {
+      phase_feedback: {
+        title: t('site.alpha.feedback_banner.title'),
+        text: t('site.alpha.feedback_banner.description'),
+        cta_url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
+        cta_text: t('site.alpha.feedback_banner.link-text')
+      }
+    }
+  end
+
   def styleguide_path(asset = nil)
     Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
   end
@@ -307,6 +324,7 @@ module MustacheHelper
   end
 
   def news_items(items)
+    return nil if items.blank?
     items[0..2].map do |item|
       {
         image_root: nil,
@@ -331,7 +349,7 @@ module MustacheHelper
     return nil unless item.content.present?
     img_tag = item.content.match(/<img [^>]*>/i)[0]
     return nil unless img_tag.present?
-    url = img_tag.match(/src="([^"]*)"/i)[1]
+    url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
     mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
     mo.nil? ? nil : mo.file.url(:medium)
   end

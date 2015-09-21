@@ -22,9 +22,9 @@ nl:
     channels-fashion: Mode
     channels-music: Muziek
     channels-music-link: 
-    choose-language: 
-    email-address: 
-    exhibitions: Tentoonstelling
+    choose-language: Taal
+    email-address: e-mail adres
+    exhibitions: Tentoonstellingen
     facet:
       advanced:
         options: 
@@ -185,25 +185,25 @@ nl:
         from: 
         to: 
     find-us-elsewhere: 
-    forgot-password: 
-    genres: 
+    forgot-password: 'Wachtwoord kwijt? '
+    genres: thema's
     genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
+    genres-classical-music: Klassieke muziek
+    genres-concertos: Concertos
     genres-non-western-classical-music: 
     genres-opera: 
     genres-popular-music: 
     genres-traditional-music: 
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
+      connect: verbind
+      develop: ontwikkel
+      discover: ontdek
+      network: netwerk
     help: 
     home: 
     javascript-required: 
-    labs: 
-    labs-text: 
+    labs: Labs
+    labs-text: Gebruik onze APIs en datasets
     language-basque: 
     language-bulgarian: 
     language-catalan: 
@@ -245,12 +245,12 @@ nl:
     our-mission-text: 
     our-sites: onze sites
     password: 
-    professional: 
-    professional-text: 
+    professional: Professional
+    professional-text: Doe mee; deel uw collectie met ons!
     refine-your-search: 
     register: 
-    research: 
-    research-text: 
+    research: Research
+    research-text: Voor academici
     rights-box:
       background-image-provider: 
       background-image-provider-url: 
@@ -260,8 +260,8 @@ nl:
     search-area:
       search-button-image-alt: Zoek
       search-placeholder-text: Voeg een zoekfunctie toe
-    search-collections: 
-    search-collections-text: 
+    search-collections: Collecties
+    search-collections-text: Ontdek Europa's cultureel erfgoed
     share: 
     sitemap: 
     terms-and-policies: 

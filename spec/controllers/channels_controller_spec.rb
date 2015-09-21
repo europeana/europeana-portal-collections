@@ -59,7 +59,7 @@ RSpec.describe ChannelsController, type: :controller do
 
         it 'queries API for recent additions' do
           expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_least_times(1)
-          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_most_times(3)
+          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_most_times(24)
         end
 
         it 'does not get RSS blog posts' do

@@ -1,21 +1,20 @@
 nl:
   global:
     labs-link: 'link naar labs '
-    labs-text: tekst over labs
     navigation:
-      home: 
+      home: Home
     pro-link: link naar pro
     pro-text: tekst voor pro
     settings: tekst voor settings
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
+        description: '"Alpha" betekent dat we momenteel druk bezig zijn de website te verbeteren and dat we regelmatig updates doen en dat we soms off-line zijn! Jullie feedback helpt ons de site te verbeteren!'
+        link-text: 'Vertel wat u denkt! '
+        title: Dit is een Alpha versie van onze nieuwe Collections Search en Muziek Kanaal
     blog-link: link naar de blog
     channels:
-      art:
+      art-history:
         description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
         title: Kunst Kanaal
       data-types:
@@ -30,7 +29,7 @@ nl:
         recent: Recent toegevoegd
         spotlight-on: In de spotlight
       music:
-        description: 
+        description: Het <strong> Europeana Muziek Kanaal</strong> brengt u de beste muziek opnames, blad muziek en ander muziek gerelateerde collecties van Europa's audio-visuele archieven, bibliotheken, archieven en musea. <a href="/portal/channels/music/about"> Meer over dit kanaal...</a>
         title: Europeana Muziek
     facet:
       language:
@@ -38,13 +37,13 @@ nl:
           results: Resulaten
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        copyright: 
-        data-providers: 
-        new-collections: 
-        search-tips: 
-        using-myeuropeana: 
+        about: Over ons
+        become-a-provider: Word een data provider
+        copyright: Auteursrecht
+        data-providers: Alle data providers
+        new-collections: Nieuwe Collecties
+        search-tips: Zoek tips
+        using-myeuropeana: Gebruik mijn Europeana
     home:
       strapline: 'Ontdek %{total_item_count} items van Europa''s bibliotheken, archiven en musea.  '
     more: Meer...
@@ -54,23 +53,23 @@ nl:
     object:
       actions:
         download: Download
-        download-additional: 
+        download-additional: Ook beschikbaar als
         downloaddata: Download informatie
-        open-media: 
+        open-media: Open dit type media
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
-        technicalmetadata: 
+        technicalmetadata: Technische metadata
       meta-label:
-        codec: 
-        collection-name: 
+        codec: Codec
+        collection-name: Dataset
         concept: Soort object
         concepts: Categorieën
-        consists-of: 
-        contributor: 
-        copyright: 
+        consists-of: Bestaat uit
+        contributor: Bijdrager
+        copyright: Auteursrecht
         creation-date: Datum vervaardigd
         creator: Van
-        current-location: 
+        current-location: Huidige locatie
         data-provider: 
         date: 
         dates: 

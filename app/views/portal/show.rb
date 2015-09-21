@@ -1,7 +1,12 @@
-
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
+
+    def head_meta
+      [
+        { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') }
+      ] + helpers.head_meta
+    end
 
     def page_title
       [@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - ')
@@ -54,7 +59,7 @@ module Portal
           ]
         )
       end
-      navigation.merge(helpers.navigation)
+      navigation.reverse_merge(helpers.navigation)
     end
 
     def content
@@ -403,7 +408,7 @@ module Portal
           end
         },
         thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-      }
+      }.reverse_merge(helpers.content)
     end
 
     def labels
@@ -416,9 +421,18 @@ module Portal
 
     private
 
+    def use_edm_is_shown_by_proxy?
+      Rails.application.config.x.edm_is_shown_by_proxy &&
+        document.fetch('type', false) != 'IMAGE' &&
+        document.aggregations.size > 0 &&
+        document.aggregations.first.fetch('edmIsShownBy', false) &&
+        @mime_type.present? &&
+        @mime_type.match('image/').nil?
+    end
+
     def edm_is_shown_by_download_url
       @edm_is_shown_by_download_url ||= begin
-        if Rails.application.config.x.edm_is_shown_by_proxy && document.aggregations.size > 0 && document.aggregations.first.fetch('edmIsShownBy', false)
+        if use_edm_is_shown_by_proxy?
           Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/')
         else
           render_document_show_field_value(document, 'aggregations.edmIsShownBy')
@@ -740,8 +754,9 @@ module Portal
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
-    # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis
+    # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls
     def iiif_manifesto(identifier, collection)
+      url_match = nil
       ids = Hash.new
       collections = Hash.new
 
@@ -749,7 +764,7 @@ module Portal
       ids['http://gallica.bnf.fr/ark:/12148/btv1b84539771'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
 
       # test url: http://localhost:3000/portal/record/92082/BibliographicResource_1000157170184.html?debug=json
-      ids['http://gallica.bnf.fr/ark:/12148/btv1b530193948'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
+      ids['http://gallica.bnf.fr/ark:/12148/btv1b10500687r'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
 
       # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
       # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
@@ -758,7 +773,13 @@ module Portal
           identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
       end
 
-      ids[identifier] || collections[collection]
+      path = request.original_fullpath
+      if path.match('/portal/record/07927/diglit_')
+        url_match = path.sub(path.match('/portal/record/07927/diglit_')[0], 'http://digi.ub.uni-heidelberg.de/diglit/iiif/')
+        url_match = url_match.sub('.html', '/manifest.json')
+      end
+
+      url_match || ids[identifier] || collections[collection]
     end
 
     def media_items
@@ -805,7 +826,7 @@ module Portal
           media_type: media_type,
           rights: simple_rights_label_data(media_rights),
           downloadable: true,
-          playable: true,
+          playable: edm_is_shown_by_download_url.present?,
           thumbnail: edm_preview
         }
 
@@ -823,8 +844,9 @@ module Portal
           item[:playable] = true
         end
 
-        if media_type == 'audio' && mime_type.index('text/plain')
+        if media_type == 'text' && (mime_type == 'text/plain; charset=utf-8' || !mime_type)
           item[:playable] = false
+          item[:downloadable] = false
         end
 
         if media_type == 'text' && mime_type == 'text/plain; charset=utf-8'
@@ -875,6 +897,7 @@ module Portal
           item['play_url'] = edm_is_shown_by_download_url
         elsif !manifesto.nil?
           item['play_url'] = manifesto
+          item[:playable] = true
         else
           item['play_url'] = web_resource_url
         end
