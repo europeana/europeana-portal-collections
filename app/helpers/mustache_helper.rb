@@ -177,10 +177,9 @@ module MustacheHelper
             {
               url: root_url,
               text: t('global.navigation.home'),
-              is_current: controller.controller_name != 'channels'
+              is_current: controller.controller_name == 'home'
             },
             {
-#              url: channel_url('music'),
               text: t('global.navigation.channels'),
               is_current: controller.controller_name == 'channels',
               submenu: {
@@ -196,7 +195,12 @@ module MustacheHelper
               url: 'http://exhibitions.europeana.eu/',
               text: t('global.navigation.exhibitions'),
               submenu: {
-                items: [
+                items: feed_entries(FeedCacheJob::URLS[:exhibitions][:all])[0..5].map { |item|
+                  {
+                    url: CGI.unescapeHTML(item.url),
+                    text: CGI.unescapeHTML(item.title)
+                  }
+                } + [
                   {
                     url: 'http://exhibitions.europeana.eu/',
                     text: t('global.navigation.all_exhibitions'),

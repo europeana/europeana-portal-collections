@@ -15,3 +15,7 @@ end
 every(1.day, 'blog.music', at: ENV['SCHEDULE_BLOG_MUSIC']) do
   BlogFeedCacheJob.perform_later(FeedCacheJob::URLS[:blog][:music])
 end
+
+every(1.day, 'feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
+  FeedCacheJob.perform_later(FeedCacheJob::URLS[:exhibitions][:all])
+end
