@@ -269,15 +269,6 @@ module MustacheHelper
     }
   end
 
-  def feed_entry_nav_items(url, max)
-    feed_entries(url)[0..(max-1)].map do |item|
-      {
-        url: CGI.unescapeHTML(item.url),
-        text: CGI.unescapeHTML(item.title)
-      }
-    end
-  end
-
   def content
     {
       phase_feedback: {
@@ -300,6 +291,15 @@ module MustacheHelper
   end
 
   private
+
+  def feed_entry_nav_items(url, max)
+    feed_entries(url)[0..(max - 1)].map do |item|
+      {
+        url: CGI.unescapeHTML(item.url),
+        text: CGI.unescapeHTML(item.title)
+      }
+    end
+  end
 
   # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]
