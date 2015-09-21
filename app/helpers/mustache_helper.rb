@@ -199,19 +199,26 @@ module MustacheHelper
                 items: [
                   {
                     url: 'http://exhibitions.europeana.eu/',
-                    text: t('global.navigation.all_exhibitions')
+                    text: t('global.navigation.all_exhibitions'),
+                    is_morelink: true
                   }
                 ]
               }
             },
             {
-              url: 'http://blog.europeana.eu/',
+              url: FeedCacheJob::URLS[:blog][:all],
               text: t('global.navigation.blog'),
               submenu: {
-                items: [
+                items: feed_entries(FeedCacheJob::URLS[:blog][:all])[0..5].map { |item|
                   {
-                    url: 'http://blog.europeana.eu/',
-                    text: t('global.navigation.all_blog_posts')
+                    url: CGI.unescapeHTML(item.url),
+                    text: CGI.unescapeHTML(item.title)
+                  }
+                } + [
+                  {
+                    url: FeedCacheJob::URLS[:blog][:all],
+                    text: t('global.navigation.all_blog_posts'),
+                    is_morelink: true
                   }
                 ]
               }
