@@ -206,7 +206,7 @@ module MustacheHelper
               }
             },
             {
-              url: FeedCacheJob::URLS[:blog][:all],
+              url: 'http://blog.europeana.eu/',
               text: t('global.navigation.blog'),
               submenu: {
                 items: feed_entries(FeedCacheJob::URLS[:blog][:all])[0..5].map { |item|
@@ -216,7 +216,7 @@ module MustacheHelper
                   }
                 } + [
                   {
-                    url: FeedCacheJob::URLS[:blog][:all],
+                    url: 'http://blog.europeana.eu/',
                     text: t('global.navigation.all_blog_posts'),
                     is_morelink: true
                   }
