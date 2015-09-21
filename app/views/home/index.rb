@@ -11,7 +11,7 @@ module Home
         promoted: stylised_promoted,
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
-          blogurl: 'http://blog.europeana.eu/'
+          blogurl: FeedCacheJob::URLS[:blog][:all]
         }
       }.reverse_merge(helpers.content)
     end
@@ -39,7 +39,7 @@ module Home
     end
 
     def blog_news_items
-      @blog_news_items ||= news_items(@blog_items)
+      @blog_news_items ||= news_items(feed_entries(FeedCacheJob::URLS[:blog][:all]))
     end
   end
 end

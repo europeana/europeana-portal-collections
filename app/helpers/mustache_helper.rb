@@ -166,48 +166,58 @@ module MustacheHelper
       global: {
         options: {
           search_active: false,
-          settings_active: false
+          settings_active: true
         },
         logo: {
           url: root_url,
           text: 'Europeana ' + t('global.search-collections')
         },
         primary_nav: {
+          menu_id: 'main-menu',
           items: [
             {
               url: root_url,
-              text: 'Home',
-              is_current: controller.controller_name != 'channels'
+              text: t('global.navigation.home'),
+              is_current: controller.controller_name == 'home'
             },
-            # {
-            #   url: channel_url('music'),
-            #   text: 'Channels',
-            #   is_current: controller.controller_name == 'channels',
-            #   submenu: {
-            #     items: [
-            #       {
-            #         url: channel_url('art'),
-            #         text: 'Art History'
-            #       },
-            #       {
-            #         url: channel_url('music'),
-            #         text: 'Music'
-            #       }
-            #     ]
-            #   }
-            # },
-            # {
-            #   url: 'http://exhibitions.europeana.eu/',
-            #   text: 'Exhibitions'
-            # },
-            # {
-            #   url: 'http://blog.europeana.eu/',
-            #   text: 'Blog'
-            # },
-            # {
-            #   url: 'http://www.europeana.eu/portal/myeuropeana#login',
-            #   text: 'My Europeana'
-            # }
+            {
+              text: t('global.navigation.channels'),
+              is_current: controller.controller_name == 'channels',
+              submenu: {
+                items: ['music'].map do |channel|
+                  {
+                    url: channel_url(channel),
+                    text: t("site.channels.#{channel}.title")
+                  }
+                end
+              }
+            },
+            {
+              url: 'http://exhibitions.europeana.eu/',
+              text: t('global.navigation.exhibitions'),
+              submenu: {
+                items: feed_entry_nav_items(FeedCacheJob::URLS[:exhibitions][:all], 6) + [
+                  {
+                    url: 'http://exhibitions.europeana.eu/',
+                    text: t('global.navigation.all_exhibitions'),
+                    is_morelink: true
+                  }
+                ]
+              }
+            },
+            {
+              url: 'http://blog.europeana.eu/',
+              text: t('global.navigation.blog'),
+              submenu: {
+                items: feed_entry_nav_items(FeedCacheJob::URLS[:blog][:all], 6) + [
+                  {
+                    url: 'http://blog.europeana.eu/',
+                    text: t('global.navigation.all_blog_posts'),
+                    is_morelink: true
+                  }
+                ]
+              }
+            }
           ]
         }  # end prim nav
       },
@@ -282,6 +292,15 @@ module MustacheHelper
   end
 
   private
+
+  def feed_entry_nav_items(url, max)
+    feed_entries(url)[0..(max - 1)].map do |item|
+      {
+        url: CGI.unescapeHTML(item.url),
+        text: CGI.unescapeHTML(item.title)
+      }
+    end
+  end
 
   # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]

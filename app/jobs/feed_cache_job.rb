@@ -1,6 +1,17 @@
 class FeedCacheJob < ActiveJob::Base
   include ActiveSupport::Benchmarkable
 
+  URLS = {
+    blog: {
+      all: 'http://blog.europeana.eu/feed/',
+      music: 'http://blog.europeana.eu/tag/music/feed/',
+      art_history: 'http://blog.europeana.eu/tag/art-history/feed/'
+    },
+    exhibitions: {
+      all: 'http://exhibitions.europeana.eu/rss/exhibitions.xml'
+    }
+  }
+
   queue_as :default
 
   def perform(url)
