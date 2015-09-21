@@ -2,6 +2,8 @@ en:
   global:
     labs-link: 'link to labs '
     navigation:
+      all_blog_posts: All Posts…
+      all_exhibitions: All Exhibitions…
       blog: Blog
       channels: Channels
       exhibitions: Exhibitions
