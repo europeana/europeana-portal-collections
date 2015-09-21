@@ -62,10 +62,6 @@ RSpec.describe ChannelsController, type: :controller do
           expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_most_times(24)
         end
 
-        it 'does not get RSS blog posts' do
-          expect(a_europeana_blog_request).not_to have_been_made
-        end
-
         it 'renders channels landing template' do
           expect(response.status).to eq(200)
           expect(response).to render_template('channels/show')

@@ -60,7 +60,11 @@ module Channels
     end
 
     def blog_news_items
-      @blog_news_items ||= news_items(@blog_items)
+      @blog_news_items ||= begin
+        key = @channel.id.underscore.to_sym
+        url = FeedCacheJob::URLS[:blog][key]
+        news_items(feed_entries(url))
+      end
     end
 
     def stylised_promoted

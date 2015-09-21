@@ -4,13 +4,11 @@ class ChannelsController < ApplicationController
   include Catalog
   include Channels
   include Europeana::Styleguide
-  include BlogFetcher
 
   rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
 
   before_action :find_channel, only: :show
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
-  before_action :fetch_blog_items, only: :show
   before_action :populate_channel_entry, only: :show, unless: :has_search_parameters?
   before_action :populate_channel_stats, only: :show, unless: :has_search_parameters?
   before_action :populate_recent_additions, only: :show, unless: :has_search_parameters?
