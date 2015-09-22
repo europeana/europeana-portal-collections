@@ -63,87 +63,87 @@ module MustacheHelper
        js_version: js_version}]
   end
 
-  def menus
-    {
-      actions: {
-        button_title: 'Actions',
-        menu_id: 'dropdown-result-actions',
-        menu_title: 'Save to:',
-        items: [
-          {
-            url: 'http://europeana.eu',
-            text: 'First Item'
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label'
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Label here'
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Fourth Item'
-          },
-          {
-            divider: true
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label',
-            calltoaction: true
-          },
-          {
-            divider: true
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label',
-            calltoaction: true
-          }
-        ]
-      },
-      sort: {
-        button_title: 'Relevance',
-        menu_id: 'dropdown-result-sort',
-        menu_title: 'Sort by:',
-        items: [
-          {
-            text: 'Date',
-            url: 'http://europeana.eu'
-          },
-          {
-            text: 'Alphabetical',
-            url: 'http://europeana.eu'
-          },
-          {
-            text: 'Relevance',
-            url: 'http://europeana.eu'
-          },
-          {
-            divider: true
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label',
-            calltoaction: true
-          },
-          {
-            divider: true
-          },
-          {
-            text: 'Advanced Search',
-            url: 'http://europeana.eu',
-            calltoaction: true
-          }
-        ]
-      }
-    }
-  end
+  # def menus
+  #   {
+  #     actions: {
+  #       button_title: 'Actions',
+  #       menu_id: 'dropdown-result-actions',
+  #       menu_title: 'Save to:',
+  #       items: [
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'First Item'
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label'
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Label here'
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Fourth Item'
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label',
+  #           calltoaction: true
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label',
+  #           calltoaction: true
+  #         }
+  #       ]
+  #     },
+  #     sort: {
+  #       button_title: 'Relevance',
+  #       menu_id: 'dropdown-result-sort',
+  #       menu_title: 'Sort by:',
+  #       items: [
+  #         {
+  #           text: 'Date',
+  #           url: 'http://europeana.eu'
+  #         },
+  #         {
+  #           text: 'Alphabetical',
+  #           url: 'http://europeana.eu'
+  #         },
+  #         {
+  #           text: 'Relevance',
+  #           url: 'http://europeana.eu'
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label',
+  #           calltoaction: true
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           text: 'Advanced Search',
+  #           url: 'http://europeana.eu',
+  #           calltoaction: true
+  #         }
+  #       ]
+  #     }
+  #   }
+  # end
 
   def total_item_count
-    @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
+      @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
   end
 
   def channels_nav_links
@@ -270,6 +270,67 @@ module MustacheHelper
     }
   end
 
+  def utility_nav
+    {
+      menu_id: "settings-menu",
+      style_modifier: "caret-right",
+      tabindex: "6",
+      items: [
+        {
+          url: "url to settings",
+          text: "Settings",
+          icon: "settings",
+          submenu: {
+            items: [
+              {
+                text: "Settings",
+                subtitle: true,
+                url: false
+              },
+              {
+                text: "Language ",
+                url: "/portal/settings/language",
+                is_current: controller.controller_name == 'settings'
+              },
+              # {
+              #   text: "My Profile",
+              #   url: "url to profile page"
+              # },
+              # {
+              #   text: "Advanced",
+              #   url: "url to settings page"
+              # },
+              # {
+              #   is_divider: true
+              # },
+              # {
+              #   text: "Admin",
+              #   subtitle: true,
+              #   url: false
+              # },
+              # {
+              #   text: "Channel Admin",
+              #   url: "url to admin page"
+              # },
+              # {
+              #   is_divider: true
+              # },
+              # {
+              #   text: "Account",
+              #   subtitle: true,
+              #   url: false
+              # },
+              # {
+              #   text: "Log Out",
+              #   url: "url to login page"
+              # }
+            ]
+          }
+        }
+      ]
+    }
+  end
+
   def content
     {
       phase_feedback: {
@@ -277,6 +338,59 @@ module MustacheHelper
         text: t('site.alpha.feedback_banner.description'),
         cta_url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
         cta_text: t('site.alpha.feedback_banner.link-text')
+      }
+    }
+  end
+
+  def settings
+    {
+      language: {
+        title: "Language Settings",
+        language_default: {
+          title: "Default Language",
+          group_id: "Available Languages",
+          items: [
+            {
+              text:  t('global.language-english'),
+              value: 'en'
+            },
+            {
+              text: t('global.language-french'),
+              value: 'fr'
+            },
+            {
+              text: t('global.language-spanish'),
+              value: 'es'
+            }
+          ]
+        },
+        language_itempages: {
+
+          title: "Automatically translate item pages into...",
+          label: "Auto translate items into",
+          value: "autotranslateitem",
+          item_id: "translate-item",
+          is_checked: true,
+          group_id: "Available Languages",
+          items: [
+            {
+              text: "Nederlands",
+              value: "nl"
+            },
+            {
+              text: "عربي",
+              value: "value"
+            },
+            {
+              text: "Russian",
+              value: "value"
+            },
+            {
+              text: "Greek",
+              value: "value"
+            }
+          ]
+        }
       }
     }
   end
