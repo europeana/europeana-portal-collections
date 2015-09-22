@@ -7,13 +7,11 @@ RSpec.describe 'settings/language.html.mustache' do
     end
 
     allow(view).to receive(:content).and_return(
-      {
-        language_default: {
-          title: 'Default Language',
-          items: [
-            { text: 'English' }, { text: 'French' }
-          ]
-        }
+      language_default: {
+        title: 'Default Language',
+        items: [
+          { text: 'English' }, { text: 'French' }
+        ]
       }
     )
 
