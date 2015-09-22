@@ -277,7 +277,7 @@ module MustacheHelper
       tabindex: "6",
       items: [
         {
-          url: "url to settings",
+          url: "#",
           text: "Settings",
           icon: "settings",
           submenu: {
@@ -345,6 +345,9 @@ module MustacheHelper
   def settings
     {
       language: {
+        form: {
+          action: root_url + "settings"
+        },
         title: "Language Settings",
         language_default: {
           title: "Default Language",
