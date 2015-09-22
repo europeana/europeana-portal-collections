@@ -15,8 +15,9 @@ class SettingsController < ApplicationController
           render action: :language, status: status_from_flash
         end
         format.json do
-          render json: { success: !flash.key?(:alert), refresh: locale_changed, message: flash.key?(:alert) ? flash.now[:alert] : flash.now[:notice] },
-            status: status_from_flash
+          render json: { success: !flash.key?(:alert), refresh: locale_changed,
+                         message: flash.key?(:alert) ? flash.now[:alert] : flash.now[:notice] },
+                 status: status_from_flash
         end
       end
     else
@@ -43,7 +44,7 @@ class SettingsController < ApplicationController
           locale_changed = true
         end
       else
-        flash.now[:alert] = "Invalid language specified. Available languages: " + I18n.available_locales.map(&:to_s).join(',')
+        flash.now[:alert] = 'Invalid language specified. Available languages: ' + I18n.available_locales.map(&:to_s).join(',')
       end
     end
 
