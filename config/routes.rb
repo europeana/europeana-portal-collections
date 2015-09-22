@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
     resources :channels, only: [:show, :index]
 
+    get 'settings/language', to: 'settings#language'
+
     # Static pages
     get ':page', to: 'portal#static', constraints: { page: %r{(about|channels/music/about)} }
   end
