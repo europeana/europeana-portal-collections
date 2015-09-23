@@ -52,7 +52,7 @@ module MustacheHelper
 
   def js_variables
     'var js_path="' + styleguide_path('/js/dist/') + '";' +
-      'var require = {"urlArgs": "' + js_version  + '"};' +
+      'var require = {"urlArgs": "' + js_version + '"};' +
       'var pageName = "' + params[:controller] + '/' + params[:action] + '";'
   end
 
