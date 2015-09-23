@@ -19,7 +19,7 @@ class SettingsController < ApplicationController
     respond_to do |format|
       format.html { render action: :language, status: flash_status }
       format.json do
-        render json: flash_json.merge({ refresh: (locales.first != locales.last) }),
+        render json: flash_json.merge(refresh: (locales.first != locales.last)),
                status: flash_status
       end
     end
@@ -45,12 +45,15 @@ class SettingsController < ApplicationController
   #   current session locale
   def set_locale_from_param
     session_locale_was = session[:locale]
-    I18n.locale = params[:locale] if params[:locale]
-    flash.now[:notice] = t('site.settings.language.flash.notice')
-  rescue I18n::InvalidLocale
-    flash.now[:alert] = t('site.settings.language.flash.alert', locales: I18n.available_locales.map(&:to_s).join(','))
-  ensure
+
+    begin
+      I18n.locale = params[:locale] if params[:locale]
+      flash.now[:notice] = t('site.settings.language.flash.notice')
+    rescue I18n::InvalidLocale
+      flash.now[:alert] = t('site.settings.language.flash.alert', locales: I18n.available_locales.map(&:to_s).join(','))
+    end
+
     session[:locale] = I18n.locale
-    return [session_locale_was, session[:locale]]
+    [session_locale_was, session[:locale]]
   end
 end
