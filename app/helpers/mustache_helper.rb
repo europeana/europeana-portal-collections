@@ -51,9 +51,9 @@ module MustacheHelper
   end
 
   def js_variables
-    'var js_path="' + styleguide_path('/js/dist/') + '"; ' +
-    'var require = {"urlArgs": "' + js_version  + '"}; ' +
-    'var pageName = "' + params[:controller] + '/' + params[:action] + '";'
+    'var js_path="' + styleguide_path('/js/dist/') + '";' +
+      'var require = {"urlArgs": "' + js_version  + '"};' +
+      'var pageName = "' + params[:controller] + '/' + params[:action] + '";'
   end
 
   def js_files
