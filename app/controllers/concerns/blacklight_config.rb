@@ -27,10 +27,7 @@ module BlacklightConfig
       }
 
       # Response models
-      config.repository_class = Europeana::Blacklight::ApiRepository
-      config.search_builder_class = SearchBuilder
-      config.response_model = Europeana::Blacklight::Response
-      config.document_model = Europeana::Blacklight::Document
+#      config.search_builder_class = Europeana::Blacklight::SearchBuilder
       config.document_presenter_class = MustacheDocumentPresenter
 
       # Europeana API caching
@@ -59,13 +56,22 @@ module BlacklightConfig
       config.add_index_field 'edmIsShownAt'
 
       # Facet fields in the order they should be displayed.
-      # config.add_facet_field 'CHANNEL', query: channels_query_facet
-      config.add_facet_field 'TYPE'
+      # config.add_facet_field 'CHANNEL', query: channels_query_facet, single: true
+      config.add_facet_field 'TYPE', hierarchical: true
+      config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE)
+      config.add_facet_field 'IMAGE_ASPECTRATIO', hierarchical: true, parent: %w(TYPE IMAGE)
+      config.add_facet_field 'IMAGE_SIZE', hierarchical: true, parent: %w(TYPE IMAGE)
+      config.add_facet_field 'SOUND_DURATION', hierarchical: true, parent: %w(TYPE SOUND)
+      config.add_facet_field 'SOUND_HQ', hierarchical: true, parent: %w(TYPE SOUND)
+      config.add_facet_field 'TEXT_FULLTEXT', hierarchical: true, parent: %w(TYPE TEXT)
+      config.add_facet_field 'VIDEO_DURATION', hierarchical: true, parent: %w(TYPE VIDEO)
+      config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'REUSABILITY'
       config.add_facet_field 'COUNTRY'
       config.add_facet_field 'LANGUAGE'
       config.add_facet_field 'PROVIDER'
       config.add_facet_field 'DATA_PROVIDER'
+      config.add_facet_field 'MEDIA'
 
       # Send all facet field names to Solr.
       config.add_facet_fields_to_solr_request!
@@ -101,9 +107,6 @@ module BlacklightConfig
       %w(title who what when where subject).each do |field_name|
         config.add_search_field(field_name)
       end
-
-      # Prevent BL's "did you mean" spellcheck feature kicking in
-      config.spell_max = -1
     end
   end
 end
