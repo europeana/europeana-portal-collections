@@ -211,5 +211,10 @@ en:
         text: Add a search term
       similar:
         prefix: 'Similar to: %{mlt_item}'
+    settings:
+      language:
+        flash:
+          alert: 'Invalid language specified. Available languages: %{locales}'
+          notice: Language settings saved.
     site-name-link: 
     sitemap-link: 

@@ -200,5 +200,10 @@ nl:
         text: 
       similar:
         prefix: 
+    settings:
+      language:
+        flash:
+          alert: 
+          notice: 
     site-name-link: 
     sitemap-link: 
