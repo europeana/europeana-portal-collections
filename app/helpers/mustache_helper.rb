@@ -52,7 +52,8 @@ module MustacheHelper
 
   def js_variables
     'var js_path="' + styleguide_path('/js/dist/') + '"; ' +
-    'var require = {"urlArgs": "' + js_version  + '"};'
+    'var require = {"urlArgs": "' + js_version  + '"}; ' +
+    'var pageName = "' + params[:controller] + '/' + params[:action] + '";'
   end
 
   def js_files
@@ -288,7 +289,7 @@ module MustacheHelper
                 url: false
               },
               {
-                text: 'should be Language ' + t('site.settings.language.label'),
+                text: t('site.settings.language.label'),
                 url: '/portal/settings/language',
                 is_current: controller.controller_name == 'settings'
               },
@@ -347,7 +348,8 @@ module MustacheHelper
       language: {
         form: {
           action: root_url + '/settings/language',
-          method: 'PUT'
+          method: 'PUT',
+          form_authenticity_token: form_authenticity_token
         },
         title: t('site.settings.language.settings-label'),
         language_default: {
@@ -357,12 +359,12 @@ module MustacheHelper
             {
               text: t('global.language-english'),
               value: 'en',
-              selected: I18n.locale == 'en'
+              selected: I18n.locale.to_s == 'en'
             },
             {
               text: t('global.language-dutch'),
               value: 'nl',
-              selected: I18n.locale == 'nl'
+              selected: I18n.locale.to_s == 'nl'
             }
           ]
         },
