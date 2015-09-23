@@ -347,8 +347,7 @@ module MustacheHelper
       language: {
         form: {
           action: root_url + "/settings/language",
-          method: 'PUT',
-          selected: I18n.locale
+          method: 'PUT'
         },
         title: "Language Settings",
         language_default: {
@@ -357,11 +356,13 @@ module MustacheHelper
           items: [
             {
               text:  t('global.language-english'),
-              value: 'en'
+              value: 'en',
+              selected: I18n.locale == 'en'
             },
             {
               text: t('global.language-dutch'),
-              value: 'nl'
+              value: 'nl',
+              selected: I18n.locale == 'nl'
             },
             # {
             #  text: t('global.language-french'),
