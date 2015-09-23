@@ -18,14 +18,14 @@ RSpec.describe SettingsController do
       context 'when locale is available' do
         it 'updates locale in session' do
           session[:locale] = :en
-          expect { put :language, locale: :nl }.to change { session[:locale] }.from(:en).to(:nl)
+          expect { put :update_language, locale: 'nl' }.to change { session[:locale] }.from(:en).to(:nl)
         end
         it 'sets flash notice' do
-          put :language, locale: :nl
+          put :update_language, locale: 'nl'
           expect(controller).to set_flash[:notice].now
         end
         context 'when format is html' do
-          before { put :language, locale: :nl }
+          before { put :update_language, locale: 'nl' }
           it 'responds with 200 status' do
             expect(response.status).to eq(200)
           end
@@ -34,7 +34,7 @@ RSpec.describe SettingsController do
           end
         end
         context 'when format is json' do
-          before { put :language, locale: :nl, format: 'json' }
+          before { put :update_language, locale: 'nl', format: 'json' }
           let(:response_body) { JSON.parse(response.body) }
 
           it 'responds with 200 status' do
@@ -58,14 +58,14 @@ RSpec.describe SettingsController do
       context 'when locale is unavailable' do
         it 'does not change locale in session' do
           session[:locale] = :en
-          expect { put :language, locale: :abc }.not_to change { session[:locale] }
+          expect { put :update_language, locale: 'abc' }.not_to change { session[:locale] }
         end
         it 'sets flash alert' do
-          put :language, locale: :abc
+          put :update_language, locale: 'abc'
           expect(controller).to set_flash[:alert].now
         end
         context 'when format is html' do
-          before { put :language, locale: :abc }
+          before { put :update_language, locale: 'abc' }
           it 'responds with 400 status' do
             expect(response.status).to eq(400)
           end
@@ -74,7 +74,7 @@ RSpec.describe SettingsController do
           end
         end
         context 'when format is json' do
-          before { put :language, locale: :abc, format: 'json' }
+          before { put :update_language, locale: 'abc', format: 'json' }
           let(:response_body) { JSON.parse(response.body) }
 
           it 'responds with 400 status' do
@@ -99,14 +99,14 @@ RSpec.describe SettingsController do
     context 'without locale param' do
       it 'does not change locale in session' do
         session[:locale] = :en
-        expect { put :language }.not_to change { session[:locale] }
+        expect { put :update_language }.not_to change { session[:locale] }
       end
       it 'sets flash notice' do
-        put :language
+        put :update_language
         expect(controller).to set_flash[:notice].now
       end
       context 'when format is html' do
-        before { put :language }
+        before { put :update_language }
         it 'responds with 200 status' do
           expect(response.status).to eq(200)
         end
@@ -115,7 +115,7 @@ RSpec.describe SettingsController do
         end
       end
       context 'when format is json' do
-        before { put :language, format: 'json' }
+        before { put :update_language, format: 'json' }
         let(:response_body) { JSON.parse(response.body) }
 
         it 'responds with 200 status' do
