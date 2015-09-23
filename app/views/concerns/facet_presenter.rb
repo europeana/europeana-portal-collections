@@ -49,7 +49,7 @@ module FacetPresenter
   end
 
   def simple_facet(facet)
-    basic_facet(facet, type = :simple)
+    basic_facet(facet, :simple)
   end
 
   def simple_facet_item(facet, item)
@@ -57,7 +57,7 @@ module FacetPresenter
   end
 
   def colour_facet(facet)
-    basic_facet(facet, type = :colour)
+    basic_facet(facet, :colour)
   end
 
   def colour_facet_item(facet, item)
@@ -68,7 +68,7 @@ module FacetPresenter
   end
 
   def hierarchical_facet(facet)
-    basic_facet(facet, type = :hierarchical)
+    basic_facet(facet, :hierarchical)
   end
 
   def hierarchical_facet_item(facet, item)
@@ -88,9 +88,9 @@ module FacetPresenter
   end
 
   def range_facet(facet)
-    range_min = facet.items.collect(&:value).min
-    range_max = facet.items.collect(&:value).max
-    hits_max = facet.items.collect(&:hits).max
+    range_min = facet.items.map(&:value).min
+    range_max = facet.items.map(&:value).max
+    hits_max = facet.items.map(&:hits).max
     {
       date: true,
       title: facet_map(facet.name),
@@ -110,7 +110,7 @@ module FacetPresenter
           label_text: 'To:'
         }
       },
-      data: facet.items.sort_by(&:value).collect do |item|
+      data: facet.items.sort_by(&:value).map do |item|
         p = reset_search_params(params).deep_dup
         p[:f] ||= {}
         p[:f][facet.name] = [item.value]

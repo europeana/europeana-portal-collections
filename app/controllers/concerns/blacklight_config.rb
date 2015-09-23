@@ -27,7 +27,6 @@ module BlacklightConfig
       }
 
       # Response models
-#      config.search_builder_class = Europeana::Blacklight::SearchBuilder
       config.document_presenter_class = MustacheDocumentPresenter
 
       # Europeana API caching
