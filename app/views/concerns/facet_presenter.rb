@@ -11,16 +11,19 @@ module FacetPresenter
     end
   end
 
-  def facet_display(facet, children = false)
+  def facet_display(facet, show_children = false)
     facet_config = blacklight_config.facet_fields[facet.name]
-    if facet_config.colour
-      colour_facet(facet)
-    elsif facet_config.range
-      range_facet(facet)
-    elsif facet_config.hierarchical && !facet_config.parent
+
+    if facet_config.hierarchical && !facet_config.parent
       hierarchical_facet(facet)
-    else
-      simple_facet(facet)
+    elsif !facet_config.parent || show_children
+      if facet_config.colour
+        colour_facet(facet)
+      elsif facet_config.range
+        range_facet(facet)
+      else
+        simple_facet(facet)
+      end
     end
   end
 
