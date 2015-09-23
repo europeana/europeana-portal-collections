@@ -347,7 +347,8 @@ module MustacheHelper
       language: {
         form: {
           action: root_url + "/settings/language",
-          method: 'PUT'
+          method: 'PUT',
+          selected: I18n.locale
         },
         title: "Language Settings",
         language_default: {
