@@ -10,7 +10,7 @@ nl:
       home: Home
     pro-link: link naar pro
     pro-text: tekst voor pro
-    settings: tekst voor settings
+    settings: settings
   site:
     alpha:
       feedback_banner:
@@ -201,9 +201,19 @@ nl:
       similar:
         prefix: 
     settings:
+      actions:
+        clear-selection: 
+        save-settings: 
       language:
+        auto-translate-page: 
+        auto-translate-page-short: 
+        auto-translate-query: 
+        available: 
+        default: 
         flash:
           alert: 
           notice: 
+        label: Taal
+        settings-label: 
     site-name-link: 
     sitemap-link: 

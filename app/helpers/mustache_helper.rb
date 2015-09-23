@@ -143,7 +143,7 @@ module MustacheHelper
   # end
 
   def total_item_count
-      @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
+    @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
   end
 
   def channels_nav_links
@@ -272,57 +272,57 @@ module MustacheHelper
 
   def utility_nav
     {
-      menu_id: "settings-menu",
-      style_modifier: "caret-right",
-      tabindex: "6",
+      menu_id: 'settings-menu',
+      style_modifier: 'caret-right',
+      tabindex: 6,
       items: [
         {
-          url: "#",
-          text: "Settings",
-          icon: "settings",
+          url: '#',
+          text: 'Settings',
+          icon: 'settings',
           submenu: {
             items: [
               {
-                text: "Settings",
+                text: t('global.settings'),
                 subtitle: true,
                 url: false
               },
               {
-                text: "Language ",
-                url: "/portal/settings/language",
+                text: 'should be Language ' + t('site.settings.language.label'),
+                url: '/portal/settings/language',
                 is_current: controller.controller_name == 'settings'
               },
               # {
-              #   text: "My Profile",
-              #   url: "url to profile page"
+              #   text: 'My Profile',
+              #   url: 'url to profile page'
               # },
               # {
-              #   text: "Advanced",
-              #   url: "url to settings page"
-              # },
-              # {
-              #   is_divider: true
-              # },
-              # {
-              #   text: "Admin",
-              #   subtitle: true,
-              #   url: false
-              # },
-              # {
-              #   text: "Channel Admin",
-              #   url: "url to admin page"
+              #   text: 'Advanced',
+              #   url: 'url to settings page'
               # },
               # {
               #   is_divider: true
               # },
               # {
-              #   text: "Account",
+              #   text: 'Admin',
               #   subtitle: true,
               #   url: false
               # },
               # {
-              #   text: "Log Out",
-              #   url: "url to login page"
+              #   text: 'Channel Admin',
+              #   url: 'url to admin page'
+              # },
+              # {
+              #   is_divider: true
+              # },
+              # {
+              #   text: 'Account',
+              #   subtitle: true,
+              #   url: false
+              # },
+              # {
+              #   text: 'Log Out',
+              #   url: 'url to login page'
               # }
             ]
           }
@@ -346,16 +346,16 @@ module MustacheHelper
     {
       language: {
         form: {
-          action: root_url + "/settings/language",
+          action: root_url + '/settings/language',
           method: 'PUT'
         },
-        title: "Language Settings",
+        title: t('site.settings.language.settings-label'),
         language_default: {
-          title: "Default Language",
-          group_id: "Available Languages",
+          title: t('site.settings.language.default'),
+          group_id: t('site.settings.language.available'),
           items: [
             {
-              text:  t('global.language-english'),
+              text: t('global.language-english'),
               value: 'en',
               selected: I18n.locale == 'en'
             },
@@ -363,41 +363,46 @@ module MustacheHelper
               text: t('global.language-dutch'),
               value: 'nl',
               selected: I18n.locale == 'nl'
-            },
-            # {
-            #  text: t('global.language-french'),
-            #  value: 'fr'
-            # },
-            # {
-            #  text: t('global.language-spanish'),
-            #  value: 'es'
-            # }
+            }
           ]
         },
         language_itempages: {
 
-          title: "Automatically translate item pages into...",
-          label: "Auto translate items into",
-          value: "autotranslateitem",
-          item_id: "translate-item",
+          title: t('site.settings.language.auto-translate-page'),
+          label: t('site.settings.language.auto-translate-page-short'),
+          value: 'autotranslateitem',
+          item_id: 'translate-item',
           is_checked: true,
-          group_id: "Available Languages",
+          group_id: t('site.settings.language.available'),
           items: [
             {
-              text: "Nederlands",
-              value: "nl"
+              text: t('global.language-dutch'),
+              value: 'nl'
             },
             {
-              text: "عربي",
-              value: "value"
+              text: t('global.language-russian'),
+              value: 'ru'
             },
             {
-              text: "Russian",
-              value: "value"
+              text:  t('global.language-greek'),
+              value: 'el'
+            }
+          ]
+        },
+        language_options: {
+          title: t('site.settings.language.auto-translate-query'),
+          is_required: false,
+          name: 'checkboxes[]',
+          items: [
+            {
+              text: t('global.language-french'),
+              value: 'fr',
+              item_id: 'fr'
             },
             {
-              text: "Greek",
-              value: "value"
+              text: t('global.language-german'),
+              value: 'de',
+              item_id: 'de'
             }
           ]
         }
