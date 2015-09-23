@@ -9,13 +9,6 @@ class PortalController < ApplicationController
 
   before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
 
-  # GET /search
-  def index
-    respond_to do |format|
-      format.html
-    end
-  end
-
   # GET /record/:id
   def show
     @response, @document = fetch_with_hierarchy(doc_id)

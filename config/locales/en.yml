@@ -10,7 +10,7 @@ en:
       home: Home
     pro-link: 'link to pro '
     pro-text: text for pro
-    settings: settings text
+    settings: settings
   site:
     alpha:
       feedback_banner:
@@ -211,5 +211,20 @@ en:
         text: Add a search term
       similar:
         prefix: 'Similar to: %{mlt_item}'
+    settings:
+      actions:
+        clear-selection: Clear selection
+        save-settings: Save Settings
+      language:
+        auto-translate-page: Automatically translate item pages into...
+        auto-translate-page-short: Auto translate items into
+        auto-translate-query: Automatically translate search keywords into...
+        available: Available Languages
+        default: Default Language
+        flash:
+          alert: 'Invalid language specified. Available languages: %{locales}'
+          notice: Language settings saved.
+        label: Language
+        settings-label: language settings
     site-name-link: 
     sitemap-link: 

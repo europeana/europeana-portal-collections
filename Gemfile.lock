@@ -1,7 +1,19 @@
 GIT
+  remote: git://github.com/europeana/europeana-blacklight.git
+  revision: 6cda8ea6c306351b7a4aa6cb3491b450dc87ed3e
+  ref: 6cda8ea
+  specs:
+    europeana-blacklight (0.2.7)
+      activesupport (>= 4.0, < 5.0)
+      blacklight (>= 5.12.0, < 6.0.0)
+      europeana-api (~> 0.3.6)
+      iso-639 (~> 0.2.5)
+      kaminari (~> 0.16)
+
+GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 01064deabfd21897b425ae9f846fb3a79e1cfe73
-  ref: 01064de
+  revision: 5d142e855896d9109559cf5d9ff024ce03e67657
+  ref: 5d142e8558
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -116,14 +128,9 @@ GEM
       dotenv (= 2.0.2)
       railties (~> 4.0)
     erubis (2.7.0)
-    europeana-api (0.3.4)
+    europeana-api (0.3.6)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-    europeana-blacklight (0.2.7)
-      blacklight (>= 5.12.0, < 6.0.0)
-      europeana-api (~> 0.3.4)
-      iso-639 (~> 0.2.5)
-      kaminari (~> 0.16)
     excon (0.45.4)
     execjs (2.5.2)
     faraday (0.9.1)
@@ -395,6 +402,8 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -447,8 +456,8 @@ DEPENDENCIES
   coveralls
   delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 2.0)
-  europeana-api (~> 0.3.4)
-  europeana-blacklight (= 0.2.7)
+  europeana-api (~> 0.3.6)
+  europeana-blacklight!
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
@@ -468,6 +477,7 @@ DEPENDENCIES
   sass-rails
   sdoc (~> 0.4.0)
   selenium-webdriver (~> 2.47)
+  shoulda-matchers (~> 2.8)
   simplecov
   spring (~> 1.3.6)
   stache!
