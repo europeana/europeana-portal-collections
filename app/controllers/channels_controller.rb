@@ -88,7 +88,7 @@ class ChannelsController < ApplicationController
   end
 
   def channel_content
-    @channel.config[:content] || {}
+    @channel ? @channel.config[:content] || {} : {}
   end
 
   def populate_recent_additions
