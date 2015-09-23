@@ -2,7 +2,6 @@ nl:
   Symphonies: 
   global:
     about-us: Over ons
-    blog: blog
     channel:
       archaeology: Archeology
       architecture: 'Architectuur '
@@ -14,7 +13,6 @@ nl:
       natural-history: natuurlijke historie
       newspapers: Kranten
       performing-arts: Beeldende kunst
-    channels: Kanalen
     channels-art: Test text
     channels-art-image: Test text
     channels-art-link: Test text
@@ -24,7 +22,6 @@ nl:
     channels-music-link: 
     choose-language: Taal
     email-address: e-mail adres
-    exhibitions: Tentoonstellingen
     facet:
       advanced:
         options: 

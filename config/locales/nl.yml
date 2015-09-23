@@ -3,10 +3,10 @@ nl:
     labs-link: 'link naar labs '
     navigation:
       all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      channels: 
-      exhibitions: 
+      all_exhibitions: Alle tentoonstellingen
+      blog: Blog
+      channels: Kanalen
+      exhibitions: Tentoonstellingen
       home: Home
     pro-link: link naar pro
     pro-text: tekst voor pro
@@ -200,5 +200,10 @@ nl:
         text: 
       similar:
         prefix: 
+    settings:
+      language:
+        flash:
+          alert: 
+          notice: 
     site-name-link: 
     sitemap-link: 

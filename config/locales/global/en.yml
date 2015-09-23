@@ -2,7 +2,6 @@ en:
   Symphonies: Symphonies
   global:
     about-us: About us
-    blog: blog
     channel:
       archaeology: archaeology
       architecture: architecture
@@ -14,7 +13,6 @@ en:
       natural-history: natural history
       newspapers: newspapers
       performing-arts: performing-arts
-    channels: Channels
     channels-art: 'Channels art channel '
     channels-art-image: 'Channels art image '
     channels-art-link: Channels art link
@@ -24,7 +22,6 @@ en:
     channels-music-link: 
     choose-language: Language
     email-address: email address
-    exhibitions: Exhibitions
     facet:
       advanced:
         options: Options
