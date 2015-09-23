@@ -7,7 +7,6 @@ class ChannelsController < ApplicationController
 
   rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
 
-  before_action :find_channel, only: :show
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
   before_action :populate_channel_entry, only: :show, unless: :has_search_parameters?
   before_action :populate_channel_stats, only: :show, unless: :has_search_parameters?
@@ -18,6 +17,9 @@ class ChannelsController < ApplicationController
   end
 
   def show
+    @channel ||= Channel.find(params[:id])
+    (@response, @document_list) = search_results(params, search_params_logic) if has_search_parameters?
+
     respond_to do |format|
       format.html do
         render has_search_parameters? ? { template: '/portal/index' } : { action: 'show' }
@@ -39,10 +41,6 @@ class ChannelsController < ApplicationController
 
   def start_new_search_session?
     has_search_parameters?
-  end
-
-  def find_channel
-    @channel ||= Channel.find(params[:id])
   end
 
   def channel_not_found
@@ -90,7 +88,7 @@ class ChannelsController < ApplicationController
   end
 
   def channel_content
-    @channel.config[:content] || {}
+    @channel ? @channel.config[:content] || {} : {}
   end
 
   def populate_recent_additions
