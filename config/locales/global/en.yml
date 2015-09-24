@@ -80,14 +80,29 @@ en:
       creator: creator
       header:
         channel: Channels
+        colourpalette: Colour
         country: Country
         data_provider: Data Provider
+        image_aspectratio: Orientation
+        image_size: Image Size
         language: Language
         language_of_description: Language of Description
         provider: Provider
         reusability: Can I use it?
+        sound_duration: Sound Duration
+        sound_hq: Sound Quality
+        text_fulltext: Full Text
         type: Media
+        video_hd: HD Video
         year: Date
+      image_aspectratio:
+        landscape: Landscape
+        portrait: Portrait
+      image_size:
+        extra_large: Extra large
+        large: Large
+        medium: Medium
+        small: Small
       language:
         bg: "български език"
         de: Deutsch
@@ -142,7 +157,17 @@ en:
         permission: Only with permission
         restricted: Yes with restrictions
         simple: Simple
+      sound_duration:
+        long: Long
+        medium: Medium
+        short: Short
+        very_short: Very short
+      sound_hq:
+        'true': 'Yes'
       source: Source
+      text_fulltext:
+        'false': 'No'
+        'true': 'Yes'
       type:
         3d: 3D
         image: Image

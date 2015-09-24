@@ -80,14 +80,29 @@ nl:
       creator: 
       header:
         channel: 
+        colourpalette: 
         country: 
         data_provider: 
+        image_aspectratio: 
+        image_size: 
         language: 
         language_of_description: 
         provider: 
         reusability: 
+        sound_duration: 
+        sound_hq: 
+        text_fulltext: 
         type: 
+        video_hd: 
         year: 
+      image_aspectratio:
+        landscape: 
+        portrait: 
+      image_size:
+        extra_large: 
+        large: 
+        medium: 
+        small: 
       language:
         bg: 
         de: 
@@ -142,7 +157,17 @@ nl:
         permission: 
         restricted: 
         simple: 
+      sound_duration:
+        long: 
+        medium: 
+        short: 
+        very_short: 
+      sound_hq:
+        'true': 
       source: 
+      text_fulltext:
+        'false': 
+        'true': 
       type:
         3d: 
         image: 
