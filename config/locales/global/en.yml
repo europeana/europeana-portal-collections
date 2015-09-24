@@ -84,17 +84,17 @@ en:
         country: Country
         data_provider: Data Provider
         image_aspectratio: Orientation
-        image_size: Image Size
+        image_size: Size
         language: Language
         language_of_description: Language of Description
         media: Media Available
         provider: Provider
         reusability: Can I use it?
-        sound_duration: Sound Duration
-        sound_hq: Sound Quality
+        sound_duration: Duration
+        sound_hq: High Quality
         text_fulltext: Full Text
         type: Media
-        video_hd: HD Video
+        video_hd: HD
         year: Date
       image_aspectratio:
         landscape: Landscape
