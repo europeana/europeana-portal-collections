@@ -141,7 +141,7 @@ en:
         yi: Yiddish
       less: Fewer
       media:
-        'false': 'Yes'
+        'false': 'No'
         'true': 'Yes'
       more: More
       more-refinements: More refinements
