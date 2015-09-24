@@ -27,16 +27,17 @@ module FacetPresenter
     end
   end
 
-  def basic_facet(facet, type = :simple)
+  def basic_facet(facet, options = {})
+    options = options.reverse_merge(type: :simple, count: 4)
     facet_config = blacklight_config.facet_fields[facet.name]
     {
       title: facet_map(facet.name),
       select_one: facet_config.single,
-      items: facet.items[0..3].map { |item| send(:"#{type}_facet_item", facet, item) },
-      extra_items: facet.items.size <= 4 ? nil : {
-        items: facet.items[4..-1].map { |item| send(:"#{type}_facet_item", facet, item) }
+      items: facet.items[0..(options[:count] - 1)].map { |item| send(:"#{options[:type]}_facet_item", facet, item) },
+      extra_items: facet.items.size <= options[:count] ? nil : {
+        items: facet.items[options[:count]..-1].map { |item| send(:"#{options[:type]}_facet_item", facet, item) }
       }
-    }.merge(type => true)
+    }.merge(options[:type] => true)
   end
 
   def basic_facet_item(facet, item)
@@ -49,7 +50,7 @@ module FacetPresenter
   end
 
   def simple_facet(facet)
-    basic_facet(facet, :simple)
+    basic_facet(facet, type: :simple)
   end
 
   def simple_facet_item(facet, item)
@@ -57,7 +58,7 @@ module FacetPresenter
   end
 
   def colour_facet(facet)
-    basic_facet(facet, :colour)
+    basic_facet(facet, type: :colour, count: 16)
   end
 
   def colour_facet_item(facet, item)
@@ -68,7 +69,7 @@ module FacetPresenter
   end
 
   def hierarchical_facet(facet)
-    basic_facet(facet, :hierarchical)
+    basic_facet(facet, type: :hierarchical)
   end
 
   def hierarchical_facet_item(facet, item)
