@@ -87,6 +87,7 @@ nl:
         image_size: 
         language: 
         language_of_description: 
+        media: 
         provider: 
         reusability: 
         sound_duration: 
@@ -105,6 +106,9 @@ nl:
         small: 
       language:
         bg: 
+        ca: 
+        cs: 
+        da: 
         de: 
         el: 
         en: 
@@ -123,15 +127,22 @@ nl:
         mt: 
         mul: 
         nl: 
+        'no': 
         pl: 
         pt: 
         ro: 
+        ru: 
         sk: 
         sl: 
+        sr: 
         sv: 
         tr: 
+        uk: 
         yi: 
       less: Minder
+      media:
+        'false': 
+        'true': 
       more: 
       more-refinements: 
       resource:

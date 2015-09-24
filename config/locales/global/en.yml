@@ -87,6 +87,7 @@ en:
         image_size: Image Size
         language: Language
         language_of_description: Language of Description
+        media: Media Available
         provider: Provider
         reusability: Can I use it?
         sound_duration: Sound Duration
@@ -105,6 +106,9 @@ en:
         small: Small
       language:
         bg: "български език"
+        ca: Català
+        cs: "Čeština"
+        da: Dansk
         de: Deutsch
         el: " ellinikí glóssa"
         en: English
@@ -123,15 +127,22 @@ en:
         mt: Malti
         mul: Multilingue
         nl: Nederlands
+        'no': Norsk
         pl: polszczyzna
         pt: português
         ro: română
+        ru: "Русский"
         sk: slovenský jazyk
         sl: slovenščina
+        sr: "Српски"
         sv: svenska
         tr: " Türkçe"
+        uk: "Українська"
         yi: Yiddish
       less: Fewer
+      media:
+        'false': 'Yes'
+        'true': 'Yes'
       more: More
       more-refinements: More refinements
       resource:
