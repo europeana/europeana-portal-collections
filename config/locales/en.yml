@@ -56,6 +56,11 @@ en:
     more: More...
     my-europeana: My Europeana
     my-europeana-link: link to my Europeana
+    navigation:
+      breadcrumb:
+        item_detail: Item detail
+        results_list: Results List
+        return_home: Return to Home
     news: News
     object:
       actions:
@@ -144,7 +149,6 @@ en:
       nav:
         next: Next
         prev: Previous
-        return-to-search: Return to search results
       points:
         east: East
         north: North

@@ -31,11 +31,8 @@ module Portal
 
       navigation = {
         next_prev: {
-          prev_text: t('site.object.nav.prev'),
-          back_url: back_link_url,
-          back_text: t('site.object.nav.return-to-search'),
-          next_text: t('site.object.nav.next')
-        }
+        },
+        back_url: back_link_url
       }
       if @previous_document
         navigation[:next_prev].merge!(
