@@ -54,6 +54,11 @@ nl:
     more: Meer...
     my-europeana: Mijn Europeana
     my-europeana-link: Link naar mijn Europeana
+    navigation:
+      breadcrumb:
+        item_detail: 
+        results_list: 
+        return_home: 
     news: Nieuws
     object:
       actions:
@@ -142,7 +147,6 @@ nl:
       nav:
         next: 
         prev: 
-        return-to-search: 
       points:
         east: 
         north: 
