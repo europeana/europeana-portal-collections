@@ -346,8 +346,9 @@ module MustacheHelper
     {
       language: {
         form: {
-          action: root_url + '/settings/language',
-          method: 'PUT'
+          action: settings_language_path,
+          method: 'put',
+          form_authenticity_token: form_authenticity_token
         },
         title: t('site.settings.language.settings-label'),
         language_default: {
