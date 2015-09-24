@@ -23,8 +23,11 @@ module Portal
         query_params[:page] = ((counter - 1) / per_page) + 1
       end
 
+
+      # use nil rather than "search_action_path(only_path: true)" to stop pointless breadcrumb
+
       back_link_url = if query_params.empty?
-                        search_action_path(only_path: true)
+                        nil
                       else
                         url_for(query_params)
                       end
