@@ -15,7 +15,7 @@ RSpec.feature 'Top navigation' do
 
       it 'links to Channels' do
         visit '/'
-        expect(nav).to have_link('Channels')
+        expect(nav).to have_css('span', text: 'Channels')
       end
 
       it 'links to exhibitions' do
