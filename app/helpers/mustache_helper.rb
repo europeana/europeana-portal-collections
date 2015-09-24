@@ -162,6 +162,25 @@ module MustacheHelper
     }
   end
 
+  def channel_data
+    name = nil
+    if (params[:controller] == 'portal' && params[:action] == 'show')
+      name = params[:src_channel]
+    else
+      name = params[:id] ? params[:id] : nil
+    end
+
+    if !name.nil?
+      {
+        name: name,
+        label: t("site.channels.#{name}.title"),
+        url: name ? channel_url(name) : nil
+      }
+    else
+      nil
+    end
+  end
+
   def navigation
     {
       global: {
@@ -185,10 +204,11 @@ module MustacheHelper
               text: t('global.navigation.channels'),
               is_current: controller.controller_name == 'channels',
               submenu: {
-                items: ['music'].map do |channel|
+                items: ['art-history', 'music'].map do |channel|
                   {
                     url: channel_url(channel),
-                    text: t("site.channels.#{channel}.title")
+                    text: t("site.channels.#{channel}.title"),
+                    is_current: params[:id] == channel
                   }
                 end
               }
@@ -222,6 +242,7 @@ module MustacheHelper
           ]
         }  # end prim nav
       },
+      home_url: root_url,
       footer: {
         linklist1: {
           title: t('global.more-info'),
