@@ -6,12 +6,14 @@ RSpec.describe 'settings/language.html.mustache' do
       end
     end
 
-    allow(view).to receive(:content).and_return(
-      language_default: {
-        title: 'Default Language',
-        items: [
-          { text: 'English' }, { text: 'French' }
-        ]
+    allow(view).to receive(:settings).and_return(
+      language: {
+        language_default: {
+          title: 'Default Language',
+          items: [
+            { text: 'English' }, { text: 'French' }
+          ]
+        }
       }
     )
 
@@ -25,6 +27,6 @@ RSpec.describe 'settings/language.html.mustache' do
 
   it 'should have default language field' do
     render
-    expect(rendered).to have_select('Default Language', with_options: ['English', 'French'])
+    expect(rendered).to have_select('locale', with_options: ['English', 'French'])
   end
 end
