@@ -80,16 +80,35 @@ en:
       creator: creator
       header:
         channel: Channels
+        colourpalette: Colour
         country: Country
         data_provider: Data Provider
+        image_aspectratio: Orientation
+        image_size: Size
         language: Language
         language_of_description: Language of Description
+        media: Media Available
         provider: Provider
         reusability: Can I use it?
+        sound_duration: Duration
+        sound_hq: High Quality
+        text_fulltext: Full Text
         type: Media
+        video_hd: HD
         year: Date
+      image_aspectratio:
+        landscape: Landscape
+        portrait: Portrait
+      image_size:
+        extra_large: Extra large
+        large: Large
+        medium: Medium
+        small: Small
       language:
         bg: "български език"
+        ca: Català
+        cs: "Čeština"
+        da: Dansk
         de: Deutsch
         el: " ellinikí glóssa"
         en: English
@@ -108,15 +127,22 @@ en:
         mt: Malti
         mul: Multilingue
         nl: Nederlands
+        'no': Norsk
         pl: polszczyzna
         pt: português
         ro: română
+        ru: "Русский"
         sk: slovenský jazyk
         sl: slovenščina
+        sr: "Српски"
         sv: svenska
         tr: " Türkçe"
+        uk: "Українська"
         yi: Yiddish
       less: Fewer
+      media:
+        'false': 'No'
+        'true': 'Yes'
       more: More
       more-refinements: More refinements
       resource:
@@ -142,7 +168,17 @@ en:
         permission: Only with permission
         restricted: Yes with restrictions
         simple: Simple
+      sound_duration:
+        long: Long
+        medium: Medium
+        short: Short
+        very_short: Very short
+      sound_hq:
+        'true': 'Yes'
       source: Source
+      text_fulltext:
+        'false': 'No'
+        'true': 'Yes'
       type:
         3d: 3D
         image: Image
