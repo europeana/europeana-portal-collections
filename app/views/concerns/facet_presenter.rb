@@ -33,7 +33,7 @@ module FacetPresenter
     {
       title: facet_map(facet.name),
       select_one: facet_config.single,
-      items: facet.items[0..(options[:count]-1)].map { |item| send(:"#{options[:type]}_facet_item", facet, item) },
+      items: facet.items[0..(options[:count] - 1)].map { |item| send(:"#{options[:type]}_facet_item", facet, item) },
       extra_items: facet.items.size <= options[:count] ? nil : {
         items: facet.items[options[:count]..-1].map { |item| send(:"#{options[:type]}_facet_item", facet, item) }
       }
