@@ -13,9 +13,26 @@ module Portal
     end
 
     def filters
-      facets_from_request(facet_field_names).map do |facet|
+      facets_from_request(facet_field_names).reject do |facet|
+        blacklight_config.facet_fields[facet.name].advanced
+      end.map do |facet|
         facet_display(facet) # @see FacetPresenter
-      end.compact
+      end.compact + advanced_filters
+    end
+
+    def advanced_filters
+      [
+        {
+          advanced: true,
+          advanced_items: {
+            items: facets_from_request(facet_field_names).select do |facet|
+              blacklight_config.facet_fields[facet.name].advanced
+            end.map do |facet|
+              facet_display(facet) # @see FacetPresenter
+            end.compact
+          }
+        }
+      ]
     end
 
     def results_count
