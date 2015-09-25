@@ -187,7 +187,9 @@ nl:
         header-and: 
         in-channel: 
         less: 
+        less_adv: 
         more: 
+        more_adv: 
         product-3D: 
         product-image: 
         product-sound: 

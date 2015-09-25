@@ -17,7 +17,9 @@ module FacetPresenter
     if facet_config.hierarchical && !facet_config.parent
       hierarchical_facet(facet)
     elsif !facet_config.parent || show_children
-      if facet_config.colour
+      if facet_config.boolean
+        boolean_facet(facet)
+      elsif facet_config.colour
         colour_facet(facet)
       elsif facet_config.range
         range_facet(facet)
@@ -124,5 +126,40 @@ module FacetPresenter
       date_start: range_min,
       date_end: range_max
     }
+  end
+
+  def boolean_facet(facet)
+    {
+      url: boolean_facet_url(facet),
+      text: facet_map(facet.name),
+      is_checked: boolean_facet_checked?(facet)
+    }
+  end
+
+  def boolean_facet_url(facet)
+    facet_config = blacklight_config.facet_fields[facet.name]
+
+    if boolean_facet_in_params?(facet.name)
+      search_action_url(remove_facet_params(facet.name, facet_params(facet.name).first, params))
+    elsif boolean_facet_checked?(facet)
+      search_action_url(add_facet_params_and_redirect(facet.name, facet_config.boolean[:off]))
+    else
+      search_action_url(add_facet_params_and_redirect(facet.name, facet_config.boolean[:on]))
+    end
+  end
+
+  def boolean_facet_checked?(facet)
+    facet_config = blacklight_config.facet_fields[facet.name]
+    if facet_config.boolean[:on].nil? && !boolean_facet_in_params?(facet.name)
+      true
+    elsif !facet_config.boolean[:on].nil? && facet_in_params?(facet.name, facet_config.boolean[:on])
+      true
+    else
+      facet_config.boolean[:default] == :on
+    end
+  end
+
+  def boolean_facet_in_params?(field)
+    (facet_params(field) || []).present?
   end
 end

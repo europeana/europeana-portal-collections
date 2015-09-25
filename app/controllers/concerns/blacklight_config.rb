@@ -70,7 +70,8 @@ module BlacklightConfig
       config.add_facet_field 'LANGUAGE'
       config.add_facet_field 'PROVIDER'
       config.add_facet_field 'DATA_PROVIDER'
-      config.add_facet_field 'MEDIA'
+      config.add_facet_field 'MEDIA', advanced: true, boolean: { on: 'true', off: nil, default: :off }
+      config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
 
       # Send all facet field names to Solr.
       config.add_facet_fields_to_solr_request!
