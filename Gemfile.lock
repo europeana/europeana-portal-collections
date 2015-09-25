@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 6cda8ea6c306351b7a4aa6cb3491b450dc87ed3e
-  ref: 6cda8ea
+  revision: 4540b8fb3e10d7c8432121d57899cef787c3e2b8
+  branch: crf-facets
   specs:
     europeana-blacklight (0.2.7)
       activesupport (>= 4.0, < 5.0)
