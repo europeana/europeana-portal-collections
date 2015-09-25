@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 6cda8ea6c306351b7a4aa6cb3491b450dc87ed3e
-  ref: 6cda8ea
+  revision: b95c041c74218024df747c05c2483309ac1aecef
+  branch: crf-facets
   specs:
     europeana-blacklight (0.2.7)
       activesupport (>= 4.0, < 5.0)
@@ -12,8 +12,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 5d142e855896d9109559cf5d9ff024ce03e67657
-  ref: 5d142e8558
+  revision: bd532bd64aed9c407805ef37b275eff340838517
+  ref: bd532bd
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)

@@ -87,13 +87,14 @@ en:
         image_size: Size
         language: Language
         language_of_description: Language of Description
-        media: Media Available
+        media: Only show items with direct access to media
         provider: Provider
         reusability: Can I use it?
         sound_duration: Duration
         sound_hq: High Quality
         text_fulltext: Full Text
         type: Media
+        ugc: Show content contributed by users
         video_hd: HD
         year: Date
       image_aspectratio:

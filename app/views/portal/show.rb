@@ -23,19 +23,19 @@ module Portal
         query_params[:page] = ((counter - 1) / per_page) + 1
       end
 
+
+      # use nil rather than "search_action_path(only_path: true)" to stop pointless breadcrumb
+
       back_link_url = if query_params.empty?
-                        search_action_path(only_path: true)
+                        nil
                       else
                         url_for(query_params)
                       end
 
       navigation = {
         next_prev: {
-          prev_text: t('site.object.nav.prev'),
-          back_url: back_link_url,
-          back_text: t('site.object.nav.return-to-search'),
-          next_text: t('site.object.nav.next')
-        }
+        },
+        back_url: back_link_url
       }
       if @previous_document
         navigation[:next_prev].merge!(

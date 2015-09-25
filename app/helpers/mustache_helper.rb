@@ -51,8 +51,9 @@ module MustacheHelper
   end
 
   def js_variables
-    'var js_path="' + styleguide_path('/js/dist/') + '"; ' +
-    'var require = {"urlArgs": "' + js_version  + '"};'
+    'var js_path="' + styleguide_path('/js/dist/') + '";' +
+      'var require = {"urlArgs": "' + js_version + '"};' +
+      'var pageName = "' + params[:controller] + '/' + params[:action] + '";'
   end
 
   def js_files
@@ -161,6 +162,23 @@ module MustacheHelper
     }
   end
 
+  def channel_data
+    name = nil
+    if params[:controller] == 'portal' && params[:action] == 'show'
+      name = params[:src_channel]
+    else
+      name = params[:id] ? params[:id] : nil
+    end
+
+    if !name.nil?
+      {
+        name: name,
+        label: t("site.channels.#{name}.title"),
+        url: name ? channel_url(name) : nil
+      }
+    end
+  end
+
   def navigation
     {
       global: {
@@ -184,10 +202,11 @@ module MustacheHelper
               text: t('global.navigation.channels'),
               is_current: controller.controller_name == 'channels',
               submenu: {
-                items: ['music'].map do |channel|
+                items: ['art-history', 'music'].map do |channel|
                   {
                     url: channel_url(channel),
-                    text: t("site.channels.#{channel}.title")
+                    text: t("site.channels.#{channel}.title"),
+                    is_current: params[:id] == channel
                   }
                 end
               }
@@ -221,6 +240,7 @@ module MustacheHelper
           ]
         }  # end prim nav
       },
+      home_url: root_url,
       footer: {
         linklist1: {
           title: t('global.more-info'),
@@ -288,7 +308,7 @@ module MustacheHelper
                 url: false
               },
               {
-                text: 'should be Language ' + t('site.settings.language.label'),
+                text: t('site.settings.language.label'),
                 url: '/portal/settings/language',
                 is_current: controller.controller_name == 'settings'
               },
@@ -347,7 +367,8 @@ module MustacheHelper
       language: {
         form: {
           action: root_url + '/settings/language',
-          method: 'PUT'
+          method: 'PUT',
+          form_authenticity_token: form_authenticity_token
         },
         title: t('site.settings.language.settings-label'),
         language_default: {
@@ -357,12 +378,12 @@ module MustacheHelper
             {
               text: t('global.language-english'),
               value: 'en',
-              selected: I18n.locale == 'en'
+              selected: I18n.locale.to_s == 'en'
             },
             {
               text: t('global.language-dutch'),
               value: 'nl',
-              selected: I18n.locale == 'nl'
+              selected: I18n.locale.to_s == 'nl'
             }
           ]
         },

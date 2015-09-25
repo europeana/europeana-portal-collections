@@ -4,7 +4,7 @@ ruby '2.2.2'
 gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide',
-  github: 'europeana/europeana-styleguide-ruby', ref: '5d142e8558'
+  github: 'europeana/europeana-styleguide-ruby', ref: 'bd532bd'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -14,7 +14,7 @@ gem 'blacklight', '~> 5.14.0'
 gem 'clockwork', '~> 1.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'europeana-api', '~> 0.3.6'
-gem 'europeana-blacklight', github: 'europeana/europeana-blacklight', ref: '6cda8ea'
+gem 'europeana-blacklight', github: 'europeana/europeana-blacklight', branch: 'crf-facets'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'htmlcompressor', '0.2'
