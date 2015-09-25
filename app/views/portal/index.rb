@@ -101,9 +101,7 @@ module Portal
         mapped_value = case facet_name.upcase
           when 'CHANNEL'
             t('global.channel.' + facet_value.downcase)
-          when 'PROVIDER'
-            facet_value
-          when 'DATA_PROVIDER'
+          when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE'
             facet_value
           else
             t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
