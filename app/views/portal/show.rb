@@ -396,6 +396,7 @@ module Portal
         similar: {
           title: t('site.object.similar-items') + ':',
           more_items_query: search_path(mlt: document.id),
+          more_items_load: request.original_url.split('.html')[0] + '/similar.json',
           items: @similar.map do |doc|
             {
               url: document_path(doc, format: 'html'),
@@ -910,18 +911,6 @@ module Portal
           }
           item['technical_metadata'] = {
             mime_type: mime_type
-            # language: "English",
-            # format: "jpg",
-            # file_size: "23.2",
-            # file_unit: "MB",
-            # codec: "MPEG-2",
-            # fps: "30",
-            # fps_unit: "fps",
-            # width: "1200",
-            # height: "900",
-            # size_unit: "pixels",
-            # runtime: "34",
-            # runtime_unit: "minutes"
           }
         end
 
@@ -939,7 +928,8 @@ module Portal
         required_players: players.uniq,
         single_item: items.uniq.size == 1,
         empty_item: items.size == 0,
-        items: items.uniq
+        items: items.uniq,
+        more_thumbs_url: request.original_url.split('.html')[0] + '/thumbnails.json',
       }
     end
   end
