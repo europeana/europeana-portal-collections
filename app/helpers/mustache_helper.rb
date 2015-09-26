@@ -165,12 +165,9 @@ module MustacheHelper
 
   def channel_data
     name = nil
-    if params[:controller] == 'portal' && params[:action] == 'show'
-      name = params[:src_channel]
-    else
+    if !(params[:controller] == 'portal' && params[:action] == 'show')
       name = params[:id] ? params[:id] : nil
     end
-
     if !name.nil?
       {
         name: name,
