@@ -46,7 +46,7 @@ module Settings
                 value: 'ru'
               },
               {
-                text:  t('global.language-greek'),
+                text: t('global.language-greek'),
                 value: 'el'
               }
             ]
