@@ -30,7 +30,6 @@ module Settings
             ]
           },
           language_itempages: {
-
             title: t('site.settings.language.auto-translate-page'),
             label: t('site.settings.language.auto-translate-page-short'),
             value: 'autotranslateitem',
