@@ -414,7 +414,7 @@ module Portal
 
     private
 
-    def use_media_proxy?(web_resource_url, mime_type)
+    def use_media_proxy?(mime_type)
       Rails.application.config.x.edm_is_shown_by_proxy &&
         mime_type.present? &&
         mime_type.match('image/').nil?
@@ -423,7 +423,7 @@ module Portal
     def media_proxy_download_url(web_resource_url, mime_type)
       @media_proxy_download_urls ||= {}
       @media_proxy_download_urls[web_resource_url] ||= begin
-        if use_media_proxy?(web_resource_url, mime_type)
+        if use_media_proxy?(mime_type)
           Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/') + '?view=' + CGI.escape(web_resource_url)
         else
           web_resource_url
@@ -830,7 +830,7 @@ module Portal
 
       view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
       web_resources = aggregation.webResources.dup
-      edm_web_resource = web_resources.find { |web_resource| render_document_show_field_value(web_resource, 'about') == edm_resource_url }
+      edm_web_resource = web_resources.detect { |web_resource| render_document_show_field_value(web_resource, 'about') == edm_resource_url }
       # make sure the edm_is_shown_by is the first item
       web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
       web_resources.select! { |wr| view_urls.compact.include?(wr.fetch('about', nil)) }
@@ -854,10 +854,10 @@ module Portal
 
     def item_playable?(web_resource_url, mime_type, media_type)
       if web_resource_url.blank? ||
-        mime_type.blank? ||
-        (mime_type == 'video/mpeg') ||
-        (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-        (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+          mime_type.blank? ||
+          (mime_type == 'video/mpeg') ||
+          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
         true
@@ -866,10 +866,10 @@ module Portal
 
     def item_downloadable?(web_resource_url, mime_type, media_type, media_rights)
       if web_resource_url.blank? ||
-        mime_type.blank? ||
-        download_disabled?(media_rights) ||
-        (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-        (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+          mime_type.blank? ||
+          download_disabled?(media_rights) ||
+          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
         true
@@ -913,11 +913,12 @@ module Portal
     end
 
     def item_players(items)
-      [:audio, :iiif, :image, :pdf, :video].select do |player|
+      players = [:audio, :iiif, :image, :pdf, :video].select do |player|
         items.any? do |item|
           item.fetch("is_#{player}", false)
         end
-      end.map do |player|
+      end
+      players.map do |player|
         { player => true }
       end
     end
