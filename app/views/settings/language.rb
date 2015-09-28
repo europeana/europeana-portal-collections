@@ -8,7 +8,7 @@ module Settings
       {
         language: {
           form: {
-            action: root_url + '/settings/language',
+            action: settings_language_path,
             method: 'PUT',
             form_authenticity_token: form_authenticity_token
           },
