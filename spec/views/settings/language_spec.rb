@@ -27,6 +27,6 @@ RSpec.describe 'settings/language.html.mustache' do
 
   it 'should have default language field' do
     render
-    expect(rendered).to have_select('locale', with_options: ['English', 'French'])
+    expect(rendered).to have_select('locale', with_options: ['English', 'Dutch'])
   end
 end

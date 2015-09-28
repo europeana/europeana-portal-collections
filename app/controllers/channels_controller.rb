@@ -8,9 +8,6 @@ class ChannelsController < ApplicationController
   rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
 
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
-  before_action :populate_channel_entry, only: :show, unless: :has_search_parameters?
-  before_action :populate_channel_stats, only: :show, unless: :has_search_parameters?
-  before_action :populate_recent_additions, only: :show, unless: :has_search_parameters?
 
   def index
     redirect_to_root
@@ -18,6 +15,10 @@ class ChannelsController < ApplicationController
 
   def show
     @channel ||= Channel.find(params[:id])
+    @channel_entry = channel_entry(@channel)
+    @channel_stats = channel_stats
+    @recent_additions = recent_additions
+
     (@response, @document_list) = search_results(params, search_params_logic) if has_search_parameters?
 
     respond_to do |format|
@@ -47,11 +48,11 @@ class ChannelsController < ApplicationController
     render file: 'public/404.html', status: 404
   end
 
-  def populate_channel_entry
-    @channel_entry = (channel_content[:channel_entry] || []).tap do |entry_config|
+  def channel_entry(channel)
+    (channel_content[:channel_entry] || []).tap do |entry_config|
       entry_config.each do |entry|
         entry.merge!(
-          url: channel_path(@channel.id, q: entry[:query]),
+          url: channel_path(channel.id, q: entry[:query]),
           # uncomment next line to add dynamic item counts
           # count: channel_entry_count(entry[:query])
         )
@@ -68,11 +69,11 @@ class ChannelsController < ApplicationController
 
   ##
   # Gets from the API the number of items of each media type within the current channel
-  def populate_channel_stats
+  def channel_stats
     # ['EDM value', 'i18n key']
     types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
              ['3D', '3d'], ['SOUND', 'sound']]
-    @channel_stats = types.map do |type|
+    channel_stats = types.map do |type|
       api_query = search_builder(self.search_params_logic).
         with(q: "TYPE:#{type[0]}").query.
         merge(rows: 0, start: 1, profile: 'minimal')
@@ -83,16 +84,16 @@ class ChannelsController < ApplicationController
         url: channel_path(q: "TYPE:#{type[0]}")
       }
     end
-    @channel_stats.reject! { |stats| stats[:count] == 0 }
-    @channel_stats.sort_by! { |stats| stats[:count] }.reverse!
+    channel_stats.reject! { |stats| stats[:count] == 0 }
+    channel_stats.sort_by { |stats| stats[:count] }.reverse
   end
 
   def channel_content
     @channel ? @channel.config[:content] || {} : {}
   end
 
-  def populate_recent_additions
-    @recent_additions = []
+  def recent_additions
+    recent_additions = []
 
     time_now = Time.now
     month_now = time_now.month
@@ -115,7 +116,7 @@ class ChannelsController < ApplicationController
       next if data_provider_facet.blank?
 
       data_provider_facet['fields'][0..2].each do |field|
-        @recent_additions << {
+        recent_additions << {
           text: field['label'],
           number: field['count'],
           date: time_from.strftime('%B %Y'),
@@ -123,10 +124,10 @@ class ChannelsController < ApplicationController
         }
       end
 
-      break if @recent_additions.size >= 3
+      break if recent_additions.size >= 3
     end
 
-    @recent_additions = @recent_additions[0..2]
-    @recent_additions.sort_by! { |addition| addition[:number] }.reverse!
+    recent_additions = recent_additions[0..2]
+    recent_additions.sort_by { |addition| addition[:number] }.reverse
   end
 end
