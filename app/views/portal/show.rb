@@ -27,10 +27,11 @@ module Portal
       back_link_url = query_params.empty? ? nil : url_for(query_params)
 
       navigation = {
-        back_url: back_link_url
+        back_url: back_link_url,
+        next_prev: {}
       }
       if @previous_document
-        navigation[:next_prev] = {
+        navigation[:next_prev].merge!(
           prev_url: document_path(@previous_document, format: 'html'),
           prev_link_attrs: [
             {
@@ -38,10 +39,10 @@ module Portal
               value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
             }
           ]
-        }
+        )
       end
       if @next_document
-        navigation[:next_prev] = {
+        navigation[:next_prev].merge!(
           next_url: document_path(@next_document, format: 'html'),
           next_link_attrs: [
             {
@@ -49,7 +50,7 @@ module Portal
               value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
             }
           ]
-        }
+        )
       end
       navigation.reverse_merge(helpers.navigation)
     end
