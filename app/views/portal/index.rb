@@ -140,7 +140,7 @@ module Portal
     def search_result_for_document(doc, counter)
       doc_type = doc.fetch(:type, nil)
       {
-        object_url: document_path(doc, format: 'html') +(@channel.nil? ? '' : '?src_channel=' + @channel.id),
+        object_url: document_path(doc, format: 'html'),
         link_attrs: [
           {
             name: 'data-context-href',

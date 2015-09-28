@@ -23,22 +23,14 @@ module Portal
         query_params[:page] = ((counter - 1) / per_page) + 1
       end
 
-
       # use nil rather than "search_action_path(only_path: true)" to stop pointless breadcrumb
-
-      back_link_url = if query_params.empty?
-                        nil
-                      else
-                        url_for(query_params)
-                      end
+      back_link_url = query_params.empty? ? nil : url_for(query_params)
 
       navigation = {
-        next_prev: {
-        },
         back_url: back_link_url
       }
       if @previous_document
-        navigation[:next_prev].merge!(
+        navigation[:next_prev] = {
           prev_url: document_path(@previous_document, format: 'html'),
           prev_link_attrs: [
             {
@@ -46,10 +38,10 @@ module Portal
               value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
             }
           ]
-        )
+        }
       end
       if @next_document
-        navigation[:next_prev].merge!(
+        navigation[:next_prev] = {
           next_url: document_path(@next_document, format: 'html'),
           next_link_attrs: [
             {
@@ -57,7 +49,7 @@ module Portal
               value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
             }
           ]
-        )
+        }
       end
       navigation.reverse_merge(helpers.navigation)
     end
@@ -396,6 +388,7 @@ module Portal
         similar: {
           title: t('site.object.similar-items') + ':',
           more_items_query: search_path(mlt: document.id),
+          more_items_load: request.original_url.split('.html')[0] + '/similar.json',
           items: @similar.map do |doc|
             {
               url: document_path(doc, format: 'html'),
@@ -826,7 +819,8 @@ module Portal
         required_players: item_players(items),
         single_item: items.size == 1,
         empty_item: items.size == 0,
-        items: items
+        items: items,
+        more_thumbs_url: request.original_url.split('.html')[0] + '/thumbnails.json'
       }
     end
 
@@ -847,13 +841,9 @@ module Portal
       file_size = number_to_human_size(render_document_show_field_value(web_resource, 'ebucoreFileByteSize')) || ''
       {
         mime_type: mime_type,
-        # language: "English",
-        # format: "jpg",
         file_size: file_size.split(' ').first,
         file_unit: file_size.split(' ').last,
         codec: render_document_show_field_value(web_resource, 'edmCodecName'),
-        # fps: "30",
-        # fps_unit: "fps",
         width: render_document_show_field_value(web_resource, 'ebucoreWidth'),
         height: render_document_show_field_value(web_resource, 'ebucoreHeight'),
         size_unit: 'pixels',
