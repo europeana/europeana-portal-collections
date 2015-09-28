@@ -23,19 +23,12 @@ module Portal
         query_params[:page] = ((counter - 1) / per_page) + 1
       end
 
-
       # use nil rather than "search_action_path(only_path: true)" to stop pointless breadcrumb
-
-      back_link_url = if query_params.empty?
-                        nil
-                      else
-                        url_for(query_params)
-                      end
+      back_link_url = query_params.empty? ? nil : url_for(query_params)
 
       navigation = {
-        next_prev: {
-        },
-        back_url: back_link_url
+        back_url: back_link_url,
+        next_prev: {}
       }
       if @previous_document
         navigation[:next_prev].merge!(
@@ -422,21 +415,19 @@ module Portal
 
     private
 
-    def use_edm_is_shown_by_proxy?
+    def use_media_proxy?(mime_type)
       Rails.application.config.x.edm_is_shown_by_proxy &&
-        document.fetch('type', false) != 'IMAGE' &&
-        document.aggregations.size > 0 &&
-        document.aggregations.first.fetch('edmIsShownBy', false) &&
-        @mime_type.present? &&
-        @mime_type.match('image/').nil?
+        mime_type.present? &&
+        mime_type.match('image/').nil?
     end
 
-    def edm_is_shown_by_download_url
-      @edm_is_shown_by_download_url ||= begin
-        if use_edm_is_shown_by_proxy?
-          Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/')
+    def media_proxy_download_url(web_resource_url, mime_type)
+      @media_proxy_download_urls ||= {}
+      @media_proxy_download_urls[web_resource_url] ||= begin
+        if use_media_proxy?(mime_type)
+          Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/') + '?view=' + CGI.escape(web_resource_url)
         else
-          render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+          web_resource_url
         end
       end
     end
@@ -623,30 +614,11 @@ module Portal
       end
     end
 
-    # Media type function normalises mime types
-    # Current @mime_type variable only workd for edm_is_shown_by
-    # Once it works for web_resources we change this function so
-    # that  it accepts a mime type rather than a url, and
-
-    def media_type(url)
-      ext = url[/\.[^.]*$/]
-      if ext.nil?
-        return nil
-      end
-
-      ext = ext.downcase
-      if !['.avi', '.flac', '.mp3', '.mpga'].index(ext).nil?
-        'audio'
-      elsif !['.jpg', '.jpeg'].index(ext).nil?
-        'image'
-      elsif !['.flv', '.mp4', '.mp2', '.mpeg', '.mpg', '.ogg'].index(ext).nil?
-        'video'
-      elsif !['.txt', '.pdf'].index(ext).nil?
-        'text'
-      end
+    def creator_title
+      document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
-    def download_disabled(rights)
+    def download_disabled?(rights)
       disabled = false
       ['http://www.europeana.eu/rights/rr-p',
        'http://www.europeana.eu/rights/rr-r/'].map do |blacklisted|
@@ -751,15 +723,14 @@ module Portal
       end
     end
 
-    def creator_title
-      document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
-    end
-
     # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls
-    def iiif_manifesto(identifier, collection)
+    def iiif_manifesto(document)
+      identifier = render_document_show_field_value(document, 'proxies.dcIdentifier')
+      collection = render_document_show_field_value(document, 'europeanaCollectionName')
+
       url_match = nil
-      ids = Hash.new
-      collections = Hash.new
+      ids = {}
+      collections = {}
 
       # test url: http://localhost:3000/portal/record/9200365/BibliographicResource_3000094705862.html?debug=json
       ids['http://gallica.bnf.fr/ark:/12148/btv1b84539771'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
@@ -783,154 +754,174 @@ module Portal
       url_match || ids[identifier] || collections[collection]
     end
 
+    def web_resource_media_item(web_resource)
+      web_resource_url = render_document_show_field_value(web_resource, 'about')
+      mime_type = render_document_show_field_value(web_resource, 'ebucoreHasMimeType')
+
+      media_rights = render_document_show_field_value(web_resource, 'webResourceEdmRights')
+      media_rights ||= render_document_show_field_value(document, 'aggregations.edmRights')
+
+      media_type = media_type(mime_type) || render_document_show_field_value(document, 'type')
+      media_type.downcase!
+
+      # if media_type == 'audio' && mime_type == 'application/octet-stream'
+      #   if !web_resource_url.index('.mp3').nil?
+      #     mime_type = 'audio/mpeg'
+      #   end
+      # end
+
+      manifesto = iiif_manifesto(document)
+      media_type = 'iiif' if manifesto
+
+      item = {
+        media_type: media_type,
+        rights: simple_rights_label_data(media_rights),
+        downloadable: item_downloadable?(web_resource_url, mime_type, media_type, media_rights),
+        playable: item_playable?(web_resource_url, mime_type, media_type),
+        thumbnail: item_thumbnail(media_type),
+        play_url: manifesto.present? ? manifesto : web_resource_url
+      }
+
+      player = item_player(media_type, mime_type)
+      if player.nil?
+        item[:is_unknown_type] = render_document_show_field_value(web_resource, 'about')
+      else
+        item[:"is_#{player}"] = true
+      end
+
+      item[:download] = {
+        url: media_proxy_download_url(web_resource_url, mime_type),
+        text: t('site.object.actions.download')
+      }
+      item[:technical_metadata] = item_technical_metadata(web_resource, mime_type)
+
+      if web_resource_url == edm_resource_url
+        item[:thumbnail] = edm_preview
+        item[:is_current] = true
+      end
+
+      item
+    end
+
+    def edm_resource_url
+      @edm_resource_url ||= render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+    end
+
+    def edm_preview
+      @edm_preview ||= render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+    end
+
     def media_items
+      items = salient_web_resources.map do |web_resource|
+        web_resource_media_item(web_resource)
+      end
+
+      {
+        required_players: item_players(items),
+        single_item: items.size == 1,
+        empty_item: items.size == 0,
+        items: items,
+        more_thumbs_url: request.original_url.split('.html')[0] + '/thumbnails.json'
+      }
+    end
+
+    def salient_web_resources
       aggregation = document.aggregations.first
       return [] unless aggregation.respond_to?(:webResources)
 
-      players = []
-      items = []
+      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
+      web_resources = aggregation.webResources.dup
+      edm_web_resource = web_resources.detect { |web_resource| render_document_show_field_value(web_resource, 'about') == edm_resource_url }
+      # make sure the edm_is_shown_by is the first item
+      web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
+      web_resources.select! { |wr| view_urls.compact.include?(wr.fetch('about', nil)) }
+      web_resources.uniq { |wr| wr.fetch('about', nil) }
+    end
 
-      aggregation.webResources.map do |web_resource|
-        # TODO: we're using 'document' values instead of 'web_resource' values
-        # -this until the mime_type/edm_download / mimetypes start working for multiple items
-
-        mime_type = @mime_type
-
-        web_resource_url = render_document_show_field_value(web_resource, 'about')
-        edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
-        edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-        media_rights = render_document_show_field_value(web_resource, 'webResourceEdmRights')
-
-        if media_rights.nil?
-          media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
-        end
-
-        media_type = media_type(web_resource_url)
-        media_type = media_type || render_document_show_field_value(document, 'type')
-        media_type = media_type.downcase
-
-        if media_type == 'audio' && mime_type == 'application/octet-stream'
-          if !web_resource_url.index('.mp3').nil?
-            mime_type = 'audio/mpeg'
-          end
-        end
-
-        identifier = render_document_show_field_value(document, 'proxies.dcIdentifier')
-        collection = render_document_show_field_value(document, 'europeanaCollectionName')
-        manifesto = iiif_manifesto(identifier, collection)
-
-        if manifesto
-          media_type = 'iiif'
-        end
-
-        item = {
-          media_type: media_type,
-          rights: simple_rights_label_data(media_rights),
-          downloadable: true,
-          playable: edm_is_shown_by_download_url.present?,
-          thumbnail: edm_preview
-        }
-
-        if download_disabled(media_rights)
-          item[:downloadable] = false
-        end
-
-        # disable play / download
-
-        if mime_type == 'video/mpeg'
-          item[:playable] = false
-        end
-
-        if mime_type == 'audio/flac'
-          item[:playable] = true
-        end
-
-        if media_type == 'text' && (mime_type == 'text/plain; charset=utf-8' || !mime_type)
-          item[:playable] = false
-          item[:downloadable] = false
-        end
-
-        if media_type == 'text' && mime_type == 'text/plain; charset=utf-8'
-          item[:playable] = false
-          item[:downloadable] = false
-        end
-
-        if media_type == 'video' && mime_type == 'text/plain; charset=utf-8'
-          item[:playable] = false
-          item[:downloadable] = false
-        end
-
-        if media_type == 'image'
-          item['is_image'] = true
-          players << { image: true }
-
-          # we only have a thumbnail for the first
-          # - full image needed for the others
-          # - metadata service needed
-          # if web_resource_url != edm_resource_url
-          #   item[:thumbnail] = web_resource_url
-          # end
-        elsif media_type == 'audio' || media_type == 'sound'
-          item['is_audio'] = true
-          players << { audio: true }
-          item[:thumbnail] = item[:thumbnail] || 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
-        elsif media_type == 'iiif'
-          item['is_iiif'] = true
-          players << { iiif: true }
-        elsif media_type == 'pdf'
-          item['is_pdf'] = true
-          players << { pdf: true }
-        elsif media_type == 'text'
-          if mime_type == 'application/pdf'
-            item['is_pdf'] = true
-            players << { pdf: true }
-          else
-            item['is_text'] = true
-          end
-        elsif media_type == 'video'
-          item['is_video'] = true
-          players << { video: true }
-        else
-          item['is_unknown_type'] = render_document_show_field_value(web_resource, 'about')
-        end
-
-        if mime_type == 'application/pdf' || mime_type == 'audio/flac'
-          item['play_url'] = edm_is_shown_by_download_url
-        elsif !manifesto.nil?
-          item['play_url'] = manifesto
-          item[:playable] = true
-        else
-          item['play_url'] = web_resource_url
-        end
-
-        # TODO: this should check the download-ability of the web resource
-        if edm_is_shown_by_download_url.present?
-          item['download'] = {
-            url: edm_is_shown_by_download_url,
-            text: t('site.object.actions.download')
-          }
-          item['technical_metadata'] = {
-            mime_type: mime_type
-          }
-        end
-
-        # make sure the edm_is_shown_by is the first item
-        if web_resource_url == edm_resource_url
-          item[:is_current] = true
-          items.unshift(item)
-        else
-          items << item
-        end
-        # only show first (the edm_is_shown_by or an iiiif manifest)
-        items = [items.first]
-      end
+    def item_technical_metadata(web_resource, mime_type)
+      file_size = number_to_human_size(render_document_show_field_value(web_resource, 'ebucoreFileByteSize')) || ''
       {
-        required_players: players.uniq,
-        single_item: items.uniq.size == 1,
-        empty_item: items.size == 0,
-        items: items.uniq,
-        more_thumbs_url: request.original_url.split('.html')[0] + '/thumbnails.json',
+        mime_type: mime_type,
+        file_size: file_size.split(' ').first,
+        file_unit: file_size.split(' ').last,
+        codec: render_document_show_field_value(web_resource, 'edmCodecName'),
+        width: render_document_show_field_value(web_resource, 'ebucoreWidth'),
+        height: render_document_show_field_value(web_resource, 'ebucoreHeight'),
+        size_unit: 'pixels',
+        runtime: render_document_show_field_value(web_resource, 'ebucoreDuration'),
+        runtime_unit: 'seconds'
       }
+    end
+
+    def item_playable?(web_resource_url, mime_type, media_type)
+      if web_resource_url.blank? ||
+          mime_type.blank? ||
+          (mime_type == 'video/mpeg') ||
+          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+        false
+      else
+        true
+      end
+    end
+
+    def item_downloadable?(web_resource_url, mime_type, media_type, media_rights)
+      if web_resource_url.blank? ||
+          mime_type.blank? ||
+          download_disabled?(media_rights) ||
+          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+        false
+      else
+        true
+      end
+    end
+
+    def item_thumbnail(media_type)
+      edm_type = (media_type == 'audio' ? 'SOUND' : media_type.upcase)
+      'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=' + edm_type
+    end
+
+    # Media type function normalises mime types
+    def media_type(mime_type)
+      case (mime_type || '').downcase
+      when /^audio\//
+        'audio'
+      when /^image\//
+        'image'
+      when /^video\//
+        'video'
+      when /^text\//, /\/pdf$/
+        'text'
+      end
+    end
+
+    def item_player(media_type, mime_type)
+      case media_type
+      when 'image'
+        :image
+      when 'audio', 'sound'
+        :audio
+      when 'iiif'
+        :iiif
+      when 'pdf'
+        :pdf
+      when 'text'
+        mime_type == 'application/pdf' ? :pdf : :text
+      when 'video'
+        :video
+      end
+    end
+
+    def item_players(items)
+      players = [:audio, :iiif, :image, :pdf, :video].select do |player|
+        items.any? do |item|
+          item.fetch("is_#{player}", false)
+        end
+      end
+      players.map do |player|
+        { player => true }
+      end
     end
   end
 end
