@@ -421,21 +421,19 @@ module Portal
 
     private
 
-    def use_edm_is_shown_by_proxy?
+    def use_media_proxy?(web_resource_url, mime_type)
       Rails.application.config.x.edm_is_shown_by_proxy &&
-        document.fetch('type', false) != 'IMAGE' &&
-        document.aggregations.size > 0 &&
-        document.aggregations.first.fetch('edmIsShownBy', false) &&
-        @mime_type.present? &&
-        @mime_type.match('image/').nil?
+        mime_type.present? &&
+        mime_type.match('image/').nil?
     end
 
-    def edm_is_shown_by_download_url
-      @edm_is_shown_by_download_url ||= begin
-        if use_edm_is_shown_by_proxy?
-          Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/')
+    def media_proxy_download_url(web_resource_url, mime_type)
+      @media_proxy_download_urls ||= {}
+      @media_proxy_download_urls[web_resource_url] ||= begin
+        if use_media_proxy?(web_resource_url, mime_type)
+          Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/') + '?view=' + CGI.escape(web_resource_url)
         else
-          render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+          web_resource_url
         end
       end
     end
@@ -626,8 +624,6 @@ module Portal
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
-    protected
-
     def download_disabled?(rights)
       disabled = false
       ['http://www.europeana.eu/rights/rr-p',
@@ -799,13 +795,11 @@ module Portal
         item[:"is_#{player}"] = true
       end
 
-#      unless mime_type.nil?
-        item[:download] = {
-          url: web_resource_url == edm_resource_url ? edm_is_shown_by_download_url : web_resource_url,
-          text: t('site.object.actions.download')
-        }
-        item[:technical_metadata] = item_technical_metadata(web_resource, mime_type)
-#      end
+      item[:download] = {
+        url: media_proxy_download_url(web_resource_url, mime_type),
+        text: t('site.object.actions.download')
+      }
+      item[:technical_metadata] = item_technical_metadata(web_resource, mime_type)
 
       if web_resource_url == edm_resource_url
         item[:thumbnail] = edm_preview
@@ -840,12 +834,12 @@ module Portal
       aggregation = document.aggregations.first
       return [] unless aggregation.respond_to?(:webResources)
 
-      has_view = aggregation.fetch('hasView', [])
+      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
       web_resources = aggregation.webResources.dup
       edm_web_resource = web_resources.find { |web_resource| render_document_show_field_value(web_resource, 'about') == edm_resource_url }
       # make sure the edm_is_shown_by is the first item
       web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
-      web_resources.select! { |wr| has_view.include?(wr.fetch('about', nil)) }
+      web_resources.select! { |wr| view_urls.compact.include?(wr.fetch('about', nil)) }
       web_resources.uniq { |wr| wr.fetch('about', nil) }
     end
 
