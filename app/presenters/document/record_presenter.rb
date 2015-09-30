@@ -29,7 +29,7 @@ module Document
     # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls
     def iiif_manifesto
       @iiif_manifesto ||= begin
-        iiif_manifesto_by_record_id || iif_manifesto_by_identifier || iif_manifesto_by_collection
+        iiif_manifesto_by_record_id || iiif_manifesto_by_identifier || iiif_manifesto_by_collection
       end
     end
 
@@ -44,9 +44,9 @@ module Document
       end
     end
 
-    def iif_manifesto_by_identifier
+    def iiif_manifesto_by_identifier
       identifier = render_document_show_field_value('proxies.dcIdentifier')
-      
+
       ids = {
         # test url: http://localhost:3000/portal/record/9200365/BibliographicResource_3000094705862.html?debug=json
         'http://gallica.bnf.fr/ark:/12148/btv1b84539771' => 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json',
@@ -57,7 +57,7 @@ module Document
       ids[identifier]
     end
 
-    def iif_manifesto_by_collection
+    def iiif_manifesto_by_collection
       identifier = render_document_show_field_value('proxies.dcIdentifier')
       return nil unless identifier.present?
 
