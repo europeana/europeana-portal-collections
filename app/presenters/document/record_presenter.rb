@@ -3,7 +3,7 @@ module Document
   # Blacklight document presenter for a Europeana record
   class RecordPresenter < DocumentPresenter
     def edm_resource_url
-      @edm_resource_url ||= @document.fetch('aggregations.edmIsShownBy', nil)
+      @edm_resource_url ||= render_document_show_field_value('aggregations.edmIsShownBy')
     end
 
     def media_web_resources(options)
