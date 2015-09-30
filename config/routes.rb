@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     root to: 'home#index'
     get 'search', to: 'portal#index'
 
+    get 'record/*id/media', to: 'portal#media', as: 'document_media'
+    get 'record/*id/similar', to: 'portal#similar', as: 'similar_document'
     blacklight_for :portal
 
     resources :channels, only: [:show, :index]

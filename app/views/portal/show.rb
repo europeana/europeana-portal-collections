@@ -297,7 +297,7 @@ module Portal
               }
             ]
           ),
-          rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
+          rights: simple_rights_label_data,
           social_share: {
             url: URI.escape(request.original_url),
             facebook: true,
@@ -405,6 +405,10 @@ module Portal
       }.reverse_merge(helpers.content)
     end
 
+    def simple_rights_label_data
+      Document::RecordPresenter.new(document, controller).simple_rights_label_data
+    end
+
     def labels
       {
         show_more_meta: t('site.object.actions.show-more-data'),
@@ -414,23 +418,6 @@ module Portal
     end
 
     private
-
-    def use_media_proxy?(mime_type)
-      Rails.application.config.x.edm_is_shown_by_proxy &&
-        mime_type.present? &&
-        mime_type.match('image/').nil?
-    end
-
-    def media_proxy_download_url(web_resource_url, mime_type)
-      @media_proxy_download_urls ||= {}
-      @media_proxy_download_urls[web_resource_url] ||= begin
-        if use_media_proxy?(mime_type)
-          Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/') + '?view=' + CGI.escape(web_resource_url)
-        else
-          web_resource_url
-        end
-      end
-    end
 
     def collect_values(fields, doc = document)
       fields.map do |field|
@@ -618,310 +605,36 @@ module Portal
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
-    def download_disabled?(rights)
-      disabled = false
-      ['http://www.europeana.eu/rights/rr-p',
-       'http://www.europeana.eu/rights/rr-r/'].map do |blacklisted|
-        if rights.index(blacklisted) == 0
-          disabled = true
-        end
-      end
-      disabled
-    end
-
-    def simple_rights_label_data(rights)
-      return nil unless rights.present?
-      # global.facet.reusability.permission      Only with permission
-      # global.facet.reusability.open            Yes with attribution
-      # global.facet.reusability.restricted      Yes with restrictions
-
-      if rights.nil?
-        nil
-      elsif rights.index('http://creativecommons.org/publicdomain/zero') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc0'),
-          license_CC0: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by/') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc-by'),
-          license_CC_BY: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-nc/') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc-by-nc'),
-          license_CC_BY_NC: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
-        {
-          license_human: t('global.facet.reusability.restricted'),
-          license_name: t('global.facet.reusability.advanced-cc-by-nc-nd'),
-          license_CC_BY_NC_ND: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
-        {
-          license_human: t('global.facet.reusability.restricted'),
-          license_name: t('global.facet.reusability.advanced-cc-by-nc-sa'),
-          license_CC_BY_NC_SA: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-sa') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc-by-sa'),
-          license_CC_BY_SA: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/out-of-copyright-non-commercial') == 0
-        {
-          license_human: t('global.facet.reusability.restricted'),
-          license_name: t('global.facet.reusability.advanced-out-of-copyright-non-commercial'),
-          license_OOC: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/rr-f') == 0
-        {
-          license_human: t('global.facet.reusability.permission'),
-          license_name: t('global.facet.reusability.advanced-rrfa'),
-          license_RR_free: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/rr-p') == 0
-        {
-          license_human: t('global.facet.reusability.permission'),
-          license_name: t('global.facet.reusability.advanced-rrpa'),
-          license_RR_paid: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/rr-r/') == 0
-        {
-          license_human: t('global.facet.reusability.permission'),
-          license_name: t('global.facet.reusability.advanced-rrra'),
-          license_RR_restricted: true
-        }
-      elsif rights.index('http://creativecommons.org/publicdomain/mark') == 0
-        {
-          license_public: true,
-          license_name: t('global.facet.reusability.advanced-pdm'),
-          license_human: t('global.facet.reusability.open')
-        }
-      elsif rights.index('http://www.europeana.eu/rights/unknown') == 0
-        {
-          license_unknown: true,
-          license_name: t('global.facet.reusability.advanced-ucs'),
-          license_human: t('global.facet.reusability.permission')
-        }
-      elsif rights.index('http://www.europeana.eu/rights/test-orphan') == 0
-        {
-          license_orphan: true,
-          license_name: t('global.facet.reusability.advanced-orphan-work'),
-          license_human: t('global.facet.reusability.permission')
-        }
-      else
-        {
-          license_public: false,
-          license_name: 'unmatched rights: ' + rights
-        }
-      end
-    end
-
-    # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls
-    def iiif_manifesto(document)
-      identifier = render_document_show_field_value(document, 'proxies.dcIdentifier')
-      collection = render_document_show_field_value(document, 'europeanaCollectionName')
-
-      url_match = nil
-      ids = {}
-      collections = {}
-
-      # test url: http://localhost:3000/portal/record/9200365/BibliographicResource_3000094705862.html?debug=json
-      ids['http://gallica.bnf.fr/ark:/12148/btv1b84539771'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
-
-      # test url: http://localhost:3000/portal/record/92082/BibliographicResource_1000157170184.html?debug=json
-      ids['http://gallica.bnf.fr/ark:/12148/btv1b10500687r'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
-
-      # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
-      # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
-      if identifier
-        collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
-          identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
-      end
-
-      path = request.original_fullpath
-      if path.match('/portal/record/07927/diglit_')
-        url_match = path.sub(path.match('/portal/record/07927/diglit_')[0], 'http://digi.ub.uni-heidelberg.de/diglit/iiif/')
-        url_match = url_match.sub('.html', '/manifest.json')
-      end
-
-      url_match || ids[identifier] || collections[collection]
-    end
-
-    def web_resource_media_item(web_resource)
-      web_resource_url = render_document_show_field_value(web_resource, 'about')
-      mime_type = render_document_show_field_value(web_resource, 'ebucoreHasMimeType')
-
-      media_rights = render_document_show_field_value(web_resource, 'webResourceEdmRights')
-      media_rights ||= render_document_show_field_value(document, 'aggregations.edmRights')
-
-      media_type = media_type(mime_type) || render_document_show_field_value(document, 'type')
-      media_type.downcase!
-
-      # if media_type == 'audio' && mime_type == 'application/octet-stream'
-      #   if !web_resource_url.index('.mp3').nil?
-      #     mime_type = 'audio/mpeg'
-      #   end
-      # end
-
-      manifesto = iiif_manifesto(document)
-      media_type = 'iiif' if manifesto
-
-      item = {
-        media_type: media_type,
-        rights: simple_rights_label_data(media_rights),
-        downloadable: item_downloadable?(web_resource_url, mime_type, media_type, media_rights),
-        playable: item_playable?(web_resource_url, mime_type, media_type),
-        thumbnail: item_thumbnail(media_type),
-        play_url: manifesto.present? ? manifesto : web_resource_url
-      }
-
-      player = item_player(media_type, mime_type)
-      if player.nil?
-        item[:is_unknown_type] = render_document_show_field_value(web_resource, 'about')
-      else
-        item[:"is_#{player}"] = true
-      end
-
-      item[:download] = {
-        url: media_proxy_download_url(web_resource_url, mime_type),
-        text: t('site.object.actions.download')
-      }
-      item[:technical_metadata] = item_technical_metadata(web_resource, mime_type)
-
-      if web_resource_url == edm_resource_url
-        item[:thumbnail] = edm_preview
-        item[:is_current] = true
-      end
-
-      item
-    end
-
-    def edm_resource_url
-      @edm_resource_url ||= render_document_show_field_value(document, 'aggregations.edmIsShownBy')
-    end
-
     def edm_preview
       @edm_preview ||= render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
     end
 
     def media_items
-      items = salient_web_resources.map do |web_resource|
-        web_resource_media_item(web_resource)
+      items = presenter.media_web_resources(per_page: 4, page: 1).map do |web_resource|
+        Document::WebResourcePresenter.new(web_resource, document, controller).media_item
       end
+      items.first[:is_current] = true unless items.size == 0
 
       {
         required_players: item_players(items),
         single_item: items.size == 1,
         empty_item: items.size == 0,
         items: items,
-        more_thumbs_url: request.original_url.split('.html')[0] + '/thumbnails.json'
+        more_thumbs_url: document_media_path(document, page: 2, format: 'json')
       }
-    end
-
-    def salient_web_resources
-      aggregation = document.aggregations.first
-      return [] unless aggregation.respond_to?(:webResources)
-
-      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
-      web_resources = aggregation.webResources.dup
-      edm_web_resource = web_resources.detect { |web_resource| render_document_show_field_value(web_resource, 'about') == edm_resource_url }
-      # make sure the edm_is_shown_by is the first item
-      web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
-      web_resources.select! { |wr| view_urls.compact.include?(wr.fetch('about', nil)) }
-      web_resources.uniq { |wr| wr.fetch('about', nil) }
-    end
-
-    def item_technical_metadata(web_resource, mime_type)
-      file_size = number_to_human_size(render_document_show_field_value(web_resource, 'ebucoreFileByteSize')) || ''
-      {
-        mime_type: mime_type,
-        file_size: file_size.split(' ').first,
-        file_unit: file_size.split(' ').last,
-        codec: render_document_show_field_value(web_resource, 'edmCodecName'),
-        width: render_document_show_field_value(web_resource, 'ebucoreWidth'),
-        height: render_document_show_field_value(web_resource, 'ebucoreHeight'),
-        size_unit: 'pixels',
-        runtime: render_document_show_field_value(web_resource, 'ebucoreDuration'),
-        runtime_unit: 'seconds'
-      }
-    end
-
-    def item_playable?(web_resource_url, mime_type, media_type)
-      if web_resource_url.blank? ||
-          mime_type.blank? ||
-          (mime_type == 'video/mpeg') ||
-          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
-        false
-      else
-        true
-      end
-    end
-
-    def item_downloadable?(web_resource_url, mime_type, media_type, media_rights)
-      if web_resource_url.blank? ||
-          mime_type.blank? ||
-          download_disabled?(media_rights) ||
-          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
-        false
-      else
-        true
-      end
-    end
-
-    def item_thumbnail(media_type)
-      edm_type = (media_type == 'audio' ? 'SOUND' : media_type.upcase)
-      'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=' + edm_type
-    end
-
-    # Media type function normalises mime types
-    def media_type(mime_type)
-      case (mime_type || '').downcase
-      when /^audio\//
-        'audio'
-      when /^image\//
-        'image'
-      when /^video\//
-        'video'
-      when /^text\//, /\/pdf$/
-        'text'
-      end
-    end
-
-    def item_player(media_type, mime_type)
-      case media_type
-      when 'image'
-        :image
-      when 'audio', 'sound'
-        :audio
-      when 'iiif'
-        :iiif
-      when 'pdf'
-        :pdf
-      when 'text'
-        mime_type == 'application/pdf' ? :pdf : :text
-      when 'video'
-        :video
-      end
     end
 
     def item_players(items)
       players = [:audio, :iiif, :image, :pdf, :video].select do |player|
-        items.any? do |item|
-          item.fetch("is_#{player}", false)
-        end
+        items.any? { |item| item.fetch("is_#{player}".to_sym, false) }
       end
       players.map do |player|
         { player => true }
       end
+    end
+
+    def presenter
+      @presenter ||= Document::RecordPresenter.new(document, controller)
     end
   end
 end
