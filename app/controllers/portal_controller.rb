@@ -13,7 +13,6 @@ class PortalController < ApplicationController
   def show
     @response, @document = fetch_with_hierarchy(doc_id)
     _mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
-    @mime_type = media_mime_type(@document)
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
@@ -35,6 +34,17 @@ class PortalController < ApplicationController
     end
   end
 
+  # GET /record/:id/media
+  def media
+    @response, @document = fetch(doc_id)
+    @page = params[:page]
+
+    respond_to do |format|
+      format.json { render :media, layout: false }
+    end
+  end
+
+  # @todo move into own controller to isolate record resource related actions
   def static
     @page = params[:page]
     respond_to do |format|

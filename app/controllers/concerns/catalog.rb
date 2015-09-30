@@ -39,34 +39,7 @@ module Catalog
     search_results(mlt_params, search_params_logic)
   end
 
-  def media_mime_type(document)
-    edm_is_shown_by = document.fetch('aggregations.edmIsShownBy', []).first
-    return nil if edm_is_shown_by.nil?
-
-    cache_key = "Europeana/MediaProxy/Response/#{edm_is_shown_by}"
-    response = Rails.cache.fetch(cache_key)
-    if response.nil?
-      response = remote_content_type_header(document)
-      Rails.cache.write(cache_key, response)
-    end
-
-    if [Net::HTTPClientError, Net::HTTPServerError].include?(response.class.superclass)
-      nil
-    else
-      response['content-type']
-    end
-  end
-
   protected
-
-  def remote_content_type_header(document)
-    url = URI(Rails.application.config.x.edm_is_shown_by_proxy + document.id)
-    benchmark("[Media Proxy] #{url}", level: :info) do
-      Net::HTTP.start(url.host, url.port) do |http|
-        http.head(url.path)
-      end
-    end
-  end
 
   def search_action_url(options = {})
     case

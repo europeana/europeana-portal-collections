@@ -20,4 +20,8 @@ module RecordHelper
       documents: more_like_this(similar)
     }
   end
+
+  def record_media_items(record, options = {})
+    Document::RecordPresenter.new(record, controller).media_web_resources(options)
+  end
 end
