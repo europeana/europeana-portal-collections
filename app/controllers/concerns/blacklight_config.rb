@@ -27,7 +27,7 @@ module BlacklightConfig
       }
 
       # Response models
-      config.document_presenter_class = MustacheDocumentPresenter
+      config.document_presenter_class = Document::RecordPresenter
 
       # Europeana API caching
       config.europeana_api_cache = Rails.cache
