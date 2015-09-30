@@ -11,10 +11,10 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
       safe_values = safe_values[0..max_i]
     end
 
-    safe_values.collect! { |x| x.respond_to?(:force_encoding) ? x.force_encoding("UTF-8") : x }
+    safe_values.map! { |x| x.respond_to?(:force_encoding) ? x.force_encoding('UTF-8') : x }
 
     if field_config && field_config.itemprop
-      safe_values = safe_values.map { |x| content_tag :span, x, :itemprop => field_config.itemprop }
+      safe_values.map! { |x| content_tag :span, x, itemprop: field_config.itemprop }
     end
 
     # Do not use {safe_join} to escape HTML because that is done by {Mustache}

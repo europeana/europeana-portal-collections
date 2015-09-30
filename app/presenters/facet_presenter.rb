@@ -90,9 +90,9 @@ class FacetPresenter
 
     {
       has_subfilters: child_facets.present?,
-      filters: child_facets.map { |child|
+      filters: child_facets.map do |child|
         self.class.new(child, @controller).display(true)
-      }
+      end
     }.merge(simple_facet_item(item))
   end
 
