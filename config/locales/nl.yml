@@ -2,7 +2,7 @@ nl:
   global:
     labs-link: 'link naar labs '
     navigation:
-      all_blog_posts: 
+      all_blog_posts: Alle berichten...
       all_exhibitions: Alle tentoonstellingen
       blog: Blog
       channels: Kanalen
