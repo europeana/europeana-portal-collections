@@ -406,7 +406,7 @@ module Portal
     end
 
     def simple_rights_label_data
-      presenter_class.new(document, controller).simple_rights_label_data
+      Document::RecordPresenter.new(document, controller).simple_rights_label_data
     end
 
     def labels
@@ -605,49 +605,36 @@ module Portal
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
-    def edm_resource_url
-      @edm_resource_url ||= render_document_show_field_value(document, 'aggregations.edmIsShownBy')
-    end
-
     def edm_preview
       @edm_preview ||= render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
     end
 
     def media_items
-      items = salient_web_resources.map do |web_resource|
-        WebResourcePresenter.new(web_resource, document, controller).media_item
+      items = presenter.media_web_resources(per_page: 4, page: 1).map do |web_resource|
+        Document::WebResourcePresenter.new(web_resource, document, controller).media_item
       end
-      items.first[:is_current] = true
+      items.first[:is_current] = true unless items.size == 0
 
       {
         required_players: item_players(items),
         single_item: items.size == 1,
         empty_item: items.size == 0,
         items: items,
-        more_thumbs_url: request.original_url.split('.html')[0] + '/thumbnails.json'
+        more_thumbs_url: document_media_path(document, page: 2, format: 'json')
       }
-    end
-
-    def salient_web_resources
-      aggregation = document.aggregations.first
-      return [] unless aggregation.respond_to?(:webResources)
-
-      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
-      web_resources = aggregation.webResources.dup
-      edm_web_resource = web_resources.detect { |web_resource| render_document_show_field_value(web_resource, 'about') == edm_resource_url }
-      # make sure the edm_is_shown_by is the first item
-      web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
-      web_resources.select! { |wr| view_urls.compact.include?(wr.fetch('about', nil)) }
-      web_resources.uniq { |wr| wr.fetch('about', nil) }
     end
 
     def item_players(items)
       players = [:audio, :iiif, :image, :pdf, :video].select do |player|
-        items.any? { |item| item.fetch("is_#{player}", false) }
+        items.any? { |item| item.fetch("is_#{player}".to_sym, false) }
       end
       players.map do |player|
         { player => true }
       end
+    end
+
+    def presenter
+      @presenter ||= Document::RecordPresenter.new(document, controller)
     end
   end
 end

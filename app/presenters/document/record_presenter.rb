@@ -2,6 +2,30 @@ module Document
   ##
   # Blacklight document presenter for a Europeana record
   class RecordPresenter < DocumentPresenter
+    def edm_resource_url
+      @edm_resource_url ||= @document.fetch('aggregations.edmIsShownBy', nil)
+    end
+
+    def media_web_resources(options)
+      options.reverse_merge!(per_page: 4, page: 1)
+
+      aggregation = @document.aggregations.first
+      return [] unless aggregation.respond_to?(:webResources)
+
+      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
+      web_resources = aggregation.webResources.dup
+      edm_web_resource = web_resources.detect { |web_resource| web_resource.fetch('about', nil) == edm_resource_url }
+      # make sure the edm_is_shown_by is the first item
+      web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
+      web_resources.select! do |wr|
+        view_urls.compact.include?(wr.fetch('about', nil)) ||
+          Document::WebResourcePresenter.new(wr, @document, @controller).media_type == 'iiif'
+      end
+      web_resources.uniq! { |wr| wr.fetch('about', nil) }
+
+      Kaminari.paginate_array(web_resources).page(options[:page]).per(options[:per_page])
+    end
+
     # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls
     def iiif_manifesto
       @iiif_manifesto ||= begin

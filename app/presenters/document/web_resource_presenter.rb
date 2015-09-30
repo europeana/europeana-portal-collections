@@ -44,7 +44,8 @@ module Document
 
     def media_rights
       @media_rights ||= begin
-        render_document_show_field_value('webResourceEdmRights') || @record_presenter.media_rights
+        rights = render_document_show_field_value('webResourceEdmRights')
+        rights.blank? ? @record_presenter.media_rights : rights
       end
     end
 
@@ -70,6 +71,19 @@ module Document
           else
             @record_presenter.render_document_show_field_value('type')
           end
+        end
+      end
+    end
+
+    def edm_media_type
+      @edm_media_type ||= begin
+        record_type = @record_presenter.render_document_show_field_value('type')
+        if record_type == '3D' || media_type == 'iiif'
+          record_type
+        elsif media_type == 'audio'
+          'SOUND'
+        else
+          media_type.upcase
         end
       end
     end
@@ -107,7 +121,7 @@ module Document
 
     def playable?
       if url.blank? ||
-          mime_type.blank? ||
+          (media_type != 'iiif' && mime_type.blank?) ||
           (mime_type == 'video/mpeg') ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
@@ -121,6 +135,7 @@ module Document
       if url.blank? ||
           mime_type.blank? ||
           download_disabled? ||
+          media_type == 'iiif' ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
@@ -135,7 +150,7 @@ module Document
     end
 
     def thumbnail
-      Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url)
+      Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 
     def player

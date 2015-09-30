@@ -31,6 +31,7 @@ RSpec.describe 'portal/show.html.mustache' do
       end
     end
 
+    allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:current_search_session).and_return nil
     allow(view).to receive(:search_session).and_return({})
