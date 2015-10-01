@@ -390,6 +390,7 @@ module Portal
           title: t('site.object.similar-items') + ':',
           more_items_query: search_path(mlt: document.id),
           more_items_load: request.original_url.split('.html')[0] + '/similar.json',
+          more_items_total: 100,
           items: @similar.map do |doc|
             {
               url: document_path(doc, format: 'html'),
@@ -610,6 +611,7 @@ module Portal
     end
 
     def media_items
+
       items = presenter.media_web_resources(per_page: 4, page: 1).map do |web_resource|
         Document::WebResourcePresenter.new(web_resource, document, controller).media_item
       end
@@ -620,7 +622,15 @@ module Portal
         single_item: items.size == 1,
         empty_item: items.size == 0,
         items: items,
-        more_thumbs_url: document_media_path(document, page: 2, format: 'json')
+
+        # The page parameter gets added by the javascript - base url needed here
+        more_thumbs_url: document_media_path(document, format: 'json'),
+
+        # if we're already on page 2 the page number here should be 3
+        more_thumbs_page: document_media_path(document, page: 2, format: 'json'),
+
+        # this is inefficient, but works
+        more_thumbs_total: presenter.media_web_resources(per_page: 111111111).size
       }
     end
 
