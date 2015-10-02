@@ -22,6 +22,8 @@ module RecordHelper
   end
 
   def record_media_items(record, options = {})
-    Document::RecordPresenter.new(record, controller).media_web_resources(options)
+    Document::RecordPresenter.new(record, controller).media_web_resources(options).map do |web_resource|
+      Document::WebResourcePresenter.new(web_resource, record, controller).media_item
+    end
   end
 end
