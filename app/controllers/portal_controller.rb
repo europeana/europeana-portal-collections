@@ -37,7 +37,8 @@ class PortalController < ApplicationController
   # GET /record/:id/media
   def media
     @response, @document = fetch(doc_id)
-    @page = params[:page]
+    @page = params[:page] || 1
+    @per_page = params[:per_page] || 4
 
     respond_to do |format|
       format.json { render :media, layout: false }
