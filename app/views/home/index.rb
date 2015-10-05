@@ -6,7 +6,7 @@ module Home
 
     def content
       {
-        hero_config: helpers.styleguide_hero_config(config[:content][:hero_config]),
+        hero_config: styleguide_hero_config(config[:content][:hero_config]),
         strapline: t('site.home.strapline', total_item_count: total_item_count),
         promoted: stylised_promoted,
         news: blog_news_items.blank? ? nil : {
@@ -19,7 +19,7 @@ module Home
     def head_meta
       [
         { meta_name: 'description', content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ') }
-      ] + helpers.head_meta
+      ] + super
     end
 
     private
