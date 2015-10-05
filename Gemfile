@@ -8,7 +8,7 @@ gem 'europeana-styleguide',
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
-gem 'stache', github: 'rwd/stache', ref: '819ff88'
+gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
 
 gem 'blacklight', '~> 5.15'
 gem 'clockwork', '~> 1.2'

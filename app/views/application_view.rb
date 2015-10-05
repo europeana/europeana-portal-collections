@@ -1,5 +1,3 @@
-require 'stache/mustache/view/method_missing_view_arity'
-
 ##
 # A custom class for this project's Mustache templates
 #
