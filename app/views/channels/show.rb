@@ -3,7 +3,7 @@ module Channels
     def head_meta
       [
         { meta_name: 'description', content: truncate(strip_tags(t("site.channels.#{@channel.id}.description")), length: 350, separator: ' ') }
-      ] + helpers.head_meta
+      ] + super
     end
 
     def page_title
@@ -38,7 +38,7 @@ module Channels
             items: channel_content[:credits]
           }
         },
-        hero_config: helpers.styleguide_hero_config(channel_content[:hero_config]),
+        hero_config: styleguide_hero_config(channel_content[:hero_config]),
         channel_entry: {
           items: stylised_channel_entry
         },

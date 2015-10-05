@@ -3,12 +3,13 @@ require 'stache/mustache/view/method_missing_view_arity'
 ##
 # A custom class for this project's Mustache templates
 #
-# Each of your view classes should sub-class this instead of
-# {Stache::Mustache::View}
+# Each page-specific view class should sub-class this.
 #
 # Public methods added to this class will be available to all Mustache
 # templates.
-class ApplicationView < Stache::Mustache::View
+class ApplicationView < Europeana::Styleguide::View
+  include MustacheHelper
+
   class << self
     attr_accessor :only_call_once_aliases
 
@@ -37,30 +38,7 @@ class ApplicationView < Stache::Mustache::View
     self.class.send(:only_call_once, methods)
   end
 
-  ##
-  # Performs I18n lookups from within a Mustache template
-  # @example Translate the "site.name" key (from within a Mustache template)
-  #   {{i18n.site.name}}
-  # @return [View::Translator.new]
-  def i18n
-    MustacheHelper::Translator.new(context)
-  end
   only_call_once :i18n
-
-  ##
-  # Whether or not to enable debugging in Mustache templates
-  #
-  # Override this in a template-specific view class to enable debugging there.
-  # The overriden method should return the textual debug output.
-  #
-  # This method is required here to prevent templates hitting the helper
-  # method {ActionView::Helpers::DebugHelper#debug} which will raise an
-  # {ArgumentError}
-  #
-  # @return [Boolean]
-  def debug
-    false
-  end
 
   protected
 
