@@ -30,4 +30,8 @@ module FacetsHelper
       mapped_value
     end
   end
+
+  def facet_item_url(facet, item)
+    FacetPresenter.new(facet, controller).facet_item_url(item)
+  end
 end
