@@ -45,6 +45,17 @@ class PortalController < ApplicationController
     end
   end
 
+  # GET /record/:id/hierarchy
+  def hierarchy
+    @response, @document = fetch(doc_id)
+    @page = params[:page] || 1
+    @per_page = params[:per_page] || 4
+
+    respond_to do |format|
+      format.json { render :hierarchy, layout: false }
+    end
+  end
+
   # @todo move into own controller to isolate record resource related actions
   def static
     @page = params[:page]
