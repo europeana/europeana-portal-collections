@@ -10,7 +10,7 @@ gem 'europeana-styleguide',
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'rwd/stache', ref: '819ff88'
 
-gem 'blacklight', '~> 5.14.0'
+gem 'blacklight', '~> 5.15'
 gem 'clockwork', '~> 1.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'europeana-api', '~> 0.3.6'
