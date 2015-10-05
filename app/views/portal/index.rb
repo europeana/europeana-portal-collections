@@ -99,7 +99,7 @@ module Portal
             items << {
               filter: facet_label(facet.name),
               value: facet_label(facet.name, item.value),
-              remove: facet_item_url(facet.name, item),
+              remove: facet_item_url(facet, item),
               name: "f[#{facet.name}][]"
             }
           end
