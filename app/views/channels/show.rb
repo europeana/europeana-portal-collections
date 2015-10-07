@@ -62,7 +62,7 @@ module Channels
     def blog_news_items
       @blog_news_items ||= begin
         key = @channel.id.underscore.to_sym
-        url = FeedCacheJob::URLS[:blog][key]
+        url = Cache::FeedJob::URLS[:blog][key]
         news_items(feed_entries(url))
       end
     end
