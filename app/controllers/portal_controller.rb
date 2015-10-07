@@ -45,6 +45,21 @@ class PortalController < ApplicationController
     end
   end
 
+  # GET /record/:id/hierarchy
+  def hierarchy
+    page = (params[:page] || 1).to_i
+    per_page = (params[:per_page] || 4).to_i
+    offset = (page == 1 ? 0 : (per_page * page) - 1)
+    relation = params.key?(:relation) ? params[:relation].underscore : nil
+
+    options = { limit: per_page, offset: offset }
+    @hierarchy = repository.fetch_document_hierarchy(doc_id, relation, options)
+
+    respond_to do |format|
+      format.json { render :hierarchy, layout: false }
+    end
+  end
+
   # @todo move into own controller to isolate record resource related actions
   def static
     @page = params[:page]

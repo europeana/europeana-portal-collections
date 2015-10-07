@@ -72,5 +72,9 @@ module Document
 
       collections[collection]
     end
+
+    def hierarchy(options)
+      options.reverse_merge!(per_page: 4, page: 1)
+    end
   end
 end

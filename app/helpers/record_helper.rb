@@ -26,4 +26,8 @@ module RecordHelper
       Document::WebResourcePresenter.new(web_resource, record, controller).media_item
     end
   end
+
+  def record_hierarchy(record, options = {})
+    Document::RecordPresenter.new(record, controller).hierarchy(options)
+  end
 end

@@ -9,8 +9,11 @@ Rails.application.routes.draw do
     root to: 'home#index'
     get 'search', to: 'portal#index'
 
-    get 'record/*id/media', to: 'portal#media', as: 'document_media'
-    get 'record/*id/similar', to: 'portal#similar', as: 'similar_document'
+    constraints id: %r{[^/]+/[^/]+} do
+      get 'record/*id/hierarchy', to: 'portal#hierarchy', as: 'document_hierarchy'
+      get 'record/*id/media', to: 'portal#media', as: 'document_media'
+      get 'record/*id/similar', to: 'portal#similar', as: 'document_similar'
+    end
     blacklight_for :portal
 
     resources :channels, only: [:show, :index]
