@@ -5,6 +5,8 @@ pl:
       all_blog_posts: 
       all_exhibitions: 
       blog: 
+      browse: 
+      browse_newcontent: 
       channels: 
       exhibitions: 
       home: 
