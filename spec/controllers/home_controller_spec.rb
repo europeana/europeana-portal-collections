@@ -6,8 +6,8 @@ RSpec.describe HomeController, type: :controller do
       get :index
     end
 
-    it 'gets total record count from API' do
-      expect(an_api_search_request).to have_been_made
+    it 'should not get total record count from API' do
+      expect(an_api_search_request).not_to have_been_made
     end
 
     it 'renders the homepage Mustache template' do

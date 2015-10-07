@@ -4,10 +4,10 @@ class HomeController < ApplicationController
   include Catalog
   include Europeana::Styleguide
 
-  before_action :count_all, only: :index
-
   # GET /
   def index
+    @europeana_item_count = Rails.cache.fetch('record/counts/all') # populated by {RecordCountsCacheJob}
+
     respond_to do |format|
       format.html
     end

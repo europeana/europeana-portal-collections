@@ -198,7 +198,7 @@ module MustacheHelper
               url: 'http://exhibitions.europeana.eu/',
               text: t('global.navigation.exhibitions'),
               submenu: {
-                items: feed_entry_nav_items(FeedCacheJob::URLS[:exhibitions][:all], 6) + [
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][:all], 6) + [
                   {
                     url: 'http://exhibitions.europeana.eu/',
                     text: t('global.navigation.all_exhibitions'),
@@ -211,7 +211,7 @@ module MustacheHelper
               url: 'http://blog.europeana.eu/',
               text: t('global.navigation.blog'),
               submenu: {
-                items: feed_entry_nav_items(FeedCacheJob::URLS[:blog][:all], 6) + [
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6) + [
                   {
                     url: 'http://blog.europeana.eu/',
                     text: t('global.navigation.all_blog_posts'),
