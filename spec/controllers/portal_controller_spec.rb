@@ -214,7 +214,6 @@ RSpec.describe PortalController, type: :controller do
       end
       let(:params) { { id: 'abc/123', format: 'json' } }
       let(:record_id) { '/' + params[:id] }
-      it_behaves_like 'a record API request'
       it_behaves_like 'a hierarchy API request'
       it 'responds with JSON' do
         expect(response.content_type).to eq('application/json')
