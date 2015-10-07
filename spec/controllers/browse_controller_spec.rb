@@ -1,8 +1,8 @@
 RSpec.describe BrowseController do
   describe 'GET new_content' do
-    before do
-      get :new_content
+    before(:each) do
       Rails.cache.write('browse/new_content/providers', providers)
+      get :new_content
     end
 
     let(:providers) do
