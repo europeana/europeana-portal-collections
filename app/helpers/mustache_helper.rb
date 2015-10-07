@@ -35,11 +35,13 @@ module MustacheHelper
     Rails.application.config.x.js_version || ''
   end
 
-  def js_variables
+  def js_vars
     page_name = (params[:controller] || '') + '/' + (params[:action] || '')
-    'var js_path="' + styleguide_url('/js/dist/') + '";' +
-      'var require = {"urlArgs": "' + js_version + '"};' +
-      'var pageName = "' + page_name + '";'
+    [
+      {
+        name: 'pageName', value: page_name.to_json
+      }
+    ]
   end
 
   def js_files
@@ -192,6 +194,19 @@ module MustacheHelper
                     is_current: params[:id] == channel
                   }
                 end
+              }
+            },
+            {
+              text: t('global.navigation.browse'),
+              is_current: controller.controller_name == 'browse',
+              submenu: {
+                items: [
+                  {
+                    url: browse_newcontent_path,
+                    text: t('global.navigation.browse_newcontent'),
+                    is_current: current_page?(browse_newcontent_path)
+                  }
+                ]
               }
             },
             {

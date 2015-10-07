@@ -5,6 +5,8 @@ pl:
       all_blog_posts: 
       all_exhibitions: 
       blog: 
+      browse: 
+      browse_newcontent: 
       channels: 
       exhibitions: 
       home: 
@@ -18,6 +20,9 @@ pl:
         link-text: 
         title: 
     blog-link: 
+    browse:
+      newcontent:
+        title: 
     channels:
       art-history:
         description: 

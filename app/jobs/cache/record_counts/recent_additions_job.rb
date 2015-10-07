@@ -1,29 +1,34 @@
 module Cache
   module RecordCounts
-    class RecentAdditionsJob < Cache::RecordCountsJob
+    class RecentAdditionsJob < ActiveJob::Base
+      include ApiQueryingJob
+
       def perform
-        %w(music art-history).each do |channel|
-          cache_key = "record/counts/channels/#{channel}/recent-additions"
-          channel_params = Channel.find(channel).config[:params]
-          Rails.cache.write(cache_key, recent_additions(channel_params))
+        sets.each_pair do |cache_key, params|
+          Rails.cache.write(cache_key, recent_additions(params))
         end
       end
 
       protected
 
+      def sets
+        {
+          'browse/new_content/providers' => {}
+        }.tap do |sets|
+          %w(music art-history).each do |channel|
+            cache_key = "record/counts/channels/#{channel}/recent-additions"
+            channel_params = Channel.find(channel).config[:params]
+            sets[cache_key] = channel_params
+          end
+        end
+      end
+
       def recent_additions(params = {})
         recent_additions = []
-        time_now = Time.now
-
         (0..23).each do |months_ago|
-          time_from = Time.new(time_now.year, time_now.month) - months_ago.month
-          time_to = time_from + 1.month - 1.second
+          time = recent_additions_months_ago_time(months_ago)
 
-          time_from_param = time_from.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
-          time_to_param = time_to.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
-          time_range_query = "timestamp_created:[#{time_from_param} TO #{time_to_param}]"
-
-          api_params = params.merge(query: time_range_query, rows: 0, profile: 'minimal facets')
+          api_params = params.merge(query: time[:range_query], rows: 0, profile: 'minimal facets')
           api_response = repository.search(api_params)
 
           next if api_response.total == 0
@@ -35,13 +40,29 @@ module Cache
             recent_additions << {
               label: field['label'],
               count: field['count'],
-              from: time_from,
-              query: time_range_query
+              from: time[:from],
+              query: time[:range_query]
             }
           end
         end
 
         recent_additions
+      end
+
+      def recent_additions_time_now
+        @recent_additions_time_now ||= Time.now
+      end
+
+      def recent_additions_months_ago_time(months_ago)
+        {}.tap do |time|
+          time[:now] = recent_additions_time_now
+          time[:from] = Time.new(time[:now].year, time[:now].month) - months_ago.month
+          time[:to] = time[:from] + 1.month - 1.second
+
+          time[:from_param] = time[:from].strftime('%Y-%m-%dT%H:%M:%S.%LZ')
+          time[:to_param] = time[:to].strftime('%Y-%m-%dT%H:%M:%S.%LZ')
+          time[:range_query] = "timestamp_created:[#{time[:from_param]} TO #{time[:to_param]}]"
+        end
       end
     end
   end

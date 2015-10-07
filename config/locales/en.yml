@@ -5,6 +5,8 @@ en:
       all_blog_posts: All Posts…
       all_exhibitions: All Exhibitions…
       blog: Blog
+      browse: Browse
+      browse_newcontent: New content
       channels: Channels
       exhibitions: Exhibitions
       home: Home
@@ -18,6 +20,9 @@ en:
         link-text: Give us your input!
         title: This is an Alpha release of our new collections search and Music Channel
     blog-link: link to blog
+    browse:
+      newcontent:
+        title: New Content
     channels:
       art-history:
         description: |
