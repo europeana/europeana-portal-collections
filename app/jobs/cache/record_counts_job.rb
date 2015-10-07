@@ -17,9 +17,11 @@ class Cache::RecordCountsJob < ActiveJob::Base
     {
       all: { query: '*:*' }
     }.tap do |sets|
-      music_channel_params = Channel.find('music').config[:params]
-      %w(IMAGE SOUND TEXT VIDEO 3D).each do |type|
-        sets["channels/music/type/#{type.downcase}"] = music_channel_params.merge(query: "TYPE:#{type}")
+      %w(music art-history).each do |channel|
+        channel_params = Channel.find(channel).config[:params]
+        %w(IMAGE SOUND TEXT VIDEO 3D).each do |type|
+          sets["channels/#{channel}/type/#{type.downcase}"] = channel_params.merge(query: "TYPE:#{type}")
+        end
       end
     end
   end
