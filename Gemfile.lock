@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: b95c041c74218024df747c05c2483309ac1aecef
-  branch: crf-facets
+  revision: 1132e7bbf9f93d0ce2ca0e0b12e823216de585db
+  branch: release/v0.2.8
   specs:
     europeana-blacklight (0.2.7)
       activesupport (>= 4.0, < 5.0)
       blacklight (>= 5.12.0, < 6.0.0)
-      europeana-api (~> 0.3.6)
+      europeana-api (~> 0.4.0)
       iso-639 (~> 0.2.5)
       kaminari (~> 0.16)
 
@@ -128,7 +128,7 @@ GEM
       dotenv (= 2.0.2)
       railties (~> 4.0)
     erubis (2.7.0)
-    europeana-api (0.3.6)
+    europeana-api (0.4.0)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
     excon (0.45.4)
@@ -456,7 +456,6 @@ DEPENDENCIES
   coveralls
   delayed_job_active_record (~> 4.0.3)
   dotenv-rails (~> 2.0)
-  europeana-api (~> 0.3.6)
   europeana-blacklight!
   europeana-styleguide!
   feedjira (~> 2.0)
