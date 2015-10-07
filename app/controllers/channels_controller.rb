@@ -91,12 +91,12 @@ class ChannelsController < ApplicationController
 
   def recent_additions
     additions = Rails.cache.fetch("record/counts/channels/#{@channel.id}/recent-additions") || []
-    additions.sort_by { |addition| addition[:count] }.reverse[0..2].map do |addition|
+    additions.sort_by { |addition| [-addition[:from].to_i, -addition[:count]] }[0..2].map do |addition|
       {
         text: addition[:label],
         number: addition[:count],
         date: addition[:from].strftime('%B %Y'),
-        url: channel_path({ q: addition[:query], f: { 'DATA_PROVIDER' => [addition[:label]] } })
+        url: channel_path(q: addition[:query], f: { 'DATA_PROVIDER' => [addition[:label]] })
       }
     end
   end
