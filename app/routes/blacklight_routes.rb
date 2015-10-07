@@ -15,8 +15,10 @@ module BlacklightRoutes
       args = { only: [:show] }
       args[:constraints] = options[:constraints] if options[:constraints]
 
-      post 'record/*id/track', args.merge(to: "#{primary_resource}#track", as: 'track_document')
-      get 'record/*id', args.merge(to: "#{primary_resource}#show", as: 'document')
+      constraints id: %r{[^/]+/[^/]+} do
+        post 'record/*id/track', args.merge(to: "#{primary_resource}#track", as: 'track_document')
+        get 'record/*id', args.merge(to: "#{primary_resource}#show", as: 'document')
+      end
     end
   end
 end
