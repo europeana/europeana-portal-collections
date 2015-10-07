@@ -20,6 +20,9 @@ nl:
         link-text: 'Vertel wat u denkt! '
         title: Dit is een Alpha versie van onze nieuwe Collections Search en Muziek Kanaal
     blog-link: link naar de blog
+    browse:
+      newcontent:
+        title: 
     channels:
       art-history:
         description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '

@@ -20,6 +20,9 @@ pl:
         link-text: 
         title: 
     blog-link: 
+    browse:
+      newcontent:
+        title: 
     channels:
       art-history:
         description: 
