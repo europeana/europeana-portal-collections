@@ -195,6 +195,19 @@ module MustacheHelper
               }
             },
             {
+              text: t('global.navigation.browse'),
+              is_current: controller.controller_name == 'browse',
+              submenu: {
+                items: [
+                  {
+                    url: browse_newcontent_path,
+                    text: t('global.navigation.browse_newcontent'),
+                    is_current: current_page?(browse_newcontent_path)
+                  }
+                ]
+              }
+            },
+            {
               url: 'http://exhibitions.europeana.eu/',
               text: t('global.navigation.exhibitions'),
               submenu: {

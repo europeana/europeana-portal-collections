@@ -1,4 +1,6 @@
 class Cache::RecordCountsJob < ActiveJob::Base
+  include ApiQueryingJob
+
   queue_as :default
 
   def perform
@@ -24,17 +26,5 @@ class Cache::RecordCountsJob < ActiveJob::Base
         end
       end
     end
-  end
-
-  def blacklight_config
-    @blacklight_config ||= PortalController.new.blacklight_config
-  end
-
-  def repository
-    @repository ||= repository_class.new(blacklight_config)
-  end
-
-  def repository_class
-    blacklight_config.repository_class
   end
 end
