@@ -23,7 +23,9 @@ module Europeana
       # -- all .rb files in that directory are automatically loaded.
 
       # Load job, routing and view concern classes
-      config.autoload_paths += %W(#{config.root}/app/jobs #{config.root}/app/jobs/concerns #{config.root}/app/routes #{config.root}/app/presenters)
+      config.autoload_paths += %W(#{config.root}/app/jobs
+        #{config.root}/app/jobs/concerns #{config.root}/app/routes
+        #{config.root}/app/presenters)
 
       # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
       # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

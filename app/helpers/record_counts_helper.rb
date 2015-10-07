@@ -17,7 +17,7 @@ module RecordCountsHelper
           text: addition[:label],
           number: number_with_delimiter(addition[:count]) + ' ' + t('site.channels.data-types.count'),
           date: addition[:from].strftime('%B %Y'),
-          url: send(path_meth, { q: addition[:query], f: { 'DATA_PROVIDER' => [addition[:label]] } })
+          url: send(path_meth, q: addition[:query], f: { 'DATA_PROVIDER' => [addition[:label]] })
         }
       end
     end

@@ -6,9 +6,6 @@ RSpec.describe 'browse/new_content.html.mustache' do
       end
     end
 
-#    assign(:page, 'about')
-#    allow(view).to receive(:search_action_path).and_return('/search')
-#    allow(view).to receive(:search_action_url).and_return('/search')
     Stache::ViewContext.current = view
   end
 
