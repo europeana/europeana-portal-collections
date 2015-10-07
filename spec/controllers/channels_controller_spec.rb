@@ -51,15 +51,14 @@ RSpec.describe ChannelsController, type: :controller do
       context 'without search params' do
         let(:params) { { id: channel_id } }
 
-        it 'queries API for channel stats' do
+        it 'should not query API for channel stats' do
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
-            expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).to have_been_made.once
+            expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).not_to have_been_made
           end
         end
 
-        it 'queries API for recent additions' do
-          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_least_times(1)
-          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_most_times(24)
+        it 'should not query API for recent additions' do
+          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).not_to have_been_made
         end
 
         it 'renders channels landing template' do

@@ -56,13 +56,4 @@ module Catalog
     facet_url_params = { controller: 'portal', action: 'facet' }
     url_for params.merge(facet_url_params).merge(options).except(:page)
   end
-
-  ##
-  # Gets the total number of items available over the Europeana API
-  #
-  # @return [Fixnum]
-  def count_all
-    all_params = { query: '*:*', rows: 0, profile: 'minimal' }
-    @europeana_item_count = repository.search(all_params).total
-  end
 end
