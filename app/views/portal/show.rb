@@ -389,8 +389,8 @@ module Portal
         similar: {
           title: t('site.object.similar-items') + ':',
           more_items_query: search_path(mlt: document.id),
-          more_items_load: request.original_url.split('.html')[0] + '/similar.json',
-          more_items_total: 100,
+          more_items_load: document_similar_url(@document, format: 'json'),
+          more_items_total: @mlt_response.total,
           items: @similar.map do |doc|
             {
               url: document_path(doc, format: 'html'),
