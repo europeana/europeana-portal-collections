@@ -6,7 +6,7 @@ module Document
       @edm_resource_url ||= render_document_show_field_value('aggregations.edmIsShownBy')
     end
 
-    def media_web_resources(options)
+    def media_web_resources(options = {})
       options.reverse_merge!(per_page: 4, page: 1)
 
       aggregation = @document.aggregations.first
