@@ -10,7 +10,7 @@ module Document
       options.reverse_merge!(per_page: 4, page: 1)
 
       aggregation = @document.aggregations.first
-      return [] unless aggregation.respond_to?(:webResources)
+      return Kaminari.paginate_array([]) unless aggregation.respond_to?(:webResources)
 
       view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
       web_resources = aggregation.webResources.dup
