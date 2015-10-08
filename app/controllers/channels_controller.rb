@@ -68,16 +68,13 @@ class ChannelsController < ApplicationController
   end
 
   ##
-  # Gets from the API the number of items of each media type within the current channel
+  # Gets from the cache the number of items of each media type within the current channel
   def channel_stats
     # ['EDM value', 'i18n key']
     types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
              ['3D', '3d'], ['SOUND', 'sound']]
     channel_stats = types.map do |type|
-      api_query = search_builder(self.search_params_logic).
-        with(q: "TYPE:#{type[0]}").query.
-        merge(rows: 0, start: 1, profile: 'minimal')
-      type_count = repository.search(api_query).total
+      type_count = Rails.cache.fetch("record/counts/channels/#{@channel.id}/type/#{type[0].downcase}")
       {
         count: type_count,
         text: t(type[1], scope: 'site.channels.data-types'),
@@ -93,41 +90,6 @@ class ChannelsController < ApplicationController
   end
 
   def recent_additions
-    recent_additions = []
-
-    time_now = Time.now
-    month_now = time_now.month
-
-    (0..23).each do |months_ago|
-      time_from = Time.new(time_now.year, time_now.month) - months_ago.month
-      time_to = time_from + 1.month - 1.second
-
-      time_from_param = time_from.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
-      time_to_param = time_to.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
-      time_range_query = "timestamp_created:[#{time_from_param} TO #{time_to_param}]"
-
-      api_query = search_builder(self.search_params_logic).
-        with(q: time_range_query).query.
-        merge(rows: 0, start: 1, profile: 'minimal facets')
-      api_response = repository.search(api_query)
-      next if api_response.total == 0
-
-      data_provider_facet = api_response.facet_fields.find { |f| f['name'] == 'DATA_PROVIDER' }
-      next if data_provider_facet.blank?
-
-      data_provider_facet['fields'][0..2].each do |field|
-        recent_additions << {
-          text: field['label'],
-          number: field['count'],
-          date: time_from.strftime('%B %Y'),
-          url: channel_path(q: time_range_query, f: { 'DATA_PROVIDER' => [field['label']] })
-        }
-      end
-
-      break if recent_additions.size >= 3
-    end
-
-    recent_additions = recent_additions[0..2]
-    recent_additions.sort_by { |addition| addition[:number] }.reverse
+    Rails.cache.fetch("record/counts/channels/#{@channel.id}/recent-additions") || []
   end
 end

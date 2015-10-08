@@ -4,18 +4,26 @@ require 'clockwork'
 
 include Clockwork
 
-every(1.day, 'blog.home', at: ENV['SCHEDULE_BLOG_HOME']) do
-  BlogFeedCacheJob.perform_later(FeedCacheJob::URLS[:blog][:all])
+every(1.day, 'cache.feed.blog.home', at: ENV['SCHEDULE_BLOG_HOME']) do
+  Cache::Feed::BlogJob.perform_later(Cache::FeedJob::URLS[:blog][:all])
 end
 
-every(1.day, 'blog.art-history', at: ENV['SCHEDULE_BLOG_ART_HISTORY']) do
-  BlogFeedCacheJob.perform_later(FeedCacheJob::URLS[:blog][:art_history])
+every(1.day, 'cache.feed.blog.art-history', at: ENV['SCHEDULE_BLOG_ART_HISTORY']) do
+  Cache::Feed::BlogJob.perform_later(Cache::FeedJob::URLS[:blog][:art_history])
 end
 
-every(1.day, 'blog.music', at: ENV['SCHEDULE_BLOG_MUSIC']) do
-  BlogFeedCacheJob.perform_later(FeedCacheJob::URLS[:blog][:music])
+every(1.day, 'cache.feed.blog.music', at: ENV['SCHEDULE_BLOG_MUSIC']) do
+  Cache::Feed::BlogJob.perform_later(Cache::FeedJob::URLS[:blog][:music])
 end
 
-every(1.day, 'feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
-  FeedCacheJob.perform_later(FeedCacheJob::URLS[:exhibitions][:all])
+every(1.day, 'cache.feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
+  Cache::FeedJob.perform_later(Cache::FeedJob::URLS[:exhibitions][:all])
+end
+
+every(1.day, 'cache.record-counts', at: ENV['SCHEDULE_RECORD_COUNTS']) do
+  Cache::RecordCountsJob.perform_later
+end
+
+every(1.day, 'cache.record-counts.recent-additions', at: ENV['SCHEDULE_RECENT_ADDITIONS']) do
+  Cache::RecordCounts::RecentAdditionsJob.perform_later
 end

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
     resources :channels, only: [:show, :index]
 
+    get 'browse/newcontent', to: 'browse#new_content'
+
     get 'settings/language', to: 'settings#language'
     put 'settings/language', to: 'settings#update_language'
 
