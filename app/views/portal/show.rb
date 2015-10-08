@@ -426,8 +426,8 @@ module Portal
         parent: hierarchy_node(@document.hierarchy[:parent]),
         siblings: {
           items: @document.hierarchy[:preceding_siblings].map { |item| hierarchy_node(item) } +
-           [hierarchy_node(@document.hierarchy[:self])] +
-           @document.hierarchy[:following_siblings].map { |item| hierarchy_node(item) }
+            [hierarchy_node(@document.hierarchy[:self])] +
+            @document.hierarchy[:following_siblings].map { |item| hierarchy_node(item) }
         },
         children: {
           items: @document.hierarchy[:children].map { |item| hierarchy_node(item) }
