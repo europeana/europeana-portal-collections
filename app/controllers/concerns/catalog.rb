@@ -4,7 +4,6 @@ require 'net/http'
 # Include this concern in a controller to give it Blacklight catalog features
 # with extensions specific to Europeana.
 #
-# @todo Break up into sub-modules
 # @todo Does any of this belong in {Europeana::Blacklight}?
 module Catalog
   extend ActiveSupport::Concern
@@ -14,22 +13,8 @@ module Catalog
   include BlacklightConfig
   include ActiveSupport::Benchmarkable
 
-  included do
-    # Adds Blacklight nav action for Channels
-    # @todo move to europeana-blacklight gem; not used by europeana-styleguide
-    #   mustache templates
-    # add_nav_action(:channels, partial: 'channels/nav')
-  end
-
   def doc_id
     @doc_id ||= '/' + params[:id]
-  end
-
-  def fetch_with_hierarchy(id = nil, extra_controller_params = {})
-    response, _document = fetch(id, extra_controller_params)
-    hierarchy = repository.fetch_document_hierarchy(id)
-    response.documents.first.hierarchy = hierarchy
-    [response, response.documents.first]
   end
 
   def more_like_this(document, field = nil, extra_controller_params = {})

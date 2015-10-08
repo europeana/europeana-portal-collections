@@ -402,6 +402,7 @@ module Portal
             }
           end
         },
+        hierarchy: @document.hierarchy.blank? ? nil : document_hierarchy,
         thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
       }.reverse_merge(helpers.content)
     end
@@ -419,6 +420,30 @@ module Portal
     end
 
     private
+
+    def document_hierarchy
+      {
+        parent: hierarchy_node(@document.hierarchy[:parent]),
+        siblings: {
+          items: @document.hierarchy[:preceding_siblings].map { |item| hierarchy_node(item) } +
+            [hierarchy_node(@document.hierarchy[:self])] +
+            @document.hierarchy[:following_siblings].map { |item| hierarchy_node(item) }
+        },
+        children: {
+          items: @document.hierarchy[:children].map { |item| hierarchy_node(item) }
+        }
+      }
+    end
+
+    def hierarchy_node(item)
+      return nil unless item.present?
+      {
+        title: render_document_show_field_value(item, 'title'),
+        index: render_document_show_field_value(item, 'index'),
+        url: document_path(item, format: 'html'),
+        is_current: (item.id == @document.id)
+      }
+    end
 
     def collect_values(fields, doc = document)
       fields.map do |field|
