@@ -31,25 +31,18 @@ module MustacheHelper
     { is_alpha: true }
   end
 
-  def js_version
-    Rails.application.config.x.js_version || ''
-  end
-
   def js_vars
     page_name = (params[:controller] || '') + '/' + (params[:action] || '')
     [
       {
-        name: 'pageName', value: page_name.to_json
+        name: 'pageName', value: page_name
       }
     ]
   end
 
   def js_files
-    js_entry_point = Rails.application.config.x.js_entrypoint || '/js/dist/'
-    js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
-    [{ path: styleguide_url(js_entry_point + 'require.js?cache=' + js_version),
-       data_main: styleguide_url(js_entry_point + 'main/main'),
-       js_version: js_version}]
+    [{ path:      styleguide_url('/js/dist/require.js'),
+       data_main: styleguide_url('/js/dist/main/main') }]
   end
 
   # def menus
