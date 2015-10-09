@@ -47,13 +47,20 @@ class PortalController < ApplicationController
 
   # GET /record/:id/hierarchy
   def hierarchy
-    page = (params[:page] || 1).to_i
-    per_page = (params[:per_page] || 4).to_i
-    offset = (page == 1 ? 0 : (per_page * page) - 1)
     relation = params.key?(:relation) ? params[:relation].underscore : nil
 
-    options = { limit: per_page, offset: offset }
-    @hierarchy = repository.fetch_document_hierarchy(doc_id, relation, options)
+    if relation.present?
+      page = (params[:page] || 1).to_i
+      per_page = (params[:per_page] || 4).to_i
+      offset = (page == 1 ? 0 : (per_page * page) - 1)
+      options = { limit: per_page, offset: offset }
+
+      _response, @document = fetch(doc_id)
+      @hierarchy = fetch_hierarchy_relation(doc_id, relation, options)
+    else
+      _response, @document = fetch_with_hierarchy(doc_id)
+      @hierarchy = @document.hierarchy
+    end
 
     respond_to do |format|
       format.json { render :hierarchy, layout: false }
