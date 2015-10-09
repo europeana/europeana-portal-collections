@@ -23,4 +23,17 @@ class BrowseController < ApplicationController
       format.html
     end
   end
+
+  # GET /browse/sources
+  def sources
+    @providers = Rails.cache.fetch('browse/sources/providers') || []
+    @providers.each do |provider|
+      provider[:url] = '#'
+      provider[:data_providers] = Rails.cache.fetch("browse/sources/providers/#{provider[:text]}")
+    end
+
+    respond_to do |format|
+      format.html
+    end
+  end
 end
