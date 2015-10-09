@@ -42,7 +42,7 @@ class FacetPresenter
   end
 
   def basic_facet(options = {})
-    options = options.reverse_merge(type: :simple, count: 4)
+    options = options.reverse_merge(type: :simple, count: facet_config.limit || 4)
     {
       title: facet_label(@facet.name),
       select_one: facet_config.single,
@@ -71,7 +71,7 @@ class FacetPresenter
   end
 
   def colour_facet
-    basic_facet(type: :colour, count: 16)
+    basic_facet(type: :colour)
   end
 
   def colour_facet_item(item)
@@ -145,7 +145,8 @@ class FacetPresenter
     {
       url: boolean_facet_url,
       text: facet_label(@facet.name),
-      is_checked: boolean_facet_checked?
+      is_checked: boolean_facet_checked?,
+      boolean: true
     }
   end
 
