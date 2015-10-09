@@ -89,6 +89,7 @@ pl:
         language: Język
         language_of_description: Język opisu
         media: Pokaż wyłącznie obiekty z bezpośrednim dostępem do mediów
+        mime_type: 
         provider: Dostawca treści
         reusability: Czy mogę to wykorzystać?
         sound_duration: Czas trwania
@@ -148,6 +149,10 @@ pl:
       media:
         'false': Nie
         'true': Tak
+      mime_type:
+        image/gif: 
+        image/jpeg: 
+        image/png: 
       more: Więcej
       more-refinements: Więcej filtrów
       resource:

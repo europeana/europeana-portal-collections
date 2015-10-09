@@ -89,6 +89,7 @@ en:
         language: Language
         language_of_description: Language of Description
         media: Only show items with direct access to media
+        mime_type: File format
         provider: Provider
         reusability: Can I use it?
         sound_duration: Duration
@@ -148,6 +149,10 @@ en:
       media:
         'false': 'No'
         'true': 'Yes'
+      mime_type:
+        image/gif: GIF
+        image/jpeg: JPEG
+        image/png: PNG
       more: More
       more-refinements: More refinements
       resource:
