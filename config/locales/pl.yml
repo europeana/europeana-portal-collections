@@ -22,6 +22,8 @@ pl:
         title: 
     blog-link: 
     browse:
+      colours:
+        title: 
       newcontent:
         title: 
     channels:

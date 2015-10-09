@@ -22,6 +22,8 @@ en:
         title: This is an Alpha release of our new collections search and Music Channel
     blog-link: link to blog
     browse:
+      colours:
+        title: Colours
       newcontent:
         title: New Content
     channels:
