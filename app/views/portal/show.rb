@@ -389,8 +389,8 @@ module Portal
         similar: {
           title: t('site.object.similar-items') + ':',
           more_items_query: search_path(mlt: document.id),
-          more_items_load: request.original_url.split('.html')[0] + '/similar.json',
-          more_items_total: 100,
+          more_items_load: document_similar_url(@document, format: 'json'),
+          more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
           items: @similar.map do |doc|
             {
               url: document_path(doc, format: 'html'),
@@ -402,7 +402,7 @@ module Portal
             }
           end
         },
-        hierarchy: @document.hierarchy.blank? ? nil : document_hierarchy,
+        hierarchy: @document.hierarchy.blank? ? nil : record_hierarchy(@document.hierarchy),
         thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
       }.reverse_merge(helpers.content)
     end
@@ -421,30 +421,6 @@ module Portal
 
     private
 
-    def document_hierarchy
-      {
-        parent: hierarchy_node(@document.hierarchy[:parent]),
-        siblings: {
-          items: @document.hierarchy[:preceding_siblings].map { |item| hierarchy_node(item) } +
-            [hierarchy_node(@document.hierarchy[:self])] +
-            @document.hierarchy[:following_siblings].map { |item| hierarchy_node(item) }
-        },
-        children: {
-          items: @document.hierarchy[:children].map { |item| hierarchy_node(item) }
-        }
-      }
-    end
-
-    def hierarchy_node(item)
-      return nil unless item.present?
-      {
-        title: render_document_show_field_value(item, 'title'),
-        index: render_document_show_field_value(item, 'index'),
-        url: document_path(item, format: 'html'),
-        is_current: (item.id == @document.id)
-      }
-    end
-
     def collect_values(fields, doc = document)
       fields.map do |field|
         render_document_show_field_value(doc, field)
@@ -455,152 +431,98 @@ module Portal
       collect_values(fields).join(separator)
     end
 
-    def data_section(data)
-      section_data = []
-      section_labels = []
+    def data_section_field_values(section)
+      fields = (section[:fields] || []).map do |field|
+        @document.fetch(field, [])
+      end
 
-      data[:sections].map do |section|
-        f_data = []
-        field_values = []
+      if section[:fields_then_fallback] && fields.present?
+        values = fields
+      else
+        values = [section[:collected]] + fields
+      end
 
-        if section[:collected]
-          f_data.push(* section[:collected])
-        end
-        if section[:fields]
-          # field_values = collect_values(section[:fields])
-          field_values = []
-          section[:fields].each do |field|
-            values = document.fetch(field, [])
-            if values.is_a? Array
-              values = values - field_values
+      values.flatten.compact.uniq
+    end
+
+    def data_section_field_subsection(section)
+      field_values = data_section_field_values(section)
+
+      subsection = field_values.map do |val|
+        {}.tap do |item|
+          item[:text] = val
+
+          if section[:url]
+            if section[:url] == 'q'
+              item[:url] = search_path(q: "\"#{val}\"")
+            elsif section[:url] == 'what'
+              item[:url] = search_path(q: "what:\"#{val}\"")
+            else
+              item[:url] = render_document_show_field_value(document, section[:url])
             end
-            field_values << [*values]
-          end
-          if section[:fields_then_fallback] && field_values.size > 0
-            f_data = []
-          end
-          f_data.push(*field_values)
-        end
-
-        f_data = f_data.flatten.uniq
-
-        if f_data.size > 0
-          subsection = []
-          f_data.map do |f_datum|
-            ob = {}
-            text = f_datum
-
-            if section[:url]
-              if section[:url] == 'q'
-                ob[:url] = search_path(q: "\"#{f_datum}\"")
-              elsif section[:url] == 'what'
-                ob[:url] = search_path(q: "what:\"#{f_datum}\"")
-              else
-                ob[:url] = render_document_show_field_value(document, section[:url])
-              end
-            end
-
-            # text manipulation
-
-            text = if section[:format_date].nil?
-                     text = f_datum
-                   else
-                     begin
-                       date = Time.parse(f_datum)
-                       date.strftime(section[:format_date])
-                     rescue
-                     end
-                   end
-
-            # overrides
-
-            if section[:overrides] && text == section[:override_val]
-              section[:overrides].map do |override|
-                if override[:field_title]
-                  text = override[:field_title]
-                end
-                if override[:field_url]
-                  ob[:url] = override[:field_url]
-                end
-              end
-            end
-
-            # extra info on last
-
-            if f_datum == f_data.last && !section[:extra].nil?
-              extra_info = {}
-
-              section[:extra].map do |xtra|
-                extra_val = render_document_show_field_value(document, xtra[:field])
-                if !extra_val
-                  next
-                end
-                if xtra[:format_date]
-                  begin
-                    date = Time.parse(extra_val)
-                    formatted = date.strftime(xtra[:format_date])
-                    extra_val = formatted
-                  rescue
-                  end
-                end
-                extra_info_builder = extra_info
-                path_segments = xtra[:map_to] || xtra[:field]
-                path_segments = path_segments.split('.')
-
-                path_segments.each.map do |path_segment|
-                  is_last = path_segment == path_segments.last
-                  extra_info_builder[path_segment] ||= (is_last ? extra_val : {})
-                  extra_info_builder = extra_info_builder[path_segment]
-                end
-                ob['extra_info'] = extra_info
-              end
-            end
-
-            ob['text'] = text
-            subsection << ob unless text.nil? || text.blank?
           end
 
-          if subsection.size > 0
-            section_data << subsection
-            section_labels << (section[:title].nil? ? false : t(section[:title]))
+          # text manipulation
+          item[:text] = format_date(val, section[:format_date])
+
+          # overrides
+          if section[:overrides] && item[:text] == section[:override_val]
+            section[:overrides].map do |override|
+              if override[:field_title]
+                item[:text] = override[:field_title]
+              end
+              if override[:field_url]
+                item[:url] = override[:field_url]
+              end
+            end
+          end
+
+          # extra info on last
+          if val == field_values.last && !section[:extra].nil?
+            item[:extra_info] = data_section_nested_hash(section[:extra])
           end
         end
       end
 
-      {
-        title: t(data[:title]),
-        sections: section_data.each_with_index.map do |subsection, index|
-          if subsection.size > 0
-            {
-              title: section_labels[index],
-              items: subsection
-            }
-          else
-            false
-          end
-        end
-      } unless section_data.size == 0
+      subsection.reject { |item| item[:text].blank? }
     end
 
-    # def content_object_download
-    #   links = []
+    def data_section(data)
+      sections = data[:sections].map do |section|
+        {
+          title: section[:title].nil? ? false : t(section[:title]),
+          items: data_section_field_subsection(section)
+        }
+      end
 
-    #   if edm_is_shown_by_download_url.present?
-    #     links << {
-    #       text: t('site.object.actions.download'),
-    #       url: edm_is_shown_by_download_url
-    #     }
-    #   end
+      sections.reject! { |section| section[:items].blank? }
 
-    #   return nil unless links.present?
+      sections.blank? ? nil : {
+        title: t(data[:title]),
+        sections: sections
+      }
+    end
 
-    #   {
-    #     primary: links.first,
-    #     secondary: {
-    #       items: (links.size == 1) ? nil : links[1..-1]
-    #     }
-    #   }
-    # end
+    ##
+    # Creates a nested hash of field values for Mustache template
+    def data_section_nested_hash(mappings)
+      {}.tap do |hash|
+        mappings.each do |mapping|
+          val = render_document_show_field_value(@document, mapping[:field])
+          if val.present?
+            keys = (mapping[:map_to] || mapping[:field]).split('.')
+            last = keys.pop
+
+            context = hash
+            keys.each do |k|
+              context[k] ||= {}
+              context = context[k]
+            end
+            context[last] = format_date(val, mapping[:format_date])
+          end
+        end
+      end
+    end
 
     def long_and_lat?
       latitude = render_document_show_field_value(document, 'places.latitude')
@@ -636,32 +558,30 @@ module Portal
     end
 
     def media_items
-
       items = presenter.media_web_resources(per_page: 4, page: 1).map do |web_resource|
         Document::WebResourcePresenter.new(web_resource, document, controller).media_item
       end
       items.first[:is_current] = true unless items.size == 0
 
       {
-        required_players: item_players(items),
+        required_players: item_players,
         single_item: items.size == 1,
         empty_item: items.size == 0,
         items: items,
-
         # The page parameter gets added by the javascript - base url needed here
         more_thumbs_url: document_media_path(document, format: 'json'),
-
         # if we're already on page 2 the page number here should be 3
         more_thumbs_page: document_media_path(document, page: 2, format: 'json'),
-
-        # this is inefficient, but works
-        more_thumbs_total: presenter.media_web_resources(per_page: 111111111).size
+        more_thumbs_total: presenter.media_web_resources.total_count
       }
     end
 
-    def item_players(items)
+    def item_players
+      web_resources = presenter.media_web_resources.map do |web_resource|
+        Document::WebResourcePresenter.new(web_resource, document, controller)
+      end
       players = [:audio, :iiif, :image, :pdf, :video].select do |player|
-        items.any? { |item| item.fetch("is_#{player}".to_sym, false) }
+        web_resources.any? { |wr| wr.player == player }
       end
       players.map do |player|
         { player => true }
@@ -670,6 +590,13 @@ module Portal
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
+    end
+
+    def format_date(text, format)
+      return text if format.nil?
+      Time.parse(text).strftime(format)
+    rescue ArgumentError
+      text
     end
   end
 end

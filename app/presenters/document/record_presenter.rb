@@ -6,11 +6,9 @@ module Document
       @edm_resource_url ||= render_document_show_field_value('aggregations.edmIsShownBy')
     end
 
-    def media_web_resources(options)
-      options.reverse_merge!(per_page: 4, page: 1)
-
+    def media_web_resources(options = {})
       aggregation = @document.aggregations.first
-      return [] unless aggregation.respond_to?(:webResources)
+      return Kaminari.paginate_array([]) unless aggregation.respond_to?(:webResources)
 
       view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
       web_resources = aggregation.webResources.dup
@@ -71,10 +69,6 @@ module Document
       end
 
       collections[collection]
-    end
-
-    def hierarchy(options)
-      options.reverse_merge!(per_page: 4, page: 1)
     end
   end
 end

@@ -13,9 +13,9 @@ pl:
       natural-history: historia naturalna
       newspapers: gazety
       performing-arts: 
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
+    channels-art: Kanały sztuka kanał
+    channels-art-image: Kanały sztuka obraz
+    channels-art-link: Kanały sztuka link
     channels-art-url: 
     channels-fashion: Moda
     channels-music: Muzyka
@@ -34,7 +34,7 @@ pl:
         form:
           paintings:
             genre: Gatunek
-            medium: 
+            medium: "Średni"
       carrier: Nośnik
       colour: Kolor
       colour-black-and-white: Czarno-białe
@@ -87,7 +87,7 @@ pl:
         image_size: Rozmiar
         language: Język
         language_of_description: Język opisu
-        media: 
+        media: Pokaż wyłącznie obiekty z bezpośrednim dostępem do mediów
         provider: Dostawca treści
         reusability: Czy mogę to wykorzystać?
         sound_duration: Czas trwania
@@ -160,7 +160,6 @@ pl:
         advanced-orphan-work: Dzieło Osierocone
         advanced-out-of-copyright-non-commercial: Autorskie prawa majątkowe wygasły - użycie tylko niekomercyjne
         advanced-pdm: Domena Publiczna
-        advanced-rarr: 
         advanced-rrfa: Wszelkie prawa zastrzeżone - Wolny dostęp
         advanced-rrpa: Wszelkie prawa zastrzeżone - Płatny dostęp
         advanced-rrra: 'Wszelkie prawa zastrzeżone - '
