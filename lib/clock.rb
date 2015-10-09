@@ -22,8 +22,6 @@ end
 
 every(1.day, 'cache.record-counts', at: ENV['SCHEDULE_RECORD_COUNTS']) do
   Cache::RecordCountsJob.perform_later
-end
-
-every(1.day, 'cache.record-counts.recent-additions', at: ENV['SCHEDULE_RECENT_ADDITIONS']) do
   Cache::RecordCounts::RecentAdditionsJob.perform_later
+  Cache::RecordCounts::ProvidersJob.perform_later
 end

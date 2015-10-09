@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
     get 'browse/colours', to: 'browse#colours'
     get 'browse/newcontent', to: 'browse#new_content'
+    get 'browse/sources', to: 'browse#sources'
 
     get 'settings/language', to: 'settings#language'
     put 'settings/language', to: 'settings#update_language'
