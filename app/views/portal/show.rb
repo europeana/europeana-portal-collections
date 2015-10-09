@@ -564,7 +564,7 @@ module Portal
       items.first[:is_current] = true unless items.size == 0
 
       {
-        required_players: item_players(items),
+        required_players: item_players,
         single_item: items.size == 1,
         empty_item: items.size == 0,
         items: items,
@@ -576,9 +576,12 @@ module Portal
       }
     end
 
-    def item_players(items)
+    def item_players
+      web_resources = presenter.media_web_resources.map do |web_resource|
+        Document::WebResourcePresenter.new(web_resource, document, controller)
+      end
       players = [:audio, :iiif, :image, :pdf, :video].select do |player|
-        items.any? { |item| item.fetch("is_#{player}".to_sym, false) }
+        web_resources.any? { |wr| wr.player == player }
       end
       players.map do |player|
         { player => true }

@@ -7,8 +7,6 @@ module Document
     end
 
     def media_web_resources(options = {})
-      options.reverse_merge!(per_page: 4, page: 1)
-
       aggregation = @document.aggregations.first
       return Kaminari.paginate_array([]) unless aggregation.respond_to?(:webResources)
 
