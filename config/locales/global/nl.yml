@@ -84,6 +84,7 @@ nl:
         country: 
         data_provider: 
         image_aspectratio: 
+        image_colour: 
         image_size: 
         language: 
         language_of_description: 
@@ -100,6 +101,9 @@ nl:
       image_aspectratio:
         landscape: 
         portrait: 
+      image_colour:
+        'false': 
+        'true': 
       image_size:
         extra_large: 
         large: 

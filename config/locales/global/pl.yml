@@ -84,6 +84,7 @@ pl:
         country: Kraj
         data_provider: "Źródła Danych"
         image_aspectratio: Orientacja
+        image_colour: 
         image_size: Rozmiar
         language: Język
         language_of_description: Język opisu
@@ -100,6 +101,9 @@ pl:
       image_aspectratio:
         landscape: Pejzaż
         portrait: Portret
+      image_colour:
+        'false': 
+        'true': 
       image_size:
         extra_large: Bardzo duży
         large: Duży
