@@ -6,6 +6,7 @@ en:
       all_exhibitions: All Exhibitions…
       blog: Blog
       browse: Browse
+      browse_colours: Colours
       browse_newcontent: New content
       channels: Channels
       exhibitions: Exhibitions
@@ -21,6 +22,8 @@ en:
         title: This is an Alpha release of our new collections search and Music Channel
     blog-link: link to blog
     browse:
+      colours:
+        title: Colours
       newcontent:
         title: New Content
     channels:

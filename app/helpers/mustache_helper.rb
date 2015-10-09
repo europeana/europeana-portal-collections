@@ -198,6 +198,11 @@ module MustacheHelper
                     url: browse_newcontent_path,
                     text: t('global.navigation.browse_newcontent'),
                     is_current: current_page?(browse_newcontent_path)
+                  },
+                  {
+                    url: browse_colours_path,
+                    text: t('global.navigation.browse_colours'),
+                    is_current: current_page?(browse_colours_path)
                   }
                 ]
               }

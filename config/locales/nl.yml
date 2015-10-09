@@ -6,6 +6,7 @@ nl:
       all_exhibitions: Alle tentoonstellingen
       blog: Blog
       browse: 
+      browse_colours: 
       browse_newcontent: 
       channels: Kanalen
       exhibitions: Tentoonstellingen
@@ -21,6 +22,8 @@ nl:
         title: Dit is een Alpha versie van onze nieuwe Collections Search en Muziek Kanaal
     blog-link: link naar de blog
     browse:
+      colours:
+        title: 
       newcontent:
         title: 
     channels:
