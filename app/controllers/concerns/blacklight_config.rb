@@ -66,7 +66,7 @@ module BlacklightConfig
       config.add_facet_field 'TEXT_FULLTEXT', hierarchical: true, parent: %w(TYPE TEXT)
       config.add_facet_field 'VIDEO_DURATION', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
-      config.add_facet_field 'MIME_TYPE'
+      config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'REUSABILITY'
       config.add_facet_field 'COUNTRY'
       config.add_facet_field 'LANGUAGE'

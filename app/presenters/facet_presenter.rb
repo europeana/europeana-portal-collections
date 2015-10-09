@@ -99,7 +99,11 @@ class FacetPresenter
   def hierarchical_facet_item_children(item)
     facets_from_request(facet_field_names).select do |child|
       parent = @configuration.facet_fields[child.name].parent
-      !parent.nil? && (parent.first == @facet.name) && (parent.last == item.value)
+      if parent.is_a?(Array)
+        (parent.first == @facet.name) && (parent.last == item.value)
+      elsif !parent.nil?
+        parent == @facet.name
+      end
     end
   end
 
