@@ -15,15 +15,15 @@ module FacetsHelper
       facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, '') : facet_value)
 
       mapped_value = case facet_name.upcase
-        when 'CHANNEL'
-          t('global.channel.' + facet_value.downcase)
-        when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE'
-          facet_value
-        else
-          t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
-      end
+                     when 'CHANNEL'
+                       t('global.channel.' + facet_value.downcase)
+                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE'
+                       facet_value
+                     else
+                       t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
+                     end
 
-      unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet_name)
+      unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE'].include?(facet_name)
         mapped_value = mapped_value.split.map(&:capitalize).join(' ')
       end
 
