@@ -8,6 +8,7 @@ en:
       browse: Browse
       browse_colours: Colours
       browse_newcontent: New content
+      browse_sources: Sources
       channels: Channels
       exhibitions: Exhibitions
       home: Home
@@ -26,6 +27,8 @@ en:
         title: Colours
       newcontent:
         title: New Content
+      sources:
+        title: Sources
     channels:
       art-history:
         description: |

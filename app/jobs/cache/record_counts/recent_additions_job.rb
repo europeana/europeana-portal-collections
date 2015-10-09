@@ -3,6 +3,8 @@ module Cache
     class RecentAdditionsJob < ActiveJob::Base
       include ApiQueryingJob
 
+      queue_as :default
+
       def perform
         sets.each_pair do |cache_key, params|
           Rails.cache.write(cache_key, recent_additions(params))

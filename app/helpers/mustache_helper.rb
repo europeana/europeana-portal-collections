@@ -203,6 +203,11 @@ module MustacheHelper
                     url: browse_colours_path,
                     text: t('global.navigation.browse_colours'),
                     is_current: current_page?(browse_colours_path)
+                  },
+                  {
+                    url: browse_sources_path,
+                    text: t('global.navigation.browse_sources'),
+                    is_current: current_page?(browse_sources_path)
                   }
                 ]
               }
