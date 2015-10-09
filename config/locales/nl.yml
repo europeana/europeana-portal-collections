@@ -8,6 +8,7 @@ nl:
       browse: 
       browse_colours: 
       browse_newcontent: 
+      browse_sources: 
       channels: Kanalen
       exhibitions: Tentoonstellingen
       home: Home
@@ -25,6 +26,8 @@ nl:
       colours:
         title: 
       newcontent:
+        title: 
+      sources:
         title: 
     channels:
       art-history:
