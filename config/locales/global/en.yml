@@ -111,40 +111,40 @@ en:
         medium: Medium
         small: Small
       language:
-        bg: "български език"
+        bg: "Български"
         ca: Català
         cs: "Čeština"
         da: Dansk
         de: Deutsch
-        el: " ellinikí glóssa"
+        el: "Ελληνικά"
         en: English
-        es: español
+        es: Español
         et: Eesti
         fi: Suomi
-        fr: le français
+        fr: Français
         ga: Gaeilge
         he: "עברית"
-        hr: 'hrvatski '
-        hu: Hrvatski
-        is: "íslenska"
+        hr: Hrvatski
+        hu: Magyar
+        is: "Íslenska"
         it: Italiano
-        lt: lietuvių kalba
-        lv: latviešu valoda
+        lt: Lietuvių
+        lv: Latviešu
         mt: Malti
         mul: Multilingue
         nl: Nederlands
         'no': Norsk
-        pl: polski
-        pt: português
-        ro: română
+        pl: Polski
+        pt: Português
+        ro: Română
         ru: "Русский"
-        sk: slovenský jazyk
-        sl: slovenščina
+        sk: Slovenský
+        sl: Slovenski
         sr: "Српски"
-        sv: svenska
+        sv: Svenska
         tr: " Türkçe"
         uk: "Українська"
-        yi: Yiddish
+        yi: "ייִדיש"
       less: Fewer
       media:
         'false': 'No'
