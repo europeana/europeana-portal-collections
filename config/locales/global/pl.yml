@@ -12,7 +12,7 @@ pl:
       music: muzyka
       natural-history: historia naturalna
       newspapers: gazety
-      performing-arts: 
+      performing-arts: sztuki performatywne
     channels-art: Kanały sztuka kanał
     channels-art-image: Kanały sztuka obraz
     channels-art-link: Kanały sztuka link
@@ -84,18 +84,18 @@ pl:
         country: Kraj
         data_provider: "Źródła Danych"
         image_aspectratio: Orientacja
-        image_colour: 
+        image_colour: Paleta
         image_size: Rozmiar
         language: Język
         language_of_description: Język opisu
         media: Pokaż wyłącznie obiekty z bezpośrednim dostępem do mediów
-        mime_type: 
+        mime_type: Format pliku
         provider: Dostawca treści
         reusability: Czy mogę to wykorzystać?
         sound_duration: Czas trwania
         sound_hq: Dobra Jakość
         text_fulltext: Pełna Treść
-        type: 
+        type: Media
         ugc: Pokaż obiekty dodane przez użytkowników
         video_hd: Wysoka rozdzielczość
         year: Data
@@ -103,8 +103,8 @@ pl:
         landscape: Pejzaż
         portrait: Portret
       image_colour:
-        'false': 
-        'true': 
+        'false': Czarno-biały
+        'true': Kolor
       image_size:
         extra_large: Bardzo duży
         large: Duży
