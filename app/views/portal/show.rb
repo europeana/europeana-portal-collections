@@ -89,7 +89,7 @@ module Portal
                 overrides: [
                   {
                     field_title: t('site.object.meta-label.ugc'),
-                    field_url: root_url + ('search?f[UGC][]=true')
+                    field_url: search_url(f: { 'UGC' => ['true'] })
                   }
                 ]
               }
