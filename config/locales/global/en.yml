@@ -2,7 +2,6 @@ en:
   Symphonies: Symphonies
   global:
     about-us: About us
-    blog: blog
     channel:
       archaeology: archaeology
       architecture: architecture
@@ -14,7 +13,6 @@ en:
       natural-history: natural history
       newspapers: newspapers
       performing-arts: performing-arts
-    channels: Channels
     channels-art: 'Channels art channel '
     channels-art-image: 'Channels art image '
     channels-art-link: Channels art link
@@ -24,7 +22,6 @@ en:
     channels-music-link: 
     choose-language: Language
     email-address: email address
-    exhibitions: Exhibitions
     facet:
       advanced:
         options: Options
@@ -83,60 +80,95 @@ en:
       creator: creator
       header:
         channel: Channels
+        colourpalette: Colour
         country: Country
         data_provider: Data Provider
+        image_aspectratio: Orientation
+        image_colour: Palette
+        image_size: Size
         language: Language
         language_of_description: Language of Description
+        media: Only show items with direct access to media
+        mime_type: File format
         provider: Provider
         reusability: Can I use it?
+        sound_duration: Duration
+        sound_hq: High Quality
+        text_fulltext: Full Text
         type: Media
+        ugc: Show content contributed by users
+        video_hd: HD
         year: Date
+      image_aspectratio:
+        landscape: Landscape
+        portrait: Portrait
+      image_colour:
+        'false': Black and white
+        'true': Colour
+      image_size:
+        extra_large: Extra large
+        large: Large
+        medium: Medium
+        small: Small
       language:
-        bg: "български език"
+        bg: "Български"
+        ca: Català
+        cs: "Čeština"
+        da: Dansk
         de: Deutsch
-        el: " ellinikí glóssa"
+        el: "Ελληνικά"
         en: English
-        es: español
+        es: Español
         et: Eesti
         fi: Suomi
-        fr: le français
+        fr: Français
         ga: Gaeilge
         he: "עברית"
-        hr: 'hrvatski '
-        hu: Hrvatski
-        is: "íslenska"
+        hr: Hrvatski
+        hu: Magyar
+        is: "Íslenska"
         it: Italiano
-        lt: lietuvių kalba
-        lv: latviešu valoda
+        lt: Lietuvių
+        lv: Latviešu
         mt: Malti
         mul: Multilingue
         nl: Nederlands
-        pl: polszczyzna
-        pt: português
-        ro: română
-        sk: slovenský jazyk
-        sl: slovenščina
-        sv: svenska
+        'no': Norsk
+        pl: Polski
+        pt: Português
+        ro: Română
+        ru: "Русский"
+        sk: Slovenský
+        sl: Slovenski
+        sr: "Српски"
+        sv: Svenska
         tr: " Türkçe"
-        yi: Yiddish
+        uk: "Українська"
+        yi: "ייִדיש"
       less: Fewer
+      media:
+        'false': 'No'
+        'true': 'Yes'
+      mime_type:
+        image/gif: GIF
+        image/jpeg: JPEG
+        image/png: PNG
       more: More
       more-refinements: More refinements
       resource:
         type: 
       reusability:
         advanced: Advanced
-        advanced-cc-by: CC-BY
-        advanced-cc-by-nc: CC-BY-NC
-        advanced-cc-by-nc-nd: CC-BY-NC-ND
-        advanced-cc-by-nc-sa: CC-BY-NC-SA
-        advanced-cc-by-nd: CC-BY-ND
-        advanced-cc-by-sa: CC-BY-SA
+        advanced-cc-by: CC BY
+        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc-nd: CC BY-NC-ND
+        advanced-cc-by-nc-sa: CC BY-NC-SA
+        advanced-cc-by-nd: CC BY-ND
+        advanced-cc-by-sa: CC BY-SA
         advanced-cc0: CC0
         advanced-orphan-work: Orphan Work
         advanced-out-of-copyright-non-commercial: 'Out of copyright - non commercial re-use '
         advanced-pdm: Public Domain Marked
-        advanced-rarr: Restricted access - Rights reserved
         advanced-rrfa: Rights reserved - Free access
         advanced-rrpa: Rights reserved - Paid access
         advanced-rrra: Rights Reserved - Restricted Access
@@ -145,7 +177,17 @@ en:
         permission: Only with permission
         restricted: Yes with restrictions
         simple: Simple
+      sound_duration:
+        long: Long
+        medium: Medium
+        short: Short
+        very_short: Very short
+      sound_hq:
+        'true': 'Yes'
       source: Source
+      text_fulltext:
+        'false': 'No'
+        'true': 'Yes'
       type:
         3d: 3D
         image: Image

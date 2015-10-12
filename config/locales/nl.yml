@@ -2,10 +2,19 @@ nl:
   global:
     labs-link: 'link naar labs '
     navigation:
+      all_blog_posts: Alle berichten...
+      all_exhibitions: Alle tentoonstellingen
+      blog: Blog
+      browse: 
+      browse_colours: 
+      browse_newcontent: 
+      browse_sources: 
+      channels: Kanalen
+      exhibitions: Tentoonstellingen
       home: Home
     pro-link: link naar pro
     pro-text: tekst voor pro
-    settings: tekst voor settings
+    settings: settings
   site:
     alpha:
       feedback_banner:
@@ -13,6 +22,13 @@ nl:
         link-text: 'Vertel wat u denkt! '
         title: Dit is een Alpha versie van onze nieuwe Collections Search en Muziek Kanaal
     blog-link: link naar de blog
+    browse:
+      colours:
+        title: 
+      newcontent:
+        title: 
+      sources:
+        title: 
     channels:
       art-history:
         description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
@@ -49,6 +65,11 @@ nl:
     more: Meer...
     my-europeana: Mijn Europeana
     my-europeana-link: Link naar mijn Europeana
+    navigation:
+      breadcrumb:
+        item_detail: 
+        results_list: 
+        return_home: 
     news: Nieuws
     object:
       actions:
@@ -137,7 +158,6 @@ nl:
       nav:
         next: 
         prev: 
-        return-to-search: 
       points:
         east: 
         north: 
@@ -178,7 +198,9 @@ nl:
         header-and: 
         in-channel: 
         less: 
+        less_adv: 
         more: 
+        more_adv: 
         product-3D: 
         product-image: 
         product-sound: 
@@ -195,5 +217,20 @@ nl:
         text: 
       similar:
         prefix: 
+    settings:
+      actions:
+        clear-selection: 
+        save-settings: 
+      language:
+        auto-translate-page: 
+        auto-translate-page-short: 
+        auto-translate-query: 
+        available: 
+        default: 
+        flash:
+          alert: 
+          notice: 
+        label: Taal
+        settings-label: 
     site-name-link: 
     sitemap-link: 

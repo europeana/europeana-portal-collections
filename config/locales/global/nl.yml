@@ -2,7 +2,6 @@ nl:
   Symphonies: 
   global:
     about-us: Over ons
-    blog: blog
     channel:
       archaeology: Archeology
       architecture: 'Architectuur '
@@ -14,7 +13,6 @@ nl:
       natural-history: natuurlijke historie
       newspapers: Kranten
       performing-arts: Beeldende kunst
-    channels: Kanalen
     channels-art: Test text
     channels-art-image: Test text
     channels-art-link: Test text
@@ -24,7 +22,6 @@ nl:
     channels-music-link: 
     choose-language: Taal
     email-address: e-mail adres
-    exhibitions: Tentoonstellingen
     facet:
       advanced:
         options: 
@@ -83,16 +80,41 @@ nl:
       creator: 
       header:
         channel: 
+        colourpalette: 
         country: 
         data_provider: 
+        image_aspectratio: 
+        image_colour: 
+        image_size: 
         language: 
         language_of_description: 
+        media: 
+        mime_type: 
         provider: 
         reusability: 
+        sound_duration: 
+        sound_hq: 
+        text_fulltext: 
         type: 
+        ugc: 
+        video_hd: 
         year: 
+      image_aspectratio:
+        landscape: 
+        portrait: 
+      image_colour:
+        'false': 
+        'true': 
+      image_size:
+        extra_large: 
+        large: 
+        medium: 
+        small: 
       language:
         bg: 
+        ca: 
+        cs: 
+        da: 
         de: 
         el: 
         en: 
@@ -111,15 +133,26 @@ nl:
         mt: 
         mul: 
         nl: 
+        'no': 
         pl: 
         pt: 
         ro: 
+        ru: 
         sk: 
         sl: 
+        sr: 
         sv: 
         tr: 
+        uk: 
         yi: 
       less: Minder
+      media:
+        'false': 
+        'true': 
+      mime_type:
+        image/gif: 
+        image/jpeg: 
+        image/png: 
       more: 
       more-refinements: 
       resource:
@@ -136,7 +169,6 @@ nl:
         advanced-orphan-work: 
         advanced-out-of-copyright-non-commercial: 
         advanced-pdm: 
-        advanced-rarr: 
         advanced-rrfa: 
         advanced-rrpa: 
         advanced-rrra: 
@@ -145,7 +177,17 @@ nl:
         permission: 
         restricted: 
         simple: 
+      sound_duration:
+        long: 
+        medium: 
+        short: 
+        very_short: 
+      sound_hq:
+        'true': 
       source: 
+      text_fulltext:
+        'false': 
+        'true': 
       type:
         3d: 
         image: 
@@ -200,7 +242,7 @@ nl:
       discover: ontdek
       network: netwerk
     help: 
-    home: 
+    home: Home
     javascript-required: 
     labs: Labs
     labs-text: Gebruik onze APIs en datasets

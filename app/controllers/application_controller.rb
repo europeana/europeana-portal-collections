@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    session[:locale] ||= I18n.default_locale
+    I18n.locale = session[:locale]
   end
 
   def redirect_to_root

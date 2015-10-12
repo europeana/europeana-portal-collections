@@ -6,6 +6,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require 'capybara_helper'
+require 'shoulda/matchers'
 require 'webmock_helper'
 require 'support/relative_url_root_helper'
 
@@ -53,4 +54,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include RelativeUrlRootHelper
+
+  config.before(:each) do
+    Rails.cache.clear
+  end
 end

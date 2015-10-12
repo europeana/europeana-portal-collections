@@ -2,10 +2,19 @@ en:
   global:
     labs-link: 'link to labs '
     navigation:
+      all_blog_posts: All Posts…
+      all_exhibitions: All Exhibitions…
+      blog: Blog
+      browse: Browse
+      browse_colours: Colours
+      browse_newcontent: New content
+      browse_sources: Sources
+      channels: Channels
+      exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
     pro-text: text for pro
-    settings: settings text
+    settings: settings
   site:
     alpha:
       feedback_banner:
@@ -13,6 +22,13 @@ en:
         link-text: Give us your input!
         title: This is an Alpha release of our new collections search and Music Channel
     blog-link: link to blog
+    browse:
+      colours:
+        title: Colours
+      newcontent:
+        title: New Content
+      sources:
+        title: Sources
     channels:
       art-history:
         description: |
@@ -51,6 +67,11 @@ en:
     more: More...
     my-europeana: My Europeana
     my-europeana-link: link to my Europeana
+    navigation:
+      breadcrumb:
+        item_detail: Item detail
+        results_list: Results List
+        return_home: Return to Home
     news: News
     object:
       actions:
@@ -139,7 +160,6 @@ en:
       nav:
         next: Next
         prev: Previous
-        return-to-search: Return to search results
       points:
         east: East
         north: North
@@ -189,7 +209,9 @@ en:
         header-and: and
         in-channel: in Channel
         less: Less
+        less_adv: Less Refinements
         more: More
+        more_adv: Advanced Filters
         product-3D: 3D
         product-image: Image
         product-sound: Sound
@@ -206,5 +228,20 @@ en:
         text: Add a search term
       similar:
         prefix: 'Similar to: %{mlt_item}'
+    settings:
+      actions:
+        clear-selection: Clear selection
+        save-settings: Save Settings
+      language:
+        auto-translate-page: Automatically translate item pages into...
+        auto-translate-page-short: Auto translate items into
+        auto-translate-query: Automatically translate search keywords into...
+        available: Available Languages
+        default: Default Language
+        flash:
+          alert: 'Invalid language specified. Available languages: %{locales}'
+          notice: Language settings saved.
+        label: Language
+        settings-label: language settings
     site-name-link: 
     sitemap-link: 

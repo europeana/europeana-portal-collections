@@ -11,14 +11,26 @@ module Portal
     end
 
     def filters
-      facets_from_request(facet_field_names).map do |facet|
-        facet_config = blacklight_config.facet_fields[facet.name]
-        if facet_config.range
-          range_facet_template_data(facet)
-        else
-          simple_facet_template_data(facet)
-        end
-      end
+      facets_from_request(facet_field_names).reject do |facet|
+        blacklight_config.facet_fields[facet.name].advanced
+      end.map do |facet|
+        FacetPresenter.new(facet, controller).display
+      end.compact + advanced_filters
+    end
+
+    def advanced_filters
+      [
+        {
+          advanced: true,
+          advanced_items: {
+            items: facets_from_request(facet_field_names).select do |facet|
+              blacklight_config.facet_fields[facet.name].advanced
+            end.map do |facet|
+              FacetPresenter.new(facet, self).display
+            end.compact
+          }
+        }
+      ]
     end
 
     def results_count
@@ -85,38 +97,13 @@ module Portal
         facets_from_request(facet_field_names).each do |facet|
           facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
             items << {
-              filter: facet_map(facet.name),
-              value: facet_map(facet.name, item.value),
-              remove: facet_item_url(facet.name, item),
+              filter: facet_label(facet.name),
+              value: facet_label(facet.name, item.value),
+              remove: facet_item_url(facet, item),
               name: "f[#{facet.name}][]"
             }
           end
         end
-      end
-    end
-
-    def facet_map(facet_name, facet_value = nil)
-      if facet_value.nil?
-        t('global.facet.header.' + facet_name.downcase)
-      else
-        facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, '') : facet_value)
-
-        mapped_value = case facet_name.upcase
-          when 'CHANNEL'
-            t('global.channel.' + facet_value.downcase)
-          when 'PROVIDER'
-            facet_value
-          when 'DATA_PROVIDER'
-            facet_value
-          else
-            t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
-        end
-
-        unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet_name)
-          mapped_value = mapped_value.split.map(&:capitalize).join(' ')
-        end
-
-        mapped_value
       end
     end
 
@@ -154,10 +141,8 @@ module Portal
         is_text: doc_type == 'TEXT',
         is_video: doc_type == 'VIDEO',
         img: {
-          rectangle: {
-            src: render_index_field_value(doc, 'edmPreview'),
-            alt: ''
-          }
+          src: render_index_field_value(doc, 'edmPreview'),
+          alt: ''
         },
         agent: agent_label(doc),
         concepts: concept_labels(doc),
@@ -172,73 +157,6 @@ module Portal
         per_page: params.fetch(:per_page, search_session['per_page']),
         counter: counter,
         search_id: current_search_session.try(:id)
-      }
-    end
-
-    def facet_item_url(facet, item)
-      if facet_in_params?(facet, item)
-        search_action_url(remove_facet_params(facet, item, params))
-      else
-        search_action_url(add_facet_params_and_redirect(facet, item))
-      end
-    end
-
-    def simple_facet_template_data(facet)
-      {
-        simple: true,
-        title: facet_map(facet.name),
-        select_one: (facet.name == 'CHANNEL'),
-        items: facet.items[0..3].map { |item| simple_facet_item(facet, item) },
-        extra_items: facet.items.size <= 4 ? nil : {
-          items: facet.items[4..-1].map { |item| simple_facet_item(facet, item) }
-        }
-      }
-    end
-
-    def simple_facet_item(facet, item)
-      {
-        url: facet_item_url(facet.name, item),
-        text: facet_map(facet.name, item.value),
-        num_results: number_with_delimiter(item.hits),
-        is_checked: facet_in_params?(facet.name, item)
-      }
-    end
-
-    def range_facet_template_data(facet)
-      range_min = facet.items.collect(&:value).min
-      range_max = facet.items.collect(&:value).max
-      hits_max = facet.items.collect(&:hits).max
-      {
-        date: true,
-        title: facet_map(facet.name),
-        form: {
-          action_url: search_action_url,
-          hidden_inputs: hidden_inputs_for_search
-        },
-        range: {
-          start: {
-            input_name: "range[#{facet.name}][begin]",
-            input_value: range_min,
-            label_text: 'From:'
-          },
-          end: {
-            input_name: "range[#{facet.name}][end]",
-            input_value: range_max,
-            label_text: 'To:'
-          }
-        },
-        data: facet.items.sort_by(&:value).collect do |item|
-          p = reset_search_params(params).deep_dup
-          p[:f] ||= {}
-          p[:f][facet.name] = [item.value]
-          {
-            percent_of_max: (item.hits.to_f / hits_max.to_f * 100).to_i,
-            value: "#{item.value} (#{item.hits})",
-            url: search_action_path(p)
-          }
-        end,
-        date_start: range_min,
-        date_end: range_max
       }
     end
 
