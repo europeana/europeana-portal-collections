@@ -29,7 +29,7 @@ class BrowseController < ApplicationController
     @providers = Rails.cache.fetch('browse/sources/providers') || []
     @providers.each do |provider|
       provider[:url] = search_path(f: { 'PROVIDER' => [provider[:text]] })
-      provider[:data_providers] = Rails.cache.fetch("browse/sources/providers/#{provider[:text]}")
+      provider[:data_providers] = Rails.cache.fetch("browse/sources/providers/#{provider[:text]}") || []
       provider[:data_providers].each do |dp|
         dp[:url] = search_path(f: { 'DATA_PROVIDER' => [dp[:text]] })
       end
