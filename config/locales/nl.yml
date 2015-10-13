@@ -73,6 +73,9 @@ nl:
     news: Nieuws
     object:
       actions:
+        attribute-author: 
+        attribute-html: 
+        attribute-plaintext: 
         download: Download
         download-additional: Ook beschikbaar als
         downloaddata: Download informatie

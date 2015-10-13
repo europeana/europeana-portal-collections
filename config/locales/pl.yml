@@ -73,6 +73,9 @@ pl:
     news: 
     object:
       actions:
+        attribute-author: 
+        attribute-html: 
+        attribute-plaintext: 
         download: 
         download-additional: 
         downloaddata: 

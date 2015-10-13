@@ -75,6 +75,9 @@ en:
     news: News
     object:
       actions:
+        attribute-author: Attribute the author
+        attribute-html: HTML
+        attribute-plaintext: Plain Text
         download: Download
         download-additional: Also available as
         downloaddata: Download data
