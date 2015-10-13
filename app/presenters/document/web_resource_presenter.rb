@@ -105,14 +105,18 @@ module Document
     end
 
     def technical_metadata
+      width   = render_document_show_field_value('ebucoreWidth')
+      height  = render_document_show_field_value('ebucoreHeight')
+
       file_size = number_to_human_size(render_document_show_field_value('ebucoreFileByteSize')) || ''
       {
         mime_type: mime_type,
         file_size: file_size.split(' ').first,
         file_unit: file_size.split(' ').last,
         codec: render_document_show_field_value('edmCodecName'),
-        width: render_document_show_field_value('ebucoreWidth'),
-        height: render_document_show_field_value('ebucoreHeight'),
+        width: width,
+        height: height,
+        width_or_height: !(width.blank? && height.blank?),
         size_unit: 'pixels',
         runtime: render_document_show_field_value('ebucoreDuration'),
         runtime_unit: 'seconds'
