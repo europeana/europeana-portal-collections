@@ -146,6 +146,7 @@ nl:
         rights: 
         rights-human: Mag ik dit gebruiken?
         runtime: 
+        runtime-unit-seconds: 
         source: Bron en Herkomst
         subject: 
         temporal: 
