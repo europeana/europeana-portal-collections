@@ -558,7 +558,7 @@ module Portal
     end
 
     def media_items
-      items = presenter.media_web_resources(per_page: 4, page: 1).map do |web_resource|
+      items = presenter.media_web_resources(per_page: 10, page: 1).map do |web_resource|
         Document::WebResourcePresenter.new(web_resource, document, controller).media_item
       end
       items.first[:is_current] = true unless items.size == 0
