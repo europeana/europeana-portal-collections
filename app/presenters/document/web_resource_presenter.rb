@@ -111,6 +111,8 @@ module Document
       file_size = number_to_human_size(render_document_show_field_value('ebucoreFileByteSize')) || ''
       {
         mime_type: mime_type,
+        format: (play_url.blank? ? '' : play_url.split('.').last),
+        language: '',
         file_size: file_size.split(' ').first,
         file_unit: file_size.split(' ').last,
         codec: render_document_show_field_value('edmCodecName'),
@@ -119,7 +121,7 @@ module Document
         width_or_height: !(width.blank? && height.blank?),
         size_unit: 'pixels',
         runtime: render_document_show_field_value('ebucoreDuration'),
-        runtime_unit: 'seconds'
+        runtime_unit: t('site.object.meta-label.runtime-unit-seconds')
       }
     end
 
