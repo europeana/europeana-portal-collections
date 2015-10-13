@@ -2,8 +2,6 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
-    include FacetPresenter
-
     def page_title
       [params[:q], 'Europeana - Search results'].compact.join(' - ')
     end
@@ -16,7 +14,7 @@ module Portal
       facets_from_request(facet_field_names).reject do |facet|
         blacklight_config.facet_fields[facet.name].advanced
       end.map do |facet|
-        facet_display(facet) # @see FacetPresenter
+        FacetPresenter.new(facet, controller).display
       end.compact + advanced_filters
     end
 
@@ -28,7 +26,7 @@ module Portal
             items: facets_from_request(facet_field_names).select do |facet|
               blacklight_config.facet_fields[facet.name].advanced
             end.map do |facet|
-              facet_display(facet) # @see FacetPresenter
+              FacetPresenter.new(facet, self).display
             end.compact
           }
         }
@@ -99,36 +97,13 @@ module Portal
         facets_from_request(facet_field_names).each do |facet|
           facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
             items << {
-              filter: facet_map(facet.name),
-              value: facet_map(facet.name, item.value),
-              remove: facet_item_url(facet.name, item),
+              filter: facet_label(facet.name),
+              value: facet_label(facet.name, item.value),
+              remove: facet_item_url(facet, item),
               name: "f[#{facet.name}][]"
             }
           end
         end
-      end
-    end
-
-    def facet_map(facet_name, facet_value = nil)
-      if facet_value.nil?
-        t('global.facet.header.' + facet_name.downcase)
-      else
-        facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, '') : facet_value)
-
-        mapped_value = case facet_name.upcase
-          when 'CHANNEL'
-            t('global.channel.' + facet_value.downcase)
-          when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE'
-            facet_value
-          else
-            t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
-        end
-
-        unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet_name)
-          mapped_value = mapped_value.split.map(&:capitalize).join(' ')
-        end
-
-        mapped_value
       end
     end
 
@@ -184,7 +159,6 @@ module Portal
         search_id: current_search_session.try(:id)
       }
     end
-
 
     def hidden_inputs_for_search
       flatten_hash(params_for_search.except(:page, :utf8)).collect do |name, value|

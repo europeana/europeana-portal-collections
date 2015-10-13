@@ -10,7 +10,16 @@ module EuropeanaAPIHelper
 
       stub_request(:get, Europeana::API.url + '/search.json').
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
-        to_return(body: '{"success":true,"itemsCount":' + items.size.to_s + ',"totalResults":' + items.size.to_s + ',"items":[' + items + ']}',
+        to_return(body: '{"success":true,"itemsCount":' + items.size.to_s + ',"totalResults":' + items.size.to_s + ',"items":[' + items + '],
+                          "facets":[{
+                          "name": "COLOURPALETTE",
+                          "fields": [{
+                            "label": "#000000",
+                            "count": 2000
+                          }, {
+                            "label": "#FFFFFF",
+                            "count": 1000
+                          }]}]}',
                   status: 200,
                   headers: { 'Content-Type' => 'text/json' })
 

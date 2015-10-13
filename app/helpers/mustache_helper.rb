@@ -1,15 +1,4 @@
 module MustacheHelper
-  def head_meta
-    [
-      #{'name':'X-UA-Compatible',    content: 'IE=edge' },
-      #{'name':'viewport',           content: 'width=device-width,initial-scale=1.0' },
-      { meta_name: 'HandheldFriendly',   content: 'True' },
-      { httpequiv: 'Content-Type',       content: 'text/html; charset=utf-8' },
-      { meta_name: 'csrf-param',         content: 'authenticity_token' },
-      { meta_name: 'csrf-token',         content: form_authenticity_token }
-    ]
-  end
-
   def form_search
     {
       action: search_action_path(only_path: true)
@@ -19,7 +8,7 @@ module MustacheHelper
   def head_links
     [
       # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
-      { rel: 'stylesheet', href: styleguide_path('/css/search/screen.css'), media: 'all' }
+      { rel: 'stylesheet', href: styleguide_url('/css/search/screen.css'), media: 'all' }
     ]
   end
 
@@ -38,31 +27,22 @@ module MustacheHelper
     }
   end
 
-  def image_root
-    styleguide_path('/images/')
-  end
-
   def version
     { is_alpha: true }
   end
 
-  def js_version
-    Rails.application.config.x.js_version || ''
-  end
-
-  def js_variables
+  def js_vars
     page_name = (params[:controller] || '') + '/' + (params[:action] || '')
-    'var js_path="' + styleguide_path('/js/dist/') + '";' +
-      'var require = {"urlArgs": "' + js_version + '"};' +
-      'var pageName = "' + page_name + '";'
+    [
+      {
+        name: 'pageName', value: page_name
+      }
+    ]
   end
 
   def js_files
-    js_entry_point = Rails.application.config.x.js_entrypoint || '/js/dist/'
-    js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
-    [{ path: styleguide_path(js_entry_point + 'require.js?cache=' + js_version),
-       data_main: styleguide_path(js_entry_point + 'main/main'),
-       js_version: js_version}]
+    [{ path: styleguide_url('/js/dist/require.js'),
+      data_main: styleguide_url('/js/dist/main/main') }]
   end
 
   # def menus
@@ -210,10 +190,33 @@ module MustacheHelper
               }
             },
             {
+              text: t('global.navigation.browse'),
+              is_current: controller.controller_name == 'browse',
+              submenu: {
+                items: [
+                  {
+                    url: browse_newcontent_path,
+                    text: t('global.navigation.browse_newcontent'),
+                    is_current: current_page?(browse_newcontent_path)
+                  },
+                  {
+                    url: browse_colours_path,
+                    text: t('global.navigation.browse_colours'),
+                    is_current: current_page?(browse_colours_path)
+                  },
+                  {
+                    url: browse_sources_path,
+                    text: t('global.navigation.browse_sources'),
+                    is_current: current_page?(browse_sources_path)
+                  }
+                ]
+              }
+            },
+            {
               url: 'http://exhibitions.europeana.eu/',
               text: t('global.navigation.exhibitions'),
               submenu: {
-                items: feed_entry_nav_items(FeedCacheJob::URLS[:exhibitions][:all], 6) + [
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][:all], 6) + [
                   {
                     url: 'http://exhibitions.europeana.eu/',
                     text: t('global.navigation.all_exhibitions'),
@@ -226,7 +229,7 @@ module MustacheHelper
               url: 'http://blog.europeana.eu/',
               text: t('global.navigation.blog'),
               submenu: {
-                items: feed_entry_nav_items(FeedCacheJob::URLS[:blog][:all], 6) + [
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6) + [
                   {
                     url: 'http://blog.europeana.eu/',
                     text: t('global.navigation.all_blog_posts'),
@@ -358,10 +361,6 @@ module MustacheHelper
         cta_text: t('site.alpha.feedback_banner.link-text')
       }
     }
-  end
-
-  def styleguide_path(asset = nil)
-    Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
   end
 
   def styleguide_hero_config(hero_config)

@@ -3,7 +3,7 @@ module Channels
     def head_meta
       [
         { meta_name: 'description', content: truncate(strip_tags(t("site.channels.#{@channel.id}.description")), length: 350, separator: ' ') }
-      ] + helpers.head_meta
+      ] + super
     end
 
     def page_title
@@ -29,16 +29,16 @@ module Channels
           stats: {
             items: stylised_channel_stats
           },
-          recent: stylised_recent_additions.blank? ? nil : {
+          recent: @recent_additions.blank? ? nil : {
             title: t('site.channels.labels.recent'),
-            items: stylised_recent_additions
+            items: stylised_recent_additions(@recent_additions, max: 3)
           },
           credits: {
             title: t('site.channels.labels.credits'),
             items: channel_content[:credits]
           }
         },
-        hero_config: helpers.styleguide_hero_config(channel_content[:hero_config]),
+        hero_config: styleguide_hero_config(channel_content[:hero_config]),
         channel_entry: {
           items: stylised_channel_entry
         },
@@ -62,7 +62,7 @@ module Channels
     def blog_news_items
       @blog_news_items ||= begin
         key = @channel.id.underscore.to_sym
-        url = FeedCacheJob::URLS[:blog][key]
+        url = Cache::FeedJob::URLS[:blog][key]
         news_items(feed_entries(url))
       end
     end
@@ -95,16 +95,6 @@ module Channels
       @stylised_channel_stats = @channel_stats.deep_dup.tap do |channel_stats|
         channel_stats.each do |stats|
           stats[:count] = number_with_delimiter(stats[:count])
-        end
-      end
-    end
-
-    def stylised_recent_additions
-      return @stylised_recent_additions unless @stylised_recent_additions.blank?
-      return nil unless @recent_additions.present?
-      @stylised_recent_additions = @recent_additions.deep_dup.tap do |recent_additions|
-        recent_additions.each do |addition|
-          addition[:number] = number_with_delimiter(addition[:number]) + ' ' + t('site.channels.data-types.count')
         end
       end
     end

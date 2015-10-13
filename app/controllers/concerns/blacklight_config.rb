@@ -27,7 +27,7 @@ module BlacklightConfig
       }
 
       # Response models
-      config.document_presenter_class = MustacheDocumentPresenter
+      config.document_presenter_class = Document::RecordPresenter
 
       # Europeana API caching
       config.europeana_api_cache = Rails.cache
@@ -57,7 +57,8 @@ module BlacklightConfig
       # Facet fields in the order they should be displayed.
       # config.add_facet_field 'CHANNEL', query: channels_query_facet, single: true
       config.add_facet_field 'TYPE', hierarchical: true
-      config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE)
+      config.add_facet_field 'IMAGE_COLOUR', parent: %w(TYPE IMAGE)
+      config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 18
       config.add_facet_field 'IMAGE_ASPECTRATIO', hierarchical: true, parent: %w(TYPE IMAGE)
       config.add_facet_field 'IMAGE_SIZE', hierarchical: true, parent: %w(TYPE IMAGE)
       config.add_facet_field 'SOUND_DURATION', hierarchical: true, parent: %w(TYPE SOUND)
@@ -65,6 +66,7 @@ module BlacklightConfig
       config.add_facet_field 'TEXT_FULLTEXT', hierarchical: true, parent: %w(TYPE TEXT)
       config.add_facet_field 'VIDEO_DURATION', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
+      config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'REUSABILITY'
       config.add_facet_field 'COUNTRY'
       config.add_facet_field 'LANGUAGE'

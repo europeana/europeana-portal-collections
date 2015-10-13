@@ -12,8 +12,7 @@ class PortalController < ApplicationController
   # GET /record/:id
   def show
     @response, @document = fetch_with_hierarchy(doc_id)
-    _mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
-    @mime_type = media_mime_type(@document)
+    @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
@@ -35,6 +34,40 @@ class PortalController < ApplicationController
     end
   end
 
+  # GET /record/:id/media
+  def media
+    @response, @document = fetch(doc_id)
+    @page = params[:page] || 1
+    @per_page = params[:per_page] || 4
+
+    respond_to do |format|
+      format.json { render :media, layout: false }
+    end
+  end
+
+  # GET /record/:id/hierarchy
+  def hierarchy
+    relation = params.key?(:relation) ? params[:relation].underscore : nil
+
+    if relation.present?
+      page = (params[:page] || 1).to_i
+      per_page = (params[:per_page] || 4).to_i
+      offset = (page == 1 ? 0 : (per_page * page) - 1)
+      options = { limit: per_page, offset: offset }
+
+      _response, @document = fetch(doc_id)
+      @hierarchy = fetch_hierarchy_relation(doc_id, relation, options)
+    else
+      _response, @document = fetch_with_hierarchy(doc_id)
+      @hierarchy = @document.hierarchy
+    end
+
+    respond_to do |format|
+      format.json { render :hierarchy, layout: false }
+    end
+  end
+
+  # @todo move into own controller to isolate record resource related actions
   def static
     @page = params[:page]
     respond_to do |format|

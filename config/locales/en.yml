@@ -5,6 +5,10 @@ en:
       all_blog_posts: All Posts…
       all_exhibitions: All Exhibitions…
       blog: Blog
+      browse: Browse
+      browse_colours: Colours
+      browse_newcontent: New content
+      browse_sources: Sources
       channels: Channels
       exhibitions: Exhibitions
       home: Home
@@ -18,6 +22,13 @@ en:
         link-text: Give us your input!
         title: This is an Alpha release of our new collections search and Music Channel
     blog-link: link to blog
+    browse:
+      colours:
+        title: Colours
+      newcontent:
+        title: New Content
+      sources:
+        title: Sources
     channels:
       art-history:
         description: |
@@ -64,6 +75,9 @@ en:
     news: News
     object:
       actions:
+        attribute-author: Attribute the author
+        attribute-html: HTML
+        attribute-plaintext: Plain Text
         download: Download
         download-additional: Also available as
         downloaddata: Download data
