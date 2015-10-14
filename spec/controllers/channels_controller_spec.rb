@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ChannelsController, type: :controller do
-  before do 
+  before do
     FactoryGirl.create(:error_page, :not_found)
   end
 
@@ -82,11 +82,9 @@ RSpec.describe ChannelsController, type: :controller do
           expect(response).to render_template('channels/show')
         end
 
-#          let(:landing_page) { FactoryGirl.create(:landing_page, :music_channel) }
-          it 'assigns @landing_page' do
-            expect(assigns(:landing_page)).to eq(landing_page)
-          end
-#        end
+        it 'assigns @landing_page' do
+          expect(assigns(:landing_page)).to eq(landing_page)
+        end
       end
 
       context 'with search params' do

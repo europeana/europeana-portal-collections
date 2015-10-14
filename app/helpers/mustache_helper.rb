@@ -488,6 +488,6 @@ module MustacheHelper
   end
 
   def license_template_var_name(license)
-    "license_#{license.gsub('-', '_')}"
+    'license_' + license.tr('-', '_')
   end
 end

@@ -1,6 +1,4 @@
 RSpec.describe Page do
-#  subject { FactoryGirl.create(:page) }
-
   it { is_expected.to belong_to(:hero_image) }
   it { is_expected.to validate_uniqueness_of(:slug) }
 

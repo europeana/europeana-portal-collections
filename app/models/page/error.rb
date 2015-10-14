@@ -9,7 +9,7 @@ class Page::Error < Page
 
   before_validation do |page|
     unless page.http_code.nil? || Rack::Utils::HTTP_STATUS_CODES[page.http_code].nil?
-      page.slug = 'errors/' + Rack::Utils::HTTP_STATUS_CODES[page.http_code].downcase.gsub(' ', '_')
+      page.slug = 'errors/' + Rack::Utils::HTTP_STATUS_CODES[page.http_code].downcase.tr(' ', '_')
     end
   end
 end
