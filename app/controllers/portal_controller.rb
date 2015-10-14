@@ -11,9 +11,10 @@ class PortalController < ApplicationController
 
   # GET /record/:id
   def show
-    @response, @document = fetch_with_hierarchy(doc_id)
+    @response, @document = fetch(doc_id)
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
-    @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
+    @hierarchy = Europeana::API::Record::new('/' + params[:id]).hierarchy.ancestor_self_siblings
+    @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 
     respond_to do |format|
       format.html do
