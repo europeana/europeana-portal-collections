@@ -206,36 +206,4 @@ RSpec.describe PortalController, type: :controller do
       end
     end
   end
-
-  describe 'GET hierarchy' do
-    context 'when format is JSON' do
-      before do
-        get :hierarchy, params
-      end
-      let(:params) { { id: 'abc/123', format: 'json' } }
-      let(:record_id) { '/' + params[:id] }
-      it_behaves_like 'a hierarchy API request'
-      it 'responds with JSON' do
-        expect(response.content_type).to eq('application/json')
-      end
-      it 'has 200 status code' do
-        expect(response.status).to eq(200)
-      end
-      it 'renders JSON ERB template' do
-        expect(response).to render_template('portal/hierarchy')
-      end
-      context 'with page param' do
-        let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
-        it 'paginates'
-        it 'defaults per_page to 4'
-      end
-    end
-
-    context 'when format is HTML' do
-      let(:params) { { id: 'abc/123', format: 'html' } }
-      it 'returns an unknown format error' do
-        expect { get :hierarchy, params }.to raise_error(ActionController::UnknownFormat)
-      end
-    end
-  end
 end
