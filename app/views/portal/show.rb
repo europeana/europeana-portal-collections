@@ -402,7 +402,7 @@ module Portal
             }
           end
         },
-        hierarchy: @document.hierarchy.blank? ? nil : record_hierarchy(@document.hierarchy),
+        hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
         thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
       }.reverse_merge(helpers.content)
     end

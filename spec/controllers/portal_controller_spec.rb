@@ -106,7 +106,7 @@ RSpec.describe PortalController, type: :controller do
       context 'with param debug=json' do
         let(:params) { { id: 'abc/123', format: 'html', debug: 'json' } }
         it 'assigns pretty JSON document to @debug' do
-          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json))
+          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json.merge(hierarchy: assigns(:hierarchy).as_json)))
         end
       end
     end
