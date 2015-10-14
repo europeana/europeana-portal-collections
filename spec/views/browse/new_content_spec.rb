@@ -1,14 +1,4 @@
 RSpec.describe 'browse/new_content.html.mustache' do
-  before(:each) do
-    RSpec.configure do |config|
-      config.mock_with :rspec do |mocks|
-        mocks.verify_partial_doubles = false
-      end
-    end
-
-    Stache::ViewContext.current = view
-  end
-
   let(:providers) do
     time_now = Time.now
     [
