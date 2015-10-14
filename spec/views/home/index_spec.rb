@@ -7,8 +7,8 @@ RSpec.describe 'home/index.html.mustache' do
     assign(:channel, channel)
   end
 
-  let(:landing_page) { FactoryGirl.create(:landing_page, :home) }
-  let(:channel) { FactoryGirl.create(:channel, :home) }
+  let(:landing_page) { Page::Landing.find_by_slug('') }
+  let(:channel) { Channel.find_by_key('home') }
 
   it 'should have meta description' do
     meta_content = I18n.t('site.home.strapline', total_item_count: europeana_item_count)

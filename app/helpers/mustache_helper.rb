@@ -352,9 +352,10 @@ module MustacheHelper
     }
   end
 
+  # @todo {User.new} does not belong here, but needed by request specs
   def content
     banner = Banner.find_by_key('phase-feedback')
-    banner = Banner.new unless current_user.can? :show, banner
+    banner = Banner.new unless (current_user || User.new(role: :guest)).can? :show, banner
     {
       phase_feedback: banner.new_record? ? nil : {
         title: banner.title,

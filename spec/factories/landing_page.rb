@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :landing_page, class: Page::Landing do
     hero_image
-    slug ''
+    slug 'landing'
 
     trait :home do
       slug ''

@@ -12,6 +12,7 @@ require 'shoulda/matchers'
 require 'webmock_helper'
 
 # Local requires
+require 'support/seed_cms_test_helper'
 require 'support/view_test_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -59,6 +60,24 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.include ViewTestHelper, type: :view
+  config.include SeedCmsTestHelper
+
+  # DatabaseCleaner
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    begin
+      DatabaseCleaner.start
+      FactoryGirl.lint
+    ensure
+      DatabaseCleaner.clean
+    end
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 
   config.before(:each) do
     Rails.cache.clear

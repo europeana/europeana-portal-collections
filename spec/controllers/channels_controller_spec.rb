@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ChannelsController, type: :controller do
-  before do
-    FactoryGirl.create(:error_page, :not_found)
-  end
-
   describe 'GET index' do
     before do
       get :index
@@ -22,11 +18,9 @@ RSpec.describe ChannelsController, type: :controller do
   describe 'GET show' do
     context 'with id=home' do
       before do
-        channel.publish
-        channel.save
         get :show, params
       end
-      let(:channel) { FactoryGirl.create(:channel, :home) }
+      let(:channel) { Channel.find_by_key('home') }
       let(:params) { { id: channel.key } }
 
       it 'does not query API' do
