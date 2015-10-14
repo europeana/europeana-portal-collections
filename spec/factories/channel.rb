@@ -11,5 +11,10 @@ FactoryGirl.define do
       key 'music'
       api_params 'qf=what:music'
     end
+
+    trait :home do
+      key 'home'
+      api_params '*:*'
+    end
   end
 end

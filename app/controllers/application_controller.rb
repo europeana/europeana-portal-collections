@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    session[:locale] ||= I18n.default_locale
+    I18n.locale = session[:locale]
   end
 
   def redirect_to_root
@@ -26,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    super || User.new
+    super || User.new(guest: true)
   end
 
   private

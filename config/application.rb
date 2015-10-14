@@ -22,8 +22,12 @@ module Europeana
       # Application configuration should go into files in config/initializers
       # -- all .rb files in that directory are automatically loaded.
 
-      # Load job, routing and validator classes
-      config.autoload_paths += %W(#{config.root}/app/jobs #{config.root}/app/routes #{config.root}/app/validators)
+      # Load extra classes
+      config.autoload_paths += %W(
+        #{config.root}/app/jobs #{config.root}/app/jobs/concerns
+        #{config.root}/app/routes #{config.root}/app/presenters
+        #{config.root}/app/validators
+      )
 
       # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
       # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -65,7 +69,6 @@ module Europeana
       # Read settings from env vars
       config.x.edm_is_shown_by_proxy = ENV['EDM_IS_SHOWN_BY_PROXY']
       config.x.europeana_styleguide_cdn = ENV['EUROPEANA_STYLEGUIDE_CDN']
-      config.x.js_entrypoint = ENV['JS_ENTRYPOINT']
     end
   end
 end

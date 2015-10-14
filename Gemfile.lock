@@ -1,12 +1,40 @@
 GIT
+  remote: git://github.com/europeana/europeana-api-client-ruby.git
+  revision: 9bab0e56cfee6a013c2b15ac742668d1e1419246
+  ref: 9bab0e5
+  specs:
+    europeana-api (0.4.0)
+      activesupport (>= 3.0)
+      multi_json (~> 1.0)
+
+GIT
+  remote: git://github.com/europeana/europeana-blacklight.git
+  revision: 966d3f2840c169b6d817a4d8e9e4813ce0b1fe3a
+  ref: 966d3f2
+  specs:
+    europeana-blacklight (0.2.8)
+      activesupport (>= 4.0, < 5.0)
+      blacklight (>= 5.12.0, < 6.0.0)
+      europeana-api (~> 0.4.0)
+      iso-639 (~> 0.2.5)
+      kaminari (~> 0.16)
+
+GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 540ad0ebb40bc61773ffe37d8131fc15cea663bc
-  ref: 540ad0e
+  revision: a11a0e5513666d0660c4b9de5aa72754da2227da
+  ref: a11a0e5513
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
+
+GIT
+  remote: git://github.com/europeana/stache.git
+  revision: e5ceff86974620d7d7db28018fc29a2c9c24d1d0
+  branch: europeana-styleguide
+  specs:
+    stache (1.1.1)
 
 GIT
   remote: git://github.com/globalize/globalize-versioning.git
@@ -27,13 +55,6 @@ GIT
       globalize (>= 5.0)
       rails (>= 4.2)
       rails_admin (>= 0.6.2)
-
-GIT
-  remote: git://github.com/rwd/stache.git
-  revision: 819ff888bf0c109f4592ffd26fb2c1e2922980ef
-  ref: 819ff88
-  specs:
-    stache (1.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -80,13 +101,13 @@ GEM
     ast (2.0.0)
     astrolabe (1.3.1)
       parser (~> 2.2)
-    autoprefixer-rails (5.2.1.1)
+    autoprefixer-rails (6.0.3)
       execjs
       json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.14.0)
+    blacklight (5.15.0)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (>= 0.15)
@@ -155,14 +176,6 @@ GEM
       dotenv (= 2.0.2)
       railties (~> 4.0)
     erubis (2.7.0)
-    europeana-api (0.3.4)
-      activesupport (>= 3.0)
-      multi_json (~> 1.0)
-    europeana-blacklight (0.2.7)
-      blacklight (>= 5.12.0, < 6.0.0)
-      europeana-api (~> 0.3.4)
-      iso-639 (~> 0.2.5)
-      kaminari (~> 0.16)
     excon (0.45.4)
     execjs (2.5.2)
     factory_girl (4.5.0)
@@ -530,7 +543,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.2)
-  blacklight (~> 5.14.0)
+  blacklight (~> 5.15)
   cancancan (~> 1.12)
   capybara (~> 2.4.0)
   clockwork (~> 1.2)
@@ -540,8 +553,8 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.0.3)
   devise (~> 3.5)
   dotenv-rails (~> 2.0)
-  europeana-api (~> 0.3.4)
-  europeana-blacklight (= 0.2.7)
+  europeana-api!
+  europeana-blacklight!
   europeana-styleguide!
   factory_girl_rails (~> 4.5)
   feedjira (~> 2.0)
@@ -567,7 +580,7 @@ DEPENDENCIES
   sass-rails
   sdoc (~> 0.4.0)
   selenium-webdriver (~> 2.47)
-  shoulda-matchers (~> 2.8.0)
+  shoulda-matchers (~> 2.8)
   simplecov
   spring (~> 1.3.6)
   stache!

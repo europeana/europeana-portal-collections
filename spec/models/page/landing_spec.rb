@@ -1,5 +1,4 @@
-RSpec.describe LandingPage do
-  it { is_expected.to belong_to(:channel) }
+RSpec.describe Page::Landing do
   it { is_expected.to belong_to(:hero_image) }
   it { is_expected.to have_many(:credits) }
   it { is_expected.to have_many(:social_media) }

@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ChannelsController, type: :controller do
+  before do 
+    FactoryGirl.create(:error_page, :not_found)
+  end
+
   describe 'GET index' do
     before do
       get :index
@@ -16,12 +20,13 @@ RSpec.describe ChannelsController, type: :controller do
   end
 
   describe 'GET show' do
-    before do
-      get :show, params
-    end
-
     context 'with id=home' do
-      let(:channel) { FactoryGirl.create(:channel, key: 'home') }
+      before do
+        channel.publish
+        channel.save
+        get :show, params
+      end
+      let(:channel) { FactoryGirl.create(:channel, :home) }
       let(:params) { { id: channel.key } }
 
       it 'does not query API' do
@@ -37,34 +42,39 @@ RSpec.describe ChannelsController, type: :controller do
       let(:params) { { id: 'unknown' } }
 
       it 'does not query API' do
+        get :show, params
         expect(an_api_search_request).not_to have_been_made
       end
 
       it 'responds with 404' do
+        get :show, params
         expect(response.status).to eq(404)
-        expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
+        expect(response).to render_template('pages/errors/not_found')
       end
     end
 
     context 'with id=[known channel]' do
+      before do
+        landing_page.publish
+        landing_page.save
+        channel.publish
+        channel.save
+        get :show, params
+      end
       let(:channel) { FactoryGirl.create(:channel, :music) }
+      let(:landing_page) { FactoryGirl.create(:landing_page, :music_channel) }
 
       context 'without search params' do
         let(:params) { { id: channel.key } }
 
-        it 'queries API for channel stats' do
+        it 'should not query API for channel stats' do
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
-            expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).to have_been_made.once
+            expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).not_to have_been_made
           end
         end
 
-        it 'queries API for recent additions' do
-          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_least_times(1)
-          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).to have_been_made.at_most_times(24)
-        end
-
-        it 'does not get RSS blog posts' do
-          expect(a_europeana_blog_request).not_to have_been_made
+        it 'should not query API for recent additions' do
+          expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).not_to have_been_made
         end
 
         it 'renders channels landing template' do
@@ -72,12 +82,11 @@ RSpec.describe ChannelsController, type: :controller do
           expect(response).to render_template('channels/show')
         end
 
-        context 'with associated landing page' do
-          let(:landing_page) { FactoryGirl.create(:landing_page, :music_channel) }
+#          let(:landing_page) { FactoryGirl.create(:landing_page, :music_channel) }
           it 'assigns @landing_page' do
             expect(assigns(:landing_page)).to eq(landing_page)
           end
-        end
+#        end
       end
 
       context 'with search params' do

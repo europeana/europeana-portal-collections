@@ -3,25 +3,24 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.2.4'
 
-gem 'europeana-styleguide',
-  github: 'europeana/europeana-styleguide-ruby', ref: '540ad0e'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'a11a0e5513'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
-gem 'stache', github: 'rwd/stache', ref: '819ff88'
+gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
 
 gem 'rails_admin_globalize_field', github: 'rwd/rails_admin_globalize_field',
   branch: 'globalize-5-rails-4.2'
 
 gem 'aasm', '~> 4.2'
-gem 'blacklight', '~> 5.14.0'
+gem 'blacklight', '~> 5.15'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'devise', '~> 3.5'
-gem 'europeana-api', '~> 0.3.4'
-gem 'europeana-blacklight', '0.2.7'
+gem 'europeana-blacklight', github: 'europeana/europeana-blacklight', ref: '966d3f2'
+gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', ref: '9bab0e5'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
@@ -46,7 +45,6 @@ group :development, :test do
   # gem 'rails_best_practices', require: false # @todo add to CI suite
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '0.29.1', require: false # only update when Hound does
-  gem 'shoulda-matchers', '~> 2.8.0', require: false
 end
 
 group :development do
@@ -63,6 +61,7 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver', '~> 2.47'
+  gem 'shoulda-matchers', '~> 2.8', require: false
   gem 'simplecov', require: false
   gem 'webmock', '~> 1.21.0'
 end

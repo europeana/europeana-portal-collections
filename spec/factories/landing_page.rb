@@ -1,9 +1,14 @@
 FactoryGirl.define do
-  factory :landing_page do
+  factory :landing_page, class: Page::Landing do
     hero_image
+    slug ''
+
+    trait :home do
+      slug ''
+    end
 
     trait :music_channel do
-      channel { Channel.find_by_key('music') }
+      slug 'channels/music'
     end
   end
 end

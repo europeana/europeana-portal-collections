@@ -9,4 +9,14 @@ class Channel < ActiveRecord::Base
   def to_param
     key
   end
+
+  def api_params_hash
+    {}.tap do |hash|
+      api_params.split('&').map do |param|
+        key, val = param.split('=')
+        hash[key] ||= []
+        hash[key] << val
+      end
+    end
+  end
 end

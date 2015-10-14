@@ -11,9 +11,6 @@ require 'capybara_helper'
 require 'shoulda/matchers'
 require 'webmock_helper'
 
-# Local requires
-require 'support/relative_url_root_helper'
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -57,7 +54,9 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.include RelativeUrlRootHelper
-
   config.include Devise::TestHelpers, type: :controller
+
+  config.before(:each) do
+    Rails.cache.clear
+  end
 end

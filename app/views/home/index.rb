@@ -11,15 +11,21 @@ module Home
         promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
-          blogurl: 'http://blog.europeana.eu/'
+          blogurl: Cache::FeedJob::URLS[:blog][:all]
         }
-      }.merge(helpers.content)
+      }.reverse_merge(helpers.content)
+    end
+
+    def head_meta
+      [
+        { meta_name: 'description', content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ') }
+      ] + super
     end
 
     private
 
     def blog_news_items
-      @blog_news_items ||= news_items(@blog_items)
+      @blog_news_items ||= news_items(feed_entries(Cache::FeedJob::URLS[:blog][:all]))
     end
   end
 end

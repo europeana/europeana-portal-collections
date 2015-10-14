@@ -1,6 +1,4 @@
 RSpec.describe MediaObject do
-  subject { described_class.new }
-
   it 'has Paperclip attachment' do
     expect(Paperclip::AttachmentRegistry.instance.names_for(described_class)).
       to include(:file)

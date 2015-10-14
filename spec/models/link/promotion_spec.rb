@@ -16,11 +16,4 @@ RSpec.describe Link::Promotion do
     subject { described_class.settings_wide_enum }
     it { is_expected.to eq(['0', '1']) }
   end
-
-  context 'new record' do
-    subject { FactoryGirl.build(:promotion_link) }
-    it 'has a media object built' do
-      expect(subject.media_object).not_to be_nil
-    end
-  end
 end

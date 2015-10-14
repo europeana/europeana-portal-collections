@@ -8,6 +8,8 @@ class Page::Error < Page
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   before_validation do |page|
-    page.slug = 'errors/' + Rack::Utils::HTTP_STATUS_CODES[page.http_code].downcase.gsub(' ', '_')
+    unless page.http_code.nil? || Rack::Utils::HTTP_STATUS_CODES[page.http_code].nil?
+      page.slug = 'errors/' + Rack::Utils::HTTP_STATUS_CODES[page.http_code].downcase.gsub(' ', '_')
+    end
   end
 end

@@ -4,20 +4,21 @@ class ChannelsController < ApplicationController
   include Catalog
   include Channels
   include Europeana::Styleguide
-  include BlogFetcher
 
-  before_action :find_channel, only: :show
-  before_action :find_landing_page, only: :show
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
-  before_action :fetch_blog_items, only: :show
-  before_action :populate_channel_stats, only: :show, unless: :has_search_parameters?
-  before_action :populate_recent_additions, only: :show, unless: :has_search_parameters?
 
   def index
     redirect_to_root
   end
 
   def show
+    @channel = find_channel
+    @landing_page = find_landing_page
+    @channel_stats = channel_stats
+    @recent_additions = recent_additions
+
+    (@response, @document_list) = search_results(params, search_params_logic) if has_search_parameters?
+
     respond_to do |format|
       format.html do
         render has_search_parameters? ? { template: '/portal/index' } : { action: 'show' }
@@ -42,69 +43,36 @@ class ChannelsController < ApplicationController
   end
 
   def find_channel
-    @channel ||= Channel.find_by_key!(params[:id])
-    authorize! :show, @channel
+    Channel.find_by_key!(params[:id]).tap do |channel|
+      authorize! :show, channel
+    end
   end
 
   def find_landing_page
-    @landing_page = Page::Landing.find_or_initialize_by(slug: "channels/#{@channel.key}")
-    authorize! :show, @landing_page
+    Page::Landing.find_or_initialize_by(slug: "channels/#{@channel.key}").tap do |landing_page|
+      authorize! :show, landing_page
+    end
   end
 
   ##
-  # Gets from the API the number of items of each media type within the current channel
-  def populate_channel_stats
+  # Gets from the cache the number of items of each media type within the current channel
+  def channel_stats
     # ['EDM value', 'i18n key']
     types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
              ['3D', '3d'], ['SOUND', 'sound']]
-    @channel_stats = types.map do |type|
-      type_count = api_query_count("TYPE:#{type[0]}")
+    channel_stats = types.map do |type|
+      type_count = Rails.cache.fetch("record/counts/channels/#{@channel.key}/type/#{type[0].downcase}")
       {
         count: type_count,
         text: t(type[1], scope: 'site.channels.data-types'),
         url: channel_path(q: "TYPE:#{type[0]}")
       }
     end
-    @channel_stats.reject! { |stats| stats[:count] == 0 }
-    @channel_stats.sort_by! { |stats| stats[:count] }.reverse!
+    channel_stats.reject! { |stats| stats[:count] == 0 }
+    channel_stats.sort_by { |stats| stats[:count] }.reverse
   end
 
-  def populate_recent_additions
-    @recent_additions = []
-
-    time_now = Time.now
-    month_now = time_now.month
-
-    (0..23).each do |months_ago|
-      time_from = Time.new(time_now.year, time_now.month) - months_ago.month
-      time_to = time_from + 1.month - 1.second
-
-      time_from_param = time_from.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
-      time_to_param = time_to.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
-      time_range_query = "timestamp_created:[#{time_from_param} TO #{time_to_param}]"
-
-      api_query = search_builder(self.search_params_logic).
-        with(q: time_range_query).query.
-        merge(rows: 0, start: 1, profile: 'minimal facets')
-      api_response = repository.search(api_query)
-      next if api_response.total == 0
-
-      data_provider_facet = api_response.facet_fields.find { |f| f['name'] == 'DATA_PROVIDER' }
-      next if data_provider_facet.blank?
-
-      data_provider_facet['fields'][0..2].each do |field|
-        @recent_additions << {
-          text: field['label'],
-          number: field['count'],
-          date: time_from.strftime('%B %Y'),
-          url: channel_path(q: time_range_query, f: { 'DATA_PROVIDER' => [field['label']] })
-        }
-      end
-
-      break if @recent_additions.size >= 3
-    end
-
-    @recent_additions = @recent_additions[0..2]
-    @recent_additions.sort_by! { |addition| addition[:number] }.reverse!
+  def recent_additions
+    Rails.cache.fetch("record/counts/channels/#{@channel.key}/recent-additions") || []
   end
 end

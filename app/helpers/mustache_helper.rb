@@ -1,15 +1,4 @@
 module MustacheHelper
-  def head_meta
-    [
-      #{'name':'X-UA-Compatible',    content: 'IE=edge' },
-      #{'name':'viewport',           content: 'width=device-width,initial-scale=1.0' },
-      { meta_name: 'HandheldFriendly',   content: 'True' },
-      { httpequiv: 'Content-Type',       content: 'text/html; charset=utf-8' },
-      { meta_name: 'csrf-param',         content: 'authenticity_token' },
-      { meta_name: 'csrf-token',         content: form_authenticity_token }
-    ]
-  end
-
   def form_search
     {
       action: search_action_path(only_path: true)
@@ -19,7 +8,7 @@ module MustacheHelper
   def head_links
     [
       # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
-      { rel: 'stylesheet', href: styleguide_path('/css/search/screen.css'), media: 'all' }
+      { rel: 'stylesheet', href: styleguide_url('/css/search/screen.css'), media: 'all' }
     ]
   end
 
@@ -38,103 +27,102 @@ module MustacheHelper
     }
   end
 
-  def image_root
-    styleguide_path('/images/')
-  end
-
   def version
     { is_alpha: content[:phase_feedback].present? }
   end
 
-  def js_variables
-    "var js_path='" + styleguide_path('/js/dist/') + "';"
+  def js_vars
+    page_name = (params[:controller] || '') + '/' + (params[:action] || '')
+    [
+      {
+        name: 'pageName', value: page_name
+      }
+    ]
   end
 
   def js_files
-    js_entry_point = Rails.application.config.x.js_entrypoint || '/js/dist/'
-    js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
-    [{ path: styleguide_path(js_entry_point + 'require.js'),
-       data_main: styleguide_path(js_entry_point + 'main/main') }]
+    [{ path: styleguide_url('/js/dist/require.js'),
+      data_main: styleguide_url('/js/dist/main/main') }]
   end
 
-  def menus
-    {
-      actions: {
-        button_title: 'Actions',
-        menu_id: 'dropdown-result-actions',
-        menu_title: 'Save to:',
-        items: [
-          {
-            url: 'http://europeana.eu',
-            text: 'First Item'
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label'
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Label here'
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Fourth Item'
-          },
-          {
-            divider: true
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label',
-            calltoaction: true
-          },
-          {
-            divider: true
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label',
-            calltoaction: true
-          }
-        ]
-      },
-      sort: {
-        button_title: 'Relevance',
-        menu_id: 'dropdown-result-sort',
-        menu_title: 'Sort by:',
-        items: [
-          {
-            text: 'Date',
-            url: 'http://europeana.eu'
-          },
-          {
-            text: 'Alphabetical',
-            url: 'http://europeana.eu'
-          },
-          {
-            text: 'Relevance',
-            url: 'http://europeana.eu'
-          },
-          {
-            divider: true
-          },
-          {
-            url: 'http://europeana.eu',
-            text: 'Another Label',
-            calltoaction: true
-          },
-          {
-            divider: true
-          },
-          {
-            text: 'Advanced Search',
-            url: 'http://europeana.eu',
-            calltoaction: true
-          }
-        ]
-      }
-    }
-  end
+  # def menus
+  #   {
+  #     actions: {
+  #       button_title: 'Actions',
+  #       menu_id: 'dropdown-result-actions',
+  #       menu_title: 'Save to:',
+  #       items: [
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'First Item'
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label'
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Label here'
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Fourth Item'
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label',
+  #           calltoaction: true
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label',
+  #           calltoaction: true
+  #         }
+  #       ]
+  #     },
+  #     sort: {
+  #       button_title: 'Relevance',
+  #       menu_id: 'dropdown-result-sort',
+  #       menu_title: 'Sort by:',
+  #       items: [
+  #         {
+  #           text: 'Date',
+  #           url: 'http://europeana.eu'
+  #         },
+  #         {
+  #           text: 'Alphabetical',
+  #           url: 'http://europeana.eu'
+  #         },
+  #         {
+  #           text: 'Relevance',
+  #           url: 'http://europeana.eu'
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           url: 'http://europeana.eu',
+  #           text: 'Another Label',
+  #           calltoaction: true
+  #         },
+  #         {
+  #           divider: true
+  #         },
+  #         {
+  #           text: 'Advanced Search',
+  #           url: 'http://europeana.eu',
+  #           calltoaction: true
+  #         }
+  #       ]
+  #     }
+  #   }
+  # end
 
   def total_item_count
     @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
@@ -155,56 +143,105 @@ module MustacheHelper
     }
   end
 
+  def channel_data
+    name = nil
+    if !(params[:controller] == 'portal' && params[:action] == 'show')
+      name = params[:id] ? params[:id] : nil
+    end
+    if !name.nil?
+      {
+        name: name,
+        label: t("site.channels.#{name}.title"),
+        url: name ? channel_url(name) : nil
+      }
+    end
+  end
+
   def navigation
     {
       global: {
         options: {
           search_active: false,
-          settings_active: false
+          settings_active: true
         },
         logo: {
           url: root_url,
-          text: 'Europeana Search'
+          text: 'Europeana ' + t('global.search-collections')
         },
         primary_nav: {
+          menu_id: 'main-menu',
           items: [
             {
               url: root_url,
-              text: 'Home',
-              is_current: controller.controller_name != 'channels'
+              text: t('global.navigation.home'),
+              is_current: controller.controller_name == 'home'
             },
-            # {
-            #   url: channel_url('music'),
-            #   text: 'Channels',
-            #   is_current: controller.controller_name == 'channels',
-            #   submenu: {
-            #     items: [
-            #       {
-            #         url: channel_url('art'),
-            #         text: 'Art History'
-            #       },
-            #       {
-            #         url: channel_url('music'),
-            #         text: 'Music'
-            #       }
-            #     ]
-            #   }
-            # },
-            # {
-            #   url: 'http://exhibitions.europeana.eu/',
-            #   text: 'Exhibitions'
-            # },
-            # {
-            #   url: 'http://blog.europeana.eu/',
-            #   text: 'Blog'
-            # },
-            # {
-            #   url: 'http://www.europeana.eu/portal/myeuropeana#login',
-            #   text: 'My Europeana'
-            # }
+            {
+              text: t('global.navigation.channels'),
+              is_current: controller.controller_name == 'channels',
+              submenu: {
+                items: ['art-history', 'music'].map do |channel|
+                  {
+                    url: channel_url(channel),
+                    text: t("site.channels.#{channel}.title"),
+                    is_current: params[:id] == channel
+                  }
+                end
+              }
+            },
+            {
+              text: t('global.navigation.browse'),
+              is_current: controller.controller_name == 'browse',
+              submenu: {
+                items: [
+                  {
+                    url: browse_newcontent_path,
+                    text: t('global.navigation.browse_newcontent'),
+                    is_current: current_page?(browse_newcontent_path)
+                  },
+                  {
+                    url: browse_colours_path,
+                    text: t('global.navigation.browse_colours'),
+                    is_current: current_page?(browse_colours_path)
+                  },
+                  {
+                    url: browse_sources_path,
+                    text: t('global.navigation.browse_sources'),
+                    is_current: current_page?(browse_sources_path)
+                  }
+                ]
+              }
+            },
+            {
+              url: 'http://exhibitions.europeana.eu/',
+              text: t('global.navigation.exhibitions'),
+              submenu: {
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][:all], 6) + [
+                  {
+                    url: 'http://exhibitions.europeana.eu/',
+                    text: t('global.navigation.all_exhibitions'),
+                    is_morelink: true
+                  }
+                ]
+              }
+            },
+            {
+              url: 'http://blog.europeana.eu/',
+              text: t('global.navigation.blog'),
+              submenu: {
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6) + [
+                  {
+                    url: 'http://blog.europeana.eu/',
+                    text: t('global.navigation.all_blog_posts'),
+                    is_morelink: true
+                  }
+                ]
+              }
+            }
           ]
         }  # end prim nav
       },
+      home_url: root_url,
       footer: {
         linklist1: {
           title: t('global.more-info'),
@@ -254,6 +291,67 @@ module MustacheHelper
     }
   end
 
+  def utility_nav
+    {
+      menu_id: 'settings-menu',
+      style_modifier: 'caret-right',
+      tabindex: 6,
+      items: [
+        {
+          url: '#',
+          text: 'Settings',
+          icon: 'settings',
+          submenu: {
+            items: [
+              {
+                text: t('global.settings'),
+                subtitle: true,
+                url: false
+              },
+              {
+                text: t('site.settings.language.label'),
+                url: '/portal/settings/language',
+                is_current: controller.controller_name == 'settings'
+              },
+              # {
+              #   text: 'My Profile',
+              #   url: 'url to profile page'
+              # },
+              # {
+              #   text: 'Advanced',
+              #   url: 'url to settings page'
+              # },
+              # {
+              #   is_divider: true
+              # },
+              # {
+              #   text: 'Admin',
+              #   subtitle: true,
+              #   url: false
+              # },
+              # {
+              #   text: 'Channel Admin',
+              #   url: 'url to admin page'
+              # },
+              # {
+              #   is_divider: true
+              # },
+              # {
+              #   text: 'Account',
+              #   subtitle: true,
+              #   url: false
+              # },
+              # {
+              #   text: 'Log Out',
+              #   url: 'url to login page'
+              # }
+            ]
+          }
+        }
+      ]
+    }
+  end
+
   def content
     banner = Banner.find_by_key('phase-feedback')
     banner = Banner.new unless current_user.can? :show, banner
@@ -267,11 +365,16 @@ module MustacheHelper
     }
   end
 
-  def styleguide_path(asset = nil)
-    Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
-  end
-
   private
+
+  def feed_entry_nav_items(url, max)
+    feed_entries(url)[0..(max - 1)].map do |item|
+      {
+        url: CGI.unescapeHTML(item.url),
+        text: CGI.unescapeHTML(item.title)
+      }
+    end
+  end
 
   # @param keys [Symbol] keys of params to gather template input field data for
   # @return [Array<Hash>]
@@ -314,6 +417,7 @@ module MustacheHelper
   end
 
   def news_items(items)
+    return nil if items.blank?
     items[0..2].map do |item|
       {
         image_root: nil,
@@ -322,10 +426,8 @@ module MustacheHelper
         },
         url: CGI.unescapeHTML(item.url),
         img: {
-          rectangle: {
-            src: news_item_img_src(item),
-            alt: nil
-          }
+          src: news_item_img_src(item),
+          alt: nil
         },
         excerpt: {
           short: CGI.unescapeHTML(item.summary)

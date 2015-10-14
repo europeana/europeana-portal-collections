@@ -5,7 +5,7 @@ module Channels
   ##
   # Adds channel filter params to the API query
   def search_builder(processor_chain = search_params_logic)
-    super(processor_chain).with_overlay_params(current_channel.api_params)
+    super(processor_chain).with_overlay_params(current_channel.api_params_hash)
   end
 
   def has_search_parameters?

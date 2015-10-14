@@ -60,11 +60,4 @@ RSpec.describe HeroImage do
       end
     end
   end
-
-  context 'new record' do
-    subject { FactoryGirl.build(:hero_image) }
-    it 'has a media object built' do
-      expect(subject.media_object).not_to be_nil
-    end
-  end
 end
