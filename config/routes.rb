@@ -5,10 +5,17 @@ Rails.application.routes.draw do
   get 'search', to: 'portal#index'
 
   constraints id: %r{[^/]+/[^/]+} do
-    get 'record/*id/hierarchy', to: 'portal#hierarchy', as: 'document_hierarchy'
     get 'record/*id/media', to: 'portal#media', as: 'document_media'
     get 'record/*id/similar', to: 'portal#similar', as: 'document_similar'
+
+    get 'record/*id/hierarchy/self', to: 'hierarchy#self'
+    get 'record/*id/hierarchy/parent', to: 'hierarchy#parent'
+    get 'record/*id/hierarchy/children', to: 'hierarchy#children'
+    get 'record/*id/hierarchy/preceding-siblings', to: 'hierarchy#preceding_siblings'
+    get 'record/*id/hierarchy/following-siblings', to: 'hierarchy#following_siblings'
+    get 'record/*id/hierarchy/ancestor-self-siblings', to: 'hierarchy#ancestor_self_siblings'
   end
+
   blacklight_for :portal
 
   resources :channels, only: [:show, :index]
