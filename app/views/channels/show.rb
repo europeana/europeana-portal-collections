@@ -2,7 +2,7 @@ module Channels
   class Show < ApplicationView
     def head_meta
       [
-        { meta_name: 'description', content: truncate(strip_tags(t("site.channels.#{@channel.id}.description")), length: 350, separator: ' ') }
+        { meta_name: 'description', content: truncate(strip_tags(@landing_page.body), length: 350, separator: ' ') }
       ] + super
     end
 

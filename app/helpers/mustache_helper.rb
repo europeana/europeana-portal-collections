@@ -448,7 +448,7 @@ module MustacheHelper
   def hero_config(hero_image)
     hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
     {
-      hero_image: hero_image.file.url,
+      hero_image: hero_image.file.present? ? hero_image.file.url : nil,
       attribution_title: hero_image.settings_attribution_title,
       attribution_creator: hero_image.settings_attribution_creator,
       attribution_institution: hero_image.settings_attribution_institution,

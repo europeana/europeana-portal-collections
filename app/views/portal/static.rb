@@ -4,6 +4,12 @@ module Portal
       @page.title
     end
 
+    def head_meta
+      [
+        { meta_name: 'description', content: truncate(strip_tags(@page.body), length: 350, separator: ' ') }
+      ] + super
+    end
+
     def content
       {
         title: @page.title,
