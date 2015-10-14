@@ -28,7 +28,7 @@ module MustacheHelper
   end
 
   def version
-    { is_alpha: true }
+    { is_alpha: content[:phase_feedback].present? }
   end
 
   def js_vars
@@ -352,21 +352,18 @@ module MustacheHelper
     }
   end
 
+  # @todo {User.new} does not belong here, but needed by request specs
   def content
+    banner = Banner.find_by_key('phase-feedback')
+    banner = Banner.new unless (current_user || User.new(role: :guest)).can? :show, banner
     {
-      phase_feedback: {
-        title: t('site.alpha.feedback_banner.title'),
-        text: t('site.alpha.feedback_banner.description'),
-        cta_url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
-        cta_text: t('site.alpha.feedback_banner.link-text')
+      phase_feedback: banner.new_record? ? nil : {
+        title: banner.title,
+        text: banner.body,
+        cta_url: banner.link.url,
+        cta_text: banner.link.text
       }
     }
-  end
-
-  def styleguide_hero_config(hero_config)
-    hero_config.deep_dup.tap do |hc|
-      hc[:hero_image] = image_root + hc[:hero_image]
-    end
   end
 
   private
@@ -447,5 +444,51 @@ module MustacheHelper
     url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
     mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
     mo.nil? ? nil : mo.file.url(:medium)
+  end
+
+  def hero_config(hero_image)
+    hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
+    {
+      hero_image: hero_image.file.present? ? hero_image.file.url : nil,
+      attribution_title: hero_image.settings_attribution_title,
+      attribution_creator: hero_image.settings_attribution_creator,
+      attribution_institution: hero_image.settings_attribution_institution,
+      attribution_url: hero_image.settings_attribution_url,
+      attribution_text: hero_image.settings_attribution_text,
+      brand_opacity: "brand-opacity#{hero_image.settings_brand_opacity}",
+      brand_position: "brand-#{hero_image.settings_brand_position}",
+      brand_colour: "brand-colour-#{hero_image.settings_brand_colour}"
+    }.merge(hero_license)
+  end
+
+  def promoted_items(promotions)
+    promotions.map do |promo|
+      cat_flag = promo.settings_category.blank? ? {} : { :"is_#{promo.settings_category}" => true }
+      {
+        url: promo.url,
+        title: promo.text,
+        custom_class: promo.settings_class,
+        wide: promo.settings_wide == '1',
+        bg_image: promo.file.nil? ? nil : promo.file.url
+      }.merge(cat_flag)
+    end
+  end
+
+  ##
+  # @param [ActiveRecord::Associations::CollectionProxy<BrowseEntry>
+  def channel_entry_items(browse_entries)
+    browse_entries.map do |entry|
+      cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
+      {
+        title: entry.title,
+        url: browse_entry_url(entry),
+        image: entry.file.nil? ? nil : entry.file.url,
+        image_alt: nil
+      }.merge(cat_flag)
+    end
+  end
+
+  def license_template_var_name(license)
+    'license_' + license.tr('-', '_')
   end
 end

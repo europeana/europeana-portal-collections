@@ -2,12 +2,15 @@ require 'rails_helper'
 
 RSpec.describe ChannelsHelper, type: :helper do
   describe '#available_channels' do
-    subject { helper.available_channels }
-    it 'should get available channels from app config' do
-      expect(subject).to eq(Rails.application.config.x.channels.keys.sort)
+    before do
+      3.times do
+        FactoryGirl.create(:channel)
+      end
     end
-    it { is_expected.to be_instance_of(Array) }
-    it { is_expected.to include('home') }
+    subject { helper.available_channels }
+    it 'should eq channel keys' do
+      expect(subject).to eq(Channel.all.map(&:key))
+    end
   end
   
   describe '#within_channel?' do

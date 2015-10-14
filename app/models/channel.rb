@@ -1,36 +1,22 @@
-##
-# A "Channel" of Europeana content, e.g. Music or Fashion
-#
-# @todo Use ActiveModel
-class Channel
-  # @!attribute [r] id
-  #   @return [String] the ID of the Channel
-  #   @example 'music'
-  attr_reader :id
+class Channel < ActiveRecord::Base
+  include HasPublicationStates
 
-  # @!attribute [rw] config
-  #   @return [Hash] the configuration for the Channel
-  attr_accessor :config
+  has_paper_trail
 
-  def self.find(id)
-    unless Rails.application.config.x.channels.key?(id)
-      fail Channels::Errors::NoChannelConfiguration,
-           "Channel \"#{id}\" is not configured"
-    end
-    channel = new(id)
-    channel.config = Rails.application.config.x.channels[id]
-    channel
+  validates :key, presence: true, uniqueness: true
+  validates :api_params, presence: true
+
+  def to_param
+    key
   end
 
-  # @param [String] id The Channel ID
-  def initialize(id)
-    unless id.is_a?(String)
-      fail ArgumentError, "Channel ID must be a String, but is a #{id.class}"
+  def api_params_hash
+    {}.tap do |hash|
+      api_params.split('&').map do |param|
+        key, val = param.split('=')
+        hash[key] ||= []
+        hash[key] << val
+      end
     end
-    @id = id
-  end
-
-  def method_missing(meth, *_args, &_block)
-    config[meth] if config.key?(meth)
   end
 end

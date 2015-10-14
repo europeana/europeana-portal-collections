@@ -22,10 +22,11 @@ module Europeana
       # Application configuration should go into files in config/initializers
       # -- all .rb files in that directory are automatically loaded.
 
-      # Load job, routing and view concern classes
+      # Load extra classes
       config.autoload_paths += %W(
         #{config.root}/app/jobs #{config.root}/app/jobs/concerns
         #{config.root}/app/routes #{config.root}/app/presenters
+        #{config.root}/app/validators
       )
 
       # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
@@ -34,8 +35,10 @@ module Europeana
 
       # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
       # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-      # config.i18n.default_locale = :de
+      config.i18n.default_locale = :en
       config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
+      config.i18n.available_locales = [:en, :nl]
+      config.i18n.fallbacks = true
 
       # Do not swallow errors in after_commit/after_rollback callbacks.
       config.active_record.raise_in_transactional_callbacks = true

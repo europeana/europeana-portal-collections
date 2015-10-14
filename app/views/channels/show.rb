@@ -2,12 +2,12 @@ module Channels
   class Show < ApplicationView
     def head_meta
       [
-        { meta_name: 'description', content: truncate(strip_tags(t("site.channels.#{@channel.id}.description")), length: 350, separator: ' ') }
+        { meta_name: 'description', content: truncate(strip_tags(@landing_page.body), length: 350, separator: ' ') }
       ] + super
     end
 
     def page_title
-      t('site.channels.' + @channel.id.to_s + '.title') + ' Channel - Alpha'
+      @landing_page.title + ' Channel - Alpha'
     end
 
     def body_class
@@ -24,8 +24,8 @@ module Channels
     def content
       {
         channel_info: {
-          name: t("site.channels.#{@channel.id}.title"),
-          description: t("site.channels.#{@channel.id}.description"),
+          name: @landing_page.title,
+          description: @landing_page.body,
           stats: {
             items: stylised_channel_stats
           },
@@ -33,59 +33,49 @@ module Channels
             title: t('site.channels.labels.recent'),
             items: stylised_recent_additions(@recent_additions, max: 3)
           },
-          credits: {
+          credits: @landing_page.credits.blank? ? {} : {
             title: t('site.channels.labels.credits'),
-            items: channel_content[:credits]
+            items: @landing_page.credits.to_a
           }
         },
-        hero_config: styleguide_hero_config(channel_content[:hero_config]),
-        channel_entry: {
-          items: stylised_channel_entry
+        hero_config: hero_config(@landing_page.hero_image),
+        channel_entry: @landing_page.browse_entries.blank? ? nil : {
+          items: channel_entry_items(@landing_page.browse_entries)
         },
-        promoted: {
-          items: stylised_promoted
+        promoted: @landing_page.promotions.blank? ? nil : {
+          items: promoted_items(@landing_page.promotions)
         },
         news: blog_news_items.blank? ? nil : {
           items: blog_news_items,
-          blogurl: "http://blog.europeana.eu/tag/#{@channel.id}"
+          blogurl: 'http://blog.europeana.eu/tag/#' + @channel.key
         },
-        social: channel_content[:social]
+        social: @landing_page.social_media.blank? ? nil : social_media_links
       }.reverse_merge(helpers.content)
     end
 
     private
 
-    def channel_content
-      @channel_content ||= @channel.config[:content] || {}
+    def detect_link_in_array(links, domain)
+      matcher = %r(://([^/]*.)?#{domain}/)
+      links.detect { |l| l.url =~ matcher }
+    end
+
+    # @todo move into {Link::SocialMedia} as {#twitter?} etc
+    def social_media_links
+      {
+        twitter: detect_link_in_array(@landing_page.social_media, 'twitter.com'),
+        facebook: detect_link_in_array(@landing_page.social_media, 'facebook.com'),
+        soundcloud: detect_link_in_array(@landing_page.social_media, 'soundcloud.com'),
+        pinterest: detect_link_in_array(@landing_page.social_media, 'pinterest.com'),
+        googleplus: detect_link_in_array(@landing_page.social_media, 'plus.google.com')
+      }
     end
 
     def blog_news_items
       @blog_news_items ||= begin
-        key = @channel.id.underscore.to_sym
+        key = @channel.key.underscore.to_sym
         url = Cache::FeedJob::URLS[:blog][key]
         news_items(feed_entries(url))
-      end
-    end
-
-    def stylised_promoted
-      return @stylised_promoted unless @stylised_promoted.blank?
-      return nil unless channel_content[:promoted].present?
-      @stylised_channel_entry = channel_content[:promoted].deep_dup.tap do |promoted|
-        promoted.each do |item|
-          item[:bg_image] = image_root + item[:bg_image] unless item[:bg_image].nil?
-        end
-      end
-    end
-
-    def stylised_channel_entry
-      return @stylised_channel_entry unless @stylised_channel_entry.blank?
-      return nil unless @channel_entry.present?
-      @stylised_channel_entry = @channel_entry.deep_dup.tap do |channel_entry|
-        channel_entry.each do |entry|
-          entry[:count] = number_with_delimiter(entry[:count])
-          entry[:image_alt] ||= nil
-          entry[:image] = image_root + entry[:image] unless entry[:image].nil?
-        end
       end
     end
 
