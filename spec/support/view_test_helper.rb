@@ -1,6 +1,6 @@
 module ViewTestHelper
   RSpec.configure do |config|
-    config.before(:each) do
+    config.before(:each, type: :view) do
       RSpec.configure do |config|
         config.mock_with :rspec do |mocks|
           mocks.verify_partial_doubles = false
