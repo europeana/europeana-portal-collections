@@ -23,6 +23,8 @@ module RecordHelper
 
   # @todo Refactor for raw API data
   def record_hierarchy(hierarchy)
+    require 'json'
+    JSON.pretty_generate(hierarchy)
 #    if hierarchy.is_a?(Hash)
 #      {
 #        parent: hierarchy_node(hierarchy[:parent]),
