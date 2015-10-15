@@ -47,4 +47,14 @@ module UrlHelper
       end
     end
   end
+
+  # @param browse_entry [BrowseEntry]
+  # @return [String] url
+  def browse_entry_url(browse_entry)
+    if slug_match = browse_entry.page.slug.match(/\Achannels\/(.*)\Z/)
+      channel = Channel.find_by_key(slug_match[1])
+      return channel_path(channel.key, q: browse_entry.query) unless channel.nil?
+    end
+    search_path(q: browse_entry.query)
+  end
 end

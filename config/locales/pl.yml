@@ -3,15 +3,15 @@ pl:
     labs-link: 
     navigation:
       all_blog_posts: 
-      all_exhibitions: 
+      all_exhibitions: Wszystkie Wystawy...
       blog: 
-      browse: 
-      browse_colours: 
+      browse: Przeglądaj
+      browse_colours: Kolory
       browse_newcontent: 
       browse_sources: 
       channels: 
-      exhibitions: 
-      home: 
+      exhibitions: Wystawy
+      home: Strona główna
     pro-link: 
     pro-text: 
     settings: 
@@ -24,7 +24,7 @@ pl:
     blog-link: 
     browse:
       colours:
-        title: 
+        title: Kolory
       newcontent:
         title: 
       sources:
@@ -36,13 +36,13 @@ pl:
       data-types:
         3d: 
         count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        images: Obrazy
+        moving-images: Ruchome obrazy
+        sound: Nagrania
+        texts: Teksty
       labels:
-        credits: 
-        recent: 
+        credits: Kuratorowane przez
+        recent: Ostatnio dodane
         spotlight-on: 
       music:
         description: 
@@ -83,6 +83,10 @@ pl:
         show-less-data: 
         show-more-data: 
         technicalmetadata: 
+      hierarchy:
+        title: 
+        view-items-above: 
+        view-items-below: 
       meta-label:
         codec: 
         collection-name: 
@@ -146,6 +150,7 @@ pl:
         rights: 
         rights-human: 
         runtime: 
+        runtime-unit-seconds: 
         source: 
         subject: 
         temporal: 

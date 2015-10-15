@@ -1,23 +1,29 @@
 module Browse
   class Sources < ApplicationView
     def page_title
-      t('site.browse.sources.title')
+      @mustache[:page_title] ||= begin
+        t('site.browse.sources.title')
+      end
     end
 
     def content
-      {
-        title: page_title,
-        providers: @providers.blank? ? nil : {
+      @mustache[:content] ||= begin
+        {
           title: page_title,
-          items: stylised_providers
+          providers: @providers.blank? ? nil : {
+            title: page_title,
+            items: stylised_providers
+          }
         }
-      }
+      end
     end
 
     def head_meta
-      [
-        { meta_name: 'description', content: page_title }
-      ] + super
+      @mustache[:head_meta] ||= begin
+        [
+          { meta_name: 'description', content: page_title }
+        ] + super
+      end
     end
 
     protected

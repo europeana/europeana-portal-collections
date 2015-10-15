@@ -17,10 +17,9 @@ module Cache
         {
           'browse/new_content/providers' => {}
         }.tap do |sets|
-          %w(music art-history).each do |channel|
-            cache_key = "record/counts/channels/#{channel}/recent-additions"
-            channel_params = Channel.find(channel).config[:params]
-            sets[cache_key] = channel_params
+          Channel.published.each do |channel|
+            cache_key = "record/counts/channels/#{channel.key}/recent-additions"
+            sets[cache_key] = channel.api_params_hash
           end
         end
       end
@@ -30,8 +29,9 @@ module Cache
         (0..23).each do |months_ago|
           time = recent_additions_months_ago_time(months_ago)
 
-          api_params = params.merge(query: time[:range_query], rows: 0, profile: 'minimal facets')
-          api_response = repository.search(api_params)
+          builder = search_builder(search_params_logic)
+          api_query = builder.rows(0).where(time[:range_query]).with_overlay_params(params).merge(profile: 'minimal facets')
+          api_response = repository.search(api_query)
 
           next if api_response.total == 0
 

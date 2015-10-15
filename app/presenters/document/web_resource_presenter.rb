@@ -89,7 +89,7 @@ module Document
     end
 
     def use_media_proxy?
-      Rails.application.config.x.edm_is_shown_by_proxy &&
+      Rails.application.config.x.europeana_media_proxy &&
         mime_type.present? &&
         mime_type.match('image/').nil?
     end
@@ -97,7 +97,7 @@ module Document
     def download_url
       @download_url ||= begin
         if use_media_proxy?
-          Rails.application.config.x.edm_is_shown_by_proxy + @record.fetch('about', '/') + '?view=' + CGI.escape(url)
+          Rails.application.config.x.europeana_media_proxy + @record.fetch('about', '/') + '?view=' + CGI.escape(url)
         else
           url
         end
@@ -111,6 +111,8 @@ module Document
       file_size = number_to_human_size(render_document_show_field_value('ebucoreFileByteSize')) || ''
       {
         mime_type: mime_type,
+        format: (play_url.blank? ? '' : play_url.split('.').last),
+        language: '',
         file_size: file_size.split(' ').first,
         file_unit: file_size.split(' ').last,
         codec: render_document_show_field_value('edmCodecName'),
@@ -119,7 +121,7 @@ module Document
         width_or_height: !(width.blank? && height.blank?),
         size_unit: 'pixels',
         runtime: render_document_show_field_value('ebucoreDuration'),
-        runtime_unit: 'seconds'
+        runtime_unit: t('site.object.meta-label.runtime-unit-seconds')
       }
     end
 
