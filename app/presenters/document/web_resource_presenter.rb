@@ -89,7 +89,7 @@ module Document
     end
 
     def use_media_proxy?
-      Rails.application.config.x.edm_is_shown_by_proxy &&
+      Rails.application.config.x.europeana_media_proxy &&
         mime_type.present? &&
         mime_type.match('image/').nil?
     end
@@ -97,7 +97,7 @@ module Document
     def download_url
       @download_url ||= begin
         if use_media_proxy?
-          Rails.application.config.x.edm_is_shown_by_proxy + @record.fetch('about', '/') + '?view=' + CGI.escape(url)
+          Rails.application.config.x.europeana_media_proxy + @record.fetch('about', '/') + '?view=' + CGI.escape(url)
         else
           url
         end
