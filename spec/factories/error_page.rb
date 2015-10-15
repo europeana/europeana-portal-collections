@@ -5,5 +5,9 @@ FactoryGirl.define do
     trait :not_found do
       http_code 404
     end
+
+    trait :internal_server_error do
+      http_code 500
+    end
   end
 end

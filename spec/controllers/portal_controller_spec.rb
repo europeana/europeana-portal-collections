@@ -168,8 +168,10 @@ RSpec.describe PortalController, type: :controller do
 
     context 'when format is HTML' do
       let(:params) { { id: 'abc/123', format: 'html' } }
-      it 'returns an unknown format error' do
-        expect { get :similar, params }.to raise_error(ActionController::UnknownFormat)
+      it 'renders an error page' do
+        get :similar, params
+        expect(response.status).to eq(500)
+        expect(response).to render_template('portal/static')
       end
     end
   end
@@ -201,8 +203,10 @@ RSpec.describe PortalController, type: :controller do
 
     context 'when format is HTML' do
       let(:params) { { id: 'abc/123', format: 'html' } }
-      it 'returns an unknown format error' do
-        expect { get :media, params }.to raise_error(ActionController::UnknownFormat)
+      it 'renders an error page' do
+        get :media, params
+        expect(response.status).to eq(500)
+        expect(response).to render_template('portal/static')
       end
     end
   end
