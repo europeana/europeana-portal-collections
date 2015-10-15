@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916074832) do
+ActiveRecord::Schema.define(version: 20151015120519) do
 
   create_table "banner_translations", force: :cascade do |t|
     t.integer  "banner_id",  limit: 4,     null: false

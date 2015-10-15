@@ -361,12 +361,15 @@ ActiveRecord::Base.transaction do
     )
   ).publish!
 
-  error_404_page = Page::Error.create!(
-    http_code: '404',
-    title: 'Sorry, we can\'t find that page',
-    body: 'Unfortunately we couldn\'t find the page you were looking for. Try searching Europeana or you might like the selected items below.'
-  )
-  error_404_page.publish!
+  error_pages = [
+    { title: 'Internal Server Error', body: 'Something went wrong.', http_code: 500 },
+    { title: 'Forbidden', body: 'You do not have permission to access this resource.', http_code: 403 },
+    { title: "Sorry, we can't find that page", body: "Unfortunately we couldn't find the page you were looking for. Try searching Europeana or you might like the selected items below.", http_code: 404 }
+  ]
+  error_pages.each do |attrs|
+    page = Page::Error.create!(attrs)
+    page.publish!
+  end
 
   about_page = Page.create!(
     slug: 'about',
