@@ -180,11 +180,11 @@ module MustacheHelper
               text: t('global.navigation.channels'),
               is_current: controller.controller_name == 'channels',
               submenu: {
-                items: ['art-history', 'music'].map do |channel|
+                items: Channel.published.map(&:landing_page).compact.select(&:published?).map do |channel|
                   {
-                    url: channel_url(channel),
-                    text: t("site.channels.#{channel}.title"),
-                    is_current: params[:id] == channel
+                    url: channel_path(channel),
+                    text: channel.title,
+                    is_current: current_page?(channel_path(channel))
                   }
                 end
               }

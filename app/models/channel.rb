@@ -19,4 +19,8 @@ class Channel < ActiveRecord::Base
       end
     end
   end
+
+  def landing_page
+    Page::Landing.find_by_slug("channels/#{key}")
+  end
 end
