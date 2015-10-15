@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015120519) do
+ActiveRecord::Schema.define(version: 20150916074832) do
 
   create_table "banner_translations", force: :cascade do |t|
     t.integer  "banner_id",  limit: 4,     null: false
@@ -71,12 +71,11 @@ ActiveRecord::Schema.define(version: 20151015120519) do
   add_index "browse_entry_translations", ["locale"], name: "index_browse_entry_translations_on_locale", using: :btree
 
   create_table "channels", force: :cascade do |t|
-    t.string   "key",             limit: 255
-    t.text     "api_params",      limit: 65535
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "state",           limit: 4
-    t.integer  "landing_page_id", limit: 4
+    t.string   "key",        limit: 255
+    t.text     "api_params", limit: 65535
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "state",      limit: 4,     default: 0
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -171,7 +170,6 @@ ActiveRecord::Schema.define(version: 20151015120519) do
   add_index "pages", ["http_code"], name: "index_pages_on_http_code", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
   add_index "pages", ["state"], name: "index_pages_on_state", using: :btree
-  add_index "pages", ["type"], name: "index_pages_on_type", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.text     "query_params", limit: 65535
