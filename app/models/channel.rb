@@ -21,6 +21,6 @@ class Channel < ActiveRecord::Base
   end
 
   def landing_page
-    Page::Landing.find_by_slug("channels/#{key}")
+    @landing_page ||= Page::Landing.find_by_slug("channels/#{key}")
   end
 end

@@ -1,3 +1,5 @@
+require 'support/shared_examples/page_with_top_nav'
+
 RSpec.describe 'channels/show.html.mustache' do
   include ActionView::Helpers::TextHelper
 
@@ -6,8 +8,10 @@ RSpec.describe 'channels/show.html.mustache' do
     assign(:landing_page, landing_page)
   end
 
-  let(:channel) { FactoryGirl.create(:channel, :music) }
-  let(:landing_page) { FactoryGirl.create(:landing_page, :music_channel) }
+  let(:channel) { Channel.find_by_key('music') }
+  let(:landing_page) { Page::Landing.find_by_slug('channels/music') }
+
+  it_should_behave_like 'page with top nav'
 
   it 'should have meta description' do
     meta_content = truncate(ActionView::Base.full_sanitizer.sanitize(landing_page.body), length: 350, separator: ' ')
