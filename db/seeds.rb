@@ -437,7 +437,7 @@ unless Page.find_by_slug('channels/music/about').present?
 end
 
 error_pages = [
-  { title: 'Internal Server Error', body: 'Something went wrong.', http_code: 500 },
+  { title: 'Error', body: "We're sorry! The portal has encountered an error. A report has been automatically sent to the Europeana team to notify us. You can try to reload the page or do another search.", http_code: 500 },
   { title: 'Forbidden', body: 'You do not have permission to access this resource.', http_code: 403 },
   { title: "Sorry, we can't find that page", body: "Unfortunately we couldn't find the page you were looking for. Try searching Europeana or you might like the selected items below.", http_code: 404 }
 ]
