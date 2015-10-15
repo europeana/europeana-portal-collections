@@ -16,6 +16,14 @@ class ApplicationController < ActionController::Base
     render_error_page(404)
   end
 
+  rescue_from Europeana::API::Errors::RequestError do |exception|
+    if exception.message.match(/Invalid record identifier/)
+      render_error_page(404)
+    else
+      raise
+    end
+  end
+
   def set_locale
     session[:locale] ||= I18n.default_locale
     I18n.locale = session[:locale]
@@ -33,9 +41,16 @@ class ApplicationController < ActionController::Base
   private
 
   def render_error_page(status)
-    @page = Page::Error.find_by_http_code!(status)
-    page_template = "pages/#{@page.slug}"
-    template = template_exists?(page_template) ? page_template : 'pages/static'
-    render template, status: status
+    respond_to do |format|
+      format.html do
+        @page = Page::Error.find_by_http_code!(status)
+        page_template = "pages/#{@page.slug}"
+        template = template_exists?(page_template) ? page_template : 'pages/static'
+        render template, status: status
+      end
+      format.json do
+        render json: { success: false, error: Rack::Utils::HTTP_STATUS_CODES[status] }, status: status
+      end
+    end
   end
 end
