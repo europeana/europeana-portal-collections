@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     if exception.message.match(/Invalid record identifier/)
       handle_error(exception, 404)
     else
-      rescue_action_without_handler(exception)
+      raise
     end
   end
 
@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::UnknownFormat do |exception|
     handle_error(exception, 500, 'html')
+  end
+
+  def current_user
+    super || User.new(guest: true)
   end
 
   private
@@ -56,14 +60,12 @@ class ApplicationController < ActionController::Base
     return false
   end
 
-  def current_user
-    super || User.new(guest: true)
-  end
-
   def handle_error(exception, status, format = params[:format])
     log_error(exception)
 
-    if format == 'json'
+    if self.class.to_s.deconstantize == 'RailsAdmin'
+      raise exception
+    elsif format == 'json'
       render_json_error_response(exception, status)
     else
       render_html_error_response(exception, status)

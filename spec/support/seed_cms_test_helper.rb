@@ -6,6 +6,7 @@ module SeedCmsTestHelper
       FactoryGirl.create(:channel, :music).publish!
       FactoryGirl.create(:landing_page, :music_channel).publish!
       FactoryGirl.create(:error_page, :not_found).publish!
+      FactoryGirl.create(:error_page, :internal_server_error).publish!
     end
   end
 end
