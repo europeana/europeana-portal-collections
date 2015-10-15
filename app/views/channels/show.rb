@@ -7,7 +7,7 @@ module Channels
     end
 
     def page_title
-      @landing_page.title + ' Channel - Alpha'
+      (@landing_page.title || @channel.key) + ' Channel - Alpha'
     end
 
     def body_class

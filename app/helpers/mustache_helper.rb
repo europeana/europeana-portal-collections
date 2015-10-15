@@ -180,11 +180,11 @@ module MustacheHelper
               text: t('global.navigation.channels'),
               is_current: controller.controller_name == 'channels',
               submenu: {
-                items: ['art-history', 'music'].map do |channel|
+                items: Channel.published.map(&:landing_page).compact.select(&:published?).map do |channel|
                   {
-                    url: channel_url(channel),
-                    text: t("site.channels.#{channel}.title"),
-                    is_current: params[:id] == channel
+                    url: channel_path(channel),
+                    text: channel.title,
+                    is_current: current_page?(channel_path(channel))
                   }
                 end
               }
@@ -447,6 +447,7 @@ module MustacheHelper
   end
 
   def hero_config(hero_image)
+    return nil unless hero_image.present?
     hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
     {
       hero_image: hero_image.file.present? ? hero_image.file.url : nil,
