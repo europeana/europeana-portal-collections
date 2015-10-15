@@ -1,9 +1,13 @@
+require 'support/shared_examples/page_with_top_nav'
+
 RSpec.describe 'portal/static.html.mustache' do
   before(:each) do
     assign(:page, page)
   end
 
   let(:page) { FactoryGirl.create(:page, body: '<p>Some info.</p> <p>More info.</p>') }
+
+  it_should_behave_like 'page with top nav'
 
   it 'should have meta description' do
     render
