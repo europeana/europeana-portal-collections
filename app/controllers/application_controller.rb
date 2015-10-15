@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def render_html_error_response(exception, status)
+  def render_html_error_response(_exception, status)
     @page = Page::Error.find_by_http_code!(status)
     page_template = "pages/#{@page.slug}"
     template = template_exists?(page_template) ? page_template : 'portal/static'
