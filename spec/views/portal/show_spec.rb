@@ -1,3 +1,5 @@
+require 'support/shared_examples/page_with_top_nav'
+
 RSpec.describe 'portal/show.html.mustache' do
   let(:blacklight_config) do
     Blacklight::Configuration.new do |config|
@@ -34,6 +36,8 @@ RSpec.describe 'portal/show.html.mustache' do
     assign(:document, blacklight_document)
     assign(:similar, [])
   end
+
+  it_should_behave_like 'page with top nav'
 
   it 'should have meta description' do
     render

@@ -1,3 +1,5 @@
+require 'support/shared_examples/page_with_top_nav'
+
 RSpec.describe 'home/index.html.mustache' do
   let(:europeana_item_count) { 1234 }
 
@@ -9,6 +11,8 @@ RSpec.describe 'home/index.html.mustache' do
 
   let(:landing_page) { Page::Landing.find_by_slug('') }
   let(:channel) { Channel.find_by_key('home') }
+
+  it_should_behave_like 'page with top nav'
 
   it 'should have meta description' do
     meta_content = I18n.t('site.home.strapline', total_item_count: europeana_item_count)

@@ -49,14 +49,10 @@ RSpec.describe ChannelsController, type: :controller do
 
     context 'with id=[known channel]' do
       before do
-        landing_page.publish
-        landing_page.save
-        channel.publish
-        channel.save
         get :show, params
       end
-      let(:channel) { FactoryGirl.create(:channel, :music) }
-      let(:landing_page) { FactoryGirl.create(:landing_page, :music_channel) }
+      let(:channel) { Channel.find_by_key('music') }
+      let(:landing_page) { Page::Landing.find_by_slug('channels/music') }
 
       context 'without search params' do
         let(:params) { { id: channel.key } }

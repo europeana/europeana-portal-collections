@@ -10,7 +10,7 @@ FactoryGirl.define do
 
     trait :music_channel do
       slug 'channels/music'
-      title 'Music'
+      title 'Europeana Music'
       body 'About music'
     end
   end
