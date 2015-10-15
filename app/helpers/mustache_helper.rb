@@ -447,6 +447,7 @@ module MustacheHelper
   end
 
   def hero_config(hero_image)
+    return nil unless hero_image.present?
     hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
     {
       hero_image: hero_image.file.present? ? hero_image.file.url : nil,
