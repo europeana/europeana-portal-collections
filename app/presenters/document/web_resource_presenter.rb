@@ -125,15 +125,17 @@ module Document
       }
     end
 
-    def is_avi
-      (mime_type == 'video/avi') ||
-      (mime_type == 'video/msvideo') ||
-      (mime_type == 'video/x-msvideo') ||
-      (mime_type == 'image/avi') ||
-      (mime_type == 'video/xmpg2') ||
-      (mime_type == 'application/x-troff-msvideo') ||
-      (mime_type == 'audio/aiff') ||
-      (mime_type == 'audio/avi')
+    def is_avi?
+      avi_fmts = []
+      avi_fmts << 'video/avi'
+      avi_fmts << 'video/msvideo'
+      avi_fmts << 'video/x-msvideo'
+      avi_fmts << 'image/avi'
+      avi_fmts << 'video/xmpg2'
+      avi_fmts << 'application/x-troff-msvideo'
+      avi_fmts << 'audio/aiff'
+      avi_fmts << 'audio/avi'
+      avi_fmts.include? mime_type
     end
 
     def playable?
@@ -142,7 +144,7 @@ module Document
           (mime_type == 'video/mpeg') ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
-          is_avi
+          is_avi?
         false
       else
         true
