@@ -85,6 +85,10 @@ en:
         show-less-data: Show less data
         show-more-data: Show more data
         technicalmetadata: Technical Metadata
+      hierarchy:
+        title: Hierarchy
+        view-items-above: view items above
+        view-items-below: view items below
       meta-label:
         codec: Codec
         collection-name: Dataset
