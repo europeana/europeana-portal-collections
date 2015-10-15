@@ -35,7 +35,7 @@ class HierarchyController < ApplicationController
 
   # GET /record/:id/hierarchy/following-siblings
   def following_siblings
-    data = record.hierarchy.preceding_siblings(params.slice(:offset, :limit))
+    data = record.hierarchy.following_siblings(params.slice(:offset, :limit))
     respond_to do |format|
       format.json { render json: data }
     end
