@@ -1,13 +1,17 @@
 module Channels
   class Show < ApplicationView
     def head_meta
-      [
-        { meta_name: 'description', content: truncate(strip_tags(@landing_page.body), length: 350, separator: ' ') }
-      ] + super
+      @mustache[:head_meta] ||= begin
+        [
+          { meta_name: 'description', content: truncate(strip_tags(@landing_page.body), length: 350, separator: ' ') }
+        ] + super
+      end
     end
 
     def page_title
-      (@landing_page.title || @channel.key) + ' Channel - Alpha'
+      @mustache[:page_title] ||= begin
+        (@landing_page.title || @channel.key) + ' Channel - Alpha'
+      end
     end
 
     def body_class
@@ -15,42 +19,46 @@ module Channels
     end
 
     def globalnav_options
-      {
-        search: false,
-        myeuropeana: true
-      }
+      @mustache[:globalnav_options] ||= begin
+        {
+          search: false,
+          myeuropeana: true
+        }
+      end
     end
 
     def content
-      {
-        channel_info: {
-          name: @landing_page.title,
-          description: @landing_page.body,
-          stats: {
-            items: stylised_channel_stats
+      @mustache[:content] ||= begin
+        {
+          channel_info: {
+            name: @landing_page.title,
+            description: @landing_page.body,
+            stats: {
+              items: stylised_channel_stats
+            },
+            recent: @recent_additions.blank? ? nil : {
+              title: t('site.channels.labels.recent'),
+              items: stylised_recent_additions(@recent_additions, max: 3)
+            },
+            credits: @landing_page.credits.blank? ? {} : {
+              title: t('site.channels.labels.credits'),
+              items: @landing_page.credits.to_a
+            }
           },
-          recent: @recent_additions.blank? ? nil : {
-            title: t('site.channels.labels.recent'),
-            items: stylised_recent_additions(@recent_additions, max: 3)
+          hero_config: hero_config(@landing_page.hero_image),
+          channel_entry: @landing_page.browse_entries.blank? ? nil : {
+            items: channel_entry_items(@landing_page.browse_entries)
           },
-          credits: @landing_page.credits.blank? ? {} : {
-            title: t('site.channels.labels.credits'),
-            items: @landing_page.credits.to_a
-          }
-        },
-        hero_config: hero_config(@landing_page.hero_image),
-        channel_entry: @landing_page.browse_entries.blank? ? nil : {
-          items: channel_entry_items(@landing_page.browse_entries)
-        },
-        promoted: @landing_page.promotions.blank? ? nil : {
-          items: promoted_items(@landing_page.promotions)
-        },
-        news: blog_news_items.blank? ? nil : {
-          items: blog_news_items,
-          blogurl: 'http://blog.europeana.eu/tag/#' + @channel.key
-        },
-        social: @landing_page.social_media.blank? ? nil : social_media_links
-      }.reverse_merge(helpers.content)
+          promoted: @landing_page.promotions.blank? ? nil : {
+            items: promoted_items(@landing_page.promotions)
+          },
+          news: blog_news_items.blank? ? nil : {
+            items: blog_news_items,
+            blogurl: 'http://blog.europeana.eu/tag/#' + @channel.key
+          },
+          social: @landing_page.social_media.blank? ? nil : social_media_links
+        }.reverse_merge(helpers.content)
+      end
     end
 
     private

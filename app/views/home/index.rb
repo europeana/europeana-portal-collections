@@ -5,21 +5,25 @@ module Home
     end
 
     def content
-      {
-        hero_config: hero_config(@landing_page.hero_image),
-        strapline: t('site.home.strapline', total_item_count: total_item_count),
-        promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
-        news: blog_news_items.blank? ? nil : {
-          items: blog_news_items,
-          blogurl: Cache::FeedJob::URLS[:blog][:all]
-        }
-      }.reverse_merge(helpers.content)
+      @mustache[:content] ||= begin
+        {
+          hero_config: hero_config(@landing_page.hero_image),
+          strapline: t('site.home.strapline', total_item_count: total_item_count),
+          promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
+          news: blog_news_items.blank? ? nil : {
+            items: blog_news_items,
+            blogurl: Cache::FeedJob::URLS[:blog][:all]
+          }
+        }.reverse_merge(helpers.content)
+      end
     end
 
     def head_meta
-      [
-        { meta_name: 'description', content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ') }
-      ] + super
+      @mustache[:head_meta] ||= begin
+        [
+          { meta_name: 'description', content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ') }
+        ] + super
+      end
     end
 
     private
