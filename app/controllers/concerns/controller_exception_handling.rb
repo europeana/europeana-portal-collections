@@ -54,7 +54,7 @@ module ControllerExceptionHandling
     message = "\n#{exception.class} (#{exception.message}):\n"
     message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
     message << '  ' << trace.join("\n  ")
-    logger.fatal("#{message}\n".red.bold)
+    logger.error("#{message}\n".red.bold)
   end
 
   def render_html_error_response(_exception, status)
