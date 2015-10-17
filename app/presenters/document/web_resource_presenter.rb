@@ -34,7 +34,7 @@ module Document
 
     def play_url
       @play_url ||= begin
-        @record_presenter.iiif_manifesto || url
+        @record_presenter.iiif_manifesto || download_url
       end
     end
 
