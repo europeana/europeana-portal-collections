@@ -89,7 +89,7 @@ module Document
     end
 
     def use_media_proxy?
-      Rails.application.config.x.edm_is_shown_by_proxy &&
+      Rails.application.config.x.europeana_media_proxy &&
         mime_type.present? &&
         mime_type.match('image/').nil?
     end
@@ -97,7 +97,7 @@ module Document
     def download_url
       @download_url ||= begin
         if use_media_proxy?
-          Rails.application.config.x.edm_is_shown_by_proxy + @record.fetch('about', '/') + '?view=' + CGI.escape(url)
+          Rails.application.config.x.europeana_media_proxy + @record.fetch('about', '/') + '?view=' + CGI.escape(url)
         else
           url
         end
@@ -125,12 +125,26 @@ module Document
       }
     end
 
+    def is_avi?
+      avi_fmts = []
+      avi_fmts << 'video/avi'
+      avi_fmts << 'video/msvideo'
+      avi_fmts << 'video/x-msvideo'
+      avi_fmts << 'image/avi'
+      avi_fmts << 'video/xmpg2'
+      avi_fmts << 'application/x-troff-msvideo'
+      avi_fmts << 'audio/aiff'
+      avi_fmts << 'audio/avi'
+      avi_fmts.include? mime_type
+    end
+
     def playable?
       if url.blank? ||
           (media_type != 'iiif' && mime_type.blank?) ||
           (mime_type == 'video/mpeg') ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
+          is_avi?
         false
       else
         true

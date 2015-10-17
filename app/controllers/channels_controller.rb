@@ -5,8 +5,6 @@ class ChannelsController < ApplicationController
   include Channels
   include Europeana::Styleguide
 
-  rescue_from Channels::Errors::NoChannelConfiguration, with: :channel_not_found
-
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
 
   def index
@@ -14,8 +12,8 @@ class ChannelsController < ApplicationController
   end
 
   def show
-    @channel ||= Channel.find(params[:id])
-    @channel_entry = channel_entry(@channel)
+    @channel = find_channel
+    @landing_page = find_landing_page
     @channel_stats = channel_stats
     @recent_additions = recent_additions
 
@@ -44,27 +42,16 @@ class ChannelsController < ApplicationController
     has_search_parameters?
   end
 
-  def channel_not_found
-    render file: 'public/404.html', status: 404
-  end
-
-  def channel_entry(channel)
-    (channel_content[:channel_entry] || []).tap do |entry_config|
-      entry_config.each do |entry|
-        entry.merge!(
-          url: channel_path(channel.id, q: entry[:query]),
-          # uncomment next line to add dynamic item counts
-          # count: channel_entry_count(entry[:query])
-        )
-      end
+  def find_channel
+    Channel.find_by_key!(params[:id]).tap do |channel|
+      authorize! :show, channel
     end
   end
 
-  def channel_entry_count(entry_query)
-    api_query = search_builder(self.search_params_logic).
-      with(q: entry_query).query.
-      merge(rows: 0, start: 1, profile: 'minimal')
-    repository.search(api_query).total
+  def find_landing_page
+    Page::Landing.find_or_initialize_by(slug: "channels/#{@channel.key}").tap do |landing_page|
+      authorize! :show, landing_page
+    end
   end
 
   ##
@@ -74,7 +61,7 @@ class ChannelsController < ApplicationController
     types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
              ['3D', '3d'], ['SOUND', 'sound']]
     channel_stats = types.map do |type|
-      type_count = Rails.cache.fetch("record/counts/channels/#{@channel.id}/type/#{type[0].downcase}")
+      type_count = Rails.cache.fetch("record/counts/channels/#{@channel.key}/type/#{type[0].downcase}")
       {
         count: type_count,
         text: t(type[1], scope: 'site.channels.data-types'),
@@ -85,11 +72,7 @@ class ChannelsController < ApplicationController
     channel_stats.sort_by { |stats| stats[:count] }.reverse
   end
 
-  def channel_content
-    @channel ? @channel.config[:content] || {} : {}
-  end
-
   def recent_additions
-    Rails.cache.fetch("record/counts/channels/#{@channel.id}/recent-additions") || []
+    Rails.cache.fetch("record/counts/channels/#{@channel.key}/recent-additions") || []
   end
 end

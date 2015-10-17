@@ -3,89 +3,113 @@ module Portal
   # Portal search results view
   class Index < ApplicationView
     def page_title
-      [params[:q], 'Europeana - Search results'].compact.join(' - ')
+      @mustache[:page_title] ||= begin
+        [params[:q], 'Europeana - Search results'].compact.join(' - ')
+      end
     end
 
     def form_search
-      super.merge(hidden: form_search_hidden)
+      @mustache[:form_search] ||= begin
+        super.merge(hidden: form_search_hidden)
+      end
     end
 
     def filters
-      facets_from_request(facet_field_names).reject do |facet|
-        blacklight_config.facet_fields[facet.name].advanced
-      end.map do |facet|
-        FacetPresenter.new(facet, controller).display
-      end.compact + advanced_filters
+      @mustache[:filters] ||= begin
+        facets_from_request(facet_field_names).reject do |facet|
+          blacklight_config.facet_fields[facet.name].advanced
+        end.map do |facet|
+          FacetPresenter.new(facet, controller).display
+        end.compact + advanced_filters
+      end
     end
 
     def advanced_filters
-      [
-        {
-          advanced: true,
-          advanced_items: {
-            items: facets_from_request(facet_field_names).select do |facet|
-              blacklight_config.facet_fields[facet.name].advanced
-            end.map do |facet|
-              FacetPresenter.new(facet, self).display
-            end.compact
+      @mustache[:advanced_filters] ||= begin
+        [
+          {
+            advanced: true,
+            advanced_items: {
+              items: facets_from_request(facet_field_names).select do |facet|
+                blacklight_config.facet_fields[facet.name].advanced
+              end.map do |facet|
+                FacetPresenter.new(facet, self).display
+              end.compact
+            }
           }
-        }
-      ]
+        ]
+      end
     end
 
     def results_count
-      number_with_delimiter(response.total)
+      @mustache[:results_count] ||= begin
+        number_with_delimiter(response.total)
+      end
     end
 
     def has_results
-      response.total > 0
+      @mustache[:has_results] ||= begin
+        response.total > 0
+      end
     end
 
     def has_single_result
-      response.total == 1
+      @mustache[:has_single_result] ||= begin
+        response.total == 1
+      end
     end
 
     def has_multiple_results
-      response.total > 1
+      @mustache[:has_multiple_results] ||= begin
+        response.total > 1
+      end
     end
 
     def query_terms
-      query_terms = [(params[:q] || [])].flatten.collect do |query_term|
-        content_tag(:strong, query_term)
+      @mustache[:query_terms] ||= begin
+        query_terms = [(params[:q] || [])].flatten.collect do |query_term|
+          content_tag(:strong, query_term)
+        end
+        safe_join(query_terms, ' AND ')
       end
-      safe_join(query_terms, ' AND ')
     end
 
     def search_results
-      counter = 0 + (@response.limit_value * (@response.current_page - 1))
-      @document_list.collect do |doc|
-        counter += 1
-        search_result_for_document(doc, counter)
+      @mustache[:search_results] ||= begin
+        counter = 0 + (@response.limit_value * (@response.current_page - 1))
+        @document_list.collect do |doc|
+          counter += 1
+          search_result_for_document(doc, counter)
+        end
       end
     end
 
     def navigation
-      pages = pages_of_search_results
-      {
-        pagination: {
-          prev_url: previous_page_url,
-          next_url: next_page_url,
-          is_first_page: @response.first_page?,
-          is_last_page: @response.last_page?,
-          pages: pages.collect.each_with_index do |page, i|
-            {
-              url: Kaminari::Helpers::Page.new(self, page: page.number).url,
-              index: number_with_delimiter(page.number),
-              is_current: (@response.current_page == page.number),
-              separator: show_pagination_separator?(i, page.number, pages.size)
-            }
-          end
-        }
-      }.reverse_merge(helpers ? helpers.navigation : {})
+      @mustache[:navigation] ||= begin
+        pages = pages_of_search_results
+        {
+          pagination: {
+            prev_url: previous_page_url,
+            next_url: next_page_url,
+            is_first_page: @response.first_page?,
+            is_last_page: @response.last_page?,
+            pages: pages.collect.each_with_index do |page, i|
+              {
+                url: Kaminari::Helpers::Page.new(self, page: page.number).url,
+                index: number_with_delimiter(page.number),
+                is_current: (@response.current_page == page.number),
+                separator: show_pagination_separator?(i, page.number, pages.size)
+              }
+            end
+          }
+        }.reverse_merge(helpers ? helpers.navigation : {})
+      end
     end
 
     def facets_selected
-      facets_selected_items.blank? ? nil : { items: facets_selected_items }
+      @mustache[:facets_selected] ||= begin
+        facets_selected_items.blank? ? nil : { items: facets_selected_items }
+      end
     end
 
     private

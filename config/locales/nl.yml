@@ -83,6 +83,10 @@ nl:
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
         technicalmetadata: Technische metadata
+      hierarchy:
+        title: 
+        view-items-above: 
+        view-items-below: 
       meta-label:
         codec: Codec
         collection-name: Dataset

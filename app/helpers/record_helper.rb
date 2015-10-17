@@ -21,24 +21,26 @@ module RecordHelper
     }
   end
 
+  # @todo Refactor for raw API data
   def record_hierarchy(hierarchy)
-    if hierarchy.is_a?(Hash)
-      {
-        parent: hierarchy_node(hierarchy[:parent]),
-        siblings: {
-          items: hierarchy[:preceding_siblings].map { |item| hierarchy_node(item) } +
-            [hierarchy_node(hierarchy[:self])] +
-            hierarchy[:following_siblings].map { |item| hierarchy_node(item) }
-        },
-        children: {
-          items: hierarchy[:children].map { |item| hierarchy_node(item) }
-        }
-      }
-    elsif hierarchy.is_a?(Array)
-      hierarchy.map { |item| hierarchy_node(item) }
-    else
-      hierarchy_node(hierarchy)
-    end
+    hierarchy.to_json
+#    if hierarchy.is_a?(Hash)
+#      {
+#        parent: hierarchy_node(hierarchy[:parent]),
+#        siblings: {
+#          items: hierarchy[:preceding_siblings].map { |item| hierarchy_node(item) } +
+#            [hierarchy_node(hierarchy[:self])] +
+#            hierarchy[:following_siblings].map { |item| hierarchy_node(item) }
+#        },
+#        children: {
+#          items: hierarchy[:children].map { |item| hierarchy_node(item) }
+#        }
+#      }
+#    elsif hierarchy.is_a?(Array)
+#      hierarchy.map { |item| hierarchy_node(item) }
+#    else
+#      hierarchy_node(hierarchy)
+#    end
   end
 
   def hierarchy_node(item)

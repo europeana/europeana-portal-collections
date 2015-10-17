@@ -1,0 +1,18 @@
+en:
+  admin:
+    actions:
+      publish:
+        breadcrumb: "Publish"
+        done: "published"
+        link: "Publish '%{object_label}'"
+        menu: "Publish"
+        title: "Publish %{model_label} '%{object_label}'"
+      unpublish:
+        breadcrumb: "Unpublish"
+        done: "unpublished"
+        link: "Unpublish '%{object_label}'"
+        menu: "Unpublish"
+        title: "Unpublish %{model_label} '%{object_label}'"
+    form:
+      are_you_sure_you_want_to_publish_the_object: "Are you sure you want to publish this %{model_name}?"
+      are_you_sure_you_want_to_unpublish_the_object: "Are you sure you want to unpublish this %{model_name}?"
