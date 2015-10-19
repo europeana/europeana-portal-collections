@@ -23,7 +23,7 @@ module FacetsHelper
                        t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
                      end
 
-      unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE'].include?(facet_name)
+      unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE', 'IMAGE_SIZE'].include?(facet_name)
         mapped_value = mapped_value.split.map(&:capitalize).join(' ')
       end
 
