@@ -223,6 +223,10 @@ pl:
           long: 
           medium: 
           short: 
+      video_duration:
+        long: 
+        medium: 
+        short: 
       year:
         from: od
         to: do

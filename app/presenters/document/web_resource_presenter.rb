@@ -111,8 +111,7 @@ module Document
       file_size = number_to_human_size(render_document_show_field_value('ebucoreFileByteSize')) || ''
       {
         mime_type: mime_type,
-        format: (play_url.blank? ? '' : play_url.split('.').last),
-        language: '',
+        format: render_document_show_field_value('ebucoreHasMimeType'),
         file_size: file_size.split(' ').first,
         file_unit: file_size.split(' ').last,
         codec: render_document_show_field_value('edmCodecName'),
