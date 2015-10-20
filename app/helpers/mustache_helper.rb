@@ -248,7 +248,7 @@ module MustacheHelper
           items: [
             {
               text: t('site.footer.menu.about'),
-              url: root_url + '/about.html'
+              url: static_page_path('about', format: 'html')
             }
             # {
             #   text: t('site.footer.menu.new-collections'),
