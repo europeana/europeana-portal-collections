@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   put 'settings/language', to: 'settings#update_language'
 
   # Static pages
-  get '*page', to: 'portal#static'
+  get '*page', to: 'portal#static', as: 'static_page'
 end
