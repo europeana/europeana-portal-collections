@@ -2,7 +2,7 @@
 # Channels helpers
 module ChannelsHelper
   def available_channels
-    Rails.application.config.x.channels.keys.sort
+    Channel.all.map(&:key)
   end
 
   def within_channel?(localized_params = params)

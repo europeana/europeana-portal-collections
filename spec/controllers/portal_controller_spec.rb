@@ -106,7 +106,7 @@ RSpec.describe PortalController, type: :controller do
       context 'with param debug=json' do
         let(:params) { { id: 'abc/123', format: 'html', debug: 'json' } }
         it 'assigns pretty JSON document to @debug' do
-          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json))
+          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json.merge(hierarchy: assigns(:hierarchy).as_json)))
         end
       end
     end
@@ -168,8 +168,10 @@ RSpec.describe PortalController, type: :controller do
 
     context 'when format is HTML' do
       let(:params) { { id: 'abc/123', format: 'html' } }
-      it 'returns an unknown format error' do
-        expect { get :similar, params }.to raise_error(ActionController::UnknownFormat)
+      it 'renders an error page' do
+        get :similar, params
+        expect(response.status).to eq(500)
+        expect(response).to render_template('portal/static')
       end
     end
   end
@@ -201,40 +203,10 @@ RSpec.describe PortalController, type: :controller do
 
     context 'when format is HTML' do
       let(:params) { { id: 'abc/123', format: 'html' } }
-      it 'returns an unknown format error' do
-        expect { get :media, params }.to raise_error(ActionController::UnknownFormat)
-      end
-    end
-  end
-
-  describe 'GET hierarchy' do
-    context 'when format is JSON' do
-      before do
-        get :hierarchy, params
-      end
-      let(:params) { { id: 'abc/123', format: 'json' } }
-      let(:record_id) { '/' + params[:id] }
-      it_behaves_like 'a hierarchy API request'
-      it 'responds with JSON' do
-        expect(response.content_type).to eq('application/json')
-      end
-      it 'has 200 status code' do
-        expect(response.status).to eq(200)
-      end
-      it 'renders JSON ERB template' do
-        expect(response).to render_template('portal/hierarchy')
-      end
-      context 'with page param' do
-        let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
-        it 'paginates'
-        it 'defaults per_page to 4'
-      end
-    end
-
-    context 'when format is HTML' do
-      let(:params) { { id: 'abc/123', format: 'html' } }
-      it 'returns an unknown format error' do
-        expect { get :hierarchy, params }.to raise_error(ActionController::UnknownFormat)
+      it 'renders an error page' do
+        get :media, params
+        expect(response.status).to eq(500)
+        expect(response).to render_template('portal/static')
       end
     end
   end

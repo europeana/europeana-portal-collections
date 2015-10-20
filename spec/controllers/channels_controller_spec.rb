@@ -16,12 +16,12 @@ RSpec.describe ChannelsController, type: :controller do
   end
 
   describe 'GET show' do
-    before do
-      get :show, params
-    end
-
     context 'with id=home' do
-      let(:params) { { id: 'home' } }
+      before do
+        get :show, params
+      end
+      let(:channel) { Channel.find_by_key('home') }
+      let(:params) { { id: channel.key } }
 
       it 'does not query API' do
         expect(an_api_search_request).not_to have_been_made
@@ -36,20 +36,26 @@ RSpec.describe ChannelsController, type: :controller do
       let(:params) { { id: 'unknown' } }
 
       it 'does not query API' do
+        get :show, params
         expect(an_api_search_request).not_to have_been_made
       end
 
       it 'responds with 404' do
+        get :show, params
         expect(response.status).to eq(404)
-        expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
+        expect(response).to render_template('pages/errors/not_found')
       end
     end
 
     context 'with id=[known channel]' do
-      let(:channel_id) { Rails.application.config.x.channels.keys.reject { |k| k == 'home' }.first }
+      before do
+        get :show, params
+      end
+      let(:channel) { Channel.find_by_key('music') }
+      let(:landing_page) { Page::Landing.find_by_slug('channels/music') }
 
       context 'without search params' do
-        let(:params) { { id: channel_id } }
+        let(:params) { { id: channel.key } }
 
         it 'should not query API for channel stats' do
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
@@ -65,10 +71,14 @@ RSpec.describe ChannelsController, type: :controller do
           expect(response.status).to eq(200)
           expect(response).to render_template('channels/show')
         end
+
+        it 'assigns @landing_page' do
+          expect(assigns(:landing_page)).to eq(landing_page)
+        end
       end
 
       context 'with search params' do
-        let(:params) { { id: channel_id, q: 'search' } }
+        let(:params) { { id: channel.key, q: 'search' } }
 
         it 'queries API' do
           expect(an_api_search_request).to have_been_made.at_least_once

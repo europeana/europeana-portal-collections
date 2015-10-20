@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   # Adds a few additional behaviors into the application controller
   include Blacklight::Controller
+  include ControllerExceptionHandling
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -11,6 +12,12 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
+
+  def current_user
+    super || User.new(guest: true)
+  end
+
+  private
 
   def set_locale
     session[:locale] ||= I18n.default_locale

@@ -75,6 +75,9 @@ en:
     news: News
     object:
       actions:
+        attribute-author: Attribute the author
+        attribute-html: HTML
+        attribute-plaintext: Plain Text
         download: Download
         download-additional: Also available as
         downloaddata: Download data
@@ -82,6 +85,10 @@ en:
         show-less-data: Show less data
         show-more-data: Show more data
         technicalmetadata: Technical Metadata
+      hierarchy:
+        title: Hierarchy
+        view-items-above: view items above
+        view-items-below: view items below
       meta-label:
         codec: Codec
         collection-name: Dataset
@@ -145,6 +152,7 @@ en:
         rights: Rights
         rights-human: Can I use this?
         runtime: Run time
+        runtime-unit-seconds: seconds
         source: Provenance
         subject: Subject
         temporal: Temporal

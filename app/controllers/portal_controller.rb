@@ -11,9 +11,10 @@ class PortalController < ApplicationController
 
   # GET /record/:id
   def show
-    @response, @document = fetch_with_hierarchy(doc_id)
+    @response, @document = fetch(doc_id)
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
-    @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
+    @hierarchy = Europeana::API::Record::new('/' + params[:id]).hierarchy.ancestor_self_siblings
+    @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 
     respond_to do |format|
       format.html do
@@ -45,33 +46,16 @@ class PortalController < ApplicationController
     end
   end
 
-  # GET /record/:id/hierarchy
-  def hierarchy
-    relation = params.key?(:relation) ? params[:relation].underscore : nil
-
-    if relation.present?
-      page = (params[:page] || 1).to_i
-      per_page = (params[:per_page] || 4).to_i
-      offset = (page == 1 ? 0 : (per_page * page) - 1)
-      options = { limit: per_page, offset: offset }
-
-      _response, @document = fetch(doc_id)
-      @hierarchy = fetch_hierarchy_relation(doc_id, relation, options)
-    else
-      _response, @document = fetch_with_hierarchy(doc_id)
-      @hierarchy = @document.hierarchy
-    end
-
-    respond_to do |format|
-      format.json { render :hierarchy, layout: false }
-    end
-  end
-
   # @todo move into own controller to isolate record resource related actions
   def static
-    @page = params[:page]
+    @page = Page.find_by_slug!(params[:page])
+    authorize! :show, @page
+
     respond_to do |format|
-      format.html
+      format.html do
+        page_template = "pages/#{@page.slug}"
+        render template_exists?(page_template) ? page_template : 'portal/static'
+      end
     end
   end
 end

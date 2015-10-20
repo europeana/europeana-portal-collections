@@ -1,23 +1,29 @@
 module Browse
   class NewContent < ApplicationView
     def page_title
-      t('site.browse.newcontent.title')
+      @mustache[:page_title] ||= begin
+        t('site.browse.newcontent.title')
+      end
     end
 
     def content
-      {
-        title: page_title,
-        recent: @providers.blank? ? nil : {
-          title: t('site.channels.labels.recent'),
-          items: stylised_recent_additions(@providers, max: 1000, from: :same)
+      @mustache[:content] ||= begin
+        {
+          title: page_title,
+          recent: @providers.blank? ? nil : {
+            title: t('site.channels.labels.recent'),
+            items: stylised_recent_additions(@providers, max: 1000, from: :same)
+          }
         }
-      }
+      end
     end
 
     def head_meta
-      [
-        { meta_name: 'description', content: page_title }
-      ] + super
+      @mustache[:head_meta] ||= begin
+        [
+          { meta_name: 'description', content: page_title }
+        ] + super
+      end
     end
   end
 end

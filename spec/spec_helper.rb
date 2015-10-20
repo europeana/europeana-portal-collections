@@ -17,9 +17,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'simplecov'
 require 'coveralls'
+require 'simplecov'
+require 'factory_girl'
 
+# Test coverage reports
 if Coveralls.will_run?.nil?
   # Generate Simplecov report during local testing
   SimpleCov.start
@@ -54,6 +56,9 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  # FactoryGirl factories
+  config.include FactoryGirl::Syntax::Methods
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

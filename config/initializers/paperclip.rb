@@ -1,3 +1,9 @@
+# Relative URL root interpolation used in filesystem URL paths
+# @see /deploy/development/config/paperclip.yml
+Paperclip.interpolates :rails_relative_url_root do |_attachment, _style|
+  Rails.application.config.relative_url_root
+end
+
 # Basic Paperclip file storage settings
 Paperclip::Attachment.default_options.merge!(
   path: ':class/:id_partition/:attachment/:fingerprint.:style.:extension',

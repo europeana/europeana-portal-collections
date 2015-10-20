@@ -19,3 +19,11 @@ Rails.application.config.assets.version = '1.0'
 
 # Prevent default behaviour that adds all non-JS/CSS assets
 Rails.application.config.assets.precompile.delete(Sprockets::Railtie::LOOSE_APP_ASSETS)
+
+# RailsAdmin assets
+Rails.application.config.assets.precompile << lambda do |filename, path|
+  path =~ /rails_admin/ && !%w(.js .css).include?(File.extname(filename))
+end
+Rails.application.config.assets.precompile << lambda do |_filename, path|
+  path =~ /(fontawesome-|bootstrap-wysihtml5)/
+end

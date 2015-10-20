@@ -1,14 +1,6 @@
+require 'support/shared_examples/page_with_top_nav'
+
 RSpec.describe 'browse/new_content.html.mustache' do
-  before(:each) do
-    RSpec.configure do |config|
-      config.mock_with :rspec do |mocks|
-        mocks.verify_partial_doubles = false
-      end
-    end
-
-    Stache::ViewContext.current = view
-  end
-
   let(:providers) do
     time_now = Time.now
     [
@@ -17,6 +9,8 @@ RSpec.describe 'browse/new_content.html.mustache' do
       { label: 'A Different Provider', count: 500, from: time_now }
     ]
   end
+
+  it_should_behave_like 'page with top nav'
 
   it 'should have page title' do
     render

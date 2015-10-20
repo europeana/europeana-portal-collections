@@ -106,10 +106,10 @@ en:
         'false': Black and white
         'true': Colour
       image_size:
-        extra_large: Extra large
-        large: Large
-        medium: Medium
-        small: Small
+        extra_large: Extra Large (4MP+)
+        large: Large (1-4MP)
+        medium: Medium (0.5-1MP)
+        small: Small (<0.5MP)
       language:
         bg: "Български"
         ca: Català
@@ -178,10 +178,10 @@ en:
         restricted: Yes with restrictions
         simple: Simple
       sound_duration:
-        long: Long
-        medium: Medium
-        short: Short
-        very_short: Very short
+        long: Long (6+ min)
+        medium: Medium (3-6 min)
+        short: Short (30s - 3 min)
+        very_short: Very short (<30s)
       sound_hq:
         'true': 'Yes'
       source: Source
@@ -223,6 +223,10 @@ en:
           long: Long (%{data})
           medium: Medium (%{data})
           short: Short (%{data})
+      video_duration:
+        long: Long (20+ min)
+        medium: Medium (4-20 min)
+        short: Short (<4 min)
       year:
         from: from
         to: to
