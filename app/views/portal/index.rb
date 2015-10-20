@@ -165,7 +165,7 @@ module Portal
         is_text: doc_type == 'TEXT',
         is_video: doc_type == 'VIDEO',
         img: {
-          src: render_index_field_value(doc, 'edmPreview'),
+          src: (render_index_field_value(doc, 'edmPreview') || '').sub('http://europeanastatic.eu/api/image', Europeana::API.url + '/thumbnail-by-url.json'),
           alt: ''
         },
         agent: agent_label(doc),
