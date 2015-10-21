@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.2.4'
 
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '78a8b7d'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'd2b4c79'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -26,7 +26,7 @@ gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
 gem 'htmlcompressor', '0.2'
-gem 'mysql2', '~> 0.3.20'
+gem 'pg'
 gem 'paperclip', '~> 4.3'
 gem 'paper_trail', '~> 4.0'
 gem 'puma', '~> 2.13'
