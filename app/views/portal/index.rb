@@ -165,7 +165,7 @@ module Portal
         is_text: doc_type == 'TEXT',
         is_video: doc_type == 'VIDEO',
         img: {
-          src: (render_index_field_value(doc, 'edmPreview') || '').sub('http://europeanastatic.eu/api/image', Europeana::API.url + '/thumbnail-by-url.json'),
+          src: thumbnail_url(doc),
           alt: ''
         },
         agent: agent_label(doc),
@@ -174,6 +174,23 @@ module Portal
           name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase)
         }
       }
+    end
+
+    def thumbnail_url(doc)
+      edm_preview = render_index_field_value(doc, 'edmPreview')
+      return nil if edm_preview.blank?
+
+      @api_uri ||= URI.parse(Europeana::API.url)
+
+      uri = URI.parse(edm_preview)
+      query = Rack::Utils.parse_query(uri.query)
+      query['size'] = 'w200'
+
+      uri.host = @api_uri.host
+      uri.path = @api_uri.path + '/thumbnail-by-url.json'
+      uri.query = query.to_query
+
+      uri.to_s
     end
 
     def track_document_path_opts(counter)
