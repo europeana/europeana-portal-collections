@@ -42,7 +42,7 @@ class FacetPresenter
   end
 
   def basic_facet(options = {})
-    options = options.reverse_merge(type: :simple, count: 4)
+    options = options.reverse_merge(type: :simple, count: facet_config.limit || 4)
     unhidden_items, hidden_items = split_items(options[:count])
     {
       title: facet_label(@facet.name),
