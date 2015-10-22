@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   include Catalog
   include Europeana::Styleguide
 
+  caches_action :index,
+    expires_in: 1.hour,
+    cache_path: Proc.new { I18n.locale.to_s + request.original_fullpath }
+
   # GET /
   def index
     @channel = find_channel
