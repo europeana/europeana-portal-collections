@@ -1,10 +1,11 @@
-defaults: &defaults
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  timeout: 5000
-  host: localhost
-  adapter: mysql2
-  username: root
-  password:
+  username: postgres
+
 test:
   database: europeana_channels_blacklight_test
-  <<: *defaults
+  <<: *default

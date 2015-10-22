@@ -215,9 +215,9 @@ ActiveRecord::Schema.define(version: 20150916074832) do
     t.integer  "item_id",        limit: 4,          null: false
     t.string   "event",          limit: 255,        null: false
     t.string   "whodunnit",      limit: 255
-    t.text     "object",         limit: 4294967295
+    t.text     "object",         limit: 1_073_741_823
     t.datetime "created_at"
-    t.text     "object_changes", limit: 4294967295
+    t.text     "object_changes", limit: 1_073_741_823
     t.integer  "transaction_id", limit: 4
   end
 

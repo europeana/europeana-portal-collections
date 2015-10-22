@@ -21,8 +21,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 78a8b7d680c9b9dac7a1c3b31ca3399af2c5cbb9
-  ref: 78a8b7d
+  revision: d2b4c7994f8c8175f027f829cfdf05ee1ec20d66
+  ref: d2b4c79
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -344,7 +344,6 @@ GEM
     multi_json (1.11.2)
     multipart-post (2.0.0)
     mustache (1.0.2)
-    mysql2 (0.3.20)
     nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -365,6 +364,7 @@ GEM
       mimemagic (= 0.3.0)
     parser (2.2.2.6)
       ast (>= 1.1, < 3.0)
+    pg (0.18.3)
     phantomjs (1.9.8.0)
     poltergeist (1.6.0)
       capybara (~> 2.1)
@@ -567,9 +567,9 @@ DEPENDENCIES
   globalize-versioning!
   htmlcompressor (= 0.2)
   localeapp (~> 0.9.0)
-  mysql2 (~> 0.3.20)
   paper_trail (~> 4.0)
   paperclip (~> 4.3)
+  pg
   phantomjs
   poltergeist
   puma (~> 2.13)

@@ -43,14 +43,27 @@ class FacetPresenter
 
   def basic_facet(options = {})
     options = options.reverse_merge(type: :simple, count: facet_config.limit || 4)
+    unhidden_items, hidden_items = split_items(options[:count])
     {
       title: facet_label(@facet.name),
       select_one: facet_config.single,
-      items: @facet.items[0..(options[:count] - 1)].map { |item| send(:"#{options[:type]}_facet_item", item) },
-      extra_items: @facet.items.size <= options[:count] ? nil : {
-        items: @facet.items[options[:count]..-1].map { |item| send(:"#{options[:type]}_facet_item", item) }
+      items: unhidden_items.map { |item| send(:"#{options[:type]}_facet_item", item) },
+      extra_items: hidden_items.blank? ? nil : {
+        items: hidden_items.map { |item| send(:"#{options[:type]}_facet_item", item) }
       }
     }.merge(options[:type] => true)
+  end
+
+  def split_items(count)
+    unhidden_items = []
+    hidden_items = @facet.items.dup
+    hidden_items.select { |item| facet_in_params?(@facet.name, item) }.each do |selected_item|
+      unhidden_items << hidden_items.delete(selected_item)
+    end
+    while (unhidden_items.size) < count && hidden_items.present?
+      unhidden_items.push(hidden_items.shift)
+    end
+    [unhidden_items, hidden_items]
   end
 
   def basic_facet_item(item)
