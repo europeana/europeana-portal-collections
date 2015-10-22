@@ -13,6 +13,7 @@ gem 'rails_admin_globalize_field', github: 'rwd/rails_admin_globalize_field',
   branch: 'globalize-5-rails-4.2'
 
 gem 'aasm', '~> 4.2'
+gem 'actionpack-action_caching'
 gem 'blacklight', '~> 5.15'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
