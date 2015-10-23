@@ -10,7 +10,7 @@ module Document
       aggregation = @document.aggregations.first
       return Kaminari.paginate_array([]) unless aggregation.respond_to?(:webResources)
 
-      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmIsShownBy', nil)]
+      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmObject', nil)]
       web_resources = aggregation.webResources.dup
       edm_web_resource = web_resources.detect { |web_resource| web_resource.fetch('about', nil) == edm_resource_url }
       # make sure the edm_is_shown_by is the first item

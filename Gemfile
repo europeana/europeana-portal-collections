@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.2.4'
 
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'd2b4c79'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'e3b6c04'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -13,13 +13,14 @@ gem 'rails_admin_globalize_field', github: 'rwd/rails_admin_globalize_field',
   branch: 'globalize-5-rails-4.2'
 
 gem 'aasm', '~> 4.2'
+gem 'actionpack-action_caching'
 gem 'blacklight', '~> 5.15'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'devise', '~> 3.5'
-gem 'europeana-blacklight', github: 'europeana/europeana-blacklight', ref: '323d214'
+gem 'europeana-blacklight', github: 'europeana/europeana-blacklight', ref: '375ad69'
 gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', ref: '7328695'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'

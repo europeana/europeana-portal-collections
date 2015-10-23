@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 323d21493d13c8c9f5bc077a69679aa65e7755a6
-  ref: 323d214
+  revision: 375ad69db68857477d1fd90c36e793c1d08176a9
+  ref: 375ad69
   specs:
     europeana-blacklight (0.2.8)
       activesupport (>= 4.0, < 5.0)
@@ -21,8 +21,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: d2b4c7994f8c8175f027f829cfdf05ee1ec20d66
-  ref: d2b4c79
+  revision: e3b6c0463a69272dd79e0cd63b0e24e27ee1ce26
+  ref: e3b6c04
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -74,6 +74,8 @@ GEM
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionpack-action_caching (1.1.1)
+      actionpack (>= 4.0.0, < 5.0)
     actionview (4.2.4)
       activesupport (= 4.2.4)
       builder (~> 3.1)
@@ -543,6 +545,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.2)
+  actionpack-action_caching
   blacklight (~> 5.15)
   cancancan (~> 1.12)
   capybara (~> 2.4.0)
