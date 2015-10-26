@@ -225,7 +225,9 @@ module Portal
               sections: [
                 {
                   title: 'site.object.meta-label.location',
-                  fields: ['proxies.dctermsSpatial', 'places.prefLabel']
+                  fields: ['proxies.dctermsSpatial'],
+#                  collected: 'XXX' + @document.fetch('places.prefLabel', [])[0][I18n.locale.to_sym][0].to_s + 'xxx'
+                  collected: pref_label('places.prefLabel')
                 },
                 {
                   title: 'site.object.meta-label.place-time',
@@ -564,6 +566,19 @@ module Portal
         render_document_show_field_value(document, 'proxies.dcTitle')
       else
         title.first
+      end
+    end
+
+    def pref_label(field_name)
+      val = @document.fetch(field_name, [])
+      pref = nil
+      if val.size > 0
+        pref = val[0][I18n.locale.to_sym]
+        if(pref.size > 0)
+          pref[0]
+        else
+          val[0][:en]
+        end
       end
     end
 
