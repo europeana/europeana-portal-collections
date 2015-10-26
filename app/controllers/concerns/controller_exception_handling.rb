@@ -38,6 +38,7 @@ module ControllerExceptionHandling
 
   def handle_error(exception, status, format = params[:format])
     log_error(exception)
+    report_error(exception) if status == 500
 
     if ENV['DISABLE_CMS_ERROR_PAGES'] ||
         self.class.to_s.deconstantize == 'RailsAdmin'
@@ -55,6 +56,11 @@ module ControllerExceptionHandling
     message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
     message << '  ' << trace.join("\n  ")
     logger.error("#{message}\n".red.bold)
+  end
+
+  def report_error(exception)
+    return unless Rails.application.config.x.error_report_mail_to.present? # No email recipient configured
+    ErrorMailer.report(exception.message, exception.backtrace, request.original_url, request.method).deliver_later
   end
 
   def render_html_error_response(_exception, status)
