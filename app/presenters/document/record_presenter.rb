@@ -10,13 +10,15 @@ module Document
       aggregation = @document.aggregations.first
       return Kaminari.paginate_array([]) unless aggregation.respond_to?(:webResources)
 
-      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmObject', nil)]
+      edm_object = aggregation.fetch('edmObject', nil)
+      has_views = aggregation.fetch('hasView', [])
       web_resources = aggregation.webResources.dup
       edm_web_resource = web_resources.detect { |web_resource| web_resource.fetch('about', nil) == edm_resource_url }
       # make sure the edm_is_shown_by is the first item
       web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
       web_resources.select! do |wr|
-        view_urls.compact.include?(wr.fetch('about', nil)) ||
+        wr.fetch('about', nil) == edm_object ||
+        (has_views.compact.include?(wr.fetch('about', nil)) && wr.fetch('ebucoreHasMimeType', nil).present?) ||
           Document::WebResourcePresenter.new(wr, @document, @controller).media_type == 'iiif'
       end
       web_resources.uniq! { |wr| wr.fetch('about', nil) }

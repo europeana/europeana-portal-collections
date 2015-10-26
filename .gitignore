@@ -31,6 +31,9 @@
 # Ignore Spring config file.
 /config/spring.rb
 
+# Ignore SMTP config file
+/config/smtp.yml
+
 # Ignore rvm files.
 .ruby-version
 .ruby-gemset
