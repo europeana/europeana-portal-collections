@@ -67,7 +67,11 @@ module Europeana
       end
 
       # Load Action Mailer SMTP config from config/smtp.yml, if it exists
-      config.action_mailer.smtp_settings = Rails.application.config_for(:smtp).symbolize_keys
+      config.action_mailer.smtp_settings = begin
+        Rails.application.config_for(:smtp).symbolize_keys
+      rescue RuntimeError
+        {}
+      end
     end
   end
 end
