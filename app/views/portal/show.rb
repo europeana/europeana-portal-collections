@@ -278,7 +278,10 @@ module Portal
                   title: 'site.object.meta-label.timestamp-updated',
                   fields: ['timestamp_update'],
                   format_date: '%Y-%m-%d'
-                }
+                },
+                ['aggregations.edmUgc'].present? ? {
+                  collected: t('site.object.meta-label.ugc')
+                } : {},
               ]
             ),
             properties: data_section(
