@@ -65,6 +65,9 @@ module Europeana
       rescue RuntimeError
         :null_store
       end
+
+      # Load Action Mailer SMTP config from config/smtp.yml, if it exists
+      config.action_mailer.smtp_settings = Rails.application.config_for(:smtp).symbolize_keys
     end
   end
 end
