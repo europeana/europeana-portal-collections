@@ -580,6 +580,8 @@ module Portal
 
       {
         required_players: item_players,
+        is_shown_by_or_at: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
+          render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
         single_item: items.size == 1,
         empty_item: items.size == 0,
         items: items,
