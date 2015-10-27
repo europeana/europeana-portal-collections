@@ -417,10 +417,108 @@ module Portal
               }
             end
           },
+          enriched: enriched_data,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(helpers.content)
       end
+    end
+
+    def enriched_data()
+      data = [collectConceptLabels(), collectAgentLabels(), collectTimeLabels(), collectPlaceLabels()]
+      present = false
+
+      for group in data
+        if group[:fields].size > 0
+          present = true
+        end
+      end
+      {
+        present: present,
+        data: data
+      }
+    end
+
+    def collectAgentLabels()
+      fields = []
+      concepts = document.fetch('concepts', [])
+      (concepts).map do |concept|
+        fields << { :key => "Agent Term", :val => concept[:about], :link => true}
+        fields << { :key => "Agent Label", :val => normalisePrefLabels(concept[:prefLabel]), :multi => true }
+      end
+      {
+        :title => 'Who',
+        :fields => fields,
+        :present => fields.size > 0
+      }
+    end
+
+    def collectPlaceLabels()
+      fields = []
+      places = document.fetch('places', [])
+      (places).map do |place|
+        fields << { :key => "Place Term", :val => place[:about], :link => true}
+        fields << { :key => "Place Label", :val => normalisePrefLabels(place[:prefLabel]), :multi => true }
+
+        if !place[:latitude].nil?
+          fields << { :key => "Place Latitude", :val => place[:latitude] }#[:def][0] }
+        end
+        if !place[:longitude].nil?
+          fields << { :key => "Place Longitude", :val => place[:longitude] }#[:def][0] }
+        end
+      end
+      {
+        :title => 'Where',
+        :fields => fields,
+        :present => fields.size > 0
+      }
+    end
+
+    def collectTimeLabels()
+      fields = []
+      timespans = document.fetch('timespans', [])
+      (timespans).map do |timespan|
+        fields << { :key => "Period Term", :val => timespan[:about], :link => true}
+        fields << { :key => "Period Label", :val => normalisePrefLabels(timespan[:prefLabel]), :multi => true }
+        if !timespan[:begin].nil?
+          fields << { :key => "Period Begin", :val => timespan[:begin][:def][0] }
+        end
+        if !timespan[:end].nil?
+          fields << { :key => "Period End", :val => timespan[:end][:def][0] }
+        end
+      end
+      {
+        :title => 'When',
+        :fields => fields,
+        :present => fields.size > 0
+      }
+    end
+
+    def collectConceptLabels()
+      fields = []
+      concepts = document.fetch('concepts', [])
+      (concepts).map do |concept|
+        fields << { :key => "Concept Term", :val => concept[:about],  :link => true}
+        fields << { :key => "Concept Label", :val => normalisePrefLabels(concept[:prefLabel]), :multi => true }
+        broader = concept[:broader]
+        if !broader.nil?
+          broader = broader.size > 1 ? broader : broader[0]
+          fields << { :key => "Broader Concept", :val => broader, :link => true}
+        end
+      end
+      {
+        :title => 'What',
+        :fields => fields,
+        :present => fields.size > 0
+      }
+    end
+
+    def normalisePrefLabels(prefLabelHash)
+      res = []
+      prefLabelHash.each do |key, val|
+        res << {key: key, val: val}
+      end
+      res
     end
 
     def simple_rights_label_data
@@ -573,11 +671,15 @@ module Portal
       val = @document.fetch(field_name, [])
       pref = nil
       if val.size > 0
-        pref = val[0][I18n.locale.to_sym]
-        if(pref.size > 0)
-          pref[0]
+        if val.is_a?(Array)
+          val[0]
         else
-          val[0][:en]
+          pref = val[0][I18n.locale.to_sym]
+          if(pref.size > 0)
+            pref[0]
+          else
+            val[0][:en]
+          end
         end
       end
     end
