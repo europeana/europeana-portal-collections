@@ -27,6 +27,11 @@ module Settings
                   text: t('global.language-dutch'),
                   value: 'nl',
                   selected: I18n.locale.to_s == 'nl'
+                },
+                {
+                  text: t('global.language-german'),
+                  value: 'de',
+                  selected: I18n.locale.to_s == 'de'
                 }
               ]
             },

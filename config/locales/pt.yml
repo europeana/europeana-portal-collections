@@ -1,27 +1,27 @@
-nl:
+pt:
   global:
-    labs-link: 'link naar labs '
+    labs-link: 
     navigation:
-      all_blog_posts: Alle berichten...
-      all_exhibitions: Alle tentoonstellingen
-      blog: Blog
+      all_blog_posts: 
+      all_exhibitions: 
+      blog: 
       browse: 
       browse_colours: 
       browse_newcontent: 
       browse_sources: 
-      channels: Kanalen
-      exhibitions: Tentoonstellingen
-      home: Home
-    pro-link: link naar pro
-    pro-text: tekst voor pro
-    settings: settings
+      channels: 
+      exhibitions: 
+      home: 
+    pro-link: 
+    pro-text: 
+    settings: 
   site:
     alpha:
       feedback_banner:
-        description: '"Alpha" betekent dat we momenteel druk bezig zijn de website te verbeteren and dat we regelmatig updates doen en dat we soms off-line zijn! Jullie feedback helpt ons de site te verbeteren!'
-        link-text: 'Vertel wat u denkt! '
-        title: Dit is een Alpha versie van onze nieuwe Collections Search en Muziek Kanaal
-    blog-link: link naar de blog
+        description: 
+        link-text: 
+        title: 
+    blog-link: 
     browse:
       colours:
         title: 
@@ -31,58 +31,58 @@ nl:
         title: 
     channels:
       art-history:
-        description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
-        title: Kunst Kanaal
+        description: 
+        title: 
       data-types:
-        3d: 3D objecten
-        count: objecten
-        images: Afbeeldingen
-        moving-images: Bewegende afbeeldingen
-        sound: Geluidsopnames
-        texts: Tekst
+        3d: 
+        count: 
+        images: 
+        moving-images: 
+        sound: 
+        texts: 
       labels:
-        credits: Gecureerd door
-        recent: Recent toegevoegd
-        spotlight-on: In de spotlight
+        credits: 
+        recent: 
+        spotlight-on: 
       music:
-        description: Het <strong> Europeana Muziek Kanaal</strong> brengt u de beste muziek opnames, blad muziek en ander muziek gerelateerde collecties van Europa's audio-visuele archieven, bibliotheken, archieven en musea. <a href="/portal/channels/music/about"> Meer over dit kanaal...</a>
-        title: Europeana Muziek
+        description: 
+        title: 
     facet:
       language:
         show:
-          results: Resulaten
+          results: 
     footer:
       menu:
-        about: Over ons
-        become-a-provider: Word een data provider
-        copyright: Auteursrecht
-        data-providers: Alle data providers
-        new-collections: Nieuwe Collecties
-        search-tips: Zoek tips
-        using-myeuropeana: Gebruik mijn Europeana
+        about: 
+        become-a-provider: 
+        copyright: 
+        data-providers: 
+        new-collections: 
+        search-tips: 
+        using-myeuropeana: 
     home:
-      strapline: 'Ontdek %{total_item_count} items van Europa''s bibliotheken, archiven en musea.  '
-    more: Meer...
-    my-europeana: Mijn Europeana
-    my-europeana-link: Link naar mijn Europeana
+      strapline: 
+    more: 
+    my-europeana: 
+    my-europeana-link: 
     navigation:
       breadcrumb:
         item_detail: 
         results_list: 
         return_home: 
-    news: Nieuws
+    news: 
     object:
       actions:
         attribute-author: 
         attribute-html: 
         attribute-plaintext: 
-        download: Download
-        download-additional: Ook beschikbaar als
-        downloaddata: Download informatie
-        open-media: Open dit type media
-        show-less-data: Toon minder informatie
-        show-more-data: Toon meer informatie
-        technicalmetadata: Technische metadata
+        download: 
+        download-additional: 
+        downloaddata: 
+        open-media: 
+        show-less-data: 
+        show-more-data: 
+        technicalmetadata: 
       enrichment:
         who:
           title: 
@@ -91,20 +91,20 @@ nl:
         view-items-above: 
         view-items-below: 
       meta-label:
-        codec: Codec
-        collection-name: Dataset
-        concept: Soort object
-        concepts: Categorieën
-        consists-of: Bestaat uit
-        contributor: Bijdrager
-        copyright: Auteursrecht
-        creation-date: Datum vervaardigd
-        creator: Van
-        current-location: Huidige locatie
+        codec: 
+        collection-name: 
+        concept: 
+        concepts: 
+        consists-of: 
+        contributor: 
+        copyright: 
+        creation-date: 
+        creator: 
+        current-location: 
         data-provider: 
         date: 
         dates: 
-        description: Omschrijving
+        description: 
         dimensions: 
         duration: 
         edm:
@@ -118,7 +118,7 @@ nl:
           was-present-at: 
         extent: 
         file-size: 
-        format: Formaat
+        format: 
         fps: 
         has-type: 
         identifier: 
@@ -128,33 +128,33 @@ nl:
         is-replaced-by: 
         is-required-by: 
         issued: 
-        language: Taal
-        latitude: Breedtegraad
-        location: Plaats
-        longitude: Lengtegraad
-        map: Kaart
-        map-tiles: Tegel
+        language: 
+        latitude: 
+        location: 
+        longitude: 
+        map: 
+        map-tiles: 
         medium: 
         people: 
-        period: Tijdvak
+        period: 
         place: 
         place-time: 
-        properties: Eigenschappen
-        provenance: Bron
+        properties: 
+        provenance: 
         provided-by: 
         provided-by-detail: 
         provider: 
         providing-country: 
         publication-date: 
-        publisher: Uitgeverij
+        publisher: 
         references: 
         refs-rels: 
         relations: 
         rights: 
-        rights-human: Mag ik dit gebruiken?
+        rights-human: 
         runtime: 
         runtime-unit-seconds: 
-        source: Bron en Herkomst
+        source: 
         subject: 
         temporal: 
         time: 
@@ -163,7 +163,7 @@ nl:
         timestamp_created: 
         timestamp_updated: 
         toc: 
-        type: Type
+        type: 
         ugc: 
         version: 
       nav:
@@ -174,7 +174,7 @@ nl:
         north: 
         south: 
         west: 
-      show-more-similar-items: toon meer
+      show-more-similar-items: 
       similar-items: 
     pages:
       '404':
@@ -241,7 +241,7 @@ nl:
         flash:
           alert: 
           notice: 
-        label: Taal
+        label: 
         settings-label: 
     site-name-link: 
     sitemap-link: 
