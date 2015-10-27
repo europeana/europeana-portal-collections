@@ -6,11 +6,20 @@ module Document
       @edm_resource_url ||= render_document_show_field_value('aggregations.edmIsShownBy')
     end
 
+    def edm_object
+      aggregation = @document.aggregations.first
+      edm_object = aggregation.fetch('edmObject', nil)
+    end
+
+    def is_shown_by_or_at
+      aggregation = @document.aggregations.first
+      aggregation.fetch('edmIsShownBy', nil) || aggregation.fetch('edmIsShownAt', nil)
+    end
+
     def media_web_resources(options = {})
       aggregation = @document.aggregations.first
       return Kaminari.paginate_array([]) unless aggregation.respond_to?(:webResources)
 
-      edm_object = aggregation.fetch('edmObject', nil)
       has_views = aggregation.fetch('hasView', [])
       web_resources = aggregation.webResources.dup
       edm_web_resource = web_resources.detect { |web_resource| web_resource.fetch('about', nil) == edm_resource_url }
