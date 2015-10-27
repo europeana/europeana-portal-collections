@@ -88,13 +88,13 @@ en:
         image_size: Size
         language: Language
         language_of_description: Language of Description
-        media: Only show items with direct access to media
+        media: Only items with links to media
         mime_type: File format
         provider: Provider
         reusability: Can I use it?
         sound_duration: Duration
         sound_hq: High Quality
-        text_fulltext: Full Text
+        text_fulltext: Full text
         type: Media
         ugc: Show content contributed by users
         video_hd: HD
@@ -259,7 +259,7 @@ en:
     language-danish: Danish
     language-dutch: Dutch
     language-english: English
-    language-estonian: Estionian
+    language-estonian: Estonian
     language-finnish: Finnish
     language-french: French
     language-gaelic: Gaelic
@@ -280,7 +280,7 @@ en:
     language-slovenian: Slovenian
     language-spanish: Spanish
     language-swedish: Swedish
-    language-ukranian: Ukranian
+    language-ukranian: Ukrainian
     login: Login
     logo-image: 
     more:
@@ -292,7 +292,7 @@ en:
     our-mission-text: Who is afraid of the jabberwocky?
     our-sites: our sites
     password: Password
-    professional: Professional
+    professional: Pro
     professional-text: Get involved, share your data or use ours
     refine-your-search: Refine your search
     register: Register
