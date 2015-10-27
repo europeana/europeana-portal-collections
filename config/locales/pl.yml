@@ -4,7 +4,7 @@ pl:
     navigation:
       all_blog_posts: 
       all_exhibitions: Wszystkie Wystawy...
-      blog: 
+      blog: Blog
       browse: Przeglądaj
       browse_colours: Kolory
       browse_newcontent: 
@@ -83,6 +83,9 @@ pl:
         show-less-data: 
         show-more-data: 
         technicalmetadata: 
+      enrichment:
+        who:
+          title: 
       hierarchy:
         title: 
         view-items-above: 

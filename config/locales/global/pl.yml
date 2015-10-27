@@ -172,7 +172,7 @@ pl:
         advanced-rrfa: Wszelkie prawa zastrzeżone - Wolny dostęp
         advanced-rrpa: Wszelkie prawa zastrzeżone - Płatny dostęp
         advanced-rrra: 'Wszelkie prawa zastrzeżone - '
-        advanced-ucs: 
+        advanced-ucs: Status praw autorskich nieznany
         open: Tak, ale z podaniem źródła
         permission: Tylko za pisemną zgodą
         restricted: Tak, ale z ograniczeniami
@@ -206,27 +206,27 @@ pl:
         size:
           explanation: Co oznaczają te rozmiary?
           label: Rozmiar obrazu
-          large: 
-          medium: 
-          small: 
-          xl: 
+          large: Duży (%{data})
+          medium: "Średni (%{data})"
+          small: Mały (%{data})
+          xl: Bardzo duży (%{data})
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: Czas trwania
+          long: Długi (%{data})
+          medium: "Średni (%{data})"
+          short: Krótki (%{data})
+          very-short: Bardzo krótki (%{data})
       type-video:
         duration:
           label: Czas trwania
-          long: 
-          medium: 
-          short: 
+          long: Długi (%{data})
+          medium: "Średni (%{data})"
+          short: Krótki (%{data})
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Długi (>20 min)
+        medium: "Średni (4-20 min)"
+        short: Krótki (<4 min)
       year:
         from: od
         to: do
@@ -236,19 +236,19 @@ pl:
     genres-chamber-music: Muzyka kameralna
     genres-classical-music: Muzyka poważna
     genres-concertos: Koncerty
-    genres-non-western-classical-music: 
+    genres-non-western-classical-music: Nie-zachodnia muzyka klasyczna
     genres-opera: Opera
     genres-popular-music: Muzyka rozrywkowa
     genres-traditional-music: Muzyka ludowa
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
+      connect: zbliżaj
+      develop: twórz
+      discover: odkrywaj
+      network: "łącz"
     help: Pomoc
     home: Strona główna
-    javascript-required: 
-    labs: 
+    javascript-required: Chcesz uzyskać dostęp do pełnej zawartości tej strony? W tym celu należy włączyć obsługę JavaScript. Zalecamy również zmianę przeglądarki na obsługującą elementy w HTML5
+    labs: Laboratoria
     labs-text: 
     language-basque: Baskijski
     language-bulgarian: Bułgarski
@@ -291,12 +291,12 @@ pl:
     our-mission-text: 
     our-sites: nasze strony
     password: Hasło
-    professional: 
-    professional-text: 
+    professional: Dla specjalistów
+    professional-text: Zaangażuj się, podziel się swoją wiedzą lub wykorzystaj naszą
     refine-your-search: Zawęź wyniki wyszukiwania
     register: Zarejestruj się
-    research: 
-    research-text: 
+    research: Badania naukowe
+    research-text: Dołącz do środowisk naukowych
     rights-box:
       background-image-provider: 
       background-image-provider-url: 
@@ -307,11 +307,11 @@ pl:
       search-button-image-alt: Szukaj
       search-placeholder-text: Dodaj słowo kluczowe
     search-collections: Zbiory
-    search-collections-text: 
+    search-collections-text: Odkrywaj dziedzictwo kulturowe Europy
     share: Udostępnij
     sitemap: Mapa strony
     terms-and-policies: Regulamin i polityka prywatności
-    type: 
+    type: typ
   'no': Norwegia
   pl: Portugalia
   site:

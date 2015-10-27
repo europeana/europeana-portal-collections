@@ -38,7 +38,7 @@ en:
         3d: 3D objects
         count: items
         images: Images
-        moving-images: Moving images
+        moving-images: Videos
         sound: Sound recordings
         texts: Texts
       labels:
@@ -77,16 +77,19 @@ en:
       actions:
         attribute-author: Attribute the author
         attribute-html: HTML
-        attribute-plaintext: Plain Text
+        attribute-plaintext: Plain text
         download: Download
         download-additional: Also available as
         downloaddata: Download data
         open-media: Open this media item
         show-less-data: Show less data
         show-more-data: Show more data
-        technicalmetadata: Technical Metadata
+        technicalmetadata: Technical metadata
+      enrichment:
+        who:
+          title: 
       hierarchy:
-        title: Hierarchy
+        title: Related items
         view-items-above: view items above
         view-items-below: view items below
       meta-label:
@@ -141,13 +144,13 @@ en:
         properties: Properties
         provenance: Provenance
         provided-by: Provided by
-        provided-by-detail: <a href="%{url}">%{institution_name}</a> who may have more information and media for this item.
+        provided-by-detail: <a href="%{url}">%{institution_name}</a> may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
-        publication-date: Date of Publication
+        publication-date: Date of publication
         publisher: Publisher
         references: References
-        refs-rels: References and Relations
+        refs-rels: References and relations
         relations: Relations
         rights: Rights
         rights-human: Can I use this?
@@ -242,10 +245,10 @@ en:
         save-settings: Save Settings
       language:
         auto-translate-page: Automatically translate item pages into...
-        auto-translate-page-short: Auto translate items into
+        auto-translate-page-short: Auto-translate items into
         auto-translate-query: Automatically translate search keywords into...
-        available: Available Languages
-        default: Default Language
+        available: Available languages
+        default: Default language
         flash:
           alert: 'Invalid language specified. Available languages: %{locales}'
           notice: Language settings saved.
