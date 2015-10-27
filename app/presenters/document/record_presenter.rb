@@ -8,7 +8,7 @@ module Document
 
     def edm_object
       aggregation = @document.aggregations.first
-      edm_object = aggregation.fetch('edmObject', nil)
+      aggregation.fetch('edmObject', nil)
     end
 
     def is_shown_by_or_at
