@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe CatalogHelper, type: :helper do
+RSpec.describe CatalogHelper do
   it { is_expected.to include(Blacklight::CatalogHelperBehavior) }
 
   describe '#document_counter_with_offset' do
