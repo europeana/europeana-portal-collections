@@ -1,15 +1,15 @@
 require 'support/shared_examples/page_with_top_nav'
 
-RSpec.describe 'channels/show.html.mustache' do
+RSpec.describe 'collections/show.html.mustache' do
   include ActionView::Helpers::TextHelper
 
   before(:each) do
-    assign(:channel, channel)
+    assign(:collection, collection)
     assign(:landing_page, landing_page)
   end
 
-  let(:channel) { Channel.find_by_key('music') }
-  let(:landing_page) { Page::Landing.find_by_slug('channels/music') }
+  let(:collection) { Collection.find_by_key('music') }
+  let(:landing_page) { Page::Landing.find_by_slug('collections/music') }
 
   it_should_behave_like 'page with top nav'
 

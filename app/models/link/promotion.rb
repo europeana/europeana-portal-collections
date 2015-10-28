@@ -13,7 +13,7 @@ class Link::Promotion < Link
 
   class << self
     def settings_category_enum
-      %w(channel exhibition new partner featured_site)
+      %w(collection exhibition new partner featured_site)
     end
 
     def settings_wide_enum

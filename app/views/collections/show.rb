@@ -1,4 +1,4 @@
-module Channels
+module Collections
   class Show < ApplicationView
     def head_meta
       @mustache[:head_meta] ||= begin
@@ -10,7 +10,7 @@ module Channels
 
     def page_title
       @mustache[:page_title] ||= begin
-        (@landing_page.title || @channel.key) + ' Channel - Alpha'
+        (@landing_page.title || @collection.key) + ' Collection - Alpha'
       end
     end
 
@@ -34,27 +34,27 @@ module Channels
             name: @landing_page.title,
             description: @landing_page.body,
             stats: {
-              items: stylised_channel_stats
+              items: stylised_collection_stats
             },
             recent: @recent_additions.blank? ? nil : {
-              title: t('site.channels.labels.recent'),
+              title: t('site.collections.labels.recent'),
               items: stylised_recent_additions(@recent_additions, max: 3)
             },
             credits: @landing_page.credits.blank? ? {} : {
-              title: t('site.channels.labels.credits'),
+              title: t('site.collections.labels.credits'),
               items: @landing_page.credits.to_a
             }
           },
           hero_config: hero_config(@landing_page.hero_image),
           channel_entry: @landing_page.browse_entries.blank? ? nil : {
-            items: channel_entry_items(@landing_page.browse_entries)
+            items: browse_entry_items(@landing_page.browse_entries)
           },
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
-            blogurl: 'http://blog.europeana.eu/tag/#' + @channel.key
+            blogurl: 'http://blog.europeana.eu/tag/#' + @collection.key
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links
         }.reverse_merge(helpers.content)
@@ -81,17 +81,17 @@ module Channels
 
     def blog_news_items
       @blog_news_items ||= begin
-        key = @channel.key.underscore.to_sym
+        key = @collection.key.underscore.to_sym
         url = Cache::FeedJob::URLS[:blog][key]
         news_items(feed_entries(url))
       end
     end
 
-    def stylised_channel_stats
-      return @stylised_channel_stats unless @stylised_channel_stats.blank?
-      return nil unless @channel_stats.present?
-      @stylised_channel_stats = @channel_stats.deep_dup.tap do |channel_stats|
-        channel_stats.each do |stats|
+    def stylised_collection_stats
+      return @stylised_collection_stats unless @stylised_collection_stats.blank?
+      return nil unless @collection_stats.present?
+      @stylised_collection_stats = @collection_stats.deep_dup.tap do |collection_stats|
+        collection_stats.each do |stats|
           stats[:count] = number_with_delimiter(stats[:count])
         end
       end

@@ -15,7 +15,7 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner Banner::Translation BrowseEntry BrowseEntry::Translation Channel HeroImage
+    Banner Banner::Translation BrowseEntry BrowseEntry::Translation Collection HeroImage
     Link Link::Translation Link::Promotion Link::Credit Link::SocialMedia MediaObject Page
     Page::Error Page::Landing Page::Translation User
   )
@@ -88,7 +88,7 @@ RailsAdmin.config do |config|
     include_fields :locale, :title
   end
 
-  config.model 'Channel' do
+  config.model 'Collection' do
     list do
       sort_by :key
       field :key

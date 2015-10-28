@@ -11,7 +11,7 @@ module Browse
         {
           title: page_title,
           recent: @providers.blank? ? nil : {
-            title: t('site.channels.labels.recent'),
+            title: t('site.collections.labels.recent'),
             items: stylised_recent_additions(@providers, max: 1000, from: :same)
           }
         }

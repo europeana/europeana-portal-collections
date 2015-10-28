@@ -18,8 +18,11 @@ Rails.application.routes.draw do
 
   blacklight_for :portal
 
-  resources :channels, only: [:show, :index]
+  resources :collections, only: [:show, :index]
   resources :landing_pages, only: [:show]
+
+  get '/channels', to: redirect('collections')
+  get '/channels/:id', to: redirect('collections/%{id}')
 
   mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
   devise_for :users

@@ -1,8 +1,8 @@
-# Europeana Channels
+# Europeana Portal with Collections
 
-[![Build Status](https://travis-ci.org/europeana/europeana-channels-blacklight.svg?branch=master)](https://travis-ci.org/europeana/europeana-channels-blacklight) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-channels-blacklight/badge.svg?branch=master&service=github)](https://coveralls.io/github/europeana/europeana-channels-blacklight?branch=master) [![security](https://hakiri.io/github/europeana/europeana-channels-blacklight/master.svg)](https://hakiri.io/github/europeana/europeana-channels-blacklight/master) [![Dependency Status](https://gemnasium.com/europeana/europeana-channels-blacklight.svg)](https://gemnasium.com/europeana/europeana-channels-blacklight)
+[![Build Status](https://travis-ci.org/europeana/europeana-portal-collections.svg?branch=master)](https://travis-ci.org/europeana/europeana-portal-collections) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-portal-collections/badge.svg?branch=master&service=github)](https://coveralls.io/github/europeana/europeana-portal-collections?branch=master) [![security](https://hakiri.io/github/europeana/europeana-portal-collections/master.svg)](https://hakiri.io/github/europeana/europeana-portal-collections/master) [![Dependency Status](https://gemnasium.com/europeana/europeana-portal-collections.svg)](https://gemnasium.com/europeana/europeana-portal-collections)
 
-Europeana Channels as a Rails + 
+Europeana Portal with Collections as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
 
 ## License
@@ -17,6 +17,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 * ImageMagick
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
+* PostgreSQL
 
 ## Installation
 
@@ -93,17 +94,11 @@ deployment will not require this API key.
 
 ### Database
 
-1. Create a MySQL database, and configure in config/database.yml (see
+1. Create a PostgreSQL database, and configure in config/database.yml (see
   http://guides.rubyonrails.org/configuring.html#configuring-a-database)
 2. Include a "test" section in the database configuration if you 
   plan on running the unit and integration tests
 3. Initialize the database: `bundle exec rake db:setup`
-
-### Channels
-
-For each Channel, create a YAML file in config/channels/. See the bundled 
-files in that directory for example configuration settings.
-
 
 ### Testing
 
@@ -132,26 +127,7 @@ development:
 If the file config/redis.yml exists, the application will use Redis as a cache
 store.
 
-Example configuration:
-
-```yaml
-# config/redis.yml
-development:
-  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-  port: <%= ENV['REDIS_PORT'] || 6379 %>
-  name: <%= ENV['REDIS_NAME'] || 'redis' %>
-
-test:
-  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-  port: <%= ENV['REDIS_PORT'] || 6379 %>
-  name: <%= ENV['REDIS_NAME'] || 'redis' %>
-
-production:
-  host: <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['hostname'] rescue 'localhost' %>
-  port: <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['port'] rescue 6379 %>
-  password:  <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['password'] rescue '' %>
-  name: <%= JSON.parse( ENV['VCAP_SERVICES'] )['redis-2.2'].first['credentials']['name'] rescue 'redis' %>
-```
+Example configurations for different environments are in [deploy/](deploy/).
 
 ## Usage
 
