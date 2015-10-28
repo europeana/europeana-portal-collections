@@ -425,7 +425,7 @@ module Portal
     end
 
     def named_entity_data()
-      data = [collectConceptLabels(), collectAgentLabels(), collectTimeLabels(), collectPlaceLabels()]
+      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
       present = false
       for group in data
         if group[:fields].size > 0
@@ -438,89 +438,89 @@ module Portal
       }
     end
 
-    def collectAgentLabels()
+    def collect_agent_labels()
       fields = []
       agents = document.fetch('concepts', [])
       (agents).map do |agent|
-        fields << { :key => t('site.object.named-entities.who.term'), :val => agent[:about], :agt_link => true}
-        fields << { :key => t('site.object.named-entities.who.label'), :vals => normalise_named_entity(agent[:prefLabel]), :multi => true }
+        fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true}
+        fields << { key: t('site.object.named-entities.who.label'), vals: normalise_named_entity(agent[:prefLabel]), multi: true }
       end
       {
-        :title => t('site.object.named-entities.who.title'),
-        :fields => fields,
-        :present => fields.size > 0
+        title: t('site.object.named-entities.who.title'),
+        fields: fields,
+        present: fields.size > 0
       }
     end
 
-    def collectPlaceLabels()
+    def collect_place_labels()
       fields = []
       places = document.fetch('places', [])
       (places).map do |place|
-        fields << { :key => t('site.object.named-entities.where.term'), :val => place[:about], :agt_link => true}
-        fields << { :key => t('site.object.named-entities.where.label'), :vals => normalise_named_entity(place[:prefLabel]), :multi => true }
+        fields << { key: t('site.object.named-entities.where.term'), val: place[:about], agt_link: true}
+        fields << { key: t('site.object.named-entities.where.label'), vals: normalise_named_entity(place[:prefLabel]), multi: true }
         if !place[:latitude].nil?
-          fields << { :key => t('site.object.named-entities.where.latitude'), :val => place[:latitude] }
+          fields << { key: t('site.object.named-entities.where.latitude'), val: place[:latitude] }
         end
         if !place[:longitude].nil?
-          fields << { :key => t('site.object.named-entities.where.longitude'), :val => place[:longitude] }
+          fields << { key: t('site.object.named-entities.where.longitude'), val: place[:longitude] }
         end
       end
       {
-        :title => t('site.object.named-entities.where.title'),
-        :fields => fields,
-        :present => fields.size > 0
+        title: t('site.object.named-entities.where.title'),
+        fields: fields,
+        present: fields.size > 0
       }
     end
 
-    def collectTimeLabels()
+    def collect_time_labels()
       fields = []
       timespans = document.fetch('timespans', [])
       (timespans).map do |timespan|
-        fields << { :key => t('site.object.named-entities.when.term'), :val => timespan[:about], :agt_link => true}
-        fields << { :key => t('site.object.named-entities.when.label'), :vals => normalise_named_entity(timespan[:prefLabel]), :multi => true }
+        fields << { key: t('site.object.named-entities.when.term'), val: timespan[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.when.label'), vals: normalise_named_entity(timespan[:prefLabel]), multi: true }
         if !timespan[:begin].nil?
-          fields << { :key => t('site.object.named-entities.when.begin'), :val => timespan[:begin][:def][0] }
+          fields << { key: t('site.object.named-entities.when.begin'), val: timespan[:begin][:def][0] }
         end
         if !timespan[:end].nil?
-          fields << { :key => t('site.object.named-entities.when.end'), :val => timespan[:end][:def][0] }
+          fields << { key: t('site.object.named-entities.when.end'), val: timespan[:end][:def][0] }
         end
       end
       {
-        :title => 'When',
-        :fields => fields,
-        :present => fields.size > 0
+        title: 'When',
+        fields: fields,
+        present: fields.size > 0
       }
     end
 
-    def collectConceptLabels()
+    def collect_concept_labels
       fields = []
       concepts = document.fetch('concepts', [])
       (concepts).map do |concept|
-        fields << { :key => t('site.object.named-entities.what.term'), :val => concept[:about],  :agt_link => true}
-        fields << { :key => t('site.object.named-entities.what.label'), :vals => normalise_named_entity(concept[:prefLabel]), :multi => true }
+        fields << { key: t('site.object.named-entities.what.term'), val: concept[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.what.label'), vals: normalise_named_entity(concept[:prefLabel]), multi: true }
         broader = concept[:broader]
         if !broader.nil?
           multi = broader.size > 1
           broader = multi ? broader : broader[0]
           fields << {
-            :key => t('site.object.named-entities.what.broader'),
-            :val => multi ? nil : broader,
-            :vals => multi ? normalise_named_entity(broader, true) : nil,
-            :agt_link => true,
-            :multi => multi}
+            key: t('site.object.named-entities.what.broader'),
+            val: multi ? nil : broader,
+            vals: multi ? normalise_named_entity(broader, true) : nil,
+            agt_link: true,
+            multi: multi}
         end
       end
       {
-        :title => t('site.object.named-entities.what.title'),
-        :fields => fields,
-        :present => fields.size > 0
+        title: t('site.object.named-entities.what.title'),
+        fields: fields,
+        present: fields.size > 0
       }
     end
 
     def normalise_named_entity(named_entity, agt_link = false)
       res = []
       named_entity.each do |key, val|
-        if(key && val.nil?)
+        if key && val.nil?
           res << {val: key, key: nil, agt_link: agt_link}
         else
           res << {key: key, val: val, agt_link: agt_link}
@@ -683,7 +683,7 @@ module Portal
           val[0]
         else
           pref = val[0][I18n.locale.to_sym]
-          if(pref.size > 0)
+          if pref.size > 0
             pref[0]
           else
             val[0][:en]
