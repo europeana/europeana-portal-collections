@@ -1,25 +1,4 @@
 GIT
-  remote: git://github.com/europeana/europeana-api-client-ruby.git
-  revision: 732869511fe3d820ae2cf1eb759b39898d605b01
-  ref: 7328695
-  specs:
-    europeana-api (0.4.0)
-      activesupport (>= 3.0)
-      multi_json (~> 1.0)
-
-GIT
-  remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 375ad69db68857477d1fd90c36e793c1d08176a9
-  ref: 375ad69
-  specs:
-    europeana-blacklight (0.2.8)
-      activesupport (>= 4.0, < 5.0)
-      blacklight (>= 5.12.0, < 6.0.0)
-      europeana-api (~> 0.4.0)
-      iso-639 (~> 0.2.5)
-      kaminari (~> 0.16)
-
-GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
   revision: 31e55e5aafd7ef386aa336d903dd28e3aa7e487f
   ref: 31e55e5
@@ -55,6 +34,23 @@ GIT
       globalize (>= 5.0)
       rails (>= 4.2)
       rails_admin (>= 0.6.2)
+
+PATH
+  remote: /home/rwdit/dev/euf/git/europeana-api-client-ruby
+  specs:
+    europeana-api (0.4.0)
+      activesupport (>= 3.0)
+      multi_json (~> 1.0)
+
+PATH
+  remote: /home/rwdit/dev/euf/git/europeana-blacklight
+  specs:
+    europeana-blacklight (0.2.8)
+      activesupport (>= 4.0, < 5.0)
+      blacklight (>= 5.12.0, < 6.0.0)
+      europeana-api (~> 0.4.0)
+      iso-639 (~> 0.2.5)
+      kaminari (~> 0.16)
 
 GEM
   remote: https://rubygems.org/
