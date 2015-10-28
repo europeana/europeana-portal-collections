@@ -478,7 +478,7 @@ module MustacheHelper
 
   ##
   # @param [ActiveRecord::Associations::CollectionProxy<BrowseEntry>
-  def collection_entry_items(browse_entries)
+  def browse_entry_items(browse_entries)
     browse_entries.map do |entry|
       cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
       {
