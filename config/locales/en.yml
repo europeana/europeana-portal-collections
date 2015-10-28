@@ -143,7 +143,7 @@ en:
         place-time: Place/Time
         properties: Properties
         provenance: Provenance
-        provided-by: Provided by
+        provided-by: Find out more
         provided-by-detail: <a href="%{url}">%{institution_name}</a> may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
