@@ -14,7 +14,7 @@ def find_or_download_styleguide_image(path)
   media_object
 end
 
-unless Page::Landing.find_by_slug('channels/art-history').present?
+unless Page::Landing.find_by_slug('collections/art-history').present?
   ActiveRecord::Base.transaction do
     art_history_hero = HeroImage.create(
       settings_attribution_title: 'Ships in a storm off a rocky coast',
@@ -25,9 +25,9 @@ unless Page::Landing.find_by_slug('channels/art-history').present?
       media_object: find_or_download_styleguide_image('sample/channel_hero_art.jpg')
     )
     art_history_landing = Page::Landing.create!(
-      slug: 'channels/art-history',
+      slug: 'collections/art-history',
       title: 'Europeana Art History',
-      body: 'From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Channel introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]',
+      body: 'From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]',
       credits: [
         Link::Credit.new(url: 'http://www.smk.dk/', text: 'National Gallery of Denmark', position: 1),
         Link::Credit.new(url: 'https://www.rijksmuseum.nl/', text: 'Rijksmuseum', position: 2)
@@ -119,18 +119,18 @@ unless Page::Landing.find_by_slug('channels/art-history').present?
   end
 end
 
-unless Channel.find_by_key('art-history').present?
+unless Collection.find_by_key('art-history').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'art-history',
       api_params: 'qf=(what: "fine art") OR (what: "beaux arts") OR (what: "bellas artes") OR (what: "belle arti") OR (what: "schone kunsten") OR (what:"konst") OR (what:"bildende kunst") OR (what: decorative arts) OR (what: konsthantverk) OR (what: "arts décoratifs") OR (what: paintings) OR (what: schilderij) OR (what: pintura) OR (what: peinture) OR (what: dipinto) OR (what: malerei) OR (what: måleri) OR (what: målning) OR (what: sculpture) OR (what: skulptur) OR (what: sculptuur) OR (what: beeldhouwwerk) OR (what: drawing) OR (what: poster) OR (what: tapestry) OR (what: jewellery) OR (what: miniature) OR (what: prints) OR (what: träsnitt) OR (what: holzschnitt) OR (what: woodcut) OR (what: lithography) OR (what: chiaroscuro) OR (what: "old master print") OR (what: estampe) OR (what: porcelain) OR (what: Mannerism) OR (what: Rococo) OR (what: Impressionism) OR (what: Expressionism) OR (what: Romanticism) OR (what: "Neo-Classicism") OR (what: "Pre-Raphaelite") OR (what: Symbolism) OR (what: Surrealism) OR (what: Cubism) OR (what: "Art Deco") OR (what: Dadaism) OR (what: "De Stijl") OR (what: "Pop Art") OR (what: "art nouveau") OR (what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: "histoire de l\'art") OR (what: (art histoire)) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis) OR (what: "illuminated manuscript") OR (what: buchmalerei) OR (what: enluminure) OR (what: "manuscrito illustrado") OR (what: "manoscritto miniato") OR (what: boekverluchting) OR (what: exlibris) OR (europeana_collectionName: "91631_Ag_SE_SwedishNationalHeritage_shm_art") OR (DATA_PROVIDER: "Institut für Realienkunde") OR (DATA_PROVIDER: "Bibliothèque municipale de Lyon") OR (DATA_PROVIDER:"Museu Nacional d\'Art de Catalunya") OR (DATA_PROVIDER:"Victoria \and Albert Museum") OR (PROVIDER:Ville+de+Bourg-en-Bresse) NOT (what: "printed serial" OR what:"printedbook" OR "printing paper" OR "printed music" OR DATA_PROVIDER:"NALIS Foundation" OR PROVIDER:"OpenUp!" OR PROVIDER:"BHL Europe" OR PROVIDER:"EFG - The European Film Gateway" OR DATA_PROVIDER: "Malta Aviation Museum Foundation")'
     ).publish!
   end
 end
 
-unless Channel.find_by_key('archaeology').present?
+unless Collection.find_by_key('archaeology').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'archaeology',
       api_params: 'qf=(what: archaeology) OR (what: archäologie) OR (what: Altertümerkunde)
       OR (what: fornminne) OR (what: arqueologia) OR (what: archéologie) OR (what:
@@ -147,9 +147,9 @@ unless Channel.find_by_key('archaeology').present?
   end
 end
 
-unless Channel.find_by_key('architecture').present?
+unless Collection.find_by_key('architecture').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'architecture',
       api_params: 'qf=(what: architecture) OR (what: arkitektur) OR (what: architektur) OR
       (what: buildings) OR (what: ruin) OR DATA_PROVIDER: "Architekturmuseum der
@@ -161,9 +161,9 @@ unless Channel.find_by_key('architecture').present?
   end
 end
 
-unless Channel.find_by_key('fashion').present?
+unless Collection.find_by_key('fashion').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'fashion',
       api_params: 'qf=(PROVIDER: "Europeana Fashion") OR (what: Fashion) OR (what: mode) OR (what: moda) OR (what: costume) OR (what: clothes) OR (what: shoes) OR (what: jewellery)'
     ).publish!
@@ -189,9 +189,9 @@ unless Page::Landing.find_by_slug('').present?
       promotions: [
         Link::Promotion.new(
           position: 1,
-          url: '/portal/channels/music',
+          url: '/portal/collections/music',
           text: 'Music',
-          settings_category: 'channel',
+          settings_category: 'collection',
           settings_wide: '1',
           media_object: find_or_download_styleguide_image('sample/thumb-music.jpg')
         ),
@@ -235,25 +235,25 @@ unless Page::Landing.find_by_slug('').present?
   end
 end
 
-unless Channel.find_by_key('home').present?
+unless Collection.find_by_key('home').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'home',
       api_params: '*:*'
     ).publish!
   end
 end
 
-unless Channel.find_by_key('maps').present?
+unless Collection.find_by_key('maps').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'maps',
       api_params: 'qf=what:maps OR what:cartography OR what:kartografi OR what:cartographic OR what:geography OR what:geografi OR what:navigation OR what:chart OR what: portolan OR what: "mappa mundi" OR what: cosmography OR what:kosmografi OR what: "astronomical instrument" OR what:"celestial globe" OR title:cosmographia OR title:geographia OR title:geographica OR what:"aerial photograph" OR what:periplus OR what:atlas OR what:"armillary sphere" OR what:"terrestrial globe" OR what:"jordglob" OR what:globus NOT (PROVIDER:"OpenUp!")'
     ).publish!
   end
 end
 
-unless Page::Landing.find_by_slug('channels/music').present?
+unless Page::Landing.find_by_slug('collections/music').present?
   ActiveRecord::Base.transaction do
     music_hero = HeroImage.create!(
       settings_attribution_title: 'Danse de trois faunes et trois bacchantes',
@@ -264,9 +264,9 @@ unless Page::Landing.find_by_slug('channels/music').present?
       media_object: find_or_download_styleguide_image('sample/channel_hero_music.jpg')
     )
     music_landing = Page::Landing.create!(
-      slug: 'channels/music',
+      slug: 'collections/music',
       title: 'Europeana Music',
-      body: 'The <strong>Europeana Music Channel</strong> brings together the best music recordings, sheet music, and other music related collections from Europe\'s audio-visual archives, libraries, archives and museums. <a href="/portal/channels/music/about">Find out more about the Music Channel.</a>',
+      body: 'The <strong>Europeana Music Collection</strong> brings together the best music recordings, sheet music, and other music related collections from Europe\'s audio-visual archives, libraries, archives and museums. <a href="/portal/collections/music/about">Find out more about the Music Collection.</a>',
       hero_image: music_hero,
       credits: [
         Link::Credit.new(url: 'http://www.europeanasounds.eu/', text: 'Europeana Sounds')
@@ -356,36 +356,36 @@ unless Page::Landing.find_by_slug('channels/music').present?
   end
 end
 
-unless Channel.find_by_key('music').present?
+unless Collection.find_by_key('music').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'music',
       api_params: 'qf=(PROVIDER:"Europeana Sounds" AND (what:music)) OR (DATA_PROVIDER:"National Library of Spain" AND TYPE:SOUND) OR (DATA_PROVIDER:"Sächsische Landesbibliothek - Staats- und Universitätsbibliothek Dresden" AND TYPE:SOUND) OR (PROVIDER:"DISMARC" AND NOT RIGHTS:*rr-p*) OR (PROVIDER: "MIMO - Musical Instrument Museums Online") OR ((what:music OR "performing arts") AND (DATA_PROVIDER:"Netherlands Institute for Sound and Vision")) OR ((what:music) AND (DATA_PROVIDER:"Open Beelden")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"National Library of France")) OR ((what:musique OR title:musique) AND (DATA_PROVIDER:"The British Library")) OR ((what:musik OR what:oper OR title:musik OR title:oper) AND (DATA_PROVIDER:"Österreichische Nationalbibliothek - Austrian National Library") AND (TYPE:IMAGE))'
     ).publish!
   end
 end
 
-unless Channel.find_by_key('natural-history').present?
+unless Collection.find_by_key('natural-history').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'natural-history',
       api_params: 'qf=(what: natural history) OR ("histoire naturelle") OR (naturgeschichte) OR ("historia naturalna") OR ("historia natural") OR (what: biology) OR (what: geology) OR (what: zoology) OR (what:entomology) OR (what:ornithology) OR (what:mycology) OR (what: specimen) OR (what: fossil) OR (what:animal) OR (what:flower) OR (what:palaeontology) OR (what:paleontology) OR (what:flora) OR (what:fauna) OR ((title:fauna AND TYPE:TEXT)) OR ((title:flora AND TYPE:TEXT)) OR (what:evolution) OR (what:systematics) OR (what:systematik) OR (what:plant) OR (what:insect) OR (what:insekt) OR (herbarium) OR (carl linnaeus) OR (Carl von Linné) OR (Leonhart Fuchs) OR (Otto Brunfels) OR (Hieronymus Bock) OR (Valerius Cordus) OR (Konrad Gesner) OR (Frederik Ruysch) OR (Gaspard Bauhin) OR (Henry Walter Bates) OR (Charles Darwin) OR (Alfred Russel Wallace) OR (Georges Buffon) OR (Jean-Baptiste de Lamarck) OR (Maria Sibylla Merian) OR (naturalist) OR (de materia media) OR (historiae animalium) OR (systema naturae) OR (botanica) OR (plantarum) OR (PROVIDER:"OpenUp!") OR (PROVIDER:"STERNA") OR (PROVIDER:"The Natural Europe Project") OR (PROVIDER:"BHL Europe") NOT (DATA_PROVIDER:"askabaoutireland.ie")'
     ).publish!
   end
 end
 
-unless Channel.find_by_key('newspapers').present?
+unless Collection.find_by_key('newspapers').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'newspapers',
       api_params: 'qf=what:newspapers'
     ).publish!
   end
 end
 
-unless Channel.find_by_key('performing-arts').present?
+unless Collection.find_by_key('performing-arts').present?
   ActiveRecord::Base.transaction do
-    Channel.create!(
+    Collection.create!(
       key: 'performing-arts',
       api_params: 'qf=(what: "performance art") OR (what: "performing arts") OR (what:
       theatre) OR (what: pantomime) OR (what: puppetry) OR (what: "puppet theatre")
@@ -406,7 +406,7 @@ unless Banner.find_by_key('phase-feedback').present?
   ActiveRecord::Base.transaction do
     Banner.create!(
       key: 'phase-feedback',
-      title: 'This is an Alpha release of our new collections search and Music Channel',
+      title: 'This is an Alpha release of our new collections search and Music Collection',
       body: 'An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.',
       link: Link.new(
         url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
@@ -426,12 +426,12 @@ unless Page.find_by_slug('about').present?
   end
 end
 
-unless Page.find_by_slug('channels/music/about').present?
+unless Page.find_by_slug('collections/music/about').present?
   ActiveRecord::Base.transaction do
     Page.create!(
-      slug: 'channels/music/about',
-      title: 'About the Music Channel',
-      body: '<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Channel, you can.</p><p><a href="http://www.europeanasounds.eu/">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p><p>We’ve made this early test version of the Music Channel available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p><p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Channel. All logs are kept private and anonymised and will only be used to improve our service.</p><p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>'
+      slug: 'collections/music/about',
+      title: 'About the Music Collection',
+      body: '<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p><p><a href="http://www.europeanasounds.eu/">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p><p>We’ve made this early test version of the Music Collection available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p><p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Collection. All logs are kept private and anonymised and will only be used to improve our service.</p><p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>'
     ).publish!
   end
 end

@@ -30,8 +30,8 @@ module Catalog
     case
     when options[:controller]
       url_for(options)
-    when params[:controller] == 'channels'
-      url_for(options.merge(controller: 'channels', action: params[:action]))
+    when params[:controller] == 'collections'
+      url_for(options.merge(controller: 'collections', action: params[:action]))
     else
       search_url(options.except(:controller, :action))
     end

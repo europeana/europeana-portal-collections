@@ -1,5 +1,3 @@
-require 'rails_helper'
-
-RSpec.describe CatalogController, type: :controller do
+RSpec.describe CatalogController do
   it 'does not implement any URLs'
 end

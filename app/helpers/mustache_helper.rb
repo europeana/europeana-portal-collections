@@ -128,10 +128,10 @@ module MustacheHelper
     @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
   end
 
-  def channels_nav_links
-    available_channels.collect do |c|
+  def collections_nav_links
+    available_collections.map do |c|
       {
-        url: channel_path(c),
+        url: collection_path(c),
         text: c
       }
     end
@@ -143,7 +143,7 @@ module MustacheHelper
     }
   end
 
-  def channel_data
+  def collection_data
     name = nil
     if !(params[:controller] == 'portal' && params[:action] == 'show')
       name = params[:id] ? params[:id] : nil
@@ -151,11 +151,12 @@ module MustacheHelper
     if !name.nil?
       {
         name: name,
-        label: t("site.channels.#{name}.title"),
-        url: name ? channel_url(name) : nil
+        label: t("site.collections.#{name}.title"),
+        url: name ? collection_url(name) : nil
       }
     end
   end
+  alias_method :channel_data, :collection_data
 
   def navigation
     {
@@ -177,14 +178,14 @@ module MustacheHelper
               is_current: controller.controller_name == 'home'
             },
             {
-              text: t('global.navigation.channels'),
-              is_current: controller.controller_name == 'channels',
+              text: t('global.navigation.collections'),
+              is_current: controller.controller_name == 'collections',
               submenu: {
-                items: Channel.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |channel|
+                items: Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|
                   {
-                    url: channel_path(channel),
-                    text: channel.landing_page.title,
-                    is_current: current_page?(channel_path(channel))
+                    url: collection_path(collection),
+                    text: collection.landing_page.title,
+                    is_current: current_page?(collection_path(collection))
                   }
                 end
               }
@@ -330,7 +331,7 @@ module MustacheHelper
               #   url: false
               # },
               # {
-              #   text: 'Channel Admin',
+              #   text: 'Collection Admin',
               #   url: 'url to admin page'
               # },
               # {
@@ -477,7 +478,7 @@ module MustacheHelper
 
   ##
   # @param [ActiveRecord::Associations::CollectionProxy<BrowseEntry>
-  def channel_entry_items(browse_entries)
+  def browse_entry_items(browse_entries)
     browse_entries.map do |entry|
       cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
       {

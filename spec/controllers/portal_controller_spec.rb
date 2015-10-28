@@ -1,6 +1,6 @@
 require 'support/shared_examples/europeana_api_requests'
 
-RSpec.describe PortalController, type: :controller do
+RSpec.describe PortalController do
   # workaround for https://github.com/jnicklas/capybara/issues/1396
   include RSpec::Matchers.clone
 

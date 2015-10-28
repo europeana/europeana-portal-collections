@@ -6,11 +6,11 @@ RSpec.describe 'home/index.html.mustache' do
   before(:each) do
     assign(:europeana_item_count, europeana_item_count)
     assign(:landing_page, landing_page)
-    assign(:channel, channel)
+    assign(:collection, collection)
   end
 
   let(:landing_page) { Page::Landing.find_by_slug('') }
-  let(:channel) { Channel.find_by_key('home') }
+  let(:collection) { Collection.find_by_key('home') }
 
   it_should_behave_like 'page with top nav'
 
