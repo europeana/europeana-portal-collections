@@ -226,7 +226,6 @@ module Portal
                 {
                   title: 'site.object.meta-label.location',
                   fields: ['proxies.dctermsSpatial'],
-#                  collected: 'XXX' + @document.fetch('places.prefLabel', [])[0][I18n.locale.to_sym][0].to_s + 'xxx'
                   collected: pref_label('places.prefLabel')
                 },
                 {
@@ -424,10 +423,11 @@ module Portal
       end
     end
 
-    def named_entity_data()
+    def named_entity_data
       data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
       present = false
-      for group in data
+
+      data.each do |group|
         if group[:fields].size > 0
           present = true
         end
@@ -438,11 +438,11 @@ module Portal
       }
     end
 
-    def collect_agent_labels()
+    def collect_agent_labels
       fields = []
       agents = document.fetch('concepts', [])
       (agents).map do |agent|
-        fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true}
+        fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true }
         fields << { key: t('site.object.named-entities.who.label'), vals: normalise_named_entity(agent[:prefLabel]), multi: true }
       end
       {
@@ -452,11 +452,11 @@ module Portal
       }
     end
 
-    def collect_place_labels()
+    def collect_place_labels
       fields = []
       places = document.fetch('places', [])
       (places).map do |place|
-        fields << { key: t('site.object.named-entities.where.term'), val: place[:about], agt_link: true}
+        fields << { key: t('site.object.named-entities.where.term'), val: place[:about], agt_link: true }
         fields << { key: t('site.object.named-entities.where.label'), vals: normalise_named_entity(place[:prefLabel]), multi: true }
         if !place[:latitude].nil?
           fields << { key: t('site.object.named-entities.where.latitude'), val: place[:latitude] }
@@ -472,7 +472,7 @@ module Portal
       }
     end
 
-    def collect_time_labels()
+    def collect_time_labels
       fields = []
       timespans = document.fetch('timespans', [])
       (timespans).map do |timespan|
