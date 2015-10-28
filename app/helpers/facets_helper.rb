@@ -5,7 +5,7 @@ module FacetsHelper
 
   def facet_in_params?(field, item)
     value = facet_value_for_facet_item(item)
-    super || (field =='COLLECTION' && within_collection? && (params[:id] == value))
+    super || (field == 'COLLECTION' && within_collection? && (params[:id] == value))
   end
 
   def facet_label(facet_name, facet_value = nil)
