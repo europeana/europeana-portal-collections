@@ -1,5 +1,5 @@
 ##
-# Configures Blacklight for Europeana Portal & Channels
+# Configures Blacklight for Europeana Portal & Collections
 #
 # In the configuration for query facet fields, the :fq option is a Hash, to
 # permit specification of multiple parameters to be passed to the API.
@@ -12,9 +12,9 @@ module BlacklightConfig
   include ::Blacklight::Base
 
   included do
-    def self.channels_query_facet
-      channels = Rails.application.config.x.channels.dup
-      channels.each_with_object({}) do |(k, v), hash|
+    def self.collections_query_facet
+      collections = Rails.application.config.x.collections.dup
+      collections.each_with_object({}) do |(k, v), hash|
         hash[k] = { label: k, fq: v[:params] }
       end
     end
@@ -55,7 +55,7 @@ module BlacklightConfig
       config.add_index_field 'edmIsShownAt'
 
       # Facet fields in the order they should be displayed.
-      # config.add_facet_field 'CHANNEL', query: channels_query_facet, single: true
+      # config.add_facet_field 'COLLECTION', query: collections_query_facet, single: true
       config.add_facet_field 'TYPE', hierarchical: true
       config.add_facet_field 'IMAGE_COLOUR', parent: %w(TYPE IMAGE)
       config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 18
