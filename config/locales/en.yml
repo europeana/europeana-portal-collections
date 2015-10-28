@@ -145,7 +145,7 @@ en:
         properties: Properties
         provenance: Provenance
         provided-by: Find out more
-        provided-by-detail: <a href="%{url}">%{institution_name}</a> may have more information and media for this item.
+        provided-by-detail: may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
         publication-date: Date of publication
@@ -165,10 +165,34 @@ en:
         timestamp-updated: Last updated in Europeana
         timestamp_created: First published in Europeana (%{timestamp_created})
         timestamp_updated: Last updated in Europeana (%{timestamp_updated})
+        title: Title
         toc: Table of Contents
         type: Type
         ugc: User contributed content
         version: Version
+      named-entities:
+        title: Named Entities
+        what:
+          broader: Broader Concept
+          label: Concept Label
+          term: Concept Term
+          title: What
+        when:
+          begin: Period Begin
+          end: Period End
+          label: Period Label
+          term: Period Term
+          title: When
+        where:
+          label: Place Label
+          latitude: Place Latitude
+          longitude: Place Longitude
+          term: Place Term
+          title: Where
+        who:
+          label: Agent Label
+          term: Agent Term
+          title: Who
       nav:
         next: Next
         prev: Previous

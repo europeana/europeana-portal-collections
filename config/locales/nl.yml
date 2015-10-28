@@ -163,10 +163,34 @@ nl:
         timestamp-updated: 
         timestamp_created: 
         timestamp_updated: 
+        title: 
         toc: 
         type: Type
         ugc: 
         version: 
+      named-entities:
+        title: 
+        what:
+          broader: 
+          label: 
+          term: 
+          title: 
+        when:
+          begin: 
+          end: 
+          label: 
+          term: 
+          title: 
+        where:
+          label: 
+          latitude: 
+          longitude: 
+          term: 
+          title: 
+        who:
+          label: 
+          term: 
+          title: 
       nav:
         next: 
         prev: 
