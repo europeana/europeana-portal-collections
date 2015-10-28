@@ -26,7 +26,7 @@ module Catalog
 
   def search_results(user_params, search_params_logic)
     response, documents = super
-    response.max_pages_per(960/response.limit_value)
+    response.max_pages_per(960 / response.limit_value)
     [response, documents]
   end
 
