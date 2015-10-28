@@ -151,7 +151,7 @@ module MustacheHelper
     if !name.nil?
       {
         name: name,
-        label: t("site.channels.#{name}.title"),
+        label: t("site.collections.#{name}.title"),
         url: name ? collection_url(name) : nil
       }
     end
@@ -178,7 +178,7 @@ module MustacheHelper
               is_current: controller.controller_name == 'home'
             },
             {
-              text: t('global.navigation.channels'),
+              text: t('global.navigation.collections'),
               is_current: controller.controller_name == 'collections',
               submenu: {
                 items: Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|

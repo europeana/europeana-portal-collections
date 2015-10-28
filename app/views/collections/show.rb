@@ -37,11 +37,11 @@ module Collections
               items: stylised_collection_stats
             },
             recent: @recent_additions.blank? ? nil : {
-              title: t('site.channels.labels.recent'),
+              title: t('site.collections.labels.recent'),
               items: stylised_recent_additions(@recent_additions, max: 3)
             },
             credits: @landing_page.credits.blank? ? {} : {
-              title: t('site.channels.labels.credits'),
+              title: t('site.collections.labels.credits'),
               items: @landing_page.credits.to_a
             }
           },

@@ -10,6 +10,7 @@ en:
       browse_newcontent: New content
       browse_sources: Sources
       channels: Channels
+      collections: Collections
       exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
@@ -29,7 +30,7 @@ en:
         title: New Content
       sources:
         title: Sources
-    channels:
+    collections:
       art-history:
         description: |
           From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Channel introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
@@ -143,7 +144,7 @@ en:
         place-time: Place/Time
         properties: Properties
         provenance: Provenance
-        provided-by: Provided by
+        provided-by: Find out more
         provided-by-detail: <a href="%{url}">%{institution_name}</a> may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
