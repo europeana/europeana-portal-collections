@@ -1,0 +1,9 @@
+user:
+  email: user@example.com
+  password: secret!!
+  role: user
+
+admin:
+  email: admin@example.com
+  password: you-will-never-guess
+  role: admin
