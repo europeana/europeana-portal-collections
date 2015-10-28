@@ -10,6 +10,7 @@ it:
       browse_newcontent: 
       browse_sources: 
       channels: 
+      collections: 
       exhibitions: 
       home: 
     pro-link: 
@@ -29,7 +30,7 @@ it:
         title: 
       sources:
         title: 
-    channels:
+    collections:
       art-history:
         description: 
         title: 

@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 
   # GET /
   def index
-    @channel = find_channel
+    @collection = find_collection
     @landing_page = find_landing_page
     @europeana_item_count = Rails.cache.fetch('record/counts/all') # populated by {RecordCountsCacheJob}
 
@@ -21,9 +21,9 @@ class HomeController < ApplicationController
 
   protected
 
-  def find_channel
-    Channel.find_or_initialize_by(key: 'home').tap do |channel|
-      authorize! :show, channel
+  def find_collection
+    Collection.find_or_initialize_by(key: 'home').tap do |collection|
+      authorize! :show, collection
     end
   end
 

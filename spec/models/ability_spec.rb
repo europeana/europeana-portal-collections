@@ -5,8 +5,8 @@ RSpec.describe Ability do
 
   let(:draft_banner) { FactoryGirl.create(:banner) }
   let(:published_banner) { FactoryGirl.create(:banner).tap(&:publish!) }
-  let(:draft_channel) { FactoryGirl.create(:channel) }
-  let(:published_channel) { FactoryGirl.create(:channel).tap(&:publish!) }
+  let(:draft_collection) { FactoryGirl.create(:collection) }
+  let(:published_collection) { FactoryGirl.create(:collection).tap(&:publish!) }
   let(:draft_landing_page) { FactoryGirl.create(:landing_page) }
   let(:published_landing_page) { FactoryGirl.create(:landing_page).tap(&:publish!) }
 
@@ -19,7 +19,7 @@ RSpec.describe Ability do
 
     it { is_expected.not_to be_able_to(:manage, Banner.new) }
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
-    it { is_expected.not_to be_able_to(:manage, Channel.new) }
+    it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.not_to be_able_to(:manage, Link.new) }
@@ -28,8 +28,8 @@ RSpec.describe Ability do
 
     it { is_expected.not_to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }
-    it { is_expected.not_to be_able_to(:show, draft_channel) }
-    it { is_expected.to be_able_to(:show, published_channel) }
+    it { is_expected.not_to be_able_to(:show, draft_collection) }
+    it { is_expected.to be_able_to(:show, published_collection) }
     it { is_expected.not_to be_able_to(:show, draft_landing_page) }
     it { is_expected.to be_able_to(:show, published_landing_page) }
   end
@@ -43,7 +43,7 @@ RSpec.describe Ability do
 
     it { is_expected.not_to be_able_to(:manage, Banner.new) }
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
-    it { is_expected.not_to be_able_to(:manage, Channel.new) }
+    it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.not_to be_able_to(:manage, Link.new) }
@@ -52,8 +52,8 @@ RSpec.describe Ability do
 
     it { is_expected.not_to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }
-    it { is_expected.not_to be_able_to(:show, draft_channel) }
-    it { is_expected.to be_able_to(:show, published_channel) }
+    it { is_expected.not_to be_able_to(:show, draft_collection) }
+    it { is_expected.to be_able_to(:show, published_collection) }
     it { is_expected.not_to be_able_to(:show, draft_landing_page) }
     it { is_expected.to be_able_to(:show, published_landing_page) }
   end
@@ -66,7 +66,7 @@ RSpec.describe Ability do
 
     it { is_expected.to be_able_to(:manage, Banner.new) }
     it { is_expected.to be_able_to(:manage, BrowseEntry.new) }
-    it { is_expected.to be_able_to(:manage, Channel.new) }
+    it { is_expected.to be_able_to(:manage, Collection.new) }
     it { is_expected.to be_able_to(:manage, HeroImage.new) }
     it { is_expected.to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.to be_able_to(:manage, Link.new) }
@@ -75,8 +75,8 @@ RSpec.describe Ability do
 
     it { is_expected.to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }
-    it { is_expected.to be_able_to(:show, draft_channel) }
-    it { is_expected.to be_able_to(:show, published_channel) }
+    it { is_expected.to be_able_to(:show, draft_collection) }
+    it { is_expected.to be_able_to(:show, published_collection) }
     it { is_expected.to be_able_to(:show, draft_landing_page) }
     it { is_expected.to be_able_to(:show, published_landing_page) }
   end

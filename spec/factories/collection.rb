@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :channel do
+  factory :collection do
     sequence(:key) { |n| "key (#{n})" }
     api_params 'qf=what:ever'
 

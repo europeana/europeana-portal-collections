@@ -6,12 +6,12 @@ module UrlHelper
   include Blacklight::UrlHelperBehavior
 
   def add_facet_params(field, item, source_params = params)
-    return super unless field == 'CHANNEL'
+    return super unless field == 'COLLECTION'
 
     value = facet_value_for_facet_item(item)
 
     p = reset_search_params(source_params)
-    p[:controller] = :channels
+    p[:controller] = :collections
     p[:action] = :show
     p[:id] = value
 
@@ -51,9 +51,9 @@ module UrlHelper
   # @param browse_entry [BrowseEntry]
   # @return [String] url
   def browse_entry_url(browse_entry)
-    if slug_match = browse_entry.page.slug.match(/\Achannels\/(.*)\Z/)
-      channel = Channel.find_by_key(slug_match[1])
-      return channel_path(channel.key, q: browse_entry.query) unless channel.nil?
+    if slug_match = browse_entry.page.slug.match(/\Acollections\/(.*)\Z/)
+      collection = Collection.find_by_key(slug_match[1])
+      return collection_path(collection.key, q: browse_entry.query) unless collection.nil?
     end
     search_path(q: browse_entry.query)
   end

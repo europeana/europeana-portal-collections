@@ -8,8 +8,8 @@ FactoryGirl.define do
       title 'Home'
     end
 
-    trait :music_channel do
-      slug 'channels/music'
+    trait :music_collection do
+      slug 'collections/music'
       title 'Europeana Music'
       body 'About music'
     end
