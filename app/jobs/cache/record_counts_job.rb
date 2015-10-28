@@ -19,9 +19,9 @@ class Cache::RecordCountsJob < ActiveJob::Base
     {
       all: { query: '*:*' }
     }.tap do |sets|
-      Channel.published.each do |channel|
+      Collection.published.each do |collection|
         %w(IMAGE SOUND TEXT VIDEO 3D).each do |type|
-          sets["channels/#{channel}/type/#{type.downcase}"] = { overlay: channel.api_params_hash }.merge(query: "TYPE:#{type}")
+          sets["collections/#{collection}/type/#{type.downcase}"] = { overlay: collection.api_params_hash }.merge(query: "TYPE:#{type}")
         end
       end
     end
