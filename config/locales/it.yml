@@ -22,14 +22,14 @@ it:
         description: 
         link-text: 
         title: 
-    blog-link: 
+    blog-link: link al blog
     browse:
       colours:
-        title: 
+        title: Colori
       newcontent:
-        title: 
+        title: Nuovo contenuto
       sources:
-        title: 
+        title: Fonti
     collections:
       art-history:
         description: 
@@ -63,15 +63,15 @@ it:
         using-myeuropeana: 
     home:
       strapline: 
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+    more: Di più
+    my-europeana: My Europeana
+    my-europeana-link: link a my Europeana
     navigation:
       breadcrumb:
         item_detail: 
         results_list: 
         return_home: 
-    news: 
+    news: Notizie
     object:
       actions:
         attribute-author: 
@@ -92,22 +92,22 @@ it:
         view-items-above: 
         view-items-below: 
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
+        codec: Codec
+        collection-name: Dataset
+        concept: Concetta
+        concepts: Classificazioni
         consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        contributor: Contributore
+        copyright: Diritto d'autore
+        creation-date: Data da creazione
+        creator: Creatore
+        current-location: Collocazione attuale
+        data-provider: Fornitori di contenuti
+        date: Data
+        dates: Date
+        description: Descrizione
+        dimensions: Dimensioni
+        duration: Durazione
         edm:
           has-met: 
           incorporates: 
@@ -117,56 +117,80 @@ it:
           is-successor-of: 
           realises: 
           was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
+        extent: Larghezza
+        file-size: Dimensione del file
+        format: Formatto
+        fps: Fotogrammi al secondo
+        has-type: "è di tipo"
+        identifier: Identificatore
+        is-format-of: "È formato "
+        is-part-of: "È parte di"
+        is-referenced-by: "è referenziato da"
+        is-replaced-by: "è sostituito da"
+        is-required-by: "è richiesto dal"
+        issued: Rilasciato
+        language: Lingua
+        latitude: Latitudine
+        location: Localizzazione
+        longitude: Longitudine
+        map: Mappa
         map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        toc: 
-        type: 
-        ugc: 
+        medium: Medium
+        people: Gente
+        period: Periodo
+        place: Luogo
+        place-time: Luogo/Tempo
+        properties: Proprietà
+        provenance: Provenienza
+        provided-by: Scopri di più
+        provided-by-detail: potrebbe dare più informazioni e contenuti digitali su quest'opera
+        provider: Fornitore
+        providing-country: Paese fornitore
+        publication-date: Data di pubblicazione
+        publisher: Editore
+        references: Referenze
+        refs-rels: Riferimenti e relazioni
+        relations: Relazioni
+        rights: Diritti d'autore
+        rights-human: Posso usarlo?
+        runtime: Durata
+        runtime-unit-seconds: secondi
+        source: Provenienza
+        subject: Soggetto
+        temporal: Temporale
+        time: Tempo
+        timestamp-created: Pubblicato in Europeana
+        timestamp-updated: L'ultimo aggiornamento da Europeana
+        timestamp_created: Pubblicato da Europeana (%{timestamp_created})
+        timestamp_updated: L'ultimo aggiornamento da Europeana (%{timestamp_updated})
+        title: Titolo
+        toc: Tavola dei contenuti
+        type: Tipo
+        ugc: Contenuto contribuito dall'utente
         version: 
+      named-entities:
+        title: 
+        what:
+          broader: Concetta Larga
+          label: Etichetta della concetta
+          term: Termine della concetta
+          title: Cosa
+        when:
+          begin: Inizio Periodo
+          end: Fine Periodo
+          label: Etichetta del Periodo
+          term: Termine Periodo
+          title: 
+        where:
+          label: Etichetta del Posto
+          latitude: Latitudine del Posto
+          longitude: Posto Longitudine
+          term: Termine del Posto
+          title: Dove
+        who:
+          label: Etichetta del'agente
+          term: Termine del'agente
+          title: Chi
       nav:
         next: 
         prev: 

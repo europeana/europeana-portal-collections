@@ -28,13 +28,13 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
     # global.facet.reusability.restricted      Yes with restrictions
 
     case media_rights
-    when %r{http://creativecommons.org/publicdomain/zero'}
+    when %r{http://creativecommons.org/publicdomain/zero}
       {
         license_human: t('global.facet.reusability.open'),
         license_name: t('global.facet.reusability.advanced-cc0'),
         license_CC0: true
       }
-    when %r{http://creativecommons.org/licenses/by/'}
+    when %r{http://creativecommons.org/licenses/by/}
       {
         license_human: t('global.facet.reusability.open'),
         license_name: t('global.facet.reusability.advanced-cc-by'),
