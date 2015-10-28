@@ -3,7 +3,7 @@ module RecordCountsHelper
     @stylised_recent_additions ||= begin
       max = options[:max]
       from = options[:from]
-      path_meth = within_channel? ? :channel_path : :search_path
+      path_meth = within_collection? ? :collection_path : :search_path
 
       sorted = additions.sort_by { |addition| [-addition[:from].to_i, -addition[:count]] }
       sorted = sorted[0..(max - 1)] if max.present?
