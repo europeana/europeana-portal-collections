@@ -167,6 +167,29 @@ it:
         type: 
         ugc: 
         version: 
+      named-entities:
+        title: 
+        what:
+          broader: Concetta Larga
+          label: Etichetta della concetta
+          term: Termine della concetta
+          title: Cosa
+        when:
+          begin: Inizio Periodo
+          end: Fine Periodo
+          label: Etichetta del Periodo
+          term: Termine Periodo
+          title: 
+        where:
+          label: Etichetta del Posto
+          latitude: Latitudine del Posto
+          longitude: Posto Longitudine
+          term: Termine del Posto
+          title: Dove
+        who:
+          label: Etichetta del'agente
+          term: Termine del'agente
+          title: Chi
       nav:
         next: 
         prev: 

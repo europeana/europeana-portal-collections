@@ -417,17 +417,16 @@ module Portal
               }
             end
           },
-          enriched: enriched_data,
+          named_entities: named_entity_data,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(helpers.content)
       end
     end
 
-    def enriched_data()
+    def named_entity_data()
       data = [collectConceptLabels(), collectAgentLabels(), collectTimeLabels(), collectPlaceLabels()]
       present = false
-
       for group in data
         if group[:fields].size > 0
           present = true
@@ -441,13 +440,13 @@ module Portal
 
     def collectAgentLabels()
       fields = []
-      concepts = document.fetch('concepts', [])
-      (concepts).map do |concept|
-        fields << { :key => "Agent Term", :val => concept[:about], :link => true}
-        fields << { :key => "Agent Label", :val => normalisePrefLabels(concept[:prefLabel]), :multi => true }
+      agents = document.fetch('concepts', [])
+      (agents).map do |agent|
+        fields << { :key => t('site.object.named-entities.who.term'), :val => agent[:about], :agt_link => true}
+        fields << { :key => t('site.object.named-entities.who.label'), :vals => normalise_named_entity(agent[:prefLabel]), :multi => true }
       end
       {
-        :title => 'Who',
+        :title => t('site.object.named-entities.who.title'),
         :fields => fields,
         :present => fields.size > 0
       }
@@ -457,18 +456,17 @@ module Portal
       fields = []
       places = document.fetch('places', [])
       (places).map do |place|
-        fields << { :key => "Place Term", :val => place[:about], :link => true}
-        fields << { :key => "Place Label", :val => normalisePrefLabels(place[:prefLabel]), :multi => true }
-
+        fields << { :key => t('site.object.named-entities.where.term'), :val => place[:about], :agt_link => true}
+        fields << { :key => t('site.object.named-entities.where.label'), :vals => normalise_named_entity(place[:prefLabel]), :multi => true }
         if !place[:latitude].nil?
-          fields << { :key => "Place Latitude", :val => place[:latitude] }#[:def][0] }
+          fields << { :key => t('site.object.named-entities.where.latitude'), :val => place[:latitude] }
         end
         if !place[:longitude].nil?
-          fields << { :key => "Place Longitude", :val => place[:longitude] }#[:def][0] }
+          fields << { :key => t('site.object.named-entities.where.longitude'), :val => place[:longitude] }
         end
       end
       {
-        :title => 'Where',
+        :title => t('site.object.named-entities.where.title'),
         :fields => fields,
         :present => fields.size > 0
       }
@@ -478,13 +476,13 @@ module Portal
       fields = []
       timespans = document.fetch('timespans', [])
       (timespans).map do |timespan|
-        fields << { :key => "Period Term", :val => timespan[:about], :link => true}
-        fields << { :key => "Period Label", :val => normalisePrefLabels(timespan[:prefLabel]), :multi => true }
+        fields << { :key => t('site.object.named-entities.when.term'), :val => timespan[:about], :agt_link => true}
+        fields << { :key => t('site.object.named-entities.when.label'), :vals => normalise_named_entity(timespan[:prefLabel]), :multi => true }
         if !timespan[:begin].nil?
-          fields << { :key => "Period Begin", :val => timespan[:begin][:def][0] }
+          fields << { :key => t('site.object.named-entities.when.begin'), :val => timespan[:begin][:def][0] }
         end
         if !timespan[:end].nil?
-          fields << { :key => "Period End", :val => timespan[:end][:def][0] }
+          fields << { :key => t('site.object.named-entities.when.end'), :val => timespan[:end][:def][0] }
         end
       end
       {
@@ -498,25 +496,35 @@ module Portal
       fields = []
       concepts = document.fetch('concepts', [])
       (concepts).map do |concept|
-        fields << { :key => "Concept Term", :val => concept[:about],  :link => true}
-        fields << { :key => "Concept Label", :val => normalisePrefLabels(concept[:prefLabel]), :multi => true }
+        fields << { :key => t('site.object.named-entities.what.term'), :val => concept[:about],  :agt_link => true}
+        fields << { :key => t('site.object.named-entities.what.label'), :vals => normalise_named_entity(concept[:prefLabel]), :multi => true }
         broader = concept[:broader]
         if !broader.nil?
-          broader = broader.size > 1 ? broader : broader[0]
-          fields << { :key => "Broader Concept", :val => broader, :link => true}
+          multi = broader.size > 1
+          broader = multi ? broader : broader[0]
+          fields << {
+            :key => t('site.object.named-entities.what.broader'),
+            :val => multi ? nil : broader,
+            :vals => multi ? normalise_named_entity(broader, true) : nil,
+            :agt_link => true,
+            :multi => multi}
         end
       end
       {
-        :title => 'What',
+        :title => t('site.object.named-entities.what.title'),
         :fields => fields,
         :present => fields.size > 0
       }
     end
 
-    def normalisePrefLabels(prefLabelHash)
+    def normalise_named_entity(named_entity, agt_link = false)
       res = []
-      prefLabelHash.each do |key, val|
-        res << {key: key, val: val}
+      named_entity.each do |key, val|
+        if(key && val.nil?)
+          res << {val: key, key: nil, agt_link: agt_link}
+        else
+          res << {key: key, val: val, agt_link: agt_link}
+        end
       end
       res
     end

@@ -10,9 +10,9 @@ de:
       browse_newcontent: Neue Inhalte
       browse_sources: Quellen
       channels: ''
-      collections: 
+      collections: Sammlungen
       exhibitions: Ausstellungen
-      home: 
+      home: Startseite
     pro-link: Link zu Pro
     pro-text: Text für Pro
     settings: Einstellungen
@@ -21,7 +21,7 @@ de:
       feedback_banner:
         description: Eine Alpha-Version bedeutet, dass diese Website in aktiver Entwicklung ist und regelmäßig aktualisiert wird. Manchmal kann diese offline sein. Ihr Feedback hilft uns, unsere Seite zu verbessern.
         link-text: Teilen Sie uns Ihre Meinung mit!
-        title: Dies ist eine Alpha Veröffentlichung unserer neuen Kunst und Musik Sammlungen
+        title: Dies ist eine Alpha Veröffentlichung unserer neuen Sammlungen und Musik Sammlung
     blog-link: Link zum Blog
     browse:
       colours:
@@ -29,98 +29,98 @@ de:
       newcontent:
         title: Neue Inhalte
       sources:
-        title: 
+        title: Quellen
     collections:
       art-history:
-        description: 
-        title: 
+        description: Von der Renaissance bis zu den Surrealisten, von antiken römischen Skulpturen bis zur zeitgenössischen Kunst, die Europeana Kunst und Kunstgeschichte Sammlung bringt Sie den Künstlern und Kunstwerken aus ganz Europa näher. [Something about interactive element]
+        title: Europeana Kunstgeschichte
       data-types:
-        3d: 
-        count: 
-        images: 
+        3d: 3D-Objekte
+        count: Objekte
+        images: Bilder
         moving-images: 
-        sound: 
-        texts: 
+        sound: Tonaufnahmen
+        texts: Texte
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Kuratiert von
+        recent: Neu hinzugefügt
+        spotlight-on: Spotlight auf
       music:
-        description: 
-        title: 
+        description: Die <strong> Europeana Musik Sammlung </ strong> vereint die besten Musikaufnahmen, Noten und andere Musik bezogen Sammlungen von Europas audiovisuelle Archiven, Bibliotheken, und Archiven
+        title: Europeana Musik
     facet:
       language:
         show:
-          results: 
+          results: Ergebnisse
     footer:
       menu:
-        about: 
-        become-a-provider: 
+        about: "Über"
+        become-a-provider: Werden Sie ein Datengeber
         copyright: 
-        data-providers: 
-        new-collections: 
-        search-tips: 
-        using-myeuropeana: 
+        data-providers: Alle Datengeber
+        new-collections: Neue Sammlungen
+        search-tips: Suchtipps
+        using-myeuropeana: Verwendung My Europeana
     home:
-      strapline: 
+      strapline: Entdecken Sie %{total_item_count} Kunstwerke, Artefakte, Bücher, Videos und Audios aus ganz Europa.
     more: Mehr...
     my-europeana: Mein Europeana
-    my-europeana-link: 
+    my-europeana-link: Link zu Mein Europeana
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: Objektdetail
+        results_list: Ergebnisliste
+        return_home: Zurück zur Startseite
+    news: Neuigkeiten
     object:
       actions:
-        attribute-author: 
+        attribute-author: Autor zuordnen
         attribute-html: 
         attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        download: Herunterladen
+        download-additional: Auch erhältlich als
+        downloaddata: Daten herunterladen
+        open-media: "Öffnen Sie dieses Objekt"
+        show-less-data: Weniger Daten anzeigen
+        show-more-data: Weitere Daten anzeigen
+        technicalmetadata: Technische Metadaten
       enrichment:
         who:
           title: 
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: "Ähnliche Objekte"
+        view-items-above: Objekte oben anzeigen
+        view-items-below: Objekte unten anzeigen
       meta-label:
         codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
+        collection-name: Datensatz
+        concept: Konzept
+        concepts: Klassifikationen
+        consists-of: Besteht aus
+        contributor: Beitragender
         copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        creation-date: Erstellungsdatum
+        creator: Urheber
+        current-location: Aktueller Standort
+        data-provider: Datenanbieter
+        date: Datum
+        dates: Datum
+        description: Beschreibung
+        dimensions: Maße
+        duration: Laufzeit
         edm:
           has-met: 
-          incorporates: 
+          incorporates: enthält
           is-derivative-of: 
           is-representation-of: 
           is-similar-to: 
           is-successor-of: 
           realises: 
           was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
+        extent: Größe
+        file-size: Dateigröße
+        format: 'Format '
+        fps: Bilder pro Sekunde
         has-type: 
         identifier: 
         is-format-of: 
@@ -167,82 +167,125 @@ de:
         type: 
         ugc: 
         version: 
+      named-entities:
+        title: 
+        what:
+          broader: 
+          label: 
+          term: 
+          title: Was
+        when:
+          begin: Zeitraum Anfang
+          end: Zeitraum Ende
+          label: Zeitraum Label
+          term: Zeitraum Begriff
+          title: Wann
+        where:
+          label: Ort
+          latitude: 
+          longitude: 
+          term: 
+          title: Wo
+        who:
+          label: 
+          term: 
+          title: Wer
       nav:
-        next: 
-        prev: 
+        next: Weiter
+        prev: Zurück
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: "Östlich"
+        north: Nördlich
+        south: Südlich
+        west: Westlich
+      show-more-similar-items: Mehr anzeigen
+      similar-items: "Ähnliche Objekte"
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Leider konnten wir die Seite nicht finden
+        text: Leider konnten wir die Seite die Sie suchen nicht finden. Versuchen Sie nach Europeana zu suchen oder Ihnen gefallen die unten ausgewählten Objekte.
       about:
-        text: 
-        title: 
+        text: |-
+          <p>Egal, ob Sie hier aus Inspirations- oder Forschungszwecken, auf der Suche nach Ihrem nächsten Kaffeebecher-Entwurf sind, oder sich einfach nur umschauen möchten. Wir hoffen, dass Sie unter den 45 Millionen Objekten, die wir hier zur Verfügung stellen, finden was Sie suchen.<p>
+
+          <p> Unser Material stammt aus ganz Europa und der Umfang der Sammlung ist wirklich erstaunlich. Unser Ziel ist es Sie auf Ihrem Weg durch die Sammlung zu unterstützen, damit Sie unsere Schätze auf eigene Faust entdecken können.<p>
+
+          <p> In den letzten Jahren haben wir unsere Sammlungne immer weiter ausgebaut und mehr und mehr über sie gelernt, und was Sie mit Ihnen machen wollen. Jetzt ist es Zeit, ein paar Dinge zu ändern und unser Angebot zu verbessern! <p>
+
+          <p> Wir versuchen es mit einer neuen Version, der Europeana Sammlungen. Wir arbeiten hart, um den Zugang zu den Europeana Sannlungne zu verbessern und es Ihnen so einfach wie möglich zu machen Informationen, die Sie suchen zu finden. So werden wir Sie wahrscheinlich bitten, uns durch die Beantwortung von ein paar Fragen zu helfen. Ihre Antworten sind sehr hilfreich für uns. Deshalb bitten wir Sie sich einen Moment Zeit zu nehmen, um uns Ihre Meinung mitzuteilen. Vielen Dank! <p>
+
+          <p> In der Zwischenzeit hoffen wir, dass Sie Ihre kulturelle Reise mit uns genießen. <p>
+        title: Willkommen, Kulturliebhaber!
       music-channel-about:
-        text: 
-        title: 
+        text: |+
+          <p> Stellen Sie sich vor auf Originalhandschriften eines Musikstückes zu sehen, während Sie verschiedene Interpretationen desselben anhören, und eine Biographie des Komponisten zu lesen. In den Europeana Musik Sammlung ist dies möglich. <p>
+
+          <p><a href="http://www.europeanasounds.eu">Unsere Partner</a>, Musikexperten aus ganz Europa haben diese Sammlung von Musikaufnahmen, Noten, Bildern von Musikinstrumenten, Büchern über Musik und andere Musik bezogenen Inhalte sorgfältig kuratiert . </p>
+
+           </p> Wir haben diese frühe Test-Version der Musik Sammlung  für Sie zur Verfügung gestellt, um Sie in die Entwicklung mit einzubeziehen. Wenn Sie also die Website besuchen, werden Sie manchmal gebeten werden, Fragen oder Umfragen zu beantworten. Wir würden es wirklich schätzen, wenn Sie sich die Zeit nehmen würden, diese Fragen und Umfragen zu beantworten! </p>
+
+          <p> Im Interesse der Transparenz und der Privatsphäre, sollten Sie wissen, dass wir Benutzerstatistiken und Nutzerverhalten in Google Analytics und einem Dienst namens Hotjar festhalten. Wir tun dies, da es uns aufzeigt, wo wir falsch in unseren Entwürfen liegen und es uns dabei hilft die Musik Sammlung zu verbessern. Alle Protokolle werden vertraulich und anonymisiert behandelt und werden nur zur Verbesserung unserer Dienstleistung verwendet. </p>
+
+          <p> Wir empfehlen Ihnen, die Sammlung zu durchsuchen, Musik abzuspielen, Noten anzusehen, oder zu lesen. Wenn es das Urheberrecht ermöglicht, können Sie die Dinge, die Sie am meisten lieben herunterladen. Und besuchen Sie unsere virtuellen Ausstellungen um Musik in einer Weise zu entdecken, wie nie zuvor! </ p>
+
+
+        title: "Über die Musiksammlung"
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: Konfigurieren Sie Aktionen
+        dutchmasters: Niederländische Meister
+        favouriteart: Lieblingskunst
+        label: Aktionen
+        newcollection: Neue Sammlung
+        product-save: Speichern
+        saveto: Speichern als
+        show-all-collections: Alle Sammlungen anzeigen
       list:
         all-results:
           3D: 
-          images: 
+          images: Bilder
           text: 
           video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
+        count-and-terms: "%{results_count} Ergebnisse"
+        empty: Keine Ergebnisse
+        empty-with-terms: Ihre Suche nach %{query_terms} ergab keine Treffer
+        header: Ergebnisse für
+        header-and: und
         in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
+        less: Weniger
+        less_adv: Weniger Verfeinerungen
+        more: Mehr
+        more_adv: Erweiterte Filter
         product-3D: 
-        product-image: 
-        product-sound: 
+        product-image: Bild
+        product-sound: Audio
         product-text: 
         product-video: 
-        results-relevance: 
-        single-result: 
+        results-relevance: Relevanz
+        single-result: 1 Ergebnis für %{query_terms}
         view:
           grid: 
           list: 
-        view-at-provider: 
+        view-at-provider: Ansehen
     search:
       placeholder:
-        text: 
+        text: Fügen Sie einen Suchbegriff ein
       similar:
-        prefix: 
+        prefix: "Ähnlich wie: %{mlt_item}"
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Auswahl löschen
+        save-settings: Einstellungen speichern
       language:
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-page: Trefferliste automatisch übersetzen in ...
+        auto-translate-page-short: Objekte automatisch übersetzen in ...
+        auto-translate-query: Suchbegriffe automatisch übersetzen in ...
+        available: Verfügbare Sprachen
+        default: Standard-Sprache
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: 'Ungültige Sprache angeben. Verfügbare Sprachen: %{locales}'
+          notice: Spracheinstellungen gespeichert.
+        label: Sprache
+        settings-label: Spracheinstellungen
     site-name-link: 
     sitemap-link: 

@@ -169,6 +169,29 @@ en:
         type: Type
         ugc: User contributed content
         version: Version
+      named-entities:
+        title: Named Entities
+        what:
+          broader: Broader Concept
+          label: Concept Label
+          term: Concept Term
+          title: What
+        when:
+          begin: Period Begin
+          end: Period End
+          label: Period Label
+          term: Period Term
+          title: When
+        where:
+          label: Place Label
+          latitude: Place Latitude
+          longitude: Place Longitude
+          term: Place Term
+          title: Where
+        who:
+          label: Agent Label
+          term: Agent Term
+          title: Who
       nav:
         next: Next
         prev: Previous
