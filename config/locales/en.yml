@@ -145,7 +145,7 @@ en:
         properties: Properties
         provenance: Provenance
         provided-by: Find out more
-        provided-by-detail: <a href="%{url}">%{institution_name}</a> may have more information and media for this item.
+        provided-by-detail: may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
         publication-date: Date of publication
@@ -165,6 +165,7 @@ en:
         timestamp-updated: Last updated in Europeana
         timestamp_created: First published in Europeana (%{timestamp_created})
         timestamp_updated: Last updated in Europeana (%{timestamp_updated})
+        title: Title
         toc: Table of Contents
         type: Type
         ugc: User contributed content
