@@ -19,6 +19,16 @@ module FacetsHelper
                        t('global.channel.' + facet_value.downcase)
                      when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE'
                        facet_value
+                     when 'MIME_TYPE'
+                       case facet_value
+                       when 'text/plain'
+                        'TXT'
+                       when 'video/x-msvideo'
+                         'AVI'
+                       else
+                         subtype = facet_value.split('/')[1] || ''
+                         subtype.split('-').last.upcase
+                       end
                      else
                        t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
                      end
