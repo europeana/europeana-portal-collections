@@ -13,8 +13,8 @@ RSpec.describe FacetsHelper do
       helper.class.send(:include, Blacklight::Configurable)
     end
 
-    context 'when field is "Collection"' do
-      let(:field) { 'Collection' }
+    context 'when field is "COLLECTION"' do
+      let(:field) { 'COLLECTION' }
 
       context 'and viewing queried collection' do
         let(:params) { { id: collection_id } }
@@ -35,7 +35,7 @@ RSpec.describe FacetsHelper do
       end
     end
 
-    context 'when field is not "Collection"' do
+    context 'when field is not "COLLECTION"' do
       let(:field) { 'YEAR' }
 
       context 'and viewing queried collection' do

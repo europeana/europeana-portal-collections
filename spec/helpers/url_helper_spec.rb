@@ -4,8 +4,8 @@ RSpec.shared_examples 'facet param adder' do
     allow(helper).to receive(:reset_search_params).and_return(params)
   end
 
-  context 'facet is "Collection"' do
-    let(:field) { 'Collection' }
+  context 'facet is "COLLECTION"' do
+    let(:field) { 'COLLECTION' }
     let(:item) { 'art' }
     let(:params) { { controller: 'catalog', action: 'index' } }
 
@@ -17,7 +17,7 @@ RSpec.shared_examples 'facet param adder' do
     it { is_expected.not_to have_key(:f) }
   end
 
-  context 'facet is not "Collection"' do
+  context 'facet is not "COLLECTION"' do
     let(:field) { 'YEAR' }
     let(:item) { '1950' }
     let(:params) { { controller: 'catalog', action: 'index' } }
