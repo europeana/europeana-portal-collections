@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe 'Search requests', :type => :request do
+RSpec.describe 'Search requests' do
   context 'without query params' do
     it 'redirects /search to /' do
       get('/search')
