@@ -24,6 +24,12 @@ module Catalog
     search_results(mlt_params, search_params_logic)
   end
 
+  def search_results(user_params, search_params_logic)
+    response, documents = super
+    response.max_pages_per(960 / response.limit_value)
+    [response, documents]
+  end
+
   protected
 
   def search_action_url(options = {})
