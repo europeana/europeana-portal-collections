@@ -129,7 +129,7 @@ module MustacheHelper
   end
 
   def collections_nav_links
-    available_collections.collect do |c|
+    available_collections.map do |c|
       {
         url: collection_path(c),
         text: c

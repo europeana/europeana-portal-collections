@@ -10,7 +10,7 @@ RSpec.describe CollectionsHelper do
       expect(subject).to eq(Collection.all.map(&:key))
     end
   end
-  
+
   describe '#within_collection?' do
     context 'when search was in a collection' do
       let(:params) { { 'controller' => 'collections', 'id' => 'art' } }
