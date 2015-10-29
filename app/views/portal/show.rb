@@ -401,7 +401,7 @@ module Portal
             ]
           ),
           similar: {
-            title: t('site.object.similar-items') + ':',
+            title: t('site.object.similar-items'),
             more_items_query: search_path(mlt: document.id),
             more_items_load: document_similar_url(@document, format: 'json'),
             more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
