@@ -4,12 +4,13 @@ pl:
     navigation:
       all_blog_posts: 
       all_exhibitions: Wszystkie Wystawy...
-      blog: 
+      blog: Blog
       browse: Przeglądaj
       browse_colours: Kolory
       browse_newcontent: 
       browse_sources: 
       channels: 
+      collections: 
       exhibitions: Wystawy
       home: Strona główna
     pro-link: 
@@ -29,7 +30,7 @@ pl:
         title: 
       sources:
         title: 
-    channels:
+    collections:
       art-history:
         description: 
         title: 
@@ -83,6 +84,9 @@ pl:
         show-less-data: 
         show-more-data: 
         technicalmetadata: 
+      enrichment:
+        who:
+          title: 
       hierarchy:
         title: 
         view-items-above: 
@@ -159,10 +163,34 @@ pl:
         timestamp-updated: 
         timestamp_created: 
         timestamp_updated: 
+        title: 
         toc: 
         type: 
         ugc: 
         version: 
+      named-entities:
+        title: 
+        what:
+          broader: 
+          label: 
+          term: 
+          title: 
+        when:
+          begin: 
+          end: 
+          label: 
+          term: 
+          title: 
+        where:
+          label: 
+          latitude: 
+          longitude: 
+          term: 
+          title: 
+        who:
+          label: 
+          term: 
+          title: 
       nav:
         next: 
         prev: 

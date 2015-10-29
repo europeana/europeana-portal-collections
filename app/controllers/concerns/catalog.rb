@@ -24,14 +24,20 @@ module Catalog
     search_results(mlt_params, search_params_logic)
   end
 
+  def search_results(user_params, search_params_logic)
+    response, documents = super
+    response.max_pages_per(960 / response.limit_value)
+    [response, documents]
+  end
+
   protected
 
   def search_action_url(options = {})
     case
     when options[:controller]
       url_for(options)
-    when params[:controller] == 'channels'
-      url_for(options.merge(controller: 'channels', action: params[:action]))
+    when params[:controller] == 'collections'
+      url_for(options.merge(controller: 'collections', action: params[:action]))
     else
       search_url(options.except(:controller, :action))
     end

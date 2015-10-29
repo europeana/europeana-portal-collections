@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe ChannelsController, type: :controller do
+RSpec.describe CollectionsController do
   describe 'GET index' do
     before do
       get :index
@@ -20,8 +18,8 @@ RSpec.describe ChannelsController, type: :controller do
       before do
         get :show, params
       end
-      let(:channel) { Channel.find_by_key('home') }
-      let(:params) { { id: channel.key } }
+      let(:collection) { Collection.find_by_key('home') }
+      let(:params) { { id: collection.key } }
 
       it 'does not query API' do
         expect(an_api_search_request).not_to have_been_made
@@ -32,7 +30,7 @@ RSpec.describe ChannelsController, type: :controller do
       end
     end
 
-    context 'with id=[unknown channel]' do
+    context 'with id=[unknown collection]' do
       let(:params) { { id: 'unknown' } }
 
       it 'does not query API' do
@@ -47,17 +45,17 @@ RSpec.describe ChannelsController, type: :controller do
       end
     end
 
-    context 'with id=[known channel]' do
+    context 'with id=[known collection]' do
       before do
         get :show, params
       end
-      let(:channel) { Channel.find_by_key('music') }
-      let(:landing_page) { Page::Landing.find_by_slug('channels/music') }
+      let(:collection) { Collection.find_by_key('music') }
+      let(:landing_page) { Page::Landing.find_by_slug('collections/music') }
 
       context 'without search params' do
-        let(:params) { { id: channel.key } }
+        let(:params) { { id: collection.key } }
 
-        it 'should not query API for channel stats' do
+        it 'should not query API for collection stats' do
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
             expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).not_to have_been_made
           end
@@ -67,9 +65,9 @@ RSpec.describe ChannelsController, type: :controller do
           expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).not_to have_been_made
         end
 
-        it 'renders channels landing template' do
+        it 'renders collections landing template' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('channels/show')
+          expect(response).to render_template('collections/show')
         end
 
         it 'assigns @landing_page' do
@@ -78,7 +76,7 @@ RSpec.describe ChannelsController, type: :controller do
       end
 
       context 'with search params' do
-        let(:params) { { id: channel.key, q: 'search' } }
+        let(:params) { { id: collection.key, q: 'search' } }
 
         it 'queries API' do
           expect(an_api_search_request).to have_been_made.at_least_once

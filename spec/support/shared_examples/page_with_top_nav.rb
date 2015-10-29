@@ -4,8 +4,8 @@ RSpec.shared_examples 'page with top nav' do
     expect(rendered).to have_selector('#main-menu a', text: 'Home')
   end
 
-  it 'should have top nav links to published channels' do
+  it 'should have top nav links to published collections' do
     render
-    expect(rendered).to have_selector('#main-menu a[href$="/channels/music"]', text: 'Europeana Music')
+    expect(rendered).to have_selector('#main-menu a[href$="/collections/music"]', text: 'Europeana Music')
   end
 end
