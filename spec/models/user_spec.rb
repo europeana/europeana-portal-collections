@@ -29,7 +29,7 @@ RSpec.describe User do
 
   describe '#role' do
     context 'when blank' do
-      let(:user) { users(:guest) }
+      let(:user) { users(:roleless) }
       it 'is set to "user"' do
         expect { user.save }.to change { user.role }.to('user')
       end
