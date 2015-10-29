@@ -97,6 +97,7 @@ en:
         text_fulltext: Full text
         type: Media
         ugc: Show content contributed by users
+        video_duration: Video Duration
         video_hd: HD
         year: Date
       image_aspectratio:
@@ -149,10 +150,6 @@ en:
       media:
         'false': 'No'
         'true': 'Yes'
-      mime_type:
-        image/gif: GIF
-        image/jpeg: JPEG
-        image/png: PNG
       more: More
       more-refinements: More refinements
       resource:
