@@ -67,13 +67,13 @@ module BlacklightConfig
       config.add_facet_field 'VIDEO_DURATION', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
+      config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'REUSABILITY'
       config.add_facet_field 'COUNTRY'
       config.add_facet_field 'LANGUAGE'
       config.add_facet_field 'PROVIDER'
       config.add_facet_field 'DATA_PROVIDER'
-      config.add_facet_field 'MEDIA', advanced: true, boolean: { on: 'true', off: nil, default: :off }
-      config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
+      # config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
 
       # Send all facet field names to Solr.
       config.add_facet_fields_to_solr_request!
