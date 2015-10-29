@@ -1,10 +1,5 @@
 RSpec.describe CollectionsHelper do
   describe '#available_collections' do
-    before do
-      3.times do
-        FactoryGirl.create(:collection)
-      end
-    end
     subject { helper.available_collections }
     it 'should eq collection keys' do
       expect(subject).to eq(Collection.all.map(&:key))
