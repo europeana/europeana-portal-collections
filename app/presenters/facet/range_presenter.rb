@@ -1,6 +1,6 @@
 module Facet
   class RangePresenter < FacetPresenter
-    def display(options = {})
+    def display(_options = {})
       range_min = @facet.items.map(&:value).min
       range_max = @facet.items.map(&:value).max
       hits_max = @facet.items.map(&:hits).max

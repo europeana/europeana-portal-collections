@@ -10,21 +10,22 @@ class FacetPresenter
   # Factory
   def self.build(facet, controller, blacklight_config = controller.blacklight_config)
     facet_config = blacklight_config.facet_fields[facet.name]
+    class_for_facet(facet_config).new(facet, controller, blacklight_config)
+  end
 
-    klass = case
-            when facet_config.hierarchical && !facet_config.parent
-              Facet::HierarchicalPresenter
-            when facet_config.boolean
-              Facet::BooleanPresenter
-            when facet_config.colour
-              Facet::ColourPresenter
-            when facet_config.range
-              Facet::RangePresenter
-            else
-              Facet::SimplePresenter
-            end
-
-    klass.new(facet, controller, blacklight_config)
+  def self.class_for_facet(facet_config)
+    case
+    when facet_config.hierarchical && !facet_config.parent
+      Facet::HierarchicalPresenter
+    when facet_config.boolean
+      Facet::BooleanPresenter
+    when facet_config.colour
+      Facet::ColourPresenter
+    when facet_config.range
+      Facet::RangePresenter
+    else
+      Facet::SimplePresenter
+    end
   end
 
   def initialize(facet, controller, blacklight_config = controller.blacklight_config)
