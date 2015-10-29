@@ -1,2 +1,7 @@
 music:
   key: 'music'
+  api_params: 'qf=what:music'
+
+home:
+  key: 'home'
+  api_params: '*:*'
