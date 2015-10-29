@@ -17,9 +17,10 @@ module Portal
     def filters
       @mustache[:filters] ||= begin
         facets_from_request(facet_field_names).reject do |facet|
-          blacklight_config.facet_fields[facet.name].advanced
+          blacklight_config.facet_fields[facet.name].advanced ||
+            blacklight_config.facet_fields[facet.name].parent
         end.map do |facet|
-          FacetPresenter.new(facet, controller).display
+          FacetPresenter.build(facet, controller).display
         end.compact + advanced_filters
       end
     end
@@ -31,9 +32,10 @@ module Portal
             advanced: true,
             advanced_items: {
               items: facets_from_request(facet_field_names).select do |facet|
-                blacklight_config.facet_fields[facet.name].advanced
+                blacklight_config.facet_fields[facet.name].advanced &&
+                  !blacklight_config.facet_fields[facet.name].parent
               end.map do |facet|
-                FacetPresenter.new(facet, self).display
+                FacetPresenter.build(facet, controller).display
               end.compact
             }
           }
