@@ -26,18 +26,20 @@ module Portal
     end
 
     def advanced_filters
+      advanced_count = 0
       @mustache[:advanced_filters] ||= begin
         [
           {
-            advanced: true,
             advanced_items: {
               items: facets_from_request(facet_field_names).select do |facet|
                 blacklight_config.facet_fields[facet.name].advanced &&
                   !blacklight_config.facet_fields[facet.name].parent
               end.map do |facet|
+                advanced_count += 1
                 FacetPresenter.build(facet, controller).display
               end.compact
-            }
+            },
+            advanced: advanced_count > 0
           }
         ]
       end
