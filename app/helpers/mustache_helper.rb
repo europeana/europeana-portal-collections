@@ -1,15 +1,4 @@
 module MustacheHelper
-  def head_meta
-    [
-      #{'name':'X-UA-Compatible',    content: 'IE=edge' },
-      #{'name':'viewport',           content: 'width=device-width,initial-scale=1.0' },
-      { meta_name: 'HandheldFriendly',   content: 'True' },
-      { httpequiv: 'Content-Type',       content: 'text/html; charset=utf-8' },
-      { meta_name: 'csrf-param',         content: 'authenticity_token' },
-      { meta_name: 'csrf-token',         content: form_authenticity_token }
-    ]
-  end
-
   def form_search
     {
       action: search_action_path(only_path: true)
@@ -19,7 +8,7 @@ module MustacheHelper
   def head_links
     [
       # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
-      { rel: 'stylesheet', href: styleguide_path('/css/search/screen.css'), media: 'all' }
+      { rel: 'stylesheet', href: styleguide_url('/css/search/screen.css'), media: 'all' }
     ]
   end
 
@@ -38,30 +27,22 @@ module MustacheHelper
     }
   end
 
-  def image_root
-    styleguide_path('/images/')
-  end
-
   def version
-    { is_alpha: true }
+    { is_alpha: content[:phase_feedback].present? }
   end
 
-  def js_version
-    Rails.application.config.x.js_version || ''
-  end
-
-  def js_variables
-    'var js_path="' + styleguide_path('/js/dist/') + '";' +
-      'var require = {"urlArgs": "' + js_version + '"};' +
-      'var pageName = "' + params[:controller] + '/' + params[:action] + '";'
+  def js_vars
+    page_name = (params[:controller] || '') + '/' + (params[:action] || '')
+    [
+      {
+        name: 'pageName', value: page_name
+      }
+    ]
   end
 
   def js_files
-    js_entry_point = Rails.application.config.x.js_entrypoint || '/js/dist/'
-    js_entry_point = js_entry_point.dup << '/' unless js_entry_point.end_with?('/')
-    [{ path: styleguide_path(js_entry_point + 'require.js?cache=' + js_version),
-       data_main: styleguide_path(js_entry_point + 'main/main'),
-       js_version: js_version}]
+    [{ path: styleguide_url('/js/dist/require.js'),
+      data_main: styleguide_url('/js/dist/main/main') }]
   end
 
   # def menus
@@ -147,10 +128,10 @@ module MustacheHelper
     @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
   end
 
-  def channels_nav_links
-    available_channels.collect do |c|
+  def collections_nav_links
+    available_collections.map do |c|
       {
-        url: channel_path(c),
+        url: collection_path(c),
         text: c
       }
     end
@@ -162,22 +143,20 @@ module MustacheHelper
     }
   end
 
-  def channel_data
+  def collection_data
     name = nil
-    if params[:controller] == 'portal' && params[:action] == 'show'
-      name = params[:src_channel]
-    else
+    if !(params[:controller] == 'portal' && params[:action] == 'show')
       name = params[:id] ? params[:id] : nil
     end
-
     if !name.nil?
       {
         name: name,
-        label: t("site.channels.#{name}.title"),
-        url: name ? channel_url(name) : nil
+        label: t("site.collections.#{name}.title"),
+        url: name ? collection_url(name) : nil
       }
     end
   end
+  alias_method :channel_data, :collection_data
 
   def navigation
     {
@@ -199,23 +178,46 @@ module MustacheHelper
               is_current: controller.controller_name == 'home'
             },
             {
-              text: t('global.navigation.channels'),
-              is_current: controller.controller_name == 'channels',
+              text: t('global.navigation.collections'),
+              is_current: controller.controller_name == 'collections',
               submenu: {
-                items: ['art-history', 'music'].map do |channel|
+                items: Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|
                   {
-                    url: channel_url(channel),
-                    text: t("site.channels.#{channel}.title"),
-                    is_current: params[:id] == channel
+                    url: collection_path(collection),
+                    text: collection.landing_page.title,
+                    is_current: current_page?(collection_path(collection))
                   }
                 end
+              }
+            },
+            {
+              text: t('global.navigation.browse'),
+              is_current: controller.controller_name == 'browse',
+              submenu: {
+                items: [
+                  {
+                    url: browse_newcontent_path,
+                    text: t('global.navigation.browse_newcontent'),
+                    is_current: current_page?(browse_newcontent_path)
+                  },
+                  {
+                    url: browse_colours_path,
+                    text: t('global.navigation.browse_colours'),
+                    is_current: current_page?(browse_colours_path)
+                  },
+                  {
+                    url: browse_sources_path,
+                    text: t('global.navigation.browse_sources'),
+                    is_current: current_page?(browse_sources_path)
+                  }
+                ]
               }
             },
             {
               url: 'http://exhibitions.europeana.eu/',
               text: t('global.navigation.exhibitions'),
               submenu: {
-                items: feed_entry_nav_items(FeedCacheJob::URLS[:exhibitions][:all], 6) + [
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][:all], 6) + [
                   {
                     url: 'http://exhibitions.europeana.eu/',
                     text: t('global.navigation.all_exhibitions'),
@@ -228,7 +230,7 @@ module MustacheHelper
               url: 'http://blog.europeana.eu/',
               text: t('global.navigation.blog'),
               submenu: {
-                items: feed_entry_nav_items(FeedCacheJob::URLS[:blog][:all], 6) + [
+                items: feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6) + [
                   {
                     url: 'http://blog.europeana.eu/',
                     text: t('global.navigation.all_blog_posts'),
@@ -247,7 +249,7 @@ module MustacheHelper
           items: [
             {
               text: t('site.footer.menu.about'),
-              url: root_url + '/about.html'
+              url: static_page_path('about', format: 'html')
             }
             # {
             #   text: t('site.footer.menu.new-collections'),
@@ -329,7 +331,7 @@ module MustacheHelper
               #   url: false
               # },
               # {
-              #   text: 'Channel Admin',
+              #   text: 'Collection Admin',
               #   url: 'url to admin page'
               # },
               # {
@@ -351,94 +353,18 @@ module MustacheHelper
     }
   end
 
+  # @todo {User.new} does not belong here, but needed by request specs
   def content
+    banner = Banner.find_by_key('phase-feedback')
+    banner = Banner.new unless (current_user || User.new(role: :guest)).can? :show, banner
     {
-      phase_feedback: {
-        title: t('site.alpha.feedback_banner.title'),
-        text: t('site.alpha.feedback_banner.description'),
-        cta_url: 'http://insights.hotjar.com/s?siteId=54631&surveyId=2939',
-        cta_text: t('site.alpha.feedback_banner.link-text')
+      phase_feedback: banner.new_record? ? nil : {
+        title: banner.title,
+        text: banner.body,
+        cta_url: banner.link.url,
+        cta_text: banner.link.text
       }
     }
-  end
-
-  def settings
-    {
-      language: {
-        form: {
-          action: root_url + '/settings/language',
-          method: 'PUT',
-          form_authenticity_token: form_authenticity_token
-        },
-        title: t('site.settings.language.settings-label'),
-        language_default: {
-          title: t('site.settings.language.default'),
-          group_id: t('site.settings.language.available'),
-          items: [
-            {
-              text: t('global.language-english'),
-              value: 'en',
-              selected: I18n.locale.to_s == 'en'
-            },
-            {
-              text: t('global.language-dutch'),
-              value: 'nl',
-              selected: I18n.locale.to_s == 'nl'
-            }
-          ]
-        },
-        language_itempages: {
-
-          title: t('site.settings.language.auto-translate-page'),
-          label: t('site.settings.language.auto-translate-page-short'),
-          value: 'autotranslateitem',
-          item_id: 'translate-item',
-          is_checked: true,
-          group_id: t('site.settings.language.available'),
-          items: [
-            {
-              text: t('global.language-dutch'),
-              value: 'nl'
-            },
-            {
-              text: t('global.language-russian'),
-              value: 'ru'
-            },
-            {
-              text:  t('global.language-greek'),
-              value: 'el'
-            }
-          ]
-        },
-        language_options: {
-          title: t('site.settings.language.auto-translate-query'),
-          is_required: false,
-          name: 'checkboxes[]',
-          items: [
-            {
-              text: t('global.language-french'),
-              value: 'fr',
-              item_id: 'fr'
-            },
-            {
-              text: t('global.language-german'),
-              value: 'de',
-              item_id: 'de'
-            }
-          ]
-        }
-      }
-    }
-  end
-
-  def styleguide_path(asset = nil)
-    Rails.application.config.x.europeana_styleguide_cdn + (asset.present? ? asset : '')
-  end
-
-  def styleguide_hero_config(hero_config)
-    hero_config.deep_dup.tap do |hc|
-      hc[:hero_image] = image_root + hc[:hero_image]
-    end
   end
 
   private
@@ -519,5 +445,52 @@ module MustacheHelper
     url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
     mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
     mo.nil? ? nil : mo.file.url(:medium)
+  end
+
+  def hero_config(hero_image)
+    return nil unless hero_image.present?
+    hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
+    {
+      hero_image: hero_image.file.present? ? hero_image.file.url : nil,
+      attribution_title: hero_image.settings_attribution_title,
+      attribution_creator: hero_image.settings_attribution_creator,
+      attribution_institution: hero_image.settings_attribution_institution,
+      attribution_url: hero_image.settings_attribution_url,
+      attribution_text: hero_image.settings_attribution_text,
+      brand_opacity: "brand-opacity#{hero_image.settings_brand_opacity}",
+      brand_position: "brand-#{hero_image.settings_brand_position}",
+      brand_colour: "brand-colour-#{hero_image.settings_brand_colour}"
+    }.merge(hero_license)
+  end
+
+  def promoted_items(promotions)
+    promotions.map do |promo|
+      cat_flag = promo.settings_category.blank? ? {} : { :"is_#{promo.settings_category}" => true }
+      {
+        url: promo.url,
+        title: promo.text,
+        custom_class: promo.settings_class,
+        wide: promo.settings_wide == '1',
+        bg_image: promo.file.nil? ? nil : promo.file.url
+      }.merge(cat_flag)
+    end
+  end
+
+  ##
+  # @param [ActiveRecord::Associations::CollectionProxy<BrowseEntry>
+  def browse_entry_items(browse_entries)
+    browse_entries.map do |entry|
+      cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
+      {
+        title: entry.title,
+        url: browse_entry_url(entry),
+        image: entry.file.nil? ? nil : entry.file.url,
+        image_alt: nil
+      }.merge(cat_flag)
+    end
+  end
+
+  def license_template_var_name(license)
+    'license_' + license.tr('-', '_')
   end
 end

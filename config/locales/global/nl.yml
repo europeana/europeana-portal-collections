@@ -84,10 +84,12 @@ nl:
         country: 
         data_provider: 
         image_aspectratio: 
+        image_colour: 
         image_size: 
         language: 
         language_of_description: 
         media: 
+        mime_type: 
         provider: 
         reusability: 
         sound_duration: 
@@ -100,6 +102,9 @@ nl:
       image_aspectratio:
         landscape: 
         portrait: 
+      image_colour:
+        'false': 
+        'true': 
       image_size:
         extra_large: 
         large: 
@@ -144,6 +149,10 @@ nl:
       media:
         'false': 
         'true': 
+      mime_type:
+        image/gif: 
+        image/jpeg: 
+        image/png: 
       more: 
       more-refinements: 
       resource:
@@ -160,7 +169,6 @@ nl:
         advanced-orphan-work: 
         advanced-out-of-copyright-non-commercial: 
         advanced-pdm: 
-        advanced-rarr: 
         advanced-rrfa: 
         advanced-rrpa: 
         advanced-rrra: 
@@ -215,6 +223,10 @@ nl:
           long: 
           medium: 
           short: 
+      video_duration:
+        long: 
+        medium: 
+        short: 
       year:
         from: 
         to: 

@@ -3,29 +3,40 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.2.4'
 
-gem 'europeana-styleguide',
-  github: 'europeana/europeana-styleguide-ruby', ref: 'bd532bd'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '22ea6d3'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
-gem 'stache', github: 'rwd/stache', ref: '819ff88'
+gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
 
-gem 'blacklight', '~> 5.14.0'
+gem 'rails_admin_globalize_field', github: 'rwd/rails_admin_globalize_field',
+  branch: 'globalize-5-rails-4.2'
+
+gem 'aasm', '~> 4.2'
+gem 'actionpack-action_caching'
+gem 'blacklight', '~> 5.15'
+gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
+gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.0.3'
-gem 'europeana-api', '~> 0.3.6'
-gem 'europeana-blacklight', github: 'europeana/europeana-blacklight', branch: 'crf-facets'
+gem 'devise', '~> 3.5'
+gem 'europeana-blacklight', github: 'europeana/europeana-blacklight', ref: '0bab0fc'
+gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', ref: '16ac267'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
+gem 'globalize', '~> 5.0'
+gem 'globalize-versioning', github: 'globalize/globalize-versioning'
 gem 'htmlcompressor', '0.2'
-gem 'mysql2', '~> 0.3.20'
+gem 'pg'
 gem 'paperclip', '~> 4.3'
+gem 'paper_trail', '~> 4.0'
 gem 'puma', '~> 2.13'
+gem 'rails_admin', '~> 0.7.0'
 gem 'redis-rails', '~> 4.0'
+gem 'sass-rails'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
-  gem 'sass-rails'
   gem 'uglifier', '~> 2.7.2'
 end
 
@@ -46,6 +57,8 @@ end
 group :test do
   gem 'capybara', '~> 2.4.0'
   gem 'coveralls', require: false
+  gem 'database_cleaner', '~> 1.4'
+  gem 'factory_girl_rails', '~> 4.5'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver', '~> 2.47'

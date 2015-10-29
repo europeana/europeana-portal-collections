@@ -84,15 +84,17 @@ en:
         country: Country
         data_provider: Data Provider
         image_aspectratio: Orientation
+        image_colour: Palette
         image_size: Size
         language: Language
         language_of_description: Language of Description
-        media: Only show items with direct access to media
+        media: Only items with links to media
+        mime_type: File format
         provider: Provider
         reusability: Can I use it?
         sound_duration: Duration
         sound_hq: High Quality
-        text_fulltext: Full Text
+        text_fulltext: Full text
         type: Media
         ugc: Show content contributed by users
         video_hd: HD
@@ -100,67 +102,73 @@ en:
       image_aspectratio:
         landscape: Landscape
         portrait: Portrait
+      image_colour:
+        'false': Black and white
+        'true': Colour
       image_size:
-        extra_large: Extra large
-        large: Large
-        medium: Medium
-        small: Small
+        extra_large: Extra Large (4MP+)
+        large: Large (1-4MP)
+        medium: Medium (0.5-1MP)
+        small: Small (<0.5MP)
       language:
-        bg: "български език"
+        bg: "Български"
         ca: Català
         cs: "Čeština"
         da: Dansk
         de: Deutsch
-        el: " ellinikí glóssa"
+        el: "Ελληνικά"
         en: English
-        es: español
+        es: Español
         et: Eesti
         fi: Suomi
-        fr: le français
+        fr: Français
         ga: Gaeilge
         he: "עברית"
-        hr: 'hrvatski '
-        hu: Hrvatski
-        is: "íslenska"
+        hr: Hrvatski
+        hu: Magyar
+        is: "Íslenska"
         it: Italiano
-        lt: lietuvių kalba
-        lv: latviešu valoda
+        lt: Lietuvių
+        lv: Latviešu
         mt: Malti
         mul: Multilingue
         nl: Nederlands
         'no': Norsk
-        pl: polszczyzna
-        pt: português
-        ro: română
+        pl: Polski
+        pt: Português
+        ro: Română
         ru: "Русский"
-        sk: slovenský jazyk
-        sl: slovenščina
+        sk: Slovenský
+        sl: Slovenski
         sr: "Српски"
-        sv: svenska
+        sv: Svenska
         tr: " Türkçe"
         uk: "Українська"
-        yi: Yiddish
+        yi: "ייִדיש"
       less: Fewer
       media:
         'false': 'No'
         'true': 'Yes'
+      mime_type:
+        image/gif: GIF
+        image/jpeg: JPEG
+        image/png: PNG
       more: More
       more-refinements: More refinements
       resource:
         type: 
       reusability:
         advanced: Advanced
-        advanced-cc-by: CC-BY
-        advanced-cc-by-nc: CC-BY-NC
-        advanced-cc-by-nc-nd: CC-BY-NC-ND
-        advanced-cc-by-nc-sa: CC-BY-NC-SA
-        advanced-cc-by-nd: CC-BY-ND
-        advanced-cc-by-sa: CC-BY-SA
+        advanced-cc-by: CC BY
+        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc-nd: CC BY-NC-ND
+        advanced-cc-by-nc-sa: CC BY-NC-SA
+        advanced-cc-by-nd: CC BY-ND
+        advanced-cc-by-sa: CC BY-SA
         advanced-cc0: CC0
         advanced-orphan-work: Orphan Work
         advanced-out-of-copyright-non-commercial: 'Out of copyright - non commercial re-use '
         advanced-pdm: Public Domain Marked
-        advanced-rarr: Restricted access - Rights reserved
         advanced-rrfa: Rights reserved - Free access
         advanced-rrpa: Rights reserved - Paid access
         advanced-rrra: Rights Reserved - Restricted Access
@@ -170,10 +178,10 @@ en:
         restricted: Yes with restrictions
         simple: Simple
       sound_duration:
-        long: Long
-        medium: Medium
-        short: Short
-        very_short: Very short
+        long: Long (6+ min)
+        medium: Medium (3-6 min)
+        short: Short (30s - 3 min)
+        very_short: Very short (<30s)
       sound_hq:
         'true': 'Yes'
       source: Source
@@ -215,6 +223,10 @@ en:
           long: Long (%{data})
           medium: Medium (%{data})
           short: Short (%{data})
+      video_duration:
+        long: Long (20+ min)
+        medium: Medium (4-20 min)
+        short: Short (<4 min)
       year:
         from: from
         to: to
@@ -247,7 +259,7 @@ en:
     language-danish: Danish
     language-dutch: Dutch
     language-english: English
-    language-estonian: Estionian
+    language-estonian: Estonian
     language-finnish: Finnish
     language-french: French
     language-gaelic: Gaelic
@@ -268,7 +280,7 @@ en:
     language-slovenian: Slovenian
     language-spanish: Spanish
     language-swedish: Swedish
-    language-ukranian: Ukranian
+    language-ukranian: Ukrainian
     login: Login
     logo-image: 
     more:
@@ -280,7 +292,7 @@ en:
     our-mission-text: Who is afraid of the jabberwocky?
     our-sites: our sites
     password: Password
-    professional: Professional
+    professional: Pro
     professional-text: Get involved, share your data or use ours
     refine-your-search: Refine your search
     register: Register

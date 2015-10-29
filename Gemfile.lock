@@ -1,19 +1,28 @@
 GIT
-  remote: git://github.com/europeana/europeana-blacklight.git
-  revision: b95c041c74218024df747c05c2483309ac1aecef
-  branch: crf-facets
+  remote: git://github.com/europeana/europeana-api-client-ruby.git
+  revision: 16ac267b403e27b92fbe03972dae499bc405c6dc
+  ref: 16ac267
   specs:
-    europeana-blacklight (0.2.7)
+    europeana-api (0.4.0)
+      activesupport (>= 3.0)
+      multi_json (~> 1.0)
+
+GIT
+  remote: git://github.com/europeana/europeana-blacklight.git
+  revision: 0bab0fcbed70919572c104b6ba864388e8048c9c
+  ref: 0bab0fc
+  specs:
+    europeana-blacklight (0.2.8)
       activesupport (>= 4.0, < 5.0)
       blacklight (>= 5.12.0, < 6.0.0)
-      europeana-api (~> 0.3.6)
+      europeana-api (~> 0.4.0)
       iso-639 (~> 0.2.5)
       kaminari (~> 0.16)
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: bd532bd64aed9c407805ef37b275eff340838517
-  ref: bd532bd
+  revision: 22ea6d3fc224bf85176d8d740d73a25bb7973f60
+  ref: 22ea6d3
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -21,16 +30,37 @@ GIT
       stache (~> 1.1.1)
 
 GIT
-  remote: git://github.com/rwd/stache.git
-  revision: 819ff888bf0c109f4592ffd26fb2c1e2922980ef
-  ref: 819ff88
+  remote: git://github.com/europeana/stache.git
+  revision: e5ceff86974620d7d7db28018fc29a2c9c24d1d0
+  branch: europeana-styleguide
   specs:
     stache (1.1.1)
+
+GIT
+  remote: git://github.com/globalize/globalize-versioning.git
+  revision: 10ae04a77d765134f7d527b70693637d5937fba6
+  specs:
+    globalize-versioning (0.2.0)
+      activemodel (>= 3.2.0, < 5)
+      activerecord (>= 3.2.0, < 5)
+      globalize (>= 3.0.4, < 6)
+      paper_trail (>= 3.0.0, < 5)
+
+GIT
+  remote: git://github.com/rwd/rails_admin_globalize_field.git
+  revision: 59b87f63a1c017d5851f610cd7e6faefacd2dd03
+  branch: globalize-5-rails-4.2
+  specs:
+    rails_admin_globalize_field (0.3.3)
+      globalize (>= 5.0)
+      rails (>= 4.2)
+      rails_admin (>= 0.6.2)
 
 GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
+    aasm (4.2.0)
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
       actionview (= 4.2.4)
@@ -44,6 +74,8 @@ GEM
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionpack-action_caching (1.1.1)
+      actionpack (>= 4.0.0, < 5.0)
     actionview (4.2.4)
       activesupport (= 4.2.4)
       builder (~> 3.1)
@@ -68,15 +100,16 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (6.0.3)
-    ast (2.1.0)
+    ast (2.0.0)
     astrolabe (1.3.1)
       parser (~> 2.2)
-    autoprefixer-rails (5.2.1.1)
+    autoprefixer-rails (6.0.3)
       execjs
       json
+    bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    blacklight (5.14.0)
+    blacklight (5.15.0)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (>= 0.15)
@@ -87,6 +120,7 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
     builder (3.2.2)
+    cancancan (1.12.0)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -103,6 +137,14 @@ GEM
       tzinfo
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
+    coffee-rails (4.1.0)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.9.1.1)
+    colorize (0.7.7)
     coveralls (0.8.2)
       json (~> 1.8)
       rest-client (>= 1.6.8, < 2)
@@ -111,6 +153,7 @@ GEM
       thor (~> 0.19.1)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
+    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
@@ -119,6 +162,13 @@ GEM
       delayed_job (>= 3.0, < 4.1)
     deprecation (0.2.2)
       activesupport
+    devise (3.5.2)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
     domain_name (0.5.24)
@@ -128,11 +178,13 @@ GEM
       dotenv (= 2.0.2)
       railties (~> 4.0)
     erubis (2.7.0)
-    europeana-api (0.3.6)
-      activesupport (>= 3.0)
-      multi_json (~> 1.0)
     excon (0.45.4)
     execjs (2.5.2)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
@@ -172,7 +224,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.7.5)
+    fog-aws (0.7.6)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -244,12 +296,19 @@ GEM
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     foreman (0.78.0)
       thor (~> 0.19.1)
     formatador (0.2.5)
     gli (2.13.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    globalize (5.0.1)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
+    haml (4.0.7)
+      tilt
     htmlcompressor (0.2.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -257,6 +316,12 @@ GEM
     inflecto (0.0.2)
     ipaddress (0.8.0)
     iso-639 (0.2.5)
+    jquery-rails (4.0.4)
+      rails-dom-testing (~> 1.0)
+      railties (>= 4.2.0)
+      thor (>= 0.14, < 2.0)
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     json (1.8.3)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -279,13 +344,18 @@ GEM
     multi_json (1.11.2)
     multipart-post (2.0.0)
     mustache (1.0.2)
-    mysql2 (0.3.20)
+    nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    orm_adapter (0.5.0)
+    paper_trail (4.0.0)
+      activerecord (>= 3.0, < 6.0)
+      activesupport (>= 3.0, < 6.0)
+      request_store (~> 1.1)
     paperclip (4.3.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -294,6 +364,7 @@ GEM
       mimemagic (= 0.3.0)
     parser (2.2.2.6)
       ast (>= 1.1, < 3.0)
+    pg (0.18.3)
     phantomjs (1.9.8.0)
     poltergeist (1.6.0)
       capybara (~> 2.1)
@@ -303,6 +374,9 @@ GEM
     powerpack (0.1.1)
     puma (2.13.4)
     rack (1.6.4)
+    rack-pjax (0.8.0)
+      nokogiri (~> 1.5)
+      rack (~> 1.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -327,6 +401,20 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_admin (0.7.0)
+      builder (~> 3.1)
+      coffee-rails (~> 4.0)
+      font-awesome-rails (>= 3.0, < 5)
+      haml (~> 4.0)
+      jquery-rails (>= 3.0, < 5)
+      jquery-ui-rails (~> 5.0)
+      kaminari (~> 0.14)
+      nested_form (~> 0.3)
+      rack-pjax (~> 0.7)
+      rails (~> 4.0)
+      remotipart (~> 1.0)
+      safe_yaml (~> 1.0)
+      sass-rails (>= 4.0, < 6)
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.3)
     railties (4.2.4)
@@ -354,6 +442,10 @@ GEM
       redis-store (~> 1.1.0)
     redis-store (1.1.6)
       redis (>= 2.2)
+    remotipart (1.2.1)
+    request_store (1.2.0)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -430,6 +522,8 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    warden (1.2.3)
+      rack (>= 1.0)
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -450,27 +544,39 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 5.14.0)
+  aasm (~> 4.2)
+  actionpack-action_caching
+  blacklight (~> 5.15)
+  cancancan (~> 1.12)
   capybara (~> 2.4.0)
   clockwork (~> 1.2)
+  colorize
   coveralls
+  database_cleaner (~> 1.4)
   delayed_job_active_record (~> 4.0.3)
+  devise (~> 3.5)
   dotenv-rails (~> 2.0)
-  europeana-api (~> 0.3.6)
+  europeana-api!
   europeana-blacklight!
   europeana-styleguide!
+  factory_girl_rails (~> 4.5)
   feedjira (~> 2.0)
   fog (~> 1.33)
   foreman
+  globalize (~> 5.0)
+  globalize-versioning!
   htmlcompressor (= 0.2)
   localeapp (~> 0.9.0)
-  mysql2 (~> 0.3.20)
+  paper_trail (~> 4.0)
   paperclip (~> 4.3)
+  pg
   phantomjs
   poltergeist
   puma (~> 2.13)
   rails (= 4.2.4)
   rails_12factor (~> 0.0.3)
+  rails_admin (~> 0.7.0)
+  rails_admin_globalize_field!
   redis-rails (~> 4.0)
   rspec-rails (~> 3.0)
   rubocop (= 0.29.1)

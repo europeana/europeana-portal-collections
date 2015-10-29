@@ -2,92 +2,116 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
-    include FacetPresenter
-
     def page_title
-      [params[:q], 'Europeana - Search results'].compact.join(' - ')
+      @mustache[:page_title] ||= begin
+        [params[:q], 'Europeana - Search results'].compact.join(' - ')
+      end
     end
 
     def form_search
-      super.merge(hidden: form_search_hidden)
+      @mustache[:form_search] ||= begin
+        super.merge(hidden: form_search_hidden)
+      end
     end
 
     def filters
-      facets_from_request(facet_field_names).reject do |facet|
-        blacklight_config.facet_fields[facet.name].advanced
-      end.map do |facet|
-        facet_display(facet) # @see FacetPresenter
-      end.compact + advanced_filters
+      @mustache[:filters] ||= begin
+        facets_from_request(facet_field_names).reject do |facet|
+          blacklight_config.facet_fields[facet.name].advanced ||
+            blacklight_config.facet_fields[facet.name].parent
+        end.map do |facet|
+          FacetPresenter.build(facet, controller).display
+        end.compact + advanced_filters
+      end
     end
 
     def advanced_filters
-      [
-        {
-          advanced: true,
-          advanced_items: {
-            items: facets_from_request(facet_field_names).select do |facet|
-              blacklight_config.facet_fields[facet.name].advanced
-            end.map do |facet|
-              facet_display(facet) # @see FacetPresenter
-            end.compact
+      @mustache[:advanced_filters] ||= begin
+        [
+          {
+            advanced: true,
+            advanced_items: {
+              items: facets_from_request(facet_field_names).select do |facet|
+                blacklight_config.facet_fields[facet.name].advanced &&
+                  !blacklight_config.facet_fields[facet.name].parent
+              end.map do |facet|
+                FacetPresenter.build(facet, controller).display
+              end.compact
+            }
           }
-        }
-      ]
+        ]
+      end
     end
 
     def results_count
-      number_with_delimiter(response.total)
+      @mustache[:results_count] ||= begin
+        number_with_delimiter(response.total)
+      end
     end
 
     def has_results
-      response.total > 0
+      @mustache[:has_results] ||= begin
+        response.total > 0
+      end
     end
 
     def has_single_result
-      response.total == 1
+      @mustache[:has_single_result] ||= begin
+        response.total == 1
+      end
     end
 
     def has_multiple_results
-      response.total > 1
+      @mustache[:has_multiple_results] ||= begin
+        response.total > 1
+      end
     end
 
     def query_terms
-      query_terms = [(params[:q] || [])].flatten.collect do |query_term|
-        content_tag(:strong, query_term)
+      @mustache[:query_terms] ||= begin
+        query_terms = [(params[:q] || [])].flatten.collect do |query_term|
+          content_tag(:strong, query_term)
+        end
+        safe_join(query_terms, ' AND ')
       end
-      safe_join(query_terms, ' AND ')
     end
 
     def search_results
-      counter = 0 + (@response.limit_value * (@response.current_page - 1))
-      @document_list.collect do |doc|
-        counter += 1
-        search_result_for_document(doc, counter)
+      @mustache[:search_results] ||= begin
+        counter = 0 + (@response.limit_value * (@response.current_page - 1))
+        @document_list.collect do |doc|
+          counter += 1
+          search_result_for_document(doc, counter)
+        end
       end
     end
 
     def navigation
-      pages = pages_of_search_results
-      {
-        pagination: {
-          prev_url: previous_page_url,
-          next_url: next_page_url,
-          is_first_page: @response.first_page?,
-          is_last_page: @response.last_page?,
-          pages: pages.collect.each_with_index do |page, i|
-            {
-              url: Kaminari::Helpers::Page.new(self, page: page.number).url,
-              index: number_with_delimiter(page.number),
-              is_current: (@response.current_page == page.number),
-              separator: show_pagination_separator?(i, page.number, pages.size)
-            }
-          end
-        }
-      }.reverse_merge(helpers ? helpers.navigation : {})
+      @mustache[:navigation] ||= begin
+        pages = pages_of_search_results
+        {
+          pagination: {
+            prev_url: previous_page_url,
+            next_url: next_page_url,
+            is_first_page: @response.first_page?,
+            is_last_page: @response.last_page?,
+            pages: pages.collect.each_with_index do |page, i|
+              {
+                url: Kaminari::Helpers::Page.new(self, page: page.number).url,
+                index: number_with_delimiter(page.number),
+                is_current: (@response.current_page == page.number),
+                separator: show_pagination_separator?(i, page.number, pages.size)
+              }
+            end
+          }
+        }.reverse_merge(helpers ? helpers.navigation : {})
+      end
     end
 
     def facets_selected
-      facets_selected_items.blank? ? nil : { items: facets_selected_items }
+      @mustache[:facets_selected] ||= begin
+        facets_selected_items.blank? ? nil : { items: facets_selected_items }
+      end
     end
 
     private
@@ -99,36 +123,13 @@ module Portal
         facets_from_request(facet_field_names).each do |facet|
           facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
             items << {
-              filter: facet_map(facet.name),
-              value: facet_map(facet.name, item.value),
-              remove: facet_item_url(facet.name, item),
+              filter: facet_label(facet.name),
+              value: facet_label(facet.name, item.value),
+              remove: facet_item_url(facet, item),
               name: "f[#{facet.name}][]"
             }
           end
         end
-      end
-    end
-
-    def facet_map(facet_name, facet_value = nil)
-      if facet_value.nil?
-        t('global.facet.header.' + facet_name.downcase)
-      else
-        facet_value = ('COUNTRY' == facet_name ? facet_value.gsub(/\s+/, '') : facet_value)
-
-        mapped_value = case facet_name.upcase
-          when 'CHANNEL'
-            t('global.channel.' + facet_value.downcase)
-          when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE'
-            facet_value
-          else
-            t('global.facet.' + facet_name.downcase + '.' + facet_value.downcase)
-        end
-
-        unless ['PROVIDER', 'DATA_PROVIDER'].include?(facet_name)
-          mapped_value = mapped_value.split.map(&:capitalize).join(' ')
-        end
-
-        mapped_value
       end
     end
 
@@ -140,7 +141,7 @@ module Portal
     def search_result_for_document(doc, counter)
       doc_type = doc.fetch(:type, nil)
       {
-        object_url: document_path(doc, format: 'html') +(@channel.nil? ? '' : '?src_channel=' + @channel.id),
+        object_url: document_path(doc, format: 'html'),
         link_attrs: [
           {
             name: 'data-context-href',
@@ -166,7 +167,7 @@ module Portal
         is_text: doc_type == 'TEXT',
         is_video: doc_type == 'VIDEO',
         img: {
-          src: render_index_field_value(doc, 'edmPreview'),
+          src: thumbnail_url(doc),
           alt: ''
         },
         agent: agent_label(doc),
@@ -177,6 +178,23 @@ module Portal
       }
     end
 
+    def thumbnail_url(doc)
+      edm_preview = render_index_field_value(doc, 'edmPreview')
+      return nil if edm_preview.blank?
+
+      @api_uri ||= URI.parse(Europeana::API.url)
+
+      uri = URI.parse(edm_preview)
+      query = Rack::Utils.parse_query(uri.query)
+      query['size'] = 'w200'
+
+      uri.host = @api_uri.host
+      uri.path = @api_uri.path + '/thumbnail-by-url.json'
+      uri.query = query.to_query
+
+      uri.to_s
+    end
+
     def track_document_path_opts(counter)
       {
         per_page: params.fetch(:per_page, search_session['per_page']),
@@ -184,7 +202,6 @@ module Portal
         search_id: current_search_session.try(:id)
       }
     end
-
 
     def hidden_inputs_for_search
       flatten_hash(params_for_search.except(:page, :utf8)).collect do |name, value|

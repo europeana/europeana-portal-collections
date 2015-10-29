@@ -1,0 +1,322 @@
+de:
+  Symphonies: Sinfonien
+  global:
+    about-us: "Über uns"
+    channel:
+      archaeology: 'Archäologie '
+      architecture: Architektur
+      art: Kunst
+      fashion: Mode
+      home: Home
+      maps: Landkarten
+      music: Musik
+      natural-history: Naturgeschichte
+      newspapers: Zeitungen
+      performing-arts: Performing Arts
+    channels-art: 
+    channels-art-image: 
+    channels-art-link: 
+    channels-art-url: 
+    channels-fashion: Mode
+    channels-music: Musik
+    channels-music-link: 
+    choose-language: Sprache
+    email-address: E-Mail-Adresse
+    facet:
+      advanced:
+        options: 
+        show:
+          direct:
+            links: 
+          thumbnails: 
+          ugc: 
+      art:
+        form:
+          paintings:
+            genre: Genre
+            medium: Medium
+      carrier: 
+      colour: Farbe
+      colour-black-and-white: Schwarz und Weiß
+      country:
+        austria: "Österreich"
+        belgium: Belgien
+        bulgaria: Bulgarien
+        croatia: Kroatien
+        cyprus: Zypern
+        czechrepublic: Tschechien
+        denmark: Dänemark
+        estonia: Estland
+        europe: Europa
+        finland: Finnland
+        france: Frankreich
+        germany: Deutschland
+        greece: Griechenland
+        hungary: Ungarn
+        iceland: Island
+        ireland: Irland
+        israel: 'Israel '
+        italy: Italien
+        latvia: Lettland
+        lithuania: Litauen
+        luxembourg: Luxemburg
+        malta: Malta
+        netherlands: Niederlande
+        norway: Norwegen
+        poland: Polen
+        portugal: Portugal
+        romania: Rumänien
+        russia: Russland
+        serbia: Serbien
+        slovakia: Slowakei
+        slovenia: Slowenien
+        spain: Spanien
+        sweden: Schweden
+        switzerland: Schweiz
+        turkey: Türkei
+        ukraine: Ukraine
+        unitedkingdom: Vereinigtes Königreich
+        unitedstatesofamerica: USA / Vereinigte Staaten von Amerika
+      creator: Urheber
+      header:
+        channel: 
+        colourpalette: Farbe
+        country: Land
+        data_provider: 
+        image_aspectratio: Ausrichtung
+        image_colour: Palette
+        image_size: Größe
+        language: Sprache
+        language_of_description: Sprache der Beschreibung
+        media: Nur Objekte mit ...
+        mime_type: Dateiformat
+        provider: 
+        reusability: Kann ich es verwenden?
+        sound_duration: Laufzeit
+        sound_hq: Hohe Qualität
+        text_fulltext: Volltext
+        type: Medien
+        ugc: 'Inhalte von Nutzern anzeigen '
+        video_hd: HD
+        year: Datum
+      image_aspectratio:
+        landscape: Querformat
+        portrait: Hochformat
+      image_colour:
+        'false': Schwarz und Weiß
+        'true': Farbe
+      image_size:
+        extra_large: Extragroß (4MP+)
+        large: Groß (1-4MP)
+        medium: Mittel (0.5-1MP)
+        small: Klein (<0.5MP)
+      language:
+        bg: 
+        ca: 
+        cs: 
+        da: 
+        de: 
+        el: 
+        en: 
+        es: 
+        et: 
+        fi: 
+        fr: 
+        ga: 
+        he: 
+        hr: 
+        hu: 
+        is: 
+        it: 
+        lt: 
+        lv: 
+        mt: 
+        mul: 
+        nl: 
+        'no': 
+        pl: 
+        pt: 
+        ro: 
+        ru: 
+        sk: 
+        sl: 
+        sr: 
+        sv: 
+        tr: 
+        uk: 
+        yi: 
+      less: Weniger
+      media:
+        'false': Nein
+        'true': Ja
+      mime_type:
+        image/gif: GIF
+        image/jpeg: JPEG
+        image/png: PNG
+      more: Mehr
+      more-refinements: Suche verfeinern
+      resource:
+        type: 
+      reusability:
+        advanced: Erweitert
+        advanced-cc-by: 
+        advanced-cc-by-nc: 
+        advanced-cc-by-nc-nd: 
+        advanced-cc-by-nc-sa: 
+        advanced-cc-by-nd: 
+        advanced-cc-by-sa: 
+        advanced-cc0: ''
+        advanced-orphan-work: 
+        advanced-out-of-copyright-non-commercial: 
+        advanced-pdm: 
+        advanced-rrfa: Rechte vorbehalten - freier Zugang
+        advanced-rrpa: Rechte vorbehalten - kostenpflichtiger Zugang
+        advanced-rrra: Rechte Vorbehalten - eingeschränkter Zugang
+        advanced-ucs: Unbekannter Urheberrechtsstatus
+        open: Ja, mit Namensnennung
+        permission: Nur mit Genehmigung
+        restricted: Ja, mit Einschränkungen
+        simple: Einfach
+      sound_duration:
+        long: Lang (6+ min)
+        medium: Mittel (3-6 min)
+        short: Kurz (30s - 3 min)
+        very_short: Sehr kurz (<30s)
+      sound_hq:
+        'true': Ja
+      source: Quelle
+      text_fulltext:
+        'false': Nein
+        'true': Ja
+      type:
+        3d: 
+        image: Bild
+        sound: 
+        text: Text
+        video: 
+      type-image:
+        orientation:
+          label: Bildausrichtung
+          landscape: Querformat
+          portrait: Hochformat
+        quality:
+          all: Alles anzeigen
+          hq-only: 
+          label: Qualität
+        size:
+          explanation: Was bedeuten diese Größen?
+          label: Bildgröße
+          large: Groß (%{data})
+          medium: Mittel (%{data})
+          small: Klein (%{data})
+          xl: Extra groß (%{data})
+      type-sound:
+        duration:
+          label: 
+          long: Lang (%{data})
+          medium: Mittel (%{data})
+          short: Kurz (%{data})
+          very-short: Sehr kurz (%{data})
+      type-video:
+        duration:
+          label: 
+          long: Lang (%{data})
+          medium: Mittel (%{data})
+          short: Kurz (%{data})
+      video_duration:
+        long: Lang (20+ min)
+        medium: Mittel (4-20 min)
+        short: Kurz (<4 min)
+      year:
+        from: von
+        to: nach
+    find-us-elsewhere: 
+    forgot-password: Haben Sie Ihr Passwort vergessen?
+    genres: 
+    genres-chamber-music: Kammermusik
+    genres-classical-music: Klassische Musik
+    genres-concertos: Konzerte
+    genres-non-western-classical-music: Nicht-westliche klassische Musik
+    genres-opera: Oper
+    genres-popular-music: Unterhaltungsmusik
+    genres-traditional-music: Traditionelle Musik
+    header:
+      connect: verknüpfen
+      develop: 
+      discover: entdecken
+      network: 
+    help: Hilfe
+    home: 
+    javascript-required: 
+    labs: 
+    labs-text: 
+    language-basque: Baskisch
+    language-bulgarian: Bulgarisch
+    language-catalan: Katalanisch
+    language-croatian: Kroatisch
+    language-czech: Tschechisch
+    language-danish: Dänisch
+    language-dutch: Niederländisch
+    language-english: Englisch
+    language-estonian: Estnisch
+    language-finnish: Finnisch
+    language-french: Französisch
+    language-gaelic: Gälisch
+    language-german: Deutsch
+    language-greek: Griechisch
+    language-hungarian: Ungarisch
+    language-icelandic: Isländisch
+    language-italian: Italienisch
+    language-latvian: Lettisch
+    language-lithuanian: Litauisch
+    language-maltese: Maltesisch
+    language-norwegian: Norwegisch
+    language-polish: Polnisch
+    language-portuguese: Portugiesisch
+    language-romanian: Rumänisch
+    language-russian: 'Russisch '
+    language-slovakian: Slowakisch
+    language-slovenian: 'Slowenisch '
+    language-spanish: Spanisch
+    language-swedish: Schwedisch
+    language-ukranian: Ukrainisch
+    login: 
+    logo-image: 
+    more:
+      load-more: Mehr
+      show-more: Mehr anzeigen
+      view-more: Mehr anzeigen
+    more-info: Mehr Informationen
+    our-mission: 
+    our-mission-text: ''
+    our-sites: Unsere Seiten
+    password: Passwort
+    professional: 
+    professional-text: Machen Sie mit, teilen Sie Ihre Daten oder benutzen Sie unsere
+    refine-your-search: Suche verfeinern
+    register: Anmelden
+    research: 
+    research-text: 
+    rights-box:
+      background-image-provider: 
+      background-image-provider-url: 
+      background-image-rights-icons-alt: 
+      background-image-title: 
+      background-image-title-url: 
+    search-area:
+      search-button-image-alt: Suche
+      search-placeholder-text: Fügen Sie einen Suchbegriff ein
+    search-collections: 
+    search-collections-text: Entdecken Sie das kulturelle Erbe Europas
+    share: Teilen
+    sitemap: 
+    terms-and-policies: Geschäftsbedingungen und Richtlinien
+    type: 
+  'no': Norwegen
+  pl: Portugal
+  site:
+    facet:
+      language:
+        show:
+          results: 
+        show-results-all: 
