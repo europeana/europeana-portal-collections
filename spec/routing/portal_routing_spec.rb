@@ -20,4 +20,8 @@ RSpec.describe 'routes for the portal controller', :type => :routing do
   it 'routes GET /record/:id/media to portal#media' do
     expect(get('/record/abc/123/media')).to route_to('portal#media', id: 'abc/123')
   end
+
+  it 'routes GET /record/:id/navigation to portal#navigation' do
+    expect(get('/record/abc/123/navigation')).to route_to('portal#navigation', id: 'abc/123')
+  end
 end

@@ -1,0 +1,272 @@
+it:
+  global:
+    labs-link: 
+    navigation:
+      all_blog_posts: 
+      all_exhibitions: 
+      blog: 
+      browse: 
+      browse_colours: 
+      browse_newcontent: 
+      browse_sources: 
+      channels: 
+      collections: 
+      exhibitions: 
+      home: 
+    pro-link: 
+    pro-text: 
+    settings: 
+  site:
+    alpha:
+      feedback_banner:
+        description: 
+        link-text: 
+        title: 
+    blog-link: link al blog
+    browse:
+      colours:
+        title: Colori
+      newcontent:
+        title: Nuovo contenuto
+      sources:
+        title: Fonti
+    collections:
+      art-history:
+        description: Dal Rinascimento ai surrealisti , e dall'antica scultura romana all'arte contemporanea , l' Europeana Arte e il Canale di Storia dell'arte vi presenta artisti e opere d'arte provenienti da tutto il territorio europeo.
+        title: 
+      data-types:
+        3d: 
+        count: 
+        images: 
+        moving-images: 
+        sound: 
+        texts: 
+      labels:
+        credits: 
+        recent: 
+        spotlight-on: 
+      music:
+        description: 
+        title: 
+    facet:
+      language:
+        show:
+          results: 
+    footer:
+      menu:
+        about: 
+        become-a-provider: 
+        copyright: 
+        data-providers: 
+        new-collections: 
+        search-tips: 
+        using-myeuropeana: 
+    home:
+      strapline: 
+    more: Di più
+    my-europeana: My Europeana
+    my-europeana-link: link a my Europeana
+    navigation:
+      breadcrumb:
+        item_detail: 
+        results_list: 
+        return_home: 
+    news: Notizie
+    object:
+      actions:
+        attribute-author: 
+        attribute-html: 
+        attribute-plaintext: 
+        download: 
+        download-additional: 
+        downloaddata: 
+        open-media: 
+        show-less-data: 
+        show-more-data: 
+        technicalmetadata: 
+      enrichment:
+        who:
+          title: 
+      hierarchy:
+        title: 
+        view-items-above: 
+        view-items-below: 
+      meta-label:
+        codec: Codec
+        collection-name: Dataset
+        concept: Concetta
+        concepts: Classificazioni
+        consists-of: 
+        contributor: Contributore
+        copyright: Diritto d'autore
+        creation-date: Data da creazione
+        creator: Creatore
+        current-location: Collocazione attuale
+        data-provider: Fornitori di contenuti
+        date: Data
+        dates: Date
+        description: Descrizione
+        dimensions: Dimensioni
+        duration: Durazione
+        edm:
+          has-met: 
+          incorporates: 
+          is-derivative-of: 
+          is-representation-of: 
+          is-similar-to: 
+          is-successor-of: 
+          realises: 
+          was-present-at: 
+        extent: Larghezza
+        file-size: Dimensione del file
+        format: Formatto
+        fps: Fotogrammi al secondo
+        has-type: "è di tipo"
+        identifier: Identificatore
+        is-format-of: "È formato "
+        is-part-of: "È parte di"
+        is-referenced-by: "è referenziato da"
+        is-replaced-by: "è sostituito da"
+        is-required-by: "è richiesto dal"
+        issued: Rilasciato
+        language: Lingua
+        latitude: Latitudine
+        location: Localizzazione
+        longitude: Longitudine
+        map: Mappa
+        map-tiles: 
+        medium: Medium
+        people: Gente
+        period: Periodo
+        place: Luogo
+        place-time: Luogo/Tempo
+        properties: Proprietà
+        provenance: Provenienza
+        provided-by: Scopri di più
+        provided-by-detail: potrebbe dare più informazioni e contenuti digitali su quest'opera
+        provider: Fornitore
+        providing-country: Paese fornitore
+        publication-date: Data di pubblicazione
+        publisher: Editore
+        references: Referenze
+        refs-rels: Riferimenti e relazioni
+        relations: Relazioni
+        rights: Diritti d'autore
+        rights-human: Posso usarlo?
+        runtime: Durata
+        runtime-unit-seconds: secondi
+        source: Provenienza
+        subject: Soggetto
+        temporal: Temporale
+        time: Tempo
+        timestamp-created: Pubblicato in Europeana
+        timestamp-updated: L'ultimo aggiornamento da Europeana
+        timestamp_created: Pubblicato da Europeana (%{timestamp_created})
+        timestamp_updated: L'ultimo aggiornamento da Europeana (%{timestamp_updated})
+        title: Titolo
+        toc: Tavola dei contenuti
+        type: Tipo
+        ugc: Contenuto contribuito dall'utente
+        version: 
+      named-entities:
+        title: 
+        what:
+          broader: Concetta Larga
+          label: Etichetta della concetta
+          term: Termine della concetta
+          title: Cosa
+        when:
+          begin: Inizio Periodo
+          end: Fine Periodo
+          label: Etichetta del Periodo
+          term: Termine Periodo
+          title: 
+        where:
+          label: Etichetta del Posto
+          latitude: Latitudine del Posto
+          longitude: Posto Longitudine
+          term: Termine del Posto
+          title: Dove
+        who:
+          label: Etichetta del'agente
+          term: Termine del'agente
+          title: Chi
+      nav:
+        next: 
+        prev: 
+      points:
+        east: 
+        north: 
+        south: 
+        west: 
+      show-more-similar-items: 
+      similar-items: 
+    pages:
+      '404':
+        intro: 
+        text: 
+      about:
+        text: 
+        title: 
+      music-channel-about:
+        text: 
+        title: 
+    results:
+      actions:
+        configure-actions: 
+        dutchmasters: 
+        favouriteart: 
+        label: 
+        newcollection: 
+        product-save: 
+        saveto: 
+        show-all-collections: 
+      list:
+        all-results:
+          3D: 
+          images: 
+          text: 
+          video: 
+        count-and-terms: 
+        empty: 
+        empty-with-terms: 
+        header: 
+        header-and: 
+        in-channel: 
+        less: 
+        less_adv: 
+        more: 
+        more_adv: 
+        product-3D: 
+        product-image: 
+        product-sound: 
+        product-text: 
+        product-video: 
+        results-relevance: 
+        single-result: 
+        view:
+          grid: 
+          list: 
+        view-at-provider: 
+    search:
+      placeholder:
+        text: 
+      similar:
+        prefix: 
+    settings:
+      actions:
+        clear-selection: 
+        save-settings: 
+      language:
+        auto-translate-page: 
+        auto-translate-page-short: 
+        auto-translate-query: 
+        available: 
+        default: 
+        flash:
+          alert: 
+          notice: 
+        label: 
+        settings-label: 
+    site-name-link: 
+    sitemap-link: 

@@ -2,26 +2,70 @@ module Document
   ##
   # Blacklight document presenter for a Europeana record
   class RecordPresenter < DocumentPresenter
-    def edm_resource_url
-      @edm_resource_url ||= render_document_show_field_value('aggregations.edmIsShownBy')
+    def edm_is_shown_by
+      @edm_is_shown_by ||= render_document_show_field_value('aggregations.edmIsShownBy')
+    end
+
+    def edm_object
+      @edm_object ||= aggregation.fetch('edmObject', nil)
+    end
+
+    def aggregation
+      @first_aggregation ||= @document.aggregations.first
+    end
+
+    def is_shown_by_or_at
+      aggregation.fetch('edmIsShownBy', nil) || aggregation.fetch('edmIsShownAt', nil)
+    end
+
+    def has_views
+      @has_views ||= aggregation.fetch('hasView', []).compact
+    end
+
+    def edm_is_shown_by_web_resource
+      @edm_is_shown_by_web_resource ||= begin
+        web_resources.detect do |web_resource|
+          web_resource.fetch('about', nil) == edm_is_shown_by
+        end
+      end
+    end
+
+    def web_resources
+      @web_resources ||= begin
+        aggregation.respond_to?(:webResources) ? aggregation.webResources : []
+      end
+    end
+
+    def salient_media_web_resources
+      return [] if web_resources.blank?
+
+      @media_web_resources ||= begin
+        web_resources.dup.tap do |web_resources|
+          # make sure the edm_is_shown_by is the first item
+          unless edm_is_shown_by_web_resource.nil?
+            web_resources.unshift(web_resources.delete(edm_is_shown_by_web_resource))
+          end
+
+          web_resources.select! { |web_resource| web_resource_displayable?(web_resource) }
+
+          web_resources.uniq! { |web_resource| web_resource.fetch('about', nil) }
+        end
+      end
+    end
+
+    def web_resource_displayable?(web_resource)
+      web_resource_url = web_resource.fetch('about', nil)
+      web_resource_mime_type = web_resource.fetch('ebucoreHasMimeType', nil)
+
+      (edm_object.present? && web_resource_url == edm_object) ||
+        (edm_object.blank? && web_resource_url == edm_is_shown_by) ||
+        (has_views.include?(web_resource_url) && web_resource_mime_type.present?) ||
+        Document::WebResourcePresenter.new(web_resource, @document, @controller).media_type == 'iiif'
     end
 
     def media_web_resources(options = {})
-      aggregation = @document.aggregations.first
-      return Kaminari.paginate_array([]) unless aggregation.respond_to?(:webResources)
-
-      view_urls = aggregation.fetch('hasView', []) + [aggregation.fetch('edmObject', nil)]
-      web_resources = aggregation.webResources.dup
-      edm_web_resource = web_resources.detect { |web_resource| web_resource.fetch('about', nil) == edm_resource_url }
-      # make sure the edm_is_shown_by is the first item
-      web_resources.unshift(web_resources.delete(edm_web_resource)) unless edm_web_resource.nil?
-      web_resources.select! do |wr|
-        view_urls.compact.include?(wr.fetch('about', nil)) ||
-          Document::WebResourcePresenter.new(wr, @document, @controller).media_type == 'iiif'
-      end
-      web_resources.uniq! { |wr| wr.fetch('about', nil) }
-
-      Kaminari.paginate_array(web_resources).page(options[:page]).per(options[:per_page])
+      Kaminari.paginate_array(salient_media_web_resources).
+        page(options[:page]).per(options[:per_page])
     end
 
     # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls

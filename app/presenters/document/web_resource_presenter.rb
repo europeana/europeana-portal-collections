@@ -29,6 +29,7 @@ module Document
         else
           item[:"is_#{player}"] = true
         end
+        item[:external_media] = download_url == @record_presenter.edm_object ? @record_presenter.is_shown_by_or_at : download_url
       end
     end
 

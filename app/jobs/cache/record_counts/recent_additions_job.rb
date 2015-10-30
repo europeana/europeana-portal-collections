@@ -17,9 +17,9 @@ module Cache
         {
           'browse/new_content/providers' => {}
         }.tap do |sets|
-          Channel.published.each do |channel|
-            cache_key = "record/counts/channels/#{channel.key}/recent-additions"
-            sets[cache_key] = channel.api_params_hash
+          Collection.published.each do |collection|
+            cache_key = "record/counts/collections/#{collection.key}/recent-additions"
+            sets[cache_key] = collection.api_params_hash
           end
         end
       end

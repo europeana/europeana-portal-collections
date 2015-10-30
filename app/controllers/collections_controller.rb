@@ -1,8 +1,8 @@
 ##
-# Provides Blacklight search and browse, within a content Channel
-class ChannelsController < ApplicationController
+# Provides Blacklight search and browse, within a content Collection
+class CollectionsController < ApplicationController
   include Catalog
-  include Channels
+  include Europeana::Collections
   include Europeana::Styleguide
 
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
@@ -17,9 +17,9 @@ class ChannelsController < ApplicationController
   end
 
   def show
-    @channel = find_channel
+    @collection = find_collection
     @landing_page = find_landing_page
-    @channel_stats = channel_stats
+    @collection_stats = collection_stats
     @recent_additions = recent_additions
 
     (@response, @document_list) = search_results(params, search_params_logic) if has_search_parameters?
@@ -47,37 +47,37 @@ class ChannelsController < ApplicationController
     has_search_parameters?
   end
 
-  def find_channel
-    Channel.find_by_key!(params[:id]).tap do |channel|
-      authorize! :show, channel
+  def find_collection
+    Collection.find_by_key!(params[:id]).tap do |collection|
+      authorize! :show, collection
     end
   end
 
   def find_landing_page
-    Page::Landing.find_or_initialize_by(slug: "channels/#{@channel.key}").tap do |landing_page|
+    Page::Landing.find_or_initialize_by(slug: "collections/#{@collection.key}").tap do |landing_page|
       authorize! :show, landing_page
     end
   end
 
   ##
-  # Gets from the cache the number of items of each media type within the current channel
-  def channel_stats
+  # Gets from the cache the number of items of each media type within the current collection
+  def collection_stats
     # ['EDM value', 'i18n key']
     types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
              ['3D', '3d'], ['SOUND', 'sound']]
-    channel_stats = types.map do |type|
-      type_count = Rails.cache.fetch("record/counts/channels/#{@channel.key}/type/#{type[0].downcase}")
+    collection_stats = types.map do |type|
+      type_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}/type/#{type[0].downcase}")
       {
         count: type_count,
-        text: t(type[1], scope: 'site.channels.data-types'),
-        url: channel_path(q: "TYPE:#{type[0]}")
+        text: t(type[1], scope: 'site.collections.data-types'),
+        url: collection_path(q: "TYPE:#{type[0]}")
       }
     end
-    channel_stats.reject! { |stats| stats[:count] == 0 }
-    channel_stats.sort_by { |stats| stats[:count] }.reverse
+    collection_stats.reject! { |stats| stats[:count] == 0 }
+    collection_stats.sort_by { |stats| stats[:count] }.reverse
   end
 
   def recent_additions
-    Rails.cache.fetch("record/counts/channels/#{@channel.key}/recent-additions") || []
+    Rails.cache.fetch("record/counts/collections/#{@collection.key}/recent-additions") || []
   end
 end

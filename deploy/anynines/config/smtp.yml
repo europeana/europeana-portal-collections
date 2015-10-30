@@ -1,0 +1,5 @@
+production:
+  address: '<%= ENV['SMTP_HOST'] %>'
+  port: <%= ENV['SMTP_PORT'] || 25 %>
+  user_name: '<%= ENV['SMTP_USER'] %>'
+  password: '<%= ENV['SMTP_PASS'] %>'

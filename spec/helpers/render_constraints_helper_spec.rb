@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe RenderConstraintsHelper, type: :helper do
+RSpec.describe RenderConstraintsHelper do
   it { is_expected.to include(Blacklight::RenderConstraintsHelperBehavior) }
 
   describe '#query_has_constraints?' do 

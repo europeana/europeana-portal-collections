@@ -37,7 +37,7 @@ module Europeana
       # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
       config.i18n.default_locale = :en
       config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
-      config.i18n.available_locales = [:en, :nl]
+      config.i18n.available_locales = [:en, :nl, :de]
       config.i18n.fallbacks = true
 
       # Do not swallow errors in after_commit/after_rollback callbacks.
@@ -64,6 +64,13 @@ module Europeana
         [:redis_store, uri.to_s]
       rescue RuntimeError
         :null_store
+      end
+
+      # Load Action Mailer SMTP config from config/smtp.yml, if it exists
+      config.action_mailer.smtp_settings = begin
+        Rails.application.config_for(:smtp).symbolize_keys
+      rescue RuntimeError
+        {}
       end
     end
   end

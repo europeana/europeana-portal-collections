@@ -1,0 +1,319 @@
+sv:
+  Symphonies: Symfonier
+  global:
+    about-us: Om oss
+    channel:
+      archaeology: arkeologi
+      architecture: arkitektur
+      art: konst
+      fashion: mode
+      home: Start
+      maps: kartor
+      music: musik
+      natural-history: naturhistoria
+      newspapers: tidningar
+      performing-arts: scenkonst
+    channels-art: 
+    channels-art-image: 
+    channels-art-link: 
+    channels-art-url: 
+    channels-fashion: 
+    channels-music: Musik
+    channels-music-link: 
+    choose-language: 
+    email-address: 
+    facet:
+      advanced:
+        options: 
+        show:
+          direct:
+            links: 
+          thumbnails: 
+          ugc: 
+      art:
+        form:
+          paintings:
+            genre: Genre
+            medium: Medium
+      carrier: 
+      colour: 
+      colour-black-and-white: Svartvit
+      country:
+        austria: 
+        belgium: 
+        bulgaria: Belgien
+        croatia: Kroatien
+        cyprus: Cypern
+        czechrepublic: 
+        denmark: Danmark
+        estonia: Estland
+        europe: 
+        finland: Finland
+        france: Frankrike
+        germany: Tyskland
+        greece: Grekland
+        hungary: Ungern
+        iceland: Island
+        ireland: Irland
+        israel: Israel
+        italy: Italien
+        latvia: Lettland
+        lithuania: Litauen
+        luxembourg: Luxemburg
+        malta: Malta
+        netherlands: 
+        norway: Norge
+        poland: Polen
+        portugal: Portugal
+        romania: 
+        russia: Ryssland
+        serbia: Serbien
+        slovakia: Slovakien
+        slovenia: Slovenien
+        spain: Spanien
+        sweden: Sverige
+        switzerland: Schweiz
+        turkey: Turkiet
+        ukraine: Ukraina
+        unitedkingdom: 
+        unitedstatesofamerica: USA
+      creator: 
+      header:
+        channel: 
+        colourpalette: 
+        country: Land
+        data_provider: 
+        image_aspectratio: 
+        image_colour: Palett
+        image_size: Storlek
+        language: 
+        language_of_description: 
+        media: 
+        mime_type: Filformat
+        provider: 
+        reusability: 
+        sound_duration: 
+        sound_hq: 
+        text_fulltext: Fulltext
+        type: Mediaformat
+        ugc: 
+        video_duration: 
+        video_hd: 
+        year: 
+      image_aspectratio:
+        landscape: Landskap
+        portrait: 
+      image_colour:
+        'false': Svartvit
+        'true': 
+      image_size:
+        extra_large: Extra stor (4MP+)
+        large: Stor (1-4MP)
+        medium: Medelstor (0.5-1MP)
+        small: Liten (<0.5MP)
+      language:
+        bg: 
+        ca: 
+        cs: 
+        da: 
+        de: 
+        el: 
+        en: 
+        es: 
+        et: 
+        fi: 
+        fr: 
+        ga: 
+        he: 
+        hr: 
+        hu: 
+        is: 
+        it: 
+        lt: 
+        lv: 
+        mt: 
+        mul: 
+        nl: 
+        'no': 
+        pl: 
+        pt: 
+        ro: 
+        ru: 
+        sk: 
+        sl: 
+        sr: 
+        sv: 
+        tr: 
+        uk: 
+        yi: 
+      less: 
+      media:
+        'false': Nej
+        'true': Ja
+      more: Fler
+      more-refinements: 
+      resource:
+        type: Typ
+      reusability:
+        advanced: Avancerad
+        advanced-cc-by: 
+        advanced-cc-by-nc: 
+        advanced-cc-by-nc-nd: 
+        advanced-cc-by-nc-sa: 
+        advanced-cc-by-nd: 
+        advanced-cc-by-sa: 
+        advanced-cc0: 
+        advanced-orphan-work: 
+        advanced-out-of-copyright-non-commercial: 
+        advanced-pdm: 
+        advanced-rrfa: 
+        advanced-rrpa: 
+        advanced-rrra: 
+        advanced-ucs: 
+        open: 
+        permission: 
+        restricted: 
+        simple: Enkel
+      sound_duration:
+        long: 
+        medium: 
+        short: Kort (30s - 3 min)
+        very_short: Mycket kort (<30s)
+      sound_hq:
+        'true': Ja
+      source: 
+      text_fulltext:
+        'false': Nej
+        'true': Ja
+      type:
+        3d: 
+        image: Bild
+        sound: Ljud
+        text: 
+        video: Video
+      type-image:
+        orientation:
+          label: 
+          landscape: Landskap
+          portrait: 
+        quality:
+          all: Visa alla
+          hq-only: 
+          label: Kvalitet
+        size:
+          explanation: 
+          label: Bildstorlek
+          large: 
+          medium: Medelstor (%{data})
+          small: Liten (%{data})
+          xl: Extra stor (%{data})
+      type-sound:
+        duration:
+          label: 
+          long: 
+          medium: 
+          short: Kort (%{data})
+          very-short: Mycket kort  (%{data})
+      type-video:
+        duration:
+          label: 
+          long: 
+          medium: 
+          short: Kort (%{data})
+      video_duration:
+        long: 
+        medium: 
+        short: Kort (<4 min)
+      year:
+        from: 
+        to: till
+    find-us-elsewhere: 
+    forgot-password: 
+    genres: genrer
+    genres-chamber-music: Kammarmusik
+    genres-classical-music: Klassisk musik
+    genres-concertos: 
+    genres-non-western-classical-music: 
+    genres-opera: Opera
+    genres-popular-music: 
+    genres-traditional-music: Folkmusik
+    header:
+      connect: 
+      develop: utveckla
+      discover: 
+      network: 
+    help: 
+    home: Hem
+    javascript-required: 
+    labs: 
+    labs-text: 
+    language-basque: 
+    language-bulgarian: 
+    language-catalan: 
+    language-croatian: 
+    language-czech: 
+    language-danish: 
+    language-dutch: 
+    language-english: 
+    language-estonian: 
+    language-finnish: 
+    language-french: 
+    language-gaelic: 
+    language-german: 
+    language-greek: 
+    language-hungarian: 
+    language-icelandic: 
+    language-italian: 
+    language-latvian: 
+    language-lithuanian: 
+    language-maltese: 
+    language-norwegian: 
+    language-polish: 
+    language-portuguese: 
+    language-romanian: 
+    language-russian: 
+    language-slovakian: 
+    language-slovenian: 
+    language-spanish: 
+    language-swedish: 
+    language-ukranian: 
+    login: Logga in
+    logo-image: 
+    more:
+      load-more: Mer
+      show-more: Visa mer
+      view-more: Mer
+    more-info: 
+    our-mission: 
+    our-mission-text: 
+    our-sites: 
+    password: 
+    professional: Pro
+    professional-text: 
+    refine-your-search: 
+    register: Registrera dig
+    research: Research
+    research-text: 
+    rights-box:
+      background-image-provider: 
+      background-image-provider-url: 
+      background-image-rights-icons-alt: 
+      background-image-title: 
+      background-image-title-url: 
+    search-area:
+      search-button-image-alt: 
+      search-placeholder-text: 
+    search-collections: Samlingar
+    search-collections-text: 
+    share: Dela
+    sitemap: Sajtkarta
+    terms-and-policies: 
+    type: typ
+  'no': 
+  pl: 
+  site:
+    facet:
+      language:
+        show:
+          results: 
+        show-results-all: 

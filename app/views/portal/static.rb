@@ -20,7 +20,7 @@ module Portal
           title: @page.title,
           text: @page.body,
           channel_entry: @page.browse_entries.blank? ? nil : {
-            items: channel_entry_items(@page.browse_entries)
+            items: browse_entry_items(@page.browse_entries)
           },
         }.merge(helpers.content)
       end

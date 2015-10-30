@@ -225,7 +225,8 @@ module Portal
               sections: [
                 {
                   title: 'site.object.meta-label.location',
-                  fields: ['proxies.dctermsSpatial', 'places.prefLabel']
+                  fields: ['proxies.dctermsSpatial'],
+                  collected: pref_label('places.prefLabel')
                 },
                 {
                   title: 'site.object.meta-label.place-time',
@@ -278,7 +279,10 @@ module Portal
                   title: 'site.object.meta-label.timestamp-updated',
                   fields: ['timestamp_update'],
                   format_date: '%Y-%m-%d'
-                }
+                },
+                ['aggregations.edmUgc'].present? ? {
+                  collected: t('site.object.meta-label.ugc')
+                } : {},
               ]
             ),
             properties: data_section(
@@ -397,7 +401,7 @@ module Portal
             ]
           ),
           similar: {
-            title: t('site.object.similar-items') + ':',
+            title: t('site.object.similar-items'),
             more_items_query: search_path(mlt: document.id),
             more_items_load: document_similar_url(@document, format: 'json'),
             more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
@@ -412,10 +416,117 @@ module Portal
               }
             end
           },
+          named_entities: named_entity_data,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(helpers.content)
       end
+    end
+
+    def named_entity_data
+      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
+      present = false
+
+      data.each do |group|
+        if group[:fields].size > 0
+          present = true
+        end
+      end
+      {
+        present: present,
+        data: data
+      }
+    end
+
+    def collect_agent_labels
+      fields = []
+      agents = document.fetch('concepts', [])
+      (agents).map do |agent|
+        fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.who.label'), vals: normalise_named_entity(agent[:prefLabel]), multi: true }
+      end
+      {
+        title: t('site.object.named-entities.who.title'),
+        fields: fields,
+        present: fields.size > 0
+      }
+    end
+
+    def collect_place_labels
+      fields = []
+      places = document.fetch('places', [])
+      (places).map do |place|
+        fields << { key: t('site.object.named-entities.where.term'), val: place[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.where.label'), vals: normalise_named_entity(place[:prefLabel]), multi: true }
+        if !place[:latitude].nil?
+          fields << { key: t('site.object.named-entities.where.latitude'), val: place[:latitude] }
+        end
+        if !place[:longitude].nil?
+          fields << { key: t('site.object.named-entities.where.longitude'), val: place[:longitude] }
+        end
+      end
+      {
+        title: t('site.object.named-entities.where.title'),
+        fields: fields,
+        present: fields.size > 0
+      }
+    end
+
+    def collect_time_labels
+      fields = []
+      timespans = document.fetch('timespans', [])
+      (timespans).map do |timespan|
+        fields << { key: t('site.object.named-entities.when.term'), val: timespan[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.when.label'), vals: normalise_named_entity(timespan[:prefLabel]), multi: true }
+        if !timespan[:begin].nil?
+          fields << { key: t('site.object.named-entities.when.begin'), val: timespan[:begin][:def][0] }
+        end
+        if !timespan[:end].nil?
+          fields << { key: t('site.object.named-entities.when.end'), val: timespan[:end][:def][0] }
+        end
+      end
+      {
+        title: 'When',
+        fields: fields,
+        present: fields.size > 0
+      }
+    end
+
+    def collect_concept_labels
+      fields = []
+      concepts = document.fetch('concepts', [])
+      (concepts).map do |concept|
+        fields << { key: t('site.object.named-entities.what.term'), val: concept[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.what.label'), vals: normalise_named_entity(concept[:prefLabel]), multi: true }
+        broader = concept[:broader]
+        if !broader.nil?
+          multi = broader.size > 1
+          broader = multi ? broader : broader[0]
+          fields << {
+            key: t('site.object.named-entities.what.broader'),
+            val: multi ? nil : broader,
+            vals: multi ? normalise_named_entity(broader, true) : nil,
+            agt_link: true,
+            multi: multi}
+        end
+      end
+      {
+        title: t('site.object.named-entities.what.title'),
+        fields: fields,
+        present: fields.size > 0
+      }
+    end
+
+    def normalise_named_entity(named_entity, agt_link = false)
+      res = []
+      named_entity.each do |key, val|
+        if key && val.nil?
+          res << {val: key, key: nil, agt_link: agt_link}
+        else
+          res << {key: key, val: val, agt_link: agt_link}
+        end
+      end
+      res
     end
 
     def simple_rights_label_data
@@ -564,6 +675,23 @@ module Portal
       end
     end
 
+    def pref_label(field_name)
+      val = @document.fetch(field_name, [])
+      pref = nil
+      if val.size > 0
+        if val.is_a?(Array)
+          val[0]
+        else
+          pref = val[0][I18n.locale.to_sym]
+          if pref.size > 0
+            pref[0]
+          else
+            val[0][:en]
+          end
+        end
+      end
+    end
+
     def creator_title
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
@@ -580,6 +708,8 @@ module Portal
 
       {
         required_players: item_players,
+        external_media: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
+          render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
         single_item: items.size == 1,
         empty_item: items.size == 0,
         items: items,

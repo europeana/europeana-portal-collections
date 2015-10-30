@@ -10,6 +10,7 @@ en:
       browse_newcontent: New content
       browse_sources: Sources
       channels: Channels
+      collections: Collections
       exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
@@ -29,7 +30,7 @@ en:
         title: New Content
       sources:
         title: Sources
-    channels:
+    collections:
       art-history:
         description: |
           From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Channel introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
@@ -38,7 +39,7 @@ en:
         3d: 3D objects
         count: items
         images: Images
-        moving-images: Moving images
+        moving-images: Videos
         sound: Sound recordings
         texts: Texts
       labels:
@@ -77,16 +78,19 @@ en:
       actions:
         attribute-author: Attribute the author
         attribute-html: HTML
-        attribute-plaintext: Plain Text
+        attribute-plaintext: Plain text
         download: Download
         download-additional: Also available as
         downloaddata: Download data
         open-media: Open this media item
         show-less-data: Show less data
         show-more-data: Show more data
-        technicalmetadata: Technical Metadata
+        technicalmetadata: Technical metadata
+      enrichment:
+        who:
+          title: 
       hierarchy:
-        title: Hierarchy
+        title: Related items
         view-items-above: view items above
         view-items-below: view items below
       meta-label:
@@ -140,14 +144,14 @@ en:
         place-time: Place/Time
         properties: Properties
         provenance: Provenance
-        provided-by: Provided by
-        provided-by-detail: <a href="%{url}">%{institution_name}</a> who may have more information and media for this item.
+        provided-by: Find out more
+        provided-by-detail: may have more information and media for this item.
         provider: Provider
         providing-country: Providing country
-        publication-date: Date of Publication
+        publication-date: Date of publication
         publisher: Publisher
         references: References
-        refs-rels: References and Relations
+        refs-rels: References and relations
         relations: Relations
         rights: Rights
         rights-human: Can I use this?
@@ -161,10 +165,34 @@ en:
         timestamp-updated: Last updated in Europeana
         timestamp_created: First published in Europeana (%{timestamp_created})
         timestamp_updated: Last updated in Europeana (%{timestamp_updated})
+        title: Title
         toc: Table of Contents
         type: Type
         ugc: User contributed content
         version: Version
+      named-entities:
+        title: Named Entities
+        what:
+          broader: Broader Concept
+          label: Concept Label
+          term: Concept Term
+          title: What
+        when:
+          begin: Period Begin
+          end: Period End
+          label: Period Label
+          term: Period Term
+          title: When
+        where:
+          label: Place Label
+          latitude: Place Latitude
+          longitude: Place Longitude
+          term: Place Term
+          title: Where
+        who:
+          label: Agent Label
+          term: Agent Term
+          title: Who
       nav:
         next: Next
         prev: Previous
@@ -242,10 +270,10 @@ en:
         save-settings: Save Settings
       language:
         auto-translate-page: Automatically translate item pages into...
-        auto-translate-page-short: Auto translate items into
+        auto-translate-page-short: Auto-translate items into
         auto-translate-query: Automatically translate search keywords into...
-        available: Available Languages
-        default: Default Language
+        available: Available languages
+        default: Default language
         flash:
           alert: 'Invalid language specified. Available languages: %{locales}'
           notice: Language settings saved.

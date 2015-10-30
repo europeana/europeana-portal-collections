@@ -4,7 +4,7 @@ RSpec.describe Cache::RecordCounts::RecentAdditionsJob do
     expect(an_api_search_request).to have_been_made.at_least_once
   end
 
-  it 'should fetch per-channel providers from API'
+  it 'should fetch per-collection providers from API'
 
   it 'should write providers to cache' do
     Rails.cache.delete('browse/new_content/providers')

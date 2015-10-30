@@ -1,4 +1,4 @@
-class Channel < ActiveRecord::Base
+class Collection < ActiveRecord::Base
   include HasPublicationStates
 
   has_paper_trail
@@ -21,6 +21,6 @@ class Channel < ActiveRecord::Base
   end
 
   def landing_page
-    @landing_page ||= Page::Landing.find_by_slug("channels/#{key}")
+    @landing_page ||= Page::Landing.find_by_slug("collections/#{key}")
   end
 end

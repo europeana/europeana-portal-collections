@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'search', to: 'portal#index'
 
   constraints id: %r{[^/]+/[^/]+} do
+    get 'record/*id/navigation', to: 'portal#navigation', as: 'document_navigation'
     get 'record/*id/media', to: 'portal#media', as: 'document_media'
     get 'record/*id/similar', to: 'portal#similar', as: 'document_similar'
 
@@ -18,8 +19,11 @@ Rails.application.routes.draw do
 
   blacklight_for :portal
 
-  resources :channels, only: [:show, :index]
+  resources :collections, only: [:show, :index]
   resources :landing_pages, only: [:show]
+
+  get '/channels', to: redirect('collections')
+  get '/channels/:id', to: redirect('collections/%{id}')
 
   mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
   devise_for :users

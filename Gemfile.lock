@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-api-client-ruby.git
-  revision: 732869511fe3d820ae2cf1eb759b39898d605b01
-  ref: 7328695
+  revision: 16ac267b403e27b92fbe03972dae499bc405c6dc
+  ref: 16ac267
   specs:
     europeana-api (0.4.0)
       activesupport (>= 3.0)
@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 375ad69db68857477d1fd90c36e793c1d08176a9
-  ref: 375ad69
+  revision: 0bab0fcbed70919572c104b6ba864388e8048c9c
+  ref: 0bab0fc
   specs:
     europeana-blacklight (0.2.8)
       activesupport (>= 4.0, < 5.0)
@@ -21,8 +21,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: e3b6c0463a69272dd79e0cd63b0e24e27ee1ce26
-  ref: e3b6c04
+  revision: 64a3a15197a410e063ae65236b334d612541f7f6
+  ref: 64a3a15
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)

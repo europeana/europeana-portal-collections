@@ -10,6 +10,7 @@ nl:
       browse_newcontent: 
       browse_sources: 
       channels: Kanalen
+      collections: 
       exhibitions: Tentoonstellingen
       home: Home
     pro-link: link naar pro
@@ -29,7 +30,7 @@ nl:
         title: 
       sources:
         title: 
-    channels:
+    collections:
       art-history:
         description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
         title: Kunst Kanaal
@@ -83,6 +84,9 @@ nl:
         show-less-data: Toon minder informatie
         show-more-data: Toon meer informatie
         technicalmetadata: Technische metadata
+      enrichment:
+        who:
+          title: 
       hierarchy:
         title: 
         view-items-above: 
@@ -159,10 +163,34 @@ nl:
         timestamp-updated: 
         timestamp_created: 
         timestamp_updated: 
+        title: 
         toc: 
         type: Type
         ugc: 
         version: 
+      named-entities:
+        title: 
+        what:
+          broader: 
+          label: 
+          term: 
+          title: 
+        when:
+          begin: 
+          end: 
+          label: 
+          term: 
+          title: 
+        where:
+          label: 
+          latitude: 
+          longitude: 
+          term: 
+          title: 
+        who:
+          label: 
+          term: 
+          title: 
       nav:
         next: 
         prev: 
