@@ -144,6 +144,7 @@ module Document
           (mime_type == 'video/mpeg') ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
+          (media_type == 'image' && render_document_show_field_value('ebucoreWidth').to_i < 400) ||
           is_avi?
         false
       else
