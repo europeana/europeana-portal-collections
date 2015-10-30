@@ -9,7 +9,7 @@ de:
       browse_colours: Farben
       browse_newcontent: Neue Inhalte
       browse_sources: Quellen
-      channels: ''
+      channels: 
       collections: Sammlungen
       exhibitions: Ausstellungen
       home: Startseite
@@ -46,7 +46,7 @@ de:
         recent: Neu hinzugefügt
         spotlight-on: Spotlight auf
       music:
-        description: Die <strong> Europeana Musik Sammlung </ strong> vereint die besten Musikaufnahmen, Noten und andere Musik bezogen Sammlungen von Europas audiovisuelle Archiven, Bibliotheken, und Archiven
+        description: Die <strong> Europeana Musik Sammlung </ strong> vereint die besten Musikaufnahmen, Noten und andere Musik bezogen Sammlungen von Europas audiovisuellen Archiven, Bibliotheken, und Archiven
         title: Europeana Musik
     facet:
       language:
@@ -56,16 +56,16 @@ de:
       menu:
         about: "Über"
         become-a-provider: Werden Sie ein Datengeber
-        copyright: 
+        copyright: Urheberrecht
         data-providers: Alle Datengeber
         new-collections: Neue Sammlungen
         search-tips: Suchtipps
-        using-myeuropeana: Verwendung My Europeana
+        using-myeuropeana: My Europeana benutzen
     home:
       strapline: Entdecken Sie %{total_item_count} Kunstwerke, Artefakte, Bücher, Videos und Audios aus ganz Europa.
     more: Mehr...
-    my-europeana: Mein Europeana
-    my-europeana-link: Link zu Mein Europeana
+    my-europeana: My Europeana
+    my-europeana-link: Link zu My Europeana
     navigation:
       breadcrumb:
         item_detail: Objektdetail
@@ -98,11 +98,11 @@ de:
         concepts: Klassifikationen
         consists-of: Besteht aus
         contributor: Beitragender
-        copyright: 
+        copyright: Urheberrecht
         creation-date: Erstellungsdatum
         creator: Urheber
         current-location: Aktueller Standort
-        data-provider: Datenanbieter
+        data-provider: Datengeber
         date: Datum
         dates: Datum
         description: Beschreibung
@@ -144,8 +144,8 @@ de:
         provenance: 
         provided-by: 
         provided-by-detail: 
-        provider: 
-        providing-country: 
+        provider: 'Beiträger '
+        providing-country: Bereitstellendes Land
         publication-date: 
         publisher: 
         references: 
@@ -211,25 +211,23 @@ de:
 
           <p> Unser Material stammt aus ganz Europa und der Umfang der Sammlung ist wirklich erstaunlich. Unser Ziel ist es Sie auf Ihrem Weg durch die Sammlung zu unterstützen, damit Sie unsere Schätze auf eigene Faust entdecken können.<p>
 
-          <p> In den letzten Jahren haben wir unsere Sammlungne immer weiter ausgebaut und mehr und mehr über sie gelernt, und was Sie mit Ihnen machen wollen. Jetzt ist es Zeit, ein paar Dinge zu ändern und unser Angebot zu verbessern! <p>
+          <p> In den letzten Jahren haben wir unsere Sammlungne immer weiter ausgebaut und mehr und mehr über diese gelernt, und was Sie mit Ihnen machen wollen. Jetzt ist es Zeit, ein paar Dinge zu ändern und unser Angebot zu verbessern! <p>
 
-          <p> Wir versuchen es mit einer neuen Version, der Europeana Sammlungen. Wir arbeiten hart, um den Zugang zu den Europeana Sannlungne zu verbessern und es Ihnen so einfach wie möglich zu machen Informationen, die Sie suchen zu finden. So werden wir Sie wahrscheinlich bitten, uns durch die Beantwortung von ein paar Fragen zu helfen. Ihre Antworten sind sehr hilfreich für uns. Deshalb bitten wir Sie sich einen Moment Zeit zu nehmen, um uns Ihre Meinung mitzuteilen. Vielen Dank! <p>
+          <p> Wir versuchen es mit einer neuen Version, der Europeana Sammlungen. Wir arbeiten hart, um den Zugang zu den Europeana Sammlungen zu verbessern und es Ihnen so einfach wie möglich zu machen Informationen, die Sie suchen zu finden. So werden wir Sie wahrscheinlich bitten, uns durch die Beantwortung von ein paar Fragen zu helfen. Ihre Antworten sind sehr hilfreich für uns. Deshalb bitten wir Sie sich einen Moment Zeit zu nehmen, um uns Ihre Meinung mitzuteilen. Vielen Dank! <p>
 
           <p> In der Zwischenzeit hoffen wir, dass Sie Ihre kulturelle Reise mit uns genießen. <p>
         title: Willkommen, Kulturliebhaber!
       music-channel-about:
-        text: |+
-          <p> Stellen Sie sich vor auf Originalhandschriften eines Musikstückes zu sehen, während Sie verschiedene Interpretationen desselben anhören, und eine Biographie des Komponisten zu lesen. In den Europeana Musik Sammlung ist dies möglich. <p>
+        text: |-
+          <p> Stellen Sie sich vor auf Originalhandschriften eines Musikstückes zu sehen während Sie verschiedene Interpretationen desselben anhören, sowie eine Biographie des Komponisten zu lesen. In der Europeana Musik Sammlung ist dies möglich. <p>
 
-          <p><a href="http://www.europeanasounds.eu">Unsere Partner</a>, Musikexperten aus ganz Europa haben diese Sammlung von Musikaufnahmen, Noten, Bildern von Musikinstrumenten, Büchern über Musik und andere Musik bezogenen Inhalte sorgfältig kuratiert . </p>
+          <p><a href="http://www.europeanasounds.eu">Unsere Partner</a>, Musikexperten aus ganz Europa haben diese Sammlung von Musikaufnahmen, Noten, Bildern von Musikinstrumenten, Büchern über Musik und andere Musik bezogenen Inhalte sorgfältig ausgewählt. </p>
 
-           </p> Wir haben diese frühe Test-Version der Musik Sammlung  für Sie zur Verfügung gestellt, um Sie in die Entwicklung mit einzubeziehen. Wenn Sie also die Website besuchen, werden Sie manchmal gebeten werden, Fragen oder Umfragen zu beantworten. Wir würden es wirklich schätzen, wenn Sie sich die Zeit nehmen würden, diese Fragen und Umfragen zu beantworten! </p>
+           </p> Wir haben diese frühe Test-Version der Musik Sammlung für Sie zur Verfügung gestellt, um Sie in die Entwicklung mit einzubeziehen. Wenn Sie also die Webseite besuchen, werden Sie manchmal gebeten werden, Fragen oder Umfragen zu beantworten. Wir würden es wirklich schätzen, wenn Sie sich die Zeit nehmen würden diese Fragen und Umfragen zu beantworten! </p>
 
-          <p> Im Interesse der Transparenz und der Privatsphäre, sollten Sie wissen, dass wir Benutzerstatistiken und Nutzerverhalten in Google Analytics und einem Dienst namens Hotjar festhalten. Wir tun dies, da es uns aufzeigt, wo wir falsch in unseren Entwürfen liegen und es uns dabei hilft die Musik Sammlung zu verbessern. Alle Protokolle werden vertraulich und anonymisiert behandelt und werden nur zur Verbesserung unserer Dienstleistung verwendet. </p>
+          <p> Im Interesse der Transparenz und der Privatsphäre sollten Sie wissen, dass wir Benutzerstatistiken und Nutzerverhalten in Google Analytics und einem Dienst namens Hotjar festhalten. Wir tun dies, da es uns aufzeigt, wo wir falsch in unseren Entwürfen liegen und es uns dabei hilft die Musik Sammlung zu verbessern. Alle Protokolle werden vertraulich und anonymisiert behandelt und nur zur Verbesserung unserer Dienstleistung verwendet. </p>
 
-          <p> Wir empfehlen Ihnen, die Sammlung zu durchsuchen, Musik abzuspielen, Noten anzusehen, oder zu lesen. Wenn es das Urheberrecht ermöglicht, können Sie die Dinge, die Sie am meisten lieben herunterladen. Und besuchen Sie unsere virtuellen Ausstellungen um Musik in einer Weise zu entdecken, wie nie zuvor! </ p>
-
-
+          <p> Wir empfehlen Ihnen, die Sammlung zu durchsuchen Musik abzuspielen, Noten anzusehen, oder zu lesen. Wenn es das Urheberrecht ermöglicht, können Sie die Dinge, die Sie am meisten mögen herunterladen. Und besuchen Sie unsere virtuellen Ausstellungen, um Musik in einer Weise zu entdecken wie nie zuvor! </ p>
         title: "Über die Musiksammlung"
     results:
       actions:
@@ -284,7 +282,7 @@ de:
         available: Verfügbare Sprachen
         default: Standard-Sprache
         flash:
-          alert: 'Ungültige Sprache angeben. Verfügbare Sprachen: %{locales}'
+          alert: 'Ungültige Sprache angegeben. Verfügbare Sprachen: %{locales}'
           notice: Spracheinstellungen gespeichert.
         label: Sprache
         settings-label: Spracheinstellungen

@@ -97,6 +97,7 @@ pl:
         text_fulltext: Pełna Treść
         type: Media
         ugc: Pokaż obiekty dodane przez użytkowników
+        video_duration: 
         video_hd: Wysoka rozdzielczość
         year: Data
       image_aspectratio:
@@ -149,10 +150,6 @@ pl:
       media:
         'false': Nie
         'true': Tak
-      mime_type:
-        image/gif: 
-        image/jpeg: 
-        image/png: 
       more: Więcej
       more-refinements: Więcej filtrów
       resource:

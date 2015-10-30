@@ -97,6 +97,7 @@ ro:
         text_fulltext: 
         type: 
         ugc: 
+        video_duration: 
         video_hd: 
         year: 
       image_aspectratio:
@@ -149,10 +150,6 @@ ro:
       media:
         'false': 
         'true': 
-      mime_type:
-        image/gif: 
-        image/jpeg: 
-        image/png: 
       more: 
       more-refinements: 
       resource:
