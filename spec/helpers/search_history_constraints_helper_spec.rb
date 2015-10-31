@@ -1,45 +1,43 @@
-require 'rails_helper'
-
-RSpec.describe SearchHistoryConstraintsHelper, type: :helper do
+RSpec.describe SearchHistoryConstraintsHelper do
   it { is_expected.to include(Blacklight::SearchHistoryConstraintsHelperBehavior) }
 
   describe '#render_search_to_s' do
-    context 'when search was in a channel' do
-      let(:params) { { 'controller' => 'channels', 'id' => 'art' } }
+    context 'when search was in a collection' do
+      let(:params) { { 'controller' => 'collections', 'id' => 'art' } }
       subject { helper.render_search_to_s(params) }
-      it { is_expected.to include('Channel') }
+      it { is_expected.to include('Collection') }
       it { is_expected.to include('art') }
     end
 
-    context 'when search was not in a channel' do
-      it 'should not include channel search summary' do
+    context 'when search was not in a collection' do
+      it 'should not include collection search summary' do
         [
           { 'controller' => 'other' },
-          { 'controller' => 'channels' },
+          { 'controller' => 'collections' },
           { 'controller' => 'other', 'id' => 'art' }
         ].each do |params|
-          expect(helper.render_search_to_s(params)).not_to include('Channel')
+          expect(helper.render_search_to_s(params)).not_to include('Collection')
         end
       end
     end
   end
 
-  describe '#render_search_to_s_channel' do
-    context 'when search was in a channel' do
-      let(:params) { { 'controller' => 'channels', 'id' => 'art' } }
-      subject { helper.render_search_to_s_channel(params) }
-      it { is_expected.to include('Channel') }
+  describe '#render_search_to_s_collection' do
+    context 'when search was in a collection' do
+      let(:params) { { 'controller' => 'collections', 'id' => 'art' } }
+      subject { helper.render_search_to_s_collection(params) }
+      it { is_expected.to include('Collection') }
       it { is_expected.to include('art') }
     end
 
-    context 'when search was not in a channel' do
-      it 'should not include channel search summary' do
+    context 'when search was not in a collection' do
+      it 'should not include collection search summary' do
         [
           { 'controller' => 'other' },
-          { 'controller' => 'channels' },
+          { 'controller' => 'collections' },
           { 'controller' => 'other', 'id' => 'art' }
         ].each do |params|
-          expect(helper.render_search_to_s_channel(params)).to eq('')
+          expect(helper.render_search_to_s_collection(params)).to eq('')
         end
       end
     end

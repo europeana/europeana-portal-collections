@@ -1,0 +1,319 @@
+pl:
+  Symphonies: Symfonie
+  global:
+    about-us: O nas
+    channel:
+      archaeology: archeologia
+      architecture: architektura
+      art: sztuka
+      fashion: moda
+      home: Strona główna
+      maps: mapy
+      music: muzyka
+      natural-history: historia naturalna
+      newspapers: gazety
+      performing-arts: sztuki performatywne
+    channels-art: Kanały sztuka kanał
+    channels-art-image: Kanały sztuka obraz
+    channels-art-link: Kanały sztuka link
+    channels-art-url: 
+    channels-fashion: Moda
+    channels-music: Muzyka
+    channels-music-link: 
+    choose-language: Język
+    email-address: email
+    facet:
+      advanced:
+        options: Opcje
+        show:
+          direct:
+            links: 
+          thumbnails: 
+          ugc: 
+      art:
+        form:
+          paintings:
+            genre: Gatunek
+            medium: "Średni"
+      carrier: Nośnik
+      colour: Kolor
+      colour-black-and-white: Czarno-białe
+      country:
+        austria: Austria
+        belgium: Belgia
+        bulgaria: Bułgaria
+        croatia: Chorwacja
+        cyprus: Cypr
+        czechrepublic: Czechy
+        denmark: Dania
+        estonia: Estonia
+        europe: Europa
+        finland: Finlandia
+        france: Francja
+        germany: Niemcy
+        greece: Grecja
+        hungary: Węgry
+        iceland: Islandia
+        ireland: Irlandia
+        israel: Izrael
+        italy: Włochy
+        latvia: "Łotwa"
+        lithuania: Litwa
+        luxembourg: Luksemburg
+        malta: Malta
+        netherlands: Holandia
+        norway: Norwegia
+        poland: Polska
+        portugal: Portugalia
+        romania: Rumunia
+        russia: Rosja
+        serbia: Serbia
+        slovakia: Słowacja
+        slovenia: Słowenia
+        spain: Hiszpania
+        sweden: Szwecja
+        switzerland: Szwajcaria
+        turkey: Turcja
+        ukraine: Ukraina
+        unitedkingdom: Wielka Brytania
+        unitedstatesofamerica: USA
+      creator: twórca
+      header:
+        channel: Kanały
+        colourpalette: Kolor
+        country: Kraj
+        data_provider: "Źródła Danych"
+        image_aspectratio: Orientacja
+        image_colour: Paleta
+        image_size: Rozmiar
+        language: Język
+        language_of_description: Język opisu
+        media: Pokaż wyłącznie obiekty z bezpośrednim dostępem do mediów
+        mime_type: Format pliku
+        provider: Dostawca treści
+        reusability: Czy mogę to wykorzystać?
+        sound_duration: Czas trwania
+        sound_hq: Dobra Jakość
+        text_fulltext: Pełna Treść
+        type: Media
+        ugc: Pokaż obiekty dodane przez użytkowników
+        video_duration: 
+        video_hd: Wysoka rozdzielczość
+        year: Data
+      image_aspectratio:
+        landscape: Pejzaż
+        portrait: Portret
+      image_colour:
+        'false': Czarno-biały
+        'true': Kolor
+      image_size:
+        extra_large: Bardzo duży
+        large: Duży
+        medium: "Średni"
+        small: Mały
+      language:
+        bg: 
+        ca: 
+        cs: 
+        da: 
+        de: 
+        el: 
+        en: 
+        es: 
+        et: 
+        fi: 
+        fr: 
+        ga: 
+        he: 
+        hr: 
+        hu: 
+        is: 
+        it: 
+        lt: 
+        lv: 
+        mt: 
+        mul: Wielojęzyczny
+        nl: 
+        'no': 
+        pl: 
+        pt: 
+        ro: 
+        ru: 
+        sk: 
+        sl: 
+        sr: 
+        sv: 
+        tr: 
+        uk: 
+        yi: 
+      less: Mniej
+      media:
+        'false': Nie
+        'true': Tak
+      more: Więcej
+      more-refinements: Więcej filtrów
+      resource:
+        type: 
+      reusability:
+        advanced: 
+        advanced-cc-by: 
+        advanced-cc-by-nc: 
+        advanced-cc-by-nc-nd: 
+        advanced-cc-by-nc-sa: 
+        advanced-cc-by-nd: 
+        advanced-cc-by-sa: 
+        advanced-cc0: 
+        advanced-orphan-work: Dzieło Osierocone
+        advanced-out-of-copyright-non-commercial: Autorskie prawa majątkowe wygasły - użycie tylko niekomercyjne
+        advanced-pdm: Domena Publiczna
+        advanced-rrfa: Wszelkie prawa zastrzeżone - Wolny dostęp
+        advanced-rrpa: Wszelkie prawa zastrzeżone - Płatny dostęp
+        advanced-rrra: 'Wszelkie prawa zastrzeżone - '
+        advanced-ucs: Status praw autorskich nieznany
+        open: Tak, ale z podaniem źródła
+        permission: Tylko za pisemną zgodą
+        restricted: Tak, ale z ograniczeniami
+        simple: 
+      sound_duration:
+        long: Długi
+        medium: "Średni"
+        short: Krótki
+        very_short: Bardzo krótki
+      sound_hq:
+        'true': Tak
+      source: "Źródło"
+      text_fulltext:
+        'false': Nie
+        'true': Tak
+      type:
+        3d: 3D
+        image: Obraz
+        sound: Dźwięk
+        text: Tekst
+        video: Wideo
+      type-image:
+        orientation:
+          label: Orientacja obrazu
+          landscape: Pejzaż
+          portrait: Portret
+        quality:
+          all: Pokaż wszystko
+          hq-only: Pokaż tylko w dobrej jakości
+          label: Jakość
+        size:
+          explanation: Co oznaczają te rozmiary?
+          label: Rozmiar obrazu
+          large: Duży (%{data})
+          medium: "Średni (%{data})"
+          small: Mały (%{data})
+          xl: Bardzo duży (%{data})
+      type-sound:
+        duration:
+          label: Czas trwania
+          long: Długi (%{data})
+          medium: "Średni (%{data})"
+          short: Krótki (%{data})
+          very-short: Bardzo krótki (%{data})
+      type-video:
+        duration:
+          label: Czas trwania
+          long: Długi (%{data})
+          medium: "Średni (%{data})"
+          short: Krótki (%{data})
+      video_duration:
+        long: Długi (>20 min)
+        medium: "Średni (4-20 min)"
+        short: Krótki (<4 min)
+      year:
+        from: od
+        to: do
+    find-us-elsewhere: 
+    forgot-password: Nie pamiętam hasła.
+    genres: gatunki
+    genres-chamber-music: Muzyka kameralna
+    genres-classical-music: Muzyka poważna
+    genres-concertos: Koncerty
+    genres-non-western-classical-music: Nie-zachodnia muzyka klasyczna
+    genres-opera: Opera
+    genres-popular-music: Muzyka rozrywkowa
+    genres-traditional-music: Muzyka ludowa
+    header:
+      connect: zbliżaj
+      develop: twórz
+      discover: odkrywaj
+      network: "łącz"
+    help: Pomoc
+    home: Strona główna
+    javascript-required: Chcesz uzyskać dostęp do pełnej zawartości tej strony? W tym celu należy włączyć obsługę JavaScript. Zalecamy również zmianę przeglądarki na obsługującą elementy w HTML5
+    labs: Laboratoria
+    labs-text: 
+    language-basque: Baskijski
+    language-bulgarian: Bułgarski
+    language-catalan: Kataloński
+    language-croatian: Chorwacki
+    language-czech: Czeski
+    language-danish: Duński
+    language-dutch: Niderlandzki
+    language-english: Angielski
+    language-estonian: Estoński
+    language-finnish: Fiński
+    language-french: Francuski
+    language-gaelic: Irlandzki
+    language-german: Niemiecki
+    language-greek: Grecki
+    language-hungarian: Węgierski
+    language-icelandic: Islandzki
+    language-italian: Włoski
+    language-latvian: "Łotewski"
+    language-lithuanian: Litewski
+    language-maltese: Maltański
+    language-norwegian: Norweski
+    language-polish: Polski
+    language-portuguese: Portugalski
+    language-romanian: Rumuński
+    language-russian: Rosyjski
+    language-slovakian: Słowacki
+    language-slovenian: Słoweński
+    language-spanish: Hiszpański
+    language-swedish: Szwedzki
+    language-ukranian: Ukraiński
+    login: Login
+    logo-image: 
+    more:
+      load-more: Więcej
+      show-more: Pokaż więcej
+      view-more: Zobacz więcej
+    more-info: Więcej infromacji
+    our-mission: Nasza misja
+    our-mission-text: 
+    our-sites: nasze strony
+    password: Hasło
+    professional: Dla specjalistów
+    professional-text: Zaangażuj się, podziel się swoją wiedzą lub wykorzystaj naszą
+    refine-your-search: Zawęź wyniki wyszukiwania
+    register: Zarejestruj się
+    research: Badania naukowe
+    research-text: Dołącz do środowisk naukowych
+    rights-box:
+      background-image-provider: 
+      background-image-provider-url: 
+      background-image-rights-icons-alt: 
+      background-image-title: 
+      background-image-title-url: 
+    search-area:
+      search-button-image-alt: Szukaj
+      search-placeholder-text: Dodaj słowo kluczowe
+    search-collections: Zbiory
+    search-collections-text: Odkrywaj dziedzictwo kulturowe Europy
+    share: Udostępnij
+    sitemap: Mapa strony
+    terms-and-policies: Regulamin i polityka prywatności
+    type: typ
+  'no': Norwegia
+  pl: Portugalia
+  site:
+    facet:
+      language:
+        show:
+          results: 
+        show-results-all: 

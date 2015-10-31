@@ -3,443 +3,549 @@ module Portal
     attr_accessor :document, :debug
 
     def head_meta
-      [
-        { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') }
-      ] + helpers.head_meta
+      @mustache[:head_meta] ||= begin
+        [
+          { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') }
+        ] + super
+      end
     end
 
     def page_title
-      [@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - ')
+      @mustache[:page_title] ||= begin
+        [@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - ')
+      end
     end
 
     def navigation
-      query_params = current_search_session.try(:query_params) || {}
+      # skip building item breadcrumb while action caching is in use
+      return helpers.navigation
 
-      if search_session['counter']
-        per_page = (search_session['per_page'] || default_per_page).to_i
-        counter = search_session['counter'].to_i
+      @mustache[:navigation] ||= begin
+        query_params = current_search_session.try(:query_params) || {}
 
-        query_params[:per_page] = per_page unless search_session['per_page'].to_i == default_per_page
-        query_params[:page] = ((counter - 1) / per_page) + 1
+        if search_session['counter']
+          per_page = (search_session['per_page'] || default_per_page).to_i
+          counter = search_session['counter'].to_i
+
+          query_params[:per_page] = per_page unless search_session['per_page'].to_i == default_per_page
+          query_params[:page] = ((counter - 1) / per_page) + 1
+        end
+
+        # use nil rather than "search_action_path(only_path: true)" to stop pointless breadcrumb
+        back_link_url = query_params.empty? ? nil : url_for(query_params)
+
+        navigation = {
+          back_url: back_link_url,
+          next_prev: {}
+        }
+        if @previous_document
+          navigation[:next_prev].merge!(
+            prev_url: document_path(@previous_document, format: 'html'),
+            prev_link_attrs: [
+              {
+                name: 'data-context-href',
+                value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
+              }
+            ]
+          )
+        end
+        if @next_document
+          navigation[:next_prev].merge!(
+            next_url: document_path(@next_document, format: 'html'),
+            next_link_attrs: [
+              {
+                name: 'data-context-href',
+                value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
+              }
+            ]
+          )
+        end
+        navigation.reverse_merge(helpers.navigation)
       end
-
-
-      # use nil rather than "search_action_path(only_path: true)" to stop pointless breadcrumb
-
-      back_link_url = if query_params.empty?
-                        nil
-                      else
-                        url_for(query_params)
-                      end
-
-      navigation = {
-        next_prev: {
-        },
-        back_url: back_link_url
-      }
-      if @previous_document
-        navigation[:next_prev].merge!(
-          prev_url: document_path(@previous_document, format: 'html'),
-          prev_link_attrs: [
-            {
-              name: 'data-context-href',
-              value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
-            }
-          ]
-        )
-      end
-      if @next_document
-        navigation[:next_prev].merge!(
-          next_url: document_path(@next_document, format: 'html'),
-          next_link_attrs: [
-            {
-              name: 'data-context-href',
-              value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
-            }
-          ]
-        )
-      end
-      navigation.reverse_merge(helpers.navigation)
     end
 
     def content
-      {
-        object: {
-          creator: creator_title,
-          concepts: data_section(
-            title: 'site.object.meta-label.concepts',
-            sections: [
-              {
-                title: 'site.object.meta-label.type',
-                fields: ['dcType'],
-                collected: document.proxies.map do |proxy|
-                  proxy.fetch('dcType', nil)
-                end.flatten.compact,
-                url: 'what'
-              },
-              {
-                title: 'site.object.meta-label.subject',
-                url: 'what',
-                collected: document.proxies.map do |proxy|
-                  proxy.fetch('dcSubject', nil)
-                end.flatten.compact
-              },
-              {
-                title: 'site.object.meta-label.has-type',
-                fields: ['proxies.edmHasType']
-              },
-              {
-                title: 'site.object.meta-label.concept',
-                url: 'what',
-                fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
-                override_val: 'true',
-                overrides: [
-                  {
-                    field_title: t('site.object.meta-label.ugc'),
-                    field_url: root_url + ('search?f[UGC][]=true')
+      @mustache[:content] ||= begin
+        {
+          object: {
+            creator: creator_title,
+            concepts: data_section(
+              title: 'site.object.meta-label.concepts',
+              sections: [
+                {
+                  title: 'site.object.meta-label.type',
+                  fields: ['dcType'],
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dcType', nil)
+                  end.flatten.compact,
+                  url: 'what'
+                },
+                {
+                  title: 'site.object.meta-label.subject',
+                  url: 'what',
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dcSubject', nil)
+                  end.flatten.compact
+                },
+                {
+                  title: 'site.object.meta-label.has-type',
+                  fields: ['proxies.edmHasType']
+                },
+                {
+                  title: 'site.object.meta-label.concept',
+                  url: 'what',
+                  fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
+                  override_val: 'true',
+                  overrides: [
+                    {
+                      field_title: t('site.object.meta-label.ugc'),
+                      field_url: search_url(f: { 'UGC' => ['true'] })
+                    }
+                  ]
+                }
+              ]
+            ),
+            copyright: data_section(
+              title: 'site.object.meta-label.copyright',
+              sections: [
+                {
+                  title: 'site.object.meta-label.rights',
+                  fields: ['proxies.dcRights', 'aggregations.edmRights']
+                }
+              ]
+            ),
+            creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
+            dates: data_section(
+              title: 'site.object.meta-label.time',
+              sections: [
+                {
+                  title: 'site.object.meta-label.date',
+                  fields: ['proxies.dcDate']
+                },
+                {
+                  title: 'site.object.meta-label.creation-date',
+                  fields: ['proxies.dctermsIssued'],
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dctermsCreated', nil)
+                  end.flatten.compact.join(', ')
+                },
+                {
+                  title: 'site.object.meta-label.period',
+                  fields: ['timespans.prefLabel']
+                },
+                {
+                  title: 'site.object.meta-label.publication-date',
+                  fields: ['proxies.dctermsPublished']
+                },
+                {
+                  title: 'site.object.meta-label.issued',
+                  fields: ['proxies.dctermsIssued']
+                },
+                {
+                  title: 'site.object.meta-label.temporal',
+                  fields: ['proxies.dctermsTemporal']
+                },
+                {
+                  title: 'site.object.meta-label.place-time',
+                  fields: ['proxies.dcCoverage']
+                }
+              ]
+            ),
+            description: data_section(
+              title: 'site.object.meta-label.description',
+              sections: [
+                {
+                  title: false,
+                  collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
+                },
+                {
+                  title: false,
+                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
+                }
+              ]
+            ),
+            # download: content_object_download,
+            media: media_items,
+            meta_additional: {
+              geo: {
+                latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
+                longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
+                long_and_lat: long_and_lat?,
+                placeName: pref_label('places.prefLabel'),
+                labels: {
+                  longitude: t('site.object.meta-label.longitude') + ':',
+                  latitude: t('site.object.meta-label.latitude') + ':',
+                  map: t('site.object.meta-label.map'),
+                  points: {
+                    n: t('site.object.points.north'),
+                    s: t('site.object.points.south'),
+                    e: t('site.object.points.east'),
+                    w: t('site.object.points.west')
                   }
-                ]
-              }
-            ]
-          ),
-          copyright: data_section(
-            title: 'site.object.meta-label.copyright',
-            sections: [
-              {
-                title: 'site.object.meta-label.rights',
-                fields: ['proxies.dcRights', 'aggregations.edmRights']
-              }
-            ]
-          ),
-          creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
-          dates: data_section(
-            title: 'site.object.meta-label.time',
-            sections: [
-              {
-                title: 'site.object.meta-label.date',
-                fields: ['proxies.dcDate']
-              },
-              {
-                title: 'site.object.meta-label.creation-date',
-                fields: ['proxies.dctermsIssued'],
-                collected: document.proxies.map do |proxy|
-                  proxy.fetch('dctermsCreated', nil)
-                end.flatten.compact.join(', ')
-              },
-              {
-                title: 'site.object.meta-label.period',
-                fields: ['timespans.prefLabel']
-              },
-              {
-                title: 'site.object.meta-label.publication-date',
-                fields: ['proxies.dctermsPublished']
-              },
-              {
-                title: 'site.object.meta-label.issued',
-                fields: ['proxies.dctermsIssued']
-              },
-              {
-                title: 'site.object.meta-label.temporal',
-                fields: ['proxies.dctermsTemporal']
-              },
-              {
-                title: 'site.object.meta-label.place-time',
-                fields: ['proxies.dcCoverage']
-              }
-            ]
-          ),
-          description: data_section(
-            title: 'site.object.meta-label.description',
-            sections: [
-              {
-                title: false,
-                collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
-              },
-              {
-                title: false,
-                collected: render_document_show_field_value(document, 'proxies.dcDescription')
-              }
-            ]
-          ),
-          # download: content_object_download,
-          media: media_items,
-          meta_additional: {
-            geo: {
-              latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
-              longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
-              long_and_lat: long_and_lat?,
-              placeName: render_document_show_field_value(document, 'places.prefLabel'),
-              labels: {
-                longitude: t('site.object.meta-label.longitude') + ':',
-                latitude: t('site.object.meta-label.latitude') + ':',
-                map: t('site.object.meta-label.map'),
-                points: {
-                  n: t('site.object.points.north'),
-                  s: t('site.object.points.south'),
-                  e: t('site.object.points.east'),
-                  w: t('site.object.points.west')
                 }
               }
-            }
+            },
+            origin: {
+              url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+              institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
+              institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
+            },
+            people: data_section(
+              title: 'site.object.meta-label.people',
+              sections: [
+                {
+                  title: 'site.object.meta-label.creator',
+                  fields: ['agents.prefLabel'],
+                  fields_then_fallback: true,
+                  collected: document.proxies.map do |proxy|
+                    proxy.fetch('dcCreator', nil)
+                  end.flatten.compact,
+                  url: 'q',
+                  extra: [
+                    {
+                      field: 'agents.rdaGr2DateOfBirth',
+                      map_to: 'life.from.short',
+                      format_date: '%Y-%m-%d'
+                    },
+                    {
+                      field: 'agents.rdaGr2DateOfDeath',
+                      map_to: 'life.to.short',
+                      format_date: '%Y-%m-%d'
+                    }
+                  ]
+                },
+                {
+                  title: 'site.object.meta-label.contributor',
+                  fields: ['proxies.dcContributor']
+                }
+              ]
+            ),
+            places: data_section(
+              title: 'site.object.meta-label.location',
+              sections: [
+                {
+                  title: 'site.object.meta-label.location',
+                  fields: ['proxies.dctermsSpatial'],
+                  collected: pref_label('places.prefLabel')
+                },
+                {
+                  title: 'site.object.meta-label.place-time',
+                  fields: ['proxies.dcCoverage']
+                },
+                {
+                  title: 'site.object.meta-label.current-location',
+                  fields: ['proxies.edmCurrentLocation']
+                }
+              ]
+            ),
+            provenance: data_section(
+              title: 'site.object.meta-label.source',
+              sections: [
+                {
+                  title: 'site.object.meta-label.provenance',
+                  fields: ['proxies.dctermsProvenance']
+                },
+                {
+                  title: 'site.object.meta-label.source',
+                  fields: ['proxies.dcSource']
+                },
+                {
+                  title: 'site.object.meta-label.publisher',
+                  fields: ['proxies.dcPublisher'],
+                  url: 'aggregations.edmIsShownAt'
+                },
+                {
+                  title: 'site.object.meta-label.identifier',
+                  fields: ['proxies.dcIdentifier']
+                },
+                {
+                  title: 'site.object.meta-label.data-provider',
+                  fields: ['aggregations.edmDataProvider']
+                },
+                {
+                  title: 'site.object.meta-label.provider',
+                  fields: ['aggregations.edmProvider']
+                },
+                {
+                  title: 'site.object.meta-label.providing-country',
+                  fields: ['europeanaAggregation.edmCountry']
+                },
+                {
+                  title: 'site.object.meta-label.timestamp-created',
+                  fields: ['timestamp_created'],
+                  format_date: '%Y-%m-%d'
+                },
+                {
+                  title: 'site.object.meta-label.timestamp-updated',
+                  fields: ['timestamp_update'],
+                  format_date: '%Y-%m-%d'
+                },
+                ['aggregations.edmUgc'].present? ? {
+                  collected: t('site.object.meta-label.ugc')
+                } : {},
+              ]
+            ),
+            properties: data_section(
+              title: 'site.object.meta-label.properties',
+              sections: [
+                {
+                  title: 'site.object.meta-label.extent',
+                  fields: ['proxies.dctermsExtent']
+                },
+                {
+                  title: 'site.object.meta-label.duration',
+                  fields: ['proxies.dcDuration']
+                },
+                {
+                  title: 'site.object.meta-label.medium',
+                  fields: ['proxies.dcMedium']
+                },
+                {
+                  title: 'site.object.meta-label.format',
+                  fields: ['aggregations.webResources.dcFormat']
+                },
+                {
+                  title: 'site.object.meta-label.language',
+                  fields: ['proxies.dcLanguage'],
+                  url: 'what'
+                }
+              ]
+            ),
+            rights: simple_rights_label_data,
+            social_share: {
+              url: URI.escape(request.original_url),
+              facebook: true,
+              pinterest: true,
+              twitter: true,
+              googleplus: true
+            },
+            subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
+            title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
+            type: render_document_show_field_value(document, 'proxies.dcType')
           },
-          origin: {
-            url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-            institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider'),
-            institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
+          refs_rels: data_section(
+            title: 'site.object.meta-label.refs-rels',
+            sections: [
+              {
+                title: 'site.object.meta-label.is-part-of',
+                fields: ['proxies.dctermsIsPartOf']
+              },
+              {
+                title: 'site.object.meta-label.collection-name',
+                fields: ['europeanaCollectionName']
+              },
+              {
+                title: 'site.object.meta-label.relations',
+                fields: ['proxies.dcRelation']
+              },
+              {
+                title: 'site.object.meta-label.references',
+                fields: ['proxies.dctermsReferences']
+              },
+              {
+                title: 'site.object.meta-label.consists-of',
+                fields: ['proxies.dctermsHasPart']
+              },
+              {
+                title: 'site.object.meta-label.version',
+                fields: ['proxies.dctermsHasVersion']
+              },
+              {
+                title: 'site.object.meta-label.is-format-of',
+                fields: ['proxies.dctermsIsFormatOf']
+              },
+              {
+                title: 'site.object.meta-label.is-referenced-by',
+                fields: ['proxies.dctermsIsReferencedBy']
+              },
+              {
+                title: 'site.object.meta-label.is-replaced-by',
+                fields: ['proxies.dctermsIsReplacedBy']
+              },
+              {
+                title: 'site.object.meta-label.is-required-by',
+                fields: ['proxies.dctermsIsRequiredBy']
+              },
+              {
+                title: 'site.object.meta-label.edm.has-met',
+                fields: ['proxies.edmHasMet']
+              },
+              {
+                title: 'site.object.meta-label.edm.incorporates',
+                fields: ['proxies.edmIncorporates']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-derivative-of',
+                fields: ['proxies.edmIsDerivativeOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-representation-of',
+                fields: ['proxies.edmIsRepresentationOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-similar-to',
+                fields: ['proxies.edmIsSimilarTo']
+              },
+              {
+                title: 'site.object.meta-label.edm.is-successor-of',
+                fields: ['proxies.edmIsSuccessorOf']
+              },
+              {
+                title: 'site.object.meta-label.edm.realises',
+                fields: ['proxies.edmRealizes']
+              },
+              {
+                title: 'site.object.meta-label.edm.was-present-at',
+                fields: ['proxies.edmRealizes']
+              }
+            ]
+          ),
+          similar: {
+            title: t('site.object.similar-items'),
+            more_items_query: search_path(mlt: document.id),
+            more_items_load: document_similar_url(@document, format: 'json'),
+            more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
+            items: @similar.map do |doc|
+              {
+                url: document_path(doc, format: 'html'),
+                title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+                img: {
+                  alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+                  src: render_document_show_field_value(doc, 'edmPreview')
+                }
+              }
+            end
           },
-          people: data_section(
-            title: 'site.object.meta-label.people',
-            sections: [
-              {
-                title: 'site.object.meta-label.creator',
-                fields: ['agents.prefLabel'],
-                fields_then_fallback: true,
-                collected: document.proxies.map do |proxy|
-                  proxy.fetch('dcCreator', nil)
-                end.flatten.compact,
-                url: 'q',
-                extra: [
-                  {
-                    field: 'agents.rdaGr2DateOfBirth',
-                    map_to: 'life.from.short',
-                    format_date: '%Y-%m-%d'
-                  },
-                  {
-                    field: 'agents.rdaGr2DateOfDeath',
-                    map_to: 'life.to.short',
-                    format_date: '%Y-%m-%d'
-                  }
-                ]
-              },
-              {
-                title: 'site.object.meta-label.contributor',
-                fields: ['proxies.dcContributor']
-              }
-            ]
-          ),
-          places: data_section(
-            title: 'site.object.meta-label.location',
-            sections: [
-              {
-                title: 'site.object.meta-label.location',
-                fields: ['proxies.dctermsSpatial', 'places.prefLabel']
-              },
-              {
-                title: 'site.object.meta-label.place-time',
-                fields: ['proxies.dcCoverage']
-              },
-              {
-                title: 'site.object.meta-label.current-location',
-                fields: ['proxies.edmCurrentLocation']
-              }
-            ]
-          ),
-          provenance: data_section(
-            title: 'site.object.meta-label.source',
-            sections: [
-              {
-                title: 'site.object.meta-label.provenance',
-                fields: ['proxies.dctermsProvenance']
-              },
-              {
-                title: 'site.object.meta-label.source',
-                fields: ['proxies.dcSource']
-              },
-              {
-                title: 'site.object.meta-label.publisher',
-                fields: ['proxies.dcPublisher'],
-                url: 'aggregations.edmIsShownAt'
-              },
-              {
-                title: 'site.object.meta-label.identifier',
-                fields: ['proxies.dcIdentifier']
-              },
-              {
-                title: 'site.object.meta-label.data-provider',
-                fields: ['aggregations.edmDataProvider']
-              },
-              {
-                title: 'site.object.meta-label.provider',
-                fields: ['aggregations.edmProvider']
-              },
-              {
-                title: 'site.object.meta-label.providing-country',
-                fields: ['europeanaAggregation.edmCountry']
-              },
-              {
-                title: 'site.object.meta-label.timestamp-created',
-                fields: ['timestamp_created'],
-                format_date: '%Y-%m-%d'
-              },
-              {
-                title: 'site.object.meta-label.timestamp-updated',
-                fields: ['timestamp_update'],
-                format_date: '%Y-%m-%d'
-              }
-            ]
-          ),
-          properties: data_section(
-            title: 'site.object.meta-label.properties',
-            sections: [
-              {
-                title: 'site.object.meta-label.extent',
-                fields: ['proxies.dctermsExtent']
-              },
-              {
-                title: 'site.object.meta-label.duration',
-                fields: ['proxies.dcDuration']
-              },
-              {
-                title: 'site.object.meta-label.medium',
-                fields: ['proxies.dcMedium']
-              },
-              {
-                title: 'site.object.meta-label.format',
-                fields: ['aggregations.webResources.dcFormat']
-              },
-              {
-                title: 'site.object.meta-label.language',
-                fields: ['proxies.dcLanguage'],
-                url: 'what'
-              }
-            ]
-          ),
-          rights: simple_rights_label_data(render_document_show_field_value(document, 'aggregations.edmRights')),
-          social_share: {
-            url: URI.escape(request.original_url),
-            facebook: true,
-            pinterest: true,
-            twitter: true,
-            googleplus: true
-          },
-          subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
-          title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
-          type: render_document_show_field_value(document, 'proxies.dcType')
-        },
-        refs_rels: data_section(
-          title: 'site.object.meta-label.refs-rels',
-          sections: [
-            {
-              title: 'site.object.meta-label.is-part-of',
-              fields: ['proxies.dctermsIsPartOf']
-            },
-            {
-              title: 'site.object.meta-label.collection-name',
-              fields: ['europeanaCollectionName']
-            },
-            {
-              title: 'site.object.meta-label.relations',
-              fields: ['proxies.dcRelation']
-            },
-            {
-              title: 'site.object.meta-label.references',
-              fields: ['proxies.dctermsReferences']
-            },
-            {
-              title: 'site.object.meta-label.consists-of',
-              fields: ['proxies.dctermsHasPart']
-            },
-            {
-              title: 'site.object.meta-label.version',
-              fields: ['proxies.dctermsHasVersion']
-            },
-            {
-              title: 'site.object.meta-label.is-format-of',
-              fields: ['proxies.dctermsIsFormatOf']
-            },
-            {
-              title: 'site.object.meta-label.is-referenced-by',
-              fields: ['proxies.dctermsIsReferencedBy']
-            },
-            {
-              title: 'site.object.meta-label.is-replaced-by',
-              fields: ['proxies.dctermsIsReplacedBy']
-            },
-            {
-              title: 'site.object.meta-label.is-required-by',
-              fields: ['proxies.dctermsIsRequiredBy']
-            },
-            {
-              title: 'site.object.meta-label.edm.has-met',
-              fields: ['proxies.edmHasMet']
-            },
-            {
-              title: 'site.object.meta-label.edm.incorporates',
-              fields: ['proxies.edmIncorporates']
-            },
-            {
-              title: 'site.object.meta-label.edm.is-derivative-of',
-              fields: ['proxies.edmIsDerivativeOf']
-            },
-            {
-              title: 'site.object.meta-label.edm.is-representation-of',
-              fields: ['proxies.edmIsRepresentationOf']
-            },
-            {
-              title: 'site.object.meta-label.edm.is-similar-to',
-              fields: ['proxies.edmIsSimilarTo']
-            },
-            {
-              title: 'site.object.meta-label.edm.is-successor-of',
-              fields: ['proxies.edmIsSuccessorOf']
-            },
-            {
-              title: 'site.object.meta-label.edm.realises',
-              fields: ['proxies.edmRealizes']
-            },
-            {
-              title: 'site.object.meta-label.edm.was-present-at',
-              fields: ['proxies.edmRealizes']
-            }
-          ]
-        ),
-        similar: {
-          title: t('site.object.similar-items') + ':',
-          more_items_query: search_path(mlt: document.id),
-          more_items_load: request.original_url.split('.html')[0] + '/similar.json',
-          items: @similar.map do |doc|
-            {
-              url: document_path(doc, format: 'html'),
-              title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-              img: {
-                alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-                src: render_document_show_field_value(doc, 'edmPreview')
-              }
-            }
-          end
-        },
-        thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-      }.reverse_merge(helpers.content)
+          named_entities: named_entity_data,
+          hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
+          thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+        }.reverse_merge(helpers.content)
+      end
     end
 
-    def labels
+    def named_entity_data
+      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
+      present = false
+
+      data.each do |group|
+        if group[:fields].size > 0
+          present = true
+        end
+      end
       {
-        show_more_meta: t('site.object.actions.show-more-data'),
-        show_less_meta: t('site.object.actions.show-less-data'),
-        rights: t('site.object.meta-label.rights-human')
+        present: present,
+        data: data
       }
     end
 
-    private
-
-    def use_edm_is_shown_by_proxy?
-      Rails.application.config.x.edm_is_shown_by_proxy &&
-        document.fetch('type', false) != 'IMAGE' &&
-        document.aggregations.size > 0 &&
-        document.aggregations.first.fetch('edmIsShownBy', false) &&
-        @mime_type.present? &&
-        @mime_type.match('image/').nil?
+    def collect_agent_labels
+      fields = []
+      agents = document.fetch('agents', [])
+      (agents).map do |agent|
+        fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.who.label'), vals: normalise_named_entity(agent[:prefLabel]), multi: true }
+      end
+      {
+        title: t('site.object.named-entities.who.title'),
+        fields: fields,
+        present: fields.size > 0
+      }
     end
 
-    def edm_is_shown_by_download_url
-      @edm_is_shown_by_download_url ||= begin
-        if use_edm_is_shown_by_proxy?
-          Rails.application.config.x.edm_is_shown_by_proxy + document.fetch('about', '/')
-        else
-          render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+    def collect_place_labels
+      fields = []
+      places = document.fetch('places', [])
+      (places).map do |place|
+        fields << { key: t('site.object.named-entities.where.term'), val: place[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.where.label'), vals: normalise_named_entity(place[:prefLabel]), multi: true }
+        if !place[:latitude].nil?
+          fields << { key: t('site.object.named-entities.where.latitude'), val: place[:latitude] }
+        end
+        if !place[:longitude].nil?
+          fields << { key: t('site.object.named-entities.where.longitude'), val: place[:longitude] }
         end
       end
+      {
+        title: t('site.object.named-entities.where.title'),
+        fields: fields,
+        present: fields.size > 0
+      }
     end
+
+    def collect_time_labels
+      fields = []
+      timespans = document.fetch('timespans', [])
+      (timespans).map do |timespan|
+        fields << { key: t('site.object.named-entities.when.term'), val: timespan[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.when.label'), vals: normalise_named_entity(timespan[:prefLabel]), multi: true }
+        if !timespan[:begin].nil?
+          fields << { key: t('site.object.named-entities.when.begin'), val: timespan[:begin][:def][0] }
+        end
+        if !timespan[:end].nil?
+          fields << { key: t('site.object.named-entities.when.end'), val: timespan[:end][:def][0] }
+        end
+      end
+      {
+        title: 'When',
+        fields: fields,
+        present: fields.size > 0
+      }
+    end
+
+    def collect_concept_labels
+      fields = []
+      concepts = document.fetch('concepts', [])
+      (concepts).map do |concept|
+        fields << { key: t('site.object.named-entities.what.term'), val: concept[:about], agt_link: true }
+        fields << { key: t('site.object.named-entities.what.label'), vals: normalise_named_entity(concept[:prefLabel]), multi: true }
+        broader = concept[:broader]
+        if !broader.nil?
+          multi = broader.size > 1
+          broader = multi ? broader : broader[0]
+          fields << {
+            key: t('site.object.named-entities.what.broader'),
+            val: multi ? nil : broader,
+            vals: multi ? normalise_named_entity(broader, true) : nil,
+            agt_link: true,
+            multi: multi}
+        end
+      end
+      {
+        title: t('site.object.named-entities.what.title'),
+        fields: fields,
+        present: fields.size > 0
+      }
+    end
+
+    def normalise_named_entity(named_entity, agt_link = false)
+      res = []
+      named_entity.each do |key, val|
+        if key && val.nil?
+          res << {val: key, key: nil, agt_link: agt_link}
+        else
+          res << {key: key, val: val, agt_link: agt_link}
+        end
+      end
+      res
+    end
+
+    def simple_rights_label_data
+      @mustache[:simple_rights_label_data] ||= begin
+        Document::RecordPresenter.new(document, controller).simple_rights_label_data
+      end
+    end
+
+    def labels
+      @mustache[:labels] ||= begin
+        {
+          show_more_meta: t('site.object.actions.show-more-data'),
+          show_less_meta: t('site.object.actions.show-less-data'),
+          rights: t('site.object.meta-label.rights-human')
+        }
+      end
+    end
+
+    private
 
     def collect_values(fields, doc = document)
       fields.map do |field|
@@ -451,152 +557,98 @@ module Portal
       collect_values(fields).join(separator)
     end
 
-    def data_section(data)
-      section_data = []
-      section_labels = []
+    def data_section_field_values(section)
+      fields = (section[:fields] || []).map do |field|
+        @document.fetch(field, [])
+      end
 
-      data[:sections].map do |section|
-        f_data = []
-        field_values = []
+      if section[:fields_then_fallback] && fields.present?
+        values = fields
+      else
+        values = [section[:collected]] + fields
+      end
 
-        if section[:collected]
-          f_data.push(* section[:collected])
-        end
-        if section[:fields]
-          # field_values = collect_values(section[:fields])
-          field_values = []
-          section[:fields].each do |field|
-            values = document.fetch(field, [])
-            if values.is_a? Array
-              values = values - field_values
+      values.flatten.compact.uniq
+    end
+
+    def data_section_field_subsection(section)
+      field_values = data_section_field_values(section)
+
+      subsection = field_values.map do |val|
+        {}.tap do |item|
+          item[:text] = val
+
+          if section[:url]
+            if section[:url] == 'q'
+              item[:url] = search_path(q: "\"#{val}\"")
+            elsif section[:url] == 'what'
+              item[:url] = search_path(q: "what:\"#{val}\"")
+            else
+              item[:url] = render_document_show_field_value(document, section[:url])
             end
-            field_values << [*values]
-          end
-          if section[:fields_then_fallback] && field_values.size > 0
-            f_data = []
-          end
-          f_data.push(*field_values)
-        end
-
-        f_data = f_data.flatten.uniq
-
-        if f_data.size > 0
-          subsection = []
-          f_data.map do |f_datum|
-            ob = {}
-            text = f_datum
-
-            if section[:url]
-              if section[:url] == 'q'
-                ob[:url] = search_path(q: "\"#{f_datum}\"")
-              elsif section[:url] == 'what'
-                ob[:url] = search_path(q: "what:\"#{f_datum}\"")
-              else
-                ob[:url] = render_document_show_field_value(document, section[:url])
-              end
-            end
-
-            # text manipulation
-
-            text = if section[:format_date].nil?
-                     text = f_datum
-                   else
-                     begin
-                       date = Time.parse(f_datum)
-                       date.strftime(section[:format_date])
-                     rescue
-                     end
-                   end
-
-            # overrides
-
-            if section[:overrides] && text == section[:override_val]
-              section[:overrides].map do |override|
-                if override[:field_title]
-                  text = override[:field_title]
-                end
-                if override[:field_url]
-                  ob[:url] = override[:field_url]
-                end
-              end
-            end
-
-            # extra info on last
-
-            if f_datum == f_data.last && !section[:extra].nil?
-              extra_info = {}
-
-              section[:extra].map do |xtra|
-                extra_val = render_document_show_field_value(document, xtra[:field])
-                if !extra_val
-                  next
-                end
-                if xtra[:format_date]
-                  begin
-                    date = Time.parse(extra_val)
-                    formatted = date.strftime(xtra[:format_date])
-                    extra_val = formatted
-                  rescue
-                  end
-                end
-                extra_info_builder = extra_info
-                path_segments = xtra[:map_to] || xtra[:field]
-                path_segments = path_segments.split('.')
-
-                path_segments.each.map do |path_segment|
-                  is_last = path_segment == path_segments.last
-                  extra_info_builder[path_segment] ||= (is_last ? extra_val : {})
-                  extra_info_builder = extra_info_builder[path_segment]
-                end
-                ob['extra_info'] = extra_info
-              end
-            end
-
-            ob['text'] = text
-            subsection << ob unless text.nil? || text.blank?
           end
 
-          if subsection.size > 0
-            section_data << subsection
-            section_labels << (section[:title].nil? ? false : t(section[:title]))
+          # text manipulation
+          item[:text] = format_date(val, section[:format_date])
+
+          # overrides
+          if section[:overrides] && item[:text] == section[:override_val]
+            section[:overrides].map do |override|
+              if override[:field_title]
+                item[:text] = override[:field_title]
+              end
+              if override[:field_url]
+                item[:url] = override[:field_url]
+              end
+            end
+          end
+
+          # extra info on last
+          if val == field_values.last && !section[:extra].nil?
+            item[:extra_info] = data_section_nested_hash(section[:extra])
           end
         end
       end
 
-      {
-        title: t(data[:title]),
-        sections: section_data.each_with_index.map do |subsection, index|
-          if subsection.size > 0
-            {
-              title: section_labels[index],
-              items: subsection
-            }
-          else
-            false
-          end
-        end
-      } unless section_data.size == 0
+      subsection.reject { |item| item[:text].blank? }
     end
 
-    # def content_object_download
-    #   links = []
+    def data_section(data)
+      sections = data[:sections].map do |section|
+        {
+          title: section[:title].nil? ? false : t(section[:title]),
+          items: data_section_field_subsection(section)
+        }
+      end
 
-    #   if edm_is_shown_by_download_url.present?
-    #     links << {
-    #       text: t('site.object.actions.download'),
-    #       url: edm_is_shown_by_download_url
-    #     }
-    #   end
+      sections.reject! { |section| section[:items].blank? }
 
-    #   return nil unless links.present?
+      sections.blank? ? nil : {
+        title: t(data[:title]),
+        sections: sections
+      }
+    end
 
-    #   {
-    #     primary: links.first,
-    #     secondary: {
-    #       items: (links.size == 1) ? nil : links[1..-1]
-    #     }
-    #   }
-    # end
+    ##
+    # Creates a nested hash of field values for Mustache template
+    def data_section_nested_hash(mappings)
+      {}.tap do |hash|
+        mappings.each do |mapping|
+          val = render_document_show_field_value(@document, mapping[:field])
+          if val.present?
+            keys = (mapping[:map_to] || mapping[:field]).split('.')
+            last = keys.pop
+
+            context = hash
+            keys.each do |k|
+              context[k] ||= {}
+              context = context[k]
+            end
+            context[last] = format_date(val, mapping[:format_date])
+          end
+        end
+      end
+    end
 
     def long_and_lat?
       latitude = render_document_show_field_value(document, 'places.latitude')
@@ -623,131 +675,20 @@ module Portal
       end
     end
 
-    # Media type function normalises mime types
-    # Current @mime_type variable only workd for edm_is_shown_by
-    # Once it works for web_resources we change this function so
-    # that  it accepts a mime type rather than a url, and
-
-    def media_type(url)
-      ext = url[/\.[^.]*$/]
-      if ext.nil?
-        return nil
-      end
-
-      ext = ext.downcase
-      if !['.avi', '.flac', '.mp3', '.mpga'].index(ext).nil?
-        'audio'
-      elsif !['.jpg', '.jpeg'].index(ext).nil?
-        'image'
-      elsif !['.flv', '.mp4', '.mp2', '.mpeg', '.mpg', '.ogg'].index(ext).nil?
-        'video'
-      elsif !['.txt', '.pdf'].index(ext).nil?
-        'text'
-      end
-    end
-
-    def download_disabled(rights)
-      disabled = false
-      ['http://www.europeana.eu/rights/rr-p',
-       'http://www.europeana.eu/rights/rr-r/'].map do |blacklisted|
-        if rights.index(blacklisted) == 0
-          disabled = true
+    def pref_label(field_name)
+      val = @document.fetch(field_name, [])
+      pref = nil
+      if val.size > 0
+        if val.is_a?(Array)
+          val[0]
+        else
+          pref = val[0][I18n.locale.to_sym]
+          if pref.size > 0
+            pref[0]
+          else
+            val[0][:en]
+          end
         end
-      end
-      disabled
-    end
-
-    def simple_rights_label_data(rights)
-      return nil unless rights.present?
-      # global.facet.reusability.permission      Only with permission
-      # global.facet.reusability.open            Yes with attribution
-      # global.facet.reusability.restricted      Yes with restrictions
-
-      if rights.nil?
-        nil
-      elsif rights.index('http://creativecommons.org/publicdomain/zero') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc0'),
-          license_CC0: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by/') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc-by'),
-          license_CC_BY: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-nc/') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc-by-nc'),
-          license_CC_BY_NC: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-nc-nd') == 0
-        {
-          license_human: t('global.facet.reusability.restricted'),
-          license_name: t('global.facet.reusability.advanced-cc-by-nc-nd'),
-          license_CC_BY_NC_ND: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-nc-sa') == 0
-        {
-          license_human: t('global.facet.reusability.restricted'),
-          license_name: t('global.facet.reusability.advanced-cc-by-nc-sa'),
-          license_CC_BY_NC_SA: true
-        }
-      elsif rights.index('http://creativecommons.org/licenses/by-sa') == 0
-        {
-          license_human: t('global.facet.reusability.open'),
-          license_name: t('global.facet.reusability.advanced-cc-by-sa'),
-          license_CC_BY_SA: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/out-of-copyright-non-commercial') == 0
-        {
-          license_human: t('global.facet.reusability.restricted'),
-          license_name: t('global.facet.reusability.advanced-out-of-copyright-non-commercial'),
-          license_OOC: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/rr-f') == 0
-        {
-          license_human: t('global.facet.reusability.permission'),
-          license_name: t('global.facet.reusability.advanced-rrfa'),
-          license_RR_free: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/rr-p') == 0
-        {
-          license_human: t('global.facet.reusability.permission'),
-          license_name: t('global.facet.reusability.advanced-rrpa'),
-          license_RR_paid: true
-        }
-      elsif rights.index('http://www.europeana.eu/rights/rr-r/') == 0
-        {
-          license_human: t('global.facet.reusability.permission'),
-          license_name: t('global.facet.reusability.advanced-rrra'),
-          license_RR_restricted: true
-        }
-      elsif rights.index('http://creativecommons.org/publicdomain/mark') == 0
-        {
-          license_public: true,
-          license_name: t('global.facet.reusability.advanced-pdm'),
-          license_human: t('global.facet.reusability.open')
-        }
-      elsif rights.index('http://www.europeana.eu/rights/unknown') == 0
-        {
-          license_unknown: true,
-          license_name: t('global.facet.reusability.advanced-ucs'),
-          license_human: t('global.facet.reusability.permission')
-        }
-      elsif rights.index('http://www.europeana.eu/rights/test-orphan') == 0
-        {
-          license_orphan: true,
-          license_name: t('global.facet.reusability.advanced-orphan-work'),
-          license_human: t('global.facet.reusability.permission')
-        }
-      else
-        {
-          license_public: false,
-          license_name: 'unmatched rights: ' + rights
-        }
       end
     end
 
@@ -755,182 +696,52 @@ module Portal
       document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
     end
 
-    # iiif manifests can be derived from some dc:identifiers - on a collection basis or an individual item basis - or from urls
-    def iiif_manifesto(identifier, collection)
-      url_match = nil
-      ids = Hash.new
-      collections = Hash.new
-
-      # test url: http://localhost:3000/portal/record/9200365/BibliographicResource_3000094705862.html?debug=json
-      ids['http://gallica.bnf.fr/ark:/12148/btv1b84539771'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
-
-      # test url: http://localhost:3000/portal/record/92082/BibliographicResource_1000157170184.html?debug=json
-      ids['http://gallica.bnf.fr/ark:/12148/btv1b10500687r'] = 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
-
-      # test url: http://localhost:3000/portal/record/9200175/BibliographicResource_3000004673129.html?debug=json
-      # or any result from: http://localhost:3000/portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
-      if identifier
-        collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.match('.+/uuid') ?
-          identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json' : nil
-      end
-
-      path = request.original_fullpath
-      if path.match('/portal/record/07927/diglit_')
-        url_match = path.sub(path.match('/portal/record/07927/diglit_')[0], 'http://digi.ub.uni-heidelberg.de/diglit/iiif/')
-        url_match = url_match.sub('.html', '/manifest.json')
-      end
-
-      url_match || ids[identifier] || collections[collection]
+    def edm_preview
+      @edm_preview ||= render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
     end
 
     def media_items
-      aggregation = document.aggregations.first
-      return [] unless aggregation.respond_to?(:webResources)
-
-      players = []
-      items = []
-
-      aggregation.webResources.map do |web_resource|
-        # TODO: we're using 'document' values instead of 'web_resource' values
-        # -this until the mime_type/edm_download / mimetypes start working for multiple items
-
-        mime_type = @mime_type
-
-        web_resource_url = render_document_show_field_value(web_resource, 'about')
-        edm_resource_url = render_document_show_field_value(document, 'aggregations.edmIsShownBy')
-        edm_preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-        media_rights = render_document_show_field_value(web_resource, 'webResourceEdmRights')
-
-        if media_rights.nil?
-          media_rights = render_document_show_field_value(document, 'aggregations.edmRights')
-        end
-
-        media_type = media_type(web_resource_url)
-        media_type = media_type || render_document_show_field_value(document, 'type')
-        media_type = media_type.downcase
-
-        if media_type == 'audio' && mime_type == 'application/octet-stream'
-          if !web_resource_url.index('.mp3').nil?
-            mime_type = 'audio/mpeg'
-          end
-        end
-
-        identifier = render_document_show_field_value(document, 'proxies.dcIdentifier')
-        collection = render_document_show_field_value(document, 'europeanaCollectionName')
-        manifesto = iiif_manifesto(identifier, collection)
-
-        if manifesto
-          media_type = 'iiif'
-        end
-
-        item = {
-          media_type: media_type,
-          rights: simple_rights_label_data(media_rights),
-          downloadable: true,
-          playable: edm_is_shown_by_download_url.present?,
-          thumbnail: edm_preview
-        }
-
-        if download_disabled(media_rights)
-          item[:downloadable] = false
-        end
-
-        # disable play / download
-
-        if mime_type == 'video/mpeg'
-          item[:playable] = false
-        end
-
-        if mime_type == 'audio/flac'
-          item[:playable] = true
-        end
-
-        if media_type == 'text' && (mime_type == 'text/plain; charset=utf-8' || !mime_type)
-          item[:playable] = false
-          item[:downloadable] = false
-        end
-
-        if media_type == 'text' && mime_type == 'text/plain; charset=utf-8'
-          item[:playable] = false
-          item[:downloadable] = false
-        end
-
-        if media_type == 'video' && mime_type == 'text/plain; charset=utf-8'
-          item[:playable] = false
-          item[:downloadable] = false
-        end
-
-        if media_type == 'image'
-          item['is_image'] = true
-          players << { image: true }
-
-          # we only have a thumbnail for the first
-          # - full image needed for the others
-          # - metadata service needed
-          # if web_resource_url != edm_resource_url
-          #   item[:thumbnail] = web_resource_url
-          # end
-        elsif media_type == 'audio' || media_type == 'sound'
-          item['is_audio'] = true
-          players << { audio: true }
-          item[:thumbnail] = item[:thumbnail] || 'http://europeanastatic.eu/api/image?size=BRIEF_DOC&type=SOUND'
-        elsif media_type == 'iiif'
-          item['is_iiif'] = true
-          players << { iiif: true }
-        elsif media_type == 'pdf'
-          item['is_pdf'] = true
-          players << { pdf: true }
-        elsif media_type == 'text'
-          if mime_type == 'application/pdf'
-            item['is_pdf'] = true
-            players << { pdf: true }
-          else
-            item['is_text'] = true
-          end
-        elsif media_type == 'video'
-          item['is_video'] = true
-          players << { video: true }
-        else
-          item['is_unknown_type'] = render_document_show_field_value(web_resource, 'about')
-        end
-
-        if mime_type == 'application/pdf' || mime_type == 'audio/flac'
-          item['play_url'] = edm_is_shown_by_download_url
-        elsif !manifesto.nil?
-          item['play_url'] = manifesto
-          item[:playable] = true
-        else
-          item['play_url'] = web_resource_url
-        end
-
-        # TODO: this should check the download-ability of the web resource
-        if edm_is_shown_by_download_url.present?
-          item['download'] = {
-            url: edm_is_shown_by_download_url,
-            text: t('site.object.actions.download')
-          }
-          item['technical_metadata'] = {
-            mime_type: mime_type
-          }
-        end
-
-        # make sure the edm_is_shown_by is the first item
-        if web_resource_url == edm_resource_url
-          item[:is_current] = true
-          items.unshift(item)
-        else
-          items << item
-        end
-        # only show first (the edm_is_shown_by or an iiiif manifest)
-        items = [items.first]
+      items = presenter.media_web_resources(per_page: 10, page: 1).map do |web_resource|
+        Document::WebResourcePresenter.new(web_resource, document, controller).media_item
       end
+      items.first[:is_current] = true unless items.size == 0
+
       {
-        required_players: players.uniq,
-        single_item: items.uniq.size == 1,
+        required_players: item_players,
+        external_media: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
+          render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+        single_item: items.size == 1,
         empty_item: items.size == 0,
-        items: items.uniq,
-        more_thumbs_url: request.original_url.split('.html')[0] + '/thumbnails.json',
+        items: items,
+        # The page parameter gets added by the javascript - base url needed here
+        more_thumbs_url: document_media_path(document, format: 'json'),
+        # if we're already on page 2 the page number here should be 3
+        more_thumbs_page: document_media_path(document, page: 2, format: 'json'),
+        more_thumbs_total: presenter.media_web_resources.total_count
       }
+    end
+
+    def item_players
+      web_resources = presenter.media_web_resources.map do |web_resource|
+        Document::WebResourcePresenter.new(web_resource, document, controller)
+      end
+      players = [:audio, :iiif, :image, :pdf, :video].select do |player|
+        web_resources.any? { |wr| wr.player == player }
+      end
+      players.map do |player|
+        { player => true }
+      end
+    end
+
+    def presenter
+      @presenter ||= Document::RecordPresenter.new(document, controller)
+    end
+
+    def format_date(text, format)
+      return text if format.nil?
+      Time.parse(text).strftime(format)
+    rescue ArgumentError
+      text
     end
   end
 end

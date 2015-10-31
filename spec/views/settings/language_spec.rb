@@ -1,3 +1,5 @@
+require 'support/shared_examples/page_with_top_nav'
+
 RSpec.describe 'settings/language.html.mustache' do
   before(:each) do
     RSpec.configure do |config|
@@ -20,6 +22,8 @@ RSpec.describe 'settings/language.html.mustache' do
     Stache::ViewContext.current = view
   end
 
+  it_should_behave_like 'page with top nav'
+
   it 'should have page title' do
     render
     expect(rendered).to have_css('title', visible: false, text: /Language settings/i)
@@ -27,6 +31,6 @@ RSpec.describe 'settings/language.html.mustache' do
 
   it 'should have default language field' do
     render
-    expect(rendered).to have_select('locale', with_options: ['English', 'French'])
+    expect(rendered).to have_select('locale', with_options: ['English', 'Dutch'])
   end
 end
