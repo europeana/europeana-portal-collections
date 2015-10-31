@@ -171,7 +171,11 @@ module Document
     end
 
     def thumbnail
-      Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+      # Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+      isb = @record_presenter.edm_is_shown_by
+      edm_ob = @record_presenter.edm_object
+      normal_url = Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+      url == isb && edm_ob.present? && edm_ob != isb ? edm_ob : normal_url
     end
 
     def player
