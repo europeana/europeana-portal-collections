@@ -60,10 +60,10 @@ module Document
       (edm_object == web_resource_url ? edm_object == edm_is_shown_by : true) &&
       (
         (edm_object.present? && web_resource_url == edm_object) ||
-        (edm_object.blank? && web_resource_url == edm_is_shown_by) ||
-        (edm_object != edm_is_shown_by && web_resource_url == edm_is_shown_by ) ||
-        (has_views.include?(web_resource_url) && web_resource_mime_type.present?) ||
-        Document::WebResourcePresenter.new(web_resource, @document, @controller).media_type == 'iiif'
+          (edm_object.blank? && web_resource_url == edm_is_shown_by) ||
+          (edm_object != edm_is_shown_by && web_resource_url == edm_is_shown_by) ||
+          (has_views.include?(web_resource_url) && web_resource_mime_type.present?) ||
+          Document::WebResourcePresenter.new(web_resource, @document, @controller).media_type == 'iiif'
       )
     end
 
