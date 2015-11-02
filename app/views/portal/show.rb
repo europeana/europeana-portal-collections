@@ -13,7 +13,7 @@ module Portal
 
     def page_title
       @mustache[:page_title] ||= begin
-        [@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - ')
+        CGI.unescapeHTML([@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - '))
       end
     end
 
@@ -161,7 +161,7 @@ module Portal
                 },
                 {
                   title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
+                  collected: render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
                 }
               ]
             ),
@@ -253,7 +253,7 @@ module Portal
                   title: 'site.object.meta-label.provenance',
                   fields: ['proxies.dctermsProvenance'],
                   collected: document.aggregations.map do |aggregation|
-                    if aggregation.fetch('edmUgc', nil)
+                    if aggregation.fetch('edmUgc', nil) == 'true'
                       t('site.object.meta-label.ugc')
                     end
                   end.flatten.compact
@@ -496,7 +496,7 @@ module Portal
         end
       end
       {
-        title: 'When',
+        title: t('site.object.named-entities.when.title'),
         fields: fields,
         present: fields.size > 0
       }
