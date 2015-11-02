@@ -98,7 +98,6 @@ sv:
         type: Mediaformat
         ugc: 
         video_duration: 
-        video_hd: 
         year: 
       image_aspectratio:
         landscape: Landskap
@@ -227,6 +226,10 @@ sv:
       year:
         from: 
         to: till
+    'facet ':
+      header:
+        video_hd:
+          'true': 
     find-us-elsewhere: 
     forgot-password: 
     genres: genrer
