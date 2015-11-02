@@ -51,7 +51,7 @@ module Document
           end
           web_resources.uniq! { |web_resource| web_resource.fetch('about', nil) }
         end
-        presenters = salient_web_resources.collect do |web_resource|
+        presenters = salient_web_resources.map do |web_resource|
           Document::WebResourcePresenter.new(web_resource, @controller, @configuration, @document, self)
         end
         presenters.select(&:displayable?)
