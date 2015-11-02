@@ -1,3 +1,4 @@
+
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
@@ -167,11 +168,36 @@ module Portal
             # download: content_object_download,
             media: media_items,
             meta_additional: {
+              present: @document.fetch('proxies.dctermsSpatial', []).size > 0 ||
+                @document.fetch('proxies.dcCoverage', []).size > 0 ||
+                @document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
+                (
+                  @document.fetch('places.latitude', []).size > 0 &&
+                  @document.fetch('places.longitude', []).size > 0
+                ),
+              places: data_section(
+                title: 'site.object.meta-label.location',
+                sections: [
+                  {
+                    title: 'site.object.meta-label.location',
+                    fields: ['proxies.dctermsSpatial'],
+                    collected: pref_label('places.prefLabel')
+                  },
+                  {
+                    title: 'site.object.meta-label.place-time',
+                    fields: ['proxies.dcCoverage']
+                  },
+                  {
+                    title: 'site.object.meta-label.current-location',
+                    fields: ['proxies.edmCurrentLocation']
+                  }
+                ]
+              ),
               geo: {
                 latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
                 long_and_lat: long_and_lat?,
-                placeName: render_document_show_field_value(document, 'places.prefLabel'),
+                placeName: pref_label('places.prefLabel'),
                 labels: {
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
@@ -187,7 +213,7 @@ module Portal
             },
             origin: {
               url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-              institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider'),
+              institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
             },
             people: data_section(
@@ -220,30 +246,17 @@ module Portal
                 }
               ]
             ),
-            places: data_section(
-              title: 'site.object.meta-label.location',
-              sections: [
-                {
-                  title: 'site.object.meta-label.location',
-                  fields: ['proxies.dctermsSpatial'],
-                  collected: pref_label('places.prefLabel')
-                },
-                {
-                  title: 'site.object.meta-label.place-time',
-                  fields: ['proxies.dcCoverage']
-                },
-                {
-                  title: 'site.object.meta-label.current-location',
-                  fields: ['proxies.edmCurrentLocation']
-                }
-              ]
-            ),
             provenance: data_section(
               title: 'site.object.meta-label.source',
               sections: [
                 {
                   title: 'site.object.meta-label.provenance',
-                  fields: ['proxies.dctermsProvenance']
+                  fields: ['proxies.dctermsProvenance'],
+                  collected: document.aggregations.map do |aggregation|
+                    if aggregation.fetch('edmUgc', nil)
+                      t('site.object.meta-label.ugc')
+                    end
+                  end.flatten.compact
                 },
                 {
                   title: 'site.object.meta-label.source',
@@ -279,10 +292,7 @@ module Portal
                   title: 'site.object.meta-label.timestamp-updated',
                   fields: ['timestamp_update'],
                   format_date: '%Y-%m-%d'
-                },
-                ['aggregations.edmUgc'].present? ? {
-                  collected: t('site.object.meta-label.ugc')
-                } : {},
+                }
               ]
             ),
             properties: data_section(
@@ -440,7 +450,7 @@ module Portal
 
     def collect_agent_labels
       fields = []
-      agents = document.fetch('concepts', [])
+      agents = document.fetch('agents', [])
       (agents).map do |agent|
         fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true }
         fields << { key: t('site.object.named-entities.who.label'), vals: normalise_named_entity(agent[:prefLabel]), multi: true }

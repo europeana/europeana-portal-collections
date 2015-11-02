@@ -98,7 +98,6 @@ de:
         type: Medien
         ugc: Von Nutzern beigetragene Inhalte einbeziehen
         video_duration: 
-        video_hd: HD
         year: Datum
       image_aspectratio:
         landscape: Querformat
@@ -227,6 +226,10 @@ de:
       year:
         from: von
         to: nach
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
     find-us-elsewhere: 
     forgot-password: Haben Sie Ihr Passwort vergessen?
     genres: Gattungen
@@ -246,7 +249,7 @@ de:
     home: Startseite
     javascript-required: Um diese Inhalte zu sehen aktivieren Sie bitte JavaScript. Erwägen Sie zudem auf einen Web-Browser zurückzugreifen der HTML5-Inhalte unterstützt.
     labs: 
-    labs-text: Remixen Sie kulturelle Inhalte mit unseren APIs & Datensätzen
+    labs-text: Remixen Sie kulturelle Inhalte mit unseren API & Datensätzen
     language-basque: Baskisch
     language-bulgarian: Bulgarisch
     language-catalan: Katalanisch
