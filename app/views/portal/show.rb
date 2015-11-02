@@ -535,7 +535,7 @@ module Portal
         else
           res << {key: key, val: val, agt_link: agt_link}
         end
-      end
+      end unless named_entity.nil?
       res
     end
 
