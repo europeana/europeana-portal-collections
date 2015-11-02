@@ -36,39 +36,30 @@ module Document
       end
     end
 
-    def salient_media_web_resources
+    def edm_object_thumbnails_edm_is_shown_by?
+      edm_is_shown_by.present? && edm_object.present? && (edm_object != edm_is_shown_by)
+    end
+
+    def salient_media_web_resource_presenters
       return [] if web_resources.blank?
 
-      @media_web_resources ||= begin
-        web_resources.dup.tap do |web_resources|
+      @media_web_resource_presenters ||= begin
+        salient_web_resources = web_resources.dup.tap do |web_resources|
           # make sure the edm_is_shown_by is the first item
           unless edm_is_shown_by_web_resource.nil?
             web_resources.unshift(web_resources.delete(edm_is_shown_by_web_resource))
           end
-
-          web_resources.select! { |web_resource| web_resource_displayable?(web_resource) }
-
           web_resources.uniq! { |web_resource| web_resource.fetch('about', nil) }
         end
+        presenters = salient_web_resources.collect do |web_resource|
+          Document::WebResourcePresenter.new(web_resource, @controller, @configuration, @document, self)
+        end
+        presenters.select(&:displayable?)
       end
     end
 
-    def web_resource_displayable?(web_resource)
-      web_resource_url = web_resource.fetch('about', nil)
-      web_resource_mime_type = web_resource.fetch('ebucoreHasMimeType', nil)
-
-      (edm_object == web_resource_url ? edm_object == edm_is_shown_by : true) &&
-      (
-        (edm_object.present? && web_resource_url == edm_object) ||
-          (edm_object.blank? && web_resource_url == edm_is_shown_by) ||
-          (edm_object != edm_is_shown_by && web_resource_url == edm_is_shown_by) ||
-          (has_views.include?(web_resource_url) && web_resource_mime_type.present?) ||
-          Document::WebResourcePresenter.new(web_resource, @document, @controller).media_type == 'iiif'
-      )
-    end
-
     def media_web_resources(options = {})
-      Kaminari.paginate_array(salient_media_web_resources).
+      Kaminari.paginate_array(salient_media_web_resource_presenters).
         page(options[:page]).per(options[:per_page])
     end
 

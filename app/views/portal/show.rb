@@ -701,9 +701,7 @@ module Portal
     end
 
     def media_items
-      items = presenter.media_web_resources(per_page: 10, page: 1).map do |web_resource|
-        Document::WebResourcePresenter.new(web_resource, document, controller).media_item
-      end
+      items = presenter.media_web_resources(per_page: 10, page: 1).map(&:media_item)
       items.first[:is_current] = true unless items.size == 0
 
       {
@@ -722,9 +720,7 @@ module Portal
     end
 
     def item_players
-      web_resources = presenter.media_web_resources.map do |web_resource|
-        Document::WebResourcePresenter.new(web_resource, document, controller)
-      end
+      web_resources = presenter.media_web_resources
       players = [:audio, :iiif, :image, :pdf, :video].select do |player|
         web_resources.any? { |wr| wr.player == player }
       end
