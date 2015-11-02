@@ -98,7 +98,6 @@ pl:
         type: Media
         ugc: Pokaż obiekty dodane przez użytkowników
         video_duration: 
-        video_hd: Wysoka rozdzielczość
         year: Data
       image_aspectratio:
         landscape: Pejzaż
@@ -227,6 +226,10 @@ pl:
       year:
         from: od
         to: do
+    'facet ':
+      header:
+        video_hd:
+          'true': Wysoka rozdzielczość
     find-us-elsewhere: 
     forgot-password: Nie pamiętam hasła.
     genres: gatunki

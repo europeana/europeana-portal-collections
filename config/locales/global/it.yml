@@ -98,7 +98,6 @@ it:
         type: 
         ugc: 
         video_duration: 
-        video_hd: 
         year: 
       image_aspectratio:
         landscape: 
@@ -227,6 +226,10 @@ it:
       year:
         from: 
         to: 
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
     find-us-elsewhere: 
     forgot-password: 
     genres: 
