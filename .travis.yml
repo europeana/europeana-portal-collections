@@ -11,6 +11,5 @@ before_script:
   - "psql -c 'create database europeana_channels_blacklight_test;' -U postgres"
   - "cp -r ./deploy/travis/. ."
 env:
-  - RAILS_ENV=test
-  - CUSTOM_RUBY_VERSION=2.2.2
-  - CUSTOM_RUBY_VERSION=2.2.3
+  - RAILS_ENV=test CUSTOM_RUBY_VERSION=2.2.2
+  - RAILS_ENV=test CUSTOM_RUBY_VERSION=2.2.3
