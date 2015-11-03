@@ -2,9 +2,6 @@ notifications:
   email: false
 sudo: false
 language: ruby
-rvm:
-  - 2.2.2
-  - 2.2.3
 before_install:
   - mkdir travis-phantomjs
   - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
@@ -15,3 +12,5 @@ before_script:
   - "cp -r ./deploy/travis/. ."
 env:
   - RAILS_ENV=test
+  - CUSTOM_RUBY_VERSION=2.2.2
+  - CUSTOM_RUBY_VERSION=2.2.3
