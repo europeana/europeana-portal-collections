@@ -97,7 +97,7 @@ en:
         text_fulltext: Full text
         type: Media
         ugc: Show content contributed by users
-        video_hd: HD
+        video_duration: Video Duration
         year: Date
       image_aspectratio:
         landscape: Landscape
@@ -149,10 +149,6 @@ en:
       media:
         'false': 'No'
         'true': 'Yes'
-      mime_type:
-        image/gif: GIF
-        image/jpeg: JPEG
-        image/png: PNG
       more: More
       more-refinements: More refinements
       resource:
@@ -230,6 +226,10 @@ en:
       year:
         from: from
         to: to
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
     find-us-elsewhere: 
     forgot-password: Forgot your password?
     genres: genres

@@ -4,10 +4,10 @@ module Document
   class WebResourcePresenter < DocumentPresenter
     include ActionView::Helpers::NumberHelper
 
-    def initialize(document, record, controller, configuration = controller.blacklight_config)
+    def initialize(document, controller, configuration = controller.blacklight_config, record = nil, record_presenter = nil)
       super(document, controller, configuration)
       @record = record
-      @record_presenter = RecordPresenter.new(record, controller)
+      @record_presenter = record_presenter || (record.nil? ? nil : RecordPresenter.new(record, controller))
     end
 
     def media_item
@@ -144,6 +144,7 @@ module Document
           (mime_type == 'video/mpeg') ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
+          (media_type == 'image' && render_document_show_field_value('ebucoreWidth').to_i < 400) ||
           is_avi?
         false
       else
@@ -164,12 +165,39 @@ module Document
       end
     end
 
+    def for_edm_object?
+      @record_presenter.edm_object == url
+    end
+
+    def for_edm_is_shown_by?
+      url == @record_presenter.edm_is_shown_by
+    end
+
+    def displayable?
+      return false if for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by?
+
+      (@record_presenter.edm_object.present? && for_edm_object?) ||
+        (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
+        (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
+        (@record_presenter.has_views.include?(url) && mime_type.present?) ||
+        (media_type == 'iiif')
+    end
+
     def download_disabled?
       blacklisted = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/)
       blacklisted.include?(media_rights)
     end
 
     def thumbnail
+      edm_object_thumbnail? ? @record_presenter.edm_object : api_thumbnail
+    end
+
+    def edm_object_thumbnail?
+      for_edm_is_shown_by? &&
+        @record_presenter.edm_object_thumbnails_edm_is_shown_by?
+    end
+
+    def api_thumbnail
       Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 

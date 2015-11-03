@@ -26,18 +26,20 @@ module Portal
     end
 
     def advanced_filters
+      advanced_count = 0
       @mustache[:advanced_filters] ||= begin
         [
           {
-            advanced: true,
             advanced_items: {
               items: facets_from_request(facet_field_names).select do |facet|
                 blacklight_config.facet_fields[facet.name].advanced &&
                   !blacklight_config.facet_fields[facet.name].parent
               end.map do |facet|
+                advanced_count += 1
                 FacetPresenter.build(facet, controller).display
               end.compact
-            }
+            },
+            advanced: advanced_count > 0
           }
         ]
       end
@@ -148,9 +150,9 @@ module Portal
             value: track_document_path(doc, track_document_path_opts(counter))
           }
         ],
-        title: render_index_field_value(doc, ['dcTitleLangAware', 'title']),
+        title: render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
         text: {
-          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription']),
+          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
                            length: 277,
                            separator: ' ',
                            escape: false)

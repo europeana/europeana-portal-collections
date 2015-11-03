@@ -97,7 +97,7 @@ sv:
         text_fulltext: Fulltext
         type: Mediaformat
         ugc: 
-        video_hd: 
+        video_duration: 
         year: 
       image_aspectratio:
         landscape: Landskap
@@ -149,10 +149,6 @@ sv:
       media:
         'false': Nej
         'true': Ja
-      mime_type:
-        image/gif: 
-        image/jpeg: 
-        image/png: 
       more: Fler
       more-refinements: 
       resource:
@@ -230,6 +226,10 @@ sv:
       year:
         from: 
         to: till
+    'facet ':
+      header:
+        video_hd:
+          'true': 
     find-us-elsewhere: 
     forgot-password: 
     genres: genrer

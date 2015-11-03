@@ -97,7 +97,7 @@ nl:
         text_fulltext: 
         type: 
         ugc: 
-        video_hd: 
+        video_duration: 
         year: 
       image_aspectratio:
         landscape: 
@@ -149,10 +149,6 @@ nl:
       media:
         'false': 
         'true': 
-      mime_type:
-        image/gif: 
-        image/jpeg: 
-        image/png: 
       more: 
       more-refinements: 
       resource:
@@ -230,6 +226,10 @@ nl:
       year:
         from: 
         to: 
+    'facet ':
+      header:
+        video_hd:
+          'true': 
     find-us-elsewhere: 
     forgot-password: 'Wachtwoord kwijt? '
     genres: thema's

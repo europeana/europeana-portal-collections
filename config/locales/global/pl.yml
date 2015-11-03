@@ -97,7 +97,7 @@ pl:
         text_fulltext: Pełna Treść
         type: Media
         ugc: Pokaż obiekty dodane przez użytkowników
-        video_hd: Wysoka rozdzielczość
+        video_duration: 
         year: Data
       image_aspectratio:
         landscape: Pejzaż
@@ -149,10 +149,6 @@ pl:
       media:
         'false': Nie
         'true': Tak
-      mime_type:
-        image/gif: 
-        image/jpeg: 
-        image/png: 
       more: Więcej
       more-refinements: Więcej filtrów
       resource:
@@ -230,6 +226,10 @@ pl:
       year:
         from: od
         to: do
+    'facet ':
+      header:
+        video_hd:
+          'true': Wysoka rozdzielczość
     find-us-elsewhere: 
     forgot-password: Nie pamiętam hasła.
     genres: gatunki

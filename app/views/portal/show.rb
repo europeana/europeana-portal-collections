@@ -1,3 +1,4 @@
+
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
@@ -12,7 +13,7 @@ module Portal
 
     def page_title
       @mustache[:page_title] ||= begin
-        [@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - ')
+        CGI.unescapeHTML([@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - '))
       end
     end
 
@@ -160,18 +161,43 @@ module Portal
                 },
                 {
                   title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
+                  collected: render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
                 }
               ]
             ),
             # download: content_object_download,
             media: media_items,
             meta_additional: {
+              present: @document.fetch('proxies.dctermsSpatial', []).size > 0 ||
+                @document.fetch('proxies.dcCoverage', []).size > 0 ||
+                @document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
+                (
+                  @document.fetch('places.latitude', []).size > 0 &&
+                  @document.fetch('places.longitude', []).size > 0
+                ),
+              places: data_section(
+                title: 'site.object.meta-label.location',
+                sections: [
+                  {
+                    title: 'site.object.meta-label.location',
+                    fields: ['proxies.dctermsSpatial'],
+                    collected: pref_label('places.prefLabel')
+                  },
+                  {
+                    title: 'site.object.meta-label.place-time',
+                    fields: ['proxies.dcCoverage']
+                  },
+                  {
+                    title: 'site.object.meta-label.current-location',
+                    fields: ['proxies.edmCurrentLocation']
+                  }
+                ]
+              ),
               geo: {
                 latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
                 long_and_lat: long_and_lat?,
-                placeName: render_document_show_field_value(document, 'places.prefLabel'),
+                placeName: pref_label('places.prefLabel'),
                 labels: {
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
@@ -187,7 +213,7 @@ module Portal
             },
             origin: {
               url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-              institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider'),
+              institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
             },
             people: data_section(
@@ -220,30 +246,17 @@ module Portal
                 }
               ]
             ),
-            places: data_section(
-              title: 'site.object.meta-label.location',
-              sections: [
-                {
-                  title: 'site.object.meta-label.location',
-                  fields: ['proxies.dctermsSpatial'],
-                  collected: pref_label('places.prefLabel')
-                },
-                {
-                  title: 'site.object.meta-label.place-time',
-                  fields: ['proxies.dcCoverage']
-                },
-                {
-                  title: 'site.object.meta-label.current-location',
-                  fields: ['proxies.edmCurrentLocation']
-                }
-              ]
-            ),
             provenance: data_section(
               title: 'site.object.meta-label.source',
               sections: [
                 {
                   title: 'site.object.meta-label.provenance',
-                  fields: ['proxies.dctermsProvenance']
+                  fields: ['proxies.dctermsProvenance'],
+                  collected: document.aggregations.map do |aggregation|
+                    if aggregation.fetch('edmUgc', nil) == 'true'
+                      t('site.object.meta-label.ugc')
+                    end
+                  end.flatten.compact
                 },
                 {
                   title: 'site.object.meta-label.source',
@@ -279,10 +292,7 @@ module Portal
                   title: 'site.object.meta-label.timestamp-updated',
                   fields: ['timestamp_update'],
                   format_date: '%Y-%m-%d'
-                },
-                ['aggregations.edmUgc'].present? ? {
-                  collected: t('site.object.meta-label.ugc')
-                } : {},
+                }
               ]
             ),
             properties: data_section(
@@ -320,7 +330,7 @@ module Portal
               googleplus: true
             },
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
-            title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
+            title: [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
@@ -401,7 +411,7 @@ module Portal
             ]
           ),
           similar: {
-            title: t('site.object.similar-items') + ':',
+            title: t('site.object.similar-items'),
             more_items_query: search_path(mlt: document.id),
             more_items_load: document_similar_url(@document, format: 'json'),
             more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
@@ -440,7 +450,7 @@ module Portal
 
     def collect_agent_labels
       fields = []
-      agents = document.fetch('concepts', [])
+      agents = document.fetch('agents', [])
       (agents).map do |agent|
         fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true }
         fields << { key: t('site.object.named-entities.who.label'), vals: normalise_named_entity(agent[:prefLabel]), multi: true }
@@ -486,7 +496,7 @@ module Portal
         end
       end
       {
-        title: 'When',
+        title: t('site.object.named-entities.when.title'),
         fields: fields,
         present: fields.size > 0
       }
@@ -525,7 +535,7 @@ module Portal
         else
           res << {key: key, val: val, agt_link: agt_link}
         end
-      end
+      end unless named_entity.nil?
       res
     end
 
@@ -701,9 +711,7 @@ module Portal
     end
 
     def media_items
-      items = presenter.media_web_resources(per_page: 10, page: 1).map do |web_resource|
-        Document::WebResourcePresenter.new(web_resource, document, controller).media_item
-      end
+      items = presenter.media_web_resources(per_page: 10, page: 1).map(&:media_item)
       items.first[:is_current] = true unless items.size == 0
 
       {
@@ -722,9 +730,7 @@ module Portal
     end
 
     def item_players
-      web_resources = presenter.media_web_resources.map do |web_resource|
-        Document::WebResourcePresenter.new(web_resource, document, controller)
-      end
+      web_resources = presenter.media_web_resources
       players = [:audio, :iiif, :image, :pdf, :video].select do |player|
         web_resources.any? { |wr| wr.player == player }
       end

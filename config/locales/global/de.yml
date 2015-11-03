@@ -7,7 +7,7 @@ de:
       architecture: Architektur
       art: Kunst
       fashion: Mode
-      home: Home
+      home: Startseite
       maps: Landkarten
       music: Musik
       natural-history: Naturgeschichte
@@ -24,7 +24,7 @@ de:
     email-address: E-Mail-Adresse
     facet:
       advanced:
-        options: 
+        options: Einstellungen
         show:
           direct:
             links: 
@@ -33,8 +33,8 @@ de:
       art:
         form:
           paintings:
-            genre: Genre
-            medium: Medium
+            genre: Gattung
+            medium: Medientyp
       carrier: 
       colour: Farbe
       colour-black-and-white: Schwarz und Weiß
@@ -76,19 +76,19 @@ de:
         turkey: Türkei
         ukraine: Ukraine
         unitedkingdom: Vereinigtes Königreich
-        unitedstatesofamerica: USA / Vereinigte Staaten von Amerika
+        unitedstatesofamerica: USA
       creator: Urheber
       header:
         channel: 
         colourpalette: Farbe
         country: Land
-        data_provider: 
+        data_provider: Datengeber
         image_aspectratio: Ausrichtung
         image_colour: Palette
         image_size: Größe
         language: Sprache
         language_of_description: Sprache der Beschreibung
-        media: Nur Objekte mit ...
+        media: 'Nur Objekte mit Link zum Medium '
         mime_type: Dateiformat
         provider: 
         reusability: Kann ich es verwenden?
@@ -96,8 +96,8 @@ de:
         sound_hq: Hohe Qualität
         text_fulltext: Volltext
         type: Medien
-        ugc: 'Inhalte von Nutzern anzeigen '
-        video_hd: HD
+        ugc: Von Nutzern beigetragene Inhalte einbeziehen
+        video_duration: 
         year: Datum
       image_aspectratio:
         landscape: Querformat
@@ -149,10 +149,6 @@ de:
       media:
         'false': Nein
         'true': Ja
-      mime_type:
-        image/gif: GIF
-        image/jpeg: JPEG
-        image/png: PNG
       more: Mehr
       more-refinements: Suche verfeinern
       resource:
@@ -166,10 +162,10 @@ de:
         advanced-cc-by-nd: 
         advanced-cc-by-sa: 
         advanced-cc0: ''
-        advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: 
-        advanced-pdm: 
-        advanced-rrfa: Rechte vorbehalten - freier Zugang
+        advanced-orphan-work: Verwaistes Werk
+        advanced-out-of-copyright-non-commercial: Out of copyright - nicht kommerzielle Wiederverwendung
+        advanced-pdm: Public Domain
+        advanced-rrfa: Rechte vorbehalten - Freier Zugang
         advanced-rrpa: Rechte vorbehalten - kostenpflichtiger Zugang
         advanced-rrra: Rechte Vorbehalten - eingeschränkter Zugang
         advanced-ucs: Unbekannter Urheberrechtsstatus
@@ -191,7 +187,7 @@ de:
       type:
         3d: 
         image: Bild
-        sound: 
+        sound: Audio
         text: Text
         video: 
       type-image:
@@ -201,7 +197,7 @@ de:
           portrait: Hochformat
         quality:
           all: Alles anzeigen
-          hq-only: 
+          hq-only: Nur hochwertige anzeigen
           label: Qualität
         size:
           explanation: Was bedeuten diese Größen?
@@ -212,14 +208,14 @@ de:
           xl: Extra groß (%{data})
       type-sound:
         duration:
-          label: 
+          label: Audio-Laufzeit
           long: Lang (%{data})
           medium: Mittel (%{data})
           short: Kurz (%{data})
           very-short: Sehr kurz (%{data})
       type-video:
         duration:
-          label: 
+          label: Video Lauzeit
           long: Lang (%{data})
           medium: Mittel (%{data})
           short: Kurz (%{data})
@@ -230,9 +226,13 @@ de:
       year:
         from: von
         to: nach
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
     find-us-elsewhere: 
     forgot-password: Haben Sie Ihr Passwort vergessen?
-    genres: 
+    genres: Gattungen
     genres-chamber-music: Kammermusik
     genres-classical-music: Klassische Musik
     genres-concertos: Konzerte
@@ -241,15 +241,15 @@ de:
     genres-popular-music: Unterhaltungsmusik
     genres-traditional-music: Traditionelle Musik
     header:
-      connect: verknüpfen
-      develop: 
+      connect: verbinden
+      develop: entwickeln
       discover: entdecken
-      network: 
+      network: vernetzen
     help: Hilfe
-    home: 
-    javascript-required: 
+    home: Startseite
+    javascript-required: Um diese Inhalte zu sehen aktivieren Sie bitte JavaScript. Erwägen Sie zudem auf einen Web-Browser zurückzugreifen der HTML5-Inhalte unterstützt.
     labs: 
-    labs-text: 
+    labs-text: Remixen Sie kulturelle Inhalte mit unseren API & Datensätzen
     language-basque: Baskisch
     language-bulgarian: Bulgarisch
     language-catalan: Katalanisch
@@ -286,17 +286,17 @@ de:
       load-more: Mehr
       show-more: Mehr anzeigen
       view-more: Mehr anzeigen
-    more-info: Mehr Informationen
-    our-mission: 
-    our-mission-text: ''
+    more-info: Mehr Information
+    our-mission: Unsere Mission
+    our-mission-text: Wer hat Angst vor dem jabberwocky?
     our-sites: Unsere Seiten
     password: Passwort
     professional: 
     professional-text: Machen Sie mit, teilen Sie Ihre Daten oder benutzen Sie unsere
     refine-your-search: Suche verfeinern
     register: Anmelden
-    research: 
-    research-text: 
+    research: Forschung
+    research-text: Mit der akademischen Gemeinschaft verbinden
     rights-box:
       background-image-provider: 
       background-image-provider-url: 
@@ -306,11 +306,11 @@ de:
     search-area:
       search-button-image-alt: Suche
       search-placeholder-text: Fügen Sie einen Suchbegriff ein
-    search-collections: 
+    search-collections: Sammlungen
     search-collections-text: Entdecken Sie das kulturelle Erbe Europas
     share: Teilen
     sitemap: 
-    terms-and-policies: Geschäftsbedingungen und Richtlinien
+    terms-and-policies: Nutzungsbedingungen und Datenschutzerklärung
     type: 
   'no': Norwegen
   pl: Portugal
