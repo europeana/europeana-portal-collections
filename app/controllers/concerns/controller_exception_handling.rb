@@ -20,6 +20,8 @@ module ControllerExceptionHandling
     rescue_from Europeana::API::Errors::RequestError do |exception|
       if exception.message.match(/Invalid record identifier/)
         handle_error(exception, 404)
+      elsif exception.message.match(/first 1000 search results/)
+        handle_error(exception, 400)
       else
         raise
       end

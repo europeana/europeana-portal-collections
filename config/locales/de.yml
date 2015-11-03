@@ -9,7 +9,7 @@ de:
       browse_colours: Farben
       browse_newcontent: Neue Inhalte
       browse_sources: Quellen
-      channels: 
+      channels: Sammlungen
       collections: Sammlungen
       exhibitions: Ausstellungen
       home: Startseite
@@ -54,7 +54,7 @@ de:
           results: Ergebnisse
     footer:
       menu:
-        about: "Über"
+        about: "Über Uns"
         become-a-provider: Werden Sie ein Datengeber
         copyright: Urheberrecht
         data-providers: Alle Datengeber
@@ -251,7 +251,7 @@ de:
         empty-with-terms: Ihre Suche nach %{query_terms} ergab keine Treffer
         header: Ergebnisse für
         header-and: und
-        in-channel: 
+        in-channel: In Sammlungen
         less: Weniger
         less_adv: Weniger Verfeinerungen
         more: Mehr
@@ -265,8 +265,8 @@ de:
         single-result: 1 Ergebnis für %{query_terms}
         view:
           grid: 
-          list: 
-        view-at-provider: Ansehen
+          list: Liste
+        view-at-provider: Ansehen bei
     search:
       placeholder:
         text: Fügen Sie einen Suchbegriff ein
