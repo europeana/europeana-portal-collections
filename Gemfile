@@ -1,10 +1,6 @@
 source 'https://rubygems.org'
 
-if ENV['CUSTOM_RUBY_VERSION']
-  ruby ENV['CUSTOM_RUBY_VERSION']
-else
-  ruby '2.2.3'
-end
+ruby '2.2.2'
 
 gem 'rails', '4.2.4'
 
