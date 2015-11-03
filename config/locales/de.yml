@@ -54,7 +54,7 @@ de:
           results: Ergebnisse
     footer:
       menu:
-        about: "Über"
+        about: "Über Uns"
         become-a-provider: Werden Sie ein Datengeber
         copyright: Urheberrecht
         data-providers: Alle Datengeber
@@ -266,7 +266,7 @@ de:
         view:
           grid: 
           list: Liste
-        view-at-provider: Ansehen
+        view-at-provider: Ansehen bei
     search:
       placeholder:
         text: Fügen Sie einen Suchbegriff ein
