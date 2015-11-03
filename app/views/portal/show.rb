@@ -719,6 +719,7 @@ module Portal
 
       {
         required_players: item_players,
+        has_downloadable_media: has_downloadable_media?,
         external_media: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
           render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
         single_item: items.size == 1,
@@ -740,6 +741,10 @@ module Portal
       players.map do |player|
         { player => true }
       end
+    end
+
+    def has_downloadable_media?
+      presenter.media_web_resources.any? { |wr| wr.downloadable? }
     end
 
     def presenter
