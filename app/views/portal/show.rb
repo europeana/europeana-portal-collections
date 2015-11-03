@@ -13,7 +13,7 @@ module Portal
 
     def page_title
       @mustache[:page_title] ||= begin
-        [@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - ')
+        CGI.unescapeHTML([@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - '))
       end
     end
 
@@ -161,7 +161,7 @@ module Portal
                 },
                 {
                   title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dcDescription')
+                  collected: render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
                 }
               ]
             ),
@@ -253,7 +253,7 @@ module Portal
                   title: 'site.object.meta-label.provenance',
                   fields: ['proxies.dctermsProvenance'],
                   collected: document.aggregations.map do |aggregation|
-                    if aggregation.fetch('edmUgc', nil)
+                    if aggregation.fetch('edmUgc', nil) == 'true'
                       t('site.object.meta-label.ugc')
                     end
                   end.flatten.compact
@@ -330,7 +330,7 @@ module Portal
               googleplus: true
             },
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
-            title: [render_document_show_field_value(document, 'proxies.dcTitle'), creator_title].compact.join(' | '),
+            title: [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
@@ -496,7 +496,7 @@ module Portal
         end
       end
       {
-        title: 'When',
+        title: t('site.object.named-entities.when.title'),
         fields: fields,
         present: fields.size > 0
       }
@@ -535,7 +535,7 @@ module Portal
         else
           res << {key: key, val: val, agt_link: agt_link}
         end
-      end
+      end unless named_entity.nil?
       res
     end
 
@@ -711,9 +711,7 @@ module Portal
     end
 
     def media_items
-      items = presenter.media_web_resources(per_page: 10, page: 1).map do |web_resource|
-        Document::WebResourcePresenter.new(web_resource, document, controller).media_item
-      end
+      items = presenter.media_web_resources(per_page: 10, page: 1).map(&:media_item)
       items.first[:is_current] = true unless items.size == 0
 
       {
@@ -732,9 +730,7 @@ module Portal
     end
 
     def item_players
-      web_resources = presenter.media_web_resources.map do |web_resource|
-        Document::WebResourcePresenter.new(web_resource, document, controller)
-      end
+      web_resources = presenter.media_web_resources
       players = [:audio, :iiif, :image, :pdf, :video].select do |player|
         web_resources.any? { |wr| wr.player == player }
       end

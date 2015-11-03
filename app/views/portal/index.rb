@@ -150,9 +150,9 @@ module Portal
             value: track_document_path(doc, track_document_path_opts(counter))
           }
         ],
-        title: render_index_field_value(doc, ['dcTitleLangAware', 'title']),
+        title: render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
         text: {
-          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription']),
+          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
                            length: 277,
                            separator: ' ',
                            escape: false)
