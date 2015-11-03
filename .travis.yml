@@ -2,8 +2,6 @@ notifications:
   email: false
 sudo: false
 language: ruby
-rvm:
-  - 2.2.2
 before_install:
   - mkdir travis-phantomjs
   - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
@@ -13,4 +11,5 @@ before_script:
   - "psql -c 'create database europeana_channels_blacklight_test;' -U postgres"
   - "cp -r ./deploy/travis/. ."
 env:
-  - RAILS_ENV=test
+  - RAILS_ENV=test CUSTOM_RUBY_VERSION=2.2.2
+  - RAILS_ENV=test CUSTOM_RUBY_VERSION=2.2.3

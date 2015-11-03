@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+if ENV['CUSTOM_RUBY_VERSION']
+  ruby ENV['CUSTOM_RUBY_VERSION']
+else
+  ruby '2.2.3'
+end
+
 gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '79e48b9'
