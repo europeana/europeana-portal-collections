@@ -157,7 +157,7 @@ en:
         rights-human: Can I use this?
         runtime: Run time
         runtime-unit-seconds: seconds
-        source: Provenance
+        source: Source
         subject: Subject
         temporal: Temporal
         time: Time
