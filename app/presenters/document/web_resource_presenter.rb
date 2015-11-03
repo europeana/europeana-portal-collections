@@ -20,7 +20,7 @@ module Document
         play_url: play_url,
         technical_metadata: technical_metadata,
         download: {
-          url: download_url,
+          url: downloadable? ? download_url : false,
           text: t('site.object.actions.download')
         }
       }.tap do |item|
@@ -154,11 +154,10 @@ module Document
 
     def downloadable?
       if url.blank? ||
-          mime_type.blank? ||
-          download_disabled? ||
-          media_type == 'iiif' ||
-          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+        download_disabled? ||
+        media_type == 'iiif' ||
+        (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+        (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
         true
@@ -184,8 +183,9 @@ module Document
     end
 
     def download_disabled?
-      blacklisted = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/)
-      blacklisted.include?(media_rights)
+      blacklisted1 = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/ http://www.europeana.eu/rights/rr-f/)
+      blacklisted2 = %w(http://www.europeana.eu/rights/test-orphan http://www.europeana.eu/rights/unknown)
+      blacklisted1.include?(media_rights) || blacklisted2.include?(media_rights)
     end
 
     def thumbnail
