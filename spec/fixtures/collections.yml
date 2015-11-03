@@ -1,7 +1,9 @@
 music:
   key: 'music'
   api_params: 'qf=what:music'
+  state: 1
 
 home:
   key: 'home'
   api_params: '*:*'
+  state: 1
