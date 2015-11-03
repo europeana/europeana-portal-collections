@@ -247,11 +247,10 @@ module Portal
               ]
             ),
             provenance: data_section(
-              title: 'site.object.meta-label.source',
+              title: 'site.object.meta-label.provenance',
               sections: [
                 {
-                  title: 'site.object.meta-label.provenance',
-                  fields: ['proxies.dctermsProvenance'],
+                  title: 'site.object.meta-label.source',
                   collected: document.aggregations.map do |aggregation|
                     if aggregation.fetch('edmUgc', nil) == 'true'
                       t('site.object.meta-label.ugc')
@@ -259,7 +258,11 @@ module Portal
                   end.flatten.compact
                 },
                 {
-                  title: 'site.object.meta-label.source',
+                  title: 'site.object.meta-label.provenance',
+                  fields: ['proxies.dctermsProvenance'],
+                },
+                {
+                  title: 'site.object.meta-label.provenance',
                   fields: ['proxies.dcSource']
                 },
                 {
