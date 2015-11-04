@@ -1,6 +1,4 @@
 RSpec.describe User do
-  fixtures :users
-
   it { is_expected.to delegate_method(:role_enum).to(:class) }
   it { is_expected.to validate_inclusion_of(:role).in_array(%w(user admin)) }
   it { is_expected.to delegate_method(:can?).to(:ability) }

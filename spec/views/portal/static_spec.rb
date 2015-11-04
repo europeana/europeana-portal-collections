@@ -1,8 +1,6 @@
 require 'support/shared_examples/page_with_top_nav'
 
 RSpec.describe 'portal/static.html.mustache' do
-  fixtures :pages
-
   before(:each) do
     assign(:page, page)
   end

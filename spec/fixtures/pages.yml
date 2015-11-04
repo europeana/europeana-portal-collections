@@ -1,3 +1,13 @@
 about:
   slug: 'about'
   state: 1
+
+home:
+  slug: ''
+  state: 1
+  type: 'Page::Landing'
+
+music_collection:
+  slug: 'collections/music'
+  state: 1
+  type: 'Page::Landing'

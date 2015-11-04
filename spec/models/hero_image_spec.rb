@@ -1,6 +1,4 @@
 RSpec.describe HeroImage do
-  fixtures :hero_images
-
   subject { hero_images(:imageless) }
 
   it { is_expected.to belong_to(:media_object) }

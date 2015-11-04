@@ -1,6 +1,4 @@
 RSpec.describe Collection do
-  fixtures :collections
-
   it { is_expected.to validate_presence_of(:key) }
   it { is_expected.to validate_uniqueness_of(:key) }
   it { is_expected.to validate_presence_of(:api_params) }
