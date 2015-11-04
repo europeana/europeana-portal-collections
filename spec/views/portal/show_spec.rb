@@ -8,7 +8,7 @@ RSpec.describe 'portal/show.html.mustache' do
   end
 
   let(:blacklight_document) do
-    # @todo Move to factory
+    # @todo Move to factory / fixture
     id = '/abc/123'
     source = {
       about: id,

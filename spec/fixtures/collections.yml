@@ -5,5 +5,10 @@ music:
 
 home:
   key: 'home'
-  api_params: '*:*'
+  api_params: 'qf=*:*'
   state: 1
+
+draft:
+  key: 'draft'
+  api_params: 'qf=what:ever'
+  state: 0

@@ -1,0 +1,7 @@
+generic_banner:
+  key: generic
+  state: 1
+
+draft_banner:
+  key: draft
+  state: 0
