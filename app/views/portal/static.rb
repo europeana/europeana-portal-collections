@@ -25,5 +25,50 @@ module Portal
         }.merge(helpers.content)
       end
     end
+
+    def navigation
+      @mustache[:navigation] ||= begin
+        hide_secondary_navigation? ? {} : {
+          secondary: {
+            items: secondary_navigation_items
+          }
+        }.merge(helpers.navigation)
+      end
+    end
+
+    protected
+
+    def show_secondary_navigation?
+      page_has_non_home_parent? || @page.children.present?
+    end
+
+    def hide_secondary_navigation?
+      !show_secondary_navigation?
+    end
+
+    def page_has_non_home_parent?
+      @page.parent.present? && @page.parent.slug.present?
+    end
+
+    def secondary_navigation_items
+      base = page_has_non_home_parent? ? @page.parent : @page
+      [
+        {
+          url: static_page_path(base),
+          text: base.title,
+          is_current: current_page?(static_page_path(base)),
+          submenu: base.children.blank? ? nil : {
+            items: base.children.map do |child|
+              {
+                url: static_page_path(child),
+                text: child.title,
+                is_current: current_page?(static_page_path(child)),
+                submenu: false
+              }
+            end
+          }
+        }
+      ]
+    end
   end
 end

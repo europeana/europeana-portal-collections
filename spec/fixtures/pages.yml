@@ -2,6 +2,18 @@ about:
   slug: 'about'
   state: 1
 
+about_us:
+  slug: 'about/us'
+  state: 1
+
+about_us_all:
+  slug: 'about/us/all'
+  state: 1
+
+contact:
+  slug: 'contact'
+  state: 1
+
 home:
   slug: ''
   state: 1

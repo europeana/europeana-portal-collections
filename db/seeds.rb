@@ -436,6 +436,191 @@ unless Page.find_by_slug('collections/music/about').present?
   end
 end
 
+unless Page.find_by_slug('contact').present?
+  ActiveRecord::Base.transaction do
+    Page.create!(
+      slug: 'contact',
+      title: 'Contact us',
+      body: '<p>
+        Europeana is being temporarily rehoused due to works at the Koninklijke Bibliotheek. In 2015 you will find us at:<br/>
+          <br/>
+        Europeana Foundation<br/>
+        Stichthage building, 9th floor<br/>
+        Koningin Julianaplein 10,<br/>
+        2595 AA<br/>
+        The Hague<br/>
+        The Netherlands<br/>
+        </p>
+      <h4>To be added to the press list or for general communications</h4>
+      <p>
+          <a href="mailto:Eleanor.Kenny@bl.uk">Eleanor Kenny</a>
+            <br/>
+          Head of Communications<br/>
+          </p>
+      <h4>To contribute content to Europeana</h4>
+      <p>
+        See the <a href="http://pro.europeana.eu/share-your-data/">content providers</a> page on our project site
+      </p>'
+    ).publish!
+  end
+end
+
+unless Page.find_by_slug('help').present?
+  ActiveRecord::Base.transaction do
+    Page.create!(
+      slug: 'help',
+      title: 'Help',
+      body: '<p>Welcome to Europeana. This page describes some of the things that you can do while you are here. Learn more about:</p>
+
+<ul class="zero">
+<li><strong>Searching Europeana</strong>: Search tips, Refined search, Phrase search, Exclude words, Auto-completion, Spelling suggestions.</li>
+
+<li><strong>Exploring Europeana</strong>: Through time, On a map, With curatorial expertise.</li>
+
+
+<li><strong>Results in Europeana</strong>: Seeing further details, Rights and license information, Translating details, Searching on external services, New related searches on Europeana, Viewing item on provider\'s site, Embedding, and Citing.</li>
+
+<li><strong>Using My Europeana</strong>: Saving searches, Saving items, and Adding tags.</li>
+</ul>'
+    ).publish!
+  end
+end
+
+unless Page.find_by_slug('help/search').present?
+  ActiveRecord::Base.transaction do
+    Page.create!(
+      slug: 'help/search',
+      title: 'Searching Europeana',
+      body: '<p>Welcome to Europeana. This page describes some of the things that you can do while you are here. Learn more about:
+  <ul class="zero">
+    <li><strong>Searching Europeana</strong>: Search tips, refined search, phrase search, exclude words, auto-completion, filter results, share your search.</li>
+    <li><strong>Exploring Europeana</strong>: exhibitions, new content.</li>
+    <li><strong>Results in Europeana</strong>: Seeing further details, rights and licence information, translating details, searching on external services, related searches on Europeana, viewing item on provider\'s site, embedding, and citing.</li>
+    <li><strong>Using My Europeana</strong>: Saving searches, saving items, and adding tags.</li>
+  </ul>
+
+<h2>General Search</h2>
+
+<p>Searching the millions of items in Europeana is simple. Just enter your search term and hit <strong>Search</strong>.</p>
+
+<h2>Specific search</h2>
+
+<p>You can narrow your search with the arrow to the right of <b>Search All fields</b> and selecting a category: <strong>Titles, Creators, Subjects, Dates/Periods, Places</strong>. Then enter your search term and hit <strong>Search</strong>.</p>
+
+<p>Alternatively, just ask yourself who, what, where or when you are interested in and type these words into Europeana\'s search box followed by a colon (:). Then enter your search term and hit <strong>Search</strong>.</p>
+
+<p>For specific searches, you could:</p>
+  <ul>
+    <li>Use the <strong>Creator</strong> filter or enter <strong>who:</strong> followed by a name of, for example, an actor, author or architect. Your results will display only items for which the name you entered is listed as the creator. For example, searching for <a href="search.html?query=who%3A+Vincent+van+Gogh">who: Vincent van Gogh</a> will narrow your results to van Gogh\'s works, excluding photographs of the artist or documentaries about him and his work.</li>
+    <li>Use the <strong>Subject</strong> or <strong>Title</strong> filter or enter <strong>what:</strong> followed by a type of item, a subject you are interested in or words from the title of the item you are looking for. Your search results will display only items of the requested type or subject or items whose title includes your search term. For example, searching for <a href="search.html?query=what%3A+maps">what: maps</a> will narrow your results to maps, or <a href="search.html?query=what%3A+art+nouveau">what: Art Nouveau</a> will display artworks, buildings and monuments done in the Art Nouveau style.</li>
+    <li>Use the <strong>Place</strong> filter or enter <strong>where:</strong> followed by a name of a town, city or country within Europe or around the world. Your search results will display only items which were created in, published in or depict the place you are searching for. For example, searching for <a href="search.html?query=where%3A+milan">where: Milan</a> will help you differentiate your search when you are looking only for objects created or held in Milan, excluding items on writer Milan Kundera from your search results.</li>
+    <li>Use the <strong>Date</strong> filter or enter <strong>when:</strong> followed by a date (e.g. 1945) or a period (e.g. Roman or Medieval). Your search results will display only items for which the date is listed in the item\'s date field. For example, searching for <a href="search.html?query=when%3A+1984">when: 1984</a> will help you differentiate your search when you are looking only for items dated 1984, excluding items that have 1984 in their title or description, like George Orwell\'s novel.</li>
+  </ul>
+
+<p>These search functions also have support for different spellings and languages. For example, when you search for <a href="search.html?query=where%3A+milan">where: Milan</a>, the results will also include items with Milano, Mailand or Milanas listed as their geographic coverage.</p>
+
+<h2>Phrase search</h2>
+
+<p><b>Phrase search</b> is also possible. Just put <b>quotation marks</b> (e.g. &ldquo;art nouveau&rdquo;) around the phrase you want to find, or type <strong>AND</strong> between the keywords (e.g. art <b>AND</b> nouveau).</p>
+
+<p><b>Exclude words</b> by typing <strong>NOT</strong> in capital letters, followed by the word you want to omit (e.g. Auguste <b>NOT</b> Renoir)</p>
+
+<p>Another helpful search feature is <b>Auto completion</b>. Start typing a search term. Europeana will suggest words that may match what you are thinking of. Just select the term you want and hit <strong>Search</strong></p>
+
+<h2>Refine your search</h2>
+
+ <p>Once you have done an initial search, results can be narrowed down with the <strong>Refine your search</strong> functions. These are in the grey pane on the search results screen. You can add more keywords to your search, thereby narrowing the search results. Just type your keyword into the <strong>Add more keywords</strong> field and hit <strong>+ Add</strong>. The keyword is displayed at the top of the pane, under <b>Matches for.</b></p>
+
+<p>To remove a keyword, hit the X icon next to the relevant keyword in the <strong>Matches for</strong> list.</p>
+
+<p>You can also <b>filter your search results:</b></p>
+  <ul class="zero">
+    <li><strong>By media type</strong> - will display only objects of a selected media type (images, text, video, sound or 3D). </li>
+    <li><strong>By language</strong> - will display only objects with descriptions in selected languages, i.e. the language of the institution that provided the object to Europeana.</li>
+    <li><strong>By date</strong> - will display only objects with selected dates.</li>
+    <li><strong>By country</strong> - will display only objects from selected countries, i.e. the country of the institution that provided the object to Europeana.</li>
+    <li><strong>By copyright</strong> – will display objects labelled with the selected copyright label(s). This copyright label indicates how you may reuse the digital object, including the preview.</li>
+    <li><strong>By provider</strong> - will display only objects from selected institutions</li>
+  </ul>
+
+<p>Select the filter name, e.g. \'By language\' to expand it. Then just use the check boxes for the categories you wish the search results to include. The results will refresh automatically. The filter will be added to the <strong>Matches for</strong> list at the top of the pane.</p>
+
+<p>To remove a filter, hit the X icon next to the item in the <strong>Matches for</strong> list, or de-select the check box next to the filter category.</p>
+
+<p>You can also select to <strong>Include content contributed by users</strong>. This means items that have not come from a cultural institution but from an individual user, for example, items contributed to the Europeana 1914-1918 project.</p>
+
+<p>Share your search with friends by choosing <b>Share</b>. A full list of social media sharing options is presented. Just select one you want. This also includes print and email options.</p>'
+    ).publish!
+  end
+end
+
+unless Page.find_by_slug('help/explore').present?
+  ActiveRecord::Base.transaction do
+    Page.create!(
+      slug: 'help/explore',
+      title: 'Exploring Europeana',
+      body: '<p>In addition to the search and filter options, Europeana offers alternative ways to explore and navigate through our millions of objects. You can discover Europe\'s rich heritage by browsing:</p>
+
+  <ul>
+    <li><strong>Exhibitions</strong>: Our virtual exhibitions help you discover and learn more about specific themes, e.g. Art Nouveau or musical instruments. With extensive curatorial information that guides you through the themes, the virtual exhibitions can be found by choosing the <strong>Exhibitions</strong> link at the foot of the page.</li>
+    <li><strong>New content</strong>: See the latest contributions from our partner museums, libraries, archives and audiovisual archives by choosing <strong>View more latest content from our partners</strong> in the <strong>Featured Partner</strong> area.</li>
+  </ul>'
+    ).publish!
+  end
+end
+
+unless Page.find_by_slug('help/results').present?
+  ActiveRecord::Base.transaction do
+    Page.create!(
+      slug: 'help/results',
+      title: 'Results in Europeana',
+      body: '<p>Europeana divides search results into 5 main categories: text, images, video, sound and 3D objects.</p>
+<p>The types of items included in each section are:</p>
+
+<ul class="zero">
+<li><strong>Texts</strong>: books, letters, archival papers, dissertations, poems, newspaper articles, facsimiles, manuscripts and music scores.</li>
+<li><strong>Images</strong>: paintings, drawings, prints, photographs, pictures of museum objects, maps, graphic designs, plans and musical notation.</li>
+<li><strong>Video</strong>: films, news broadcasts and television programmes</li>
+<li><strong>Sound</strong>: music and spoken word from cylinders, tapes, discs and radio broadcasts.</li>
+<li><strong>3D</strong>: virtual 3D representations of objects, architecture or places.</li>
+</ul>
+
+<p>You can also sort search results by media type, language, date, country, copyright, or provider using the Refine your search pane of the results screen. See <strong>Searching Europeana</strong> for more details.</p>
+
+<p>Search results are presented in a grid. You can select how many results to show on a page by selecting an option from the <strong>Results per page</strong> drop-down list either above or below the results. You can select <b>12, 24, 48</b> or <b>96</b>.</p>
+<p>To navigate through the results pages, select the single arrows that are shown both above and below the results grid. Hit &gt; or &lt; to move one page in either direction, or hit the double arrows &gt;&gt; or &lt;&lt; to move to the last/first pages. Alternatively, type in the page number of the page you\'d like to view.</p>
+<p><strong>Further details</strong> of an object can be found by selecting an item in the results list.</p>
+
+<h2>Individual items</h2>
+
+<p>After performing your search, select the item you want to view to find out more about it.</p>
+<p>The item page shows you the following:</p>
+
+  <ul class="zero">
+    <li><strong>Thumbnail image/preview</strong> - hit the magnifying glass <strong>View</strong> link at the bottom of the thumbnail to see a bigger image and additional information in a new window. To close that window, hit X at the top right.<br> 
+    If there are multiple images of the same object, e.g. pages of a book or different views of an object, a carousel of images is displayed under the main thumbnail. You can select items in the carousel or the left and right arrows on the main thumbnail to browse the images.</li>
+
+<li><strong>Rights and licensing</strong> - below each preview image you will find the rights statement indicating the terms on which you may re-use the digital object, including the preview. There are currently 12 rights statements describing the different terms on which re-use is permitted. Clicking on the rights statement will open a new window with a full description of the terms or, in the case of a Creative Commons licence, a link to the licence itself.</li>
+
+<li><strong>View item at</strong> - view the item on the item provider\'s own website. This is useful, for example, to find additional information and larger images, or to view an item in its fullest form, e.g. a whole book or video.</li>
+<li><strong>Share item</strong> - share the item via a range of social media, or to print or email it. Just select the option you want.</li>
+<li><strong>Cite on Wikipedia</strong> - this function will help you link to Europeana items and cite them in Wikipedia articles. The code you need is formatted for direct inclusion in Wikipedia\'s article authoring mode. Select <strong>Citation</strong> or <strong>Footnote</strong> and copy and paste the text provided. To close the citation window, hit the X in the top right corner.</li>
+<li><strong>Translate details</strong> - select an option from the drop-down list of languages. Please note this is a machine translation.</li>
+</ul>
+
+<p>The main area of the item page gives you more information about the item. The amount and type of information will vary but may contain the item\'s name and description along with other information including places, dates, formats, and providers.</p>
+
+<p>This information may contain links to further details. Select these to find the item in an external service, e.g. the data provider\'s own website, or to search Europeana for the highlighted term.</p>
+
+<p>To move to the previous or next item in your search results, hit the <strong>Next</strong> or <strong>Previous</strong> options.</p>
+
+<p>A carousel showing <strong>Similar content</strong> of up to 10 items related to the one you are viewing. Select an image to view more details.</p>
+
+<p>Another way of finding similar content is to use the links in the <strong>Search also for</strong> pane. This provides links to other searches for items with, for example, the same title, author, format or are from the same provider. A number in brackets, e.g. (33) shows the number of results each of these searches returns. Simply hit the link to perform the search.</p>'
+    ).publish!
+  end
+end
+
 error_pages = [
   { title: 'Error', body: "We're sorry! The portal has encountered an error. A report has been automatically sent to the Europeana team to notify us. You can try to reload the page or do another search.", http_code: 500 },
   { title: 'Forbidden', body: 'You do not have permission to access this resource.', http_code: 403 },
