@@ -1,5 +1,5 @@
 RSpec.describe HeroImage do
-  subject { FactoryGirl.create(:hero_image) }
+  subject { hero_images(:imageless) }
 
   it { is_expected.to belong_to(:media_object) }
   it { is_expected.to delegate_method(:file).to(:media_object) }

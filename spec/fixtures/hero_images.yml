@@ -1,0 +1,3 @@
+imageless:
+  settings: "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nattribution_title: website\nattribution_creator: author\nattribution_institution: The Firm\nattribution_url: http://firm.example.com/\ntext: description\nbrand_opacity: '50'\nbrand_position: topleft\nbrand_colour: site\n"
+  license: 'CC0'
