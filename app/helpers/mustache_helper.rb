@@ -246,24 +246,12 @@ module MustacheHelper
       footer: {
         linklist1: {
           title: t('global.more-info'),
-          items: [
+          items: Page.primary.map do |page|
             {
-              text: t('site.footer.menu.about'),
-              url: static_page_path('about', format: 'html')
+              text: t(page.slug, scope: 'site.footer.menu'),
+              url: static_page_path(page, format: 'html')
             }
-            # {
-            #   text: t('site.footer.menu.new-collections'),
-            #   url: '#'
-            # },
-            # {
-            #   text: t('site.footer.menu.data-providers'),
-            #   url: '#'
-            # },
-            # {
-            #   text: t('site.footer.menu.become-a-provider'),
-            #   url: '#'
-            # }
-          ]
+          end
         },
         xxx_linklist2: {
           title: t('global.help'),
