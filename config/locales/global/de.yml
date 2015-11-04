@@ -90,8 +90,8 @@ de:
         language_of_description: Sprache der Beschreibung
         media: 'Nur Objekte mit Link zum Medium '
         mime_type: Dateiformat
-        provider: 
-        reusability: Kann ich es verwenden?
+        provider: Beiträger
+        reusability: Verwendbarkeit
         sound_duration: Laufzeit
         sound_hq: Hohe Qualität
         text_fulltext: Volltext
@@ -185,7 +185,7 @@ de:
         'false': Nein
         'true': Ja
       type:
-        3d: 
+        3d: 3D
         image: Bild
         sound: Audio
         text: Text
@@ -248,7 +248,7 @@ de:
     help: Hilfe
     home: Startseite
     javascript-required: Um diese Inhalte zu sehen aktivieren Sie bitte JavaScript. Erwägen Sie zudem auf einen Web-Browser zurückzugreifen der HTML5-Inhalte unterstützt.
-    labs: 
+    labs: Labore
     labs-text: Remixen Sie kulturelle Inhalte mit unseren API & Datensätzen
     language-basque: Baskisch
     language-bulgarian: Bulgarisch
@@ -291,7 +291,7 @@ de:
     our-mission-text: Wer hat Angst vor dem jabberwocky?
     our-sites: Unsere Seiten
     password: Passwort
-    professional: 
+    professional: Pro
     professional-text: Machen Sie mit, teilen Sie Ihre Daten oder benutzen Sie unsere
     refine-your-search: Suche verfeinern
     register: Anmelden

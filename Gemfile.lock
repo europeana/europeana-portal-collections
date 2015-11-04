@@ -132,7 +132,6 @@ GEM
       thor (~> 0.19.1)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
-    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
@@ -168,11 +167,6 @@ GEM
       kaminari (~> 0.16)
     excon (0.45.4)
     execjs (2.5.2)
-    factory_girl (4.5.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.5.0)
-      factory_girl (~> 4.5.0)
-      railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
@@ -540,14 +534,12 @@ DEPENDENCIES
   clockwork (~> 1.2)
   colorize
   coveralls
-  database_cleaner (~> 1.4)
   delayed_job_active_record (~> 4.0.3)
   devise (~> 3.5)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.4.1)
   europeana-blacklight (~> 0.3.0)
   europeana-styleguide!
-  factory_girl_rails (~> 4.5)
   feedjira (~> 2.0)
   fog (~> 1.33)
   foreman
