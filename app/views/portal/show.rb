@@ -13,7 +13,7 @@ module Portal
 
     def page_title
       mustache[:page_title] ||= begin
-        CGI.unescapeHTML([@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - '))
+        CGI.unescapeHTML([document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - '))
       end
     end
 
@@ -168,12 +168,12 @@ module Portal
             # download: content_object_download,
             media: media_items,
             meta_additional: {
-              present: @document.fetch('proxies.dctermsSpatial', []).size > 0 ||
-                @document.fetch('proxies.dcCoverage', []).size > 0 ||
-                @document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
+              present: document.fetch('proxies.dctermsSpatial', []).size > 0 ||
+                document.fetch('proxies.dcCoverage', []).size > 0 ||
+                document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
                 (
-                  @document.fetch('places.latitude', []).size > 0 &&
-                  @document.fetch('places.longitude', []).size > 0
+                  document.fetch('places.latitude', []).size > 0 &&
+                  document.fetch('places.longitude', []).size > 0
                 ),
               places: data_section(
                 title: 'site.object.meta-label.location',
@@ -181,7 +181,7 @@ module Portal
                   {
                     title: 'site.object.meta-label.location',
                     fields: ['proxies.dctermsSpatial'],
-                    collected: pref_label('places.prefLabel')
+                    collected: document.fetch('places.prefLabel', []).first
                   },
                   {
                     title: 'site.object.meta-label.place-time',
@@ -197,7 +197,7 @@ module Portal
                 latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
                 long_and_lat: long_and_lat?,
-                placeName: pref_label('places.prefLabel'),
+                placeName: document.fetch('places.prefLabel', []).first,
                 labels: {
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
@@ -416,7 +416,7 @@ module Portal
           similar: {
             title: t('site.object.similar-items'),
             more_items_query: search_path(mlt: document.id),
-            more_items_load: document_similar_url(@document, format: 'json'),
+            more_items_load: document_similar_url(document, format: 'json'),
             more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
             items: @similar.map do |doc|
               {
@@ -547,7 +547,7 @@ module Portal
 
     def data_section_field_values(section)
       fields = (section[:fields] || []).map do |field|
-        @document.fetch(field, [])
+        document.fetch(field, [])
       end
 
       if section[:fields_then_fallback] && fields.present?
@@ -622,7 +622,7 @@ module Portal
     def data_section_nested_hash(mappings)
       {}.tap do |hash|
         mappings.each do |mapping|
-          val = render_document_show_field_value(@document, mapping[:field])
+          val = render_document_show_field_value(document, mapping[:field])
           if val.present?
             keys = (mapping[:map_to] || mapping[:field]).split('.')
             last = keys.pop
@@ -659,23 +659,6 @@ module Portal
         render_document_show_field_value(document, 'proxies.dcTitle')
       else
         title.first
-      end
-    end
-
-    def pref_label(field_name)
-      val = @document.fetch(field_name, [])
-      pref = nil
-      if val.size > 0
-        if val.is_a?(Array)
-          val[0]
-        else
-          pref = val[0][I18n.locale.to_sym]
-          if pref.size > 0
-            pref[0]
-          else
-            val[0][:en]
-          end
-        end
       end
     end
 
