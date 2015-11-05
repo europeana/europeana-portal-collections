@@ -680,7 +680,11 @@ module Portal
     end
 
     def creator_title
-      @creator_title ||= document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
+      @creator_title ||= begin
+        document.fetch('agents.prefLabel', []).first ||
+          render_document_show_field_value(document, 'dcCreator') ||
+          render_document_show_field_value(document, 'proxies.dcCreator')
+      end
     end
 
     def edm_preview

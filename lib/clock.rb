@@ -26,4 +26,8 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     Cache::RecordCounts::RecentAdditionsJob.perform_later
     Cache::RecordCounts::ProvidersJob.perform_later
   end
+
+  every(1.day, 'db.sweeper', at: ENV['SCHEDULE_DB_SWEEPER']) do
+    DeleteOldSearchesJob.perform_later
+  end
 end
