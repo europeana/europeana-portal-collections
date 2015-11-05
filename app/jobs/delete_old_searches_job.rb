@@ -3,7 +3,7 @@
 class DeleteOldSearchesJob < ActiveJob::Base
   queue_as :default
 
-  def perform(*args)
+  def perform
     Search.destroy_all(['updated_at < ?', Time.now - 1.week])
   end
 end
