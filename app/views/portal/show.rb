@@ -462,7 +462,7 @@ module Portal
     def named_entity_field_label(entity, field, i18n)
       val = entity[field.to_sym]
       if val.present?
-        val = val[:def][0] if (val.is_a?(Hash) && val.key?(:def))
+        val = val[:def][0] if val.is_a?(Hash) && val.key?(:def)
 
         multi = val.is_a?(Enumerable) && (val.size > 1)
 
