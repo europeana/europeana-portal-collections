@@ -1,13 +1,13 @@
 module Portal
   class Static < ApplicationView
     def page_title
-      @mustache[:page_title] ||= begin
+      mustache[:page_title] ||= begin
         @page.title
       end
     end
 
     def head_meta
-      @mustache[:head_meta] ||= begin
+      mustache[:head_meta] ||= begin
         [
           { meta_name: 'description', content: truncate(strip_tags(@page.body), length: 350, separator: ' ') }
         ] + super
@@ -15,7 +15,7 @@ module Portal
     end
 
     def content
-      @mustache[:content] ||= begin
+      mustache[:content] ||= begin
         {
           title: @page.title,
           text: @page.body,
@@ -27,7 +27,7 @@ module Portal
     end
 
     def navigation
-      @mustache[:navigation] ||= begin
+      mustache[:navigation] ||= begin
         hide_secondary_navigation? ? {} : {
           secondary: {
             items: secondary_navigation_items

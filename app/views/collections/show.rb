@@ -1,7 +1,7 @@
 module Collections
   class Show < ApplicationView
     def head_meta
-      @mustache[:head_meta] ||= begin
+      mustache[:head_meta] ||= begin
         [
           { meta_name: 'description', content: truncate(strip_tags(@landing_page.body), length: 350, separator: ' ') }
         ] + super
@@ -9,7 +9,7 @@ module Collections
     end
 
     def page_title
-      @mustache[:page_title] ||= begin
+      mustache[:page_title] ||= begin
         (@landing_page.title || @collection.key) + ' Collection - Alpha'
       end
     end
@@ -19,7 +19,7 @@ module Collections
     end
 
     def globalnav_options
-      @mustache[:globalnav_options] ||= begin
+      mustache[:globalnav_options] ||= begin
         {
           search: false,
           myeuropeana: true
@@ -28,7 +28,7 @@ module Collections
     end
 
     def content
-      @mustache[:content] ||= begin
+      mustache[:content] ||= begin
         {
           channel_info: {
             name: @landing_page.title,

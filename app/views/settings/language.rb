@@ -5,7 +5,7 @@ module Settings
     end
 
     def settings
-      @mustache[:settings] ||= begin
+      mustache[:settings] ||= begin
         {
           language: {
             form: {

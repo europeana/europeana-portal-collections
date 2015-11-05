@@ -7,9 +7,4 @@
 # templates.
 class ApplicationView < Europeana::Styleguide::View
   include MustacheHelper
-
-  def initialize(*args)
-    super
-    @mustache = {}
-  end
 end
