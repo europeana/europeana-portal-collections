@@ -2,7 +2,7 @@ require 'support/shared_examples/page_with_top_nav'
 
 RSpec.describe 'browse/new_content.html.mustache' do
   let(:providers) do
-    time_now = Time.now
+    time_now = Time.zone.now
     [
       { label: 'A Provider', count: 1000, from: time_now },
       { label: 'Another Provider', count: 2000, from: time_now },
