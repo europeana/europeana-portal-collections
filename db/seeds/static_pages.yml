@@ -604,5 +604,47 @@ we will produce a version &ndash; post this prototype phase &ndash; for blind in
 <p>Ultimately, at a political and policy-making level, it is in the interests of society that Public Domain knowledge and information be digitised. Once digitised, it should be freely available to creative enterprise, <abbr title=\"Research and Development\">R&amp;D</abbr> innovators and technical entrepreneurs to use as the basis for generating ideas and applications yet to be envisaged.</p>
 <p>The aim of this Charter is to give a clear signal to content providers, policy makers and the public that Europeana and the Europeana Foundation believe in and wish to strengthen the concept of the Public Domain in the digitised world. In order to do so we need a robust and up-to-date understanding of the nature of this essential resource.</p>
 <p><strong>If you would like to respond to the Europeana Public Domain Charter, please contact <a href='m&#97;&#105;lt&#111;&#58;i%6Ef%6F%40eu%7&#50;%&#54;&#70;peana&#46;eu%3F&#115;%75%62jec%&#55;4&#61;Pu&#98;li&#37;&#54;3&#37;&#37;&#51;20Do%6D&#97;&#105;n%2%&#51;&#48;&#37;43&#104;arter'>info@europeana.eu</a></strong></p>"
-- :slug:
-  
+- :slug: rights/rr-f
+  :title: "Rights Reserved - Free Access"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-copyright\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Rights Reserved - Free Access</span></p>
+<p>This digital object is protected by copyright and/or related rights. This digital object is accessible without charge, but its use is subject to the licensing conditions set by the organization giving access to it.</p>
+<p>Unless expressly stated otherwise in the licensing conditions, you are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>
+<p>All other acts of reproduction and communication to the public are subject to the licensing conditions attached to the digital object.</p>"
+- :slug: rights/rr-r
+  :title: "Rights Reserved - Restricted Access"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-copyright\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Rights Reserved - Restricted Access</span></p>
+<p>This item is protected by copyright and/or related rights. This item is only accessible through registration or some other form of controlled access and subject to the licensing conditions set by the organization giving access to it.</p>
+<p>Unless expressly stated otherwise in the licensing conditions, you are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>
+<p>All other acts of reproduction and communication to the public are subject to the licensing conditions attached to the work.</p>"
+- :slug: rights/rr-p
+  :title: "Rights Reserved - Paid Access"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-copyright\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Rights Reserved - Paid Access</span></p>
+<p>This digital object is protected by copyright and/or related rights. This digital object is only accessible against payment of a fee and its use is subject to the licensing conditions set by the organization giving access to it.</p>
+<p>Unless expressly stated otherwise in the licensing conditions, you are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>
+<p>All other acts of reproduction and communication to the public are subject to the licensing conditions attached to the digital object.</p>"
+- :slug: rights/unknown
+  :title: "Unknown copyright status"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-unknown\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Unknown copyright status</span></p>
+<p>The copyright and related rights status of this digital object is unknown. Please refer to the website of the Data Provider for additional information.</p>
+<p>You are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>"
+- :slug: rights/orphan-work-eu
+  :title: "Orphan work"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-unknown\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Orphan work</span></p>
+<p>This item has been identified as an orphan work in the country of first publication and in line Directive 2012/28/EU of the European Parliament and of the Council of 25 October 2012 on certain permitted uses of orphan works.</p>
+<p>For this item no rightholder(s) have been identified or, if one or more of them have been identified, none has been located despite a diligent search for the rightholders having been carried out. <!--The results of the diligent search are available in <a href=\"http://oami.europa.eu\" title=\"Office for harmonization in the internal market\">the single european database</a>.--></p>
+<p>If you have information about the identity or the location of the rightholder(s), please contact the Data Provider.</p>
+<p>You are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>"
+- :slug: rights/out-of-copyright-non-commercial
+  :title: "Out of copyright - non commercial re-use"
+  :body: "<p>
+<span aria-hidden=\"true\" class=\"icon-publicdomain\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span>
+<span aria-hidden=\"true\" class=\"icon-nc\" style=\"font-size:1.6em; position: relative; right: 0.1em;\" rev=\"foaf:logo\" alt=\"\"></span> 
+<span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Out of copyright - non commercial re-use</span></p>
+
+<p>This object has been digitized in a public-private partnership. As part of this partnership, the partners have agreed to limit commercial uses of this digital representation of the object by third parties.</p>
+
+<p>You can, without permission, copy, modify, distribute, display, or perform the digital object, for non-commercial uses. For any other permissible uses, please review the terms and conditions of the Data Provider.</p>
+
+<p>In some jurisdictions moral rights of the author may persist beyond the term of copyright. These rights may include the right to be identified as the author and the right to object to derogatory treatments.</p>
+
+<p>When using this digital object please respect <a href=\"pd-usage-guide.html\" title=\"Read the Europeana's usage guidelines for public domain works\">Europeana's usage Guidelines for public domain works</a>.</p>"
