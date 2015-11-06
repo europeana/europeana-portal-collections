@@ -54,15 +54,15 @@ module Portal
       base = page_has_non_home_parent? ? @page.parent : @page
       [
         {
-          url: static_page_path(base),
+          url: static_page_path(base, format: 'html'),
           text: base.title,
-          is_current: current_page?(static_page_path(base)),
+          is_current: current_page?(static_page_path(base, format: 'html')),
           submenu: base.children.blank? ? nil : {
             items: base.children.map do |child|
               {
-                url: static_page_path(child),
+                url: static_page_path(child, format: 'html'),
                 text: child.title,
-                is_current: current_page?(static_page_path(child)),
+                is_current: current_page?(static_page_path(child, format: 'html')),
                 submenu: false
               }
             end
