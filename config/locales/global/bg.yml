@@ -1,27 +1,27 @@
-ro:
+bg:
   Symphonies: 
   global:
-    about-us: Despre noi
+    about-us: 
     channel:
-      archaeology: arheologie
-      architecture: arhitectură
-      art: artă
-      fashion: modă
-      home: Acasă
-      maps: hărți
-      music: muzică
-      natural-history: istorie naturală
-      newspapers: presă
-      performing-arts: artele spectacolului
+      archaeology: 
+      architecture: 
+      art: 
+      fashion: 
+      home: 
+      maps: 
+      music: 
+      natural-history: 
+      newspapers: 
+      performing-arts: 
     channels-art: 
     channels-art-image: 
     channels-art-link: 
     channels-art-url: 
-    channels-fashion: Modă
-    channels-music: Muzică
+    channels-fashion: 
+    channels-music: 
     channels-music-link: 
-    choose-language: Limbă
-    email-address: adresă de email
+    choose-language: 
+    email-address: 
     facet:
       advanced:
         options: 
@@ -33,7 +33,7 @@ ro:
       art:
         form:
           paintings:
-            genre: Sex
+            genre: 
             medium: 
       carrier: 
       colour: 
