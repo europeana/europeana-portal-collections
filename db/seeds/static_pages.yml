@@ -210,7 +210,7 @@
 <p><a href=\"http://pro.europeana.eu/web/guest/data-exchange-agreement\" target=\"_blank\">The Europeana Data Exchange Agreement</a> governs the relationship between Europeana and the institutional data providers. The <a href=\"terms-for-user-contributions.html\">terms for user contributions</a> governs the terms on which users contribute data to Europeana.</p>
 <p><strong>Our policies</strong> contains Europeana's policies.</p>
 <p>The <a href=\"/portal/rights/privacy.html\">Privacy</a> policy details how we treat personal information that we have collected from our users. The <a href=\"/portal/rights/languagepolicy.html\">Language</a> policy describes Europeana's policy for providing information in a users own language and <a href=\"/portal/rights/accessibility.html\">Accessibility</a> describes Europeana's aim to provide functionality and content that is universally accessible. In this section you will also find the <a href=\"public-domain-charter.html\">Europeana Public Domain Charter</a> that explains Europeana's contribution to strengthening the digital Public Domain.</p>"
-- :slug: rights/terms-of-use
+- :slug: rights/terms
   :title: Terms of Use
   :body: "<p>The Europeana.eu website is run by the Europeana Foundation and gives access to a wide range of digitised cultural heritage from across Europe and beyond. This material is provided to Europeana by a large number of contributing institutions and organisations. Europeana strives to make all resources on this website available for re-use. As part of this, all metadata (textual information on digitised cultural heritage) on the site are published without any restrictions on re-use. Most other material, such as the previews to digitised cultural heritage, is clearly labelled with rights statements that indicate if and under which conditions it can be re-used.</p>
 <p><strong>Metadata</strong></p>
@@ -232,7 +232,7 @@
 <p>These terms of use do not pertain to the metadata, previews and other content of virtual exhibitions offered by Europeana on <a href=\"http://exhibitions.europeana.eu\" target=\"_blank\">exhibitions.europeana.eu</a>.</p>
 <p>By exercising any rights to the website or its content on grounds of these terms of use, you accept and agree to be bound to these terms of use. Europeana reserves the right to amend these terms of use.</p>
 <p>These terms of use are governed by the laws of The Netherlands.</p>"
-- :slug: rights/metadata-usage-guidelines
+- :slug: rights/metadata
   :title: Usage Guidelines for Metadata
   :body: "<p>These usage guidelines are based on goodwill, they are not a legal contract but Europeana requests that you follow these guidelines if you use metadata from Europeana.</p>
 <p>All metadata published by Europeana are available free of restriction under the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>. However, Europeana requests that you actively acknowledge and give attribution to all metadata sources, such as the data providers (being a specific cultural heritage institution) and any data aggregators, including Europeana.</p>
@@ -260,7 +260,7 @@
 <li>Be aware of any additional applicable community norms of data providers and data aggregators.</li>
 </ul>
 <p><strong>Thank you for your cooperation</strong></p>"
-- :slug: rights/pd-usage-guide
+- :slug: rights/public-domain
   :title: Public Domain Usage Guidelines
   :body: "<p><strong>Give credit where credit is due.</strong> When you use a public domain 
 work please credit the author or creator. Please also credit the 
@@ -302,7 +302,7 @@ domain work should not remove any public domain mark or notice that has
 been applied, or provide misleading information about its copyright 
 status.</p>
 <p><strong>This usage guide is based on goodwill. It is not a legal contract. We ask that you respect it.</strong></p>"
-- :slug: rights/api-terms-of-use
+- :slug: rights/api
   :title: API Terms of Use
   :body: "<p><strong>Definitions:</strong></p>
 <p>In these terms of use, the following terms are defined as follows:</p>
@@ -352,7 +352,7 @@ status.</p>
 <li>The rights provided to the User in these terms of use will expire automatically upon any breach by the User of the terms included herein.</li>
 <li>These terms of use are governed by the laws of The Netherlands.</li>
 </ol>"
-- :slug: rights/linked-data-sources
+- :slug: rights/data-sources
   :title: Europeana Data Sources
   :body: "<p>Europeana collects data relating to digital objects held by galleries, libraries, archives and museums across Europe (the &lsquo;Europeana data providers&rsquo;). The descriptive metadata provided by these institutions are provided to Europeana under terms that allow Europeana to aggregate it, to enrich it and to publish resulting data under the terms of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>. If you re-use data published by Europeana, we encourage you to follow the <a href=\"metadata-usage-guidelines.html\">Europeana Usage Guidelines for Metadata</a> and to provide attribution to the data sources including, where possible, links to the digital objects on the original data providers' websites.</p>
 <p>In addition to our data providers, who supply object-related data, Europeana uses a number of other sources to enrich data. Europeana wishes to express thanks to the contributors of these projects who enable us to improve the quality of our data. Please find below a list of data sources used by Europeana:</p>
@@ -361,7 +361,7 @@ status.</p>
 <li about=\"http://dbpedia.org/\">DBpedia (<a href=\"http://dbpedia.org/About\" target=\"_blank\">dbpedia.org</a>) DBpedia is a project providing access to structured content extracted from the information created as part of Wikipedia. The DBpedia datasets include structured information about persons, places, organizations...  The DBpedia datasets are licensed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\" target=\"_blank\" rel=\"license\">Creative Commons attribution licence</a> and the <a href=\"http://www.gnu.org/licenses/fdl.html\">GNU Free Documentation License</a>.</li>
 <li about=\"http://www.eionet.europa.eu/gemet/\">GEMET (<a href=\"http://www.eionet.europa.eu/gemet/\" target=\"_blank\">www.eionet.europa.eu/gemet</a>) GEMET is a multilingual thesaurus for environment. GEMET is available under the terms of the <a href=\"http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB\" target=\"_blank\" rel=\"license\">Creative Commons attribution licence</a>.</li>
 </ul>"
-- :slug: rights/terms-for-user-contributions
+- :slug: rights/contributions
   :title: Terms for User Contributions
   :body: "<p>This document contains the terms applicable to Users who contribute Content and Metadata to Websites (including but not limited to Europeana.eu) operated by the Europeana Foundation. As a User, you should be aware that the Europeana Foundation strives to make all Content and Metadata available for re-use with a minimum of restrictions.</p>
 <p>As part of this policy, the Europeana Terms for User Contributions establish that all Content that is contributed to Europeana by its Users will be made available on Websites operated by the Europeana Foundation (including but not limited to Europeana.eu) under the terms of a <a href=\"http://creativecommons.org/licenses/by-sa/3.0/\" target=\"_blank\">Creative Commons Attribution-ShareAlike licence</a>. This means that, when a User uploads Content on Websites operated by the Europeana Foundation (including but not limited to Europeana.eu), he/she irrevocably grants Third Parties the right to freely use that Content, as long as they attribute the work to the author and share alterations of that Content under the same conditions. In addition, all Metadata contributed by Users to Europeana will be made available under the terms of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>. This means that the User irrevocably grants Third Parties the right to freely use such Metadata without any restrictions. </p>
@@ -498,7 +498,7 @@ Last amendment: 30 September 2008</p>
 <p>If you encounter any problem using this site or wish to make general comments/suggestions, please use this <a class=\"fn url\" href=\"../contact.html\" title=\"Contact us with any general comments or suggestions\">contact form</a>.</p>
 <p>All of our online forms that require you to enter personal information are designed to meet privacy requirements. This privacy policy provides further details.</p>
 <p>The translations are made on a voluntary basis by our partners and are for information only. The legally valid text is in English only.</p>"
-- :slug: rights/languagepolicy
+- :slug: rights/language
   :title: Language policy
   :body: "<p>Europeana.eu follows similar policy guidelines to <a class=\"external fn url\" href=\"http://europa.eu/\" target=\"_blank\">Europa</a> (the portal site of The European Union)</p>
 <p><strong><i>As far as possible, the aim is to provide the public with the information they
@@ -604,3 +604,5 @@ we will produce a version &ndash; post this prototype phase &ndash; for blind in
 <p>Ultimately, at a political and policy-making level, it is in the interests of society that Public Domain knowledge and information be digitised. Once digitised, it should be freely available to creative enterprise, <abbr title=\"Research and Development\">R&amp;D</abbr> innovators and technical entrepreneurs to use as the basis for generating ideas and applications yet to be envisaged.</p>
 <p>The aim of this Charter is to give a clear signal to content providers, policy makers and the public that Europeana and the Europeana Foundation believe in and wish to strengthen the concept of the Public Domain in the digitised world. In order to do so we need a robust and up-to-date understanding of the nature of this essential resource.</p>
 <p><strong>If you would like to respond to the Europeana Public Domain Charter, please contact <a href='m&#97;&#105;lt&#111;&#58;i%6Ef%6F%40eu%7&#50;%&#54;&#70;peana&#46;eu%3F&#115;%75%62jec%&#55;4&#61;Pu&#98;li&#37;&#54;3&#37;&#37;&#51;20Do%6D&#97;&#105;n%2%&#51;&#48;&#37;43&#104;arter'>info@europeana.eu</a></strong></p>"
+- :slug:
+  
