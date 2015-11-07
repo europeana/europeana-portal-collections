@@ -16,19 +16,14 @@ nl:
     channels-art: Test text
     channels-art-image: Test text
     channels-art-link: Test text
-    channels-art-url: 
     channels-fashion: Mode
     channels-music: Muziek
-    channels-music-link: 
     choose-language: Taal
     email-address: e-mail adres
     facet:
       advanced:
         options: 
         show:
-          direct:
-            links: 
-          thumbnails: 
           ugc: 
       art:
         form:
@@ -281,7 +276,6 @@ nl:
     language-swedish: 
     language-ukranian: 
     login: 
-    logo-image: 
     more:
       load-more: 
       show-more: 
@@ -297,12 +291,6 @@ nl:
     register: 
     research: Research
     research-text: Voor academici
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: Zoek
       search-placeholder-text: Voeg een zoekfunctie toe

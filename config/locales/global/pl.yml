@@ -16,19 +16,14 @@ pl:
     channels-art: Kanały sztuka kanał
     channels-art-image: Kanały sztuka obraz
     channels-art-link: Kanały sztuka link
-    channels-art-url: 
     channels-fashion: Moda
     channels-music: Muzyka
-    channels-music-link: 
     choose-language: Język
     email-address: email
     facet:
       advanced:
         options: Opcje
         show:
-          direct:
-            links: 
-          thumbnails: 
           ugc: 
       art:
         form:
@@ -281,7 +276,6 @@ pl:
     language-swedish: Szwedzki
     language-ukranian: Ukraiński
     login: Login
-    logo-image: 
     more:
       load-more: Więcej
       show-more: Pokaż więcej
@@ -297,12 +291,6 @@ pl:
     register: Zarejestruj się
     research: Badania naukowe
     research-text: Dołącz do środowisk naukowych
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: Szukaj
       search-placeholder-text: Dodaj słowo kluczowe

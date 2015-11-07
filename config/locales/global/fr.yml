@@ -16,19 +16,14 @@ fr:
     channels-art: 
     channels-art-image: 
     channels-art-link: 
-    channels-art-url: 
     channels-fashion: 
     channels-music: 
-    channels-music-link: 
     choose-language: 
     email-address: 
     facet:
       advanced:
         options: 
         show:
-          direct:
-            links: 
-          thumbnails: 
           ugc: 
       art:
         form:
@@ -281,7 +276,6 @@ fr:
     language-swedish: 
     language-ukranian: 
     login: 
-    logo-image: 
     more:
       load-more: 
       show-more: 
@@ -297,12 +291,6 @@ fr:
     register: 
     research: 
     research-text: 
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: 
       search-placeholder-text: 
