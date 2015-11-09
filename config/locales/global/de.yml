@@ -16,19 +16,14 @@ de:
     channels-art: 
     channels-art-image: 
     channels-art-link: 
-    channels-art-url: 
     channels-fashion: Mode
     channels-music: Musik
-    channels-music-link: 
     choose-language: Sprache
     email-address: E-Mail-Adresse
     facet:
       advanced:
         options: Einstellungen
         show:
-          direct:
-            links: 
-          thumbnails: 
           ugc: 
       art:
         form:
@@ -281,7 +276,6 @@ de:
     language-swedish: Schwedisch
     language-ukranian: Ukrainisch
     login: 
-    logo-image: 
     more:
       load-more: Mehr
       show-more: Mehr anzeigen
@@ -297,12 +291,6 @@ de:
     register: Anmelden
     research: Forschung
     research-text: Mit der akademischen Gemeinschaft verbinden
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: Suche
       search-placeholder-text: Fügen Sie einen Suchbegriff ein

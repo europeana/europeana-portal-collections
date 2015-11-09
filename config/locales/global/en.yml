@@ -13,23 +13,18 @@ en:
       natural-history: natural history
       newspapers: newspapers
       performing-arts: performing-arts
-    channels-art: 'Channels art channel '
-    channels-art-image: 'Channels art image '
-    channels-art-link: Channels art link
-    channels-art-url: 
+    channels-art: Art History Collection
+    channels-art-image: Art History Collection image
+    channels-art-link: 'Art History Collection '
     channels-fashion: Fashion
     channels-music: Music
-    channels-music-link: 
     choose-language: Language
     email-address: email address
     facet:
       advanced:
         options: Options
         show:
-          direct:
-            links: 
-          thumbnails: 
-          ugc: 
+          ugc: User generated content
       art:
         form:
           paintings:
@@ -79,7 +74,7 @@ en:
         unitedstatesofamerica: USA
       creator: creator
       header:
-        channel: Channels
+        channel: Collections
         colourpalette: Colour
         country: Country
         data_provider: Data Provider
@@ -152,7 +147,7 @@ en:
       more: More
       more-refinements: More refinements
       resource:
-        type: 
+        type: Type
       reusability:
         advanced: Advanced
         advanced-cc-by: CC BY
@@ -230,7 +225,7 @@ en:
       header:
         video_hd:
           'true': HD
-    find-us-elsewhere: 
+    find-us-elsewhere: Find us elsewhere
     forgot-password: Forgot your password?
     genres: genres
     genres-chamber-music: Chamber music
@@ -282,7 +277,6 @@ en:
     language-swedish: Swedish
     language-ukranian: Ukrainian
     login: Login
-    logo-image: 
     more:
       load-more: More
       show-more: Show more
@@ -298,12 +292,6 @@ en:
     register: Register
     research: Research
     research-text: Connecting to the academic community
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: Search
       search-placeholder-text: Add a search term
@@ -319,5 +307,5 @@ en:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Results
+        show-results-all: Show all results

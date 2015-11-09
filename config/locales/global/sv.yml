@@ -16,19 +16,14 @@ sv:
     channels-art: 
     channels-art-image: 
     channels-art-link: 
-    channels-art-url: 
     channels-fashion: 
     channels-music: Musik
-    channels-music-link: 
     choose-language: 
     email-address: 
     facet:
       advanced:
         options: 
         show:
-          direct:
-            links: 
-          thumbnails: 
           ugc: 
       art:
         form:
@@ -281,7 +276,6 @@ sv:
     language-swedish: 
     language-ukranian: 
     login: Logga in
-    logo-image: 
     more:
       load-more: Mer
       show-more: Visa mer
@@ -297,12 +291,6 @@ sv:
     register: Registrera dig
     research: Research
     research-text: 
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: 
       search-placeholder-text: 

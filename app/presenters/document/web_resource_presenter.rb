@@ -183,9 +183,10 @@ module Document
     end
 
     def download_disabled?
-      blacklisted1 = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/ http://www.europeana.eu/rights/rr-f/)
-      blacklisted2 = %w(http://www.europeana.eu/rights/test-orphan http://www.europeana.eu/rights/unknown)
-      blacklisted1.include?(media_rights) || blacklisted2.include?(media_rights)
+      # blacklisted1 = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/ http://www.europeana.eu/rights/rr-f/)
+      # blacklisted2 = %w(http://www.europeana.eu/rights/test-orphan http://www.europeana.eu/rights/unknown)
+      # blacklisted1.include?(media_rights) || blacklisted2.include?(media_rights)
+      false
     end
 
     def thumbnail
