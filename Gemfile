@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
 gem 'rails', '4.2.4'
 
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'fae98a1'
