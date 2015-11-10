@@ -57,9 +57,12 @@ es:
       menu:
         about: Acerca de
         become-a-provider: 
+        contact: 
         copyright: Derechos de Autor
         data-providers: Todos los proveedores de datos
+        help: 
         new-collections: Nuevas Colecciones
+        rights: 
         search-tips: 'Consejos de búsqueda '
         using-myeuropeana: Usando Mi Europeana
     home:

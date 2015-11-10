@@ -56,9 +56,12 @@ de:
       menu:
         about: "Über Uns"
         become-a-provider: Werden Sie ein Datengeber
+        contact: 
         copyright: Urheberrecht
         data-providers: Alle Datengeber
+        help: 
         new-collections: Neue Sammlungen
+        rights: 
         search-tips: Suchtipps
         using-myeuropeana: My Europeana benutzen
     home:

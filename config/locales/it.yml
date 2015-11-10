@@ -56,9 +56,12 @@ it:
       menu:
         about: 
         become-a-provider: 
+        contact: 
         copyright: 
         data-providers: 
+        help: Aiuto
         new-collections: 
+        rights: 
         search-tips: 
         using-myeuropeana: 
     home:

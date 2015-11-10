@@ -6,11 +6,11 @@ pt:
       all_exhibitions: 
       blog: 
       browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
+      browse_colours: Cores
+      browse_newcontent: Novo conteúdo
+      browse_sources: Fontes
       channels: 
-      collections: 
+      collections: Colecções
       exhibitions: 
       home: 
     pro-link: 
@@ -20,12 +20,12 @@ pt:
     alpha:
       feedback_banner:
         description: 
-        link-text: 
+        link-text: Dê-nos a sua opinião!
         title: 
     blog-link: 
     browse:
       colours:
-        title: 
+        title: Cores
       newcontent:
         title: 
       sources:
@@ -33,37 +33,40 @@ pt:
     collections:
       art-history:
         description: 
-        title: 
+        title: Europeana História de Arte
       data-types:
-        3d: 
+        3d: objectos 3D
         count: 
         images: 
         moving-images: 
         sound: 
-        texts: 
+        texts: Textos
       labels:
         credits: 
         recent: 
         spotlight-on: 
       music:
         description: 
-        title: 
+        title: Europeana Música
     facet:
       language:
         show:
-          results: 
+          results: Resultados
     footer:
       menu:
-        about: 
+        about: Sobre
         become-a-provider: 
+        contact: 
         copyright: 
         data-providers: 
+        help: 
         new-collections: 
+        rights: 
         search-tips: 
         using-myeuropeana: 
     home:
       strapline: 
-    more: 
+    more: Mais...
     my-europeana: 
     my-europeana-link: 
     navigation:
@@ -78,15 +81,15 @@ pt:
         attribute-html: 
         attribute-plaintext: 
         download: 
-        download-additional: 
+        download-additional: Também disponível como
         downloaddata: 
         open-media: 
-        show-less-data: 
-        show-more-data: 
+        show-less-data: Mostrar menos informação
+        show-more-data: Mostrar mais informação
         technicalmetadata: 
       enrichment:
         who:
-          title: 
+          title: Título
       hierarchy:
         title: 
         view-items-above: 
@@ -104,27 +107,27 @@ pt:
         current-location: 
         data-provider: 
         date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        dates: Datas
+        description: Descrição
+        dimensions: Dimensões
+        duration: Duração
         edm:
-          has-met: 
-          incorporates: 
+          has-met: Está relacionado com
+          incorporates: Incorpora
           is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
+          is-representation-of: "É representação de"
+          is-similar-to: "É semelhante a"
           is-successor-of: 
           realises: 
           was-present-at: 
-        extent: 
-        file-size: 
-        format: 
+        extent: Tamanho
+        file-size: Tamanho de ficheiro
+        format: Formato
         fps: 
         has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
+        identifier: Identificador
+        is-format-of: "É formato de"
+        is-part-of: "É parte de"
         is-referenced-by: 
         is-replaced-by: 
         is-required-by: 
@@ -139,26 +142,26 @@ pt:
         people: 
         period: 
         place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
+        place-time: Local/Tempo
+        properties: Propriedades
+        provenance: Proveniência
+        provided-by: Saiba mais
+        provided-by-detail: poderá haver mais informação e media para este
         provider: 
         providing-country: 
-        publication-date: 
+        publication-date: Data de publicação
         publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
+        references: Referências
+        refs-rels: Referências e relações
+        relations: Relações
+        rights: Direitos
+        rights-human: Posso usar isto?
         runtime: 
-        runtime-unit-seconds: 
-        source: 
+        runtime-unit-seconds: segundos
+        source: Fonte
         subject: 
         temporal: 
-        time: 
+        time: Tempo
         timestamp-created: 
         timestamp-updated: 
         timestamp_created: 
@@ -180,26 +183,26 @@ pt:
           end: 
           label: 
           term: 
-          title: 
+          title: Quando
         where:
           label: 
           latitude: 
           longitude: 
           term: 
-          title: 
+          title: Onde
         who:
           label: 
           term: 
-          title: 
+          title: Quem
       nav:
-        next: 
-        prev: 
+        next: Seguinte
+        prev: Anterior
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
+        east: Este
+        north: Norte
+        south: Sul
+        west: Oeste
+      show-more-similar-items: mostrar mais
       similar-items: 
     pages:
       '404':
@@ -216,28 +219,28 @@ pt:
         configure-actions: 
         dutchmasters: 
         favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        label: Acções
+        newcollection: Nova Colecção
+        product-save: Guardar
+        saveto: Guardar para
+        show-all-collections: Mostrar todas as colecções
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
+          3D: 3D
+          images: Imagens
+          text: Texto
+          video: Video
+        count-and-terms: "%{results_count} resultados"
+        empty: Sem Resultados
+        empty-with-terms: A sua pesquisa por %{query_terms} obteve nenhum resultado
+        header: Resultados para
+        header-and: e
         in-channel: 
-        less: 
+        less: Menos
         less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
+        more: Mais
+        more_adv: Filtros Avançados
+        product-3D: 3D
         product-image: 
         product-sound: 
         product-text: 
@@ -264,7 +267,7 @@ pt:
         available: 
         default: 
         flash:
-          alert: 
+          alert: 'Língua especificada inválida. Línguas disponíveis:  %{locales}'
           notice: 
-        label: 
+        label: Língua
         settings-label: 
