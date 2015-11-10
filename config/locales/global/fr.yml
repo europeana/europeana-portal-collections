@@ -1,105 +1,105 @@
 fr:
   Symphonies: 
   global:
-    about-us: 
+    about-us: "À propos"
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
-      home: 
-      maps: 
-      music: 
-      natural-history: 
+      archaeology: archéologie
+      architecture: architecture
+      art: art
+      fashion: mode
+      home: Accueil
+      maps: cartes
+      music: musique
+      natural-history: histoire naturelle
       newspapers: 
-      performing-arts: 
+      performing-arts: arts vivants
     channels-art: 
     channels-art-image: 
     channels-art-link: 
-    channels-fashion: 
-    channels-music: 
-    choose-language: 
+    channels-fashion: Mode
+    channels-music: Musique
+    choose-language: Langue
     email-address: 
     facet:
       advanced:
-        options: 
+        options: Options
         show:
           ugc: 
       art:
         form:
           paintings:
-            genre: 
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            genre: Genre
+            medium: Technique
+      carrier: Support
+      colour: Couleur
+      colour-black-and-white: Noir et blanc
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        austria: Autriche
+        belgium: Belgique
+        bulgaria: Bulgarie
+        croatia: Croatie
+        cyprus: Chypre
+        czechrepublic: République tchèque
+        denmark: Danemark
+        estonia: Estonie
+        europe: Europe
+        finland: Finlande
+        france: France
+        germany: Allemagne
+        greece: Grèce
+        hungary: Hongrie
+        iceland: Islande
+        ireland: Irlande
+        israel: Israël
+        italy: Italie
+        latvia: Lettonie
+        lithuania: Lituanie
+        luxembourg: Luxembourg
+        malta: Malte
+        netherlands: Pays-Bas
+        norway: Norvège
+        poland: Pologne
+        portugal: Portugal
+        romania: Roumanie
+        russia: Russie
+        serbia: Serbie
+        slovakia: Slovaquie
+        slovenia: Slovénie
+        spain: Espagne
+        sweden: Suède
+        switzerland: Suisse
+        turkey: Turquie
+        ukraine: Ukraine
+        unitedkingdom: Royaume-Uni
+        unitedstatesofamerica: "États-Unis"
+      creator: auteur
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
+        channel: Collections
+        colourpalette: Couleur
+        country: Pays
+        data_provider: Auteur des données
+        image_aspectratio: Orientation
+        image_colour: Palette
+        image_size: Taille
+        language: Langue
+        language_of_description: Langue de la description
         media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
+        mime_type: Format du fichier
+        provider: Aggrégateur
+        reusability: Puis-je l'utiliser?
+        sound_duration: Durée
+        sound_hq: Haute qualité
+        text_fulltext: Texte intégral
         type: 
         ugc: 
-        video_duration: 
-        year: 
+        video_duration: Durée de la vidéo
+        year: Date
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: Paysage
+        portrait: Portrait
       image_colour:
-        'false': 
-        'true': 
+        'false': Noir et blanc
+        'true': Couleur
       image_size:
         extra_large: 
         large: 
@@ -140,10 +140,10 @@ fr:
         tr: 
         uk: 
         yi: 
-      less: 
+      less: Moins
       media:
-        'false': 
-        'true': 
+        'false': Non
+        'true': Oui
       more: 
       more-refinements: 
       resource:
@@ -224,7 +224,7 @@ fr:
     'facet ':
       header:
         video_hd:
-          'true': 
+          'true': HD
     find-us-elsewhere: 
     forgot-password: 
     genres: 
