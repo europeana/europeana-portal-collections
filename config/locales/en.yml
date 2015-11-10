@@ -57,9 +57,12 @@ en:
       menu:
         about: About
         become-a-provider: Become a data provider
+        contact: Contact
         copyright: Copyright
         data-providers: All data providers
+        help: Help
         new-collections: New Collections
+        rights: 
         search-tips: Search tips
         using-myeuropeana: Using My Europeana
     home:

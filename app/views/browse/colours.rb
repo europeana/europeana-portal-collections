@@ -15,6 +15,7 @@ module Browse
             items: @colours.map do |colour|
               {
                 hex: colour.value,
+                label: t('X11.colours.' + (colour.value.sub '#', ''), locale: 'en', default: colour.value),
                 num_results: colour.hits,
                 url: search_path(f: { 'COLOURPALETTE' => [colour.value], 'TYPE' => ['IMAGE'] })
               }
