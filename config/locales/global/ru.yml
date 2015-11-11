@@ -202,7 +202,7 @@ ru:
         malta: "Мальта"
         netherlands: "Нидерланды"
         norway: "Норвегия"
-        poland: 
+        poland: "Польша"
         portugal: "Польша"
         romania: "Румыния"
         russia: "Россия"
@@ -293,7 +293,7 @@ ru:
       resource:
         type: "Тип"
       reusability:
-        advanced: "Расширенное"
+        advanced: 
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -301,17 +301,17 @@ ru:
         advanced-cc-by-nd: 
         advanced-cc-by-sa: 
         advanced-cc0: 
-        advanced-orphan-work: "Произведение с недоступным правообладателем"
-        advanced-out-of-copyright-non-commercial: "Вне авторского права - для некоммерческого повторного использования"
-        advanced-pdm: "Помеченное как Общественное Достояние"
-        advanced-rrfa: "Права защищены - Свободный Доступ"
-        advanced-rrpa: "Права защищены - Платный доступ"
-        advanced-rrra: "Права защищены - Ограниченный Доступ"
-        advanced-ucs: "Статус авторского права неизвестен"
-        open: "Да с атрибуцией"
-        permission: "Только с разрешения"
-        restricted: "Да с ограничениями"
-        simple: "Простой"
+        advanced-orphan-work: ''
+        advanced-out-of-copyright-non-commercial: ''
+        advanced-pdm: 
+        advanced-rrfa: 
+        advanced-rrpa: 
+        advanced-rrra: 
+        advanced-ucs: 
+        open: 
+        permission: 
+        restricted: 
+        simple: 
       sound_duration:
         long: "Длинный (6+ минут)"
         medium: "Средний (3-6 минут)"
