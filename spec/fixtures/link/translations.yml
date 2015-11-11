@@ -1,0 +1,4 @@
+example_dot_com_translations:
+  locale: en
+  text: 'Example website'
+  globalized_model: example_dot_com

@@ -2,7 +2,7 @@ module Pages
   module Errors
     class NotFound < Portal::Static
       def content
-        @mustache[:content] ||= begin
+        mustache[:content] ||= begin
           {
             intro: @page.title,
             text: @page.body

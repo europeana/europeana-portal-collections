@@ -56,9 +56,12 @@ nl:
       menu:
         about: Over ons
         become-a-provider: Word een data provider
+        contact: Contact
         copyright: Auteursrecht
         data-providers: Alle data providers
+        help: Help
         new-collections: Nieuwe Collecties
+        rights: 
         search-tips: Zoek tips
         using-myeuropeana: Gebruik mijn Europeana
     home:
@@ -268,5 +271,3 @@ nl:
           notice: 
         label: Taal
         settings-label: 
-    site-name-link: 
-    sitemap-link: 

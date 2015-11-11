@@ -3,15 +3,15 @@ RSpec.describe Ability do
     expect(described_class).to include(CanCan::Ability)
   end
 
-  let(:draft_banner) { FactoryGirl.create(:banner) }
-  let(:published_banner) { FactoryGirl.create(:banner).tap(&:publish!) }
-  let(:draft_collection) { FactoryGirl.create(:collection) }
-  let(:published_collection) { FactoryGirl.create(:collection).tap(&:publish!) }
-  let(:draft_landing_page) { FactoryGirl.create(:landing_page) }
-  let(:published_landing_page) { FactoryGirl.create(:landing_page).tap(&:publish!) }
+  let(:draft_banner) { banners(:draft_banner) }
+  let(:published_banner) { banners(:generic_banner) }
+  let(:draft_collection) { collections(:draft) }
+  let(:published_collection) { collections(:music) }
+  let(:draft_landing_page) { pages(:draft_landing_page) }
+  let(:published_landing_page) { pages(:music_collection) }
 
   context 'without user role (guest)' do
-    subject { FactoryGirl.create(:user, :guest) }
+    subject { users(:guest) }
 
     it { is_expected.not_to be_able_to(:access, :rails_admin) }
 
@@ -35,7 +35,7 @@ RSpec.describe Ability do
   end
 
   context 'when user role is "user"' do
-    subject { FactoryGirl.create(:user) }
+    subject { users(:user) }
 
     it { is_expected.not_to be_able_to(:access, :rails_admin) }
 
@@ -59,7 +59,7 @@ RSpec.describe Ability do
   end
 
   context 'when user role is "admin"' do
-    subject { FactoryGirl.create(:user, :admin) }
+    subject { users(:admin) }
 
     it { is_expected.to be_able_to(:access, :rails_admin) }
     it { is_expected.to be_able_to(:dashboard, nil) }

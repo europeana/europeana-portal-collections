@@ -9,7 +9,7 @@ en:
       browse_colours: Colours
       browse_newcontent: New content
       browse_sources: Sources
-      channels: Channels
+      channels: Collections
       collections: Collections
       exhibitions: Exhibitions
       home: Home
@@ -47,7 +47,7 @@ en:
         recent: Recent additions
         spotlight-on: 'Spotlight on '
       music:
-        description: The <strong>Europeana Music Channel</strong> brings together the best music recordings, sheet music, and other music related collections from Europe's audio-visual archives, libraries, archives and museums. <a href="/portal/channels/music/about">Find out more about the Music Channel.</a>
+        description: The <strong>Europeana Music Collection</strong> brings together the best music recordings, sheet music, and other music related collections from Europe's audio-visual archives, libraries, archives and museums. <a href="/portal/channels/music/about">Find out more about the Music Channel.</a>
         title: Europeana Music
     facet:
       language:
@@ -57,9 +57,12 @@ en:
       menu:
         about: About
         become-a-provider: Become a data provider
+        contact: Contact
         copyright: Copyright
         data-providers: All data providers
+        help: Help
         new-collections: New Collections
+        rights: 
         search-tips: Search tips
         using-myeuropeana: Using My Europeana
     home:
@@ -88,7 +91,7 @@ en:
         technicalmetadata: Technical metadata
       enrichment:
         who:
-          title: 
+          title: Title
       hierarchy:
         title: Related items
         view-items-above: view items above
@@ -279,5 +282,3 @@ en:
           notice: Language settings saved.
         label: Language
         settings-label: language settings
-    site-name-link: 
-    sitemap-link: 

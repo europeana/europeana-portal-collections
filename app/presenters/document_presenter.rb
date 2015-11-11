@@ -58,6 +58,12 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
         license_name: t('global.facet.reusability.advanced-cc-by-nc-sa'),
         license_CC_BY_NC_SA: true
       }
+    when %r{http://creativecommons.org/licenses/by-nd}
+      {
+        license_human: t('global.facet.reusability.restricted'),
+        license_name: t('global.facet.reusability.advanced-cc-by-nd'),
+        license_CC_BY_ND: true
+      }
     when %r{http://creativecommons.org/licenses/by-sa}
       {
         license_human: t('global.facet.reusability.open'),

@@ -1,115 +1,254 @@
 el:
-  Symphonies: 
+  Symphonies: "Συμφωνίες"
+  X11:
+    colours:
+      '000000': 
+      000080: 
+      00008B: 
+      0000CD: 
+      0000FF: 
+      '006400': 
+      008000: 
+      008080: 
+      008B8B: 
+      00BFFF: 
+      00CED1: 
+      00FA9A: 
+      00FF00: 
+      00FF7F: 
+      00FFFF: 
+      '191970': 
+      1E90FF: 
+      20B2AA: 
+      228B22: 
+      2E8B57: 
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: 
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: 
+      F0FFF0: 
+      F0FFFF: 
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: 
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
   global:
-    about-us: 
+    about-us: "Σχετικά με εμάς"
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
-      home: 
-      maps: 
-      music: 
-      natural-history: 
-      newspapers: 
-      performing-arts: 
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
-    channels-art-url: 
-    channels-fashion: 
-    channels-music: 
-    channels-music-link: 
-    choose-language: 
-    email-address: 
+      archaeology: "αρχαιολογία"
+      architecture: "αρχιτεκτονική"
+      art: "τέχνη"
+      fashion: "μόδα"
+      home: "Αρχική"
+      maps: "χάρτες"
+      music: "μουσική"
+      natural-history: "φυσική ιστορία"
+      newspapers: "εφημερίδες"
+      performing-arts: "Τέχνες του θεάματος"
+    channels-art: "Συλλογή Ιστορία της Τέχνης"
+    channels-art-image: "Εικόνα Συλλογή Ιστορία της Τέχνης"
+    channels-art-link: "Συλλογή Ιστορία της Τέχνης"
+    channels-fashion: "Μόδα"
+    channels-music: "Μουσική"
+    choose-language: "Γλώσσα"
+    email-address: "διεύθυνση ηλεκτρονικού ταχυδρομείου"
     facet:
       advanced:
-        options: 
+        options: "Επιλογές"
         show:
-          direct:
-            links: 
-          thumbnails: 
-          ugc: 
+          ugc: "Περιεχόμενο από χρήστες"
       art:
         form:
           paintings:
-            genre: 
-            medium: 
+            genre: "Είδος"
+            medium: "Μέσο"
       carrier: 
-      colour: 
-      colour-black-and-white: 
+      colour: "Χρώμα"
+      colour-black-and-white: "Ασπρόμαυρο"
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        austria: "Αυστρία"
+        belgium: "Βέλγιο"
+        bulgaria: "Βουλγαρία"
+        croatia: "Κροατία"
+        cyprus: "Κύπρος"
+        czechrepublic: "Τσεχία"
+        denmark: "Δανία"
+        estonia: "Εσθονία"
+        europe: "Ευρώπη"
+        finland: "Φινλανδία"
+        france: "Γαλλία"
+        germany: "Γερμανία"
+        greece: "Ελλάδα"
+        hungary: "Ουγγαρία"
+        iceland: "Ισλανδία"
+        ireland: "Ιρλανδία"
+        israel: "Ισραήλ"
+        italy: "Ιταλία"
+        latvia: "Λετονία"
+        lithuania: "Λιθουανία"
+        luxembourg: "Λουξεμβούργο"
+        malta: "Μάλτα"
+        netherlands: "Ολλανδία"
+        norway: "Νορβηγία"
+        poland: "Πολωνία"
+        portugal: "Πορτογαλία"
+        romania: "Ρουμανία"
+        russia: "Ρωσία"
+        serbia: "Σερβία"
+        slovakia: "Σλοβακία"
+        slovenia: "Σλοβενία"
+        spain: "Ισπανία"
+        sweden: "Σουηδία"
+        switzerland: "Ελβετία"
+        turkey: "Τουρκία"
+        ukraine: "Ουκρανία"
+        unitedkingdom: "Ηνωμένο Βασίλειο"
+        unitedstatesofamerica: "ΗΠΑ"
+      creator: "δημιουργός"
       header:
-        channel: 
-        colourpalette: 
-        country: 
+        channel: "Συλλογές"
+        colourpalette: "Χρώμα"
+        country: "Χώρα"
         data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
-        media: 
-        mime_type: 
+        image_aspectratio: "Προσανατολισμός"
+        image_colour: "Παλέτα"
+        image_size: "Μέγεθος"
+        language: "Γλώσσα"
+        language_of_description: "Γλώσσα Περιγραφής"
+        media: "Μόνο αντικείμενα με συνδέσμους σε μέσα"
+        mime_type: "Τύπος αρχείου"
         provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
-        type: 
-        ugc: 
-        video_duration: 
-        year: 
+        reusability: "Μπορώ να το χρησιμοποιήσω;"
+        sound_duration: "Διάρκεια"
+        sound_hq: "Υψηλή ποιότητα"
+        text_fulltext: "Πλήρες κείμενο"
+        type: "Μέσα"
+        ugc: "Περιεχόμενο που δόθηκε από χρήστες"
+        video_duration: "Διάρκεια Video"
+        year: "Ημερομηνία"
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: "Τοπίο"
+        portrait: "Πορτρέτο"
       image_colour:
-        'false': 
-        'true': 
+        'false': "Ασπρόμαυρο"
+        'true': "Χρώμα"
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: "Πολύ μεγάλη ανάλυση (4MP+)"
+        large: "Μεγάλη ανάλυση (1-4MP)"
+        medium: "Μέση ανάλυση (0.5-1MP)"
+        small: "Χαμηλή ανάλυση (<0.5MP)"
       language:
         bg: 
         ca: 
@@ -145,16 +284,16 @@ el:
         tr: 
         uk: 
         yi: 
-      less: 
+      less: "Λιγότερα"
       media:
-        'false': 
-        'true': 
-      more: 
-      more-refinements: 
+        'false': "Όχι"
+        'true': "Ναι"
+      more: "Περισσότερα"
+      more-refinements: "Περισσότεροι όροι εξειδικευμένης αναζήτησης"
       resource:
-        type: 
+        type: "Τύπος"
       reusability:
-        advanced: 
+        advanced: "Για προχωρημένους"
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -162,161 +301,154 @@ el:
         advanced-cc-by-nd: 
         advanced-cc-by-sa: 
         advanced-cc0: 
-        advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: 
-        advanced-pdm: 
-        advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
+        advanced-orphan-work: ''
+        advanced-out-of-copyright-non-commercial: ''
+        advanced-pdm: ''
+        advanced-rrfa: ''
+        advanced-rrpa: ''
+        advanced-rrra: ''
         advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
-        simple: 
+        open: "Ναι με απόδοση πνευματικών δικαιωμάτων"
+        permission: "Μόνο με άδεια"
+        restricted: "Ναι με περιορισμούς"
+        simple: "Απλό"
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: "Μεγάλη διάρκεια (6+ λεπτά)"
+        medium: "Μεσαία διάρκεια (3-6 λεπτά)"
+        short: "Μικρή διάρκεια (30δ - 3 λεπτά) "
+        very_short: "Πολύ μικρή διάρκεια (<30δ)"
       sound_hq:
-        'true': 
-      source: 
+        'true': "Ναι"
+      source: "Πηγή"
       text_fulltext:
-        'false': 
-        'true': 
+        'false': "Όχι"
+        'true': "Ναι"
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: "Εικόνα"
+        sound: "Ήχος"
+        text: "Κείμενο"
+        video: "Βίντεο"
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: "Προσανατολισμός εικόνας"
+          landscape: "Τοπίο"
+          portrait: "Πορτρέτο"
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: "Εμφάνιση όλων"
+          hq-only: "Εμφάνιση μόνος υψηλής ποιότητας"
+          label: "Ποιότητα"
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: "Τι σημαίνουν αυτά τα μεγέθη;"
+          label: "Μέγεθος εικόνας"
+          large: "Μεγάλη (%{data})"
+          medium: "Μεσαία (%{data})"
+          small: "Μικρή (%{data})"
+          xl: "Πολύ μεγάλη (%{data})"
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: "Διάρκεια ήχου"
+          long: "Μεγάλη (%{data})"
+          medium: "Μεσαία (%{data})"
+          short: "Μικρή (%{data})"
+          very-short: "Πολύ μικρή (%{data})"
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
+          label: "Διάρκεια Βίντεο"
+          long: "Μεγάλη (%{data})"
+          medium: "Μεσαία (%{data})"
+          short: "Μικρή (%{data})"
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: "Μεγάλη (20+ λεπτά)"
+        medium: "Μεσαία (4-20 λεπτά)"
+        short: "Μικρή (<4 λεπτά)"
       year:
-        from: 
-        to: 
+        from: "από"
+        to: "μέχρι"
     'facet ':
       header:
         video_hd:
-          'true': 
-    find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
-    genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+          'true': HD
+    find-us-elsewhere: "Βρείτε μας αλλού"
+    forgot-password: "Ξεχάσατε τον κωδικό σας"
+    genres: "είδη"
+    genres-chamber-music: "Μουσική δωματίου"
+    genres-classical-music: "Κλασσική μουσική"
+    genres-concertos: "Κονσέρτα"
+    genres-non-western-classical-music: "Μη-δυτική κλασσική μουσική"
+    genres-opera: "Όπερα"
+    genres-popular-music: "Λαϊκή μουσική"
+    genres-traditional-music: "Παραδοσιακή"
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
-    help: 
-    home: 
-    javascript-required: 
+      connect: "σύνδεση"
+      develop: "ανάπτυξη"
+      discover: "ανακάλυψη"
+      network: "δίκτυο"
+    help: "Βοήθεια"
+    home: "Αρχική"
+    javascript-required: "Για να αποκτήσετε πρόσβαση σε αυτό το περιεχόμενο, ενεργοποιήστε την Javascript, και χρησιμοποιήστε έναν φυλλομετρητή με υποστήριξη περιεχομένου HTML5"
     labs: 
-    labs-text: 
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
-    logo-image: 
+    labs-text: "Συνδυάστε πολιτιστικό περιεχόμενο μέσω των APIs και τις συλλογές μας"
+    language-basque: "Βάσκικα"
+    language-bulgarian: "Βουλγάρικα"
+    language-catalan: "Καταλανικά"
+    language-croatian: "Κροατικά"
+    language-czech: "Τσέχικα"
+    language-danish: "Δανέζικα"
+    language-dutch: "Ολλανδικά"
+    language-english: "Αγγλικά"
+    language-estonian: "Εσθονικά"
+    language-finnish: "Φινλανδέζικα"
+    language-french: "Γαλλικά"
+    language-gaelic: "Γαλικιακά"
+    language-german: "Γερμανικά"
+    language-greek: "Ελληνικά"
+    language-hungarian: "Ουγγαρέζικα"
+    language-icelandic: "Ισλανδικά"
+    language-italian: "Ιταλικά"
+    language-latvian: "Λετονικά"
+    language-lithuanian: "Λιθουανικά"
+    language-maltese: "Μαλτέζικα"
+    language-norwegian: "Νορβηγικά"
+    language-polish: "Πολωνικά"
+    language-portuguese: "Πορτογαλικά"
+    language-romanian: "Ρουμανικά"
+    language-russian: "Ρώσικα"
+    language-slovakian: "Σλοβάκικα"
+    language-slovenian: "Σλοβένικα"
+    language-spanish: "Ισπανικά"
+    language-swedish: "Σουηδικά"
+    language-ukranian: "Ουκρανικά"
+    login: "Είσοδος"
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
-    our-mission: 
+      load-more: "Περισσότερα"
+      show-more: "Εμφάνιση περισσοτέρων"
+      view-more: "Δείτε περισσότερα"
+    more-info: "Περισσότερες πληροφορίες"
+    our-mission: "Η αποστολή μας"
     our-mission-text: 
-    our-sites: 
-    password: 
+    our-sites: "Οι ιστοσελίδες μας"
+    password: "Κωδικός"
     professional: 
-    professional-text: 
-    refine-your-search: 
-    register: 
-    research: 
-    research-text: 
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
+    professional-text: "Συμμετέχετε, μοιραστείτε τα δεδομένα σας ή χρησιμοποιήστε τα δικά μας"
+    refine-your-search: "Επαναπροσδιορίστε τα αποτελέσματά σας"
+    register: "Εγγραφή"
+    research: "Έρευνα"
+    research-text: "Σε σύνδεση με την ακαδημαϊκή κοινότητα"
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+      search-button-image-alt: "Αναζήτηση"
+      search-placeholder-text: "Προσθέστε όρο αναζήτησης"
+    search-collections: "Συλλογές"
+    search-collections-text: "Περιηγηθείτε στην πολιτιστική κληρονομιά της Ευρώπης"
+    share: "Μοιραστείτε"
+    sitemap: "Χάρτης ιστοχώρου"
+    terms-and-policies: "Όροι και πολιτική χρήσης"
+    type: "τύπος"
+  'no': "Νορβηγία"
+  pl: "Πορτογαλία"
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: "Αποτελέσματα"
+        show-results-all: "Εμφάνιση όλων των αποτελεσμάτων"

@@ -19,7 +19,6 @@
 
 require 'coveralls'
 require 'simplecov'
-require 'factory_girl'
 
 # Test coverage reports
 if Coveralls.will_run?.nil?
@@ -56,9 +55,6 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-
-  # FactoryGirl factories
-  config.include FactoryGirl::Syntax::Methods
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

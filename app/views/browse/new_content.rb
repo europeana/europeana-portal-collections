@@ -1,13 +1,13 @@
 module Browse
   class NewContent < ApplicationView
     def page_title
-      @mustache[:page_title] ||= begin
+      mustache[:page_title] ||= begin
         t('site.browse.newcontent.title')
       end
     end
 
     def content
-      @mustache[:content] ||= begin
+      mustache[:content] ||= begin
         {
           title: page_title,
           recent: @providers.blank? ? nil : {
@@ -19,7 +19,7 @@ module Browse
     end
 
     def head_meta
-      @mustache[:head_meta] ||= begin
+      mustache[:head_meta] ||= begin
         [
           { meta_name: 'description', content: page_title }
         ] + super
