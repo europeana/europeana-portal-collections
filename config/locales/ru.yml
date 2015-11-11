@@ -27,247 +27,256 @@ ru:
       colours:
         title: "Цвета"
       newcontent:
-        title: 
+        title: "Новый контент"
       sources:
-        title: 
+        title: "Источники"
     collections:
       art-history:
-        description: 
-        title: 
+        description: "От художников Возрождения до сюрреалистов, от древнеримской скульптуры до современного искусства, Europeana Art (Европеана Искусство) и Europeana Channel (Канал Европеана) знакомит Вас с художниками и произведениями искусства со всей Европы. "
+        title: "Европеана История Искусства"
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D объекты
+        count: "элементы"
+        images: "изображения"
+        moving-images: "видео"
+        sound: "звукозаписи"
+        texts: "тексты"
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: "Курируется"
+        recent: "Последние добавления"
+        spotlight-on: "В центре внимания"
       music:
-        description: 
-        title: 
+        description: <strong>Коллекция Европеана Музыка</strong> включает в себя лучшие музыкальные звукозаписи, нотный архив, а также другие коллекции, имеющие отношение к музыке, из других европейских аудио-визуальных архивов, библиотек, архивов и музеев. <a href="/portal/channels/music/about">Узнайте больше о Музыкальном Канале.</a>
+        title: "Европеана Музыка"
     facet:
       language:
         show:
-          results: 
+          results: "Результаты"
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
+        about: "О нас"
+        become-a-provider: "Станьте провайдером данных"
+        contact: "Контакты"
+        copyright: "Копирайт"
+        data-providers: "Все провайдеры данных"
+        help: "Помощь"
+        new-collections: "Новые коллекции"
         rights: 
-        search-tips: 
-        using-myeuropeana: 
+        search-tips: "Советы по поиску"
+        using-myeuropeana: "Использование сервиса Моя Европеана"
     home:
-      strapline: 
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+      strapline: "Исследуйте %{total_item_count} произведений искусства, предметов материальной культуры, книг, видео и звукозаписей со всей Европы"
+    more: "Еще"
+    my-europeana: "Моя Европеана"
+    my-europeana-link: "добавить ссылку в Моя Европеана"
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: "Подробная информация"
+        results_list: "Список результатов"
+        return_home: "Домой"
+    news: "Новости"
     object:
       actions:
-        attribute-author: 
+        attribute-author: "Добавить автора"
         attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-plaintext: "Простой текст"
+        download: "Скачать"
+        download-additional: "Также доступно в формате"
+        downloaddata: "Скачать данные"
+        open-media: "Открыть этот носитель информации"
+        show-less-data: "Меньше"
+        show-more-data: "Больше"
+        technicalmetadata: "Технические метаданные"
       enrichment:
         who:
-          title: 
+          title: "Название"
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: "Родственные элементы"
+        view-items-above: "Показать вышестоящие элементы"
+        view-items-below: "Показать нижестоящие элементы"
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        codec: "Кодек"
+        collection-name: "Коллекция"
+        concept: "Концепция"
+        concepts: "Классификация"
+        consists-of: "Состоит из"
+        contributor: "Участник, источник"
+        copyright: "Копирайт"
+        creation-date: "Дата создания"
+        creator: "Автор"
+        current-location: "Текущее местоположение"
+        data-provider: "Провайдер данных"
+        date: "Дата"
+        dates: "Даты"
+        description: "Описание"
+        dimensions: "Измерения"
+        duration: "Длительность"
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
+          has-met: ''
+          incorporates: ''
+          is-derivative-of: ''
+          is-representation-of: ''
+          is-similar-to: ''
+          is-successor-of: ''
+          realises: ''
           was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+        extent: "Размер"
+        file-size: "В полном размере"
+        format: "Формат"
+        fps: "Кадровая частота"
+        has-type: "Тип"
+        identifier: "Идентификатор"
+        is-format-of: "Является форматом для"
+        is-part-of: "Является частью"
+        is-referenced-by: "есть ссылка в"
+        is-replaced-by: "заменен на"
+        is-required-by: "требуется для"
+        issued: "Впервые издано"
+        language: "Язык"
+        latitude: "Широта"
+        location: "Местоположение"
+        longitude: "Долгота"
+        map: "Карта"
+        map-tiles: "Плитка"
+        medium: "Носитель"
+        people: "Люди"
+        period: "Период"
+        place: "Место"
+        place-time: "Место/время"
+        properties: "Свойства"
+        provenance: "Происхождение"
+        provided-by: "Узнать больше"
+        provided-by-detail: "может иметь больше информации и носителей для данного элемента"
+        provider: "Провайдер"
+        providing-country: "Страна провайдер"
+        publication-date: "Дата публикации"
+        publisher: "Издатель"
+        references: "Ссылки"
+        refs-rels: "Ссылки и отношения"
+        relations: "Отношения"
+        rights: "Права"
+        rights-human: "Могу ли я это использовать?"
+        runtime: "В режиме реального времени"
+        runtime-unit-seconds: "секунд(ы)"
+        source: "Источник"
+        subject: "Предмет"
+        temporal: "Временные данные"
+        time: "Время"
+        timestamp-created: "Впервые опубликовано в Европеане"
+        timestamp-updated: "Последнее обновление в Европеане"
+        timestamp_created: "Впервые опубликовано в Европеане (%{timestamp_created})"
+        timestamp_updated: "Последнее обновление в Европеане  (%{timestamp_updated})"
+        title: "Название"
+        toc: "Краткое содержание"
+        type: "Тип"
+        ugc: "Контент, добавленный пользователями"
+        version: "Версия"
       named-entities:
-        title: 
+        title: "Поименованный объект"
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: "Расширенное понятие"
+          label: "Метка Понятие"
+          term: "Термин Понятие"
+          title: "Что"
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: "Начало периода"
+          end: "Конец периода"
+          label: "Метка Период"
+          term: "Термин Период"
+          title: "Когда"
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
+          label: "Метка Местоположение"
+          latitude: "Широта местоположения"
+          longitude: "Долгота местоположения"
+          term: "Термин Местоположение"
+          title: "Где"
         who:
-          label: 
-          term: 
-          title: 
+          label: "Метка Агент"
+          term: "Термин Агент"
+          title: "Кто"
       nav:
-        next: 
-        prev: 
+        next: "Следующее"
+        prev: "Предыдущее"
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: "Восток"
+        north: "Север"
+        south: "Юг"
+        west: "Запад"
+      show-more-similar-items: "показать больше"
+      similar-items: "Похожие записи"
     pages:
       '404':
-        intro: 
-        text: 
+        intro: "Извините, мы не можем найти данную страницу"
+        text: "К сожалению, запрашиваемая Вами страница, не обнаружена. Попробуйте воспользоваться поиском Европеаны или, возможно, вам будут интересны выбранные ниже записи."
       about:
-        text: 
-        title: 
+        text: |-
+          <p>Если Вы пришли за вдохновением, работаете над своим исследованием, ищете новый дизайн для Вашей кофейной чашки или просто разыскиваете какую-то информацию, надеемся, Вы найдете то, что Вам нужно, среди 45 миллионов объектов, находящихся на нашем веб-сайте.</p>
+
+          <p>Наши материалы собраны со всей Европы, здесь Вы найдете широчайшую сферу знаний. Наша цель - помочь Вам найти Ваш собственный способ поиска ценнейших объектов культуры.</p>
+
+          <p>В течение последних лет, мы расширяли наши коллекции, продолжали наши исследования, находили новое для этих коллекций, а также искали новые способы их использования Вами. Сейчас пришло время кое-что изменить и улучшить наш сервис!</p>
+
+          <p>В данный момент мы тестируем новую версию Европеана Коллекции. Мы прилагаем все наши усилия для повышения уровня работы с пользователями, а также для упрощения возможности поиска нужной Вам информации. Возможно, мы попросим Вас ответить на несколько вопросов.  Ваши ответы будут очень полезны для нас, пожалуйста, выделите для нас немного времени, чтобы сообщить нам Ваше мнение. Спасибо!</p>
+
+          <p>Тем временем, мы также надеемся, что вы получите только положительный опыт во время Вашего культурного путешествия с нами.</p>
+        title: "Добро пожаловать ценителям культуры!"
       music-channel-about:
-        text: 
-        title: 
+        text: "<p>Представьте себе возможность увидеть оригинальную рукопись музыкального произведения, одновременно слушать различные интерпретации этого произведения и, в добавление ко всему, читать биографию композитора, написавшего это произведение. На Музыкальном Канале Европеаны Вы можете все это сделать.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Наши партнеры</a> - это музыкальные эксперты со всей Европы, которые тщательнейшим образом собирали эту коллекцию музыкальных звукозаписей, нот, изображений музыкальных инструментов, книг о музыке и многих других музыкальных средств. </p>\n\n<p>Мы сделали эту раннюю тестовую версию Музыкального Канала доступной Вам и другим нашим пользователям, чтобы Вы могли помочь нам построить его наилучшим образом, дать ему дальнейшее развитие. Поэтому во время посещения нашего сайта время от времени Вам будет предложено ответить на некоторые вопросы или заполнить некоторые опросы, которые будут появляться на экране. Мы были бы очень Вам благодарны, если у Вас найдется время ответить на них!</p>\n\n<p>Также, в интересах прозрачности и в то же время ради сохранения конфиденциальности, Вам необходимо знать, что мы собираем пользовательскую статистику и посещаемость наших страниц с помощью сервисов Google Analytics и Hotjar. Нам необходима эта информация во избежание ошибок в дизайне нашего веб-сайта и для улучшения работы Музыкального Канала. Вся собранная статистика абсолютно конфиденциальна, анонимна и будет использоваться исключительно в целях улучшения нашего сервиса.</p>\n\n<p>Обязательно воспользуйтесь нашим поиском, прослушайте найденные аудио-записи, просмотрите ноты или просто прочтите об интересующем произведении или теме. Вы также можете скачивать свои любимые произведения, когда авторское право это позволяет. Не забудьте посетить наши виртуальные музыкальные выставки и Вы узнаете, возможно, абсолютно новый для Вас способ поиска музыки!</p>"
+        title: "О Музыкальном Канале"
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: "Настроить действия"
+        dutchmasters: "Голландские мастера"
+        favouriteart: "Любимый вид искусства"
+        label: "Действия"
+        newcollection: "Новая коллекция"
+        product-save: "Сохранить"
+        saveto: "Сохранить в"
+        show-all-collections: "Показать все коллекции"
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: "Изображения"
+          text: "Текст"
+          video: "Видео"
+        count-and-terms: "%{results_count}  результат(ов)"
+        empty: "Нет результатов"
+        empty-with-terms: "Ваш запрос для поиска %{query_terms} не нашел результатов"
+        header: "Результаты для"
+        header-and: "и"
+        in-channel: "на Канале"
+        less: "Меньше"
+        less_adv: "Менее детально"
+        more: "Больше"
+        more_adv: "Расширенные фильтры"
+        product-3D: 3D
+        product-image: "Изображение"
+        product-sound: "Звук"
+        product-text: "Текст"
+        product-video: "Видео"
+        results-relevance: "Релевантность"
+        single-result: 1 результат для %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: "Сетка"
+          list: "Список"
+        view-at-provider: "Просмотреть на "
     search:
       placeholder:
-        text: 
+        text: "Добавить поисковый термин"
       similar:
-        prefix: 
+        prefix: "Имеет сходство с %{mlt_item}"
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: "Очистить выделенние"
+        save-settings: "Сохранить настройки"
       language:
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-page: "Автоматически переводить страницы на"
+        auto-translate-page-short: "Авто-перевод элементов на"
+        auto-translate-query: "Автоматически переводить ключевые слова на..."
+        available: "Доступные языки"
+        default: "Язык по умолчанию"
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: "Некорректно выбран язык. Доступные языки: %{locales}"
+          notice: "Языковые настройки сохранены."
+        label: "Язык"
+        settings-label: "языковые настройки"

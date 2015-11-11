@@ -1,166 +1,166 @@
 el:
   global:
-    labs-link: 
+    labs-link: "Σύνδεσμος στο labs"
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: "Όλες οι αναρτήσεις..."
+      all_exhibitions: "'Ολες οι εκθέσεις"
+      blog: "Ιστολόγιο"
+      browse: "Περιήγηση"
+      browse_colours: "Χρώματα"
+      browse_newcontent: "Νέο περιεχόμενο"
+      browse_sources: "Πηγές"
+      channels: "Συλλογές"
+      collections: "Συλλογές"
+      exhibitions: "Εκθέσεις"
+      home: "Αρχική"
+    pro-link: "σύνδεσμος στο pro"
+    pro-text: "κείμενο για pro"
+    settings: "προτιμήσεις"
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
+        description: Alpha έκδοση σημαίνει ότι αυτός ο ιστότοπος βρίσκεται ύπο ενεργή ανάπτυξη και θα ανανενώνεται τακτικά. Πιθανόν ορισμένες φορές να μην είναι διαθέσιμος. Οι παρατηρήσεις σας θα μας βοηθήσουν να βελτιώσουμε τον ιστότοπό μας.
+        link-text: "Δώστε μας τις παρατηρήσεις σας!"
         title: 
-    blog-link: 
+    blog-link: "σύνδεσμος για το ιστολόγιο"
     browse:
       colours:
-        title: 
+        title: "Χρώματα"
       newcontent:
-        title: 
+        title: "Νέο Περιεχόμενο"
       sources:
-        title: 
+        title: "Πηγές"
     collections:
       art-history:
         description: 
-        title: 
+        title: Europeana Ιστορία της Τέχνης
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D αντικείμενα
+        count: "αντικείμενα"
+        images: "Εικόνες"
+        moving-images: "Βίντεο"
+        sound: "Ηχογραφήσεις"
+        texts: "Κείμενα"
       labels:
-        credits: 
-        recent: 
+        credits: "Επιμελημένες από"
+        recent: "Πρόσφατες προσθήκες"
         spotlight-on: 
       music:
-        description: 
-        title: 
+        description: Η <strong>Europeana Μουσική Συλλογή</strong> φέρνει κοντά τις καλύτερες μουσικές ηχογραφήσεις, παρτιτούρες, και αλλό μουσικό περιεχόμενο από τα οπτικο-ακουστικά αρχεία, βιβιοθήκεςσ και μουσεία της Ευρώπης. <a href="/portal/channels/music/about">Ανακαλύψτε περισσότερα για την Μουσική Συλλογή</a>
+        title: Europeana Μουσική
     facet:
       language:
         show:
-          results: 
+          results: "Αποτελέσματα"
     footer:
       menu:
-        about: 
+        about: "Σχετικά με"
         become-a-provider: 
-        contact: 
-        copyright: 
+        contact: "Επικοινωνία"
+        copyright: "Πνευματικά δικαιώματα"
         data-providers: 
-        help: 
-        new-collections: 
+        help: "Βοήθεια"
+        new-collections: "Νέες Συλλογές"
         rights: 
-        search-tips: 
-        using-myeuropeana: 
+        search-tips: "Συμβουλές αναζήτησης"
+        using-myeuropeana: "Χρησιμοποιώντας το My Europeana"
     home:
-      strapline: 
-    more: 
+      strapline: "Περιηγηθήτε σε %{total_item_count} έργα τέχνης, τεχνουργήματα, βιβλία, βίντεο και ήχους από όλη την Ευρώπη"
+    more: "Περισσότερα..."
     my-europeana: 
-    my-europeana-link: 
+    my-europeana-link: "συνδεσμος για το my Europeana"
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: "Λεπτομέρεια εγγραφής"
+        results_list: "Λίστα Αποτελεσμάτων"
+        return_home: "Επιστροφή στην Αρχική"
+    news: "Νέα"
     object:
       actions:
-        attribute-author: 
+        attribute-author: "Απόδοση προς τον δημιουργό"
         attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
+        attribute-plaintext: "Κείμενο"
+        download: "Μεταφόρτωση"
+        download-additional: "Επίσης διαθέσιμο ως"
+        downloaddata: "Μεταφόρτωση δεδομένων"
         open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        show-less-data: "Εμφάνιση λιγότερων δεδομένων"
+        show-more-data: "Εμφάνιση περισσότερων δεδομένων"
+        technicalmetadata: "Τεχνικά μεταδεδομένα"
       enrichment:
         who:
-          title: 
+          title: "Τίτλος"
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: "Σχετικές εγγραφές"
+        view-items-above: "εμφάνιση προηγούμενων"
+        view-items-below: "εμφάνιση επόμενων"
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
+        codec: "Κωδικοποιητής"
+        collection-name: "Συλλογή δεδομένων"
+        concept: "Έννοια"
+        concepts: "Κατηγοριοποιήσεις"
+        consists-of: "Αποτελείται από"
+        contributor: "Συνεισφέρων"
+        copyright: "Πνευματικά δικαιώματα"
+        creation-date: "Ημερομηνία δημιουργίας"
+        creator: "Δημιουργός"
+        current-location: "Τρέχουσα θέση"
         data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        date: "Ημερομηνία"
+        dates: "Ημερομηνίες"
+        description: "Περιγραφή"
+        dimensions: "Διαστάσεις"
+        duration: "Διάρκεια"
         edm:
-          has-met: 
+          has-met: "Σχετίζεται με"
           incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
+          is-derivative-of: "Ενσωματώνει"
+          is-representation-of: "Είναι αναπαράσταση του"
+          is-similar-to: "Είναι όμοιο με"
+          is-successor-of: "Είναι διάδοχος του"
+          realises: "Πραγματοποιεί"
+          was-present-at: "Παρών στο"
+        extent: "Μέγεθος"
+        file-size: "Μέγεθος αρψείου"
+        format: "Τύπος αρχείου"
+        fps: "Εικόνες το δευτερόλεπτο"
+        has-type: "Τύπος"
+        identifier: "Προσδιοριστής"
+        is-format-of: "Είναι τύπου αρχείου"
+        is-part-of: "Είναι μέρος του"
+        is-referenced-by: "Αναφέρεται από"
+        is-replaced-by: "Αντικαθίσταται από"
+        is-required-by: "Είναι απαραίτητο απο"
+        issued: "Εκδόθηκε πρώτη φορά"
+        language: "Γλώσσα"
+        latitude: "Γεωγραφικό πλάτος"
+        location: "Τοποθεσία"
+        longitude: "Γεωγραφικό μήκος"
+        map: "Χάρτης"
+        map-tiles: "Εικονίδια"
+        medium: "Μέσο"
+        people: "Άνθρωποι"
+        period: "Περίοδος"
+        place: "Μέρος"
+        place-time: "Μέρος/Χρόνος"
+        properties: "Ιδιότητες"
+        provenance: "Προέλευση"
+        provided-by: "Ανακαλύχτε περισσότερα"
+        provided-by-detail: "ίσως έχει περισσότερες πληροφορίες και περιεχόμενο για αυό το αντικείμενο."
         provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
+        providing-country: "Χώρα παρόχου"
+        publication-date: "Ημερομηνία έκδοσης"
+        publisher: "Εκδότης"
+        references: "Αναφέρει"
+        refs-rels: "Αναφορές και συσχετίσεις"
+        relations: "Συσχετίσεις"
+        rights: "Πνευματικά δικαιώματα"
+        rights-human: "Μπορώ να το χρησιμοποιήσω;"
+        runtime: "Διάρκεια αναπαραγωγής"
+        runtime-unit-seconds: "δευτερόλεπτα"
+        source: "Πηγή"
+        subject: "Θέμα"
+        temporal: "Χρονική κάλυψη"
         time: 
         timestamp-created: 
         timestamp-updated: 
