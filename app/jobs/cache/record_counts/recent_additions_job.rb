@@ -52,7 +52,7 @@ module Cache
       end
 
       def recent_additions_time_now
-        @recent_additions_time_now ||= Time.now
+        @recent_additions_time_now ||= Time.zone.now
       end
 
       def recent_additions_months_ago_time(months_ago)

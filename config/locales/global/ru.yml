@@ -1,115 +1,254 @@
 ru:
-  Symphonies: 
+  Symphonies: "Симфонии"
+  X11:
+    colours:
+      '000000': 
+      000080: 
+      00008B: 
+      0000CD: 
+      0000FF: 
+      '006400': 
+      008000: 
+      008080: 
+      008B8B: 
+      00BFFF: 
+      00CED1: 
+      00FA9A: 
+      00FF00: 
+      00FF7F: 
+      00FFFF: 
+      '191970': 
+      1E90FF: 
+      20B2AA: 
+      228B22: 
+      2E8B57: 
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: 
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: 
+      F0FFF0: 
+      F0FFFF: 
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: 
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
   global:
-    about-us: 
+    about-us: "О нас"
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
-      home: 
-      maps: 
-      music: 
-      natural-history: 
-      newspapers: 
-      performing-arts: 
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
-    channels-art-url: 
-    channels-fashion: 
-    channels-music: 
-    channels-music-link: 
-    choose-language: 
-    email-address: 
+      archaeology: "Археология"
+      architecture: "Архитектура"
+      art: "Искусство"
+      fashion: "Мода"
+      home: "Домой"
+      maps: "карты"
+      music: "музыка"
+      natural-history: "естествознание"
+      newspapers: "газеты"
+      performing-arts: "исполнительское искусство"
+    channels-art: "Коллекция История Искусства"
+    channels-art-image: "Изображение коллекции История Искусства"
+    channels-art-link: "Коллекция История Искусства"
+    channels-fashion: "Мода"
+    channels-music: "Музыка"
+    choose-language: "Язык"
+    email-address: "адрес электронной почты"
     facet:
       advanced:
-        options: 
+        options: "Опции"
         show:
-          direct:
-            links: 
-          thumbnails: 
-          ugc: 
+          ugc: "Контент, созданный пользователем"
       art:
         form:
           paintings:
-            genre: 
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            genre: "Жанр"
+            medium: "Средний"
+      carrier: "Носитель"
+      colour: "Цвет"
+      colour-black-and-white: "Черно-белый"
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
+        austria: "Австрия"
+        belgium: "Бельгия"
+        bulgaria: "Болгария"
+        croatia: "Хорватия"
+        cyprus: "Кипр"
+        czechrepublic: "Чехия"
+        denmark: "Дания"
+        estonia: "Эстония"
+        europe: "Европа"
+        finland: "Финляндия"
+        france: "Франция"
+        germany: "Германия"
+        greece: "Греция"
+        hungary: "Венгрия"
+        iceland: "Исландия"
+        ireland: "Ирландия"
+        israel: "Израиль"
+        italy: "Италия"
+        latvia: "Латвия"
+        lithuania: "Литва"
+        luxembourg: "Люксембург"
+        malta: "Мальта"
+        netherlands: "Нидерланды"
+        norway: "Норвегия"
         poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        portugal: "Польша"
+        romania: "Румыния"
+        russia: "Россия"
+        serbia: "Сербия"
+        slovakia: "Словакия"
+        slovenia: "Словения"
+        spain: "Испания"
+        sweden: "Швеция"
+        switzerland: "Швейцария"
+        turkey: "Турция"
+        ukraine: "Украина"
+        unitedkingdom: "Великобритания"
+        unitedstatesofamerica: "США"
+      creator: "автор"
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
-        media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
-        type: 
-        ugc: 
-        video_duration: 
-        year: 
+        channel: "Коллекции"
+        colourpalette: "Цвет"
+        country: "Страна"
+        data_provider: "Провайдер данных"
+        image_aspectratio: "Ориентация"
+        image_colour: "Палитра"
+        image_size: "Размер"
+        language: "Язык"
+        language_of_description: "Язык описания"
+        media: "Только со ссылками на носители"
+        mime_type: "Формат файла"
+        provider: "Провайдер"
+        reusability: "Могу ли я это использовать?"
+        sound_duration: "Продолжительность"
+        sound_hq: "Высокое качество"
+        text_fulltext: "Полный текст"
+        type: "Носитель"
+        ugc: "Показать контент, добавленный пользователями"
+        video_duration: "Длительность видео"
+        year: "Дата"
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: "Альбомная"
+        portrait: "Книжная"
       image_colour:
-        'false': 
-        'true': 
+        'false': "Черно-белый"
+        'true': "Цвет"
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: "Очень большие (> 4 Мп)"
+        large: "Большие (1 Мп - 4 Мп)"
+        medium: "Средние (0.5 Мп - 1 Мп)"
+        small: "Маленькие (<0.5 Мп)"
       language:
         bg: 
         ca: 
@@ -145,16 +284,16 @@ ru:
         tr: 
         uk: 
         yi: 
-      less: 
+      less: "Меньше"
       media:
-        'false': 
-        'true': 
-      more: 
-      more-refinements: 
+        'false': "Нет"
+        'true': "Да"
+      more: "Больше"
+      more-refinements: "Более детально"
       resource:
-        type: 
+        type: "Тип"
       reusability:
-        advanced: 
+        advanced: "Расширенное"
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -162,161 +301,154 @@ ru:
         advanced-cc-by-nd: 
         advanced-cc-by-sa: 
         advanced-cc0: 
-        advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: 
-        advanced-pdm: 
-        advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
-        advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
-        simple: 
+        advanced-orphan-work: "Произведение с недоступным правообладателем"
+        advanced-out-of-copyright-non-commercial: "Вне авторского права - для некоммерческого повторного использования"
+        advanced-pdm: "Помеченное как Общественное Достояние"
+        advanced-rrfa: "Права защищены - Свободный Доступ"
+        advanced-rrpa: "Права защищены - Платный доступ"
+        advanced-rrra: "Права защищены - Ограниченный Доступ"
+        advanced-ucs: "Статус авторского права неизвестен"
+        open: "Да с атрибуцией"
+        permission: "Только с разрешения"
+        restricted: "Да с ограничениями"
+        simple: "Простой"
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: "Длинный (6+ минут)"
+        medium: "Средний (3-6 минут)"
+        short: "Короткий (30 секунд - 3 минуты)"
+        very_short: "Очень короткий (<30 секунд)"
       sound_hq:
-        'true': 
-      source: 
+        'true': "Да"
+      source: "Источник"
       text_fulltext:
-        'false': 
-        'true': 
+        'false': "Нет"
+        'true': "Да"
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: "Изображение"
+        sound: "Звуковой"
+        text: "Текст"
+        video: "Видео"
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: "Ориентация изображения"
+          landscape: "Альбомная"
+          portrait: "Книжная"
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: "Показать все"
+          hq-only: "Показать только в высоком качестве"
+          label: "Качество"
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: "Что означают эти размеры?"
+          label: "Размер изображения"
+          large: "Большой (%{data})"
+          medium: "Средний (%{data})"
+          small: "Маленький (%{data})"
+          xl: "Очень большой (%{data})"
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: "Длительность аудиозаписи"
+          long: "Длинный (%{data})"
+          medium: "Средний (%{data})"
+          short: "Короткий (%{data})"
+          very-short: "Очень короткий (%{data})"
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
+          label: "Длительность видео"
+          long: "Длинный (%{data})"
+          medium: "Средний (%{data})"
+          short: "Короткий (%{data})"
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: "Длинный (20+ минут)"
+        medium: "Средний (4 - 20 минут)"
+        short: "Короткий (<4 минут)"
       year:
-        from: 
-        to: 
+        from: "от"
+        to: "до"
     'facet ':
       header:
         video_hd:
-          'true': 
-    find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
-    genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+          'true': HD
+    find-us-elsewhere: "Найти нас где-либо еще"
+    forgot-password: "Забыли пароль?"
+    genres: "жанры"
+    genres-chamber-music: "Камерная музыка"
+    genres-classical-music: "Классическая музыка"
+    genres-concertos: "Концерты"
+    genres-non-western-classical-music: "Не-западная классическая музыка"
+    genres-opera: "Опера"
+    genres-popular-music: "Популярная музыка"
+    genres-traditional-music: "Традиционная музыка"
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
-    help: 
-    home: 
-    javascript-required: 
-    labs: 
-    labs-text: 
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
-    logo-image: 
+      connect: "связаться"
+      develop: "разработать"
+      discover: "открыть"
+      network: "сеть"
+    help: "Помощь"
+    home: "Домой"
+    javascript-required: "Чтобы увидеть содержимое, пожалуйста, включите JavaScript в Вашем браузере и попробуйте обновить веб-браузер до версии, которая поддерживает HTML5."
+    labs: Labs
+    labs-text: "Воспользуйтесь нашими API в дополнение к поиску культурных материалов по коллекциям"
+    language-basque: "Баскский"
+    language-bulgarian: "Болгарский"
+    language-catalan: "Каталонский"
+    language-croatian: "Хорватский"
+    language-czech: "Чешский"
+    language-danish: "Датский"
+    language-dutch: "Голландский"
+    language-english: "Английский"
+    language-estonian: "Эстонский"
+    language-finnish: "Финнский"
+    language-french: "Французский"
+    language-gaelic: "Галльский"
+    language-german: "Немецкий"
+    language-greek: "Греческий"
+    language-hungarian: "Венгерский"
+    language-icelandic: "Исландский"
+    language-italian: "Итальянский"
+    language-latvian: "Латышский"
+    language-lithuanian: "Литовский"
+    language-maltese: "Мальтийский"
+    language-norwegian: "Норвежский"
+    language-polish: "Польский"
+    language-portuguese: "Португальсикй"
+    language-romanian: "Румынский"
+    language-russian: "Русский"
+    language-slovakian: "Словакский"
+    language-slovenian: "Словенский"
+    language-spanish: "Испанский"
+    language-swedish: "Шедский"
+    language-ukranian: "Украинский"
+    login: "Логин"
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
-    our-mission: 
-    our-mission-text: 
-    our-sites: 
-    password: 
-    professional: 
-    professional-text: 
-    refine-your-search: 
-    register: 
-    research: 
-    research-text: 
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
+      load-more: "Еще"
+      show-more: "Показать еще"
+      view-more: "Просмотреть еще"
+    more-info: "Еще информация"
+    our-mission: "Наша миссия"
+    our-mission-text: "Кто боится абракадабры?"
+    our-sites: "наши сайты"
+    password: "Пароль"
+    professional: Pro
+    professional-text: "Принимайте участие, делитесь своими данными или используйте наши"
+    refine-your-search: "Уточните свой поиск"
+    register: "Зарегистрируйтесь"
+    research: "Исследование"
+    research-text: "Связаться с академическими сообществами"
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+      search-button-image-alt: "Поиск"
+      search-placeholder-text: "Добавить поисковый термин"
+    search-collections: "Коллекции"
+    search-collections-text: "Исследуйте европейское культурное наследие"
+    share: "Поделиться"
+    sitemap: "Карта сайта"
+    terms-and-policies: "Условия и положения"
+    type: "тип"
+  'no': "Норвегия"
+  pl: "Португалия"
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: "Результаты"
+        show-results-all: "Показать все результаты"

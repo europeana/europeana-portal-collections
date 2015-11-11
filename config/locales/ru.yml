@@ -1,31 +1,31 @@
 ru:
   global:
-    labs-link: 
+    labs-link: "ссылка на Labs"
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: "Все сообщения"
+      all_exhibitions: "Все выставки"
+      blog: "Блог"
+      browse: "Просмотреть"
+      browse_colours: "Цвета"
+      browse_newcontent: "Новое содержание"
+      browse_sources: "Источники"
+      channels: "Коллекции"
+      collections: "Коллекции"
+      exhibitions: "Выставки"
+      home: "Домой"
+    pro-link: "ссылка на Pro"
+    pro-text: "текст для Pro"
+    settings: "параметры"
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: "Релиз Альфа означает, что данный веб-сайт находится в стадии активной разработки и регулярно обновляется. Иногда он может работать в автономном режиме (offline). Ваш отзыв поможет улучшить наш веб-сайт. "
+        link-text: "Внесите свой вклад!"
+        title: "Это Альфа релизы нового поиска по коллекциям и Музыкального канала"
+    blog-link: "ссылка на блог "
     browse:
       colours:
-        title: 
+        title: "Цвета"
       newcontent:
         title: 
       sources:
@@ -56,9 +56,12 @@ ru:
       menu:
         about: 
         become-a-provider: 
+        contact: 
         copyright: 
         data-providers: 
+        help: 
         new-collections: 
+        rights: 
         search-tips: 
         using-myeuropeana: 
     home:
@@ -268,5 +271,3 @@ ru:
           notice: 
         label: 
         settings-label: 
-    site-name-link: 
-    sitemap-link: 

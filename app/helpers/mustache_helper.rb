@@ -144,230 +144,230 @@ module MustacheHelper
   end
 
   def collection_data
-    name = nil
-    if !(params[:controller] == 'portal' && params[:action] == 'show')
-      name = params[:id] ? params[:id] : nil
-    end
-    if !name.nil?
-      {
-        name: name,
-        label: t("site.collections.#{name}.title"),
-        url: name ? collection_url(name) : nil
-      }
+    mustache[:collection_data] ||= begin
+      name = nil
+      if !(params[:controller] == 'portal' && params[:action] == 'show')
+        name = params[:id] ? params[:id] : nil
+      end
+      if !name.nil?
+        {
+          name: name,
+          label: t("site.collections.#{name}.title"),
+          url: name ? collection_url(name) : nil
+        }
+      end
     end
   end
   alias_method :channel_data, :collection_data
 
   def navigation
-    {
-      global: {
-        options: {
-          search_active: false,
-          settings_active: true
-        },
-        logo: {
-          url: root_url,
-          text: 'Europeana ' + t('global.search-collections')
-        },
-        primary_nav: {
-          menu_id: 'main-menu',
-          items: [
-            {
-              url: root_url,
-              text: t('global.navigation.home'),
-              is_current: controller.controller_name == 'home'
-            },
-            {
-              text: t('global.navigation.collections'),
-              is_current: controller.controller_name == 'collections',
-              submenu: {
-                items: Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|
-                  {
-                    url: collection_path(collection),
-                    text: collection.landing_page.title,
-                    is_current: current_page?(collection_path(collection))
-                  }
-                end
+    mustache[:navigation] ||= begin
+      {
+        global: {
+          options: {
+            search_active: false,
+            settings_active: true
+          },
+          logo: {
+            url: root_url,
+            text: 'Europeana ' + t('global.search-collections')
+          },
+          primary_nav: {
+            menu_id: 'main-menu',
+            items: [
+              {
+                url: root_url,
+                text: t('global.navigation.home'),
+                is_current: controller.controller_name == 'home'
+              },
+              {
+                text: t('global.navigation.collections'),
+                is_current: controller.controller_name == 'collections',
+                submenu: {
+                  items: Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|
+                    {
+                      url: collection_path(collection),
+                      text: collection.landing_page.title,
+                      is_current: current_page?(collection_path(collection))
+                    }
+                  end
+                }
+              },
+              {
+                text: t('global.navigation.browse'),
+                is_current: controller.controller_name == 'browse',
+                submenu: {
+                  items: [
+                    {
+                      url: browse_newcontent_path,
+                      text: t('global.navigation.browse_newcontent'),
+                      is_current: current_page?(browse_newcontent_path)
+                    },
+                    {
+                      url: browse_colours_path,
+                      text: t('global.navigation.browse_colours'),
+                      is_current: current_page?(browse_colours_path)
+                    },
+                    {
+                      url: browse_sources_path,
+                      text: t('global.navigation.browse_sources'),
+                      is_current: current_page?(browse_sources_path)
+                    }
+                  ]
+                }
+              },
+              {
+                url: 'http://exhibitions.europeana.eu/',
+                text: t('global.navigation.exhibitions'),
+                submenu: {
+                  items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][:all], 6) + [
+                    {
+                      url: 'http://exhibitions.europeana.eu/',
+                      text: t('global.navigation.all_exhibitions'),
+                      is_morelink: true
+                    }
+                  ]
+                }
+              },
+              {
+                url: 'http://blog.europeana.eu/',
+                text: t('global.navigation.blog'),
+                submenu: {
+                  items: feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6) + [
+                    {
+                      url: 'http://blog.europeana.eu/',
+                      text: t('global.navigation.all_blog_posts'),
+                      is_morelink: true
+                    }
+                  ]
+                }
               }
-            },
-            {
-              text: t('global.navigation.browse'),
-              is_current: controller.controller_name == 'browse',
-              submenu: {
-                items: [
-                  {
-                    url: browse_newcontent_path,
-                    text: t('global.navigation.browse_newcontent'),
-                    is_current: current_page?(browse_newcontent_path)
-                  },
-                  {
-                    url: browse_colours_path,
-                    text: t('global.navigation.browse_colours'),
-                    is_current: current_page?(browse_colours_path)
-                  },
-                  {
-                    url: browse_sources_path,
-                    text: t('global.navigation.browse_sources'),
-                    is_current: current_page?(browse_sources_path)
-                  }
-                ]
-              }
-            },
-            {
-              url: 'http://exhibitions.europeana.eu/',
-              text: t('global.navigation.exhibitions'),
-              submenu: {
-                items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][:all], 6) + [
-                  {
-                    url: 'http://exhibitions.europeana.eu/',
-                    text: t('global.navigation.all_exhibitions'),
-                    is_morelink: true
-                  }
-                ]
-              }
-            },
-            {
-              url: 'http://blog.europeana.eu/',
-              text: t('global.navigation.blog'),
-              submenu: {
-                items: feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6) + [
-                  {
-                    url: 'http://blog.europeana.eu/',
-                    text: t('global.navigation.all_blog_posts'),
-                    is_morelink: true
-                  }
-                ]
-              }
-            }
-          ]
-        }  # end prim nav
-      },
-      home_url: root_url,
-      footer: {
-        linklist1: {
-          title: t('global.more-info'),
-          items: [
-            {
-              text: t('site.footer.menu.about'),
-              url: static_page_path('about', format: 'html')
-            }
-            # {
-            #   text: t('site.footer.menu.new-collections'),
-            #   url: '#'
-            # },
-            # {
-            #   text: t('site.footer.menu.data-providers'),
-            #   url: '#'
-            # },
-            # {
-            #   text: t('site.footer.menu.become-a-provider'),
-            #   url: '#'
-            # }
-          ]
+            ]
+          }  # end prim nav
         },
-        xxx_linklist2: {
-          title: t('global.help'),
-          items: [
-            {
-              text: t('site.footer.menu.search-tips'),
-              url: '#'
-            },
-            {
-              text: t('site.footer.menu.using-myeuropeana'),
-              url: '#'
-            },
-            {
-              text: t('site.footer.menu.copyright'),
-              url: '#'
-            }
-          ]
-        },
-        social: {
-          facebook: true,
-          pinterest: true,
-          twitter: true,
-          googleplus: true
+        home_url: root_url,
+        footer: {
+          linklist1: {
+            title: t('global.more-info'),
+            items: Page.primary.map do |page|
+              {
+                text: t(page.slug, scope: 'site.footer.menu'),
+                url: static_page_path(page, format: 'html')
+              }
+            end
+          },
+          xxx_linklist2: {
+            title: t('global.help'),
+            items: [
+              {
+                text: t('site.footer.menu.search-tips'),
+                url: '#'
+              },
+              {
+                text: t('site.footer.menu.using-myeuropeana'),
+                url: '#'
+              },
+              {
+                text: t('site.footer.menu.copyright'),
+                url: '#'
+              }
+            ]
+          },
+          social: {
+            facebook: true,
+            pinterest: true,
+            twitter: true,
+            googleplus: true
+          }
         }
       }
-    }
+    end
   end
 
   def utility_nav
-    {
-      menu_id: 'settings-menu',
-      style_modifier: 'caret-right',
-      tabindex: 6,
-      items: [
-        {
-          url: '#',
-          text: 'Settings',
-          icon: 'settings',
-          submenu: {
-            items: [
-              {
-                text: t('global.settings'),
-                subtitle: true,
-                url: false
-              },
-              {
-                text: t('site.settings.language.label'),
-                url: '/portal/settings/language',
-                is_current: controller.controller_name == 'settings'
-              },
-              # {
-              #   text: 'My Profile',
-              #   url: 'url to profile page'
-              # },
-              # {
-              #   text: 'Advanced',
-              #   url: 'url to settings page'
-              # },
-              # {
-              #   is_divider: true
-              # },
-              # {
-              #   text: 'Admin',
-              #   subtitle: true,
-              #   url: false
-              # },
-              # {
-              #   text: 'Collection Admin',
-              #   url: 'url to admin page'
-              # },
-              # {
-              #   is_divider: true
-              # },
-              # {
-              #   text: 'Account',
-              #   subtitle: true,
-              #   url: false
-              # },
-              # {
-              #   text: 'Log Out',
-              #   url: 'url to login page'
-              # }
-            ]
+    mustache[:utility_nav] ||= begin
+      {
+        menu_id: 'settings-menu',
+        style_modifier: 'caret-right',
+        tabindex: 6,
+        items: [
+          {
+            url: '#',
+            text: 'Settings',
+            icon: 'settings',
+            submenu: {
+              items: [
+                {
+                  text: t('global.settings'),
+                  subtitle: true,
+                  url: false
+                },
+                {
+                  text: t('site.settings.language.label'),
+                  url: '/portal/settings/language',
+                  is_current: controller.controller_name == 'settings'
+                },
+                # {
+                #   text: 'My Profile',
+                #   url: 'url to profile page'
+                # },
+                # {
+                #   text: 'Advanced',
+                #   url: 'url to settings page'
+                # },
+                # {
+                #   is_divider: true
+                # },
+                # {
+                #   text: 'Admin',
+                #   subtitle: true,
+                #   url: false
+                # },
+                # {
+                #   text: 'Collection Admin',
+                #   url: 'url to admin page'
+                # },
+                # {
+                #   is_divider: true
+                # },
+                # {
+                #   text: 'Account',
+                #   subtitle: true,
+                #   url: false
+                # },
+                # {
+                #   text: 'Log Out',
+                #   url: 'url to login page'
+                # }
+              ]
+            }
           }
-        }
-      ]
-    }
+        ]
+      }
+    end
   end
 
   # @todo {User.new} does not belong here, but needed by request specs
   def content
-    banner = Banner.find_by_key('phase-feedback')
-    banner = Banner.new unless (current_user || User.new(role: :guest)).can? :show, banner
-    {
-      phase_feedback: banner.new_record? ? nil : {
-        title: banner.title,
-        text: banner.body,
-        cta_url: banner.link.url,
-        cta_text: banner.link.text
+    mustache[:content] ||= begin
+      banner = Banner.find_by_key('phase-feedback')
+      banner = Banner.new unless (current_user || User.new(role: :guest)).can? :show, banner
+      {
+        phase_feedback: banner.new_record? ? nil : {
+          title: banner.title,
+          text: banner.body,
+          cta_url: banner.link.url,
+          cta_text: banner.link.text
+        }
       }
-    }
+    end
   end
 
   private
+
+  def mustache
+    @mustache ||= {}
+  end
 
   def feed_entry_nav_items(url, max)
     feed_entries(url)[0..(max - 1)].map do |item|

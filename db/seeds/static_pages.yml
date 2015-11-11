@@ -1,0 +1,650 @@
+---
+- :slug: help/results
+  :title: Results in Europeana
+  :body: "<p>Europeana divides search results into 5 main categories: text, images,
+    video, sound and 3D objects.</p><p>The types of items included in each section
+    are:</p><ul><li><strong>Texts</strong>: books, letters, archival
+    papers, dissertations, poems, newspaper articles, facsimiles, manuscripts and
+    music scores.</li><li><strong>Images</strong>: paintings, drawings, prints,
+    photographs, pictures of museum objects, maps, graphic designs, plans and musical
+    notation.</li><li><strong>Video</strong>: films, news broadcasts and television
+    programmes</li><li><strong>Sound</strong>: music and spoken word from cylinders,
+    tapes, discs and radio broadcasts.</li><li><strong>3D</strong>: virtual 3D representations
+    of objects, architecture or places.</li></ul><p>You can also sort search
+    results by media type, language, date, country, copyright, or provider using the
+    Refine your search pane of the results screen. See <strong>Searching Europeana</strong>
+    for more details.</p><p>Search results are presented in a grid. You can select
+    how many results to show on a page by selecting an option from the <strong>Results
+    per page</strong> drop-down list either above or below the results. You can select
+    <b>12, 24, 48</b> or <b>96</b>.</p><p>To navigate through the results pages,
+    select the single arrows that are shown both above and below the results grid.
+    Hit &gt; or &lt; to move one page in either direction, or hit the double arrows
+    &gt;&gt; or &lt;&lt; to move to the last/first pages. Alternatively, type in the
+    page number of the page you'd like to view.</p><p><strong>Further details</strong>
+    of an object can be found by selecting an item in the results list.</p><h2>Individual
+    items</h2><p>After performing your search, select the item you want to view
+    to find out more about it.</p><p>The item page shows you the following:</p>
+    \ <ul>    <li><strong>Thumbnail image/preview</strong> - hit
+    the magnifying glass <strong>View</strong> link at the bottom of the thumbnail
+    to see a bigger image and additional information in a new window. To close that
+    window, hit X at the top right.<br>     If there are multiple images of the
+    same object, e.g. pages of a book or different views of an object, a carousel
+    of images is displayed under the main thumbnail. You can select items in the carousel
+    or the left and right arrows on the main thumbnail to browse the images.</li><li><strong>Rights
+    and licensing</strong> - below each preview image you will find the rights statement
+    indicating the terms on which you may re-use the digital object, including the
+    preview. There are currently 12 rights statements describing the different terms
+    on which re-use is permitted. Clicking on the rights statement will open a new
+    window with a full description of the terms or, in the case of a Creative Commons
+    licence, a link to the licence itself.</li><li><strong>View item at</strong>
+    - view the item on the item provider's own website. This is useful, for example,
+    to find additional information and larger images, or to view an item in its fullest
+    form, e.g. a whole book or video.</li><li><strong>Share item</strong> - share
+    the item via a range of social media, or to print or email it. Just select the
+    option you want.</li><li><strong>Cite on Wikipedia</strong> - this function
+    will help you link to Europeana items and cite them in Wikipedia articles. The
+    code you need is formatted for direct inclusion in Wikipedia's article authoring
+    mode. Select <strong>Citation</strong> or <strong>Footnote</strong> and copy and
+    paste the text provided. To close the citation window, hit the X in the top right
+    corner.</li><li><strong>Translate details</strong> - select an option from the
+    drop-down list of languages. Please note this is a machine translation.</li></ul><p>The
+    main area of the item page gives you more information about the item. The amount
+    and type of information will vary but may contain the item's name and description
+    along with other information including places, dates, formats, and providers.</p><p>This
+    information may contain links to further details. Select these to find the item
+    in an external service, e.g. the data provider's own website, or to search Europeana
+    for the highlighted term.</p><p>To move to the previous or next item in your
+    search results, hit the <strong>Next</strong> or <strong>Previous</strong> options.</p><p>A
+    carousel showing <strong>Similar content</strong> of up to 10 items related to
+    the one you are viewing. Select an image to view more details.</p><p>Another
+    way of finding similar content is to use the links in the <strong>Search also
+    for</strong> pane. This provides links to other searches for items with, for example,
+    the same title, author, format or are from the same provider. A number in brackets,
+    e.g. (33) shows the number of results each of these searches returns. Simply hit
+    the link to perform the search.</p>"
+- :slug: help/explore
+  :title: Exploring Europeana
+  :body: |-
+    <p>In addition to the search and filter options, Europeana offers alternative ways to explore and navigate through our millions of objects. You can discover Europe's rich heritage by browsing:</p>
+
+      <ul>
+        <li><strong>Exhibitions</strong>: Our virtual exhibitions help you discover and learn more about specific themes, e.g. Art Nouveau or musical instruments. With extensive curatorial information that guides you through the themes, the virtual exhibitions can be found by choosing the <strong>Exhibitions</strong> link at the foot of the page.</li>
+        <li><strong>New content</strong>: See the latest contributions from our partner museums, libraries, archives and audiovisual archives by choosing <strong>View more latest content from our partners</strong> in the <strong>Featured Partner</strong> area.</li>
+      </ul>
+- :slug: help/search
+  :title: Searching Europeana
+  :body: |-
+    <p>Welcome to Europeana. This page describes some of the things that you can do while you are here. Learn more about:
+      <ul>
+        <li><strong>Searching Europeana</strong>: Search tips, refined search, phrase search, exclude words, auto-completion, filter results, share your search.</li>
+        <li><strong>Exploring Europeana</strong>: exhibitions, new content.</li>
+        <li><strong>Results in Europeana</strong>: Seeing further details, rights and licence information, translating details, searching on external services, related searches on Europeana, viewing item on provider's site, embedding, and citing.</li>
+        <li><strong>Using My Europeana</strong>: Saving searches, saving items, and adding tags.</li>
+      </ul>
+
+    <h2>General Search</h2>
+
+    <p>Searching the millions of items in Europeana is simple. Just enter your search term and hit <strong>Search</strong>.</p>
+
+    <h2>Specific search</h2>
+
+    <p>You can narrow your search with the arrow to the right of <b>Search All fields</b> and selecting a category: <strong>Titles, Creators, Subjects, Dates/Periods, Places</strong>. Then enter your search term and hit <strong>Search</strong>.</p>
+
+    <p>Alternatively, just ask yourself who, what, where or when you are interested in and type these words into Europeana's search box followed by a colon (:). Then enter your search term and hit <strong>Search</strong>.</p>
+
+    <p>For specific searches, you could:</p>
+      <ul>
+        <li>Use the <strong>Creator</strong> filter or enter <strong>who:</strong> followed by a name of, for example, an actor, author or architect. Your results will display only items for which the name you entered is listed as the creator. For example, searching for <a href="search.html?query=who%3A+Vincent+van+Gogh">who: Vincent van Gogh</a> will narrow your results to van Gogh's works, excluding photographs of the artist or documentaries about him and his work.</li>
+        <li>Use the <strong>Subject</strong> or <strong>Title</strong> filter or enter <strong>what:</strong> followed by a type of item, a subject you are interested in or words from the title of the item you are looking for. Your search results will display only items of the requested type or subject or items whose title includes your search term. For example, searching for <a href="search.html?query=what%3A+maps">what: maps</a> will narrow your results to maps, or <a href="search.html?query=what%3A+art+nouveau">what: Art Nouveau</a> will display artworks, buildings and monuments done in the Art Nouveau style.</li>
+        <li>Use the <strong>Place</strong> filter or enter <strong>where:</strong> followed by a name of a town, city or country within Europe or around the world. Your search results will display only items which were created in, published in or depict the place you are searching for. For example, searching for <a href="search.html?query=where%3A+milan">where: Milan</a> will help you differentiate your search when you are looking only for objects created or held in Milan, excluding items on writer Milan Kundera from your search results.</li>
+        <li>Use the <strong>Date</strong> filter or enter <strong>when:</strong> followed by a date (e.g. 1945) or a period (e.g. Roman or Medieval). Your search results will display only items for which the date is listed in the item's date field. For example, searching for <a href="search.html?query=when%3A+1984">when: 1984</a> will help you differentiate your search when you are looking only for items dated 1984, excluding items that have 1984 in their title or description, like George Orwell's novel.</li>
+      </ul>
+
+    <p>These search functions also have support for different spellings and languages. For example, when you search for <a href="search.html?query=where%3A+milan">where: Milan</a>, the results will also include items with Milano, Mailand or Milanas listed as their geographic coverage.</p>
+
+    <h2>Phrase search</h2>
+
+    <p><b>Phrase search</b> is also possible. Just put <b>quotation marks</b> (e.g. &ldquo;art nouveau&rdquo;) around the phrase you want to find, or type <strong>AND</strong> between the keywords (e.g. art <b>AND</b> nouveau).</p>
+
+    <p><b>Exclude words</b> by typing <strong>NOT</strong> in capital letters, followed by the word you want to omit (e.g. Auguste <b>NOT</b> Renoir)</p>
+
+    <p>Another helpful search feature is <b>Auto completion</b>. Start typing a search term. Europeana will suggest words that may match what you are thinking of. Just select the term you want and hit <strong>Search</strong></p>
+
+    <h2>Refine your search</h2>
+
+     <p>Once you have done an initial search, results can be narrowed down with the <strong>Refine your search</strong> functions. These are in the grey pane on the search results screen. You can add more keywords to your search, thereby narrowing the search results. Just type your keyword into the <strong>Add more keywords</strong> field and hit <strong>+ Add</strong>. The keyword is displayed at the top of the pane, under <b>Matches for.</b></p>
+
+    <p>To remove a keyword, hit the X icon next to the relevant keyword in the <strong>Matches for</strong> list.</p>
+
+    <p>You can also <b>filter your search results:</b></p>
+      <ul>
+        <li><strong>By media type</strong> - will display only objects of a selected media type (images, text, video, sound or 3D). </li>
+        <li><strong>By language</strong> - will display only objects with descriptions in selected languages, i.e. the language of the institution that provided the object to Europeana.</li>
+        <li><strong>By date</strong> - will display only objects with selected dates.</li>
+        <li><strong>By country</strong> - will display only objects from selected countries, i.e. the country of the institution that provided the object to Europeana.</li>
+        <li><strong>By copyright</strong> – will display objects labelled with the selected copyright label(s). This copyright label indicates how you may reuse the digital object, including the preview.</li>
+        <li><strong>By provider</strong> - will display only objects from selected institutions</li>
+      </ul>
+
+    <p>Select the filter name, e.g. 'By language' to expand it. Then just use the check boxes for the categories you wish the search results to include. The results will refresh automatically. The filter will be added to the <strong>Matches for</strong> list at the top of the pane.</p>
+
+    <p>To remove a filter, hit the X icon next to the item in the <strong>Matches for</strong> list, or de-select the check box next to the filter category.</p>
+
+    <p>You can also select to <strong>Include content contributed by users</strong>. This means items that have not come from a cultural institution but from an individual user, for example, items contributed to the Europeana 1914-1918 project.</p>
+
+    <p>Share your search with friends by choosing <b>Share</b>. A full list of social media sharing options is presented. Just select one you want. This also includes print and email options.</p>
+- :slug: help
+  :title: Help
+  :body: "<p>Welcome to Europeana. This page describes some of the things that you
+    can do while you are here. Learn more about:</p><ul><li><strong>Searching
+    Europeana</strong>: Search tips, Refined search, Phrase search, Exclude words,
+    Auto-completion, Spelling suggestions.</li><li><strong>Exploring Europeana</strong>:
+    Through time, On a map, With curatorial expertise.</li><li><strong>Results
+    in Europeana</strong>: Seeing further details, Rights and license information,
+    Translating details, Searching on external services, New related searches on Europeana,
+    Viewing item on provider's site, Embedding, and Citing.</li><li><strong>Using
+    My Europeana</strong>: Saving searches, Saving items, and Adding tags.</li></ul>"
+- :slug: contact
+  :title: Contact us
+  :body: |-
+    <p>
+            Europeana is being temporarily rehoused due to works at the Koninklijke Bibliotheek. In 2015 you will find us at:<br/>
+              <br/>
+            Europeana Foundation<br/>
+            Stichthage building, 9th floor<br/>
+            Koningin Julianaplein 10,<br/>
+            2595 AA<br/>
+            The Hague<br/>
+            The Netherlands<br/>
+            </p>
+          <h4>To be added to the press list or for general communications</h4>
+          <p>
+              <a href="mailto:Eleanor.Kenny@bl.uk">Eleanor Kenny</a>
+                <br/>
+              Head of Communications<br/>
+              </p>
+          <h4>To contribute content to Europeana</h4>
+          <p>
+            See the <a href="http://pro.europeana.eu/share-your-data/">content providers</a> page on our project site
+          </p>
+- :slug: collections/music/about
+  :title: About the Music Channel
+  :body: <p>Imagine looking at original handwritten manuscripts of a piece of music
+    while listening to different interpretations of it, and reading a biography of
+    the composer. On the Europeana Music Channel, you can.</p><p><a href="http://www.europeanasounds.eu/">Our
+    partners</a>, all experts in music, from across Europe have carefully curated
+    this collection of music recordings, sheet music, images of musical instruments,
+    books about music and other music-related content. </p><p>We’ve made this early
+    test version of the Music Channel available to you, our users, so you can help
+    us shape it as we develop it further. So when you visit the site you will at times
+    be asked to answer questions or surveys that appear on screen. We would really
+    appreciate if you could take the time to answer those questions and surveys!</p><p>Also,
+    in the interest of transparency and privacy, you should know that we log user
+    statistics and user behaviour in Google Analytics and a service called Hotjar.
+    We do that because it shows us where we’ve gone wrong in our designs and so helps
+    us to improve the Music Channel. All logs are kept private and anonymised and
+    will only be used to improve our service.</p><p>We encourage you to search the
+    collection, play music, view the sheet music or read around it. When copyright
+    allows, you can download the things you love most. And visit our virtual exhibitions
+    to discover music in ways you’ve never done before!</p>
+- :slug: about
+  :title: Welcome, culture lover!
+  :body: "<p>Whether you came here for inspiration, to work on your research, looking
+    for your next coffee mug design or just to snoop around, we hope you will find
+    what you need somewhere amongst the 45 million objects we host here.</p><p>Our
+    material comes from all over Europe and the scope of the collections is really
+    quite astonishing. Our aim is help you find your way round so you discover treasures
+    of your own.</p><p>Over the last few years, we’ve been expanding our collections
+    and learning more and more about them, and what you want to do with them. Now
+    it’s time to change a few things and make some improvements to our service!</p><p>We’re
+    trying out a new version of Europeana Collections. We are working hard to improve
+    your experience here and make it as easy as possible for you to find the information
+    you are looking for. So we’ll probably ask you to help us by answering some questions.
+    Your answers will be really helpful to us, so please do take a moment to give
+    us your thoughts. Thanks!</p><p>In the meantime, we hope you enjoy your cultural
+    journey with us.</p>"
+- :slug: rights
+  :title: "Terms & Policies"
+  :body: "<p>In this section of the Europeana website you will find an overview of our Terms and Policies. These are divided into three subsections: 'Using Our data', 'Contributing data' and 'Our Policies':</p><p><strong>Using Our data</strong> provides you with the Terms of Use and Guidelines for using the data published on Europeana.eu.</p><p><a href=\"/portal/rights/terms-of-use.html\">Terms of Use</a> governs what you can or cannot do with the metadata and previews that are published on Europeana.eu, with seperate <a href=\"/portal/rights/api-terms-of-use.html\">Terms of Use for the Europeana API</a>. Europeana publishes guidelines for working with <a href=\"/portal/rights/metadata-usage-guidelines.html\">Europeana metadata</a> as well as for using digital reproductions of <a href=\"/portal/rights/pd-usage-guide.html\">Public Domain works that you find via Europeana.</a> Additionally we provide a list of <a href=\"/portal/rights/linked-data-sources.html\">data sources that Europeana uses</a> to enrich the metadata provided by our data providers.</p>
+<p><strong>Contributing data</strong> provides terms that ensure that Europeana can combine objects and data provided by individual users with the rest of the Europeana metadata.</p>
+<p><a href=\"http://pro.europeana.eu/web/guest/data-exchange-agreement\" target=\"_blank\">The Europeana Data Exchange Agreement</a> governs the relationship between Europeana and the institutional data providers. The <a href=\"terms-for-user-contributions.html\">terms for user contributions</a> governs the terms on which users contribute data to Europeana.</p>
+<p><strong>Our policies</strong> contains Europeana's policies.</p>
+<p>The <a href=\"/portal/rights/privacy.html\">Privacy</a> policy details how we treat personal information that we have collected from our users. The <a href=\"/portal/rights/languagepolicy.html\">Language</a> policy describes Europeana's policy for providing information in a users own language and <a href=\"/portal/rights/accessibility.html\">Accessibility</a> describes Europeana's aim to provide functionality and content that is universally accessible. In this section you will also find the <a href=\"public-domain-charter.html\">Europeana Public Domain Charter</a> that explains Europeana's contribution to strengthening the digital Public Domain.</p>"
+- :slug: rights/terms
+  :title: Terms of Use
+  :body: "<p>The Europeana.eu website is run by the Europeana Foundation and gives access to a wide range of digitised cultural heritage from across Europe and beyond. This material is provided to Europeana by a large number of contributing institutions and organisations. Europeana strives to make all resources on this website available for re-use. As part of this, all metadata (textual information on digitised cultural heritage) on the site are published without any restrictions on re-use. Most other material, such as the previews to digitised cultural heritage, is clearly labelled with rights statements that indicate if and under which conditions it can be re-used.</p>
+<p><strong>Metadata</strong></p>
+<p>All metadata available on europeana.eu are published free of restrictions, under the terms of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"license\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>. However if you re-use data published by Europeana, we encourage you to follow the <a href=\"/portal/rights/metadata-usage-guidelines/\" rel=\"cc:useGuidelines\">Europeana Usage Guidelines for Metadata</a> and to provide attribution to the data sources whenever possible.</p>
+<p><a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\"><img style=\"display:block; margin-left: auto; margin-right: auto;\" src=\"/http://www.europeana.eu/sp/img/cc0mark.png\" /></a></p>
+<p><strong>Previews</strong></p>
+<p>The previews that are shown on Europeana.eu can only be used in accordance with the rights information displayed alongside them (the badges underneath the previews). If there is no rights information displayed alongside a preview, these previews may only be used in accordance with the applicable copyright laws. However, in the latter event, please refer to the website of the data provider to find out whether other types of use are also allowed.</p>
+<p><strong>Notice and Takedown</strong></p>
+<p>Europeana is not the owner of the copyrights to the metadata, the previews or the digitised cultural heritage to which these metadata or previews refer. This information has been provided to Europeana by a large number of contributing institutions and organisations. These data providers have ensured Europeana that the owners of these rights have agreed to the publication of their works under the applicable conditions as referred to above. However, the Europeana Foundation cannot guarantee that this is always correct. If you think that anything published on Europeana.eu infringes your rights, you may report this to Europeana by emailing <a href=\"m&#97;i&#108;&#116;o&#58;n%6F&#116;i&#99;%65%40e&#117;%&#55;&#50;opea%6E%61&#46;eu?subject=Reporting%20an%20unlawful%20use%20of%20the%20service\" class=\"email\" title=\"Mail Europeana to report an unlawful use of the service\">no&#116;&#105;ce&#64;europeana&#46;eu</a>.</p>
+<p><strong>Liability Disclaimer</strong></p>
+<p>Europeana does not guarantee the accuracy or completeness of the website and its content.</p>
+<p>Except to the extent required by applicable law, in no event will Europeana be liable on any legal theory for any special, incidental, consequential, punitive or exemplary damages arising out of the use of the website or its content. In particular, it will not be liable for the following:</p>
+<ul>
+<li>Accuracy, completeness, etc. of the website or its content;</li>
+<li>Any infringement of privacy, publicity or other rights, including infringement of copyrights to metadata, previews or other content made available on Europeana.eu under conditions that were not approved by the right holder;</li>
+<li>Any use by third parties that goes beyond the rights expressed in these terms of use.</li>
+</ul>
+<p><strong>These terms of use</strong></p>
+<p>These terms of use do not pertain to the metadata, previews and other content of virtual exhibitions offered by Europeana on <a href=\"http://exhibitions.europeana.eu\" target=\"_blank\">exhibitions.europeana.eu</a>.</p>
+<p>By exercising any rights to the website or its content on grounds of these terms of use, you accept and agree to be bound to these terms of use. Europeana reserves the right to amend these terms of use.</p>
+<p>These terms of use are governed by the laws of The Netherlands.</p>"
+- :slug: rights/metadata
+  :title: Usage Guidelines for Metadata
+  :body: "<p>These usage guidelines are based on goodwill, they are not a legal contract but Europeana requests that you follow these guidelines if you use metadata from Europeana.</p>
+<p>All metadata published by Europeana are available free of restriction under the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>. However, Europeana requests that you actively acknowledge and give attribution to all metadata sources, such as the data providers (being a specific cultural heritage institution) and any data aggregators, including Europeana.</p>
+<p><strong>Give credit where credit is due.</strong></p>
+<ul>
+<li>Give attribution to the data provider and all contributing data aggregators, including Europeana. Aggregators perform a crucial task in collecting, storing and harmonising data so that it is more widely accessible and interoperable.</li>
+<li>Make sure that others are aware of the rights status of the Europeana metadata and are aware of these guidelines. One way you can do this is to keep links to the CC0 Public Domain Dedication intact.</li>
+<li>If, for technical or other reasons, you cannot include all the appropriate source links and rights information alongside the metadata that you have used,  you should consider including them separately, for example in a separate document that is distributed with the metadata or dataset.</li>
+<li>If, for technical or other reasons, you cannot include all the appropriate source links and rights information alongside the metadata that you have used,  you may consider linking only to the specific metadata source on Europeana, where all available sources and rights information can be found, including machine-readable formats.</li>
+</ul>
+<p><strong>Metadata is dynamic; consider using the metadata via the Europeana APIs or by linking.</strong></p>
+<ul>
+<li>When working with metadata obtained via Europeana,please be aware that it is not static but subject to change. Europeana continuously updates its metadata to correct mistakes and include new and additional information. Therefore, the best way touse metadata published by Europeana is via the Europeana API or by linking to the specific data. If, for technical or other reasons, you cannot do this,then provide a link back to the source of the data on Europeana or implement an update mechanism.</li>
+</ul>
+<p><strong>Mention your modifications of the metadata and make your modified metadata available under the same terms.</strong></p>
+<ul>
+<li>Please do not use the metadata in a way that suggests you have any official status or that the data provider, aggregator or Europeana endorses you or your use of the metadata, unless you have prior permission to do so.</li>
+<li>Please do not mislead others or misrepresent the metadata or its sources.</li>
+<li>Please make the metadata and any improvements thereto freely available under the same terms as Europeana, i.e., without claiming any legal right to, or imposing any legally binding conditions on access to the metadata or your improvements.</li>
+</ul>
+<p><strong>Please note that you use the metadata at your own risk.</strong></p>
+<ul>
+<li>Europeana offers the metadata as-is and makes no representations or warranties of any kind concerning any metadata published by Europeana.</li>
+<li>Any use of the metadata must conform to all applicable laws and other regulations in your jurisdiction, notably concerning (but not limited to) data protection, defamation or copyright.</li>
+<li>Be aware of any additional applicable community norms of data providers and data aggregators.</li>
+</ul>
+<p><strong>Thank you for your cooperation</strong></p>"
+- :slug: rights/public-domain
+  :title: Public Domain Usage Guidelines
+  :body: "<p><strong>Give credit where credit is due.</strong> When you use a public domain 
+work please credit the author or creator. Please also credit the 
+institution (such as the archive, museum or library) that provided the 
+work, as the more you credit the institution the greater the 
+encouragement to put more public domain works online.</p>
+<p><strong>Protect the reputation of creators and providers.</strong> When you use
+ or modify a public domain work you should not attribute the changes to 
+the creator or the provider of the work. The name or logo of the creator
+ or provider should not be used to endorse the modified work or any use 
+of it without their consent.</p>
+<p><strong>Show respect for the original work.</strong> Please do not use the work
+ in any way that is unlawful and misleading. When you modify and 
+redistribute a public domain work, any changes made to the original 
+should be clearly indicated. You should label the work to show you have 
+changed it, so that other users know who made the changes.</p>
+<p><strong>Show respect for the creator.</strong> If the creator, or provider on 
+behalf of the creator, has asked that a public domain work should not be
+ changed or that it should be used in certain contexts only, then please
+ respect their wishes.</p>
+<p><strong>Share knowledge.</strong> If you use a public domain work to generate 
+new work or if you have additional information about it (such where it 
+came from, its author, content or other possible rights holders), please
+ share your knowledge. That may include tagging, annotating or 
+commenting on a public domain work that is published online and sending 
+back this information to the institution that holds the original object.</p>
+<p><strong>Be culturally aware.</strong> If the work includes culturally sensitive
+ elements you should not change or use these in ways that might be 
+derogatory to other cultures or communities.</p>
+<p><strong>Support efforts to enrich the public domain.</strong> Users of public 
+domain works are asked to support the efforts of cultural and scientific
+ heritage organisations to care for, preserve, digitise and make public 
+domain works available. This support should include monetary 
+contributions or work in kind, particularly when the work is being used 
+for commercial or other for-profit purposes and the provider is a public
+ or non-profit institution.</p>
+<p><strong>Preserve public domain marks and notices.</strong> Users of a public 
+domain work should not remove any public domain mark or notice that has 
+been applied, or provide misleading information about its copyright 
+status.</p>
+<p><strong>This usage guide is based on goodwill. It is not a legal contract. We ask that you respect it.</strong></p>"
+- :slug: rights/api
+  :title: API Terms of Use
+  :body: "<p><strong>Definitions:</strong></p>
+<p>In these terms of use, the following terms are defined as follows:</p>
+<ul>
+<li><strong>API-key:</strong> a unique and confidential code allowing access to the Europeana API.</li>
+<li><strong>Content:</strong> a physical or digital object that is part of Europe's cultural and/or scientific heritage.</li>
+<li><strong>Creative Commons CC0 1.0 Universal Public Domain Dedication:</strong> The Creative Commons Universal Public Domain Dedication as published at: <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">http://creativecommons.org/publicdomain/zero/1.0/</a></li>
+<li><strong>Email Address:</strong> the Email Address provided by the User upon registration for an API-key, or the Email Address provided by the User to replace this Email Address.</li>
+<li><strong>Europeana:</strong> The Europeana Foundation, operating under the Dutch law, the provider of the Europeana API.</li>
+<li><strong>Europeana API Service:</strong> application programming interfaces for the purpose of searching and retrieving the Metadata offered by Europeana on Europeana.eu.</li>
+<li><strong>Implementation:</strong> a service developed by the User, using the Europeana API.</li>
+<li><strong>Metadata:</strong> textual information (including hyperlinks) that may serve to identify, discover, interpret and/or manage Content. </li>
+<li><strong>Preview:</strong> A reduced size or length audio and/or visual representation of Content, in the form of one or more images, text files, audio files, and/or moving images</li>
+<li><strong>User:</strong> a natural or legal person authorised to receive a Europeana API-key.</li>
+</ul>
+<ol>
+<p style=\"margin-top: 10px;\"><strong>Applicability of these terms of use</strong></p>
+<li>By accessing the Europeana API, the User accepts and agrees to be bound by these terms of use.</li>
+<li>In addition thereto, the User must, before using the Europeana API, accept these terms of use where this option is made available in the sign-up form for the API.</li>
+<p style=\"margin-top: 10px;\"><strong>Use of the API-key</strong></p>
+<li>API-keys are confidential and are for use by the User only and may not be shared with third parties unless with express agreement from Europeana.</li>
+<li>An API-key applies to a single Implementation. The User needs to create a separate API-key for every new Implementation. </li>
+<li>Europeana reserves the right to terminate individual Europeana API-keys that are used to display data obtained via the Europeana API in contexts that are illegal, pornographic, defamatory or can be detrimental to the reputation of Europeana in any other way.</li>
+<p style=\"margin-top: 10px;\"><strong>Provision of the Europeana API</strong></p>
+<li>Europeana will provide the User with public technical documentation of the Europeana API, but will not provide technical support for Users unless explicitly agreed otherwise.</li>
+<li>Europeana will log all uses of the Europeana API by the User for the purpose of monitoring service load and for the purpose of improving the Europeana API.</li>
+<li>Europeana may limit the number of transactions the User may send or receive through the Europeana API. Such a limit may be set by Europeana at any time to ensure even performance of the Europeana API to all Users.</li>
+<li>Europeana will continually upgrade the Europeana API by adding new features. Europeana will give notice of updates to the User on a timely basis and will attempt to keep new versions of the Europeana API backwards-compatible. However, Europeana does not guarantee that the Implementations of the User will continue to function after an upgrade.</li>
+<p style=\"margin-top: 10px;\"><strong>Use of Metadata, Previews and Content</strong></p>
+<li>All Metadata that are exposed through the Europeana API are published under the terms of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a> and can be freely re-used for any purpose.</li>
+<li>The Europeana API also provides URLs pointing to Previews hosted on Europeana.eu (edm:preview) and to Content hosted by Europeana's data providers (europeana:object, enclosure, edm:object and edm:isShownBy). The files identified by these URLs do not fall under the scope of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a> and may only be used in accordance with the rights statements contained in the europeana:rights/edm:rights record associated with the digital object (note that there are some uses such as embedding or linking that do not require permission in most jurisdictions). If there is no rights statement contained in the europeana:rights/edm:rights field or if the europeana:rights/edm:rights field is missing, the User shall assume that these Previews and Content may only be used in accordance with the applicable copyright laws, unless the website of the data provider gives different permissions relating to the Preview and/or Content.</li>
+<li>The User is encouraged to follow the <a href=\"metadata-usage-guidelines.html\">Europeana Usage Guidelines for Metadata</a> and to provide attribution to the data sources including, where possible, links to the Content on the original data providers' websites.</li>
+<li>Users of the API are requested to use the &lsquo;Powered by Europeana&rsquo; logo in close proximity to the Metadata whenever such Metadata are displayed to indicate that they are obtained from the Europeana API. The &lsquo;Powered by Europeana&rsquo; logo as well as instructions for using the logo can be found <a href=\"http://pro.europeana.eu/web/guest/about/comms-tools/logos\" target=\"_blank\" title=\"Click here to download the powered by Europeana logo\">here</a>.</li>
+<p style=\"margin-top: 10px;\"><strong>Notice and Takedown</strong></p>
+<li>Europeana is not the owner of the copyrights to the Metadata, the Previews or the Content. This information has been provided to Europeana by a large number of contributing institutions and organizations. These data providers have ensured Europeana that the owners of these rights have agreed to the publication of their works under the applicable conditions as referred to above. However, Europeana cannot guarantee that this is always correct.</li>
+<li>In the event that Europeana is under the impression that it is publishing Metadata or Previews to which it is not entitled, it will remove these Metadata or Previews from the Europeana API. The User must cease use of such Metadata and Previews upon first request thereto from Europeana.</li>
+<p style=\"margin-top: 10px;\"><strong>Liability Disclaimer</strong></p>
+<li>The Europeana Foundation does not guarantee the accuracy or completeness of the Metadata, Previews or Content.</li>
+<li>Except to the extent required by applicable law, in no event will Europeana be liable on any legal theory for any special, incidental, consequential, punitive or exemplary damages arising out the use of Metadata, Previews or Content. In particular, it will not be liable for the following:</li>
+<ul style=\"list-style-type:lower-alpha\">
+<li>accuracy, completeness, etc. of the Metadata, Previews or Content;</li>
+<li>any infringement of privacy, publicity, copyrights or other rights, including infringement of copyrights to Metadata, Previews or Content made available through the Europeana API under conditions that were not approved by the right holder; </li>
+<li>any use by third parties that goes beyond the rights expressed in these terms of use.</li>
+</ul>
+<p style=\"margin-top: 10px;\"><strong>These terms of use</strong></p>
+<li>Europeana reserves the right to amend these terms of use. The User will be bound to the amended terms of use. Every subsequent reference to &lsquo;these terms of use&rsquo; is considered to refer to the amended terms of use, once the User has been informed of the amendments and has reasonably been in the position to adjust use that began before the amendment of the terms of use. A User is considered to have been informed of amendments to these terms of use once Europeana has informed the User of the amendments via the  email address provided by the User upon registration for an API-key, or the email address provided by the User to replace this email address.</li>
+<li>The rights provided to the User in these terms of use will expire automatically upon any breach by the User of the terms included herein.</li>
+<li>These terms of use are governed by the laws of The Netherlands.</li>
+</ol>"
+- :slug: rights/data-sources
+  :title: Europeana Data Sources
+  :body: "<p>Europeana collects data relating to digital objects held by galleries, libraries, archives and museums across Europe (the &lsquo;Europeana data providers&rsquo;). The descriptive metadata provided by these institutions are provided to Europeana under terms that allow Europeana to aggregate it, to enrich it and to publish resulting data under the terms of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>. If you re-use data published by Europeana, we encourage you to follow the <a href=\"metadata-usage-guidelines.html\">Europeana Usage Guidelines for Metadata</a> and to provide attribution to the data sources including, where possible, links to the digital objects on the original data providers' websites.</p>
+<p>In addition to our data providers, who supply object-related data, Europeana uses a number of other sources to enrich data. Europeana wishes to express thanks to the contributors of these projects who enable us to improve the quality of our data. Please find below a list of data sources used by Europeana:</p>
+<ul>
+<li about=\"http://www.geonames.org/\">Geonames (<a href=\"http://www.geonames.org/\" target=\"_blank\">www.geonames.org</a>) A worldwide geographical database with a search function, browsable maps, and downloadable data files. Geonames is available under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\" target=\"_blank\" rel=\"license\">Creative Commons attribution licence</a>. </li>
+<li about=\"http://dbpedia.org/\">DBpedia (<a href=\"http://dbpedia.org/About\" target=\"_blank\">dbpedia.org</a>) DBpedia is a project providing access to structured content extracted from the information created as part of Wikipedia. The DBpedia datasets include structured information about persons, places, organizations...  The DBpedia datasets are licensed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\" target=\"_blank\" rel=\"license\">Creative Commons attribution licence</a> and the <a href=\"http://www.gnu.org/licenses/fdl.html\">GNU Free Documentation License</a>.</li>
+<li about=\"http://www.eionet.europa.eu/gemet/\">GEMET (<a href=\"http://www.eionet.europa.eu/gemet/\" target=\"_blank\">www.eionet.europa.eu/gemet</a>) GEMET is a multilingual thesaurus for environment. GEMET is available under the terms of the <a href=\"http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB\" target=\"_blank\" rel=\"license\">Creative Commons attribution licence</a>.</li>
+</ul>"
+- :slug: rights/contributions
+  :title: Terms for User Contributions
+  :body: "<p>This document contains the terms applicable to Users who contribute Content and Metadata to Websites (including but not limited to Europeana.eu) operated by the Europeana Foundation. As a User, you should be aware that the Europeana Foundation strives to make all Content and Metadata available for re-use with a minimum of restrictions.</p>
+<p>As part of this policy, the Europeana Terms for User Contributions establish that all Content that is contributed to Europeana by its Users will be made available on Websites operated by the Europeana Foundation (including but not limited to Europeana.eu) under the terms of a <a href=\"http://creativecommons.org/licenses/by-sa/3.0/\" target=\"_blank\">Creative Commons Attribution-ShareAlike licence</a>. This means that, when a User uploads Content on Websites operated by the Europeana Foundation (including but not limited to Europeana.eu), he/she irrevocably grants Third Parties the right to freely use that Content, as long as they attribute the work to the author and share alterations of that Content under the same conditions. In addition, all Metadata contributed by Users to Europeana will be made available under the terms of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>. This means that the User irrevocably grants Third Parties the right to freely use such Metadata without any restrictions. </p>
+<p>If you do not agree with these policies, please do not contribute Content and/or Metadata to Europeana.</p>
+<p>These Terms for User Contributions determine inter alia the following aspects of the relationship between Users who contribute Content and Europeana:</p>
+<ul class=\"none\">
+<li>Passwords and logging in (Article 3)</li>
+<li>Responsibility for the operation of the platform (Article 4)</li>
+<li>Intellectual Property Rights to the Content (Article 5)</li>
+<li>Intellectual Property Rights to Metadata (Article 6)</li>
+<li>Unlawful use of the Service (Article 7)</li>
+<li>Users' personal data (privacy) (Article 8)</li>
+<li>Liability of the parties in the event of damage or loss (Article 9)</li>
+</ul>
+<p>By creating an account on a website operated by the Europeana Foundation, the User indicates acceptance of these terms and conditions. Once a User account is created, the conditions can be accessed at <a href=\"/rights/terms-for-user-contributions/\">http://www.europeana.eu/rights/terms-for-user-contributions/</a></p>
+<dl>
+<h2 class=\"article\" class=\"article\">Article <dt>&nbsp;</dt> Definitions</h2>
+<p>In these Terms of Use, the following terms have an initial capital letter. These terms are defined as follows:</p>
+<dd class=\"first\">Account: personal section that is managed by the User and which is created when the User registers for the Service.</dd>
+<dd>Content: all material made available and accessible by a User to Visitors through the Service, including but not limited to video, photo, image and/or audio material, as well as texts. </dd>
+<dd>Creative Commons Attribution-ShareAlike 3.0 Unported licence: The Creative Commons Attribution-ShareAlike licence as published at: <a href=\"http://creativecommons.org/licenses/by-sa/3.0/\" target=\"_blank\">http://creativecommons.org/licenses/by-sa/3.0/</a></dd>
+<dd>Creative Commons CC0 1.0 Universal Public Domain Dedication: The Creative Commons Universal Public Domain Dedication as published at: <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">http://creativecommons.org/publicdomain/zero/1.0/</a></dd>
+<dd>Email Address: The Email Address provided by the User upon registration or the Email Address provided by the User to replace this Email Address.</dd>
+<dd>Europeana: the Europeana Foundation established in The Hague, The Netherlands, and operating, among others, the website Europeana.eu.</dd>
+<dd>Intellectual Property Rights: Intellectual Property Rights, including but not limited to copyrights, related (or neighbouring) rights and database rights. </dd>
+<dd>Metadata: all descriptive Metadata, including but not limited to descriptions and tags that refer to Content or to a physical or digital object that is otherwise the subject of the Website.</dd>
+<dd>Password: the Password entered by the User.</dd>
+<dd>Public Domain: Content not protected by Intellectual Property Rights and/or subject to a waiver of Intellectual Property Rights.</dd>
+<dd>Public Domain Mark: The Public Domain Mark 1.0 as published at: <a href=\"http://creativecommons.org/publicdomain/mark/1.0/\" target=\"_blank\">http://creativecommons.org/publicdomain/mark/1.0/</a></dd>
+<dd>Report: a Report of the presence of Content on the Website that infringes Intellectual Property Rights and/or other rights of Third Parties.</dd>
+<dd>Service: the Service rendered by the Europeana Foundation to enable Users to contribute Content and Metadata on the Website.</dd>
+<dd>Terms of Use: this document.</dd>
+<dd>Third Party: any natural or legal person who is not party to this agreement.</dd>
+<dd>User: a natural or legal person who uses the Service.</dd>
+<dd>Username: the name or alias entered by the User during the registration procedure, and which is displayed in connection with the Content placed by the User.</dd>
+<dd>Visitor: a natural or legal person who visits the Website, including Users when they are not using the Service.</dd>
+<dd>Website: any Website and associated databases operated by the Europeana Foundation (including but not limited to Europeana.eu, and all sub-domains).</dd>
+</dt>
+
+<h2 class=\"article\" class=\"article\">Article <dt>&nbsp;</dt> Applicability</h2>
+<dd class=\"first\">These Terms for User Contributions apply to Users when they are using the Service. They do not apply to Visitors. The Europeana Terms of Use that can be found at <a href=\"terms-of-use.html\" title=\"The Europeana Terms of use page\">http://www.europeana.eu/rights/terms-of-use/</a> apply to Visitors, including Users in their capacity as Visitors.</dd>
+<dd>Europeana is entitled at all times to amend or supplement these Terms of Use. In such an event, the amended Terms for User Contributions will be sent to the User's Email Address. If the User continues using the Service after the amended or supplemented Terms for User Contributions have been sent to the Email Address, he/she thereby irrevocably accepts such conditions. If the User does not agree to the amended or supplemented Terms of Use, he/she must refrain from using the Service, and he/she must close his/her Account. The applicable Terms for User Contributions are available on the Website at all times.</dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Registration for the Service</h2>
+<dd class=\"first\">Before Content or Metadata can be contributed to the Website, the User must create an Account in the manner described on the Website. During registration, the User must also enter a Username and a Password, which will provide access to the Account.</dd>
+<dd>It is the responsibility of the User to keep the Username/Password combination confidential. The User is therefore responsible for all use that is made of the Service through the Username and the Password. Europeana may assume that the User is in fact the person who is seeking access with the Username and the Password that belong to him/her.  As soon as the User is aware or as soon as he/she may have reason to suspect that a Username and/or Password has become known to unauthorised persons, the User must notify Europeana immediately. This does not affect his/her own obligation to take effective measures immediately, such as changing the Password.</dd>
+<dd>If the User is younger than 16 years of age, he/she is only allowed to use the Service if he/she has the consent of his/her legal representative(s). By accepting these Terms of Use, the User guarantees that he/she is in fact 16 years of age or older, or that he/she has obtained the consent of his/her legal representative(s) to create an Account and to use the Service.</dd>
+<dd>Europeana reserves the right to alter the login procedure, the Password and/or the Username, if it considers this necessary in any way, for instance if this is in the interests of the operation of the Service. In that event, the User will be notified of this by email using the Email Address. </dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> The Service</h2>
+<dd class=\"first\">The User accepts that the Service only contains the functionality and other features found by him/her when using the Service. The Service is, therefore, delivered 'as is'. Europeana expressly excludes explicit and tacit guarantees, undertakings and warranties of any nature whatsoever, including but not limited to guarantees, promises and warranties with respect to the quality, safety, availability, lawfulness, integrity and correctness of the Service.</dd>
+<dd>Europeana does not guarantee that the Website and/or the Service will at all times be accessible without interruptions or failures. Failures in the Website and/or the Service may occur as a result of, amongst other things, failures in internet or telephone connections or because of viruses or faults/defects. Europeana is in no way responsible or liable for compensating the User for any damage or loss arising from or as a result of the Website and/or the Service being unavailable or temporarily unavailable, or in case of a breakdown of the Website and/or the Service.</dd>
+<dd>Europeana is entitled, without any prior notice being required and without being liable to compensate the User, to close down or to temporarily close down the Website and/or the Service and/or to limit the use of it if it considers this necessary, for instance in connection with any reasonably necessary maintenance of the Website and/or the Service.</dd>
+<dd>Europeana is entitled, without any prior announcement being required, to make procedural and technical changes and/or improvements to the Website and/or the Service.</dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Use of Content by Europeana</h2>
+<dd class=\"first\">All Content that is protected by Intellectual Property Rights contributed by the User to the Website will be made available by Europeana to Third Parties under the terms of the <a href=\"http://creativecommons.org/licenses/by-sa/3.0/\" target=\"_blank\">Creative Commons Attribution-ShareAlike 3.0 Unported licence</a>. Content that is in the Public Domain will be marked with the Public Domain Mark. </dd>
+<dd>If the User is the proprietor of the Intellectual Property Rights of the Content contributed by him/her; he/she hereby authorises Europeana to perform Article 5.1 with respect to that Content. If the User is not the proprietor of the Intellectual Property Rights of the Content contributed by him/her, he/she guarantees that either:<ul>
+<li>He/she is authorised by the proprietor of the Intellectual Property Rights of this Content to authorise Europeana to perform Article 5.1 with respect to that Content; or </li>
+<li>The Content is Public Domain.</li></ul></dd>
+<dd>If required and in addition to the rights granted under Article 5.2 in conjunction with Article 5.1, the User grants Europeana a free, unencumbered, worldwide, non-exclusive licence for the use, reproduction, distribution and communication of the Content, and for making the Content publicly available, to the extent that this is necessary for the Service to be provided. </dd>
+<dd>The licence referred to in Article 5.3 ends once the User and/or Europeana remove(s) the relevant Content from the Website, or once the Account is removed by the User and/or Europeana, except for the situation where and in as far as Content has become part of a curated collection of Content on the Website which has been created by the Europeana Foundation or by Users of the Website.  </dd>
+<dd>Although the Website will indicate that use by Third Parties of the Content contributed by the User is governed by the Terms of the <a href=\"http://creativecommons.org/licenses/by-sa/3.0/\" target=\"_blank\">Creative Commons Attribution-ShareAlike 3.0 Unported licence</a>, the User acknowledges and accepts that Europeana is not responsible and/or liable for compliance by Visitors with the <a href=\"http://creativecommons.org/licenses/by-sa/3.0/\" target=\"_blank\">Creative Commons Attribution-ShareAlike 3.0 Unported licence</a>.</dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Use of Metadata by Europeana</h2>
+<dd class=\"first\">All Metadata contributed by the User to the Website will be made available by Europeana to Third Parties under the terms of the <a href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"cc:useGuidelines\" resource=\"http://www.europeana.eu/rights/metadata-usage-guidelines/\">Creative Commons CC0 1.0 Universal Public Domain Dedication</a>.</dd>
+<dd>If the User is the proprietor of the Intellectual Property Rights of the Metadata contributed by him/her; he/she hereby authorises Europeana to perform Article 6.1 with respect to that Metadata. If the User is not the proprietor of the Intellectual Property Rights of the Metadata contributed by him/her, he/she guarantees that either: <ul>
+<li>He/she is authorised by the proprietor of the Intellectual Property Rights of this Metadata to authorise Europeana to perform Article 6.1 with respect to the Metadata; or </li>
+<li>The Metadata are Public Domain.</li></ul></dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Unlawful Use of the Service</h2>
+<dd class=\"first\">The User is aware of and accepts that Europeana has no knowledge of Content and Metadata that is made available through the Service. Europeana does not verify, inspect and/or edit the wording of this Content and Metadata, nor is it obliged to do so.  The User is fully responsible and liable for any acts he/she performs with the help of the Service, in particular with regard to the placement of Content. </dd>
+<dd>The User guarantees that he/she will not distribute through the Website any Content or Metadata:<ul style=\"list-style-type:lower-alpha;\">
+<li>that infringes rights of Europeana or Third Parties, including but not limited to Intellectual Property Rights or rights relating to the protection of privacy;</li>
+<li>that discriminates on the grounds of and/or is offensive in respect of appearance, race, religion, sex, culture, or origin;</li>
+<li>that incites violence against and/or harassment of other person(s);</li>
+<li>that leads to or is the result of exploitation or abuse of others;</li>
+<li>that is pornographic or that contains a link to pornographic material or pornographic websites;</li>
+<li>in which personal data of minors are requested and/or in which personal data of others are made available;</li>
+<li>that promotes or facilitates the committing of illegal activities;</li>
+<li>that involves chain letters, junk mail or spam and/or that requests passwords or other information traceable to individuals for commercial or illegal purposes, or which envisages other commercial purposes;</li>
+<li>that contains viruses, Trojan horses, worms, bots or other software that may damage automated work or data, render it unusable or inaccessible, delete or appropriate it, or that is intended to circumvent technical protection measures of the Website and/or Europeana's computer systems;</li>
+<li>that is in violation of any applicable legislation and regulations; </li>
+<li>that is in violation of any of the other provisions of these Terms of Use.  </li></ul></dd>
+<dd>The User indemnifies Europeana against Third-Party claims that are based on the statement that Content or Metadata placed by the User with the help of the Service in some way infringes the rights of Third Parties and/or is unlawful in any other way.</dd>
+<dd>Without being required to give notice or without being liable for compensation, and without prejudice to Europeana's right to take further legal action, Europeana reserves the right to remove Content or Metadata or to close an Account if it considers there are grounds for doing so, in particular in, but not limited to, cases in which, in Europeana's opinion, the User breaches the provisions of this Article 7 or any other provision of these Terms of Use.</dd>   
+<dd>If the User is of the opinion that Content or Metadata distributed with the help of the Service is unlawful, he/she can Report this. Such a Report to Europeana can be made by emailing <a href=\"m&#97;i&#108;&#116;o&#58;n%6F&#116;i&#99;%65%40e&#117;%&#55;&#50;opea%6E%61&#46;eu?subject=Reporting%20an%20unlawful%20use%20of%20the%20service\" class=\"email\" title=\"Mail Europeana to report an unlawful use of the service\">no&#116;&#105;ce&#64;europeana&#46;eu</a></dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Privacy</h2>
+<dd class=\"first\">In connection with the Service, the User will provide Europeana with personal data as defined in the Dutch Personal Data Protection Act (Wet beschermingpersoonsgegevens - Wbp). Europeana will only process and use these personal data where necessary in connection with the Service, and it will not supply these personal data to Third Parties in any manner whatsoever, unless it is legally obliged to do so.</dd>
+<dd>The User understands and acknowledges that the Username entered by him/her upon registration will be displayed in connection with the Content and/or Metadata and that any personal data in the Username will be disclosed. Users can change their Usernames themselves.</dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Liability</h2>
+<dd class=\"first\">Europeana assumes no liability for damage or loss as a result of any failure in fulfilment of the provision of the Service, including but not limited to damage or loss arising from or relating to the use of the Website and/or any impossibility of using it, or as a result of any unlawful act or otherwise, unless this exclusion of liability is not allowed under mandatory provisions of law.  </dd>
+<dd>Europeana assumes no liability for the substance of the Content and/or Metadata, nor, therefore, for damage or loss to Users or other Third Parties that arises from any unlawful substance of the Content and/or Metadata. </dd>
+<dd>The User indemnifies Europeana against all Third-Party claims on any grounds whatsoever that relate to the compensation of damage, loss, costs or interest, in connection with or arising from his/her use of the Service and/or any breach of these Terms for User Contributions and/or any other rights of Third Parties.</dd>
+<dd>This restriction of liability does not, however, intend to exclude Europeana's liability for intent and/or wilful recklessness by Europeana ('own actions') itself and/or its executive managers.</dd>
+<dd>The only action the User may take if he/she is of the opinion that he/she has sustained any damage or loss is to cease using the Service and close his/her Account. </dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Duration and Termination</h2>
+<dd class=\"first\">The User is entitled to cease using the Service and close his/her Account at any time.</dd>
+<dd>Europeana is at all times entitled to terminate and/or suspend the availability of the Service to the User if it considers there are grounds for doing so, without creating any liability on its part towards the User.</dd>
+<h2 class=\"article\">Article <dt>&nbsp;</dt> Miscellaneous, Applicable Law and Competent Court</h2>
+<dd class=\"first\">These Terms for User Contributions and the use of the Service are governed by the laws of The Netherlands.</dd>
+<dd>Where national or international rules of law do not contain mandatory provisions to the contrary, all disputes between the User and Europeana will, at the discretion of the party serving a summons or the party making an application, be brought before the competent court in the district of his/her place of residence or place of business, or before another court that is competent pursuant to national or international rules of law.</dd>
+<dd>Should any provision of these Terms for User Contributions be or become invalid, the User and Europeana will remain bound to the remaining provisions.  Europeana will replace the invalid provision by a valid provision, in accordance with the object and purport of these Terms of Use, in such a way that the new provision differs as little as possible from the invalid provisions.</dd>
+</dl>"
+- :slug: rights/privacy
+  :title: Privacy policy
+  :body: "<h4>What Information do we collect?</h4>
+<p>In line with common practice, when you visit Europeana website and when you register with us, we record and store some information about you. In some cases we process this information in order to better understand our users and their needs. This is done to improve the content and the usability of our portal and the services we offer. However,  Europeana.eu recognizes the importance of privacy to users of the Europeana.eu portal; consequently we handle such personal information with care.</p>
+<p>Please read our Privacy Policy Statement to find out what information we log and how we use it. We collect the following: Log Files, cookies and information that we explicitly ask you to provide about yourself upon registration or upon using any electronic forms of communication with Europeana.eu staff.</p>
+<h4>Log Files and Cookies</h4>
+<p>When you visit  Europeana.eu, your requests and actions are automatically logged on our server. Log files contain information such as your IP address, the date and time you accessed the website, the pages you requested for viewing, etc. Log files do not contain any personal identifiable information about you.</p>
+<p>Cookies are small amounts of information sent from a web server to your browser and stored on your computers hard-drive. They contain information about the internet sites that you have visited. Europeana.eu uses cookies to recognise you and your access privileges. Most web browsers automatically accept cookies but you can usually change your browser settings to prevent this (although you might not have access to the full functionality of the website, such as the language settings you might have chosen).</p>
+<p>Europeana.eu collects or logs cookies and information about its users and processes this information to produce usage statistics. By processing such information we are trying to identify user profiles and usage habits to improve the content and services we offer according to users needs. Log files analysis are also used to inform Europeana.eu partner libraries about digitisation priorities based on user preferences. These aggregated data do not contain information from which individuals can be identified. They are used strictly for the following purposes:</p>
+<ol class=\"number\">
+<li>To monitor and to better administer traffic to the website.</li>
+<li>To assess and improve usability, services and content.</li>
+<li>To identify technical shortcomings and to troubleshoot.</li>
+<li>To develop personalised services.</li>
+<li>To develop efficient marketing tools.</li>
+</ol>
+<h4>Registered users data and data from other online forms</h4>
+<p>When we ask you to register, we ask you to voluntarily supply some personal information about yourself. Identification of users allows us to provide personalised services on the portal. Currently the following options are offered: to save favorites or session query history for referencing at a later date. We intend to expand these services to offer more personalized possibilities to the users, such as: to save selected collections for use at a later date or to receive e-mail alerts about new collections added which might interest them.</p>
+<p>Through the use of any electronic form on our website (feedback form, newsletter subscription, report a link) you agree to supply some minimum personal information (namely name and e-mail address). We may use this information to reply to you about the issue involved. Your personal information will not be used for direct mailing or for other reasons than to answer your request.</p>
+<h4>Data Protection</h4>
+<p>Europeana.eu respects your privacy and seeks to protect your personal data. We do not sell, trade or rent the information we get from you on this site to others. Sometimes, we collaborate with public organisations such as universities that conduct research on our behalf on usage patterns and behaviour to help us improve the content and the services we offer. In these cases we do not disclose to them personal information (e.g. names or addresses).</p>
+<p>Europeana.eu takes all necessary measures to protect the data from un-authorised access and use in a way other than that stated in the Privacy Policy. Europeana.eu is hosted by SARA in The Netherlands and therefore uses the systems and security in place for this public institution.</p>
+<p>The data are stored for as long as they are useful for administrative reasons. Non-personal data may be stored indefinitely as research material.</p>
+<p>Please note: Under law, we may be required to disclose the information that we log to the appropriate legal authorities.</p>
+<h4>About this Privacy Policy Statement</h4>
+<p>This Site may contain links to other web sites that are beyond our control. This privacy policy applies solely to the information you provide while visiting this Site. Other web sites to which you link may contain privacy policies that are different from this privacy policy.</p>
+<p>The current privacy policy statement is in accordance with the Dutch Personal Data Protection Act (Wet Bescherming Persoonsgegevens).</p>
+<p>Any changes to Europeana.eu privacy policy will be published on this page.</p>
+<h4>Questions, Complaints, and Dispute Resolution</h4>
+<p>By using our website you consent to the terms of the Privacy Statement hereby described. However, you have the right to prevent the use of your personal data for personalised services and marketing as well as to request not to be further contacted by us.
+If you wish to be informed about the personal data collected about you, or to have this data corrected or removed, or have any other question with regards to this statement, please contact <a class=\"email\" href=\"&#109;&#97;&#105;&#108;&#116;&#111;:&#x69;&#x6E;&#x66;&#111;&#64;&#x65;&#117;&#x72;&#x6F;&#x70;&#101;&#97;&#x6E;&#x61;&#46;&#x65;&#x75;?subject=&#80;&#x72;&#105;&#x76;&#x61;&#99;&#x79;&#58;&#32;&#x71;&#x75;&#101;&#115;&#x74;&#x69;&#x6F;&#x6E;&#x73;&#44;&#x20;&#x63;&#111;&#x6D;&#112;&#x6C;&#x61;&#105;&#x6E;&#115;&#44;&#x20;&#97;&#110;&#100;&#32;&#100;&#x69;&#x73;&#112;&#117;&#116;&#101;&#x20;&#114;&#101;&#x73;&#111;&#x6C;&#117;&#116;&#x69;&#111;&#110;\" title=\"Click here to mail us with any questions regarding the statement\">Europeana.eu</a>.</p>
+<p>Date of creation of the Privacy Statement: 30 September 2008<br />
+Last amendment: 30 September 2008</p>
+<h4>Feedback Form</h4>
+<p>If you encounter any problem using this site or wish to make general comments/suggestions, please use this <a class=\"fn url\" href=\"../contact.html\" title=\"Contact us with any general comments or suggestions\">contact form</a>.</p>
+<p>All of our online forms that require you to enter personal information are designed to meet privacy requirements. This privacy policy provides further details.</p>
+<p>The translations are made on a voluntary basis by our partners and are for information only. The legally valid text is in English only.</p>"
+- :slug: rights/language
+  :title: Language policy
+  :body: "<p>Europeana.eu follows similar policy guidelines to <a class=\"external fn url\" href=\"http://europa.eu/\" target=\"_blank\">Europa</a> (the portal site of The European Union)</p>
+<p><strong><i>As far as possible, the aim is to provide the public with the information they
+are looking for in their own language. However, due to constraints on resources,
+this isn't always possible</i></strong></p>
+<p>Therefore the following guidelines apply in Europa and will
+apply in Europeana.eu:</p>
+<ul>
+<li>all top (*) level pages in all full partner languages</li>
+<li>prioritise speed of publication over availability of translation</li>
+<li>Allow limited 'language mixing' (**) i.e.: where a warning sign needs to be displayed</li>
+</ul>
+<p>(*) i.e.: the navigation, search, retrieval and display interfaces</p>
+<p>(**) Language mixing = more than one language on a page</p>
+<p>In practical terms this means the following:</p>
+<ol class=\"number\">
+<li>Tools to manage translation will be developed and maintained by Europeana.eu</li>
+<li>The completion of the translations will be the responsibility of
+each designated volunteer partner institution</li>
+<li>These are unofficial translations and may not correspond exactly with the English version</li>
+<li>Europeana.eu will notify each designated volunteer partner
+institution should an update be required but will not chase for that
+update</li>
+<li>Information that is urgent or has a very short life is in
+English only e.g.: Ad-hoc error messages</li>
+<li>All surveys about the site will be produced in all
+feasible languages only</li>
+<li>Search Engine Promotion to be executed in English, in the
+first instance</li>
+<li>The Management section and the technical information will
+be maintained solely in English, as the working language of
+Europeana.eu</li>
+<li>If, however, an individual institution wishes to translate and maintain
+any of the above from within their own resources, Europeana.eu would be happy
+to enable its display</li>
+</ol>
+<p>The translations are made on a voluntary basis by our partners and are for information only. The legally valid text is in English only.</p>"
+- :slug: rights/accessibility
+  :title: Accessibility policy
+  :body: "<p>Europeana.eu features and content have been designed to be universally
+accessible by users and user agents/devices. We strive to meet the WC3 Web
+Content Accessibility Guidelines Version 1.0.</p>
+<p>Our User Centred Design team frequently conducts usability testing of
+Europeana.eu navigation, flow, labels, and consistency. Furthermore,
+we will produce a version &ndash; post this prototype phase &ndash; for blind individuals.</p>
+<p>Some of the accessibility features of our site include:</p>
+<ul>
+<li>Meaningful page titles to help with orientation</li>
+<li>Almost all images have either a meaningful alt-text (text equivalent)</li>
+<li>Minimal use of frames</li>
+<li>Use of resizable fonts</li>
+<li>Use Cascading Style Sheets (CSS) to separate content from presentation</li>
+<li>Notifying a user when a link opens a new window</li>
+<li>The (core) functionalities are usable without JavaScript</li>
+</ul>
+<p>Please send us any feedback or questions on the accessibility of Europeana.eu with the
+<a class=\"fn url\" href=\"/portal/contact.html\">feedback form</a>.</p>"
+- :slug: rights/publications
+  :title: Publications
+  :body: "<p>Unless stated otherwise, all Europeana publications and texts, including blog posts, are licensed under a <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution Share-Alike 4.0 International License.</a></p>
+<p><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\"><img alt=\"Creative Commons License\" src=\"https://i.creativecommons.org/l/by-sa/4.0/88x31.png\" /></a></p>"
+- :slug: rights/public-domain-charter
+  :title: Public Domain Charter
+  :body: "<p><strong>Europeana, Europe's digital library, museum and archive, belongs to the public and must represent the public interest.</strong></p>
+<p><strong>The Public Domain is the material from which society derives knowledge and fashions new cultural works.</strong></p>
+<p><strong>Having a healthy and thriving Public Domain is essential to the social and economic well-being of society.</strong></p>
+<p><strong>Digitisation of Public Domain content does not create new rights over it: works that are in the Public Domain in analogue form continue to be in the Public Domain once they have been digitised.</strong></p>
+<h2>Principles for a healthy Public Domain</h2>
+<p>Museums, libraries and archives of all kinds are holders of our cultural and scientific heritage. These memory organisations are the guardians of society's shared knowledge. They play an essential part in maintaining the Public Domain on behalf of citizens and must uphold a number of general principles. These principles are essential to preserve a meaningful understanding of the Public Domain and to ensure that it continues to function in the technological environment of the networked information society. These principles are not intended to prevent organisations from commercial exploitation of Public Domain works in their collections. Instead they provide a set of minimum standards that ensures that the Public Domain functions in the digital environment.</p>
+<ol>
+<li><strong>Copyright protection is temporary.</strong> Copyright gives creators a time-limited monopoly regarding the control of their works. Once this period has expired, these works automatically fall into the Public Domain. The mass of knowledge over recorded time is in the Public Domain; copyright offers an appropriate and time-limited exception to this status.</li>
+<li><strong>What is in the Public Domain needs to remain in the Public Domain.</strong> Exclusive control over Public Domain works cannot be re-established by claiming exclusive rights in technical reproductions of the works, or by using technical and or contractual measures to limit access to technical reproductions of such works. Works that are in the Public Domain in analogue form continue to be in the Public Domain once they have been digitised.</li>
+<li><strong>The lawful user of a digital copy of a Public Domain work should be free to (re-) use, copy and modify the work.</strong> Public Domain status of a work guarantees the right to re-use, modify and make reproductions and this must not be limited through technical and or contractual measures. When a work has entered the Public Domain there is no longer a legal basis to impose restrictions on the use of that work.</li>
+</ol>
+<h2>Guidelines for preserving the function of the Public Domain</h2>
+<p>There are a number of significant developments that threaten the function of the Public Domain. Over the last decades we have witnessed an expansion of the scope of copyright both in terms of time and protected subject matter. This has been detrimental to the Public Domain and the ability of citizens and memory organisations to interact with important parts of our shared culture and knowledge. The following Guidelines are issued to counter this trend.</p>
+<ol>
+<li><strong>Any change to the scope of copyright protection needs to take into account the effects on the Public Domain.</strong> Changes to the scope of copyright must not be retroactive. In the 20<sup>th</sup> century copyright has been extended to accommodate the interests of rights holders at the expense of the Public Domain. As a result a large portion of our shared culture and knowledge is locked away behind copyright and technical restrictions, and we must ensure that this situation will not be worsened in the future.</li>
+<li><strong>No other intellectual property right must be used to reconstitute exclusivity over Public Domain material.</strong> The Public Domain is an integral element of the internal balance of the copyright system. This internal balance must not be manipulated by attempts to reconstitute or obtain exclusive control via regulations that are external to copyright. No technological protection measures backed-up by statute should limit the practical value of works in the Public Domain. Industrial property rights, such as trademarks, should not be used to restrict the re-use and copying of Public Domain works.</li>
+</ol>
+<h2>Background</h2>
+<p>The Public Domain is a shared resource that underpins contemporary society. As knowledge and information are digitised, legal contracts are often being used that inhibit free access to the digitised Public Domain. This runs counter to the founding objective of Europeana. Our essential aim is to make Europe's Public Domain cultural and scientific heritage freely accessible to citizens in digital form to encourage the development of knowledge and stimulate creative enterprise and innovation. This is the position of the European Commission, who fund Europeana, and the Europeana Foundation, who run the service.</p>
+<p>The Europeana Foundation is made up of international associations that represent museums, archives, audiovisual collections and libraries: the memory organisations which provide content to Europeana. It is in the Foundation's interest to be clear on the use and meaning of the Public Domain. Europeana belongs to the public and must represent the public interest.</p>
+<p>This Charter is a policy statement, not a contract. It does not bind Europeana's content providers to any position. The Europeana Foundation is issuing the Charter in order to influence the debate among the Europe's memory organisations, policy makers and funders about the terms under which Public Domain digital content is made available.</p>
+<p>In its access and re-use terms Europeana follows the policies of its content providers. Each of them is legally responsible for deciding the terms on which they make content available, and for determining and clearing any rights in their content. Consequently, there are a wide range of practices among institutions providing Public Domain content to Europeana.</p>
+<p>The Public Domain Charter will help to promote greater consistency for the benefit of our users. Users have complained of the range of different practices and especially that some content providers charge for downloading and even for accessing digitised items which are in the Public Domain in their analogue form. They perceive this as a barrier to citizens wishing legitimate access to their Public Domain heritage.</p>
+<h2>What is the Public Domain?</h2>
+<p>The Public Domain comprises all the knowledge and information &ndash; including books, pictures and audiovisual works &ndash; which does not have copyright protection and can be used without restriction, subject in some European countries to the author's perpetual moral rights. The Public Domain provides a historically developed balance to the rights of creators protected by copyright and it is essential to the cultural memory and knowledge base of our societies. The Public Domain covers two categories of material:</p>
+<ol>
+<li><strong>Works on which copyright protection has expired.</strong> Copyright in a work in most of Europe lasts for 70 years after the death of its longest living creator. If copyright is held by a corporation, then it lasts for 70 years after publication. Once this temporary protection has come to its end, all legal restrictions cease to exist. It means that almost everything published, painted, photographed or released anywhere in the world before the 20<sup>th</sup> century is out of copyright and in the Public Domain.</li>
+<li><strong>The essential commons of information that is not covered by copyright.</strong> Works are not protected by copyright if they are not original. Ideas and facts are not covered by copyright, but the expression of them is. Laws and judicial and administrative decisions are excluded from this protection. This essential commons is regarded as too important for the functioning our societies to be burdened with legal restrictions of any nature even for a limited period.</li>
+</ol>
+<p>It is important to note that next to the Public Domain as described above there are a number of other limitations and exceptions that reduce legal restrictions and ensure sufficient access to our shared knowledge and culture. These exceptions ensure that the copyright granted to creators does not interfere with certain specific requirements of society. They ensure access, enable the functioning of essential social institutions and provide for the social participation of individuals with special needs.</p>
+<h2>Why is the Public Domain important?</h2>
+<p>The Public Domain is the raw material from which we make new knowledge and create new cultural works. Having a healthy and thriving Public Domain is essential to the social and economic well-being of our societies.</p>
+<p>Much of the world's knowledge &ndash; Diderot's Encyclop&eacute;die, the paintings of Leonardo, Newton's Laws of Motion &ndash; is in the Public Domain. Society constantly re-uses, reinterprets and reproduces material in the Public Domain and by doing so develops new ideas and creates new work. New theories, inventions, cultural works and the like are indebted to the knowledge and creativity of previous centuries.</p>
+<h2>The Public Domain in the digital age</h2>
+<p>The internet gives access to the digitised portion of that knowledge and creativity on a scale previously impossible. It is the driver for massive digitisation efforts that will fundamentally change the role of cultural and scientific heritage institutions. The digitisation of analogue collections creates new opportunities for sharing and creative re-use, empowering people to explore and respond to our shared heritage in new ways that our legislation has yet to catch up with. It has also brought copyright to the centre of attention for holders of our cultural and scientific heritage. Our memory organisations have for generations had the public duty of holding the heritage in trust for the citizenry and of making it accessible to all. Both of these functions are usually conducted at the citizens' &ndash; i.e. the tax payers' &ndash; expense.</p>
+<p>Entrusted with the preservation of our shared knowledge and culture, not-for-profit memory organisations should take upon themselves a special role in the effective labelling and preserving of Public Domain works. As part of this role they need to ensure that works in the Public Domain are accessible to all of society, by making them available as widely as possible. It is important for memory organisations to recognise that as the guardians of our shared culture and knowledge they play a central role in enabling the creativity of citizens and providing the raw materials for contemporary culture, science, innovation and economic growth.</p>
+<p>At the same time the transformation from guardians of analogue collections to providers of digital services places enormous challenges on these organisations. Creating and maintaining digital collections is expensive; the cultural heritage sector may lack resources for this new responsibility. Government sponsors may encourage or require organisations to generate income by way of licensing content to a wide variety of commercial users.</p>
+<p>Public-Private Partnerships have become one option for funding large scale digitisation efforts. Commercial content aggregators pay for the digitisation in exchange for privileged access to the digitised collections. These activities are seen as a reason for attempting to exercise as much control as possible over digital reproductions of Public Domain works. Organisations are claiming exclusive rights in digitised versions of Public Domain works and are entering into exclusive relationships with commercial partners that hinder free access.</p>
+<p>When this exclusivity locks down digital content and inhibits access and re-use by teachers, innovators and citizens, memory organisations may be compromising their core mission and undermining their relationship with their users. Works that are in the Public Domain in analogue form must remain freely available in digital form and digitisation of such works must lead to increased access by the public instead of new restrictions. To remain relevant in the digital age, cultural and scientific heritage organisations must strive to increase access to our shared knowledge and culture by being the primary points of access to the works that they have in their collections. Value-added services can be developed around content without the need to claim exclusive rights over works that have been in the Public Domain in analogue form.</p>
+<p>Ultimately, at a political and policy-making level, it is in the interests of society that Public Domain knowledge and information be digitised. Once digitised, it should be freely available to creative enterprise, <abbr title=\"Research and Development\">R&amp;D</abbr> innovators and technical entrepreneurs to use as the basis for generating ideas and applications yet to be envisaged.</p>
+<p>The aim of this Charter is to give a clear signal to content providers, policy makers and the public that Europeana and the Europeana Foundation believe in and wish to strengthen the concept of the Public Domain in the digitised world. In order to do so we need a robust and up-to-date understanding of the nature of this essential resource.</p>
+<p><strong>If you would like to respond to the Europeana Public Domain Charter, please contact <a href='m&#97;&#105;lt&#111;&#58;i%6Ef%6F%40eu%7&#50;%&#54;&#70;peana&#46;eu%3F&#115;%75%62jec%&#55;4&#61;Pu&#98;li&#37;&#54;3&#37;&#37;&#51;20Do%6D&#97;&#105;n%2%&#51;&#48;&#37;43&#104;arter'>info@europeana.eu</a></strong></p>"
+- :slug: rights/rr-f
+  :title: "Rights Reserved - Free Access"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-copyright\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Rights Reserved - Free Access</span></p>
+<p>This digital object is protected by copyright and/or related rights. This digital object is accessible without charge, but its use is subject to the licensing conditions set by the organization giving access to it.</p>
+<p>Unless expressly stated otherwise in the licensing conditions, you are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>
+<p>All other acts of reproduction and communication to the public are subject to the licensing conditions attached to the digital object.</p>"
+- :slug: rights/rr-r
+  :title: "Rights Reserved - Restricted Access"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-copyright\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Rights Reserved - Restricted Access</span></p>
+<p>This item is protected by copyright and/or related rights. This item is only accessible through registration or some other form of controlled access and subject to the licensing conditions set by the organization giving access to it.</p>
+<p>Unless expressly stated otherwise in the licensing conditions, you are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>
+<p>All other acts of reproduction and communication to the public are subject to the licensing conditions attached to the work.</p>"
+- :slug: rights/rr-p
+  :title: "Rights Reserved - Paid Access"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-copyright\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Rights Reserved - Paid Access</span></p>
+<p>This digital object is protected by copyright and/or related rights. This digital object is only accessible against payment of a fee and its use is subject to the licensing conditions set by the organization giving access to it.</p>
+<p>Unless expressly stated otherwise in the licensing conditions, you are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>
+<p>All other acts of reproduction and communication to the public are subject to the licensing conditions attached to the digital object.</p>"
+- :slug: rights/unknown
+  :title: "Unknown copyright status"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-unknown\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Unknown copyright status</span></p>
+<p>The copyright and related rights status of this digital object is unknown. Please refer to the website of the Data Provider for additional information.</p>
+<p>You are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>"
+- :slug: rights/orphan-work-eu
+  :title: "Orphan work"
+  :body: "<p><span aria-hidden=\"true\" class=\"icon-unknown\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span> <span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Orphan work</span></p>
+<p>This item has been identified as an orphan work in the country of first publication and in line Directive 2012/28/EU of the European Parliament and of the Council of 25 October 2012 on certain permitted uses of orphan works.</p>
+<p>For this item no rightholder(s) have been identified or, if one or more of them have been identified, none has been located despite a diligent search for the rightholders having been carried out. <!--The results of the diligent search are available in <a href=\"http://oami.europa.eu\" title=\"Office for harmonization in the internal market\">the single european database</a>.--></p>
+<p>If you have information about the identity or the location of the rightholder(s), please contact the Data Provider.</p>
+<p>You are free to make any of the acts permitted by your national copyright and related rights act, including browsing, printing and making a copy for your own personal purposes.</p>"
+- :slug: rights/out-of-copyright-non-commercial
+  :title: "Out of copyright - non commercial re-use"
+  :body: "<p>
+<span aria-hidden=\"true\" class=\"icon-publicdomain\" style=\"font-size:1.6em;\" rev=\"foaf:logo\" alt=\"\"></span>
+<span aria-hidden=\"true\" class=\"icon-nc\" style=\"font-size:1.6em; position: relative; right: 0.1em;\" rev=\"foaf:logo\" alt=\"\"></span> 
+<span style=\"font-size: 0.75em; position: relative; padding-left: 0.5em; top: -0.4em;\">Out of copyright - non commercial re-use</span></p>
+
+<p>This object has been digitized in a public-private partnership. As part of this partnership, the partners have agreed to limit commercial uses of this digital representation of the object by third parties.</p>
+
+<p>You can, without permission, copy, modify, distribute, display, or perform the digital object, for non-commercial uses. For any other permissible uses, please review the terms and conditions of the Data Provider.</p>
+
+<p>In some jurisdictions moral rights of the author may persist beyond the term of copyright. These rights may include the right to be identified as the author and the right to object to derogatory treatments.</p>
+
+<p>When using this digital object please respect <a href=\"pd-usage-guide.html\" title=\"Read the Europeana's usage guidelines for public domain works\">Europeana's usage Guidelines for public domain works</a>.</p>"

@@ -4,7 +4,7 @@ module Portal
     attr_accessor :document, :debug
 
     def head_meta
-      @mustache[:head_meta] ||= begin
+      mustache[:head_meta] ||= begin
         [
           { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') }
         ] + super
@@ -12,8 +12,8 @@ module Portal
     end
 
     def page_title
-      @mustache[:page_title] ||= begin
-        CGI.unescapeHTML([@document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - '))
+      mustache[:page_title] ||= begin
+        CGI.unescapeHTML([document.fetch(:title, ['']).join(', '), 'Europeana'].compact.join(' - '))
       end
     end
 
@@ -21,7 +21,7 @@ module Portal
       # skip building item breadcrumb while action caching is in use
       return helpers.navigation
 
-      @mustache[:navigation] ||= begin
+      mustache[:navigation] ||= begin
         query_params = current_search_session.try(:query_params) || {}
 
         if search_session['counter']
@@ -66,7 +66,7 @@ module Portal
     end
 
     def content
-      @mustache[:content] ||= begin
+      mustache[:content] ||= begin
         {
           object: {
             creator: creator_title,
@@ -168,12 +168,12 @@ module Portal
             # download: content_object_download,
             media: media_items,
             meta_additional: {
-              present: @document.fetch('proxies.dctermsSpatial', []).size > 0 ||
-                @document.fetch('proxies.dcCoverage', []).size > 0 ||
-                @document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
+              present: document.fetch('proxies.dctermsSpatial', []).size > 0 ||
+                document.fetch('proxies.dcCoverage', []).size > 0 ||
+                document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
                 (
-                  @document.fetch('places.latitude', []).size > 0 &&
-                  @document.fetch('places.longitude', []).size > 0
+                  document.fetch('places.latitude', []).size > 0 &&
+                  document.fetch('places.longitude', []).size > 0
                 ),
               places: data_section(
                 title: 'site.object.meta-label.location',
@@ -181,7 +181,7 @@ module Portal
                   {
                     title: 'site.object.meta-label.location',
                     fields: ['proxies.dctermsSpatial'],
-                    collected: pref_label('places.prefLabel')
+                    collected: document.fetch('places.prefLabel', []).first
                   },
                   {
                     title: 'site.object.meta-label.place-time',
@@ -197,7 +197,7 @@ module Portal
                 latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
                 long_and_lat: long_and_lat?,
-                placeName: pref_label('places.prefLabel'),
+                placeName: document.fetch('places.prefLabel', []).first,
                 labels: {
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
@@ -416,7 +416,7 @@ module Portal
           similar: {
             title: t('site.object.similar-items'),
             more_items_query: search_path(mlt: document.id),
-            more_items_load: document_similar_url(@document, format: 'json'),
+            more_items_load: document_similar_url(document, format: 'json'),
             more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
             items: @similar.map do |doc|
               {
@@ -438,13 +438,7 @@ module Portal
 
     def named_entity_data
       data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
-      present = false
-
-      data.each do |group|
-        if group[:fields].size > 0
-          present = true
-        end
-      end
+      present = data.any? { |group| group[:present] }
       {
         present: present,
         data: data
@@ -452,104 +446,85 @@ module Portal
     end
 
     def collect_agent_labels
-      fields = []
-      agents = document.fetch('agents', [])
-      (agents).map do |agent|
-        fields << { key: t('site.object.named-entities.who.term'), val: agent[:about], agt_link: true }
-        fields << { key: t('site.object.named-entities.who.label'), vals: normalise_named_entity(agent[:prefLabel]), multi: true }
-      end
-      {
-        title: t('site.object.named-entities.who.title'),
-        fields: fields,
-        present: fields.size > 0
-      }
+      named_entity_labels('agents', 'who')
     end
 
     def collect_place_labels
-      fields = []
-      places = document.fetch('places', [])
-      (places).map do |place|
-        fields << { key: t('site.object.named-entities.where.term'), val: place[:about], agt_link: true }
-        fields << { key: t('site.object.named-entities.where.label'), vals: normalise_named_entity(place[:prefLabel]), multi: true }
-        if !place[:latitude].nil?
-          fields << { key: t('site.object.named-entities.where.latitude'), val: place[:latitude] }
-        end
-        if !place[:longitude].nil?
-          fields << { key: t('site.object.named-entities.where.longitude'), val: place[:longitude] }
-        end
-      end
-      {
-        title: t('site.object.named-entities.where.title'),
-        fields: fields,
-        present: fields.size > 0
-      }
+      named_entity_labels('places', 'where', :latitude, :longitude)
     end
 
     def collect_time_labels
-      fields = []
-      timespans = document.fetch('timespans', [])
-      (timespans).map do |timespan|
-        fields << { key: t('site.object.named-entities.when.term'), val: timespan[:about], agt_link: true }
-        fields << { key: t('site.object.named-entities.when.label'), vals: normalise_named_entity(timespan[:prefLabel]), multi: true }
-        if !timespan[:begin].nil?
-          fields << { key: t('site.object.named-entities.when.begin'), val: timespan[:begin][:def][0] }
-        end
-        if !timespan[:end].nil?
-          fields << { key: t('site.object.named-entities.when.end'), val: timespan[:end][:def][0] }
-        end
-      end
-      {
-        title: t('site.object.named-entities.when.title'),
-        fields: fields,
-        present: fields.size > 0
-      }
+      named_entity_labels('timespans', 'when', :begin, :end)
     end
 
     def collect_concept_labels
-      fields = []
-      concepts = document.fetch('concepts', [])
-      (concepts).map do |concept|
-        fields << { key: t('site.object.named-entities.what.term'), val: concept[:about], agt_link: true }
-        fields << { key: t('site.object.named-entities.what.label'), vals: normalise_named_entity(concept[:prefLabel]), multi: true }
-        broader = concept[:broader]
-        if !broader.nil?
-          multi = broader.size > 1
-          broader = multi ? broader : broader[0]
-          fields << {
-            key: t('site.object.named-entities.what.broader'),
-            val: multi ? nil : broader,
-            vals: multi ? normalise_named_entity(broader, true) : nil,
-            agt_link: true,
-            multi: multi}
+      named_entity_labels('concepts', 'what', :broader)
+    end
+
+    def named_entity_labels(edm, i18n, *args)
+      fields = document.fetch(edm, []).map do |entity|
+        ([:about, :prefLabel] + (args || [])).map do |f|
+          named_entity_field_label(entity, f, i18n)
         end
-      end
+      end.flatten.compact
+
       {
-        title: t('site.object.named-entities.what.title'),
+        title: t("site.object.named-entities.#{i18n}.title"),
         fields: fields,
         present: fields.size > 0
       }
     end
 
+    def named_entity_field_label(entity, field, i18n)
+      val = normalise_named_entity(entity[field.to_sym], agt_link_field?(field))
+
+      if val.present?
+        val = val.first if val.is_a?(Array) && val.size == 1
+        multi = (val.is_a?(Hash) || val.is_a?(Array)) && (val.size > 1)
+
+        Rails.logger.debug("normalize named entity multi: #{multi.inspect}".bold.red)
+
+        {
+          key: t(named_entity_field_label_i18n_key(field), scope: "site.object.named-entities.#{i18n}"),
+          val: multi ? nil : val,
+          vals: multi ? val : nil,
+          multi: multi,
+          agt_link: agt_link_field?(field)
+        }
+      end
+    end
+
+    def named_entity_field_label_i18n_key(field)
+      map = { about: 'term', prefLabel: 'label' }
+      map.key?(field) ? map[field] : field
+    end
+
+    def agt_link_field?(field)
+      [:about, :broader].include?(field)
+    end
+
     def normalise_named_entity(named_entity, agt_link = false)
-      res = []
-      named_entity.each do |key, val|
+      return [] if named_entity.nil?
+      return named_entity unless named_entity.is_a?(Hash)
+      return named_entity[:def] if named_entity.key?(:def) && named_entity.size == 1
+
+      named_entity.map do |key, val|
         if key && val.nil?
-          res << {val: key, key: nil, agt_link: agt_link}
+          { val: key, key: nil, agt_link: agt_link }
         else
-          res << {key: key, val: val, agt_link: agt_link}
+          { key: key, val: val, agt_link: agt_link }
         end
-      end unless named_entity.nil?
-      res
+      end
     end
 
     def simple_rights_label_data
-      @mustache[:simple_rights_label_data] ||= begin
+      mustache[:simple_rights_label_data] ||= begin
         Document::RecordPresenter.new(document, controller).simple_rights_label_data
       end
     end
 
     def labels
-      @mustache[:labels] ||= begin
+      mustache[:labels] ||= begin
         {
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
@@ -572,7 +547,7 @@ module Portal
 
     def data_section_field_values(section)
       fields = (section[:fields] || []).map do |field|
-        @document.fetch(field, [])
+        document.fetch(field, [])
       end
 
       if section[:fields_then_fallback] && fields.present?
@@ -647,7 +622,7 @@ module Portal
     def data_section_nested_hash(mappings)
       {}.tap do |hash|
         mappings.each do |mapping|
-          val = render_document_show_field_value(@document, mapping[:field])
+          val = render_document_show_field_value(document, mapping[:field])
           if val.present?
             keys = (mapping[:map_to] || mapping[:field]).split('.')
             last = keys.pop
@@ -678,7 +653,6 @@ module Portal
     end
 
     def doc_title
-      # force array return with empty default
       title = document.fetch(:title, nil)
 
       if title.blank?
@@ -688,25 +662,12 @@ module Portal
       end
     end
 
-    def pref_label(field_name)
-      val = @document.fetch(field_name, [])
-      pref = nil
-      if val.size > 0
-        if val.is_a?(Array)
-          val[0]
-        else
-          pref = val[0][I18n.locale.to_sym]
-          if pref.size > 0
-            pref[0]
-          else
-            val[0][:en]
-          end
-        end
-      end
-    end
-
     def creator_title
-      document.fetch('agents.prefLabel', []).first || render_document_show_field_value(document, 'dcCreator')
+      @creator_title ||= begin
+        document.fetch('agents.prefLabel', []).first ||
+          render_document_show_field_value(document, 'dcCreator') ||
+          render_document_show_field_value(document, 'proxies.dcCreator')
+      end
     end
 
     def edm_preview
@@ -714,32 +675,36 @@ module Portal
     end
 
     def media_items
-      items = presenter.media_web_resources(per_page: 10, page: 1).map(&:media_item)
-      items.first[:is_current] = true unless items.size == 0
+      @media_items ||= begin
+        items = presenter.media_web_resources(per_page: 10, page: 1).map(&:media_item)
+        items.first[:is_current] = true unless items.size == 0
 
-      {
-        required_players: item_players,
-        has_downloadable_media: has_downloadable_media?,
-        external_media: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
-          render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-        single_item: items.size == 1,
-        empty_item: items.size == 0,
-        items: items,
-        # The page parameter gets added by the javascript - base url needed here
-        more_thumbs_url: document_media_path(document, format: 'json'),
-        # if we're already on page 2 the page number here should be 3
-        more_thumbs_page: document_media_path(document, page: 2, format: 'json'),
-        more_thumbs_total: presenter.media_web_resources.total_count
-      }
+        {
+          required_players: item_players,
+          has_downloadable_media: has_downloadable_media?,
+          external_media: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
+            render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+          single_item: items.size == 1,
+          empty_item: items.size == 0,
+          items: items,
+          # The page parameter gets added by the javascript - base url needed here
+          more_thumbs_url: document_media_path(document, format: 'json'),
+          # if we're already on page 2 the page number here should be 3
+          more_thumbs_page: document_media_path(document, page: 2, format: 'json'),
+          more_thumbs_total: presenter.media_web_resources.total_count
+        }
+      end
     end
 
     def item_players
-      web_resources = presenter.media_web_resources
-      players = [:audio, :iiif, :image, :pdf, :video].select do |player|
-        web_resources.any? { |wr| wr.player == player }
-      end
-      players.map do |player|
-        { player => true }
+      @item_players ||= begin
+        web_resources = presenter.media_web_resources
+        players = [:audio, :iiif, :image, :pdf, :video].select do |player|
+          web_resources.any? { |wr| wr.player == player }
+        end
+        players.map do |player|
+          { player => true }
+        end
       end
     end
 

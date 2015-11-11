@@ -56,9 +56,12 @@ fr:
       menu:
         about: 
         become-a-provider: 
+        contact: 
         copyright: 
         data-providers: 
+        help: 
         new-collections: 
+        rights: 
         search-tips: 
         using-myeuropeana: 
     home:
@@ -268,5 +271,3 @@ fr:
           notice: 
         label: 
         settings-label: 
-    site-name-link: 
-    sitemap-link: 
