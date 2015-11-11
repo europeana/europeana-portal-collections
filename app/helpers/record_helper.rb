@@ -6,7 +6,10 @@ module RecordHelper
         title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
         img: {
           alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-          src: render_document_show_field_value(doc, 'edmPreview')
+          # temporary fix until API contains correct image url
+          # src: render_document_show_field_value(doc, 'edmPreview'),
+          src: render_document_show_field_value(doc, 'edmPreview').sub('http://europeanastatic.eu/api/image?',
+            'http://delta-web.de.a9sapp.eu/api/v2/thumbnail-by-url.json?').sub('&size=LARGE', '&size=w200')
         }
       }
     end
