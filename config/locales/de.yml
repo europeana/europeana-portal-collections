@@ -2,7 +2,7 @@ de:
   global:
     labs-link: Link zu Labs
     navigation:
-      all_blog_posts: Alle Beiträge
+      all_blog_posts: Alle Beiträge...
       all_exhibitions: Alle Ausstellungen...
       blog: 
       browse: Durchsuchen
@@ -46,7 +46,7 @@ de:
         recent: Neu hinzugefügt
         spotlight-on: Spotlight auf
       music:
-        description: Die <strong> Europeana Musik Sammlung </ strong> vereint die besten Musikaufnahmen, Noten und andere musikbezogene Sammlungen von Europas audiovisuellen Archiven und Bibliotheken
+        description: Die <strong> Europeana Musik Sammlung </ strong> vereint die besten Musikaufnahmen, Noten und andere musikbezogene Sammlungen von Europas audiovisuellen Archiven und Bibliotheken. <a href="/portal/channels/music/about">Erfahren Sie mehr über die Musik Sammlung.</a>
         title: Europeana Musik
     facet:
       language:
@@ -56,10 +56,10 @@ de:
       menu:
         about: "Über Uns"
         become-a-provider: Werden Sie ein Datengeber
-        contact: 
+        contact: Kontakt
         copyright: Urheberrecht
         data-providers: Alle Datengeber
-        help: 
+        help: Hilfe
         new-collections: Neue Sammlungen
         rights: 
         search-tips: Suchtipps
@@ -67,8 +67,8 @@ de:
     home:
       strapline: Entdecken Sie %{total_item_count} Kunstwerke, Artefakte, Bücher, Videos und Audios aus ganz Europa.
     more: Mehr...
-    my-europeana: My Europeana
-    my-europeana-link: Link zu My Europeana
+    my-europeana: Mein Europeana
+    my-europeana-link: Link zu Mein Europeana
     navigation:
       breadcrumb:
         item_detail: Objektdetail
@@ -79,7 +79,7 @@ de:
       actions:
         attribute-author: Autor zuordnen
         attribute-html: 
-        attribute-plaintext: 
+        attribute-plaintext: Nur Text
         download: Herunterladen
         download-additional: Auch erhältlich als
         downloaddata: Daten herunterladen
@@ -89,7 +89,7 @@ de:
         technicalmetadata: Technische Metadaten
       enrichment:
         who:
-          title: 
+          title: Titel
       hierarchy:
         title: "Ähnliche Objekte"
         view-items-above: Objekte oben anzeigen
@@ -112,87 +112,87 @@ de:
         dimensions: Maße
         duration: Laufzeit
         edm:
-          has-met: 
+          has-met: Ist verwandt mit
           incorporates: enthält
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
+          is-derivative-of: Ist abgeleitet von
+          is-representation-of: Wird dargestellt durch
+          is-similar-to: Ist ähnlich wie
+          is-successor-of: Ist Nachfolger von
+          realises: Verwirklicht
+          was-present-at: Vorhanden bei
         extent: Größe
         file-size: Dateigröße
         format: 'Format '
         fps: Bilder pro Sekunde
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
+        has-type: Hat Art
+        identifier: Kennung
+        is-format-of: Ist Format
+        is-part-of: Ist ein Teil von
+        is-referenced-by: mit Verweis versehen
+        is-replaced-by: Wird ersetzt durch
+        is-required-by: Ist erforderlich durch
+        issued: Erstausgabe
+        language: Sprache
+        latitude: Breitengrad
+        location: Standort
+        longitude: Längengrad
+        map: Karte
+        map-tiles: Kacheln
         medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
+        people: Leute
+        period: Zeitraum
+        place: Ort
+        place-time: Ort/Zeit
+        properties: Eigenschaften
+        provenance: Herkunft
+        provided-by: Mehr herausfinden
+        provided-by-detail: mehr Informationen und Medien zu diesem Objekt.
         provider: 'Beiträger '
         providing-country: Bereitstellendes Land
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
+        publication-date: Erscheinungsdatum
+        publisher: Herausgeber
+        references: Verweise
+        refs-rels: Verweise und Beziehungen
+        relations: Beziehungen
+        rights: Rechte
+        rights-human: Verwendbarkeit
+        runtime: Laufzeit
+        runtime-unit-seconds: Sekunden
+        source: Quelle
+        subject: Thema
+        temporal: Zeitlich
+        time: Zeit
+        timestamp-created: Erstmals in Europeana veröffentlicht
+        timestamp-updated: Letzte Aktualisierung in Europeana
+        timestamp_created: Erstmals in Europeana veröffentlicht (%{timestamp_created})
+        timestamp_updated: Letzte Aktualisierung in Europeana (%{timestamp_updated})
+        title: Titel
         toc: 
-        type: 
-        ugc: 
-        version: 
+        type: Art
+        ugc: Von Nutzern beigetragene Inhalte
+        version: Fassung
       named-entities:
-        title: 
+        title: Benannte Eigenschaften
         what:
-          broader: 
-          label: 
-          term: 
+          broader: Umfassenderes Konzept
+          label: Konzept Bezeichnung
+          term: Konzept Begriff
           title: Was
         when:
           begin: Zeitraum Anfang
           end: Zeitraum Ende
-          label: Zeitraum Label
+          label: Zeitraum Bezeichnung
           term: Zeitraum Begriff
           title: Wann
         where:
-          label: Ort
-          latitude: 
-          longitude: 
-          term: 
+          label: Ort Bezeichnung
+          latitude: Ort Breitengrad
+          longitude: Ort Längengrad
+          term: Ort Begriff
           title: Wo
         who:
-          label: 
-          term: 
+          label: Agent Bezeichnung
+          term: Agent Begriff
           title: Wer
       nav:
         next: Weiter
@@ -267,7 +267,7 @@ de:
         results-relevance: Relevanz
         single-result: 1 Ergebnis für %{query_terms}
         view:
-          grid: 
+          grid: Raster
           list: Liste
         view-at-provider: Ansehen bei
     search:
@@ -281,7 +281,7 @@ de:
         save-settings: Einstellungen speichern
       language:
         auto-translate-page: Trefferliste automatisch übersetzen in ...
-        auto-translate-page-short: Objekte automatisch übersetzen in ...
+        auto-translate-page-short: Objekte automatisch übersetzen in
         auto-translate-query: Suchbegriffe automatisch übersetzen in ...
         available: Verfügbare Sprachen
         default: Standard-Sprache

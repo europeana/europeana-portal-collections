@@ -95,14 +95,15 @@ module Portal
                 {
                   title: 'site.object.meta-label.concept',
                   url: 'what',
-                  fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
-                  override_val: 'true',
-                  overrides: [
-                    {
-                      field_title: t('site.object.meta-label.ugc'),
-                      field_url: search_url(f: { 'UGC' => ['true'] })
-                    }
-                  ]
+                  fields: ['concepts.prefLabel'],
+                  #fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
+                  #override_val: 'true',
+                  #overrides: [
+                  #  {
+                  #    field_title: t('site.object.meta-label.ugc'),
+                  #    field_url: search_url(f: { 'UGC' => ['true'] })
+                  #  }
+                  #]
                 }
               ]
             ),
@@ -263,7 +264,8 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.provenance',
-                  fields: ['proxies.dcSource']
+                  fields: ['proxies.dcSource'],
+                  exclude_vals: ['ugc', 'UGC']
                 },
                 {
                   title: 'site.object.meta-label.publisher',
@@ -547,7 +549,17 @@ module Portal
 
     def data_section_field_values(section)
       fields = (section[:fields] || []).map do |field|
-        document.fetch(field, [])
+        val = document.fetch(field, [])
+        if !section[:exclude_vals].nil?
+          val = val.map do |value|
+            if section[:exclude_vals].include? (value)
+              nil
+            else
+              value
+            end
+          end
+        end
+        val
       end
 
       if section[:fields_then_fallback] && fields.present?
