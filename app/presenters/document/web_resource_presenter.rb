@@ -4,10 +4,10 @@ module Document
   class WebResourcePresenter < DocumentPresenter
     include ActionView::Helpers::NumberHelper
 
-    def initialize(document, record, controller, configuration = controller.blacklight_config)
+    def initialize(document, controller, configuration = controller.blacklight_config, record = nil, record_presenter = nil)
       super(document, controller, configuration)
       @record = record
-      @record_presenter = RecordPresenter.new(record, controller)
+      @record_presenter = record_presenter || (record.nil? ? nil : RecordPresenter.new(record, controller))
     end
 
     def media_item
@@ -20,7 +20,7 @@ module Document
         play_url: play_url,
         technical_metadata: technical_metadata,
         download: {
-          url: download_url,
+          url: downloadable? ? download_url : false,
           text: t('site.object.actions.download')
         }
       }.tap do |item|
@@ -154,28 +154,52 @@ module Document
 
     def downloadable?
       if url.blank? ||
-          mime_type.blank? ||
-          download_disabled? ||
-          media_type == 'iiif' ||
-          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+        download_disabled? ||
+        media_type == 'iiif' ||
+        (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+        (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
         true
       end
     end
 
+    def for_edm_object?
+      @record_presenter.edm_object == url
+    end
+
+    def for_edm_is_shown_by?
+      url == @record_presenter.edm_is_shown_by
+    end
+
+    def displayable?
+      return false if for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by?
+
+      (@record_presenter.edm_object.present? && for_edm_object?) ||
+        (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
+        (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
+        (@record_presenter.has_views.include?(url) && mime_type.present?) ||
+        (media_type == 'iiif')
+    end
+
     def download_disabled?
-      blacklisted = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/)
-      blacklisted.include?(media_rights)
+      # blacklisted1 = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/ http://www.europeana.eu/rights/rr-f/)
+      # blacklisted2 = %w(http://www.europeana.eu/rights/test-orphan http://www.europeana.eu/rights/unknown)
+      # blacklisted1.include?(media_rights) || blacklisted2.include?(media_rights)
+      false
     end
 
     def thumbnail
-      # Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
-      isb = @record_presenter.edm_is_shown_by
-      edm_ob = @record_presenter.edm_object
-      normal_url = Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
-      url == isb && edm_ob.present? && edm_ob != isb ? edm_ob : normal_url
+      edm_object_thumbnail? ? @record_presenter.edm_object : api_thumbnail
+    end
+
+    def edm_object_thumbnail?
+      for_edm_is_shown_by? &&
+        @record_presenter.edm_object_thumbnails_edm_is_shown_by?
+    end
+
+    def api_thumbnail
+      Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 
     def player

@@ -21,20 +21,20 @@ RSpec.describe User do
   end
 
   describe '#ability' do
-    subject { FactoryGirl.create(:user).ability }
+    subject { users(:user).ability }
     it { is_expected.to be_a(Ability) }
   end
 
   describe '#role' do
     context 'when blank' do
-      let(:user) { FactoryGirl.build(:user, :guest) }
+      let(:user) { users(:roleless) }
       it 'is set to "user"' do
         expect { user.save }.to change { user.role }.to('user')
       end
     end
 
     context 'when set' do
-      let(:user) { FactoryGirl.create(:user, :admin) }
+      let(:user) { users(:admin) }
       it 'is preserved' do
         expect { user.save }.not_to change { user.role }
       end

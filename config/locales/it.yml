@@ -56,9 +56,12 @@ it:
       menu:
         about: 
         become-a-provider: 
+        contact: 
         copyright: 
         data-providers: 
+        help: Aiuto
         new-collections: 
+        rights: 
         search-tips: 
         using-myeuropeana: 
     home:
@@ -155,7 +158,7 @@ it:
         rights-human: Posso usarlo?
         runtime: Durata
         runtime-unit-seconds: secondi
-        source: Provenienza
+        source: Fonte
         subject: Soggetto
         temporal: Temporale
         time: Tempo
@@ -268,5 +271,3 @@ it:
           notice: 
         label: 
         settings-label: 
-    site-name-link: 
-    sitemap-link: 

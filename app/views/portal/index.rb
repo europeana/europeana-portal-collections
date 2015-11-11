@@ -3,19 +3,19 @@ module Portal
   # Portal search results view
   class Index < ApplicationView
     def page_title
-      @mustache[:page_title] ||= begin
+      mustache[:page_title] ||= begin
         [params[:q], 'Europeana - Search results'].compact.join(' - ')
       end
     end
 
     def form_search
-      @mustache[:form_search] ||= begin
+      mustache[:form_search] ||= begin
         super.merge(hidden: form_search_hidden)
       end
     end
 
     def filters
-      @mustache[:filters] ||= begin
+      mustache[:filters] ||= begin
         facets_from_request(facet_field_names).reject do |facet|
           blacklight_config.facet_fields[facet.name].advanced ||
             blacklight_config.facet_fields[facet.name].parent
@@ -27,7 +27,7 @@ module Portal
 
     def advanced_filters
       advanced_count = 0
-      @mustache[:advanced_filters] ||= begin
+      mustache[:advanced_filters] ||= begin
         [
           {
             advanced_items: {
@@ -46,31 +46,31 @@ module Portal
     end
 
     def results_count
-      @mustache[:results_count] ||= begin
+      mustache[:results_count] ||= begin
         number_with_delimiter(response.total)
       end
     end
 
     def has_results
-      @mustache[:has_results] ||= begin
+      mustache[:has_results] ||= begin
         response.total > 0
       end
     end
 
     def has_single_result
-      @mustache[:has_single_result] ||= begin
+      mustache[:has_single_result] ||= begin
         response.total == 1
       end
     end
 
     def has_multiple_results
-      @mustache[:has_multiple_results] ||= begin
+      mustache[:has_multiple_results] ||= begin
         response.total > 1
       end
     end
 
     def query_terms
-      @mustache[:query_terms] ||= begin
+      mustache[:query_terms] ||= begin
         query_terms = [(params[:q] || [])].flatten.collect do |query_term|
           content_tag(:strong, query_term)
         end
@@ -79,7 +79,7 @@ module Portal
     end
 
     def search_results
-      @mustache[:search_results] ||= begin
+      mustache[:search_results] ||= begin
         counter = 0 + (@response.limit_value * (@response.current_page - 1))
         @document_list.collect do |doc|
           counter += 1
@@ -89,7 +89,7 @@ module Portal
     end
 
     def navigation
-      @mustache[:navigation] ||= begin
+      mustache[:navigation] ||= begin
         pages = pages_of_search_results
         {
           pagination: {
@@ -111,7 +111,7 @@ module Portal
     end
 
     def facets_selected
-      @mustache[:facets_selected] ||= begin
+      mustache[:facets_selected] ||= begin
         facets_selected_items.blank? ? nil : { items: facets_selected_items }
       end
     end
@@ -150,9 +150,9 @@ module Portal
             value: track_document_path(doc, track_document_path_opts(counter))
           }
         ],
-        title: render_index_field_value(doc, ['dcTitleLangAware', 'title']),
+        title: render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
         text: {
-          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription']),
+          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
                            length: 277,
                            separator: ' ',
                            escape: false)

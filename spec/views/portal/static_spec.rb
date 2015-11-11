@@ -5,13 +5,13 @@ RSpec.describe 'portal/static.html.mustache' do
     assign(:page, page)
   end
 
-  let(:page) { FactoryGirl.create(:page, body: '<p>Some info.</p> <p>More info.</p>') }
+  let(:page) { pages(:about) }
 
   it_should_behave_like 'page with top nav'
 
   it 'should have meta description' do
     render
-    expect(rendered).to have_selector("meta[name=\"description\"][content=\"Some info. More info.\"]", visible: false)
+    expect(rendered).to have_selector("meta[name=\"description\"][content=\"An introduction. Everything you need to know.\"]", visible: false)
   end
 
   it 'should have meta HandheldFriendly' do

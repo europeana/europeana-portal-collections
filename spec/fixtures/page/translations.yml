@@ -1,0 +1,28 @@
+home_translations:
+  locale: en
+  title: 'Home'
+  globalized_model: home
+
+about_translations:
+  locale: en
+  title: 'About the site'
+  body: '<p>An introduction.</p> </p>Everything you need to know.</p>'
+  globalized_model: about
+
+music_collection_translations:
+  locale: en
+  title: 'Europeana Music'
+  body: 'About music'
+  globalized_model: music_collection
+
+not_found_translations:
+  locale: en
+  title: 'Not Found'
+  body: '404'
+  globalized_model: not_found
+
+internal_server_error_translations:
+  locale: en
+  title: 'Internal Server Error'
+  body: '500'
+  globalized_model: internal_server_error

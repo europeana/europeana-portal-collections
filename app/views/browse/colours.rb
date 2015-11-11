@@ -1,13 +1,13 @@
 module Browse
   class Colours < ApplicationView
     def page_title
-      @mustache[:page_title] ||= begin
+      mustache[:page_title] ||= begin
         t('site.browse.colours.title')
       end
     end
 
     def content
-      @mustache[:content] ||= begin
+      mustache[:content] ||= begin
         {
           title: page_title,
           colours: {
@@ -15,6 +15,7 @@ module Browse
             items: @colours.map do |colour|
               {
                 hex: colour.value,
+                label: t('X11.colours.' + (colour.value.sub '#', ''), locale: 'en', default: colour.value),
                 num_results: colour.hits,
                 url: search_path(f: { 'COLOURPALETTE' => [colour.value], 'TYPE' => ['IMAGE'] })
               }
@@ -25,7 +26,7 @@ module Browse
     end
 
     def head_meta
-      @mustache[:head_meta] ||= begin
+      mustache[:head_meta] ||= begin
         [
           { meta_name: 'description', content: page_title }
         ] + super
