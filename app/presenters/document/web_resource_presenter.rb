@@ -160,7 +160,7 @@ module Document
         (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
-        true
+        @record_presenter.has_views.include?(url) || for_edm_is_shown_by?
       end
     end
 
