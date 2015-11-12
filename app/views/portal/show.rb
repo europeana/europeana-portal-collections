@@ -182,7 +182,8 @@ module Portal
                   {
                     title: 'site.object.meta-label.location',
                     fields: ['proxies.dctermsSpatial'],
-                    collected: document.fetch('places.prefLabel', []).first
+                    collected: pref_label('places.prefLabel')
+                    #collected: document.fetch('places.prefLabel', []).first,
                   },
                   {
                     title: 'site.object.meta-label.place-time',
@@ -198,7 +199,8 @@ module Portal
                 latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
                 long_and_lat: long_and_lat?,
-                placeName: document.fetch('places.prefLabel', []).first,
+                #placeName: document.fetch('places.prefLabel', []).first,
+                placeName: pref_label('places.prefLabel'),
                 labels: {
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
@@ -675,6 +677,23 @@ module Portal
         render_document_show_field_value(document, 'proxies.dcTitle')
       else
         title.first
+      end
+    end
+
+    def pref_label(field_name)
+      val = @document.fetch(field_name, [])
+      pref = nil
+      if val.size > 0
+        if val.is_a?(Array)
+          val[0]
+        else
+          pref = val[0][I18n.locale.to_sym]
+          if pref.size > 0
+            pref[0]
+          else
+            val[0][:en]
+          end
+        end
       end
     end
 
