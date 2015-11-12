@@ -293,7 +293,7 @@ ru:
       resource:
         type: "Тип"
       reusability:
-        advanced: 
+        advanced: ''
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -303,15 +303,15 @@ ru:
         advanced-cc0: 
         advanced-orphan-work: ''
         advanced-out-of-copyright-non-commercial: ''
-        advanced-pdm: 
-        advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
-        advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
-        simple: 
+        advanced-pdm: ''
+        advanced-rrfa: ''
+        advanced-rrpa: ''
+        advanced-rrra: ''
+        advanced-ucs: ''
+        open: ''
+        permission: ''
+        restricted: ''
+        simple: ''
       sound_duration:
         long: "Длинный (6+ минут)"
         medium: "Средний (3-6 минут)"
@@ -420,6 +420,8 @@ ru:
     language-swedish: "Шедский"
     language-ukranian: "Украинский"
     login: "Логин"
+    mission: 
+    mission-title: 
     more:
       load-more: "Еще"
       show-more: "Показать еще"

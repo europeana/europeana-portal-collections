@@ -158,7 +158,7 @@ el:
       newspapers: "εφημερίδες"
       performing-arts: "Τέχνες του θεάματος"
     channels-art: "Συλλογή Ιστορία της Τέχνης"
-    channels-art-image: "Εικόνα Συλλογή Ιστορία της Τέχνης"
+    channels-art-image: "Εικόνα από την Συλλογή Ιστορία της Τέχνης"
     channels-art-link: "Συλλογή Ιστορία της Τέχνης"
     channels-fashion: "Μόδα"
     channels-music: "Μουσική"
@@ -174,7 +174,7 @@ el:
           paintings:
             genre: "Είδος"
             medium: "Μέσο"
-      carrier: 
+      carrier: "Μέσο αποθήκευσης"
       colour: "Χρώμα"
       colour-black-and-white: "Ασπρόμαυρο"
       country:
@@ -221,7 +221,7 @@ el:
         channel: "Συλλογές"
         colourpalette: "Χρώμα"
         country: "Χώρα"
-        data_provider: 
+        data_provider: "Συλλέκτης"
         image_aspectratio: "Προσανατολισμός"
         image_colour: "Παλέτα"
         image_size: "Μέγεθος"
@@ -229,7 +229,7 @@ el:
         language_of_description: "Γλώσσα Περιγραφής"
         media: "Μόνο αντικείμενα με συνδέσμους σε μέσα"
         mime_type: "Τύπος αρχείου"
-        provider: 
+        provider: "Ίδρυμα"
         reusability: "Μπορώ να το χρησιμοποιήσω;"
         sound_duration: "Διάρκεια"
         sound_hq: "Υψηλή ποιότητα"
@@ -307,7 +307,7 @@ el:
         advanced-rrfa: ''
         advanced-rrpa: ''
         advanced-rrra: ''
-        advanced-ucs: 
+        advanced-ucs: ''
         open: "Ναι με απόδοση πνευματικών δικαιωμάτων"
         permission: "Μόνο με άδεια"
         restricted: "Ναι με περιορισμούς"
@@ -380,13 +380,13 @@ el:
     genres-popular-music: "Λαϊκή μουσική"
     genres-traditional-music: "Παραδοσιακή"
     header:
-      connect: "σύνδεση"
-      develop: "ανάπτυξη"
-      discover: "ανακάλυψη"
+      connect: "συνδεθείτε"
+      develop: "αναπτύξτε"
+      discover: "ανακάλυψτε"
       network: "δίκτυο"
     help: "Βοήθεια"
     home: "Αρχική"
-    javascript-required: "Για να αποκτήσετε πρόσβαση σε αυτό το περιεχόμενο, ενεργοποιήστε την Javascript, και χρησιμοποιήστε έναν φυλλομετρητή με υποστήριξη περιεχομένου HTML5"
+    javascript-required: "Για να αποκτήσετε πρόσβαση σε αυτό το περιεχόμενο, ενεργοποιήστε τις επεκτάσεις Javascript, και χρησιμοποιήστε έναν φυλλομετρητή με υποστήριξη περιεχομένου HTML5"
     labs: 
     labs-text: "Συνδυάστε πολιτιστικό περιεχόμενο μέσω των APIs και τις συλλογές μας"
     language-basque: "Βάσκικα"
@@ -420,6 +420,8 @@ el:
     language-swedish: "Σουηδικά"
     language-ukranian: "Ουκρανικά"
     login: "Είσοδος"
+    mission: 
+    mission-title: 
     more:
       load-more: "Περισσότερα"
       show-more: "Εμφάνιση περισσοτέρων"

@@ -1,50 +1,50 @@
 pt:
   global:
-    labs-link: 
+    labs-link: ligação para labs
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
+      all_blog_posts: Todas as Mensagens...
+      all_exhibitions: Todas as Exposições...
+      blog: Blogue
+      browse: Procurar
       browse_colours: Cores
       browse_newcontent: Novo conteúdo
       browse_sources: Fontes
-      channels: 
+      channels: Colecções
       collections: Colecções
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      exhibitions: Exposições
+      home: Início
+    pro-link: ligação para pro
+    pro-text: texto para pro
+    settings: definições
   site:
     alpha:
       feedback_banner:
-        description: 
+        description: Uma versão Alfa significa que este  website está sob activo desenvolvimento e será actualizada com regularidade. Poderá estar por vezes inacessível. As suas sugestões e comentários ajudarão a melhorar o website.
         link-text: Dê-nos a sua opinião!
-        title: 
-    blog-link: 
+        title: Esta é uma versão Alfa da n
+    blog-link: ligação para blogue
     browse:
       colours:
         title: Cores
       newcontent:
-        title: 
+        title: Novo Conteúdo
       sources:
-        title: 
+        title: Fontes
     collections:
       art-history:
-        description: 
+        description: Desde a Renascença aos surrealistas, e desde as esculturas da antiga Roma à arte contemporânea, a Europeana Arte e Colecção de História de Arte vai dar-lhe a conhecer artistas e obras de arte de toda a Europa. [Algo sobre elementos interactivos]
         title: Europeana História de Arte
       data-types:
         3d: objectos 3D
-        count: 
-        images: 
-        moving-images: 
-        sound: 
+        count: itens
+        images: Imagens
+        moving-images: Vídeos
+        sound: Gravações de som
         texts: Textos
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Curadoria por
+        recent: Adições recentes
+        spotlight-on: Destaque para
       music:
         description: 
         title: Europeana Música
@@ -56,57 +56,57 @@ pt:
       menu:
         about: Sobre
         become-a-provider: 
-        contact: 
-        copyright: 
+        contact: Contacto
+        copyright: Direitos de Autor
         data-providers: 
-        help: 
-        new-collections: 
+        help: Ajuda
+        new-collections: Novas Colecções
         rights: 
-        search-tips: 
-        using-myeuropeana: 
+        search-tips: Dicas de pesquisa
+        using-myeuropeana: Utilizar Minha Europeana
     home:
-      strapline: 
+      strapline: Explore %{total_item_count} obras de arte, artefactos, livros, videos e sons de toda a Europa.
     more: Mais...
-    my-europeana: 
-    my-europeana-link: 
+    my-europeana: Minha Europeana
+    my-europeana-link: ligação para Minha Europeana
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
+        item_detail: 'Detalhe do item '
+        results_list: Lista de Resultados
         return_home: 
-    news: 
+    news: Notícias
     object:
       actions:
         attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
+        attribute-html: HTML
+        attribute-plaintext: Texto simples
+        download: Descarregar
         download-additional: Também disponível como
-        downloaddata: 
-        open-media: 
+        downloaddata: Descarregar dados
+        open-media: Abrir este item de media
         show-less-data: Mostrar menos informação
         show-more-data: Mostrar mais informação
-        technicalmetadata: 
+        technicalmetadata: Metadata Técnica
       enrichment:
         who:
           title: Título
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Itens Relacionados
+        view-items-above: ver itens acima
+        view-items-below: ver itens abaixo
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
+        codec: Codec
+        collection-name: Conjunto de Dados
+        concept: Conceito
+        concepts: Classificações
+        consists-of: Consiste em
+        contributor: Contribuidor
+        copyright: Direitos de Autor
+        creation-date: Data de criação
+        creator: Criador
+        current-location: Localização actual
+        data-provider: Fornecedor de dados
+        date: Data
         dates: Datas
         description: Descrição
         dimensions: Dimensões
@@ -119,11 +119,11 @@ pt:
           is-similar-to: "É semelhante a"
           is-successor-of: 
           realises: 
-          was-present-at: 
+          was-present-at: Present em
         extent: Tamanho
         file-size: Tamanho de ficheiro
         format: Formato
-        fps: 
+        fps: Imagens por segundo
         has-type: 
         identifier: Identificador
         is-format-of: "É formato de"
@@ -132,15 +132,15 @@ pt:
         is-replaced-by: 
         is-required-by: 
         issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
+        language: Língua
+        latitude: Latitude
+        location: Localização
+        longitude: Longitude
+        map: Mapa
         map-tiles: 
         medium: 
         people: 
-        period: 
+        period: Período
         place: 
         place-time: Local/Tempo
         properties: Propriedades
@@ -156,23 +156,23 @@ pt:
         relations: Relações
         rights: Direitos
         rights-human: Posso usar isto?
-        runtime: 
+        runtime: Duração
         runtime-unit-seconds: segundos
         source: Fonte
-        subject: 
-        temporal: 
+        subject: Tema
+        temporal: Temporal
         time: Tempo
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+        timestamp-created: Publicado pela primeira vez na Europeana
+        timestamp-updated: "Última actualização na Europeana"
+        timestamp_created: Publicado pela primeira vez na Europeana (%{timestamp_created})
+        timestamp_updated: "Última actualização na Europeana (%{timestamp_updated})"
+        title: Título
+        toc: Tabela de Conteúdos
+        type: Tipo
+        ugc: Conteúdo contribuido por utilizador
+        version: Versão
       named-entities:
-        title: 
+        title: Entidades Nomeadas
         what:
           broader: 
           label: 
@@ -203,14 +203,14 @@ pt:
         south: Sul
         west: Oeste
       show-more-similar-items: mostrar mais
-      similar-items: 
+      similar-items: Itens semelhantes
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Desculpe, não conseguimos encontrar essa página
+        text: Infelizmente não conseguimos encontrar a página que procura. Tente pesquisar na Europeana ou talvez goste dos itens seleccionados em baixo.
       about:
         text: 
-        title: 
+        title: Bem vindo, amante da cultura!
       music-channel-about:
         text: 
         title: 
