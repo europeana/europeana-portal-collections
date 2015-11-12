@@ -21,7 +21,7 @@ en:
       feedback_banner:
         description: An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
         link-text: Give us your input!
-        title: This is an Alpha release of our new collections search and Music Channel
+        title: This is an Alpha release of our new "Collections" and "Music Collection"
     blog-link: link to blog
     browse:
       colours:
@@ -32,8 +32,7 @@ en:
         title: Sources
     collections:
       art-history:
-        description: |
-          From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Channel introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
+        description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
         title: Europeana Art History
       data-types:
         3d: 3D objects

@@ -394,16 +394,16 @@ pt:
     language-catalan: Catalão
     language-croatian: Croata
     language-czech: Checo
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
+    language-danish: Dinamarquês
+    language-dutch: Holandês
+    language-english: Inglês
+    language-estonian: Estónio
+    language-finnish: Finlandês
+    language-french: Francês
+    language-gaelic: Gaélico
+    language-german: Alemão
+    language-greek: Grego
+    language-hungarian: Húngaro
     language-icelandic: 
     language-italian: 
     language-latvian: 
@@ -421,32 +421,32 @@ pt:
     language-ukranian: 
     login: 
     mission: 
-    mission-title: 
+    mission-title: A nossa missão
     more:
-      load-more: 
-      show-more: 
+      load-more: Mais
+      show-more: Mostrar mais
       view-more: Ver mais
-    more-info: 
+    more-info: Mais informação
     our-mission: A nossa missão
     our-mission-text: 
     our-sites: os nosso sites
     password: Palavra-passe
     professional: Pro
-    professional-text: 
+    professional-text: Involva-se, partilhe os seus dados ou use os nossos
     refine-your-search: 
-    register: 
+    register: Registe-se
     research: 
     research-text: 
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
+      search-button-image-alt: Pesquisar
+      search-placeholder-text: Adicione um termo de pesquisa
+    search-collections: Colecções
     search-collections-text: 
-    share: 
+    share: Partilhe
     sitemap: 
     terms-and-policies: 
-    type: 
-  'no': 
+    type: tipo
+  'no': Noruega
   pl: 
   site:
     facet:
