@@ -1,22 +1,22 @@
 ro:
-  Symphonies: 
+  Symphonies: Simfonii
   X11:
     colours:
-      '000000': 
-      000080: 
-      00008B: 
-      0000CD: 
-      0000FF: 
-      '006400': 
+      '000000': ''
+      000080: Bleumarin
+      00008B: ''
+      0000CD: ''
+      0000FF: ''
+      '006400': ''
       008000: 
       008080: 
-      008B8B: 
+      008B8B: ''
       00BFFF: 
-      00CED1: 
+      00CED1: ''
       00FA9A: 
-      00FF00: 
+      00FF00: ''
       00FF7F: 
-      00FFFF: 
+      00FFFF: ''
       '191970': 
       1E90FF: 
       20B2AA: 
@@ -157,98 +157,98 @@ ro:
       natural-history: istorie naturală
       newspapers: presă
       performing-arts: artele spectacolului
-    channels-art: 
-    channels-art-image: Istoria artei imaginea colectiei
-    channels-art-link: 
+    channels-art: Colecția Istoria Artei
+    channels-art-image: Colecția Istoria Artei imagine
+    channels-art-link: Colecția Istoria Artei
     channels-fashion: Modă
     channels-music: Muzică
     choose-language: Limbă
     email-address: adresă de email
     facet:
       advanced:
-        options: 
+        options: Opțiuni
         show:
-          ugc: 
+          ugc: Conținut creat de utilizator
       art:
         form:
           paintings:
             genre: Tip
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            medium: Mediu
+      carrier: Suport
+      colour: Culoare
+      colour-black-and-white: Alb și negru
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        austria: Austria
+        belgium: Belgia
+        bulgaria: Bulgaria
+        croatia: Croația
+        cyprus: Cipru
+        czechrepublic: Republica Cehă
+        denmark: Danemarca
+        estonia: Estonia
+        europe: Europa
+        finland: Finlanda
+        france: Franța
+        germany: Germania
+        greece: Germania
+        hungary: Ungaria
+        iceland: Islanda
+        ireland: Irlanda
+        israel: Israel
+        italy: Italia
+        latvia: Latvia
+        lithuania: Lituania
+        luxembourg: Luxemburg
+        malta: Malta
+        netherlands: Tările de Jos
+        norway: Norvegia
+        poland: Polonia
+        portugal: Portugalia
+        romania: România
+        russia: Rusia
+        serbia: Serbia
+        slovakia: Slovacia
+        slovenia: Slovenia
+        spain: Spania
+        sweden: Suedia
+        switzerland: Elveția
+        turkey: Turcia
+        ukraine: Ucraina
+        unitedkingdom: Regatul Unit
+        unitedstatesofamerica: SUA
+      creator: creator
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
+        channel: Colecții
+        colourpalette: Culoare
+        country: "Țară"
+        data_provider: Instituție
+        image_aspectratio: Orientare
+        image_colour: Paletă coloristică
+        image_size: Dimensiune
+        language: Limbă
+        language_of_description: Limba descrierii
         media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
-        type: 
-        ugc: 
-        video_duration: 
-        year: 
+        mime_type: Formatul fișierului
+        provider: Instituția
+        reusability: Pot folosi?
+        sound_duration: Durata
+        sound_hq: Calitate superioară
+        text_fulltext: Text complet
+        type: Media
+        ugc: Arată conținut furnizat de către utilizatori
+        video_duration: Durata videoclip
+        year: Dată
       image_aspectratio:
         landscape: 
         portrait: 
       image_colour:
-        'false': 
-        'true': 
+        'false': Alb si negru
+        'true': Culoare
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: Foarte mare (4MP+)
+        large: Mare (1-4MP)
+        medium: Medie (0.5-1MP)
+        small: Mică (<0.5MP)
       language:
         bg: 
         ca: 
@@ -256,7 +256,7 @@ ro:
         da: 
         de: 
         el: 
-        en: 
+        en: ''
         es: 
         et: 
         fi: 
@@ -284,78 +284,78 @@ ro:
         tr: 
         uk: 
         yi: 
-      less: 
+      less: Mai puține
       media:
-        'false': 
-        'true': 
-      more: 
-      more-refinements: 
+        'false': Nu
+        'true': Da
+      more: Mai multe
+      more-refinements: Mai multe filtre
       resource:
-        type: 
+        type: Tip
       reusability:
-        advanced: 
-        advanced-cc-by: 
-        advanced-cc-by-nc: 
-        advanced-cc-by-nc-nd: 
-        advanced-cc-by-nc-sa: 
-        advanced-cc-by-nd: 
-        advanced-cc-by-sa: 
-        advanced-cc0: 
-        advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: 
-        advanced-pdm: 
-        advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
-        advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
-        simple: 
+        advanced: Avansat
+        advanced-cc-by: ''
+        advanced-cc-by-nc: ''
+        advanced-cc-by-nc-nd: ''
+        advanced-cc-by-nc-sa: ''
+        advanced-cc-by-nd: ''
+        advanced-cc-by-sa: ''
+        advanced-cc0: ''
+        advanced-orphan-work: Operă orfană
+        advanced-out-of-copyright-non-commercial: Scos de sub incidența drepturilor de autor - uz non-comercial
+        advanced-pdm: "În domeniu public"
+        advanced-rrfa: Drepturi rezervate - Acces liber
+        advanced-rrpa: Drepturi rezervate - Acces cu plată
+        advanced-rrra: Drepturi rezervate - Acces restricționat
+        advanced-ucs: Necunoscut statutul drepturilor de autor
+        open: Da cu atribuire
+        permission: Doar cu permisiune
+        restricted: Da cu restricții
+        simple: Simplu
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: Lung (6+ min)
+        medium: Mediu (3-6 min)
+        short: Scurt (30 - 3 min)
+        very_short: Foarte scurt (<30s)
       sound_hq:
-        'true': 
-      source: 
+        'true': Da
+      source: Sursa
       text_fulltext:
-        'false': 
-        'true': 
+        'false': Nu
+        'true': Da
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: Imagine
+        sound: Sunet
+        text: Text
+        video: Video
       type-image:
         orientation:
-          label: 
+          label: Orientarea imaginii
           landscape: 
           portrait: 
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: Arată tot
+          hq-only: Arată doar imagini de calitate superioară
+          label: Calitate
         size:
-          explanation: 
-          label: 
+          explanation: Ce reprezintă aceste dimensiuni?
+          label: Dimensiunea imaginii
           large: 
           medium: 
           small: 
           xl: 
       type-sound:
         duration:
-          label: 
+          label: Durata audio
           long: 
           medium: 
           short: 
           very-short: 
       type-video:
         duration:
-          label: 
-          long: 
+          label: Durata video
+          long: Lungime (%{data})
           medium: 
           short: 
       video_duration:
@@ -363,31 +363,31 @@ ro:
         medium: 
         short: 
       year:
-        from: 
-        to: 
+        from: 'de la '
+        to: până la
     'facet ':
       header:
         video_hd:
-          'true': 
+          'true': HD
     find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
+    forgot-password: Parola uitată?
+    genres: genuri
+    genres-chamber-music: Muzică de cameră
+    genres-classical-music: Muzică clasică
+    genres-concertos: Concerte
     genres-non-western-classical-music: 
-    genres-opera: 
+    genres-opera: Operă
     genres-popular-music: 
-    genres-traditional-music: 
+    genres-traditional-music: Muzică tradițională
     header:
       connect: 
-      develop: 
-      discover: 
-      network: 
-    help: 
-    home: 
-    javascript-required: 
-    labs: 
+      develop: dezvoltă
+      discover: descoperă
+      network: rețea
+    help: Ajutor
+    home: Acasă
+    javascript-required: Pentru a accesa acest conținut activați JavaScript, si luați in considerare actualizarea navigatorului dvs web către unul care suportă vizualizarea de conținut HTML5
+    labs: ''
     labs-text: 
     language-basque: 
     language-bulgarian: 
@@ -419,36 +419,36 @@ ro:
     language-spanish: 
     language-swedish: 
     language-ukranian: 
-    login: 
+    login: Autentificare
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
-    our-mission: 
+      load-more: Mai mult
+      show-more: Arată mai mult
+      view-more: Vezi mai mult
+    more-info: Mai multe informații
+    our-mission: Misiunea noastră
     our-mission-text: 
     our-sites: 
-    password: 
-    professional: 
+    password: Parolă
+    professional: ''
     professional-text: 
-    refine-your-search: 
-    register: 
+    refine-your-search: Căutare rafinată
+    register: "Înregistrează"
     research: 
     research-text: 
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+      search-button-image-alt: Caută
+      search-placeholder-text: Adaugă termen de căutare
+    search-collections: Colecții
+    search-collections-text: Explorează patrimoniul cultural european
+    share: Partajează
+    sitemap: Harta siteului
+    terms-and-policies: Termeni și condiții
+    type: tip
+  'no': Norvegia
+  pl: Portugalia
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Rezultate
+        show-results-all: Arată toate rezultatele

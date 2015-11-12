@@ -1,5 +1,5 @@
 fr:
-  Symphonies: 
+  Symphonies: Symphonies
   X11:
     colours:
       '000000': 
@@ -289,7 +289,7 @@ fr:
         'false': Non
         'true': Oui
       more: Plus
-      more-refinements: 
+      more-refinements: Plus de filtres
       resource:
         type: Type
       reusability:
@@ -301,7 +301,7 @@ fr:
         advanced-cc-by-nd: 
         advanced-cc-by-sa: 
         advanced-cc0: 
-        advanced-orphan-work: Oeuvre orpheline
+        advanced-orphan-work: ''
         advanced-out-of-copyright-non-commercial: 
         advanced-pdm: 
         advanced-rrfa: 
@@ -315,140 +315,140 @@ fr:
       sound_duration:
         long: Longue (6+ min)
         medium: Moyenne (3-6 min)
-        short: 
-        very_short: 
+        short: Courte (30s - 3 min)
+        very_short: Très courte (<30s)
       sound_hq:
-        'true': 
-      source: 
+        'true': Oui
+      source: Source
       text_fulltext:
-        'false': 
-        'true': 
+        'false': Non
+        'true': Oui
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: Image
+        sound: Son
+        text: Texte
+        video: Vidéo
       type-image:
         orientation:
-          label: 
-          landscape: 
+          label: Orientation de l'image
+          landscape: Paysage
           portrait: Portrait
         quality:
           all: Voir tout
-          hq-only: 
-          label: 
+          hq-only: Ne voir que les hautes qualités
+          label: Qualité
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: Que veulent dire ces tailles?
+          label: Taille d'image
+          large: Grande (%{data})
+          medium: Moyenne (%{data})
+          small: Petite (%{data})
+          xl: Très grande (%{data})
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: Durée du son
+          long: Longue (%{data})
+          medium: Moyenne (%{data})
+          short: Courte (%{data})
+          very-short: Très courte (%{data})
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
+          label: Durée de la vidéo
+          long: Longue (%{data})
+          medium: Moyenne (%{data})
+          short: Courte (%{data})
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Longue (20+ min)
+        medium: Moyenne (4-20 min)
+        short: Courte (<4 min)
       year:
-        from: 
-        to: 
+        from: de
+        to: "à"
     'facet ':
       header:
         video_hd:
           'true': HD
-    find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
-    genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+    find-us-elsewhere: Retrouvez-nous ailleurs
+    forgot-password: Vous avez oublié votre mot de passe ?
+    genres: genres
+    genres-chamber-music: Musique de chambre
+    genres-classical-music: Musique classique
+    genres-concertos: Concertos
+    genres-non-western-classical-music: Musique classique non-européenne
+    genres-opera: Opéra
+    genres-popular-music: Music populaire
+    genres-traditional-music: Musique traditionnelle
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
-    help: 
-    home: 
-    javascript-required: 
+      connect: connecter
+      develop: developper
+      discover: découvrir
+      network: réseau
+    help: Aide
+    home: Accueil
+    javascript-required: Pour voir ce contenu, activez l'option JavaScript si elle est désactivée; nous vous recommandons de mettre à niveau votre navigateur avec une version compatible avec HTML5.
     labs: 
     labs-text: 
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
+    language-basque: Basque
+    language-bulgarian: Bulgare
+    language-catalan: Catalan
+    language-croatian: Croate
+    language-czech: Tchèque
+    language-danish: Danois
+    language-dutch: Néerlandais
+    language-english: Anglais
+    language-estonian: Estonien
+    language-finnish: Finnois
+    language-french: Français
+    language-gaelic: Gaélique
+    language-german: Allemand
+    language-greek: Grec
+    language-hungarian: Hongrois
+    language-icelandic: Islandais
+    language-italian: Italien
+    language-latvian: Letton
+    language-lithuanian: Lituanien
+    language-maltese: Maltais
+    language-norwegian: Norvégien
+    language-polish: Polonais
+    language-portuguese: Portugais
+    language-romanian: Roumain
+    language-russian: Russe
+    language-slovakian: Slovaque
+    language-slovenian: Slovène
+    language-spanish: Espagnol
+    language-swedish: Suédois
+    language-ukranian: Ukrainien
+    login: S'identifier
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
-    our-mission: 
+      load-more: Plus
+      show-more: Voir plus
+      view-more: Voir plus
+    more-info: En savoir plus
+    our-mission: Notre mission
     our-mission-text: 
-    our-sites: 
-    password: 
+    our-sites: nos sites
+    password: Mot de passe
     professional: 
-    professional-text: 
-    refine-your-search: 
-    register: 
-    research: 
+    professional-text: Participez, partagez vos données ou utilisez les nôtres
+    refine-your-search: Préciser la recherche
+    register: S'enregistrer
+    research: Recherche
     research-text: 
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+      search-button-image-alt: Chercher
+      search-placeholder-text: Ajouter un terme à la requête
+    search-collections: Collections
+    search-collections-text: Explorez l'héritage culturel d'Europe
+    share: Partager
+    sitemap: Plan du site
+    terms-and-policies: 'Conditions générales d''utilisation '
+    type: type
+  'no': Norvège
+  pl: Portugal
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Résultats
+        show-results-all: Voir tous les résultats

@@ -1,4 +1,4 @@
-pt:
+da:
   Symphonies: 
   X11:
     colours:
@@ -16,7 +16,7 @@ pt:
       00FA9A: 
       00FF00: 
       00FF7F: 
-      00FFFF: Aqua
+      00FFFF: 
       '191970': 
       1E90FF: 
       20B2AA: 
@@ -46,7 +46,7 @@ pt:
       7F0000: 
       7F007F: 
       7FFF00: 
-      7FFFD4: Aquamarine
+      7FFFD4: 
       '808000': 
       '808080': 
       87CEEB: 
@@ -100,9 +100,9 @@ pt:
       EEE8AA: 
       F08080: 
       F0E68C: 
-      F0F8FF: Azul Alice
+      F0F8FF: 
       F0FFF0: 
-      F0FFFF: Azure
+      F0FFFF: 
       F4A460: 
       F5DEB3: 
       F5F5DC: 
@@ -110,7 +110,7 @@ pt:
       F5FFFA: 
       F8F8FF: 
       FA8072: 
-      FAEBD7: Branco Antigo
+      FAEBD7: 
       FAF0E6: 
       FAFAD2: 
       FDF5E6: 
@@ -145,28 +145,28 @@ pt:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: Sobre nós
+    about-us: 
     channel:
-      archaeology: arqueologia
-      architecture: arquitectura
-      art: arte
-      fashion: moda
+      archaeology: 
+      architecture: 
+      art: 
+      fashion: 
       home: 
-      maps: mapas
-      music: música
-      natural-history: história natural
-      newspapers: jornais
+      maps: 
+      music: 
+      natural-history: 
+      newspapers: 
       performing-arts: 
     channels-art: 
     channels-art-image: 
     channels-art-link: 
-    channels-fashion: Moda
-    channels-music: Música
-    choose-language: Língua
-    email-address: endereço de email
+    channels-fashion: 
+    channels-music: 
+    choose-language: 
+    email-address: 
     facet:
       advanced:
-        options: Opções
+        options: 
         show:
           ugc: 
       art:
