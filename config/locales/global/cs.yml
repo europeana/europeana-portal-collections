@@ -1,5 +1,5 @@
-sv:
-  Symphonies: Symfonier
+cs:
+  Symphonies: 
   X11:
     colours:
       '000000': 
@@ -145,23 +145,23 @@ sv:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: Om oss
+    about-us: 
     channel:
-      archaeology: arkeologi
-      architecture: arkitektur
-      art: konst
-      fashion: mode
-      home: Start
-      maps: kartor
-      music: musik
-      natural-history: naturhistoria
-      newspapers: tidningar
-      performing-arts: scenkonst
+      archaeology: 
+      architecture: 
+      art: 
+      fashion: 
+      home: 
+      maps: 
+      music: 
+      natural-history: 
+      newspapers: 
+      performing-arts: 
     channels-art: 
     channels-art-image: 
     channels-art-link: 
     channels-fashion: 
-    channels-music: Musik
+    channels-music: 
     choose-language: 
     email-address: 
     facet:
@@ -172,83 +172,83 @@ sv:
       art:
         form:
           paintings:
-            genre: Genre
-            medium: Medium
+            genre: 
+            medium: 
       carrier: 
       colour: 
-      colour-black-and-white: Svartvit
+      colour-black-and-white: 
       country:
         austria: 
         belgium: 
-        bulgaria: Belgien
-        croatia: Kroatien
-        cyprus: Cypern
+        bulgaria: 
+        croatia: 
+        cyprus: 
         czechrepublic: 
-        denmark: Danmark
-        estonia: Estland
+        denmark: 
+        estonia: 
         europe: 
-        finland: Finland
-        france: Frankrike
-        germany: Tyskland
-        greece: Grekland
-        hungary: Ungern
-        iceland: Island
-        ireland: Irland
-        israel: Israel
-        italy: Italien
-        latvia: Lettland
-        lithuania: Litauen
-        luxembourg: Luxemburg
-        malta: Malta
+        finland: 
+        france: 
+        germany: 
+        greece: 
+        hungary: 
+        iceland: 
+        ireland: 
+        israel: 
+        italy: 
+        latvia: 
+        lithuania: 
+        luxembourg: 
+        malta: 
         netherlands: 
-        norway: Norge
-        poland: Polen
-        portugal: Portugal
+        norway: 
+        poland: 
+        portugal: 
         romania: 
-        russia: Ryssland
-        serbia: Serbien
-        slovakia: Slovakien
-        slovenia: Slovenien
-        spain: Spanien
-        sweden: Sverige
-        switzerland: Schweiz
-        turkey: Turkiet
-        ukraine: Ukraina
+        russia: 
+        serbia: 
+        slovakia: 
+        slovenia: 
+        spain: 
+        sweden: 
+        switzerland: 
+        turkey: 
+        ukraine: 
         unitedkingdom: 
-        unitedstatesofamerica: USA
+        unitedstatesofamerica: 
       creator: 
       header:
         channel: 
         colourpalette: 
-        country: Land
+        country: 
         data_provider: 
         image_aspectratio: 
-        image_colour: Palett
-        image_size: Storlek
+        image_colour: 
+        image_size: 
         language: 
         language_of_description: 
         media: 
-        mime_type: Filformat
+        mime_type: 
         provider: 
         reusability: 
         sound_duration: 
         sound_hq: 
-        text_fulltext: Fulltext
-        type: Mediaformat
+        text_fulltext: 
+        type: 
         ugc: 
         video_duration: 
         year: 
       image_aspectratio:
-        landscape: Landskap
+        landscape: 
         portrait: 
       image_colour:
-        'false': Svartvit
+        'false': 
         'true': 
       image_size:
-        extra_large: Extra stor (4MP+)
-        large: Stor (1-4MP)
-        medium: Medelstor (0.5-1MP)
-        small: Liten (<0.5MP)
+        extra_large: 
+        large: 
+        medium: 
+        small: 
       language:
         bg: 
         ca: 
@@ -286,14 +286,14 @@ sv:
         yi: 
       less: 
       media:
-        'false': Nej
-        'true': Ja
-      more: Fler
+        'false': 
+        'true': 
+      more: 
       more-refinements: 
       resource:
-        type: Typ
+        type: 
       reusability:
-        advanced: Avancerad
+        advanced: 
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -311,81 +311,81 @@ sv:
         open: 
         permission: 
         restricted: 
-        simple: Enkel
+        simple: 
       sound_duration:
         long: 
         medium: 
-        short: Kort (30s - 3 min)
-        very_short: Mycket kort (<30s)
+        short: 
+        very_short: 
       sound_hq:
-        'true': Ja
+        'true': 
       source: 
       text_fulltext:
-        'false': Nej
-        'true': Ja
+        'false': 
+        'true': 
       type:
         3d: 
-        image: Bild
-        sound: Ljud
+        image: 
+        sound: 
         text: 
-        video: Video
+        video: 
       type-image:
         orientation:
           label: 
-          landscape: Landskap
+          landscape: 
           portrait: 
         quality:
-          all: Visa alla
+          all: 
           hq-only: 
-          label: Kvalitet
+          label: 
         size:
           explanation: 
-          label: Bildstorlek
+          label: 
           large: 
-          medium: Medelstor (%{data})
-          small: Liten (%{data})
-          xl: Extra stor (%{data})
+          medium: 
+          small: 
+          xl: 
       type-sound:
         duration:
           label: 
           long: 
           medium: 
-          short: Kort (%{data})
-          very-short: Mycket kort  (%{data})
+          short: 
+          very-short: 
       type-video:
         duration:
           label: 
           long: 
           medium: 
-          short: Kort (%{data})
+          short: 
       video_duration:
         long: 
         medium: 
-        short: Kort (<4 min)
+        short: 
       year:
         from: 
-        to: till
+        to: 
     'facet ':
       header:
         video_hd:
           'true': 
     find-us-elsewhere: 
     forgot-password: 
-    genres: genrer
-    genres-chamber-music: Kammarmusik
-    genres-classical-music: Klassisk musik
+    genres: 
+    genres-chamber-music: 
+    genres-classical-music: 
     genres-concertos: 
     genres-non-western-classical-music: 
-    genres-opera: Opera
+    genres-opera: 
     genres-popular-music: 
-    genres-traditional-music: Folkmusik
+    genres-traditional-music: 
     header:
       connect: 
-      develop: utveckla
+      develop: 
       discover: 
       network: 
     help: 
-    home: Hem
+    home: 
     javascript-required: 
     labs: 
     labs-text: 
@@ -419,33 +419,33 @@ sv:
     language-spanish: 
     language-swedish: 
     language-ukranian: 
-    login: Logga in
+    login: 
     mission: 
     mission-title: 
     more:
-      load-more: Mer
-      show-more: Visa mer
-      view-more: Mer
+      load-more: 
+      show-more: 
+      view-more: 
     more-info: 
     our-mission: 
     our-mission-text: 
     our-sites: 
     password: 
-    professional: Pro
+    professional: 
     professional-text: 
     refine-your-search: 
-    register: Registrera dig
-    research: Research
+    register: 
+    research: 
     research-text: 
     search-area:
       search-button-image-alt: 
       search-placeholder-text: 
-    search-collections: Samlingar
+    search-collections: 
     search-collections-text: 
-    share: Dela
-    sitemap: Sajtkarta
+    share: 
+    sitemap: 
     terms-and-policies: 
-    type: typ
+    type: 
   'no': 
   pl: 
   site:

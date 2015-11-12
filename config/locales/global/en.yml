@@ -421,13 +421,15 @@ en:
     language-swedish: Swedish
     language-ukranian: Ukrainian
     login: Login
+    mission: We transform the world with culture! We want to build on Europe’s rich heritage and make it easier for people to use, whether for work, for learning or just for fun.
+    mission-title: Our mission
     more:
       load-more: More
       show-more: Show more
       view-more: View more
     more-info: More information
     our-mission: Our mission
-    our-mission-text: Who is afraid of the jabberwocky?
+    our-mission-text: 
     our-sites: our sites
     password: Password
     professional: Pro
@@ -443,7 +445,7 @@ en:
     search-collections-text: Explore Europe’s cultural heritage
     share: Share
     sitemap: Sitemap
-    terms-and-policies: Terms and policies
+    terms-and-policies: Terms of use & Policies
     type: type
   'no': Norway
   pl: Portugal
