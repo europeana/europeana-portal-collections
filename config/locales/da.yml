@@ -1,50 +1,50 @@
 da:
   global:
-    labs-link: 
+    labs-link: link til labs
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: Alle poster...
+      all_exhibitions: Alle udstillinger
+      blog: Blog
+      browse: Browse
+      browse_colours: Farver
+      browse_newcontent: Nyt indhold
+      browse_sources: Kilder
+      channels: Samlinger
+      collections: Samlinger
+      exhibitions: Udstillinger
+      home: Hjem
+    pro-link: link til pro
+    pro-text: tekst til pro
+    settings: indstillinger
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: 'Dette website er lanceret i Alpha. Det betyder, at det er under udvikling og løbende opdateres. Det kan undertiden være offline. Din feedback vil hjælpe os med at forbedre sitet. '
+        link-text: Giv os dine input!
+        title: Dette er en Alpha version af vores nye "Samlinger" og "Musiksamling"
+    blog-link: link til blog
     browse:
       colours:
-        title: 
+        title: Farver
       newcontent:
-        title: 
+        title: Nyt Indhold
       sources:
-        title: 
+        title: Kilder
     collections:
       art-history:
-        description: 
-        title: 
+        description: 'Europeanas Kunst- og Kunsthistoriesamling introducerer dig til kunstnere og værker fra hele Europa, fra renæssancen til surrealismen, og fra antik romersk skulptur til samtidskunsten.  '
+        title: Europeana Kunsthistorie
       data-types:
-        3d: 
+        3d: 3D genstande
         count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        images: Billeder
+        moving-images: Videoer
+        sound: Lydoptagelser
+        texts: Tekster
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Kurateret af
+        recent: Seneste
+        spotlight-on: Fokus på
       music:
         description: 
         title: 

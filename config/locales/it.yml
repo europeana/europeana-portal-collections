@@ -1,27 +1,27 @@
 it:
   global:
-    labs-link: 
+    labs-link: Link ai laboratori
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: Tutti i messaggi
+      all_exhibitions: Tutte le esibizioni
+      blog: Blog
+      browse: Motore di ricerca
+      browse_colours: Colori
+      browse_newcontent: Nuovo contenuto
+      browse_sources: Fonti
+      channels: Collezioni
+      collections: Collezioni
+      exhibitions: Esibizioni
+      home: Pagina principale
+    pro-link: Link a pro
+    pro-text: Testo per pro
+    settings: Impostazioni
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
+        description: Una versione Alpha significa che questo sito internet è in fase di sviluppo e sarà aggiornato regolarmente. Talvolta può essere non in linea. Il tuo feedback ci aiuterà a migliorare il nostro sito.
+        link-text: Dateci il vostro contributo!
+        title: Questa è una versione Alpha delle nostre nuove "Collezioni" e "Collezione musicale"
     blog-link: link al blog
     browse:
       colours:
@@ -32,101 +32,101 @@ it:
         title: Fonti
     collections:
       art-history:
-        description: Dal Rinascimento ai surrealisti , e dall'antica scultura romana all'arte contemporanea , l' Europeana Arte e il Canale di Storia dell'arte vi presenta artisti e opere d'arte provenienti da tutto il territorio europeo.
-        title: 
+        description: Dal Rinascimento ai surrealisti, e dall'antica scultura romana all'arte contemporanea, la Collezione d'Arte e Storia dell'arte di Europeana vi presenta artisti e opere d'arte provenienti da tutta l'Europa.
+        title: Europeana Storia dell'Arte
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: Oggetti tridimensionali
+        count: Articoli
+        images: Immagini
+        moving-images: Video
+        sound: Registrazioni sonore
+        texts: Testi
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Curato da
+        recent: Aggiunte recenti
+        spotlight-on: Riflettori su
       music:
-        description: 
-        title: 
+        description: La collezione musicale di Europeana riunisce le migliori registrazioni musicali, spartiti ed altre raccolte musicali provenienti da archivi audiovisivi, biblioteche, archivi e musei europei. Scopri di più sul canale musicale.
+        title: Europeana Musica
     facet:
       language:
         show:
-          results: 
+          results: Risultati
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
+        about: Riguardo or circa or di or su
+        become-a-provider: Diventa un fornitore di dati
+        contact: Contatto
+        copyright: Diritto d'autore
+        data-providers: Tutti i fornitori di dati
         help: Aiuto
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        new-collections: Nuove Collezioni
+        rights: Condizioni d'uso e linee di condotta
+        search-tips: Suggerimenti di ricerca
+        using-myeuropeana: 'Utilizzando or Utilizzare la Mia Europeana '
     home:
       strapline: 
     more: Di più
-    my-europeana: My Europeana
-    my-europeana-link: link a my Europeana
+    my-europeana: La mia Europeana
+    my-europeana-link: link a La mia Europeana
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
+        item_detail: Dettaglio della voce or elemento or articolo
+        results_list: Lista dei risultati
+        return_home: Ritorna alla Pagina principale
     news: Notizie
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
+        attribute-author: Riferisci all'autore
+        attribute-html: HTML
+        attribute-plaintext: Testo senza formattazione
+        download: Scarica
+        download-additional: Anche disponibile come
+        downloaddata: Scarica i dati
         open-media: 
         show-less-data: 
         show-more-data: 
         technicalmetadata: 
       enrichment:
         who:
-          title: 
+          title: Titolo
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Articoli or voci collegati or collegate
+        view-items-above: Vedi le voci or gli articoli sopra
+        view-items-below: Vedi le voci or gli articoli sotto
       meta-label:
         codec: Codec
-        collection-name: Dataset
-        concept: Concetta
+        collection-name: Dataset or set di dati
+        concept: Concetto or Idea
         concepts: Classificazioni
-        consists-of: 
+        consists-of: Consiste di
         contributor: Contributore
         copyright: Diritto d'autore
-        creation-date: Data da creazione
+        creation-date: Data di creazione
         creator: Creatore
         current-location: Collocazione attuale
-        data-provider: Fornitori di contenuti
+        data-provider: Fornitori di contenuti or dati
         date: Data
         dates: Date
         description: Descrizione
         dimensions: Dimensioni
-        duration: Durazione
+        duration: Durata
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: Larghezza
+          has-met: E' relativo a
+          incorporates: Contiene or include
+          is-derivative-of: Deriva da
+          is-representation-of: E' una rappresentazione di
+          is-similar-to: E' simile a
+          is-successor-of: E' il successore di or segue a
+          realises: Realizza
+          was-present-at: Presente a
+        extent: Dimensione
         file-size: Dimensione del file
-        format: Formatto
+        format: Formato
         fps: Fotogrammi al secondo
         has-type: "è di tipo"
         identifier: Identificatore
-        is-format-of: "È formato "
+        is-format-of: "È formato di or da"
         is-part-of: "È parte di"
         is-referenced-by: "è referenziato da"
         is-replaced-by: "è sostituito da"
