@@ -55,13 +55,13 @@ pt:
     footer:
       menu:
         about: Sobre
-        become-a-provider: 
+        become-a-provider: Torne-se num fornecedor de dados
         contact: Contacto
         copyright: Direitos de Autor
-        data-providers: 
+        data-providers: Todos os fornecedores de dados
         help: Ajuda
         new-collections: Novas Colecções
-        rights: 
+        rights: Termos de uso & Políticas
         search-tips: Dicas de pesquisa
         using-myeuropeana: Utilizar Minha Europeana
     home:
@@ -73,11 +73,11 @@ pt:
       breadcrumb:
         item_detail: 'Detalhe do item '
         results_list: Lista de Resultados
-        return_home: 
+        return_home: Regressar ao Início
     news: Notícias
     object:
       actions:
-        attribute-author: 
+        attribute-author: Atribuir o autor
         attribute-html: HTML
         attribute-plaintext: Texto simples
         download: Descarregar
@@ -139,16 +139,16 @@ pt:
         map: Mapa
         map-tiles: 
         medium: 
-        people: 
+        people: Pessoas
         period: Período
-        place: 
+        place: Local
         place-time: Local/Tempo
         properties: Propriedades
         provenance: Proveniência
         provided-by: Saiba mais
         provided-by-detail: poderá haver mais informação e media para este
-        provider: 
-        providing-country: 
+        provider: Fornecedor
+        providing-country: País fornecedor
         publication-date: Data de publicação
         publisher: 
         references: Referências
@@ -174,25 +174,25 @@ pt:
       named-entities:
         title: Entidades Nomeadas
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: Conceito mais amplo
+          label: Etiqueta de Conceito
+          term: Termo de Conceito
+          title: O quê
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
+          begin: Começo do Período
+          end: Final do Período
+          label: Etiqueta de Período
+          term: Termo de Período
           title: Quando
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
+          label: Etiqueta de Local
+          latitude: Latitude do Local
+          longitude: Longitude do Local
+          term: Termo do Local
           title: Onde
         who:
-          label: 
-          term: 
+          label: Etiqueta do Agente
+          term: Termos do Agente
           title: Quem
       nav:
         next: Seguinte
@@ -217,8 +217,8 @@ pt:
     results:
       actions:
         configure-actions: 
-        dutchmasters: 
-        favouriteart: 
+        dutchmasters: Mestres holandeses
+        favouriteart: Arte favorita
         label: Acções
         newcollection: Nova Colecção
         product-save: Guardar
@@ -235,39 +235,39 @@ pt:
         empty-with-terms: A sua pesquisa por %{query_terms} obteve nenhum resultado
         header: Resultados para
         header-and: e
-        in-channel: 
+        in-channel: em Colecção
         less: Menos
-        less_adv: 
+        less_adv: Menos ajustes
         more: Mais
         more_adv: Filtros Avançados
         product-3D: 3D
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+        product-image: Imagem
+        product-sound: Som
+        product-text: Texto
+        product-video: Video
+        results-relevance: Relevância
+        single-result: 1 resultado por %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Grelha
+          list: Lista
+        view-at-provider: Ver em
     search:
       placeholder:
         text: 
       similar:
-        prefix: 
+        prefix: 'Similar a: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Limpar selecção
+        save-settings: Gravar Definições
       language:
-        auto-translate-page: 
-        auto-translate-page-short: 
+        auto-translate-page: Traduzir automaticamente página de itens em...
+        auto-translate-page-short: Auto-traduzir itens em
         auto-translate-query: 
-        available: 
+        available: Línguas disponíveis
         default: 
         flash:
           alert: 'Língua especificada inválida. Línguas disponíveis:  %{locales}'
-          notice: 
+          notice: Definições de língua guardadas.
         label: Língua
-        settings-label: 
+        settings-label: definições de língua

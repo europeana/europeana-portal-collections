@@ -5,12 +5,12 @@ nl:
       all_blog_posts: Alle berichten...
       all_exhibitions: Alle tentoonstellingen
       blog: Blog
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
+      browse: Bladeren
+      browse_colours: Kleuren
+      browse_newcontent: Onlangs toegevoegd
+      browse_sources: Bronnen
       channels: Kanalen
-      collections: 
+      collections: Collecties
       exhibitions: Tentoonstellingen
       home: Home
     pro-link: link naar pro
@@ -25,11 +25,11 @@ nl:
     blog-link: link naar de blog
     browse:
       colours:
-        title: 
+        title: Kleuren
       newcontent:
-        title: 
+        title: Onlangs toegevoegd
       sources:
-        title: 
+        title: Bronnen
     collections:
       art-history:
         description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
@@ -61,7 +61,7 @@ nl:
         data-providers: Alle data providers
         help: Help
         new-collections: Nieuwe Collecties
-        rights: 
+        rights: Algemene voorwaarden
         search-tips: Zoek tips
         using-myeuropeana: Gebruik mijn Europeana
     home:
@@ -71,15 +71,15 @@ nl:
     my-europeana-link: Link naar mijn Europeana
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
+        item_detail: Object details
+        results_list: Resultaten
+        return_home: Terug naar hoofdpagina
     news: Nieuws
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
+        attribute-author: Naam van de maker
+        attribute-html: HTML
+        attribute-plaintext: tekst
         download: Download
         download-additional: Ook beschikbaar als
         downloaddata: Download informatie
@@ -89,11 +89,11 @@ nl:
         technicalmetadata: Technische metadata
       enrichment:
         who:
-          title: 
+          title: Titel
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Gerelateerde objecten
+        view-items-above: bekijk bovenstaande resultaten
+        view-items-below: bekijk onderstaande resultaten
       meta-label:
         codec: Codec
         collection-name: Dataset
@@ -105,169 +105,169 @@ nl:
         creation-date: Datum vervaardigd
         creator: Van
         current-location: Huidige locatie
-        data-provider: 
-        date: 
-        dates: 
+        data-provider: Instituut
+        date: Datum
+        dates: Data
         description: Omschrijving
-        dimensions: 
-        duration: 
+        dimensions: Afmetingen
+        duration: Lengte
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
+          has-met: gerelateerde resultaten
+          incorporates: heeft betrekking tot
+          is-derivative-of: afgeleid van
+          is-representation-of: Representatie van
+          is-similar-to: Is vergelijkbaar met
           is-successor-of: 
-          realises: 
+          realises: Realisatie
           was-present-at: 
-        extent: 
-        file-size: 
+        extent: Afmeting
+        file-size: Bestandsgrootte
         format: Formaat
-        fps: 
+        fps: FPS
         has-type: 
         identifier: 
         is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
+        is-part-of: Deel van
+        is-referenced-by: Referentie van
+        is-replaced-by: Vervangen door
+        is-required-by: Vereist voor
+        issued: Eerste uitgave
         language: Taal
         latitude: Breedtegraad
         location: Plaats
         longitude: Lengtegraad
         map: Kaart
         map-tiles: Tegel
-        medium: 
-        people: 
+        medium: Medium
+        people: Personen
         period: Tijdvak
-        place: 
-        place-time: 
+        place: Plaats
+        place-time: Plaats / Tijd
         properties: Eigenschappen
         provenance: Bron
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
+        provided-by: Meer
+        provided-by-detail: meer informatie
+        provider: Partner
+        providing-country: Land
+        publication-date: Publicatie datum
         publisher: Uitgeverij
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
+        references: Referentie
+        refs-rels: Referentie en relatie
+        relations: Relaties
+        rights: Rechten
         rights-human: Mag ik dit gebruiken?
-        runtime: 
-        runtime-unit-seconds: 
+        runtime: Totale tijd
+        runtime-unit-seconds: seconde
         source: Bron en Herkomst
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
+        subject: Onderwerp
+        temporal: Temporaal
+        time: Tijd
+        timestamp-created: Voor het eerst in Europeana
+        timestamp-updated: Laatste Europeana update
+        timestamp_created: Voor het eerst in Europeana (%{timestamp_created})
+        timestamp_updated: Laatste Europeana update (%{timestamp_updated})
+        title: Titel
+        toc: Inhoudsopgave
         type: Type
-        ugc: 
-        version: 
+        ugc: Bijdragen van particulieren
+        version: Versie
       named-entities:
-        title: 
+        title: Entiteiten
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: Groter geheel
+          label: Concept label
+          term: Concept Term
+          title: Wat
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: Begin periode
+          end: Eind periode
+          label: Label periode
+          term: Term periode
+          title: Wanneer
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
+          label: Plaats label
+          latitude: Latitude
+          longitude: Longtitude
+          term: Plaats Term
+          title: waar
         who:
-          label: 
-          term: 
-          title: 
+          label: Agent Label
+          term: Agent Term
+          title: Wie
       nav:
-        next: 
-        prev: 
+        next: Volgende
+        prev: Vorige
       points:
-        east: 
-        north: 
-        south: 
-        west: 
+        east: Oost
+        north: Noord
+        south: Zuid
+        west: West
       show-more-similar-items: toon meer
-      similar-items: 
+      similar-items: 'Gelijke objecten '
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Sorry, deze pagina is onvindbaar
+        text: 'Helaas heeft dit geen zoekresultaten opgeleverd. Probeer het opnieuw of bekijk de volgende zoekresultaten: '
       about:
         text: 
-        title: 
+        title: Welkom, cultuur liefhebber!
       music-channel-about:
         text: 
-        title: 
+        title: Over de Muziek Collectie
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: Configureer acties
+        dutchmasters: Nederlandse meesters
+        favouriteart: Kunst favorieten
+        label: Acties
+        newcollection: Nieuwe collectie
+        product-save: Bewaar
+        saveto: Bewaar als
+        show-all-collections: Geef alle collecties weer
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: Afbeeldingen
+          text: Tekst
+          video: Video
+        count-and-terms: "%{results_count} resultaten"
+        empty: Geen resultaten
+        empty-with-terms: Uw zoekopdracht voor %{query_terms} heeft geen resultaat
+        header: Resultaten voor
+        header-and: en
+        in-channel: in collectie
+        less: minder
+        less_adv: Minder verfijning
+        more: meer
+        more_adv: Geavanceerd...
+        product-3D: 3D
+        product-image: Afbeelding
+        product-sound: Geluid
+        product-text: Tekst
+        product-video: Video
+        results-relevance: Relevantie
+        single-result: 1 reslutaat van %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Grit
+          list: Lijst
+        view-at-provider: Bekijk via
     search:
       placeholder:
-        text: 
+        text: Voeg zoekterm toe
       similar:
-        prefix: 
+        prefix: Hetzelfde als %{mlt_item}
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Wis selectie
+        save-settings: Bewaar Instellingen
       language:
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-page: Vertaal pagina's automatisch naar...
+        auto-translate-page-short: Vertaal automatisch naar
+        auto-translate-query: Vertaal zoektermen automatisch naar...
+        available: Beschikbare talen
+        default: Standaard taal
         flash:
-          alert: 
-          notice: 
+          alert: 'Helaas is hier geen vertaling voor. Beschikbare talen: %{locales}'
+          notice: Taal voorkeur ingesteld.
         label: Taal
-        settings-label: 
+        settings-label: Instellingen voor taal
