@@ -162,7 +162,7 @@ hu:
     channels-art-link: 
     channels-fashion: 
     channels-music: 
-    choose-language: 
+    choose-language: Nyelv
     email-address: 
     facet:
       advanced:
@@ -420,6 +420,8 @@ hu:
     language-swedish: 
     language-ukranian: 
     login: 
+    mission: 
+    mission-title: 
     more:
       load-more: 
       show-more: 

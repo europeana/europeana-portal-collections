@@ -95,14 +95,15 @@ module Portal
                 {
                   title: 'site.object.meta-label.concept',
                   url: 'what',
-                  fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
-                  override_val: 'true',
-                  overrides: [
-                    {
-                      field_title: t('site.object.meta-label.ugc'),
-                      field_url: search_url(f: { 'UGC' => ['true'] })
-                    }
-                  ]
+                  fields: ['concepts.prefLabel'],
+                  #fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
+                  #override_val: 'true',
+                  #overrides: [
+                  #  {
+                  #    field_title: t('site.object.meta-label.ugc'),
+                  #    field_url: search_url(f: { 'UGC' => ['true'] })
+                  #  }
+                  #]
                 }
               ]
             ),
@@ -181,7 +182,8 @@ module Portal
                   {
                     title: 'site.object.meta-label.location',
                     fields: ['proxies.dctermsSpatial'],
-                    collected: document.fetch('places.prefLabel', []).first
+                    collected: pref_label('places.prefLabel')
+                    #collected: document.fetch('places.prefLabel', []).first,
                   },
                   {
                     title: 'site.object.meta-label.place-time',
@@ -197,7 +199,8 @@ module Portal
                 latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
                 longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
                 long_and_lat: long_and_lat?,
-                placeName: document.fetch('places.prefLabel', []).first,
+                #placeName: document.fetch('places.prefLabel', []).first,
+                placeName: pref_label('places.prefLabel'),
                 labels: {
                   longitude: t('site.object.meta-label.longitude') + ':',
                   latitude: t('site.object.meta-label.latitude') + ':',
@@ -263,7 +266,8 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.provenance',
-                  fields: ['proxies.dcSource']
+                  fields: ['proxies.dcSource'],
+                  exclude_vals: ['ugc', 'UGC']
                 },
                 {
                   title: 'site.object.meta-label.publisher',
@@ -424,7 +428,11 @@ module Portal
                 title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
                 img: {
                   alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-                  src: render_document_show_field_value(doc, 'edmPreview')
+                  # temporary fix until API contains correct image url
+                  # src: render_document_show_field_value(doc, 'edmPreview'),
+                  src: render_document_show_field_value(doc, 'edmPreview').sub(
+                    'http://europeanastatic.eu/api/image?',
+                    'http://delta-web.de.a9sapp.eu/api/v2/thumbnail-by-url.json?').sub('&size=LARGE', '&size=w200')
                 }
               }
             end
@@ -547,7 +555,17 @@ module Portal
 
     def data_section_field_values(section)
       fields = (section[:fields] || []).map do |field|
-        document.fetch(field, [])
+        val = document.fetch(field, [])
+        if !section[:exclude_vals].nil?
+          val = val.map do |value|
+            if section[:exclude_vals].include? (value)
+              nil
+            else
+              value
+            end
+          end
+        end
+        val
       end
 
       if section[:fields_then_fallback] && fields.present?
@@ -659,6 +677,23 @@ module Portal
         render_document_show_field_value(document, 'proxies.dcTitle')
       else
         title.first
+      end
+    end
+
+    def pref_label(field_name)
+      val = @document.fetch(field_name, [])
+      pref = nil
+      if val.size > 0
+        if val.is_a?(Array)
+          val[0]
+        else
+          pref = val[0][I18n.locale.to_sym]
+          if pref.size > 0
+            pref[0]
+          else
+            val[0][:en]
+          end
+        end
       end
     end
 

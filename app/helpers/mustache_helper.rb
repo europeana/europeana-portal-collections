@@ -249,14 +249,30 @@ module MustacheHelper
         footer: {
           linklist1: {
             title: t('global.more-info'),
-            items: Page.primary.map do |page|
+            # Use less elegant way to get footer links
+            #
+            # items: Page.primary.map do |page|
+            #   {
+            #     text: t(page.slug, scope: 'site.footer.menu'),
+            #     url: static_page_path(page, format: 'html')
+            #   }
+            # end
+            items: [
               {
-                text: t(page.slug, scope: 'site.footer.menu'),
-                url: static_page_path(page, format: 'html')
+                text: t('site.footer.menu.about'),
+                url: static_page_path('about', format: 'html')
+              },
+              {
+                text: t('site.footer.menu.data-providers'),
+                url: static_page_path('browse/sources', format: 'html')
+              },
+              {
+                text: t('site.footer.menu.become-a-provider'),
+                url: 'http://pro.europeana.eu/share-your-data/'
               }
-            end
+            ]
           },
-          xxx_linklist2: {
+          linklist2: {
             title: t('global.help'),
             items: [
               {

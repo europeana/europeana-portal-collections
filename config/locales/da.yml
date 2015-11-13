@@ -1,46 +1,46 @@
-fr:
+da:
   global:
     labs-link: 
     navigation:
       all_blog_posts: 
-      all_exhibitions: Toutes les expositions...
-      blog: Blog
-      browse: Naviguer
-      browse_colours: Par couleurs
-      browse_newcontent: Nouveau contenu
-      browse_sources: Par sources
-      channels: Collections
-      collections: Collections
-      exhibitions: Expositions
-      home: Accueil
+      all_exhibitions: 
+      blog: 
+      browse: 
+      browse_colours: 
+      browse_newcontent: 
+      browse_sources: 
+      channels: 
+      collections: 
+      exhibitions: 
+      home: 
     pro-link: 
     pro-text: 
-    settings: paramètres
+    settings: 
   site:
     alpha:
       feedback_banner:
         description: 
-        link-text: Donnez-nous votre avis!
+        link-text: 
         title: 
     blog-link: 
     browse:
       colours:
-        title: Couleurs
+        title: 
       newcontent:
-        title: Nouveau contenu
+        title: 
       sources:
-        title: Sources
+        title: 
     collections:
       art-history:
         description: 
         title: 
       data-types:
-        3d: objets 3D
-        count: objets
-        images: Images
-        moving-images: Vidéos
-        sound: Enregistrements sonores
-        texts: Textes
+        3d: 
+        count: 
+        images: 
+        moving-images: 
+        sound: 
+        texts: 
       labels:
         credits: 
         recent: 
@@ -54,16 +54,16 @@ fr:
           results: 
     footer:
       menu:
-        about: "À propos"
+        about: 
         become-a-provider: 
-        contact: Contact
+        contact: 
         copyright: 
         data-providers: 
-        help: Aide
-        new-collections: Nouvelles collections
+        help: 
+        new-collections: 
         rights: 
         search-tips: 
-        using-myeuropeana: Utiliser My Europeana
+        using-myeuropeana: 
     home:
       strapline: 
     more: 
@@ -73,14 +73,14 @@ fr:
       breadcrumb:
         item_detail: 
         results_list: 
-        return_home: Retour à la page d'accueil
+        return_home: 
     news: 
     object:
       actions:
         attribute-author: 
-        attribute-html: HTML
-        attribute-plaintext: Texte intégral
-        download: Télécharger
+        attribute-html: 
+        attribute-plaintext: 
+        download: 
         download-additional: 
         downloaddata: 
         open-media: 
@@ -103,14 +103,14 @@ fr:
         contributor: 
         copyright: 
         creation-date: 
-        creator: Auteur
+        creator: 
         current-location: 
         data-provider: 
-        date: Date
+        date: 
         dates: 
         description: 
-        dimensions: Dimensions
-        duration: Durée
+        dimensions: 
+        duration: 
         edm:
           has-met: 
           incorporates: 
@@ -134,9 +134,9 @@ fr:
         issued: 
         language: 
         latitude: 
-        location: Localisation
-        longitude: Longitude
-        map: Carte
+        location: 
+        longitude: 
+        map: 
         map-tiles: 
         medium: 
         people: 

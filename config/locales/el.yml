@@ -1,273 +1,282 @@
 el:
   global:
-    labs-link: 
+    labs-link: "Σύνδεσμος στο labs"
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: "Όλες οι αναρτήσεις..."
+      all_exhibitions: "'Ολες οι εκθέσεις"
+      blog: "Ιστολόγιο"
+      browse: "Περιήγηση"
+      browse_colours: "Χρώματα"
+      browse_newcontent: "Νέο περιεχόμενο"
+      browse_sources: "Πηγές"
+      channels: "Συλλογές"
+      collections: "Συλλογές"
+      exhibitions: "Εκθέσεις"
+      home: "Αρχική"
+    pro-link: "σύνδεσμος στο pro"
+    pro-text: "κείμενο για pro"
+    settings: "προτιμήσεις"
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: Alpha έκδοση σημαίνει ότι αυτός ο ιστότοπος βρίσκεται ύπο ενεργή ανάπτυξη και θα ανανεώνεται τακτικά. Πιθανόν ορισμένες φορές να μην είναι διαθέσιμος. Οι παρατηρήσεις σας θα μας βοηθήσουν να βελτιώσουμε τον ιστότοπό μας.
+        link-text: "Δώστε μας τις παρατηρήσεις σας!"
+        title: "Αυτή είναι μία Alpha έκδοση της νέας μας αναζήτησης σε Συλλογές και της Συλλογής Μουσική"
+    blog-link: "σύνδεσμος για το ιστολόγιο"
     browse:
       colours:
-        title: 
+        title: "Χρώματα"
       newcontent:
-        title: 
+        title: "Νέο Περιεχόμενο"
       sources:
-        title: 
+        title: "Πηγές"
     collections:
       art-history:
-        description: 
-        title: 
+        description: "Από την Αναγγένηση μέχρι τους υπερρεαλιστές, και από την γλυπτική της Αρχαίας Ρώμης στην σύγχρονη τέχνη, η Συλλογή Europeana Τέχνη και Ιστορία της Τέχνης σας παρουσιάζει καλλιτέχνες και έργα τέχνης από όλη την Ευρώπη"
+        title: Europeana Ιστορία της Τέχνης
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D αντικείμενα
+        count: "εγγραφές"
+        images: "Εικόνες"
+        moving-images: "Βίντεο"
+        sound: "Ηχογραφήσεις"
+        texts: "Κείμενα"
       labels:
-        credits: 
-        recent: 
+        credits: "Επιμελημένες από"
+        recent: "Πρόσφατες προσθήκες"
         spotlight-on: 
       music:
-        description: 
-        title: 
+        description: Η <strong>Europeana Μουσική Συλλογή</strong> φέρνει κοντά τις καλύτερες μουσικές ηχογραφήσεις, παρτιτούρες, και αλλό μουσικό περιεχόμενο από τα οπτικο-ακουστικά αρχεία, βιβιοθήκεςσ και μουσεία της Ευρώπης. <a href="/portal/channels/music/about">Ανακαλύψτε περισσότερα για την Μουσική Συλλογή</a>
+        title: Europeana Μουσική
     facet:
       language:
         show:
-          results: 
+          results: "Αποτελέσματα"
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        about: "Σχετικά με"
+        become-a-provider: "Γίνετε συλλέκτης δεδομένων"
+        contact: "Επικοινωνία"
+        copyright: "Πνευματικά δικαιώματα"
+        data-providers: "Όλοι οι συλλέκτες δεδομένων"
+        help: "Βοήθεια"
+        new-collections: "Νέες Συλλογές"
+        rights: "Δικαιώματα χρήσης"
+        search-tips: "Συμβουλές αναζήτησης"
+        using-myeuropeana: "Χρησιμοποιώντας το My Europeana"
     home:
-      strapline: 
-    more: 
+      strapline: "Περιηγηθήτε σε %{total_item_count} έργα τέχνης, τεχνουργήματα, βιβλία, βίντεο και ήχους από όλη την Ευρώπη"
+    more: "Περισσότερα..."
     my-europeana: 
-    my-europeana-link: 
+    my-europeana-link: "συνδεσμος για το my Europeana"
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: "Λεπτομέρεια εγγραφής"
+        results_list: "Λίστα Αποτελεσμάτων"
+        return_home: "Επιστροφή στην Αρχική"
+    news: "Νέα"
     object:
       actions:
-        attribute-author: 
+        attribute-author: "Απόδοση προς τον δημιουργό"
         attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-plaintext: "Κείμενο"
+        download: "Μεταφόρτωση"
+        download-additional: "Επίσης διαθέσιμο ως"
+        downloaddata: "Μεταφόρτωση δεδομένων"
+        open-media: "Ανοίξτε το αντικείμενο"
+        show-less-data: "Εμφάνιση λιγότερων δεδομένων"
+        show-more-data: "Εμφάνιση περισσότερων δεδομένων"
+        technicalmetadata: "Τεχνικά μεταδεδομένα"
       enrichment:
         who:
-          title: 
+          title: "Τίτλος"
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: "Σχετικές εγγραφές"
+        view-items-above: "εμφάνιση προηγούμενων"
+        view-items-below: "εμφάνιση επόμενων"
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        codec: "Κωδικοποιητής"
+        collection-name: "Συλλογή δεδομένων"
+        concept: "Έννοια"
+        concepts: "Κατηγοριοποιήσεις"
+        consists-of: "Αποτελείται από"
+        contributor: "Συνεισφέρων"
+        copyright: "Πνευματικά δικαιώματα"
+        creation-date: "Ημερομηνία δημιουργίας"
+        creator: "Δημιουργός"
+        current-location: "Τρέχουσα τοποθεσία"
+        data-provider: "Συλλέκτης"
+        date: "Ημερομηνία"
+        dates: "Ημερομηνίες"
+        description: "Περιγραφή"
+        dimensions: "Διαστάσεις"
+        duration: "Διάρκεια"
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+          has-met: "Σχετίζεται με"
+          incorporates: "Ενσωματώνει"
+          is-derivative-of: "Προέρχεται από"
+          is-representation-of: "Είναι αναπαράσταση του"
+          is-similar-to: "Είναι όμοιο με"
+          is-successor-of: "Είναι διάδοχος του"
+          realises: "Πραγματοποιεί"
+          was-present-at: "Παρών στο"
+        extent: "Μέγεθος"
+        file-size: "Μέγεθος αρχείου"
+        format: "Τύπος αρχείου"
+        fps: "Εικόνες το δευτερόλεπτο"
+        has-type: "Έχει τύπο"
+        identifier: "Προσδιοριστής"
+        is-format-of: "Είναι τύπου αρχείου"
+        is-part-of: "Είναι μέρος του"
+        is-referenced-by: "Αναφέρεται από"
+        is-replaced-by: "Αντικαθίσταται από"
+        is-required-by: "Είναι απαραίτητο από"
+        issued: "Εκδόθηκε πρώτη φορά"
+        language: "Γλώσσα"
+        latitude: "Γεωγραφικό πλάτος"
+        location: "Τοποθεσία"
+        longitude: "Γεωγραφικό μήκος"
+        map: "Χάρτης"
+        map-tiles: "Εικονίδια"
+        medium: "Μέσο"
+        people: "Άνθρωποι"
+        period: "Περίοδος"
+        place: "Τοποθεσία"
+        place-time: "Τοποθεσία/Χρόνος"
+        properties: "Ιδιότητες"
+        provenance: "Προέλευση"
+        provided-by: "Ανακαλύψτε περισσότερα"
+        provided-by-detail: "ίσως έχει περισσότερες πληροφορίες και περιεχόμενο για αυό το αντικείμενο."
+        provider: "Ίδρυμα"
+        providing-country: "Χώρα παρόχου"
+        publication-date: "Ημερομηνία έκδοσης"
+        publisher: "Εκδότης"
+        references: "Αναφέρει"
+        refs-rels: "Αναφορές και συσχετίσεις"
+        relations: "Συσχετίσεις"
+        rights: "Δικαιώματα χρήσης"
+        rights-human: "Μπορώ να το χρησιμοποιήσω;"
+        runtime: "Διάρκεια αναπαραγωγής"
+        runtime-unit-seconds: "δευτερόλεπτα"
+        source: "Πηγή"
+        subject: "Θέμα"
+        temporal: "Χρονική κάλυψη"
+        time: "Χρόνος"
+        timestamp-created: "Εκδόθηκε για πρώτη φορα στο Europeana"
+        timestamp-updated: "Τελευταία ενημέρωση στο Europeana"
+        timestamp_created: "Εκδόθηκε για πρώτη φορα στο Europeana (%{timestamp_created})"
+        timestamp_updated: "Τελευταία ενημέρωση στο Europeana (%{timestamp_updated})"
+        title: "Τίτλος"
+        toc: "Πίνακας Περιεχομένων"
+        type: "Τύπος"
+        ugc: "Περιεχόμενο παρεχόμενο από χρήστες"
+        version: "Έκδοση"
       named-entities:
-        title: 
+        title: "Οντότητες"
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: "Ευρύτερη Έννοια"
+          label: "Ετικέτα Έννοιας"
+          term: "Εννοιολογικός όρος"
+          title: "Τι"
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: "Αρχή χρονικής περιόδου"
+          end: "Τέλος χρονικής περιόδου"
+          label: "Ετικέτα Χρονικής Περιόδου"
+          term: "Όρος Χρονικής Περιόδου"
+          title: "Πότε"
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
+          label: "Ετικέτα Τοποθεσίας"
+          latitude: "Γεωγραφικό πλάτος"
+          longitude: "Γεωγραφικό μήκος"
+          term: "Όρος Τοποθεσίας"
+          title: "Που"
         who:
-          label: 
-          term: 
-          title: 
+          label: "Ετικέτα Οντότητας"
+          term: "Όρος οντότητας"
+          title: "Ποιος"
       nav:
-        next: 
-        prev: 
+        next: "Επόμενη"
+        prev: "Προηγούμενη"
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: "Ανατολή"
+        north: "Βορράς"
+        south: "Νότος"
+        west: "Δύση"
+      show-more-similar-items: "εμφάνιση περισσοτέρων"
+      similar-items: "Παρόμοια αντικείμενα"
     pages:
       '404':
-        intro: 
-        text: 
+        intro: "Συγνώμη, δεν μπορούμε να εμφανισούμε την σελίδα"
+        text: "Δυστυχώς δεν μπορέσαμε να βρούμε την σελίδα που επιθυμείτε. Δοκιμάστε να αναζητήσετε στο Europeana ή ίσως να προτιμάτε κάποια από τα παρακάτω επιλεγμένα αντικείμενα"
       about:
-        text: 
-        title: 
+        text: |-
+          <p>Είτε ήρθατε σε αυτόν τον ιστοχώρο για έμπνευση, για να δουλέψετε στην έρευνα σας, για να βρείτε το επόμενο σχέδιο στην κούπα για τον καφέ σας, είτε απλά για να περιηγηθείτε, ελπίζουμε ότι θα βρείτε αυτό που ψάχνετε κάπου ανάμεσα στα 45 εκατομμύρια αντικείμενα που φιλοξενούμε.</p>
+
+          <p>Το υλικό προέρχετε από όλη την Ευρώπη και ο σκοπός τνω Συλλογών είναι πραγματικά εκπληκτικός. Ο σκοπός μας είναι να σας καθοδηγήσουμε ούτως ώστε να ανακαλύψετε τους δικούς σας θησαυρούς.</p>
+
+          <p>Τα τελευταία χρόνα, έχουμε επεκτείνει τις συλλογές και έχουμε μάθει πολλά πράγματα σχετικά με αυτές, και τι θέλετε να κάνετε με αυτές. Τώρα είναι η ώρα να αλλάξουμε ορισμένα πράγματα και να βελτιώσουμε τις υπηρεσίες μας!</p>
+
+          <p>Δοκιμάζουμε την νέα έκδοση των Συλλογών Europeana. Εργαζόμαστε σκληρά για να βελτιώσουμε την εμπειρία σας στις υπηρεσίες μας, και να το κάνουμε την δυνατότητα να βρείτε αυτό που θέλετε όσον το δυνατό ευκολότερη. Για αυτό τον λόγο, πιθανότατα να σας ζητήσουμε να απαντήσετε σε κάποιες ερωτήσεις. Οι απαντήσεις σας μας είναι πολύ χρησιμες, και για αυτό σας παρακαλούμε να ξοδέψετε ένα λεπτό και να μοιραστείετε τις σκέψεις σας μαζί μας. Σας ευχαριστούμε!</p>
+
+          <p>Εντωμεταξύ, ελπίζουμε ότι το πολιτιστικό ταξίδι σας μαζί μας σας είναι πολύ ευχάριστο.</p>
+        title: "Καλώς ήρθες, λάτρη του πολιτισμού!"
       music-channel-about:
-        text: 
-        title: 
+        text: "<p>Φανταστείτε ότι κοιτάζετε σε αυθεντικά χειρόγραφα ενός μουσικού κομματιού ένω ακούτε τις διαφορετικές μουσικές εκφράσεις του, όσο παράλληλα διαβάζετε την βιογραφία του συνθέτη. Στην Συλλογή Europeana Μουσική, μπορείτε.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Οι συνεργάτες μας</a>, όλοι ειδικοί στην μουσική,από όλη την Ευρώπη έχουν επιμεληθεί με προσοχή αυτήν την συλλογή από μουσικές ηχογραφήσεις, παρτιτούρες μουσικής, εικόνες μουσικών οργάνων, βιβλία σχετικά με την μουσική καθώς και άλλο μουσικό περιεχόμενο. </p>\n\n<p>Δημιουργήσαμε αυτήν την δοκιμαστική έκδοση της Συλλογής Μουσική και την διαθέτουμε σε εσάς, τους χρήστες μας, ούτως ώστε να μας βοηθήσετε να της δώσουμε μορφή και να την αναπτύξουμε περαιτέρω. Ετσι, όταν θα επισκέπτεστε τον ιστότοπο, ορισμένες φορές θα σας ζητάμε να απαντήσετε ερωτήσεις ή έρευνες που θα εμφανίζονται στην οθόνη. Θα το εκτιμούσαμε ιδιαιτέρως αν μπορείτε να διαθέσετε τον χρόνο να απαντήσετε σε αυτές τις ερωτήσεις και έρευνες!</p>\n\n<p>Επίσης, για λόγους διάυγειας και προστασίας προσωπικών δεδομένων, θέλουμε να σας ενημερώσουμε ότι ακταγράφουμε στατιστικά και συμπεριφορά των χρηστών στον ιστοχώρο μέσω Google Analytics και της υπηρεσίας Hotjar. Αυτό το κάνουμε για να μπορέσουμε να εντοπίσουμε τα λάθη μας στον σχεδιασμό του ιστοχώρου και να βελτιώσουμε την Συλλογή Μουσική. Όλες οι καταγραφές είανι μυστικές και ανώνυμες και θα χρησιμοποιηθούν μόνο για την βελτίωση των υπηρεσιών μας.</p>\n\n<p>Σας προτρέπουμε να αναζητήσετε στην Συλλογή, να αναπαράγετε μουσική, να δείτε παρτιτούρες και να διαβάσετε σχετικά. Όταν τα πνευματικά δικαιώματα το επιτρέπουν, μπορείτε ακόμα και να μεταφορτώσετε τα αντικείμενα που επιθυμείτε. Επίσης, περιηγηθείτε στις ψηφιακές εκθέσεις μας και ανακαλύψτε την μουσική με τρόπους δεν έχετε συναντήσει στο παρελθόν!</p>"
+        title: "Σχετικά με την Μουσική Συλλογή"
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: "Παραμετροποίηση επιλογών"
+        dutchmasters: "Ολλανδοί δάσκαλοι"
+        favouriteart: "Προσθήκη στα αγαπημένα"
+        label: "Επιλογές"
+        newcollection: "Νέα συλλογή"
+        product-save: "Αποθήκευση"
+        saveto: "Αποθήκευση σε"
+        show-all-collections: "Εμφάνιση όλων των συλλογών"
       list:
         all-results:
           3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
+          images: "Εικόνες"
+          text: "Κείμενο"
+          video: "Βίντεο"
+        count-and-terms: "%{results_count} αποτελέσματα"
+        empty: "Δεν βρέθηκαν αποτελέσματα"
+        empty-with-terms: "Η αναζήτηση σας για %{query_terms} δεν επέστρεψε αποτελέσματα"
+        header: "Αποτελέσματα για"
+        header-and: "και"
+        in-channel: "στην Συλλογή"
+        less: "Λιγότερα"
+        less_adv: "Λιγότεροι όροι εξειδικεύσης"
+        more: "Περισσότερα"
+        more_adv: "Φίλτρα για Προχωρημένους"
         product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+        product-image: "Εικόνα"
+        product-sound: "Ήχος"
+        product-text: "Κείμενο"
+        product-video: "Βίντεο"
+        results-relevance: "Συσχέτιση"
+        single-result: 1 αποτέλεσμα για %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: "Πλέγμα"
+          list: "Λίστα"
+        view-at-provider: "Δείτε το αντικείμενο στο"
     search:
       placeholder:
-        text: 
+        text: "Προσθήκη όρου αναζήτησης"
       similar:
-        prefix: 
+        prefix: "Παρόμοιο με: %{mlt_item}"
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: "Καθαρισμός επιλογής"
+        save-settings: "Αποθήκευση ρυθμίσεων"
       language:
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-page: "Αυτόματε μετάφραση σελίδων σε ..."
+        auto-translate-page-short: "Αυτόματη μετάφραση αντικειμένων σε"
+        auto-translate-query: "Αυτόματη μετάφραση όρων αναζήτησης σε..."
+        available: "Διαθέσιμες γλώσσες"
+        default: "Προεπιλεγμένη γλώσσα"
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: "Επιλέχθηκε μη διαθέσιμη γλώσσα. Διαθέσιμες γλώσσες: %{locales}"
+          notice: "Επιλογές γλώσσας αποθηκεύτηκαν."
+        label: "Γλώσσα"
+        settings-label: "επιλογές γλώσσας"
