@@ -227,7 +227,7 @@ ro:
         image_size: Dimensiune
         language: Limbă
         language_of_description: Limba descrierii
-        media: 
+        media: Doar înregistrări cu legături către fișiere media
         mime_type: Formatul fișierului
         provider: Instituția
         reusability: Pot folosi?
@@ -239,8 +239,8 @@ ro:
         video_duration: Durata videoclip
         year: Dată
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: Peisaj
+        portrait: Portret
       image_colour:
         'false': Alb si negru
         'true': Culoare
@@ -332,8 +332,8 @@ ro:
       type-image:
         orientation:
           label: Orientarea imaginii
-          landscape: 
-          portrait: 
+          landscape: Peisaj
+          portrait: Portret
         quality:
           all: Arată tot
           hq-only: Arată doar imagini de calitate superioară
@@ -369,7 +369,7 @@ ro:
       header:
         video_hd:
           'true': HD
-    find-us-elsewhere: 
+    find-us-elsewhere: Ne găsiți și aici
     forgot-password: Parola uitată?
     genres: genuri
     genres-chamber-music: Muzică de cameră
@@ -421,14 +421,12 @@ ro:
     language-ukranian: 
     login: Autentificare
     mission: 
-    mission-title: 
+    mission-title: Misiunea noastră
     more:
       load-more: Mai mult
       show-more: Arată mai mult
       view-more: Vezi mai mult
     more-info: Mai multe informații
-    our-mission: Misiunea noastră
-    our-mission-text: 
     our-sites: 
     password: Parolă
     professional: ''

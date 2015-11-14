@@ -420,15 +420,13 @@ ru:
     language-swedish: "Шедский"
     language-ukranian: "Украинский"
     login: "Логин"
-    mission: 
-    mission-title: 
+    mission: "Кто боится абракадабры?"
+    mission-title: "Кто боится абракадабры?"
     more:
       load-more: "Еще"
       show-more: "Показать еще"
       view-more: "Просмотреть еще"
     more-info: "Еще информация"
-    our-mission: "Наша миссия"
-    our-mission-text: "Кто боится абракадабры?"
     our-sites: "наши сайты"
     password: "Пароль"
     professional: Pro
