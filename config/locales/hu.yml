@@ -1,41 +1,41 @@
 hu:
   global:
-    labs-link: 
+    labs-link: link a lab-hoz
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: Minden bejegyzés...
+      all_exhibitions: Minden kiállítás
+      blog: Blog
+      browse: Böngészés
+      browse_colours: Színek
+      browse_newcontent: "Új tartalom"
+      browse_sources: Források
+      channels: Gyűjtemények
+      collections: Gyűjtemények
+      exhibitions: Kiállítások
+      home: Főoldan
+    pro-link: link a pro-ra
+    pro-text: pro-nak való szöveg
+    settings: beállítások
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: Az Alpha verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
+        link-text: "Írd le a véleményed!"
+        title: Ez egy Alpha verziója az új Gyűjteményeknek és Zenei Gyűjteményeknek
+    blog-link: link a blogra
     browse:
       colours:
-        title: 
+        title: Színek
       newcontent:
-        title: 
+        title: "Új tartalom"
       sources:
-        title: 
+        title: Források
     collections:
       art-history:
         description: 
         title: 
       data-types:
-        3d: 
+        3d: 3D tárgyak
         count: 
         images: 
         moving-images: 
@@ -51,21 +51,21 @@ hu:
     facet:
       language:
         show:
-          results: 
+          results: Eredmények
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
+        about: Rólunk
+        become-a-provider: Válj partnerünké
+        contact: Elérhetőség
         copyright: 
         data-providers: 
-        help: 
+        help: Segítség
         new-collections: 
         rights: 
         search-tips: 
         using-myeuropeana: 
     home:
-      strapline: 
+      strapline: Fedezz fel %{total_item_count} műalkotást, műtárgyat, könyvet, videót és hanganyagot Európa összes részéről.
     more: 
     my-europeana: 
     my-europeana-link: 
