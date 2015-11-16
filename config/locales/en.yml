@@ -61,7 +61,7 @@ en:
         data-providers: All data providers
         help: Help
         new-collections: New Collections
-        rights: 
+        rights: Terms of use & Policies
         search-tips: Search tips
         using-myeuropeana: Using My Europeana
     home:
@@ -222,8 +222,8 @@ en:
           <p>In the meantime, we hope you enjoy your cultural journey with us.</p>
         title: Welcome, culture lover!
       music-channel-about:
-        text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Channel, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Channel available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Channel. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"
-        title: About the Music Channel
+        text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Channel available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Channel. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"
+        title: About the Music Collection
     results:
       actions:
         configure-actions: Configure actions
@@ -245,7 +245,7 @@ en:
         empty-with-terms: Your search for %{query_terms} returned no results
         header: Results for
         header-and: and
-        in-channel: in Channel
+        in-channel: in Collection
         less: Less
         less_adv: Less Refinements
         more: More
