@@ -421,14 +421,12 @@ el:
     language-ukranian: "Ουκρανικά"
     login: "Είσοδος"
     mission: 
-    mission-title: 
+    mission-title: "Η αποστολή μας"
     more:
       load-more: "Περισσότερα"
       show-more: "Εμφάνιση περισσοτέρων"
       view-more: "Δείτε περισσότερα"
     more-info: "Περισσότερες πληροφορίες"
-    our-mission: "Η αποστολή μας"
-    our-mission-text: 
     our-sites: "Οι ιστοσελίδες μας"
     password: "Κωδικός"
     professional: 

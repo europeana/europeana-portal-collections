@@ -12,7 +12,8 @@ module Browse
           title: page_title,
           providers: @providers.blank? ? nil : {
             title: page_title,
-            items: stylised_providers
+            data: stylised_providers,
+            inline: true
           }
         }
       end
@@ -32,15 +33,20 @@ module Browse
       @providers.each do |provider|
         provider[:count] = number_with_delimiter(provider[:count])
         dps = provider.delete(:data_providers)
+        dp_data_all = []
         if dps.present?
           dps.each do |dp|
-            dp[:count] = number_with_delimiter(dp[:count])
+            dp_data_all << {
+              count: number_with_delimiter(dp[:count]),
+              val: dp[:text],
+              foldable_url: dp[:url],
+              foldable_link: true
+            }
           end
-          provider[:data_providers] = {
-            items: dps
-          }
+          provider[:fields] = dp_data_all
         end
       end
+      @providers
     end
   end
 end

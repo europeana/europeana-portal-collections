@@ -2,272 +2,279 @@ ro:
   global:
     labs-link: 
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
+      all_blog_posts: Toate postările...
+      all_exhibitions: Toate expozițiile...
+      blog: Blog
+      browse: Caută
+      browse_colours: Culori
       browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
+      browse_sources: Surse
+      channels: Colecții
+      collections: Colecții
+      exhibitions: Expoziții
+      home: Acasă
     pro-link: 
     pro-text: 
-    settings: 
+    settings: setări
   site:
     alpha:
       feedback_banner:
         description: 
-        link-text: 
-        title: 
+        link-text: Trimite-ne sugestiile tale!
+        title: Aceasta este versiunea Alfa a noilor noastre "Colecții" și a "Colecției de Muzică"
     blog-link: 
     browse:
       colours:
-        title: 
+        title: Culori
       newcontent:
-        title: 
+        title: Noi înregistrări
       sources:
-        title: 
+        title: Surse
     collections:
       art-history:
-        description: 
+        description: De la Renaștere până la Suprarelism, de la sculptura Romei Antice la arta contemporană, colecția de Artă și Istoria Artelor din Europeana vă aduce în atenție artiști și opere de artă din întreaga Europă.
         title: 
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: Obiecte 3D
+        count: "înregistrări"
+        images: Imagini
+        moving-images: "Înregistrări video"
+        sound: "Înregistrări audio"
+        texts: Texte
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Selectat de
+        recent: Adăugări recente
+        spotlight-on: Sub lupă
       music:
-        description: 
-        title: 
+        description: Colecția de Muzică Europeana <strong>Europeana Music Collection</strong> aduce la un loc cele mai bune înregistrări sonore, partituri și alte colecții legate de muzică de la arhivele, bibliotecile și muzeele europene <a href="/portal/channels/music/about">Află mai multe despre Colecția de Muzică.</a>
+        title: Europeana Music
     facet:
       language:
         show:
-          results: 
+          results: Rezultate
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        about: Despre
+        become-a-provider: Cum să devii instituție contributoare
+        contact: Contactează-ne
+        copyright: Copyright
+        data-providers: Toate instituțiile contributoare
+        help: Ajutor
+        new-collections: Colecții noi
+        rights: Termeni & Politici de utilizare
+        search-tips: Sfaturi de căutare
+        using-myeuropeana: |-
+          Contul My Europeana
+          Folosind contul My Europeana
     home:
-      strapline: 
-    more: 
-    my-europeana: 
+      strapline: Explorează %{total_item_count} lucrări de artă, artefacte, cărți, înregistrări video și audio din întreaga Europă.
+    more: Mai mult...
+    my-europeana: Contul My Europeana
     my-europeana-link: 
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: detalii înregistrare
+        results_list: Lista rezultatelor
+        return_home: Inapoi Acasă
+    news: "Știri"
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-author: Atribuie autorul
+        attribute-html: HTML
+        attribute-plaintext: Text simplu
+        download: Descarcă
+        download-additional: Disponibil și ca
+        downloaddata: Descarcă date
+        open-media: Deschide această înregistrare
+        show-less-data: Arată mai puține informații
+        show-more-data: Arată mai multe informații
+        technicalmetadata: Metadate technice
       enrichment:
         who:
-          title: 
+          title: Titlu
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: "Înregistrări înrudite"
+        view-items-above: vezi obiectele de mai sus
+        view-items-below: vezi obiectele de mai jos
       meta-label:
         codec: 
         collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        concept: Concept
+        concepts: Clasificare
+        consists-of: 'Conține '
+        contributor: Contributor
+        copyright: Copyright
+        creation-date: Data creării
+        creator: Creator
+        current-location: Locația curentă
+        data-provider: Instituția contributoare
+        date: Dată
+        dates: Dăti
+        description: Descriere
+        dimensions: Dimensiuni
+        duration: Durată
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
+          has-met: Se înrudește cu
+          incorporates: Cuprinde
+          is-derivative-of: E derivat din
+          is-representation-of: E reprezentat de
+          is-similar-to: Se aseamană cu
+          is-successor-of: Urmează lui
+          realises: Realizează
+          was-present-at: Prezent la
+        extent: Dimensiune
+        file-size: Dimensiunea fișierului
+        format: Format
+        fps: Cadre pe secundă
+        has-type: Are tip
+        identifier: Identificator
+        is-format-of: E format din
+        is-part-of: E parte a
         is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
+        is-replaced-by: E înlocuit de
+        is-required-by: E cerut de
+        issued: Prima emitere
+        language: Limba
+        latitude: Latitudine
+        location: Locația
+        longitude: Longitudine
+        map: Hartă
         map-tiles: 
         medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
+        people: Oameni
+        period: Perioada
+        place: Loc
+        place-time: Loc/Timp
+        properties: Proprietăți
+        provenance: Proveniență
+        provided-by: Află mai multe
+        provided-by-detail: această înregistrare poate deține mai multe informații și fișiere media
+        provider: Instituție
+        providing-country: "Țara furnizoare"
+        publication-date: Data publicării
+        publisher: Editor
+        references: Referințe
+        refs-rels: Referințe și relații
+        relations: Relații
+        rights: Drepturi
+        rights-human: Pot folosi?
         runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+        runtime-unit-seconds: secunde
+        source: Sursă
+        subject: Subiect
+        temporal: Temporal
+        time: Timp
+        timestamp-created: |
+          Prima publicare în Europeana
+        timestamp-updated: Ultima actualizare în Europeana
+        timestamp_created: Prima publicare în Europeana (%{timestamp_created})
+        timestamp_updated: Ultima actualizare în Europeana (%{timestamp_updated})
+        title: Titlu
+        toc: Cuprins
+        type: Tipul
+        ugc: Conținut creat de utilizator
+        version: Versiune
       named-entities:
         title: 
         what:
           broader: 
           label: 
           term: 
-          title: 
+          title: Ce
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: Perioada Început
+          end: Perioada Sfârșit
+          label: Perioada Etichetă
+          term: Perioada Termen
+          title: Când
         where:
           label: 
           latitude: 
           longitude: 
           term: 
-          title: 
+          title: Unde
         who:
           label: 
           term: 
-          title: 
+          title: Cine
       nav:
-        next: 
-        prev: 
+        next: Următor
+        prev: Precedent
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: Est
+        north: Nord
+        south: Sud
+        west: Vest
+      show-more-similar-items: arată mai multe
+      similar-items: "Înregistrări asemănătoare"
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Ne pare rău, pagina nu a fost găsită
+        text: Din păcate pagina căutată nu a fost găsită. Te rugăm încearcă o căutare generală în Europeana sau alege din obiectele selectate mai jos.
       about:
         text: 
-        title: 
+        title: Bun venit, iubitorule de cultură!
       music-channel-about:
         text: 
-        title: 
+        title: Despre Colecția de Muzică
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: Acțiuni de configurare
+        dutchmasters: Maestrii artei olandeze
+        favouriteart: Artă preferată
+        label: Acțiuni
+        newcollection: Colecție nouă
+        product-save: Salvează
+        saveto: Salvează la
+        show-all-collections: Arată toate colecțiile
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: Imagini
+          text: Text
+          video: "Înregistrare video"
+        count-and-terms: "%{results_count} rezultate găsite"
+        empty: Niciun rezultat
+        empty-with-terms: Pentru căutarea după %{query_terms} nu au fost găsite rezultate
+        header: Rezultate pentru
+        header-and: "și"
+        in-channel: "în Colecția"
+        less: Mai puțin
+        less_adv: Mai puține filtre
+        more: Mai mult
+        more_adv: Filtre avansate
+        product-3D: 3D
+        product-image: Imagine
+        product-sound: |-
+          Sunet
+          Înregistrare audio
+        product-text: Text
+        product-video: "Înregistrare video"
+        results-relevance: Relevanță
+        single-result: 1 rezultat găsit pentru %{query_terms}
         view:
           grid: 
-          list: 
-        view-at-provider: 
+          list: Listă
+        view-at-provider: Vezi la
     search:
       placeholder:
-        text: 
+        text: Adaugă termen de căutare
       similar:
-        prefix: 
+        prefix: 'Asemănător cu: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Anulează selecție
+        save-settings: Salvează setări
       language:
-        auto-translate-page: 
+        auto-translate-page: Tradu automat .....
         auto-translate-page-short: 
         auto-translate-query: 
-        available: 
-        default: 
+        available: |-
+          Disponibil în limba
+          Limbi disponibile
+        default: Limbă predefinită
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: 'Limbă specificată negăsită. Limbi disponibile: %{locales}'
+          notice: Setări de limbă salvate.
+        label: Limbă
+        settings-label: setări de limbă
