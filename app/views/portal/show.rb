@@ -444,13 +444,21 @@ module Portal
       end
     end
 
+    # def named_entity_data
+    #   data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
+    #   present = data.any? { |group| group[:present] }
+    #   {
+    #     present: present,
+    #     data: data
+    #   }
+    # end
+
     def named_entity_data
-      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
-      present = data.any? { |group| group[:present] }
+      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels].compact
       {
-        present: present,
+        title: t('site.object.named-entities.title'),
         data: data
-      }
+      } unless data.size == 0
     end
 
     def collect_agent_labels
@@ -475,16 +483,14 @@ module Portal
           named_entity_field_label(entity, f, i18n)
         end
       end.flatten.compact
-
       {
         title: t("site.object.named-entities.#{i18n}.title"),
-        fields: fields,
-        present: fields.size > 0
-      }
+        fields: fields
+      } unless fields.size == 0
     end
 
     def named_entity_field_label(entity, field, i18n)
-      val = normalise_named_entity(entity[field.to_sym], agt_link_field?(field))
+      val = normalise_named_entity(entity[field.to_sym], named_entity_link_field?(field))
 
       if val.present?
         val = val.first if val.is_a?(Array) && val.size == 1
@@ -497,7 +503,7 @@ module Portal
           val: multi ? nil : val,
           vals: multi ? val : nil,
           multi: multi,
-          agt_link: agt_link_field?(field)
+          foldable_link: named_entity_link_field?(field)
         }
       end
     end
@@ -507,20 +513,20 @@ module Portal
       map.key?(field) ? map[field] : field
     end
 
-    def agt_link_field?(field)
+    def named_entity_link_field?(field)
       [:about, :broader].include?(field)
     end
 
-    def normalise_named_entity(named_entity, agt_link = false)
+    def normalise_named_entity(named_entity, foldable_link = false)
       return [] if named_entity.nil?
       return named_entity unless named_entity.is_a?(Hash)
       return named_entity[:def] if named_entity.key?(:def) && named_entity.size == 1
 
       named_entity.map do |key, val|
         if key && val.nil?
-          { val: key, key: nil, agt_link: agt_link }
+          { val: key, key: nil, foldable_link: foldable_link }
         else
-          { key: key, val: val, agt_link: agt_link }
+          { key: key, val: val, foldable_link: foldable_link }
         end
       end
     end
