@@ -3,7 +3,7 @@ ro:
   X11:
     colours:
       '000000': ''
-      000080: Bleumarin
+      000080: ''
       00008B: ''
       0000CD: ''
       0000FF: ''
@@ -172,7 +172,7 @@ ro:
       art:
         form:
           paintings:
-            genre: Tip
+            genre: 
             medium: Mediu
       carrier: Suport
       colour: Culoare
@@ -190,17 +190,17 @@ ro:
         finland: Finlanda
         france: Franța
         germany: Germania
-        greece: Germania
+        greece: Grecia
         hungary: Ungaria
         iceland: Islanda
         ireland: Irlanda
         israel: Israel
         italy: Italia
-        latvia: Latvia
+        latvia: Letonia
         lithuania: Lituania
         luxembourg: Luxemburg
         malta: Malta
-        netherlands: Tările de Jos
+        netherlands: "Țările de Jos"
         norway: Norvegia
         poland: Polonia
         portugal: Portugalia
@@ -226,7 +226,7 @@ ro:
         image_colour: Paletă coloristică
         image_size: Dimensiune
         language: Limbă
-        language_of_description: Limba descrierii
+        language_of_description: Limba Descrierii
         media: Doar înregistrări cu legături către fișiere media
         mime_type: Formatul fișierului
         provider: Instituția
@@ -234,7 +234,7 @@ ro:
         sound_duration: Durata
         sound_hq: Calitate superioară
         text_fulltext: Text complet
-        type: Media
+        type: Fișier media
         ugc: Arată conținut furnizat de către utilizatori
         video_duration: Durata videoclip
         year: Dată
@@ -242,12 +242,12 @@ ro:
         landscape: Peisaj
         portrait: Portret
       image_colour:
-        'false': Alb si negru
+        'false': Alb și negru
         'true': Culoare
       image_size:
         extra_large: Foarte mare (4MP+)
         large: Mare (1-4MP)
-        medium: Medie (0.5-1MP)
+        medium: Mediu (0.5-1MP)
         small: Mică (<0.5MP)
       language:
         bg: 
@@ -301,22 +301,22 @@ ro:
         advanced-cc-by-nd: ''
         advanced-cc-by-sa: ''
         advanced-cc0: ''
-        advanced-orphan-work: Operă orfană
-        advanced-out-of-copyright-non-commercial: Scos de sub incidența drepturilor de autor - uz non-comercial
-        advanced-pdm: "În domeniu public"
-        advanced-rrfa: Drepturi rezervate - Acces liber
-        advanced-rrpa: Drepturi rezervate - Acces cu plată
-        advanced-rrra: Drepturi rezervate - Acces restricționat
-        advanced-ucs: Necunoscut statutul drepturilor de autor
+        advanced-orphan-work: ''
+        advanced-out-of-copyright-non-commercial: ''
+        advanced-pdm: ''
+        advanced-rrfa: ''
+        advanced-rrpa: ''
+        advanced-rrra: ''
+        advanced-ucs: ''
         open: Da cu atribuire
         permission: Doar cu permisiune
         restricted: Da cu restricții
         simple: Simplu
       sound_duration:
-        long: Lung (6+ min)
-        medium: Mediu (3-6 min)
-        short: Scurt (30 - 3 min)
-        very_short: Foarte scurt (<30s)
+        long: Lungă (6+ min)
+        medium: Medie (3-6 min)
+        short: Scurtă (30 - 3 min)
+        very_short: Foarte scurtă (<30s)
       sound_hq:
         'true': Da
       source: Sursa
@@ -341,27 +341,27 @@ ro:
         size:
           explanation: Ce reprezintă aceste dimensiuni?
           label: Dimensiunea imaginii
-          large: 
-          medium: 
-          small: 
-          xl: 
+          large: Mare (%{data})
+          medium: Medie (%{data})
+          small: Mică (%{data})
+          xl: Foarte mare (%{data})
       type-sound:
         duration:
           label: Durata audio
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          long: Lungă (%{data})
+          medium: Medie (%{data})
+          short: Scurtă (%{data})
+          very-short: Foarte scurtă (%{data})
       type-video:
         duration:
-          label: Durata video
-          long: Lungime (%{data})
-          medium: 
-          short: 
+          label: Durata videoclip
+          long: Lungă (%{data})
+          medium: Medie (%{data})
+          short: Scurtă (%{data})
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Lungă (20+ min)
+        medium: Medie (4-20 min)
+        short: Scurtă (<4 min)
       year:
         from: 'de la '
         to: până la
@@ -375,9 +375,9 @@ ro:
     genres-chamber-music: Muzică de cameră
     genres-classical-music: Muzică clasică
     genres-concertos: Concerte
-    genres-non-western-classical-music: 
+    genres-non-western-classical-music: Muzică clasică non-europeană
     genres-opera: Operă
-    genres-popular-music: 
+    genres-popular-music: Muzică de consum
     genres-traditional-music: Muzică tradițională
     header:
       connect: 
@@ -386,9 +386,9 @@ ro:
       network: rețea
     help: Ajutor
     home: Acasă
-    javascript-required: Pentru a accesa acest conținut activați JavaScript, si luați in considerare actualizarea navigatorului dvs web către unul care suportă vizualizarea de conținut HTML5
+    javascript-required: Pentru a accesa acest conținut activați opțiunea JavaScript, și luați în considerare actualizarea navigatorului dvs. web către o versiune care suportă vizualizarea de conținut HTML5.
     labs: ''
-    labs-text: 
+    labs-text: Combinați conținutul digital cu ajutorul interfețelor noastre API & a seturilor de date
     language-basque: 
     language-bulgarian: 
     language-catalan: 
@@ -420,21 +420,21 @@ ro:
     language-swedish: 
     language-ukranian: 
     login: Autentificare
-    mission: 
+    mission: Prin cultură noi transformăm lumea! Ne dorim să contribuim la dezvoltarea patrimoniului cultural european, și să-l facem ușor accesibil, fie pentru scopuri profesionale sau doar de amuzament.
     mission-title: Misiunea noastră
     more:
       load-more: Mai mult
       show-more: Arată mai mult
       view-more: Vezi mai mult
     more-info: Mai multe informații
-    our-sites: 
+    our-sites: paginile noastre
     password: Parolă
     professional: ''
-    professional-text: 
-    refine-your-search: Căutare rafinată
-    register: "Înregistrează"
-    research: 
-    research-text: 
+    professional-text: Implică-te, timite-ne ....ale tale și folosește-le pe ale noastre
+    refine-your-search: Rafinează căutare
+    register: "Înregistrează-te"
+    research: ''
+    research-text: Puntea către comunitatea academică
     search-area:
       search-button-image-alt: Caută
       search-placeholder-text: Adaugă termen de căutare
