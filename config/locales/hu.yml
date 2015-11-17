@@ -12,14 +12,14 @@ hu:
       channels: Gyűjtemények
       collections: Gyűjtemények
       exhibitions: Kiállítások
-      home: Főoldan
+      home: Főoldal
     pro-link: link a pro-ra
     pro-text: pro-nak való szöveg
     settings: beállítások
   site:
     alpha:
       feedback_banner:
-        description: Az Alpha verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
+        description: Az Alpha verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért az oldal néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
         link-text: "Írd le a véleményed!"
         title: Ez egy Alpha verziója az új Gyűjteményeknek és Zenei Gyűjteményeknek
     blog-link: link a blogra
@@ -32,22 +32,22 @@ hu:
         title: Források
     collections:
       art-history:
-        description: 
-        title: 
+        description: A reneszánsztól a szürrealistákig, az ókori római szobrászattól a kortárs művészetig, az Europeana Művészeti és Művészettörténeti Gyűjtemény bevezet a művészek és a műalkotások világába szerte Európából. [Valami interaktív elemeről]
+        title: Europeana Művészettörténet
       data-types:
         3d: 3D tárgyak
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        count: elemek
+        images: Képek
+        moving-images: Videók
+        sound: Hangfelvételek
+        texts: Szövegek
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: 'Kurátor:'
+        recent: Legutóbbi hozzáadások
+        spotlight-on: Reflektorfényben
       music:
-        description: 
-        title: 
+        description: Az <strong> Europeana Zenei Gyűjtemény </ strong> egyesíti a legjobb zenei felvételeket, kottákat és más zenével kapcsolatos gyűjteményeket Európa audiovizuális archívumaiból, könyvtáraiból, levéltáraiból és múzeumaiból. <a href="/portal/channels/music/about"> Tudjon meg többet a Zenei Csatornáról. </a>
+        title: Europeana Zene
     facet:
       language:
         show:
@@ -57,97 +57,97 @@ hu:
         about: Rólunk
         become-a-provider: Válj partnerünké
         contact: Elérhetőség
-        copyright: 
-        data-providers: 
+        copyright: Copyright
+        data-providers: "Összes intézmény"
         help: Segítség
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        new-collections: "Új gyűjtemények"
+        rights: Felhasználási feltételek
+        search-tips: Keresési segítség
+        using-myeuropeana: Saját Europeana használata
     home:
       strapline: Fedezz fel %{total_item_count} műalkotást, műtárgyat, könyvet, videót és hanganyagot Európa összes részéről.
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+    more: Tovább...
+    my-europeana: Saját Europeana
+    my-europeana-link: link a Saját Europeana-ra
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: Elem részletei
+        results_list: Találati lista
+        return_home: Vissza a Főoldalra
+    news: Hírek
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-author: Szerző hozzárendelése
+        attribute-html: HTML
+        attribute-plaintext: Egyszerű szöveg
+        download: Letöltés
+        download-additional: "Úgyszintén elérhető mint"
+        downloaddata: Töltsd le az adatot
+        open-media: Média elem megnyítása
+        show-less-data: Mutass kevesebb adatot
+        show-more-data: Mutass bővebb adatot
+        technicalmetadata: Technikai metaadat
       enrichment:
         who:
-          title: 
+          title: Cím
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Hasonló elemek
+        view-items-above: mutasd a fenti elemeket
+        view-items-below: mutasd a lenti elemeket
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        codec: Kodek
+        collection-name: Adathalmaz
+        concept: Fogalom
+        concepts: Osztályozás
+        consists-of: Magába foglalja
+        contributor: Hozzájáruló
+        copyright: Copyright
+        creation-date: Létrehozás dátuma
+        creator: Alkotó
+        current-location: Jelenlegi helye
+        data-provider: Adatszolgáltató
+        date: Dátum
+        dates: Dátumok
+        description: Leírás
+        dimensions: Méretek
+        duration: Hossza
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
+          has-met: Kapcsolódik
+          incorporates: 'Magába foglalja:'
+          is-derivative-of: 'A következőből származik:'
+          is-representation-of: 'A következő reprezentációja:'
+          is-similar-to: 'Hasonló a következőhöz:'
+          is-successor-of: 'A következő származéka:'
           realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
+          was-present-at: Jelen volt
+        extent: Méret
+        file-size: Fájl mérete
+        format: Formátum
+        fps: Képkocka másodpercenként
+        has-type: Típusa
+        identifier: Azonosító
+        is-format-of: Formátuma
+        is-part-of: 'Következő része:'
+        is-referenced-by: Hivatkozik rá
+        is-replaced-by: Helyettesíti
+        is-required-by: Megköveteli
+        issued: Első megjelenése
+        language: Nyelv
+        latitude: Szélesség
+        location: Helyszín
+        longitude: Hosszúság
+        map: Térkép
+        map-tiles: Csempék
+        medium: Adathordozó
+        people: Emberek
+        period: Időszak
+        place: Hely
+        place-time: Hely/Idő
+        properties: Tulajdonságok
+        provenance: Eredet
+        provided-by: Tudj meg többet
+        provided-by-detail: több információ és média is elérhető lehet jelen elem számára.
+        provider: Szolgáltató
         providing-country: 
         publication-date: 
         publisher: 

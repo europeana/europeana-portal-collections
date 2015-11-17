@@ -3,7 +3,7 @@ ro:
     labs-link: 
     navigation:
       all_blog_posts: Toate postările...
-      all_exhibitions: Toate expozițiile
+      all_exhibitions: Toate expozițiile...
       blog: Blog
       browse: Caută
       browse_colours: Culori
@@ -20,8 +20,8 @@ ro:
     alpha:
       feedback_banner:
         description: 
-        link-text: Trimite sugestii
-        title: 
+        link-text: Trimite-ne sugestiile tale!
+        title: Aceasta este versiunea Alfa a noilor noastre "Colecții" și a "Colecției de Muzică"
     blog-link: 
     browse:
       colours:
@@ -32,7 +32,7 @@ ro:
         title: Surse
     collections:
       art-history:
-        description: 
+        description: De la Renaștere până la Suprarelism, de la sculptura Romei Antice la arta contemporană, colecția de Artă și Istoria Artelor din Europeana vă aduce în atenție artiști și opere de artă din întreaga Europă.
         title: 
       data-types:
         3d: Obiecte 3D
@@ -40,13 +40,13 @@ ro:
         images: Imagini
         moving-images: "Înregistrări video"
         sound: "Înregistrări audio"
-        texts: Text
+        texts: Texte
       labels:
         credits: Selectat de
-        recent: Adăugat recent
-        spotlight-on: 
+        recent: Adăugări recente
+        spotlight-on: Sub lupă
       music:
-        description: 
+        description: Colecția de Muzică Europeana <strong>Europeana Music Collection</strong> aduce la un loc cele mai bune înregistrări sonore, partituri și alte colecții legate de muzică de la arhivele, bibliotecile și muzeele europene <a href="/portal/channels/music/about">Află mai multe despre Colecția de Muzică.</a>
         title: Europeana Music
     facet:
       language:
@@ -55,19 +55,21 @@ ro:
     footer:
       menu:
         about: Despre
-        become-a-provider: 'Cum să devii instituție furnizoare '
-        contact: Contact
+        become-a-provider: Cum să devii instituție contributoare
+        contact: Contactează-ne
         copyright: Copyright
-        data-providers: Toate instituțiile furnizoare
+        data-providers: Toate instituțiile contributoare
         help: Ajutor
         new-collections: Colecții noi
         rights: Termeni & Politici de utilizare
         search-tips: Sfaturi de căutare
-        using-myeuropeana: 
+        using-myeuropeana: |-
+          Contul My Europeana
+          Folosind contul My Europeana
     home:
-      strapline: 
+      strapline: Explorează %{total_item_count} lucrări de artă, artefacte, cărți, înregistrări video și audio din întreaga Europă.
     more: Mai mult...
-    my-europeana: 
+    my-europeana: Contul My Europeana
     my-europeana-link: 
     navigation:
       breadcrumb:
@@ -97,7 +99,7 @@ ro:
       meta-label:
         codec: 
         collection-name: 
-        concept: 
+        concept: Concept
         concepts: Clasificare
         consists-of: 'Conține '
         contributor: Contributor
@@ -105,7 +107,7 @@ ro:
         creation-date: Data creării
         creator: Creator
         current-location: Locația curentă
-        data-provider: Instituția furnizoare
+        data-provider: Instituția contributoare
         date: Dată
         dates: Dăti
         description: Descriere
@@ -131,7 +133,7 @@ ro:
         is-referenced-by: 
         is-replaced-by: E înlocuit de
         is-required-by: E cerut de
-        issued: 
+        issued: Prima emitere
         language: Limba
         latitude: Latitudine
         location: Locația
@@ -147,7 +149,7 @@ ro:
         provenance: Proveniență
         provided-by: Află mai multe
         provided-by-detail: această înregistrare poate deține mai multe informații și fișiere media
-        provider: Instituția furnizoare
+        provider: Instituție
         providing-country: "Țara furnizoare"
         publication-date: Data publicării
         publisher: Editor
@@ -170,7 +172,7 @@ ro:
         title: Titlu
         toc: Cuprins
         type: Tipul
-        ugc: Conținut furnizat de utilizator
+        ugc: Conținut creat de utilizator
         version: Versiune
       named-entities:
         title: 
@@ -203,12 +205,12 @@ ro:
         north: Nord
         south: Sud
         west: Vest
-      show-more-similar-items: arată mai mult
+      show-more-similar-items: arată mai multe
       similar-items: "Înregistrări asemănătoare"
     pages:
       '404':
         intro: Ne pare rău, pagina nu a fost găsită
-        text: 
+        text: Din păcate pagina căutată nu a fost găsită. Te rugăm încearcă o căutare generală în Europeana sau alege din obiectele selectate mai jos.
       about:
         text: 
         title: Bun venit, iubitorule de cultură!
@@ -217,10 +219,10 @@ ro:
         title: Despre Colecția de Muzică
     results:
       actions:
-        configure-actions: 
+        configure-actions: Acțiuni de configurare
         dutchmasters: Maestrii artei olandeze
-        favouriteart: 
-        label: 
+        favouriteart: Artă preferată
+        label: Acțiuni
         newcollection: Colecție nouă
         product-save: Salvează
         saveto: Salvează la
@@ -230,7 +232,7 @@ ro:
           3D: 3D
           images: Imagini
           text: Text
-          video: Video
+          video: "Înregistrare video"
         count-and-terms: "%{results_count} rezultate găsite"
         empty: Niciun rezultat
         empty-with-terms: Pentru căutarea după %{query_terms} nu au fost găsite rezultate
@@ -243,9 +245,11 @@ ro:
         more_adv: Filtre avansate
         product-3D: 3D
         product-image: Imagine
-        product-sound: 
+        product-sound: |-
+          Sunet
+          Înregistrare audio
         product-text: Text
-        product-video: Video
+        product-video: "Înregistrare video"
         results-relevance: Relevanță
         single-result: 1 rezultat găsit pentru %{query_terms}
         view:
@@ -259,13 +263,15 @@ ro:
         prefix: 'Asemănător cu: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
+        clear-selection: Anulează selecție
         save-settings: Salvează setări
       language:
-        auto-translate-page: 
+        auto-translate-page: Tradu automat .....
         auto-translate-page-short: 
         auto-translate-query: 
-        available: Limbi disponibile
+        available: |-
+          Disponibil în limba
+          Limbi disponibile
         default: Limbă predefinită
         flash:
           alert: 'Limbă specificată negăsită. Limbi disponibile: %{locales}'
