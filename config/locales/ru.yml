@@ -146,7 +146,7 @@ ru:
         properties: "Свойства"
         provenance: "Происхождение"
         provided-by: "Узнать больше"
-        provided-by-detail: "может иметь больше информации и носителей для данного элемента"
+        provided-by-detail: 
         provider: "Провайдер"
         providing-country: "Страна провайдер"
         publication-date: "Дата публикации"
