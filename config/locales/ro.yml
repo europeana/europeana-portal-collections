@@ -7,7 +7,7 @@ ro:
       blog: Blog
       browse: Caută
       browse_colours: Culori
-      browse_newcontent: 
+      browse_newcontent: Conținut agăugat nou
       browse_sources: Surse
       channels: Colecții
       collections: Colecții
@@ -19,7 +19,9 @@ ro:
   site:
     alpha:
       feedback_banner:
-        description: 
+        description: |-
+          Aceasta este o versiune alfa a noii platforme, însemnânand că se află în lucru și va fi actualizat periodic. Se poate întâmpla ca pagina să nu fie găsită online. Părerile voastre ne ajută să îmbunătățim pagina.
+          An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
         link-text: Trimite-ne sugestiile tale!
         title: Aceasta este versiunea Alfa a noilor noastre "Colecții" și a "Colecției de Muzică"
     blog-link: 
@@ -148,7 +150,7 @@ ro:
         properties: Proprietăți
         provenance: Proveniență
         provided-by: Află mai multe
-        provided-by-detail: această înregistrare poate deține mai multe informații și fișiere media
+        provided-by-detail: 
         provider: Instituție
         providing-country: "Țara furnizoare"
         publication-date: Data publicării
@@ -212,7 +214,16 @@ ro:
         intro: Ne pare rău, pagina nu a fost găsită
         text: Din păcate pagina căutată nu a fost găsită. Te rugăm încearcă o căutare generală în Europeana sau alege din obiectele selectate mai jos.
       about:
-        text: 
+        text: |-
+          <p>Fie că ai ajuns aici pentru a te insipira, pentru a face cercetareWhether you came here for inspiration, to work on your research, looking for your next coffee mug design or just to snoop around, we hope you will find what you need somewhere amongst the 45 million objects we host here.</p>
+
+          <p>Our material comes from all over Europe and the scope of the collections is really quite astonishing. Our aim is help you find your way round so you discover treasures of your own.</p>
+
+          <p>Over the last few years, we’ve been expanding our collections and learning more and more about them, and what you want to do with them. Now it’s time to change a few things and make some improvements to our service!</p>
+
+          <p>We’re trying out a new version of Europeana Collections. We are working hard to improve your experience here and make it as easy as possible for you to find the information you are looking for. So we’ll probably ask you to help us by answering some questions. Your answers will be really helpful to us, so please do take a moment to give us your thoughts. Thanks!</p>
+
+          <p>In the meantime, we hope you enjoy your cultural journey with us.</p>
         title: Bun venit, iubitorule de cultură!
       music-channel-about:
         text: 

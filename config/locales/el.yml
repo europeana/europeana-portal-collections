@@ -146,7 +146,7 @@ el:
         properties: "Ιδιότητες"
         provenance: "Προέλευση"
         provided-by: "Ανακαλύψτε περισσότερα"
-        provided-by-detail: "ίσως έχει περισσότερες πληροφορίες και περιεχόμενο για αυό το αντικείμενο."
+        provided-by-detail: 
         provider: "Ίδρυμα"
         providing-country: "Χώρα παρόχου"
         publication-date: "Ημερομηνία έκδοσης"
