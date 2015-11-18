@@ -146,7 +146,7 @@ pt:
         properties: Propriedades
         provenance: Proveniência
         provided-by: Saiba mais
-        provided-by-detail: poderá haver mais informação e media para este item.
+        provided-by-detail: 
         provider: Fornecedor
         providing-country: País fornecedor
         publication-date: Data de publicação
@@ -221,15 +221,15 @@ pt:
           <p>Entretanto, esperamos que aprecie a sua viagem cultural connosco.</p>
         title: Bem vindo, amante da cultura!
       music-channel-about:
-        text: 
-        title: 
+        text: "<p>Imagine ver os manuscritos originais de uma peça musical enquanto ouve diferentes interpretações da mesma e ler a biografia do compositor. Em Europeana Coleções: Música, poderá fazê-lo.</p>  \n\n<p><a href=\"http://www.europeanasounds.eu\">Os nossos parceiros</a>, peritos em Música de toda Europa selecionaram cuidadosamente esta coleção de gravações, partituras, imagens de instrumentos musicais, livros sobre música e outros conteúdos relacionados com música.</p>\n\n<p>Disponibilizamos esta versão de teste de Europeana Coleções: Música para que vocês, nossos utilizadores, nos ajudem a dar-lhe forma e melhorá-lo. Cuando lo visites a veces te pediremos que respondas a los cuestionarios que aparecen en la pantalla. Te agradecemos que gastes unos minutos en responder a nuestras preguntas.</p> \n\n<p>Em nome da transparência e privacidade, comunicamos que guardamos as estatísticas de utilização no Google Analytics e num serviço chamado Hotjar. Fazemos isto porque nos mostra o que estamos a fazer mal e ajuda-nos a melhorar o Europeana Coleções: Música. Todos os registos são privados e anónimos e só serão usados para melhorar o nosso serviço.</p>\n\n<p>Encorajamo-lo a pesquisar as nossas coleções, ouça música, veja ou leia partituras. Quando os direitos de autor o permitem, poderá descargar o que mais lhe agradar. E visite as nossas exibições virtuais para descobrir música de uma forma inédita.</p>"
+        title: Sobre a Coleção de Música
     results:
       actions:
-        configure-actions: 
+        configure-actions: Configurar ações
         dutchmasters: Mestres holandeses
         favouriteart: Arte favorita
-        label: Acções
-        newcollection: Nova Colecção
+        label: Ações
+        newcollection: Nova Coleção
         product-save: Guardar
         saveto: Guardar para
         show-all-collections: Mostrar todas as colecções
@@ -238,13 +238,13 @@ pt:
           3D: 3D
           images: Imagens
           text: Texto
-          video: Video
+          video: Vídeo
         count-and-terms: "%{results_count} resultados"
         empty: Sem Resultados
         empty-with-terms: A sua pesquisa por %{query_terms} obteve nenhum resultado
         header: Resultados para
         header-and: e
-        in-channel: em Colecção
+        in-channel: em Coleção
         less: Menos
         less_adv: Menos ajustes
         more: Mais
@@ -262,19 +262,19 @@ pt:
         view-at-provider: Ver em
     search:
       placeholder:
-        text: 
+        text: Adicionar termo de pesquisa
       similar:
         prefix: 'Similar a: %{mlt_item}'
     settings:
       actions:
-        clear-selection: Limpar selecção
+        clear-selection: Limpar seleção
         save-settings: Gravar Definições
       language:
-        auto-translate-page: Traduzir automaticamente página de itens em...
+        auto-translate-page: Traduzir automaticamente a página de itens em...
         auto-translate-page-short: Auto-traduzir itens em
-        auto-translate-query: 
+        auto-translate-query: Traduzir automaticamente os termos de pesquisa em...
         available: Línguas disponíveis
-        default: 
+        default: Língua predefinida
         flash:
           alert: 'Língua especificada inválida. Línguas disponíveis:  %{locales}'
           notice: Definições de língua guardadas.

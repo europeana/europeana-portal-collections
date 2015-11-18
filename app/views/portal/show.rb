@@ -217,6 +217,10 @@ module Portal
             origin: {
               url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
               institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
+              institution_name_and_link: '<a class="cap" target="_blank" href="' +
+                render_document_show_field_value(document, 'aggregations.edmIsShownAt') + '">' +
+                (render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider')) +
+                ' <svg class="icon icon-linkout"><use xlink:href="#icon-linkout"/></svg></a>',
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
             },
             people: data_section(

@@ -146,7 +146,7 @@ bg:
         properties: "Характеристики"
         provenance: "Произход"
         provided-by: "Научи повече"
-        provided-by-detail: "може да има повече информация и медийни файлове за този обект."
+        provided-by-detail: 
         provider: "Доставчик"
         providing-country: "Страна-доставчик"
         publication-date: "Дата на публикуване"
