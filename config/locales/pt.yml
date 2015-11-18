@@ -1,28 +1,28 @@
 pt:
   global:
-    labs-link: ligação para labs
+    labs-link: ligação ao labs
     navigation:
       all_blog_posts: Todas as Mensagens...
       all_exhibitions: Todas as Exposições...
       blog: Blogue
-      browse: Procurar
-      browse_colours: Cores
+      browse: Explorar
+      browse_colours: por Cores
       browse_newcontent: Novo conteúdo
-      browse_sources: Fontes
-      channels: Colecções
-      collections: Colecções
+      browse_sources: por Fontes
+      channels: Coleções
+      collections: Coleções
       exhibitions: Exposições
       home: Início
-    pro-link: ligação para pro
+    pro-link: ligação ao pro
     pro-text: texto para pro
     settings: definições
   site:
     alpha:
       feedback_banner:
-        description: Uma versão Alfa significa que este  website está sob activo desenvolvimento e será actualizada com regularidade. Poderá estar por vezes inacessível. As suas sugestões e comentários ajudarão a melhorar o website.
-        link-text: Dê-nos a sua opinião!
-        title: Esta é uma versão Alfa da n
-    blog-link: ligação para blogue
+        description: Uma versão Alfa significa que esta página está sob activo desenvolvimento e será actualizada com regularidade. Poderá estar por vezes inacessível. Os suas comentários ajudarão a melhorá-la.
+        link-text: Deixe-nos os seus comentários!
+        title: Esta é uma versão Alfa das novas Europeana Coleções e Europeana Coleções Música
+    blog-link: ligação ao blogue
     browse:
       colours:
         title: Cores
@@ -32,21 +32,21 @@ pt:
         title: Fontes
     collections:
       art-history:
-        description: Desde a Renascença aos surrealistas, e desde as esculturas da antiga Roma à arte contemporânea, a Europeana Arte e Colecção de História de Arte vai dar-lhe a conhecer artistas e obras de arte de toda a Europa. [Algo sobre elementos interactivos]
-        title: Europeana História de Arte
+        description: Desde a Renascença aos surrealistas, e desde as esculturas da Roma antiga à arte contemporânea, a Europeana Coleção Arte e História da Arte irá dar-lhe a conhecer artistas e obras de arte de toda a Europa.
+        title: Europeana História da Arte
       data-types:
-        3d: objectos 3D
+        3d: Objectos 3D
         count: itens
         images: Imagens
         moving-images: Vídeos
         sound: Gravações de som
         texts: Textos
       labels:
-        credits: Curadoria por
+        credits: Curada por
         recent: Adições recentes
-        spotlight-on: Destaque para
+        spotlight-on: Destacadas
       music:
-        description: 
+        description: '<strong>Europeana Coleções: Música</strong> reúne as melhores graveções, partituras e outras coleções musicais dos arquivos audiovisuais, bibliotecas e museus europeus. <a href="/portal/channels/music/about"> Saiba mais sobre Europeana Coleções: Música.</a>'
         title: Europeana Música
     facet:
       language:
@@ -55,20 +55,20 @@ pt:
     footer:
       menu:
         about: Sobre
-        become-a-provider: Torne-se num fornecedor de dados
+        become-a-provider: Torne-se numa instituição contribuinte
         contact: Contacto
         copyright: Direitos de Autor
-        data-providers: Todos os fornecedores de dados
+        data-providers: Todas as instituições
         help: Ajuda
-        new-collections: Novas Colecções
-        rights: Termos de uso & Políticas
-        search-tips: Dicas de pesquisa
+        new-collections: Novas Coleções
+        rights: 'Termos & Políticas de uso '
+        search-tips: Dicas para pesquisa
         using-myeuropeana: Utilizar Minha Europeana
     home:
       strapline: Explore %{total_item_count} obras de arte, artefactos, livros, videos e sons de toda a Europa.
     more: Mais...
     my-europeana: Minha Europeana
-    my-europeana-link: ligação para Minha Europeana
+    my-europeana-link: ligação à Minha Europeana
     navigation:
       breadcrumb:
         item_detail: 'Detalhe do item '
@@ -85,13 +85,13 @@ pt:
         downloaddata: Descarregar dados
         open-media: Abrir este item de media
         show-less-data: Mostrar menos informação
-        show-more-data: Mostrar mais informação
-        technicalmetadata: Metadata Técnica
+        show-more-data: Mostrar mais dados
+        technicalmetadata: Metadados Técnicos
       enrichment:
         who:
           title: Título
       hierarchy:
-        title: Itens Relacionados
+        title: Itens relacionados
         view-items-above: ver itens acima
         view-items-below: ver itens abaixo
       meta-label:
@@ -105,7 +105,7 @@ pt:
         creation-date: Data de criação
         creator: Criador
         current-location: Localização actual
-        data-provider: Fornecedor de dados
+        data-provider: Instituição
         date: Data
         dates: Datas
         description: Descrição
@@ -114,31 +114,31 @@ pt:
         edm:
           has-met: Está relacionado com
           incorporates: Incorpora
-          is-derivative-of: 
-          is-representation-of: "É representação de"
+          is-derivative-of: Deriva de
+          is-representation-of: "É uma representação de"
           is-similar-to: "É semelhante a"
-          is-successor-of: 
-          realises: 
-          was-present-at: Present em
+          is-successor-of: "É sucessor de"
+          realises: Realiza
+          was-present-at: Presente em
         extent: Tamanho
         file-size: Tamanho de ficheiro
         format: Formato
         fps: Imagens por segundo
-        has-type: 
+        has-type: Tem tipo
         identifier: Identificador
         is-format-of: "É formato de"
         is-part-of: "É parte de"
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
+        is-referenced-by: "É referido por"
+        is-replaced-by: "É substituido por"
+        is-required-by: "É requerido por"
+        issued: Emitido pela primeira vez
         language: Língua
         latitude: Latitude
         location: Localização
         longitude: Longitude
         map: Mapa
-        map-tiles: 
-        medium: 
+        map-tiles: Mosaico
+        medium: Meio
         people: Pessoas
         period: Período
         place: Local
@@ -146,11 +146,11 @@ pt:
         properties: Propriedades
         provenance: Proveniência
         provided-by: Saiba mais
-        provided-by-detail: poderá haver mais informação e media para este
+        provided-by-detail: poderá haver mais informação e media para este item.
         provider: Fornecedor
         providing-country: País fornecedor
         publication-date: Data de publicação
-        publisher: 
+        publisher: Editor
         references: Referências
         refs-rels: Referências e relações
         relations: Relações
@@ -159,7 +159,7 @@ pt:
         runtime: Duração
         runtime-unit-seconds: segundos
         source: Fonte
-        subject: Tema
+        subject: Assunto
         temporal: Temporal
         time: Tempo
         timestamp-created: Publicado pela primeira vez na Europeana
@@ -169,14 +169,14 @@ pt:
         title: Título
         toc: Tabela de Conteúdos
         type: Tipo
-        ugc: Conteúdo contribuido por utilizador
+        ugc: Conteúdo contribuido pelo utilizador
         version: Versão
       named-entities:
-        title: Entidades Nomeadas
+        title: Entidades Mencionadas
         what:
           broader: Conceito mais amplo
-          label: Etiqueta de Conceito
-          term: Termo de Conceito
+          label: Etiqueta do Conceito
+          term: Termo do Conceito
           title: O quê
         when:
           begin: Começo do Período
@@ -207,9 +207,18 @@ pt:
     pages:
       '404':
         intro: Desculpe, não conseguimos encontrar essa página
-        text: Infelizmente não conseguimos encontrar a página que procura. Tente pesquisar na Europeana ou talvez goste dos itens seleccionados em baixo.
+        text: Infelizmente não conseguimos encontrar a página que procura. Tente pesquisar na Europeana ou talvez goste dos itens selecionados em baixo.
       about:
-        text: 
+        text: |-
+          <p>Quer tenha vindo em busca de inspiração, para investigar, para encontrar o próximo desenho para a caneca de café ou apenas por curiosidade, esperamos que encontre o que procure entre os 45 milhões de itens que aqui apresentamos</p>
+
+          <p>O nosso material vem de toda a Europa e a abrangência das nossas coleções é verdadeiramente surprendente. O nosso objectivo é ajudá-lo a orientar-se e a descobrir os tesouros por si próprio.</p>
+
+          <p>Durante os últimos anos temos expandido as nossas coleções, conhecendo-as melhor e aprendido o que quererá fazer com elas. Chegou o momento de alterar algumas coisas e fazer algumas melhorias ao nosso serviço!</p>
+
+          <p>Estamos a experimentar uma nova versão de Europeana Coleções. Estamos a trabalhar arduamente para melhorar a sua experiência e que encontre mais facilmente a informação que procura. Necessitamos então que nos ajude respondendo a algumas questões. As suas respostas serão uma grande ajuda, assim pedimos o favor de nos dar algum tempo e partilhar os seus comentários. Obrigado!</p>
+
+          <p>Entretanto, esperamos que aprecie a sua viagem cultural connosco.</p>
         title: Bem vindo, amante da cultura!
       music-channel-about:
         text: 
