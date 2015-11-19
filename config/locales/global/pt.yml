@@ -1,5 +1,5 @@
 pt:
-  Symphonies: 
+  Symphonies: Sinfonias
   X11:
     colours:
       '000000': 
@@ -47,6 +47,8 @@ pt:
       7F007F: 
       7FFF00: 
       7FFFD4: Aquamarine
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -151,15 +153,15 @@ pt:
       architecture: arquitectura
       art: arte
       fashion: moda
-      home: 
+      home: Início
       maps: mapas
       music: música
       natural-history: história natural
       newspapers: jornais
       performing-arts: artes-performativas
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
+    channels-art: Coleção História da Arte
+    channels-art-image: Coleção História da Arte imagem
+    channels-art-link: 'Coleção História da Arte '
     channels-fashion: Moda
     channels-music: Música
     choose-language: Língua
@@ -173,7 +175,7 @@ pt:
         form:
           paintings:
             genre: Género
-            medium: 
+            medium: Meio
       carrier: 
       colour: Cor
       colour-black-and-white: Preto e branco
@@ -218,10 +220,10 @@ pt:
         unitedstatesofamerica: EUA
       creator: criador
       header:
-        channel: Colecções
+        channel: Coleções
         colourpalette: Cor
         country: País
-        data_provider: 
+        data_provider: Instituição
         image_aspectratio: Orientação
         image_colour: Paleta
         image_size: Tamanho
@@ -229,7 +231,7 @@ pt:
         language_of_description: Língua da Descrição
         media: Apenas itens com ligação a media
         mime_type: Formato do ficheiro
-        provider: Fornecedor
+        provider: Agregador
         reusability: Posso usar?
         sound_duration: Duração
         sound_hq: Alta Qualidade
@@ -270,7 +272,7 @@ pt:
         lt: 
         lv: 
         mt: 
-        mul: Multilingue
+        mul: ''
         nl: 
         'no': 
         pl: 
@@ -294,23 +296,23 @@ pt:
         type: Tipo
       reusability:
         advanced: Avançado
-        advanced-cc-by: CC BY
-        advanced-cc-by-nc: CC BY-NC
-        advanced-cc-by-nc-nd: CC BY-NC-ND
-        advanced-cc-by-nc-sa: CC BY-NC-SA
-        advanced-cc-by-nd: CC BY-ND
-        advanced-cc-by-sa: CC BY-SA
-        advanced-cc0: CC0
+        advanced-cc-by: ''
+        advanced-cc-by-nc: ''
+        advanced-cc-by-nc-nd: ''
+        advanced-cc-by-nc-sa: ''
+        advanced-cc-by-nd: ''
+        advanced-cc-by-sa: ''
+        advanced-cc0: ''
         advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: Fora de direitos de autor - re-utilização não comercial
-        advanced-pdm: Marca de Domínio Público
-        advanced-rrfa: Direitos reservados - Acesso livre
-        advanced-rrpa: Direitos reservados - Acesso pago
-        advanced-rrra: Direitos reservados - Acesso Restrito
-        advanced-ucs: Estado de direitos de autor desconhecido
-        open: Sim com atribuição
+        advanced-out-of-copyright-non-commercial: ''
+        advanced-pdm: ''
+        advanced-rrfa: ''
+        advanced-rrpa: ''
+        advanced-rrra: ''
+        advanced-ucs: ''
+        open: Sim, com atribuição
         permission: Apenas com permissão
-        restricted: Sim com restrições
+        restricted: Sim, com restrições
         simple: Simples
       sound_duration:
         long: Longa (6+ min)
@@ -364,12 +366,12 @@ pt:
         short: Curta (<4 min)
       year:
         from: de
-        to: para
+        to: a
     'facet ':
       header:
         video_hd:
           'true': HD
-    find-us-elsewhere: Encontre-nos noutros locais
+    find-us-elsewhere: Encontre-nos noutros sítios
     forgot-password: Esqueceu-se da palavra-passe?
     genres: géneros
     genres-chamber-music: Música de câmara
@@ -380,13 +382,13 @@ pt:
     genres-popular-music: Musica popular
     genres-traditional-music: Música tradicional
     header:
-      connect: connectar
+      connect: conectar
       develop: desenvolver
       discover: descobrir
       network: rede
     help: Ajuda
-    home: 
-    javascript-required: Para ver este conteúdo por favor active o JavaScript, e considere actualizar-se com um navegador que suporte conteúdo HTML5.
+    home: Início
+    javascript-required: Para ver este conteúdo por favor active o JavaScript, e considere actualizar para um navegador que suporte conteúdo HTML5.
     labs: Labs
     labs-text: 
     language-basque: Basco
@@ -404,22 +406,22 @@ pt:
     language-german: Alemão
     language-greek: Grego
     language-hungarian: Húngaro
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
+    language-icelandic: Islandês
+    language-italian: Italiano
+    language-latvian: Letão
+    language-lithuanian: Lituano
+    language-maltese: Maltês
+    language-norwegian: Norueguês
+    language-polish: Polaco
+    language-portuguese: Português
+    language-romanian: Romeno
+    language-russian: Russo
+    language-slovakian: Eslovaco
+    language-slovenian: Esloveno
+    language-spanish: Espanhol
+    language-swedish: Sueco
+    language-ukranian: Ucraniano
+    login: Entrar
     mission: 
     mission-title: A nossa missão
     more:
@@ -429,26 +431,26 @@ pt:
     more-info: Mais informação
     our-sites: os nosso sites
     password: Palavra-passe
-    professional: Pro
-    professional-text: Involva-se, partilhe os seus dados ou use os nossos
-    refine-your-search: 
+    professional: ''
+    professional-text: Envolva-se, partilhe os seus dados ou use os nossos
+    refine-your-search: Refinar pesquisa
     register: Registe-se
     research: 
     research-text: 
     search-area:
       search-button-image-alt: Pesquisar
       search-placeholder-text: Adicione um termo de pesquisa
-    search-collections: Colecções
-    search-collections-text: 
+    search-collections: Coleções
+    search-collections-text: Explore a herança cultura da Europa
     share: Partilhe
-    sitemap: 
-    terms-and-policies: 
+    sitemap: Mapa do site
+    terms-and-policies: Termos & Políticas de uso
     type: tipo
   'no': Noruega
-  pl: 
+  pl: Portugal
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Resultados
+        show-results-all: Mostrar todos os resultados
