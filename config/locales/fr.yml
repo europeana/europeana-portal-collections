@@ -77,7 +77,7 @@ fr:
     news: Nouvelles
     object:
       actions:
-        attribute-author: 
+        attribute-author: Mentionnez le nom de l'auteur
         attribute-html: HTML
         attribute-plaintext: Texte intégral
         download: Télécharger

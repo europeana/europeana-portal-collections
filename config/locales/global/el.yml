@@ -47,6 +47,8 @@ el:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -427,6 +429,11 @@ el:
       show-more: "Εμφάνιση περισσοτέρων"
       view-more: "Δείτε περισσότερα"
     more-info: "Περισσότερες πληροφορίες"
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: "Οι ιστοσελίδες μας"
     password: "Κωδικός"
     professional: 

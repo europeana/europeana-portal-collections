@@ -1,6 +1,6 @@
 pt:
   global:
-    labs-link: ligação ao labs
+    labs-link: ''
     navigation:
       all_blog_posts: Todas as Mensagens...
       all_exhibitions: Todas as Exposições...
@@ -13,8 +13,8 @@ pt:
       collections: Coleções
       exhibitions: Exposições
       home: Início
-    pro-link: ligação ao pro
-    pro-text: texto para pro
+    pro-link: ''
+    pro-text: texto para Europeana Pro
     settings: definições
   site:
     alpha:
@@ -63,12 +63,12 @@ pt:
         new-collections: Novas Coleções
         rights: 'Termos & Políticas de uso '
         search-tips: Dicas para pesquisa
-        using-myeuropeana: Utilizar Minha Europeana
+        using-myeuropeana: Utilizar My Europeana
     home:
       strapline: Explore %{total_item_count} obras de arte, artefactos, livros, videos e sons de toda a Europa.
     more: Mais...
-    my-europeana: Minha Europeana
-    my-europeana-link: ligação à Minha Europeana
+    my-europeana: My Europeana
+    my-europeana-link: ligação a My Europeana
     navigation:
       breadcrumb:
         item_detail: 'Detalhe do item '

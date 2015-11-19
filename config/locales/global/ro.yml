@@ -47,6 +47,8 @@ ro:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -427,6 +429,11 @@ ro:
       show-more: Arată mai mult
       view-more: Vezi mai mult
     more-info: Mai multe informații
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: paginile noastre
     password: Parolă
     professional: ''

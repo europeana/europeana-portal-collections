@@ -47,6 +47,8 @@ de:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -302,12 +304,12 @@ de:
         advanced-cc-by-sa: 
         advanced-cc0: ''
         advanced-orphan-work: Verwaistes Werk
-        advanced-out-of-copyright-non-commercial: Kein Urheberrecht - nicht kommerzielle Wiederverwendung
+        advanced-out-of-copyright-non-commercial: ''
         advanced-pdm: Gemeinfreiheit
-        advanced-rrfa: Rechte vorbehalten - Freier Zugang
-        advanced-rrpa: Rechte vorbehalten - kostenpflichtiger Zugang
-        advanced-rrra: Rechte Vorbehalten - eingeschränkter Zugang
-        advanced-ucs: Unbekannter Urheberrechtsstatus
+        advanced-rrfa: 
+        advanced-rrpa: ''
+        advanced-rrra: ''
+        advanced-ucs: ''
         open: Ja, mit Namensnennung
         permission: Nur mit Genehmigung
         restricted: Ja, mit Einschränkungen
@@ -387,7 +389,7 @@ de:
     help: Hilfe
     home: Startseite
     javascript-required: Um diese Inhalte zu sehen aktivieren Sie bitte JavaScript. Erwägen Sie zudem auf einen Web-Browser zurückzugreifen der HTML5-Inhalte unterstützt.
-    labs: Labore
+    labs: Labs
     labs-text: Remixen Sie kulturelle Inhalte mit unseren API & Datensätzen
     language-basque: Baskisch
     language-bulgarian: Bulgarisch
@@ -420,20 +422,25 @@ de:
     language-swedish: Schwedisch
     language-ukranian: Ukrainisch
     login: Einloggen
-    mission: 
+    mission: Wir verwandeln die Welt mit Kultur! Wir wollen auf Europas reiches Erbe aufbauen und es Menschen einfacher machen dieses zu nutzen, ob für die Arbeit, zum Lernen oder einfach nur zum Spaß.
     mission-title: Unsere Mission
     more:
       load-more: Mehr
       show-more: Mehr anzeigen
       view-more: Mehr anzeigen
     more-info: Mehr Information
+    newsletter:
+      email-address-invalid: Die E-Mail muss eine gültige E-Mail-Adresse sein.
+      email-address-required: Eine E-Mail-Adresse muss angegeben werden.
+      language-required: Eine Sprache muss angegeben werden.
+      signup: Newsletter Anmeldung
     our-sites: Unsere Seiten
     password: Passwort
     professional: Pro
     professional-text: Machen Sie mit, teilen Sie Ihre Daten oder benutzen Sie unsere
     refine-your-search: Suche verfeinern
     register: Anmelden
-    research: Forschung
+    research: Research
     research-text: Mit der akademischen Gemeinschaft verbinden
     search-area:
       search-button-image-alt: Suche

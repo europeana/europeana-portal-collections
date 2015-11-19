@@ -3,8 +3,8 @@ bg:
   X11:
     colours:
       '000000': "Черен"
-      000080: 
-      00008B: 
+      000080: ''
+      00008B: ''
       0000CD: 
       0000FF: 
       '006400': 
@@ -47,6 +47,8 @@ bg:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -427,6 +429,11 @@ bg:
       show-more: "Покажи повече"
       view-more: "Виж повече"
     more-info: "Повече информация"
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: "нашите страници"
     password: "Парола"
     professional: Pro

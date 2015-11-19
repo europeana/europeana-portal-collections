@@ -139,7 +139,7 @@ module MustacheHelper
 
   def page_config
     {
-      newsletter: false
+      newsletter: true
     }
   end
 
