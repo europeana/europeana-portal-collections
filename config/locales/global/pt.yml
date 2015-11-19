@@ -385,11 +385,11 @@ pt:
       connect: conectar
       develop: desenvolver
       discover: descobrir
-      network: rede
+      network: ligue-se
     help: Ajuda
     home: Início
     javascript-required: Para ver este conteúdo por favor active o JavaScript, e considere actualizar para um navegador que suporte conteúdo HTML5.
-    labs: Labs
+    labs: Europeana Labs
     labs-text: 
     language-basque: Basco
     language-bulgarian: Búlgaro
@@ -429,13 +429,18 @@ pt:
       show-more: Mostrar mais
       view-more: Ver mais
     more-info: Mais informação
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: Inscreva-se na nossa newsletter
     our-sites: os nosso sites
     password: Palavra-passe
-    professional: ''
+    professional: Europeana Pro
     professional-text: Envolva-se, partilhe os seus dados ou use os nossos
     refine-your-search: Refinar pesquisa
     register: Registe-se
-    research: 
+    research: Europeana Research
     research-text: 
     search-area:
       search-button-image-alt: Pesquisar

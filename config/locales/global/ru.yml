@@ -157,7 +157,7 @@ ru:
       maps: "карты"
       music: "музыка"
       natural-history: "естествознание"
-      newspapers: "газеты"
+      newspapers: "пресса"
       performing-arts: "исполнительское искусство"
     channels-art: "Коллекция История Искусства"
     channels-art-image: "Изображение коллекции История Искусства"
@@ -223,7 +223,7 @@ ru:
         channel: "Коллекции"
         colourpalette: "Цвет"
         country: "Страна"
-        data_provider: "Провайдер данных"
+        data_provider: "Организация"
         image_aspectratio: "Ориентация"
         image_colour: "Палитра"
         image_size: "Размер"
@@ -231,7 +231,7 @@ ru:
         language_of_description: "Язык описания"
         media: "Только со ссылками на носители"
         mime_type: "Формат файла"
-        provider: "Провайдер"
+        provider: "Агрегатор"
         reusability: "Могу ли я это использовать?"
         sound_duration: "Продолжительность"
         sound_hq: "Высокое качество"
@@ -385,7 +385,7 @@ ru:
       connect: "связаться"
       develop: "разработать"
       discover: "открыть"
-      network: "сеть"
+      network: "сообщество"
     help: "Помощь"
     home: "Домой"
     javascript-required: "Чтобы увидеть содержимое, пожалуйста, включите JavaScript в Вашем браузере и попробуйте обновить веб-браузер до версии, которая поддерживает HTML5."
@@ -429,13 +429,18 @@ ru:
       show-more: "Показать еще"
       view-more: "Просмотреть еще"
     more-info: "Еще информация"
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: "Подпишитесь на рассылку наших новостей"
     our-sites: "наши сайты"
     password: "Пароль"
     professional: Pro
     professional-text: "Принимайте участие, делитесь своими данными или используйте наши"
     refine-your-search: "Уточните свой поиск"
     register: "Зарегистрируйтесь"
-    research: "Исследование"
+    research: Research
     research-text: "Связаться с академическими сообществами"
     search-area:
       search-button-image-alt: "Поиск"

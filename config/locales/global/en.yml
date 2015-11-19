@@ -430,6 +430,11 @@ en:
       show-more: Show more
       view-more: View more
     more-info: More information
+    newsletter:
+      email-address-invalid: Email must be a valid email address.
+      email-address-required: An email address must be specified.
+      language-required: A language must be specified.
+      signup: Sign up for our newsletter
     our-sites: our sites
     password: Password
     professional: Pro

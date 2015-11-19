@@ -429,6 +429,11 @@ es:
       show-more: Mostrar más
       view-more: Ver más
     more-info: Más información
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: nuestros sitios
     password: Contraseña
     professional: Profesional

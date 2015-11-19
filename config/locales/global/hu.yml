@@ -429,6 +429,11 @@ hu:
       show-more: Mutass többet
       view-more: Nézz meg többet
     more-info: Több információ
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: weboldalaink
     password: Jelszó
     professional: Pro

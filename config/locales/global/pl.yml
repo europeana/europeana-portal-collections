@@ -429,6 +429,11 @@ pl:
       show-more: Pokaż więcej
       view-more: Zobacz więcej
     more-info: Więcej infromacji
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: nasze strony
     password: Hasło
     professional: Dla specjalistów

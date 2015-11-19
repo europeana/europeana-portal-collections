@@ -429,6 +429,11 @@ da:
       show-more: 
       view-more: 
     more-info: 
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: 
     password: 
     professional: 

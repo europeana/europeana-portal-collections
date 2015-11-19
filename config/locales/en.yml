@@ -32,7 +32,7 @@ en:
         title: Sources
     collections:
       art-history:
-        description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
+        description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
         title: Europeana Art History
       data-types:
         3d: 3D objects
@@ -147,7 +147,7 @@ en:
         properties: Properties
         provenance: Provenance
         provided-by: Find out more
-        provided-by-detail: Europeana is displaying this item via %{institution_name_and_link}. Visit their site for more information.
+        provided-by-detail: Europeana is displaying this item via the %{institution_name_and_link}. Visit their site for more information.
         provider: Provider
         providing-country: Providing country
         publication-date: Date of publication

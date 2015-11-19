@@ -55,15 +55,15 @@ de:
     footer:
       menu:
         about: "Über Uns"
-        become-a-provider: Werden Sie ein Datengeber
+        become-a-provider: Datengeber werden
         contact: Kontakt
         copyright: Urheberrecht
-        data-providers: Alle Datengeber
+        data-providers: Alle Institutionen
         help: Hilfe
         new-collections: Neue Sammlungen
-        rights: 
+        rights: Nutzungsbedingungen und Datenschutzerklärung
         search-tips: Suchtipps
-        using-myeuropeana: My Europeana benutzen
+        using-myeuropeana: My Europeana
     home:
       strapline: Entdecken Sie %{total_item_count} Kunstwerke, Artefakte, Bücher, Videos und Audios aus ganz Europa.
     more: Mehr...
@@ -77,7 +77,7 @@ de:
     news: Neuigkeiten
     object:
       actions:
-        attribute-author: Autor zuordnen
+        attribute-author: Autor erwähnen
         attribute-html: 
         attribute-plaintext: Nur Text
         download: Herunterladen
@@ -139,14 +139,14 @@ de:
         map: Karte
         map-tiles: Kacheln
         medium: 
-        people: Leute
+        people: Personen
         period: Zeitraum
         place: Ort
         place-time: Ort/Zeit
         properties: Eigenschaften
         provenance: Herkunft
         provided-by: Mehr herausfinden
-        provided-by-detail: 
+        provided-by-detail: Europeana zeigt dieses Objekt über %{institution_name_and_link} an. Besuchen Sie deren Webseite für weitere Informationen.
         provider: 'Beiträger '
         providing-country: Bereitstellendes Land
         publication-date: Erscheinungsdatum

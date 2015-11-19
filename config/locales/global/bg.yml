@@ -429,6 +429,11 @@ bg:
       show-more: "Покажи повече"
       view-more: "Виж повече"
     more-info: "Повече информация"
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: "нашите страници"
     password: "Парола"
     professional: Pro
