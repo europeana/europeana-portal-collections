@@ -47,6 +47,8 @@ de:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -387,7 +389,7 @@ de:
     help: Hilfe
     home: Startseite
     javascript-required: Um diese Inhalte zu sehen aktivieren Sie bitte JavaScript. Erwägen Sie zudem auf einen Web-Browser zurückzugreifen der HTML5-Inhalte unterstützt.
-    labs: Labore
+    labs: Labs
     labs-text: Remixen Sie kulturelle Inhalte mit unseren API & Datensätzen
     language-basque: Baskisch
     language-bulgarian: Bulgarisch
@@ -427,13 +429,18 @@ de:
       show-more: Mehr anzeigen
       view-more: Mehr anzeigen
     more-info: Mehr Information
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: Unsere Seiten
     password: Passwort
     professional: Pro
     professional-text: Machen Sie mit, teilen Sie Ihre Daten oder benutzen Sie unsere
     refine-your-search: Suche verfeinern
     register: Anmelden
-    research: Forschung
+    research: Research
     research-text: Mit der akademischen Gemeinschaft verbinden
     search-area:
       search-button-image-alt: Suche

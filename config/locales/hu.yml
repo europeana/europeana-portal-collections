@@ -118,7 +118,7 @@ hu:
           is-representation-of: 'A következő reprezentációja:'
           is-similar-to: 'Hasonló a következőhöz:'
           is-successor-of: 'A következő származéka:'
-          realises: 
+          realises: Kiadás
           was-present-at: Jelen volt
         extent: Méret
         file-size: Fájl mérete
@@ -146,7 +146,7 @@ hu:
         properties: Tulajdonságok
         provenance: Eredet
         provided-by: Tudj meg többet
-        provided-by-detail: 
+        provided-by-detail: Az Europeana a %{institution_name_and_link} oldalán keresztül mutatja be az elemeket. Látogassa meg az oldalukat több információért.
         provider: Szolgáltató
         providing-country: Szolgáltató ország
         publication-date: Kiadás dátuma

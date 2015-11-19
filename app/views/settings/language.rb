@@ -24,15 +24,55 @@ module Settings
                   selected: I18n.locale.to_s == 'en'
                 },
                 {
+                  text: t('global.language-bulgarian'),
+                  value: 'bg',
+                  selected: I18n.locale.to_s == 'bg'
+                },
+                {
+                  text: t('global.language-danish'),
+                  value: 'da',
+                  selected: I18n.locale.to_s == 'da'
+                },
+                {
                   text: t('global.language-dutch'),
                   value: 'nl',
                   selected: I18n.locale.to_s == 'nl'
                 },
                 {
+                  text: t('global.language-french'),
+                  value: 'fr',
+                  selected: I18n.locale.to_s == 'fr'
+                },
+                {
                   text: t('global.language-german'),
                   value: 'de',
                   selected: I18n.locale.to_s == 'de'
-                }
+                },
+                {
+                  text: t('global.language-greek'),
+                  value: 'el',
+                  selected: I18n.locale.to_s == 'el'
+                },
+                {
+                  text: t('global.language-hungarian'),
+                  value: 'hu',
+                  selected: I18n.locale.to_s == 'hu'
+                },
+                {
+                  text: t('global.language-portuguese'),
+                  value: 'pt',
+                  selected: I18n.locale.to_s == 'pt'
+                },
+                {
+                  text: t('global.language-russian'),
+                  value: 'ru',
+                  selected: I18n.locale.to_s == 'ru'
+                },
+                {
+                  text: t('global.language-spanish'),
+                  value: 'es',
+                  selected: I18n.locale.to_s == 'es'
+                },
               ]
             },
             language_itempages: {

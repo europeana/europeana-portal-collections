@@ -47,6 +47,8 @@ nl:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -427,6 +429,11 @@ nl:
       show-more: Meer
       view-more: Meer
     more-info: Meer informatie
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: onze sites
     password: Wachtwoord
     professional: Professional

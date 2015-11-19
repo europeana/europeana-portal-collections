@@ -1,42 +1,42 @@
 pl:
   global:
-    labs-link: 
+    labs-link: link do labs
     navigation:
-      all_blog_posts: 
+      all_blog_posts: Wszystkie Wpisy...
       all_exhibitions: Wszystkie Wystawy...
       blog: Blog
       browse: Przeglądaj
       browse_colours: Kolory
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
+      browse_newcontent: Nowości
+      browse_sources: "Źródła"
+      channels: Kolekcje
+      collections: Kolekcje
       exhibitions: Wystawy
       home: Strona główna
-    pro-link: 
-    pro-text: 
-    settings: 
+    pro-link: link do Europeana Pro
+    pro-text: tekst dla Europeana Pro
+    settings: ustawienia
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: Wersja alfa oznacza, że strona działa w ograniczonym zakresie, ponieważ jest na bieżąco rozbudowywana.Dlatego też może przejściowo nie działać. Twoja opinia pomoże nam usprawnić jej działanie!
+        link-text: Powiedz nam co myślisz!
+        title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka"'
+    blog-link: link do bloga
     browse:
       colours:
         title: Kolory
       newcontent:
-        title: 
+        title: Nowości
       sources:
-        title: 
+        title: "Źródła"
     collections:
       art-history:
-        description: 
-        title: 
+        description: Od renesansu do surrealistów, od starożytnej rzymskiej rzeźby do sztuki współczesnej, Europeana Historia Sztuki, pozwoli Ci zapoznać się z artystami i ich pracami z całej Europy.
+        title: Europeana Historia Sztuki
       data-types:
-        3d: 
-        count: 
+        3d: Obiekty 3D
+        count: obiekty
         images: Obrazy
         moving-images: Ruchome obrazy
         sound: Nagrania
@@ -47,14 +47,14 @@ pl:
         spotlight-on: 
       music:
         description: 
-        title: 
+        title: Europeana Muzyka
     facet:
       language:
         show:
-          results: 
+          results: Wyniki
     footer:
       menu:
-        about: 
+        about: O nas
         become-a-provider: 
         contact: 
         copyright: 
