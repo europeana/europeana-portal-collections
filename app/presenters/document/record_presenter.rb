@@ -107,6 +107,14 @@ module Document
         collections['9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian'] = identifier.sub(identifier.match('.+/uuid')[0], 'http://iiif.bodleian.ox.ac.uk/iiif/manifest') + '.json'
       end
 
+      # test url: http://localhost:3000/portal/record/9200173/9B976C77421CE43F3BDA72EF47BCCC08AF94A238.html?debug=json
+      if collection.match('9200173')
+        numeric_part = identifier.split('llgc-id:')
+        if(numeric_part.size > 1)
+          numeric_part = numeric_part[1].split(',')[0]
+          collections[collection] = 'http://dams.llgc.org.uk/iiif/2.0/' + numeric_part + '/manifest.json'
+        end
+      end
       collections[collection]
     end
   end
