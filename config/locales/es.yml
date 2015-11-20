@@ -28,6 +28,9 @@ es:
       colours:
         title: Colores
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nuevo Contenido
       sources:
         title: Recursos

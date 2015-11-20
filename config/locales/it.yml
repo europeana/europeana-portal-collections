@@ -27,6 +27,9 @@ it:
       colours:
         title: Colori
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nuovo contenuto
       sources:
         title: Fonti
