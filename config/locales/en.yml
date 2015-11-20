@@ -27,6 +27,9 @@ en:
       colours:
         title: Colours
       newcontent:
+        tableh1: Data Providers
+        tableh2: Items
+        tableh3: Date
         title: New Content
       sources:
         title: Sources

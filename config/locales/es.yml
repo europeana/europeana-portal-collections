@@ -28,6 +28,9 @@ es:
       colours:
         title: Colores
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nuevo Contenido
       sources:
         title: Recursos
@@ -57,12 +60,12 @@ es:
       menu:
         about: Acerca de
         become-a-provider: 
-        contact: 
+        contact: Contactar
         copyright: Derechos de Autor
         data-providers: Todos los proveedores de datos
-        help: 
+        help: Ayuda
         new-collections: Nuevas Colecciones
-        rights: 
+        rights: Terminos de usp
         search-tips: 'Consejos de búsqueda '
         using-myeuropeana: Usando Mi Europeana
     home:
@@ -138,7 +141,7 @@ es:
         location: Localización
         longitude: Longitud
         map: Mapa
-        map-tiles: 
+        map-tiles: Mosaico
         medium: Técnica
         people: Personas
         period: Periodo

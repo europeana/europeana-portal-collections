@@ -11,8 +11,11 @@ module Browse
         {
           title: page_title,
           recent: @providers.blank? ? nil : {
-            title: t('site.collections.labels.recent'),
-            items: stylised_recent_additions(@providers, max: 1000, from: :same)
+            title: t('site.browse.newcontent.title'),
+            items: stylised_recent_additions(@providers, max: 1000, from: :same),
+            tableh1: t('site.browse.newcontent.tableh1'),
+            tableh2: t('site.browse.newcontent.tableh2'),
+            tableh3: t('site.browse.newcontent.tableh3')
           }
         }
       end

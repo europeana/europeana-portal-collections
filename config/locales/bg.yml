@@ -27,6 +27,9 @@ bg:
       colours:
         title: "Цветове"
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: "Ново съдържание"
       sources:
         title: "Източници"

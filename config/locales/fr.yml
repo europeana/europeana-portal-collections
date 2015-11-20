@@ -1,11 +1,11 @@
 fr:
   global:
-    labs-link: lien vers labs
+    labs-link: ''
     navigation:
       all_blog_posts: Tous les posts...
       all_exhibitions: Toutes les expositions...
       blog: Blog
-      browse: Naviguer
+      browse: Parcourir
       browse_colours: Par couleurs
       browse_newcontent: Nouveau contenu
       browse_sources: Par sources
@@ -13,8 +13,8 @@ fr:
       collections: Collections
       exhibitions: Expositions
       home: Accueil
-    pro-link: lien vers pro
-    pro-text: texte pour pro
+    pro-link: ''
+    pro-text: ''
     settings: paramètres
   site:
     alpha:
@@ -27,6 +27,9 @@ fr:
       colours:
         title: Couleurs
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nouveau contenu
       sources:
         title: Sources
@@ -35,16 +38,16 @@ fr:
         description: 'Depuis la Renaissance jusqu''aux surréalistes, depuis la sculpture Romaine ancienne jusqu''à l''art contemporain, Europeana Collection Art et Histoire de l''Art vous fait découvrir les artistes et oeuvres d''art de toute l''Europe. '
         title: Europeana Histoire de l'Art
       data-types:
-        3d: objets 3D
+        3d: Objets 3D
         count: objets
         images: Images
         moving-images: Vidéos
         sound: Enregistrements sonores
         texts: Textes
       labels:
-        credits: 
+        credits: Administrée par
         recent: Ajouts récents
-        spotlight-on: 
+        spotlight-on: Lumière sur
       music:
         description: '<strong>Europeana Collections: Musique</strong> rassemble les meilleurs enregistrements musicaux, partitions de musique, et autres collections musicales des archives audiovisuelles, bibliothèques, musées européens. <a href="/portal/channels/music/about">En savoir plus sur Europeana Collections: Musique</a>'
         title: Europeana Musique
@@ -55,7 +58,7 @@ fr:
     footer:
       menu:
         about: "À propos"
-        become-a-provider: Devenez une institution contribuant à Europeana
+        become-a-provider: Devenez notre partenaire
         contact: Contact
         copyright: Copyright
         data-providers: Toutes les institutions
@@ -79,9 +82,9 @@ fr:
       actions:
         attribute-author: Mentionnez le nom de l'auteur
         attribute-html: HTML
-        attribute-plaintext: Texte intégral
+        attribute-plaintext: Texte brut
         download: Télécharger
-        download-additional: 
+        download-additional: Aussi disponible comme suit
         downloaddata: Télécharger les données
         open-media: Ouvrir ce contenu
         show-less-data: Voir moins de données
@@ -137,16 +140,16 @@ fr:
         location: Localisation
         longitude: Longitude
         map: Carte
-        map-tiles: 
+        map-tiles: Données cartographiques
         medium: Support
-        people: Personnes
+        people: Contributeurs
         period: Période
-        place: Lieu
+        place: Couverture géographique
         place-time: Lieu/Temps
         properties: Propriétés
         provenance: Provenance
         provided-by: En savoir plus
-        provided-by-detail: 
+        provided-by-detail: 'Cet objet est accessible sur Europeana à partir de %{institution_name_and_link}. Rendez-vous sur leur site pour plus d''information. '
         provider: Aggrégateur
         providing-country: Pays contributeur
         publication-date: Date de publication
@@ -161,7 +164,7 @@ fr:
         source: Source
         subject: Sujet
         temporal: Couverture temporelle
-        time: Temps
+        time: Couverture temporelle
         timestamp-created: Première publication sur Europeana
         timestamp-updated: Dernière mise à jour sur Europeana
         timestamp_created: Première publication sur Europeana (%{timestamp_created})
@@ -259,7 +262,7 @@ fr:
         view:
           grid: Grille
           list: Liste
-        view-at-provider: Voir l'objet
+        view-at-provider: Voir sur le site de
     search:
       placeholder:
         text: Ajouter un terme à votre recherche

@@ -27,6 +27,9 @@ el:
       colours:
         title: "Χρώματα"
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: "Νέο Περιεχόμενο"
       sources:
         title: "Πηγές"
