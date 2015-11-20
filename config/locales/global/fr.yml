@@ -223,20 +223,20 @@ fr:
         channel: Collections
         colourpalette: Couleur
         country: Pays
-        data_provider: Auteur des données
+        data_provider: Institution
         image_aspectratio: Orientation
         image_colour: Palette
         image_size: Taille
         language: Langue
         language_of_description: Langue de la description
-        media: 
+        media: Seulement les objets avec un lien direct vers le contenu
         mime_type: Format du fichier
         provider: Aggrégateur
         reusability: Puis-je l'utiliser?
         sound_duration: Durée
         sound_hq: Haute qualité
         text_fulltext: Texte intégral
-        type: 
+        type: Media
         ugc: Voir le contenu généré par les utilisateurs
         video_duration: Durée de la vidéo
         year: Date
@@ -383,14 +383,14 @@ fr:
     genres-traditional-music: Musique traditionnelle
     header:
       connect: connecter
-      develop: developper
+      develop: développer
       discover: découvrir
-      network: réseau
+      network: contribuer
     help: Aide
     home: Accueil
     javascript-required: Pour voir ce contenu, activez l'option JavaScript si elle est désactivée; nous vous recommandons de mettre à niveau votre navigateur avec une version compatible avec HTML5.
     labs: 
-    labs-text: 
+    labs-text: Réutilisez notre contenu par nos APIs et datasets
     language-basque: Basque
     language-bulgarian: Bulgare
     language-catalan: Catalan
@@ -422,7 +422,7 @@ fr:
     language-swedish: Suédois
     language-ukranian: Ukrainien
     login: S'identifier
-    mission: 
+    mission: On transforme le monde par la culture! Nous voulons construire sur le riche héritage culturel européen et donner aux gens la possibilité de le réutiliser facilement, pour leur travail, pour leur apprentissage personnel ou tout simplement pour s'amuser.
     mission-title: Notre mission
     more:
       load-more: Plus
@@ -430,18 +430,18 @@ fr:
       view-more: Voir plus
     more-info: En savoir plus
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
+      email-address-invalid: L'email doit être une adresse email valide.
+      email-address-required: Une adresse email doit être précisée.
+      language-required: Une langue doit être précisée.
+      signup: Inscrivez-vous à notre newsletter
     our-sites: nos sites
     password: Mot de passe
     professional: 
     professional-text: Participez, partagez vos données ou utilisez les nôtres
     refine-your-search: Préciser la recherche
     register: S'enregistrer
-    research: Recherche
-    research-text: 
+    research: Research
+    research-text: Un pont avec la communauté académique
     search-area:
       search-button-image-alt: Chercher
       search-placeholder-text: Ajouter un terme à la requête

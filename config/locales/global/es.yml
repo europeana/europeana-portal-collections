@@ -430,7 +430,7 @@ es:
       view-more: Ver más
     more-info: Más información
     newsletter:
-      email-address-invalid: 
+      email-address-invalid: 'Debe de ser una direccion de correo electronico valida '
       email-address-required: 
       language-required: 
       signup: 
