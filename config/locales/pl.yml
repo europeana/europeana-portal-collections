@@ -27,6 +27,9 @@ pl:
       colours:
         title: Kolory
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nowości
       sources:
         title: "Źródła"
@@ -55,29 +58,29 @@ pl:
     footer:
       menu:
         about: O nas
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
+        become-a-provider: Zostań naszym partnerem
+        contact: Kontakt
+        copyright: Prawa autorskie
+        data-providers: Wszystkie instytucje
+        help: Pomoc
+        new-collections: Nowe Kolekcje
+        rights: Warunki i zasady użytkowania
         search-tips: 
         using-myeuropeana: 
     home:
       strapline: 
-    more: 
+    more: Więcej...
     my-europeana: 
     my-europeana-link: 
     navigation:
       breadcrumb:
         item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        results_list: Lista Wyników
+        return_home: Powrót do strony głównej
+    news: Wiadomości
     object:
       actions:
-        attribute-author: 
+        attribute-author: Oznacz autora
         attribute-html: 
         attribute-plaintext: 
         download: 

@@ -35,15 +35,23 @@ module Browse
         dps = provider.delete(:data_providers)
         dp_data_all = []
         if dps.present?
+
+          # first data-provider item is the (opened) provider:
+          dp_data_all << {
+            val: provider[:text] + ' (' + number_with_delimiter(provider[:count]) + ')',
+            foldable_url: provider[:url],
+            foldable_link: true
+          }
+          # the rest of the data-providers:
           dps.each do |dp|
             dp_data_all << {
-              count: number_with_delimiter(dp[:count]),
-              val: dp[:text],
+              val: dp[:text] + ' (' + number_with_delimiter(dp[:count]) + ')',
               foldable_url: dp[:url],
               foldable_link: true
             }
           end
           provider[:fields] = dp_data_all
+          provider[:title] = provider[:text] + ' (' + number_with_delimiter(provider[:count]) + ')'
         end
       end
       @providers

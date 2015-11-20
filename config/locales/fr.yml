@@ -27,6 +27,9 @@ fr:
       colours:
         title: Couleurs
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nouveau contenu
       sources:
         title: Sources
