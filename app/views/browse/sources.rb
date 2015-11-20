@@ -30,7 +30,6 @@ module Browse
     protected
 
     def stylised_providers
-
       @providers.each do |provider|
         provider[:count] = number_with_delimiter(provider[:count])
         dps = provider.delete(:data_providers)
