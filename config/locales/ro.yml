@@ -19,9 +19,8 @@ ro:
   site:
     alpha:
       feedback_banner:
-        description: |-
-          Aceasta este o versiune alfa a noii platforme, însemnânand că se află în lucru și va fi actualizat periodic. Se poate întâmpla ca pagina să nu fie găsită online. Părerile voastre ne ajută să îmbunătățim pagina.
-          An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
+        description: |
+          Aceasta este o versiune Alfa ceea ce înseamnă că se află încă în lucru și că va fi actualizată periodic. Se poate întâmpla ca pagina să nu fie disponibilă. Părerile voastre ajută la îmbunătățirea acesteia.
         link-text: Trimite-ne sugestiile tale!
         title: Aceasta este versiunea Alfa a noilor noastre "Colecții" și a "Colecției de Muzică"
     blog-link: 
@@ -29,16 +28,16 @@ ro:
       colours:
         title: Culori
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
+        tableh1: Instituții
+        tableh2: "Înregistrări"
+        tableh3: Dată
         title: Noi înregistrări
       sources:
         title: Surse
     collections:
       art-history:
         description: De la Renaștere până la Suprarelism, de la sculptura Romei Antice la arta contemporană, colecția de Artă și Istoria Artelor din Europeana vă aduce în atenție artiști și opere de artă din întreaga Europă.
-        title: 
+        title: Europeana Istoria Artelor
       data-types:
         3d: Obiecte 3D
         count: "înregistrări"
@@ -47,7 +46,7 @@ ro:
         sound: "Înregistrări audio"
         texts: Texte
       labels:
-        credits: Selectat de
+        credits: Alcătuit de
         recent: Adăugări recente
         spotlight-on: Sub lupă
       music:
@@ -91,8 +90,8 @@ ro:
         download-additional: Disponibil și ca
         downloaddata: Descarcă date
         open-media: Deschide această înregistrare
-        show-less-data: Arată mai puține informații
-        show-more-data: Arată mai multe informații
+        show-less-data: Arată mai puține date
+        show-more-data: Arată mai multe date
         technicalmetadata: Metadate technice
       enrichment:
         who:
@@ -102,8 +101,8 @@ ro:
         view-items-above: vezi obiectele de mai sus
         view-items-below: vezi obiectele de mai jos
       meta-label:
-        codec: 
-        collection-name: 
+        codec: Codec
+        collection-name: Set de date
         concept: Concept
         concepts: Clasificare
         consists-of: 'Conține '
@@ -145,7 +144,7 @@ ro:
         longitude: Longitudine
         map: Hartă
         map-tiles: 
-        medium: 
+        medium: Suport
         people: Oameni
         period: Perioada
         place: Loc
@@ -163,7 +162,7 @@ ro:
         relations: Relații
         rights: Drepturi
         rights-human: Pot folosi?
-        runtime: 
+        runtime: runtime
         runtime-unit-seconds: secunde
         source: Sursă
         subject: Subiect
@@ -182,25 +181,25 @@ ro:
       named-entities:
         title: 
         what:
-          broader: 
-          label: 
-          term: 
+          broader: Concept mai larg
+          label: Etichetă concept
+          term: Terminologie concept
           title: Ce
         when:
           begin: Perioada Început
           end: Perioada Sfârșit
-          label: Perioada Etichetă
-          term: Perioada Termen
+          label: Etichetă Perioadă
+          term: 'Termen Perioada '
           title: Când
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
+          label: Etichetă Loc
+          latitude: Loc latitudine
+          longitude: Loc longitudine
+          term: Termen loc
           title: Unde
         who:
-          label: 
-          term: 
+          label: Etichetă Agent
+          term: Termen Agent
           title: Cine
       nav:
         next: Următor
@@ -259,15 +258,13 @@ ro:
         more_adv: Filtre avansate
         product-3D: 3D
         product-image: Imagine
-        product-sound: |-
-          Sunet
-          Înregistrare audio
+        product-sound: "Înregistrare audio"
         product-text: Text
         product-video: "Înregistrare video"
         results-relevance: Relevanță
         single-result: 1 rezultat găsit pentru %{query_terms}
         view:
-          grid: 
+          grid: Grilă
           list: Listă
         view-at-provider: Vezi la
     search:
@@ -280,9 +277,9 @@ ro:
         clear-selection: Anulează selecție
         save-settings: Salvează setări
       language:
-        auto-translate-page: Tradu automat .....
-        auto-translate-page-short: 
-        auto-translate-query: 
+        auto-translate-page: Tradu automat pagina în
+        auto-translate-page-short: Tradu automat înregistrarea în
+        auto-translate-query: Tradu automat cuvinte-cheie în
         available: |-
           Disponibil în limba
           Limbi disponibile
