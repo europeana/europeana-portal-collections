@@ -34,6 +34,7 @@ module Portal
           }
         }.merge(helpers.navigation)
       end
+      helpers.get_navigation.merge(mustache[:navigation])
     end
 
     protected

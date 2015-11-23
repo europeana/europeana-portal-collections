@@ -47,7 +47,7 @@ pl:
       7F007F: 
       7FFF00: 
       7FFFD4: 
-      '800000': 
+      '800000': Kasztanowy
       '800080': 
       '808000': 
       '808080': ''
@@ -170,7 +170,7 @@ pl:
       advanced:
         options: Opcje
         show:
-          ugc: 
+          ugc: Materiały dodane przez użytkowników
       art:
         form:
           paintings:
@@ -238,7 +238,7 @@ pl:
         text_fulltext: Pełna Treść
         type: Media
         ugc: Pokaż obiekty dodane przez użytkowników
-        video_duration: 
+        video_duration: Czas Trwania
         year: Data
       image_aspectratio:
         landscape: Pejzaż
@@ -293,9 +293,9 @@ pl:
       more: Więcej
       more-refinements: Więcej filtrów
       resource:
-        type: 
+        type: Typ
       reusability:
-        advanced: 
+        advanced: Zaawansowane
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -313,7 +313,7 @@ pl:
         open: Tak, ale z podaniem źródła
         permission: Tylko za pisemną zgodą
         restricted: Tak, ale z ograniczeniami
-        simple: 
+        simple: Proste
       sound_duration:
         long: Długi
         medium: "Średni"
@@ -371,7 +371,7 @@ pl:
       header:
         video_hd:
           'true': Wysoka rozdzielczość
-    find-us-elsewhere: 
+    find-us-elsewhere: Znajdź nas także
     forgot-password: Nie pamiętam hasła.
     genres: gatunki
     genres-chamber-music: Muzyka kameralna
@@ -385,12 +385,12 @@ pl:
       connect: zbliżaj
       develop: twórz
       discover: odkrywaj
-      network: "łącz"
+      network: poznaj
     help: Pomoc
     home: Strona główna
     javascript-required: Chcesz uzyskać dostęp do pełnej zawartości tej strony? W tym celu należy włączyć obsługę JavaScript. Zalecamy również zmianę przeglądarki na obsługującą elementy w HTML5
-    labs: Laboratoria
-    labs-text: 
+    labs: Europeana Labs
+    labs-text: Twórz dzięki naszemu API
     language-basque: Baskijski
     language-bulgarian: Bułgarski
     language-catalan: Kataloński
@@ -422,7 +422,7 @@ pl:
     language-swedish: Szwedzki
     language-ukranian: Ukraiński
     login: Login
-    mission: 
+    mission: Kulturą zmieniamy świat! Chcemy budować na bogatym dziedzictwie kulturowym Europy i ułatwić do niego dostęp, aby każdy miał szansę wykorzystać je w pracy, do nauki lub po prostu dla zabawy.
     mission-title: Nasza misja
     more:
       load-more: Więcej
@@ -430,17 +430,17 @@ pl:
       view-more: Zobacz więcej
     more-info: Więcej infromacji
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
+      email-address-invalid: Wprowadź poprawny adres email.
+      email-address-required: Dodaj adres email.
+      language-required: Zaznacz preferowany język.
+      signup: Zapisz się, by otrzymywać nasz biuletyn
     our-sites: nasze strony
     password: Hasło
-    professional: Dla specjalistów
+    professional: Europeana Pro
     professional-text: Zaangażuj się, podziel się swoją wiedzą lub wykorzystaj naszą
     refine-your-search: Zawęź wyniki wyszukiwania
     register: Zarejestruj się
-    research: Badania naukowe
+    research: Europeana Research
     research-text: Dołącz do środowisk naukowych
     search-area:
       search-button-image-alt: Szukaj
@@ -457,5 +457,5 @@ pl:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Wyniki
+        show-results-all: Pokaż wszystkie wyniki

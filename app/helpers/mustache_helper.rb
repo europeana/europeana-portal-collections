@@ -169,6 +169,10 @@ module MustacheHelper
   end
   alias_method :channel_data, :collection_data
 
+  def get_navigation
+    navigation
+  end
+
   def navigation
     mustache[:navigation] ||= begin
       {
@@ -286,15 +290,15 @@ module MustacheHelper
             items: [
               {
                 text: t('site.footer.menu.search-tips'),
-                url: '#'
+                url: 'help'
               },
-              {
-                text: t('site.footer.menu.using-myeuropeana'),
-                url: '#'
-              },
+              # {
+              #   text: t('site.footer.menu.using-myeuropeana'),
+              #   url: '#'
+              # },
               {
                 text: t('site.footer.menu.copyright'),
-                url: '#'
+                url: 'rights'
               }
             ]
           },

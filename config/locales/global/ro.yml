@@ -231,7 +231,7 @@ ro:
         language_of_description: Limba Descrierii
         media: Doar înregistrări cu legături către fișiere media
         mime_type: Formatul fișierului
-        provider: Instituția
+        provider: Agregator
         reusability: Pot folosi?
         sound_duration: Durata
         sound_hq: Calitate superioară
@@ -310,9 +310,9 @@ ro:
         advanced-rrpa: ''
         advanced-rrra: ''
         advanced-ucs: ''
-        open: Da cu atribuire
+        open: Da, cu atribuire
         permission: Doar cu permisiune
-        restricted: Da cu restricții
+        restricted: Da, cu restricții
         simple: Simplu
       sound_duration:
         long: Lungă (6+ min)
@@ -330,7 +330,7 @@ ro:
         image: Imagine
         sound: Sunet
         text: Text
-        video: Video
+        video: Videoclip
       type-image:
         orientation:
           label: Orientarea imaginii
@@ -382,15 +382,15 @@ ro:
     genres-popular-music: Muzică de consum
     genres-traditional-music: Muzică tradițională
     header:
-      connect: 
+      connect: conectează-te
       develop: dezvoltă
       discover: descoperă
-      network: rețea
+      network: alătură-te
     help: Ajutor
     home: Acasă
     javascript-required: Pentru a accesa acest conținut activați opțiunea JavaScript, și luați în considerare actualizarea navigatorului dvs. web către o versiune care suportă vizualizarea de conținut HTML5.
     labs: ''
-    labs-text: Combinați conținutul digital cu ajutorul interfețelor noastre API & a seturilor de date
+    labs-text: Combină conținutul digital cultural cu ajutorul interfeței API & a seturilor de date
     language-basque: 
     language-bulgarian: 
     language-catalan: 
@@ -430,23 +430,23 @@ ro:
       view-more: Vezi mai mult
     more-info: Mai multe informații
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
+      email-address-invalid: Adresa de email trebuie să fie validă
+      email-address-required: Specificați o adresă de email
+      language-required: Specificați limba
+      signup: "Înscrieți-vă aici pentru a primi buletinul nostru de știri"
     our-sites: paginile noastre
     password: Parolă
     professional: ''
-    professional-text: Implică-te, timite-ne ....ale tale și folosește-le pe ale noastre
+    professional-text: Implică-te, partajează datele pe care le deții sau exploatează-le pe cele existente la noi
     refine-your-search: Rafinează căutare
     register: "Înregistrează-te"
     research: ''
     research-text: Puntea către comunitatea academică
     search-area:
       search-button-image-alt: Caută
-      search-placeholder-text: Adaugă termen de căutare
+      search-placeholder-text: Adaugă un termen de căutare
     search-collections: Colecții
-    search-collections-text: Explorează patrimoniul cultural european
+    search-collections-text: Exploră patrimoniul cultural european
     share: Partajează
     sitemap: Harta siteului
     terms-and-policies: Termeni și condiții
