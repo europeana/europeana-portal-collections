@@ -165,7 +165,7 @@ hu:
     channels-fashion: Divat
     channels-music: Zene
     choose-language: Nyelv
-    email-address: emailcím
+    email-address: Email cím
     facet:
       advanced:
         options: Beállítások
@@ -333,12 +333,12 @@ hu:
         video: Videó
       type-image:
         orientation:
-          label: Kép orientációja
+          label: Kép tájolása
           landscape: Fekvő
           portrait: Portré
         quality:
           all: Mutasd az összeset
-          hq-only: Csak magas minőségűek mutatása
+          hq-only: Csak jó minőségűek mutatása
           label: Minőség
         size:
           explanation: Mit jelentenek ezek a méretek?
@@ -376,7 +376,7 @@ hu:
     genres: műfajok
     genres-chamber-music: Kamarazene
     genres-classical-music: Klasszikus zene
-    genres-concertos: Versebyművek
+    genres-concertos: Versenyművek
     genres-non-western-classical-music: Nem nyugati klasszikus művek
     genres-opera: Opera
     genres-popular-music: Könnyűzene
@@ -385,14 +385,14 @@ hu:
       connect: csatlakoztassa
       develop: fejlessze
       discover: fedezze fel
-      network: hálozat
+      network: hálózat
     help: Segítség
     home: Főoldal
-    javascript-required: 'Hogy ezt a tartalmat megtekinthesse, kérjük engedélyezze a JavaScript használatát, és javasoljuk egy '
+    javascript-required: Hogy ezt a tartalmat megtekinthesse, kérjük engedélyezze a JavaScript használatát; javasoljuk olyan böngésző használatát is, mely a HTML5 tartalmat támogatja.
     labs: Labs
     labs-text: Remixelje a kulturális tartalmainkat az API-ink és adathalmazaink segítségével.
     language-basque: Baszk
-    language-bulgarian: Bulgár
+    language-bulgarian: Bolgár
     language-catalan: Katalán
     language-croatian: Horvát
     language-czech: Cseh
@@ -422,7 +422,7 @@ hu:
     language-swedish: Svéd
     language-ukranian: Ukrán
     login: Bejelentkezés
-    mission: Megváltoztatjuk a világot kultúrával! Európa gazdag örökségére akarunk építeni és ezt könnyen hozzáférhetővé tenni az embereknek, használják akár munkára, tanulásra vagy szórakozásra.
+    mission: Megváltoztatjuk a világota kultúra segítségével! Európa gazdag örökségére akarunk építeni és ezt könnyen hozzáférhetővé tenni az emberek számára, legyen az munka, tanulás vagy szórakozás céljára.
     mission-title: Küldetésünk
     more:
       load-more: Több
@@ -430,18 +430,18 @@ hu:
       view-more: Nézz meg többet
     more-info: Több információ
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
+      email-address-invalid: Működő email címet adjon meg.
+      email-address-required: Meg kell adnia egy email címet.
+      language-required: Meg kell jelölnie egy nyelvet.
+      signup: Iratkozon fel hírlevelünkre.
     our-sites: weboldalaink
     password: Jelszó
     professional: Pro
-    professional-text: Csatlakozz te is, oszd meg adataidat vagy használd fel a mienket
+    professional-text: Csatlakozz te is, oszd meg adataidat vagy használd fel a miénket
     refine-your-search: Finomítsd a keresésed
     register: Regisztráció
     research: Kutatás
-    research-text: Az akadémiai közösséghez való csatlakozás
+    research-text: A kutató közösséghez való csatlakozás
     search-area:
       search-button-image-alt: Keresés
       search-placeholder-text: Adj meg egy keresőszót
