@@ -286,15 +286,15 @@ module MustacheHelper
             items: [
               {
                 text: t('site.footer.menu.search-tips'),
-                url: '#'
+                url: 'help'
               },
-              {
-                text: t('site.footer.menu.using-myeuropeana'),
-                url: '#'
-              },
+              #{
+              #  text: t('site.footer.menu.using-myeuropeana'),
+              #  url: '#'
+              #},
               {
                 text: t('site.footer.menu.copyright'),
-                url: '#'
+                url: 'rights'
               }
             ]
           },
