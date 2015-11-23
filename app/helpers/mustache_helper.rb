@@ -288,10 +288,10 @@ module MustacheHelper
                 text: t('site.footer.menu.search-tips'),
                 url: 'help'
               },
-              #{
-              #  text: t('site.footer.menu.using-myeuropeana'),
-              #  url: '#'
-              #},
+              # {
+              #   text: t('site.footer.menu.using-myeuropeana'),
+              #   url: '#'
+              # },
               {
                 text: t('site.footer.menu.copyright'),
                 url: 'rights'
