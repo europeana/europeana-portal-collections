@@ -21,21 +21,21 @@ hu:
       feedback_banner:
         description: Az Alpha verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért az oldal néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
         link-text: "Írd le a véleményed!"
-        title: Ez egy Alpha verziója az új Gyűjteményeknek és Zenei Gyűjteményeknek
+        title: Ez egy Alpha verziója új Gyűjtemények és Zenei Gyűjtemények számára
     blog-link: link a blogra
     browse:
       colours:
         title: Színek
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
+        tableh1: Adatszolgáltatók
+        tableh2: Elemek
+        tableh3: Dátum
         title: "Új tartalom"
       sources:
         title: Források
     collections:
       art-history:
-        description: A reneszánsztól a szürrealistákig, az ókori római szobrászattól a kortárs művészetig, az Europeana Művészeti és Művészettörténeti Gyűjtemény bevezet a művészek és a műalkotások világába szerte Európából. [Valami interaktív elemeről]
+        description: A reneszánsztól a szürrealistákig, az ókori római szobrászattól a kortárs művészetig, az Europeana Művészeti és Művészettörténeti Gyűjtemény bevezet a művészek és a műalkotások világába szerte Európából. [Valami interaktív elemről]
         title: Europeana Művészettörténet
       data-types:
         3d: 3D tárgyak
@@ -45,7 +45,7 @@ hu:
         sound: Hangfelvételek
         texts: Szövegek
       labels:
-        credits: 'Kurátor:'
+        credits: Kurátor
         recent: Legutóbbi hozzáadások
         spotlight-on: Reflektorfényben
       music:
@@ -58,7 +58,7 @@ hu:
     footer:
       menu:
         about: Rólunk
-        become-a-provider: Válj partnerünké
+        become-a-provider: Legyél a partnerünk
         contact: Elérhetőség
         copyright: Copyright
         data-providers: "Összes intézmény"
@@ -68,7 +68,7 @@ hu:
         search-tips: Keresési segítség
         using-myeuropeana: Saját Europeana használata
     home:
-      strapline: Fedezz fel %{total_item_count} műalkotást, műtárgyat, könyvet, videót és hanganyagot Európa összes részéről.
+      strapline: Fedezz fel %{total_item_count} műalkotást, műtárgyat, könyvet, videót és hanganyagot Európa teljes területéről.
     more: Tovább...
     my-europeana: Saját Europeana
     my-europeana-link: link a Saját Europeana-ra
@@ -84,11 +84,11 @@ hu:
         attribute-html: HTML
         attribute-plaintext: Egyszerű szöveg
         download: Letöltés
-        download-additional: "Úgyszintén elérhető mint"
-        downloaddata: Töltsd le az adatot
+        download-additional: Elérhető úgy is mint
+        downloaddata: Adatletöltés
         open-media: Média elem megnyítása
         show-less-data: Mutass kevesebb adatot
-        show-more-data: Mutass bővebb adatot
+        show-more-data: Mutass több adatot
         technicalmetadata: Technikai metaadat
       enrichment:
         who:
@@ -165,7 +165,7 @@ hu:
         subject: Tárgy
         temporal: Időbeli
         time: Idő
-        timestamp-created: Először közzétéve az Europeana-ban
+        timestamp-created: Első közzététel időpontja az Europeana-ban
         timestamp-updated: Utolsó frissítés az Europeana-ban
         timestamp_created: 'Először közzétéve az Europeana-ban: (%{timestamp_created})'
         timestamp_updated: 'Utolsó frissítés időpontja az Europeana-ban: (%{timestamp_updated})'
@@ -213,18 +213,18 @@ hu:
         text: Sajnos nem találjuk a kért oldalt. Próbáljon meg keresni az Europeana-ban vagy válasszon a lenti kiemelt elemek közül.
       about:
         text: |-
-          <p>Akár inspirációért nézett be, kutatáson dolgozik, esetleg a következő kávésbögre dizájnját keresi, vagy csak egyszerűen csak körbe szeretne nézni, mi reméljük, hogy megtalálja amit keres a több mint 45 millió tárgy között, melyet itt tárolunk.</p>
+          <p>Ihletet keres, kutatáson dolgozik, esetleg a következő kávésbögre dizájnját keresi, vagy csak egyszerűen csak szétnézett: reméljük, hogy a több mint 45 millió tárgy között, melyet itt tárolunk, Ön is megtalálja, amit keres .</p>
 
-          <p>Az oldalon fellelhető anyag egész Európából érkezik és a gyűjtemények felhasználása igazán lenyűgöző. Célunk, hogy segítsünk eligazodni látogatóinknak, hogy felfedezhessenek saját maguknak kincseket.</p>
+          <p>Az oldalon fellelhető anyag Európa teljes területéről érkezik és a gyűjtemények terjedelme igazán lenyűgöző. Célunk, hogy segítsünk eligazodni látogatóinknak abban, hogy felfedezhessenek saját kincseiket.</p>
 
           <p>Az utóbbi években bővítettük a gyűjteményeinket és mind többet és többet tudtunk meg róluk és látogatóinkról is, hogy mire szeretnék őket felhasználni. Most viszont eljött az idő, hogy megváltoztassunk egy pár dolgot és javítsuk szolgáltatásunkat!</p>
 
-          <p>Egy új verzióját próbáljuk ki Europeana Gyűjteményeknek. Keményen dolgozunk azon, hogy javítsunk látogatóink élményén és lehetővé tegyük, hogy a lehető legkönnyebben megtalálhassák amit keresnek. Ezért lehet, hogy megkérünk segítsd munkánkat pár kérdésre való válasszal. Válaszaid nagyon sokat segíthetnek, ezért kérünk szánj rá pár percet, hogy megoszd gondolataid velünk! Köszönjük!</p>
+          <p>Egy új verzióját próbáljuk ki Europeana Gyűjteményeknek. Keményen dolgozunk azon, hogy javítsunk látogatóink élményén és lehetővé tegyük, hogy a lehető legkönnyebben megtalálhassák amit keresnek. Ezért lehet, hogy megkérünk arra, segítsd munkánkat pár kérdésre való válasszal. Válaszaid nagyon sokat segíthetnek, ezért kérünk szánj rá pár percet, hogy megoszd gondolataid velünk! Köszönjük!</p>
 
-          <p>Nagyon reméljük, hogy addig is tetszéssel tölt el ez a kulturális utazás velünk.</p>
+          <p>Nagyon reméljük, hogy addig is kedvét leli a velünk való kulturális utazásban.</p>
         title: "Üdvözöljük, kultúra szerelmese!"
       music-channel-about:
-        text: "<p>Képzeld el milyen lehet megtekinteni egy eredeti kézzel írt kottát, miközben az előadását hallgatod különböző előadóktól és közben a zeneszerző életrajzát is böngészed. Az Europeana Zenei Gyűjteménnyel ezt mind megteheted!</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Partnereink</a>, mind zeneszakértők egész Európából, gondosan válogatták ki ezt a zenei felvételekből, kottákból, hangszerek képeiből, zenével kapcsolatos könyvekből és más zenéhez kapcsolódó anyagokból álló gyűjteményt. </p>\n\n<p>Elérhetővé tettük nektek, látogatóinknak ezt a korai teszt verzióját a Zenei Csatornának, hogy segítsetek formálni amint továbbfejlesztjük. Tehát, amíg az oldal böngészi néha megkérjük, hogy válaszoljon pár kérdésre vagy kérdőívre. Nagyra értékelnénk, ha időt szánna ezeknek a kérdéseknek megválaszolására, illetve kérdőívek kitöltésére!</p>\n\n<p>Értékeljük az átláthatóságot és magánéletet, így tudnod kell továbbá azt is, hogy naplózzuk a felhasználói statisztikákat és felhasználói viselkedést a Google Analyticsban és egy Hotjar nevű szolgáltatásban. Azért tesszük mindezt, hogy megtudjuk mit rontottunk el a tervezésben és nagyban segít javítsuk a Zenei Csatornát. Minden naplót bizalmasan és névtelenül kezelünk és csakis a szolgáltatás javítására használjuk.</p>\n\n<p>Biztatunk, hogy keress a gyűjteményben, hallgass zenét, tekints meg kottákat vagy olvass. Amikor a copyright megengedi, le is töltheted a kedvenc dolgaidat. Látogasd meg a virtuális kiállításainkat is, hogy felfedezd a zene oly arcát, melyet még nem láttál!</p>"
+        text: "<p>Képzeld el milyen lehet megtekinteni egy eredeti kézzel írt kottát, miközben az előadását hallgatod különböző előadóktól és közben a zeneszerző életrajzát is böngészed. Az Europeana Zenei Gyűjteménnyel ezt mind megteheted!</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Partnereink</a>, akik valamennyien európai zenei szakemberek, gondosan válogatták ki ezt a zenei felvételekből, kottákból, hangszerek képeiből, zenével kapcsolatos könyvekből és más zenéhez kapcsolódó anyagokból álló gyűjteményt. </p>\n\n<p>Elérhetővé tettük látogatóink számára a Zenei Csatornának ezt a korai teszt verzióját , hogy segítsetek formálni, amint továbbfejlesztjük. Tehát, amíg az oldalt böngészi néha megkérjük, hogy válaszoljon pár kérdésre vagy kérdőívre. Nagyra értékelnénk, ha időt szánna ezeknek a kérdéseknek megválaszolására, illetve kérdőívek kitöltésére!</p>\n\n<p>Értékeljük az átláthatóságot és magánéletet, így tudnod kell továbbá azt is, hogy naplózzuk a felhasználói statisztikákat és felhasználói viselkedést a Google Analyticsban és egy Hotjar nevű szolgáltatásban. Azért tesszük mindezt, hogy megtudjuk mit rontottunk el a tervezésben és hogy fejleszthessük a Zenei Csatornát. Minden naplót bizalmasan és névtelenül kezelünk és csakis a szolgáltatás javítására használjuk.</p>\n\n<p>Bíztatunk, hogy keress a gyűjteményben, hallgass zenét, tekints meg kottákat vagy olvass. Amikor a copyright megengedi, le is töltheted a kedvenc dolgaidat. Látogasd meg a virtuális kiállításainkat is, hogy felfedezd a zenének azt az arcát, melyet még sosem láttál!</p>"
         title: A Zenei Gyűjteményről
     results:
       actions:

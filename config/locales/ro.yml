@@ -50,7 +50,7 @@ ro:
         recent: Adăugări recente
         spotlight-on: Sub lupă
       music:
-        description: Colecția de Muzică Europeana <strong>Europeana Music Collection</strong> aduce la un loc cele mai bune înregistrări sonore, partituri și alte colecții legate de muzică de la arhivele, bibliotecile și muzeele europene <a href="/portal/channels/music/about">Află mai multe despre Colecția de Muzică.</a>
+        description: <strong>Colecția de Muzică Europeana <strong> adună la un loc cele mai bune înregistrări muzicale, partituri și alte colecții legate de muzică de la arhivele, bibliotecile și muzeele din Europa <a href="/portal/channels/music/about">Află mai multe despre Colecția de Muzică.</a>
         title: Europeana Music
     facet:
       language:
@@ -67,9 +67,7 @@ ro:
         new-collections: Colecții noi
         rights: Termeni & Politici de utilizare
         search-tips: Sfaturi de căutare
-        using-myeuropeana: |-
-          Contul My Europeana
-          Folosind contul My Europeana
+        using-myeuropeana: Contul My Europeana
     home:
       strapline: Explorează %{total_item_count} lucrări de artă, artefacte, cărți, înregistrări video și audio din întreaga Europă.
     more: Mai mult...
@@ -134,7 +132,7 @@ ro:
         identifier: Identificator
         is-format-of: E format din
         is-part-of: E parte a
-        is-referenced-by: 
+        is-referenced-by: Referențiat_de
         is-replaced-by: E înlocuit de
         is-required-by: E cerut de
         issued: Prima emitere
@@ -143,7 +141,7 @@ ro:
         location: Locația
         longitude: Longitudine
         map: Hartă
-        map-tiles: 
+        map-tiles: Secțiune hartă
         medium: Suport
         people: Oameni
         period: Perioada
@@ -152,7 +150,7 @@ ro:
         properties: Proprietăți
         provenance: Proveniență
         provided-by: Află mai multe
-        provided-by-detail: 
+        provided-by-detail: Europeana vă ofera aceasta înregistrare cu ajutorul %{institution_name_and_link}. Pentru mai multe detalii vizitați website-ul acestei instituții.
         provider: Instituție
         providing-country: "Țara furnizoare"
         publication-date: Data publicării
@@ -179,7 +177,7 @@ ro:
         ugc: Conținut creat de utilizator
         version: Versiune
       named-entities:
-        title: 
+        title: Localizare entități
         what:
           broader: Concept mai larg
           label: Etichetă concept
@@ -217,18 +215,27 @@ ro:
         text: Din păcate pagina căutată nu a fost găsită. Te rugăm încearcă o căutare generală în Europeana sau alege din obiectele selectate mai jos.
       about:
         text: |-
-          <p>Fie că ai ajuns aici pentru a te insipira, pentru a face cercetareWhether you came here for inspiration, to work on your research, looking for your next coffee mug design or just to snoop around, we hope you will find what you need somewhere amongst the 45 million objects we host here.</p>
+          <p>Fie că ai ajuns aici pentru a cerceta un subiect de interest educațional sau profesional, a căuta inspirație pentru un viitor proiect artistic sau poate că ne vizitezi doar de curiozitate, noi sperăm că cele peste 45 de milioane de obiecte pe care le prezentăm aici îți oferă ceea ce cauți.</p>
 
-          <p>Our material comes from all over Europe and the scope of the collections is really quite astonishing. Our aim is help you find your way round so you discover treasures of your own.</p>
+          <p>Materialul pe care-l găsești aici provide din întreaga Europă iar colecțiile oferite de noi sunt remarcabile. Scopul nostru este de a te ajuta să navighezi astfel încât să descoperi aceste comori cât mai ușor.</p>
 
-          <p>Over the last few years, we’ve been expanding our collections and learning more and more about them, and what you want to do with them. Now it’s time to change a few things and make some improvements to our service!</p>
+          <p>De-a lungul anilor am extins colecțiile și am învățat foarte multe despre ele și despre nevoile tale. Acum a venit timpul să ne schimbăm și să aducem îmbunătățiri serviciului nostru!</p>
 
-          <p>We’re trying out a new version of Europeana Collections. We are working hard to improve your experience here and make it as easy as possible for you to find the information you are looking for. So we’ll probably ask you to help us by answering some questions. Your answers will be really helpful to us, so please do take a moment to give us your thoughts. Thanks!</p>
+          <p>Prin urmare ne dorim să testăm împreună această nouă versiune a Colecțiilor Europeana. Ne străduim să îmbunătățim experiența ta și să-ți ușurăm modul în care regăsești informația dorită. În acest scop îți vom cere să ne răspunzi la câteva întrebări, părerile tale ajutându-ne foarte mult în crearea unui serviciu de calitate. Te rugăm, deci, să ne acorzi câteva momente pentru a ne împărtași gândurile tale. Mulțumim!</p>
 
-          <p>In the meantime, we hope you enjoy your cultural journey with us.</p>
+          <p>Între timp sperăm că te bucuri de expediția culturală oferiă de noi.</p>
         title: Bun venit, iubitorule de cultură!
       music-channel-about:
-        text: 
+        text: |-
+          <p>Imaginează-ți că privești manuscrisul original al unui fragment muzical în timp ce asculți diferitele interpretări ale acestuia, însoțit de o biografie a compozitorului piesei respective. Colecția de Muzică a Europeana face toate aceste lucruri posibile.</p>
+
+          <p><a href="http://www.europeanasounds.eu">Partenerii noștri</a>, experți în muzică din întreaga Europă au selectat pentru tine această colecție de creații muzicale, partituri, imagini cu instrumente muzicale, cărți despre muzică dar și conținut adiacent domeniului. </p>
+
+          <p>Am lansat această versiune a Colecției de Muzică pentru tine, utilizatorul nostru, cu scopul de a ne ajuta s-o șlefuim și îmbunătățim. Prin urmare, atunci când vizitezi pagina noastră îți vom cere să ne răspunzi la întrebările care apar pe ecran. Apreciem foarte mult efortul tău de a răspunde la aceste întrebări și chestionare!</p>
+
+          <p>De asemenea, în scopul transparenței și al confidențialității, trebuie să știi că reținem statistici de utilizare și comportament online cu ajutorul Google Analytics și a unui serviciu numit Hotjar. Acestea ne arată unde am greșit când am ales modalitatea de prezentare și ne ajută să îmbunătățim experiența ta în cadrul Colecției de Muzică. Toate aceste informații sunt private și anonime, și vor folosite doar în scopurile menționate anterior.</p>
+
+          <p>Te incurajăm să răsfoiești cât mai detaliat colecția, să asculți muzica, să vizualizezi partiturile sau să citești materialele înrudite. Când legea dreptului de autor o permite, poți descarca creațiile care îți sunt pe plac. Și nu uita să vizitezi și expozițiile virtuale pentru a descoperi muzica în moduri nemaiîntâlnite până acum!</p>
         title: Despre Colecția de Muzică
     results:
       actions:
