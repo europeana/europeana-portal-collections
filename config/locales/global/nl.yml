@@ -47,6 +47,8 @@ nl:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -427,8 +429,11 @@ nl:
       show-more: Meer
       view-more: Meer
     more-info: Meer informatie
-    our-mission: Onze missie
-    our-mission-text: 'Wij geloven dat cultuur de wereld een stukje beter maakt! Daarom verzamelen wij al het cultureel erfgoed en maken het online beschikbaar zodat u het kan gebruiken voor professionele, entertainment en leerdoeleinden. '
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: onze sites
     password: Wachtwoord
     professional: Professional

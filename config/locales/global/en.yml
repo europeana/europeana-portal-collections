@@ -47,6 +47,8 @@ en:
       7F007F: Web Purple
       7FFF00: Chartreuse
       7FFFD4: Aquamarine
+      '800000': Maroon
+      '800080': Purple
       '808000': Olive
       '808080': Web Gray
       87CEEB: Sky Blue
@@ -221,7 +223,7 @@ en:
         channel: Collections
         colourpalette: Colour
         country: Country
-        data_provider: Data Provider
+        data_provider: Institution
         image_aspectratio: Orientation
         image_colour: Palette
         image_size: Size
@@ -229,7 +231,7 @@ en:
         language_of_description: Language of Description
         media: Only items with links to media
         mime_type: File format
-        provider: Provider
+        provider: Aggregator
         reusability: Can I use it?
         sound_duration: Duration
         sound_hq: High Quality
@@ -428,8 +430,11 @@ en:
       show-more: Show more
       view-more: View more
     more-info: More information
-    our-mission: Our mission
-    our-mission-text: We transform the world with culture! We want to build on Europe’s rich heritage and make it easier for people to use, whether for work, for learning or just for fun.
+    newsletter:
+      email-address-invalid: Email must be a valid email address.
+      email-address-required: An email address must be specified.
+      language-required: A language must be specified.
+      signup: Sign up for our newsletter
     our-sites: our sites
     password: Password
     professional: Pro

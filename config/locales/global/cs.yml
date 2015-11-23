@@ -47,6 +47,8 @@ cs:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -427,8 +429,11 @@ cs:
       show-more: 
       view-more: 
     more-info: 
-    our-mission: 
-    our-mission-text: 
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: 
     password: 
     professional: 

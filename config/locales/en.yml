@@ -27,12 +27,15 @@ en:
       colours:
         title: Colours
       newcontent:
+        tableh1: Data Providers
+        tableh2: Items
+        tableh3: Date
         title: New Content
       sources:
         title: Sources
     collections:
       art-history:
-        description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
+        description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
         title: Europeana Art History
       data-types:
         3d: 3D objects
@@ -55,10 +58,10 @@ en:
     footer:
       menu:
         about: About
-        become-a-provider: Become a data provider
+        become-a-provider: Become our partner
         contact: Contact
         copyright: Copyright
-        data-providers: All data providers
+        data-providers: All institutions
         help: Help
         new-collections: New Collections
         rights: Terms of use & Policies
@@ -147,7 +150,7 @@ en:
         properties: Properties
         provenance: Provenance
         provided-by: Find out more
-        provided-by-detail: may have more information and media for this item.
+        provided-by-detail: Europeana is displaying this item via the %{institution_name_and_link}. Visit their site for more information.
         provider: Provider
         providing-country: Providing country
         publication-date: Date of publication
@@ -222,7 +225,7 @@ en:
           <p>In the meantime, we hope you enjoy your cultural journey with us.</p>
         title: Welcome, culture lover!
       music-channel-about:
-        text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Channel available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Channel. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"
+        text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Collection available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Collection. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"
         title: About the Music Collection
     results:
       actions:

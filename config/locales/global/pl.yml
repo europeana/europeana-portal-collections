@@ -47,8 +47,10 @@ pl:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
-      '808080': 
+      '808080': ''
       87CEEB: 
       87CEFA: 
       8A2BE2: 
@@ -221,7 +223,7 @@ pl:
         channel: Kanały
         colourpalette: Kolor
         country: Kraj
-        data_provider: "Źródła Danych"
+        data_provider: Instytucja
         image_aspectratio: Orientacja
         image_colour: Paleta
         image_size: Rozmiar
@@ -229,7 +231,7 @@ pl:
         language_of_description: Język opisu
         media: Pokaż wyłącznie obiekty z bezpośrednim dostępem do mediów
         mime_type: Format pliku
-        provider: Dostawca treści
+        provider: Agregator treści
         reusability: Czy mogę to wykorzystać?
         sound_duration: Czas trwania
         sound_hq: Dobra Jakość
@@ -421,14 +423,17 @@ pl:
     language-ukranian: Ukraiński
     login: Login
     mission: 
-    mission-title: 
+    mission-title: Nasza misja
     more:
       load-more: Więcej
       show-more: Pokaż więcej
       view-more: Zobacz więcej
     more-info: Więcej infromacji
-    our-mission: Nasza misja
-    our-mission-text: 
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: nasze strony
     password: Hasło
     professional: Dla specjalistów

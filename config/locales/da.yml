@@ -27,6 +27,9 @@ da:
       colours:
         title: Farver
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nyt Indhold
       sources:
         title: Kilder
@@ -43,231 +46,240 @@ da:
         texts: Tekster
       labels:
         credits: Kurateret af
-        recent: Seneste
+        recent: Senest tilføjet
         spotlight-on: Fokus på
       music:
-        description: 
-        title: 
+        description: <strong>Europeanas Musiksamling</strong> samler de bedste musikoptagelser, partiturer og andre musikrelaterede genstande fra Europas audiovisuelle arkiver, biblioteker og museer. <a href="/portal/channels/music/about">Find ud af mere om Musikkanalen.</a>
+        title: Europeana Musik
     facet:
       language:
         show:
-          results: 
+          results: Resultater
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        about: Om
+        become-a-provider: Bliv vores partner
+        contact: Kontakt
+        copyright: Ophavsret
+        data-providers: Alle institutioner
+        help: Hjælp
+        new-collections: Nye Samlinger
+        rights: 'Betingelser for brug '
+        search-tips: Søgetips
+        using-myeuropeana: Brug af Mit Europeana
     home:
-      strapline: 
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+      strapline: Udforsk %{total_item_count} kunstværker, genstande, bøger, videoer og lydoptagelser fra hele Europa.
+    more: Mere...
+    my-europeana: Mit Europeana
+    my-europeana-link: link til mit Europeana
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: Genstandsdetalje
+        results_list: Oversigt over Resultater
+        return_home: Tilbage til Hjem
+    news: Nyheder
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-author: Krediter kilden
+        attribute-html: HTML
+        attribute-plaintext: Almindelig tekst
+        download: Hent
+        download-additional: Også tilgængelig som
+        downloaddata: Hent data
+        open-media: "Åbn denne mediefil"
+        show-less-data: Vis færre data
+        show-more-data: Vis flere data
+        technicalmetadata: Tekniske metadata
       enrichment:
         who:
-          title: 
+          title: Titel
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Relaterede genstande
+        view-items-above: se genstande ovenfor
+        view-items-below: se genstande nedenfor
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        codec: 'Codec '
+        collection-name: Datasæt
+        concept: Koncept
+        concepts: Klassifikationer
+        consists-of: Består af
+        contributor: Bidragyder
+        copyright: Ophavsret
+        creation-date: Datering
+        creator: Ophav
+        current-location: Nuværende placering
+        data-provider: Dataleverandør
+        date: Dato
+        dates: Datoer
+        description: Beskrivelse
+        dimensions: Dimensioner
+        duration: Varighed
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
+          has-met: Er relateret til
+          incorporates: Omfatter
+          is-derivative-of: Er afledt af
+          is-representation-of: Forestiller
+          is-similar-to: Er den samme som
+          is-successor-of: Er efterfølger til
+          realises: Realiserer
+          was-present-at: Til stede ved
+        extent: Størrelse
+        file-size: Filstørrelse
+        format: Format
+        fps: Billeder i sekundet
         has-type: 
-        identifier: 
+        identifier: Identifikator
         is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
+        is-part-of: Er del af
+        is-referenced-by: Er betegnet med
+        is-replaced-by: Er erstattet af
+        is-required-by: Påkrævet af
+        issued: Først udgivet
+        language: Sprog
+        latitude: Længdegrad
+        location: Placering
+        longitude: Breddegrad
+        map: Kort
+        map-tiles: Tiles
+        medium: Medie
+        people: Personer
+        period: Periode
+        place: Sted
+        place-time: Sted/Tid
+        properties: Egenskaber
+        provenance: Proveniens
+        provided-by: Mere info
         provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+        provider: Leverandør
+        providing-country: Oprindelsesland
+        publication-date: Udgivelsesdato
+        publisher: Udgiver
+        references: Referencer
+        refs-rels: Referencer og relationer
+        relations: Relationer
+        rights: Rettigheder
+        rights-human: Må jeg bruge denne?
+        runtime: Kørselstid
+        runtime-unit-seconds: sekunder
+        source: Kilde
+        subject: Emne
+        temporal: Tidslig
+        time: Tid
+        timestamp-created: Først udgivet i Europeana
+        timestamp-updated: Sidst opdateret i Europeana
+        timestamp_created: Først udgivet i Europeana (%{timestamp_created})
+        timestamp_updated: Sidst opdateret i Europeana (%{timestamp_updated})
+        title: Titel
+        toc: Indholdsfortegnelse
+        type: Type
+        ugc: Brugergenereret indhold
+        version: Udgave
       named-entities:
-        title: 
+        title: Navngivne Enheder
         what:
-          broader: 
+          broader: Bredere Begreb
           label: 
-          term: 
-          title: 
+          term: Begrebsbetegnelse
+          title: Hvad
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: Periode Starter
+          end: Periode Slutter
+          label: Periodenavn
+          term: Periodebetegnelse
+          title: Hvornår
         where:
           label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
+          latitude: Sted Længdegrad
+          longitude: Sted Breddegrad
+          term: Stedsbetegnelse
+          title: Hvor
         who:
           label: 
           term: 
-          title: 
+          title: Hvem
       nav:
-        next: 
-        prev: 
+        next: Næste
+        prev: Forrige
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: "Øst"
+        north: Nord
+        south: Syd
+        west: Vest
+      show-more-similar-items: vis mere
+      similar-items: Lignende genstande
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Beklager, siden kunne ikke findes
+        text: Desværre kunne vi ikke finde den side, du ledte efter. Prøv at søge i Europeana, eller blandt de udvalgte genstande nedenfor.
       about:
-        text: 
-        title: 
+        text: |-
+          <p>Uanset om du kom for at hente inspiration, arbejde på din forskning, finde designs til din kaffekop eller blot for at snuse rundt, håber vi at du finder hvad du har du brug for blandt de næsten 45 millioner genstande, som vi har samlet her.</p>
+
+          <p>Vores materiale kommer fra hele Europa, og omfanget af samlingerne er virkelig forbløffende. Vi er her for at hjælpe dig med at finde vej, så du selv kan opdage de skjulte skatte.</p>
+
+          <p>Gennem de seneste år har vi udvidet vores samlinger og lært mere om hvad de kan, og hvad du gerne vil bruge dem til. Nu er det tid til at ændre og forbedre den service, vi giver dig!</p>
+
+          <p>Vi afprøver en ny version af Europeana Samlinger. Vi arbejder hårdt på at forbedre din oplevelse herinde, og gøre det så nemt som muligt for dig at finde det, du leder efter. Så vi vil sikkert komme til at bede dig om hjælp ved at besvare nogle spørgsmål. Dine svar vil være en kæmpe hjælp for os, så brug venligst et et øjeblik på at dele dine tanker med os. Tak!</p>
+
+          <p>I mellemtiden håber vi, at du nyder din kulturelle rejse med os.</p>
+        title: Velkommen, kulturelsker!
       music-channel-about:
-        text: 
-        title: 
+        text: "<p>Forestil dig at du ser på et originalt, håndskrevet manuskript af et stykke musik, mens du lytter til forskellige fortolkninger af musikken, og læser en biografi om komponisten. Det kan du i Europeana Musiksamlingen.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Vores partnere</a>, der alle er musikeksperter fra hele Europa, har omhyggeligt kurateret denne samling af musikindspilninger, noder, billeder af musikinstrumenter, bøger om musik, og andet musikrelateret indhold. </p>\n\n<p>Vi har lagt denne tidlige testversion af Musikkanalen ud til jer, vores brugere, så I kan hjælpe os med at forme og videreudvikle den. Det betyder, at når du besøger sitet, vil du ind i mellem blive bedt om at besvare spørgsmål eller deltage i undersøgelser. Vi vil være meget taknemmelige, hvis du vil afse tid til at besvare disse spørgsmål!</p>\n\n<p>Af hensyn til transparens og privatliv, vil vi gerne informere dig om, at vi logger brugerstatistik og -adfærd i Google Aanalytics og en service ved navn Hotjar. Det gør vi, fordi de viser os hvor vi har lavet fejl i vores design, og det hjælper os til at forbedre Musikkanalen. Alle logfiler forbliver private og anonymiserede, og anvendes udelukkende til at forbedre vores service.</p>\n\n<p>Vi vil gerne opfordre dig til at søge i samlingen, afspille musikken, se noderne og læse om musikken. I det omfang ophavsretten tillader, kan du hente dine favoritfiler ned, og du kan besøge vores virtuelle udstillinger for at opleve musik, som du aldrig har prøvet det før!</p>"
+        title: Om Musiksamlingen
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: Konfigurer handlinger
+        dutchmasters: Hollandske mestre
+        favouriteart: Yndlingskunst
+        label: Handlinger
+        newcollection: Ny samling
+        product-save: Gem
+        saveto: Gem til
+        show-all-collections: Vis alle samlinger
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: Billeder
+          text: Tekst
+          video: Video
+        count-and-terms: "%{results_count} resultater"
+        empty: Ingen Resultater
+        empty-with-terms: Din søgning efter %{query_terms} gav ingen resultater
+        header: Resultater for
+        header-and: og
+        in-channel: i Samling
+        less: Færre
+        less_adv: Færre Detaljer
+        more: Mere
+        more_adv: Avancerede Filtre
+        product-3D: 3D
+        product-image: Billede
+        product-sound: Lyd
+        product-text: Tekst
+        product-video: Video
+        results-relevance: Relevans
+        single-result: 1 resultat for %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Grid
+          list: Liste
+        view-at-provider: Se hos
     search:
       placeholder:
-        text: 
+        text: Tilføj en søgeterm
       similar:
-        prefix: 
+        prefix: 'Beslægtet med: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Ryd valgte
+        save-settings: Gem Indstillinger
       language:
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-page: Oversæt automatisk genstandssider til...
+        auto-translate-page-short: Oversæt automatisk genstande til
+        auto-translate-query: Oversæt automatisk nøgleord fra søgning til
+        available: Tilgængelige sprog
+        default: Standardsprog
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: 'Du har valgt et ugyldigt sprog. Tilgængelige sprog: %{locales}'
+          notice: Sprogindstillinger gemt.
+        label: Sprog
+        settings-label: sprogindstillinger

@@ -28,6 +28,9 @@ es:
       colours:
         title: Colores
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nuevo Contenido
       sources:
         title: Recursos
@@ -57,12 +60,12 @@ es:
       menu:
         about: Acerca de
         become-a-provider: 
-        contact: 
+        contact: Contactar
         copyright: Derechos de Autor
         data-providers: Todos los proveedores de datos
-        help: 
+        help: Ayuda
         new-collections: Nuevas Colecciones
-        rights: 
+        rights: Terminos de usp
         search-tips: 'Consejos de búsqueda '
         using-myeuropeana: Usando Mi Europeana
     home:
@@ -138,7 +141,7 @@ es:
         location: Localización
         longitude: Longitud
         map: Mapa
-        map-tiles: 
+        map-tiles: Mosaico
         medium: Técnica
         people: Personas
         period: Periodo
@@ -147,7 +150,7 @@ es:
         properties: Propiedades
         provenance: 'Procedencia '
         provided-by: Más acerca de
-        provided-by-detail: 'Puede haber más información acerca de este objeto '
+        provided-by-detail: 
         provider: Proveedor
         providing-country: 'País proveedor '
         publication-date: Fecha de publicación
@@ -220,7 +223,7 @@ es:
           <p>Estamos probando una nueva versión de Europeana Colecciones y estamos trabajando duro para mejorar tu experiencia y para que encuentres más fácilmente lo que buscas. Te pediremos que nos ayudes respondiendo a algunas preguntas. Tus respuestas nos serán de gran ayuda así que por favor gasta unos minutos para compartir tus comentarios. ¡Gracias! </p>
         title: "¡Bienvenido, amante de la cultura!"
       music-channel-about:
-        text: "<p>Imagina mirar manuscritos originales de una obra musical mientras escuchas diferentes interpretaciones y lees la biografía del compositor. Estos es posible en el canal Europeana Música.</p>  \n\n<p><a href=\"http://www.europeanasounds.eu\">Nuestros colaboradores</a>, expertos en Música de toda Europa han seleccionado cuidadosamente esta colección de de grabaciones, partituras, imágenes de instrumentos musicales, libros sobre música y otros contenidos relacionados con la materia.</p>\n\n<p>Hemos hecho disponible esta versión de prueba del Canal de Música a vosotros, nuestros usuarios, para que podáis ayudarnos a darle forma y mejorarlo. Cuando lo visites a veces te pediremos que respondas a los cuestionarios que aparecen en la pantalla. Te agradecemos que gastes unos minutos en responder a nuestras preguntas.</p> \n\n<p>En nombre de la transparencia y la privacidad, te comunicamos que guardamos las estadísticas de uso en Google Analytics y en un servicio llamado Hotjar. Hacemos esto porque nos muestra lo que estamos haciendo mal y nos ayuda a mejorar el canal de música. Todos los registros son privados y anónimos y solo serán usados para mejorar nuestro servicio.</p> \n\n<p>Te animamos a buscar en nuestras colecciones, escuchar música, ver partituras u ojearlas. Cuando los derechos de autor lo permitan, te puedes descargar lo que más te guste o visitar nuestras exhibiciones virtuales y descubrir la música de una manera como nunca antes lo habías hecho./p> "
+        text: "<p>Imagina mirar manuscritos originales de una obra musical mientras escuchas diferentes interpretaciones y lees la biografía del compositor. Estos es posible en el canal Europeana Música.</p>  \n\n<p><a href=\"http://www.europeanasounds.eu\">Nuestros colaboradores</a>, expertos en Música de toda Europa han seleccionado cuidadosamente esta colección de grabaciones, partituras, imágenes de instrumentos musicales, libros sobre música y otros contenidos relacionados con la materia.</p>\n\n<p>Hemos hecho disponible esta versión de prueba del Canal de Música a vosotros, nuestros usuarios, para que podáis ayudarnos a darle forma y mejorarlo. Cuando lo visites a veces te pediremos que respondas a los cuestionarios que aparecen en la pantalla. Te agradecemos que gastes unos minutos en responder a nuestras preguntas.</p> \n\n<p>En nombre de la transparencia y la privacidad, te comunicamos que guardamos las estadísticas de uso en Google Analytics y en un servicio llamado Hotjar. Hacemos esto porque nos muestra lo que estamos haciendo mal y nos ayuda a mejorar el canal de música. Todos los registros son privados y anónimos y solo serán usados para mejorar nuestro servicio.</p> \n\n<p>Te animamos a buscar en nuestras colecciones, escuchar música, ver partituras u ojearlas. Cuando los derechos de autor lo permitan, te puedes descargar lo que más te guste o visitar nuestras exhibiciones virtuales y descubrir la música de una manera como nunca antes lo habías hecho.</p>"
         title: Acerca del Canal de Música
     results:
       actions:

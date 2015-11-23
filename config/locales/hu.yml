@@ -1,273 +1,285 @@
 hu:
   global:
-    labs-link: 
+    labs-link: link a lab-hoz
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: Minden bejegyzés...
+      all_exhibitions: Minden kiállítás
+      blog: Blog
+      browse: Böngészés
+      browse_colours: Színek
+      browse_newcontent: "Új tartalom"
+      browse_sources: Források
+      channels: Gyűjtemények
+      collections: Gyűjtemények
+      exhibitions: Kiállítások
+      home: Főoldal
+    pro-link: link a pro-ra
+    pro-text: pro-nak való szöveg
+    settings: beállítások
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: Az Alpha verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért az oldal néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
+        link-text: "Írd le a véleményed!"
+        title: Ez egy Alpha verziója az új Gyűjteményeknek és Zenei Gyűjteményeknek
+    blog-link: link a blogra
     browse:
       colours:
-        title: 
+        title: Színek
       newcontent:
-        title: 
+        tableh1: 
+        tableh2: 
+        tableh3: 
+        title: "Új tartalom"
       sources:
-        title: 
+        title: Források
     collections:
       art-history:
-        description: 
-        title: 
+        description: A reneszánsztól a szürrealistákig, az ókori római szobrászattól a kortárs művészetig, az Europeana Művészeti és Művészettörténeti Gyűjtemény bevezet a művészek és a műalkotások világába szerte Európából. [Valami interaktív elemeről]
+        title: Europeana Művészettörténet
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D tárgyak
+        count: elemek
+        images: Képek
+        moving-images: Videók
+        sound: Hangfelvételek
+        texts: Szövegek
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: 'Kurátor:'
+        recent: Legutóbbi hozzáadások
+        spotlight-on: Reflektorfényben
       music:
-        description: 
-        title: 
+        description: Az <strong> Europeana Zenei Gyűjtemény </ strong> egyesíti a legjobb zenei felvételeket, kottákat és más zenével kapcsolatos gyűjteményeket Európa audiovizuális archívumaiból, könyvtáraiból, levéltáraiból és múzeumaiból. <a href="/portal/channels/music/about"> Tudjon meg többet a Zenei Csatornáról. </a>
+        title: Europeana Zene
     facet:
       language:
         show:
-          results: 
+          results: Eredmények
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        about: Rólunk
+        become-a-provider: Válj partnerünké
+        contact: Elérhetőség
+        copyright: Copyright
+        data-providers: "Összes intézmény"
+        help: Segítség
+        new-collections: "Új gyűjtemények"
+        rights: Felhasználási feltételek
+        search-tips: Keresési segítség
+        using-myeuropeana: Saját Europeana használata
     home:
-      strapline: 
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+      strapline: Fedezz fel %{total_item_count} műalkotást, műtárgyat, könyvet, videót és hanganyagot Európa összes részéről.
+    more: Tovább...
+    my-europeana: Saját Europeana
+    my-europeana-link: link a Saját Europeana-ra
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: Elem részletei
+        results_list: Találati lista
+        return_home: Vissza a Főoldalra
+    news: Hírek
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-author: Szerző hozzárendelése
+        attribute-html: HTML
+        attribute-plaintext: Egyszerű szöveg
+        download: Letöltés
+        download-additional: "Úgyszintén elérhető mint"
+        downloaddata: Töltsd le az adatot
+        open-media: Média elem megnyítása
+        show-less-data: Mutass kevesebb adatot
+        show-more-data: Mutass bővebb adatot
+        technicalmetadata: Technikai metaadat
       enrichment:
         who:
-          title: 
+          title: Cím
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Hasonló elemek
+        view-items-above: mutasd a fenti elemeket
+        view-items-below: mutasd a lenti elemeket
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        codec: Kodek
+        collection-name: Adathalmaz
+        concept: Fogalom
+        concepts: Osztályozás
+        consists-of: Magába foglalja
+        contributor: Hozzájáruló
+        copyright: Copyright
+        creation-date: Létrehozás dátuma
+        creator: Alkotó
+        current-location: Jelenlegi helye
+        data-provider: Adatszolgáltató
+        date: Dátum
+        dates: Dátumok
+        description: Leírás
+        dimensions: Méretek
+        duration: Hossza
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+          has-met: Kapcsolódik
+          incorporates: 'Magába foglalja:'
+          is-derivative-of: 'A következőből származik:'
+          is-representation-of: 'A következő reprezentációja:'
+          is-similar-to: 'Hasonló a következőhöz:'
+          is-successor-of: 'A következő származéka:'
+          realises: Kiadás
+          was-present-at: Jelen volt
+        extent: Méret
+        file-size: Fájl mérete
+        format: Formátum
+        fps: Képkocka másodpercenként
+        has-type: Típusa
+        identifier: Azonosító
+        is-format-of: Formátuma
+        is-part-of: 'Következő része:'
+        is-referenced-by: Hivatkozik rá
+        is-replaced-by: Helyettesíti
+        is-required-by: Megköveteli
+        issued: Első megjelenése
+        language: Nyelv
+        latitude: Szélesség
+        location: Helyszín
+        longitude: Hosszúság
+        map: Térkép
+        map-tiles: Csempék
+        medium: Adathordozó
+        people: Emberek
+        period: Időszak
+        place: Hely
+        place-time: Hely/Idő
+        properties: Tulajdonságok
+        provenance: Eredet
+        provided-by: Tudj meg többet
+        provided-by-detail: Az Europeana a %{institution_name_and_link} oldalán keresztül mutatja be az elemeket. Látogassa meg az oldalukat több információért.
+        provider: Szolgáltató
+        providing-country: Szolgáltató ország
+        publication-date: Kiadás dátuma
+        publisher: Kiadó
+        references: Hivatkozások
+        refs-rels: Hivatkozások és kapcsolatok
+        relations: Kapcsolatok
+        rights: Jogok
+        rights-human: Használhatom?
+        runtime: Lejátszási idő
+        runtime-unit-seconds: másodperc
+        source: Forrás
+        subject: Tárgy
+        temporal: Időbeli
+        time: Idő
+        timestamp-created: Először közzétéve az Europeana-ban
+        timestamp-updated: Utolsó frissítés az Europeana-ban
+        timestamp_created: 'Először közzétéve az Europeana-ban: (%{timestamp_created})'
+        timestamp_updated: 'Utolsó frissítés időpontja az Europeana-ban: (%{timestamp_updated})'
+        title: Cím
+        toc: Tartalomjegyzék
+        type: Típus
+        ugc: Felhasználó által beküldött tartalom
+        version: Verzió
       named-entities:
-        title: 
+        title: Megnevezett entitások
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: Bővebb fogalom
+          label: Fogalom címke
+          term: Fogalom terminus
+          title: Micsoda
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: Időszak kezdete
+          end: Időszak vége
+          label: Időszak címke
+          term: Időszak terminus
+          title: Mikor
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
+          label: Helyszín címke
+          latitude: Helyszín szélesség
+          longitude: Helyszín hosszúság
+          term: Helyszín terminus
+          title: Hol
         who:
-          label: 
-          term: 
-          title: 
+          label: "Ügynök címke"
+          term: "Ügynök terminus"
+          title: Kicsoda
       nav:
-        next: 
-        prev: 
+        next: Következő
+        prev: Előző
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: Kelet
+        north: "Észak"
+        south: Dél
+        west: Nyugat
+      show-more-similar-items: mutass többet
+      similar-items: Hasonló elemek
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Sajnáljuk, a kért oldal nem található
+        text: Sajnos nem találjuk a kért oldalt. Próbáljon meg keresni az Europeana-ban vagy válasszon a lenti kiemelt elemek közül.
       about:
-        text: 
-        title: 
+        text: |-
+          <p>Akár inspirációért nézett be, kutatáson dolgozik, esetleg a következő kávésbögre dizájnját keresi, vagy csak egyszerűen csak körbe szeretne nézni, mi reméljük, hogy megtalálja amit keres a több mint 45 millió tárgy között, melyet itt tárolunk.</p>
+
+          <p>Az oldalon fellelhető anyag egész Európából érkezik és a gyűjtemények felhasználása igazán lenyűgöző. Célunk, hogy segítsünk eligazodni látogatóinknak, hogy felfedezhessenek saját maguknak kincseket.</p>
+
+          <p>Az utóbbi években bővítettük a gyűjteményeinket és mind többet és többet tudtunk meg róluk és látogatóinkról is, hogy mire szeretnék őket felhasználni. Most viszont eljött az idő, hogy megváltoztassunk egy pár dolgot és javítsuk szolgáltatásunkat!</p>
+
+          <p>Egy új verzióját próbáljuk ki Europeana Gyűjteményeknek. Keményen dolgozunk azon, hogy javítsunk látogatóink élményén és lehetővé tegyük, hogy a lehető legkönnyebben megtalálhassák amit keresnek. Ezért lehet, hogy megkérünk segítsd munkánkat pár kérdésre való válasszal. Válaszaid nagyon sokat segíthetnek, ezért kérünk szánj rá pár percet, hogy megoszd gondolataid velünk! Köszönjük!</p>
+
+          <p>Nagyon reméljük, hogy addig is tetszéssel tölt el ez a kulturális utazás velünk.</p>
+        title: "Üdvözöljük, kultúra szerelmese!"
       music-channel-about:
-        text: 
-        title: 
+        text: "<p>Képzeld el milyen lehet megtekinteni egy eredeti kézzel írt kottát, miközben az előadását hallgatod különböző előadóktól és közben a zeneszerző életrajzát is böngészed. Az Europeana Zenei Gyűjteménnyel ezt mind megteheted!</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Partnereink</a>, mind zeneszakértők egész Európából, gondosan válogatták ki ezt a zenei felvételekből, kottákból, hangszerek képeiből, zenével kapcsolatos könyvekből és más zenéhez kapcsolódó anyagokból álló gyűjteményt. </p>\n\n<p>Elérhetővé tettük nektek, látogatóinknak ezt a korai teszt verzióját a Zenei Csatornának, hogy segítsetek formálni amint továbbfejlesztjük. Tehát, amíg az oldal böngészi néha megkérjük, hogy válaszoljon pár kérdésre vagy kérdőívre. Nagyra értékelnénk, ha időt szánna ezeknek a kérdéseknek megválaszolására, illetve kérdőívek kitöltésére!</p>\n\n<p>Értékeljük az átláthatóságot és magánéletet, így tudnod kell továbbá azt is, hogy naplózzuk a felhasználói statisztikákat és felhasználói viselkedést a Google Analyticsban és egy Hotjar nevű szolgáltatásban. Azért tesszük mindezt, hogy megtudjuk mit rontottunk el a tervezésben és nagyban segít javítsuk a Zenei Csatornát. Minden naplót bizalmasan és névtelenül kezelünk és csakis a szolgáltatás javítására használjuk.</p>\n\n<p>Biztatunk, hogy keress a gyűjteményben, hallgass zenét, tekints meg kottákat vagy olvass. Amikor a copyright megengedi, le is töltheted a kedvenc dolgaidat. Látogasd meg a virtuális kiállításainkat is, hogy felfedezd a zene oly arcát, melyet még nem láttál!</p>"
+        title: A Zenei Gyűjteményről
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: Tevékenységek beállítása
+        dutchmasters: Holland mesterek
+        favouriteart: Kedvenc művészet
+        label: Tevékenységek
+        newcollection: "Új gyűjtemény"
+        product-save: Mentés
+        saveto: Mentés ide
+        show-all-collections: Mutasd az összes gyűjteményt
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: Képek
+          text: Szöveg
+          video: Videó
+        count-and-terms: "%{results_count} találat"
+        empty: Nincs találat
+        empty-with-terms: A %{query_terms}  kifejezésre való keresés nem eredményezett találatot
+        header: 'Találatok a '
+        header-and: "és"
+        in-channel: Gyűjteményben
+        less: Kevesebb
+        less_adv: Kevesebb finomítás
+        more: Több
+        more_adv: "Összetett szűrők"
+        product-3D: 3D
+        product-image: Kép
+        product-sound: Hang
+        product-text: Szöveg
+        product-video: Videó
+        results-relevance: Relevancia
+        single-result: '1 találat a következő keresőszóra: %{query_terms}'
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Rács
+          list: Lista
+        view-at-provider: Tekintsd meg
     search:
       placeholder:
-        text: 
+        text: Keresési kulcsszó megadása
       similar:
-        prefix: 
+        prefix: 'Hasonló a következőhöz: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Kiválasztások törlése
+        save-settings: Beállítások mentése
       language:
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-page: 'Automatikusan fordítsd le az elemek oldalait a következő nyelvre:'
+        auto-translate-page-short: 'Automatikusan fordítsd le az elemeket a következő nyelvre:'
+        auto-translate-query: 'Automatikusan fordítsd le a kulcsszavakat a következő nyelvre:'
+        available: Elérhető nyelvek
+        default: Alapértelmezett nyelv
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: "Érvénytelen nyelv kiválasztva.Elérhető nyelvek: %{locales}"
+          notice: Nyelvi beállítások elmentve.
+        label: Nyelv
+        settings-label: nyelvi beállítások

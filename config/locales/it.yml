@@ -27,6 +27,9 @@ it:
       colours:
         title: Colori
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Nuovo contenuto
       sources:
         title: Fonti
@@ -146,7 +149,7 @@ it:
         properties: Proprietà
         provenance: Provenienza
         provided-by: Scopri di più
-        provided-by-detail: potrebbe dare più informazioni e contenuti digitali su quest'opera
+        provided-by-detail: 
         provider: Fornitore
         providing-country: Paese fornitore
         publication-date: Data di pubblicazione

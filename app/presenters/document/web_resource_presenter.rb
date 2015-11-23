@@ -190,7 +190,8 @@ module Document
     end
 
     def thumbnail
-      edm_object_thumbnail? ? @record_presenter.edm_object : api_thumbnail
+      # edm_object_thumbnail? ? @record_presenter.edm_object : api_thumbnail
+      api_thumbnail
     end
 
     def edm_object_thumbnail?

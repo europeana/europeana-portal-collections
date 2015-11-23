@@ -27,6 +27,9 @@ el:
       colours:
         title: "Χρώματα"
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: "Νέο Περιεχόμενο"
       sources:
         title: "Πηγές"
@@ -146,7 +149,7 @@ el:
         properties: "Ιδιότητες"
         provenance: "Προέλευση"
         provided-by: "Ανακαλύψτε περισσότερα"
-        provided-by-detail: "ίσως έχει περισσότερες πληροφορίες και περιεχόμενο για αυό το αντικείμενο."
+        provided-by-detail: 
         provider: "Ίδρυμα"
         providing-country: "Χώρα παρόχου"
         publication-date: "Ημερομηνία έκδοσης"

@@ -27,6 +27,9 @@ nl:
       colours:
         title: Kleuren
       newcontent:
+        tableh1: 
+        tableh2: 
+        tableh3: 
         title: Onlangs toegevoegd
       sources:
         title: Bronnen
@@ -146,7 +149,7 @@ nl:
         properties: Eigenschappen
         provenance: Bron
         provided-by: Meer
-        provided-by-detail: meer informatie
+        provided-by-detail: 
         provider: Partner
         providing-country: Land
         publication-date: Publicatie datum

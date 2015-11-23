@@ -47,6 +47,8 @@ el:
       7F007F: 
       7FFF00: 
       7FFFD4: 
+      '800000': 
+      '800080': 
       '808000': 
       '808080': 
       87CEEB: 
@@ -421,14 +423,17 @@ el:
     language-ukranian: "Ουκρανικά"
     login: "Είσοδος"
     mission: 
-    mission-title: 
+    mission-title: "Η αποστολή μας"
     more:
       load-more: "Περισσότερα"
       show-more: "Εμφάνιση περισσοτέρων"
       view-more: "Δείτε περισσότερα"
     more-info: "Περισσότερες πληροφορίες"
-    our-mission: "Η αποστολή μας"
-    our-mission-text: 
+    newsletter:
+      email-address-invalid: 
+      email-address-required: 
+      language-required: 
+      signup: 
     our-sites: "Οι ιστοσελίδες μας"
     password: "Κωδικός"
     professional: 

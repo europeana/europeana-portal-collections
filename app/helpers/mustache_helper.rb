@@ -139,7 +139,16 @@ module MustacheHelper
 
   def page_config
     {
-      newsletter: false
+      newsletter: true
+    }
+  end
+
+  def newsletter
+    {
+      form: {
+        action: 'http://europeana.us3.list-manage.com/subscribe/post?u=ad318b7566f97eccc895e014e&amp;id=1d4f51a117',
+        language_op: true
+      }
     }
   end
 
