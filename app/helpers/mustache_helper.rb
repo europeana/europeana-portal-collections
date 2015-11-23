@@ -290,7 +290,7 @@ module MustacheHelper
             items: [
               {
                 text: t('site.footer.menu.search-tips'),
-                url: 'help'
+                url: static_page_path('help', format: 'html')
               },
               # {
               #   text: t('site.footer.menu.using-myeuropeana'),
@@ -298,7 +298,7 @@ module MustacheHelper
               # },
               {
                 text: t('site.footer.menu.copyright'),
-                url: 'rights'
+                url: static_page_path('rights', format: 'html')
               }
             ]
           },
