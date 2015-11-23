@@ -169,6 +169,10 @@ module MustacheHelper
   end
   alias_method :channel_data, :collection_data
 
+  def get_navigation
+    navigation
+  end
+
   def navigation
     mustache[:navigation] ||= begin
       {
