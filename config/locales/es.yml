@@ -272,6 +272,7 @@ es:
         clear-selection: Eliminar selección
         save-settings: Guardar ajustes
       language:
+        auto-translate-limit: 
         auto-translate-page: Traducir automáticamente los objetos de la página al...
         auto-translate-page-short: 'Traducir automáticamente los objetos al... '
         auto-translate-query: Traducir automáticamente los términos de búsqueda al...
@@ -282,3 +283,4 @@ es:
           notice: Ajustes de idioma guardados
         label: Idioma
         settings-label: Ajustes de idioma
+      title: ajustes

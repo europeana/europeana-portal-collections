@@ -273,6 +273,7 @@ ru:
         clear-selection: "Очистить выделенние"
         save-settings: "Сохранить настройки"
       language:
+        auto-translate-limit: 
         auto-translate-page: "Автоматически переводить страницы на"
         auto-translate-page-short: "Авто-перевод элементов на"
         auto-translate-query: "Автоматически переводить ключевые слова на..."
@@ -283,3 +284,4 @@ ru:
           notice: "Языковые настройки сохранены."
         label: "Язык"
         settings-label: "Языковые настройки"
+      title: "Настройки"

@@ -273,6 +273,7 @@ hu:
         clear-selection: Kiválasztások törlése
         save-settings: Beállítások mentése
       language:
+        auto-translate-limit: 
         auto-translate-page: 'Automatikusan fordítsd le az elemek oldalait a következő nyelvre:'
         auto-translate-page-short: 'Automatikusan fordítsd le az elemeket a következő nyelvre:'
         auto-translate-query: 'Automatikusan fordítsd le a kulcsszavakat a következő nyelvre:'
@@ -283,3 +284,4 @@ hu:
           notice: Nyelvi beállítások elmentve.
         label: Nyelv
         settings-label: nyelvi beállítások
+      title: beállítások

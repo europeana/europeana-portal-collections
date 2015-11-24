@@ -283,6 +283,7 @@ de:
         clear-selection: Auswahl löschen
         save-settings: Einstellungen speichern
       language:
+        auto-translate-limit: 
         auto-translate-page: Trefferliste automatisch übersetzen in ...
         auto-translate-page-short: Objekte automatisch übersetzen in
         auto-translate-query: Suchbegriffe automatisch übersetzen in ...
@@ -293,3 +294,4 @@ de:
           notice: Spracheinstellungen gespeichert.
         label: Sprache
         settings-label: Spracheinstellungen
+      title: Einstellungen

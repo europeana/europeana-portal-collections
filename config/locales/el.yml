@@ -273,6 +273,7 @@ el:
         clear-selection: "Καθαρισμός επιλογής"
         save-settings: "Αποθήκευση ρυθμίσεων"
       language:
+        auto-translate-limit: 
         auto-translate-page: "Αυτόματε μετάφραση σελίδων σε ..."
         auto-translate-page-short: "Αυτόματη μετάφραση αντικειμένων σε"
         auto-translate-query: "Αυτόματη μετάφραση όρων αναζήτησης σε..."
@@ -283,3 +284,4 @@ el:
           notice: "Επιλογές γλώσσας αποθηκεύτηκαν."
         label: "Γλώσσα"
         settings-label: "επιλογές γλώσσας"
+      title: "προτιμήσεις"

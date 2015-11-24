@@ -264,6 +264,7 @@ sv:
         clear-selection: 
         save-settings: 
       language:
+        auto-translate-limit: 
         auto-translate-page: 
         auto-translate-page-short: 
         auto-translate-query: 
@@ -274,3 +275,4 @@ sv:
           notice: 
         label: 
         settings-label: 
+      title: 

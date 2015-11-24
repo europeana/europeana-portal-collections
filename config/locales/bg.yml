@@ -274,6 +274,7 @@ bg:
         clear-selection: "Изтриване на подбора"
         save-settings: "Запази настройки"
       language:
+        auto-translate-limit: 
         auto-translate-page: "Автоматично преведи страниците на обектите на..."
         auto-translate-page-short: "Автоматично преведи обектите на..."
         auto-translate-query: "Автоматично преведи ключовите думи за търсене на..."
@@ -284,3 +285,4 @@ bg:
           notice: "Езиковите настройки са запазени."
         label: "Език"
         settings-label: "езикови настройки"
+      title: "Настройки"
