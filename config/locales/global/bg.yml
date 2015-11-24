@@ -47,8 +47,8 @@ bg:
       7F007F: 
       7FFF00: 
       7FFFD4: 
-      '800000': 
-      '800080': 
+      '800000': "Кафяв"
+      '800080': "Лилав"
       '808000': 
       '808080': 
       87CEEB: 
@@ -430,10 +430,10 @@ bg:
       view-more: "Виж повече"
     more-info: "Повече информация"
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
+      email-address-invalid: "Моля, въведете валиден имейл адрес."
+      email-address-required: "Моля, въведете имейл адрес."
+      language-required: "Моля, изберете език."
+      signup: "Абонамент за бюлентин"
     our-sites: "нашите страници"
     password: "Парола"
     professional: Pro

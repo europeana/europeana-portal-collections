@@ -223,7 +223,7 @@ el:
         channel: "Συλλογές"
         colourpalette: "Χρώμα"
         country: "Χώρα"
-        data_provider: "Συλλέκτης"
+        data_provider: "Ίδρυμα"
         image_aspectratio: "Προσανατολισμός"
         image_colour: "Παλέτα"
         image_size: "Μέγεθος"
@@ -231,13 +231,13 @@ el:
         language_of_description: "Γλώσσα Περιγραφής"
         media: "Μόνο αντικείμενα με συνδέσμους σε μέσα"
         mime_type: "Τύπος αρχείου"
-        provider: "Ίδρυμα"
+        provider: "Συλλέκτης"
         reusability: "Μπορώ να το χρησιμοποιήσω;"
         sound_duration: "Διάρκεια"
         sound_hq: "Υψηλή ποιότητα"
         text_fulltext: "Πλήρες κείμενο"
         type: "Μέσα"
-        ugc: "Περιεχόμενο που δόθηκε από χρήστες"
+        ugc: "Περιεχόμενο που παρείχαν χρήστες"
         video_duration: "Διάρκεια Video"
         year: "Ημερομηνία"
       image_aspectratio:
@@ -422,7 +422,7 @@ el:
     language-swedish: "Σουηδικά"
     language-ukranian: "Ουκρανικά"
     login: "Είσοδος"
-    mission: 
+    mission: "Αλλάζουμε τον κόσμο μέσω του πολιτισμού! Θέλουμε να βασιστούμε στην πολιτιστική κληρονομιά της Ευρώπης και να το κάνουμε πιο εύκολο για τους ανθρώπους να την χρησιμοποιήσουν, είτε για δουλειά, είτε για να μάθουν είτε απλά για διασκέδαση."
     mission-title: "Η αποστολή μας"
     more:
       load-more: "Περισσότερα"
@@ -430,17 +430,17 @@ el:
       view-more: "Δείτε περισσότερα"
     more-info: "Περισσότερες πληροφορίες"
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
+      email-address-invalid: "Η διεύθυνση του ηλεκτρινοκού ταχυδρομείου δεν είναι έγκυρη."
+      email-address-required: "Η διεύθυνση ηλεκτρονικού ταχυδρομείου δεν έχει καθοριστεί."
+      language-required: "Η γλώσσα δεν έχει καθοριστεί."
+      signup: "Εγγραφείτε για το newsletter"
     our-sites: "Οι ιστοσελίδες μας"
     password: "Κωδικός"
     professional: 
     professional-text: "Συμμετέχετε, μοιραστείτε τα δεδομένα σας ή χρησιμοποιήστε τα δικά μας"
     refine-your-search: "Επαναπροσδιορίστε τα αποτελέσματά σας"
     register: "Εγγραφή"
-    research: "Έρευνα"
+    research: ''
     research-text: "Σε σύνδεση με την ακαδημαϊκή κοινότητα"
     search-area:
       search-button-image-alt: "Αναζήτηση"
