@@ -273,6 +273,7 @@ fr:
         clear-selection: Vider la sélection
         save-settings: Enregistrer les paramètres
       language:
+        auto-translate-limit: 
         auto-translate-page: Traduire automatiquement les résultats de recherche en...
         auto-translate-page-short: Traduire automatiquement en..
         auto-translate-query: Traduire automatiquement les termes de recherche de recherche en..
@@ -283,3 +284,4 @@ fr:
           notice: Paramètres de langue sauvegardés.
         label: Langue
         settings-label: paramètres de langue
+      title: paramètres

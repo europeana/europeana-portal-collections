@@ -273,6 +273,7 @@ pt:
         clear-selection: Limpar seleção
         save-settings: Gravar Definições
       language:
+        auto-translate-limit: 
         auto-translate-page: Traduzir automaticamente a página de itens em...
         auto-translate-page-short: Auto-traduzir itens em
         auto-translate-query: Traduzir automaticamente os termos de pesquisa em...
@@ -283,3 +284,4 @@ pt:
           notice: Definições de língua guardadas.
         label: Língua
         settings-label: definições de língua
+      title: definições

@@ -284,6 +284,7 @@ ro:
         clear-selection: Anulează selecție
         save-settings: Salvează setări
       language:
+        auto-translate-limit: 
         auto-translate-page: Tradu automat pagina în
         auto-translate-page-short: Tradu automat înregistrarea în
         auto-translate-query: Tradu automat cuvinte-cheie în
@@ -296,3 +297,4 @@ ro:
           notice: Setări de limbă salvate.
         label: Limbă
         settings-label: setări de limbă
+      title: setări

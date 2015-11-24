@@ -76,6 +76,7 @@ module Settings
               ]
             },
             language_itempages: {
+              enabled: false,
               title: t('site.settings.language.auto-translate-page'),
               label: t('site.settings.language.auto-translate-page-short'),
               value: 'autotranslateitem',
@@ -97,8 +98,10 @@ module Settings
                 }
               ]
             },
-            language_options: {
+            language_translations: {
+              enabled: false,
               title: t('site.settings.language.auto-translate-query'),
+              limit: t('site.settings.language.auto-translate-limit', max_languages: 6),
               is_required: false,
               name: 'checkboxes[]',
               items: [
