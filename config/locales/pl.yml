@@ -27,9 +27,9 @@ pl:
       colours:
         title: Kolory
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
+        tableh1: Wszystkie instytucje
+        tableh2: Obiekty
+        tableh3: Data
         title: Nowości
       sources:
         title: "Źródła"
@@ -65,16 +65,16 @@ pl:
         help: Pomoc
         new-collections: Nowe Kolekcje
         rights: Warunki i zasady użytkowania
-        search-tips: 
-        using-myeuropeana: 
+        search-tips: Porady
+        using-myeuropeana: Moja Europeana
     home:
-      strapline: 
+      strapline: Odkryj %{total_item_count} dzieł sztuki, książek, filmów i nagrań z całej Europy.
     more: Więcej...
-    my-europeana: 
+    my-europeana: Moja Europeana
     my-europeana-link: 
     navigation:
       breadcrumb:
-        item_detail: 
+        item_detail: Detal
         results_list: Lista Wyników
         return_home: Powrót do strony głównej
     news: Wiadomości
@@ -82,195 +82,195 @@ pl:
       actions:
         attribute-author: Oznacz autora
         attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-plaintext: Zwykły tekst
+        download: "Ściągnij"
+        download-additional: Dostępne także jako
+        downloaddata: "Ściągnij dane"
+        open-media: Otwórz
+        show-less-data: Pokaż mniej
+        show-more-data: Pokaż więcej
+        technicalmetadata: Metadane administracyjne
       enrichment:
         who:
-          title: 
+          title: Tytuł
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Powiązane obiekty
+        view-items-above: zobacz obiekty powyżej
+        view-items-below: zobacz obiekty poniżej
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
+        codec: Kodek
+        collection-name: Zbiór
+        concept: Koncept
+        concepts: Klasyfikacje
+        consists-of: Zawiera
+        contributor: Współtwórca
+        copyright: Prawo autorskie
+        creation-date: Data utworzenia
+        creator: Twórca
         current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        data-provider: Instytucja
+        date: Data
+        dates: Daty
+        description: Opis
+        dimensions: Wymiary
+        duration: Czas trwania
         edm:
-          has-met: 
-          incorporates: 
+          has-met: Jest powiązany z
+          incorporates: Zawiera
           is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
+          is-representation-of: Jest reprezentacją
+          is-similar-to: Jest podobny do
+          is-successor-of: Jest następcą
           realises: 
           was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
+        extent: Rozmiar
+        file-size: Rozmiar pliku
+        format: Format
+        fps: 'Klatki na sekundę '
+        has-type: Ma rodzaj
+        identifier: Identyfikator
+        is-format-of: Jest w formacie
+        is-part-of: Jest częścią
+        is-referenced-by: Ma odniesienie w
+        is-replaced-by: Zastąpiony przez
+        is-required-by: Jest wymagany przez
+        issued: Pierwsze wydanie
+        language: Język
+        latitude: Szerokość
+        location: Lokalizacja
+        longitude: Długość
+        map: Mapa
+        map-tiles: Kafelki
+        medium: Metoda
+        people: Osoby
+        period: Okres
+        place: Miejsce
+        place-time: Miejsce/Czas
+        properties: Własności
+        provenance: Pochodzenie
+        provided-by: Dowiedz się więcej
         provided-by-detail: 
-        provider: 
+        provider: Agregator
         providing-country: 
-        publication-date: 
-        publisher: 
+        publication-date: Data wydania
+        publisher: Wydawca
         references: 
         refs-rels: 
         relations: 
-        rights: 
-        rights-human: 
+        rights: Prawa
+        rights-human: Czy mogę tego użyć?
         runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
+        runtime-unit-seconds: sekundy
+        source: "Źródło"
+        subject: Przedmiot
         temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+        time: Czas
+        timestamp-created: Pierwszy raz dostępne w Europeanie
+        timestamp-updated: Ostatni raz zaktualizowane w Europeanie
+        timestamp_created: Pierwszy raz dostępne w Europeanie (%{timestamp_created})
+        timestamp_updated: Ostatni raz zaktualizowane w Europeanie (%{timestamp_updated})
+        title: Tytuł
+        toc: Spis Treści
+        type: Typ
+        ugc: Materiały dodane przez użytkowników
+        version: Wersja
       named-entities:
         title: 
         what:
           broader: 
           label: 
           term: 
-          title: 
+          title: Co
         when:
-          begin: 
-          end: 
+          begin: Początek Okresu
+          end: Koniec Okresu
           label: 
           term: 
-          title: 
+          title: Kiedy
         where:
           label: 
           latitude: 
           longitude: 
           term: 
-          title: 
+          title: Gdzie
         who:
           label: 
           term: 
-          title: 
+          title: Kto
       nav:
-        next: 
-        prev: 
+        next: Następny
+        prev: Poprzedni
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: Wschód
+        north: Północ
+        south: Południe
+        west: Zachód
+      show-more-similar-items: pokaż więcej
+      similar-items: Podobne obiekty
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Przykro nam - ta strona gdzieś się zapodziała
+        text: Niestety nie możemy znaleźć strony, której szukasz. Spróbuj ponownie na stronie głównej lub wybierz z poniższych propozycji.
       about:
         text: 
-        title: 
+        title: Witaj, miłośniku kultury!
       music-channel-about:
         text: 
-        title: 
+        title: O Kolekcji Muzyka
     results:
       actions:
         configure-actions: 
-        dutchmasters: 
-        favouriteart: 
+        dutchmasters: Holenderscy Mistrzowie
+        favouriteart: Ulubione dzieło
         label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        newcollection: Nowa kolekcja
+        product-save: Zapisz
+        saveto: Zapisz do
+        show-all-collections: Pokaż wszystkie kolekcje
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
+          3D: 3D
+          images: Obrazy
+          text: Tekst
+          video: Wideo
+        count-and-terms: "%{results_count} wyników"
+        empty: Brak Wyników
+        empty-with-terms: Twoje zapytanie %{query_terms} nie przyniosło wyników
+        header: Wyniki dla
+        header-and: i
+        in-channel: w Kolekcji
+        less: Mniej
+        less_adv: Mniej Filtrów
+        more: Więcej
+        more_adv: Zaawansowane filtry
+        product-3D: 3D
+        product-image: Obraz
+        product-sound: Dźwięk
+        product-text: Tekst
+        product-video: Wideo
+        results-relevance: Trafność
         single-result: 
         view:
           grid: 
-          list: 
-        view-at-provider: 
+          list: Lista
+        view-at-provider: Zobacz w
     search:
       placeholder:
-        text: 
+        text: Dodaj termin wyszukiwawczy
       similar:
         prefix: 
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Wyczyść wybór
+        save-settings: Zapisz Ustawienia
       language:
         auto-translate-page: 
         auto-translate-page-short: 
         auto-translate-query: 
-        available: 
-        default: 
+        available: Dostępne języki
+        default: Domyślny język
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: 'Nie znaleziono języka. Dostępne języki: %{locales}'
+          notice: Ustawienia języków zapisane.
+        label: Język
+        settings-label: ustawienia języków
