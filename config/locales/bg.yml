@@ -27,9 +27,9 @@ bg:
       colours:
         title: "Цветове"
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
+        tableh1: "Всички институции"
+        tableh2: "Обекти"
+        tableh3: "Дата"
         title: "Ново съдържание"
       sources:
         title: "Източници"
@@ -149,7 +149,8 @@ bg:
         properties: "Характеристики"
         provenance: "Произход"
         provided-by: "Научи повече"
-        provided-by-detail: 
+        provided-by-detail: |
+          Европеана показва този обект благодарение на %{institution_name_and_link}. Моля, посетете тяхната уеб страница за повече информация.
         provider: "Доставчик"
         providing-country: "Страна-доставчик"
         publication-date: "Дата на публикуване"
@@ -273,6 +274,7 @@ bg:
         clear-selection: "Изтриване на подбора"
         save-settings: "Запази настройки"
       language:
+        auto-translate-limit: 
         auto-translate-page: "Автоматично преведи страниците на обектите на..."
         auto-translate-page-short: "Автоматично преведи обектите на..."
         auto-translate-query: "Автоматично преведи ключовите думи за търсене на..."
@@ -283,3 +285,4 @@ bg:
           notice: "Езиковите настройки са запазени."
         label: "Език"
         settings-label: "езикови настройки"
+      title: "Настройки"

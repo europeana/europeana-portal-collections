@@ -264,6 +264,7 @@ nl:
         clear-selection: Wis selectie
         save-settings: Bewaar Instellingen
       language:
+        auto-translate-limit: 
         auto-translate-page: Vertaal pagina's automatisch naar...
         auto-translate-page-short: Vertaal automatisch naar
         auto-translate-query: Vertaal zoektermen automatisch naar...
@@ -274,3 +275,4 @@ nl:
           notice: Taal voorkeur ingesteld.
         label: Taal
         settings-label: Instellingen voor taal
+      title: settings

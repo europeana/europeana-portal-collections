@@ -274,6 +274,7 @@ en:
         clear-selection: Clear selection
         save-settings: Save Settings
       language:
+        auto-translate-limit: A maximum of %{max_languages} can be selected
         auto-translate-page: Automatically translate item pages into...
         auto-translate-page-short: Auto-translate items into
         auto-translate-query: Automatically translate search keywords into...
@@ -284,3 +285,4 @@ en:
           notice: Language settings saved.
         label: Language
         settings-label: language settings
+      title: Settings
