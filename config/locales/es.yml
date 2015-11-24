@@ -28,9 +28,9 @@ es:
       colours:
         title: Colores
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
+        tableh1: Todas las instituciones
+        tableh2: Objetos
+        tableh3: Fecha
         title: Nuevo Contenido
       sources:
         title: Recursos
@@ -46,7 +46,7 @@ es:
         sound: Grabaciones sonoras
         texts: Textos
       labels:
-        credits: 
+        credits: Curado por
         recent: Adiciones recientes
         spotlight-on: Destacados
       music:
@@ -59,7 +59,7 @@ es:
     footer:
       menu:
         about: Acerca de
-        become-a-provider: 
+        become-a-provider: Unete a nosotros
         contact: Contactar
         copyright: Derechos de Autor
         data-providers: Todos los proveedores de datos
