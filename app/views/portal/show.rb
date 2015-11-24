@@ -217,10 +217,7 @@ module Portal
             origin: {
               url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
               institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
-              institution_name_and_link: '<a class="cap" target="_blank" href="' +
-                render_document_show_field_value(document, 'aggregations.edmIsShownAt') + '">' +
-                (render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider')) +
-                ' <svg class="icon icon-linkout"><use xlink:href="#icon-linkout"/></svg></a>',
+              institution_name_and_link: institution_name_and_link,
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
             },
             people: data_section(
@@ -448,14 +445,24 @@ module Portal
       end
     end
 
-    # def named_entity_data
-    #   data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels]
-    #   present = data.any? { |group| group[:present] }
-    #   {
-    #     present: present,
-    #     data: data
-    #   }
-    # end
+    def institution_name_and_link
+      is_shown_at = render_document_show_field_value(document, 'aggregations.edmIsShownAt')
+      is_shown_by = nil #render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+      at_or_by = is_shown_at || is_shown_by
+
+      provider = render_document_show_field_value(document, 'aggregations.edmProvider')
+      data_provider = render_document_show_field_value(document, 'aggregations.edmDataProvider')
+      data_provider_or_provider = data_provider || provider
+
+      if at_or_by && data_provider_or_provider
+        '<a class="cap" target="_blank" href="' +
+          at_or_by + '">' + data_provider_or_provider +
+          ' <svg class="icon icon-linkout"><use xlink:href="#icon-linkout"/></svg></a>'
+      else
+        false
+      end
+    end
+
 
     def named_entity_data
       data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels].compact
