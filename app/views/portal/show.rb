@@ -4,10 +4,35 @@ module Portal
     attr_accessor :document, :debug
 
     def head_meta
+      desc = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
+      landing = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
+      preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview')
+      title = render_document_show_field_value(document, 'proxies.dcTitle', unescape: true)
+
       mustache[:head_meta] ||= begin
         [
-          { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') }
-        ] + super
+          { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') },
+          { meta_name: 'twitter:card', content: 'summary' },
+          { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+          begin
+            { meta_property: 'og:title', content: title } unless title.nil?
+          end,
+          begin
+            { meta_property: 'og:description',
+              content: truncate(
+                desc.split('.').first(3).join('.'),
+                length: 200)
+            } unless desc.nil?
+          end,
+          begin
+            { meta_property: 'og:image', content: preview } unless preview.nil?
+          end,
+          begin
+            { meta_property: 'og:url', content: landing } unless landing.nil?
+          end,
+          { meta_property: 'og:sitename', content: 'Europeana Collections' },
+          { meta_property: 'fb:appid', content: '185778248173748' }
+        ].compact + super
       end
     end
 
