@@ -264,6 +264,7 @@ pl:
         clear-selection: Wyczyść wybór
         save-settings: Zapisz Ustawienia
       language:
+        auto-translate-limit: 
         auto-translate-page: 
         auto-translate-page-short: 
         auto-translate-query: 
@@ -274,3 +275,4 @@ pl:
           notice: Ustawienia języków zapisane.
         label: Język
         settings-label: ustawienia języków
+      title: ustawienia

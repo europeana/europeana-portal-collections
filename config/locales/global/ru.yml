@@ -154,18 +154,18 @@ ru:
       art: "Искусство"
       fashion: "Мода"
       home: "Домой"
-      maps: "карты"
-      music: "музыка"
-      natural-history: "естествознание"
-      newspapers: "пресса"
-      performing-arts: "исполнительское искусство"
-    channels-art: "Коллекция История Искусства"
-    channels-art-image: "Изображение коллекции История Искусства"
-    channels-art-link: "Коллекция История Искусства"
+      maps: "Карты"
+      music: "Музыка"
+      natural-history: "Естествознание"
+      newspapers: "Пресса"
+      performing-arts: "Исполнительское искусство"
+    channels-art: "Коллекция Art History Collection"
+    channels-art-image: "Изображение коллекции Art History Collection"
+    channels-art-link: "Коллекция Art History Collection"
     channels-fashion: "Мода"
     channels-music: "Музыка"
     choose-language: "Язык"
-    email-address: "адрес электронной почты"
+    email-address: "Адрес электронной почты"
     facet:
       advanced:
         options: "Опции"
@@ -218,7 +218,7 @@ ru:
         ukraine: "Украина"
         unitedkingdom: "Великобритания"
         unitedstatesofamerica: "США"
-      creator: "автор"
+      creator: "Автор"
       header:
         channel: "Коллекции"
         colourpalette: "Цвет"
@@ -310,9 +310,9 @@ ru:
         advanced-rrpa: ''
         advanced-rrra: ''
         advanced-ucs: ''
-        open: ''
-        permission: ''
-        restricted: ''
+        open: "Да с указанием правообладателя"
+        permission: "Только с разрешения правообладателя"
+        restricted: "Да с ограничениями"
         simple: ''
       sound_duration:
         long: "Длинный (6+ минут)"
@@ -328,7 +328,7 @@ ru:
       type:
         3d: 3D
         image: "Изображение"
-        sound: "Звуковой"
+        sound: "Звукозапись"
         text: "Текст"
         video: "Видео"
       type-image:
@@ -365,32 +365,32 @@ ru:
         medium: "Средний (4 - 20 минут)"
         short: "Короткий (<4 минут)"
       year:
-        from: "от"
-        to: "до"
+        from: "с"
+        to: "по"
     'facet ':
       header:
         video_hd:
           'true': HD
-    find-us-elsewhere: "Найти нас где-либо еще"
+    find-us-elsewhere: "Вы также можете найти нас"
     forgot-password: "Забыли пароль?"
-    genres: "жанры"
+    genres: "Жанры"
     genres-chamber-music: "Камерная музыка"
     genres-classical-music: "Классическая музыка"
-    genres-concertos: "Концерты"
+    genres-concertos: "Концертная музыка"
     genres-non-western-classical-music: "Не-западная классическая музыка"
     genres-opera: "Опера"
     genres-popular-music: "Популярная музыка"
     genres-traditional-music: "Традиционная музыка"
     header:
-      connect: "связаться"
-      develop: "разработать"
-      discover: "открыть"
-      network: "сообщество"
+      connect: "Связь"
+      develop: "Разработка"
+      discover: "Открытия"
+      network: "Сообщество"
     help: "Помощь"
     home: "Домой"
     javascript-required: "Чтобы увидеть содержимое, пожалуйста, включите JavaScript в Вашем браузере и попробуйте обновить веб-браузер до версии, которая поддерживает HTML5."
     labs: Labs
-    labs-text: "Воспользуйтесь нашими API в дополнение к поиску культурных материалов по коллекциям"
+    labs-text: "Воспользуйтесь нашими API сервисами и коллекциями"
     language-basque: "Баскский"
     language-bulgarian: "Болгарский"
     language-catalan: "Каталонский"
@@ -422,35 +422,35 @@ ru:
     language-swedish: "Шедский"
     language-ukranian: "Украинский"
     login: "Логин"
-    mission: "Кто боится абракадабры?"
-    mission-title: "Кто боится абракадабры?"
+    mission: "Мы изменяем мир с помощью культуры! Мы хотим построить банк данных общеевропейского наследия, доступного всем для использования в работе, в учебе или просто для развлечения."
+    mission-title: "Наша миссия"
     more:
       load-more: "Еще"
       show-more: "Показать еще"
       view-more: "Просмотреть еще"
-    more-info: "Еще информация"
+    more-info: "Информация"
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
+      email-address-invalid: "Адрес электронной почты должен быть корректным электронным адресом."
+      email-address-required: "Адрес электронной почты должен быть указан."
+      language-required: "Язык должен быть указан."
       signup: "Подпишитесь на рассылку наших новостей"
     our-sites: "наши сайты"
     password: "Пароль"
     professional: Pro
     professional-text: "Принимайте участие, делитесь своими данными или используйте наши"
-    refine-your-search: "Уточните свой поиск"
+    refine-your-search: "Инструменты поиска"
     register: "Зарегистрируйтесь"
     research: Research
-    research-text: "Связаться с академическими сообществами"
+    research-text: "Свяжитесь с академическими сообществами"
     search-area:
       search-button-image-alt: "Поиск"
-      search-placeholder-text: "Добавить поисковый термин"
-    search-collections: "Коллекции"
+      search-placeholder-text: "Введите поисковый запрос"
+    search-collections: Collections
     search-collections-text: "Исследуйте европейское культурное наследие"
     share: "Поделиться"
     sitemap: "Карта сайта"
     terms-and-policies: "Условия и положения"
-    type: "тип"
+    type: "Тип"
   'no': "Норвегия"
   pl: "Португалия"
   site:

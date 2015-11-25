@@ -273,6 +273,7 @@ da:
         clear-selection: Ryd valgte
         save-settings: Gem Indstillinger
       language:
+        auto-translate-limit: 
         auto-translate-page: Oversæt automatisk genstandssider til...
         auto-translate-page-short: Oversæt automatisk genstande til
         auto-translate-query: Oversæt automatisk nøgleord fra søgning til
@@ -283,3 +284,4 @@ da:
           notice: Sprogindstillinger gemt.
         label: Sprog
         settings-label: sprogindstillinger
+      title: indstillinger
