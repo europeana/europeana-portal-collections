@@ -15,23 +15,23 @@ module Portal
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
           begin
-            { meta_property: "og:title", content: title } unless title.nil?
+            { meta_property: 'og:title', content: title } unless title.nil?
           end,
           begin
-            { meta_property: "og:description",
+            { meta_property: 'og:description',
               content: truncate(
                 desc.split('.').first(3).join('.'),
                 length: 200)
             } unless desc.nil?
           end,
           begin
-            { meta_property: "og:image", content: preview } unless preview.nil?
+            { meta_property: 'og:image', content: preview } unless preview.nil?
           end,
           begin
-            { meta_property: "og:url", content: landing } unless landing.nil?
+            { meta_property: 'og:url', content: landing } unless landing.nil?
           end,
-          { meta_property: "og:sitename", content: "Europeana Collections" },
-          { meta_property: "fb:appid", content: "185778248173748" }
+          { meta_property: 'og:sitename', content: 'Europeana Collections' },
+          { meta_property: 'fb:appid', content: '185778248173748' }
         ].compact + super
       end
     end
