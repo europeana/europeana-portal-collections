@@ -15,7 +15,7 @@ pt:
       home: Início
     pro-link: ''
     pro-text: texto para Europeana Pro
-    settings: definições
+    settings: Definições
   site:
     alpha:
       feedback_banner:
@@ -57,7 +57,7 @@ pt:
           results: Resultados
     footer:
       menu:
-        about: Sobre
+        about: Sobre nós
         become-a-provider: Torne-se numa instituição contribuinte
         contact: Contacto
         copyright: Direitos de Autor
@@ -271,9 +271,9 @@ pt:
     settings:
       actions:
         clear-selection: Limpar seleção
-        save-settings: Gravar Definições
+        save-settings: Guardar Definições
       language:
-        auto-translate-limit: 
+        auto-translate-limit: 'Pode selecionar um máximo de %{max_languages} '
         auto-translate-page: Traduzir automaticamente a página de itens em...
         auto-translate-page-short: Auto-traduzir itens em
         auto-translate-query: Traduzir automaticamente os termos de pesquisa em...
