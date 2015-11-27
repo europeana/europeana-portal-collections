@@ -322,7 +322,7 @@ module MustacheHelper
         items: [
           {
             url: '#',
-            text: 'Settings',
+            text: t('global.settings'),
             icon: 'settings',
             submenu: {
               items: [
