@@ -1,4 +1,4 @@
-da:
+'no':
   Symphonies: 
   X11:
     colours:
@@ -147,10 +147,10 @@ da:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: rtert
+    about-us: 
     channel:
-      archaeology: etrt
-      architecture: sdgsd
+      archaeology: 
+      architecture: 
       art: 
       fashion: 
       home: 

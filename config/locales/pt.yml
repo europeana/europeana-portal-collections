@@ -2,7 +2,7 @@ pt:
   global:
     labs-link: ''
     navigation:
-      all_blog_posts: Todas as Mensagens...
+      all_blog_posts: Todos os Artigos...
       all_exhibitions: Todas as Exposições...
       blog: Blogue
       browse: Explorar
@@ -15,13 +15,13 @@ pt:
       home: Início
     pro-link: ''
     pro-text: texto para Europeana Pro
-    settings: definições
+    settings: Definições
   site:
     alpha:
       feedback_banner:
         description: Uma versão Alfa significa que esta página está sob activo desenvolvimento e será actualizada com regularidade. Poderá estar por vezes inacessível. Os suas comentários ajudarão a melhorá-la.
         link-text: Deixe-nos os seus comentários!
-        title: Esta é uma versão Alfa das novas Europeana Coleções e Europeana Coleções Música
+        title: Esta é a versão Alfa das novas Europeana Coleções e Europeana Coleções Música
     blog-link: ligação ao blogue
     browse:
       colours:
@@ -57,7 +57,7 @@ pt:
           results: Resultados
     footer:
       menu:
-        about: Sobre
+        about: Sobre nós
         become-a-provider: Torne-se numa instituição contribuinte
         contact: Contacto
         copyright: Direitos de Autor
@@ -134,7 +134,7 @@ pt:
         is-referenced-by: "É referido por"
         is-replaced-by: "É substituido por"
         is-required-by: "É requerido por"
-        issued: Emitido pela primeira vez
+        issued: Publicado pela primeira vez
         language: Língua
         latitude: Latitude
         location: Localização
@@ -149,9 +149,9 @@ pt:
         properties: Propriedades
         provenance: Proveniência
         provided-by: Saiba mais
-        provided-by-detail: 
-        provider: Fornecedor
-        providing-country: País fornecedor
+        provided-by-detail: Este item é acessível na Europeana via %{institution_name_and_link}. Visite o seu website para mais informação.
+        provider: Agregador
+        providing-country: País Agregador
         publication-date: Data de publicação
         publisher: Editor
         references: Referências
@@ -271,9 +271,9 @@ pt:
     settings:
       actions:
         clear-selection: Limpar seleção
-        save-settings: Gravar Definições
+        save-settings: Guardar Definições
       language:
-        auto-translate-limit: 
+        auto-translate-limit: 'Pode selecionar um máximo de %{max_languages} '
         auto-translate-page: Traduzir automaticamente a página de itens em...
         auto-translate-page-short: Auto-traduzir itens em
         auto-translate-query: Traduzir automaticamente os termos de pesquisa em...

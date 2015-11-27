@@ -297,11 +297,11 @@ es:
       reusability:
         advanced: Avanzado
         advanced-cc-by: CC BY
-        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc: ''
         advanced-cc-by-nc-nd: CC BY-NC-ND
         advanced-cc-by-nc-sa: CC BY-NC-SA
-        advanced-cc-by-nd: CC BY-ND
-        advanced-cc-by-sa: CC BY-SA
+        advanced-cc-by-nd: ''
+        advanced-cc-by-sa: ''
         advanced-cc0: CC0
         advanced-orphan-work: Orphan Work
         advanced-out-of-copyright-non-commercial: Out of copyright - non commercial re-use
