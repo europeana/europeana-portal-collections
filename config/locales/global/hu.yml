@@ -310,8 +310,8 @@ hu:
         advanced-rrpa: 
         advanced-rrra: 
         advanced-ucs: ''
-        open: ''
-        permission: ''
+        open: 
+        permission: 
         restricted: 
         simple: Egyszerű
       sound_duration:
