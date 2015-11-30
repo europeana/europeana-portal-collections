@@ -1,21 +1,21 @@
 sv:
   global:
-    labs-link: 
+    labs-link: Länk till Labs
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
+      all_blog_posts: Alla bloggposter
+      all_exhibitions: Alla utställningar
+      blog: Blogg
+      browse: Utforska
+      browse_colours: Färger
+      browse_newcontent: Nytt innehåll
+      browse_sources: Källor
+      channels: Samlingar
+      collections: Samlingar
+      exhibitions: Utställningar
+      home: Start
+    pro-link: länk till Pro
     pro-text: 
-    settings: 
+    settings: Inställningar
   site:
     alpha:
       feedback_banner:
@@ -25,28 +25,28 @@ sv:
     blog-link: 
     browse:
       colours:
-        title: 
+        title: Färger
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
-        title: 
+        tableh1: Alla institutioner
+        tableh2: Poster
+        tableh3: Datum
+        title: Nytt innehåll
       sources:
-        title: 
+        title: Källor
     collections:
       art-history:
         description: 
         title: 
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D objekt
+        count: poster
+        images: Bilder
+        moving-images: Video
+        sound: Ljudinspelningar
+        texts: Texter
       labels:
-        credits: 
-        recent: 
+        credits: Sammanställd av
+        recent: Senaste tilläggen
         spotlight-on: 
       music:
         description: 
@@ -54,169 +54,169 @@ sv:
     facet:
       language:
         show:
-          results: 
+          results: Resultat
     footer:
       menu:
         about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        become-a-provider: Bli vår partner
+        contact: Kontaktinformation
+        copyright: Copyright
+        data-providers: Alla institutioner
+        help: Hjälp
+        new-collections: Nya samlingar
+        rights: Användarvillkor & Policys
+        search-tips: Söktips
+        using-myeuropeana: Om Mitt Europeana
     home:
-      strapline: 
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+      strapline: Utforska  %{total_item_count} konstverk, artefakter, böker, videor och ljudinspelningar från hela Europa
+    more: Mera...
+    my-europeana: Mitt Europeana
+    my-europeana-link: länk till Mitt Europeana
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: Post
+        results_list: Resultat
+        return_home: Tillbaka till Startsidan
+    news: Nyheter
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
+        attribute-author: Attribuera upphovsmannen
+        attribute-html: HTML
         attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        download: Ladda ner
+        download-additional: Flera versioner
+        downloaddata: Ladda ner metadata
+        open-media: Visa
+        show-less-data: Visa mindre information
+        show-more-data: Visa mer information
+        technicalmetadata: Teknisk metadata
       enrichment:
         who:
-          title: 
+          title: Titel
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Relaterade poster
+        view-items-above: visa poster ovan
+        view-items-below: visa poster nedan
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
+        codec: Codec
+        collection-name: Dataset
+        concept: Koncept
+        concepts: Klassificeringar
+        consists-of: Består av
         contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        copyright: Copyright
+        creation-date: Tillkomstdatum
+        creator: Upphovsman
+        current-location: Nuvarande plats
+        data-provider: Institution
+        date: Datering
+        dates: Dateringar
+        description: Beskrivning
+        dimensions: Dimensioner
+        duration: Längd
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
+          has-met: Relaterad till
+          incorporates: Införlivar
+          is-derivative-of: Härledd från
+          is-representation-of: Representerar
+          is-similar-to: Liknar
+          is-successor-of: Efterträder
+          realises: Realiserar
+          was-present-at: Närvarade vid
+        extent: Storlek
+        file-size: Filstorlek
+        format: Format
         fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
+        has-type: "Är av typen"
+        identifier: ID-nummer
+        is-format-of: "Är en form av"
+        is-part-of: "Är en del av"
+        is-referenced-by: Refereras av
+        is-replaced-by: Ersatt av
+        is-required-by: Erfordras av
+        issued: Först utgiven
+        language: Språk
+        latitude: Latitud
+        location: Läge
+        longitude: Longitud
+        map: Karta
+        map-tiles: Kartrutor
+        medium: Medium
+        people: Personer
+        period: Period
+        place: Plats
+        place-time: Plats/Tid
+        properties: Egenskaper
         provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
+        provided-by: Upptäck mera
+        provided-by-detail: Europeana visar denna post via %{institution_name_and_link}. Besök deras sajt för mera information.
+        provider: Leverantör
+        providing-country: Leverantörsland
+        publication-date: Publiceringsdatum
+        publisher: Utgivare
+        references: Referenser
+        refs-rels: Referenser och relationer
+        relations: Relationer
+        rights: Rättigheter
+        rights-human: Kan jag använda detta?
+        runtime: Speltid
+        runtime-unit-seconds: sekunder
+        source: Källa
+        subject: "Ämne"
+        temporal: Tidsaspekt
+        time: Tid
+        timestamp-created: Publicerad första gången i Europeana
+        timestamp-updated: Senast uppdaterad i Europeana
+        timestamp_created: Publicerad första gången i Europeana (%{timestamp_created})
         timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+        title: Titel
+        toc: Innehållsförteckning
+        type: Typ
+        ugc: Användarskapat innehåll
+        version: Version
       named-entities:
-        title: 
+        title: Termer
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: Bredare term
+          label: Termetikett
+          term: Term URI
+          title: Vad
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: Från
+          end: Till
+          label: Periodsetikett
+          term: Periodterm
+          title: När
         where:
-          label: 
-          latitude: 
-          longitude: 
+          label: Platsetikett
+          latitude: Latitud
+          longitude: Longitude
           term: 
-          title: 
+          title: Var
         who:
-          label: 
-          term: 
-          title: 
+          label: Agentetikett
+          term: Agentterm
+          title: Vem
       nav:
-        next: 
-        prev: 
+        next: Nästa
+        prev: Föregående
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: "Öst"
+        north: Nord
+        south: Syd
+        west: Väst
+      show-more-similar-items: visa fler
+      similar-items: Liknande poster
     pages:
       '404':
-        intro: 
+        intro: Förlåt men vi kan inte hitta den sidan
         text: 
       about:
         text: 
         title: 
       music-channel-about:
         text: 
-        title: 
+        title: Om Musiksamlingarna
     results:
       actions:
         configure-actions: 
@@ -226,53 +226,53 @@ sv:
         newcollection: 
         product-save: 
         saveto: 
-        show-all-collections: 
+        show-all-collections: Visa all tematiska samlingar
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: " Bilder"
+          text: Texter
+          video: Video
+        count-and-terms: "%{results_count} träffar"
+        empty: Inga träffar
+        empty-with-terms: Din sökning efter %{query_terms} fick inga träffar
+        header: Träffar för
+        header-and: och
+        in-channel: i tematiska samlingen
+        less: Färre
+        less_adv: Färre filter
+        more: Flera
+        more_adv: Avancerade filter
+        product-3D: 3D
+        product-image: Bilder
+        product-sound: Ljud
+        product-text: Texter
+        product-video: Video
+        results-relevance: Relevans
+        single-result: 1 träff för %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Rutnät
+          list: Lista
+        view-at-provider: Se hos
     search:
       placeholder:
-        text: 
+        text: Lägg till sökterm
       similar:
-        prefix: 
+        prefix: 'Liknar: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Rensa inställningarna
+        save-settings: Spara inställnigarna
       language:
-        auto-translate-limit: 
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
+        auto-translate-limit: Max %{max_languages} språk kan väljas
+        auto-translate-page: "Översätt postbeskrivningarna till..."
+        auto-translate-page-short: "Översätt postbeskrivningarna till"
+        auto-translate-query: "Översätt söktermer till"
+        available: Tillgängliga språk
         default: 
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
-      title: 
+          alert: Ogiltigt språk. Tillgängliga språk är %{locales}
+          notice: Språkinställningarna sparade
+        label: Språk
+        settings-label: Språkinställningar
+      title: Inställningar
