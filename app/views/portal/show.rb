@@ -255,7 +255,7 @@ module Portal
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
-                  url: 'q',
+                  url: 'who',
                   extra: [
                     {
                       field: 'agents.rdaGr2DateOfBirth',
@@ -271,7 +271,8 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.contributor',
-                  fields: ['proxies.dcContributor']
+                  fields: ['proxies.dcContributor'],
+                  url: 'who'
                 }
               ]
             ),
@@ -298,7 +299,8 @@ module Portal
                 {
                   title: 'site.object.meta-label.publisher',
                   fields: ['proxies.dcPublisher'],
-                  url: 'aggregations.edmIsShownAt'
+                  url: 'canned_search_from_val',
+                  canned_search_field: 'proxy_dc_publisher'
                 },
                 {
                   title: 'site.object.meta-label.identifier',
@@ -306,15 +308,21 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.data-provider',
-                  fields: ['aggregations.edmDataProvider']
+                  fields: ['aggregations.edmDataProvider'],
+                  url: 'f',
+                  canned_facet_url: 'DATA_PROVIDER'
                 },
                 {
                   title: 'site.object.meta-label.provider',
-                  fields: ['aggregations.edmProvider']
+                  fields: ['aggregations.edmProvider'],
+                  url: 'f',
+                  canned_facet_url: 'PROVIDER'
                 },
                 {
                   title: 'site.object.meta-label.providing-country',
-                  fields: ['europeanaAggregation.edmCountry']
+                  fields: ['europeanaAggregation.edmCountry'],
+                  url: 'f',
+                  canned_facet_url: 'COUNTRY'
                 },
                 {
                   title: 'site.object.meta-label.timestamp-created',
@@ -345,7 +353,9 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.format',
-                  fields: ['aggregations.webResources.dcFormat']
+                  # fields: ['aggregations.webResources.dcFormat'],
+                  fields: ['proxies.dcFormat'],
+                  url: 'what'
                 },
                 {
                   title: 'site.object.meta-label.language',
@@ -375,7 +385,9 @@ module Portal
               },
               {
                 title: 'site.object.meta-label.collection-name',
-                fields: ['europeanaCollectionName']
+                fields: ['europeanaCollectionName'],
+                url: 'canned_search_from_val',
+                canned_search_field: 'europeana_collectionName'
               },
               {
                 title: 'site.object.meta-label.relations',
@@ -625,11 +637,24 @@ module Portal
         {}.tap do |item|
           item[:text] = val
 
+          search_val = val.sub('(', '').sub(')', '').sub('[', '').sub(']', '').sub('<', '').sub('>', '')
+          if search_val.index(' ')
+            if section[:url] == 'who'
+              search_val = "(#{search_val})"
+            end
+          end
+
           if section[:url]
             if section[:url] == 'q'
-              item[:url] = search_path(q: "\"#{val}\"")
+              item[:url] = search_path(q: "\"#{search_val}\"")
+            elsif section[:url] == 'f'
+              item[:url] = search_path(f: { section[:canned_facet_url] => [search_val] } )
+            elsif section[:url] == 'canned_search_from_val'
+              item[:url] = search_path(q: "#{section[:canned_search_field]}:\"#{search_val}\"" )
             elsif section[:url] == 'what'
-              item[:url] = search_path(q: "what:\"#{val}\"")
+              item[:url] = search_path(q: "what:\"#{search_val}\"")
+            elsif section[:url] == 'who'
+              item[:url] = search_path(q: "who:\"#{search_val}\"")
             else
               item[:url] = render_document_show_field_value(document, section[:url])
             end
