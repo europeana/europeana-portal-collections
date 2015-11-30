@@ -304,7 +304,7 @@ module MustacheHelper
           },
           social: {
             facebook: true,
-            pinterest: true,
+            pinterest: false,
             twitter: true,
             googleplus: true
           }
