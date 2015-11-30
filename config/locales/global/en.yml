@@ -159,9 +159,9 @@ en:
       natural-history: natural history
       newspapers: newspapers
       performing-arts: performing-arts
-    channels-art: Art History Collection
+    channels-art: Art History Collections
     channels-art-image: Art History Collection image
-    channels-art-link: 'Art History Collection '
+    channels-art-link: Art History Collections
     channels-fashion: Fashion
     channels-music: Music
     choose-language: Language
@@ -238,7 +238,7 @@ en:
         text_fulltext: Full text
         type: Media
         ugc: Show content contributed by users
-        video_duration: Video Duration
+        video_duration: Duration
         year: Date
       image_aspectratio:
         landscape: Landscape
@@ -272,7 +272,7 @@ en:
         lt: Lietuvių
         lv: Latviešu
         mt: Malti
-        mul: Multilingue
+        mul: Multilingual
         nl: Nederlands
         'no': Norsk
         pl: Polski
@@ -315,9 +315,9 @@ en:
         restricted: Yes with restrictions
         simple: Simple
       sound_duration:
-        long: Long (6+ min)
-        medium: Medium (3-6 min)
-        short: Short (30s - 3 min)
+        long: Long (6+ minutes)
+        medium: Medium (3-6 minutes)
+        short: Short (30s - 3 minutes)
         very_short: Very short (<30s)
       sound_hq:
         'true': 'Yes'
@@ -349,21 +349,21 @@ en:
           xl: Extra large (%{data})
       type-sound:
         duration:
-          label: Audio duration
+          label: Duration
           long: Long (%{data})
           medium: Medium (%{data})
           short: Short (%{data})
           very-short: Very short (%{data})
       type-video:
         duration:
-          label: Video duration
+          label: Duration
           long: Long (%{data})
           medium: Medium (%{data})
           short: Short (%{data})
       video_duration:
-        long: Long (20+ min)
-        medium: Medium (4-20 min)
-        short: Short (<4 min)
+        long: Long (20+ minutes)
+        medium: Medium (4-20 minutes)
+        short: Short (<4 minutes)
       year:
         from: from
         to: to
@@ -382,10 +382,10 @@ en:
     genres-popular-music: Popular music
     genres-traditional-music: Traditional music
     header:
-      connect: connect
-      develop: develop
-      discover: discover
-      network: network
+      connect: Connect
+      develop: Develop
+      discover: Discover
+      network: Network
     help: Help
     home: Home
     javascript-required: To view this content please enable JavaScript, and consider upgrading to a web browser that supports HTML5 content.
