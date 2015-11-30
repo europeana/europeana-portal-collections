@@ -648,9 +648,9 @@ module Portal
             if section[:url] == 'q'
               item[:url] = search_path(q: "\"#{search_val}\"")
             elsif section[:url] == 'f'
-              item[:url] = search_path(f: { section[:canned_facet_url] => [search_val] } )
+              item[:url] = search_path(f: { section[:canned_facet_url] => [search_val] })
             elsif section[:url] == 'canned_search_from_val'
-              item[:url] = search_path(q: "#{section[:canned_search_field]}:\"#{search_val}\"" )
+              item[:url] = search_path(q: "#{section[:canned_search_field]}:\"#{search_val}\"")
             elsif section[:url] == 'what'
               item[:url] = search_path(q: "what:\"#{search_val}\"")
             elsif section[:url] == 'who'
