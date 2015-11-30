@@ -652,7 +652,7 @@ module Portal
               if search_val.index(' ')
                 item[:url] = search_path(q: "who:(#{search_val})")
               else
-                item[:url] = search_path(q: "who:#{search_val}")
+                item[:url] = search_path(q: "who:\"#{search_val}\"")
               end
             else
               item[:url] = render_document_show_field_value(document, section[:url])
