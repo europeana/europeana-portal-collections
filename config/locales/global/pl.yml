@@ -303,13 +303,13 @@ pl:
         advanced-cc-by-nd: 
         advanced-cc-by-sa: 
         advanced-cc0: 
-        advanced-orphan-work: Dzieło Osierocone
-        advanced-out-of-copyright-non-commercial: Autorskie prawa majątkowe wygasły - użycie tylko niekomercyjne
-        advanced-pdm: Domena Publiczna
-        advanced-rrfa: Wszelkie prawa zastrzeżone - Wolny dostęp
-        advanced-rrpa: Wszelkie prawa zastrzeżone - Płatny dostęp
-        advanced-rrra: 'Wszelkie prawa zastrzeżone - '
-        advanced-ucs: Status praw autorskich nieznany
+        advanced-orphan-work: ''
+        advanced-out-of-copyright-non-commercial: ''
+        advanced-pdm: ''
+        advanced-rrfa: ''
+        advanced-rrpa: ''
+        advanced-rrra: ''
+        advanced-ucs: ''
         open: Tak, ale z podaniem źródła
         permission: Tylko za pisemną zgodą
         restricted: Tak, ale z ograniczeniami

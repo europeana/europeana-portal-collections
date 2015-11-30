@@ -2,8 +2,8 @@ en:
   global:
     labs-link: 'link to labs '
     navigation:
-      all_blog_posts: All Posts…
-      all_exhibitions: All Exhibitions…
+      all_blog_posts: All blog posts…
+      all_exhibitions: All exhibitions…
       blog: Blog
       browse: Browse
       browse_colours: Colours
@@ -15,7 +15,7 @@ en:
       home: Home
     pro-link: 'link to pro '
     pro-text: text for pro
-    settings: settings
+    settings: Settings
   site:
     alpha:
       feedback_banner:
@@ -63,7 +63,7 @@ en:
         copyright: Copyright
         data-providers: All institutions
         help: Help
-        new-collections: New Collections
+        new-collections: New collections
         rights: Terms of use & Policies
         search-tips: Search tips
         using-myeuropeana: Using My Europeana
@@ -72,11 +72,11 @@ en:
         Explore %{total_item_count} artworks, artefacts, books, videos and sounds from across Europe.
     more: More...
     my-europeana: My Europeana
-    my-europeana-link: link to my Europeana
+    my-europeana-link: link to My Europeana
     navigation:
       breadcrumb:
-        item_detail: Item detail
-        results_list: Results List
+        item_detail: Item
+        results_list: Results
         return_home: Return to Home
     news: News
     object:
@@ -109,7 +109,7 @@ en:
         creation-date: Creation date
         creator: Creator
         current-location: Current location
-        data-provider: Data provider
+        data-provider: Institution
         date: Date
         dates: Dates
         description: Description
@@ -176,7 +176,7 @@ en:
         ugc: User contributed content
         version: Version
       named-entities:
-        title: Named Entities
+        title: Entities
         what:
           broader: Broader Concept
           label: Concept Label
@@ -190,8 +190,8 @@ en:
           title: When
         where:
           label: Place Label
-          latitude: Place Latitude
-          longitude: Place Longitude
+          latitude: Latitude
+          longitude: Longitude
           term: Place Term
           title: Where
         who:
@@ -248,7 +248,7 @@ en:
         empty-with-terms: Your search for %{query_terms} returned no results
         header: Results for
         header-and: and
-        in-channel: in Collection
+        in-channel: in thematic collection
         less: Less
         less_adv: Less Refinements
         more: More
@@ -272,7 +272,7 @@ en:
     settings:
       actions:
         clear-selection: Clear selection
-        save-settings: Save Settings
+        save-settings: Save settings
       language:
         auto-translate-limit: A maximum of %{max_languages} can be selected
         auto-translate-page: Automatically translate item pages into...

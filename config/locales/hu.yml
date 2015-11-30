@@ -273,7 +273,7 @@ hu:
         clear-selection: Kiválasztások törlése
         save-settings: Beállítások mentése
       language:
-        auto-translate-limit: 
+        auto-translate-limit: Maximum %{max_languages} nyelvet lehet kiválasztani
         auto-translate-page: 'Automatikusan fordítsd le az elemek oldalait a következő nyelvre:'
         auto-translate-page-short: 'Automatikusan fordítsd le az elemeket a következő nyelvre:'
         auto-translate-query: 'Automatikusan fordítsd le a kulcsszavakat a következő nyelvre:'
