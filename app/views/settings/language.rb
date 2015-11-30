@@ -59,6 +59,11 @@ module Settings
                   selected: I18n.locale.to_s == 'hu'
                 },
                 {
+                  text: t('global.language-polish'),
+                  value: 'pl',
+                  selected: I18n.locale.to_s == 'pl'
+                },
+                {
                   text: t('global.language-portuguese'),
                   value: 'pt',
                   selected: I18n.locale.to_s == 'pt'
@@ -73,6 +78,11 @@ module Settings
                   value: 'es',
                   selected: I18n.locale.to_s == 'es'
                 },
+                {
+                  text: t('global.language-swedish'),
+                  value: 'sv',
+                  selected: I18n.locale.to_s == 'sv'
+                }
               ]
             },
             language_itempages: {
