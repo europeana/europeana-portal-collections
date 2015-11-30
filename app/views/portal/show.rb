@@ -6,8 +6,11 @@ module Portal
     def head_meta
       desc = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
       landing = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
-      preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview')
       title = render_document_show_field_value(document, 'proxies.dcTitle', unescape: true)
+      preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', unescape: true)
+      preview = preview.sub(
+        'http://europeanastatic.eu/api/image?',
+        'http://delta-web.de.a9sapp.eu/api/v2/thumbnail-by-url.json?').sub('&size=LARGE', '&size=w400') unless preview.nil?
 
       mustache[:head_meta] ||= begin
         [
@@ -368,7 +371,7 @@ module Portal
             social_share: {
               url: URI.escape(request.original_url),
               facebook: true,
-              pinterest: true,
+              pinterest: false,
               twitter: true,
               googleplus: true
             },
