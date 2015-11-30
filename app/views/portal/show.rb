@@ -638,11 +638,6 @@ module Portal
           item[:text] = val
 
           search_val = val.sub('(', '').sub(')', '').sub('[', '').sub(']', '').sub('<', '').sub('>', '')
-          if search_val.index(' ')
-            if section[:url] == 'who'
-              search_val = "(#{search_val})"
-            end
-          end
 
           if section[:url]
             if section[:url] == 'q'
@@ -654,7 +649,11 @@ module Portal
             elsif section[:url] == 'what'
               item[:url] = search_path(q: "what:\"#{search_val}\"")
             elsif section[:url] == 'who'
-              item[:url] = search_path(q: "who:\"#{search_val}\"")
+              if search_val.index(' ')
+                item[:url] = search_path(q: "who:(#{search_val})")
+              else
+                item[:url] = search_path(q: "who:\"#{search_val}\"")
+              end
             else
               item[:url] = render_document_show_field_value(document, section[:url])
             end
