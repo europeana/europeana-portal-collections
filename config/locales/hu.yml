@@ -262,7 +262,7 @@ hu:
         view:
           grid: Rács
           list: Lista
-        view-at-provider: Tekintsd meg
+        view-at-provider: 'Tekintsd meg az eredeti helyén:'
     search:
       placeholder:
         text: Keresési kulcsszó megadása
