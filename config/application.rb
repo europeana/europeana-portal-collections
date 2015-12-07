@@ -62,8 +62,12 @@ module Europeana
         uri.path = '/' + [redis_config[:db], redis_config[:namespace]].join('/')
 
         [:redis_store, uri.to_s]
-      rescue RuntimeError
-        :null_store
+      rescue RuntimeError => e
+        if e.message.match('Could not load configuration.')
+          :null_store
+        else
+          raise e
+        end
       end
 
       # Load Action Mailer SMTP config from config/smtp.yml, if it exists
