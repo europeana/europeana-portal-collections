@@ -1,1 +1,1 @@
-Rails.application.config.x.cache_version = `git rev-parse HEAD`.strip
+Rails.application.config.x.cache_version = File.mtime(Rails.root).to_i.to_s
