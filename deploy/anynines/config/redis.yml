@@ -1,7 +1,18 @@
+<%
+config = begin
+  services = JSON.parse(ENV['VCAP_SERVICES'])
+  if services.key?('user-provided')
+    services['user-provided'].find { |val| val.key?('name') && val['name'].match(/redis/) }
+  elsif services.key?('redis-2.2')
+    services['redis-2.2'].first
+  end
+end
+fail 'No Redis service found in environment.' if config.nil?
+%>
 production:
-  host: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['hostname'] %>
-  port: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['port'] %>
-  password: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['password'] %>
-  name: <%= JSON.parse(ENV['VCAP_SERVICES'])['redis-2.2'].first['credentials']['name'] %>
+  host: <%= config['credentials']['hostname'] %>
+  port: <%= config['credentials']['port'] %>
+  password: <%= config['credentials']['password'] %>
+  name: <%= config['credentials']['name'] %>
   db: 0
   namespace: cache
