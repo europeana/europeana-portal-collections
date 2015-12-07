@@ -1,12 +1,11 @@
 <%
-redis_config = begin
-  if ENV.key?('VCAP_SERVICES')
-    services = JSON.parse(ENV['VCAP_SERVICES'])
-    if services.key?('user-provided')
-      services['user-provided'].find { |val| val.key?('name') && val['name'].match(/redis/) }
-    elsif services.key?('redis-2.2')
-      services['redis-2.2'].first
-    end
+if ENV.key?('VCAP_SERVICES')
+  services = JSON.parse(ENV['VCAP_SERVICES'])
+  if services.key?('user-provided')
+    redis_config = services['user-provided'].find { |val| val.key?('name') && val['name'].match(/redis/) }
+  end
+  if redis_config.nil? && services.key?('redis-2.2')
+    redis_config = services['redis-2.2'].first
   end
 end
 fail 'No Redis service found in environment.' if redis_config.nil?
