@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     super || User.new(guest: true)
   end
 
+  def cache_path_prefix
+    Rails.application.config.x.cache_version + '/'
+  end
+
   private
 
   def set_locale
