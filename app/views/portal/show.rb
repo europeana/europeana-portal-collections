@@ -546,8 +546,6 @@ module Portal
         val = val.first if val.is_a?(Array) && val.size == 1
         multi = (val.is_a?(Hash) || val.is_a?(Array)) && (val.size > 1)
 
-        Rails.logger.debug("normalize named entity multi: #{multi.inspect}".bold.red)
-
         {
           key: t(named_entity_field_label_i18n_key(field), scope: "site.object.named-entities.#{i18n}"),
           val: multi ? nil : val,
