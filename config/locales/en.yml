@@ -181,23 +181,23 @@ en:
           broader: Broader Concept
           label: Concept Label
           term: Concept Term
-          title: What
+          title: Subjects, resource types, genres and forms (Concepts)
         when:
           begin: Period Begin
           end: Period End
           label: Period Label
           term: Period Term
-          title: When
+          title: Time spans and dates (TimeSpan)
         where:
           label: Place Label
           latitude: Latitude
           longitude: Longitude
           term: Place Term
-          title: Where
+          title: Place names (Places)
         who:
           label: Agent Label
           term: Agent Term
-          title: Who
+          title: Persons and organisations (Agents)
       nav:
         next: Next
         prev: Previous

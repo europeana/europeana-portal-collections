@@ -182,14 +182,14 @@ module MustacheHelper
             settings_active: true
           },
           logo: {
-            url: root_url,
+            url: root_path,
             text: 'Europeana ' + t('global.search-collections')
           },
           primary_nav: {
             menu_id: 'main-menu',
             items: [
               {
-                url: root_url,
+                url: root_path,
                 text: t('global.navigation.home'),
                 is_current: controller.controller_name == 'home'
               },

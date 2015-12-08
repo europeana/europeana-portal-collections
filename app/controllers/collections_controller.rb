@@ -10,7 +10,7 @@ class CollectionsController < ApplicationController
   caches_action :show,
     if: Proc.new { !request.format.json? },
     expires_in: 1.hour,
-    cache_path: Proc.new { I18n.locale.to_s + request.original_fullpath }
+    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
 
   def index
     redirect_to_root

@@ -21,7 +21,7 @@ hu:
       feedback_banner:
         description: Az Alpha verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért az oldal néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
         link-text: "Írd le a véleményed!"
-        title: Ez egy Alpha verziója új Gyűjtemények és Zenei Gyűjtemények számára
+        title: Ez egy Alpha verzió új Gyűjtemények és Zenei Gyűjtemények számára
     blog-link: link a blogra
     browse:
       colours:
@@ -262,7 +262,7 @@ hu:
         view:
           grid: Rács
           list: Lista
-        view-at-provider: Tekintsd meg
+        view-at-provider: 'Tekintsd meg az eredeti helyén:'
     search:
       placeholder:
         text: Keresési kulcsszó megadása

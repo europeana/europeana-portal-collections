@@ -310,9 +310,9 @@ hu:
         advanced-rrpa: 
         advanced-rrra: 
         advanced-ucs: ''
-        open: 
-        permission: 
-        restricted: 
+        open: Igen, tulajdonos feltüntetésével
+        permission: Csak engedéllyel
+        restricted: Igen, korlátozásokkal
         simple: Egyszerű
       sound_duration:
         long: Hosszú (6+ perc)
@@ -371,7 +371,7 @@ hu:
       header:
         video_hd:
           'true': HD
-    find-us-elsewhere: Találj meg minket máshol
+    find-us-elsewhere: Találj meg minket a közösségi médiában
     forgot-password: Elfelejtetted a jelszavad?
     genres: műfajok
     genres-chamber-music: Kamarazene
@@ -382,10 +382,10 @@ hu:
     genres-popular-music: Könnyűzene
     genres-traditional-music: Népzene
     header:
-      connect: csatlakoztassa
-      develop: fejlessze
-      discover: fedezze fel
-      network: hálózat
+      connect: Csatlakozás
+      develop: Fejlesztés
+      discover: Felfedezés
+      network: Hálozat
     help: Segítség
     home: Főoldal
     javascript-required: Hogy ezt a tartalmat megtekinthesse, kérjük engedélyezze a JavaScript használatát; javasoljuk olyan böngésző használatát is, mely a HTML5 tartalmat támogatja.
@@ -422,7 +422,7 @@ hu:
     language-swedish: Svéd
     language-ukranian: Ukrán
     login: Bejelentkezés
-    mission: Megváltoztatjuk a világota kultúra segítségével! Európa gazdag örökségére akarunk építeni és ezt könnyen hozzáférhetővé tenni az emberek számára, legyen az munka, tanulás vagy szórakozás céljára.
+    mission: Megváltoztatjuk a világot a kultúra segítségével! Európa gazdag örökségére akarunk építeni és ezt könnyen hozzáférhetővé tenni az emberek számára, legyen látogatóink célja munka, tanulás vagy akár csupán szórakozás.
     mission-title: Küldetésünk
     more:
       load-more: Több

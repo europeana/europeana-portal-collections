@@ -188,7 +188,7 @@ sv:
         czechrepublic: Tjeckien
         denmark: Danmark
         estonia: Estland
-        europe: 
+        europe: Europa
         finland: Finland
         france: Frankrike
         germany: Tyskland
@@ -206,7 +206,7 @@ sv:
         norway: Norge
         poland: Polen
         portugal: Portugal
-        romania: 
+        romania: Rumänien
         russia: Ryssland
         serbia: Serbien
         slovakia: Slovakien
@@ -234,7 +234,7 @@ sv:
         provider: Aggregator
         reusability: Kan jag använda det?
         sound_duration: Längd
-        sound_hq: 
+        sound_hq: Hög kvalitet
         text_fulltext: Fulltext
         type: Mediaformat
         ugc: Visa användarskapat innehåll
@@ -253,7 +253,7 @@ sv:
         small: Liten (<0.5MP)
       language:
         bg: 
-        ca: 
+        ca: Katalonien
         cs: 
         da: 
         de: 
@@ -441,7 +441,7 @@ sv:
     refine-your-search: Förfina din sökning
     register: Registrera dig
     research: Research
-    research-text: 
+    research-text: Samverka med forskarsamhället
     search-area:
       search-button-image-alt: Sök
       search-placeholder-text: Lägg till ett sökord

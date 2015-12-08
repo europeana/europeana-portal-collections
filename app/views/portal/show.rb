@@ -546,8 +546,6 @@ module Portal
         val = val.first if val.is_a?(Array) && val.size == 1
         multi = (val.is_a?(Hash) || val.is_a?(Array)) && (val.size > 1)
 
-        Rails.logger.debug("normalize named entity multi: #{multi.inspect}".bold.red)
-
         {
           key: t(named_entity_field_label_i18n_key(field), scope: "site.object.named-entities.#{i18n}"),
           val: multi ? nil : val,
@@ -640,25 +638,27 @@ module Portal
         {}.tap do |item|
           item[:text] = val
 
-          search_val = val.sub('(', '').sub(')', '').sub('[', '').sub(']', '').sub('<', '').sub('>', '')
+          if val.is_a?(String)
+            search_val = val.sub('(', '').sub(')', '').sub('[', '').sub(']', '').sub('<', '').sub('>', '')
 
-          if section[:url]
-            if section[:url] == 'q'
-              item[:url] = search_path(q: "\"#{search_val}\"")
-            elsif section[:url] == 'f'
-              item[:url] = search_path(f: { section[:canned_facet_url] => [search_val] })
-            elsif section[:url] == 'canned_search_from_val'
-              item[:url] = search_path(q: "#{section[:canned_search_field]}:\"#{search_val}\"")
-            elsif section[:url] == 'what'
-              item[:url] = search_path(q: "what:\"#{search_val}\"")
-            elsif section[:url] == 'who'
-              if search_val.index(' ')
-                item[:url] = search_path(q: "who:(#{search_val})")
+            if section[:url]
+              if section[:url] == 'q'
+                item[:url] = search_path(q: "\"#{search_val}\"")
+              elsif section[:url] == 'f'
+                item[:url] = search_path(f: { section[:canned_facet_url] => [search_val] })
+              elsif section[:url] == 'canned_search_from_val'
+                item[:url] = search_path(q: "#{section[:canned_search_field]}:\"#{search_val}\"")
+              elsif section[:url] == 'what'
+                item[:url] = search_path(q: "what:\"#{search_val}\"")
+              elsif section[:url] == 'who'
+                if search_val.index(' ')
+                  item[:url] = search_path(q: "who:(#{search_val})")
+                else
+                  item[:url] = search_path(q: "who:\"#{search_val}\"")
+                end
               else
-                item[:url] = search_path(q: "who:\"#{search_val}\"")
+                item[:url] = render_document_show_field_value(document, section[:url])
               end
-            else
-              item[:url] = render_document_show_field_value(document, section[:url])
             end
           end
 

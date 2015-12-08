@@ -12,16 +12,16 @@ class PortalController < ApplicationController
   caches_action :index,
     if: Proc.new { !request.format.json? },
     expires_in: 1.day,
-    cache_path: Proc.new { I18n.locale.to_s + request.original_fullpath }
+    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
 
   caches_action :show,
     if: Proc.new { !request.format.json? && !params.key?(:debug) },
     expires_in: 1.day,
-    cache_path: Proc.new { I18n.locale.to_s + request.original_fullpath }
+    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
 
   caches_action :static,
     expires_in: 1.hour,
-    cache_path: Proc.new { I18n.locale.to_s + request.original_fullpath }
+    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
 
   # GET /record/:id
   def show

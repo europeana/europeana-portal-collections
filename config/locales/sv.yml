@@ -8,8 +8,8 @@ sv:
       browse: Utforska
       browse_colours: Färger
       browse_newcontent: Nytt innehåll
-      browse_sources: Källor
-      channels: Samlingar
+      browse_sources: Våra källor
+      channels: Collections
       collections: Samlingar
       exhibitions: Utställningar
       home: Start
@@ -103,7 +103,7 @@ sv:
         concept: Koncept
         concepts: Klassificeringar
         consists-of: Består av
-        contributor: 
+        contributor: Medverkande
         copyright: Copyright
         creation-date: Tillkomstdatum
         creator: Upphovsman
@@ -126,7 +126,7 @@ sv:
         extent: Storlek
         file-size: Filstorlek
         format: Format
-        fps: 
+        fps: Buildrutor per sekund
         has-type: "Är av typen"
         identifier: ID-nummer
         is-format-of: "Är en form av"
@@ -147,7 +147,7 @@ sv:
         place: Plats
         place-time: Plats/Tid
         properties: Egenskaper
-        provenance: 
+        provenance: Provenans
         provided-by: Upptäck mera
         provided-by-detail: Europeana visar denna post via %{institution_name_and_link}. Besök deras sajt för mera information.
         provider: Leverantör
@@ -158,7 +158,7 @@ sv:
         refs-rels: Referenser och relationer
         relations: Relationer
         rights: Rättigheter
-        rights-human: Kan jag använda detta?
+        rights-human: Kan jag använda det digitala objektet?
         runtime: Speltid
         runtime-unit-seconds: sekunder
         source: Källa
@@ -168,7 +168,7 @@ sv:
         timestamp-created: Publicerad första gången i Europeana
         timestamp-updated: Senast uppdaterad i Europeana
         timestamp_created: Publicerad första gången i Europeana (%{timestamp_created})
-        timestamp_updated: 
+        timestamp_updated: Senast uppdaterad i Europeana (%{timestamp_updated})
         title: Titel
         toc: Innehållsförteckning
         type: Typ
@@ -180,23 +180,23 @@ sv:
           broader: Bredare term
           label: Termetikett
           term: Term URI
-          title: Vad
+          title: "Ämnen, typer, och genres (Concepts)"
         when:
           begin: Från
           end: Till
           label: Periodsetikett
           term: Periodterm
-          title: När
+          title: Tidsintervall och årtal (TimeSpan)
         where:
           label: Platsetikett
           latitude: Latitud
           longitude: Longitude
-          term: 
-          title: Var
+          term: Platsterm
+          title: Platsnamn (Places)
         who:
           label: Agentetikett
           term: Agentterm
-          title: Vem
+          title: Personer och organisationer (Agents)
       nav:
         next: Nästa
         prev: Föregående
@@ -269,7 +269,7 @@ sv:
         auto-translate-page-short: "Översätt postbeskrivningarna till"
         auto-translate-query: "Översätt söktermer till"
         available: Tillgängliga språk
-        default: 
+        default: Förinställt språk
         flash:
           alert: Ogiltigt språk. Tillgängliga språk är %{locales}
           notice: Språkinställningarna sparade
