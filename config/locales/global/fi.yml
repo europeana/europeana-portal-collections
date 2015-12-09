@@ -1,5 +1,5 @@
 fi:
-  Symphonies: 
+  Symphonies: Sinfoniat
   X11:
     colours:
       '000000': 
@@ -83,7 +83,7 @@ fi:
       C0C0C0: 
       C71585: 
       CD5C5C: 
-      CD853F: 
+      CD853F: ''
       D2691E: 
       D2B48C: 
       D3D3D3: 
@@ -147,132 +147,132 @@ fi:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: 
+    about-us: Tietoa meistä
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
-      home: 
-      maps: 
-      music: 
-      natural-history: 
-      newspapers: 
-      performing-arts: 
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
-    channels-fashion: 
-    channels-music: 
-    choose-language: 
-    email-address: 
+      archaeology: arkeologia
+      architecture: arkkitehtuuri
+      art: taide
+      fashion: muoti
+      home: Koti (kaikki)
+      maps: kartat
+      music: musiikki
+      natural-history: luonnonhistoria
+      newspapers: sanomalehdet
+      performing-arts: esittävä taide
+    channels-art: Taidehistorialliset kokoelmat
+    channels-art-image: Taidehistoriallinen kokoelma -kuva
+    channels-art-link: Taidehistorialliset kokoelmat
+    channels-fashion: Muoti
+    channels-music: Musiikki
+    choose-language: Kieli
+    email-address: sähköpostiosoite
     facet:
       advanced:
-        options: 
+        options: Valinnat
         show:
-          ugc: 
+          ugc: Käyttäjien tuottama sisältö
       art:
         form:
           paintings:
-            genre: 
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            genre: Genre
+            medium: Väline
+      carrier: Alusta
+      colour: Väri
+      colour-black-and-white: Mustavalkoinen
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        austria: Itävalta
+        belgium: Belgia
+        bulgaria: Bulgaria
+        croatia: Kroatia
+        cyprus: Kypros
+        czechrepublic: Tšekki
+        denmark: Tanska
+        estonia: Viro
+        europe: Eurooppa
+        finland: Suomi
+        france: Ranska
+        germany: Saksa
+        greece: Kreikka
+        hungary: Unkari
+        iceland: Islanti
+        ireland: Irlanti
+        israel: Israel
+        italy: Italia
+        latvia: Latvia
+        lithuania: Liettua
+        luxembourg: Luxemburg
+        malta: Malta
+        netherlands: Alankomaat
+        norway: Norja
+        poland: Puola
+        portugal: Portugali
+        romania: Romania
+        russia: Venäjä
+        serbia: Serbia
+        slovakia: Slovakia
+        slovenia: Slovenia
+        spain: Espanja
+        sweden: Ruotsi
+        switzerland: Sveitsi
+        turkey: Turkki
+        ukraine: Ukraina
+        unitedkingdom: Britannia
+        unitedstatesofamerica: USA
+      creator: tekijä
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
-        media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
-        type: 
-        ugc: 
-        video_duration: 
-        year: 
+        channel: Kokoelmat
+        colourpalette: Väri
+        country: Maa
+        data_provider: Instituutio
+        image_aspectratio: Suunta
+        image_colour: Paletti
+        image_size: Koko
+        language: Kieli
+        language_of_description: Kuvailukieli
+        media: Vain kohteet, joista on kuva
+        mime_type: Tiedostomuoto
+        provider: Aggregaattori
+        reusability: Voinko käyttää sitä?
+        sound_duration: Kesto
+        sound_hq: Korkealaatuinen
+        text_fulltext: Kokoteksti
+        type: Media
+        ugc: Näytä käyttäjien lisäämä sisältö
+        video_duration: Kesto
+        year: Päivämäärä
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: Vaakakuva
+        portrait: Pystykuva
       image_colour:
-        'false': 
-        'true': 
+        'false': Mustavalkoinen
+        'true': Värillinen
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: Erittäin suuri (4MP+)
+        large: Suuri (1–4MP)
+        medium: Keskikokoinen (0,5–1MP)
+        small: Pieni (<0,5MP)
       language:
-        bg: 
-        ca: 
-        cs: 
-        da: 
-        de: 
-        el: 
-        en: 
-        es: 
-        et: 
-        fi: 
-        fr: 
-        ga: 
-        he: 
-        hr: 
-        hu: 
-        is: 
-        it: 
-        lt: 
+        bg: "Български"
+        ca: Català
+        cs: "Čeština"
+        da: Dansk
+        de: Deutsch
+        el: "Ελληνικά"
+        en: English
+        es: Español
+        et: Eesti
+        fi: Suomi
+        fr: Français
+        ga: Gaeilge
+        he: "עברית"
+        hr: Hrvatski
+        hu: Magyar
+        is: "Íslenska"
+        it: ''
+        lt: ''
         lv: 
         mt: 
-        mul: 
+        mul: Monikielinen
         nl: 
         'no': 
         pl: 
@@ -286,176 +286,176 @@ fi:
         tr: 
         uk: 
         yi: 
-      less: 
+      less: Vähemmän
       media:
-        'false': 
-        'true': 
-      more: 
-      more-refinements: 
+        'false': Ei
+        'true': Kyllä
+      more: Lisää
+      more-refinements: Enemmän tarkennuksia
       resource:
-        type: 
+        type: Tyyppi
       reusability:
-        advanced: 
-        advanced-cc-by: 
-        advanced-cc-by-nc: 
-        advanced-cc-by-nc-nd: 
-        advanced-cc-by-nc-sa: 
-        advanced-cc-by-nd: 
-        advanced-cc-by-sa: 
-        advanced-cc0: 
-        advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: 
-        advanced-pdm: 
-        advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
-        advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
-        simple: 
+        advanced: Laajennettu
+        advanced-cc-by: CC BY
+        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc-nd: CC BY-NC-ND
+        advanced-cc-by-nc-sa: CC BY-NC-SA
+        advanced-cc-by-nd: CC BY-ND
+        advanced-cc-by-sa: CC BY-SA
+        advanced-cc0: CC0
+        advanced-orphan-work: Orpoteos
+        advanced-out-of-copyright-non-commercial: Ei tekijänoikeuden suojaa - ei saa käyttää kaupallisesti
+        advanced-pdm: Public Domain
+        advanced-rrfa: Oikeudet pidätetään - Vapaasti katseltavissa
+        advanced-rrpa: Oikeudet pidätetään - Katselu maksullinen
+        advanced-rrra: Oikeudet pidätetään - Rajattu katseluoikeus
+        advanced-ucs: Tuntematon tekijänoikeudellinen status
+        open: Sallittu, kun lähde mainitaan
+        permission: Vain luvanvaraisesti
+        restricted: Kyllä, rajoituksin
+        simple: Yksinkertainen
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: Pitä (6+ minuuttia)
+        medium: Keskipitkä (3-6 minuuttia)
+        short: Lyhyt (30s - 3 minuuttia)
+        very_short: Erittäin lyhyt (alle 30 s)
       sound_hq:
-        'true': 
-      source: 
+        'true': Kyllä
+      source: Lähde
       text_fulltext:
-        'false': 
-        'true': 
+        'false': Ei
+        'true': Kyllä
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: Kuva
+        sound: "Ääni"
+        text: Teksti
+        video: Video
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: Kuvan suunta
+          landscape: Vaakakuva
+          portrait: Pystykuva
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: Näytä kaikki
+          hq-only: Näytä vain korkelaatuiset
+          label: Laatu
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: Mitä nämä koot tarkoittavat?
+          label: Kuvakoko
+          large: Suuri (%{data})
+          medium: Keskikokoinen (%{data})
+          small: Pieni (%{data})
+          xl: Erittäin suuri (%{data})
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: Kesto
+          long: Pitkä (%{data})
+          medium: Keskipitkä (%{data})
+          short: Lyhyt (%{data})
+          very-short: Erittäin lyhyt (%{data})
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
+          label: Kesto
+          long: Pitkä (%{data})
+          medium: Keskipitkä (%{data})
+          short: Lyhyt (%{data})
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Pitkä (20+ minuuttia)
+        medium: Keskipitkä (4–20 minuuttia)
+        short: Lyhyt (alle 4 minuuttia)
       year:
-        from: 
-        to: 
+        from: alkaen
+        to: päättyen
     'facet ':
       header:
         video_hd:
-          'true': 
-    find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
-    genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+          'true': HD
+    find-us-elsewhere: Muualla palvelussa
+    forgot-password: Unohditko salasanasi?
+    genres: genret
+    genres-chamber-music: Kamarimusiikko
+    genres-classical-music: Klassinen musiikki
+    genres-concertos: Konsertot
+    genres-non-western-classical-music: Ei-läntinen klassinen musiikki
+    genres-opera: Ooppera
+    genres-popular-music: Populaarimusiikki
+    genres-traditional-music: Kansanmusiikki
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
-    help: 
-    home: 
-    javascript-required: 
-    labs: 
-    labs-text: 
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
-    mission: 
-    mission-title: 
+      connect: Yhdistä
+      develop: Kehitä
+      discover: Löydä
+      network: Verkosto
+    help: Apu
+    home: Koti
+    javascript-required: Ota JavaScript käyttöön, jotta näet tämän sisällön. Harkitse myös päivittämistä selaimeen, joka tukee HTML5-sisältöjä.
+    labs: Labs
+    labs-text: Remiksaa kulttuurisisältöjä APIemme ja datasettiemme avulla
+    language-basque: Baski
+    language-bulgarian: Bulgaria
+    language-catalan: Katalaani
+    language-croatian: Kroaatti
+    language-czech: Tšekki
+    language-danish: Tanska
+    language-dutch: Hollanti
+    language-english: Englanti
+    language-estonian: Viro
+    language-finnish: Suomi
+    language-french: Ranska
+    language-gaelic: Iiri
+    language-german: Saksa
+    language-greek: Kreikka
+    language-hungarian: Unkari
+    language-icelandic: Islanti
+    language-italian: Italia
+    language-latvian: Latvia
+    language-lithuanian: Liettua
+    language-maltese: Malta
+    language-norwegian: Norja
+    language-polish: Puola
+    language-portuguese: Portugali
+    language-romanian: Romania
+    language-russian: Venäjä
+    language-slovakian: Slovakki
+    language-slovenian: Sloveeni
+    language-spanish: Espanja
+    language-swedish: Ruotsi
+    language-ukranian: Ukraina
+    login: Kirjaudu
+    mission: Muutamme maailmaa kulttuurilla! Haluamme rakentaa Euroopan rikasta kulttuuriperintöä ja tuoda sitä ihmisille käytettäväksi - työhön, oppimiseen tai vain huvin vuoksi.
+    mission-title: Missiomme
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
+      load-more: Lisää
+      show-more: Näytä lisää
+      view-more: Katso lisää
+    more-info: Lisätietoa
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
-    our-sites: 
-    password: 
-    professional: 
-    professional-text: 
-    refine-your-search: 
-    register: 
-    research: 
-    research-text: 
+      email-address-invalid: Sähköpostiosoitteen on oltava toimiva osoite.
+      email-address-required: Sähköpostiosoite on määritettävä.
+      language-required: Kieli on määritettävä.
+      signup: Tilaa uutiskirje
+    our-sites: sivustomme
+    password: Salasana
+    professional: Pro
+    professional-text: Osallistu, jaa tai hyödynnä aineistoja
+    refine-your-search: Tarkenna hakuasi
+    register: Rekisteröidy
+    research: Tutkimus
+    research-text: Yhteys akateemiseen yhteisöön
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+      search-button-image-alt: Hae
+      search-placeholder-text: Anna hakutermi
+    search-collections: Kokoelmat
+    search-collections-text: Tutustu Euroopan kulttuuriperintöön
+    share: Jaa
+    sitemap: Sivukartta
+    terms-and-policies: Käyttöehdot & käytännöt
+    type: tyyppi
+  'no': Norja
+  pl: Portugali
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Tulokset
+        show-results-all: Näytä kaikki tulokset
