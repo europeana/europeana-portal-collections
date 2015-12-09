@@ -30,8 +30,8 @@ module BlacklightConfig
       config.document_presenter_class = Document::RecordPresenter
 
       # Europeana API caching
-      config.europeana_api_cache = Rails.cache
-      config.europeana_api_cache_expires_in = 24.hours
+      # config.europeana_api_cache = Rails.cache
+      # config.europeana_api_cache_expires_in = 24.hours
 
       # items to show per page, each number in the array represents another
       # option to choose from.
