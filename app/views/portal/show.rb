@@ -458,7 +458,7 @@ module Portal
               }
             ]
           ),
-          similar: {
+          similar: @hierarchy.blank? ? {
             title: t('site.object.similar-items'),
             more_items_query: search_path(mlt: document.id),
             more_items_load: document_similar_url(document, format: 'json'),
@@ -477,7 +477,7 @@ module Portal
                 }
               }
             end
-          },
+          } : false,
           named_entities: named_entity_data,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
