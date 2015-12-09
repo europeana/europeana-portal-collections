@@ -33,6 +33,7 @@ gem 'paper_trail', '~> 4.0'
 gem 'puma', '~> 2.13'
 gem 'rails_admin', '~> 0.7.0'
 gem 'redis-rails', '~> 4.0'
+gem 'redis-rails-instrumentation'
 gem 'sass-rails'
 
 group :production do
