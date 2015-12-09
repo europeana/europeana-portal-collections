@@ -1,4 +1,4 @@
-da:
+tr:
   Symphonies: 
   X11:
     colours:
@@ -147,7 +147,7 @@ da:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: Om os
+    about-us: 
     channel:
       archaeology: 
       architecture: 
@@ -159,13 +159,13 @@ da:
       natural-history: 
       newspapers: 
       performing-arts: 
-    channels-art: Kultur historiske samlinger
-    channels-art-image: Kultur historisk billede
-    channels-art-link: Kultur historiske samlinger
-    channels-fashion: Mode
-    channels-music: Musik
-    choose-language: Sprog
-    email-address: email adresse
+    channels-art: 
+    channels-art-image: 
+    channels-art-link: 
+    channels-fashion: 
+    channels-music: 
+    choose-language: 
+    email-address: 
     facet:
       advanced:
         options: 
@@ -371,33 +371,32 @@ da:
       header:
         video_hd:
           'true': 
-    find-us-elsewhere: Find os
-    forgot-password: |
-      Glemt dit brugernavn?
-    genres: genre
-    genres-chamber-music: Kamer musik
-    genres-classical-music: Klassisk musik
-    genres-concertos: Koncerter
-    genres-non-western-classical-music: Ikke western klassisk musik
-    genres-opera: Opera
-    genres-popular-music: Populær musik
-    genres-traditional-music: Traditionel musik
+    find-us-elsewhere: 
+    forgot-password: 
+    genres: 
+    genres-chamber-music: 
+    genres-classical-music: 
+    genres-concertos: 
+    genres-non-western-classical-music: 
+    genres-opera: 
+    genres-popular-music: 
+    genres-traditional-music: 
     header:
       connect: 
       develop: 
       discover: 
       network: 
-    help: Hjælp
-    home: Hjem
-    javascript-required: 'For at kunne se dette indhold, venligst tillad brugen af Javascript og overvej at opgradere til en web browser, der støtter indhold fra HTML 5 '
-    labs: Labs
-    labs-text: Mix kultur indhold med vore APIs og datasæt
+    help: 
+    home: 
+    javascript-required: 
+    labs: 
+    labs-text: 
     language-basque: 
     language-bulgarian: 
     language-catalan: 
     language-croatian: 
     language-czech: 
-    language-danish: Dansk
+    language-danish: 
     language-dutch: 
     language-english: 
     language-estonian: 

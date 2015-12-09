@@ -35,7 +35,7 @@ en:
         title: Sources
     collections:
       art-history:
-        description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]
+        description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art History Collection introduces you to artists and artworks from across the whole of Europe.
         title: Europeana Art History
       data-types:
         3d: 3D objects
@@ -213,16 +213,22 @@ en:
         intro: Sorry, we can't find that page
         text: Unfortunately we couldn't find the page you were looking for. Try searching Europeana or you might like the selected items below.
       about:
-        text: |-
-          <p>Whether you came here for inspiration, to work on your research, looking for your next coffee mug design or just to snoop around, we hope you will find what you need somewhere amongst the 45 million objects we host here.</p>
+        text: |+
+          <p>Searching for a favourite old painting? Doing some research or writing a school paper?  Looking for an inspiration for your next coffee mug design?  Fancy learning something new? Whatever the reason for your visit to Europeana, welcome!</p>
 
-          <p>Our material comes from all over Europe and the scope of the collections is really quite astonishing. Our aim is help you find your way round so you discover treasures of your own.</p>
+          <p>Delve into Europe's largest online collection of art, culture and science. Europeana Collections brings you material from the famous and the not-so-famous (but always fascinating)  libraries, museums, galleries and archives of Europe.</p>
 
-          <p>Over the last few years, we’ve been expanding our collections and learning more and more about them, and what you want to do with them. Now it’s time to change a few things and make some improvements to our service!</p>
+          <p>Books and manuscripts, photos and paintings, sculpture and sheet music, videos and sound recordings, diaries and maps - they’re all here. No need to travel the continent, either physically or virtually!</p>
 
-          <p>We’re trying out a new version of Europeana Collections. We are working hard to improve your experience here and make it as easy as possible for you to find the information you are looking for. So we’ll probably ask you to help us by answering some questions. Your answers will be really helpful to us, so please do take a moment to give us your thoughts. Thanks!</p>
+          <p>Explore, discover, watch, listen, read, download... Enjoy!</p>
 
-          <p>In the meantime, we hope you enjoy your cultural journey with us.</p>
+          <p>Now why not try out the Europeana Art History Collections or Europeana Music Collections? We also have custom resources for researchers and cultural developers/innovators (this is where you can find our API), as well as a range of virtual exhibitions and a blog. </p>
+
+          <p>And if you’re still hungry for more, you can get your daily dose of culture on Facebook, Twitter, Medium, Google+ and Pinterest.</p>
+
+          <p>For more information on how we work with cultural institutions and their collections, visit Europeana Pro.</p>
+
+
         title: Welcome, culture lover!
       music-channel-about:
         text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Collection available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Collection. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"
