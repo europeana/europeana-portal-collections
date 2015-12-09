@@ -175,7 +175,7 @@ module Portal
         agent: agent_label(doc),
         concepts: concept_labels(doc),
         item_type: {
-          name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase.sub('_3d', '3D'))
+          name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase)
         }
       }
     end
