@@ -10,6 +10,7 @@ module Browse
       mustache[:content] ||= begin
         {
           title: page_title,
+          description: t('site.browse.sources.description'),
           providers: @providers.blank? ? nil : {
             title: page_title,
             data: stylised_providers,
