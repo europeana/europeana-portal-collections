@@ -2,20 +2,20 @@ lv:
   global:
     labs-link: 
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
+      all_blog_posts: Visi bloga ieraksti...
+      all_exhibitions: Visas izstādes...
+      blog: Blogs
+      browse: Pārlūkot
+      browse_colours: Krāsas
+      browse_newcontent: Jauns saturs
       browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
+      channels: Kolekcijas
+      collections: Kolekcijas
+      exhibitions: Izstādes
+      home: Sākums
     pro-link: 
     pro-text: 
-    settings: 
+    settings: Iestatījumi
   site:
     alpha:
       feedback_banner:
@@ -25,12 +25,12 @@ lv:
     blog-link: 
     browse:
       colours:
-        title: 
+        title: Krāsas
       newcontent:
-        tableh1: 
+        tableh1: Visas institūcijas
         tableh2: 
-        tableh3: 
-        title: 
+        tableh3: Datējums
+        title: Jauns saturs
       sources:
         title: 
     collections:
@@ -38,15 +38,15 @@ lv:
         description: 
         title: 
       data-types:
-        3d: 
+        3d: 3D objekti
         count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        images: Attēli
+        moving-images: Video
+        sound: Skaņu ieraksti
+        texts: Teksti
       labels:
         credits: 
-        recent: 
+        recent: Jaunākie papildinājumi
         spotlight-on: 
       music:
         description: 
@@ -54,22 +54,22 @@ lv:
     facet:
       language:
         show:
-          results: 
+          results: Rezultāti
     footer:
       menu:
-        about: 
+        about: Par
         become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
+        contact: Kontakti
+        copyright: Autortiesības
+        data-providers: Visas institūcijas
+        help: Palīdzība
+        new-collections: Jaunas kolekcijas
         rights: 
-        search-tips: 
+        search-tips: Meklēšanas padomi
         using-myeuropeana: 
     home:
       strapline: 
-    more: 
+    more: Vairāk...
     my-europeana: 
     my-europeana-link: 
     navigation:
@@ -81,18 +81,18 @@ lv:
     object:
       actions:
         attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
+        attribute-html: HTML
+        attribute-plaintext: Vienkāršs teksts
+        download: Lejupielādēt
+        download-additional: Pieejams arī kā
         downloaddata: 
         open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        show-less-data: Rādīt mazāk datu
+        show-more-data: Rādīt vairāk datu
+        technicalmetadata: Tehniskie metadati
       enrichment:
         who:
-          title: 
+          title: Nosaukums
       hierarchy:
         title: 
         view-items-above: 
@@ -101,15 +101,15 @@ lv:
         codec: 
         collection-name: 
         concept: 
-        concepts: 
-        consists-of: 
+        concepts: Klasifikācijas
+        consists-of: Sastāv no
         contributor: 
-        copyright: 
+        copyright: Autortiesības
         creation-date: 
         creator: 
-        current-location: 
-        data-provider: 
-        date: 
+        current-location: Pašreizējā atrašanās vieta
+        data-provider: Institūcija
+        date: Datējums
         dates: 
         description: 
         dimensions: 
@@ -123,8 +123,8 @@ lv:
           is-successor-of: 
           realises: 
           was-present-at: 
-        extent: 
-        file-size: 
+        extent: Izmērs
+        file-size: Datnes izmērs
         format: 
         fps: 
         has-type: 
@@ -135,11 +135,11 @@ lv:
         is-replaced-by: 
         is-required-by: 
         issued: 
-        language: 
+        language: Valoda
         latitude: 
         location: 
         longitude: 
-        map: 
+        map: Karte
         map-tiles: 
         medium: 
         people: 
@@ -147,24 +147,24 @@ lv:
         place: 
         place-time: 
         properties: 
-        provenance: 
-        provided-by: 
+        provenance: Izcelsme
+        provided-by: Uzzināt vairāk
         provided-by-detail: 
         provider: 
         providing-country: 
         publication-date: 
-        publisher: 
+        publisher: Izdevējs
         references: 
         refs-rels: 
         relations: 
-        rights: 
+        rights: Tiesības
         rights-human: 
         runtime: 
-        runtime-unit-seconds: 
+        runtime-unit-seconds: sekundes
         source: 
-        subject: 
+        subject: Priekšmets
         temporal: 
-        time: 
+        time: Laiks
         timestamp-created: 
         timestamp-updated: 
         timestamp_created: 
@@ -172,8 +172,8 @@ lv:
         title: 
         toc: 
         type: 
-        ugc: 
-        version: 
+        ugc: Lietotāja iesniegts saturs
+        version: Versija
       named-entities:
         title: 
         what:
@@ -205,11 +205,11 @@ lv:
         north: 
         south: 
         west: 
-      show-more-similar-items: 
+      show-more-similar-items: rādīt vairāk
       similar-items: 
     pages:
       '404':
-        intro: 
+        intro: Atvainojiet, šo lapu neizdevās atrast
         text: 
       about:
         text: 
@@ -223,10 +223,10 @@ lv:
         dutchmasters: 
         favouriteart: 
         label: 
-        newcollection: 
-        product-save: 
+        newcollection: Jauna kolekcija
+        product-save: Saglabāt
         saveto: 
-        show-all-collections: 
+        show-all-collections: Rādīt visas kolekcijas
       list:
         all-results:
           3D: 
@@ -234,29 +234,29 @@ lv:
           text: 
           video: 
         count-and-terms: 
-        empty: 
-        empty-with-terms: 
+        empty: Nav rezultātu
+        empty-with-terms: Jūsu meklēšanas pieprasījumam %{query_terms} nav rezultātu
         header: 
-        header-and: 
+        header-and: un
         in-channel: 
         less: 
         less_adv: 
-        more: 
+        more: Vairāk
         more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
+        product-3D: 3D
+        product-image: Attēls
+        product-sound: Skaņa
+        product-text: Teksts
+        product-video: Video
         results-relevance: 
         single-result: 
         view:
           grid: 
-          list: 
+          list: Saraksts
         view-at-provider: 
     search:
       placeholder:
-        text: 
+        text: Pievienot meklējamo vārdu
       similar:
         prefix: 
     settings:
@@ -273,6 +273,6 @@ lv:
         flash:
           alert: 
           notice: 
-        label: 
-        settings-label: 
-      title: 
+        label: Valoda
+        settings-label: valodas iestatījumi
+      title: Iestatījumi

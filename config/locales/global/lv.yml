@@ -1,5 +1,5 @@
 lv:
-  Symphonies: 
+  Symphonies: Simfonijas
   X11:
     colours:
       '000000': 
@@ -147,51 +147,51 @@ lv:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: 
+    about-us: Par mums
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
+      archaeology: arheoloģija
+      architecture: arhitektūra
+      art: māksla
+      fashion: mode
       home: 
-      maps: 
-      music: 
+      maps: kartes
+      music: mūzika
       natural-history: 
-      newspapers: 
+      newspapers: laikraksti
       performing-arts: 
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
-    channels-fashion: 
-    channels-music: 
-    choose-language: 
-    email-address: 
+    channels-art: Mākslas vēstures kolekcijas
+    channels-art-image: Mākslas vēstures kolekcijas attēls
+    channels-art-link: Mākslas vēstures kolekcijas
+    channels-fashion: Mode
+    channels-music: Mūzika
+    choose-language: Valoda
+    email-address: e-pasta adrese
     facet:
       advanced:
         options: 
         show:
-          ugc: 
+          ugc: Lietotāja radīts saturs
       art:
         form:
           paintings:
             genre: 
             medium: 
       carrier: 
-      colour: 
+      colour: Krāsa
       colour-black-and-white: 
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
+        austria: Austrija
+        belgium: Beļģija
+        bulgaria: Bulgārija
+        croatia: Horvātija
+        cyprus: Kipra
+        czechrepublic: "Čehija"
+        denmark: Dānija
+        estonia: Igaunija
+        europe: Eiropa
+        finland: Somija
+        france: Francija
+        germany: Vācija
         greece: 
         hungary: 
         iceland: 
@@ -204,34 +204,34 @@ lv:
         malta: 
         netherlands: 
         norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
+        poland: Polija
+        portugal: Portugāle
+        romania: Rumānija
+        russia: Krievija
+        serbia: Serbija
+        slovakia: Slovākija
+        slovenia: Slovēnija
+        spain: Spānija
+        sweden: Zviedrija
+        switzerland: "Šveice"
+        turkey: Turcija
+        ukraine: Ukraina
+        unitedkingdom: Apvienotā Karaliste
+        unitedstatesofamerica: ASV
       creator: 
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
+        channel: Kolekcijas
+        colourpalette: Krāsa
+        country: Valsts
+        data_provider: Institūcija
         image_aspectratio: 
         image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
+        image_size: Izmērs
+        language: Valoda
+        language_of_description: Apraksta valoda
         media: 
         mime_type: 
-        provider: 
+        provider: Agregators
         reusability: 
         sound_duration: 
         sound_hq: 
@@ -239,18 +239,18 @@ lv:
         type: 
         ugc: 
         video_duration: 
-        year: 
+        year: Datējums
       image_aspectratio:
         landscape: 
         portrait: 
       image_colour:
         'false': 
-        'true': 
+        'true': Krāsa
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: "Ļoti liels (4MP+)"
+        large: Liels (1-4MP)
+        medium: Vidējs (0.5-1MP)
+        small: Mazs (<0.5MP)
       language:
         bg: 
         ca: 
@@ -288,9 +288,9 @@ lv:
         yi: 
       less: 
       media:
-        'false': 
-        'true': 
-      more: 
+        'false': Nē
+        'true': Jā
+      more: Vairāk
       more-refinements: 
       resource:
         type: 
@@ -315,79 +315,79 @@ lv:
         restricted: 
         simple: 
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: Garš (6+ minūtes)
+        medium: Vidējs (3-6 minūtes)
+        short: "Īss (30 sekundes - 3 minūtes)"
+        very_short: "Ļoti īss (<30 sekundes)"
       sound_hq:
-        'true': 
+        'true': Jā
       source: 
       text_fulltext:
-        'false': 
-        'true': 
+        'false': Nē
+        'true': Jā
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: Attēls
+        sound: Skaņa
+        text: Teksts
+        video: Video
       type-image:
         orientation:
           label: 
           landscape: 
           portrait: 
         quality:
-          all: 
+          all: Rādīt visu
           hq-only: 
-          label: 
+          label: Kvalitāte
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: Ko šie izmēri nozīmē?
+          label: Attēla izmērs
+          large: Liels (%{data})
+          medium: Vidējs (%{data})
+          small: Mazs (%{data})
+          xl: "Ļoti liels (%{data})"
       type-sound:
         duration:
           label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          long: Garš (%{data})
+          medium: Vidējs (%{data})
+          short: "Īss (%{data})"
+          very-short: "Ļoti īss (%{data})"
       type-video:
         duration:
           label: 
-          long: 
-          medium: 
-          short: 
+          long: Garš (%{data})
+          medium: Vidējs (%{data})
+          short: "Īss (%{data})"
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Garš (20+ minūtes)
+        medium: Vidējs (4-20 minūtes)
+        short: "Īss (<4 minūtes)"
       year:
-        from: 
-        to: 
+        from: 'no'
+        to: līdz
     'facet ':
       header:
         video_hd:
           'true': 
     find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
+    forgot-password: Aizmirsi savu paroli?
+    genres: "žanri"
+    genres-chamber-music: Kamermūzika
+    genres-classical-music: Klasiskā mūzika
+    genres-concertos: Koncerti
     genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+    genres-opera: Opera
+    genres-popular-music: Populārā mūzika
+    genres-traditional-music: Tradicionālā mūzika
     header:
       connect: 
       develop: 
       discover: 
       network: 
-    help: 
-    home: 
+    help: Palīdzība
+    home: Sākums
     javascript-required: 
     labs: 
     labs-text: 
@@ -423,11 +423,11 @@ lv:
     language-ukranian: 
     login: 
     mission: 
-    mission-title: 
+    mission-title: Mūsu misija
     more:
-      load-more: 
-      show-more: 
-      view-more: 
+      load-more: Vairāk
+      show-more: Rādīt vairāk
+      view-more: Skatīt vairāk
     more-info: 
     newsletter:
       email-address-invalid: 
@@ -435,20 +435,20 @@ lv:
       language-required: 
       signup: 
     our-sites: 
-    password: 
+    password: Parole
     professional: 
     professional-text: 
-    refine-your-search: 
+    refine-your-search: Precizēt meklēšanas pieprasījumu
     register: 
     research: 
     research-text: 
     search-area:
       search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
+      search-placeholder-text: Pievienot meklējamo vārdu
+    search-collections: Kolekcijas
     search-collections-text: 
     share: 
-    sitemap: 
+    sitemap: Lapas karte
     terms-and-policies: 
     type: 
   'no': 
@@ -457,5 +457,5 @@ lv:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Rezultāti
+        show-results-all: Rādīt visus rezultātus

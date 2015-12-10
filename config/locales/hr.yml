@@ -1,119 +1,119 @@
 hr:
   global:
-    labs-link: 
+    labs-link: poveznica na labs
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: Sve objave na blogu...
+      all_exhibitions: Sve izložbe...
+      blog: Blog
+      browse: Pregledavanje
+      browse_colours: Boje
+      browse_newcontent: Novi sadržaj
+      browse_sources: Izvori
+      channels: Zbirke
+      collections: Zbirke
+      exhibitions: Izložbe
+      home: Naslovnica
+    pro-link: poveznica na pro
+    pro-text: tekst za pro
+    settings: Postavke
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: Alfa objava znači da je ova mrežna stranica u aktivnom razvoju i da će redovito biti ažurirana. Ponekad će možda biti offline. Vaše povratne informacije će nam pomoći da poboljšamo našu stranicu.
+        link-text: Podijelite svoje mišljenje!
+        title: 'Ovo je alfa objava naših novih stranica: "Zbirke" i "Glazbena zbirka"'
+    blog-link: poveznica na blog
     browse:
       colours:
-        title: 
+        title: Boje
       newcontent:
-        tableh1: 
+        tableh1: Sve ustanove
         tableh2: 
-        tableh3: 
-        title: 
+        tableh3: Datum
+        title: Novi sadržaj
       sources:
-        title: 
+        title: Izvori
     collections:
       art-history:
-        description: 
-        title: 
+        description: Od renesanse do nadrealista te od starorimske skulpture do suvremene umjetnosti, Europeanina povijesno-umjetnička zbirka upoznaje vas s umjetnicima i umjetničkim djelima iz cijele Europe.
+        title: Europeana povijest umjetnosti
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D predmeti
+        count: objekti
+        images: Slike
+        moving-images: Video zapisi
+        sound: Zvučni zapisi
+        texts: Tekstovi
       labels:
         credits: 
-        recent: 
-        spotlight-on: 
+        recent: Nedavno dodani
+        spotlight-on: U fokusu
       music:
-        description: 
-        title: 
+        description: ' <strong>Europeana Music Collection</strong> povezujue najbolje glazbene snimke, notne zapise i ostale zbirke glazbene tematike iz audio-vizualnih arhiva, knjižnica, arhiva i muzeja Europe. <a href="/portal/channels/music/about">Saznajte više o Glazbenom kanalu.</a>'
+        title: Europeana Music
     facet:
       language:
         show:
-          results: 
+          results: Rezultati
     footer:
       menu:
         about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        become-a-provider: Postani naš partner
+        contact: Kontakt
+        copyright: Autorsko pravo
+        data-providers: Sve ustanove
+        help: Pomoć
+        new-collections: Nove zbirke
+        rights: Opći uvjeti i pravila
+        search-tips: Savjeti za pretragu
+        using-myeuropeana: Korištenje My Europeana
     home:
       strapline: 
-    more: 
-    my-europeana: 
+    more: Više...
+    my-europeana: My Europeana
     my-europeana-link: 
     navigation:
       breadcrumb:
         item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        results_list: Rezultati
+        return_home: Povratak na naslovnicu
+    news: Novosti
     object:
       actions:
         attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
+        attribute-html: HTML
+        attribute-plaintext: Samo tekst
+        download: Preuzmi
+        download-additional: Dostupno i kao
+        downloaddata: Preuzmi podatke
         open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        show-less-data: Prikaži manje podataka
+        show-more-data: Prikaži više podataka
+        technicalmetadata: Tehnički metapodaci
       enrichment:
         who:
-          title: 
+          title: Naslov
       hierarchy:
         title: 
         view-items-above: 
         view-items-below: 
       meta-label:
-        codec: 
+        codec: Kodek
         collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
+        concept: Koncept
+        concepts: Klasifikacije
+        consists-of: Sastoji se od
+        contributor: Suradnik
+        copyright: Autorsko pravo
         creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        creator: Stvaratelj
+        current-location: Trenutna lokacija
+        data-provider: Ustanova
+        date: Datum
+        dates: Datumi
+        description: Opis
+        dimensions: Dimenzije
+        duration: Trajanje
         edm:
           has-met: 
           incorporates: 
@@ -123,41 +123,41 @@ hr:
           is-successor-of: 
           realises: 
           was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
+        extent: Veličina
+        file-size: Veličina datoteke
+        format: Format
+        fps: Kadrova po sekundi
         has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
+        identifier: Identifikator
+        is-format-of: Format od
+        is-part-of: Dio od
         is-referenced-by: 
         is-replaced-by: 
         is-required-by: 
         issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
+        language: Jezik
+        latitude: "Širina"
+        location: Lokacija
+        longitude: Dužina
+        map: Karta
+        map-tiles: Naslovi
+        medium: Medij
+        people: Ljudi
+        period: Period
+        place: Mjesto
+        place-time: Mjesto/vrijeme
+        properties: Svojstva
+        provenance: Porijeklo
+        provided-by: Saznaj više
+        provided-by-detail: Europeana prikazuje ovaj objekt preko %{institution_name_and_link}. Posjetite njihovu stranicu za više informacija.
         provider: 
         providing-country: 
-        publication-date: 
-        publisher: 
+        publication-date: Datum objave
+        publisher: Nakladnik
         references: 
         refs-rels: 
         relations: 
-        rights: 
+        rights: Prava
         rights-human: 
         runtime: 
         runtime-unit-seconds: 
@@ -169,48 +169,48 @@ hr:
         timestamp-updated: 
         timestamp_created: 
         timestamp_updated: 
-        title: 
-        toc: 
-        type: 
+        title: Naslov
+        toc: Sadržaj
+        type: Vrsta
         ugc: 
-        version: 
+        version: Verzija
       named-entities:
         title: 
         what:
-          broader: 
+          broader: "Širi pojam"
           label: 
           term: 
           title: 
         when:
-          begin: 
-          end: 
+          begin: Početak perioda
+          end: Kraj perioda
           label: 
           term: 
           title: 
         where:
           label: 
-          latitude: 
-          longitude: 
+          latitude: "Širina"
+          longitude: Dužina
           term: 
           title: 
         who:
           label: 
           term: 
-          title: 
+          title: 'Osobe i organizacije '
       nav:
-        next: 
-        prev: 
+        next: Sljedeće
+        prev: Prethodni
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: Istok
+        north: Sjever
+        south: Jug
+        west: Zapad
+      show-more-similar-items: prikaži više
+      similar-items: Slični objekti
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Nažalost , ne možemo pronaći tu stranicu
+        text: Nažalost, nismo pronašli stranicu koju ste tražili. Pokušajte pretražiti Europeanu ili možda vam se svide dolje odabrani objekti.
       about:
         text: 
         title: 
@@ -220,59 +220,59 @@ hr:
     results:
       actions:
         configure-actions: 
-        dutchmasters: 
+        dutchmasters: Nizozemski majstori
         favouriteart: 
         label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        newcollection: Nova zbirka
+        product-save: Pohrani
+        saveto: Pohrani u
+        show-all-collections: Prikaži sve zbirke
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: Slike
+          text: Tekst
+          video: Video
+        count-and-terms: "%{results_count} rezultata"
+        empty: Nema rezultata
+        empty-with-terms: Vaša pretraga za %{query_terms} nije dala rezultata
+        header: Rezultati za
+        header-and: i
+        in-channel: u tematskoj zbirci
+        less: Manje
+        less_adv: Manje preciziranja
+        more: Više
+        more_adv: Napredni filteri
+        product-3D: 3D
+        product-image: Slika
+        product-sound: Zvuk
+        product-text: Tekst
+        product-video: Video
+        results-relevance: Relevantnost
+        single-result: 1 rezultat za %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Mreža
+          list: Popis
+        view-at-provider: Pogledaj na
     search:
       placeholder:
-        text: 
+        text: Dodaj pojam za pretraživanje
       similar:
-        prefix: 
+        prefix: 'Slično kao: %{mlt_item} '
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Očisti odabir
+        save-settings: Pohrani postavke
       language:
-        auto-translate-limit: 
+        auto-translate-limit: Maksimum od %{max_languages} može biti odabran
         auto-translate-page: 
         auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-query: Automatski prevedi ključne riječi za pretraživanje na...
+        available: Dostupni jezici
+        default: Zadani jezik
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
-      title: 
+          alert: 'Naveden je nevažeći jezik. Dostupni jezici: %{locales}'
+          notice: Postavke jezika su pohranjene.
+        label: Jezik
+        settings-label: postavke jezika
+      title: Postavke

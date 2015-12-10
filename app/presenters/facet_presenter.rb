@@ -36,7 +36,7 @@ class FacetPresenter
   end
 
   def display(options = {})
-    options = options.reverse_merge(count: facet_config.limit || 5)
+    options = options.reverse_merge(count: 5)
     unhidden_items, hidden_items = split_items(options[:count])
     {
       title: facet_label(@facet.name),

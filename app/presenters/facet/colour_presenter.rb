@@ -1,7 +1,7 @@
 module Facet
   class ColourPresenter < FacetPresenter
-    def display
-      super.merge(colour: true)
+    def display(options = {})
+      super(options.reverse_merge(count: facet_config.limit)).merge(colour: true)
     end
 
     def facet_item(item)

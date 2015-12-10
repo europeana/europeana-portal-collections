@@ -154,16 +154,16 @@ pl:
         providing-country: 
         publication-date: Data wydania
         publisher: Wydawca
-        references: 
-        refs-rels: 
-        relations: 
+        references: Odnośniki
+        refs-rels: Odniesienia i relacje
+        relations: Relacje
         rights: Prawa
         rights-human: Czy mogę tego użyć?
         runtime: 
         runtime-unit-seconds: sekundy
         source: "Źródło"
         subject: Przedmiot
-        temporal: 
+        temporal: Przejściowy
         time: Czas
         timestamp-created: Pierwszy raz dostępne w Europeanie
         timestamp-updated: Ostatni raz zaktualizowane w Europeanie
@@ -175,10 +175,10 @@ pl:
         ugc: Materiały dodane przez użytkowników
         version: Wersja
       named-entities:
-        title: 
+        title: Podmioty
         what:
           broader: 
-          label: 
+          label: Etykieta Pojęcia
           term: 
           title: Co
         when:
