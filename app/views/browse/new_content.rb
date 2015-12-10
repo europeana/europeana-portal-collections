@@ -10,8 +10,9 @@ module Browse
       mustache[:content] ||= begin
         {
           title: page_title,
+          description: t('site.browse.newcontent.description'),
           recent: @providers.blank? ? nil : {
-            title: t('site.browse.newcontent.title'),
+            title: ' ',
             items: stylised_recent_additions(@providers, max: 1000, from: :same),
             tableh1: t('site.browse.newcontent.tableh1'),
             tableh2: t('site.browse.newcontent.tableh2'),
