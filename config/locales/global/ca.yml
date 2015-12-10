@@ -1,5 +1,5 @@
 ca:
-  Symphonies: 
+  Symphonies: Simfonies
   X11:
     colours:
       '000000': 
@@ -147,315 +147,315 @@ ca:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: 
+    about-us: Sobre nosaltres
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
-      home: 
-      maps: 
-      music: 
-      natural-history: 
-      newspapers: 
-      performing-arts: 
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
-    channels-fashion: 
-    channels-music: 
-    choose-language: 
-    email-address: 
+      archaeology: arqueologia
+      architecture: arquitectura
+      art: art
+      fashion: moda
+      home: 'Inici '
+      maps: mapes
+      music: música
+      natural-history: història natural
+      newspapers: diaris
+      performing-arts: arts escèniques
+    channels-art: Col·leccions d'Història de l'Art
+    channels-art-image: Imatges de la Col·lecció d'Història de l'Art
+    channels-art-link: Col·leccions d'Història de l'Art
+    channels-fashion: Moda
+    channels-music: Moda
+    choose-language: Llengua
+    email-address: correu electrònic
     facet:
       advanced:
-        options: 
+        options: Opcions
         show:
-          ugc: 
+          ugc: Contingut generat per usuaris
       art:
         form:
           paintings:
-            genre: 
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            genre: Gènere
+            medium: Mitjà
+      carrier: Carrera
+      colour: Color
+      colour-black-and-white: Blanc i negre
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        austria: "Àustria"
+        belgium: Bèlgica
+        bulgaria: Bulgària
+        croatia: Cròacia
+        cyprus: Xipre
+        czechrepublic: República Txeca
+        denmark: Dinamarca
+        estonia: Estònia
+        europe: Europa
+        finland: Finlàndia
+        france: França
+        germany: Alemanya
+        greece: Grècia
+        hungary: Hongria
+        iceland: Islàndia
+        ireland: Islàndia
+        israel: Israel
+        italy: Itàlia
+        latvia: Letònia
+        lithuania: Lituània
+        luxembourg: Luxemburg
+        malta: Malta
+        netherlands: Països Baixos
+        norway: Noruega
+        poland: Polònia
+        portugal: Portugal
+        romania: Romania
+        russia: Rússia
+        serbia: Sèrbia
+        slovakia: Eslovàquia
+        slovenia: Eslovènia
+        spain: Espanya
+        sweden: Suècia
+        switzerland: Suïssa
+        turkey: Turquia
+        ukraine: Ucraïna
+        unitedkingdom: Regne Unit
+        unitedstatesofamerica: EEUU
+      creator: creador
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
-        media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
-        type: 
-        ugc: 
-        video_duration: 
-        year: 
+        channel: Col·leccions
+        colourpalette: Color
+        country: Estat
+        data_provider: Institució
+        image_aspectratio: Orientació
+        image_colour: Paleta
+        image_size: Mida
+        language: Llengua
+        language_of_description: Idioma de la descripció
+        media: Només ítems que enllacin a fitxers
+        mime_type: Format de fitxer
+        provider: Agregador
+        reusability: Puc fer-ho servir?
+        sound_duration: Durada
+        sound_hq: Alta Qualitat
+        text_fulltext: Text complet
+        type: Audiovisuals
+        ugc: Mostrar continguts generats per usuaris
+        video_duration: Durada
+        year: Data
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: Paisatge
+        portrait: Retrat
       image_colour:
-        'false': 
-        'true': 
+        'false': Blanc i negre
+        'true': Color
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: Extra Gran (4MP+)
+        large: Gran (1-4 MP)
+        medium: Mitjà (0,5 - 1 MP)
+        small: Petit (<0,5 MP)
       language:
-        bg: 
-        ca: 
-        cs: 
-        da: 
-        de: 
-        el: 
-        en: 
-        es: 
-        et: 
-        fi: 
-        fr: 
-        ga: 
-        he: 
-        hr: 
-        hu: 
-        is: 
-        it: 
-        lt: 
-        lv: 
-        mt: 
-        mul: 
-        nl: 
-        'no': 
-        pl: 
-        pt: 
-        ro: 
-        ru: 
-        sk: 
-        sl: 
-        sr: 
-        sv: 
-        tr: 
-        uk: 
-        yi: 
-      less: 
+        bg: "Български"
+        ca: Català
+        cs: "Čeština"
+        da: Dansk
+        de: Deutsch
+        el: "Ελληνικά"
+        en: English
+        es: Español
+        et: Eesti
+        fi: Suomi
+        fr: Français
+        ga: Gaeilge
+        he: "עברית"
+        hr: Hrvatski
+        hu: Magyar
+        is: "Íslenska"
+        it: Italiano
+        lt: Lietuvių
+        lv: Latviešu
+        mt: Malti
+        mul: multilíngüe
+        nl: Països Baixos
+        'no': Noruec
+        pl: Polonès
+        pt: Portuguès
+        ro: Română
+        ru: "Русский"
+        sk: Slovenský
+        sl: Slovenski
+        sr: "Српски"
+        sv: Svenska
+        tr: Türkçe
+        uk: "Українська"
+        yi: "ייִדיש"
+      less: Menys
       media:
-        'false': 
-        'true': 
-      more: 
-      more-refinements: 
+        'false': 'No'
+        'true': Sí
+      more: Més
+      more-refinements: Més refinaments
       resource:
-        type: 
+        type: Tipus
       reusability:
-        advanced: 
-        advanced-cc-by: 
-        advanced-cc-by-nc: 
-        advanced-cc-by-nc-nd: 
-        advanced-cc-by-nc-sa: 
-        advanced-cc-by-nd: 
-        advanced-cc-by-sa: 
-        advanced-cc0: 
-        advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: 
-        advanced-pdm: 
-        advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
-        advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
-        simple: 
+        advanced: Avançat
+        advanced-cc-by: CC BY
+        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc-nd: CC BY-NC-ND
+        advanced-cc-by-nc-sa: CC BY-NC-SA
+        advanced-cc-by-nd: CC BY-ND
+        advanced-cc-by-sa: CC BY-SA
+        advanced-cc0: CC0
+        advanced-orphan-work: Treball orfe
+        advanced-out-of-copyright-non-commercial: Sense drets d'autor - reutilització no comercial
+        advanced-pdm: Marca de Domini Públic
+        advanced-rrfa: Drets reservats - Accés lliure
+        advanced-rrpa: Drets reservat - Accés de pagament
+        advanced-rrra: Drets reservats - Accés restringit
+        advanced-ucs: Situació de copyright desconeguda
+        open: Sí, amb atribució
+        permission: Només amb permís
+        restricted: Sí, amb restriccions
+        simple: Simple
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: Llarg (6+ minuts)
+        medium: Mig (3-6 minuts)
+        short: Curt (30s - 3 minuts)
+        very_short: Molt curt (<30s)
       sound_hq:
-        'true': 
-      source: 
+        'true': Sí
+      source: Font
       text_fulltext:
-        'false': 
-        'true': 
+        'false': 'No'
+        'true': Sí
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: Imatge
+        sound: So
+        text: Text
+        video: Vídeo
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: Orientació de la Imatge
+          landscape: Paisatge
+          portrait: Retrat
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: Mostra tot
+          hq-only: Mostra només alta qualitat
+          label: Qualitat
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: Què signifiquen aquestes mides?
+          label: Mida de la imatge
+          large: Gran  (%{data})
+          medium: Mig  (%{data})
+          small: Petit (%{data})
+          xl: Extra gran (%{data})
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: Durada
+          long: Llarg (%{data})
+          medium: Mig (%{data})
+          short: Curt (%{data})
+          very-short: Molt curt (%{data})
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
+          label: Durada
+          long: Llarg (%{data})
+          medium: Mig (%{data})
+          short: Curt (%{data})
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Llarg (>20 minuts)
+        medium: Mig (4-20 minuts)
+        short: Curt (<4 minuts)
       year:
-        from: 
-        to: 
+        from: de
+        to: a
     'facet ':
       header:
         video_hd:
-          'true': 
-    find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
-    genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+          'true': HD
+    find-us-elsewhere: Troba'ns arreu
+    forgot-password: No recordes la teva paraula de pas?
+    genres: gèneres
+    genres-chamber-music: Música de cambra
+    genres-classical-music: Música clàssica
+    genres-concertos: Concerts
+    genres-non-western-classical-music: Música clàssica no-occidental
+    genres-opera: "Òpera"
+    genres-popular-music: Música popular
+    genres-traditional-music: Música tradicional
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
-    help: 
-    home: 
-    javascript-required: 
-    labs: 
-    labs-text: 
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
-    mission: 
-    mission-title: 
+      connect: Connecta
+      develop: Desenvolupa
+      discover: Descobreix
+      network: Xarxa
+    help: Ajuda
+    home: Inici
+    javascript-required: Per veure aquest contingut necessites habilitar el JavaScript, i considerar actualitzar a un navegador que suporti continguts HTML5.
+    labs: Labs
+    labs-text: Remescla contingut cultural amb la nostra API i datasets
+    language-basque: Basc
+    language-bulgarian: Búlgar
+    language-catalan: Català
+    language-croatian: Croat
+    language-czech: Txec
+    language-danish: Danès
+    language-dutch: Neerlandès
+    language-english: Anglès
+    language-estonian: Estonià
+    language-finnish: Finès
+    language-french: Francès
+    language-gaelic: Gaèl·lic
+    language-german: Alemany
+    language-greek: Grec
+    language-hungarian: Hongarès
+    language-icelandic: Islandès
+    language-italian: Italià
+    language-latvian: Letó
+    language-lithuanian: Lituà
+    language-maltese: Maltès
+    language-norwegian: Noruec
+    language-polish: Polonès
+    language-portuguese: Portuguès
+    language-romanian: Romanès
+    language-russian: Rus
+    language-slovakian: Eslovac
+    language-slovenian: Eslovè
+    language-spanish: Castellà
+    language-swedish: Suec
+    language-ukranian: Ucraïnès
+    login: Identifica't
+    mission: Transformem el món amb cultura! Volem construir sobre el ric patrimoni d'Europa i fer-ho fàcil de fer servir, tant a nivell laboral, docent o per gaudi personal.
+    mission-title: La nostra missió
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
+      load-more: Més
+      show-more: Mostra més
+      view-more: Veure més
+    more-info: Més informació
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
-    our-sites: 
-    password: 
-    professional: 
-    professional-text: 
-    refine-your-search: 
-    register: 
-    research: 
-    research-text: 
+      email-address-invalid: El correu electrònic ha de ser una adreça vàlida
+      email-address-required: Especifiqueu una adreça de correu electrònic.
+      language-required: Especifiqueu una llengua
+      signup: Signeu per a una newsletter
+    our-sites: els nostres webs
+    password: Paraula de pas
+    professional: Pro
+    professional-text: Involucra't, comparteix les teves dades amb nosaltres
+    refine-your-search: Refina la teva cerca
+    register: Registre
+    research: Recerca
+    research-text: Connectant amb la comunitat acadèmica
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+      search-button-image-alt: Cerca
+      search-placeholder-text: Afegeix un element de cerca
+    search-collections: Col·leccions
+    search-collections-text: Expora el patrimoni cultural d'Europa
+    share: Comparteix
+    sitemap: Mapa del lloc web
+    terms-and-policies: Termes d'ús i polítiques
+    type: tipus
+  'no': Noruega
+  pl: Portugal
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Resultats
+        show-results-all: Mosatre tots els resultats
