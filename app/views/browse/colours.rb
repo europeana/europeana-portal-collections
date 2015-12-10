@@ -10,6 +10,7 @@ module Browse
       mustache[:content] ||= begin
         {
           title: page_title,
+          description: t('site.browse.colours.description'),
           colours: {
             title: page_title,
             items: @colours.map do |colour|
