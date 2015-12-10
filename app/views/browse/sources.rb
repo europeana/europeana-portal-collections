@@ -52,6 +52,9 @@ module Browse
           end
           provider[:fields] = dp_data_all
           provider[:title] = provider[:text] + ' (' + number_with_delimiter(provider[:count]) + ')'
+        else
+          provider[:title] = provider[:text] + ' (' + number_with_delimiter(provider[:count]) + ')'
+          provider[:title_url] = provider[:url]
         end
       end
       @providers
