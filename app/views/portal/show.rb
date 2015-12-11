@@ -1,41 +1,29 @@
-
 module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
 
     def head_meta
-      desc = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
-      landing = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
-      title = render_document_show_field_value(document, 'proxies.dcTitle', unescape: true)
-      preview = render_document_show_field_value(document, 'europeanaAggregation.edmPreview', unescape: true)
-      preview = preview.sub(
-        'http://europeanastatic.eu/api/image?',
-        'http://delta-web.de.a9sapp.eu/api/v2/thumbnail-by-url.json?').sub('&size=LARGE', '&size=w400') unless preview.nil?
-
       mustache[:head_meta] ||= begin
-        [
+        desc = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
+        landing = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
+        title = render_document_show_field_value(document, 'proxies.dcTitle', unescape: true)
+        preview = record_preview_url(render_document_show_field_value(document, 'europeanaAggregation.edmPreview', unescape: true), 400)
+
+        head_meta = [
           { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          begin
-            { meta_property: 'og:title', content: title } unless title.nil?
-          end,
-          begin
-            { meta_property: 'og:description',
-              content: truncate(
-                desc.split('.').first(3).join('.'),
-                length: 200)
-            } unless desc.nil?
-          end,
-          begin
-            { meta_property: 'og:image', content: preview } unless preview.nil?
-          end,
-          begin
-            { meta_property: 'og:url', content: landing } unless landing.nil?
-          end,
           { meta_property: 'og:sitename', content: 'Europeana Collections' },
           { meta_property: 'fb:appid', content: '185778248173748' }
-        ].compact + super
+        ]
+        head_meta << { meta_property: 'og:title', content: title } unless title.nil?
+        head_meta << {
+          meta_property: 'og:description',
+          content: truncate(desc.split('.').first(3).join('.'), length: 200)
+        } unless desc.nil?
+        head_meta << { meta_property: 'og:image', content: preview } unless preview.nil?
+        head_meta << { meta_property: 'og:url', content: landing } unless landing.nil?
+        head_meta + super
       end
     end
 

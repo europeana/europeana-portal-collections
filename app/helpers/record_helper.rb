@@ -8,9 +8,7 @@ module RecordHelper
           alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
           # temporary fix until API contains correct image url
           # src: render_document_show_field_value(doc, 'edmPreview'),
-          src: render_document_show_field_value(doc, 'edmPreview').sub(
-            'http://europeanastatic.eu/api/image?',
-            'http://delta-web.de.a9sapp.eu/api/v2/thumbnail-by-url.json?').sub('&size=LARGE', '&size=w200')
+          src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'))
         }
       }
     end
@@ -59,5 +57,14 @@ module RecordHelper
 
   def record_media_items(record, options = {})
     Document::RecordPresenter.new(record, controller).media_web_resources(options).map(&:media_item)
+  end
+
+  # temporary fix until API contains correct image url
+  def record_preview_url(edm_preview, size = 200)
+    return edm_preview if edm_preview.nil?
+    edm_preview.tap do |preview|
+      preview.sub!('http://europeanastatic.eu/api/image?', Europeana::API.url + '/thumbnail-by-url.json?')
+      preview.sub!('&size=LARGE', "&size=w#{size}")
+    end
   end
 end
