@@ -9,15 +9,15 @@ class PortalController < ApplicationController
 
   before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
 
-  caches_action :index,
-    if: Proc.new { !request.format.json? },
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
+  # caches_action :index,
+  #   if: Proc.new { !request.format.json? },
+  #   expires_in: 1.day,
+  #   cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
 
-  caches_action :show,
-    if: Proc.new { !request.format.json? && !params.key?(:debug) },
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
+  # caches_action :show,
+  #   if: Proc.new { !request.format.json? && !params.key?(:debug) },
+  #   expires_in: 1.day,
+  #   cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
 
   caches_action :static,
     expires_in: 1.hour,
@@ -62,8 +62,6 @@ class PortalController < ApplicationController
 
   # GET /record/:id/navigation
   def navigation
-    @response, @document = fetch(doc_id)
-
     respond_to do |format|
       format.json do
         setup_next_and_previous_documents

@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 26394cc5c80ec060d236e96c12c26e35b37a5cc6
-  ref: 26394cc
+  revision: 28e12baa9edf9784b5b05d78dce9a1c9ae850a15
+  ref: 28e12ba
   specs:
     europeana-blacklight (0.3.1)
       activesupport (>= 4.0, < 5.0)
@@ -12,8 +12,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 80de9a1fbae3e7630d85d26c22d494eb20340e31
-  ref: 80de9a1
+  revision: 9708dff23f9fcf6a98d6d98ccb7ef7320e73e0a6
+  ref: 9708dff
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -434,6 +434,10 @@ GEM
       redis-actionpack (~> 4)
       redis-activesupport (~> 4)
       redis-store (~> 1.1.0)
+    redis-rails-instrumentation (0.1.0)
+      activesupport (>= 3.0)
+      redis (~> 3.0)
+      sweet_notifications (~> 0.2)
     redis-store (1.1.7)
       redis (>= 2.2)
     remotipart (1.2.1)
@@ -503,6 +507,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sweet_notifications (0.2.1)
+      activesupport (>= 4.0, < 6)
+      railties (>= 4.0, < 6)
+      request_store (~> 1.0)
     term-ansicolor (1.3.2)
       tins (~> 1.0)
     thor (0.19.1)
@@ -573,6 +581,7 @@ DEPENDENCIES
   rails_admin (~> 0.7.0)
   rails_admin_globalize_field!
   redis-rails (~> 4.0)
+  redis-rails-instrumentation
   rspec-rails (~> 3.0)
   rubocop (= 0.29.1)
   sass-rails

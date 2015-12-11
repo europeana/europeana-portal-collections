@@ -30,8 +30,8 @@ module BlacklightConfig
       config.document_presenter_class = Document::RecordPresenter
 
       # Europeana API caching
-      config.europeana_api_cache = Rails.cache
-      config.europeana_api_cache_expires_in = 24.hours
+      # config.europeana_api_cache = Rails.cache
+      # config.europeana_api_cache_expires_in = 24.hours
 
       # items to show per page, each number in the array represents another
       # option to choose from.
@@ -58,7 +58,7 @@ module BlacklightConfig
       # config.add_facet_field 'COLLECTION', query: collections_query_facet, single: true
       config.add_facet_field 'TYPE', hierarchical: true
       config.add_facet_field 'IMAGE_COLOUR', parent: %w(TYPE IMAGE)
-      config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 18
+      config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 20
       config.add_facet_field 'IMAGE_ASPECTRATIO', hierarchical: true, parent: %w(TYPE IMAGE)
       config.add_facet_field 'IMAGE_SIZE', hierarchical: true, parent: %w(TYPE IMAGE)
       config.add_facet_field 'SOUND_DURATION', hierarchical: true, parent: %w(TYPE SOUND)
@@ -69,10 +69,10 @@ module BlacklightConfig
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'REUSABILITY'
-      config.add_facet_field 'COUNTRY'
-      config.add_facet_field 'LANGUAGE'
-      config.add_facet_field 'PROVIDER'
-      config.add_facet_field 'DATA_PROVIDER'
+      config.add_facet_field 'COUNTRY', limit: 100
+      config.add_facet_field 'LANGUAGE', limit: 100
+      config.add_facet_field 'PROVIDER', limit: 100
+      config.add_facet_field 'DATA_PROVIDER', limit: 100
       # config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
 
       # Send all facet field names to Solr.

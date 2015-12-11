@@ -29,6 +29,11 @@ module Settings
                   selected: I18n.locale.to_s == 'bg'
                 },
                 {
+                  text: t('global.language-catalan'),
+                  value: 'ca',
+                  selected: I18n.locale.to_s == 'ca'
+                },
+                {
                   text: t('global.language-danish'),
                   value: 'da',
                   selected: I18n.locale.to_s == 'da'
@@ -37,6 +42,11 @@ module Settings
                   text: t('global.language-dutch'),
                   value: 'nl',
                   selected: I18n.locale.to_s == 'nl'
+                },
+                {
+                  text: t('global.language-finnish'),
+                  value: 'fi',
+                  selected: I18n.locale.to_s == 'fi'
                 },
                 {
                   text: t('global.language-french'),
@@ -59,6 +69,11 @@ module Settings
                   selected: I18n.locale.to_s == 'hu'
                 },
                 {
+                  text: t('global.language-lithuanian'),
+                  value: 'lt',
+                  selected: I18n.locale.to_s == 'lt'
+                },
+                {
                   text: t('global.language-polish'),
                   value: 'pl',
                   selected: I18n.locale.to_s == 'pl'
@@ -67,6 +82,11 @@ module Settings
                   text: t('global.language-portuguese'),
                   value: 'pt',
                   selected: I18n.locale.to_s == 'pt'
+                },
+                {
+                  text: t('global.language-romanian'),
+                  value: 'ro',
+                  selected: I18n.locale.to_s == 'ro'
                 },
                 {
                   text: t('global.language-russian'),
