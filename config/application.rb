@@ -37,9 +37,9 @@ module Europeana
       # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
       config.i18n.default_locale = :en
       config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
-      config.i18n.available_locales = [:bg, :ca, :de, :el, :en, :es, :fi, :fr,
-                                       :hr, :hu, :it, :lt, :nl, :pl, :pt, :ro,
-                                       :ru, :sv]
+      config.i18n.available_locales = [:bg, :ca, :da, :de, :el, :en, :es, :et,
+                                       :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl,
+                                       :pl, :pt, :ro, :ru, :sv]
       config.i18n.fallbacks = true
 
       # Do not swallow errors in after_commit/after_rollback callbacks.
