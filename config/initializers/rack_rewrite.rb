@@ -31,6 +31,9 @@ Rails.application.configure do
             if qf.include?(':')
               field, value = qf.split(':')
               if bl_facets.include?(field)
+                if value[0] == '"' && value[-1] == '"'
+                  value = value[1..-2]
+                end
                 params['f'] ||= {}
                 params['f'][field] ||= []
                 params['f'][field] << value
