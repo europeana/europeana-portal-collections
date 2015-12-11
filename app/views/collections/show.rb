@@ -38,7 +38,7 @@ module Collections
             },
             recent: @recent_additions.blank? ? nil : {
               title: t('site.collections.labels.recent'),
-              items: stylised_recent_additions(@recent_additions, max: 3)
+              items: stylised_recent_additions(@recent_additions, max: 3, skip_date: true)
             },
             credits: @landing_page.credits.blank? ? {} : {
               title: t('site.collections.labels.credits'),
