@@ -297,7 +297,7 @@ module MustacheHelper
               #   url: '#'
               # },
               {
-                text: t('site.footer.menu.copyright'),
+                text: t('global.terms-and-policies'),
                 url: static_page_path('rights', format: 'html')
               }
             ]
