@@ -47,7 +47,7 @@ module Europeana
       config.active_job.queue_adapter = :delayed_job
 
       # Read relative URL root from env
-      config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT']
+      config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
 
       # Load Redis config from config/redis.yml, if it exists
       config.cache_store = begin
