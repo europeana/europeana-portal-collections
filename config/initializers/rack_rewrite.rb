@@ -5,8 +5,8 @@ Rails.application.configure do
   config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
     # Redirect searches with old params to app's equivalents
     # @todo Move the logic into a class
-    r301 %r{/search(.html)?(\?.*)},
-      lambda { |match, rack_env|
+    r301 %r{^/search.html\?},
+      lambda { |_match, rack_env|
         params = Rack::Utils.parse_query(rack_env['QUERY_STRING'])
 
         # Search query
