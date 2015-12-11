@@ -90,9 +90,7 @@ module Document
     end
 
     def use_media_proxy?
-      Rails.application.config.x.europeana_media_proxy &&
-        mime_type.present? &&
-        mime_type.match('image/').nil?
+      Rails.application.config.x.europeana_media_proxy && mime_type.present?
     end
 
     def download_url
