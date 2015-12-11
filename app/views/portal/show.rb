@@ -2,6 +2,14 @@ module Portal
   class Show < ApplicationView
     attr_accessor :document, :debug
 
+    def head_links
+      mustache[:head_links] ||= begin
+        [
+          { rel: 'canonical', href: document_url(document, format: 'html') }
+        ] + super
+      end
+    end
+
     def head_meta
       mustache[:head_meta] ||= begin
         desc = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
