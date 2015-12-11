@@ -8,7 +8,7 @@ lv:
       browse: Pārlūkot
       browse_colours: Krāsas
       browse_newcontent: Jauns saturs
-      browse_sources: 
+      browse_sources: Avoti
       channels: Kolekcijas
       collections: Kolekcijas
       exhibitions: Izstādes
@@ -20,9 +20,9 @@ lv:
     alpha:
       feedback_banner:
         description: 
-        link-text: 
+        link-text: Sniedziet savu ieguldījumu!
         title: 
-    blog-link: 
+    blog-link: saite uz blogu
     browse:
       colours:
         title: Krāsas
@@ -32,11 +32,11 @@ lv:
         tableh3: Datējums
         title: Jauns saturs
       sources:
-        title: 
+        title: Avoti
     collections:
       art-history:
-        description: 
-        title: 
+        description: No renesances līdz sirreālistiem, no seno romiešu skulptūrām līdz mūsdienu mākslai, Europeana mākslas vēstures kolekcija iepazīstina ar māksliniekiem un mākslas darbiem no visas Eiropas.
+        title: Europeana mākslas vēsture
       data-types:
         3d: 3D objekti
         count: 
@@ -45,12 +45,12 @@ lv:
         sound: Skaņu ieraksti
         texts: Teksti
       labels:
-        credits: 
+        credits: Kurators
         recent: Jaunākie papildinājumi
-        spotlight-on: 
+        spotlight-on: Uzmanības centrā
       music:
-        description: 
-        title: 
+        description: <strong>Europeana mūzikas kolekcija</strong> apkopo labākos mūzikas ierakstus, notis, un citas ar mūziku saistītas kolekcijas no Eiropas arhīviem, bibliotēkām, muzejiem un audiovizuālajiem arhīviem. <a href="/portal/channels/music/about">Uzzini vairāk par Mūzikas kanālu.</a>
+        title: Europeana mūzika
     facet:
       language:
         show:
@@ -58,25 +58,25 @@ lv:
     footer:
       menu:
         about: Par
-        become-a-provider: 
+        become-a-provider: Kļūsti par mūsu partneri
         contact: Kontakti
         copyright: Autortiesības
         data-providers: Visas institūcijas
         help: Palīdzība
         new-collections: Jaunas kolekcijas
-        rights: 
+        rights: Lietošanas noteikumi un politika
         search-tips: Meklēšanas padomi
-        using-myeuropeana: 
+        using-myeuropeana: '"Mana Europeana" lietošana'
     home:
       strapline: 
     more: Vairāk...
-    my-europeana: 
-    my-europeana-link: 
+    my-europeana: Mana Europeana
+    my-europeana-link: saite uz "Mana Europeana"
     navigation:
       breadcrumb:
         item_detail: 
-        results_list: 
-        return_home: 
+        results_list: Rezultāti
+        return_home: Atgriezties uz sākumu
     news: 
     object:
       actions:

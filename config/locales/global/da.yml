@@ -149,161 +149,161 @@ da:
   global:
     about-us: Om os
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
-      home: 
-      maps: 
-      music: 
-      natural-history: 
-      newspapers: 
-      performing-arts: 
-    channels-art: Kultur historiske samlinger
-    channels-art-image: Kultur historisk billede
-    channels-art-link: Kultur historiske samlinger
+      archaeology: arkæologi
+      architecture: arkitektur
+      art: kunst
+      fashion: mode
+      home: Hjem (alt)
+      maps: mapper
+      music: musik
+      natural-history: naturhistorisk
+      newspapers: aviser
+      performing-arts: scenekunst
+    channels-art: Kunsthistoriske samlinger
+    channels-art-image: Kunsthistorisk billede
+    channels-art-link: Kunsthistoriske samlinger
     channels-fashion: Mode
     channels-music: Musik
     choose-language: Sprog
     email-address: email adresse
     facet:
       advanced:
-        options: 
+        options: Muligheder
         show:
-          ugc: 
+          ugc: Bruger genereret indhold
       art:
         form:
           paintings:
-            genre: 
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            genre: Genre
+            medium: Medium
+      carrier: Bærer
+      colour: Farve
+      colour-black-and-white: Sort og hvid
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        austria: "Østrig"
+        belgium: Belgien
+        bulgaria: Bulgarien
+        croatia: Kroatien
+        cyprus: Cypern
+        czechrepublic: Tjekkiet
+        denmark: Danmark
+        estonia: Estland
+        europe: Europa
+        finland: Finland
+        france: Frankrig
+        germany: Tyskland
+        greece: Grækenland
+        hungary: Ungarn
+        iceland: Island
+        ireland: Irland
+        israel: Israel
+        italy: Italien
+        latvia: Letland
+        lithuania: Litauen
+        luxembourg: Luxemborg
+        malta: Malta
+        netherlands: Holland
+        norway: Norge
+        poland: Polen
+        portugal: Portugal
+        romania: Rumænien
+        russia: Rusland
+        serbia: Serbien
+        slovakia: Slovakiet
+        slovenia: Slovenien
+        spain: Spanien
+        sweden: Sverige
+        switzerland: Schweiz
+        turkey: Tyrkiet
+        ukraine: Ukraine
+        unitedkingdom: England
+        unitedstatesofamerica: Amerika
+      creator: skaber
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
-        media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
-        type: 
-        ugc: 
-        video_duration: 
-        year: 
+        channel: Samlinger
+        colourpalette: Farve
+        country: Land
+        data_provider: Organisation
+        image_aspectratio: Orientering
+        image_colour: Palette
+        image_size: Størrelse
+        language: Sprog
+        language_of_description: Hvilket sprog er beskrivelsen
+        media: " Kun materiale med links til medier"
+        mime_type: Fil format
+        provider: Aggregator
+        reusability: Kan jeg bruge det?
+        sound_duration: Varighed
+        sound_hq: Høj kvalitet
+        text_fulltext: Fuld tekst
+        type: Medier
+        ugc: Vis indhold genereret af brugerer
+        video_duration: Varighed
+        year: Dato
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: Landskab
+        portrait: Portræt
       image_colour:
-        'false': 
-        'true': 
+        'false': Sort og hvid
+        'true': Farve
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: Ekstra stor (4MP+)
+        large: Stor (1-4MP)
+        medium: Medium (0.5-1MP)
+        small: Lille (<0.5MP)
       language:
         bg: 
-        ca: 
+        ca: Catalansk
         cs: 
-        da: 
-        de: 
+        da: Dansk
+        de: Tysk
         el: 
-        en: 
-        es: 
-        et: 
-        fi: 
-        fr: 
-        ga: 
+        en: Engelsk
+        es: Spansk
+        et: Estisk
+        fi: Finsk
+        fr: Fransk
+        ga: Galisisk
         he: 
-        hr: 
-        hu: 
-        is: 
-        it: 
-        lt: 
-        lv: 
-        mt: 
-        mul: 
-        nl: 
-        'no': 
-        pl: 
-        pt: 
-        ro: 
+        hr: Kroatisk
+        hu: Ungarsk
+        is: Islandsk
+        it: Italiensk
+        lt: Litauisk
+        lv: Lettisk
+        mt: Maltesisk
+        mul: Flersprogede
+        nl: Hollandsk
+        'no': Norsk
+        pl: Polsk
+        pt: Portugisisk
+        ro: Rumænsk
         ru: 
-        sk: 
-        sl: 
+        sk: Slovakisk
+        sl: Slovensk
         sr: 
-        sv: 
-        tr: 
+        sv: Svensk
+        tr: Tyrkisk
         uk: 
         yi: 
-      less: 
+      less: Mindre
       media:
-        'false': 
-        'true': 
-      more: 
-      more-refinements: 
+        'false': Nej
+        'true': Ja
+      more: Flere
+      more-refinements: Flere ændringer
       resource:
-        type: 
+        type: Type
       reusability:
-        advanced: 
-        advanced-cc-by: 
-        advanced-cc-by-nc: 
-        advanced-cc-by-nc-nd: 
-        advanced-cc-by-nc-sa: 
-        advanced-cc-by-nd: 
-        advanced-cc-by-sa: 
-        advanced-cc0: 
-        advanced-orphan-work: 
+        advanced: Udvidet
+        advanced-cc-by: CC BY
+        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc-nd: CC BY-NC-ND
+        advanced-cc-by-nc-sa: CC BY-NC-SA
+        advanced-cc-by-nd: CC BY-ND
+        advanced-cc-by-sa: CC BY-SA
+        advanced-cc0: CC0
+        advanced-orphan-work: Ukendt ophavsmand
         advanced-out-of-copyright-non-commercial: 
         advanced-pdm: 
         advanced-rrfa: 
@@ -312,65 +312,65 @@ da:
         advanced-ucs: 
         open: 
         permission: 
-        restricted: 
-        simple: 
+        restricted: Ja med restriktioner
+        simple: Simpel
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: Lang (6+ minutter)
+        medium: Medium (3-6 minutter)
+        short: Kort (30s - 3 minutter)
+        very_short: Meget kort (under 30s)
       sound_hq:
-        'true': 
-      source: 
+        'true': Ja
+      source: Kilde
       text_fulltext:
-        'false': 
-        'true': 
+        'false': Nej
+        'true': Ja
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: Billede
+        sound: Lyd
+        text: Tekst
+        video: Video
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: Billede orientering
+          landscape: Landskab
+          portrait: Portræt
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: Vis alt
+          hq-only: Vis kun højt kvalitet
+          label: Kvalitet
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: Hvad betyder disse størrelser?
+          label: Billede størrelse
+          large: Stort (%{data})
+          medium: Medium  (%{data})
+          small: Lille  (%{data})
+          xl: Ekstra stort  (%{data})
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: Varighed
+          long: Lang  (%{data})
+          medium: Medium  (%{data})
+          short: Kort  (%{data})
+          very-short: Meget kort  (%{data})
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
+          label: Varighed
+          long: Lang  (%{data})
+          medium: Medium  (%{data})
+          short: Kort  (%{data})
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Lang  (20+ minutter)
+        medium: Medium 4-(20 minutter)
+        short: Kort (<4 minutter)
       year:
-        from: 
-        to: 
+        from: fra
+        to: til
     'facet ':
       header:
         video_hd:
-          'true': 
+          'true': HD
     find-us-elsewhere: Find os
     forgot-password: |
       Glemt dit brugernavn?
@@ -378,73 +378,73 @@ da:
     genres-chamber-music: Kamer musik
     genres-classical-music: Klassisk musik
     genres-concertos: Koncerter
-    genres-non-western-classical-music: Ikke western klassisk musik
+    genres-non-western-classical-music: Ikke vestlige klassisk musik
     genres-opera: Opera
     genres-popular-music: Populær musik
     genres-traditional-music: Traditionel musik
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
+      connect: Forbind
+      develop: Udvikle
+      discover: Opdag
+      network: Netværk
     help: Hjælp
     home: Hjem
     javascript-required: 'For at kunne se dette indhold, venligst tillad brugen af Javascript og overvej at opgradere til en web browser, der støtter indhold fra HTML 5 '
     labs: Labs
     labs-text: Mix kultur indhold med vore APIs og datasæt
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
+    language-basque: Basque
+    language-bulgarian: Bulgarisk
+    language-catalan: Catalansk
+    language-croatian: Kroatisk
+    language-czech: Tjekkisk
     language-danish: Dansk
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
-    mission: 
-    mission-title: 
+    language-dutch: Hollandsk
+    language-english: Engelsk
+    language-estonian: Estisk
+    language-finnish: Finsk
+    language-french: Fransk
+    language-gaelic: Gælisk
+    language-german: Tysk
+    language-greek: Græsk
+    language-hungarian: Ungarsk
+    language-icelandic: Islandsk
+    language-italian: Italiensk
+    language-latvian: Lettisk
+    language-lithuanian: Litauisk
+    language-maltese: Maltesisk
+    language-norwegian: Norsk
+    language-polish: Polsk
+    language-portuguese: Portugisisk
+    language-romanian: Rumænsk
+    language-russian: Russisk
+    language-slovakian: Slovakisk
+    language-slovenian: Slovensk
+    language-spanish: Spansk
+    language-swedish: Svensk
+    language-ukranian: Ukrainsk
+    login: Login
+    mission: Vi ændre verden med kultur. Vi ønsker at bygge videre på den rige arv fra Europa og gøre det nemmere for folk at bruge, uanset om det er til brug for arbejde, uddannelse eller underholdning.
+    mission-title: Vores mission
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
+      load-more: Mere
+      show-more: Vis mere
+      view-more: Se mere
+    more-info: Mere oplysninger
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
-    our-sites: 
-    password: 
-    professional: 
-    professional-text: 
-    refine-your-search: 
-    register: 
-    research: 
-    research-text: 
+      email-address-invalid: Email skal være en tilgængelig email adresse
+      email-address-required: 'Angiv email adressen '
+      language-required: 'Angiv sprog '
+      signup: Tilmeld vores nyhedsbrev
+    our-sites: Vores sider
+    password: Adgangskode
+    professional: Pro
+    professional-text: Bliv involveret, del din data eller brug vores
+    refine-your-search: Forfin din søgning
+    register: Registre
+    research: Undersøg
+    research-text: Bliv en del af det akademiske fælleskab
     search-area:
-      search-button-image-alt: 
+      search-button-image-alt: Søg
       search-placeholder-text: 
     search-collections: 
     search-collections-text: 

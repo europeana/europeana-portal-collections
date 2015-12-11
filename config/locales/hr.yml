@@ -68,10 +68,10 @@ hr:
         search-tips: Savjeti za pretragu
         using-myeuropeana: Korištenje My Europeana
     home:
-      strapline: 
+      strapline: Istražite %{total_item_count} umjetnina, predmeta, knjiga, videa i zvučnih zapisa iz cijele Europe.
     more: Više...
     my-europeana: My Europeana
-    my-europeana-link: 
+    my-europeana-link: poveznica na stranicu My Europeana
     navigation:
       breadcrumb:
         item_detail: 
@@ -99,13 +99,13 @@ hr:
         view-items-below: 
       meta-label:
         codec: Kodek
-        collection-name: 
+        collection-name: Skup podataka
         concept: Koncept
         concepts: Klasifikacije
         consists-of: Sastoji se od
         contributor: Suradnik
         copyright: Autorsko pravo
-        creation-date: 
+        creation-date: Datum stvaranja
         creator: Stvaratelj
         current-location: Trenutna lokacija
         data-provider: Ustanova
@@ -116,23 +116,23 @@ hr:
         duration: Trajanje
         edm:
           has-met: 
-          incorporates: 
-          is-derivative-of: 
+          incorporates: Uključuje
+          is-derivative-of: Izveden je od
           is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
+          is-similar-to: Sličan je
+          is-successor-of: Nastavlja
+          realises: Ostvaruje
           was-present-at: 
         extent: Veličina
         file-size: Veličina datoteke
         format: Format
         fps: Kadrova po sekundi
-        has-type: 
+        has-type: Ima vrstu
         identifier: Identifikator
         is-format-of: Format od
         is-part-of: Dio od
         is-referenced-by: 
-        is-replaced-by: 
+        is-replaced-by: Mijenja ga
         is-required-by: 
         issued: 
         language: Jezik
@@ -158,28 +158,28 @@ hr:
         refs-rels: 
         relations: 
         rights: Prava
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
+        rights-human: Mogu li koristiti?
+        runtime: Trajanje
+        runtime-unit-seconds: sekundi
+        source: Izvor
+        subject: Tema
+        temporal: Vremenski
+        time: Vrijeme
+        timestamp-created: Prva objava na Europeani
+        timestamp-updated: 'Zadnja objava na Europeani '
+        timestamp_created: Prva objava na Europeani (%{timestamp_created})
+        timestamp_updated: Zadnja objava na Europeani (%{timestamp_updated})
         title: Naslov
         toc: Sadržaj
         type: Vrsta
-        ugc: 
+        ugc: Korisnički sadržaj
         version: Verzija
       named-entities:
-        title: 
+        title: Entiteti
         what:
           broader: "Širi pojam"
-          label: 
-          term: 
+          label: Oznaka koncepta
+          term: Termin koncepta
           title: 
         when:
           begin: Početak perioda
@@ -212,8 +212,21 @@ hr:
         intro: Nažalost , ne možemo pronaći tu stranicu
         text: Nažalost, nismo pronašli stranicu koju ste tražili. Pokušajte pretražiti Europeanu ili možda vam se svide dolje odabrani objekti.
       about:
-        text: 
-        title: 
+        text: |-
+          <p>U potrazi ste za omiljenom starom slikom? Vršite istraživanje ili pišete školski rad? Tražite inspiraciju za novi dizajn šalice za kavu? Želite li naučiti nešto novo? Koji god bio razlog vašeg posjeta Europeani, dobor došli!</p>
+
+          <p>Udubite se u najveću zbirku umjetnosti, kulture i znanosti u Europi. Europeana Collections donose vam materijale iz poznatih i manje poznatih (ali uvijek fascinantnih) knjižnica, muzeja, galerija i arhiva Europe.</p>
+
+          <p>Knjige i rukopisi, fotografije i slike, skulpture i note, video i zvučne snimke, dnevnici i karte - svi su oni ovdje. Ne trebate putovati preko kontinenta, ni fizički ni virtualno.</p>
+
+          <p>Istražujte, otkrivajte, gledajte, slušajte, čitajte, preuzmite na svoje računalo... Uživajte!</p>
+
+          <p>Sad zašto ne isprobati Europeaninu povijesno-umjetničku zbirku ili Europeaninu glazbenu zbirku? Imamo i prilagođene resurse za istraživače i inovatore u području kulturne baštine (tu možete pronaći naš API), kao i raspon virtualnih izložbi i blog.</p>
+
+          <p>A želite još više, svoju dnevnu dozu kulture možete pronaći na Facebooku, Twitteru, Mediumu, Google+ i Pinterestu.</p>
+
+          <p>Za više informacija o našoj suradnji s kulturnim ustanovama i njihovim zbirkama, posjetite stranicu Europeana Pro.</p>
+        title: Dobro došli, ljubitelji kulture!
       music-channel-about:
         text: 
         title: 
@@ -221,7 +234,7 @@ hr:
       actions:
         configure-actions: 
         dutchmasters: Nizozemski majstori
-        favouriteart: 
+        favouriteart: Omiljena umjetnina
         label: 
         newcollection: Nova zbirka
         product-save: Pohrani
