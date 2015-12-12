@@ -296,13 +296,13 @@ et:
         type: Tüüp
       reusability:
         advanced: Detailne
-        advanced-cc-by: 
-        advanced-cc-by-nc: 
-        advanced-cc-by-nc-nd: 
-        advanced-cc-by-nc-sa: 
-        advanced-cc-by-nd: 
+        advanced-cc-by: ''
+        advanced-cc-by-nc: ''
+        advanced-cc-by-nc-nd: ''
+        advanced-cc-by-nc-sa: ''
+        advanced-cc-by-nd: ''
         advanced-cc-by-sa: CC BY-SA
-        advanced-cc0: 
+        advanced-cc0: ''
         advanced-orphan-work: Orbteos
         advanced-out-of-copyright-non-commercial: Autorikaitse alt vaba - mitteäriline taaskasutus
         advanced-pdm: Märgistatud avalikuks omandiks

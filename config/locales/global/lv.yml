@@ -229,7 +229,7 @@ lv:
         image_size: Izmērs
         language: Valoda
         language_of_description: Apraksta valoda
-        media: 
+        media: Tikai ieraksti ar saitēm uz objektiem
         mime_type: Datnes formāts
         provider: Agregators
         reusability: Vai es varu to izmantot?
@@ -286,7 +286,7 @@ lv:
         tr: 
         uk: 
         yi: 
-      less: 
+      less: Mazāk
       media:
         'false': Nē
         'true': Jā
@@ -295,7 +295,7 @@ lv:
       resource:
         type: Tips
       reusability:
-        advanced: 
+        advanced: Paplašinātā
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -313,7 +313,7 @@ lv:
         open: Jā, ar atsauci
         permission: Tikai ar atļauju
         restricted: Jā, ar ierobežojumiem
-        simple: 
+        simple: Vienkāršā
       sound_duration:
         long: Garš (6+ minūtes)
         medium: Vidējs (3-6 minūtes)
@@ -390,7 +390,7 @@ lv:
     home: Sākums
     javascript-required: Lai aplūkotu šo saturu, lūdzu, iespējojiet JavaScript un apsveriet iespēju atjaunināt interneta pārlūku, lai tas atbalstītu HTML5 saturu.
     labs: Laboratorija
-    labs-text: 
+    labs-text: Remiksējiet kultūras saturu ar mūsu API un datu kopām
     language-basque: Basku
     language-bulgarian: Bulgāru
     language-catalan: Katalāņu
@@ -422,7 +422,7 @@ lv:
     language-swedish: Zviedru
     language-ukranian: Ukraiņu
     login: Pieslēgties
-    mission: 
+    mission: Ar kultūru mēs mainām pasauli! Mēs vēlamies attīstīt Eiropas bagāto kultūras mantojumu un padarīt to cilvēkiem pieejamāķu izmantošanai, - gan darbam, gan mācībām, gan izklaidei.
     mission-title: Mūsu misija
     more:
       load-more: Vairāk
@@ -441,7 +441,7 @@ lv:
     refine-your-search: Precizēt meklēšanas pieprasījumu
     register: Reģistrēties
     research: Pētniecība
-    research-text: 
+    research-text: Pievienošanās akadēmiskajai kopienai
     search-area:
       search-button-image-alt: Meklēt
       search-placeholder-text: Pievienot meklējamo vārdu
@@ -450,7 +450,7 @@ lv:
     share: Kopīgot
     sitemap: Lapas karte
     terms-and-policies: Lietošanas noteikumi un politika
-    type: 
+    type: tips
   'no': Norvēģija
   pl: Portugāle
   site:
