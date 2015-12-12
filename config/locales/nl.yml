@@ -15,7 +15,7 @@ nl:
       home: Home
     pro-link: link naar pro
     pro-text: tekst voor pro
-    settings: settings
+    settings: Instellingen
   site:
     alpha:
       feedback_banner:
@@ -35,8 +35,8 @@ nl:
         title: Bronnen
     collections:
       art-history:
-        description: 'Het Muziekkanaal brengt u de beste muziek opnames, bladmuziek en andere gerelateerde collecties van Europeana''s audio-visuele archiven, bibliotheken en musea. Gecureerd door Europeana Sounds. '
-        title: Kunst Kanaal
+        description: Van de Renaissance tot het Surrealisme, van antieke Romeinse sculpturen tot aan hedendaagse kunst; de Europeana Kunst Geschiedenis Collecties bevatten voor elk wat wils en zullen u versteld doen staan van alle kunstwerken en kunstenaars die Europa te bieden heeft!
+        title: Europeana Kunst Geschiedenis
       data-types:
         3d: 3D objecten
         count: objecten
@@ -49,7 +49,7 @@ nl:
         recent: Recent toegevoegd
         spotlight-on: In de spotlight
       music:
-        description: Het <strong> Europeana Muziek Kanaal</strong> brengt u de beste muziek opnames, blad muziek en ander muziek gerelateerde collecties van Europa's audio-visuele archieven, bibliotheken, archieven en musea. <a href="/portal/channels/music/about"> Meer over dit kanaal...</a>
+        description: 'Het <strong> Europeana collecties: muziek</strong> brengt u de beste muziek opnames, blad muziek en ander muziek gerelateerde collecties van Europa''s audio-visuele archieven, bibliotheken, archieven en musea. <a href="/portal/channels/music/about"> Meer over Europeana collecties: muziek</a>'
         title: Europeana Muziek
     facet:
       language:
@@ -221,7 +221,7 @@ nl:
       actions:
         configure-actions: Configureer acties
         dutchmasters: Nederlandse meesters
-        favouriteart: Kunst favorieten
+        favouriteart: Favoriete kunst
         label: Acties
         newcollection: Nieuwe collectie
         product-save: Bewaar

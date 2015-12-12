@@ -49,7 +49,7 @@ lt:
         recent: Naujausi papildymai
         spotlight-on: Dėmesio centre
       music:
-        description: <strong>Europeana muzikos kolekcija</strong> sujungia geriausių muzikos įrašų, natų ir kitų, su muzika susijusių, įrašų kolekcijas iš daugelio Europos vaizdo ir garso archyvų, bibliotekų, muziejų bei archyvų. <a href="/portal/channels/music/about">Sužinokite daugiau apie muzikos kanalą.</a>
+        description: <strong>Europeana muzikos kolekcija</strong> sujungia geriausių muzikos įrašų, natų ir kitų, su muzika susijusių, įrašų kolekcijas iš daugelio Europos vaizdo ir garso archyvų, bibliotekų, muziejų bei archyvų. <a href="/portal/channels/music/about">Sužinokite daugiau apie muzikos kolekcija.</a>
         title: Europeana muzika
     facet:
       language:
