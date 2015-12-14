@@ -2,7 +2,7 @@ module Browse
   class Colours < ApplicationView
     def page_title
       mustache[:page_title] ||= begin
-        t('site.browse.colours.title')
+        [t('site.browse.colours.title'), site_title].join(' - ')
       end
     end
 

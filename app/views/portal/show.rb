@@ -15,7 +15,7 @@ module Portal
         desc = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
         landing = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
         title = render_document_show_field_value(document, 'proxies.dcTitle', unescape: true)
-        preview = record_preview_url(render_document_show_field_value(document, 'europeanaAggregation.edmPreview', unescape: true), 400)
+        preview = record_preview_url(render_document_show_field_value(document, 'europeanaAggregation.edmPreview', unescape: true))
 
         head_meta = [
           { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') },
@@ -616,13 +616,14 @@ module Portal
         val
       end
 
+      fields = fields.flatten.compact
+
       if section[:fields_then_fallback] && fields.present?
-        values = fields
+        fields
       else
         values = [section[:collected]] + fields
+        values.flatten.compact.uniq
       end
-
-      values.flatten.compact.uniq
     end
 
     def data_section_field_subsection(section)

@@ -2,7 +2,7 @@ module Portal
   class Static < ApplicationView
     def page_title
       mustache[:page_title] ||= begin
-        @page.title
+        [@page.title, site_title].join(' - ')
       end
     end
 
