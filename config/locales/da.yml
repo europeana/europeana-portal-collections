@@ -15,7 +15,7 @@ da:
       home: Hjem
     pro-link: link til pro
     pro-text: tekst til pro
-    settings: indstillinger
+    settings: Indstillinger
   site:
     alpha:
       feedback_banner:
@@ -49,7 +49,7 @@ da:
         recent: Senest tilføjet
         spotlight-on: Fokus på
       music:
-        description: <strong>Europeanas Musiksamling</strong> samler de bedste musikoptagelser, partiturer og andre musikrelaterede genstande fra Europas audiovisuelle arkiver, biblioteker og museer. <a href="/portal/channels/music/about">Find ud af mere om Musikkanalen.</a>
+        description: <strong>Europeanas Musiksamling</strong> samler de bedste musikoptagelser, partiturer og andre musikrelaterede genstande fra Europas audiovisuelle arkiver, biblioteker og museer. <a href="/portal/channels/music/about">Find ud af mere om Musiksamling.</a>
         title: Europeana Musik
     facet:
       language:

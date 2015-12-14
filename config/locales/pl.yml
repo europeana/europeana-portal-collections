@@ -2,8 +2,8 @@ pl:
   global:
     labs-link: link do labs
     navigation:
-      all_blog_posts: Wszystkie Wpisy...
-      all_exhibitions: Wszystkie Wystawy...
+      all_blog_posts: Wszystkie wpisy...
+      all_exhibitions: Wszystkie wystawy...
       blog: Blog
       browse: Przeglądaj
       browse_colours: Kolory
@@ -15,11 +15,11 @@ pl:
       home: Strona główna
     pro-link: link do Europeana Pro
     pro-text: tekst dla Europeana Pro
-    settings: ustawienia
+    settings: Ustawienia
   site:
     alpha:
       feedback_banner:
-        description: Wersja alfa oznacza, że strona działa w ograniczonym zakresie, ponieważ jest na bieżąco rozbudowywana.Dlatego też może przejściowo nie działać. Twoja opinia pomoże nam usprawnić jej działanie!
+        description: Wersja alfa oznacza, że strona działa w ograniczonym zakresie, ponieważ jest na bieżąco rozbudowywana. Dlatego też może przejściowo nie działać. Twoja opinia pomoże nam usprawnić jej funkcjonowanie!
         link-text: Powiedz nam co myślisz!
         title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka"'
     blog-link: link do bloga
@@ -47,9 +47,9 @@ pl:
       labels:
         credits: Kuratorowane przez
         recent: Ostatnio dodane
-        spotlight-on: 
+        spotlight-on: Zbliżenie
       music:
-        description: 
+        description: '<strong>Europeana Kolekcje: Muzyka</strong> zawiera najlepsze nagrania i inne związane z muzyką zbiory z europejskich archiwów audiowizualnych, bibliotek, archiwów i muzeów. <a href="/portal/channels/music/about"> Dowiedz się więcej o Kolekcji Muzyki. <a/a>'
         title: Europeana Muzyka
     facet:
       language:
@@ -60,7 +60,7 @@ pl:
         about: O nas
         become-a-provider: Zostań naszym partnerem
         contact: Kontakt
-        copyright: Prawa autorskie
+        copyright: Prawo autorskie
         data-providers: Wszystkie instytucje
         help: Pomoc
         new-collections: Nowe Kolekcje
@@ -71,7 +71,7 @@ pl:
       strapline: Odkryj %{total_item_count} dzieł sztuki, książek, filmów i nagrań z całej Europy.
     more: Więcej...
     my-europeana: Moja Europeana
-    my-europeana-link: 
+    my-europeana-link: link do My Europeana
     navigation:
       breadcrumb:
         item_detail: Detal
@@ -107,7 +107,7 @@ pl:
         copyright: Prawo autorskie
         creation-date: Data utworzenia
         creator: Twórca
-        current-location: 
+        current-location: Aktualna lokalizacja
         data-provider: Instytucja
         date: Data
         dates: Daty
@@ -117,12 +117,12 @@ pl:
         edm:
           has-met: Jest powiązany z
           incorporates: Zawiera
-          is-derivative-of: 
+          is-derivative-of: Jest pochodną
           is-representation-of: Jest reprezentacją
           is-similar-to: Jest podobny do
           is-successor-of: Jest następcą
-          realises: 
-          was-present-at: 
+          realises: Realizuje
+          was-present-at: Obecny na
         extent: Rozmiar
         file-size: Rozmiar pliku
         format: Format
@@ -149,17 +149,17 @@ pl:
         properties: Własności
         provenance: Pochodzenie
         provided-by: Dowiedz się więcej
-        provided-by-detail: 
+        provided-by-detail: Europeana prezentuje ten obiekt przez %{institution_name_and_link}. Odwiedź ich stronnę, aby uzyskać więcej informacji.
         provider: Agregator
-        providing-country: 
+        providing-country: Kraj dostarczający
         publication-date: Data wydania
         publisher: Wydawca
         references: Odnośniki
         refs-rels: Odniesienia i relacje
         relations: Relacje
-        rights: Prawa
+        rights: Prawa autorskie
         rights-human: Czy mogę tego użyć?
-        runtime: 
+        runtime: Długość
         runtime-unit-seconds: sekundy
         source: "Źródło"
         subject: Przedmiot
@@ -177,25 +177,25 @@ pl:
       named-entities:
         title: Podmioty
         what:
-          broader: 
+          broader: Termin Szerszy
           label: Etykieta Pojęcia
-          term: 
+          term: Definicja Terminu
           title: Co
         when:
           begin: Początek Okresu
           end: Koniec Okresu
-          label: 
-          term: 
+          label: Okres etykieta
+          term: Okres termin
           title: Kiedy
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
+          label: Miejsce etykieta
+          latitude: Szerokość geograficzna
+          longitude: Długość geograficzna
+          term: Miejsce termin
           title: Gdzie
         who:
-          label: 
-          term: 
+          label: Podmiot etykieta
+          term: Podmiot termin
           title: Kto
       nav:
         next: Następny
@@ -212,17 +212,31 @@ pl:
         intro: Przykro nam - ta strona gdzieś się zapodziała
         text: Niestety nie możemy znaleźć strony, której szukasz. Spróbuj ponownie na stronie głównej lub wybierz z poniższych propozycji.
       about:
-        text: 
+        text: |+
+          <p>Szukasz swojego ulubionego obrazu? Przygotowujesz referat na zajęcia? Potrzebujesz pomysłu na wzór, aby ozdobić swój nowy kubek do kawy? A może po prostu chcesz dowiedzieć się czegoś nowego?</p>
+
+          <p>Zagłęb się w największą europejską kolekcję obiektów ze świata sztuki, kultury i nauki. Europeana Kolekcje umożliwia Ci dostęp do materiałów, zarówno z tych najsłynniejszych, jak i z tych mniej znanych bibliotek, muzeów, galerii i archiwów Europy.</p>
+
+          <p>Książki i manuskrytpy, zdjęcia i obrazy, rzeźby i nuty, nagrania video i dźwiękowe, pamiętniki i mapy - wszystko to jest właśnie tutaj. Nie musisz okrążać całego kontynentu!</p>
+
+          <p>Odkrywaj, oglądaj, słuchaj, czytaj, ściągaj… Dobrej zabawy!</p>
+
+          <p>Nie zapomnij sprawdzić naszych kolekcji tematycznych: Historia Sztuki i Muzyka. Oferujemy także zasoby dla naukowców oraz dla programistów i innowatorów (to tam znajdziesz nasze API), jak również wirtualne wystawy oraz blog.</p>
+
+          <p>Jeśli to wciąż zbyt mało, możesz liczyć na codzienną dawkę kultury w naszych serwisach społecznościowych:  Facebook, Twitter, Medium, Google+, Pinterest.</p>
+
+          <p>Aby uzyskać więcej informacji o tym, jak pracujemy z instytucjami kultury oraz ich zbiorami, odwiedź Europeana Pro.</p>
+
         title: Witaj, miłośniku kultury!
       music-channel-about:
-        text: 
+        text: "<p>Wyobraź sobie odkrywanie oryginalnycyh rękopisów utworu muzycznego, słuchając jego różnych interpretacji i czytając biografię kompozytora. Na stronie Kolekcji Muzyki Europeana jest to możliwe</p>\n\n<p><a href=\"http://www.europeanasounds.eu\">Nasi partnerzy</a>, eksperci w dziedzinie muzyki z całej Europy starannie wybrali tę kolekcję nagrań, nut, zdjęć instrumentów muzycznych, książek o muzyce i innych materiałów \nzwiązanych z muzyką.</p>\n\n<p>Udostępniamy tę wczesną wersję testową Kolekcji Muzyki Wam, naszym użytkownikom, abyście pomogli nam dalej ją rozwijać. Dlatego od czasu do czasu, odwiedzając stronę, możecie zostać poproszeni o udzielenie odpowiedzi na pytania lub wypełnienie ankiet pojawiających się na ekranie. Będziemy Wam bardzo wdzięczni za poświęcony czas!</p>\n\n<p>Ponadto, w interesie przejrzystości i prywatności, informujemy, że zbieramy dane na temat zachowań użytkownika w Google Analytics i usłudze o nazwie Hotjar. Robimy to, aby wykryć błędy i poprawić Kolekcję Muzyki. Wszystkie dane są prywatne i anonimowe i zostaną wykorzystane wyłącznie w celu poprawy jakości naszego serwisu.</p>\n\n<p>Zapraszamy do odkrywania kolekcji, słuchania muzyki, przeglądania nut i czytania. Gdy prawo autorskie na to pozwala, możnesz pobrać swoje ulubione materiały. Odwiedź również nasze wirtualne wystawy i odkrywaj muzykę w zupełnie nowy sposób!</p>"
         title: O Kolekcji Muzyka
     results:
       actions:
-        configure-actions: 
+        configure-actions: Konfiguruj działania
         dutchmasters: Holenderscy Mistrzowie
         favouriteart: Ulubione dzieło
-        label: 
+        label: Działania
         newcollection: Nowa kolekcja
         product-save: Zapisz
         saveto: Zapisz do
@@ -249,25 +263,25 @@ pl:
         product-text: Tekst
         product-video: Wideo
         results-relevance: Trafność
-        single-result: 
+        single-result: 1 wynik dla %{query_terms}
         view:
-          grid: 
+          grid: Siatka
           list: Lista
         view-at-provider: Zobacz w
     search:
       placeholder:
         text: Dodaj termin wyszukiwawczy
       similar:
-        prefix: 
+        prefix: 'Podobne do: %{mlt_item}'
     settings:
       actions:
         clear-selection: Wyczyść wybór
-        save-settings: Zapisz Ustawienia
+        save-settings: Zapisz ustawienia
       language:
-        auto-translate-limit: 
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
+        auto-translate-limit: Możesz wybrać maksymalnie %{max_languages} języków
+        auto-translate-page: Automatycznie przetłumacz strony przedmiotów na...
+        auto-translate-page-short: Automatycznie przetłumacz na
+        auto-translate-query: Automatycznie przetłumacz słowa kluczowe na...
         available: Dostępne języki
         default: Domyślny język
         flash:

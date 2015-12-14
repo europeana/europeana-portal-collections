@@ -49,7 +49,7 @@ ca:
         recent: Addicions Recents
         spotlight-on: Focus en
       music:
-        description: L'<strong>Europeana Music Collection</strong> junt els millors enregistraments musicals, partitures, i altres objectes musicals de col·leccions d'arxius, biblioteques i museus d'Europa. <a href="/portal/channels/music/about">Descobreix-ne més al Canal Música.</a>
+        description: L'<strong>Europeana Music Collection</strong> junt els millors enregistraments musicals, partitures, i altres objectes musicals de col·leccions d'arxius, biblioteques i museus d'Europa. <a href="/portal/channels/music/about">Descobreix-ne més al Music Collection.</a>
         title: Europeana Music
     facet:
       language:
