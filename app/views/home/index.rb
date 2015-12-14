@@ -1,7 +1,7 @@
 module Home
   class Index < ApplicationView
     def page_title
-      'Europeana Collections - Alpha'
+      'Europeana Collections'
     end
 
     def content
@@ -21,7 +21,10 @@ module Home
     def head_meta
       mustache[:head_meta] ||= begin
         [
-          { meta_name: 'description', content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ') }
+          {
+            meta_name: 'description',
+            content: truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ')
+          }
         ] + super
       end
     end

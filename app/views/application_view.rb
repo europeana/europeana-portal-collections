@@ -7,4 +7,10 @@
 # templates.
 class ApplicationView < Europeana::Styleguide::View
   include MustacheHelper
+
+  protected
+
+  def site_title
+    'Europeana Collections'
+  end
 end

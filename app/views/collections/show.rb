@@ -10,7 +10,7 @@ module Collections
 
     def page_title
       mustache[:page_title] ||= begin
-        (@landing_page.title || @collection.key) + ' Collection - Alpha'
+        (@landing_page.title || @collection.key) + ' Collection'
       end
     end
 
