@@ -69,10 +69,10 @@ module BlacklightConfig
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'REUSABILITY'
-      config.add_facet_field 'COUNTRY', limit: 100
-      config.add_facet_field 'LANGUAGE', limit: 100
-      config.add_facet_field 'PROVIDER', limit: 100
-      config.add_facet_field 'DATA_PROVIDER', limit: 100
+      config.add_facet_field 'COUNTRY', limit: 50
+      config.add_facet_field 'LANGUAGE', limit: 50
+      config.add_facet_field 'PROVIDER', limit: 50
+      config.add_facet_field 'DATA_PROVIDER', limit: 50
       # config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
 
       # Send all facet field names to Solr.
