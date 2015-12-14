@@ -28,7 +28,7 @@ hr:
         title: Boje
       newcontent:
         tableh1: Sve ustanove
-        tableh2: 
+        tableh2: Objekti
         tableh3: Datum
         title: Novi sadržaj
       sources:
@@ -45,7 +45,7 @@ hr:
         sound: Zvučni zapisi
         texts: Tekstovi
       labels:
-        credits: 
+        credits: Priredio
         recent: Nedavno dodani
         spotlight-on: U fokusu
       music:
@@ -57,7 +57,7 @@ hr:
           results: Rezultati
     footer:
       menu:
-        about: 
+        about: O nama
         become-a-provider: Postani naš partner
         contact: Kontakt
         copyright: Autorsko pravo
@@ -74,19 +74,19 @@ hr:
     my-europeana-link: poveznica na stranicu My Europeana
     navigation:
       breadcrumb:
-        item_detail: 
+        item_detail: Objekt
         results_list: Rezultati
         return_home: Povratak na naslovnicu
     news: Novosti
     object:
       actions:
-        attribute-author: 
+        attribute-author: Navedite autora
         attribute-html: HTML
         attribute-plaintext: Samo tekst
         download: Preuzmi
         download-additional: Dostupno i kao
         downloaddata: Preuzmi podatke
-        open-media: 
+        open-media: Otvori ovaj medijski objekt
         show-less-data: Prikaži manje podataka
         show-more-data: Prikaži više podataka
         technicalmetadata: Tehnički metapodaci
@@ -94,9 +94,9 @@ hr:
         who:
           title: Naslov
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Srodni objekti
+        view-items-above: pogledaj gornje objekte
+        view-items-below: pogledaj donje objekte
       meta-label:
         codec: Kodek
         collection-name: Skup podataka
@@ -115,14 +115,14 @@ hr:
         dimensions: Dimenzije
         duration: Trajanje
         edm:
-          has-met: 
+          has-met: Povezan s
           incorporates: Uključuje
           is-derivative-of: Izveden je od
-          is-representation-of: 
+          is-representation-of: Reprezentacija
           is-similar-to: Sličan je
           is-successor-of: Nastavlja
           realises: Ostvaruje
-          was-present-at: 
+          was-present-at: Prisutan u
         extent: Veličina
         file-size: Veličina datoteke
         format: Format
@@ -131,10 +131,10 @@ hr:
         identifier: Identifikator
         is-format-of: Format od
         is-part-of: Dio od
-        is-referenced-by: 
+        is-referenced-by: Citira ga
         is-replaced-by: Mijenja ga
-        is-required-by: 
-        issued: 
+        is-required-by: Zahtijeva ga
+        issued: Prvi put izdano
         language: Jezik
         latitude: "Širina"
         location: Lokacija
@@ -150,13 +150,13 @@ hr:
         provenance: Porijeklo
         provided-by: Saznaj više
         provided-by-detail: Europeana prikazuje ovaj objekt preko %{institution_name_and_link}. Posjetite njihovu stranicu za više informacija.
-        provider: 
+        provider: Davatelj
         providing-country: 
         publication-date: Datum objave
         publisher: Nakladnik
-        references: 
-        refs-rels: 
-        relations: 
+        references: Citira
+        refs-rels: Reference i odnosi
+        relations: Odnosi
         rights: Prava
         rights-human: Mogu li koristiti?
         runtime: Trajanje
@@ -180,19 +180,19 @@ hr:
           broader: "Širi pojam"
           label: Oznaka koncepta
           term: Termin koncepta
-          title: 
+          title: Teme, vrste izvora, žanrovi i forme (Concepts)
         when:
           begin: Početak perioda
           end: Kraj perioda
-          label: 
+          label: oznaka perioda
           term: 
-          title: 
+          title: Vremenski rasponi i datumi (TimeSpan)
         where:
-          label: 
+          label: Naziv mjesta
           latitude: "Širina"
           longitude: Dužina
           term: 
-          title: 
+          title: Imena mjesta (Places)
         who:
           label: 
           term: 
@@ -228,14 +228,14 @@ hr:
           <p>Za više informacija o našoj suradnji s kulturnim ustanovama i njihovim zbirkama, posjetite stranicu Europeana Pro.</p>
         title: Dobro došli, ljubitelji kulture!
       music-channel-about:
-        text: 
-        title: 
+        text: "<p>Zamislite da gledate originalne, rukom pisane note glazbenog djela, dok istovremeno slušate njegove različite interpretacije i čitate biografiju skladatelja. Na Europeaninoj glazbenoj zbirci možete.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Naši partneri</a>, redom glazbeni stručnjaci iz cijele Europe, pažljivo su odabrali i uredili ovu zbirku glazbenih snimaka, notnih zapisa, slika glazbenih instrumenata, knjiga o glazbi i ostalog sadržaja vezanog uz glazbu. </p>\n\n<p>Ova rana verzija Glazbene zbirke je ujedno i testna, a učinili smo dostupnu vama, našim korisnicima, kako biste nam pomogli da ju oblikujemo i dalje razvijamo. Stoga ćemo vas povremeno pri posjeti ove stranice zamoliti da odgovorite na pitanja ili ispunite anketu koja se pojavi na ekranu. Bit ćemo stvarno zahvalni ako biste mogli uzeti vremena i odgovorite na pitanja i ankete! </p>\n\n<p>Napominjemo također, u interesu transparentnosti i privatnosti, da bilježimo statistike posjete i ponašanja korisnika u uslugama Google analytics i Hotjar. Korištenje ovih usluga pokazuje nam gdje smo pogriješili u našim nacrtima i tako nam pomaže da poboljšamo Glazbenu zbirku. Svi zapisnici su privatni i anonimni, a koristit će se isključivo u svrhu poboljšanja naše usluge.</p>\n\n<p>Preporučujemo vam da pretražite zbirku, puštate glazbu, pogledate notne zapise ili čitate o njima. Ukoliko autorsko pravo dopušta, možete i preuzeti stvari koje vam se najviše sviđaju. Posjetite i naše virtualne izložbe kako biste otkrili glazbu na potpuno novi način!</p>"
+        title: O glazbenoj zbirci
     results:
       actions:
-        configure-actions: 
+        configure-actions: Konfiguriraj radnje
         dutchmasters: Nizozemski majstori
         favouriteart: Omiljena umjetnina
-        label: 
+        label: Radnje
         newcollection: Nova zbirka
         product-save: Pohrani
         saveto: Pohrani u
@@ -278,8 +278,8 @@ hr:
         save-settings: Pohrani postavke
       language:
         auto-translate-limit: Maksimum od %{max_languages} može biti odabran
-        auto-translate-page: 
-        auto-translate-page-short: 
+        auto-translate-page: Automatski prevedi stranice objekata na...
+        auto-translate-page-short: Automatski prevedi objekte na...
         auto-translate-query: Automatski prevedi ključne riječi za pretraživanje na...
         available: Dostupni jezici
         default: Zadani jezik

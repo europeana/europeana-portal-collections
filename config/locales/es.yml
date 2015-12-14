@@ -15,7 +15,7 @@ es:
       home: Inicio
     pro-link: link a pro
     pro-text: texto para pro
-    settings: ajustes
+    settings: Ajustes
   site:
     alpha:
       feedback_banner:
@@ -50,7 +50,7 @@ es:
         recent: Adiciones recientes
         spotlight-on: Destacados
       music:
-        description: La <strong>Colección de Música de Europeana<strong> reúne las mejores grabaciones, partituras y otros objectos relacionados con la música de los archivos audiovisuales europeos, bibliotecas y museos. <a href="/portal/channels/music/about">Más acerca del Canal de Música.</a>
+        description: La <strong>Colección de Música de Europeana<strong> reúne las mejores grabaciones, partituras y otros objectos relacionados con la música de los archivos audiovisuales europeos, bibliotecas y museos. <a href="/portal/channels/music/about">Más acerca del Colección de Música.</a>
         title: Europeana Música
     facet:
       language:

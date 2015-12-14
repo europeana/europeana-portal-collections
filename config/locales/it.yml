@@ -27,9 +27,9 @@ it:
       colours:
         title: Colori
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
+        tableh1: Tutte le istituzioni
+        tableh2: Oggetti
+        tableh3: Data
         title: Nuovo contenuto
       sources:
         title: Fonti
@@ -87,8 +87,8 @@ it:
         download-additional: Anche disponibile come
         downloaddata: Scarica i dati
         open-media: 
-        show-less-data: 
-        show-more-data: 
+        show-less-data: Mostra meno
+        show-more-data: Mostra di più
         technicalmetadata: 
       enrichment:
         who:
@@ -173,7 +173,7 @@ it:
         toc: Tavola dei contenuti
         type: Tipo
         ugc: Contenuto contribuito dall'utente
-        version: 
+        version: Versione
       named-entities:
         title: 
         what:
@@ -198,15 +198,15 @@ it:
           term: Termine del'agente
           title: Chi
       nav:
-        next: 
-        prev: 
+        next: Prossimo
+        prev: Precedente
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: Est
+        north: Nord
+        south: Sud
+        west: Ovest
+      show-more-similar-items: mostra di più
+      similar-items: Oggetti simili
     pages:
       '404':
         intro: 
@@ -230,29 +230,29 @@ it:
       list:
         all-results:
           3D: 
-          images: 
-          text: 
+          images: Immagini
+          text: Testo
           video: 
         count-and-terms: 
-        empty: 
+        empty: 'Nessun Risultato '
         empty-with-terms: 
-        header: 
-        header-and: 
+        header: Risultati per
+        header-and: e
         in-channel: 
-        less: 
+        less: Meno
         less_adv: 
-        more: 
+        more: Di più
         more_adv: 
         product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
+        product-image: Immagine
+        product-sound: Suono
+        product-text: Testo
+        product-video: Video
+        results-relevance: Pertinenza
         single-result: 
         view:
           grid: 
-          list: 
+          list: Lista
         view-at-provider: 
     search:
       placeholder:
@@ -262,7 +262,7 @@ it:
     settings:
       actions:
         clear-selection: 
-        save-settings: 
+        save-settings: Salva le impostazioni
       language:
         auto-translate-limit: 
         auto-translate-page: 
@@ -273,6 +273,6 @@ it:
         flash:
           alert: 
           notice: 
-        label: 
-        settings-label: 
+        label: Lingua
+        settings-label: impostazioni della lingua
       title: Impostazioni

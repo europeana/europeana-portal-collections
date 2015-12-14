@@ -49,7 +49,7 @@ fi:
         recent: "Äskettäiset lisäykset"
         spotlight-on: Valokeilassa
       music:
-        description: <strong>Europeanan musiikkikokoelma</strong> tuo yhteen parhaat musiikkitallenteet, nuotit, ja muut musiikkiaiheiset kokoelmat Euroopan audiovisuaalisista arkistoista, kirjastoista ja museoista. <a href="/portal/channels/music/about">Lisätietoa Musiikkikanavasta.</a>
+        description: <strong>Europeanan Musiikkikokoelma</strong> tuo yhteen parhaat musiikkitallenteet, nuotit, ja muut musiikkiaiheiset kokoelmat Euroopan audiovisuaalisista arkistoista, kirjastoista ja museoista. <a href="/portal/channels/music/about">Lisätietoa Musiikkikokoelma.</a>
         title: Europeana Musiikki
     facet:
       language:
