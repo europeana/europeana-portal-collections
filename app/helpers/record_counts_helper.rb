@@ -3,6 +3,7 @@ module RecordCountsHelper
     @stylised_recent_additions ||= begin
       max = options[:max]
       from = options[:from]
+      skip_date = options[:skip_date]
       path_meth = within_collection? ? :collection_path : :search_path
 
       sorted = additions.sort_by { |addition| [-addition[:from].to_i, -addition[:count]] }
@@ -16,7 +17,7 @@ module RecordCountsHelper
         {
           text: addition[:label],
           number: number_with_delimiter(addition[:count]) + ' ' + t('site.collections.data-types.count'),
-          date: addition[:from].strftime('%B %Y'),
+          date: skip_date ? false : addition[:from].strftime('%B %Y'),
           url: send(path_meth, q: addition[:query], f: { 'DATA_PROVIDER' => [addition[:label]] })
         }
       end

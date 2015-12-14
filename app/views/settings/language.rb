@@ -17,93 +17,7 @@ module Settings
             language_default: {
               title: t('site.settings.language.default'),
               group_id: t('site.settings.language.available'),
-              items: [
-                {
-                  text: t('global.language-english'),
-                  value: 'en',
-                  selected: I18n.locale.to_s == 'en'
-                },
-                {
-                  text: t('global.language-bulgarian'),
-                  value: 'bg',
-                  selected: I18n.locale.to_s == 'bg'
-                },
-                {
-                  text: t('global.language-catalan'),
-                  value: 'ca',
-                  selected: I18n.locale.to_s == 'ca'
-                },
-                {
-                  text: t('global.language-danish'),
-                  value: 'da',
-                  selected: I18n.locale.to_s == 'da'
-                },
-                {
-                  text: t('global.language-dutch'),
-                  value: 'nl',
-                  selected: I18n.locale.to_s == 'nl'
-                },
-                {
-                  text: t('global.language-finnish'),
-                  value: 'fi',
-                  selected: I18n.locale.to_s == 'fi'
-                },
-                {
-                  text: t('global.language-french'),
-                  value: 'fr',
-                  selected: I18n.locale.to_s == 'fr'
-                },
-                {
-                  text: t('global.language-german'),
-                  value: 'de',
-                  selected: I18n.locale.to_s == 'de'
-                },
-                {
-                  text: t('global.language-greek'),
-                  value: 'el',
-                  selected: I18n.locale.to_s == 'el'
-                },
-                {
-                  text: t('global.language-hungarian'),
-                  value: 'hu',
-                  selected: I18n.locale.to_s == 'hu'
-                },
-                {
-                  text: t('global.language-lithuanian'),
-                  value: 'lt',
-                  selected: I18n.locale.to_s == 'lt'
-                },
-                {
-                  text: t('global.language-polish'),
-                  value: 'pl',
-                  selected: I18n.locale.to_s == 'pl'
-                },
-                {
-                  text: t('global.language-portuguese'),
-                  value: 'pt',
-                  selected: I18n.locale.to_s == 'pt'
-                },
-                {
-                  text: t('global.language-romanian'),
-                  value: 'ro',
-                  selected: I18n.locale.to_s == 'ro'
-                },
-                {
-                  text: t('global.language-russian'),
-                  value: 'ru',
-                  selected: I18n.locale.to_s == 'ru'
-                },
-                {
-                  text: t('global.language-spanish'),
-                  value: 'es',
-                  selected: I18n.locale.to_s == 'es'
-                },
-                {
-                  text: t('global.language-swedish'),
-                  value: 'sv',
-                  selected: I18n.locale.to_s == 'sv'
-                }
-              ]
+              items: language_default_items
             },
             language_itempages: {
               enabled: false,
@@ -150,6 +64,47 @@ module Settings
           }
         }
       end
+    end
+
+    protected
+
+    def language_map
+      {
+        bg: 'bulgarian',
+        ca: 'catalan',
+        da: 'danish',
+        de: 'german',
+        el: 'greek',
+        en: 'english',
+        es: 'spanish',
+        et: 'estonian',
+        fi: 'finnish',
+        fr: 'french',
+        hr: 'croatian',
+        hu: 'hungarian',
+        lt: 'lithuanian',
+        lv: 'latvian',
+        nl: 'dutch',
+        pl: 'polish',
+        pt: 'portuguese',
+        ro: 'romanian',
+        ru: 'russian',
+        sv: 'swedish'
+      }
+    end
+
+    def language_item(k, v)
+      {
+        text: t("global.language-#{v}"),
+        value: k.to_s,
+        selected: I18n.locale.to_sym == k
+      }
+    end
+
+    def language_default_items
+      languages = language_map.dup
+      [language_item(:en, languages.delete(:en))] +
+        languages.sort_by { |_k, v| v }.map { |k, v| language_item(k, v) }
     end
   end
 end

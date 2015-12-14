@@ -10,7 +10,7 @@ ca:
       browse_newcontent: Contingut nou
       browse_sources: Fonts
       channels: Col·leccions
-      collections: Col·leccions
+      collections: Colleccions
       exhibitions: Exposicions
       home: Inici
     pro-link: enllaç a pro
@@ -63,7 +63,7 @@ ca:
         copyright: Drets d'autor
         data-providers: Totes les institucions
         help: Ajuda
-        new-collections: Noves col·leccions
+        new-collections: Noves colleccions
         rights: Termes d'ús i Polítiques
         search-tips: Consells de cerca
         using-myeuropeana: Fent servir La Meva Europeana

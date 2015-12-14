@@ -37,7 +37,9 @@ module Europeana
       # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
       config.i18n.default_locale = :en
       config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
-      config.i18n.available_locales = [:bg, :ca, :de, :el, :en, :es, :fi, :fr, :hu, :it, :lt, :nl, :pl, :pt, :ro, :ru, :sv]
+      config.i18n.available_locales = [:bg, :ca, :da, :de, :el, :en, :es, :et,
+                                       :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl,
+                                       :pl, :pt, :ro, :ru, :sv]
       config.i18n.fallbacks = true
 
       # Do not swallow errors in after_commit/after_rollback callbacks.
@@ -47,7 +49,7 @@ module Europeana
       config.active_job.queue_adapter = :delayed_job
 
       # Read relative URL root from env
-      config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT']
+      config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
 
       # Load Redis config from config/redis.yml, if it exists
       config.cache_store = begin
@@ -63,11 +65,7 @@ module Europeana
 
         [:redis_store, uri.to_s]
       rescue RuntimeError => e
-        if e.message.match('Could not load configuration.')
-          :null_store
-        else
-          raise e
-        end
+        :null_store
       end
 
       # Load Action Mailer SMTP config from config/smtp.yml, if it exists

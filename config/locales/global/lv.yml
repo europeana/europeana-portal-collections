@@ -153,12 +153,12 @@ lv:
       architecture: arhitektūra
       art: māksla
       fashion: mode
-      home: 
+      home: Sākums
       maps: kartes
       music: mūzika
-      natural-history: 
+      natural-history: dabas vēsture
       newspapers: laikraksti
-      performing-arts: 
+      performing-arts: izpildītājmāksla
     channels-art: Mākslas vēstures kolekcijas
     channels-art-image: Mākslas vēstures kolekcijas attēls
     channels-art-link: Mākslas vēstures kolekcijas
@@ -168,15 +168,15 @@ lv:
     email-address: e-pasta adrese
     facet:
       advanced:
-        options: 
+        options: Opcijas
         show:
           ugc: Lietotāja radīts saturs
       art:
         form:
           paintings:
-            genre: 
+            genre: "Žanrs"
             medium: 
-      carrier: 
+      carrier: Nesējs
       colour: Krāsa
       colour-black-and-white: 
       country:
@@ -192,18 +192,18 @@ lv:
         finland: Somija
         france: Francija
         germany: Vācija
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
+        greece: Grieķija
+        hungary: Ungārija
+        iceland: Islande
+        ireland: "Īrija"
+        israel: Izraēla
+        italy: Itālija
+        latvia: Latvija
+        lithuania: Lietuva
+        luxembourg: Luksemburga
+        malta: Malta
+        netherlands: Nīderlande
+        norway: Norvēģija
         poland: Polija
         portugal: Portugāle
         romania: Rumānija
@@ -218,31 +218,31 @@ lv:
         ukraine: Ukraina
         unitedkingdom: Apvienotā Karaliste
         unitedstatesofamerica: ASV
-      creator: 
+      creator: autors
       header:
         channel: Kolekcijas
         colourpalette: Krāsa
         country: Valsts
         data_provider: Institūcija
-        image_aspectratio: 
-        image_colour: 
+        image_aspectratio: Orientācija
+        image_colour: Palete
         image_size: Izmērs
         language: Valoda
         language_of_description: Apraksta valoda
         media: 
-        mime_type: 
+        mime_type: Datnes formāts
         provider: Agregators
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
+        reusability: Vai es varu to izmantot?
+        sound_duration: Ilgums
+        sound_hq: Augstas kvalitātes
+        text_fulltext: Pilnteksta
         type: 
-        ugc: 
-        video_duration: 
+        ugc: Rādīt lietotāju sagatavoto saturu
+        video_duration: Ilgums
         year: Datējums
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: Ainava
+        portrait: Portrets
       image_colour:
         'false': 
         'true': Krāsa
@@ -272,7 +272,7 @@ lv:
         lt: 
         lv: 
         mt: 
-        mul: 
+        mul: Daudzvalodu
         nl: 
         'no': 
         pl: 
@@ -293,7 +293,7 @@ lv:
       more: Vairāk
       more-refinements: 
       resource:
-        type: 
+        type: Tips
       reusability:
         advanced: 
         advanced-cc-by: 
@@ -310,9 +310,9 @@ lv:
         advanced-rrpa: 
         advanced-rrra: 
         advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
+        open: Jā, ar atsauci
+        permission: Tikai ar atļauju
+        restricted: Jā, ar ierobežojumiem
         simple: 
       sound_duration:
         long: Garš (6+ minūtes)
@@ -321,7 +321,7 @@ lv:
         very_short: "Ļoti īss (<30 sekundes)"
       sound_hq:
         'true': Jā
-      source: 
+      source: Avots
       text_fulltext:
         'false': Nē
         'true': Jā
@@ -333,12 +333,12 @@ lv:
         video: Video
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: Attēla orientācija
+          landscape: Ainava
+          portrait: Portrets
         quality:
           all: Rādīt visu
-          hq-only: 
+          hq-only: Rādīt tikai augstas kvalitātes
           label: Kvalitāte
         size:
           explanation: Ko šie izmēri nozīmē?
@@ -349,14 +349,14 @@ lv:
           xl: "Ļoti liels (%{data})"
       type-sound:
         duration:
-          label: 
+          label: Ilgums
           long: Garš (%{data})
           medium: Vidējs (%{data})
           short: "Īss (%{data})"
           very-short: "Ļoti īss (%{data})"
       type-video:
         duration:
-          label: 
+          label: Ilgums
           long: Garš (%{data})
           medium: Vidējs (%{data})
           short: "Īss (%{data})"
@@ -370,8 +370,8 @@ lv:
     'facet ':
       header:
         video_hd:
-          'true': 
-    find-us-elsewhere: 
+          'true': HD
+    find-us-elsewhere: Meklē mūs arī citur
     forgot-password: Aizmirsi savu paroli?
     genres: "žanri"
     genres-chamber-music: Kamermūzika
@@ -382,77 +382,77 @@ lv:
     genres-popular-music: Populārā mūzika
     genres-traditional-music: Tradicionālā mūzika
     header:
-      connect: 
-      develop: 
-      discover: 
-      network: 
+      connect: Pieslēdzies
+      develop: Izstrādā
+      discover: Atklāj
+      network: Tīkls
     help: Palīdzība
     home: Sākums
-    javascript-required: 
-    labs: 
+    javascript-required: Lai aplūkotu šo saturu, lūdzu, iespējojiet JavaScript un apsveriet iespēju atjaunināt interneta pārlūku, lai tas atbalstītu HTML5 saturu.
+    labs: Laboratorija
     labs-text: 
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
+    language-basque: Basku
+    language-bulgarian: Bulgāru
+    language-catalan: Katalāņu
+    language-croatian: Horvātu
+    language-czech: "Čehu"
+    language-danish: Dāņu
+    language-dutch: Holandiešu
+    language-english: Angļu
+    language-estonian: Igauņu
+    language-finnish: Somu
+    language-french: Franču
+    language-gaelic: Gēļu
+    language-german: Vācu
+    language-greek: Grieķu
+    language-hungarian: Ungāru
+    language-icelandic: Islandiešu
+    language-italian: Itāliešu
+    language-latvian: Latviešu
+    language-lithuanian: Lietuviešu
+    language-maltese: Maltiešu
+    language-norwegian: Norvēģu
+    language-polish: Poļu
+    language-portuguese: Portugāļu
+    language-romanian: Rumāņu
+    language-russian: Krievu
+    language-slovakian: Slovāku
+    language-slovenian: Slovēņu
+    language-spanish: Spāņu
+    language-swedish: Zviedru
+    language-ukranian: Ukraiņu
+    login: Pieslēgties
     mission: 
     mission-title: Mūsu misija
     more:
       load-more: Vairāk
       show-more: Rādīt vairāk
       view-more: Skatīt vairāk
-    more-info: 
+    more-info: Vairāk informācijas
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
-    our-sites: 
+      email-address-invalid: Kā e-pasts ir jānorāda derīga e-pasta adrese.
+      email-address-required: Ir jāuzrāda e-pasta adrese.
+      language-required: Ir jāuzrāda valoda.
+      signup: Paraksties uz mūsu informatīvo izdevumu
+    our-sites: mūsu vietnes
     password: Parole
-    professional: 
-    professional-text: 
+    professional: Pro
+    professional-text: Iesaisties, dalies ar saviem datiem vai izmanto mūsu
     refine-your-search: Precizēt meklēšanas pieprasījumu
-    register: 
-    research: 
+    register: Reģistrēties
+    research: Pētniecība
     research-text: 
     search-area:
-      search-button-image-alt: 
+      search-button-image-alt: Meklēt
       search-placeholder-text: Pievienot meklējamo vārdu
     search-collections: Kolekcijas
-    search-collections-text: 
-    share: 
+    search-collections-text: Pārlūko Eiropas kultūras mantojumu
+    share: Kopīgot
     sitemap: Lapas karte
-    terms-and-policies: 
+    terms-and-policies: Lietošanas noteikumi un politika
     type: 
-  'no': 
-  pl: 
+  'no': Norvēģija
+  pl: Portugāle
   site:
     facet:
       language:
