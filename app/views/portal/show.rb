@@ -616,13 +616,14 @@ module Portal
         val
       end
 
+      fields = fields.flatten.compact
+
       if section[:fields_then_fallback] && fields.present?
-        values = fields
+        fields
       else
         values = [section[:collected]] + fields
+        values.flatten.compact.uniq
       end
-
-      values.flatten.compact.uniq
     end
 
     def data_section_field_subsection(section)
