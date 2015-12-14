@@ -18,9 +18,8 @@ RSpec.describe 'browse/new_content.html.mustache' do
   end
 
   it 'should have meta description' do
-    meta_content = 'New Content'
     render
-    expect(rendered).to have_selector("meta[name=\"description\"][content=\"#{meta_content}\"]", visible: false)
+    expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
   end
 
   it 'should display a list of data providers' do
