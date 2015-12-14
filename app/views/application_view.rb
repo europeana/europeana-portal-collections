@@ -11,6 +11,6 @@ class ApplicationView < Europeana::Styleguide::View
   protected
 
   def site_title
-     'Europeana Collections'
+    'Europeana Collections'
   end
 end
