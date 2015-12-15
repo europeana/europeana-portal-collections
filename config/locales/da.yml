@@ -1,4 +1,11 @@
 da:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: link til labs
     navigation:
@@ -271,7 +278,7 @@ da:
     settings:
       actions:
         clear-selection: Ryd valgte
-        save-settings: Gem Indstillinger
+        save-settings: Gem indstillinger
       language:
         auto-translate-limit: 
         auto-translate-page: Oversæt automatisk genstandssider til...
@@ -284,4 +291,4 @@ da:
           notice: Sprogindstillinger gemt.
         label: Sprog
         settings-label: sprogindstillinger
-      title: indstillinger
+      title: Indstillinger

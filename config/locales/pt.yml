@@ -1,4 +1,11 @@
 pt:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: ''
     navigation:
@@ -27,9 +34,9 @@ pt:
       colours:
         title: Cores
       newcontent:
-        tableh1: 
-        tableh2: 
-        tableh3: 
+        tableh1: Todas as instituições
+        tableh2: Itens
+        tableh3: Data
         title: Novo Conteúdo
       sources:
         title: Fontes
@@ -271,7 +278,7 @@ pt:
     settings:
       actions:
         clear-selection: Limpar seleção
-        save-settings: Guardar Definições
+        save-settings: Guardar definições
       language:
         auto-translate-limit: 'Pode selecionar um máximo de %{max_languages} '
         auto-translate-page: Traduzir automaticamente a página de itens em...
@@ -284,4 +291,4 @@ pt:
           notice: Definições de língua guardadas.
         label: Língua
         settings-label: definições de língua
-      title: definições
+      title: Definições

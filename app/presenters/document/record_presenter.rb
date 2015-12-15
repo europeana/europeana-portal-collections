@@ -40,7 +40,7 @@ module Document
       edm_is_shown_by.present? && edm_object.present? && (edm_object != edm_is_shown_by)
     end
 
-    def salient_media_web_resource_presenters
+    def media_web_resource_presenters
       return [] if web_resources.blank?
 
       @media_web_resource_presenters ||= begin
@@ -54,12 +54,15 @@ module Document
         presenters = salient_web_resources.map do |web_resource|
           Document::WebResourcePresenter.new(web_resource, @controller, @configuration, @document, self)
         end
-        presenters.select(&:displayable?)
       end
     end
 
+    def displayable_media_web_resource_presenters
+      media_web_resource_presenters.select(&:displayable?)
+    end
+
     def media_web_resources(options = {})
-      Kaminari.paginate_array(salient_media_web_resource_presenters).
+      Kaminari.paginate_array(displayable_media_web_resource_presenters).
         page(options[:page]).per(options[:per_page])
     end
 

@@ -1,4 +1,11 @@
 uk:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: 
     navigation:

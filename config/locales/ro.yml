@@ -1,4 +1,11 @@
 ro:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: 
     navigation:
@@ -297,4 +304,4 @@ ro:
           notice: Setări de limbă salvate.
         label: Limbă
         settings-label: setări de limbă
-      title: setări
+      title: Setări

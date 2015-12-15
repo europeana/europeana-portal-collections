@@ -1,4 +1,11 @@
 et:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: link Labs'i
     navigation:
@@ -205,8 +212,8 @@ et:
         north: 
         south: 
         west: 
-      show-more-similar-items: 
-      similar-items: 
+      show-more-similar-items: näita rohkem
+      similar-items: Sarnased objektid
     pages:
       '404':
         intro: 
@@ -275,4 +282,4 @@ et:
           notice: 
         label: 
         settings-label: 
-      title: 
+      title: Seadistused

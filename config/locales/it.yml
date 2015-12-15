@@ -1,4 +1,11 @@
 it:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: Link ai laboratori
     navigation:

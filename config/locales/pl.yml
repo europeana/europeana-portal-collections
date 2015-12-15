@@ -1,4 +1,11 @@
 pl:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: link do labs
     navigation:
@@ -49,7 +56,7 @@ pl:
         recent: Ostatnio dodane
         spotlight-on: Zbliżenie
       music:
-        description: '<strong>Europeana Kolekcje: Muzyka</strong> zawiera najlepsze nagrania i inne związane z muzyką zbiory z europejskich archiwów audiowizualnych, bibliotek, archiwów i muzeów. <a href="/portal/channels/music/about"> Dowiedz się więcej o Kolekcji Muzyki. <a/a>'
+        description: '<strong>Europeana Kolekcje: Muzyka</strong> zawiera najlepsze nagrania i inne związane z muzyką zbiory z europejskich archiwów audiowizualnych, bibliotek, archiwów i muzeów. <a href="/portal/channels/music/about"> Dowiedz się więcej o Kolekcji Muzyka. </a>'
         title: Europeana Muzyka
     facet:
       language:
@@ -289,4 +296,4 @@ pl:
           notice: Ustawienia języków zapisane.
         label: Język
         settings-label: ustawienia języków
-      title: ustawienia
+      title: Ustawienia

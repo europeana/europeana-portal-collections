@@ -1,6 +1,13 @@
 hr:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
-    labs-link: poveznica na labs
+    labs-link: http://labs.europeana.eu/
     navigation:
       all_blog_posts: Sve objave na blogu...
       all_exhibitions: Sve izložbe...
@@ -13,7 +20,7 @@ hr:
       collections: Zbirke
       exhibitions: Izložbe
       home: Naslovnica
-    pro-link: poveznica na pro
+    pro-link: http://pro.europeana.eu/
     pro-text: tekst za pro
     settings: Postavke
   site:
@@ -22,7 +29,7 @@ hr:
         description: Alfa objava znači da je ova mrežna stranica u aktivnom razvoju i da će redovito biti ažurirana. Ponekad će možda biti offline. Vaše povratne informacije će nam pomoći da poboljšamo našu stranicu.
         link-text: Podijelite svoje mišljenje!
         title: 'Ovo je alfa objava naših novih stranica: "Zbirke" i "Glazbena zbirka"'
-    blog-link: poveznica na blog
+    blog-link: http://blog.europeana.eu
     browse:
       colours:
         title: Boje
@@ -36,20 +43,20 @@ hr:
     collections:
       art-history:
         description: Od renesanse do nadrealista te od starorimske skulpture do suvremene umjetnosti, Europeanina povijesno-umjetnička zbirka upoznaje vas s umjetnicima i umjetničkim djelima iz cijele Europe.
-        title: Europeana povijest umjetnosti
+        title: Europeanina povijest umjetnosti
       data-types:
-        3d: 3D predmeti
+        3d: 3D predmeta
         count: objekti
-        images: Slike
-        moving-images: Video zapisi
-        sound: Zvučni zapisi
-        texts: Tekstovi
+        images: Slika
+        moving-images: video zapisa
+        sound: Zvučnih zapisa
+        texts: Tekstova
       labels:
         credits: Priredio
-        recent: Nedavno dodani
+        recent: Nedavno dodano
         spotlight-on: U fokusu
       music:
-        description: ' <strong>Europeana Music Collection</strong> povezujue najbolje glazbene snimke, notne zapise i ostale zbirke glazbene tematike iz audio-vizualnih arhiva, knjižnica, arhiva i muzeja Europe. <a href="/portal/channels/music/about">Saznajte više o Glazbenom kanalu.</a>'
+        description: <strong>Europeana Music Collection</strong> povezuje najbolje glazbene snimke, notne zapise i ostale zbirke glazbene tematike iz audio-vizualnih arhiva, knjižnica, arhiva i muzeja Europe. <a href="/portal/channels/music/about">Saznajte više o Glazbenoj zbirci.</a>
         title: Europeana Music
     facet:
       language:
@@ -68,10 +75,10 @@ hr:
         search-tips: Savjeti za pretragu
         using-myeuropeana: Korištenje My Europeana
     home:
-      strapline: Istražite %{total_item_count} umjetnina, predmeta, knjiga, videa i zvučnih zapisa iz cijele Europe.
+      strapline: Istražite %{total_item_count} umjetničkih slika, predmeta, knjiga, video i zvučnih zapisa iz cijele Europe.
     more: Više...
     my-europeana: My Europeana
-    my-europeana-link: poveznica na stranicu My Europeana
+    my-europeana-link: http://www.europeana.eu/portal/myeuropeana#login
     navigation:
       breadcrumb:
         item_detail: Objekt
@@ -142,20 +149,20 @@ hr:
         map: Karta
         map-tiles: Naslovi
         medium: Medij
-        people: Ljudi
-        period: Period
+        people: Osobe
+        period: Razdoblje
         place: Mjesto
         place-time: Mjesto/vrijeme
         properties: Svojstva
         provenance: Porijeklo
         provided-by: Saznaj više
         provided-by-detail: Europeana prikazuje ovaj objekt preko %{institution_name_and_link}. Posjetite njihovu stranicu za više informacija.
-        provider: Davatelj
-        providing-country: 
+        provider: Agregator
+        providing-country: Država
         publication-date: Datum objave
         publisher: Nakladnik
         references: Citira
-        refs-rels: Reference i odnosi
+        refs-rels: Izvori i odnosi
         relations: Odnosi
         rights: Prava
         rights-human: Mogu li koristiti?
@@ -166,9 +173,9 @@ hr:
         temporal: Vremenski
         time: Vrijeme
         timestamp-created: Prva objava na Europeani
-        timestamp-updated: 'Zadnja objava na Europeani '
+        timestamp-updated: Zadnje ažuriranje na Europeani
         timestamp_created: Prva objava na Europeani (%{timestamp_created})
-        timestamp_updated: Zadnja objava na Europeani (%{timestamp_updated})
+        timestamp_updated: Zadnje ažuriranje na Europeani (%{timestamp_updated})
         title: Naslov
         toc: Sadržaj
         type: Vrsta
@@ -179,23 +186,23 @@ hr:
         what:
           broader: "Širi pojam"
           label: Oznaka koncepta
-          term: Termin koncepta
-          title: Teme, vrste izvora, žanrovi i forme (Concepts)
+          term: Pojam koncepta
+          title: Teme, vrste izvora, žanrovi i oblici (koncepti)
         when:
-          begin: Početak perioda
-          end: Kraj perioda
-          label: oznaka perioda
-          term: 
+          begin: Početak razdoblja
+          end: Kraj razdoblja
+          label: Oznaka razdoblja
+          term: Pojam razdoblja
           title: Vremenski rasponi i datumi (TimeSpan)
         where:
           label: Naziv mjesta
           latitude: "Širina"
           longitude: Dužina
-          term: 
+          term: Pojam mjesta
           title: Imena mjesta (Places)
         who:
-          label: 
-          term: 
+          label: Oznaka agenta
+          term: Pojam agenta
           title: 'Osobe i organizacije '
       nav:
         next: Sljedeće
@@ -213,22 +220,22 @@ hr:
         text: Nažalost, nismo pronašli stranicu koju ste tražili. Pokušajte pretražiti Europeanu ili možda vam se svide dolje odabrani objekti.
       about:
         text: |-
-          <p>U potrazi ste za omiljenom starom slikom? Vršite istraživanje ili pišete školski rad? Tražite inspiraciju za novi dizajn šalice za kavu? Želite li naučiti nešto novo? Koji god bio razlog vašeg posjeta Europeani, dobor došli!</p>
+          <p>U potrazi ste za omiljenom starom slikom? Vršite istraživanje ili pišete školski rad? Tražite inspiraciju za novi dizajn šalice za kavu? Želite li naučiti nešto novo? Koji god bio razlog vašeg posjeta Europeani, dobro došli!</p>
 
-          <p>Udubite se u najveću zbirku umjetnosti, kulture i znanosti u Europi. Europeana Collections donose vam materijale iz poznatih i manje poznatih (ali uvijek fascinantnih) knjižnica, muzeja, galerija i arhiva Europe.</p>
+          <p>Zadubite se u najveću zbirku umjetnosti, kulture i znanosti u Europi. Europeanine zbirke donose vam materijale iz poznatih i manje poznatih (ali uvijek fascinantnih) knjižnica, muzeja, galerija i arhiva Europe.</p>
 
           <p>Knjige i rukopisi, fotografije i slike, skulpture i note, video i zvučne snimke, dnevnici i karte - svi su oni ovdje. Ne trebate putovati preko kontinenta, ni fizički ni virtualno.</p>
 
           <p>Istražujte, otkrivajte, gledajte, slušajte, čitajte, preuzmite na svoje računalo... Uživajte!</p>
 
-          <p>Sad zašto ne isprobati Europeaninu povijesno-umjetničku zbirku ili Europeaninu glazbenu zbirku? Imamo i prilagođene resurse za istraživače i inovatore u području kulturne baštine (tu možete pronaći naš API), kao i raspon virtualnih izložbi i blog.</p>
+          <p>Zašto ne biste isprobali Europeaninu zbirku povijesti umjetnosti ili Europeaninu glazbenu zbirku? Imamo i prilagođene resurse za istraživače i inovatore u području kulturne baštine (tu možete pronaći naš API), kao i cijeli niz virtualnih izložbi i blog.</p>
 
-          <p>A želite još više, svoju dnevnu dozu kulture možete pronaći na Facebooku, Twitteru, Mediumu, Google+ i Pinterestu.</p>
+          <p>A ako želite još više, svoju dnevnu dozu kulture možete pronaći na Facebooku, Twitteru, Mediumu, Google+ i Pinterestu.</p>
 
           <p>Za više informacija o našoj suradnji s kulturnim ustanovama i njihovim zbirkama, posjetite stranicu Europeana Pro.</p>
         title: Dobro došli, ljubitelji kulture!
       music-channel-about:
-        text: "<p>Zamislite da gledate originalne, rukom pisane note glazbenog djela, dok istovremeno slušate njegove različite interpretacije i čitate biografiju skladatelja. Na Europeaninoj glazbenoj zbirci možete.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Naši partneri</a>, redom glazbeni stručnjaci iz cijele Europe, pažljivo su odabrali i uredili ovu zbirku glazbenih snimaka, notnih zapisa, slika glazbenih instrumenata, knjiga o glazbi i ostalog sadržaja vezanog uz glazbu. </p>\n\n<p>Ova rana verzija Glazbene zbirke je ujedno i testna, a učinili smo dostupnu vama, našim korisnicima, kako biste nam pomogli da ju oblikujemo i dalje razvijamo. Stoga ćemo vas povremeno pri posjeti ove stranice zamoliti da odgovorite na pitanja ili ispunite anketu koja se pojavi na ekranu. Bit ćemo stvarno zahvalni ako biste mogli uzeti vremena i odgovorite na pitanja i ankete! </p>\n\n<p>Napominjemo također, u interesu transparentnosti i privatnosti, da bilježimo statistike posjete i ponašanja korisnika u uslugama Google analytics i Hotjar. Korištenje ovih usluga pokazuje nam gdje smo pogriješili u našim nacrtima i tako nam pomaže da poboljšamo Glazbenu zbirku. Svi zapisnici su privatni i anonimni, a koristit će se isključivo u svrhu poboljšanja naše usluge.</p>\n\n<p>Preporučujemo vam da pretražite zbirku, puštate glazbu, pogledate notne zapise ili čitate o njima. Ukoliko autorsko pravo dopušta, možete i preuzeti stvari koje vam se najviše sviđaju. Posjetite i naše virtualne izložbe kako biste otkrili glazbu na potpuno novi način!</p>"
+        text: "<p>Zamislite da gledate originalne, rukom pisane note glazbenog djela, dok istovremeno slušate njegove različite interpretacije i čitate biografiju skladatelja. Na Europeaninoj glazbenoj zbirci možete upravo to.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Naši partneri</a>, redom glazbeni stručnjaci iz cijele Europe, pažljivo su odabrali i uredili ovu zbirku glazbenih snimaka, notnih zapisa, slika glazbenih instrumenata, knjiga o glazbi i ostalog sadržaja vezanog uz glazbu. </p>\n\n<p>Ova rana verzija Glazbene zbirke je ujedno i testna, a učinili smo dostupnu vama, našim korisnicima, kako biste nam pomogli da ju oblikujemo i dalje razvijamo. Stoga ćemo vas povremeno pri posjeti ove stranice zamoliti da odgovorite na pitanja ili ispunite anketu koja se pojavi na ekranu. Bit ćemo zaista zahvalni ako biste mogli uzeti vremena i odgovorite na pitanja i ankete! </p>\n\n<p>Napominjemo također, u interesu transparentnosti i privatnosti, da bilježimo statistike posjeta i ponašanja korisnika u uslugama Google analytics i Hotjar. Korištenje ovih usluga pokazuje nam gdje smo pogriješili u našim nacrtima i tpomaže nam da poboljšamo Glazbenu zbirku. Svi zapisnici su privatni i anonimni, a koristit će se isključivo u svrhu poboljšanja naše usluge.</p>\n\n<p>Preporučujemo vam da pretražite zbirku, puštate glazbu, pogledate notne zapise ili čitate o njima. Ukoliko autorsko pravo to dopušta, možete i preuzeti stvari koje vam se najviše sviđaju. Posjetite i naše virtualne izložbe kako biste otkrili glazbu na potpuno novi način!</p>"
         title: O glazbenoj zbirci
     results:
       actions:
@@ -266,7 +273,7 @@ hr:
         view:
           grid: Mreža
           list: Popis
-        view-at-provider: Pogledaj na
+        view-at-provider: Pogledaj na stranici
     search:
       placeholder:
         text: Dodaj pojam za pretraživanje

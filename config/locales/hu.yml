@@ -1,4 +1,11 @@
 hu:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: link a lab-hoz
     navigation:
@@ -284,4 +291,4 @@ hu:
           notice: Nyelvi beállítások elmentve.
         label: Nyelv
         settings-label: nyelvi beállítások
-      title: beállítások
+      title: Beállítások

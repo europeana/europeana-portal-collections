@@ -231,7 +231,7 @@ nl:
         language_of_description: Omschrijving in
         media: Alleen objecten die naar media verwijzen
         mime_type: Bestandsformaat
-        provider: Instituut
+        provider: Aggegrator
         reusability: Kan ik het gebruiken?
         sound_duration: Lengte
         sound_hq: Hoge Kwaliteit
