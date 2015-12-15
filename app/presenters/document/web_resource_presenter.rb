@@ -189,7 +189,7 @@ module Document
 
     def thumbnail
       if edm_object_thumbnail?
-       @record_presenter.media_web_resource_presenters.find { |p| p.url == @record_presenter.edm_object }.api_thumbnail
+        @record_presenter.media_web_resource_presenters.detect { |p| p.url == @record_presenter.edm_object }.api_thumbnail
       else
         api_thumbnail
       end
