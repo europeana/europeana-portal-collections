@@ -1,4 +1,11 @@
 lt:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: Nuoroda į Labs
     navigation:

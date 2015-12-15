@@ -1,4 +1,11 @@
 'no':
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: 
     navigation:
@@ -15,7 +22,7 @@
       home: 
     pro-link: 
     pro-text: 
-    settings: 
+    settings: Innstillinger
   site:
     alpha:
       feedback_banner:

@@ -1,4 +1,11 @@
 cs:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: 
     navigation:
@@ -15,7 +22,7 @@ cs:
       home: 
     pro-link: 
     pro-text: 
-    settings: 
+    settings: Nastavení
   site:
     alpha:
       feedback_banner:

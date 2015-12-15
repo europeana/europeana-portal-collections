@@ -1,4 +1,11 @@
 sv:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: Länk till Labs
     navigation:

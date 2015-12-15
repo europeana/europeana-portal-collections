@@ -1,4 +1,11 @@
 en:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: 'link to labs '
     navigation:
@@ -21,7 +28,7 @@ en:
       feedback_banner:
         description: An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
         link-text: Give us your input!
-        title: This is an Alpha release of our new "Collections" and "Music Collection"
+        title: This is an Alpha release of our new "Collections" and "Music Collections"
     blog-link: link to blog
     browse:
       colours:
@@ -232,7 +239,7 @@ en:
         title: Welcome, culture lover!
       music-channel-about:
         text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Collection available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Collection. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"
-        title: About the Music Collection
+        title: About the Music Collections
     results:
       actions:
         configure-actions: Configure actions
