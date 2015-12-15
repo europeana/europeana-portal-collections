@@ -1,4 +1,11 @@
 es:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: 'link a labs '
     navigation:
@@ -283,4 +290,4 @@ es:
           notice: Ajustes de idioma guardados
         label: Idioma
         settings-label: Ajustes de idioma
-      title: ajustes
+      title: Ajustes

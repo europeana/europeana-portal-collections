@@ -1,4 +1,11 @@
 fr:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: ''
     navigation:
@@ -284,4 +291,4 @@ fr:
           notice: Paramètres de langue sauvegardés.
         label: Langue
         settings-label: paramètres de langue
-      title: paramètres
+      title: Paramètres

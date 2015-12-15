@@ -1,4 +1,11 @@
 lv:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: saite uz Laboratoriju
     navigation:
@@ -15,7 +22,7 @@ lv:
       home: Sākums
     pro-link: saite uz Profesionālo
     pro-text: teksts Profesionālajai
-    settings: Lestatījumi
+    settings: Iestatījumi
   site:
     alpha:
       feedback_banner:
@@ -80,7 +87,7 @@ lv:
     news: Ziņas
     object:
       actions:
-        attribute-author: 
+        attribute-author: Autora atribūti
         attribute-html: HTML
         attribute-plaintext: Vienkāršs teksts
         download: Lejupielādēt
@@ -105,12 +112,12 @@ lv:
         consists-of: Sastāv no
         contributor: Līdzradītājs
         copyright: Autortiesības
-        creation-date: Radīšanas datums
+        creation-date: Radīšanas datējums
         creator: Autors
         current-location: Pašreizējā atrašanās vieta
         data-provider: Institūcija
-        date: Datums
-        dates: Datumi
+        date: Datējums
+        dates: Datējumi
         description: Apraksts
         dimensions: Izmēri
         duration: Ilgums
@@ -152,7 +159,7 @@ lv:
         provided-by-detail: Europeana šo ierakstu atrāda ar %{institution_name_and_link} līdzdalību. Lai saņemtu vairāk informācijas, apmeklējiet viņu vietni.
         provider: Piegādātājs
         providing-country: Piegādātājvalsts
-        publication-date: Izdošanas datums
+        publication-date: Izdošanas datējums
         publisher: Izdevējs
         references: Norāda
         refs-rels: Atsauces un saistības
@@ -212,10 +219,23 @@ lv:
         intro: Atvainojiet, šo lapu neizdevās atrast
         text: Diemžēl mums neizdevās atrast meklēto lapu. Izmantojiet Europeana meklētāju vai ielūkojieties zemāk uzskaitītajos ierakstos.
       about:
-        text: 
+        text: |-
+          <p>Meklē iecienītu gleznu? Veic pētījumu vai raksti mācību darbu? Meklē iedvesmu savas nākamās kafijas krūzes dizainam? Vēlies uzzināt kaut ko jaunu? Lai kāds arī būtu Europeana apmeklēšanas iemesls, esi sveicināts!</p>
+
+          <p>Ienirsti Eiropas lielākajā mākslas, kultūras un zinātnes tiešsaistes kolekcijā. Europeana kolekcijas piedāvā materiālus no Eiropas bibliotēkām, muzejiem, galerijām un arhīviem.</p>
+
+          <p>Grāmatas un rokraksti, fotogrāfijas un gleznas, skulptūras un notis, video un skaņu ieraksti, dienasgrāmatas, kartes - tas viss ir šeit. Vairs nav jāšķērso kontinenti, tagad ir iespējams ceļot virtuāli!</p>
+
+          <p>Izpēti, atklāj, skaties, klausies, lasi, lejupielādē ... Izbaudi!</p>
+
+          <p>Ieskaties Europeana mākslas kolekcijās un Europeana mūzikas kolekcijās. Mums ir arī īpaši resursi pētniekiem un kultūras projektu izstrādātājiem (to skaitā mūsu API), kā arī dažādas virtuālas izstādes un blogs.</p>
+
+          <p>Un, ja ar to nepietiek, meklē ikdienas kultūras devu arī Facebook, Twitter, Medium, Google+ un Pinterest.</p>
+
+          <p>Papildinformācijai, kā mēs strādājam ar kultūras institūcijām un to kolekcijām, apmeklē Europeana profesionālā.</p>
         title: Esi sveicināts, kultūras mīli!
       music-channel-about:
-        text: 
+        text: "<p>Iedomājies, ka skaties uz skaņdarba nošu manuskripta oriģinālu, un tajā pašā laikā ir iespējams noklausīties arī dažādas tā interpretācijas, un izlasīt komponista biogrāfiju. </p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Mūsu partneri</a>, mūzikas eksperti, no visas Eiropas ir izveidojuši šo mūzikas ierakstu, nošu, mūzikas instrumentu attēlu, mūzikas grāmatu un cita ar mūziku saistīta satura kolekciju. </p>\n\n<p>Esam publiskojuši šo Mūzikas kolekcijas testa versiju, lai mūsu lietotāji varētu mums palīdzēt to uzlabot un attīstīt. Apmeklējot vietni, lietotāji tiek aicināti atbildēt uz jautājumiem un aptaujām, kas parādās uz ekrāna. Būsim ļoti pateicīgi, ja atradīsi laiku atbildēt uz jautājumiem!</p>\n\n<p>Tāpat, privātuma saglabāšanas nolūkos, informējam, ka mēs apkopojam lietotāju statistiku un uzvedību ar Google Analytics un Hotjar pakalpojumiem. Mēs to darām, lai novērtētu un novērstu Mūzikas kolekcijas dizaina trūkumus un uzlabotu tās lietojamību. Visa uzkrātā informācija ir anonīma, netiek nevienam izpausta un tiek izmantota tikai, lai uzlabotu pakalpojumus.</p>\n\n<p>Mēs aicinām meklēt kolekcijā, atskaņot mūziku, skatīt notis un lasīt. Ja autortiesības to atļauj, iepatikušās lietas ir iespējams lejupielādēt. Un apmeklē mūsu virtuālās izstādes, lai atklātu mūziku līdz šim vēl neiepazītos veidos!</p>"
         title: Par Mūzikas kolekciju
     results:
       actions:

@@ -1,4 +1,11 @@
 bg:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: "линк към лабораториите"
     navigation:

@@ -371,7 +371,7 @@ lt:
       header:
         video_hd:
           'true': HD
-    find-us-elsewhere: Raskite mus kitur
+    find-us-elsewhere: Raskite mus socialiniuose tinkluose
     forgot-password: Pamiršote slaptažodį?
     genres: "Žanrai"
     genres-chamber-music: Kamerinė muzika
@@ -422,7 +422,7 @@ lt:
     language-swedish: "Švedų"
     language-ukranian: Ukrainiečių
     login: Prisijungti
-    mission: Mes keičiame pasaulį kultūros pagalba! Siekiame kurti turingiausią Europos kultūrinio paveldo sistemą ir padaryti ją patogia naudotis tiek darbo, tiek mokslo, tiek laisvalaikio tikslais.
+    mission: Mes keičiame pasaulį kultūros pagalba! Siekiame kurti turtingiausią Europos kultūrinio paveldo sistemą ir padaryti ją patogia naudotis tiek darbo, tiek mokslo, tiek laisvalaikio tikslais.
     mission-title: Mūsų misija
     more:
       load-more: Daugiau

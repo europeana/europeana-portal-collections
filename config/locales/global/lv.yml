@@ -175,10 +175,10 @@ lv:
         form:
           paintings:
             genre: "Žanrs"
-            medium: 
+            medium: Vidējs
       carrier: Nesējs
       colour: Krāsa
-      colour-black-and-white: 
+      colour-black-and-white: Melnbalts
       country:
         austria: Austrija
         belgium: Beļģija
@@ -236,7 +236,7 @@ lv:
         sound_duration: Ilgums
         sound_hq: Augstas kvalitātes
         text_fulltext: Pilnteksta
-        type: 
+        type: Datu nesējs
         ugc: Rādīt lietotāju sagatavoto saturu
         video_duration: Ilgums
         year: Datējums
@@ -291,7 +291,7 @@ lv:
         'false': Nē
         'true': Jā
       more: Vairāk
-      more-refinements: 
+      more-refinements: Vairāk preicizējumi
       resource:
         type: Tips
       reusability:
@@ -377,20 +377,20 @@ lv:
     genres-chamber-music: Kamermūzika
     genres-classical-music: Klasiskā mūzika
     genres-concertos: Koncerti
-    genres-non-western-classical-music: 
+    genres-non-western-classical-music: Ne-rietumu klasiskā mūzika
     genres-opera: Opera
     genres-popular-music: Populārā mūzika
     genres-traditional-music: Tradicionālā mūzika
     header:
       connect: Pieslēdzies
-      develop: Izstrādā
+      develop: Izstrāde
       discover: Atklāj
       network: Tīkls
     help: Palīdzība
     home: Sākums
     javascript-required: Lai aplūkotu šo saturu, lūdzu, iespējojiet JavaScript un apsveriet iespēju atjaunināt interneta pārlūku, lai tas atbalstītu HTML5 saturu.
     labs: Laboratorija
-    labs-text: Remiksējiet kultūras saturu ar mūsu API un datu kopām
+    labs-text: Remiksē kultūras saturu ar mūsu API un datu kopām
     language-basque: Basku
     language-bulgarian: Bulgāru
     language-catalan: Katalāņu
@@ -422,7 +422,7 @@ lv:
     language-swedish: Zviedru
     language-ukranian: Ukraiņu
     login: Pieslēgties
-    mission: Ar kultūru mēs mainām pasauli! Mēs vēlamies attīstīt Eiropas bagāto kultūras mantojumu un padarīt to cilvēkiem pieejamāķu izmantošanai, - gan darbam, gan mācībām, gan izklaidei.
+    mission: Ar kultūru mēs mainām pasauli! Mēs vēlamies attīstīt Eiropas bagāto kultūras mantojumu un padarīt to cilvēkiem pieejamāku izmantošanai, - gan darbam, gan mācībām, gan izklaidei.
     mission-title: Mūsu misija
     more:
       load-more: Vairāk
@@ -436,12 +436,12 @@ lv:
       signup: Paraksties uz mūsu informatīvo izdevumu
     our-sites: mūsu vietnes
     password: Parole
-    professional: Pro
+    professional: Profesionālā
     professional-text: Iesaisties, dalies ar saviem datiem vai izmanto mūsu
     refine-your-search: Precizēt meklēšanas pieprasījumu
     register: Reģistrēties
     research: Pētniecība
-    research-text: Pievienošanās akadēmiskajai kopienai
+    research-text: Pievienojies akadēmiskajai kopienai
     search-area:
       search-button-image-alt: Meklēt
       search-placeholder-text: Pievienot meklējamo vārdu

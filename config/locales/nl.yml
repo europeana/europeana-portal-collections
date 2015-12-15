@@ -1,4 +1,11 @@
 nl:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
     labs-link: 'link naar labs '
     navigation:
@@ -9,7 +16,7 @@ nl:
       browse_colours: Kleuren
       browse_newcontent: Onlangs toegevoegd
       browse_sources: Bronnen
-      channels: Kanalen
+      channels: Collecties
       collections: Collecties
       exhibitions: Tentoonstellingen
       home: Home
@@ -216,7 +223,7 @@ nl:
         title: Welkom, cultuur liefhebber!
       music-channel-about:
         text: 
-        title: Over de Muziek Collectie
+        title: Over de Muziek Collecties
     results:
       actions:
         configure-actions: Configureer acties
@@ -262,7 +269,7 @@ nl:
     settings:
       actions:
         clear-selection: Wis selectie
-        save-settings: Bewaar Instellingen
+        save-settings: Bewaar instellingen
       language:
         auto-translate-limit: 
         auto-translate-page: Vertaal pagina's automatisch naar...
@@ -275,4 +282,4 @@ nl:
           notice: Taal voorkeur ingesteld.
         label: Taal
         settings-label: Instellingen voor taal
-      title: settings
+      title: Settings
