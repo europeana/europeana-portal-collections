@@ -171,7 +171,7 @@ module Document
     end
 
     def displayable?
-      return false if for_edm_is_shown_by? && @record_presenter.edm_object_thumbnails_edm_is_shown_by?
+      return false if for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by?
 
       (@record_presenter.edm_object.present? && for_edm_object?) ||
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
@@ -188,8 +188,11 @@ module Document
     end
 
     def thumbnail
-      # edm_object_thumbnail? ? @record_presenter.edm_object : api_thumbnail
-      api_thumbnail
+      if edm_object_thumbnail?
+        @record_presenter.media_web_resource_presenters.detect { |p| p.url == @record_presenter.edm_object }.api_thumbnail
+      else
+        api_thumbnail
+      end
     end
 
     def edm_object_thumbnail?
