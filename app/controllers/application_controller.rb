@@ -21,6 +21,14 @@ class ApplicationController < ActionController::Base
     Rails.application.config.x.cache_version + '/'
   end
 
+  def default_url_options
+    if ENV['HTTP_HOST']
+      { host: ENV['HTTP_HOST'] }
+    else
+      {}
+    end
+  end
+
   private
 
   def set_locale
