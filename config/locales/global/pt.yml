@@ -176,7 +176,7 @@ pt:
           paintings:
             genre: Género
             medium: Meio
-      carrier: 
+      carrier: Suporte
       colour: Cor
       colour-black-and-white: Preto e branco
       country:
@@ -390,7 +390,7 @@ pt:
     home: Início
     javascript-required: Para ver este conteúdo por favor active o JavaScript, e considere actualizar para um navegador que suporte conteúdo HTML5.
     labs: Europeana Labs
-    labs-text: 
+    labs-text: Remisture conteúdo cultural com as nossas APIs e conjunto de dados
     language-basque: Basco
     language-bulgarian: Búlgaro
     language-catalan: Catalão
@@ -430,9 +430,9 @@ pt:
       view-more: Ver mais
     more-info: Mais informação
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
+      email-address-invalid: O endereço terá que ser um endereço de correio electrónico válido.
+      email-address-required: Um endereço de correio electrónico terá que ser especificado.
+      language-required: Uma língua terá que ser especificada.
       signup: Inscreva-se na nossa newsletter
     our-sites: os nossos sites
     password: Palavra-passe
@@ -441,7 +441,7 @@ pt:
     refine-your-search: Refinar pesquisa
     register: Registe-se
     research: Europeana Research
-    research-text: 
+    research-text: Uma ligação com a comunidade académica
     search-area:
       search-button-image-alt: Pesquisar
       search-placeholder-text: Adicione um termo de pesquisa

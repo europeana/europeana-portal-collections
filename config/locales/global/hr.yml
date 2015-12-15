@@ -165,7 +165,7 @@ hr:
     channels-fashion: Moda
     channels-music: Glazba
     choose-language: Jezik
-    email-address: email adresa
+    email-address: e-mail adresa
     facet:
       advanced:
         options: Izbornik
@@ -232,7 +232,7 @@ hr:
         media: 'Samo '
         mime_type: Format datoteke
         provider: Agregator
-        reusability: Mogu li koristiti?
+        reusability: Smijem li koristiti ovaj sadržaj?
         sound_duration: Trajanje
         sound_hq: Visoka kvaliteta
         text_fulltext: Cjeloviti tekst
@@ -247,10 +247,10 @@ hr:
         'false': Crno-bijelo
         'true': Boja
       image_size:
-        extra_large: Ekstra velike (4MP+)
-        large: Velike (1-4MP)
-        medium: Srednje (0.5-1MP)
-        small: Male (<0.5MP)
+        extra_large: Ekstra velika (4MP+)
+        large: Velika (1-4MP)
+        medium: Srednja (0.5-1MP)
+        small: Mala (<0.5MP)
       language:
         bg: 
         ca: 
@@ -384,7 +384,7 @@ hr:
     header:
       connect: poveži se
       develop: razvijaj
-      discover: Otkrij
+      discover: otkrij
       network: umreži se
     help: Pomoć
     home: Naslovnica
@@ -433,21 +433,21 @@ hr:
       email-address-invalid: E-mail mora biti valjana e-mail adresa.
       email-address-required: E-mail adresa mora biti navedena.
       language-required: Jezik mora biti naveden.
-      signup: Prijavite se za naš newsletter
+      signup: Prijavite se na naš newsletter
     our-sites: naše stranice
     password: Lozinka
     professional: Pro
-    professional-text: Uključite se, dijelite svoje sadržaje ili koristite naše
+    professional-text: Uključi se, dijeli svoje sadržaje ili koristi naše
     refine-your-search: Suzi rezultate pretraživanja
     register: Registriraj se
     research: Europeana Research
-    research-text: Povezivanje s akademskom zajednicom
+    research-text: Poveži se s akademskom zajednicom
     search-area:
       search-button-image-alt: Pretraživanje
-      search-placeholder-text: Dodaj pojam za pretraživanje
+      search-placeholder-text: Upišite pojam za pretraživanje
     search-collections: Zbirke
     search-collections-text: Istraži kulturnu baštinu Europe
-    share: Dijeli
+    share: Podijeli
     sitemap: Mapa weba
     terms-and-policies: Uvjeti korištenja
     type: vrsta
