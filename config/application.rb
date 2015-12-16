@@ -68,6 +68,10 @@ module Europeana
         :null_store
       end
 
+      if ENV['HTTP_HOST']
+        config.action_mailer.default_url_options = { host: ENV['HTTP_HOST'] }
+      end
+
       # Load Action Mailer SMTP config from config/smtp.yml, if it exists
       config.action_mailer.smtp_settings = begin
         Rails.application.config_for(:smtp).symbolize_keys
