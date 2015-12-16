@@ -35,6 +35,7 @@ fi:
         description: 
         title: Värit
       newcontent:
+        description: 
         tableh1: Kaikki instituutiot
         tableh2: Kohteet
         tableh3: Päivämäärä
