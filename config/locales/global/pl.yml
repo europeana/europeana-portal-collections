@@ -382,15 +382,15 @@ pl:
     genres-popular-music: Muzyka rozrywkowa
     genres-traditional-music: Muzyka ludowa
     header:
-      connect: zbliżaj
-      develop: twórz
-      discover: odkrywaj
-      network: poznaj
+      connect: Dołącz
+      develop: Twórz
+      discover: Odkrywaj
+      network: Poznawaj
     help: Pomoc
     home: Strona główna
     javascript-required: Chcesz uzyskać dostęp do pełnej zawartości tej strony? W tym celu należy włączyć obsługę JavaScript. Zalecamy również zmianę przeglądarki na obsługującą elementy w HTML5
     labs: Europeana Labs
-    labs-text: Twórz dzięki naszemu API
+    labs-text: Wykorzystaj twórczo nasze zasoby dzięki API
     language-basque: Baskijski
     language-bulgarian: Bułgarski
     language-catalan: Kataloński
@@ -437,15 +437,15 @@ pl:
     our-sites: nasze strony
     password: Hasło
     professional: Europeana Pro
-    professional-text: Zaangażuj się, podziel się swoją wiedzą lub wykorzystaj naszą
+    professional-text: Zaangażuj się, podziel się swoją wiedzą lub wykorzystaj naszą.
     refine-your-search: Zawęź wyniki wyszukiwania
     register: Zarejestruj się
     research: Europeana Research
-    research-text: Dołącz do środowisk naukowych
+    research-text: Dołącz do naukowców z całej Europy
     search-area:
       search-button-image-alt: Szukaj
       search-placeholder-text: Dodaj słowo kluczowe
-    search-collections: Zbiory
+    search-collections: Kolekcje
     search-collections-text: Odkrywaj dziedzictwo kulturowe Europy
     share: Udostępnij
     sitemap: Mapa strony
