@@ -26,12 +26,13 @@ ru:
   site:
     alpha:
       feedback_banner:
-        description: "Релиз Alpha означает, что данный веб-сайт находится в стадии активной разработки и регулярно обновляется. Иногда он может работать в автономном режиме (off-line). Ваш отзыв поможет улучшить наш веб-сайт."
+        description: "Релиз Beta означает, что данный веб-сайт находится в стадии активной разработки и регулярно обновляется. Иногда он может работать в автономном режиме (off-line). Ваш отзыв поможет улучшить наш веб-сайт."
         link-text: "Оставьте свой отзыв!"
-        title: "Это Alpha релиз наших новых проектов Collections и Music Collection"
+        title: "Это Beta релиз наших новых проектов Collections и Music Collection и  Art History Collections"
     blog-link: "Ссылка на блог"
     browse:
       colours:
+        description: 
         title: "Цвета"
       newcontent:
         tableh1: "Все организации"
@@ -39,6 +40,7 @@ ru:
         tableh3: "Дата"
         title: "Новинки"
       sources:
+        description: 
         title: "Источники"
     collections:
       art-history:

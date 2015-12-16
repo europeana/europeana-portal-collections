@@ -28,10 +28,11 @@ pl:
       feedback_banner:
         description: Wersja alfa oznacza, że strona działa w ograniczonym zakresie, ponieważ jest na bieżąco rozbudowywana. Dlatego też może przejściowo nie działać. Twoja opinia pomoże nam usprawnić jej funkcjonowanie!
         link-text: Powiedz nam co myślisz!
-        title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka"'
+        title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka" oraz "Kolekcji: Historia sztuki".'
     blog-link: link do bloga
     browse:
       colours:
+        description: 
         title: Kolory
       newcontent:
         tableh1: Wszystkie instytucje
@@ -39,6 +40,7 @@ pl:
         tableh3: Data
         title: Nowości
       sources:
+        description: 
         title: "Źródła"
     collections:
       art-history:

@@ -26,12 +26,13 @@ de:
   site:
     alpha:
       feedback_banner:
-        description: Eine Alpha-Version bedeutet, dass diese Website in aktiver Entwicklung ist und regelmäßig aktualisiert wird. Manchmal kann diese offline sein. Ihr Feedback hilft uns, unsere Seite zu verbessern.
+        description: Eine Beta-Version bedeutet, dass diese Website in aktiver Entwicklung ist und regelmäßig aktualisiert wird. Manchmal kann diese offline sein. Ihr Feedback hilft uns, unsere Seite zu verbessern.
         link-text: Teilen Sie uns Ihre Meinung mit!
-        title: Dies ist eine Alpha Version unserer neuen Sammlungen und Musik Sammlung
+        title: Dies ist eine Beta Version unserer neuen Sammlungen, Musik Sammlung und Kunstgeschichte Sammlungen
     blog-link: Link zum Blog
     browse:
       colours:
+        description: 
         title: Farben
       newcontent:
         tableh1: 
@@ -39,6 +40,7 @@ de:
         tableh3: 
         title: Neue Inhalte
       sources:
+        description: 
         title: Quellen
     collections:
       art-history:

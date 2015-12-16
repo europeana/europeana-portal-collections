@@ -3,9 +3,9 @@ hr:
     site:
       browse:
         newcontent:
-          description: 
+          description: Na ovom mjestu možete pronaći sav sadržaj koji je nedavno dodan Europeaninim zbirkama. Ovdje možete vidjeti koja je ustanova objavila novi materijal, koliko materijala i kada! Samo kliknite na poveznice u nastavku kako biste vidjeli njihve zbirke.
         sources:
-          description: 
+          description: U nastavku slijedi popis izvora za naše zbirke. Oni skupljaju i doprinose svojim zbirkama Europeani. Slijedite poveznicu koja vas zanima i pristupit ćete svim njihovim zbirkama!
   global:
     labs-link: http://labs.europeana.eu/
     navigation:
@@ -26,12 +26,13 @@ hr:
   site:
     alpha:
       feedback_banner:
-        description: Alfa objava znači da je ova mrežna stranica u aktivnom razvoju i da će redovito biti ažurirana. Ponekad će možda biti offline. Vaše povratne informacije će nam pomoći da poboljšamo našu stranicu.
+        description: Beta objava znači da je ova mrežna stranica u aktivnom razvoju i da će redovito biti ažurirana. Ponekad će možda biti offline. Vaše povratne informacije će nam pomoći da poboljšamo našu stranicu.
         link-text: Podijelite svoje mišljenje!
-        title: 'Ovo je alfa objava naših novih stranica: "Zbirke" i "Glazbena zbirka"'
+        title: 'Ovo je beta objava naših novih stranica: "Zbirke" i "Glazbene zbirke"'
     blog-link: http://blog.europeana.eu
     browse:
       colours:
+        description: U ovom dijelu možete pretraživati slike po boji. Potrebno je samo kliknuti na onu koja vam se sviđa kako biste vidjeli zbirku!
         title: Boje
       newcontent:
         tableh1: Sve ustanove
@@ -39,6 +40,7 @@ hr:
         tableh3: Datum
         title: Novi sadržaj
       sources:
+        description: U nastavku možete vidjeti popis izvora za naše zbirke. Oni skupljaju i doprinose svojim zbirkama Europeani. Slijedite poveznicu koja vas zanima i pristupit ćete svim njihovim zbirkama!
         title: Izvori
     collections:
       art-history:
@@ -46,18 +48,18 @@ hr:
         title: Europeanina povijest umjetnosti
       data-types:
         3d: 3D predmeta
-        count: objekti
-        images: Slika
+        count: objekata
+        images: slika
         moving-images: video zapisa
-        sound: Zvučnih zapisa
-        texts: Tekstova
+        sound: zvučnih zapisa
+        texts: tekstova
       labels:
         credits: Priredio
         recent: Nedavno dodano
         spotlight-on: U fokusu
       music:
-        description: <strong>Europeana Music Collection</strong> povezuje najbolje glazbene snimke, notne zapise i ostale zbirke glazbene tematike iz audio-vizualnih arhiva, knjižnica, arhiva i muzeja Europe. <a href="/portal/channels/music/about">Saznajte više o Glazbenoj zbirci.</a>
-        title: Europeana Music
+        description: <strong>Europeana glazbena zbirka</strong> povezuje najbolje glazbene snimke, notne zapise i ostale zbirke glazbene tematike iz audio-vizualnih arhiva, knjižnica, arhiva i muzeja Europe. <a href="/portal/channels/music/about">Saznajte više o Glazbenoj zbirci.</a>
+        title: Europeana glazba
     facet:
       language:
         show:
@@ -276,7 +278,7 @@ hr:
         view-at-provider: Pogledaj na stranici
     search:
       placeholder:
-        text: Dodaj pojam za pretraživanje
+        text: Upišite pojam za pretraživanje
       similar:
         prefix: 'Slično kao: %{mlt_item} '
     settings:

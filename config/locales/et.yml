@@ -26,12 +26,13 @@ et:
   site:
     alpha:
       feedback_banner:
-        description: Alfa versioon tähendab, et veebisait on aktiivses arenduses ja seda uuendatakse tihti. Vahel võib sait mitte töötada. Teie tagasiside aitab meil seda paremaks teha.
+        description: Beta versioon tähendab, et veebisait on aktiivses arenduses ja seda uuendatakse tihti. Vahel võib sait mitte töötada. Teie tagasiside aitab meil seda paremaks teha.
         link-text: Andke meile tagasisidet!
-        title: Tegu on "Kogude" ja "Muusikakogu" alfa versiooniga.
+        title: Tegu on "Kogude" ja "Muusikakogu" beta versiooniga.
     blog-link: link blogisse
     browse:
       colours:
+        description: 
         title: Värvid
       newcontent:
         tableh1: Kõik asutused
@@ -39,6 +40,7 @@ et:
         tableh3: Kuupäev
         title: Uus sisu
       sources:
+        description: 
         title: Allikad
     collections:
       art-history:

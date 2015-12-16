@@ -26,13 +26,13 @@ ro:
   site:
     alpha:
       feedback_banner:
-        description: |
-          Aceasta este o versiune Alfa ceea ce înseamnă că se află încă în lucru și că va fi actualizată periodic. Se poate întâmpla ca pagina să nu fie disponibilă. Părerile voastre ajută la îmbunătățirea acesteia.
+        description: Aceasta este o versiune Beta ceea ce înseamnă că se află încă în lucru și că va fi actualizată periodic. Se poate întâmpla ca pagina să nu fie disponibilă. Părerile voastre ajută la îmbunătățirea acesteia.
         link-text: Trimite-ne sugestiile tale!
-        title: Aceasta este versiunea Alfa a noilor noastre "Colecții" și a "Colecției de Muzică"
+        title: "Aceasta este versiunea Beta a noilor noastre \"Colecții\" și a \"Colecției de Muzică\" si a \n\"Istoria Artei Colecții\""
     blog-link: 
     browse:
       colours:
+        description: 
         title: Culori
       newcontent:
         tableh1: Instituții
@@ -40,6 +40,7 @@ ro:
         tableh3: Dată
         title: Noi înregistrări
       sources:
+        description: 
         title: Surse
     collections:
       art-history:

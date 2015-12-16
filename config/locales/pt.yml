@@ -26,12 +26,13 @@ pt:
   site:
     alpha:
       feedback_banner:
-        description: Uma versão Alfa significa que esta página está sob activo desenvolvimento e será actualizada com regularidade. Poderá estar por vezes inacessível. Os suas comentários ajudarão a melhorá-la.
+        description: Uma versão Beta significa que esta página está sob activo desenvolvimento e será actualizada com regularidade. Poderá estar por vezes inacessível. Os suas comentários ajudarão a melhorá-la.
         link-text: Deixe-nos os seus comentários!
-        title: Esta é a versão Alfa das novas Europeana Coleções e Europeana Coleções Música
+        title: Esta é a versão Beta das novas Europeana Coleções, História da Arte Colecções e Europeana Coleções Música
     blog-link: ligação ao blogue
     browse:
       colours:
+        description: 
         title: Cores
       newcontent:
         tableh1: Todas as instituições
@@ -39,6 +40,7 @@ pt:
         tableh3: Data
         title: Novo Conteúdo
       sources:
+        description: 
         title: Fontes
     collections:
       art-history:

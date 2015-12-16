@@ -3,9 +3,9 @@ lv:
     site:
       browse:
         newcontent:
-          description: 
+          description: "Šajā sadaļā ir apkopots viss saturs, kas nesen ir ticis pievienots Europeana Kolekcijām. Te ir iespējams redzēt, kura institūcija ir publicējusi jaunus materiālus un kad. Klikšķiniet uz zemāk esošajām saitēm, lai apskatītu pievienoto."
         sources:
-          description: 
+          description: Zemāk esošajā sarakstā ir uzskaitīti mūsu kolekciju avoti. Šie avoti ir apkopojuši kolekcijas un iesnieguši tās Europeana. Klikšķiniet uz zemāk esošajām saitēm, lai iepazītos ar visu to kolekciju saturu!
   global:
     labs-link: saite uz Laboratoriju
     navigation:
@@ -26,12 +26,13 @@ lv:
   site:
     alpha:
       feedback_banner:
-        description: '"Alpha" versija nozīmē, ka šī tīmekļa vietne ir aktīvā izstrādes procesā un regulāri tiek papildināta. Dažreiz tā var būt nepieejama. Jūsu atsauksmes palīdzēs mums uzlabot vietnes saturu.'
+        description: '"Beta" versija nozīmē, ka šī tīmekļa vietne ir aktīvā izstrādes procesā un regulāri tiek papildināta. Dažreiz tā var būt nepieejama. Jūsu atsauksmes palīdzēs mums uzlabot vietnes saturu.'
         link-text: Sniedziet savu ieguldījumu!
-        title: Šī ir "Alpha" versija mūsu jaunajām "Kolekcijām" un "Mūzikas kolekcijai"
+        title: Šī ir  mūsu jauno "Kolekciju" un "Mūzikas kolekcijas" "Beta" versija
     blog-link: saite uz blogu
     browse:
       colours:
+        description: "Šajā sadaļā ir iespējams meklēt attēlus pēc to krāsas. Klikšķiniet uz izvēlētās krāsas un skatiet atlasīto kolekciju!"
         title: Krāsas
       newcontent:
         tableh1: Visas institūcijas
@@ -39,10 +40,11 @@ lv:
         tableh3: Datējums
         title: Jauns saturs
       sources:
+        description: Zemāk esošajā sarakstā ir uzskaitīti mūsu kolekciju avoti. Šie avoti ir apkopojuši kolekcijas un iesnieguši tās Europeana. Klikšķiniet uz zemāk esošajām saitēm, lai iepazītos ar visu to kolekciju saturu.
         title: Avoti
     collections:
       art-history:
-        description: No renesances līdz sirreālistiem, no seno romiešu skulptūrām līdz mūsdienu mākslai, Europeana mākslas vēstures kolekcija iepazīstina ar māksliniekiem un mākslas darbiem no visas Eiropas.
+        description: No renesances līdz sirreālistiem, no seno romiešu skulptūrām līdz mūsdienu mākslai, Europeana Mākslas vēstures kolekcija iepazīstina ar māksliniekiem un mākslas darbiem no visas Eiropas.
         title: Europeana mākslas vēsture
       data-types:
         3d: 3D objekti
@@ -56,7 +58,7 @@ lv:
         recent: Jaunākie papildinājumi
         spotlight-on: Uzmanības centrā
       music:
-        description: <strong>Europeana mūzikas kolekcija</strong> apkopo labākos mūzikas ierakstus, notis, un citas ar mūziku saistītas kolekcijas no Eiropas arhīviem, bibliotēkām, muzejiem un audiovizuālajiem arhīviem. <a href="/portal/channels/music/about">Uzzini vairāk par Mūzikas kolekcija.</a>
+        description: <strong>Europeana Mūzikas kolekcija</strong> apkopo labākos mūzikas ierakstus, notis, un citas ar mūziku saistītas kolekcijas no Eiropas arhīviem, bibliotēkām, muzejiem un audiovizuālajiem arhīviem. <a href="/portal/channels/music/about">Uzzini vairāk par Mūzikas kolekciju.</a>
         title: Europeana mūzika
     facet:
       language:
@@ -222,21 +224,21 @@ lv:
         text: |-
           <p>Meklē iecienītu gleznu? Veic pētījumu vai raksti mācību darbu? Meklē iedvesmu savas nākamās kafijas krūzes dizainam? Vēlies uzzināt kaut ko jaunu? Lai kāds arī būtu Europeana apmeklēšanas iemesls, esi sveicināts!</p>
 
-          <p>Ienirsti Eiropas lielākajā mākslas, kultūras un zinātnes tiešsaistes kolekcijā. Europeana kolekcijas piedāvā materiālus no Eiropas bibliotēkām, muzejiem, galerijām un arhīviem.</p>
+          <p>Ienirsti Eiropas lielākajā mākslas, kultūras un zinātnes tiešsaistes kolekcijā. Europeana Kolekcijas piedāvā materiālus no Eiropas bibliotēkām, muzejiem, galerijām un arhīviem.</p>
 
           <p>Grāmatas un rokraksti, fotogrāfijas un gleznas, skulptūras un notis, video un skaņu ieraksti, dienasgrāmatas, kartes - tas viss ir šeit. Vairs nav jāšķērso kontinenti, tagad ir iespējams ceļot virtuāli!</p>
 
           <p>Izpēti, atklāj, skaties, klausies, lasi, lejupielādē ... Izbaudi!</p>
 
-          <p>Ieskaties Europeana mākslas kolekcijās un Europeana mūzikas kolekcijās. Mums ir arī īpaši resursi pētniekiem un kultūras projektu izstrādātājiem (to skaitā mūsu API), kā arī dažādas virtuālas izstādes un blogs.</p>
+          <p>Ieskaties Europeana Mākslas kolekcijās un Europeana Mūzikas kolekcijās. Mums ir arī īpaši resursi pētniekiem un kultūras projektu izstrādātājiem (to skaitā mūsu API), kā arī dažādas virtuālas izstādes un blogs.</p>
 
           <p>Un, ja ar to nepietiek, meklē ikdienas kultūras devu arī Facebook, Twitter, Medium, Google+ un Pinterest.</p>
 
-          <p>Papildinformācijai, kā mēs strādājam ar kultūras institūcijām un to kolekcijām, apmeklē Europeana profesionālā.</p>
+          <p>Papildinformācijai, kā mēs strādājam ar kultūras institūcijām un to kolekcijām, apmeklē Europeana Profesionālā.</p>
         title: Esi sveicināts, kultūras mīli!
       music-channel-about:
-        text: "<p>Iedomājies, ka skaties uz skaņdarba nošu manuskripta oriģinālu, un tajā pašā laikā ir iespējams noklausīties arī dažādas tā interpretācijas, un izlasīt komponista biogrāfiju. </p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Mūsu partneri</a>, mūzikas eksperti, no visas Eiropas ir izveidojuši šo mūzikas ierakstu, nošu, mūzikas instrumentu attēlu, mūzikas grāmatu un cita ar mūziku saistīta satura kolekciju. </p>\n\n<p>Esam publiskojuši šo Mūzikas kolekcijas testa versiju, lai mūsu lietotāji varētu mums palīdzēt to uzlabot un attīstīt. Apmeklējot vietni, lietotāji tiek aicināti atbildēt uz jautājumiem un aptaujām, kas parādās uz ekrāna. Būsim ļoti pateicīgi, ja atradīsi laiku atbildēt uz jautājumiem!</p>\n\n<p>Tāpat, privātuma saglabāšanas nolūkos, informējam, ka mēs apkopojam lietotāju statistiku un uzvedību ar Google Analytics un Hotjar pakalpojumiem. Mēs to darām, lai novērtētu un novērstu Mūzikas kolekcijas dizaina trūkumus un uzlabotu tās lietojamību. Visa uzkrātā informācija ir anonīma, netiek nevienam izpausta un tiek izmantota tikai, lai uzlabotu pakalpojumus.</p>\n\n<p>Mēs aicinām meklēt kolekcijā, atskaņot mūziku, skatīt notis un lasīt. Ja autortiesības to atļauj, iepatikušās lietas ir iespējams lejupielādēt. Un apmeklē mūsu virtuālās izstādes, lai atklātu mūziku līdz šim vēl neiepazītos veidos!</p>"
-        title: Par Mūzikas kolekciju
+        text: "<p>Iedomājies, ka skaties uz skaņdarba nošu manuskripta oriģinālu, un tajā pašā laikā ir iespējams noklausīties arī dažādas tā interpretācijas, un izlasīt komponista biogrāfiju. Europeana Mūzikas kolekcijā tas ir iespējams.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Mūsu partneri</a>, mūzikas eksperti, no visas Eiropas ir izveidojuši šo mūzikas ierakstu, nošu, mūzikas instrumentu attēlu, mūzikas grāmatu un cita ar mūziku saistīta satura kolekciju. </p>\n\n<p>Esam publiskojuši šo Mūzikas kolekcijas testa versiju, lai mūsu lietotāji varētu mums palīdzēt to uzlabot un attīstīt. Apmeklējot vietni, lietotāji tiek aicināti atbildēt uz jautājumiem un aptaujām, kas parādās uz ekrāna. Būsim ļoti pateicīgi, ja atradīsi laiku atbildēt uz jautājumiem!</p>\n\n<p>Tāpat, privātuma saglabāšanas nolūkos, informējam, ka mēs apkopojam lietotāju statistiku un uzvedību ar Google Analytics un Hotjar pakalpojumiem. Mēs to darām, lai novērtētu un novērstu Mūzikas kolekcijas dizaina trūkumus un uzlabotu tās lietojamību. Visa uzkrātā informācija ir anonīma, netiek nevienam izpausta un tiek izmantota tikai, lai uzlabotu pakalpojumus.</p>\n\n<p>Mēs aicinām meklēt kolekcijā, atskaņot mūziku, skatīt notis un lasīt. Ja autortiesības to atļauj, iepatikušās lietas ir iespējams lejupielādēt. Un apmeklē mūsu virtuālās izstādes, lai atklātu mūziku līdz šim vēl neiepazītos veidos!</p>"
+        title: Par Mūzikas kolekcijām
     results:
       actions:
         configure-actions: Darbību konfigurēšana

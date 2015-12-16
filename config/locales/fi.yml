@@ -26,12 +26,13 @@ fi:
   site:
     alpha:
       feedback_banner:
-        description: Alfajulkaisu tarkoittaa, että sivustoa kehitetään aktiivisesti ja sitä päivitetään säännöllisesti. Se voi olla toisinaan suljettuna. Palautteesi auttaa meitä kehittämään palvelua.
+        description: Betajulkaisu tarkoittaa, että sivustoa kehitetään aktiivisesti ja sitä päivitetään säännöllisesti. Se voi olla toisinaan suljettuna. Palautteesi auttaa meitä kehittämään palvelua.
         link-text: Kerro mielipiteesi!
-        title: Tämä on Alfa-julkaisu uusista julkaisuistamme "Kokoelmat" ja "Musiikkikokoelma"
+        title: Tämä on Alfa-julkaisu uusista julkaisuistamme "Kokoelmat", "Taidehistorian Kokoelmat" ja "Musiikkikokoelma"
     blog-link: linkki blogiin
     browse:
       colours:
+        description: 
         title: Värit
       newcontent:
         tableh1: Kaikki instituutiot
@@ -39,6 +40,7 @@ fi:
         tableh3: Päivämäärä
         title: Uutta sisältöä
       sources:
+        description: 
         title: Lähteet
     collections:
       art-history:
