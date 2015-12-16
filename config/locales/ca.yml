@@ -26,12 +26,13 @@ ca:
   site:
     alpha:
       feedback_banner:
-        description: Una versió Alpha significa que aquest lloc web està en desenvolupament continuu i que serà actualitzat regularment. Potser alguna vegada és offline. El teu feedback ens ajudarà a millorar la pàgina.
+        description: Una versió Beta significa que aquest lloc web està en desenvolupament continuu i que serà actualitzat regularment. Potser alguna vegada és offline. El teu feedback ens ajudarà a millorar la pàgina.
         link-text: Gràcies pel teu input!
-        title: Això és una versió Alpha de "Col·leccions" i "Col·lecció de Música"
+        title: 'Això és una versió Beta de "Colleccions" i "Collecció de Música" i "Art Colleccions d''Història". '
     blog-link: enllaç al blog
     browse:
       colours:
+        description: 
         title: Colors
       newcontent:
         tableh1: Totes les institucions
@@ -39,6 +40,7 @@ ca:
         tableh3: Data
         title: Contingut nou
       sources:
+        description: 
         title: Fonts
     collections:
       art-history:

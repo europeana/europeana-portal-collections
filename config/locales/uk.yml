@@ -32,6 +32,7 @@ uk:
     blog-link: 
     browse:
       colours:
+        description: 
         title: 
       newcontent:
         tableh1: 
@@ -39,6 +40,7 @@ uk:
         tableh3: 
         title: 
       sources:
+        description: 
         title: 
     collections:
       art-history:

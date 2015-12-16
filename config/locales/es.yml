@@ -26,13 +26,13 @@ es:
   site:
     alpha:
       feedback_banner:
-        description: Una versión Alpha significa que esta pagina esta en desarrollo y sera actualizada regularmente. Ocasionalmente puede estar fuera de servicio. Tus comentarios pueden ayudar a mejorarla.
+        description: Una versión Beta significa que esta pagina esta en desarrollo y sera actualizada regularmente. Ocasionalmente puede estar fuera de servicio. Tus comentarios pueden ayudar a mejorarla.
         link-text: Déjanos tus comentarios!
-        title: |
-          Esta es la versión Alpha de nuestras colecciones y el Canal de Música.
+        title: Esta es la versión Beta de nuestras colecciones, el Canal de Música y el Arte Colecciones de Historia .
     blog-link: Link al Blog
     browse:
       colours:
+        description: 
         title: Colores
       newcontent:
         tableh1: Todas las instituciones
@@ -40,6 +40,7 @@ es:
         tableh3: Fecha
         title: Nuevo Contenido
       sources:
+        description: 
         title: Recursos
     collections:
       art-history:

@@ -26,12 +26,13 @@ hu:
   site:
     alpha:
       feedback_banner:
-        description: Az Alpha verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért az oldal néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
+        description: Az Beta verzió az jelenti, hogy a weboldalt még aktívan fejlesztjük és gyakran frissítjük. Ezért az oldal néha elérhetetlen lehet. Az Ön visszajelzése segíthet az oldal minőségének javításában.
         link-text: "Írd le a véleményed!"
-        title: Ez egy Alpha verzió új Gyűjtemények és Zenei Gyűjtemények számára
+        title: Ez egy Beta verzió új Gyűjtemények, Művészettörténet gyűjtemények és Zenei Gyűjtemények számára
     blog-link: link a blogra
     browse:
       colours:
+        description: 
         title: Színek
       newcontent:
         tableh1: Adatszolgáltatók
@@ -39,6 +40,7 @@ hu:
         tableh3: Dátum
         title: "Új tartalom"
       sources:
+        description: 
         title: Források
     collections:
       art-history:

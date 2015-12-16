@@ -3,9 +3,9 @@ en:
     site:
       browse:
         newcontent:
-          description: 
+          description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when!  Just click on the links below to see their collections.
         sources:
-          description: 
+          description: Below you see a list of sources for our collections. These sources aggregate and contribute collections to Europeana, click on the link that interests you below to be brought to all their collections!
   global:
     labs-link: 'link to labs '
     navigation:
@@ -26,12 +26,13 @@ en:
   site:
     alpha:
       feedback_banner:
-        description: An Alpha release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
+        description: An Beta release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
         link-text: Give us your input!
-        title: This is an Alpha release of our new "Collections" and "Music Collections"
+        title: This is a Beta release of our new "Collections" and "Music Collections"
     blog-link: link to blog
     browse:
       colours:
+        description: 'In this section you can search for images based on their colour. Just click on the one that you like to view the collection! '
         title: Colours
       newcontent:
         tableh1: All institutions
@@ -39,6 +40,7 @@ en:
         tableh3: Date
         title: New Content
       sources:
+        description: Below you see a list of sources for our collections. These sources aggregate and contribute collections to Europeana, click on the link that interests you below to be brought to all their collections!
         title: Sources
     collections:
       art-history:

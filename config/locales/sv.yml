@@ -32,6 +32,7 @@ sv:
     blog-link: 
     browse:
       colours:
+        description: 
         title: Färger
       newcontent:
         tableh1: Alla institutioner
@@ -39,6 +40,7 @@ sv:
         tableh3: Datum
         title: Nytt innehåll
       sources:
+        description: 
         title: Källor
     collections:
       art-history:

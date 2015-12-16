@@ -26,12 +26,13 @@ fr:
   site:
     alpha:
       feedback_banner:
-        description: Ce site est en version alpha, ce qui signifie qu'il est en cours de développement et mis à jour régulièrement. Il peut être hors ligne parfois. Vos retours nous aideront à l'améliorer!
+        description: Ce site est en version beta, ce qui signifie qu'il est en cours de développement et mis à jour régulièrement. Il peut être hors ligne parfois. Vos retours nous aideront à l'améliorer!
         link-text: Donnez-nous votre avis!
-        title: Ceci est une version alpha des nouveaux Europeana Collections et Europeana Collections Musique
+        title: Ceci est une version beta des nouveaux Europeana Collections, Histoire de l'Art Collections et Europeana Collections Musique
     blog-link: lien vers le blog
     browse:
       colours:
+        description: 
         title: Couleurs
       newcontent:
         tableh1: 
@@ -39,6 +40,7 @@ fr:
         tableh3: 
         title: Nouveau contenu
       sources:
+        description: 
         title: Sources
     collections:
       art-history:

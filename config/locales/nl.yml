@@ -26,12 +26,13 @@ nl:
   site:
     alpha:
       feedback_banner:
-        description: '"Alpha" betekent dat we momenteel druk bezig zijn de website te verbeteren and dat we regelmatig updates doen en dat we soms off-line zijn! Jullie feedback helpt ons de site te verbeteren!'
+        description: '"Beta" betekent dat we momenteel druk bezig zijn de website te verbeteren and dat we regelmatig updates doen en dat we soms off-line zijn! Jullie feedback helpt ons de site te verbeteren!'
         link-text: 'Vertel wat u denkt! '
-        title: Dit is een Alpha versie van onze nieuwe Collections Search en Muziek Kanaal
+        title: 'Dit is een Beta versie van onze nieuwe Collections, Kunst Geschiedenis- en Muziek Collecties. '
     blog-link: link naar de blog
     browse:
       colours:
+        description: 
         title: Kleuren
       newcontent:
         tableh1: 
@@ -39,6 +40,7 @@ nl:
         tableh3: 
         title: Onlangs toegevoegd
       sources:
+        description: 
         title: Bronnen
     collections:
       art-history:

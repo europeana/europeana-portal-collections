@@ -26,12 +26,13 @@ da:
   site:
     alpha:
       feedback_banner:
-        description: 'Dette website er lanceret i Alpha. Det betyder, at det er under udvikling og løbende opdateres. Det kan undertiden være offline. Din feedback vil hjælpe os med at forbedre sitet. '
+        description: Dette website er lanceret i Beta. Det betyder, at det er under udvikling og løbende opdateres. Det kan undertiden være offline. Din feedback vil hjælpe os med at forbedre sitet.
         link-text: Giv os dine input!
-        title: Dette er en Alpha version af vores nye "Samlinger" og "Musiksamling"
+        title: 'Dette er en Beta version af vores nye "Samlinger" og "Musiksamling" og "Kunsthistorie Samlinger". '
     blog-link: link til blog
     browse:
       colours:
+        description: 
         title: Farver
       newcontent:
         tableh1: 
@@ -39,6 +40,7 @@ da:
         tableh3: 
         title: Nyt Indhold
       sources:
+        description: 
         title: Kilder
     collections:
       art-history:

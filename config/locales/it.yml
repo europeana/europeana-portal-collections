@@ -26,12 +26,13 @@ it:
   site:
     alpha:
       feedback_banner:
-        description: Una versione Alpha significa che questo sito internet è in fase di sviluppo e sarà aggiornato regolarmente. Talvolta può essere non in linea. Il tuo feedback ci aiuterà a migliorare il nostro sito.
+        description: Una versione Beta significa che questo sito internet è in fase di sviluppo e sarà aggiornato regolarmente. Talvolta può essere non in linea. Il tuo feedback ci aiuterà a migliorare il nostro sito.
         link-text: Dateci il vostro contributo!
-        title: Questa è una versione Alpha delle nostre nuove "Collezioni" e "Collezione musicale"
+        title: Questa è una versione Beta delle nostre nuove "Collezioni" e "Arte Storia Collezioni" e  "Collezione musicale"
     blog-link: link al blog
     browse:
       colours:
+        description: 
         title: Colori
       newcontent:
         tableh1: Tutte le istituzioni
@@ -39,6 +40,7 @@ it:
         tableh3: Data
         title: Nuovo contenuto
       sources:
+        description: 
         title: Fonti
     collections:
       art-history:

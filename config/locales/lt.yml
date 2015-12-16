@@ -26,12 +26,13 @@ lt:
   site:
     alpha:
       feedback_banner:
-        description: "Šiuo metu jūs naršote svetainės Alfa versijoje, o tai reiškia, kad mes ją dar vis tobuliname. Svetainė kartais gali būti nepasiekiama. Atsiųskite mums savo komentarus apie svetainę."
+        description: "Šiuo metu jūs naršote svetainės Beta versijoje, o tai reiškia, kad mes ją dar vis tobuliname. Svetainė kartais gali būti nepasiekiama. Atsiųskite mums savo komentarus apie svetainę."
         link-text: Prisidėkite prie svetainės tobulinimo!
-        title: Tai mūsų naujųjų "Kolekcijų" ir "Muzikos kolekcijos" Alfa versija
+        title: Tai mūsų naujųjų "Kolekcijų" ir "Muzikos kolekcijos" Beta versija
     blog-link: Nuoroda į tinklaraštį
     browse:
       colours:
+        description: 
         title: Spalvos
       newcontent:
         tableh1: Visos institucijos
@@ -39,6 +40,7 @@ lt:
         tableh3: Data
         title: Naujas turinys
       sources:
+        description: 
         title: Ištekliai
     collections:
       art-history:

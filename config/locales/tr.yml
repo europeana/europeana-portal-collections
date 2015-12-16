@@ -32,6 +32,7 @@ tr:
     blog-link: 
     browse:
       colours:
+        description: 
         title: 
       newcontent:
         tableh1: 
@@ -39,6 +40,7 @@ tr:
         tableh3: 
         title: 
       sources:
+        description: 
         title: 
     collections:
       art-history:
