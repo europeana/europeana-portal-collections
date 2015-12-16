@@ -430,10 +430,10 @@ nl:
       view-more: Meer
     more-info: Meer informatie
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
+      email-address-invalid: Vul een geldig email adres in
+      email-address-required: Dit is een verplicht veld
+      language-required: Dit is een verplicht veld
+      signup: Word lid van onze nieuwsbrief!
     our-sites: onze sites
     password: Wachtwoord
     professional: Professional
