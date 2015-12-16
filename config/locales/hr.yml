@@ -35,6 +35,7 @@ hr:
         description: U ovom dijelu možete pretraživati slike po boji. Potrebno je samo kliknuti na onu koja vam se sviđa kako biste vidjeli zbirku!
         title: Boje
       newcontent:
+        description: 
         tableh1: Sve ustanove
         tableh2: Objekti
         tableh3: Datum

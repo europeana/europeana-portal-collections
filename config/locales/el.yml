@@ -35,6 +35,7 @@ el:
         description: 
         title: "Χρώματα"
       newcontent:
+        description: 
         tableh1: "Όλα τα ιδρύματα"
         tableh2: "Αντικείμενα"
         tableh3: "Ημερομηνία"

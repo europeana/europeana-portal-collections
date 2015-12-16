@@ -35,6 +35,7 @@ lv:
         description: "Šajā sadaļā ir iespējams meklēt attēlus pēc to krāsas. Klikšķiniet uz izvēlētās krāsas un skatiet atlasīto kolekciju!"
         title: Krāsas
       newcontent:
+        description: 
         tableh1: Visas institūcijas
         tableh2: Ieraksti
         tableh3: Datējums
