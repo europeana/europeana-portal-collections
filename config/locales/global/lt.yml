@@ -1,0 +1,461 @@
+lt:
+  Symphonies: Simfonijos
+  X11:
+    colours:
+      '000000': Juoda
+      000080: Jūrinė mėlyna
+      00008B: Tamsiai mėlyna
+      0000CD: Mėlyna
+      0000FF: Mėlyna
+      '006400': Tamsiai žalia
+      008000: "Žalia"
+      008080: Elektrinė
+      008B8B: Tamsiai elektrinė
+      00BFFF: "Žydra"
+      00CED1: Tamsaus turkio
+      00FA9A: "Šviesiai žalia"
+      00FF00: "Žalia"
+      00FF7F: "Šviesiai žalia"
+      00FFFF: Elektrinė
+      '191970': Tamsiai mėlyna
+      1E90FF: Mėlyna
+      20B2AA: "Šviesiai mėlyna"
+      228B22: Tamsiai žalia
+      2E8B57: "Šviesiai žalia"
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: 
+      '800000': 
+      '800080': 
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: 
+      F0FFF0: 
+      F0FFFF: 
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: 
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
+  global:
+    about-us: Apie mus
+    channel:
+      archaeology: archeologija
+      architecture: architektūra
+      art: menas
+      fashion: mada
+      home: Pagrindinis (visi)
+      maps: "žemėlapiai"
+      music: muzika
+      natural-history: gamtotyra
+      newspapers: laikraščiai
+      performing-arts: scenos menas
+    channels-art: Meno istorijos kolekcija
+    channels-art-image: Meno istorijos kolekcijos vaizdai
+    channels-art-link: Meno istorijos kolekcija
+    channels-fashion: Mada
+    channels-music: Muzika
+    choose-language: Kalba
+    email-address: el. pašto adresas
+    facet:
+      advanced:
+        options: Pasirinkimai
+        show:
+          ugc: Vartotojų sukurtas turinys
+      art:
+        form:
+          paintings:
+            genre: "Žanras"
+            medium: Medija
+      carrier: Tiekėjas
+      colour: Spalva
+      colour-black-and-white: Juoda ir balta
+      country:
+        austria: Austrija
+        belgium: Belgija
+        bulgaria: Bulgarija
+        croatia: Kroatija
+        cyprus: Kipras
+        czechrepublic: "Čekija"
+        denmark: Danija
+        estonia: Estija
+        europe: Europa
+        finland: Suomija
+        france: Prancūzija
+        germany: Vokietija
+        greece: Graikija
+        hungary: Vengrija
+        iceland: Islandija
+        ireland: Airija
+        israel: Izraelis
+        italy: Italija
+        latvia: Latvija
+        lithuania: Lietuva
+        luxembourg: Liuksemburgas
+        malta: Malta
+        netherlands: Nyderlandai
+        norway: Norvegija
+        poland: Lenkija
+        portugal: Portugalija
+        romania: Rumunija
+        russia: Rusija
+        serbia: Serbija
+        slovakia: Slovakija
+        slovenia: Slovėnija
+        spain: Ispanija
+        sweden: "Švedija"
+        switzerland: "Šveicarija"
+        turkey: Turkija
+        ukraine: Ukraina
+        unitedkingdom: Jungtinė Karalystė
+        unitedstatesofamerica: JAV
+      creator: autorius
+      header:
+        channel: Kolekcijos
+        colourpalette: Spalva
+        country: "Šalis"
+        data_provider: Institucija
+        image_aspectratio: Pozicija
+        image_colour: Paletė
+        image_size: Dydis
+        language: Kalba
+        language_of_description: Aprašymo kalba
+        media: Tik įrašai su nuorodomis
+        mime_type: Failo formatas
+        provider: Agregatorius
+        reusability: Ar galiu tai naudoti?
+        sound_duration: Trukmė
+        sound_hq: Aukšta kokybė
+        text_fulltext: Pilnas tekstas
+        type: Medija
+        ugc: Rodyti vartotojų įkeltą turinį
+        video_duration: Video įrašo trukmė
+        year: Data
+      image_aspectratio:
+        landscape: Kraštovaizdis
+        portrait: Portretas
+      image_colour:
+        'false': Juoda ir balta
+        'true': Spalva
+      image_size:
+        extra_large: Itin didelis (4MP+)
+        large: Didelis (1-4MP)
+        medium: Vidutinis (0.5-1MP)
+        small: Mažas (<0.5MP)
+      language:
+        bg: Bulgrarų
+        ca: Katalonų
+        cs: "Čekų"
+        da: Danų
+        de: Vokiečių
+        el: Graikų
+        en: Anglų
+        es: Ispanų
+        et: Estų
+        fi: Suomių
+        fr: Prancūzų
+        ga: Airių
+        he: Hebrajų
+        hr: Kroatų
+        hu: Vengrų
+        is: Islandų
+        it: Italų
+        lt: Lietuvių
+        lv: Latvių
+        mt: Maltiečių
+        mul: Daugiakalbis
+        nl: Nyderlandų
+        'no': Norvegų
+        pl: Lenkų
+        pt: Portugalų
+        ro: Rumunų
+        ru: Rusų
+        sk: Slovakų
+        sl: Slovėnų
+        sr: Serbų
+        sv: "Švedų"
+        tr: Turkų
+        uk: Ukrainiečių
+        yi: Jidiš
+      less: Mažiau
+      media:
+        'false': Ne
+        'true': Taip
+      more: Daugiau
+      more-refinements: Daugiau pasirinkimų
+      resource:
+        type: Tipas
+      reusability:
+        advanced: Papildomas
+        advanced-cc-by: CC BY licenzija
+        advanced-cc-by-nc: CC BY-NC licenzija
+        advanced-cc-by-nc-nd: CC BY-NC-ND licenzija
+        advanced-cc-by-nc-sa: CC BY-NC-SA licenzija
+        advanced-cc-by-nd: CC BY-ND licenzija
+        advanced-cc-by-sa: CC BY-SA licenzija
+        advanced-cc0: CC0 licenzija
+        advanced-orphan-work: Kūrinio autorius nenustatytas
+        advanced-out-of-copyright-non-commercial: Nekomerciniam pakartotiniam naudojimui autorinės teisės netaikomos
+        advanced-pdm: Viešo naudojimo
+        advanced-rrfa: Teisės saugomis - laisva prieiga
+        advanced-rrpa: Teisės saugomos - mokama prieiga
+        advanced-rrra: Teisės saugomos - ribota prieiga
+        advanced-ucs: Autorinių teisių statusas nežinomas
+        open: Taip, su atribucija
+        permission: Tik su leidimu
+        restricted: Taip, su apribojimais
+        simple: Paprastas
+      sound_duration:
+        long: Ilgas (6+ min)
+        medium: Vidutinis (3-6 min)
+        short: Trumpas (30 s - 3 min)
+        very_short: Labai trumpas (<30 s)
+      sound_hq:
+        'true': Taip
+      source: "Šaltinis"
+      text_fulltext:
+        'false': Ne
+        'true': Taip
+      type:
+        3d: 3D
+        image: Vaizdas
+        sound: Garsas
+        text: Tekstas
+        video: Video įrašas
+      type-image:
+        orientation:
+          label: Vaizdo pozicija
+          landscape: Kraštovaizdis
+          portrait: Portretas
+        quality:
+          all: Rodyti visus
+          hq-only: Rodyti tik geros kokybės
+          label: Kokybė
+        size:
+          explanation: Ką reiškia šie dydžiai?
+          label: Vaizdo dydis
+          large: Didelis (%{data})
+          medium: Vidutinis (%{data})
+          small: Mažas (%{data})
+          xl: Labai didelis (%{data})
+      type-sound:
+        duration:
+          label: Audio įrašo trukmė
+          long: Ilgas (%{data})
+          medium: Vidutinis (%{data})
+          short: Trumpas (%{data})
+          very-short: Labai trumpas (%{data})
+      type-video:
+        duration:
+          label: Video įrašo trukmė
+          long: Ilgas (%{data})
+          medium: Vidutinis (%{data})
+          short: Trumpas (%{data})
+      video_duration:
+        long: Ilgas (20+ min)
+        medium: Vidutinis (4-20 min)
+        short: Trumpas (<4 min)
+      year:
+        from: nuo
+        to: iki
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: Raskite mus socialiniuose tinkluose
+    forgot-password: Pamiršote slaptažodį?
+    genres: "Žanrai"
+    genres-chamber-music: Kamerinė muzika
+    genres-classical-music: Klasikinė muzika
+    genres-concertos: Koncertai
+    genres-non-western-classical-music: Ne vakarietiška klasikinė muzika
+    genres-opera: Opera
+    genres-popular-music: Populiarioji muzika
+    genres-traditional-music: Liaudies muzika
+    header:
+      connect: prisijunkite
+      develop: kurkite
+      discover: atraskite
+      network: tinklas
+    help: Pagalba
+    home: Pagrindinis
+    javascript-required: Norėdami matyti šį turinį, įjunkite JavaScript bei apsvarstykite galimybę atnaujinti naršyklės versiją į tokią, kuri palaiko HTML5 turinį.
+    labs: Labs
+    labs-text: Derinkite turinį naudodamiesi mūsų API ir duomenų rinkiniais
+    language-basque: Baskų
+    language-bulgarian: Bulgarų
+    language-catalan: Katalonų
+    language-croatian: Kroatų
+    language-czech: "Čekų"
+    language-danish: Danų
+    language-dutch: Olandų
+    language-english: Anglų
+    language-estonian: Estų
+    language-finnish: Suomių
+    language-french: Prancūzų
+    language-gaelic: Airių
+    language-german: Vokiečių
+    language-greek: Graikų
+    language-hungarian: Vengrų
+    language-icelandic: Islandų
+    language-italian: Italų
+    language-latvian: Latvių
+    language-lithuanian: Lietuvių
+    language-maltese: Maltiečių
+    language-norwegian: Norvegų
+    language-polish: Lenkų
+    language-portuguese: Portugalų
+    language-romanian: Rumunų
+    language-russian: Rusų
+    language-slovakian: Slovakų
+    language-slovenian: Slovėnų
+    language-spanish: Ispanų
+    language-swedish: "Švedų"
+    language-ukranian: Ukrainiečių
+    login: Prisijungti
+    mission: Mes keičiame pasaulį kultūros pagalba! Siekiame kurti turtingiausią Europos kultūrinio paveldo sistemą ir padaryti ją patogia naudotis tiek darbo, tiek mokslo, tiek laisvalaikio tikslais.
+    mission-title: Mūsų misija
+    more:
+      load-more: Daugiau
+      show-more: Rodyti daugiau
+      view-more: "Žiūrėti daugiau"
+    more-info: Daugiau informacijos
+    newsletter:
+      email-address-invalid: "Įveskite egzistuojantį el. pašto adresą"
+      email-address-required: El. pašto adresas privalomas
+      language-required: Pasirinkite kalbą
+      signup: Užsiprenumeruokite mūsų naujienlaiškį
+    our-sites: mūsų puslapiai
+    password: Slaptažodis
+    professional: Pro
+    professional-text: Prisijunkite! Dalinkitės savo duomenimis ar naudokite mūsiškius
+    refine-your-search: Patikslinkite paiešką
+    register: Registruotis
+    research: Tyrinėkite
+    research-text: Prisijunkite prie akademinės bendruomenės
+    search-area:
+      search-button-image-alt: Ieškoti
+      search-placeholder-text: "Įveskite paieškos terminą"
+    search-collections: Kolekcijos
+    search-collections-text: Atraskite Europos kultūros paveldą
+    share: Dalintis
+    sitemap: Svetainės medis
+    terms-and-policies: Naudojimosi taisyklės ir privatumo politika
+    type: tipas
+  'no': Norvegija
+  pl: Portugalija
+  site:
+    facet:
+      language:
+        show:
+          results: Rezultatai
+        show-results-all: Rodyti visus rezultatus

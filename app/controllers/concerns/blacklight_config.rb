@@ -1,5 +1,5 @@
 ##
-# Configures Blacklight for Europeana Portal & Channels
+# Configures Blacklight for Europeana Portal & Collections
 #
 # In the configuration for query facet fields, the :fq option is a Hash, to
 # permit specification of multiple parameters to be passed to the API.
@@ -12,9 +12,9 @@ module BlacklightConfig
   include ::Blacklight::Base
 
   included do
-    def self.channels_query_facet
-      channels = Rails.application.config.x.channels.dup
-      channels.each_with_object({}) do |(k, v), hash|
+    def self.collections_query_facet
+      collections = Rails.application.config.x.collections.dup
+      collections.each_with_object({}) do |(k, v), hash|
         hash[k] = { label: k, fq: v[:params] }
       end
     end
@@ -27,15 +27,11 @@ module BlacklightConfig
       }
 
       # Response models
-      config.repository_class = Europeana::Blacklight::ApiRepository
-      config.search_builder_class = SearchBuilder
-      config.response_model = Europeana::Blacklight::Response
-      config.document_model = Europeana::Blacklight::Document
-      config.document_presenter_class = MustacheDocumentPresenter
+      config.document_presenter_class = Document::RecordPresenter
 
       # Europeana API caching
-      config.europeana_api_cache = Rails.cache
-      config.europeana_api_cache_expires_in = 24.hours
+      # config.europeana_api_cache = Rails.cache
+      # config.europeana_api_cache_expires_in = 24.hours
 
       # items to show per page, each number in the array represents another
       # option to choose from.
@@ -59,13 +55,25 @@ module BlacklightConfig
       config.add_index_field 'edmIsShownAt'
 
       # Facet fields in the order they should be displayed.
-      # config.add_facet_field 'CHANNEL', query: channels_query_facet
-      config.add_facet_field 'TYPE'
+      # config.add_facet_field 'COLLECTION', query: collections_query_facet, single: true
+      config.add_facet_field 'TYPE', hierarchical: true
+      config.add_facet_field 'IMAGE_COLOUR', parent: %w(TYPE IMAGE)
+      config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 20
+      config.add_facet_field 'IMAGE_ASPECTRATIO', hierarchical: true, parent: %w(TYPE IMAGE)
+      config.add_facet_field 'IMAGE_SIZE', hierarchical: true, parent: %w(TYPE IMAGE)
+      config.add_facet_field 'SOUND_DURATION', hierarchical: true, parent: %w(TYPE SOUND)
+      config.add_facet_field 'SOUND_HQ', hierarchical: true, parent: %w(TYPE SOUND)
+      config.add_facet_field 'TEXT_FULLTEXT', hierarchical: true, parent: %w(TYPE TEXT)
+      config.add_facet_field 'VIDEO_DURATION', hierarchical: true, parent: %w(TYPE VIDEO)
+      config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
+      config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
+      config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'REUSABILITY'
-      config.add_facet_field 'COUNTRY'
-      config.add_facet_field 'LANGUAGE'
-      config.add_facet_field 'PROVIDER'
-      config.add_facet_field 'DATA_PROVIDER'
+      config.add_facet_field 'COUNTRY', limit: 50
+      config.add_facet_field 'LANGUAGE', limit: 50
+      config.add_facet_field 'PROVIDER', limit: 50
+      config.add_facet_field 'DATA_PROVIDER', limit: 50
+      # config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
 
       # Send all facet field names to Solr.
       config.add_facet_fields_to_solr_request!
@@ -101,9 +109,6 @@ module BlacklightConfig
       %w(title who what when where subject).each do |field_name|
         config.add_search_field(field_name)
       end
-
-      # Prevent BL's "did you mean" spellcheck feature kicking in
-      config.spell_max = -1
     end
   end
 end

@@ -1,8 +1,153 @@
 en:
   Symphonies: Symphonies
+  X11:
+    colours:
+      '000000': Black
+      000080: Navy Blue
+      00008B: Dark Blue
+      0000CD: Medium Blue
+      0000FF: Blue
+      '006400': Dark Green
+      008000: Web Green
+      008080: Teal
+      008B8B: Dark Cyan
+      00BFFF: Deep Sky Blue
+      00CED1: Dark Turquoise
+      00FA9A: Medium Spring Green
+      00FF00: Green
+      00FF7F: Spring Green
+      00FFFF: Cyan
+      '191970': Midnight Blue
+      1E90FF: Dodger Blue
+      20B2AA: Light Sea Green
+      228B22: Forest Green
+      2E8B57: Sea Green
+      2F4F4F: Dark Slate Gray
+      32CD32: Lime Green
+      3CB371: Medium Sea Green
+      40E0D0: Turquoise
+      4169E1: Royal Blue
+      4682B4: Steel Blue
+      483D8B: Dark Slate Blue
+      48D1CC: Medium Turquoise
+      4B0082: Indigo
+      556B2F: Dark Olive Green
+      5F9EA0: Cadet Blue
+      6495ED: Cornflower
+      '663399': Rebecca Purple
+      66CDAA: Medium Aquamarine
+      '696969': Dim Gray
+      6A5ACD: Slate Blue
+      6B8E23: Olive Drab
+      '708090': Slate Gray
+      '778899': Light Slate Gray
+      7B68EE: Medium Slate Blue
+      7CFC00: Lawn Green
+      7F0000: Web Maroon
+      7F007F: Web Purple
+      7FFF00: Chartreuse
+      7FFFD4: Aquamarine
+      '800000': Maroon
+      '800080': Purple
+      '808000': Olive
+      '808080': Web Gray
+      87CEEB: Sky Blue
+      87CEFA: Light Sky Blue
+      8A2BE2: Blue Violet
+      8B0000: Dark Red
+      8B008B: Dark Magenta
+      8B4513: Saddle Brown
+      8FBC8F: Dark Sea Green
+      90EE90: Light Green
+      9370DB: Medium Purple
+      9400D3: Dark Violet
+      98FB98: Pale Green
+      9932CC: Dark Orchid
+      9ACD32: Yellow Green
+      A020F0: Purple
+      A0522D: Sienna
+      A52A2A: Brown
+      A9A9A9: Dark Gray
+      ADD8E6: Light Blue
+      ADFF2F: Green Yellow
+      AFEEEE: Pale Turquoise
+      B03060: Maroon
+      B0C4DE: Light Steel Blue
+      B0E0E6: Powder Blue
+      B22222: Firebrick
+      B8860B: Dark Goldenrod
+      BA55D3: Medium Orchid
+      BC8F8F: Rosy Brown
+      BDB76B: Dark Khaki
+      BEBEBE: Gray
+      C0C0C0: Silver
+      C71585: Medium Violet Red
+      CD5C5C: Indian Red
+      CD853F: Peru
+      D2691E: Chocolate
+      D2B48C: Tan
+      D3D3D3: Light Gray
+      D8BFD8: Thistle
+      DA70D6: Orchid
+      DAA520: Goldenrod
+      DB7093: Pale Violet Red
+      DC143C: Crimson
+      DCDCDC: Gainsboro
+      DDA0DD: Plum
+      DEB887: Burlywood
+      E0FFFF: Light Cyan
+      E6E6FA: Lavender
+      E9967A: Dark Salmon
+      EE82EE: Violet
+      EEE8AA: Pale Goldenrod
+      F08080: Light Coral
+      F0E68C: Khaki
+      F0F8FF: Alice Blue
+      F0FFF0: Honeydew
+      F0FFFF: Azure
+      F4A460: Sandy Brown
+      F5DEB3: Wheat
+      F5F5DC: Beige
+      F5F5F5: White Smoke
+      F5FFFA: Mint Cream
+      F8F8FF: Ghost White
+      FA8072: Salmon
+      FAEBD7: Antique White
+      FAF0E6: Linen
+      FAFAD2: Light Goldenrod
+      FDF5E6: Old Lace
+      FF0000: Red
+      FF00FF: Fuchsia
+      FF1493: Deep Pink
+      FF4500: Orange Red
+      FF6347: Tomato
+      FF69B4: Hot Pink
+      FF7F50: Coral
+      FF8C00: Dark Orange
+      FFA07A: Light Salmon
+      FFA500: Orange
+      FFB6C1: Light Pink
+      FFC0CB: Pink
+      FFD700: Gold
+      FFDAB9: Peach Puff
+      FFDEAD: Navajo White
+      FFE4B5: Moccasin
+      FFE4C4: Bisque
+      FFE4E1: Misty Rose
+      FFEBCD: Blanched Almond
+      FFEFD5: Papaya Whip
+      FFF0F5: Lavender Blush
+      FFF5EE: Seashell
+      FFF8DC: Cornsilk
+      FFFACD: Lemon Chiffon
+      FFFAF0: Floral White
+      FFFAFA: Snow
+      FFFF00: Yellow
+      FFFFE0: Light Yellow
+      FFFFF0: Ivory
+      FFFFFF: White
   global:
     about-us: About us
-    blog: blog
     channel:
       archaeology: archaeology
       architecture: architecture
@@ -14,25 +159,18 @@ en:
       natural-history: natural history
       newspapers: newspapers
       performing-arts: performing-arts
-    channels: Channels
-    channels-art: 'Channels art channel '
-    channels-art-image: 'Channels art image '
-    channels-art-link: Channels art link
-    channels-art-url: 
+    channels-art: Art History Collections
+    channels-art-image: Art History Collection image
+    channels-art-link: Art History Collections
     channels-fashion: Fashion
     channels-music: Music
-    channels-music-link: 
     choose-language: Language
     email-address: email address
-    exhibitions: Exhibitions
     facet:
       advanced:
         options: Options
         show:
-          direct:
-            links: 
-          thumbnails: 
-          ugc: 
+          ugc: User generated content
       art:
         form:
           paintings:
@@ -82,61 +220,92 @@ en:
         unitedstatesofamerica: USA
       creator: creator
       header:
-        channel: Channels
+        channel: Collections
+        colourpalette: Colour
         country: Country
-        data_provider: Data Provider
+        data_provider: Institution
+        image_aspectratio: Orientation
+        image_colour: Palette
+        image_size: Size
         language: Language
         language_of_description: Language of Description
-        provider: Provider
+        media: Only items with links to media
+        mime_type: File format
+        provider: Aggregator
         reusability: Can I use it?
+        sound_duration: Duration
+        sound_hq: High Quality
+        text_fulltext: Full text
         type: Media
+        ugc: Show content contributed by users
+        video_duration: Duration
         year: Date
+      image_aspectratio:
+        landscape: Landscape
+        portrait: Portrait
+      image_colour:
+        'false': Black and white
+        'true': Colour
+      image_size:
+        extra_large: Extra Large (4MP+)
+        large: Large (1-4MP)
+        medium: Medium (0.5-1MP)
+        small: Small (<0.5MP)
       language:
-        bg: "български език"
+        bg: "Български"
+        ca: Català
+        cs: "Čeština"
+        da: Dansk
         de: Deutsch
-        el: " ellinikí glóssa"
+        el: "Ελληνικά"
         en: English
-        es: español
+        es: Español
         et: Eesti
         fi: Suomi
-        fr: le français
+        fr: Français
         ga: Gaeilge
         he: "עברית"
-        hr: 'hrvatski '
-        hu: Hrvatski
-        is: "íslenska"
+        hr: Hrvatski
+        hu: Magyar
+        is: "Íslenska"
         it: Italiano
-        lt: lietuvių kalba
-        lv: latviešu valoda
+        lt: Lietuvių
+        lv: Latviešu
         mt: Malti
-        mul: Multilingue
+        mul: Multilingual
         nl: Nederlands
-        pl: polszczyzna
-        pt: português
-        ro: română
-        sk: slovenský jazyk
-        sl: slovenščina
-        sv: svenska
+        'no': Norsk
+        pl: Polski
+        pt: Português
+        ro: Română
+        ru: "Русский"
+        sk: Slovenský
+        sl: Slovenski
+        sr: "Српски"
+        sv: Svenska
         tr: " Türkçe"
-        yi: Yiddish
+        uk: "Українська"
+        yi: "ייִדיש"
       less: Fewer
+      media:
+        'false': 'No'
+        'true': 'Yes'
       more: More
       more-refinements: More refinements
       resource:
-        type: 
+        type: Type
       reusability:
         advanced: Advanced
-        advanced-cc-by: CC-BY
-        advanced-cc-by-nc: CC-BY-NC
-        advanced-cc-by-nc-nd: CC-BY-NC-ND
-        advanced-cc-by-nc-sa: CC-BY-NC-SA
-        advanced-cc-by-nd: CC-BY-ND
-        advanced-cc-by-sa: CC-BY-SA
+        advanced-cc-by: CC BY
+        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc-nd: CC BY-NC-ND
+        advanced-cc-by-nc-sa: CC BY-NC-SA
+        advanced-cc-by-nd: CC BY-ND
+        advanced-cc-by-sa: CC BY-SA
         advanced-cc0: CC0
         advanced-orphan-work: Orphan Work
         advanced-out-of-copyright-non-commercial: 'Out of copyright - non commercial re-use '
         advanced-pdm: Public Domain Marked
-        advanced-rarr: Restricted access - Rights reserved
         advanced-rrfa: Rights reserved - Free access
         advanced-rrpa: Rights reserved - Paid access
         advanced-rrra: Rights Reserved - Restricted Access
@@ -145,7 +314,17 @@ en:
         permission: Only with permission
         restricted: Yes with restrictions
         simple: Simple
+      sound_duration:
+        long: Long (6+ minutes)
+        medium: Medium (3-6 minutes)
+        short: Short (30s - 3 minutes)
+        very_short: Very short (<30s)
+      sound_hq:
+        'true': 'Yes'
       source: Source
+      text_fulltext:
+        'false': 'No'
+        'true': 'Yes'
       type:
         3d: 3D
         image: Image
@@ -170,21 +349,29 @@ en:
           xl: Extra large (%{data})
       type-sound:
         duration:
-          label: Audio duration
+          label: Duration
           long: Long (%{data})
           medium: Medium (%{data})
           short: Short (%{data})
           very-short: Very short (%{data})
       type-video:
         duration:
-          label: Video duration
+          label: Duration
           long: Long (%{data})
           medium: Medium (%{data})
           short: Short (%{data})
+      video_duration:
+        long: Long (20+ minutes)
+        medium: Medium (4-20 minutes)
+        short: Short (<4 minutes)
       year:
         from: from
         to: to
-    find-us-elsewhere: 
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: Find us elsewhere
     forgot-password: Forgot your password?
     genres: genres
     genres-chamber-music: Chamber music
@@ -195,10 +382,10 @@ en:
     genres-popular-music: Popular music
     genres-traditional-music: Traditional music
     header:
-      connect: connect
-      develop: develop
-      discover: discover
-      network: network
+      connect: Connect
+      develop: Develop
+      discover: Discover
+      network: Network
     help: Help
     home: Home
     javascript-required: To view this content please enable JavaScript, and consider upgrading to a web browser that supports HTML5 content.
@@ -213,7 +400,7 @@ en:
     language-danish: Danish
     language-dutch: Dutch
     language-english: English
-    language-estonian: Estionian
+    language-estonian: Estonian
     language-finnish: Finnish
     language-french: French
     language-gaelic: Gaelic
@@ -234,30 +421,28 @@ en:
     language-slovenian: Slovenian
     language-spanish: Spanish
     language-swedish: Swedish
-    language-ukranian: Ukranian
+    language-ukranian: Ukrainian
     login: Login
-    logo-image: 
+    mission: We transform the world with culture! We want to build on Europe’s rich heritage and make it easier for people to use, whether for work, for learning or just for fun.
+    mission-title: Our mission
     more:
       load-more: More
       show-more: Show more
       view-more: View more
     more-info: More information
-    our-mission: Our mission
-    our-mission-text: Who is afraid of the jabberwocky?
+    newsletter:
+      email-address-invalid: Email must be a valid email address.
+      email-address-required: An email address must be specified.
+      language-required: A language must be specified.
+      signup: Sign up for our newsletter
     our-sites: our sites
     password: Password
-    professional: Professional
+    professional: Pro
     professional-text: Get involved, share your data or use ours
     refine-your-search: Refine your search
     register: Register
     research: Research
     research-text: Connecting to the academic community
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: Search
       search-placeholder-text: Add a search term
@@ -265,7 +450,7 @@ en:
     search-collections-text: Explore Europe’s cultural heritage
     share: Share
     sitemap: Sitemap
-    terms-and-policies: Terms and policies
+    terms-and-policies: Terms of use & Policies
     type: type
   'no': Norway
   pl: Portugal
@@ -273,5 +458,5 @@ en:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Results
+        show-results-all: Show all results

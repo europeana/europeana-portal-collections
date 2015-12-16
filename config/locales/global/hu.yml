@@ -1,0 +1,461 @@
+hu:
+  Symphonies: Szimfóniák
+  X11:
+    colours:
+      '000000': 
+      000080: 
+      00008B: 
+      0000CD: 
+      0000FF: 
+      '006400': 
+      008000: 
+      008080: 
+      008B8B: 
+      00BFFF: 
+      00CED1: 
+      00FA9A: 
+      00FF00: 
+      00FF7F: 
+      00FFFF: 
+      '191970': 
+      1E90FF: 
+      20B2AA: 
+      228B22: 
+      2E8B57: 
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: 
+      '800000': 
+      '800080': 
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: 
+      F0FFF0: 
+      F0FFFF: 
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: 
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
+  global:
+    about-us: Rólunk
+    channel:
+      archaeology: régészet
+      architecture: "építészet"
+      art: művészet
+      fashion: divat
+      home: Főoldal
+      maps: térképek
+      music: zene
+      natural-history: természettudomány
+      newspapers: "újságok"
+      performing-arts: előadóművészet
+    channels-art: Művészettörténet Gyűjtemény
+    channels-art-image: Művészettörténet Gyűjtemény kép
+    channels-art-link: Művészettörténet Gyűjtemény
+    channels-fashion: Divat
+    channels-music: Zene
+    choose-language: Nyelv
+    email-address: Email cím
+    facet:
+      advanced:
+        options: Beállítások
+        show:
+          ugc: Felhasználó által generált tartalom
+      art:
+        form:
+          paintings:
+            genre: Műfaj
+            medium: Adathordozó
+      carrier: Hordozó
+      colour: Szín
+      colour-black-and-white: Fekete és fehér
+      country:
+        austria: Ausztria
+        belgium: Belgium
+        bulgaria: Bulgária
+        croatia: Horvátország
+        cyprus: Ciprus
+        czechrepublic: Cseh Köztársaság
+        denmark: Dánia
+        estonia: "Észtország"
+        europe: Európa
+        finland: Finnország
+        france: Franciaország
+        germany: Németország
+        greece: Görögország
+        hungary: Magyarország
+        iceland: Izland
+        ireland: "Írország"
+        israel: Izrael
+        italy: Olaszország
+        latvia: Lettország
+        lithuania: Litvánia
+        luxembourg: Luxemburg
+        malta: Málta
+        netherlands: Hollandia
+        norway: Norvégia
+        poland: Lengyelország
+        portugal: Portugália
+        romania: Románia
+        russia: Oroszország
+        serbia: Szerbia
+        slovakia: Szlovákia
+        slovenia: Szlovénia
+        spain: Spanyolország
+        sweden: Svédország
+        switzerland: Svájc
+        turkey: Törökország
+        ukraine: Ukrajna
+        unitedkingdom: Egyesült Királyság
+        unitedstatesofamerica: Amerikai Egyesült Államok
+      creator: alkotó
+      header:
+        channel: Gyűjtemények
+        colourpalette: Szín
+        country: Ország
+        data_provider: Intézmény
+        image_aspectratio: Tájolás
+        image_colour: Paletta
+        image_size: Méret
+        language: Nyelv
+        language_of_description: Leírás nyelve
+        media: Csak médiára mutató linket tartalmazó elemek
+        mime_type: Fájl formátum
+        provider: Aggregátor
+        reusability: Felhasználhatom?
+        sound_duration: Időtartam
+        sound_hq: Magas minőségű
+        text_fulltext: Teljes szöveg
+        type: Média
+        ugc: Mutasd a felhasználók által feltöltött tartalmat
+        video_duration: Videó hossza
+        year: Dátum
+      image_aspectratio:
+        landscape: Fekvő
+        portrait: Portré
+      image_colour:
+        'false': Fekete és fehér
+        'true': Szín
+      image_size:
+        extra_large: Extra nagy (4MP+)
+        large: Nagy (1-4MP)
+        medium: Közepes (0,5-1MP)
+        small: Kicsi (<0.5MP)
+      language:
+        bg: 
+        ca: 
+        cs: 
+        da: 
+        de: 
+        el: 
+        en: 
+        es: 
+        et: 
+        fi: 
+        fr: 
+        ga: 
+        he: 
+        hr: 
+        hu: 
+        is: 
+        it: 
+        lt: 
+        lv: 
+        mt: 
+        mul: 
+        nl: 
+        'no': 
+        pl: 
+        pt: 
+        ro: 
+        ru: 
+        sk: 
+        sl: 
+        sr: 
+        sv: 
+        tr: 
+        uk: 
+        yi: 
+      less: Kevesebb
+      media:
+        'false': Nem
+        'true': Igen
+      more: Több
+      more-refinements: Több finomítás
+      resource:
+        type: Típus
+      reusability:
+        advanced: "Összetett"
+        advanced-cc-by: 
+        advanced-cc-by-nc: 
+        advanced-cc-by-nc-nd: 
+        advanced-cc-by-nc-sa: 
+        advanced-cc-by-nd: 
+        advanced-cc-by-sa: 
+        advanced-cc0: CC0
+        advanced-orphan-work: 
+        advanced-out-of-copyright-non-commercial: 
+        advanced-pdm: 
+        advanced-rrfa: 
+        advanced-rrpa: 
+        advanced-rrra: 
+        advanced-ucs: ''
+        open: Igen, tulajdonos feltüntetésével
+        permission: Csak engedéllyel
+        restricted: Igen, korlátozásokkal
+        simple: Egyszerű
+      sound_duration:
+        long: Hosszú (6+ perc)
+        medium: Közepes (3-6 perc)
+        short: Rövid (30s - 3 perc)
+        very_short: Nagyon rövid (<30s)
+      sound_hq:
+        'true': Igen
+      source: Forrás
+      text_fulltext:
+        'false': Nem
+        'true': Igen
+      type:
+        3d: 3D
+        image: Kép
+        sound: Hang
+        text: Szöveg
+        video: Videó
+      type-image:
+        orientation:
+          label: Kép tájolása
+          landscape: Fekvő
+          portrait: Portré
+        quality:
+          all: Mutasd az összeset
+          hq-only: Csak jó minőségűek mutatása
+          label: Minőség
+        size:
+          explanation: Mit jelentenek ezek a méretek?
+          label: kép mérete
+          large: Nagy (%{data})
+          medium: Közepes (%{data})
+          small: Kicsi (%{data})
+          xl: Extra nagy (%{data})
+      type-sound:
+        duration:
+          label: Audió hossza
+          long: Hosszú (%{data})
+          medium: Közepes (%{data})
+          short: Rövid (%{data})
+          very-short: Nagyon rövid (%{data})
+      type-video:
+        duration:
+          label: Videó hossza
+          long: Hosszú (%{data})
+          medium: Közepes (%{data})
+          short: Rövid (%{data})
+      video_duration:
+        long: Hosszú (20+ perc)
+        medium: Közepes (4-20 perc)
+        short: Rövid (<4 perc)
+      year:
+        from: "-tól"
+        to: "-ig"
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: Találj meg minket a közösségi médiában
+    forgot-password: Elfelejtetted a jelszavad?
+    genres: műfajok
+    genres-chamber-music: Kamarazene
+    genres-classical-music: Klasszikus zene
+    genres-concertos: Versenyművek
+    genres-non-western-classical-music: Nem nyugati klasszikus művek
+    genres-opera: Opera
+    genres-popular-music: Könnyűzene
+    genres-traditional-music: Népzene
+    header:
+      connect: Csatlakozás
+      develop: Fejlesztés
+      discover: Felfedezés
+      network: Hálozat
+    help: Segítség
+    home: Főoldal
+    javascript-required: Hogy ezt a tartalmat megtekinthesse, kérjük engedélyezze a JavaScript használatát; javasoljuk olyan böngésző használatát is, mely a HTML5 tartalmat támogatja.
+    labs: Labs
+    labs-text: Remixelje a kulturális tartalmainkat az API-ink és adathalmazaink segítségével.
+    language-basque: Baszk
+    language-bulgarian: Bolgár
+    language-catalan: Katalán
+    language-croatian: Horvát
+    language-czech: Cseh
+    language-danish: Dán
+    language-dutch: Holland
+    language-english: Angol
+    language-estonian: "Észt"
+    language-finnish: Finn
+    language-french: Francia
+    language-gaelic: Kelta
+    language-german: Német
+    language-greek: Görög
+    language-hungarian: Magyar
+    language-icelandic: Izlandi
+    language-italian: Olasz
+    language-latvian: Lett
+    language-lithuanian: Litván
+    language-maltese: Máltai
+    language-norwegian: Norvég
+    language-polish: Lengyel
+    language-portuguese: Portugál
+    language-romanian: Román
+    language-russian: Orosz
+    language-slovakian: Szlovák
+    language-slovenian: Szlovén
+    language-spanish: Spanyol
+    language-swedish: Svéd
+    language-ukranian: Ukrán
+    login: Bejelentkezés
+    mission: Megváltoztatjuk a világot a kultúra segítségével! Európa gazdag örökségére akarunk építeni és ezt könnyen hozzáférhetővé tenni az emberek számára, legyen látogatóink célja munka, tanulás vagy akár csupán szórakozás.
+    mission-title: Küldetésünk
+    more:
+      load-more: Több
+      show-more: Mutass többet
+      view-more: Nézz meg többet
+    more-info: Több információ
+    newsletter:
+      email-address-invalid: Működő email címet adjon meg.
+      email-address-required: Meg kell adnia egy email címet.
+      language-required: Meg kell jelölnie egy nyelvet.
+      signup: Iratkozon fel hírlevelünkre.
+    our-sites: weboldalaink
+    password: Jelszó
+    professional: Pro
+    professional-text: Csatlakozz te is, oszd meg adataidat vagy használd fel a miénket
+    refine-your-search: Finomítsd a keresésed
+    register: Regisztráció
+    research: Kutatás
+    research-text: A kutató közösséghez való csatlakozás
+    search-area:
+      search-button-image-alt: Keresés
+      search-placeholder-text: Adj meg egy keresőszót
+    search-collections: Gyűjtemények
+    search-collections-text: Fedezd fel Európa kulturális örökségét
+    share: Oszd meg
+    sitemap: Oldaltérkép
+    terms-and-policies: Felhasználási feltételek és házirend
+    type: típus
+  'no': Norvégia
+  pl: Portugál
+  site:
+    facet:
+      language:
+        show:
+          results: Találatok
+        show-results-all: Mutasd az összes találatot

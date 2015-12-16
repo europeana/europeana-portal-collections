@@ -1,6 +1,6 @@
 require 'support/shared_examples/europeana_api_requests'
 
-RSpec.describe PortalController, type: :controller do
+RSpec.describe PortalController do
   # workaround for https://github.com/jnicklas/capybara/issues/1396
   include RSpec::Matchers.clone
 
@@ -81,12 +81,10 @@ RSpec.describe PortalController, type: :controller do
       expect(assigns(:similar)).to all(be_a(Europeana::Blacklight::Document))
     end
 
-    it 'requests the MIME type from the proxy service' do
-      expect(a_media_proxy_request_for(record_id)).to have_been_made
+    it 'does not request the MIME type from the proxy service' do
+      expect(a_media_proxy_request_for(record_id)).not_to have_been_made
     end
-    it 'assigns the MIME type to @mime_type' do
-      expect(assigns(:mime_type)).to eq('application/pdf')
-    end
+
     it 'does not break if there is no edm:isShownBy'
     it 'does not make a request to the service if record has no edm:isshownby'
     it 'checks that the edm:isShownBy value is sane, i.e. http:// or https://'
@@ -108,7 +106,7 @@ RSpec.describe PortalController, type: :controller do
       context 'with param debug=json' do
         let(:params) { { id: 'abc/123', format: 'html', debug: 'json' } }
         it 'assigns pretty JSON document to @debug' do
-          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json))
+          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json.merge(hierarchy: assigns(:hierarchy).as_json)))
         end
       end
     end
@@ -170,8 +168,45 @@ RSpec.describe PortalController, type: :controller do
 
     context 'when format is HTML' do
       let(:params) { { id: 'abc/123', format: 'html' } }
-      it 'returns an unknown format error' do
-        expect { get :similar, params }.to raise_error(ActionController::UnknownFormat)
+      it 'renders an error page' do
+        get :similar, params
+        expect(response.status).to eq(500)
+        expect(response).to render_template('portal/static')
+      end
+    end
+  end
+
+  describe 'GET media' do
+    context 'when format is JSON' do
+      before do
+        get :media, params
+      end
+      let(:params) { { id: 'abc/123', format: 'json' } }
+      let(:record_id) { '/' + params[:id] }
+      it_behaves_like 'a record API request'
+      it_behaves_like 'no hierarchy API request'
+      it 'responds with JSON' do
+        expect(response.content_type).to eq('application/json')
+      end
+      it 'has 200 status code' do
+        expect(response.status).to eq(200)
+      end
+      it 'renders JSON ERB template' do
+        expect(response).to render_template('portal/media')
+      end
+      context 'with page param' do
+        let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
+        it 'paginates'
+        it 'defaults per_page to 4'
+      end
+    end
+
+    context 'when format is HTML' do
+      let(:params) { { id: 'abc/123', format: 'html' } }
+      it 'renders an error page' do
+        get :media, params
+        expect(response.status).to eq(500)
+        expect(response).to render_template('portal/static')
       end
     end
   end

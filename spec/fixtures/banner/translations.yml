@@ -1,0 +1,5 @@
+generic_banner_translations:
+  locale: en
+  title: Banner title
+  body: Banner body
+  globalized_model: generic_banner

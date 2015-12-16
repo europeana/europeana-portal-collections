@@ -1,8 +1,153 @@
 nl:
-  Symphonies: 
+  Symphonies: Symphonieën
+  X11:
+    colours:
+      '000000': 
+      000080: 
+      00008B: 
+      0000CD: 
+      0000FF: 
+      '006400': 
+      008000: 
+      008080: 
+      008B8B: 
+      00BFFF: 
+      00CED1: 
+      00FA9A: 
+      00FF00: 
+      00FF7F: 
+      00FFFF: 
+      '191970': 
+      1E90FF: 
+      20B2AA: 
+      228B22: 
+      2E8B57: 
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: 
+      '800000': 
+      '800080': 
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: 
+      F0FFF0: 
+      F0FFFF: 
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: 
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
   global:
     about-us: Over ons
-    blog: blog
     channel:
       archaeology: Archeology
       architecture: 'Architectuur '
@@ -14,90 +159,108 @@ nl:
       natural-history: natuurlijke historie
       newspapers: Kranten
       performing-arts: Beeldende kunst
-    channels: Kanalen
     channels-art: Test text
     channels-art-image: Test text
     channels-art-link: Test text
-    channels-art-url: 
     channels-fashion: Mode
     channels-music: Muziek
-    channels-music-link: 
     choose-language: Taal
     email-address: e-mail adres
-    exhibitions: Tentoonstellingen
     facet:
       advanced:
-        options: 
+        options: Opties
         show:
-          direct:
-            links: 
-          thumbnails: 
-          ugc: 
+          ugc: Publieke bijdragen
       art:
         form:
           paintings:
-            genre: 
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            genre: Genre
+            medium: Medium
+      carrier: Door
+      colour: Kleur
+      colour-black-and-white: Zwart / wit
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
+        austria: Oostenrijk
+        belgium: België
+        bulgaria: Bulgarije
+        croatia: Kroatië
+        cyprus: Cyprus
+        czechrepublic: Tjechië
+        denmark: Denemarken
+        estonia: Estland
+        europe: Europa
+        finland: Finland
+        france: Frankrijk
+        germany: Duitsland
+        greece: Griekenland
+        hungary: Hongarije
+        iceland: Ijsland
+        ireland: Ierland
+        israel: Israël
+        italy: Italië
+        latvia: Letland
+        lithuania: Litouwen
+        luxembourg: Luxemburg
+        malta: Malta
+        netherlands: Nederland
+        norway: Noorwegen
+        poland: Polen
+        portugal: Portugal
+        romania: Roemeens
+        russia: Rusland
+        serbia: Serivië
+        slovakia: Slowakije
+        slovenia: Slovenië
+        spain: Spanje
+        sweden: Zweden
+        switzerland: Zwitserland
+        turkey: Turkije
+        ukraine: Oekraïne
+        unitedkingdom: Engeland
         unitedstatesofamerica: Amerika
-      creator: 
+      creator: Auteur
       header:
-        channel: 
-        country: 
-        data_provider: 
-        language: 
-        language_of_description: 
-        provider: 
-        reusability: 
-        type: 
-        year: 
+        channel: Collecties
+        colourpalette: Kleur
+        country: Land
+        data_provider: Instituut
+        image_aspectratio: Oriëntatie
+        image_colour: Palet
+        image_size: Grootte
+        language: Taal
+        language_of_description: Omschrijving in
+        media: Alleen objecten die naar media verwijzen
+        mime_type: Bestandsformaat
+        provider: Aggegrator
+        reusability: Kan ik het gebruiken?
+        sound_duration: Lengte
+        sound_hq: Hoge Kwaliteit
+        text_fulltext: Volledige tekst
+        type: Media
+        ugc: Toon bijdragen door gebruikers
+        video_duration: Video duur
+        year: Datum
+      image_aspectratio:
+        landscape: Landschap
+        portrait: Portret
+      image_colour:
+        'false': Zwart / Wit
+        'true': Kleur
+      image_size:
+        extra_large: Extra groot (4MP+)
+        large: Groot (1-4MP)
+        medium: Medium (0.5-1MP)
+        small: Klein (<0.5MP)
       language:
-        bg: 
-        de: 
+        bg: ''
+        ca: 
+        cs: 
+        da: Deens
+        de: Duits
         el: 
         en: 
         es: 
-        et: 
+        et: ''
         fi: 
         fr: 
         ga: 
@@ -111,21 +274,28 @@ nl:
         mt: 
         mul: 
         nl: 
+        'no': 
         pl: 
         pt: 
         ro: 
+        ru: 
         sk: 
         sl: 
+        sr: 
         sv: 
         tr: 
+        uk: 
         yi: 
       less: Minder
-      more: 
-      more-refinements: 
+      media:
+        'false': Nee
+        'true': Ja
+      more: Meer
+      more-refinements: Verder verfijnen
       resource:
-        type: 
+        type: Type
       reusability:
-        advanced: 
+        advanced: Geavanceerd
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -136,7 +306,6 @@ nl:
         advanced-orphan-work: 
         advanced-out-of-copyright-non-commercial: 
         advanced-pdm: 
-        advanced-rarr: 
         advanced-rrfa: 
         advanced-rrpa: 
         advanced-rrra: 
@@ -145,132 +314,148 @@ nl:
         permission: 
         restricted: 
         simple: 
-      source: 
+      sound_duration:
+        long: Lang (6+ min)
+        medium: Medium (3-6 min)
+        short: Kort (30s - 3 min)
+        very_short: Zeer kort (<30s)
+      sound_hq:
+        'true': Ja
+      source: Bron
+      text_fulltext:
+        'false': Nee
+        'true': Ja
       type:
-        3d: 
-        image: 
-        sound: 
-        text: 
-        video: 
+        3d: 3D
+        image: Afbeelding
+        sound: Geluid
+        text: Tekst
+        video: Video
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: 'oriëntatie '
+          landscape: Landschap
+          portrait: Portret
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: Toon alles
+          hq-only: Alleen van hoge kwaliteit
+          label: Kwaliteit
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: 'Wat betekenen deze afmetingen? '
+          label: Afbeeldings grootte
+          large: Groot (%{data})
+          medium: Medium (%{data})
+          small: Klein (%{data})
+          xl: Extra groot (%{data})
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: Audio duur
+          long: Lang (%{data})
+          medium: Medium (%{data})
+          short: Kort (%{data})
+          very-short: Zeer kort (%{data})
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
+          label: Video duur
+          long: Lang (%{data})
+          medium: Medium (%{data})
+          short: Kort (%{data})
+      video_duration:
+        long: Lang (20+ min)
+        medium: Medium (4-20 min)
+        short: Kort (<4 min)
       year:
-        from: 
-        to: 
-    find-us-elsewhere: 
+        from: van
+        to: tot
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: Volg ons
     forgot-password: 'Wachtwoord kwijt? '
     genres: thema's
-    genres-chamber-music: 
+    genres-chamber-music: Kamer muziek
     genres-classical-music: Klassieke muziek
     genres-concertos: Concertos
-    genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+    genres-non-western-classical-music: Niet westers klassiek
+    genres-opera: Opera
+    genres-popular-music: Populair
+    genres-traditional-music: Traditioneel
     header:
       connect: verbind
       develop: ontwikkel
       discover: ontdek
       network: netwerk
-    help: 
-    home: 
-    javascript-required: 
+    help: Help
+    home: Home
+    javascript-required: 'Als u dit wilt zien, moet u Javascript toestaan en upgraden naar een web browser die HTML5 ondersteund. '
     labs: Labs
     labs-text: Gebruik onze APIs en datasets
-    language-basque: 
-    language-bulgarian: 
-    language-catalan: 
-    language-croatian: 
-    language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
-    language-gaelic: 
-    language-german: 
-    language-greek: 
-    language-hungarian: 
-    language-icelandic: 
-    language-italian: 
-    language-latvian: 
-    language-lithuanian: 
-    language-maltese: 
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
-    login: 
-    logo-image: 
+    language-basque: Baskisch
+    language-bulgarian: Bulgaars
+    language-catalan: Catalaans
+    language-croatian: Kroatisch
+    language-czech: Tjechisch
+    language-danish: Deens
+    language-dutch: Nederlands
+    language-english: Engels
+    language-estonian: Ests
+    language-finnish: Fins
+    language-french: Frans
+    language-gaelic: Iers
+    language-german: Duits
+    language-greek: Grieks
+    language-hungarian: Hongaars
+    language-icelandic: Ijslands
+    language-italian: Italiaans
+    language-latvian: Lets
+    language-lithuanian: Litouws
+    language-maltese: Maltees
+    language-norwegian: Noors
+    language-polish: Pools
+    language-portuguese: Portugees
+    language-romanian: Romaans
+    language-russian: Russisch
+    language-slovakian: Slovaaks
+    language-slovenian: Sloveens
+    language-spanish: Spaans
+    language-swedish: Zweeds
+    language-ukranian: Ukraans
+    login: Aanmelden
+    mission: 'Wij geloven dat cultuur de wereld een stukje beter maakt! Daarom verzamelen wij al het cultureel erfgoed en maken het online beschikbaar zodat u het kan gebruiken voor professionele, entertainment en leerdoeleinden. '
+    mission-title: Onze missie
     more:
-      load-more: 
-      show-more: 
-      view-more: 
-    more-info: 
-    our-mission: 
-    our-mission-text: 
+      load-more: Meer
+      show-more: Meer
+      view-more: Meer
+    more-info: Meer informatie
+    newsletter:
+      email-address-invalid: Vul een geldig email adres in
+      email-address-required: Dit is een verplicht veld
+      language-required: Dit is een verplicht veld
+      signup: Word lid van onze nieuwsbrief!
     our-sites: onze sites
-    password: 
+    password: Wachtwoord
     professional: Professional
     professional-text: Doe mee; deel uw collectie met ons!
-    refine-your-search: 
-    register: 
+    refine-your-search: Verfijn uw zoekresultaten
+    register: Registreer
     research: Research
     research-text: Voor academici
-    rights-box:
-      background-image-provider: 
-      background-image-provider-url: 
-      background-image-rights-icons-alt: 
-      background-image-title: 
-      background-image-title-url: 
     search-area:
       search-button-image-alt: Zoek
       search-placeholder-text: Voeg een zoekfunctie toe
     search-collections: Collecties
     search-collections-text: Ontdek Europa's cultureel erfgoed
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+    share: Deel
+    sitemap: Sitemap
+    terms-and-policies: Gebruikersvoorwaarden
+    type: tupe
+  'no': Noorwegen
+  pl: Portugal
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Resultaten
+        show-results-all: Toon alle resultaten

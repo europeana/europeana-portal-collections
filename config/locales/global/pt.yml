@@ -1,0 +1,461 @@
+pt:
+  Symphonies: Sinfonias
+  X11:
+    colours:
+      '000000': 
+      000080: 
+      00008B: 
+      0000CD: 
+      0000FF: 
+      '006400': 
+      008000: 
+      008080: 
+      008B8B: 
+      00BFFF: 
+      00CED1: 
+      00FA9A: 
+      00FF00: 
+      00FF7F: 
+      00FFFF: Aqua
+      '191970': 
+      1E90FF: 
+      20B2AA: 
+      228B22: 
+      2E8B57: 
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: Aquamarine
+      '800000': 
+      '800080': 
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: Azul Alice
+      F0FFF0: 
+      F0FFFF: Azure
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: Branco Antigo
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
+  global:
+    about-us: Sobre nós
+    channel:
+      archaeology: arqueologia
+      architecture: arquitectura
+      art: arte
+      fashion: moda
+      home: Início
+      maps: mapas
+      music: música
+      natural-history: história natural
+      newspapers: jornais
+      performing-arts: artes-performativas
+    channels-art: Coleção História da Arte
+    channels-art-image: Coleção História da Arte imagem
+    channels-art-link: 'Coleção História da Arte '
+    channels-fashion: Moda
+    channels-music: Música
+    choose-language: Língua
+    email-address: endereço de email
+    facet:
+      advanced:
+        options: Opções
+        show:
+          ugc: Conteúdo gerado pelo utilizador
+      art:
+        form:
+          paintings:
+            genre: Género
+            medium: Meio
+      carrier: Suporte
+      colour: Cor
+      colour-black-and-white: Preto e branco
+      country:
+        austria: "Áustria"
+        belgium: Bélgica
+        bulgaria: Bulgária
+        croatia: Croácia
+        cyprus: Chipre
+        czechrepublic: República Checa
+        denmark: Dinamarca
+        estonia: Estónia
+        europe: Europa
+        finland: Finlândia
+        france: França
+        germany: Alemanha
+        greece: Grécia
+        hungary: Hungria
+        iceland: Islândia
+        ireland: Irlanda
+        israel: Israel
+        italy: Itália
+        latvia: Letónia
+        lithuania: Lituânia
+        luxembourg: Luxemburgo
+        malta: Malta
+        netherlands: Holanda
+        norway: Noruega
+        poland: Polônia
+        portugal: Portugal
+        romania: Roménia
+        russia: Rússia
+        serbia: Sérvia
+        slovakia: Eslováquia
+        slovenia: Eslovénia
+        spain: Espanha
+        sweden: Suécia
+        switzerland: Suíça
+        turkey: Turquia
+        ukraine: Ucrânia
+        unitedkingdom: Reino Unido
+        unitedstatesofamerica: EUA
+      creator: criador
+      header:
+        channel: Coleções
+        colourpalette: Cor
+        country: País
+        data_provider: Instituição
+        image_aspectratio: Orientação
+        image_colour: Paleta
+        image_size: Tamanho
+        language: Língua
+        language_of_description: Língua da Descrição
+        media: Apenas itens com ligação a media
+        mime_type: Formato do ficheiro
+        provider: Agregador
+        reusability: Posso usar?
+        sound_duration: Duração
+        sound_hq: Alta Qualidade
+        text_fulltext: Texto completo
+        type: Media
+        ugc: Mostrar conteúdo contribuído por utilizadores
+        video_duration: Duração do Vídeo
+        year: Data
+      image_aspectratio:
+        landscape: Paisagem
+        portrait: Retrato
+      image_colour:
+        'false': Preto e branco
+        'true': Cor
+      image_size:
+        extra_large: Extra Grande (4MP+)
+        large: Grande (1-4MP)
+        medium: Média (0.5-1MP)
+        small: Pequena (<0.5MP)
+      language:
+        bg: 
+        ca: 
+        cs: 
+        da: 
+        de: 
+        el: 
+        en: 
+        es: 
+        et: 
+        fi: 
+        fr: 
+        ga: 
+        he: 
+        hr: 
+        hu: 
+        is: 
+        it: 
+        lt: 
+        lv: 
+        mt: 
+        mul: ''
+        nl: 
+        'no': 
+        pl: 
+        pt: 
+        ro: 
+        ru: 
+        sk: 
+        sl: 
+        sr: 
+        sv: 
+        tr: 
+        uk: 
+        yi: 
+      less: Menos
+      media:
+        'false': Não
+        'true': Sim
+      more: Mais
+      more-refinements: Mais ajustes
+      resource:
+        type: Tipo
+      reusability:
+        advanced: Avançado
+        advanced-cc-by: ''
+        advanced-cc-by-nc: ''
+        advanced-cc-by-nc-nd: ''
+        advanced-cc-by-nc-sa: ''
+        advanced-cc-by-nd: ''
+        advanced-cc-by-sa: ''
+        advanced-cc0: ''
+        advanced-orphan-work: 
+        advanced-out-of-copyright-non-commercial: ''
+        advanced-pdm: ''
+        advanced-rrfa: ''
+        advanced-rrpa: ''
+        advanced-rrra: ''
+        advanced-ucs: ''
+        open: Sim, com atribuição
+        permission: Apenas com permissão
+        restricted: Sim, com restrições
+        simple: Simples
+      sound_duration:
+        long: Longa (6+ min)
+        medium: Média (3-6 min)
+        short: Curta (30s - 3 min)
+        very_short: Muito curta (<30s)
+      sound_hq:
+        'true': Sim
+      source: Fonte
+      text_fulltext:
+        'false': Não
+        'true': Sim
+      type:
+        3d: 3D
+        image: Imagem
+        sound: Som
+        text: Texto
+        video: Vídeo
+      type-image:
+        orientation:
+          label: Orientação da Imagem
+          landscape: Paisagem
+          portrait: Retrato
+        quality:
+          all: Mostrar tudo
+          hq-only: Mostrar apenas alta qualidade
+          label: Qualidade
+        size:
+          explanation: O que estes tamanhos significam?
+          label: Tamanho de imagem
+          large: Grande (%{data})
+          medium: Médio (%{data})
+          small: Pequeno (%{data})
+          xl: Extra grande (%{data})
+      type-sound:
+        duration:
+          label: Duração de áudio
+          long: Longa (%{data})
+          medium: Média (%{data})
+          short: Curta (%{data})
+          very-short: Muito curta (%{data})
+      type-video:
+        duration:
+          label: Duração de vídeo
+          long: Longa (%{data})
+          medium: Média (%{data})
+          short: Curta (%{data})
+      video_duration:
+        long: Long (20+ min)
+        medium: Média (4-20 min)
+        short: Curta (<4 min)
+      year:
+        from: de
+        to: a
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: Encontre-nos noutros sítios
+    forgot-password: Esqueceu-se da palavra-passe?
+    genres: géneros
+    genres-chamber-music: Música de câmara
+    genres-classical-music: Música clássica
+    genres-concertos: Concertos
+    genres-non-western-classical-music: Música clássica não-ocidental
+    genres-opera: "Ópera"
+    genres-popular-music: Musica popular
+    genres-traditional-music: Música tradicional
+    header:
+      connect: conectar
+      develop: desenvolver
+      discover: descobrir
+      network: ligue-se
+    help: Ajuda
+    home: Início
+    javascript-required: Para ver este conteúdo por favor active o JavaScript, e considere actualizar para um navegador que suporte conteúdo HTML5.
+    labs: Europeana Labs
+    labs-text: Remisture conteúdo cultural com as nossas APIs e conjunto de dados
+    language-basque: Basco
+    language-bulgarian: Búlgaro
+    language-catalan: Catalão
+    language-croatian: Croata
+    language-czech: Checo
+    language-danish: Dinamarquês
+    language-dutch: Holandês
+    language-english: Inglês
+    language-estonian: Estónio
+    language-finnish: Finlandês
+    language-french: Francês
+    language-gaelic: Gaélico
+    language-german: Alemão
+    language-greek: Grego
+    language-hungarian: Húngaro
+    language-icelandic: Islandês
+    language-italian: Italiano
+    language-latvian: Letão
+    language-lithuanian: Lituano
+    language-maltese: Maltês
+    language-norwegian: Norueguês
+    language-polish: Polaco
+    language-portuguese: Português
+    language-romanian: Romeno
+    language-russian: Russo
+    language-slovakian: Eslovaco
+    language-slovenian: Esloveno
+    language-spanish: Espanhol
+    language-swedish: Sueco
+    language-ukranian: Ucraniano
+    login: Entrar
+    mission: Transformamos o mundo com cultura! Queremos construir sobre a rica herança cultural Europeia e tornar o seu uso mais fácil, seja para trabalhar, para aprender ou apenas para diversão.
+    mission-title: A nossa missão
+    more:
+      load-more: Mais
+      show-more: Mostrar mais
+      view-more: Ver mais
+    more-info: Mais informação
+    newsletter:
+      email-address-invalid: O endereço terá que ser um endereço de correio electrónico válido.
+      email-address-required: Um endereço de correio electrónico terá que ser especificado.
+      language-required: Uma língua terá que ser especificada.
+      signup: Inscreva-se na nossa newsletter
+    our-sites: os nossos sites
+    password: Palavra-passe
+    professional: Europeana Pro
+    professional-text: Envolva-se, partilhe os seus dados ou use os nossos
+    refine-your-search: Refinar pesquisa
+    register: Registe-se
+    research: Europeana Research
+    research-text: Uma ligação com a comunidade académica
+    search-area:
+      search-button-image-alt: Pesquisar
+      search-placeholder-text: Adicione um termo de pesquisa
+    search-collections: Coleções
+    search-collections-text: Explore a herança cultura da Europa
+    share: Partilhe
+    sitemap: Mapa do site
+    terms-and-policies: Termos & Políticas de uso
+    type: tipo
+  'no': Noruega
+  pl: Portugal
+  site:
+    facet:
+      language:
+        show:
+          results: Resultados
+        show-results-all: Mostrar todos os resultados

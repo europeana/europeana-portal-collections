@@ -1,0 +1,42 @@
+about:
+  slug: 'about'
+  state: 1
+
+about_us:
+  slug: 'about/us'
+  state: 1
+
+about_us_all:
+  slug: 'about/us/all'
+  state: 1
+
+contact:
+  slug: 'contact'
+  state: 1
+
+home:
+  slug: ''
+  state: 1
+  type: 'Page::Landing'
+
+music_collection:
+  slug: 'collections/music'
+  state: 1
+  type: 'Page::Landing'
+
+draft_landing_page:
+  slug: 'draft'
+  state: 0
+  type: 'Page::Landing'
+
+not_found:
+  slug: 'errors/not_found'
+  state: 1
+  type: 'Page::Error'
+  http_code: 404
+
+internal_server_error:
+  slug: 'errors/internal_server_error'
+  state: 1
+  type: 'Page::Error'
+  http_code: 500

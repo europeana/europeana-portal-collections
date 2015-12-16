@@ -22,8 +22,12 @@ module Europeana
       # Application configuration should go into files in config/initializers
       # -- all .rb files in that directory are automatically loaded.
 
-      # Load job and routing classes
-      config.autoload_paths += %W(#{config.root}/app/jobs #{config.root}/app/routes)
+      # Load extra classes
+      config.autoload_paths += %W(
+        #{config.root}/app/jobs #{config.root}/app/jobs/concerns
+        #{config.root}/app/routes #{config.root}/app/presenters
+        #{config.root}/app/validators
+      )
 
       # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
       # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -31,8 +35,12 @@ module Europeana
 
       # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
       # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-      # config.i18n.default_locale = :de
+      config.i18n.default_locale = :en
       config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
+      config.i18n.available_locales = [:bg, :ca, :da, :de, :el, :en, :es, :et,
+                                       :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl,
+                                       :pl, :pt, :ro, :ru, :sv]
+      config.i18n.fallbacks = true
 
       # Do not swallow errors in after_commit/after_rollback callbacks.
       config.active_record.raise_in_transactional_callbacks = true
@@ -41,7 +49,7 @@ module Europeana
       config.active_job.queue_adapter = :delayed_job
 
       # Read relative URL root from env
-      config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT']
+      config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
 
       # Load Redis config from config/redis.yml, if it exists
       config.cache_store = begin
@@ -56,15 +64,20 @@ module Europeana
         uri.path = '/' + [redis_config[:db], redis_config[:namespace]].join('/')
 
         [:redis_store, uri.to_s]
-      rescue RuntimeError
+      rescue RuntimeError => e
         :null_store
       end
 
-      # Read settings from env vars
-      config.x.edm_is_shown_by_proxy = ENV['EDM_IS_SHOWN_BY_PROXY']
-      config.x.europeana_styleguide_cdn = ENV['EUROPEANA_STYLEGUIDE_CDN']
-      config.x.js_entrypoint = ENV['JS_ENTRYPOINT']
-      config.x.js_version = ENV['JS_VERSION']
+      if ENV['HTTP_HOST']
+        config.action_mailer.default_url_options = { host: ENV['HTTP_HOST'] }
+      end
+
+      # Load Action Mailer SMTP config from config/smtp.yml, if it exists
+      config.action_mailer.smtp_settings = begin
+        Rails.application.config_for(:smtp).symbolize_keys
+      rescue RuntimeError
+        {}
+      end
     end
   end
 end

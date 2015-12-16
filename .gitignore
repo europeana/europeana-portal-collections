@@ -31,8 +31,11 @@
 # Ignore Spring config file.
 /config/spring.rb
 
+# Ignore SMTP config file
+/config/smtp.yml
+
 # Ignore rvm files.
-.ruby-version
+/.ruby-version
 .ruby-gemset
 
 # Ignore IDE files.
@@ -47,6 +50,9 @@
 
 # Ignore uploaded files
 /public/system
+
+# Ignore robots.txt
+/public/robots.txt
 
 # Ignore dotenv config files.
 /.env

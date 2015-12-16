@@ -1,3 +1,5 @@
+require 'support/shared_examples/page_with_top_nav'
+
 RSpec.describe 'portal/show.html.mustache' do
   let(:blacklight_config) do
     Blacklight::Configuration.new do |config|
@@ -6,7 +8,7 @@ RSpec.describe 'portal/show.html.mustache' do
   end
 
   let(:blacklight_document) do
-    # @todo Move to factory
+    # @todo Move to factory / fixture
     id = '/abc/123'
     source = {
       about: id,
@@ -25,21 +27,17 @@ RSpec.describe 'portal/show.html.mustache' do
   end
 
   before(:each) do
-    RSpec.configure do |config|
-      config.mock_with :rspec do |mocks|
-        mocks.verify_partial_doubles = false
-      end
-    end
-
+    allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:current_search_session).and_return nil
     allow(view).to receive(:search_session).and_return({})
     allow(view).to receive(:search_action_path).and_return('/search')
-    Stache::ViewContext.current = view
 
     assign(:document, blacklight_document)
     assign(:similar, [])
   end
+
+  it_should_behave_like 'page with top nav'
 
   it 'should have meta description' do
     render

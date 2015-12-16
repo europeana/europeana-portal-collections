@@ -17,9 +17,10 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'simplecov'
 require 'coveralls'
+require 'simplecov'
 
+# Test coverage reports
 if Coveralls.will_run?.nil?
   # Generate Simplecov report during local testing
   SimpleCov.start

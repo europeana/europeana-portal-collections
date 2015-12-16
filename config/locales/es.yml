@@ -1,0 +1,295 @@
+es:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
+  global:
+    labs-link: 'link a labs '
+    navigation:
+      all_blog_posts: Todos los Posts...
+      all_exhibitions: Todas las Exhibiciones
+      blog: Blog
+      browse: Explorar
+      browse_colours: Colores
+      browse_newcontent: 'Nuevo contenido '
+      browse_sources: Recursos
+      channels: Colecciones
+      collections: Colecciones
+      exhibitions: Exhibiciones
+      home: Inicio
+    pro-link: link a pro
+    pro-text: texto para pro
+    settings: Ajustes
+  site:
+    alpha:
+      feedback_banner:
+        description: Una versión Beta significa que esta pagina esta en desarrollo y sera actualizada regularmente. Ocasionalmente puede estar fuera de servicio. Tus comentarios pueden ayudar a mejorarla.
+        link-text: Déjanos tus comentarios!
+        title: Esta es la versión Beta de nuestras colecciones, el Canal de Música y el Arte Colecciones de Historia .
+    blog-link: Link al Blog
+    browse:
+      colours:
+        description: 
+        title: Colores
+      newcontent:
+        description: 
+        tableh1: Todas las instituciones
+        tableh2: Objetos
+        tableh3: Fecha
+        title: Nuevo Contenido
+      sources:
+        description: 
+        title: Recursos
+    collections:
+      art-history:
+        description: Desde el Renacimiento a los surrealistas, pasando por la escultura del Imperio Romano al Arte Contemporáneo, Europeana Arte y el canal de Historia del Arte te presentan a los artistas y las obras de toda Europa.
+        title: 'Europeana Historia Arte '
+      data-types:
+        3d: Objectos 3D
+        count: objetos
+        images: Imágenes
+        moving-images: Videos
+        sound: Grabaciones sonoras
+        texts: Textos
+      labels:
+        credits: Curado por
+        recent: Adiciones recientes
+        spotlight-on: Destacados
+      music:
+        description: La <strong>Colección de Música de Europeana<strong> reúne las mejores grabaciones, partituras y otros objectos relacionados con la música de los archivos audiovisuales europeos, bibliotecas y museos. <a href="/portal/channels/music/about">Más acerca del Colección de Música.</a>
+        title: Europeana Música
+    facet:
+      language:
+        show:
+          results: Resultados
+    footer:
+      menu:
+        about: Acerca de
+        become-a-provider: Unete a nosotros
+        contact: Contactar
+        copyright: Derechos de Autor
+        data-providers: Todos los proveedores de datos
+        help: Ayuda
+        new-collections: Nuevas Colecciones
+        rights: Terminos de usp
+        search-tips: 'Consejos de búsqueda '
+        using-myeuropeana: Usando Mi Europeana
+    home:
+      strapline: 'Explorar %{total_item_count}  obras de arte, artefactos, libros, vídeos y sonidos de toda Europea. '
+    more: Más
+    my-europeana: Mi Europeana
+    my-europeana-link: link a Mi Europeana
+    navigation:
+      breadcrumb:
+        item_detail: Detalles del objeto
+        results_list: Resulatdos
+        return_home: Regresar al Inicio
+    news: Noticias
+    object:
+      actions:
+        attribute-author: Atribuye el autor
+        attribute-html: HTML
+        attribute-plaintext: Texto sin formato
+        download: Descargar
+        download-additional: También disponible como
+        downloaddata: Descargar datos
+        open-media: Abrir este objeto
+        show-less-data: Mostrar menos datos
+        show-more-data: Mostrar más datos
+        technicalmetadata: Meta-datos tecnicos
+      enrichment:
+        who:
+          title: Título
+      hierarchy:
+        title: Objetos relacionados
+        view-items-above: ver objetos más arriba
+        view-items-below: ver objetos más abajo
+      meta-label:
+        codec: Codec
+        collection-name: Set de datos
+        concept: Concepto
+        concepts: Clasificaciones
+        consists-of: Consiste en
+        contributor: Contribuidor
+        copyright: Derechos de Autor
+        creation-date: Fecha de creación
+        creator: Creador
+        current-location: Localización actual
+        data-provider: Proveedor de datos
+        date: Fecha
+        dates: Fechas
+        description: Descripción
+        dimensions: Dimensiones
+        duration: Duración
+        edm:
+          has-met: Relacionado con
+          incorporates: Incorpora
+          is-derivative-of: Derivado de
+          is-representation-of: Representación de
+          is-similar-to: Es similar a
+          is-successor-of: Sucede a
+          realises: 
+          was-present-at: Presente en
+        extent: Tamaño
+        file-size: Tamaño del archivo
+        format: Formato
+        fps: 'Fotogramas por segundo '
+        has-type: Tipo
+        identifier: Identificador
+        is-format-of: Formato de
+        is-part-of: Parte de
+        is-referenced-by: Citado por
+        is-replaced-by: Reemplazado por
+        is-required-by: Requerido por
+        issued: Fecha de Primera publicación
+        language: Idioma
+        latitude: 'Latitud '
+        location: Localización
+        longitude: Longitud
+        map: Mapa
+        map-tiles: Mosaico
+        medium: Técnica
+        people: Personas
+        period: Periodo
+        place: Lugar
+        place-time: Lugar/Tiempo
+        properties: Propiedades
+        provenance: 'Procedencia '
+        provided-by: Más acerca de
+        provided-by-detail: 
+        provider: Proveedor
+        providing-country: 'País proveedor '
+        publication-date: Fecha de publicación
+        publisher: Editor
+        references: Referencias
+        refs-rels: 'Referencias y relaciones '
+        relations: Relaciones
+        rights: Derechos de Autor
+        rights-human: Puedo usarlo?
+        runtime: Tiempo de ejecución
+        runtime-unit-seconds: segundos
+        source: Fuente
+        subject: Materia
+        temporal: 
+        time: Tiempo
+        timestamp-created: Primera publicación en Europeana
+        timestamp-updated: "Última actualización en Europeana"
+        timestamp_created: Primera publicación en Europeana  (%{timestamp_created})
+        timestamp_updated: "Última actualización en Europeana (%{timestamp_updated})"
+        title: Título
+        toc: Tabla de contenidos
+        type: Tipo
+        ugc: Contenido proporcionado por los usuarios
+        version: Versión
+      named-entities:
+        title: Entidades nombradas
+        what:
+          broader: Concepto más amplio
+          label: Etiqueta del concepto
+          term: Termino del concepto
+          title: Qué
+        when:
+          begin: Inicio de Periodo
+          end: Fin del Periodo
+          label: Etiqueta de Periodo
+          term: Termino de Periodo
+          title: Cuando
+        where:
+          label: Etiqueta de lugar
+          latitude: Latitud del Lugar
+          longitude: Longitud del Lugar
+          term: Término de Lugar
+          title: Donde
+        who:
+          label: Etiqueta de Agente
+          term: Término de Agente
+          title: Quien
+      nav:
+        next: Siguiente
+        prev: Anterior
+      points:
+        east: Este
+        north: Norte
+        south: Sur
+        west: Oeste
+      show-more-similar-items: Mostrar más
+      similar-items: Objetos similares
+    pages:
+      '404':
+        intro: Disculpe, no podemos encontrar esta página
+        text: 'Desgraciadamente no hemos podido encontrar la página que estaba buscando. Intente buscar en Europeana o quizá le interesen los siguientes objetos seleccionados  '
+      about:
+        text: |-
+          <p>Tanto si vienes qui en busca de inspiración, para investigar, buscando el siguiente diseño para tu taza de café o solo para curiosear, esperamos que encuentres lo que buscas entre los 45 millones de objetos que guardamos.</p>
+
+          <p>Nuestro  material viene de toda Europa y el alcance de nuestra colecciones es verdaderamente sorprendente. Nuestro objetivo es guiarte para que encuentres los tesoros que andas buscando.</p>
+
+          <p>Durante los últimos agnos  hemos estado expandiendo nuestras colecciones, conociéndolas mejor y aprendiendo lo que tu quieres hacer con ellas. ¡Ha llegado la hora de cambiar algunas cosas y hacer algunas mejoras en nuestro servicios! </p>
+
+          <p>Estamos probando una nueva versión de Europeana Colecciones y estamos trabajando duro para mejorar tu experiencia y para que encuentres más fácilmente lo que buscas. Te pediremos que nos ayudes respondiendo a algunas preguntas. Tus respuestas nos serán de gran ayuda así que por favor gasta unos minutos para compartir tus comentarios. ¡Gracias! </p>
+        title: "¡Bienvenido, amante de la cultura!"
+      music-channel-about:
+        text: "<p>Imagina mirar manuscritos originales de una obra musical mientras escuchas diferentes interpretaciones y lees la biografía del compositor. Estos es posible en el canal Europeana Música.</p>  \n\n<p><a href=\"http://www.europeanasounds.eu\">Nuestros colaboradores</a>, expertos en Música de toda Europa han seleccionado cuidadosamente esta colección de grabaciones, partituras, imágenes de instrumentos musicales, libros sobre música y otros contenidos relacionados con la materia.</p>\n\n<p>Hemos hecho disponible esta versión de prueba del Canal de Música a vosotros, nuestros usuarios, para que podáis ayudarnos a darle forma y mejorarlo. Cuando lo visites a veces te pediremos que respondas a los cuestionarios que aparecen en la pantalla. Te agradecemos que gastes unos minutos en responder a nuestras preguntas.</p> \n\n<p>En nombre de la transparencia y la privacidad, te comunicamos que guardamos las estadísticas de uso en Google Analytics y en un servicio llamado Hotjar. Hacemos esto porque nos muestra lo que estamos haciendo mal y nos ayuda a mejorar el canal de música. Todos los registros son privados y anónimos y solo serán usados para mejorar nuestro servicio.</p> \n\n<p>Te animamos a buscar en nuestras colecciones, escuchar música, ver partituras u ojearlas. Cuando los derechos de autor lo permitan, te puedes descargar lo que más te guste o visitar nuestras exhibiciones virtuales y descubrir la música de una manera como nunca antes lo habías hecho.</p>"
+        title: Acerca del Canal de Música
+    results:
+      actions:
+        configure-actions: Configurar acciones
+        dutchmasters: Maestros holandeses
+        favouriteart: Arte favorito
+        label: Acciones
+        newcollection: Nueva colección
+        product-save: Guardar
+        saveto: Guardar en
+        show-all-collections: Muestra todas las colecciones
+      list:
+        all-results:
+          3D: 3D
+          images: 'Imágenes '
+          text: Texto
+          video: Video
+        count-and-terms: "%{results_count} resultados"
+        empty: No hay resultados
+        empty-with-terms: 'Tu búsqueda de %{query_terms} no ha dado resultados '
+        header: Resultados para
+        header-and: y
+        in-channel: En Canal
+        less: Menos
+        less_adv: Menos filtros
+        more: Más
+        more_adv: Filtros avanzados
+        product-3D: 3D
+        product-image: 'Imagen '
+        product-sound: Sonido
+        product-text: Texto
+        product-video: Video
+        results-relevance: Relevancia
+        single-result: 1 resultado para %{query_terms}
+        view:
+          grid: Retícula
+          list: Lista
+        view-at-provider: Ver en
+    search:
+      placeholder:
+        text: 'Añadir término de búsqueda '
+      similar:
+        prefix: Similar a %{mlt_item}
+    settings:
+      actions:
+        clear-selection: Eliminar selección
+        save-settings: Guardar ajustes
+      language:
+        auto-translate-limit: 
+        auto-translate-page: Traducir automáticamente los objetos de la página al...
+        auto-translate-page-short: 'Traducir automáticamente los objetos al... '
+        auto-translate-query: Traducir automáticamente los términos de búsqueda al...
+        available: Idiomas disponibles
+        default: Idioma por defecto
+        flash:
+          alert: Idioma no disponible. Idiomas disponibles %{locales}
+          notice: Ajustes de idioma guardados
+        label: Idioma
+        settings-label: Ajustes de idioma
+      title: Ajustes

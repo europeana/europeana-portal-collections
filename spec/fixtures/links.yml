@@ -1,0 +1,3 @@
+generic_banner_link:
+  url: 'http://www.example.com/'
+  linkable: generic_banner (Banner)

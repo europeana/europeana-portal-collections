@@ -34,7 +34,7 @@ RSpec.feature 'Search page' do
           sleep 2 if js
 
           path_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
-          expect(current_path).to eq(path_root + '/search')
+          expect(current_path).to eq('/search')
         end
 
         it 'ignores 2nd empty search' do

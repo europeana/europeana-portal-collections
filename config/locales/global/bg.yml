@@ -1,0 +1,461 @@
+bg:
+  Symphonies: "Симфонии"
+  X11:
+    colours:
+      '000000': "Черен"
+      000080: ''
+      00008B: ''
+      0000CD: 
+      0000FF: 
+      '006400': 
+      008000: 
+      008080: 
+      008B8B: 
+      00BFFF: 
+      00CED1: 
+      00FA9A: 
+      00FF00: 
+      00FF7F: 
+      00FFFF: 
+      '191970': 
+      1E90FF: 
+      20B2AA: 
+      228B22: 
+      2E8B57: 
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: 
+      '800000': "Кафяв"
+      '800080': "Лилав"
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: 
+      F0FFF0: 
+      F0FFFF: 
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: 
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
+  global:
+    about-us: "За нас"
+    channel:
+      archaeology: "Археология"
+      architecture: "Архитектура"
+      art: "Изкуство"
+      fashion: "Мода"
+      home: "Начало"
+      maps: "Карти"
+      music: "Музика"
+      natural-history: "Естествознание"
+      newspapers: "Вестници"
+      performing-arts: "Сценични изкуства"
+    channels-art: "Колекция по история на изкуството"
+    channels-art-image: "Изображение за колекция по история на изкуството"
+    channels-art-link: "Колекция по история на изкуството"
+    channels-fashion: "Мода"
+    channels-music: "Музика"
+    choose-language: "Език"
+    email-address: "Имейл адрес"
+    facet:
+      advanced:
+        options: "Опции"
+        show:
+          ugc: " Генерирано от потребителите съдържание"
+      art:
+        form:
+          paintings:
+            genre: "Жанр"
+            medium: "Медия"
+      carrier: "Носител"
+      colour: "Цвят"
+      colour-black-and-white: "Черно-бял"
+      country:
+        austria: "Австрия"
+        belgium: "Белгия"
+        bulgaria: "България"
+        croatia: "Хърватска"
+        cyprus: "Кипър"
+        czechrepublic: "Чехия"
+        denmark: "Дания"
+        estonia: "Естония"
+        europe: "Европа"
+        finland: "Финландия"
+        france: "Франция"
+        germany: "Германия"
+        greece: "Гърция"
+        hungary: "Унгария"
+        iceland: "Исландия"
+        ireland: "Ирландия"
+        israel: "Израел"
+        italy: "Италия"
+        latvia: "Латвия"
+        lithuania: "Литва"
+        luxembourg: "Люксембург"
+        malta: "Малта"
+        netherlands: "Холандия"
+        norway: "Норвегия"
+        poland: "Полша"
+        portugal: "Португалия"
+        romania: "Румъния"
+        russia: "Русия"
+        serbia: "Сърбия"
+        slovakia: "Словакия"
+        slovenia: "Словения"
+        spain: "Испания"
+        sweden: "Швеция"
+        switzerland: "Швейцария"
+        turkey: "Турция"
+        ukraine: "Украйна"
+        unitedkingdom: "Великобритания"
+        unitedstatesofamerica: "САЩ"
+      creator: "Автор"
+      header:
+        channel: "Колекции"
+        colourpalette: "Цвят"
+        country: "Държава"
+        data_provider: "Институция"
+        image_aspectratio: "Ориентация"
+        image_colour: "Палитра"
+        image_size: "Размер"
+        language: "Език"
+        language_of_description: "Език на описанието"
+        media: "Само обекти с линк към медийния файл"
+        mime_type: "Файлов формат"
+        provider: "Агрегатор на съдържание"
+        reusability: "Мога ли да го ползвам?"
+        sound_duration: "Продължителност"
+        sound_hq: "Високо качество"
+        text_fulltext: "Пълен текст"
+        type: "Медия"
+        ugc: "Покажи генерирано от потребителите съдържание"
+        video_duration: "Продължителност на видеото"
+        year: "Дата"
+      image_aspectratio:
+        landscape: "Пейзажна ориентация"
+        portrait: "Портретна ориентация"
+      image_colour:
+        'false': "Черно-бял"
+        'true': "Цвят"
+      image_size:
+        extra_large: "Много голям (4MP+)"
+        large: " Голям (1-4MP)"
+        medium: "Среден (0.5-1MP)"
+        small: "Малък (<0.5MP)"
+      language:
+        bg: "Български"
+        ca: 
+        cs: 
+        da: 
+        de: 
+        el: 
+        en: 
+        es: 
+        et: 
+        fi: 
+        fr: 
+        ga: 
+        he: 
+        hr: 
+        hu: 
+        is: 
+        it: 
+        lt: 
+        lv: 
+        mt: 
+        mul: 
+        nl: 
+        'no': 
+        pl: 
+        pt: 
+        ro: 
+        ru: 
+        sk: 
+        sl: 
+        sr: 
+        sv: 
+        tr: 
+        uk: 
+        yi: 
+      less: "По-малко"
+      media:
+        'false': "Не"
+        'true': "Да"
+      more: "Повече"
+      more-refinements: "Пoвече филтри"
+      resource:
+        type: "Тип"
+      reusability:
+        advanced: "Подробен"
+        advanced-cc-by: CC BY
+        advanced-cc-by-nc: CC BY-NC
+        advanced-cc-by-nc-nd: CC BY-NC-ND
+        advanced-cc-by-nc-sa: CC BY-NC-SA
+        advanced-cc-by-nd: CC BY-ND
+        advanced-cc-by-sa: CC BY-SA
+        advanced-cc0: CC0
+        advanced-orphan-work: Orphan Work
+        advanced-out-of-copyright-non-commercial: Out of copyright - non commercial re-use
+        advanced-pdm: Public Domain Marked
+        advanced-rrfa: Rights reserved - Free access
+        advanced-rrpa: Rights reserved - Paid access
+        advanced-rrra: Rights Reserved - Restricted Access
+        advanced-ucs: Unknown copyright status
+        open: "Да, с посочване на авторските права"
+        permission: "Само с разрешение"
+        restricted: "Да, с ограничения"
+        simple: "Просто"
+      sound_duration:
+        long: "Дълъг (6+ мин)"
+        medium: "Среден (3-6 мин)"
+        short: "Кратък (30 сек - 3 мин)"
+        very_short: "Много кратък (<30 сек)"
+      sound_hq:
+        'true': "Да"
+      source: "Източник"
+      text_fulltext:
+        'false': "Не"
+        'true': "Да"
+      type:
+        3d: 3D
+        image: "Изображение"
+        sound: "Аудио"
+        text: "Текст"
+        video: "Видео"
+      type-image:
+        orientation:
+          label: "Ориентация на изображението"
+          landscape: "Пейзажна ориентация"
+          portrait: "Портретна ориентация"
+        quality:
+          all: "Покажи всички"
+          hq-only: "Покажи само с високо качество"
+          label: "Качество"
+        size:
+          explanation: "Какво означават тези размери?"
+          label: "Размер на изображението"
+          large: "Голям  (%{data})"
+          medium: "Среден (%{data})"
+          small: "Малък (%{data})"
+          xl: "Много голям (%{data})"
+      type-sound:
+        duration:
+          label: "Продължителност на аудио файла"
+          long: "Дълъг (%{data})"
+          medium: "Среден (%{data})"
+          short: "Кратък (%{data})"
+          very-short: "Много кратък (%{data})"
+      type-video:
+        duration:
+          label: "Продължителност на видео файла"
+          long: "Дълъг (%{data})"
+          medium: "Среден (%{data})"
+          short: "Кратък (%{data})"
+      video_duration:
+        long: "Дълъг (20+ мин)"
+        medium: "Среден (4-20 мин)"
+        short: "Кратък (<4 мин)"
+      year:
+        from: "от"
+        to: "до"
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: "Други наши страници"
+    forgot-password: "Забравена парола?"
+    genres: "жанрове"
+    genres-chamber-music: "Камерна музика"
+    genres-classical-music: "Класическа музика"
+    genres-concertos: "Концерти"
+    genres-non-western-classical-music: "Класическа музика (извън Западна Европа)"
+    genres-opera: "Опера"
+    genres-popular-music: "Поп музика"
+    genres-traditional-music: "Фолклорна музика"
+    header:
+      connect: "Свържи се"
+      develop: "Разработи"
+      discover: "Открий"
+      network: "мрежа"
+    help: "Помощ"
+    home: "Начало"
+    javascript-required: "За да видите това съдържание, моля разрешете ползването на JavaScript и обмислете инсталирането на браузер, който поддържа HTML5 съдържание."
+    labs: "Лаборатории"
+    labs-text: "Експериментирайте с културно съдържание чрез нашите APIs & бази данни"
+    language-basque: "Баскски"
+    language-bulgarian: "Български"
+    language-catalan: "Каталонски"
+    language-croatian: "Хърватски"
+    language-czech: "Чешки"
+    language-danish: "Датски"
+    language-dutch: "Холандски"
+    language-english: "Английски"
+    language-estonian: "Естонски"
+    language-finnish: "Финландски"
+    language-french: "Френски"
+    language-gaelic: "Келтски"
+    language-german: "Немски"
+    language-greek: "Гръцки"
+    language-hungarian: "Унгарски"
+    language-icelandic: "Исландски"
+    language-italian: "Италиански"
+    language-latvian: "Латвийски"
+    language-lithuanian: "Литовски"
+    language-maltese: "Малтийски"
+    language-norwegian: "Норвежки"
+    language-polish: "Полски"
+    language-portuguese: "Португалски"
+    language-romanian: "Румънски"
+    language-russian: "Руски"
+    language-slovakian: "Словашки"
+    language-slovenian: "Словенски"
+    language-spanish: "Испански"
+    language-swedish: "Шведски"
+    language-ukranian: "Украински"
+    login: "Вход"
+    mission: "Ние променяме света чрез културата! Нашата цел е да осигурим по-лесен достъп и използване на европейското културно наследство за работа, обучение или удоволствие."
+    mission-title: "Нашата мисия"
+    more:
+      load-more: "Още"
+      show-more: "Покажи повече"
+      view-more: "Виж повече"
+    more-info: "Повече информация"
+    newsletter:
+      email-address-invalid: "Моля, въведете валиден имейл адрес."
+      email-address-required: "Моля, въведете имейл адрес."
+      language-required: "Моля, изберете език."
+      signup: "Абонамент за бюлентин"
+    our-sites: "нашите страници"
+    password: "Парола"
+    professional: Pro
+    professional-text: "Включете се, споделете своите данни или използвайте нашите"
+    refine-your-search: "Стеснете търсенето"
+    register: "Регистрация"
+    research: "Изследвания"
+    research-text: "Свързване с академичните общности"
+    search-area:
+      search-button-image-alt: "Търсене"
+      search-placeholder-text: "Добавете дума за търсене"
+    search-collections: "Колекции"
+    search-collections-text: "Запознайте се с европейското културно наследство"
+    share: "Споделете"
+    sitemap: "Карта на сайта"
+    terms-and-policies: "Условия за ползване  & Политики"
+    type: "тип"
+  'no': "Норвегия"
+  pl: "Португалия"
+  site:
+    facet:
+      language:
+        show:
+          results: "Резултати"
+        show-results-all: "Покажи всички резултати"

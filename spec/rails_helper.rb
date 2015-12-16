@@ -5,9 +5,14 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+# Gem requires
+require 'cancan/matchers'
 require 'capybara_helper'
+require 'shoulda/matchers'
 require 'webmock_helper'
-require 'support/relative_url_root_helper'
+
+# Local requires
+require 'support/view_test_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -37,6 +42,9 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  # All the fixtures, all the time.
+  config.global_fixtures = :all
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -52,5 +60,10 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.include RelativeUrlRootHelper
+  config.include Devise::TestHelpers, type: :controller
+  config.include ViewTestHelper, type: :view
+
+  config.before(:each) do
+    Rails.cache.clear
+  end
 end
