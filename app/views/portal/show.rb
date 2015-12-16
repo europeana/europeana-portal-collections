@@ -365,7 +365,7 @@ module Portal
             ),
             rights: simple_rights_label_data,
             social_share: {
-              url: URI.escape(request.original_url),
+              url: URI.escape(document_url(document, format: 'html')),
               facebook: true,
               pinterest: false,
               twitter: true,
