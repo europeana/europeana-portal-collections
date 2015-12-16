@@ -39,12 +39,15 @@ Rails.application.configure do
                 params['f'][field] << value
                 if params['qf'].is_a?(Array)
                   params['qf'].delete(qf)
-                  params.delete('qf') if params['qf'].blank?
                 else
                   params.delete('qf')
                 end
               end
             end
+          end
+          if params.key?('qf')
+            params['qf'] = [params['qf']].flatten
+            params.delete('qf') if params['qf'].all?(&:blank?)
           end
         end
 
