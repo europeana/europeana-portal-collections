@@ -55,7 +55,7 @@ pl:
         sound: Nagrania
         texts: Teksty
       labels:
-        credits: Kuratorowane przez
+        credits: 'Kurator:'
         recent: Ostatnio dodane
         spotlight-on: Zbliżenie
       music:

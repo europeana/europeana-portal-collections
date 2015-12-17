@@ -3,286 +3,289 @@
     site:
       browse:
         newcontent:
-          description: 
+          description: I denne seksjonen kan du finne alt innhold som nylig har blitt lagt til på Europeana-samlingene. Her kan du se hvilke nye institusjoner som har publisert nytt innhold, hvor mye innhold og når! Bare klikk på lenkene under for å se samlingene deres.
         sources:
-          description: 
+          description: Under ser du en liste over kilder for våre samlinger. Disse kildene utvider og bidrar til samlinger på Europeana, klikk på lenkene under som interesserer deg for å se på alle samlingene deres!
   global:
-    labs-link: 
+    labs-link: lenker til labs
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
+      all_blog_posts: Alle bloggposter ...
+      all_exhibitions: Alle utstillinger ...
+      blog: Blogg
+      browse: Bla igjennom
+      browse_colours: Farger
+      browse_newcontent: Nytt innhold
+      browse_sources: Kilder
+      channels: Samlinger
+      collections: Samlinger
+      exhibitions: Utstillinger
+      home: Hjem
+    pro-link: Lenke til pro
+    pro-text: tekst for pro
     settings: Innstillinger
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: En beta-versjon betyr at et nettsted er under utvikling og vil bli oppdatert regelmessig. Noen gang kan det være nedkoplet. Dine tilbakemeldinger hjelper oss med å forbedre siden vår.
+        link-text: Gi oss dine tilbakemeldinger!
+        title: Dette er en beta-versjon av våre nye "Samlinger" og "Musikksamlinger"
+    blog-link: lenke til blogg
     browse:
       colours:
-        description: 
-        title: 
+        description: I denne seksjonen kan du søke etter bilder ut fra farge. Bare klikk på det du vil se på i samlingen!
+        title: Farger
       newcontent:
-        description: 
-        tableh1: 
-        tableh2: 
-        tableh3: 
-        title: 
+        description: I denne seksjonen kan du finne alt innhold som nylig har blitt lagt til på Europeana-samlingene. Her kan du se hvilke nye institusjoner som har publisert nytt innhold, hvor mye innhold og når! Bare klikk på lenkene under for å se samlingene deres.
+        tableh1: Alle institusjoner
+        tableh2: Objekter
+        tableh3: Dato
+        title: Nytt innhold
       sources:
-        description: 
-        title: 
+        description: Under ser du en liste over kilder for våre samlinger. Disse kildene utvider og bidrar til samlinger på Europeana, klikk på lenkene under som interesserer deg for å se på alle samlingene deres!
+        title: Kilder
     collections:
       art-history:
-        description: 
-        title: 
+        description: Fra renessansen til surrealistene, og fra antikkens skulpturer til samtidskunst, Europeana kunsthistoriske samling introduserer deg for kunstnere og kunstverk fra over alt i hele Europa.
+        title: Europeana Kunsthistorie
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: 3D-objekter
+        count: objekter
+        images: Bilder
+        moving-images: Videoer
+        sound: Lydopptak
+        texts: Tekst
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: 'Kuratert av '
+        recent: Nylige tilføringer
+        spotlight-on: Søkelys på
       music:
-        description: 
-        title: 
+        description: ' <strong>Europeana musikksamling</strong> samler de beste musikkopptakene, noteark og annet materiale som er relatert til musikksamlinger fra Europas audio-visuelle arkiver, bibliotek, arkiv og museum. <a href="/portal/channels/music/about">Find out more about the Music Collection.</a>'
+        title: Europeana Musikk
     facet:
       language:
         show:
-          results: 
+          results: Resultat
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        about: Om
+        become-a-provider: Bli en av våre partnere
+        contact: Kontakt
+        copyright: Opphavsrett
+        data-providers: Alle isntitusjoner
+        help: Hjelp
+        new-collections: Nye samlinger
+        rights: Vilkår for bruk og retningslinjer
+        search-tips: Søketips
+        using-myeuropeana: Bruke min Europeana
     home:
-      strapline: 
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+      strapline: Utforsk %{total_item_count} kunstverk, gjenstander, bøker, videoer og lyd fra  hele Europa.
+    more: Mer ...
+    my-europeana: Mitt Europeana
+    my-europeana-link: lenke til Mitt Europeana
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: Objekt
+        results_list: Resultater
+        return_home: Tilbake
+    news: Nyheter
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        attribute-author: Tilskrive forfatteren
+        attribute-html: HTML
+        attribute-plaintext: Enkel tekst
+        download: laste ned
+        download-additional: Også tilgjengelig som
+        downloaddata: 'Last ned '
+        open-media: "Åpne dette mediaobjektet"
+        show-less-data: Vis mindre data
+        show-more-data: Vis mer data
+        technicalmetadata: Tekniske metadata
       enrichment:
         who:
-          title: 
+          title: Tittel
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Relaterte objekter
+        view-items-above: se på objekter over
+        view-items-below: se på objekter under
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        codec: Codec
+        collection-name: Datasett
+        concept: Konsept
+        concepts: Klassifiseringer
+        consists-of: Består av
+        contributor: Bidragsyter
+        copyright: Opphavsrett
+        creation-date: Opprettelsesdato
+        creator: Oppretter
+        current-location: Nåværende plassering
+        data-provider: Institusjon
+        date: Dato
+        dates: Datoer
+        description: Beskrivelse
+        dimensions: Dimensjoner
+        duration: Varighet
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+          has-met: Er relatert til
+          incorporates: Omfatter
+          is-derivative-of: Er avledet av
+          is-representation-of: Er en representasjon av
+          is-similar-to: Er lik som
+          is-successor-of: 'Er etterfølgeren av '
+          realises: Frislipp av
+          was-present-at: Tilstede
+        extent: Størrelse
+        file-size: Filstørrelse
+        format: Format
+        fps: Rammer per sekund
+        has-type: Har type
+        identifier: 'Identifiserer '
+        is-format-of: Har format som
+        is-part-of: Er del av
+        is-referenced-by: 'Referert til av '
+        is-replaced-by: Erstattes av
+        is-required-by: Kreves av
+        issued: Først utgitt
+        language: Språk
+        latitude: Breddegrad
+        location: Sted
+        longitude: Lengdegrad
+        map: Kart
+        map-tiles: Fliser
+        medium: Medium
+        people: Folk
+        period: Periode
+        place: Plass
+        place-time: Plass/Tid
+        properties: Egenskaper
+        provenance: Opphavssted
+        provided-by: Finn ut mer
+        provided-by-detail: Europeana viser dette objektet  via %{institution_name_and_link}. Besøk nettsiden deres for mer informasjon.
+        provider: Leverandør
+        providing-country: Giverland
+        publication-date: Dato for publisering
+        publisher: Utgiver
+        references: Referanser
+        refs-rels: Referanser og relasjoner
+        relations: Relasjoner
+        rights: Rettigheter
+        rights-human: Kan jeg bruke dette?
+        runtime: Kjøretid
+        runtime-unit-seconds: sekunder
+        source: Kilde
+        subject: Subjekt
+        temporal: Temporal
+        time: Tid
+        timestamp-created: Først publisert i Europeana
+        timestamp-updated: Sist oppdatert i Europeana
+        timestamp_created: Først publisert i Europeana (%{timestamp_created})
+        timestamp_updated: Sist oppdatert i Europeana (%{timestamp_updated})
+        title: Tittel
+        toc: Innholdsfortegnelse
+        type: Type
+        ugc: Brukergenerert innhold
+        version: Versjon
       named-entities:
-        title: 
+        title: Enheter
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: Større sammenheng
+          label: Konsept merkelapp
+          term: Konsept term
+          title: Subjekter, ressurstyper, sjangre og former (konsepter)
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: Periode Start
+          end: Periode Slutt
+          label: Periode Merkelapp
+          term: Periode Term
+          title: Tidsspenn og datoer (tidsspenn)
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
+          label: Sted Merkelapp
+          latitude: Breddegrad
+          longitude: Lengdegrad
+          term: Sted Term
+          title: Stedsnavn (Steder)
         who:
-          label: 
-          term: 
-          title: 
+          label: Agent Merkelapp
+          term: Agent Term
+          title: Personer og organisasjoner (agenter)
       nav:
-        next: 
-        prev: 
+        next: Neste
+        prev: Forrige
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: "Øst"
+        north: Nord
+        south: Sør
+        west: Vest
+      show-more-similar-items: Vis mer
+      similar-items: Like objekter
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Beklager, vi finner ikke den siden
+        text: Dessverre kunne vi ikke finne siden du ser etter. Forsøk å søke i Europeana eller kanskje vil du like de utvalgte objektene under.
       about:
-        text: 
-        title: 
+        text: |+
+          <p>Søker du etter et eldre favorittbilde? Undersøker du noe eller holder på med en skoleoppgave? Ser du etter ditt neste kaffekopp-design? Lyst til å lære noe nytt?
+          Samme hva grunnen din er for å besøke Europeana, velkommen!</p>
+
+        title: Velkommen, du som elsker kultur!
       music-channel-about:
         text: 
-        title: 
+        title: Om musikksamlingene
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: Konfigurere handlinger
+        dutchmasters: Nederlandske mestere
+        favouriteart: Favorittkunst
+        label: Handlinger
+        newcollection: Ny samling
+        product-save: Lagre
+        saveto: Lagre til
+        show-all-collections: Vis alle samlinger
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+          3D: 3D
+          images: Bilder
+          text: Tekst
+          video: Video
+        count-and-terms: "%{results_count} resultater"
+        empty: Ingen resultater
+        empty-with-terms: Ditt søk etter %{query_terms} ga ingen resultater
+        header: Resultater for
+        header-and: og
+        in-channel: i en tematisk samling
+        less: Mindre
+        less_adv: Færre nyanser
+        more: Mer
+        more_adv: Avanserte filter
+        product-3D: 3D
+        product-image: Bilde
+        product-sound: Lyd
+        product-text: Tekst
+        product-video: Video
+        results-relevance: Relevanse
+        single-result: 1 resultat for %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Grid
+          list: Liste
+        view-at-provider: 'Se på '
     search:
       placeholder:
-        text: 
+        text: Legg til en søketerm
       similar:
-        prefix: 
+        prefix: 'Lik som: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Tydelig utvalg
+        save-settings: Spar innstilinger
       language:
-        auto-translate-limit: 
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-limit: Maksimum %{max_languages} kan velges
+        auto-translate-page: Automatisk oversett objektside til ...
+        auto-translate-page-short: 'Autooversett objekter til '
+        auto-translate-query: Oversett automatisk søkenøkkelord til ...
+        available: Tilgjengelige språk
+        default: Forhåndsvalgt språk
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
-      title: 
+          alert: 'Ugyldig språk er valgt. Tilgjengelige språk: %{locales}'
+          notice: Språkinnstillinger er lagret.
+        label: Språk
+        settings-label: språkinnstillinger
+      title: Innstillinger
