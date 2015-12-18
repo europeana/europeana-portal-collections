@@ -245,7 +245,7 @@ pl:
         portrait: Portret
       image_colour:
         'false': Czarno-biały
-        'true': Kolor
+        'true': W kolorze
       image_size:
         extra_large: Bardzo duży
         large: Duży
