@@ -222,13 +222,24 @@
         intro: Beklager, vi finner ikke den siden
         text: Dessverre kunne vi ikke finne siden du ser etter. Forsøk å søke i Europeana eller kanskje vil du like de utvalgte objektene under.
       about:
-        text: |+
+        text: |-
           <p>Søker du etter et eldre favorittbilde? Undersøker du noe eller holder på med en skoleoppgave? Ser du etter ditt neste kaffekopp-design? Lyst til å lære noe nytt?
           Samme hva grunnen din er for å besøke Europeana, velkommen!</p>
 
+          <p>Fordyp deg i Europa sin største online samling av kunst, kultur og vitenskap. Europeana sine samlinger gir deg materiale fra kjente og ikke så kjente (men alltid fascinerende) biblioteker, museum, gallerier og arkiver i Europa </p>
+
+          <p>Bøker og manuskripter, photographer og malerier, skulpturer og noteark, videoer og lydopptak, dagbøker og kart - alt er her. Ikke noe behov for å reise i Europa, verken fysisk eller virtuelt!</p>
+
+          <p>Utforsk, oppdag, se, hør, les, last ned ... Nyt!</p>
+
+          <p>Hvorfor ikke ta en kikk på Europeana sin kunsthistoriske samling og Europeana sin musikksamling? Vi har også tilpassende ressurser for forskere og utviklere /innovatører innen kultur (her kan du finne vårt API), og dessuten en rekke virtuelle utstillinger og en blogg. </p>
+
+          <p>Hvis du fremdeles er lysten på mer, kan du fading daglige dose av kultur på Facebook, Twitter, Medium, Google+ og Pinterest.</p>
+
+          <p>For mer informasjon om hvordan vi jobber med kulturinstitusjoner og deres samlinger, besøk Europeana Pro.</p>
         title: Velkommen, du som elsker kultur!
       music-channel-about:
-        text: 
+        text: "<p>Forestill deg at du ser på det originale, håndskrevne musikkmanuskriptet, mens du hører på en annen tolkning av det, og leser en biografi om komponisten.\nDette kan du i Europeana sin musikksamling.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Våre partnere</a>, alle musikkeksperter, fra hele Europa har møysommelig kuratert denne samlingen av musikkopptak, noteark, bilder av musikkinstrumenter, bøker om musikk og annet musikkrelatert innhold. </p>\n\n<p>Vi har gjort denne tidlige testversjonen av musikksamlingen tilgjengelig for dere, våre brukere, så dere kan hjelpe oss med forme samlingen ettersom vi utvikler den videre. Så når du besøker samlingen vil du av og til bli spurt om å svare på spørsmål eller spørreundersøkelser som vil dukke opp på skjermen din. Vi setter veldig stor pris på om du kan ta deg tid til å svare på disse spørsmålene eller spørreundersøkelsene!</p>\n\n<p>Dessuten, for å ta hensyn til transparens og privatliv, vil vi opplyse deg om at vi logger brukerstatstikk og brukervaner i Google Analytics og i et system som kalles Hotjar. Vi gjør dette for å finne ut hvor designet vårt er feilslått, og dette hjelper oss å forbedre musikksamligen. Alle logger holdes privat og er anonymisert og vil bare bli brukt til å forbedre vår løsning.</p>\n\n<p>Vi oppfordrer deg til å søke i samlingen, spille musikk, bla i noteark eller lese. Når opphavsretten tillater det, kan du laste ned de tingene du liker best. Og du kan besøke våre virtuelle utstillinger for å oppdage musikk på helt nye måter!</p>"
         title: Om musikksamlingene
     results:
       actions:
