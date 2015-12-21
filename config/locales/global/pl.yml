@@ -1,461 +1,302 @@
 pl:
-  Symphonies: Symfonie
-  X11:
-    colours:
-      '000000': Czarny
-      000080: 
-      00008B: 
-      0000CD: 
-      0000FF: 
-      '006400': 
-      008000: 
-      008080: 
-      008B8B: 
-      00BFFF: 
-      00CED1: 
-      00FA9A: 
-      00FF00: 
-      00FF7F: 
-      00FFFF: 
-      '191970': 
-      1E90FF: 
-      20B2AA: 
-      228B22: 
-      2E8B57: 
-      2F4F4F: 
-      32CD32: 
-      3CB371: 
-      40E0D0: 
-      4169E1: 
-      4682B4: 
-      483D8B: 
-      48D1CC: 
-      4B0082: 
-      556B2F: 
-      5F9EA0: 
-      6495ED: 
-      '663399': 
-      66CDAA: 
-      '696969': 
-      6A5ACD: 
-      6B8E23: 
-      '708090': 
-      '778899': 
-      7B68EE: 
-      7CFC00: 
-      7F0000: 
-      7F007F: 
-      7FFF00: 
-      7FFFD4: 
-      '800000': Kasztanowy
-      '800080': 
-      '808000': 
-      '808080': ''
-      87CEEB: 
-      87CEFA: 
-      8A2BE2: 
-      8B0000: 
-      8B008B: 
-      8B4513: 
-      8FBC8F: 
-      90EE90: 
-      9370DB: 
-      9400D3: 
-      98FB98: 
-      9932CC: 
-      9ACD32: 
-      A020F0: 
-      A0522D: 
-      A52A2A: 
-      A9A9A9: 
-      ADD8E6: 
-      ADFF2F: 
-      AFEEEE: 
-      B03060: 
-      B0C4DE: 
-      B0E0E6: 
-      B22222: 
-      B8860B: 
-      BA55D3: 
-      BC8F8F: 
-      BDB76B: 
-      BEBEBE: 
-      C0C0C0: 
-      C71585: 
-      CD5C5C: 
-      CD853F: 
-      D2691E: 
-      D2B48C: 
-      D3D3D3: 
-      D8BFD8: 
-      DA70D6: 
-      DAA520: 
-      DB7093: 
-      DC143C: 
-      DCDCDC: 
-      DDA0DD: 
-      DEB887: 
-      E0FFFF: 
-      E6E6FA: 
-      E9967A: 
-      EE82EE: 
-      EEE8AA: 
-      F08080: 
-      F0E68C: 
-      F0F8FF: 
-      F0FFF0: 
-      F0FFFF: 
-      F4A460: 
-      F5DEB3: 
-      F5F5DC: 
-      F5F5F5: 
-      F5FFFA: 
-      F8F8FF: 
-      FA8072: 
-      FAEBD7: 
-      FAF0E6: 
-      FAFAD2: 
-      FDF5E6: 
-      FF0000: 
-      FF00FF: 
-      FF1493: 
-      FF4500: 
-      FF6347: 
-      FF69B4: 
-      FF7F50: 
-      FF8C00: 
-      FFA07A: 
-      FFA500: 
-      FFB6C1: 
-      FFC0CB: 
-      FFD700: 
-      FFDAB9: 
-      FFDEAD: 
-      FFE4B5: 
-      FFE4C4: 
-      FFE4E1: 
-      FFEBCD: 
-      FFEFD5: 
-      FFF0F5: 
-      FFF5EE: 
-      FFF8DC: 
-      FFFACD: 
-      FFFAF0: 
-      FFFAFA: 
-      FFFF00: 
-      FFFFE0: 
-      FFFFF0: 
-      FFFFFF: 
+  en:
+    site:
+      browse:
+        newcontent:
+          description: 
+        sources:
+          description: 
   global:
-    about-us: O nas
-    channel:
-      archaeology: archeologia
-      architecture: architektura
-      art: sztuka
-      fashion: moda
+    labs-link: link do labs
+    navigation:
+      all_blog_posts: Wszystkie wpisy...
+      all_exhibitions: Wszystkie wystawy...
+      blog: Blog
+      browse: Przeglądaj
+      browse_colours: Kolory
+      browse_newcontent: Nowości
+      browse_sources: "Źródła"
+      channels: Kolekcje
+      collections: Kolekcje
+      exhibitions: Wystawy
       home: Strona główna
-      maps: mapy
-      music: muzyka
-      natural-history: historia naturalna
-      newspapers: gazety
-      performing-arts: sztuki performatywne
-    channels-art: Kanały sztuka kanał
-    channels-art-image: Kanały sztuka obraz
-    channels-art-link: Kanały sztuka link
-    channels-fashion: Moda
-    channels-music: Muzyka
-    choose-language: Język
-    email-address: email
-    facet:
-      advanced:
-        options: Opcje
-        show:
-          ugc: Materiały dodane przez użytkowników
-      art:
-        form:
-          paintings:
-            genre: Gatunek
-            medium: "Średni"
-      carrier: Nośnik
-      colour: Kolor
-      colour-black-and-white: Czarno-białe
-      country:
-        austria: Austria
-        belgium: Belgia
-        bulgaria: Bułgaria
-        croatia: Chorwacja
-        cyprus: Cypr
-        czechrepublic: Czechy
-        denmark: Dania
-        estonia: Estonia
-        europe: Europa
-        finland: Finlandia
-        france: Francja
-        germany: Niemcy
-        greece: Grecja
-        hungary: Węgry
-        iceland: Islandia
-        ireland: Irlandia
-        israel: Izrael
-        italy: Włochy
-        latvia: "Łotwa"
-        lithuania: Litwa
-        luxembourg: Luksemburg
-        malta: Malta
-        netherlands: Holandia
-        norway: Norwegia
-        poland: Polska
-        portugal: Portugalia
-        romania: Rumunia
-        russia: Rosja
-        serbia: Serbia
-        slovakia: Słowacja
-        slovenia: Słowenia
-        spain: Hiszpania
-        sweden: Szwecja
-        switzerland: Szwajcaria
-        turkey: Turcja
-        ukraine: Ukraina
-        unitedkingdom: Wielka Brytania
-        unitedstatesofamerica: USA
-      creator: twórca
-      header:
-        channel: Kanały
-        colourpalette: Kolor
-        country: Kraj
-        data_provider: Instytucja
-        image_aspectratio: Orientacja
-        image_colour: Paleta
-        image_size: Rozmiar
-        language: Język
-        language_of_description: Język opisu
-        media: Pokaż wyłącznie obiekty z bezpośrednim dostępem do mediów
-        mime_type: Format pliku
-        provider: Agregator treści
-        reusability: Czy mogę to wykorzystać?
-        sound_duration: Czas trwania
-        sound_hq: Dobra Jakość
-        text_fulltext: Pełna Treść
-        type: Media
-        ugc: Pokaż obiekty dodane przez użytkowników
-        video_duration: Czas Trwania
-        year: Data
-      image_aspectratio:
-        landscape: Pejzaż
-        portrait: Portret
-      image_colour:
-        'false': Czarno-biały
-        'true': W kolorze
-      image_size:
-        extra_large: Bardzo duży
-        large: Duży
-        medium: "Średni"
-        small: Mały
-      language:
-        bg: 
-        ca: 
-        cs: 
-        da: 
-        de: 
-        el: 
-        en: 
-        es: 
-        et: 
-        fi: 
-        fr: 
-        ga: 
-        he: 
-        hr: 
-        hu: 
-        is: 
-        it: 
-        lt: 
-        lv: 
-        mt: 
-        mul: Wielojęzyczny
-        nl: 
-        'no': 
-        pl: 
-        pt: 
-        ro: 
-        ru: 
-        sk: 
-        sl: 
-        sr: 
-        sv: 
-        tr: 
-        uk: 
-        yi: 
-      less: Mniej
-      media:
-        'false': Nie
-        'true': Tak
-      more: Więcej
-      more-refinements: Więcej filtrów
-      resource:
-        type: Typ
-      reusability:
-        advanced: Zaawansowane
-        advanced-cc-by: 
-        advanced-cc-by-nc: 
-        advanced-cc-by-nc-nd: 
-        advanced-cc-by-nc-sa: 
-        advanced-cc-by-nd: 
-        advanced-cc-by-sa: 
-        advanced-cc0: 
-        advanced-orphan-work: ''
-        advanced-out-of-copyright-non-commercial: ''
-        advanced-pdm: ''
-        advanced-rrfa: ''
-        advanced-rrpa: ''
-        advanced-rrra: ''
-        advanced-ucs: ''
-        open: Tak, ale z podaniem źródła
-        permission: Tylko za pisemną zgodą
-        restricted: Tak, ale z ograniczeniami
-        simple: Proste
-      sound_duration:
-        long: Długi
-        medium: "Średni"
-        short: Krótki
-        very_short: Bardzo krótki
-      sound_hq:
-        'true': Tak
-      source: "Źródło"
-      text_fulltext:
-        'false': Nie
-        'true': Tak
-      type:
-        3d: 3D
-        image: Obraz
-        sound: Dźwięk
-        text: Tekst
-        video: Wideo
-      type-image:
-        orientation:
-          label: Orientacja obrazu
-          landscape: Pejzaż
-          portrait: Portret
-        quality:
-          all: Pokaż wszystko
-          hq-only: Pokaż tylko w dobrej jakości
-          label: Jakość
-        size:
-          explanation: Co oznaczają te rozmiary?
-          label: Rozmiar obrazu
-          large: Duży (%{data})
-          medium: "Średni (%{data})"
-          small: Mały (%{data})
-          xl: Bardzo duży (%{data})
-      type-sound:
-        duration:
-          label: Czas trwania
-          long: Długi (%{data})
-          medium: "Średni (%{data})"
-          short: Krótki (%{data})
-          very-short: Bardzo krótki (%{data})
-      type-video:
-        duration:
-          label: Czas trwania
-          long: Długi (%{data})
-          medium: "Średni (%{data})"
-          short: Krótki (%{data})
-      video_duration:
-        long: Długi (>20 min)
-        medium: "Średni (4-20 min)"
-        short: Krótki (<4 min)
-      year:
-        from: od
-        to: do
-    'facet ':
-      header:
-        video_hd:
-          'true': Wysoka rozdzielczość
-    find-us-elsewhere: Znajdź nas także
-    forgot-password: Nie pamiętam hasła.
-    genres: gatunki
-    genres-chamber-music: Muzyka kameralna
-    genres-classical-music: Muzyka poważna
-    genres-concertos: Koncerty
-    genres-non-western-classical-music: Nie-zachodnia muzyka klasyczna
-    genres-opera: Opera
-    genres-popular-music: Muzyka rozrywkowa
-    genres-traditional-music: Muzyka ludowa
-    header:
-      connect: Dołącz
-      develop: Twórz
-      discover: Odkrywaj
-      network: Poznawaj
-    help: Pomoc
-    home: Strona główna
-    javascript-required: Chcesz uzyskać dostęp do pełnej zawartości tej strony? W tym celu należy włączyć obsługę JavaScript. Zalecamy również zmianę przeglądarki na obsługującą elementy w HTML5
-    labs: Europeana Labs
-    labs-text: Wykorzystaj twórczo nasze zasoby dzięki API
-    language-basque: Baskijski
-    language-bulgarian: Bułgarski
-    language-catalan: Kataloński
-    language-croatian: Chorwacki
-    language-czech: Czeski
-    language-danish: Duński
-    language-dutch: Niderlandzki
-    language-english: Angielski
-    language-estonian: Estoński
-    language-finnish: Fiński
-    language-french: Francuski
-    language-gaelic: Irlandzki
-    language-german: Niemiecki
-    language-greek: Grecki
-    language-hungarian: Węgierski
-    language-icelandic: Islandzki
-    language-italian: Włoski
-    language-latvian: "Łotewski"
-    language-lithuanian: Litewski
-    language-maltese: Maltański
-    language-norwegian: Norweski
-    language-polish: Polski
-    language-portuguese: Portugalski
-    language-romanian: Rumuński
-    language-russian: Rosyjski
-    language-slovakian: Słowacki
-    language-slovenian: Słoweński
-    language-spanish: Hiszpański
-    language-swedish: Szwedzki
-    language-ukranian: Ukraiński
-    login: Login
-    mission: Kulturą zmieniamy świat! Chcemy budować na bogatym dziedzictwie kulturowym Europy i ułatwić do niego dostęp, aby każdy miał szansę wykorzystać je w pracy, do nauki lub po prostu dla zabawy.
-    mission-title: Nasza misja
-    more:
-      load-more: Więcej
-      show-more: Pokaż więcej
-      view-more: Zobacz więcej
-    more-info: Więcej infromacji
-    newsletter:
-      email-address-invalid: Wprowadź poprawny adres email.
-      email-address-required: Dodaj adres email.
-      language-required: Zaznacz preferowany język.
-      signup: Zapisz się na comiesięczną dawkę kultury w naszym biuletynie
-    our-sites: nasze strony
-    password: Hasło
-    professional: Europeana Pro
-    professional-text: Zaangażuj się, podziel się swoją wiedzą lub wykorzystaj naszą.
-    refine-your-search: Zawęź wyniki wyszukiwania
-    register: Zarejestruj się
-    research: Europeana Research
-    research-text: Dołącz do naukowców z całej Europy
-    search-area:
-      search-button-image-alt: Szukaj
-      search-placeholder-text: Dodaj słowo kluczowe
-    search-collections: Kolekcje
-    search-collections-text: Odkrywaj dziedzictwo kulturowe Europy
-    share: Udostępnij
-    sitemap: Mapa strony
-    terms-and-policies: Regulamin i polityka prywatności
-    type: typ
-  'no': Norwegia
-  pl: Portugalia
+    pro-link: link do Europeana Pro
+    pro-text: tekst dla Europeana Pro
+    settings: Ustawienia
   site:
+    alpha:
+      feedback_banner:
+        description: Wersja alfa oznacza, że strona działa w ograniczonym zakresie, ponieważ jest na bieżąco rozbudowywana. Dlatego też może przejściowo nie działać. Twoja opinia pomoże nam usprawnić jej funkcjonowanie!
+        link-text: Powiedz nam co myślisz!
+        title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka" oraz "Kolekcji: Historia sztuki".'
+    blog-link: link do bloga
+    browse:
+      colours:
+        description: 
+        title: Kolory
+      newcontent:
+        description: 
+        tableh1: Wszystkie instytucje
+        tableh2: Obiekty
+        tableh3: Data
+        title: Nowości
+      sources:
+        description: 
+        title: "Źródła"
+    collections:
+      art-history:
+        description: Od renesansu do surrealistów, od starożytnej rzymskiej rzeźby do sztuki współczesnej, Europeana Historia Sztuki, pozwoli Ci zapoznać się z artystami i ich pracami z całej Europy.
+        title: Europeana Historia Sztuki
+      data-types:
+        3d: Obiekty 3D
+        count: obiekty
+        images: Obrazy
+        moving-images: Ruchome obrazy
+        sound: Nagrania
+        texts: Teksty
+      labels:
+        credits: 'Kurator:'
+        recent: Ostatnio dodane
+        spotlight-on: Zbliżenie
+      music:
+        description: '<strong>Europeana Kolekcje: Muzyka</strong> zawiera najlepsze nagrania i inne związane z muzyką zbiory z europejskich archiwów audiowizualnych, bibliotek, archiwów i muzeów. <a href="/portal/channels/music/about"> Dowiedz się więcej o Kolekcji Muzyka. </a>'
+        title: Europeana Muzyka
     facet:
       language:
         show:
           results: Wyniki
-        show-results-all: Pokaż wszystkie wyniki
+    footer:
+      menu:
+        about: O nas
+        become-a-provider: Zostań naszym partnerem
+        contact: Kontakt
+        copyright: Prawo autorskie
+        data-providers: Wszystkie instytucje
+        help: Pomoc
+        new-collections: Nowe Kolekcje
+        rights: Warunki i zasady użytkowania
+        search-tips: Porady
+        using-myeuropeana: Moja Europeana
+    home:
+      strapline: Odkryj %{total_item_count} dzieł sztuki, książek, filmów i nagrań z całej Europy.
+    more: Więcej...
+    my-europeana: Moja Europeana
+    my-europeana-link: link do My Europeana
+    navigation:
+      breadcrumb:
+        item_detail: Detal
+        results_list: Lista Wyników
+        return_home: Powrót do strony głównej
+    news: Wiadomości
+    object:
+      actions:
+        attribute-author: Oznacz autora
+        attribute-html: 
+        attribute-plaintext: Zwykły tekst
+        download: "Ściągnij"
+        download-additional: Dostępne także jako
+        downloaddata: "Ściągnij dane"
+        open-media: Otwórz
+        show-less-data: Pokaż mniej
+        show-more-data: Pokaż więcej
+        technicalmetadata: Metadane administracyjne
+      enrichment:
+        who:
+          title: Tytuł
+      hierarchy:
+        title: Powiązane obiekty
+        view-items-above: zobacz obiekty powyżej
+        view-items-below: zobacz obiekty poniżej
+      meta-label:
+        codec: Kodek
+        collection-name: Zbiór
+        concept: Koncept
+        concepts: Klasyfikacje
+        consists-of: Zawiera
+        contributor: Współtwórca
+        copyright: Prawo autorskie
+        creation-date: Data utworzenia
+        creator: Twórca
+        current-location: Aktualna lokalizacja
+        data-provider: Instytucja
+        date: Data
+        dates: Daty
+        description: Opis
+        dimensions: Wymiary
+        duration: Czas trwania
+        edm:
+          has-met: Jest powiązany z
+          incorporates: Zawiera
+          is-derivative-of: Jest pochodną
+          is-representation-of: Jest reprezentacją
+          is-similar-to: Jest podobny do
+          is-successor-of: Jest następcą
+          realises: Realizuje
+          was-present-at: Obecny na
+        extent: Rozmiar
+        file-size: Rozmiar pliku
+        format: Format
+        fps: 'Klatki na sekundę '
+        has-type: Ma rodzaj
+        identifier: Identyfikator
+        is-format-of: Jest w formacie
+        is-part-of: Jest częścią
+        is-referenced-by: Ma odniesienie w
+        is-replaced-by: Zastąpiony przez
+        is-required-by: Jest wymagany przez
+        issued: Pierwsze wydanie
+        language: Język
+        latitude: Szerokość
+        location: Lokalizacja
+        longitude: Długość
+        map: Mapa
+        map-tiles: Kafelki
+        medium: Metoda
+        people: Osoby
+        period: Okres
+        place: Miejsce
+        place-time: Miejsce/Czas
+        properties: Własności
+        provenance: Pochodzenie
+        provided-by: Dowiedz się więcej
+        provided-by-detail: Europeana prezentuje ten obiekt przez %{institution_name_and_link}. Odwiedź ich stronnę, aby uzyskać więcej informacji.
+        provider: Agregator
+        providing-country: Kraj dostarczający
+        publication-date: Data wydania
+        publisher: Wydawca
+        references: Odnośniki
+        refs-rels: Odniesienia i relacje
+        relations: Relacje
+        rights: Prawa autorskie
+        rights-human: Czy mogę tego użyć?
+        runtime: Długość
+        runtime-unit-seconds: sekundy
+        source: "Źródło"
+        subject: Przedmiot
+        temporal: Przejściowy
+        time: Czas
+        timestamp-created: Pierwszy raz dostępne w Europeanie
+        timestamp-updated: Ostatni raz zaktualizowane w Europeanie
+        timestamp_created: Pierwszy raz dostępne w Europeanie (%{timestamp_created})
+        timestamp_updated: Ostatni raz zaktualizowane w Europeanie (%{timestamp_updated})
+        title: Tytuł
+        toc: Spis Treści
+        type: Typ
+        ugc: Materiały dodane przez użytkowników
+        version: Wersja
+      named-entities:
+        title: Podmioty
+        what:
+          broader: Termin Szerszy
+          label: Etykieta Pojęcia
+          term: Definicja Terminu
+          title: Co
+        when:
+          begin: Początek Okresu
+          end: Koniec Okresu
+          label: Okres etykieta
+          term: Okres termin
+          title: Kiedy
+        where:
+          label: Miejsce etykieta
+          latitude: Szerokość geograficzna
+          longitude: Długość geograficzna
+          term: Miejsce termin
+          title: Gdzie
+        who:
+          label: Podmiot etykieta
+          term: Podmiot termin
+          title: Kto
+      nav:
+        next: Następny
+        prev: Poprzedni
+      points:
+        east: Wschód
+        north: Północ
+        south: Południe
+        west: Zachód
+      show-more-similar-items: pokaż więcej
+      similar-items: Podobne obiekty
+    pages:
+      '404':
+        intro: Przykro nam - ta strona gdzieś się zapodziała
+        text: Niestety nie możemy znaleźć strony, której szukasz. Spróbuj ponownie na stronie głównej lub wybierz z poniższych propozycji.
+      about:
+        text: |+
+          <p>Szukasz swojego ulubionego obrazu? Przygotowujesz referat na zajęcia? Potrzebujesz pomysłu na wzór, aby ozdobić swój nowy kubek do kawy? A może po prostu chcesz dowiedzieć się czegoś nowego?</p>
+
+          <p>Zagłęb się w największą europejską kolekcję obiektów ze świata sztuki, kultury i nauki. Europeana Kolekcje umożliwia Ci dostęp do materiałów, zarówno z tych najsłynniejszych, jak i z tych mniej znanych bibliotek, muzeów, galerii i archiwów Europy.</p>
+
+          <p>Książki i manuskrytpy, zdjęcia i obrazy, rzeźby i nuty, nagrania video i dźwiękowe, pamiętniki i mapy - wszystko to jest właśnie tutaj. Nie musisz okrążać całego kontynentu!</p>
+
+          <p>Odkrywaj, oglądaj, słuchaj, czytaj, ściągaj… Dobrej zabawy!</p>
+
+          <p>Nie zapomnij sprawdzić naszych kolekcji tematycznych: Historia Sztuki i Muzyka. Oferujemy także zasoby dla naukowców oraz dla programistów i innowatorów (to tam znajdziesz nasze API), jak również wirtualne wystawy oraz blog.</p>
+
+          <p>Jeśli to wciąż zbyt mało, możesz liczyć na codzienną dawkę kultury w naszych serwisach społecznościowych:  Facebook, Twitter, Medium, Google+, Pinterest.</p>
+
+          <p>Aby uzyskać więcej informacji o tym, jak pracujemy z instytucjami kultury oraz ich zbiorami, odwiedź Europeana Pro.</p>
+
+        title: Witaj, miłośniku kultury!
+      music-channel-about:
+        text: "<p>Wyobraź sobie odkrywanie oryginalnycyh rękopisów utworu muzycznego, słuchając jego różnych interpretacji i czytając biografię kompozytora. Na stronie Kolekcji Muzyki Europeana jest to możliwe</p>\n\n<p><a href=\"http://www.europeanasounds.eu\">Nasi partnerzy</a>, eksperci w dziedzinie muzyki z całej Europy starannie wybrali tę kolekcję nagrań, nut, zdjęć instrumentów muzycznych, książek o muzyce i innych materiałów \nzwiązanych z muzyką.</p>\n\n<p>Udostępniamy tę wczesną wersję testową Kolekcji Muzyki Wam, naszym użytkownikom, abyście pomogli nam dalej ją rozwijać. Dlatego od czasu do czasu, odwiedzając stronę, możecie zostać poproszeni o udzielenie odpowiedzi na pytania lub wypełnienie ankiet pojawiających się na ekranie. Będziemy Wam bardzo wdzięczni za poświęcony czas!</p>\n\n<p>Ponadto, w interesie przejrzystości i prywatności, informujemy, że zbieramy dane na temat zachowań użytkownika w Google Analytics i usłudze o nazwie Hotjar. Robimy to, aby wykryć błędy i poprawić Kolekcję Muzyki. Wszystkie dane są prywatne i anonimowe i zostaną wykorzystane wyłącznie w celu poprawy jakości naszego serwisu.</p>\n\n<p>Zapraszamy do odkrywania kolekcji, słuchania muzyki, przeglądania nut i czytania. Gdy prawo autorskie na to pozwala, możnesz pobrać swoje ulubione materiały. Odwiedź również nasze wirtualne wystawy i odkrywaj muzykę w zupełnie nowy sposób!</p>"
+        title: O Kolekcji Muzyka
+    results:
+      actions:
+        configure-actions: Konfiguruj działania
+        dutchmasters: Holenderscy Mistrzowie
+        favouriteart: Ulubione dzieło
+        label: Działania
+        newcollection: Nowa kolekcja
+        product-save: Zapisz
+        saveto: Zapisz do
+        show-all-collections: Pokaż wszystkie kolekcje
+      list:
+        all-results:
+          3D: 3D
+          images: Obrazy
+          text: Tekst
+          video: Wideo
+        count-and-terms: "%{results_count} wyników"
+        empty: Brak Wyników
+        empty-with-terms: Twoje zapytanie %{query_terms} nie przyniosło wyników
+        header: Wyniki dla
+        header-and: i
+        in-channel: w Kolekcji
+        less: Mniej
+        less_adv: Mniej Filtrów
+        more: Więcej
+        more_adv: Zaawansowane filtry
+        product-3D: 3D
+        product-image: Obraz
+        product-sound: Dźwięk
+        product-text: Tekst
+        product-video: Wideo
+        results-relevance: Trafność
+        single-result: 1 wynik dla %{query_terms}
+        view:
+          grid: Siatka
+          list: Lista
+        view-at-provider: Zobacz w
+    search:
+      placeholder:
+        text: Dodaj termin wyszukiwawczy
+      similar:
+        prefix: 'Podobne do: %{mlt_item}'
+    settings:
+      actions:
+        clear-selection: Wyczyść wybór
+        save-settings: Zapisz ustawienia
+      language:
+        auto-translate-limit: Możesz wybrać maksymalnie %{max_languages} języków
+        auto-translate-page: Automatycznie przetłumacz strony przedmiotów na...
+        auto-translate-page-short: Automatycznie przetłumacz na
+        auto-translate-query: Automatycznie przetłumacz słowa kluczowe na...
+        available: Dostępne języki
+        default: Domyślny język
+        flash:
+          alert: 'Nie znaleziono języka. Dostępne języki: %{locales}'
+          notice: Ustawienia języków zapisane.
+        label: Język
+        settings-label: ustawienia języków
+      title: Ustawienia
