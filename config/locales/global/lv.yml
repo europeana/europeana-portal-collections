@@ -1,301 +1,461 @@
 lv:
-  en:
-    site:
-      browse:
-        newcontent:
-          description: "Šajā sadaļā ir apkopots viss saturs, kas nesen ir ticis pievienots Europeana Kolekcijām. Te ir iespējams redzēt, kura institūcija ir publicējusi jaunus materiālus un kad. Klikšķiniet uz zemāk esošajām saitēm, lai apskatītu pievienoto."
-        sources:
-          description: Zemāk esošajā sarakstā ir uzskaitīti mūsu kolekciju avoti. Šie avoti ir apkopojuši kolekcijas un iesnieguši tās Europeana. Klikšķiniet uz zemāk esošajām saitēm, lai iepazītos ar visu to kolekciju saturu!
+  Symphonies: Simfonijas
+  X11:
+    colours:
+      '000000': 
+      000080: 
+      00008B: 
+      0000CD: 
+      0000FF: 
+      '006400': 
+      008000: 
+      008080: 
+      008B8B: 
+      00BFFF: 
+      00CED1: 
+      00FA9A: 
+      00FF00: 
+      00FF7F: 
+      00FFFF: 
+      '191970': 
+      1E90FF: 
+      20B2AA: 
+      228B22: 
+      2E8B57: 
+      2F4F4F: 
+      32CD32: 
+      3CB371: 
+      40E0D0: 
+      4169E1: 
+      4682B4: 
+      483D8B: 
+      48D1CC: 
+      4B0082: 
+      556B2F: 
+      5F9EA0: 
+      6495ED: 
+      '663399': 
+      66CDAA: 
+      '696969': 
+      6A5ACD: 
+      6B8E23: 
+      '708090': 
+      '778899': 
+      7B68EE: 
+      7CFC00: 
+      7F0000: 
+      7F007F: 
+      7FFF00: 
+      7FFFD4: 
+      '800000': 
+      '800080': 
+      '808000': 
+      '808080': 
+      87CEEB: 
+      87CEFA: 
+      8A2BE2: 
+      8B0000: 
+      8B008B: 
+      8B4513: 
+      8FBC8F: 
+      90EE90: 
+      9370DB: 
+      9400D3: 
+      98FB98: 
+      9932CC: 
+      9ACD32: 
+      A020F0: 
+      A0522D: 
+      A52A2A: 
+      A9A9A9: 
+      ADD8E6: 
+      ADFF2F: 
+      AFEEEE: 
+      B03060: 
+      B0C4DE: 
+      B0E0E6: 
+      B22222: 
+      B8860B: 
+      BA55D3: 
+      BC8F8F: 
+      BDB76B: 
+      BEBEBE: 
+      C0C0C0: 
+      C71585: 
+      CD5C5C: 
+      CD853F: 
+      D2691E: 
+      D2B48C: 
+      D3D3D3: 
+      D8BFD8: 
+      DA70D6: 
+      DAA520: 
+      DB7093: 
+      DC143C: 
+      DCDCDC: 
+      DDA0DD: 
+      DEB887: 
+      E0FFFF: 
+      E6E6FA: 
+      E9967A: 
+      EE82EE: 
+      EEE8AA: 
+      F08080: 
+      F0E68C: 
+      F0F8FF: 
+      F0FFF0: 
+      F0FFFF: 
+      F4A460: 
+      F5DEB3: 
+      F5F5DC: 
+      F5F5F5: 
+      F5FFFA: 
+      F8F8FF: 
+      FA8072: 
+      FAEBD7: 
+      FAF0E6: 
+      FAFAD2: 
+      FDF5E6: 
+      FF0000: 
+      FF00FF: 
+      FF1493: 
+      FF4500: 
+      FF6347: 
+      FF69B4: 
+      FF7F50: 
+      FF8C00: 
+      FFA07A: 
+      FFA500: 
+      FFB6C1: 
+      FFC0CB: 
+      FFD700: 
+      FFDAB9: 
+      FFDEAD: 
+      FFE4B5: 
+      FFE4C4: 
+      FFE4E1: 
+      FFEBCD: 
+      FFEFD5: 
+      FFF0F5: 
+      FFF5EE: 
+      FFF8DC: 
+      FFFACD: 
+      FFFAF0: 
+      FFFAFA: 
+      FFFF00: 
+      FFFFE0: 
+      FFFFF0: 
+      FFFFFF: 
   global:
-    labs-link: saite uz Laboratoriju
-    navigation:
-      all_blog_posts: Visi bloga ieraksti...
-      all_exhibitions: Visas izstādes...
-      blog: Blogs
-      browse: Pārlūkot
-      browse_colours: Krāsas
-      browse_newcontent: Jauns saturs
-      browse_sources: Avoti
-      channels: Kolekcijas
-      collections: Kolekcijas
-      exhibitions: Izstādes
+    about-us: Par mums
+    channel:
+      archaeology: arheoloģija
+      architecture: arhitektūra
+      art: māksla
+      fashion: mode
       home: Sākums
-    pro-link: saite uz Profesionālo
-    pro-text: teksts Profesionālajai
-    settings: Iestatījumi
+      maps: kartes
+      music: mūzika
+      natural-history: dabas vēsture
+      newspapers: laikraksti
+      performing-arts: izpildītājmāksla
+    channels-art: Mākslas vēstures kolekcijas
+    channels-art-image: Mākslas vēstures kolekcijas attēls
+    channels-art-link: Mākslas vēstures kolekcijas
+    channels-fashion: Mode
+    channels-music: Mūzika
+    choose-language: Valoda
+    email-address: e-pasta adrese
+    facet:
+      advanced:
+        options: Opcijas
+        show:
+          ugc: Lietotāja radīts saturs
+      art:
+        form:
+          paintings:
+            genre: "Žanrs"
+            medium: Vidējs
+      carrier: Nesējs
+      colour: Krāsa
+      colour-black-and-white: Melnbalts
+      country:
+        austria: Austrija
+        belgium: Beļģija
+        bulgaria: Bulgārija
+        croatia: Horvātija
+        cyprus: Kipra
+        czechrepublic: "Čehija"
+        denmark: Dānija
+        estonia: Igaunija
+        europe: Eiropa
+        finland: Somija
+        france: Francija
+        germany: Vācija
+        greece: Grieķija
+        hungary: Ungārija
+        iceland: Islande
+        ireland: "Īrija"
+        israel: Izraēla
+        italy: Itālija
+        latvia: Latvija
+        lithuania: Lietuva
+        luxembourg: Luksemburga
+        malta: Malta
+        netherlands: Nīderlande
+        norway: Norvēģija
+        poland: Polija
+        portugal: Portugāle
+        romania: Rumānija
+        russia: Krievija
+        serbia: Serbija
+        slovakia: Slovākija
+        slovenia: Slovēnija
+        spain: Spānija
+        sweden: Zviedrija
+        switzerland: "Šveice"
+        turkey: Turcija
+        ukraine: Ukraina
+        unitedkingdom: Apvienotā Karaliste
+        unitedstatesofamerica: ASV
+      creator: autors
+      header:
+        channel: Kolekcijas
+        colourpalette: Krāsa
+        country: Valsts
+        data_provider: Institūcija
+        image_aspectratio: Orientācija
+        image_colour: Palete
+        image_size: Izmērs
+        language: Valoda
+        language_of_description: Apraksta valoda
+        media: Tikai ieraksti ar saitēm uz objektiem
+        mime_type: Datnes formāts
+        provider: Agregators
+        reusability: Vai es varu to izmantot?
+        sound_duration: Ilgums
+        sound_hq: Augstas kvalitātes
+        text_fulltext: Pilnteksta
+        type: Datu nesējs
+        ugc: Rādīt lietotāju sagatavoto saturu
+        video_duration: Ilgums
+        year: Datējums
+      image_aspectratio:
+        landscape: Ainava
+        portrait: Portrets
+      image_colour:
+        'false': 
+        'true': Krāsa
+      image_size:
+        extra_large: "Ļoti liels (4MP+)"
+        large: Liels (1-4MP)
+        medium: Vidējs (0.5-1MP)
+        small: Mazs (<0.5MP)
+      language:
+        bg: 
+        ca: 
+        cs: 
+        da: 
+        de: 
+        el: 
+        en: 
+        es: 
+        et: 
+        fi: 
+        fr: 
+        ga: 
+        he: 
+        hr: 
+        hu: 
+        is: 
+        it: 
+        lt: 
+        lv: 
+        mt: 
+        mul: Daudzvalodu
+        nl: 
+        'no': 
+        pl: 
+        pt: 
+        ro: 
+        ru: 
+        sk: 
+        sl: 
+        sr: 
+        sv: 
+        tr: 
+        uk: 
+        yi: 
+      less: Mazāk
+      media:
+        'false': Nē
+        'true': Jā
+      more: Vairāk
+      more-refinements: Vairāk preicizējumi
+      resource:
+        type: Tips
+      reusability:
+        advanced: Paplašinātā
+        advanced-cc-by: 
+        advanced-cc-by-nc: 
+        advanced-cc-by-nc-nd: 
+        advanced-cc-by-nc-sa: 
+        advanced-cc-by-nd: 
+        advanced-cc-by-sa: 
+        advanced-cc0: 
+        advanced-orphan-work: 
+        advanced-out-of-copyright-non-commercial: 
+        advanced-pdm: 
+        advanced-rrfa: 
+        advanced-rrpa: 
+        advanced-rrra: 
+        advanced-ucs: 
+        open: Jā, ar atsauci
+        permission: Tikai ar atļauju
+        restricted: Jā, ar ierobežojumiem
+        simple: Vienkāršā
+      sound_duration:
+        long: Garš (6+ minūtes)
+        medium: Vidējs (3-6 minūtes)
+        short: "Īss (30 sekundes - 3 minūtes)"
+        very_short: "Ļoti īss (<30 sekundes)"
+      sound_hq:
+        'true': Jā
+      source: Avots
+      text_fulltext:
+        'false': Nē
+        'true': Jā
+      type:
+        3d: 3D
+        image: Attēls
+        sound: Skaņa
+        text: Teksts
+        video: Video
+      type-image:
+        orientation:
+          label: Attēla orientācija
+          landscape: Ainava
+          portrait: Portrets
+        quality:
+          all: Rādīt visu
+          hq-only: Rādīt tikai augstas kvalitātes
+          label: Kvalitāte
+        size:
+          explanation: Ko šie izmēri nozīmē?
+          label: Attēla izmērs
+          large: Liels (%{data})
+          medium: Vidējs (%{data})
+          small: Mazs (%{data})
+          xl: "Ļoti liels (%{data})"
+      type-sound:
+        duration:
+          label: Ilgums
+          long: Garš (%{data})
+          medium: Vidējs (%{data})
+          short: "Īss (%{data})"
+          very-short: "Ļoti īss (%{data})"
+      type-video:
+        duration:
+          label: Ilgums
+          long: Garš (%{data})
+          medium: Vidējs (%{data})
+          short: "Īss (%{data})"
+      video_duration:
+        long: Garš (20+ minūtes)
+        medium: Vidējs (4-20 minūtes)
+        short: "Īss (<4 minūtes)"
+      year:
+        from: 'no'
+        to: līdz
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: Meklē mūs arī citur
+    forgot-password: Aizmirsi savu paroli?
+    genres: "žanri"
+    genres-chamber-music: Kamermūzika
+    genres-classical-music: Klasiskā mūzika
+    genres-concertos: Koncerti
+    genres-non-western-classical-music: Ne-rietumu klasiskā mūzika
+    genres-opera: Opera
+    genres-popular-music: Populārā mūzika
+    genres-traditional-music: Tradicionālā mūzika
+    header:
+      connect: Pieslēdzies
+      develop: Izstrāde
+      discover: Atklāj
+      network: Tīkls
+    help: Palīdzība
+    home: Sākums
+    javascript-required: Lai aplūkotu šo saturu, lūdzu, iespējojiet JavaScript un apsveriet iespēju atjaunināt interneta pārlūku, lai tas atbalstītu HTML5 saturu.
+    labs: Laboratorija
+    labs-text: Remiksē kultūras saturu ar mūsu API un datu kopām
+    language-basque: Basku
+    language-bulgarian: Bulgāru
+    language-catalan: Katalāņu
+    language-croatian: Horvātu
+    language-czech: "Čehu"
+    language-danish: Dāņu
+    language-dutch: Holandiešu
+    language-english: Angļu
+    language-estonian: Igauņu
+    language-finnish: Somu
+    language-french: Franču
+    language-gaelic: Gēļu
+    language-german: Vācu
+    language-greek: Grieķu
+    language-hungarian: Ungāru
+    language-icelandic: Islandiešu
+    language-italian: Itāliešu
+    language-latvian: Latviešu
+    language-lithuanian: Lietuviešu
+    language-maltese: Maltiešu
+    language-norwegian: Norvēģu
+    language-polish: Poļu
+    language-portuguese: Portugāļu
+    language-romanian: Rumāņu
+    language-russian: Krievu
+    language-slovakian: Slovāku
+    language-slovenian: Slovēņu
+    language-spanish: Spāņu
+    language-swedish: Zviedru
+    language-ukranian: Ukraiņu
+    login: Pieslēgties
+    mission: Ar kultūru mēs mainām pasauli! Mēs vēlamies attīstīt Eiropas bagāto kultūras mantojumu un padarīt to cilvēkiem pieejamāku izmantošanai, - gan darbam, gan mācībām, gan izklaidei.
+    mission-title: Mūsu misija
+    more:
+      load-more: Vairāk
+      show-more: Rādīt vairāk
+      view-more: Skatīt vairāk
+    more-info: Vairāk informācijas
+    newsletter:
+      email-address-invalid: Kā e-pasts ir jānorāda derīga e-pasta adrese.
+      email-address-required: Ir jāuzrāda e-pasta adrese.
+      language-required: Ir jāuzrāda valoda.
+      signup: Paraksties uz mūsu informatīvo izdevumu
+    our-sites: mūsu vietnes
+    password: Parole
+    professional: Profesionālā
+    professional-text: Iesaisties, dalies ar saviem datiem vai izmanto mūsu
+    refine-your-search: Precizēt meklēšanas pieprasījumu
+    register: Reģistrēties
+    research: Pētniecība
+    research-text: Pievienojies akadēmiskajai kopienai
+    search-area:
+      search-button-image-alt: Meklēt
+      search-placeholder-text: Pievieno meklējamo vārdu
+    search-collections: Kolekcijas
+    search-collections-text: Pārlūko Eiropas kultūras mantojumu
+    share: Kopīgot
+    sitemap: Lapas karte
+    terms-and-policies: Lietošanas noteikumi un politika
+    type: tips
+  'no': Norvēģija
+  pl: Portugāle
   site:
-    alpha:
-      feedback_banner:
-        description: '"Beta" versija nozīmē, ka šī tīmekļa vietne ir aktīvā izstrādes procesā un regulāri tiek papildināta. Dažreiz tā var būt nepieejama. Jūsu atsauksmes palīdzēs mums uzlabot vietnes saturu.'
-        link-text: Sniedziet savu ieguldījumu!
-        title: Šī ir  mūsu jauno "Kolekciju" un "Mūzikas kolekcijas" "Beta" versija
-    blog-link: saite uz blogu
-    browse:
-      colours:
-        description: "Šajā sadaļā ir iespējams meklēt attēlus pēc to krāsas. Klikšķiniet uz izvēlētās krāsas un skatiet atlasīto kolekciju!"
-        title: Krāsas
-      newcontent:
-        description: 
-        tableh1: Visas institūcijas
-        tableh2: Ieraksti
-        tableh3: Datējums
-        title: Jauns saturs
-      sources:
-        description: Zemāk esošajā sarakstā ir uzskaitīti mūsu kolekciju avoti. Šie avoti ir apkopojuši kolekcijas un iesnieguši tās Europeana. Klikšķiniet uz zemāk esošajām saitēm, lai iepazītos ar visu to kolekciju saturu.
-        title: Avoti
-    collections:
-      art-history:
-        description: No renesances līdz sirreālistiem, no seno romiešu skulptūrām līdz mūsdienu mākslai, Europeana Mākslas vēstures kolekcija iepazīstina ar māksliniekiem un mākslas darbiem no visas Eiropas.
-        title: Europeana mākslas vēsture
-      data-types:
-        3d: 3D objekti
-        count: ieraksti
-        images: Attēli
-        moving-images: Video
-        sound: Skaņu ieraksti
-        texts: Teksti
-      labels:
-        credits: Kurators
-        recent: Jaunākie papildinājumi
-        spotlight-on: Uzmanības centrā
-      music:
-        description: <strong>Europeana Mūzikas kolekcija</strong> apkopo labākos mūzikas ierakstus, notis, un citas ar mūziku saistītas kolekcijas no Eiropas arhīviem, bibliotēkām, muzejiem un audiovizuālajiem arhīviem. <a href="/portal/channels/music/about">Uzzini vairāk par Mūzikas kolekciju.</a>
-        title: Europeana mūzika
     facet:
       language:
         show:
           results: Rezultāti
-    footer:
-      menu:
-        about: Par
-        become-a-provider: Kļūsti par mūsu partneri
-        contact: Kontakti
-        copyright: Autortiesības
-        data-providers: Visas institūcijas
-        help: Palīdzība
-        new-collections: Jaunas kolekcijas
-        rights: Lietošanas noteikumi un politika
-        search-tips: Meklēšanas padomi
-        using-myeuropeana: '"Mana Europeana" lietošana'
-    home:
-      strapline: Iepazīsties ar %{total_item_count} mākslas darbiem, artefaktiem, grāmatām, video un skaņu ierakstiem no visas Eiropas.
-    more: Vairāk...
-    my-europeana: Mana Europeana
-    my-europeana-link: saite uz "Mana Europeana"
-    navigation:
-      breadcrumb:
-        item_detail: Ieraksts
-        results_list: Rezultāti
-        return_home: Atgriezties uz sākumu
-    news: Ziņas
-    object:
-      actions:
-        attribute-author: Autora atribūti
-        attribute-html: HTML
-        attribute-plaintext: Vienkāršs teksts
-        download: Lejupielādēt
-        download-additional: Pieejams arī kā
-        downloaddata: Lejupielādēt datus
-        open-media: Atvērt šo ierakstu
-        show-less-data: Rādīt mazāk datu
-        show-more-data: Rādīt vairāk datu
-        technicalmetadata: Tehniskie metadati
-      enrichment:
-        who:
-          title: Nosaukums
-      hierarchy:
-        title: Saistītie ieraksti
-        view-items-above: skatīt iepriekšējos ierakstus
-        view-items-below: skatīt nākamos ierakstus
-      meta-label:
-        codec: Kodeks
-        collection-name: Datu kopa
-        concept: Jēdziens
-        concepts: Klasifikācijas
-        consists-of: Sastāv no
-        contributor: Līdzradītājs
-        copyright: Autortiesības
-        creation-date: Radīšanas datējums
-        creator: Autors
-        current-location: Pašreizējā atrašanās vieta
-        data-provider: Institūcija
-        date: Datējums
-        dates: Datējumi
-        description: Apraksts
-        dimensions: Izmēri
-        duration: Ilgums
-        edm:
-          has-met: Saistīts ar
-          incorporates: Iekļauj
-          is-derivative-of: Atvasinājums no
-          is-representation-of: Atveidojums no
-          is-similar-to: Līdzīgs
-          is-successor-of: Turpina
-          realises: Realizē
-          was-present-at: Piedalījās
-        extent: Izmērs
-        file-size: Datnes izmērs
-        format: Formāts
-        fps: Kadri sekundē
-        has-type: Ir tips
-        identifier: Identifikators
-        is-format-of: Cits formāts
-        is-part-of: Daļa no
-        is-referenced-by: Norāde no
-        is-replaced-by: Aizstāts ar
-        is-required-by: Nepieciešams
-        issued: Pirmo reizi izdots
-        language: Valoda
-        latitude: "Ģeogrāfiskais platums"
-        location: Novietojums
-        longitude: "Ģeogrāfiskais garums"
-        map: Karte
-        map-tiles: Lapas
-        medium: Datu fiziskais nesējs
-        people: Cilvēki
-        period: Periods
-        place: Vieta
-        place-time: Vieta/Laiks
-        properties: "Īpašības"
-        provenance: Izcelsme
-        provided-by: Uzzināt vairāk
-        provided-by-detail: Europeana šo ierakstu atrāda ar %{institution_name_and_link} līdzdalību. Lai saņemtu vairāk informācijas, apmeklējiet viņu vietni.
-        provider: Piegādātājs
-        providing-country: Piegādātājvalsts
-        publication-date: Izdošanas datējums
-        publisher: Izdevējs
-        references: Norāda
-        refs-rels: Atsauces un saistības
-        relations: Saistība
-        rights: Tiesības
-        rights-human: Vai es varu to izmantot?
-        runtime: Izpildes laiks
-        runtime-unit-seconds: sekundes
-        source: Avots
-        subject: Priekšmets
-        temporal: Aptvērums laikā
-        time: Laiks
-        timestamp-created: Europeana pirmo reizi publicēts
-        timestamp-updated: Europeana pēdējo reizi atjaunināts
-        timestamp_created: Europeana pirmo reizi publicēts (%{timestamp_created})
-        timestamp_updated: Europeana pēdējo reizi atjaunināts (%{timestamp_updated})
-        title: Nosaukums
-        toc: Satura rādītājs
-        type: Tips
-        ugc: Lietotāja iesniegts saturs
-        version: Versija
-      named-entities:
-        title: Vienības
-        what:
-          broader: Plašāks jēdziens
-          label: Jēdziena apzīmējums
-          term: Jēdziena termins
-          title: Priekšmeti, resursu tipi, žanri un formas (Jēdzieni)
-        when:
-          begin: Periods sākas
-          end: Periods beidzas
-          label: Perioda apzīmējums
-          term: Perioda termins
-          title: Laika posmi un datumi (Laika sprīdis)
-        where:
-          label: Vietas apzīmējums
-          latitude: "Ģeogrāfiskais platums"
-          longitude: "Ģeogrāfiskais garums"
-          term: Vietas nosaukums
-          title: Vietu nosaukumi (Vietas)
-        who:
-          label: Aģenta apzīmējums
-          term: Aģenta nosaukums
-          title: Personas un organizācijas (Aģenti)
-      nav:
-        next: Nākamais
-        prev: Iepriekšējais
-      points:
-        east: Austrumi
-        north: Ziemeļi
-        south: Dienvidi
-        west: Rietumi
-      show-more-similar-items: rādīt vairāk
-      similar-items: Līdzīgi ieraksti
-    pages:
-      '404':
-        intro: Atvainojiet, šo lapu neizdevās atrast
-        text: Diemžēl mums neizdevās atrast meklēto lapu. Izmantojiet Europeana meklētāju vai ielūkojieties zemāk uzskaitītajos ierakstos.
-      about:
-        text: |-
-          <p>Meklē iecienītu gleznu? Veic pētījumu vai raksti mācību darbu? Meklē iedvesmu savas nākamās kafijas krūzes dizainam? Vēlies uzzināt kaut ko jaunu? Lai kāds arī būtu Europeana apmeklēšanas iemesls, esi sveicināts!</p>
-
-          <p>Ienirsti Eiropas lielākajā mākslas, kultūras un zinātnes tiešsaistes kolekcijā. Europeana Kolekcijas piedāvā materiālus no Eiropas bibliotēkām, muzejiem, galerijām un arhīviem.</p>
-
-          <p>Grāmatas un rokraksti, fotogrāfijas un gleznas, skulptūras un notis, video un skaņu ieraksti, dienasgrāmatas, kartes - tas viss ir šeit. Vairs nav jāšķērso kontinenti, tagad ir iespējams ceļot virtuāli!</p>
-
-          <p>Izpēti, atklāj, skaties, klausies, lasi, lejupielādē ... Izbaudi!</p>
-
-          <p>Ieskaties Europeana Mākslas kolekcijās un Europeana Mūzikas kolekcijās. Mums ir arī īpaši resursi pētniekiem un kultūras projektu izstrādātājiem (to skaitā mūsu API), kā arī dažādas virtuālas izstādes un blogs.</p>
-
-          <p>Un, ja ar to nepietiek, meklē ikdienas kultūras devu arī Facebook, Twitter, Medium, Google+ un Pinterest.</p>
-
-          <p>Papildinformācijai, kā mēs strādājam ar kultūras institūcijām un to kolekcijām, apmeklē Europeana Profesionālā.</p>
-        title: Esi sveicināts, kultūras mīli!
-      music-channel-about:
-        text: "<p>Iedomājies, ka skaties uz skaņdarba nošu manuskripta oriģinālu, un tajā pašā laikā ir iespējams noklausīties arī dažādas tā interpretācijas, un izlasīt komponista biogrāfiju. Europeana Mūzikas kolekcijā tas ir iespējams.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Mūsu partneri</a>, mūzikas eksperti, no visas Eiropas ir izveidojuši šo mūzikas ierakstu, nošu, mūzikas instrumentu attēlu, mūzikas grāmatu un cita ar mūziku saistīta satura kolekciju. </p>\n\n<p>Esam publiskojuši šo Mūzikas kolekcijas testa versiju, lai mūsu lietotāji varētu mums palīdzēt to uzlabot un attīstīt. Apmeklējot vietni, lietotāji tiek aicināti atbildēt uz jautājumiem un aptaujām, kas parādās uz ekrāna. Būsim ļoti pateicīgi, ja atradīsi laiku atbildēt uz jautājumiem!</p>\n\n<p>Tāpat, privātuma saglabāšanas nolūkos, informējam, ka mēs apkopojam lietotāju statistiku un uzvedību ar Google Analytics un Hotjar pakalpojumiem. Mēs to darām, lai novērtētu un novērstu Mūzikas kolekcijas dizaina trūkumus un uzlabotu tās lietojamību. Visa uzkrātā informācija ir anonīma, netiek nevienam izpausta un tiek izmantota tikai, lai uzlabotu pakalpojumus.</p>\n\n<p>Mēs aicinām meklēt kolekcijā, atskaņot mūziku, skatīt notis un lasīt. Ja autortiesības to atļauj, iepatikušās lietas ir iespējams lejupielādēt. Un apmeklē mūsu virtuālās izstādes, lai atklātu mūziku līdz šim vēl neiepazītos veidos!</p>"
-        title: Par Mūzikas kolekcijām
-    results:
-      actions:
-        configure-actions: Darbību konfigurēšana
-        dutchmasters: Holandiešu meistari
-        favouriteart: Iecienītākā māksla
-        label: Darbības
-        newcollection: Jauna kolekcija
-        product-save: Saglabāt
-        saveto: Saglabāt
-        show-all-collections: Rādīt visas kolekcijas
-      list:
-        all-results:
-          3D: 3D
-          images: Attēli
-          text: Teksts
-          video: Video
-        count-and-terms: "%{results_count} rezultāti"
-        empty: Nav rezultātu
-        empty-with-terms: Jūsu meklēšanas pieprasījumam %{query_terms} nav rezultātu
-        header: Rezultāti
-        header-and: un
-        in-channel: tematiskajā kolekcijā
-        less: Mazāk
-        less_adv: Mazāk precizējumi
-        more: Vairāk
-        more_adv: Paplašinātie filtri
-        product-3D: 3D
-        product-image: Attēls
-        product-sound: Skaņa
-        product-text: Teksts
-        product-video: Video
-        results-relevance: Atbilstība
-        single-result: "%{query_terms} ir 1 rezultāts"
-        view:
-          grid: Tabula
-          list: Saraksts
-        view-at-provider: Skatīt
-    search:
-      placeholder:
-        text: Pievienot meklējamo vārdu
-      similar:
-        prefix: 'Līdzīgs: %{mlt_item}'
-    settings:
-      actions:
-        clear-selection: Noņemt atzīmējumu
-        save-settings: Saglabāt uzstādījumus
-      language:
-        auto-translate-limit: Var tikt izvēlētas maksimums %{max_languages}
-        auto-translate-page: Automātiski tulkot lapas uz
-        auto-translate-page-short: Automātiski tulkot ierakstus uz
-        auto-translate-query: Automātiski tulkot meklēšanas atslēgvārdus uz
-        available: Pieejamās valodās
-        default: Noklusējuma valoda
-        flash:
-          alert: 'Norādīta nederīga valoda. Pieejamās valodas: %{locales}'
-          notice: Valodas uzstādījumi saglabāti.
-        label: Valoda
-        settings-label: valodas iestatījumi
-      title: Iestatījumi
+        show-results-all: Rādīt visus rezultātus

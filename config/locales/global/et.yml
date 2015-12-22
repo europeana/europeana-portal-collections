@@ -1,288 +1,463 @@
 et:
-  en:
-    site:
-      browse:
-        newcontent:
-          description: 
-        sources:
-          description: 
+  Symphonies: Sümfooniad
+  X11:
+    colours:
+      '000000': Must
+      000080: Mereväe sinine
+      00008B: Tumesinine
+      0000CD: Mõõdukas sinine
+      0000FF: Sinine
+      '006400': Tumeroheline
+      008000: Veebiroheline
+      008080: Meresinine
+      008B8B: Tume helesinine
+      00BFFF: Sügav taevasinine
+      00CED1: Tume türkiis
+      00FA9A: Mõõdukas kevadroheline
+      00FF00: Roheline
+      00FF7F: Kevadroheline
+      00FFFF: Helesinine
+      '191970': Kesköösinine
+      1E90FF: Reklaamlehe-sinine
+      20B2AA: Hele mereroheline
+      228B22: Metsaroheline
+      2E8B57: Mereroheline
+      2F4F4F: Tume kiltkivi-hall
+      32CD32: Laimiroheline
+      3CB371: Mõõdukas mereroheline
+      40E0D0: Türkiis
+      4169E1: Kuninglik sinine
+      4682B4: Terassinine
+      483D8B: Tume kiltkivi-sinine
+      48D1CC: Mõõdukas türkiis
+      4B0082: Indigo
+      556B2F: Tume oliiviroheline
+      5F9EA0: Kadetisinine
+      6495ED: Rukkilille-sinine
+      '663399': Rebecca lilla
+      66CDAA: Mõõdukas akvamariin
+      '696969': Tuhm hall
+      6A5ACD: Kiltkivi sinine
+      6B8E23: Igav oliiv
+      '708090': Kiltkivi hall
+      '778899': Hele kiltkivi hall
+      7B68EE: Mõõdukas kiltkivi sinine
+      7CFC00: Mururoheline
+      7F0000: Veebi kastanpruun
+      7F007F: Veebi lilla
+      7FFF00: Chartreuse
+      7FFFD4: Akvamariin
+      '800000': Kastanpruun
+      '800080': Lilla
+      '808000': Oliiv
+      '808080': Veebi hall
+      87CEEB: Taevasinine
+      87CEFA: Hele taevasinine
+      8A2BE2: Sinakas violetne
+      8B0000: Tumepunane
+      8B008B: Tumelilla
+      8B4513: Sadulapruun
+      8FBC8F: Tume mereroheline
+      90EE90: Heleroheline
+      9370DB: Mõõdukas lilla
+      9400D3: Tumelilla
+      98FB98: Kahvaturoheline
+      9932CC: Tume orhidee
+      9ACD32: Kollakas-roheline
+      A020F0: Lilla
+      A0522D: Sieena
+      A52A2A: Pruun
+      A9A9A9: Tumehall
+      ADD8E6: Hele sinine
+      ADFF2F: Rohekas-kollane
+      AFEEEE: Kahvatu türkiis
+      B03060: Kastanpruun
+      B0C4DE: Hele terase sinine
+      B0E0E6: Puudrisinine
+      B22222: Tulekindel tellis
+      B8860B: Tule kuldvits
+      BA55D3: Mõõdukas orhidee
+      BC8F8F: Roosipruun
+      BDB76B: Tume khaki
+      BEBEBE: Hall
+      C0C0C0: Hõbedane
+      C71585: Mõõdukas violettpunane
+      CD5C5C: India punane
+      CD853F: Peruu
+      D2691E: "Šokolaad"
+      D2B48C: Helepruun
+      D3D3D3: Helehall
+      D8BFD8: Ohakas
+      DA70D6: Orhidee
+      DAA520: Kuldvits
+      DB7093: Kahvatu violettpunane
+      DC143C: Karmiinpunane
+      DCDCDC: Gainsboro
+      DDA0DD: Ploom
+      DEB887: Burlywood
+      E0FFFF: Hele helesinine
+      E6E6FA: Lavendel
+      E9967A: Tume lõhevärvus
+      EE82EE: Violetne
+      EEE8AA: Kahvatu kuldvits
+      F08080: Hele korallpunane
+      F0E68C: Khaki
+      F0F8FF: Alice'i sinine
+      F0FFF0: Lehemesi
+      F0FFFF: Taevasina
+      F4A460: Liivapruun
+      F5DEB3: Nisu
+      F5F5DC: Beež
+      F5F5F5: Valge suits
+      F5FFFA: Piparmündikreem
+      F8F8FF: Kummitusvalge
+      FA8072: Lõhevärvi
+      FAEBD7: Antiikvalge
+      FAF0E6: Linane
+      FAFAD2: Hele kuldvits
+      FDF5E6: Vana pits
+      FF0000: Punane
+      FF00FF: Fuksia
+      FF1493: Sügavroosa
+      FF4500: Oranžikas punane
+      FF6347: Tomat
+      FF69B4: Kuum roosa
+      FF7F50: Korallpunane
+      FF8C00: Tumeoranž
+      FFA07A: Hele lõhevärvus
+      FFA500: Oranž
+      FFB6C1: Heleroosa
+      FFC0CB: Roosa
+      FFD700: Kuldne
+      FFDAB9: Virsik
+      FFDEAD: Navajo valge
+      FFE4B5: Mokassiini
+      FFE4C4: Bisque
+      FFE4E1: Udune roos
+      FFEBCD: Kooritud mandel
+      FFEFD5: Papaia piits
+      FFF0F5: Lavendli põsepuna
+      FFF5EE: Merekarbi
+      FFF8DC: Cornsilk
+      FFFACD: Sidruni šifoon
+      FFFAF0: "Õievalge"
+      FFFAFA: Lumi
+      FFFF00: Kollane
+      FFFFE0: Helekollane
+      FFFFF0: Elevandiluu
+      FFFFFF: Valge
   global:
-    labs-link: link Labs'i
-    navigation:
-      all_blog_posts: Kõik blogipostitused...
-      all_exhibitions: Kõik näitused...
-      blog: Blogi
-      browse: Sirvi
-      browse_colours: Värvid
-      browse_newcontent: Uus sisu
-      browse_sources: Allikad
-      channels: Kogud
-      collections: Kogud
-      exhibitions: Näitused
-      home: Avaleht
-    pro-link: link Pro'sse
-    pro-text: tekst Pro jaoks
-    settings: Seadistused
+    about-us: Meist
+    channel:
+      archaeology: arheoloogia
+      architecture: arhitektuur
+      art: kunst
+      fashion: mood
+      home: Avaleht (kõik)
+      maps: kaardid
+      music: muusika
+      natural-history: looduslugu
+      newspapers: ajalehed
+      performing-arts: etenduskunst
+    channels-art: Kunstiajaloolised Kogud
+    channels-art-image: Kunstiajaloolise kogu pilt
+    channels-art-link: Kunstiajaloolised kogud
+    channels-fashion: Mood
+    channels-music: Muusika
+    choose-language: Keel
+    email-address: e-posti aadress
+    facet:
+      advanced:
+        options: Sätted
+        show:
+          ugc: Kasutajate loodud sisu
+      art:
+        form:
+          paintings:
+            genre: "Žanr"
+            medium: Meedium
+      carrier: Kandja
+      colour: Värv
+      colour-black-and-white: Mustvalge
+      country:
+        austria: Austria
+        belgium: Belgia
+        bulgaria: Bulgaaria
+        croatia: Horvaatia
+        cyprus: Küpros
+        czechrepublic: Tšehhi Vabariik
+        denmark: Taani
+        estonia: Eesti
+        europe: Euroopa
+        finland: Soome
+        france: Prantsusmaa
+        germany: Saksamaa
+        greece: Kreeka
+        hungary: Ungari
+        iceland: Island
+        ireland: Iirimaa
+        israel: Iisrael
+        italy: Itaalia
+        latvia: Läti
+        lithuania: Leedu
+        luxembourg: Luksemburg
+        malta: Malta
+        netherlands: Madalmaad
+        norway: Norra
+        poland: Poola
+        portugal: Portugal
+        romania: Rumeenia
+        russia: Venemaa
+        serbia: Serbia
+        slovakia: Slovakkia
+        slovenia: Sloveenia
+        spain: Hispaania
+        sweden: Rootsi
+        switzerland: "Šveits"
+        turkey: Türgi
+        ukraine: Ukraina
+        unitedkingdom: "Ühendkuningriik"
+        unitedstatesofamerica: Ameerika Ühendriigid
+      creator: looja
+      header:
+        channel: Kogud
+        colourpalette: Värv
+        country: Riik
+        data_provider: Asutus
+        image_aspectratio: Orientatsioon
+        image_colour: Palett
+        image_size: Suurus
+        language: Keel
+        language_of_description: Keel ja kirjeldus
+        media: Ainult meedialingiga tulemused
+        mime_type: Failiformaat
+        provider: Agregaator
+        reusability: Kas tohin kasutada?
+        sound_duration: Kestus
+        sound_hq: Kõrge kvaliteet
+        text_fulltext: Täistekst
+        type: Meedia
+        ugc: Näita kasutajate poolt loodud sisu
+        video_duration: Kestus
+        year: Kuupäev
+      image_aspectratio:
+        landscape: Rõhtformaat
+        portrait: Püstformaat
+      image_colour:
+        'false': Mustvalge
+        'true': Värv
+      image_size:
+        extra_large: Eriti Suur (4MP+)
+        large: Suur (1-4MP)
+        medium: Keskmine (0,5-1MP)
+        small: Väike (<0.5MP)
+      language:
+        bg: ''
+        ca: ''
+        cs: ''
+        da: ''
+        de: ''
+        el: ''
+        en: ''
+        es: ''
+        et: ''
+        fi: ''
+        fr: ''
+        ga: ''
+        he: ''
+        hr: ''
+        hu: ''
+        is: ''
+        it: ''
+        lt: ''
+        lv: ''
+        mt: ''
+        mul: mitmekeelne
+        nl: ''
+        'no': ''
+        pl: ''
+        pt: ''
+        ro: ''
+        ru: ''
+        sk: ''
+        sl: ''
+        sr: ''
+        sv: ''
+        tr: ''
+        uk: ''
+        yi: ''
+      less: Vähem
+      media:
+        'false': Ei
+        'true': Jah
+      more: Veel
+      more-refinements: Rohkem täpsustusi
+      resource:
+        type: Tüüp
+      reusability:
+        advanced: Detailne
+        advanced-cc-by: ''
+        advanced-cc-by-nc: ''
+        advanced-cc-by-nc-nd: ''
+        advanced-cc-by-nc-sa: ''
+        advanced-cc-by-nd: ''
+        advanced-cc-by-sa: CC BY-SA
+        advanced-cc0: ''
+        advanced-orphan-work: Orbteos
+        advanced-out-of-copyright-non-commercial: Autorikaitse alt vaba - mitteäriline taaskasutus
+        advanced-pdm: Märgistatud avalikuks omandiks
+        advanced-rrfa: "Õigused kaitstud - vaba ligipääs"
+        advanced-rrpa: "Õigused kaitstud - tasuline ligipääs"
+        advanced-rrra: "Õigused kaitstud - piiratud ligipääs"
+        advanced-ucs: Autorikaitse staatus teadmata
+        open: Jah, omistamisega
+        permission: Ainult loaga
+        restricted: Jah, piirangutega
+        simple: Lihtne
+      sound_duration:
+        long: Pikk (üle 6 minuti)
+        medium: Keskmine (3-6 minutit)
+        short: Lühike (30 s - 3 minutit)
+        very_short: Väga lühike (alla 30 s)
+      sound_hq:
+        'true': Jah
+      source: Allikas
+      text_fulltext:
+        'false': Ei
+        'true': Jah
+      type:
+        3d: 3D
+        image: Kujutis
+        sound: Heli
+        text: Tekst
+        video: Video
+      type-image:
+        orientation:
+          label: Pilti orientatsioon
+          landscape: Rõhtformaat
+          portrait: Püstformaat
+        quality:
+          all: Näita kõiki
+          hq-only: Näita ainult kõrge kvaliteediga
+          label: Kvaliteet
+        size:
+          explanation: Mida need suurused tähendavad?
+          label: Kujutise suurus
+          large: Suur (%{data})
+          medium: Keskmine (%{data})
+          small: Väike (%{data})
+          xl: Eriti suur (%{data})
+      type-sound:
+        duration:
+          label: Kestus
+          long: Pikk (%{data})
+          medium: Keskmine (%{data})
+          short: Lühike (%{data})
+          very-short: Väga lühike (%{data})
+      type-video:
+        duration:
+          label: Kestus
+          long: Pikk (%{data})
+          medium: Keskmine (%{data})
+          short: Lühike (%{data})
+      video_duration:
+        long: Pikk (üle 20 minuti)
+        medium: Keskmine (4-20 minutit)
+        short: Lühike (alla 4 minuti)
+      year:
+        from: alates
+        to: kuni
+    'facet ':
+      header:
+        video_hd:
+          'true': HD
+    find-us-elsewhere: Leia meid veel
+    forgot-password: Unustasid parooli?
+    genres: "žanrid"
+    genres-chamber-music: Kammermuusika
+    genres-classical-music: Klassikaline muusika
+    genres-concertos: Kontsertid
+    genres-non-western-classical-music: Mitte-lääne klassikaline muusika
+    genres-opera: Ooper
+    genres-popular-music: Popmuusika
+    genres-traditional-music: |2-
+
+      Pärimusmuusika
+    header:
+      connect: "Ühenda"
+      develop: Arenda
+      discover: Avasta
+      network: Võrgustik
+    help: Abi
+    home: Avaleht
+    javascript-required: Et näha seda sisu, luba palun JavaScript ja kaalu HTML5 toega veebilehitseja kasutuselevõttu.
+    labs: Laborid
+    labs-text: Remix'i kultuurilist sisu läbi meie API'de ja andmestike
+    language-basque: baski
+    language-bulgarian: bulgaaria
+    language-catalan: katalaani
+    language-croatian: horvaatia
+    language-czech: tšehhi
+    language-danish: taani
+    language-dutch: hollandi
+    language-english: inglise
+    language-estonian: eesti
+    language-finnish: soome
+    language-french: prantsuse
+    language-gaelic: gaeli
+    language-german: saksa
+    language-greek: kreeka
+    language-hungarian: ungari
+    language-icelandic: islandi
+    language-italian: itaalia
+    language-latvian: läti
+    language-lithuanian: leedu
+    language-maltese: malta
+    language-norwegian: norra
+    language-polish: poola
+    language-portuguese: portugali
+    language-romanian: rumeenia
+    language-russian: vene
+    language-slovakian: slovakkia
+    language-slovenian: sloveenia
+    language-spanish: hispaania
+    language-swedish: rootsi
+    language-ukranian: ukraina
+    login: Logi sisse
+    mission: Me muudame kultuuri abil maailma! Tahame võtta aluseks euroopa rikka pärandi ja teha selle inimestele kergemi kasutatavaks - olgu eesmärgiks töö, õppimine või lihtsalt lõbu.
+    mission-title: Meie missioon
+    more:
+      load-more: Veel
+      show-more: Näita veel
+      view-more: Vaata veel
+    more-info: Veel infot
+    newsletter:
+      email-address-invalid: E-posti väljal peab olema korrektne meiliaadress
+      email-address-required: E-posti aadress peab olema täidetud
+      language-required: Keel peab olema valitud.
+      signup: Liitu meie uudiskirjaga
+    our-sites: meie veebilehed
+    password: Parool
+    professional: Pro
+    professional-text: Võta osa, jaga oma andmeid või kasuta meie omi
+    refine-your-search: Täpsusta oma otsingut
+    register: Registreeri
+    research: Uuri
+    research-text: Akadeemilise kogukonnaga ühenduse võtmine
+    search-area:
+      search-button-image-alt: Otsing
+      search-placeholder-text: Lisa otsingutermin
+    search-collections: Kogud
+    search-collections-text: Avasta euroopa kultuuripärandit
+    share: Jaga
+    sitemap: Sisukaart
+    terms-and-policies: Kasutustingimused
+    type: tüüp
+  'no': Norra
+  pl: Portugal
   site:
-    alpha:
-      feedback_banner:
-        description: Beta versioon tähendab, et veebisait on aktiivses arenduses ja seda uuendatakse tihti. Vahel võib sait mitte töötada. Teie tagasiside aitab meil seda paremaks teha.
-        link-text: Andke meile tagasisidet!
-        title: Tegu on "Kogude" ja "Muusikakogu" beta versiooniga.
-    blog-link: link blogisse
-    browse:
-      colours:
-        description: 
-        title: Värvid
-      newcontent:
-        description: 
-        tableh1: Kõik asutused
-        tableh2: Esemed
-        tableh3: Kuupäev
-        title: Uus sisu
-      sources:
-        description: 
-        title: Allikad
-    collections:
-      art-history:
-        description: Renessanssist sürrealistideni, Vana-Rooma skultuuridest tänapäevase kunstini - Europeana Kunstiajaloo Kogu tutvustab Teile kunstnikke ja teoseid kogu Euroopast.
-        title: Europeana Kunstiajalugu
-      data-types:
-        3d: 3D objektid
-        count: esemed
-        images: Kujutised
-        moving-images: Videod
-        sound: Helisalvestised
-        texts: Tekstid
-      labels:
-        credits: Kuraator
-        recent: Hiljutised täiendused
-        spotlight-on: Esile tõstetud
-      music:
-        description: <strong>Europeana Muusikakogu</strong> toob ühte kohta kokku parimad salvestised, noodilehed ja muu muusikaga seotu kõikidest euroopa audiovisuaalarhiividest, raamatukogudest ja muuseumidest.<a href="/portal/channels/music/about">Tutvu kanaliga "Muusika" lähemalt</a>
-        title: Europeana Muusika
     facet:
       language:
         show:
           results: Tulemused
-    footer:
-      menu:
-        about: Meist
-        become-a-provider: Hakka meie partneriks
-        contact: Kontakt
-        copyright: Autoriõigused
-        data-providers: Kõik asutused
-        help: Abi
-        new-collections: Uued kogud
-        rights: Kasutustingimused
-        search-tips: Otsingunipid
-        using-myeuropeana: Minu Europeana kasutamine
-    home:
-      strapline: Avasta %{total_item_count} kunstiteost, artefakti, raamatut, videot ja heli kogu Euroopast.
-    more: Veel...
-    my-europeana: Minu Europeana
-    my-europeana-link: linu Minu Europeanasse
-    navigation:
-      breadcrumb:
-        item_detail: Ese
-        results_list: Tulemused
-        return_home: Tagasi avalehele
-    news: Uudised
-    object:
-      actions:
-        attribute-author: Omista autorile
-        attribute-html: HTML
-        attribute-plaintext: Vabatekst
-        download: Lae alla
-        download-additional: Veel saadaval
-        downloaddata: Lae andmed alla
-        open-media: Ava see kirje
-        show-less-data: Näita vähem andmeid
-        show-more-data: Näita rohkem andmeid
-        technicalmetadata: Tehnilised metaandmed
-      enrichment:
-        who:
-          title: Pealkiri
-      hierarchy:
-        title: Seotud kirjed
-        view-items-above: vaata kirjeid ülal
-        view-items-below: vaata kirjeid all
-      meta-label:
-        codec: Codec
-        collection-name: Andmestik
-        concept: Kontseptsioon
-        concepts: Klassifikatsioonid
-        consists-of: Koosneb
-        contributor: Toetaja
-        copyright: Autoriõigus
-        creation-date: Loomiskuupäev
-        creator: Looja
-        current-location: Hetkeasukoht
-        data-provider: Asutus
-        date: Kuupäev
-        dates: Kuupäevad
-        description: Kirjeldus
-        dimensions: Mõõdud
-        duration: Kestus
-        edm:
-          has-met: On seotud
-          incorporates: Sisaldab
-          is-derivative-of: Põlvneb
-          is-representation-of: Kujutab
-          is-similar-to: On sarnane
-          is-successor-of: On järjeltulija
-          realises: Realiseerib
-          was-present-at: Kohal
-        extent: Suurus
-        file-size: Failisuurus
-        format: Formaat
-        fps: Kaadrit sekundis
-        has-type: On tüübist
-        identifier: Identifikaator
-        is-format-of: On formaat
-        is-part-of: On osa
-        is-referenced-by: Viitab
-        is-replaced-by: Asendab
-        is-required-by: Nõuab
-        issued: Esmaemiteeritud
-        language: Keel
-        latitude: Laiuskraad
-        location: Asukoht
-        longitude: Pikkuskraad
-        map: Kaart
-        map-tiles: Kaarditükid
-        medium: Meedium
-        people: Inimesed
-        period: Periood
-        place: Koht
-        place-time: Koht/Aeg
-        properties: Omadused
-        provenance: Päritolu
-        provided-by: Saa rohkem teada
-        provided-by-detail: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
-      named-entities:
-        title: 
-        what:
-          broader: 
-          label: 
-          term: 
-          title: 
-        when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
-        where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
-        who:
-          label: 
-          term: 
-          title: 
-      nav:
-        next: 
-        prev: 
-      points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: näita rohkem
-      similar-items: Sarnased objektid
-    pages:
-      '404':
-        intro: 
-        text: 
-      about:
-        text: 
-        title: 
-      music-channel-about:
-        text: 
-        title: 
-    results:
-      actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
-      list:
-        all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
-        view:
-          grid: 
-          list: 
-        view-at-provider: 
-    search:
-      placeholder:
-        text: 
-      similar:
-        prefix: 
-    settings:
-      actions:
-        clear-selection: 
-        save-settings: 
-      language:
-        auto-translate-limit: 
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
-        flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
-      title: Seadistused
+        show-results-all: Näita kõiki tulemusi
