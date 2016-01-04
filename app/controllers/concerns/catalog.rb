@@ -22,7 +22,8 @@ module Catalog
     mlt_params.merge!(mlt: document, mltf: field)
     mlt_params.merge!(extra_controller_params)
     search_results(mlt_params, search_params_logic)
-  rescue Net::HTTPBadResponse, Europeana::API::Errors::RequestError
+  rescue Net::HTTPBadResponse, Europeana::API::Errors::RequestError,
+         Europeana::API::Errors::ResponseError
     # For records with many terms in MLT fields, the MLT queries can result in
     # *very* large API URLs, which cause a variety of request/response errors
     [nil, []]
