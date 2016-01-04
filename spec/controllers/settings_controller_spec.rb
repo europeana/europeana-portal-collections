@@ -22,7 +22,7 @@ RSpec.describe SettingsController do
         end
         it 'sets flash notice' do
           put :update_language, locale: 'nl'
-          expect(controller).to set_flash[:notice].now
+          expect(controller).to set_flash.now[:notice]
         end
         context 'when format is html' do
           before { put :update_language, locale: 'nl' }
@@ -62,7 +62,7 @@ RSpec.describe SettingsController do
         end
         it 'sets flash alert' do
           put :update_language, locale: 'abc'
-          expect(controller).to set_flash[:alert].now
+          expect(controller).to set_flash.now[:alert]
         end
         context 'when format is html' do
           before { put :update_language, locale: 'abc' }
@@ -103,7 +103,7 @@ RSpec.describe SettingsController do
       end
       it 'sets flash notice' do
         put :update_language
-        expect(controller).to set_flash[:notice].now
+        expect(controller).to set_flash.now[:notice]
       end
       context 'when format is html' do
         before { put :update_language }
