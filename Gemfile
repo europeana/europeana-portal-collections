@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '2a5b6c7'
 
@@ -8,16 +8,13 @@ gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
 
-gem 'rails_admin_globalize_field', github: 'rwd/rails_admin_globalize_field',
-  branch: 'globalize-5-rails-4.2'
-
 gem 'aasm', '~> 4.2'
 gem 'actionpack-action_caching'
 gem 'blacklight', '~> 5.15'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
 gem 'colorize'
-gem 'delayed_job_active_record', '~> 4.0.3'
+gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise', '~> 3.5'
 gem 'europeana-blacklight', '~> 0.3.2'
 gem 'europeana-api', '~> 0.4.2'
@@ -25,14 +22,15 @@ gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
-gem 'htmlcompressor', '0.2'
-gem 'nokogiri', '~> 1.6.6.4'
+gem 'htmlcompressor', '0.3'
+gem 'nokogiri', '~> 1.6.7.1'
 gem 'pg'
 gem 'paperclip', '~> 4.3'
 gem 'paper_trail', '~> 4.0'
 gem 'puma', '~> 2.13'
 gem 'rack-rewrite'
-gem 'rails_admin', '~> 0.7.0'
+gem 'rails_admin', '~> 0.8.0'
+gem 'rails_admin_globalize_field', '~> 0.4'
 gem 'redis-rails', '~> 4.0'
 gem 'redis-rails-instrumentation'
 gem 'sass-rails'
