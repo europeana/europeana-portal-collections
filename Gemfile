@@ -45,24 +45,24 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.0'
   # gem 'rails_best_practices', require: false # @todo add to CI suite
   gem 'rspec-rails', '~> 3.0'
-  gem 'rubocop', '0.29.1', require: false # only update when Hound does
+  gem 'rubocop', '0.35.1', require: false # only update when Hound does
 end
 
 group :development do
   gem 'foreman'
-  gem 'spring', '~> 1.3.6'
-  gem 'web-console', '~> 2.0'
+  gem 'spring', '~> 1.6'
+  gem 'web-console', '~> 3.0'
 end
 
 group :test do
-  gem 'capybara', '~> 2.4.0'
+  gem 'capybara', '~> 2.5'
   gem 'coveralls', require: false
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver', '~> 2.47'
-  gem 'shoulda-matchers', '~> 2.8', require: false
+  gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'simplecov', require: false
-  gem 'webmock', '~> 1.21.0'
+  gem 'webmock', '~> 1.22'
 end
 
 group :doc do
@@ -70,5 +70,5 @@ group :doc do
 end
 
 group :localeapp do
-  gem 'localeapp', '~> 0.9.0'
+  gem 'localeapp', '~> 1.0'
 end
