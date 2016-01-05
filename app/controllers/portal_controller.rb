@@ -64,8 +64,7 @@ class PortalController < ApplicationController
   def navigation
     respond_to do |format|
       format.json do
-        # HOTFIX: disabled due to malfunctioning tracking on beta deploy
-        # setup_next_and_previous_documents
+        setup_next_and_previous_documents
         render :navigation, layout: false
       end
     end
