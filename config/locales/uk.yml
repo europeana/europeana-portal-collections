@@ -3,60 +3,60 @@ uk:
     site:
       browse:
         newcontent:
-          description: 
+          description: "У цьому розділі ви можете знайти весь контент, нещодавно доданий до колекцій Europeana. Тут ви можете побачити, яка нова установа опублікувала нові матеріали, скільки матеріалів і коли! Просто натисніть на посилання нижче, щоб побачити їх колекції."
         sources:
-          description: 
+          description: "Нижче ви можете побачити список джерел наших колекцій. Ці джерела об'єднують та поповнюють колекції Europeana, натисніть на цікаве вам посилання, щоб побачити всі їх колекції!"
   global:
-    labs-link: 
+    labs-link: "Посилання на Europeana Labs"
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: "Усі пости блогу..."
+      all_exhibitions: "Всі виставки..."
+      blog: "Блог"
+      browse: "Переглянути"
+      browse_colours: "Кольори"
+      browse_newcontent: "Новий контент"
+      browse_sources: "Джерела"
+      channels: "Колекції"
+      collections: "Колекції"
+      exhibitions: "Виставки"
+      home: "Головна"
+    pro-link: "Посилання на Europeana Pro"
+    pro-text: "Текст для Europeana Pro"
+    settings: "Налаштування"
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: "Бета-версія означає, що цей сайт перебуває в активній розробці та буде регулярно оновлюватися. Часом він може не бути доступним. Ваші відгуки допоможуть нам поліпшити сайт."
+        link-text: "Залиште свій відгук!"
+        title: "Це бета-версія наших нових «Колекцій» та Музичних колекцій»"
+    blog-link: "посилання на блог"
     browse:
       colours:
-        description: 
-        title: 
+        description: "У цьому розділі ви можете шукати зображення за кольором. Прсто натисніть на ваш улюблений, щоб побачити колекцію!"
+        title: "Кольори"
       newcontent:
-        description: 
-        tableh1: 
-        tableh2: 
-        tableh3: 
-        title: 
+        description: "У цьому розділі ви можете знайти весь контент, нещодавно доданий до колекцій Europeana. Тут ви можете побачити, яка нова установа опублікувала нові матеріали, скільки матеріалів і коли! Просто натисніть на посилання нижче, щоб побачити їх колекції."
+        tableh1: "Усі установи"
+        tableh2: "Елемент"
+        tableh3: "Дата"
+        title: "Новий контент"
       sources:
-        description: 
-        title: 
+        description: "Нижче ви можете побачити список джерел наших колекцій. Ці джерела об'єднують та поповнюють колекції Europeana, натисніть на цікаве вам посилання, щоб побачити всі їх колекції!"
+        title: "Джерела"
     collections:
       art-history:
-        description: 
-        title: 
+        description: "Від Відродження до сюрреалізму та від давньоримської скульптури до сучасного мистецтва, Колекція історії мистецтва Europeana ознайомлює вас з митцями та творами всієї Європи."
+        title: "Історія мистецтва Europeana"
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: "Тривимірні об'єкти"
+        count: "елементи"
+        images: "Зображення"
+        moving-images: "Відео"
+        sound: "Звукозаписи"
+        texts: "Тексти"
       labels:
-        credits: 
-        recent: 
+        credits: "Куратор"
+        recent: "Нові надходження"
         spotlight-on: 
       music:
         description: 
