@@ -241,7 +241,7 @@ module Portal
               institution_name_and_link: institution_name_and_link,
               institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
               institution_canned_search: render_document_show_field_value(document, 'aggregations.edmDataProvider') ?
-                search_path(f: { 'DATA_PROVIDER' => [render_document_show_field_value(document, 'aggregations.edmDataProvider')]}) : false
+                search_path(f: { 'DATA_PROVIDER' => [render_document_show_field_value(document, 'aggregations.edmDataProvider')] }) : false
             },
             people: data_section(
               title: 'site.object.meta-label.people',
