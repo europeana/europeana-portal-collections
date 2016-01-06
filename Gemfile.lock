@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 70cc4101a05a0e57eceba6348f21d441658397dd
-  ref: 70cc410
+  revision: f430d6651758555d0dc7070846211a3cb1a5d3e1
+  ref: f430d66
   specs:
     europeana-blacklight (0.3.2)
       activesupport (>= 4.0, < 5.0)
@@ -55,8 +55,6 @@ GEM
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionpack-action_caching (1.1.1)
-      actionpack (>= 4.0.0, < 5.0)
     actionview (4.2.5)
       activesupport (= 4.2.5)
       builder (~> 3.1)
@@ -553,7 +551,6 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.2)
-  actionpack-action_caching
   blacklight (~> 5.17)
   cancancan (~> 1.12)
   capybara (~> 2.5)

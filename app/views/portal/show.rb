@@ -42,9 +42,6 @@ module Portal
     end
 
     def navigation
-      # skip building item breadcrumb while action caching is in use
-      return helpers.navigation
-
       mustache[:navigation] ||= begin
         query_params = current_search_session.try(:query_params) || {}
 

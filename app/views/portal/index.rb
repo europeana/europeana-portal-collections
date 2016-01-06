@@ -144,13 +144,12 @@ module Portal
       doc_type = doc.fetch(:type, nil)
       {
         object_url: document_path(doc, format: 'html'),
-        # HOTFIX: link_attrs disabled due to malfunctioning on beta deploy
-#         link_attrs: [
-#           {
-#             name: 'data-context-href',
-#             value: track_document_path(doc, track_document_path_opts(counter))
-#           }
-#         ],
+        link_attrs: [
+          {
+            name: 'data-context-href',
+            value: track_document_path(doc, track_document_path_opts(counter))
+          }
+        ],
         title: render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
         text: {
           medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
