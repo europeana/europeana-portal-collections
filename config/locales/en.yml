@@ -161,6 +161,7 @@ en:
         provenance: Provenance
         provided-by: Find out more
         provided-by-detail: Europeana is displaying this item via the %{institution_name_and_link}. Visit their site for more information.
+        provided-by-detail-no-link: Europeana is displaying this item via
         provider: Provider
         providing-country: Providing country
         publication-date: Date of publication

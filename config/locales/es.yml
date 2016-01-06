@@ -160,6 +160,7 @@ es:
         provenance: 'Procedencia '
         provided-by: Más acerca de
         provided-by-detail: 
+        provided-by-detail-no-link: 
         provider: Proveedor
         providing-country: 'País proveedor '
         publication-date: Fecha de publicación

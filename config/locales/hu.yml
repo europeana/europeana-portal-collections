@@ -160,6 +160,7 @@ hu:
         provenance: Eredet
         provided-by: Tudj meg többet
         provided-by-detail: Az Europeana a %{institution_name_and_link} oldalán keresztül mutatja be az elemeket. Látogassa meg az oldalukat több információért.
+        provided-by-detail-no-link: 
         provider: Szolgáltató
         providing-country: Szolgáltató ország
         publication-date: Kiadás dátuma

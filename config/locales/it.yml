@@ -160,6 +160,7 @@ it:
         provenance: Provenienza
         provided-by: Scopri di più
         provided-by-detail: 
+        provided-by-detail-no-link: 
         provider: Fornitore
         providing-country: Paese fornitore
         publication-date: Data di pubblicazione

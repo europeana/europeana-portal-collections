@@ -160,6 +160,7 @@ hr:
         provenance: Porijeklo
         provided-by: Saznaj više
         provided-by-detail: Europeana prikazuje ovaj objekt preko %{institution_name_and_link}. Posjetite njihovu stranicu za više informacija.
+        provided-by-detail-no-link: 
         provider: Agregator
         providing-country: Država
         publication-date: Datum objave

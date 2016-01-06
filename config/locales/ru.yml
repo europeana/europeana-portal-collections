@@ -160,6 +160,7 @@ ru:
         provenance: "Происхождение"
         provided-by: "Узнать больше"
         provided-by-detail: Europeana отображает этот объект по ссылке %{institution_name_and_link}. Для более подробной информации посетите данный веб-сайт.
+        provided-by-detail-no-link: 
         provider: "Организация"
         providing-country: "Страна"
         publication-date: "Дата публикации"
