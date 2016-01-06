@@ -4,18 +4,6 @@ class BrowseController < ApplicationController
   include Catalog
   include Europeana::Styleguide
 
-  caches_action :colours,
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
-  caches_action :new_content,
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
-  caches_action :sources,
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
   # GET /browse/colours
   def colours
     params = { query: '*:*', rows: 0, profile: 'minimal facets' }
