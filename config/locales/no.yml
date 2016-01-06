@@ -160,6 +160,7 @@
         provenance: Opphavssted
         provided-by: Finn ut mer
         provided-by-detail: Europeana viser dette objektet  via %{institution_name_and_link}. Besøk nettsiden deres for mer informasjon.
+        provided-by-detail-no-link: 
         provider: Leverandør
         providing-country: Giverland
         publication-date: Dato for publisering

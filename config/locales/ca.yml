@@ -160,6 +160,7 @@ ca:
         provenance: Provinença
         provided-by: Saber-ne més
         provided-by-detail: Europeana mostra aquest ítem via %{institution_name_and_link}. Visita el seu web per a més informació
+        provided-by-detail-no-link: 
         provider: Proveïdor
         providing-country: País proveïdor
         publication-date: Data de publicació

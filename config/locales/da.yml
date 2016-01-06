@@ -160,6 +160,7 @@ da:
         provenance: Proveniens
         provided-by: Mere info
         provided-by-detail: 
+        provided-by-detail-no-link: 
         provider: Leverandør
         providing-country: Oprindelsesland
         publication-date: Udgivelsesdato

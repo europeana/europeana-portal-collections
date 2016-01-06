@@ -160,6 +160,7 @@ fi:
         provenance: Provenienssi
         provided-by: Aiheesta lisää
         provided-by-detail: "%{institution_name_and_link} esittää kohteen Europeanassa. Lisätietoa sen verkkopalvelussa."
+        provided-by-detail-no-link: 
         provider: Tarjoaja
         providing-country: Tarjoava maa
         publication-date: Jukaisupäivämäärä

@@ -160,6 +160,7 @@ fr:
         provenance: Provenance
         provided-by: En savoir plus
         provided-by-detail: 'Cet objet est accessible sur Europeana à partir de %{institution_name_and_link}. Rendez-vous sur leur site pour plus d''information. '
+        provided-by-detail-no-link: 
         provider: Aggrégateur
         providing-country: Pays contributeur
         publication-date: Date de publication

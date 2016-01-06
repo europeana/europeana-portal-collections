@@ -160,6 +160,7 @@ lt:
         provenance: Kilmė
         provided-by: Sužinokite daugiau
         provided-by-detail: Europeana atvaizduoja šį įrašą iš %{institution_name_and_link}. Daugiau informacijos rasite jų internetinėje svetainėje.
+        provided-by-detail-no-link: 
         provider: Tiekėjas
         providing-country: "Šalis"
         publication-date: Publikacijos data

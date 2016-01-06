@@ -160,6 +160,7 @@ ro:
         provenance: Proveniență
         provided-by: Află mai multe
         provided-by-detail: Europeana vă ofera aceasta înregistrare cu ajutorul %{institution_name_and_link}. Pentru mai multe detalii vizitați website-ul acestei instituții.
+        provided-by-detail-no-link: 
         provider: Instituție
         providing-country: "Țara furnizoare"
         publication-date: Data publicării
