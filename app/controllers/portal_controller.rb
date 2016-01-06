@@ -18,7 +18,7 @@ class PortalController < ApplicationController
 
     respond_to do |format|
       format.html do
-        # setup_next_and_previous_documents
+        setup_next_and_previous_documents
         render action: 'show'
       end
       format.json { render json: { response: { document: @document } } }
