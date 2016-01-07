@@ -49,8 +49,8 @@ Rails.application.configure do
           end
           if params.key?('qf')
             params['qf'] = [params['qf']].flatten
-            params['qf'].each do |qf|
-              qf = qf.force_encoding('ISO-8859-1').encode('UTF-8')
+            params['qf'] = params['qf'].map do |qf|
+              qf.force_encoding('ISO-8859-1').encode('UTF-8')
             end
             params.delete('qf') if params['qf'].all?(&:blank?)
           end
