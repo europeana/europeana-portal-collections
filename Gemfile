@@ -40,9 +40,7 @@ group :production do
 end
 
 group :development, :test do
-  # gem 'brakeman', require: false # @todo add to CI suite
   gem 'dotenv-rails', '~> 2.0'
-  # gem 'rails_best_practices', require: false # @todo add to CI suite
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '0.35.1', require: false # only update when Hound does
 end
