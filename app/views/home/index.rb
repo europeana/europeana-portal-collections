@@ -4,6 +4,14 @@ module Home
       'Europeana Collections'
     end
 
+    def cached_body
+      lambda do |text|
+        Rails.cache.fetch(cache_key, expires_in: 24.hours) do
+          render(text)
+        end
+      end
+    end
+
     def content
       mustache[:content] ||= begin
         {
@@ -30,6 +38,10 @@ module Home
     end
 
     private
+
+    def cache_key
+      'views/' + Rails.application.config.assets.version + '/' + I18n.locale.to_s + '/' + @landing_page.cache_key
+    end
 
     def blog_news_items
       @blog_news_items ||= news_items(feed_entries(Cache::FeedJob::URLS[:blog][:all]))
