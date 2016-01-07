@@ -8,9 +8,28 @@
 class ApplicationView < Europeana::Styleguide::View
   include MustacheHelper
 
+  def cached_body
+    lambda do |text|
+      Rails.cache.fetch(cache_key, expires_in: 24.hours) do
+        render(text)
+      end
+    end
+  end
+
   protected
 
   def site_title
     'Europeana Collections'
+  end
+
+  private
+
+  def cache_key
+    'views/' + Rails.application.config.assets.version + '/' + I18n.locale.to_s + '/' + body_cache_key
+  end
+
+  # Implement this method in sub-classes to enable body caching
+  def body_cache_key
+    fail NotImplementedError
   end
 end

@@ -5,6 +5,7 @@ class BrowseController < ApplicationController
   include Europeana::Styleguide
 
   # GET /browse/colours
+  # @todo Get colours with a scheduled job and cache them
   def colours
     params = { query: '*:*', rows: 0, profile: 'minimal facets' }
     response = repository.search(params)
@@ -16,6 +17,7 @@ class BrowseController < ApplicationController
   end
 
   # GET /browse/newcontent
+  # @todo Load @providers from view helper, to bypass if cached
   def new_content
     @providers = Rails.cache.fetch('browse/new_content/providers') || []
 
@@ -25,6 +27,7 @@ class BrowseController < ApplicationController
   end
 
   # GET /browse/sources
+  # @todo Load @providers from view helper, to bypass if cached
   def sources
     @providers = Rails.cache.fetch('browse/sources/providers') || []
     @providers.each do |provider|
