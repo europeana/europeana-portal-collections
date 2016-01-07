@@ -10,7 +10,9 @@ Rails.application.configure do
         params = Rack::Utils.parse_query(rack_env['QUERY_STRING'])
 
         # Search query
-        params['q'] = params.delete('query') if params.key?('query')
+        if params.key?('query')
+          params['q'] = params.delete('query').force_encoding('ISO-8859-1').encode('UTF-8')
+        end
 
         # Search results per page
         rows = (params.delete('rows') || '24').to_i
@@ -47,15 +49,21 @@ Rails.application.configure do
           end
           if params.key?('qf')
             params['qf'] = [params['qf']].flatten
+            params['qf'].each do |qf|
+              qf = qf.force_encoding('ISO-8859-1').encode('UTF-8')
+            end
             params.delete('qf') if params['qf'].all?(&:blank?)
           end
         end
+
+        # Redundant qt param
+        params.delete('qt')
 
         query = Rack::Utils.build_nested_query(params)
         Europeana::Portal::Application.config.relative_url_root + '/search?' + query
       },
       if: Proc.new { |rack_env|
-        (Rack::Utils.parse_query(rack_env['QUERY_STRING']).keys & %w(query rows start qf)).present?
+        (Rack::Utils.parse_query(rack_env['QUERY_STRING']).keys & %w(query rows start qf qt)).present?
       }
   end
 end
