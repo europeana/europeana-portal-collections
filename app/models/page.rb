@@ -1,8 +1,8 @@
 class Page < ActiveRecord::Base
   include HasPublicationStates
 
-  belongs_to :hero_image
-  has_many :browse_entries, -> { order(:position) }, dependent: :destroy
+  belongs_to :hero_image, inverse_of: :page
+  has_many :browse_entries, -> { order(:position) }, dependent: :destroy, inverse_of: :page
 
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries, allow_destroy: true

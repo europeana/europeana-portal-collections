@@ -6,6 +6,8 @@ class Collection < ActiveRecord::Base
   validates :key, presence: true, uniqueness: true
   validates :api_params, presence: true
 
+  after_save :touch_landing_page
+
   def to_param
     key
   end
@@ -22,5 +24,9 @@ class Collection < ActiveRecord::Base
 
   def landing_page
     @landing_page ||= Page::Landing.find_by_slug("collections/#{key}")
+  end
+
+  def touch_landing_page
+    landing_page.touch if landing_page.present?
   end
 end
