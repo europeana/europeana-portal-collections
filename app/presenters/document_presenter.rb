@@ -117,13 +117,6 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
         license_public: false,
         license_name: 'unmatched rights: ' + media_rights
       }
-    end.merge(
-      {
-        # TODO: attribution snippet goes here
-        attribution_html: CGI.escapeHTML(''),
-        attribution_plain: ''
-      }
-    )
-
+    end
   end
 end
