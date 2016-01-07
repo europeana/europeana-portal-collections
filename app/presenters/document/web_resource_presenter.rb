@@ -119,7 +119,9 @@ module Document
         width_or_height: !(width.blank? && height.blank?),
         size_unit: 'pixels',
         runtime: render_document_show_field_value('ebucoreDuration'),
-        runtime_unit: t('site.object.meta-label.runtime-unit-seconds')
+        runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
+        attribution_plain: render_document_show_field_value('textAttributionSnippet'),
+        attribution_html:  render_document_show_field_value('htmlAttributionSnippet')
       }
     end
 
