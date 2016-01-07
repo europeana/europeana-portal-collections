@@ -190,10 +190,11 @@ module Document
     end
 
     def thumbnail
+      use_small = @record_presenter.displayable_media_web_resource_presenters.size > 1
       if edm_object_thumbnail?
-        @record_presenter.media_web_resource_presenters.detect { |p| p.url == @record_presenter.edm_object }.api_thumbnail
+        @record_presenter.media_web_resource_presenters.detect { |p| p.url == @record_presenter.edm_object }.api_thumbnail(use_small)
       else
-        api_thumbnail
+        api_thumbnail(use_small)
       end
     end
 
@@ -202,8 +203,8 @@ module Document
         @record_presenter.edm_object_thumbnails_edm_is_shown_by?
     end
 
-    def api_thumbnail
-      Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+    def api_thumbnail(use_small)
+      Europeana::API.url + '/thumbnail-by-url.json?size=w' + (use_small ? '200' : '400') + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 
     def player
