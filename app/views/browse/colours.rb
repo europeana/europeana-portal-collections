@@ -33,5 +33,11 @@ module Browse
         ] + super
       end
     end
+
+    private
+
+    def body_cache_key
+      'browse/colours'
+    end
   end
 end

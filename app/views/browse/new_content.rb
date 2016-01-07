@@ -29,5 +29,11 @@ module Browse
         ] + super
       end
     end
+
+    private
+
+    def body_cache_key
+      'browse/newcontent'
+    end
   end
 end

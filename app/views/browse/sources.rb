@@ -60,5 +60,11 @@ module Browse
       end
       @providers
     end
+
+    private
+
+    def body_cache_key
+      'browse/sources'
+    end
   end
 end

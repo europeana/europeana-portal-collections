@@ -22,6 +22,7 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
   end
 
   every(1.day, 'cache.record-counts', at: ENV['SCHEDULE_RECORD_COUNTS']) do
+    Cache::ColourFacetsJob.perform_later
     Cache::RecordCountsJob.perform_later
     Cache::RecordCounts::RecentAdditionsJob.perform_later
     Cache::RecordCounts::ProvidersJob.perform_later

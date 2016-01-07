@@ -1,8 +1,8 @@
 class BrowseEntry < ActiveRecord::Base
   include HasSettingsAttribute
 
-  belongs_to :page
-  belongs_to :media_object, dependent: :destroy
+  belongs_to :page, inverse_of: :browse_entries, touch: true
+  belongs_to :media_object, dependent: :destroy, inverse_of: :browse_entry
 
   has_settings(:category)
 

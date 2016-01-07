@@ -63,6 +63,10 @@ module Collections
 
     private
 
+    def body_cache_key
+      @landing_page.cache_key
+    end
+
     def detect_link_in_array(links, domain)
       matcher = %r(://([^/]*.)?#{domain}/)
       links.detect { |l| l.url =~ matcher }

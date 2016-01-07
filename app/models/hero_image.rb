@@ -5,13 +5,18 @@ class HeroImage < ActiveRecord::Base
                :attribution_url, :attribution_text, :brand_opacity, :brand_position,
                :brand_colour)
 
-  belongs_to :media_object, dependent: :destroy
+  has_one :page, inverse_of: :hero_image
+
+  belongs_to :media_object, dependent: :destroy, inverse_of: :hero_image
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
   delegate :settings_brand_opacity_enum, :settings_brand_position_enum,
            :settings_brand_colour_enum, to: :class
 
   delegate :file, to: :media_object, allow_nil: true
+
+  after_save :touch_page
+  after_touch :touch_page
 
   has_paper_trail
 
@@ -38,4 +43,8 @@ class HeroImage < ActiveRecord::Base
   end
 
   validates :license, inclusion: { in: license_enum }, allow_nil: true
+
+  def touch_page
+    page.touch
+  end
 end

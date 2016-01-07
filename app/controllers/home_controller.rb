@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   def index
     @collection = find_collection
     @landing_page = find_landing_page
-    @europeana_item_count = Rails.cache.fetch('record/counts/all') # populated by {RecordCountsCacheJob}
+    @europeana_item_count = Rails.cache.fetch('record/counts/all') # populated by {Cache::RecordCountsJob}
 
     respond_to do |format|
       format.html
