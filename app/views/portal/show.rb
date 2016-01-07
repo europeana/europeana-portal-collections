@@ -38,7 +38,7 @@ module Portal
     def page_title
       mustache[:page_title] ||= begin
         title = [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title]
-        title = CGI.unescapeHTML(title.compact.join(' | '))  + ' - Europeana'
+        CGI.unescapeHTML(title.compact.join(' | ')) + ' - Europeana'
       end
     end
 
