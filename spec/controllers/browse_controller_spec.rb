@@ -1,6 +1,7 @@
 RSpec.describe BrowseController do
   describe 'GET colours' do
     before(:each) do
+      Rails.cache.write('browse/colours/facets', [])
       get :colours
     end
 
@@ -9,8 +10,8 @@ RSpec.describe BrowseController do
       expect(response).to render_template('browse/colours')
     end
 
-    it 'should get colours from the API' do
-      expect(an_api_search_request).to have_been_made
+    it 'should not get colours from the API' do
+      expect(an_api_search_request).not_to have_been_made
     end
 
     it 'should assign colours from COLOURPALETTE facet' do
