@@ -204,7 +204,8 @@ module Document
     end
 
     def api_thumbnail(use_small)
-      Europeana::API.url + '/thumbnail-by-url.json?size=w' + (use_small ? '200' : '400') + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+      width = use_small ? '200' : '400'
+      Europeana::API.url + '/thumbnail-by-url.json?size=w' + width + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 
     def player
