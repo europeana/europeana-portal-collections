@@ -71,5 +71,11 @@ module Portal
         }
       ]
     end
+
+    private
+
+    def body_cache_key
+      @page.cache_key
+    end
   end
 end

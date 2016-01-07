@@ -10,7 +10,7 @@ class ApplicationView < Europeana::Styleguide::View
 
   def cached_body
     lambda do |text|
-      Rails.cache.fetch(cache_key, expires_in: 24.hours) do
+      Rails.cache.fetch(cache_key, expires_in: 24.hours, force: !cache_body?) do
         render(text)
       end
     end
@@ -31,5 +31,9 @@ class ApplicationView < Europeana::Styleguide::View
   # Implement this method in sub-classes to enable body caching
   def body_cache_key
     fail NotImplementedError
+  end
+
+  def cache_body?
+    !request.format.json?
   end
 end
