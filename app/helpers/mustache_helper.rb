@@ -12,6 +12,10 @@ module MustacheHelper
     ]
   end
 
+  def page_locale
+    session[:locale]
+  end
+
   # model for the search form
   def input_search
     {
