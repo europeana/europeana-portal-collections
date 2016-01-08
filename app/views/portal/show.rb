@@ -501,7 +501,8 @@ module Portal
       data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels].compact
       {
         title: t('site.object.named-entities.title'),
-        data: data
+        data: data,
+        inline: true,
       } unless data.size == 0
     end
 
