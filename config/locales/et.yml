@@ -3,9 +3,9 @@ et:
     site:
       browse:
         newcontent:
-          description: 
+          description: Selles alaosas leiad sisu, mis on hiljuti lisatud Europeana kogusse. Siin on näha, millised institutsioonid on avaldanud uut ainest nagu ka selle hulka ja avaldamisaega. Lihtsalt klõpsa allolevatele linkidele nende kogude nägemiseks.
         sources:
-          description: 
+          description: Allpool näed loetelu meie kogude allikaist. Need allikad koondavad ja panustavad kogusid Europeanasse. Klõpsa sind huvitavale lingile, et sind viidaks kõikide nende kogudeni!
   global:
     labs-link: link Labs'i
     navigation:
@@ -32,16 +32,16 @@ et:
     blog-link: link blogisse
     browse:
       colours:
-        description: 
+        description: Selles alaosas saad otsida pilte nende värvist lähtudes. Lihtsalt klõpsa pildile, mis sulle meeldib,et vastavat kogu näha!
         title: Värvid
       newcontent:
-        description: 
+        description: Selles alaosas leiad sisu, mis on hiljuti lisatud Europeana kogusse. Siin on näha, millised institutsioonid on avaldanud uut ainest nagu ka selle hulka ja avaldamisaega. Lihtsalt klõpsa allolevatele linkidele nende kogude nägemiseks.
         tableh1: Kõik asutused
         tableh2: Esemed
         tableh3: Kuupäev
         title: Uus sisu
       sources:
-        description: 
+        description: Allpool näed loetelu meie kogude allikaist. Need allikad koondavad ja panustavad kogusid Europeanasse. Klõpsa sind huvitavale lingile, et sind viidaks kõikide nende kogudeni!
         title: Allikad
     collections:
       art-history:
@@ -159,131 +159,153 @@ et:
         properties: Omadused
         provenance: Päritolu
         provided-by: Saa rohkem teada
-        provided-by-detail: 
-        provided-by-detail-no-link: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+        provided-by-detail: Europeana kuvab seda kirjet läbi %{institution_name_and_link}. Külasta nende lehte täienda teabe evimiseks.
+        provided-by-detail-no-link: Europeana kuvab seda kirjet läbi
+        provider: Annetaja
+        providing-country: Annetusriik
+        publication-date: Avaldamise kuupäev
+        publisher: Avaldaja
+        references: Viited
+        refs-rels: Viited ja seosed
+        relations: Seosed
+        rights: "Õigused"
+        rights-human: Kas ma saan seda kasutada?
+        runtime: Käitusaeg
+        runtime-unit-seconds: sekundid
+        source: Allikas
+        subject: Isik
+        temporal: Ajaline
+        time: Aeg
+        timestamp-created: Esmalt avaldatud Europeanas
+        timestamp-updated: Viimati uuendatud Europeanas
+        timestamp_created: Esmalt avaldatud Europeanas (%{timestamp_created})
+        timestamp_updated: Viimati uuendatud Europeanas (%{timestamp_updated})
+        title: Pealkiri
+        toc: Sisukord
+        type: Tüüp
+        ugc: Kasutaja panustatud sisu
+        version: Versioon
       named-entities:
-        title: 
+        title: "Üksused"
         what:
-          broader: 
-          label: 
+          broader: Laiem mõiste
+          label: Mõiste märgend
           term: 
-          title: 
+          title: Isikud, allikate tüübid, liigid ja vormid (Mõisted)
         when:
-          begin: 
-          end: 
-          label: 
+          begin: Perioodi algus
+          end: Perioodi lõpp
+          label: Perioodi märgend
           term: 
-          title: 
+          title: Ajavahemikud ja kuupäevad (Ajavahemik)
         where:
-          label: 
-          latitude: 
-          longitude: 
+          label: Koha märgend
+          latitude: Laiuskraad
+          longitude: Pikkuskraad
           term: 
-          title: 
+          title: Kohanimed (Kohad)
         who:
-          label: 
+          label: Toimija märgend
           term: 
-          title: 
+          title: Isikud ja asutused (Toimija)
       nav:
-        next: 
-        prev: 
+        next: Järgmine
+        prev: Eelmine
       points:
-        east: 
-        north: 
-        south: 
-        west: 
+        east: Ida
+        north: Põhi
+        south: Lõuna
+        west: Lääs
       show-more-similar-items: näita rohkem
       similar-items: Sarnased objektid
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Vabandust! Me ei suuda seda lehekülge leida
+        text: Kahjuks me ei suutnud leida otsitavat lehekülge. Proovi otsida Europeanast või leia meelepärane allolevaist valitud kirjeist.
       about:
-        text: 
-        title: 
+        text: |-
+          <p>Püüad leida enda meelepäraseimat maali? Teed uurimistööd või kirjutad referaati? Otsid inspiratsiooni oma järgmise kohvitassi kujundamiseks? Ihkad midagi uut õppida? Misiganes põhjusel külastad Europeanat, tere tulemast!</p>
+
+          <p>Kaevu Euroopa suurimasse kunsti, kultuuri ja teaduse võrgukogusse. Europeana kogud toovad sinuni ainest Euroopa kuulsatest ja mitte-nii-kuulsatest (kuid alati paeluvatest) raamatukogudest, muuseumitest, galeriidest ja arhiividest.</p>
+
+          <p>Raamatud ja käsikirjad, fotod ja maalid, kujud ja noodilehed, videod ja helisalvestised, päevikud ja kaardid - need on kõik siin. Pole tarvidust läbi terve kontinendi rännata, ei füüsiliselt ega virtuaalselt!</p>
+
+          <p>Uuri, avasta, vaata, kuula, loe, lae alla ... Naudi!</p>
+
+          <p>Miks mitte proovida ka Europeana kunstiajaloo kogusid ja Europeana muusikakogusid? Meil on ka kohandatud vahendid teadlastele ja kultuuriarendajatele/innovaatoritele (sealt leiad ka meie rakendusliidese), aga ka valiku virtuaalseid näitusi ja blogi. </p>
+
+          <p>Ja kui sa januned veel millegi enama järele, siis saad enda tarviliku päevaannuse kultuuri Facebookist, Twitterist, Mediumist, Google+'ist ja Pinterestist.</p>
+
+          <p>Selleks, et evida enamat teavet selle kohta, kuidas me töötame kultuuriasutuste ja nende kogudega, külasta Europeana Prod.</p>
+        title: Tere tulemast, kultuurisõber!
       music-channel-about:
-        text: 
-        title: 
+        text: |-
+          <p>Kujutle muusikateoste originaalkäsikirjade vaatlemist ning samaaegsed teose erinevate interpretatsioonide kuulamist ja helilooja biograafiaga tutvumist. Europeana muusikakogus on see võimalik.</p>
+
+          <p><a href="http://www.europeanasounds.eu">Meie partnerid</a>, muusikaeksperdid üle Euroopa on hoolikalt kureerinud seda muusikasalvestuste, nootide, instrumendipiltide, muusikaraamatute ja muu muusikaga seotud sisu kogu. </p>
+
+          <p>Me oleme teinud selle varase muusikakogu testversiooni kättesaadavaks teile, meie kasutajad, et te saaksite meid aidata seda edasise arendamise käigus paremini kujundada. Seega, iga kord kui te külastate seda lehekülge, siis palutakse teil vastata küsimustele või küsitlustele, mis lehel ilmuvad. Me hindame seda väga kõrgelt, kui te leiate aja nendele küsimustele ja küsitlustele vastamiseks!</p>
+
+          <p>Ühtlasi läbipaistvuse ja privaatsuse huvides teadke, et me talletame kasutajastatistika ning kasutajakäikumise Google Analytics keskkonnas ja Hotjari nime kandva teenuse abil. Me teeme seda sellepärast, et see näitab meile, kus me oleme lehekülje kujundamisel eksiteele sattunud ning seeläbi aitab meil muusikakogu arendada. Kõik logid hoitakse salajas ja anonüümselt ning neid tarvitatakse ainult meie teenuse parendamiseks. </p>
+
+          <p>Me kehutame teid kollektsioonis otsipäringuid tegema, muusikat mängima, noote vaatama ja lugema. Kui autoriõigused seda lubavad, siis saate ka endale meelepärasemaid asju alla laadida. Külastage ka meie virtuaalseid näitusi, et avastada muusikat viisil nagu te seda kunagi varem teinud ei ole!</p>
+        title: Muusikakogudest
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
+        configure-actions: Seadista tegevused
+        dutchmasters: Madalmaade meistrid
+        favouriteart: Meeliskunst
+        label: Tegevused
+        newcollection: Uus kollektsioon
+        product-save: Salvesta
         saveto: 
-        show-all-collections: 
+        show-all-collections: Näita kõiki kogusid
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
+          3D: 3D
+          images: Pildid
+          text: Tekst
+          video: Video
+        count-and-terms: "%{results_count} tulemust"
+        empty: "Ühtki tulemust"
+        empty-with-terms: Sinu otsing %{query_terms} ei andnud ühtki tulemust
         header: 
-        header-and: 
-        in-channel: 
-        less: 
+        header-and: ja
+        in-channel: temaatilises kogus
+        less: Vähem
         less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+        more: Rohkem
+        more_adv: Täpsemad filtrid
+        product-3D: 3D
+        product-image: Pilt
+        product-sound: Heli
+        product-text: Tekst
+        product-video: Video
+        results-relevance: Asjakohasus
+        single-result: 1 tulemus päringule %{query_terms}
         view:
-          grid: 
-          list: 
+          grid: Joonestik
+          list: Loend
         view-at-provider: 
     search:
       placeholder:
-        text: 
+        text: Lisa otsisõna
       similar:
-        prefix: 
+        prefix: 'Sarnane objektile: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: Puhasta valik
+        save-settings: Salvesta seaded
       language:
-        auto-translate-limit: 
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-limit: Valida saab maksimaalselt %{max_languages}
+        auto-translate-page: Tõlgi kirjeleheküljed automaatselt ...
+        auto-translate-page-short: Tõlgi kirjed automaatselt
+        auto-translate-query: Tõlgi otsisõnad automaatselt
+        available: Kasutatavad keeled
+        default: Vaikekeel
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
+          alert: 'Määratletud on kasutamatu keel. Kasutatavad keeled: %{locales}'
+          notice: Keeleseadistused salvestatud
+        label: Keel
+        settings-label: keeleseadistused
       title: Seadistused

@@ -35,7 +35,7 @@ en:
         description: 'In this section you can search for images based on their colour. Just click on the one that you like to view the collection! '
         title: Colours
       newcontent:
-        description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when!  Just click on the links below to see their collections.
+        description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when. Just click on the links below to see their collections!
         tableh1: All institutions
         tableh2: Items
         tableh3: Date
