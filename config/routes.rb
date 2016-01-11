@@ -1,5 +1,3 @@
-Blacklight::Routes.send(:include, BlacklightRoutes)
-
 Rails.application.routes.draw do
   root to: 'home#index'
   get 'search', to: 'portal#index'
@@ -15,9 +13,10 @@ Rails.application.routes.draw do
     get 'record/*id/hierarchy/preceding-siblings', to: 'hierarchy#preceding_siblings'
     get 'record/*id/hierarchy/following-siblings', to: 'hierarchy#following_siblings'
     get 'record/*id/hierarchy/ancestor-self-siblings', to: 'hierarchy#ancestor_self_siblings'
-  end
 
-  blacklight_for :portal
+    post 'record/*id/track', to: 'portal#track', as: 'track_document'
+    get 'record/*id', to: 'portal#show', as: 'document'
+  end
 
   resources :collections, only: [:show, :index]
   resources :landing_pages, only: [:show]
