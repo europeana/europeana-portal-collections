@@ -14,6 +14,10 @@ module Catalog
   include ActiveSupport::Benchmarkable
   include CollectionsHelper
 
+  included do
+    skip_before_filter :verify_authenticity_token
+  end
+
   def doc_id
     @doc_id ||= '/' + params[:id]
   end
