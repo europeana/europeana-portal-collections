@@ -7,7 +7,7 @@ Rails.application.configure do
     # @todo Move the logic into a class
     r301 %r{^/search.html\?},
       lambda { |_match, rack_env|
-        params = Rack::Utils.parse_query(rack_env['QUERY_STRING'])
+        params = Rack::Utils.parse_query(rack_env['QUERY_STRING'], '&')
 
         # Search query
         if params.key?('query')
