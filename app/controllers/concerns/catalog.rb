@@ -15,7 +15,7 @@ module Catalog
   include CollectionsHelper
 
   included do
-    skip_before_filter :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
   end
 
   def doc_id
