@@ -11,7 +11,7 @@ gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
 
 gem 'aasm', '~> 4.2'
-gem 'blacklight', '~> 5.17'
+gem 'blacklight', '6.0.0.pre5'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
 gem 'colorize'
