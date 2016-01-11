@@ -239,6 +239,7 @@ de:
         type: Medien
         ugc: Von Nutzern beigetragene Inhalte einbeziehen
         video_duration: Video Laufzeit
+        video_hd: 
         year: Datum
       image_aspectratio:
         landscape: Querformat
@@ -364,13 +365,11 @@ de:
         long: Lang (20+ min)
         medium: Mittel (4-20 min)
         short: Kurz (<4 min)
+      video_hd:
+        'true': HD
       year:
         from: von
         to: nach
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Finden Sie uns an anderer Stelle
     forgot-password: Haben Sie Ihr Passwort vergessen?
     genres: Gattungen

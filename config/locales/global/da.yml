@@ -239,6 +239,7 @@ da:
         type: Medier
         ugc: Vis indhold genereret af brugerer
         video_duration: Varighed
+        video_hd: 
         year: Dato
       image_aspectratio:
         landscape: Landskab
@@ -364,13 +365,11 @@ da:
         long: Lang  (20+ minutter)
         medium: Medium 4-(20 minutter)
         short: Kort (<4 minutter)
+      video_hd:
+        'true': HD
       year:
         from: fra
         to: til
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Find os
     forgot-password: |
       Glemt dit brugernavn?

@@ -239,6 +239,7 @@ el:
         type: "Μέσα"
         ugc: "Περιεχόμενο που παρείχαν χρήστες"
         video_duration: "Διάρκεια Video"
+        video_hd: 
         year: "Ημερομηνία"
       image_aspectratio:
         landscape: "Τοπίο"
@@ -364,13 +365,11 @@ el:
         long: "Μεγάλη (20+ λεπτά)"
         medium: "Μεσαία (4-20 λεπτά)"
         short: "Μικρή (<4 λεπτά)"
+      video_hd:
+        'true': HD
       year:
         from: "από"
         to: "μέχρι"
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: "Βρείτε μας αλλού"
     forgot-password: "Ξεχάσατε τον κωδικό σας"
     genres: "είδη"

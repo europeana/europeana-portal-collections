@@ -239,6 +239,7 @@ fr:
         type: Media
         ugc: Voir le contenu généré par les utilisateurs
         video_duration: Durée de la vidéo
+        video_hd: 
         year: Date
       image_aspectratio:
         landscape: Paysage
@@ -364,13 +365,11 @@ fr:
         long: Longue (20+ min)
         medium: Moyenne (4-20 min)
         short: Courte (<4 min)
+      video_hd:
+        'true': HD
       year:
         from: de
         to: "à"
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Retrouvez-nous ailleurs
     forgot-password: Vous avez oublié votre mot de passe ?
     genres: genres

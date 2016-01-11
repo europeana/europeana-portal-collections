@@ -239,6 +239,7 @@ en:
         type: Media
         ugc: Show content contributed by users
         video_duration: Duration
+        video_hd: Quality
         year: Date
       image_aspectratio:
         landscape: Landscape
@@ -364,13 +365,11 @@ en:
         long: Long (20+ minutes)
         medium: Medium (4-20 minutes)
         short: Short (<4 minutes)
+      video_hd:
+        'true': High Definition (576p+)
       year:
         from: from
         to: to
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Find us elsewhere
     forgot-password: Forgot your password?
     genres: genres

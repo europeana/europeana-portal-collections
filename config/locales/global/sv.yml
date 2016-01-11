@@ -239,6 +239,7 @@ sv:
         type: Mediaformat
         ugc: Visa användarskapat innehåll
         video_duration: Längd
+        video_hd: 
         year: Datering
       image_aspectratio:
         landscape: Landskap
@@ -364,13 +365,11 @@ sv:
         long: Lång (20+ minuter)
         medium: Medellång (4-20 minuter)
         short: Kort (<4 min)
+      video_hd:
+        'true': HD
       year:
         from: från
         to: till
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Hitta oss också här
     forgot-password: Glömt ditt lösenord?
     genres: genrer

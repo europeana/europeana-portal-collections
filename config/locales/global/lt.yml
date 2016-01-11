@@ -239,6 +239,7 @@ lt:
         type: Medija
         ugc: Rodyti vartotojų įkeltą turinį
         video_duration: Video įrašo trukmė
+        video_hd: 
         year: Data
       image_aspectratio:
         landscape: Kraštovaizdis
@@ -364,13 +365,11 @@ lt:
         long: Ilgas (20+ min)
         medium: Vidutinis (4-20 min)
         short: Trumpas (<4 min)
+      video_hd:
+        'true': HD
       year:
         from: nuo
         to: iki
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Raskite mus socialiniuose tinkluose
     forgot-password: Pamiršote slaptažodį?
     genres: "Žanrai"

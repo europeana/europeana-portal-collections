@@ -239,6 +239,7 @@ ro:
         type: Fișier media
         ugc: Arată conținut furnizat de către utilizatori
         video_duration: Durata videoclip
+        video_hd: 
         year: Dată
       image_aspectratio:
         landscape: Peisaj
@@ -364,13 +365,11 @@ ro:
         long: Lungă (20+ min)
         medium: Medie (4-20 min)
         short: Scurtă (<4 min)
+      video_hd:
+        'true': HD
       year:
         from: 'de la '
         to: până la
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Ne găsiți și aici
     forgot-password: Parola uitată?
     genres: genuri

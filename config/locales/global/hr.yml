@@ -239,6 +239,7 @@ hr:
         type: Medij
         ugc: Prikaži sadržaj koji su postavili korisnici
         video_duration: Trajanje
+        video_hd: 
         year: Datum
       image_aspectratio:
         landscape: Pejzaž
@@ -364,13 +365,11 @@ hr:
         long: Dugačko (20+ minuta)
         medium: Srednje (4-20 minuta)
         short: Kratko (<4 minute)
+      video_hd:
+        'true': HD
       year:
         from: od
         to: do
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Pronađite nas i na drugim mjestima
     forgot-password: Zaboravili ste lozinku?
     genres: "žanrovi"

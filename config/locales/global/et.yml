@@ -239,6 +239,7 @@ et:
         type: Meedia
         ugc: Näita kasutajate poolt loodud sisu
         video_duration: Kestus
+        video_hd: 
         year: Kuupäev
       image_aspectratio:
         landscape: Rõhtformaat
@@ -364,13 +365,11 @@ et:
         long: Pikk (üle 20 minuti)
         medium: Keskmine (4-20 minutit)
         short: Lühike (alla 4 minuti)
+      video_hd:
+        'true': HD
       year:
         from: alates
         to: kuni
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Leia meid veel
     forgot-password: Unustasid parooli?
     genres: "žanrid"
