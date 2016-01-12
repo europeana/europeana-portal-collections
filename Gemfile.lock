@@ -1,14 +1,13 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: e6f2467812a76f2ae6874cbedc3a12839a4f5714
-  ref: e6f2467
+  revision: af49766f62f6a1214bb33fc635874b684c1a1aa7
+  ref: af49766
   specs:
     europeana-blacklight (0.3.2)
-      activesupport (>= 4.0, < 5.0)
-      blacklight (>= 5.12.0, < 6.0)
+      blacklight (= 6.0.0.pre5)
       europeana-api (~> 0.4.1)
       iso-639 (~> 0.2.5)
-      kaminari (~> 0.16)
+      rails (>= 4.2.2, < 5)
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git

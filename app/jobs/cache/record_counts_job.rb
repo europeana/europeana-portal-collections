@@ -5,8 +5,7 @@ class Cache::RecordCountsJob < ActiveJob::Base
 
   def perform
     sets.each_pair do |key, set_params|
-      builder = search_builder(search_params_logic)
-      query = builder.rows(0).where(set_params[:query]).with_overlay_params(set_params[:overlay] || {}).merge(profile: 'minimal')
+      query = search_builder.rows(0).where(set_params[:query]).with_overlay_params(set_params[:overlay] || {}).merge(profile: 'minimal')
       count = repository.search(query).total
       cache_key = "record/counts/#{key}"
       Rails.cache.write(cache_key, count)
