@@ -259,8 +259,8 @@ module Portal
                 {
                   title: 'site.object.meta-label.publisher',
                   fields: ['proxies.dcPublisher'],
-                  url: 'canned_search_from_val',
-                  canned_search_field: 'proxy_dc_publisher'
+                  url: 'q',
+                  search_field: 'proxy_dc_publisher'
                 },
                 {
                   title: 'site.object.meta-label.identifier',
@@ -269,20 +269,20 @@ module Portal
                 {
                   title: 'site.object.meta-label.data-provider',
                   fields: ['aggregations.edmDataProvider'],
-                  url: 'f',
-                  canned_facet_url: 'DATA_PROVIDER'
+                  url: 'q',
+                  search_field: 'DATA_PROVIDER'
                 },
                 {
                   title: 'site.object.meta-label.provider',
                   fields: ['aggregations.edmProvider'],
-                  url: 'f',
-                  canned_facet_url: 'PROVIDER'
+                  url: 'q',
+                  search_field: 'PROVIDER'
                 },
                 {
                   title: 'site.object.meta-label.providing-country',
                   fields: ['europeanaAggregation.edmCountry'],
-                  url: 'f',
-                  canned_facet_url: 'COUNTRY'
+                  url: 'q',
+                  search_field: 'COUNTRY'
                 },
                 {
                   title: 'site.object.meta-label.timestamp-created',
@@ -346,8 +346,8 @@ module Portal
               {
                 title: 'site.object.meta-label.collection-name',
                 fields: ['europeanaCollectionName'],
-                url: 'canned_search_from_val',
-                canned_search_field: 'europeana_collectionName'
+                url: 'q',
+                search_field: 'europeana_collectionName'
               },
               {
                 title: 'site.object.meta-label.relations',
@@ -600,11 +600,11 @@ module Portal
 
             if section[:url]
               if section[:url] == 'q'
-                item[:url] = search_path(q: "\"#{search_val}\"")
-              elsif section[:url] == 'f'
-                item[:url] = search_path(f: { section[:canned_facet_url] => [search_val] })
-              elsif section[:url] == 'canned_search_from_val'
-                item[:url] = search_path(q: "#{section[:canned_search_field]}:\"#{search_val}\"")
+                if section[:search_field]
+                  item[:url] = search_path(q: "#{section[:search_field]}:\"#{search_val}\"")
+                else
+                  item[:url] = search_path(q: "\"#{search_val}\"")
+                end
               elsif section[:url] == 'what'
                 item[:url] = search_path(q: "what:\"#{search_val}\"")
               elsif section[:url] == 'who'
