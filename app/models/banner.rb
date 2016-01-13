@@ -21,9 +21,7 @@ class Banner < ActiveRecord::Base
   # All published pages display the phase feedback banner; touch them to
   #   invalidate cache
   def touch_pages
-    Page.published.find_each do |p|
-      p.touch
-    end
+    Page.published.find_each(&:touch)
   end
 
   ##
