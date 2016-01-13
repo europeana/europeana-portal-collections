@@ -190,7 +190,8 @@ module Document
     end
 
     def thumbnail
-      use_small = @record_presenter.displayable_media_web_resource_presenters.size > 1
+      siblings = @record_presenter.displayable_media_web_resource_presenters
+      use_small = (siblings.size > 1) && (siblings.first != self)
       if edm_object_thumbnail?
         @record_presenter.media_web_resource_presenters.detect { |p| p.url == @record_presenter.edm_object }.api_thumbnail(use_small)
       else
