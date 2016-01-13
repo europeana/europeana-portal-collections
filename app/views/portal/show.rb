@@ -44,12 +44,7 @@ module Portal
 
     def navigation
       mustache[:navigation] ||= begin
-        navigation = {}
-        search_urls = [search_url] + Collection.published.map { |c| collection_url(c) }
-        if search_urls.any? { |u| request.referer.match "^#{u}(\\?|$)" }
-          navigation[:back_url] = request.referer
-        end
-        navigation.reverse_merge(helpers.navigation)
+        { back_url: back_url_from_referer }.reverse_merge(helpers.navigation)
       end
     end
 
@@ -786,6 +781,16 @@ module Portal
       Time.parse(text).strftime(format)
     rescue ArgumentError
       text
+    end
+
+    def back_url_from_referer
+      referer = request.referer
+      return unless referer.present?
+
+      search_urls = [search_url] + Collection.published.map { |c| collection_url(c) }
+      if search_urls.any? { |u| referer.match "^#{u}(\\?|$)" }
+        return referer
+      end
     end
   end
 end
