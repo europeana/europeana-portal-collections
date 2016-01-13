@@ -3,10 +3,6 @@ module ApiQueryingJob
 
   include Blacklight::RequestBuilders
 
-  included do
-    self.search_params_logic = SearchBuilder.default_processor_chain
-  end
-
   def blacklight_config
     @blacklight_config ||= PortalController.new.blacklight_config
   end

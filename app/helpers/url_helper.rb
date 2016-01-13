@@ -10,7 +10,7 @@ module UrlHelper
 
     value = facet_value_for_facet_item(item)
 
-    p = reset_search_params(source_params)
+    p = Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params)
     p[:controller] = :collections
     p[:action] = :show
     p[:id] = value
@@ -26,7 +26,7 @@ module UrlHelper
   # @param source_params [Hash] params to remove from
   # @return [Hash] a copy of params with the passed value removed
   def remove_search_param(key, value, source_params = params)
-    p = reset_search_params(source_params)
+    p = Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params)
     p[key] = ([p[key]].flatten || []).dup
     p[key] = p[key] - [value]
     p.delete(key) if p[key].empty?
@@ -39,7 +39,7 @@ module UrlHelper
   # @param source_params [Hash] params to operate on
   # @return [Hash] modified params
   def remove_q_param(source_params = params)
-    reset_search_params(source_params).tap do |p|
+    Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |p|
       if p[:qf].blank?
         p.delete(:q)
       else

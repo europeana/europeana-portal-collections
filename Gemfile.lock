@@ -1,14 +1,13 @@
 GIT
   remote: git://github.com/europeana/europeana-blacklight.git
-  revision: e6f2467812a76f2ae6874cbedc3a12839a4f5714
-  ref: e6f2467
+  revision: af49766f62f6a1214bb33fc635874b684c1a1aa7
+  ref: af49766
   specs:
     europeana-blacklight (0.3.2)
-      activesupport (>= 4.0, < 5.0)
-      blacklight (>= 5.12.0, < 6.0)
+      blacklight (= 6.0.0.pre5)
       europeana-api (~> 0.4.1)
       iso-639 (~> 0.2.5)
-      kaminari (~> 0.16)
+      rails (>= 4.2.2, < 5)
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
@@ -86,13 +85,15 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
-    blacklight (5.17.1)
+    blacklight (6.0.0.pre5)
       bootstrap-sass (~> 3.2)
       deprecation
+      globalid
       kaminari (>= 0.15)
       nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
+      rails (>= 4.1, < 5)
       rsolr (~> 1.0.11)
+      twitter-typeahead-rails (~> 0.11)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -519,6 +520,10 @@ GEM
     tilt (2.0.1)
     tins (1.6.0)
     trollop (2.1.2)
+    twitter-typeahead-rails (0.11.1)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -551,7 +556,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.2)
-  blacklight (~> 5.17)
+  blacklight (= 6.0.0.pre5)
   cancancan (~> 1.12)
   capybara (~> 2.5)
   clockwork (~> 1.2)

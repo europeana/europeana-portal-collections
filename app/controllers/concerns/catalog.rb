@@ -26,7 +26,7 @@ module Catalog
     mlt_params = params.dup.slice(:page, :per_page)
     mlt_params.merge!(mlt: document, mltf: field)
     mlt_params.merge!(extra_controller_params)
-    search_results(mlt_params, search_params_logic)
+    search_results(mlt_params)
   rescue Net::HTTPBadResponse, Europeana::API::Errors::RequestError,
          Europeana::API::Errors::ResponseError
     # For records with many terms in MLT fields, the MLT queries can result in
@@ -34,7 +34,7 @@ module Catalog
     [nil, []]
   end
 
-  def search_results(user_params, search_params_logic)
+  def search_results(user_params)
     response, documents = super
     response.max_pages_per(960 / response.limit_value)
     [response, documents]
