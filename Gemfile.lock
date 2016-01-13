@@ -1,16 +1,4 @@
 GIT
-  remote: git://github.com/europeana/europeana-blacklight.git
-  revision: e6f2467812a76f2ae6874cbedc3a12839a4f5714
-  ref: e6f2467
-  specs:
-    europeana-blacklight (0.3.2)
-      activesupport (>= 4.0, < 5.0)
-      blacklight (>= 5.12.0, < 6.0)
-      europeana-api (~> 0.4.1)
-      iso-639 (~> 0.2.5)
-      kaminari (~> 0.16)
-
-GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
   revision: 2321e1f02b0c677a9e2ba1c3174482af63e2d62e
   ref: 2321e1f
@@ -159,6 +147,12 @@ GEM
     europeana-api (0.4.2)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
+    europeana-blacklight (0.3.3)
+      activesupport (>= 4.0, < 5.0)
+      blacklight (>= 5.12.0, < 6.0)
+      europeana-api (~> 0.4.1)
+      iso-639 (~> 0.2.5)
+      kaminari (~> 0.16)
     excon (0.45.4)
     execjs (2.6.0)
     faraday (0.9.2)
@@ -561,7 +555,7 @@ DEPENDENCIES
   devise (~> 3.5)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.4.2)
-  europeana-blacklight (~> 0.3.2)!
+  europeana-blacklight (~> 0.3.3)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
