@@ -62,11 +62,11 @@ module Portal
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcType', nil)
                   end.flatten.compact,
-                  url: 'what'
+                  search_field: 'what'
                 },
                 {
                   title: 'site.object.meta-label.subject',
-                  url: 'what',
+                  search_field: 'what',
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcSubject', nil)
                   end.flatten.compact
@@ -77,7 +77,7 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.concept',
-                  url: 'what',
+                  search_field: 'what',
                   fields: ['concepts.prefLabel'],
                   #fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
                   #override_val: 'true',
@@ -215,7 +215,7 @@ module Portal
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
-                  url: 'who',
+                  search_field: 'who',
                   extra: [
                     {
                       field: 'agents.rdaGr2DateOfBirth',
@@ -232,7 +232,7 @@ module Portal
                 {
                   title: 'site.object.meta-label.contributor',
                   fields: ['proxies.dcContributor'],
-                  url: 'who'
+                  search_field: 'who'
                 }
               ]
             ),
@@ -259,8 +259,7 @@ module Portal
                 {
                   title: 'site.object.meta-label.publisher',
                   fields: ['proxies.dcPublisher'],
-                  url: 'canned_search_from_val',
-                  canned_search_field: 'proxy_dc_publisher'
+                  search_field: 'proxy_dc_publisher'
                 },
                 {
                   title: 'site.object.meta-label.identifier',
@@ -269,20 +268,17 @@ module Portal
                 {
                   title: 'site.object.meta-label.data-provider',
                   fields: ['aggregations.edmDataProvider'],
-                  url: 'f',
-                  canned_facet_url: 'DATA_PROVIDER'
+                  search_field: 'DATA_PROVIDER'
                 },
                 {
                   title: 'site.object.meta-label.provider',
                   fields: ['aggregations.edmProvider'],
-                  url: 'f',
-                  canned_facet_url: 'PROVIDER'
+                  search_field: 'PROVIDER'
                 },
                 {
                   title: 'site.object.meta-label.providing-country',
                   fields: ['europeanaAggregation.edmCountry'],
-                  url: 'f',
-                  canned_facet_url: 'COUNTRY'
+                  search_field: 'COUNTRY'
                 },
                 {
                   title: 'site.object.meta-label.timestamp-created',
@@ -315,12 +311,12 @@ module Portal
                   title: 'site.object.meta-label.format',
                   # fields: ['aggregations.webResources.dcFormat'],
                   fields: ['proxies.dcFormat'],
-                  url: 'what'
+                  search_field: 'what'
                 },
                 {
                   title: 'site.object.meta-label.language',
                   fields: ['proxies.dcLanguage'],
-                  url: 'what'
+                  search_field: 'what'
                 }
               ]
             ),
@@ -346,8 +342,7 @@ module Portal
               {
                 title: 'site.object.meta-label.collection-name',
                 fields: ['europeanaCollectionName'],
-                url: 'canned_search_from_val',
-                canned_search_field: 'europeana_collectionName'
+                search_field: 'europeana_collectionName'
               },
               {
                 title: 'site.object.meta-label.relations',
@@ -588,35 +583,23 @@ module Portal
       end
     end
 
+    def data_section_field_search_path(val, field)
+      return unless val.is_a?(String)
+
+      search_val = val.gsub(/[()\[\]<>]/, '')
+      search_path(q: "#{field}:\"#{search_val}\"")
+    end
+
     def data_section_field_subsection(section)
       field_values = data_section_field_values(section)
 
-      subsection = field_values.map do |val|
+      field_values.compact.map do |val|
         {}.tap do |item|
           item[:text] = val
-
-          if val.is_a?(String)
-            search_val = val.sub('(', '').sub(')', '').sub('[', '').sub(']', '').sub('<', '').sub('>', '')
-
-            if section[:url]
-              if section[:url] == 'q'
-                item[:url] = search_path(q: "\"#{search_val}\"")
-              elsif section[:url] == 'f'
-                item[:url] = search_path(f: { section[:canned_facet_url] => [search_val] })
-              elsif section[:url] == 'canned_search_from_val'
-                item[:url] = search_path(q: "#{section[:canned_search_field]}:\"#{search_val}\"")
-              elsif section[:url] == 'what'
-                item[:url] = search_path(q: "what:\"#{search_val}\"")
-              elsif section[:url] == 'who'
-                if search_val.index(' ')
-                  item[:url] = search_path(q: "who:(#{search_val})")
-                else
-                  item[:url] = search_path(q: "who:\"#{search_val}\"")
-                end
-              else
-                item[:url] = render_document_show_field_value(document, section[:url])
-              end
-            end
+          if section[:url]
+            item[:url] = render_document_show_field_value(document, section[:url])
+          elsif section[:search_field]
+            item[:url] = data_section_field_search_path(val, section[:search_field])
           end
 
           # text manipulation
@@ -640,8 +623,6 @@ module Portal
           end
         end
       end
-
-      subsection.reject { |item| item[:text].blank? }
     end
 
     def data_section(data)
