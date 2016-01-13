@@ -171,7 +171,7 @@ RSpec.describe PortalController do
       it 'renders an error page' do
         get :similar, params
         expect(response.status).to eq(500)
-        expect(response).to render_template('portal/static')
+        expect(response).to render_template('pages/show')
       end
     end
   end
@@ -206,7 +206,7 @@ RSpec.describe PortalController do
       it 'renders an error page' do
         get :media, params
         expect(response.status).to eq(500)
-        expect(response).to render_template('portal/static')
+        expect(response).to render_template('pages/show')
       end
     end
   end

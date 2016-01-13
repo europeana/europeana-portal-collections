@@ -69,8 +69,8 @@ module ControllerExceptionHandling
     if self.class.to_s.deconstantize == 'RailsAdmin'
       redirect_to [Rails.configuration.relative_url_root, @page.slug].join('/')
     else
-      page_template = "pages/#{@page.slug}"
-      template = template_exists?(page_template) ? page_template : 'portal/static'
+      page_template = "pages/custom/#{@page.slug}"
+      template = template_exists?(page_template) ? page_template : 'pages/show'
       render template, status: status
     end
   end

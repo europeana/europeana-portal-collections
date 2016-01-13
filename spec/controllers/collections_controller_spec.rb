@@ -41,7 +41,7 @@ RSpec.describe CollectionsController do
       it 'responds with 404' do
         get :show, params
         expect(response.status).to eq(404)
-        expect(response).to render_template('pages/errors/not_found')
+        expect(response).to render_template('pages/custom/errors/not_found')
       end
     end
 
