@@ -316,7 +316,7 @@ module Portal
                 {
                   title: 'site.object.meta-label.language',
                   fields: ['proxies.dcLanguage'],
-                  search_field: 'what'
+                  search_field: 'LANGUAGE'
                 }
               ]
             ),
