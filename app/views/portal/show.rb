@@ -44,46 +44,7 @@ module Portal
 
     def navigation
       mustache[:navigation] ||= begin
-        query_params = current_search_session.try(:query_params) || {}
-
-        if search_session['counter']
-          per_page = (search_session['per_page'] || default_per_page).to_i
-          counter = search_session['counter'].to_i
-
-          query_params[:per_page] = per_page unless search_session['per_page'].to_i == default_per_page
-          query_params[:page] = ((counter - 1) / per_page) + 1
-        end
-
-        # use nil rather than "search_action_path(only_path: true)" to stop pointless breadcrumb
-        back_link_url = query_params.empty? ? nil : url_for(query_params)
-
-        navigation = {
-          back_url: back_link_url,
-          next_prev: {}
-        }
-        if @previous_document
-          navigation[:next_prev].merge!(
-            prev_url: document_path(@previous_document, format: 'html'),
-            prev_link_attrs: [
-              {
-                name: 'data-context-href',
-                value: track_document_path(@previous_document, session_tracking_path_opts(search_session['counter'].to_i - 1))
-              }
-            ]
-          )
-        end
-        if @next_document
-          navigation[:next_prev].merge!(
-            next_url: document_path(@next_document, format: 'html'),
-            next_link_attrs: [
-              {
-                name: 'data-context-href',
-                value: track_document_path(@next_document, session_tracking_path_opts(search_session['counter'].to_i + 1))
-              }
-            ]
-          )
-        end
-        navigation.reverse_merge(helpers.navigation)
+        { back_url: back_url_from_referer }.reverse_merge(helpers.navigation)
       end
     end
 
@@ -820,6 +781,16 @@ module Portal
       Time.parse(text).strftime(format)
     rescue ArgumentError
       text
+    end
+
+    def back_url_from_referer
+      referer = request.referer
+      return unless referer.present?
+
+      search_urls = [search_url] + Collection.published.map { |c| collection_url(c) }
+      if search_urls.any? { |u| referer.match "^#{u}(\\?|$)" }
+        return referer
+      end
     end
   end
 end
