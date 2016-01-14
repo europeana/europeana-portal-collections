@@ -18,6 +18,6 @@ class Page::Error < Page
   end
 
   def exception?
-    slug.match(/\Aexceptions\//).present?
+    slug.present? && slug.match(/\Aexceptions\//).present?
   end
 end
