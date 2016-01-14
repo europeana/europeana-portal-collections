@@ -4,7 +4,7 @@ class Page::Error < Page
   validates :http_code, presence: true, inclusion: { in: HTTP_ERROR_STATUS_CODES }
   validates :http_code, uniqueness: true, unless: :exception?
 
-  validates :slug, format: { with: /\A(errors|exceptions)\// }
+  validates :slug, format: { with: /\A(errors|exceptions)\/.+\z/ }
 
   translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
