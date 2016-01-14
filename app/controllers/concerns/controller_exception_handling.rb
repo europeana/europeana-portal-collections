@@ -18,12 +18,11 @@ module ControllerExceptionHandling
     end
 
     rescue_from Europeana::API::Errors::RequestError do |exception|
-      if exception.message.match(/Invalid record identifier/)
+      case exception.message
+      when /Invalid record identifier/
         handle_error(exception, 404)
-      elsif exception.message.match(/first 1000 search results/)
-        handle_error(exception, 400)
       else
-        raise
+        handle_error(exception, 400)
       end
     end
 
@@ -64,14 +63,16 @@ module ControllerExceptionHandling
     ErrorMailer.report(exception.class.to_s, exception.message, exception.backtrace, request.original_url, request.method).deliver_later
   end
 
-  def render_html_error_response(_exception, status)
-    @page = Page::Error.find_by_http_code!(status)
+  def render_html_error_response(exception, status)
+    @page = Page::Error.for_exception(exception, status)
+    @page ||= Page::Error.generic.find_by_http_code!(status)
+
     if self.class.to_s.deconstantize == 'RailsAdmin'
       redirect_to [Rails.configuration.relative_url_root, @page.slug].join('/')
     else
       page_template = "pages/custom/#{@page.slug}"
       template = template_exists?(page_template) ? page_template : 'pages/show'
-      render template, status: status
+      render template, status: @page.http_code
     end
   end
 
