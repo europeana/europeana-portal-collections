@@ -147,24 +147,24 @@ mt:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: 
+    about-us: Min aħna
     channel:
       archaeology: 
       architecture: 
-      art: 
-      fashion: 
-      home: 
-      maps: 
+      art: arti
+      fashion: moda
+      home: Dar
+      maps: mapep
       music: 
-      natural-history: 
-      newspapers: 
+      natural-history: l-istorja naturali
+      newspapers: gazzetti
       performing-arts: 
     channels-art: 
     channels-art-image: 
     channels-art-link: 
-    channels-fashion: 
+    channels-fashion: Moda
     channels-music: 
-    choose-language: 
+    choose-language: Lingwa
     email-address: 
     facet:
       advanced:
