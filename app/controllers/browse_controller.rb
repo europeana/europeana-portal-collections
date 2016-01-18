@@ -18,7 +18,9 @@ class BrowseController < ApplicationController
   # GET /browse/newcontent
   # @todo Load @providers from view helper, to bypass if HTML cached
   def new_content
-    @providers = Rails.cache.fetch('browse/new_content/providers') || []
+    @collection = Collection.published.find_by_key(params[:theme])
+    cache_key = @collection.nil? ? 'browse/new_content/providers' : "record/counts/collections/#{@collection.key}/recent-additions"
+    @providers = Rails.cache.fetch(cache_key) || []
 
     respond_to do |format|
       format.html
