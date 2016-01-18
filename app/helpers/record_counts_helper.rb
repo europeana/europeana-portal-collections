@@ -4,7 +4,7 @@ module RecordCountsHelper
       max = options[:max]
       from = options[:from]
       skip_date = options[:skip_date]
-      path_meth = within_collection? ? :collection_path : :search_path
+      collection = options[:collection]
 
       sorted = additions.sort_by { |addition| [-addition[:from].to_i, -addition[:count]] }
       sorted = sorted[0..(max - 1)] if max.present?
@@ -14,11 +14,12 @@ module RecordCountsHelper
       end
 
       sorted.map do |addition|
+        url_params = { q: addition[:query], f: { 'DATA_PROVIDER' => [addition[:label]] } }
         {
           text: addition[:label],
           number: number_with_delimiter(addition[:count]) + ' ' + t('site.collections.data-types.count'),
           date: skip_date ? false : addition[:from].strftime('%B %Y'),
-          url: send(path_meth, q: addition[:query], f: { 'DATA_PROVIDER' => [addition[:label]] })
+          url: collection.present? ? collection_path(collection, url_params) : search_path(url_params)
         }
       end
     end
