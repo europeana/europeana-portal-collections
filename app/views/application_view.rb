@@ -25,11 +25,13 @@ class ApplicationView < Europeana::Styleguide::View
   private
 
   def cache_version
-    v = Rails.application.config.assets.version
-    unless Rails.application.config.x.cache_version.blank?
-      v << ('-' + Rails.application.config.x.cache_version)
+    @cache_version ||= begin
+      v = Rails.application.config.assets.version.dup
+      unless Rails.application.config.x.cache_version.blank?
+        v << ('-' + Rails.application.config.x.cache_version.dup)
+      end
+      v
     end
-    v
   end
 
   def cache_key
