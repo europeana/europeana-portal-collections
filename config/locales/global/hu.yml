@@ -239,6 +239,7 @@ hu:
         type: Média
         ugc: Mutasd a felhasználók által feltöltött tartalmat
         video_duration: Videó hossza
+        video_hd: 
         year: Dátum
       image_aspectratio:
         landscape: Fekvő
@@ -364,13 +365,11 @@ hu:
         long: Hosszú (20+ perc)
         medium: Közepes (4-20 perc)
         short: Rövid (<4 perc)
+      video_hd:
+        'true': HD
       year:
         from: "-tól"
         to: "-ig"
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Találj meg minket a közösségi médiában
     forgot-password: Elfelejtetted a jelszavad?
     genres: műfajok

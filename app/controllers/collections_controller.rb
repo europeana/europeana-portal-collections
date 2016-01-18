@@ -7,11 +7,6 @@ class CollectionsController < ApplicationController
 
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
 
-  caches_action :show,
-    if: Proc.new { !request.format.json? },
-    expires_in: 1.hour,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
   def index
     redirect_to_root
   end

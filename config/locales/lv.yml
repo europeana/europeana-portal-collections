@@ -35,7 +35,7 @@ lv:
         description: "Šajā sadaļā ir iespējams meklēt attēlus pēc to krāsas. Klikšķiniet uz izvēlētās krāsas un skatiet atlasīto kolekciju!"
         title: Krāsas
       newcontent:
-        description: 
+        description: "Šajā sadaļā ir apkopots viss saturs, kas nesen ir ticis pievienots Europeana Kolekcijām. Te ir iespējams redzēt, kura institūcija ir publicējusi jaunus materiālus un kad. Klikšķiniet uz zemāk esošajām saitēm, lai apskatītu pievienoto."
         tableh1: Visas institūcijas
         tableh2: Ieraksti
         tableh3: Datējums
@@ -160,6 +160,7 @@ lv:
         provenance: Izcelsme
         provided-by: Uzzināt vairāk
         provided-by-detail: Europeana šo ierakstu atrāda ar %{institution_name_and_link} līdzdalību. Lai saņemtu vairāk informācijas, apmeklējiet viņu vietni.
+        provided-by-detail-no-link: 
         provider: Piegādātājs
         providing-country: Piegādātājvalsts
         publication-date: Izdošanas datējums

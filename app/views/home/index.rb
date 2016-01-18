@@ -31,6 +31,10 @@ module Home
 
     private
 
+    def body_cache_key
+      @landing_page.cache_key
+    end
+
     def blog_news_items
       @blog_news_items ||= news_items(feed_entries(Cache::FeedJob::URLS[:blog][:all]))
     end

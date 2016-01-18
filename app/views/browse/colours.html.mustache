@@ -1,12 +1,13 @@
 {{>atoms/meta/_head}}
 
-{{> templates/Search/Search-colours}}
+{{#cached_body}}
+  {{> templates/Search/Search-colours}}
 
-{{# version.is_alpha }}
-{{> organisms/sections/phase-feedback }}
-{{/ version.is_alpha }}
+  {{# version.is_alpha }}
+    {{> organisms/sections/phase-feedback }}
+  {{/ version.is_alpha }}
 
-
-{{> organisms/global/footer }}
+  {{> organisms/global/footer }}
+{{/cached_body}}
 
 {{>atoms/meta/_foot}}

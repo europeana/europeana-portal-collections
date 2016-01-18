@@ -42,8 +42,7 @@ module ControllerExceptionHandling
     log_error(exception)
     report_error(exception) if status == 500
 
-    if ENV['DISABLE_CMS_ERROR_PAGES'] ||
-        self.class.to_s.deconstantize == 'RailsAdmin'
+    if ENV['DISABLE_CMS_ERROR_PAGES']
       raise
     elsif format == 'json'
       render_json_error_response(exception, status)
@@ -67,9 +66,13 @@ module ControllerExceptionHandling
 
   def render_html_error_response(_exception, status)
     @page = Page::Error.find_by_http_code!(status)
-    page_template = "pages/#{@page.slug}"
-    template = template_exists?(page_template) ? page_template : 'portal/static'
-    render template, status: status
+    if self.class.to_s.deconstantize == 'RailsAdmin'
+      redirect_to [Rails.configuration.relative_url_root, @page.slug].join('/')
+    else
+      page_template = "pages/#{@page.slug}"
+      template = template_exists?(page_template) ? page_template : 'portal/static'
+      render template, status: status
+    end
   end
 
   def render_json_error_response(exception, status)

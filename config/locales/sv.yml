@@ -160,6 +160,7 @@ sv:
         provenance: Provenans
         provided-by: Upptäck mera
         provided-by-detail: Europeana visar denna post via %{institution_name_and_link}. Besök deras sajt för mera information.
+        provided-by-detail-no-link: 
         provider: Leverantör
         providing-country: Leverantörsland
         publication-date: Publiceringsdatum

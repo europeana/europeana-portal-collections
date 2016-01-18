@@ -4,23 +4,10 @@ class BrowseController < ApplicationController
   include Catalog
   include Europeana::Styleguide
 
-  caches_action :colours,
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
-  caches_action :new_content,
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
-  caches_action :sources,
-    expires_in: 1.day,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
   # GET /browse/colours
+  # @todo Load @colours from view helper, to bypass if HTML cached
   def colours
-    params = { query: '*:*', rows: 0, profile: 'minimal facets' }
-    response = repository.search(params)
-    @colours = response.aggregations['COLOURPALETTE'].items
+    @colours = Rails.cache.fetch('browse/colours/facets') || []
 
     respond_to do |format|
       format.html
@@ -28,6 +15,7 @@ class BrowseController < ApplicationController
   end
 
   # GET /browse/newcontent
+  # @todo Load @providers from view helper, to bypass if HTML cached
   def new_content
     @providers = Rails.cache.fetch('browse/new_content/providers') || []
 
@@ -37,6 +25,7 @@ class BrowseController < ApplicationController
   end
 
   # GET /browse/sources
+  # @todo Load @providers from view helper, to bypass if HTML cached
   def sources
     @providers = Rails.cache.fetch('browse/sources/providers') || []
     @providers.each do |provider|

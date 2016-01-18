@@ -1,7 +1,7 @@
 class Link::Promotion < Link
   include HasSettingsAttribute
 
-  belongs_to :media_object, dependent: :destroy
+  belongs_to :media_object, dependent: :destroy, inverse_of: :promotion
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
   has_settings(:wide, :category, :class)

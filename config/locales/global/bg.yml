@@ -239,6 +239,7 @@ bg:
         type: "Медия"
         ugc: "Покажи генерирано от потребителите съдържание"
         video_duration: "Продължителност на видеото"
+        video_hd: 
         year: "Дата"
       image_aspectratio:
         landscape: "Пейзажна ориентация"
@@ -364,13 +365,11 @@ bg:
         long: "Дълъг (20+ мин)"
         medium: "Среден (4-20 мин)"
         short: "Кратък (<4 мин)"
+      video_hd:
+        'true': HD
       year:
         from: "от"
         to: "до"
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: "Други наши страници"
     forgot-password: "Забравена парола?"
     genres: "жанрове"

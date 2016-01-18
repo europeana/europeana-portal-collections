@@ -239,6 +239,7 @@ ru:
         type: "Носитель"
         ugc: "Показать контент, добавленный пользователями"
         video_duration: "Длительность видео"
+        video_hd: 
         year: "Дата"
       image_aspectratio:
         landscape: "Альбомная"
@@ -364,13 +365,11 @@ ru:
         long: "Длинный (20+ минут)"
         medium: "Средний (4 - 20 минут)"
         short: "Короткий (<4 минут)"
+      video_hd:
+        'true': HD
       year:
         from: "с"
         to: "по"
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: "Вы также можете найти нас"
     forgot-password: "Забыли пароль?"
     genres: "Жанры"

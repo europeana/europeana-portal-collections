@@ -5,11 +5,14 @@ class MediaObject < ActiveRecord::Base
   attr_accessor :delete_file
   before_validation { file.clear if delete_file == '1' }
 
-  has_many :hero_images, dependent: :nullify
+  has_one :browse_entry, dependent: :nullify, inverse_of: :media_object
+  has_one :hero_image, dependent: :nullify, inverse_of: :media_object
+  has_one :promotion, dependent: :nullify, class_name: 'Link::Promotion', inverse_of: :media_object
 
   do_not_validate_attachment_file_type :file
 
   before_save :hash_source_url!, if: :source_url?
+  after_save :touch_associated
 
   def hash_source_url!
     self.source_url_hash = self.class.hash_source_url(source_url)
@@ -17,5 +20,11 @@ class MediaObject < ActiveRecord::Base
 
   def self.hash_source_url(source_url)
     Digest::MD5.hexdigest(source_url)
+  end
+
+  def touch_associated
+    browse_entry.touch if browse_entry.present?
+    hero_image.touch if hero_image.present?
+    promotion.touch if promotion.present?
   end
 end

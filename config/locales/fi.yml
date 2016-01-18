@@ -48,12 +48,12 @@ fi:
         description: Renessanssista surrealisteihin ja antiikin Rooman kuvanveistosta nykytaiteeseen, Europeanan taidehistorian kokoelmat esittelevät sinulle taidetta ja taiteilijoita koko Euroopasta.
         title: Europeana taidehistoria
       data-types:
-        3d: 3D-kohteet
-        count: kohteet
-        images: Kuvat
-        moving-images: Videot
-        sound: "Äänitallenteet"
-        texts: Tekstit
+        3d: 3D-kohdetta
+        count: kohdetta
+        images: kuvaa
+        moving-images: videota
+        sound: "äänitallennetta"
+        texts: tekstiä
       labels:
         credits: Kuratoinut
         recent: "Äskettäiset lisäykset"
@@ -160,6 +160,7 @@ fi:
         provenance: Provenienssi
         provided-by: Aiheesta lisää
         provided-by-detail: "%{institution_name_and_link} esittää kohteen Europeanassa. Lisätietoa sen verkkopalvelussa."
+        provided-by-detail-no-link: 
         provider: Tarjoaja
         providing-country: Tarjoava maa
         publication-date: Jukaisupäivämäärä

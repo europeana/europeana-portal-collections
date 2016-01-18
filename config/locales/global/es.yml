@@ -239,6 +239,7 @@ es:
         type: Multimedia
         ugc: Mostrar contenido generado por los usuarios
         video_duration: Duración de Video
+        video_hd: 
         year: Fecha
       image_aspectratio:
         landscape: Paisaje
@@ -364,13 +365,11 @@ es:
         long: Largo (20+ min)
         medium: Medio (4-20 min)
         short: Corto (<4 min)
+      video_hd:
+        'true': HD
       year:
         from: desde
         to: a
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Encuentranos en
     forgot-password: Olvidaste tu contraseña?
     genres: generos

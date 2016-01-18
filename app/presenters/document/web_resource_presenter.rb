@@ -119,7 +119,9 @@ module Document
         width_or_height: !(width.blank? && height.blank?),
         size_unit: 'pixels',
         runtime: render_document_show_field_value('ebucoreDuration'),
-        runtime_unit: t('site.object.meta-label.runtime-unit-seconds')
+        runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
+        attribution_plain: render_document_show_field_value('textAttributionSnippet'),
+        attribution_html:  render_document_show_field_value('htmlAttributionSnippet')
       }
     end
 
@@ -188,10 +190,12 @@ module Document
     end
 
     def thumbnail
+      siblings = @record_presenter.displayable_media_web_resource_presenters
+      use_small = (siblings.size > 1) && (siblings.first != self)
       if edm_object_thumbnail?
-        @record_presenter.media_web_resource_presenters.detect { |p| p.url == @record_presenter.edm_object }.api_thumbnail
+        @record_presenter.media_web_resource_presenters.detect { |p| p.url == @record_presenter.edm_object }.api_thumbnail(use_small)
       else
-        api_thumbnail
+        api_thumbnail(use_small)
       end
     end
 
@@ -200,8 +204,9 @@ module Document
         @record_presenter.edm_object_thumbnails_edm_is_shown_by?
     end
 
-    def api_thumbnail
-      Europeana::API.url + '/thumbnail-by-url.json?size=w400&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+    def api_thumbnail(use_small)
+      width = use_small ? '200' : '400'
+      Europeana::API.url + '/thumbnail-by-url.json?size=w' + width + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 
     def player

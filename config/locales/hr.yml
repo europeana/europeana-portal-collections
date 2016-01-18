@@ -3,7 +3,7 @@ hr:
     site:
       browse:
         newcontent:
-          description: Na ovom mjestu možete pronaći sav sadržaj koji je nedavno dodan Europeaninim zbirkama. Ovdje možete vidjeti koja je ustanova objavila novi materijal, koliko materijala i kada! Samo kliknite na poveznice u nastavku kako biste vidjeli njihve zbirke.
+          description: Na ovom mjestu možete pronaći sav sadržaj koji je nedavno dodan Europeaninim zbirkama. Ovdje možete vidjeti koja je ustanova objavila novi materijal, koliko materijala i kada! Samo kliknite na poveznice u nastavku kako biste vidjeli njihove zbirke.
         sources:
           description: U nastavku slijedi popis izvora za naše zbirke. Oni skupljaju i doprinose svojim zbirkama Europeani. Slijedite poveznicu koja vas zanima i pristupit ćete svim njihovim zbirkama!
   global:
@@ -35,7 +35,7 @@ hr:
         description: U ovom dijelu možete pretraživati slike po boji. Potrebno je samo kliknuti na onu koja vam se sviđa kako biste vidjeli zbirku!
         title: Boje
       newcontent:
-        description: 
+        description: U ovom dijelu možete pronaći sav sadržaj koji je nedavno dodan Europeana zbirkama. Ovdje možete vidjeti koja je nova ustanova objavila novi materijal, koliko materijala i kada! Samo kliknite na poveznice u nastavku kako biste vidjeli njihove zbirke.
         tableh1: Sve ustanove
         tableh2: Objekti
         tableh3: Datum
@@ -46,7 +46,7 @@ hr:
     collections:
       art-history:
         description: Od renesanse do nadrealista te od starorimske skulpture do suvremene umjetnosti, Europeanina povijesno-umjetnička zbirka upoznaje vas s umjetnicima i umjetničkim djelima iz cijele Europe.
-        title: Europeanina povijest umjetnosti
+        title: Europeana povijest umjetnosti
       data-types:
         3d: 3D predmeta
         count: objekata
@@ -150,7 +150,7 @@ hr:
         location: Lokacija
         longitude: Dužina
         map: Karta
-        map-tiles: Naslovi
+        map-tiles: Slojevi
         medium: Medij
         people: Osobe
         period: Razdoblje
@@ -160,6 +160,7 @@ hr:
         provenance: Porijeklo
         provided-by: Saznaj više
         provided-by-detail: Europeana prikazuje ovaj objekt preko %{institution_name_and_link}. Posjetite njihovu stranicu za više informacija.
+        provided-by-detail-no-link: 
         provider: Agregator
         providing-country: Država
         publication-date: Datum objave

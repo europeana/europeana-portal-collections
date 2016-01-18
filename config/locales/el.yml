@@ -160,6 +160,7 @@ el:
         provenance: "Προέλευση"
         provided-by: "Ανακαλύψτε περισσότερα"
         provided-by-detail: "Η Europeana εμφανίζει αυτό το αντικείμενο μέσω του %{institution_name_and_link}. Επισκεφτείτε τον ιστότοπό τους για περισσότερες πληροφορίες."
+        provided-by-detail-no-link: 
         provider: "Ίδρυμα"
         providing-country: "Χώρα ιδρύματος"
         publication-date: "Ημερομηνία έκδοσης"

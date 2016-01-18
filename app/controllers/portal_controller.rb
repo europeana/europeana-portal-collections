@@ -9,20 +9,6 @@ class PortalController < ApplicationController
 
   before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
 
-  # caches_action :index,
-  #   if: Proc.new { !request.format.json? },
-  #   expires_in: 1.day,
-  #   cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
-  # caches_action :show,
-  #   if: Proc.new { !request.format.json? && !params.key?(:debug) },
-  #   expires_in: 1.day,
-  #   cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
-  caches_action :static,
-    expires_in: 1.hour,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
   # GET /record/:id
   def show
     @response, @document = fetch(doc_id)
@@ -32,7 +18,6 @@ class PortalController < ApplicationController
 
     respond_to do |format|
       format.html do
-        # setup_next_and_previous_documents
         render action: 'show'
       end
       format.json { render json: { response: { document: @document } } }
@@ -57,17 +42,6 @@ class PortalController < ApplicationController
 
     respond_to do |format|
       format.json { render :media, layout: false }
-    end
-  end
-
-  # GET /record/:id/navigation
-  def navigation
-    respond_to do |format|
-      format.json do
-        # HOTFIX: disabled due to malfunctioning tracking on beta deploy
-        # setup_next_and_previous_documents
-        render :navigation, layout: false
-      end
     end
   end
 

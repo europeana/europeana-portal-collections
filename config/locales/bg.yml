@@ -161,6 +161,7 @@ bg:
         provided-by: "Научи повече"
         provided-by-detail: |
           Европеана показва този обект благодарение на %{institution_name_and_link}. Моля, посетете тяхната уеб страница за повече информация.
+        provided-by-detail-no-link: 
         provider: "Доставчик"
         providing-country: "Страна-доставчик"
         publication-date: "Дата на публикуване"

@@ -43,7 +43,7 @@ module UrlHelper
       if p[:qf].blank?
         p.delete(:q)
       else
-        p[:q] = p[:qf].shift
+        p[:q] = [p[:qf]].flatten.shift
       end
     end
   end

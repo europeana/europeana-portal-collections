@@ -239,6 +239,7 @@ ca:
         type: Audiovisuals
         ugc: Mostrar continguts generats per usuaris
         video_duration: Durada
+        video_hd: 
         year: Data
       image_aspectratio:
         landscape: Paisatge
@@ -364,13 +365,11 @@ ca:
         long: Llarg (>20 minuts)
         medium: Mig (4-20 minuts)
         short: Curt (<4 minuts)
+      video_hd:
+        'true': HD
       year:
         from: de
         to: a
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Troba'ns arreu
     forgot-password: No recordes la teva paraula de pas?
     genres: gèneres

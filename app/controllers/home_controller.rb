@@ -4,15 +4,11 @@ class HomeController < ApplicationController
   include Catalog
   include Europeana::Styleguide
 
-  caches_action :index,
-    expires_in: 1.hour,
-    cache_path: Proc.new { cache_path_prefix + I18n.locale.to_s + request.original_fullpath }
-
   # GET /
   def index
     @collection = find_collection
     @landing_page = find_landing_page
-    @europeana_item_count = Rails.cache.fetch('record/counts/all') # populated by {RecordCountsCacheJob}
+    @europeana_item_count = Rails.cache.fetch('record/counts/all') # populated by {Cache::RecordCountsJob}
 
     respond_to do |format|
       format.html

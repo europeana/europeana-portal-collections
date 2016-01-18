@@ -159,7 +159,8 @@ nl:
         properties: Eigenschappen
         provenance: Bron
         provided-by: Meer
-        provided-by-detail: 
+        provided-by-detail: De bron van dit object is %{institution_name_and_link} Ga naar de website voor meer informatie
+        provided-by-detail-no-link: 
         provider: Partner
         providing-country: Land
         publication-date: Publicatie datum

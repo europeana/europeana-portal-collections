@@ -160,6 +160,7 @@ de:
         provenance: Herkunft
         provided-by: Mehr herausfinden
         provided-by-detail: Europeana zeigt dieses Objekt über %{institution_name_and_link} an. Besuchen Sie deren Webseite für weitere Informationen.
+        provided-by-detail-no-link: 
         provider: 'Beiträger '
         providing-country: Bereitstellendes Land
         publication-date: Erscheinungsdatum

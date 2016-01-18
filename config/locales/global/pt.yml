@@ -239,6 +239,7 @@ pt:
         type: Media
         ugc: Mostrar conteúdo contribuído por utilizadores
         video_duration: Duração do Vídeo
+        video_hd: 
         year: Data
       image_aspectratio:
         landscape: Paisagem
@@ -364,13 +365,11 @@ pt:
         long: Long (20+ min)
         medium: Média (4-20 min)
         short: Curta (<4 min)
+      video_hd:
+        'true': HD
       year:
         from: de
         to: a
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Encontre-nos noutros sítios
     forgot-password: Esqueceu-se da palavra-passe?
     genres: géneros

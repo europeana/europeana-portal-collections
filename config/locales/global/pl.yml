@@ -239,13 +239,14 @@ pl:
         type: Media
         ugc: Pokaż obiekty dodane przez użytkowników
         video_duration: Czas Trwania
+        video_hd: 
         year: Data
       image_aspectratio:
         landscape: Pejzaż
         portrait: Portret
       image_colour:
         'false': Czarno-biały
-        'true': Kolor
+        'true': W kolorze
       image_size:
         extra_large: Bardzo duży
         large: Duży
@@ -364,13 +365,11 @@ pl:
         long: Długi (>20 min)
         medium: "Średni (4-20 min)"
         short: Krótki (<4 min)
+      video_hd:
+        'true': Wysoka rozdzielczość
       year:
         from: od
         to: do
-    'facet ':
-      header:
-        video_hd:
-          'true': Wysoka rozdzielczość
     find-us-elsewhere: Znajdź nas także
     forgot-password: Nie pamiętam hasła.
     genres: gatunki

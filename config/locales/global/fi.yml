@@ -239,6 +239,7 @@ fi:
         type: Media
         ugc: Näytä käyttäjien lisäämä sisältö
         video_duration: Kesto
+        video_hd: 
         year: Päivämäärä
       image_aspectratio:
         landscape: Vaakakuva
@@ -364,13 +365,11 @@ fi:
         long: Pitkä (20+ minuuttia)
         medium: Keskipitkä (4–20 minuuttia)
         short: Lyhyt (alle 4 minuuttia)
+      video_hd:
+        'true': HD
       year:
         from: alkaen
         to: päättyen
-    'facet ':
-      header:
-        video_hd:
-          'true': HD
     find-us-elsewhere: Muualla palvelussa
     forgot-password: Unohditko salasanasi?
     genres: genret

@@ -160,6 +160,7 @@ pt:
         provenance: Proveniência
         provided-by: Saiba mais
         provided-by-detail: Este item é acessível na Europeana via %{institution_name_and_link}. Visite o seu website para mais informação.
+        provided-by-detail-no-link: 
         provider: Agregador
         providing-country: País Agregador
         publication-date: Data de publicação
