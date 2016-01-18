@@ -35,13 +35,15 @@ class BrowseController < ApplicationController
     @providers = Rails.cache.fetch(cache_key) || []
 
     @providers.each do |provider|
-      provider[:url] = search_path(f: { 'PROVIDER' => [provider[:text]] })
+      provider_params = { f: { 'PROVIDER' => [provider[:text]] } }
+      provider[:url] = @collection.nil? ? search_path(provider_params) : collection_path(@collection, provider_params)
       cache_key = 'browse/sources/providers'
       cache_key << ('/' + @collection.key) unless @collection.nil?
       cache_key << ('/' + provider[:text])
       provider[:data_providers] = Rails.cache.fetch(cache_key) || []
       provider[:data_providers].each do |dp|
-        dp[:url] = search_path(f: { 'DATA_PROVIDER' => [dp[:text]] })
+        dp_params = { f: { 'DATA_PROVIDER' => [dp[:text]] } }
+        dp[:url] = @collection.nil? ? search_path(dp_params) : collection_path(@collection, dp_params)
       end
     end
 
