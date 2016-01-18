@@ -11,7 +11,7 @@ module Cache
         builder = search_builder(search_params_logic)
         api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets', facet: 'DATA_PROVIDER', qf: "PROVIDER:\"#{provider}\"")
 
-        cache_key = "browse/sources/providers"
+        cache_key = 'browse/sources/providers'
 
         unless collection_id.nil?
           collection = Collection.find(collection_id)
@@ -23,7 +23,6 @@ module Cache
 
         cache_key << "/#{provider}"
 
-#         params = { query: '*:*', rows: 0, profile: 'minimal facets', facet: 'DATA_PROVIDER', qf: "PROVIDER:\"#{provider}\"" }
         response = repository.search(api_query)
         data_provider_facet = response.aggregations['DATA_PROVIDER']
         data_providers = (data_provider_facet.nil? ? [] : data_provider_facet.items).map do |item|
