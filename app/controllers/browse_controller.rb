@@ -30,10 +30,16 @@ class BrowseController < ApplicationController
   # GET /browse/sources
   # @todo Load @providers from view helper, to bypass if HTML cached
   def sources
-    @providers = Rails.cache.fetch('browse/sources/providers') || []
+    @collection = Collection.published.find_by_key(params[:theme])
+    cache_key = @collection.nil? ? 'browse/sources/providers' : "browse/sources/providers/#{@collection.key}"
+    @providers = Rails.cache.fetch(cache_key) || []
+
     @providers.each do |provider|
       provider[:url] = search_path(f: { 'PROVIDER' => [provider[:text]] })
-      provider[:data_providers] = Rails.cache.fetch("browse/sources/providers/#{provider[:text]}") || []
+      cache_key = 'browse/sources/providers'
+      cache_key << ('/' + @collection.key) unless @collection.nil?
+      cache_key << ('/' + provider[:text])
+      provider[:data_providers] = Rails.cache.fetch(cache_key) || []
       provider[:data_providers].each do |dp|
         dp[:url] = search_path(f: { 'DATA_PROVIDER' => [dp[:text]] })
       end

@@ -26,6 +26,9 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     Cache::RecordCountsJob.perform_later
     Cache::RecordCounts::RecentAdditionsJob.perform_later
     Cache::RecordCounts::ProvidersJob.perform_later
+    Collection.published.each do |collection|
+      Cache::RecordCounts::ProvidersJob.perform_later(collection.id)
+    end
   end
 
   every(1.day, 'db.sweeper', at: ENV['SCHEDULE_DB_SWEEPER']) do
