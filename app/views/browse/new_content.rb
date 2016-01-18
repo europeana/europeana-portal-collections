@@ -32,10 +32,6 @@ module Browse
 
     private
 
-    def cache_body?
-      false
-    end
-
     def body_cache_key
       'browse/newcontent' + (@collection.present? ? '/' + @collection.key : '')
     end
