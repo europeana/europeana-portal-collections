@@ -74,6 +74,7 @@ RailsAdmin.config do |config|
     configure :translations, :globalize_tabs
     edit do
       field :translations
+      field :position
       field :query
       field :file, :paperclip
       field :settings_category, :enum
