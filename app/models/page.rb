@@ -16,7 +16,6 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   validates :slug, uniqueness: true
-#   validates :banner, allow_nil: true
 
   scope :static, -> { where(type: nil) }
   scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', "%/%") }

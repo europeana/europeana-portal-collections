@@ -8,12 +8,12 @@ class Banner < ActiveRecord::Base
 
   delegate :url, :text, to: :link, prefix: true, allow_nil: true
 
-  before_save(if: :became_default?) do |banner|
+  before_save(if: :became_default?) do
     Banner.update_all(default: false)
   end
 
   validates :default, inclusion: { in: [false], message: 'has not been published' },
-    unless: :published?
+                      unless: :published?
 
   has_paper_trail
 
