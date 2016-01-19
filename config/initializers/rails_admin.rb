@@ -2,6 +2,8 @@ require 'rails_admin/config/actions/publish'
 require 'rails_admin/config/actions/unpublish'
 
 RailsAdmin.config do |config|
+  config.main_app_name = ["Europeana Collections"]
+
   # Devise
   config.authenticate_with do
     warden.authenticate! scope: :user
