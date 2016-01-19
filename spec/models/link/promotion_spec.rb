@@ -9,7 +9,7 @@ RSpec.describe Link::Promotion do
 
   describe '.settings_category_enum' do
     subject { described_class.settings_category_enum }
-    it { is_expected.to eq(%w(collection exhibition new partner featured_site)) }
+    it { is_expected.to eq(%w(collection exhibition new partner featured_site app timeline playlist gallery)) }
   end
 
   describe '.settings_wide_enum' do
