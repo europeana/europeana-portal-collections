@@ -3,97 +3,97 @@ mt:
     site:
       browse:
         newcontent:
-          description: 
+          description: F'din is-sezzjoni tisa' ssib il-kontenut kollhu li ġie miżjud fuq l-Kollezzjonijiet ta' Europeana. Hawnhekk tista' tara liema istituzzjoni ġdida ppubblikat xi materjal, kemm ppubblikat u meta! Ikklikja fuq il-links hawn taħt biex tara l-kollezzjonijiet tagħhom.
         sources:
-          description: 
+          description: Hawn taħt tista' tara lista ta' sorsi għall-kollezzjonijiet tagħna. Dawn is sorsi ikomplu u jżidu kollezzjonijiet fuq Europeana, ikklikja fuq il-link li tinteressak hawn taħt biex tara l-kollezzjonijiet kollha!
   global:
-    labs-link: 
+    labs-link: Link lejn il-labs
     navigation:
-      all_blog_posts: 
-      all_exhibitions: 
-      blog: 
-      browse: 
-      browse_colours: 
-      browse_newcontent: 
-      browse_sources: 
-      channels: 
-      collections: 
-      exhibitions: 
-      home: 
-    pro-link: 
-    pro-text: 
-    settings: 
+      all_blog_posts: Il-blog posts kollha...
+      all_exhibitions: Il-wirjiet kollha...
+      blog: Blog
+      browse: Ibbrawżja
+      browse_colours: Kuluri
+      browse_newcontent: Kontenut ġdid
+      browse_sources: Sorsi
+      channels: Kollezzjonijiet
+      collections: Kollezzjonijiet
+      exhibitions: Wirjiet
+      home: Paġna Primarja
+    pro-link: Link għal pro
+    pro-text: Kitba għal pro
+    settings: Settings
   site:
     alpha:
       feedback_banner:
-        description: 
-        link-text: 
-        title: 
-    blog-link: 
+        description: 'An Beta release jiġifieri li dan il-website qiegħed jiġi żviluppat kontinwament u jkun aġġornat regulari. Xi kultant jista'' jinsab offline. Il-kummenti tiegħek jista'' jgħinna biex namalgamaw is-sit elektroniku. '
+        link-text: Tina l-input tiegħek!
+        title: Dan huwa Beta release tal-kollezzjoni ġdida tagħna "Kollezzjonijiet" u "Kollezzjonijiet tal-Mużika"
+    blog-link: Link għall-blog
     browse:
       colours:
-        description: 
-        title: 
+        description: F'din is-sezzjoni tista' tfittex ritratti bbażati fuq il-kulur tagħhom. Kemm tikklikkja fuq ir-ritratt li jogħġbok biex tara l-kollezzjoni!
+        title: Kuluri
       newcontent:
-        description: 
-        tableh1: 
-        tableh2: 
-        tableh3: 
-        title: 
+        description: F'din is-sezzjoni tista' ssib il-kontenut kollhu li ġie miżjud reċentament fuq il-Kollezzjonijiet ta' Europeana. Hawnhekk tista' tara liema istituzzjoni ppubblikat materjal ġdid, kemm hemm materjal u meta. Ikklikkja fuq il-links hawn taħt biex tara l-kollezzjonijiet kollha!
+        tableh1: L-istituzzjonijiet kollha
+        tableh2: Oġġetti
+        tableh3: Data
+        title: Kontenut ġdid
       sources:
-        description: 
-        title: 
+        description: Hawn taħt tista' tara lista ta' sorsi għall-kollezzjonijiet tagħna. Dawn is sorsi ikomplu u jżidu kollezzjonijiet fuq Europeana, ikklikja fuq il-link li tinteressak hawn taħt biex tara l-kollezzjonijiet kollha!
+        title: Sorsi
     collections:
       art-history:
-        description: 
-        title: 
+        description: Mir-Rinaxximent għas-Surrealisti, u mill-iskultura Rumana antika għall-arti kontemporanja, il-Kollezzjoni tal-Arti tal-istorja ta' Europeana  tintroduċik ma' l-artisti u x-xogħlijiet tagħhom minn madwar l-Ewropa kollha.
+        title: Arti tal-istorja ta' Europeana
       data-types:
-        3d: 
-        count: 
-        images: 
-        moving-images: 
-        sound: 
-        texts: 
+        3d: Oġġetti 3D
+        count: Oġġetti
+        images: Ritratti
+        moving-images: Videos
+        sound: "Ħsejjes"
+        texts: Kitba
       labels:
-        credits: 
-        recent: 
-        spotlight-on: 
+        credits: Superviżjonata minn
+        recent: "Żidiet riċenti"
+        spotlight-on: Il-Lenti mixgħul
       music:
-        description: 
-        title: 
+        description: Il-<strong>Kollezzjoni tal-Mużika tal-Europeana</strong> tiġbor l-isbaħ rikordji ta' mużika, mużika miktuba, u aktar affarijiet relatati lejn il-kollezzjonijiet minn arkivji Ewropej tal-awdjo viswali, libreriji, arkivji u mużewijiet. <a href="/portal/channels/music/about">Skopri aktar informazzjoni dwar il-Kollezzjoni tal-Mużika.
+        title: Mużika tal-Europeana
     facet:
       language:
         show:
-          results: 
+          results: Riżultati
     footer:
       menu:
-        about: 
-        become-a-provider: 
-        contact: 
-        copyright: 
-        data-providers: 
-        help: 
-        new-collections: 
-        rights: 
-        search-tips: 
-        using-myeuropeana: 
+        about: Dwar
+        become-a-provider: Sir sieħeb tagħna
+        contact: Kuntatt
+        copyright: Copyright
+        data-providers: Istituzzjonijiet kollha
+        help: Għinuna
+        new-collections: Kollezzjonijiet ġodda
+        rights: Termini ta' użu
+        search-tips: Tips għat-tiftix
+        using-myeuropeana: L-użu ta' Europeana Tiegħi
     home:
-      strapline: 
-    more: 
-    my-europeana: 
-    my-europeana-link: 
+      strapline: Esplora %{total_item_count} xogħolijiet tal-arti, artefatti, kotba, videos u ħsejjes minn madwar l-Ewropa.
+    more: Aktar...
+    my-europeana: L-Europeana tiegħi
+    my-europeana-link: Link lejn l-Europeana tiegħi
     navigation:
       breadcrumb:
-        item_detail: 
-        results_list: 
-        return_home: 
-    news: 
+        item_detail: Oġġett
+        results_list: Riżultati
+        return_home: Mur lura fuq il-paġna primarja
+    news: Aħbarijiet
     object:
       actions:
-        attribute-author: 
-        attribute-html: 
-        attribute-plaintext: 
-        download: 
+        attribute-author: Semmi l-awtur
+        attribute-html: HTML
+        attribute-plaintext: Kitba sempliċi
+        download: Niżżel
         download-additional: 
         downloaddata: 
         open-media: 
