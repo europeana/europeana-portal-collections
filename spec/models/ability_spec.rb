@@ -4,7 +4,7 @@ RSpec.describe Ability do
   end
 
   let(:draft_banner) { banners(:draft_banner) }
-  let(:published_banner) { banners(:generic_banner) }
+  let(:published_banner) { banners(:default_banner) }
   let(:draft_collection) { collections(:draft) }
   let(:published_collection) { collections(:music) }
   let(:draft_landing_page) { pages(:draft_landing_page) }

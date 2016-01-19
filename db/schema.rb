@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028103631) do
+ActiveRecord::Schema.define(version: 20160119093503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20151028103631) do
   add_index "banner_translations", ["locale"], name: "index_banner_translations_on_locale", using: :btree
 
   create_table "banners", force: :cascade do |t|
-    t.string   "key",        limit: 255
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "state",                  default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "state",      default: 0
+    t.boolean  "default",    default: false
   end
 
-  add_index "banners", ["key"], name: "index_banners_on_key", using: :btree
+  add_index "banners", ["default"], name: "index_banners_on_default", using: :btree
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",                   null: false
@@ -167,8 +167,10 @@ ActiveRecord::Schema.define(version: 20151028103631) do
     t.integer  "http_code"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.integer  "banner_id"
   end
 
+  add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree
   add_index "pages", ["hero_image_id"], name: "index_pages_on_hero_image_id", using: :btree
   add_index "pages", ["http_code"], name: "index_pages_on_http_code", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
@@ -227,4 +229,5 @@ ActiveRecord::Schema.define(version: 20151028103631) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
+  add_foreign_key "pages", "banners"
 end
