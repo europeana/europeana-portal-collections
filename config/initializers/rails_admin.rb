@@ -40,23 +40,25 @@ RailsAdmin.config do |config|
     visible true
     configure :translations, :globalize_tabs
     list do
-      field :key
       field :title
       field :state
+      field :default
     end
     show do
-      field :key
       field :title
       field :state
       field :body
+      field :default
       group :link do
         field :link_url
         field :link_text
       end
     end
     edit do
-      field :key
       field :translations
+      field :default do
+        help 'Only one, published, banner can be the default.'
+      end
       field :link
     end
   end
@@ -233,12 +235,14 @@ RailsAdmin.config do |config|
       field :body
       field :state
       field :browse_entries
+      field :banner
     end
     edit do
       field :slug
       field :translations
       field :hero_image
       field :browse_entries
+      field :banner
     end
   end
 
@@ -260,6 +264,7 @@ RailsAdmin.config do |config|
       field :body
       field :state
       field :browse_entries
+      field :banner
     end
     edit do
       field :slug
@@ -267,6 +272,7 @@ RailsAdmin.config do |config|
       field :translations
       field :hero_image
       field :browse_entries
+      field :banner
     end
   end
 
@@ -288,6 +294,7 @@ RailsAdmin.config do |config|
       field :social_media
       field :promotions
       field :browse_entries
+      field :banner
     end
     edit do
       field :slug
@@ -297,6 +304,7 @@ RailsAdmin.config do |config|
       field :social_media
       field :promotions
       field :browse_entries
+      field :banner
     end
   end
 

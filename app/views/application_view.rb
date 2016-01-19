@@ -35,7 +35,6 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def cache_key
-    
     'views/' + cache_version + '/' + I18n.locale.to_s + '/' + body_cache_key
   end
 

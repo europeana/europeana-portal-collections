@@ -380,23 +380,29 @@ module MustacheHelper
     end
   end
 
-  # @todo {User.new} does not belong here, but needed by request specs
   def content
     mustache[:content] ||= begin
-      banner = Banner.find_by_key('phase-feedback')
-      banner = Banner.new unless (current_user || User.new(role: :guest)).can? :show, banner
       {
-        phase_feedback: banner.new_record? ? nil : {
-          title: banner.title,
-          text: banner.body,
-          cta_url: banner.link.url,
-          cta_text: banner.link.text
-        }
+        phase_feedback: banner_content
       }
     end
   end
 
   private
+
+  # @todo {User.new} does not belong here, but needed by request specs
+  def banner_content(id = nil)
+    banner = id.nil? ? Banner.find_by_default(true) : Banner.find(id)
+
+    return nil unless (current_user || User.new(role: :guest)).can? :show, banner
+
+    {
+      title: banner.title,
+      text: banner.body,
+      cta_url: banner.link.present? ? banner.link.url : nil,
+      cta_text: banner.link.present? ? banner.link.text : nil
+    }
+  end
 
   def mustache
     @mustache ||= {}

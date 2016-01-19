@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
   include HasPublicationStates
 
   belongs_to :hero_image, inverse_of: :page
+  belongs_to :banner, inverse_of: :pages
   has_many :browse_entries, -> { order(:position) }, dependent: :destroy, inverse_of: :page
 
   accepts_nested_attributes_for :hero_image, allow_destroy: true
@@ -15,6 +16,7 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   validates :slug, uniqueness: true
+#   validates :banner, allow_nil: true
 
   scope :static, -> { where(type: nil) }
   scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', "%/%") }

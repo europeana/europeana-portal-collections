@@ -56,7 +56,8 @@ module Collections
             items: blog_news_items,
             blogurl: 'http://blog.europeana.eu/tag/#' + @collection.key
           },
-          social: @landing_page.social_media.blank? ? nil : social_media_links
+          social: @landing_page.social_media.blank? ? nil : social_media_links,
+          phase_feedback: banner_content(@landing_page.banner_id)
         }.reverse_merge(helpers.content)
       end
     end
