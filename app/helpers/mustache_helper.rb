@@ -391,9 +391,9 @@ module MustacheHelper
   private
 
   def page_banner(id = nil)
-    (id.nil? ? Banner.find_by_default(true) : Banner.find(id)).tap do |banner|
-      return nil unless (current_user || User.new(role: :guest)).can? :show, banner
-    end
+    banner = (id.nil? ? Banner.find_by_default(true) : Banner.find(id))
+    return nil unless (current_user || User.new(role: :guest)).can? :show, banner
+    banner
   end
 
   # @todo {User.new} does not belong here, but needed by request specs
