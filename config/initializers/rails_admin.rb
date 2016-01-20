@@ -74,14 +74,31 @@ RailsAdmin.config do |config|
   end
 
   config.model 'BrowseEntry' do
-    visible false
     configure :translations, :globalize_tabs
+    list do
+      field :title
+      field :file, :paperclip
+      field :subject_type
+    end
+    show do
+      field :title
+      field :query
+      field :file, :paperclip do
+        thumb_method :medium
+      end
+      field :subject_type
+      field :settings_category, :enum do
+        label 'Category'
+      end
+    end
     edit do
       field :translations
-      field :position
       field :query
       field :file, :paperclip
-      field :settings_category, :enum
+      field :subject_type
+      field :settings_category, :enum do
+        label 'Category'
+      end
     end
   end
 
@@ -243,12 +260,16 @@ RailsAdmin.config do |config|
       field :slug
       field :translations
       field :hero_image
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
       field :banner
     end
   end
 
   config.model 'Page::Error' do
+    label 'Error Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
@@ -273,12 +294,16 @@ RailsAdmin.config do |config|
       field :http_code
       field :translations
       field :hero_image
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
       field :banner
     end
   end
 
   config.model 'Page::Landing' do
+    label 'Landing Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
@@ -305,7 +330,10 @@ RailsAdmin.config do |config|
       field :credits
       field :social_media
       field :promotions
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
       field :banner
     end
   end

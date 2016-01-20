@@ -48,10 +48,11 @@ module UrlHelper
     end
   end
 
+  # @param page [Page]
   # @param browse_entry [BrowseEntry]
   # @return [String] url
-  def browse_entry_url(browse_entry)
-    if slug_match = browse_entry.page.slug.match(/\Acollections\/(.*)\Z/)
+  def browse_entry_url(browse_entry, page = nil)
+    if page.present? && (slug_match = page.slug.match(/\Acollections\/(.*)\Z/))
       collection = Collection.find_by_key(slug_match[1])
       return collection_path(collection.key, q: browse_entry.query) unless collection.nil?
     end

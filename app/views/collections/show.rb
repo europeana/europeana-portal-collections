@@ -46,8 +46,8 @@ module Collections
             }
           },
           hero_config: hero_config(@landing_page.hero_image),
-          channel_entry: @landing_page.browse_entries.blank? ? nil : {
-            items: browse_entry_items(@landing_page.browse_entries)
+          channel_entry: @landing_page.browse_entries.published.blank? ? nil : {
+            items: browse_entry_items(@landing_page.browse_entries.published, @landing_page)
           },
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
