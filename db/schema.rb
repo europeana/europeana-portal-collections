@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120093821) do
+ActiveRecord::Schema.define(version: 20160120130829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,8 +53,9 @@ ActiveRecord::Schema.define(version: 20160120093821) do
     t.text     "query"
     t.integer  "media_object_id"
     t.text     "settings"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "state",           default: 0
   end
 
   add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree

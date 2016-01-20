@@ -523,7 +523,7 @@ module MustacheHelper
   ##
   # @param page [Page]
   def browse_entry_items(page)
-    page.browse_entries.map do |entry|
+    page.browse_entries.published.map do |entry|
       cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
       {
         title: entry.title,

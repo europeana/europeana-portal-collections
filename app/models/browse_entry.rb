@@ -1,4 +1,5 @@
 class BrowseEntry < ActiveRecord::Base
+  include HasPublicationStates
   include HasSettingsAttribute
 
   has_many :page_elements, dependent: :destroy, as: :positionable
