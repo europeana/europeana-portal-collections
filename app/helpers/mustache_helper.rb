@@ -32,7 +32,7 @@ module MustacheHelper
   end
 
   def version
-    { is_alpha: content[:phase_feedback].present? }
+    { is_alpha: content[:banner].present? }
   end
 
   def js_vars
@@ -383,7 +383,7 @@ module MustacheHelper
   def content
     mustache[:content] ||= begin
       {
-        phase_feedback: banner_content
+        banner: banner_content
       }
     end
   end

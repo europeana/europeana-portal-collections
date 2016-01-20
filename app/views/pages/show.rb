@@ -22,7 +22,7 @@ module Pages
           channel_entry: @page.browse_entries.blank? ? nil : {
             items: browse_entry_items(@page.browse_entries)
           },
-          phase_feedback: banner_content(@page.banner_id)
+          banner: banner_content(@page.banner_id)
         }.reverse_merge(helpers.content)
       end
     end
