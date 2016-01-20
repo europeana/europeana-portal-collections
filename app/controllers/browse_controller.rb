@@ -15,6 +15,14 @@ class BrowseController < ApplicationController
     end
   end
 
+  def concepts
+    @concepts = BrowseEntry.includes(:translations).concept.published.sort_by(&:title)
+  end
+
+  def agents
+    @agents = BrowseEntry.includes(:translations).agent.published.sort_by(&:title)
+  end
+
   # GET /browse/newcontent
   # @todo Load @providers from view helper, to bypass if HTML cached
   def new_content

@@ -173,10 +173,6 @@ module MustacheHelper
   end
   alias_method :channel_data, :collection_data
 
-  def get_navigation
-    navigation
-  end
-
   def navigation
     mustache[:navigation] ||= begin
       {
@@ -229,6 +225,11 @@ module MustacheHelper
                       url: browse_sources_path,
                       text: t('global.navigation.browse_sources'),
                       is_current: current_page?(browse_sources_path)
+                    },
+                    {
+                      url: browse_concepts_path,
+                      text: t('global.navigation.concepts'),
+                      is_current: current_page?(browse_concepts_path)
                     }
                   ]
                 }
@@ -522,12 +523,12 @@ module MustacheHelper
 
   ##
   # @param page [Page]
-  def browse_entry_items(page)
-    page.browse_entries.published.map do |entry|
+  def browse_entry_items(browse_entries, page = nil)
+    browse_entries.map do |entry|
       cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
       {
         title: entry.title,
-        url: browse_entry_url(page, entry),
+        url: browse_entry_url(entry, page),
         image: entry.file.nil? ? nil : entry.file.url,
         image_alt: nil
       }.merge(cat_flag)

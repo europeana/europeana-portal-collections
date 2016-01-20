@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
   devise_for :users
 
+  get 'browse/agents', to: 'browse#agents'
   get 'browse/colours', to: 'browse#colours'
+  get 'browse/concepts', to: 'browse#concepts'
   get 'browse/newcontent', to: 'browse#new_content'
   get 'browse/sources', to: 'browse#sources'
 
