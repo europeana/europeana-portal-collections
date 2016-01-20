@@ -1,7 +1,8 @@
 class BrowseEntry < ActiveRecord::Base
   include HasSettingsAttribute
 
-  belongs_to :page, inverse_of: :browse_entries, touch: true
+  has_many :page_elements, dependent: :destroy, as: :positionable
+  has_many :pages, through: :page_elements
   belongs_to :media_object, dependent: :destroy, inverse_of: :browse_entry
 
   has_settings(:category)
@@ -22,6 +23,16 @@ class BrowseEntry < ActiveRecord::Base
 
   translates :title, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
+
+  after_update :touch_pages
+  after_touch :touch_pages
+  after_destroy :touch_pages
+
+  ##
+  # Touch associated pages to invalidate cache
+  def touch_pages
+    pages.find_each(&:touch)
+  end
 
   def file=(*args)
     (media_object || build_media_object).send(:file=, *args)

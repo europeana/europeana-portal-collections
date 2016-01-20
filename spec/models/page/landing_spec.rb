@@ -3,7 +3,6 @@ RSpec.describe Page::Landing do
   it { is_expected.to have_many(:credits) }
   it { is_expected.to have_many(:social_media) }
   it { is_expected.to have_many(:promotions) }
-  it { is_expected.to have_many(:browse_entries) }
 
   it { is_expected.to accept_nested_attributes_for(:hero_image) }
   it { is_expected.to accept_nested_attributes_for(:credits) }

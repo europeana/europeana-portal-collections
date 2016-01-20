@@ -74,11 +74,9 @@ RailsAdmin.config do |config|
   end
 
   config.model 'BrowseEntry' do
-    visible false
     configure :translations, :globalize_tabs
     edit do
       field :translations
-      field :position
       field :query
       field :file, :paperclip
       field :settings_category, :enum
@@ -243,7 +241,10 @@ RailsAdmin.config do |config|
       field :slug
       field :translations
       field :hero_image
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
       field :banner
     end
   end
@@ -274,7 +275,10 @@ RailsAdmin.config do |config|
       field :http_code
       field :translations
       field :hero_image
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
       field :banner
     end
   end
@@ -307,7 +311,10 @@ RailsAdmin.config do |config|
       field :credits
       field :social_media
       field :promotions
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
       field :banner
     end
   end
