@@ -14,6 +14,10 @@ class BrowseEntry < ActiveRecord::Base
 
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
+  # Do not re-order these elements!
+  # @see http://api.rubyonrails.org/classes/ActiveRecord/Enum.html
+  enum subject_type: [:concept :agent]
+
   class << self
     def settings_category_enum
       %w(search spotlight)

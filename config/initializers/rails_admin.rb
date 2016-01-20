@@ -75,11 +75,30 @@ RailsAdmin.config do |config|
 
   config.model 'BrowseEntry' do
     configure :translations, :globalize_tabs
+    list do
+      field :title
+      field :file, :paperclip
+      field :subject_type
+    end
+    show do
+      field :title
+      field :query
+      field :file, :paperclip do
+        thumb_method :medium
+      end
+      field :subject_type
+      field :settings_category, :enum do
+        label 'Category'
+      end
+    end
     edit do
       field :translations
       field :query
       field :file, :paperclip
-      field :settings_category, :enum
+      field :subject_type
+      field :settings_category, :enum do
+        label 'Category'
+      end
     end
   end
 

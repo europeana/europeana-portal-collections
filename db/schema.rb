@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120130829) do
+ActiveRecord::Schema.define(version: 20160120132502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,9 +56,11 @@ ActiveRecord::Schema.define(version: 20160120130829) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "state",           default: 0
+    t.integer  "subject_type"
   end
 
   add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree
+  add_index "browse_entries", ["subject_type"], name: "index_browse_entries_on_subject_type", using: :btree
 
   create_table "browse_entry_translations", force: :cascade do |t|
     t.integer  "browse_entry_id",             null: false
