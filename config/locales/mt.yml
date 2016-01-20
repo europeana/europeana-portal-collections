@@ -94,160 +94,160 @@ mt:
         attribute-html: HTML
         attribute-plaintext: Kitba sempliċi
         download: Niżżel
-        download-additional: 
-        downloaddata: 
-        open-media: 
-        show-less-data: 
-        show-more-data: 
-        technicalmetadata: 
+        download-additional: Disponibbli wkoll bħala
+        downloaddata: Niżżel informazzjoni
+        open-media: Iftaħ din l-iskjetta
+        show-less-data: Uri inqas informazzjoni
+        show-more-data: Uri aktar informazzjoni
+        technicalmetadata: Metadata tekniku
       enrichment:
         who:
-          title: 
+          title: Titlu
       hierarchy:
-        title: 
-        view-items-above: 
-        view-items-below: 
+        title: Oġġetti relatati
+        view-items-above: Ara l-oġġetti hawn fuq
+        view-items-below: Ara l-oġġetti hawn isfel
       meta-label:
-        codec: 
-        collection-name: 
-        concept: 
-        concepts: 
-        consists-of: 
-        contributor: 
-        copyright: 
-        creation-date: 
-        creator: 
-        current-location: 
-        data-provider: 
-        date: 
-        dates: 
-        description: 
-        dimensions: 
-        duration: 
+        codec: Codec
+        collection-name: Dataset
+        concept: Kunċett
+        concepts: Klassifikazzjonijiet
+        consists-of: Jikkonsisti minn
+        contributor: Kontributur
+        copyright: Copyright
+        creation-date: Data tal-kreazzjoni
+        creator: Kreatur
+        current-location: Lokazzjoni attwali
+        data-provider: Istituzzjoni
+        date: Data
+        dates: Dati
+        description: Deskrizzjoni
+        dimensions: Dimensjonijiet
+        duration: Dewmien
         edm:
-          has-met: 
-          incorporates: 
-          is-derivative-of: 
-          is-representation-of: 
-          is-similar-to: 
-          is-successor-of: 
-          realises: 
-          was-present-at: 
-        extent: 
-        file-size: 
-        format: 
-        fps: 
-        has-type: 
-        identifier: 
-        is-format-of: 
-        is-part-of: 
-        is-referenced-by: 
-        is-replaced-by: 
-        is-required-by: 
-        issued: 
-        language: 
-        latitude: 
-        location: 
-        longitude: 
-        map: 
-        map-tiles: 
-        medium: 
-        people: 
-        period: 
-        place: 
-        place-time: 
-        properties: 
-        provenance: 
-        provided-by: 
-        provided-by-detail: 
-        provided-by-detail-no-link: 
-        provider: 
-        providing-country: 
-        publication-date: 
-        publisher: 
-        references: 
-        refs-rels: 
-        relations: 
-        rights: 
-        rights-human: 
-        runtime: 
-        runtime-unit-seconds: 
-        source: 
-        subject: 
-        temporal: 
-        time: 
-        timestamp-created: 
-        timestamp-updated: 
-        timestamp_created: 
-        timestamp_updated: 
-        title: 
-        toc: 
-        type: 
-        ugc: 
-        version: 
+          has-met: Huwa relatat ma'
+          incorporates: Tinkorpora
+          is-derivative-of: Huwa derivattiv ta'
+          is-representation-of: Huwa rappreżentattiv ta'
+          is-similar-to: Huwa simili ta'
+          is-successor-of: Huwa suċċessur ta'
+          realises: jirrealizza
+          was-present-at: Preżenti f'
+        extent: Daqs
+        file-size: Daqs tal-fajl
+        format: Format
+        fps: Frejm kull sekonda
+        has-type: Huwa tat-tip
+        identifier: identifikatur
+        is-format-of: Huwa tal-format
+        is-part-of: Huwa parti ta'
+        is-referenced-by: Huwa referenzat minn
+        is-replaced-by: Huwa sostitwit minn
+        is-required-by: Huwa meħtieġ minn
+        issued: 'Maħruġ '
+        language: Lingwa
+        latitude: Latitudni
+        location: Lokazzjoni
+        longitude: Lonġitudni
+        map: Mappa
+        map-tiles: Madum
+        medium: Mezz
+        people: Nies
+        period: "Żmien"
+        place: Post
+        place-time: Post/Ħin
+        properties: Proprjetajiet
+        provenance: Provenjenza
+        provided-by: Skopri aktar
+        provided-by-detail: Europeana qiegħda turi dan l-oġġett permezz l-%{institution_name_and_link}. Żur is-sit elektroniku tagħhom għal aktar informazzjoni.
+        provided-by-detail-no-link: Europeana qiegħda turi dan l-oġġett permezz
+        provider: Fornitur
+        providing-country: Pajjiż fornitur
+        publication-date: Data ta' pubblikazzjoni
+        publisher: Pubblikatur
+        references: Referenzi
+        refs-rels: Referenzi u relazzjonijiet
+        relations: Relazzjonijiet
+        rights: Drittijiet
+        rights-human: Nista' nuża dan?
+        runtime: Dewmien
+        runtime-unit-seconds: sekondi
+        source: Sors
+        subject: Suġġett
+        temporal: Temporali
+        time: "Ħin"
+        timestamp-created: L-ewwel ppubblikat f'Europeana
+        timestamp-updated: Aġġornat l-aħħar minn Europeana
+        timestamp_created: L-ewwel ppubblikat f'Europeana (%{timestamp_created})
+        timestamp_updated: Aġġornat l-aħħar f'Europeana (%{timestamp_updated})
+        title: Titlu
+        toc: Werrej
+        type: Tip
+        ugc: L-utent ikkontribwixxa kontenut
+        version: Versjoni
       named-entities:
-        title: 
+        title: Entitajiet
         what:
-          broader: 
-          label: 
-          term: 
-          title: 
+          broader: Kunċett Usa
+          label: 'Kunċett '
+          term: Titlu tal-Kunċett
+          title: Suġġetti, tipi ta' risorsi, ġeneri u formi (Kunċetti)
         when:
-          begin: 
-          end: 
-          label: 
-          term: 
-          title: 
+          begin: Bidu tal-Perjodu
+          end: Tmiem tal-Perjodu
+          label: Isem tal-Perjodu
+          term: Term tal-Perjodu
+          title: Tul taż-żmien u dati
         where:
-          label: 
-          latitude: 
-          longitude: 
-          term: 
-          title: 
+          label: Post
+          latitude: Latitudni
+          longitude: Lonġitudni
+          term: Isem tal-Post
+          title: Isem tal-Postijiet (Postijiet)
         who:
-          label: 
-          term: 
-          title: 
+          label: Aġent
+          term: Terminu tal-Aġent
+          title: Nies u organizzazzjonijiet (Aġenti)
       nav:
-        next: 
-        prev: 
+        next: Li jmiss
+        prev: Ta' qabel
       points:
-        east: 
-        north: 
-        south: 
-        west: 
-      show-more-similar-items: 
-      similar-items: 
+        east: Lvant
+        north: Tramuntana
+        south: Nofsinhar
+        west: Punent
+      show-more-similar-items: Uri aktar
+      similar-items: Oġġetti simili
     pages:
       '404':
-        intro: 
-        text: 
+        intro: Jiddispjaċina, ma nistgħux insibu din il-paġna
+        text: Sfortunatament ma nistgħux insibu il-paġna li qiegħed tfittex. Ipprova fittex f'Europeana jew agħżel mill-oġġetti hawn taħt.
       about:
         text: 
-        title: 
+        title: Merħba, maħbub tal-kultura!
       music-channel-about:
         text: 
-        title: 
+        title: Dwar il-Kollezzjonijiet tal-Mużika
     results:
       actions:
-        configure-actions: 
-        dutchmasters: 
-        favouriteart: 
-        label: 
-        newcollection: 
-        product-save: 
-        saveto: 
-        show-all-collections: 
+        configure-actions: Kkonfigra l-azzjonijiet
+        dutchmasters: Kaptani Olandiżi
+        favouriteart: Arti favorita
+        label: Azzjoni
+        newcollection: Kollezzjoni ġdida
+        product-save: Salva
+        saveto: Salva f'
+        show-all-collections: Uri l-kollezzjonijiet kollha
       list:
         all-results:
-          3D: 
-          images: 
-          text: 
-          video: 
-        count-and-terms: 
-        empty: 
-        empty-with-terms: 
-        header: 
+          3D: 3D
+          images: Immaġini
+          text: Kitba
+          video: Video
+        count-and-terms: "%{results_count} riżultati"
+        empty: M'hawnx riżultati
+        empty-with-terms: It-tfixxija tiegħek għal %{query_terms} ma' ġabarx riżultati
+        header: Riżultati għal
         header-and: 
         in-channel: 
         less: 
