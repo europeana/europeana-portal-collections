@@ -249,6 +249,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Page::Error' do
+    label 'Error Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
@@ -279,6 +280,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Page::Landing' do
+    label 'Landing Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
