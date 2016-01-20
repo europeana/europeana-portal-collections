@@ -22,14 +22,15 @@ class Banner < ActiveRecord::Base
 
   after_update :touch_pages
   after_touch :touch_pages
+  after_destroy :touch_pages
 
   ##
-  # Touch associated published pages to invalidate cache
+  # Touch associated pages to invalidate cache
   def touch_pages
     if default?
-      Page.published.where('banner_id IS NULL').find_each(&:touch)
+      Page.where('banner_id IS NULL').find_each(&:touch)
     end
-    pages.published.find_each(&:touch)
+    pages.find_each(&:touch)
   end
 
   def became_default?
