@@ -33,9 +33,8 @@ module Pages
           secondary: {
             items: secondary_navigation_items
           }
-        }.merge(helpers.navigation)
+        }.reverse_merge(helpers.navigation)
       end
-      helpers.get_navigation.merge(mustache[:navigation])
     end
 
     protected
