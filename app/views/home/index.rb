@@ -14,7 +14,7 @@ module Home
             items: blog_news_items,
             blogurl: Cache::FeedJob::URLS[:blog][:all]
           },
-          phase_feedback: banner_content(@landing_page.banner_id)
+          banner: banner_content(@landing_page.banner_id)
         }.reverse_merge(helpers.content)
       end
     end
