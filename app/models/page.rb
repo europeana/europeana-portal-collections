@@ -50,7 +50,7 @@ class Page < ActiveRecord::Base
     super
 
     ids.reject(&:blank?).each_with_index do |id, index|
-      element = elements.detect { |element| (element.positionable_type == 'BrowseEntry') && (element.positionable_id == id.to_i) }
+      element = elements.detect { |e| (e.positionable_type == 'BrowseEntry') && (e.positionable_id == id.to_i) }
       element.remove_from_list
       element.insert_at(index + 1)
     end
