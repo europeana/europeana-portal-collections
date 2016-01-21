@@ -230,6 +230,11 @@ module MustacheHelper
                       url: browse_concepts_path,
                       text: t('global.navigation.concepts'),
                       is_current: current_page?(browse_concepts_path)
+                    },
+                    {
+                      url: browse_agents_path,
+                      text: t('global.navigation.agents'),
+                      is_current: current_page?(browse_agents_path)
                     }
                   ]
                 }
