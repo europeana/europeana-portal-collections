@@ -9,6 +9,7 @@ hr:
   global:
     labs-link: http://labs.europeana.eu/
     navigation:
+      agents: 
       all_blog_posts: Sve objave na blogu...
       all_exhibitions: Sve izložbe...
       blog: Blog
@@ -18,6 +19,7 @@ hr:
       browse_sources: Izvori
       channels: Zbirke
       collections: Zbirke
+      concepts: 
       exhibitions: Izložbe
       home: Naslovnica
     pro-link: http://pro.europeana.eu/
@@ -31,9 +33,13 @@ hr:
         title: 'Ovo je beta objava naših novih stranica: "Zbirke" i "Glazbene zbirke"'
     blog-link: http://blog.europeana.eu
     browse:
+      agents:
+        title: 
       colours:
         description: U ovom dijelu možete pretraživati slike po boji. Potrebno je samo kliknuti na onu koja vam se sviđa kako biste vidjeli zbirku!
         title: Boje
+      concepts:
+        title: 
       newcontent:
         description: U ovom dijelu možete pronaći sav sadržaj koji je nedavno dodan Europeana zbirkama. Ovdje možete vidjeti koja je nova ustanova objavila novi materijal, koliko materijala i kada! Samo kliknite na poveznice u nastavku kako biste vidjeli njihove zbirke.
         tableh1: Sve ustanove

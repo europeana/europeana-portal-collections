@@ -9,6 +9,7 @@ ga:
   global:
     labs-link: 
     navigation:
+      agents: 
       all_blog_posts: 
       all_exhibitions: 
       blog: 
@@ -18,6 +19,7 @@ ga:
       browse_sources: 
       channels: 
       collections: 
+      concepts: 
       exhibitions: 
       home: 
     pro-link: 
@@ -31,8 +33,12 @@ ga:
         title: 
     blog-link: 
     browse:
+      agents:
+        title: 
       colours:
         description: 
+        title: 
+      concepts:
         title: 
       newcontent:
         description: 
