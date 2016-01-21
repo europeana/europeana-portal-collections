@@ -223,10 +223,32 @@ mt:
         intro: Jiddispjaċina, ma nistgħux insibu din il-paġna
         text: Sfortunatament ma nistgħux insibu il-paġna li qiegħed tfittex. Ipprova fittex f'Europeana jew agħżel mill-oġġetti hawn taħt.
       about:
-        text: 
+        text: |-
+          <p>Qiegħed tfittex pittura antika? Qiegħed tagħmel xi riċerka jew tikteb xi komponiment ta' l-iskola? Qiegħed tfittex xi ispirazzjoni għad-diżinn tal-proġett ġejjieni tiegħek? Tixtieq titgħallem xi ħaġa ġdida? Hi x'inhi li tresqek lejn Europeana, merħba!</p>
+
+          <p>Idħol fl-akbar kollezzjoni tal-arti, kultura u xjenza online ta' l-Ewropa. Europeana Collections toffrilek materjal mill-famuż u dak li mhux daqshekk famuż (imma dejjem affaxxinanti), libreriji, mużewijiet, arkivji ta' l-Ewropa. </p>
+
+          <p>Kotba u manuskritti, ritratti u pitturi, skulturi u mużika, videos u rikordji, djarji u mappep - dawn huma kollha hawnhekk. M'għandekx għalfejn tivvjaġġa, fiżikament jew virtwalment!</p>
+
+          <p>Esplora, skopri, ara, isma, aqra, niżżel...Ħu gost!</p>
+
+          <p>Issa għalfejn ma tidħolx fil-Kollezzjoni tal-Arti Storika tal-Europeana, jew il-Kollezzjoni tal-Mużika tal-Europeana? Għandna ukoll risorsi apposta għal riċerkaturi u iżviluppaturi kulturali/innovaturi (hawnhekk tista' issib l-API tagħna), kif ukoll ħafna wirjiet virtwali u l-blog.</p>
+
+          <p>U jekk għadek bil-ġuħ għal aktar, tista' tieħu d-doża ta' kuljum tal-kultura fuq Facebook, Twitter, Medium, Google+ u Pinterest.</p>
+
+          <p>Għal aktar informazzjoni fuq kif naħdmu ma' istituzzjonijiet kulturali u l-kollezzjonijiet tagħhom, żur Europeana Pro.</p>
         title: Merħba, maħbub tal-kultura!
       music-channel-about:
-        text: 
+        text: |-
+          <p>Immaġina kieku qiegħed tħares lejn manuskritti miktubin bl-idejn ta' biċċa mużika waqt li qiegħed tisma' interpretazzjonijiet differenti tiegħu, u taqra il-biografu tal-kompositur. Fuq il-Kollezzjonijiet tal-Mużika ta' Europeana, tista'. </p>
+
+          <p><a href="http://www.europeanasounds.eu">Il-Kollegi tagħna</a>, l-esperti kollha fil-mużika, minn madwar l-Ewropa bnew kollezzjoni ta' rikordji tal-mużika, mużika miktuba, immaġni ta' strumenti mużikali, kotba dwar il-mużika u kontenut ieħor relatat mal-mużika. </p>
+
+          <p>Għamilna din il-verżjoni primarja tal-Kollezzjoni tal-Mużika lesta għalikhom, l-utenti tagħna, biex tistgħu tgħinuna nifformawha waqt li niżviluppawha u nipperfettawha aktar. Mela, meta żżuru s-sit jista' jkun li tkunu mitluba biex twieġbu mistoqsijiet jew stħarriġ li jintwera' fuq l-iskrijn. Napprezzaw ħafna li kieku tieħdu ftit ħin biex tirrispondu dawn il-mistoqsijiet! </p>
+
+          <p>Ukoll, fl-interess tat-trasparenza u privatezza, kunu għafu li aħna nieħdu rendikont tal-istatistika u l-imġieba tal-utenti tagħna perezz ta' Google Analytics u Hotjar. Nagħmlu dan għax jurina fejn morna għall-agħar fid-diżinji tagħna u għax jgħinna niżviluppaw aħjar il-Kollezzjoni tal-Mużika. Kull rendikont huwa miżjum privat u anonimu, użat biss biex mmexxu s-servizz tagħna fl-aħjar.</p>
+
+          <p>Ninkoraġġixxukom biex tfittxu l-kollezzjoni, tisimgħu il-mużika, taraw il-mużika miktuba jew taqraw dwarha. Meta l-copyright jippermettilkom, tistgħu tniżżlu l-affarijiet li jogħġbukom l-aktar. U żuru l-wirja virtwali biex tiddiskopru mużika ġdida bħalma' qatt qabel!</p>
         title: Dwar il-Kollezzjonijiet tal-Mużika
     results:
       actions:
@@ -248,42 +270,42 @@ mt:
         empty: M'hawnx riżultati
         empty-with-terms: It-tfixxija tiegħek għal %{query_terms} ma' ġabarx riżultati
         header: Riżultati għal
-        header-and: 
-        in-channel: 
-        less: 
-        less_adv: 
-        more: 
-        more_adv: 
-        product-3D: 
-        product-image: 
-        product-sound: 
-        product-text: 
-        product-video: 
-        results-relevance: 
-        single-result: 
+        header-and: U
+        in-channel: fil-ġbir tematika
+        less: Inqas
+        less_adv: Inqas Rfinar
+        more: Aktar
+        more_adv: Filtri Avvanzati
+        product-3D: 3D
+        product-image: Immaġni
+        product-sound: "Ħsejjes"
+        product-text: Kitba
+        product-video: Video
+        results-relevance: Relevanza
+        single-result: Riżultat wieħed għal %{query_terms}
         view:
-          grid: 
-          list: 
-        view-at-provider: 
+          grid: Grid
+          list: Lista
+        view-at-provider: Ara f'
     search:
       placeholder:
-        text: 
+        text: "Żid terminu ġdid għat-tfittxija"
       similar:
-        prefix: 
+        prefix: 'Simili għal: %{mlt_item}'
     settings:
       actions:
-        clear-selection: 
-        save-settings: 
+        clear-selection: 'Neħħi s-selezzjoni '
+        save-settings: Salva is-settings
       language:
-        auto-translate-limit: 
-        auto-translate-page: 
-        auto-translate-page-short: 
-        auto-translate-query: 
-        available: 
-        default: 
+        auto-translate-limit: Massimu ta' %{max_languages} jistgħu jiġu magħżula
+        auto-translate-page: Ttraduċi awtomatikament l-paġni f'...
+        auto-translate-page-short: Ttraduċi awtomatikament l-oġġetti f'
+        auto-translate-query: Ttraduċi awtomatikament l-
+        available: Lingwi disponibbli
+        default: Lingwa Mogħtija
         flash:
-          alert: 
-          notice: 
-        label: 
-        settings-label: 
-      title: 
+          alert: 'Il-lingwa speċifikat mhuwiex validu. Lingwi disponibbli: %{locales}'
+          notice: Is-settings tal-lingwi huma saved
+        label: Lingwa
+        settings-label: settings tal-lingwa
+      title: Settings
