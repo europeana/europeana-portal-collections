@@ -149,52 +149,52 @@ mt:
   global:
     about-us: Min aħna
     channel:
-      archaeology: 
-      architecture: 
+      archaeology: arkeoloġija
+      architecture: arkitettura
       art: arti
       fashion: moda
       home: Dar
       maps: mapep
-      music: 
+      music: mużika
       natural-history: l-istorja naturali
       newspapers: gazzetti
-      performing-arts: 
-    channels-art: 
-    channels-art-image: 
-    channels-art-link: 
+      performing-arts: arti teatrali
+    channels-art: Kollezzjonijiet tal-Arti Storika
+    channels-art-image: 'Immaġni tal-Kollezzjonijiet tal-Arti Storika '
+    channels-art-link: 'Kollezzjonijiet tal-Arti Storika '
     channels-fashion: Moda
-    channels-music: 
+    channels-music: Mużika
     choose-language: Lingwa
-    email-address: 
+    email-address: Indirizz tal-email
     facet:
       advanced:
-        options: 
+        options: Għażliet
         show:
-          ugc: 
+          ugc: Kontenut iġġenerat mill-utent
       art:
         form:
           paintings:
-            genre: 
-            medium: 
-      carrier: 
-      colour: 
-      colour-black-and-white: 
+            genre: "Ġeneru"
+            medium: Mezz
+      carrier: "Ġarrier"
+      colour: Kulur
+      colour-black-and-white: Iswed u abjad
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
+        austria: L-Awstrija
+        belgium: il-Belġju
+        bulgaria: il-Bulgarija
+        croatia: il-Kroazja
+        cyprus: "Ċipru"
+        czechrepublic: Ir-Repubblika Ċeka
+        denmark: Id-Danimarka
+        estonia: L-Estonja
+        europe: L-Ewropa
+        finland: Il-Finlandja
+        france: Franza
+        germany: il-Ġermanja
+        greece: il-Greċja
+        hungary: L-Ungerija
+        iceland: Islanda
         ireland: 
         israel: 
         italy: 
