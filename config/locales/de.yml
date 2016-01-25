@@ -9,6 +9,7 @@ de:
   global:
     labs-link: Link zu Labs
     navigation:
+      agents: 
       all_blog_posts: Alle Beiträge...
       all_exhibitions: Alle Ausstellungen...
       blog: 
@@ -18,6 +19,7 @@ de:
       browse_sources: Quellen
       channels: Sammlungen
       collections: Sammlungen
+      concepts: 
       exhibitions: Ausstellungen
       home: Startseite
     pro-link: Link zu Pro
@@ -31,9 +33,13 @@ de:
         title: Dies ist eine Beta Version unserer neuen Sammlungen, Musik Sammlung und Kunstgeschichte Sammlungen
     blog-link: Link zum Blog
     browse:
+      agents:
+        title: 
       colours:
         description: 
         title: Farben
+      concepts:
+        title: 
       newcontent:
         description: 
         tableh1: 

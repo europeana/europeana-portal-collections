@@ -24,8 +24,18 @@ class ApplicationView < Europeana::Styleguide::View
 
   private
 
+  def cache_version
+    @cache_version ||= begin
+      v = Rails.application.config.assets.version.dup
+      unless Rails.application.config.x.cache_version.blank?
+        v << ('-' + Rails.application.config.x.cache_version.dup)
+      end
+      v
+    end
+  end
+
   def cache_key
-    'views/' + Rails.application.config.assets.version + '/' + I18n.locale.to_s + '/' + body_cache_key
+    'views/' + cache_version + '/' + I18n.locale.to_s + '/' + body_cache_key
   end
 
   # Implement this method in sub-classes to enable body caching

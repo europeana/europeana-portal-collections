@@ -18,7 +18,7 @@ module Browse
                 hex: colour.value,
                 label: t('X11.colours.' + (colour.value.sub '#', ''), locale: 'en', default: colour.value),
                 num_results: colour.hits,
-                url: search_path(f: { 'COLOURPALETTE' => [colour.value], 'TYPE' => ['IMAGE'] })
+                url: colour_search_url(colour.value)
               }
             end
           }
@@ -36,8 +36,17 @@ module Browse
 
     private
 
+    def colour_search_url(colour)
+      query_params = { f: { 'COLOURPALETTE' => [colour], 'TYPE' => ['IMAGE'] } }
+      if @collection.present?
+        collection_path(@collection, query_params)
+      else
+        search_path(query_params)
+      end
+    end
+
     def body_cache_key
-      'browse/colours'
+      'browse/colours' + (@collection.present? ? '/' + @collection.key : '')
     end
   end
 end

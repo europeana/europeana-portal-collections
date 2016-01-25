@@ -9,6 +9,7 @@ el:
   global:
     labs-link: ''
     navigation:
+      agents: 
       all_blog_posts: "Όλες οι αναρτήσεις..."
       all_exhibitions: "'Ολες οι εκθέσεις"
       blog: "Ιστολόγιο"
@@ -18,6 +19,7 @@ el:
       browse_sources: "Πηγές"
       channels: "Συλλογές"
       collections: "Συλλογές"
+      concepts: 
       exhibitions: "Εκθέσεις"
       home: "Αρχική"
     pro-link: ''
@@ -31,9 +33,13 @@ el:
         title: "Αυτή είναι μία Beta έκδοση της νέας μας αναζήτησης σε Συλλογές και της Συλλογής Μουσική"
     blog-link: ''
     browse:
+      agents:
+        title: 
       colours:
         description: 
         title: "Χρώματα"
+      concepts:
+        title: 
       newcontent:
         description: 
         tableh1: "Όλα τα ιδρύματα"

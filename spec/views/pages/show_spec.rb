@@ -1,6 +1,6 @@
 require 'support/shared_examples/page_with_top_nav'
 
-RSpec.describe 'portal/static.html.mustache' do
+RSpec.describe 'pages/show.html.mustache' do
   before(:each) do
     assign(:page, page)
   end

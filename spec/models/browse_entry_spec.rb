@@ -1,5 +1,6 @@
 RSpec.describe BrowseEntry do
-  it { is_expected.to belong_to(:page) }
+  it { is_expected.to have_many(:page_elements).dependent(:destroy) }
+  it { is_expected.to have_many(:pages).through(:page_elements) }
   it { is_expected.to belong_to(:media_object) }
   it { is_expected.to delegate_method(:settings_category_enum).to(:class) }
   it { is_expected.to delegate_method(:file).to(:media_object) }

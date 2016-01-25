@@ -1,0 +1,23 @@
+{{>atoms/meta/_head}}
+
+{{> templates/Search/Search-colours}}
+
+<section class="channel-info section">
+
+  {{#content.browse_entries}}
+  <ul class="browse-entry-list lc">
+    {{#items}}
+    <li class="list-item">
+      {{> molecules/blocks/browse-entry }}
+    </li>
+    {{/items}}
+  </ul>
+  {{/content.browse_entries}}
+
+</section>
+
+{{> organisms/sections/banner }}
+
+{{> organisms/global/footer }}
+
+{{>atoms/meta/_foot}}

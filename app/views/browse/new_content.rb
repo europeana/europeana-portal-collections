@@ -13,7 +13,7 @@ module Browse
           description: t('site.browse.newcontent.description'),
           recent: @providers.blank? ? nil : {
             title: ' ',
-            items: stylised_recent_additions(@providers, max: 1000, from: :same),
+            items: stylised_recent_additions(@providers, max: 1000, from: :same, collection: @collection),
             tableh1: t('site.browse.newcontent.tableh1'),
             tableh2: t('site.browse.newcontent.tableh2'),
             tableh3: t('site.browse.newcontent.tableh3')
@@ -33,7 +33,7 @@ module Browse
     private
 
     def body_cache_key
-      'browse/newcontent'
+      'browse/newcontent' + (@collection.present? ? '/' + @collection.key : '')
     end
   end
 end

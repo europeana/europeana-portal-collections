@@ -45,6 +45,6 @@ class HeroImage < ActiveRecord::Base
   validates :license, inclusion: { in: license_enum }, allow_nil: true
 
   def touch_page
-    page.touch
+    page.touch if page.present?
   end
 end

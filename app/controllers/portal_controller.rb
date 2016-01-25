@@ -18,7 +18,6 @@ class PortalController < ApplicationController
 
     respond_to do |format|
       format.html do
-        setup_next_and_previous_documents
         render action: 'show'
       end
       format.json { render json: { response: { document: @document } } }
@@ -43,29 +42,6 @@ class PortalController < ApplicationController
 
     respond_to do |format|
       format.json { render :media, layout: false }
-    end
-  end
-
-  # GET /record/:id/navigation
-  def navigation
-    respond_to do |format|
-      format.json do
-        setup_next_and_previous_documents
-        render :navigation, layout: false
-      end
-    end
-  end
-
-  # @todo move into own controller to isolate record resource related actions
-  def static
-    @page = Page.find_by_slug!(params[:page])
-    authorize! :show, @page
-
-    respond_to do |format|
-      format.html do
-        page_template = "pages/#{@page.slug}"
-        render template_exists?(page_template) ? page_template : 'portal/static'
-      end
     end
   end
 end

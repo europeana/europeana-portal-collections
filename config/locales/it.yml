@@ -9,6 +9,7 @@ it:
   global:
     labs-link: Link ai laboratori
     navigation:
+      agents: 
       all_blog_posts: Tutti i messaggi
       all_exhibitions: Tutte le esibizioni
       blog: Blog
@@ -18,6 +19,7 @@ it:
       browse_sources: Fonti
       channels: Collezioni
       collections: Collezioni
+      concepts: 
       exhibitions: Esibizioni
       home: Pagina principale
     pro-link: Link a pro
@@ -31,9 +33,13 @@ it:
         title: Questa è una versione Beta delle nostre nuove "Collezioni" e "Arte Storia Collezioni" e  "Collezione musicale"
     blog-link: link al blog
     browse:
+      agents:
+        title: 
       colours:
         description: 
         title: Colori
+      concepts:
+        title: 
       newcontent:
         description: 
         tableh1: Tutte le istituzioni

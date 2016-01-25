@@ -1,5 +1,5 @@
-module Portal
-  class Static < ApplicationView
+module Pages
+  class Show < ApplicationView
     def page_title
       mustache[:page_title] ||= begin
         [@page.title, site_title].join(' - ')
@@ -19,10 +19,11 @@ module Portal
         {
           title: @page.title,
           text: @page.body,
-          channel_entry: @page.browse_entries.blank? ? nil : {
-            items: browse_entry_items(@page.browse_entries)
+          channel_entry: @page.browse_entries.published.blank? ? nil : {
+            items: browse_entry_items(@page.browse_entries.published, @page)
           },
-        }.merge(helpers.content)
+          banner: banner_content(@page.banner_id)
+        }.reverse_merge(helpers.content)
       end
     end
 
@@ -32,9 +33,8 @@ module Portal
           secondary: {
             items: secondary_navigation_items
           }
-        }.merge(helpers.navigation)
+        }.reverse_merge(helpers.navigation)
       end
-      helpers.get_navigation.merge(mustache[:navigation])
     end
 
     protected

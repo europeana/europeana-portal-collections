@@ -1,7 +1,6 @@
-generic_banner:
-  key: generic
+default_banner:
+  default: true
   state: 1
 
 draft_banner:
-  key: draft
   state: 0

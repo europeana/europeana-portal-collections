@@ -239,7 +239,7 @@ da:
         type: Medier
         ugc: Vis indhold genereret af brugerer
         video_duration: Varighed
-        video_hd: 
+        video_hd: Kvalitet
         year: Dato
       image_aspectratio:
         landscape: Landskab
@@ -305,14 +305,14 @@ da:
         advanced-cc-by-sa: CC BY-SA
         advanced-cc0: CC0
         advanced-orphan-work: Ukendt ophavsmand
-        advanced-out-of-copyright-non-commercial: 
-        advanced-pdm: 
-        advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
-        advanced-ucs: 
+        advanced-out-of-copyright-non-commercial: Ingen ophavsret - ingen kommerciel brug
+        advanced-pdm: Public Domain Marked
+        advanced-rrfa: Rettigheder reserveret - Gratis benyttelse
+        advanced-rrpa: Rettigheder reserveret - Mod betaling
+        advanced-rrra: Rettigheder reserveret - Begranset adgang
+        advanced-ucs: Ubekendt ophavsrettigheder
         open: 
-        permission: 
+        permission: Kun med tilladdelse
         restricted: Ja med restriktioner
         simple: Simpel
       sound_duration:
@@ -451,8 +451,8 @@ da:
     sitemap: 
     terms-and-policies: 
     type: 
-  'no': 
-  pl: 
+  'no': Norge
+  pl: Portugal
   site:
     facet:
       language:

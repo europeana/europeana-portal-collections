@@ -9,6 +9,7 @@ es:
   global:
     labs-link: 'link a labs '
     navigation:
+      agents: 
       all_blog_posts: Todos los Posts...
       all_exhibitions: Todas las Exhibiciones
       blog: Blog
@@ -18,6 +19,7 @@ es:
       browse_sources: Recursos
       channels: Colecciones
       collections: Colecciones
+      concepts: 
       exhibitions: Exhibiciones
       home: Inicio
     pro-link: link a pro
@@ -31,9 +33,13 @@ es:
         title: Esta es la versión Beta de nuestras colecciones, el Canal de Música y el Arte Colecciones de Historia .
     blog-link: Link al Blog
     browse:
+      agents:
+        title: 
       colours:
         description: 
         title: Colores
+      concepts:
+        title: 
       newcontent:
         description: 
         tableh1: Todas las instituciones

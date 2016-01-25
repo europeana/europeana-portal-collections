@@ -4,7 +4,7 @@ RSpec.describe Ability do
   end
 
   let(:draft_banner) { banners(:draft_banner) }
-  let(:published_banner) { banners(:generic_banner) }
+  let(:published_banner) { banners(:default_banner) }
   let(:draft_collection) { collections(:draft) }
   let(:published_collection) { collections(:music) }
   let(:draft_landing_page) { pages(:draft_landing_page) }
@@ -21,6 +21,8 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
+    it { is_expected.not_to be_able_to(:manage, Page.new) }
+    it { is_expected.not_to be_able_to(:manage, Page::Error.new) }
     it { is_expected.not_to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.not_to be_able_to(:manage, Link.new) }
     it { is_expected.not_to be_able_to(:manage, MediaObject.new) }
@@ -45,6 +47,8 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
+    it { is_expected.not_to be_able_to(:manage, Page.new) }
+    it { is_expected.not_to be_able_to(:manage, Page::Error.new) }
     it { is_expected.not_to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.not_to be_able_to(:manage, Link.new) }
     it { is_expected.not_to be_able_to(:manage, MediaObject.new) }
@@ -68,6 +72,8 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.to be_able_to(:manage, Collection.new) }
     it { is_expected.to be_able_to(:manage, HeroImage.new) }
+    it { is_expected.to be_able_to(:manage, Page.new) }
+    it { is_expected.to be_able_to(:manage, Page::Error.new) }
     it { is_expected.to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.to be_able_to(:manage, Link.new) }
     it { is_expected.to be_able_to(:manage, MediaObject.new) }

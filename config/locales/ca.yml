@@ -9,6 +9,7 @@ ca:
   global:
     labs-link: enllaç a labs
     navigation:
+      agents: 
       all_blog_posts: Tots els posts
       all_exhibitions: Totes les exposicions...
       blog: Blog
@@ -18,6 +19,7 @@ ca:
       browse_sources: Fonts
       channels: Col·leccions
       collections: Colleccions
+      concepts: 
       exhibitions: Exposicions
       home: Inici
     pro-link: enllaç a pro
@@ -31,9 +33,13 @@ ca:
         title: 'Això és una versió Beta de "Colleccions" i "Collecció de Música" i "Art Colleccions d''Història". '
     blog-link: enllaç al blog
     browse:
+      agents:
+        title: 
       colours:
         description: 
         title: Colors
+      concepts:
+        title: 
       newcontent:
         description: 
         tableh1: Totes les institucions

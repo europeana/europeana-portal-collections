@@ -32,7 +32,7 @@ module MustacheHelper
   end
 
   def version
-    { is_alpha: content[:phase_feedback].present? }
+    { is_alpha: content[:banner].present? }
   end
 
   def js_vars
@@ -173,10 +173,6 @@ module MustacheHelper
   end
   alias_method :channel_data, :collection_data
 
-  def get_navigation
-    navigation
-  end
-
   def navigation
     mustache[:navigation] ||= begin
       {
@@ -229,6 +225,16 @@ module MustacheHelper
                       url: browse_sources_path,
                       text: t('global.navigation.browse_sources'),
                       is_current: current_page?(browse_sources_path)
+                    },
+                    {
+                      url: browse_concepts_path,
+                      text: t('global.navigation.concepts'),
+                      is_current: current_page?(browse_concepts_path)
+                    },
+                    {
+                      url: browse_agents_path,
+                      text: t('global.navigation.agents'),
+                      is_current: current_page?(browse_agents_path)
                     }
                   ]
                 }
@@ -380,23 +386,34 @@ module MustacheHelper
     end
   end
 
-  # @todo {User.new} does not belong here, but needed by request specs
   def content
     mustache[:content] ||= begin
-      banner = Banner.find_by_key('phase-feedback')
-      banner = Banner.new unless (current_user || User.new(role: :guest)).can? :show, banner
       {
-        phase_feedback: banner.new_record? ? nil : {
-          title: banner.title,
-          text: banner.body,
-          cta_url: banner.link.url,
-          cta_text: banner.link.text
-        }
+        banner: banner_content
       }
     end
   end
 
   private
+
+  def page_banner(id = nil)
+    (id.nil? ? Banner.find_by_default(true) : Banner.find(id)).tap do |banner|
+      return nil unless (current_user || User.new(role: :guest)).can? :show, banner
+    end
+  end
+
+  # @todo {User.new} does not belong here, but needed by request specs
+  def banner_content(id = nil)
+    banner = page_banner(id)
+    return nil if banner.nil?
+
+    {
+      title: banner.title,
+      text: banner.body,
+      cta_url: banner.link.present? ? banner.link.url : nil,
+      cta_text: banner.link.present? ? banner.link.text : nil
+    }
+  end
 
   def mustache
     @mustache ||= {}
@@ -510,13 +527,13 @@ module MustacheHelper
   end
 
   ##
-  # @param [ActiveRecord::Associations::CollectionProxy<BrowseEntry>
-  def browse_entry_items(browse_entries)
+  # @param page [Page]
+  def browse_entry_items(browse_entries, page = nil)
     browse_entries.map do |entry|
       cat_flag = entry.settings_category.blank? ? {} : { :"is_#{entry.settings_category}" => true }
       {
         title: entry.title,
-        url: browse_entry_url(entry),
+        url: browse_entry_url(entry, page),
         image: entry.file.nil? ? nil : entry.file.url,
         image_alt: nil
       }.merge(cat_flag)
