@@ -398,8 +398,12 @@ module MustacheHelper
 
   def page_banner(id = nil)
     banner = id.nil? ? Banner.find_by_default(true) : Banner.find(id)
-    return nil unless controller.current_user.can?(:show, banner)
+    return nil unless devise_user.can?(:show, banner)
     banner
+  end
+
+  def devise_user
+    current_user || User.new(guest: true)
   end
 
   def banner_content(id = nil)
