@@ -9,7 +9,7 @@ module BlacklightHelper
     fields = args.shift || options[:field]
     [fields].flatten.each do |field|
       value = presenter(document).render_document_show_field_value field, options.except(:document, :field)
-      value = unescape ? CGI.unescapeHTML(value) : value
+      value = CGI.unescapeHTML(value.to_str) if unescape
       return value unless value.blank?
     end
     nil
@@ -23,7 +23,7 @@ module BlacklightHelper
     fields = args.shift || options[:field]
     [fields].flatten.each do |field|
       value = presenter(document).render_index_field_value field, options.except(:document, :field)
-      value = unescape ? CGI.unescapeHTML(value) : value
+      value = CGI.unescapeHTML(value.to_str) if unescape
       return value unless value.blank?
     end
     nil
