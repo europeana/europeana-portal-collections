@@ -130,7 +130,7 @@ GEM
       delayed_job (>= 3.0, < 5)
     deprecation (0.2.2)
       activesupport
-    devise (3.5.3)
+    devise (3.5.5)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -323,13 +323,13 @@ GEM
     mime-types (2.99)
     mimemagic (0.3.0)
     mini_portile2 (2.0.0)
-    minitest (5.8.3)
+    minitest (5.8.4)
     multi_json (1.11.2)
     multipart-post (2.0.0)
     mustache (1.0.2)
     nested_form (0.3.2)
     netrc (0.11.0)
-    nokogiri (1.6.7.1)
+    nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     paper_trail (4.0.1)
@@ -408,7 +408,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
-    rake (10.4.2)
+    rake (10.5.0)
     rbvmomi (1.8.2)
       builder
       nokogiri (>= 1.4.1)
@@ -555,7 +555,7 @@ DEPENDENCIES
   colorize
   coveralls
   delayed_job_active_record (~> 4.1)
-  devise (~> 3.5)
+  devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.4.2)
   europeana-blacklight (~> 0.3.3)
@@ -567,7 +567,7 @@ DEPENDENCIES
   globalize-versioning!
   htmlcompressor (= 0.3)
   localeapp (~> 1.0)
-  nokogiri (~> 1.6.7.1)
+  nokogiri (~> 1.6.7.2)
   paper_trail (~> 4.0)
   paperclip (~> 4.3)
   pg
