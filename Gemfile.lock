@@ -132,7 +132,7 @@ GEM
       delayed_job (>= 3.0, < 5)
     deprecation (0.2.2)
       activesupport
-    devise (3.5.3)
+    devise (3.5.5)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -560,7 +560,7 @@ DEPENDENCIES
   colorize
   coveralls
   delayed_job_active_record (~> 4.1)
-  devise (~> 3.5)
+  devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.4.2)
   europeana-blacklight (~> 0.4)
@@ -572,7 +572,7 @@ DEPENDENCIES
   globalize-versioning!
   htmlcompressor (= 0.3)
   localeapp (~> 1.0)
-  nokogiri (~> 1.6.7.1)
+  nokogiri (~> 1.6.7.2)
   paper_trail (~> 4.0)
   paperclip (~> 4.3)
   pg
