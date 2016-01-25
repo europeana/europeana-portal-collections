@@ -19,7 +19,7 @@ RSpec.describe RailsAdmin.config do
       let(:model_name) { 'BrowseEntry' }
       describe '.visible' do
         subject { model.visible }
-        it { is_expected.to be false }
+        it { is_expected.to be true }
       end
     end
 

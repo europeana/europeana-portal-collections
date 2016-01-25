@@ -64,7 +64,7 @@ module Browse
     private
 
     def body_cache_key
-      'browse/sources'
+      'browse/sources' + (@collection.present? ? '/' + @collection.key : '')
     end
   end
 end

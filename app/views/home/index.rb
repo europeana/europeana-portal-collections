@@ -13,7 +13,8 @@ module Home
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
             blogurl: Cache::FeedJob::URLS[:blog][:all]
-          }
+          },
+          banner: banner_content(@landing_page.banner_id)
         }.reverse_merge(helpers.content)
       end
     end

@@ -2,6 +2,8 @@ require 'rails_admin/config/actions/publish'
 require 'rails_admin/config/actions/unpublish'
 
 RailsAdmin.config do |config|
+  config.main_app_name = ['Europeana Collections']
+
   # Devise
   config.authenticate_with do
     warden.authenticate! scope: :user
@@ -40,23 +42,25 @@ RailsAdmin.config do |config|
     visible true
     configure :translations, :globalize_tabs
     list do
-      field :key
       field :title
       field :state
+      field :default
     end
     show do
-      field :key
       field :title
       field :state
       field :body
+      field :default
       group :link do
         field :link_url
         field :link_text
       end
     end
     edit do
-      field :key
       field :translations
+      field :default do
+        help 'Only one, published, banner can be the default.'
+      end
       field :link
     end
   end
@@ -70,13 +74,31 @@ RailsAdmin.config do |config|
   end
 
   config.model 'BrowseEntry' do
-    visible false
     configure :translations, :globalize_tabs
+    list do
+      field :title
+      field :file, :paperclip
+      field :subject_type
+    end
+    show do
+      field :title
+      field :query
+      field :file, :paperclip do
+        thumb_method :medium
+      end
+      field :subject_type
+      field :settings_category, :enum do
+        label 'Category'
+      end
+    end
     edit do
       field :translations
       field :query
       field :file, :paperclip
-      field :settings_category, :enum
+      field :subject_type
+      field :settings_category, :enum do
+        label 'Category'
+      end
     end
   end
 
@@ -232,16 +254,22 @@ RailsAdmin.config do |config|
       field :body
       field :state
       field :browse_entries
+      field :banner
     end
     edit do
       field :slug
       field :translations
       field :hero_image
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
+      field :banner
     end
   end
 
   config.model 'Page::Error' do
+    label 'Error Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
@@ -259,16 +287,23 @@ RailsAdmin.config do |config|
       field :body
       field :state
       field :browse_entries
+      field :banner
     end
     edit do
+      field :slug
       field :http_code
       field :translations
       field :hero_image
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
+      field :banner
     end
   end
 
   config.model 'Page::Landing' do
+    label 'Landing Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
@@ -286,6 +321,7 @@ RailsAdmin.config do |config|
       field :social_media
       field :promotions
       field :browse_entries
+      field :banner
     end
     edit do
       field :slug
@@ -294,7 +330,11 @@ RailsAdmin.config do |config|
       field :credits
       field :social_media
       field :promotions
-      field :browse_entries
+      field :browse_entries do
+        orderable true
+        nested_form false
+      end
+      field :banner
     end
   end
 

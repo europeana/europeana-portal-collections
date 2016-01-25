@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 2321e1f02b0c677a9e2ba1c3174482af63e2d62e
-  ref: 2321e1f
+  revision: a149f17f521d124643b6170dac00ef860fcf87fa
+  ref: a149f17
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -65,6 +65,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_list (0.7.2)
+      activerecord (>= 3.0)
     addressable (2.4.0)
     arel (6.0.3)
     ast (2.2.0)
@@ -550,6 +552,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.2)
+  acts_as_list (~> 0.7)
   blacklight (~> 6.0.0)
   cancancan (~> 1.12)
   capybara (~> 2.5)

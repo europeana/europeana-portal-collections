@@ -25,5 +25,18 @@ module Facet
         end
       end
     end
+
+    ##
+    # Removes all child facets from params
+    def remove_facet_params(field, item, source_params = params)
+      super.tap do |p|
+        if p.key?(:f)
+          item_children(item).each do |child|
+            p[:f].delete(child.name)
+          end
+          p.delete(:f) if p[:f].empty?
+        end
+      end
+    end
   end
 end

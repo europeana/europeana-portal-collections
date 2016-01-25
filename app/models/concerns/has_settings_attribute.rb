@@ -1,3 +1,5 @@
+# @todo Migrate to {ActiveRecord::Store}
+#   http://api.rubyonrails.org/classes/ActiveRecord/Store.html
 module HasSettingsAttribute
   extend ActiveSupport::Concern
 

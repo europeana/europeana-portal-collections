@@ -34,6 +34,9 @@
 # Ignore SMTP config file
 /config/smtp.yml
 
+# Local cache version override
+/config/initializers/cache_version.rb
+
 # Ignore rvm files.
 /.ruby-version
 .ruby-gemset

@@ -9,6 +9,7 @@
   global:
     labs-link: lenker til labs
     navigation:
+      agents: 
       all_blog_posts: Alle bloggposter ...
       all_exhibitions: Alle utstillinger ...
       blog: Blogg
@@ -18,6 +19,7 @@
       browse_sources: Kilder
       channels: Samlinger
       collections: Samlinger
+      concepts: 
       exhibitions: Utstillinger
       home: Hjem
     pro-link: Lenke til pro
@@ -31,9 +33,13 @@
         title: Dette er en beta-versjon av våre nye "Samlinger" og "Musikksamlinger"
     blog-link: lenke til blogg
     browse:
+      agents:
+        title: 
       colours:
         description: I denne seksjonen kan du søke etter bilder ut fra farge. Bare klikk på det du vil se på i samlingen!
         title: Farger
+      concepts:
+        title: 
       newcontent:
         description: I denne seksjonen kan du finne alt innhold som nylig har blitt lagt til på Europeana-samlingene. Her kan du se hvilke nye institusjoner som har publisert nytt innhold, hvor mye innhold og når! Bare klikk på lenkene under for å se samlingene deres.
         tableh1: Alle institusjoner

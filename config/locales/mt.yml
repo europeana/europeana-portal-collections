@@ -1,0 +1,317 @@
+mt:
+  en:
+    site:
+      browse:
+        newcontent:
+          description: F'din is-sezzjoni tisa' ssib il-kontenut kollhu li ġie miżjud fuq l-Kollezzjonijiet ta' Europeana. Hawnhekk tista' tara liema istituzzjoni ġdida ppubblikat xi materjal, kemm ppubblikat u meta! Ikklikja fuq il-links hawn taħt biex tara l-kollezzjonijiet tagħhom.
+        sources:
+          description: Hawn taħt tista' tara lista ta' sorsi għall-kollezzjonijiet tagħna. Dawn is sorsi ikomplu u jżidu kollezzjonijiet fuq Europeana, ikklikja fuq il-link li tinteressak hawn taħt biex tara l-kollezzjonijiet kollha!
+  global:
+    labs-link: Link lejn il-labs
+    navigation:
+      agents: 
+      all_blog_posts: Il-blog posts kollha...
+      all_exhibitions: Il-wirjiet kollha...
+      blog: Blog
+      browse: Ibbrawżja
+      browse_colours: Kuluri
+      browse_newcontent: Kontenut ġdid
+      browse_sources: Sorsi
+      channels: Kollezzjonijiet
+      collections: Kollezzjonijiet
+      concepts: 
+      exhibitions: Wirjiet
+      home: Paġna Primarja
+    pro-link: Link għal pro
+    pro-text: Kitba għal pro
+    settings: Settings
+  site:
+    alpha:
+      feedback_banner:
+        description: 'An Beta release jiġifieri li dan il-website qiegħed jiġi żviluppat kontinwament u jkun aġġornat regulari. Xi kultant jista'' jinsab offline. Il-kummenti tiegħek jista'' jgħinna biex namalgamaw is-sit elektroniku. '
+        link-text: Tina l-input tiegħek!
+        title: Dan huwa Beta release tal-kollezzjoni ġdida tagħna "Kollezzjonijiet" u "Kollezzjonijiet tal-Mużika"
+    blog-link: Link għall-blog
+    browse:
+      agents:
+        title: 
+      colours:
+        description: F'din is-sezzjoni tista' tfittex ritratti bbażati fuq il-kulur tagħhom. Kemm tikklikkja fuq ir-ritratt li jogħġbok biex tara l-kollezzjoni!
+        title: Kuluri
+      concepts:
+        title: 
+      newcontent:
+        description: F'din is-sezzjoni tista' ssib il-kontenut kollhu li ġie miżjud reċentament fuq il-Kollezzjonijiet ta' Europeana. Hawnhekk tista' tara liema istituzzjoni ppubblikat materjal ġdid, kemm hemm materjal u meta. Ikklikkja fuq il-links hawn taħt biex tara l-kollezzjonijiet kollha!
+        tableh1: L-istituzzjonijiet kollha
+        tableh2: Oġġetti
+        tableh3: Data
+        title: Kontenut ġdid
+      sources:
+        description: Hawn taħt tista' tara lista ta' sorsi għall-kollezzjonijiet tagħna. Dawn is sorsi ikomplu u jżidu kollezzjonijiet fuq Europeana, ikklikja fuq il-link li tinteressak hawn taħt biex tara l-kollezzjonijiet kollha!
+        title: Sorsi
+    collections:
+      art-history:
+        description: Mir-Rinaxximent għas-Surrealisti, u mill-iskultura Rumana antika għall-arti kontemporanja, il-Kollezzjoni tal-Arti tal-istorja ta' Europeana  tintroduċik ma' l-artisti u x-xogħlijiet tagħhom minn madwar l-Ewropa kollha.
+        title: Arti tal-istorja ta' Europeana
+      data-types:
+        3d: Oġġetti 3D
+        count: Oġġetti
+        images: Ritratti
+        moving-images: Videos
+        sound: "Ħsejjes"
+        texts: Kitba
+      labels:
+        credits: Superviżjonata minn
+        recent: "Żidiet riċenti"
+        spotlight-on: Il-Lenti mixgħul
+      music:
+        description: Il-<strong>Kollezzjoni tal-Mużika tal-Europeana</strong> tiġbor l-isbaħ rikordji ta' mużika, mużika miktuba, u aktar affarijiet relatati lejn il-kollezzjonijiet minn arkivji Ewropej tal-awdjo viswali, libreriji, arkivji u mużewijiet. <a href="/portal/channels/music/about">Skopri aktar informazzjoni dwar il-Kollezzjoni tal-Mużika.
+        title: Mużika tal-Europeana
+    facet:
+      language:
+        show:
+          results: Riżultati
+    footer:
+      menu:
+        about: Dwar
+        become-a-provider: Sir sieħeb tagħna
+        contact: Kuntatt
+        copyright: Copyright
+        data-providers: Istituzzjonijiet kollha
+        help: Għinuna
+        new-collections: Kollezzjonijiet ġodda
+        rights: Termini ta' użu
+        search-tips: Tips għat-tiftix
+        using-myeuropeana: L-użu ta' Europeana Tiegħi
+    home:
+      strapline: Esplora %{total_item_count} xogħolijiet tal-arti, artefatti, kotba, videos u ħsejjes minn madwar l-Ewropa.
+    more: Aktar...
+    my-europeana: L-Europeana tiegħi
+    my-europeana-link: Link lejn l-Europeana tiegħi
+    navigation:
+      breadcrumb:
+        item_detail: Oġġett
+        results_list: Riżultati
+        return_home: Mur lura fuq il-paġna primarja
+    news: Aħbarijiet
+    object:
+      actions:
+        attribute-author: Semmi l-awtur
+        attribute-html: HTML
+        attribute-plaintext: Kitba sempliċi
+        download: Niżżel
+        download-additional: Disponibbli wkoll bħala
+        downloaddata: Niżżel informazzjoni
+        open-media: Iftaħ din l-iskjetta
+        show-less-data: Uri inqas informazzjoni
+        show-more-data: Uri aktar informazzjoni
+        technicalmetadata: Metadata tekniku
+      enrichment:
+        who:
+          title: Titlu
+      hierarchy:
+        title: Oġġetti relatati
+        view-items-above: Ara l-oġġetti hawn fuq
+        view-items-below: Ara l-oġġetti hawn isfel
+      meta-label:
+        codec: Codec
+        collection-name: Dataset
+        concept: Kunċett
+        concepts: Klassifikazzjonijiet
+        consists-of: Jikkonsisti minn
+        contributor: Kontributur
+        copyright: Copyright
+        creation-date: Data tal-kreazzjoni
+        creator: Kreatur
+        current-location: Lokazzjoni attwali
+        data-provider: Istituzzjoni
+        date: Data
+        dates: Dati
+        description: Deskrizzjoni
+        dimensions: Dimensjonijiet
+        duration: Dewmien
+        edm:
+          has-met: Huwa relatat ma'
+          incorporates: Tinkorpora
+          is-derivative-of: Huwa derivattiv ta'
+          is-representation-of: Huwa rappreżentattiv ta'
+          is-similar-to: Huwa simili ta'
+          is-successor-of: Huwa suċċessur ta'
+          realises: jirrealizza
+          was-present-at: Preżenti f'
+        extent: Daqs
+        file-size: Daqs tal-fajl
+        format: Format
+        fps: Frejm kull sekonda
+        has-type: Huwa tat-tip
+        identifier: identifikatur
+        is-format-of: Huwa tal-format
+        is-part-of: Huwa parti ta'
+        is-referenced-by: Huwa referenzat minn
+        is-replaced-by: Huwa sostitwit minn
+        is-required-by: Huwa meħtieġ minn
+        issued: 'Maħruġ '
+        language: Lingwa
+        latitude: Latitudni
+        location: Lokazzjoni
+        longitude: Lonġitudni
+        map: Mappa
+        map-tiles: Madum
+        medium: Mezz
+        people: Nies
+        period: "Żmien"
+        place: Post
+        place-time: Post/Ħin
+        properties: Proprjetajiet
+        provenance: Provenjenza
+        provided-by: Skopri aktar
+        provided-by-detail: Europeana qiegħda turi dan l-oġġett permezz l-%{institution_name_and_link}. Żur is-sit elektroniku tagħhom għal aktar informazzjoni.
+        provided-by-detail-no-link: Europeana qiegħda turi dan l-oġġett permezz
+        provider: Fornitur
+        providing-country: Pajjiż fornitur
+        publication-date: Data ta' pubblikazzjoni
+        publisher: Pubblikatur
+        references: Referenzi
+        refs-rels: Referenzi u relazzjonijiet
+        relations: Relazzjonijiet
+        rights: Drittijiet
+        rights-human: Nista' nuża dan?
+        runtime: Dewmien
+        runtime-unit-seconds: sekondi
+        source: Sors
+        subject: Suġġett
+        temporal: Temporali
+        time: "Ħin"
+        timestamp-created: L-ewwel ppubblikat f'Europeana
+        timestamp-updated: Aġġornat l-aħħar minn Europeana
+        timestamp_created: L-ewwel ppubblikat f'Europeana (%{timestamp_created})
+        timestamp_updated: Aġġornat l-aħħar f'Europeana (%{timestamp_updated})
+        title: Titlu
+        toc: Werrej
+        type: Tip
+        ugc: L-utent ikkontribwixxa kontenut
+        version: Versjoni
+      named-entities:
+        title: Entitajiet
+        what:
+          broader: Kunċett Usa
+          label: 'Kunċett '
+          term: Titlu tal-Kunċett
+          title: Suġġetti, tipi ta' risorsi, ġeneri u formi (Kunċetti)
+        when:
+          begin: Bidu tal-Perjodu
+          end: Tmiem tal-Perjodu
+          label: Isem tal-Perjodu
+          term: Term tal-Perjodu
+          title: Tul taż-żmien u dati
+        where:
+          label: Post
+          latitude: Latitudni
+          longitude: Lonġitudni
+          term: Isem tal-Post
+          title: Isem tal-Postijiet (Postijiet)
+        who:
+          label: Aġent
+          term: Terminu tal-Aġent
+          title: Nies u organizzazzjonijiet (Aġenti)
+      nav:
+        next: Li jmiss
+        prev: Ta' qabel
+      points:
+        east: Lvant
+        north: Tramuntana
+        south: Nofsinhar
+        west: Punent
+      show-more-similar-items: Uri aktar
+      similar-items: Oġġetti simili
+    pages:
+      '404':
+        intro: Jiddispjaċina, ma nistgħux insibu din il-paġna
+        text: Sfortunatament ma nistgħux insibu il-paġna li qiegħed tfittex. Ipprova fittex f'Europeana jew agħżel mill-oġġetti hawn taħt.
+      about:
+        text: |-
+          <p>Qiegħed tfittex pittura antika? Qiegħed tagħmel xi riċerka jew tikteb xi komponiment ta' l-iskola? Qiegħed tfittex xi ispirazzjoni għad-diżinn tal-proġett ġejjieni tiegħek? Tixtieq titgħallem xi ħaġa ġdida? Hi x'inhi li tresqek lejn Europeana, merħba!</p>
+
+          <p>Idħol fl-akbar kollezzjoni tal-arti, kultura u xjenza online ta' l-Ewropa. Europeana Collections toffrilek materjal mill-famuż u dak li mhux daqshekk famuż (imma dejjem affaxxinanti), libreriji, mużewijiet, arkivji ta' l-Ewropa. </p>
+
+          <p>Kotba u manuskritti, ritratti u pitturi, skulturi u mużika, videos u rikordji, djarji u mappep - dawn huma kollha hawnhekk. M'għandekx għalfejn tivvjaġġa, fiżikament jew virtwalment!</p>
+
+          <p>Esplora, skopri, ara, isma, aqra, niżżel...Ħu gost!</p>
+
+          <p>Issa għalfejn ma tidħolx fil-Kollezzjoni tal-Arti Storika tal-Europeana, jew il-Kollezzjoni tal-Mużika tal-Europeana? Għandna ukoll risorsi apposta għal riċerkaturi u iżviluppaturi kulturali/innovaturi (hawnhekk tista' issib l-API tagħna), kif ukoll ħafna wirjiet virtwali u l-blog.</p>
+
+          <p>U jekk għadek bil-ġuħ għal aktar, tista' tieħu d-doża ta' kuljum tal-kultura fuq Facebook, Twitter, Medium, Google+ u Pinterest.</p>
+
+          <p>Għal aktar informazzjoni fuq kif naħdmu ma' istituzzjonijiet kulturali u l-kollezzjonijiet tagħhom, żur Europeana Pro.</p>
+        title: Merħba, maħbub tal-kultura!
+      music-channel-about:
+        text: |-
+          <p>Immaġina kieku qiegħed tħares lejn manuskritti miktubin bl-idejn ta' biċċa mużika waqt li qiegħed tisma' interpretazzjonijiet differenti tiegħu, u taqra il-biografu tal-kompositur. Fuq il-Kollezzjonijiet tal-Mużika ta' Europeana, tista'. </p>
+
+          <p><a href="http://www.europeanasounds.eu">Il-Kollegi tagħna</a>, l-esperti kollha fil-mużika, minn madwar l-Ewropa bnew kollezzjoni ta' rikordji tal-mużika, mużika miktuba, immaġni ta' strumenti mużikali, kotba dwar il-mużika u kontenut ieħor relatat mal-mużika. </p>
+
+          <p>Għamilna din il-verżjoni primarja tal-Kollezzjoni tal-Mużika lesta għalikhom, l-utenti tagħna, biex tistgħu tgħinuna nifformawha waqt li niżviluppawha u nipperfettawha aktar. Mela, meta żżuru s-sit jista' jkun li tkunu mitluba biex twieġbu mistoqsijiet jew stħarriġ li jintwera' fuq l-iskrijn. Napprezzaw ħafna li kieku tieħdu ftit ħin biex tirrispondu dawn il-mistoqsijiet! </p>
+
+          <p>Ukoll, fl-interess tat-trasparenza u privatezza, kunu għafu li aħna nieħdu rendikont tal-istatistika u l-imġieba tal-utenti tagħna perezz ta' Google Analytics u Hotjar. Nagħmlu dan għax jurina fejn morna għall-agħar fid-diżinji tagħna u għax jgħinna niżviluppaw aħjar il-Kollezzjoni tal-Mużika. Kull rendikont huwa miżjum privat u anonimu, użat biss biex mmexxu s-servizz tagħna fl-aħjar.</p>
+
+          <p>Ninkoraġġixxukom biex tfittxu l-kollezzjoni, tisimgħu il-mużika, taraw il-mużika miktuba jew taqraw dwarha. Meta l-copyright jippermettilkom, tistgħu tniżżlu l-affarijiet li jogħġbukom l-aktar. U żuru l-wirja virtwali biex tiddiskopru mużika ġdida bħalma' qatt qabel!</p>
+        title: Dwar il-Kollezzjonijiet tal-Mużika
+    results:
+      actions:
+        configure-actions: Kkonfigra l-azzjonijiet
+        dutchmasters: Kaptani Olandiżi
+        favouriteart: Arti favorita
+        label: Azzjoni
+        newcollection: Kollezzjoni ġdida
+        product-save: Salva
+        saveto: Salva f'
+        show-all-collections: Uri l-kollezzjonijiet kollha
+      list:
+        all-results:
+          3D: 3D
+          images: Immaġini
+          text: Kitba
+          video: Video
+        count-and-terms: "%{results_count} riżultati"
+        empty: M'hawnx riżultati
+        empty-with-terms: It-tfixxija tiegħek għal %{query_terms} ma' ġabarx riżultati
+        header: Riżultati għal
+        header-and: U
+        in-channel: fil-ġbir tematika
+        less: Inqas
+        less_adv: Inqas Rfinar
+        more: Aktar
+        more_adv: Filtri Avvanzati
+        product-3D: 3D
+        product-image: Immaġni
+        product-sound: "Ħsejjes"
+        product-text: Kitba
+        product-video: Video
+        results-relevance: Relevanza
+        single-result: Riżultat wieħed għal %{query_terms}
+        view:
+          grid: Grid
+          list: Lista
+        view-at-provider: Ara f'
+    search:
+      placeholder:
+        text: "Żid terminu ġdid għat-tfittxija"
+      similar:
+        prefix: 'Simili għal: %{mlt_item}'
+    settings:
+      actions:
+        clear-selection: 'Neħħi s-selezzjoni '
+        save-settings: Salva is-settings
+      language:
+        auto-translate-limit: Massimu ta' %{max_languages} jistgħu jiġu magħżula
+        auto-translate-page: Ttraduċi awtomatikament l-paġni f'...
+        auto-translate-page-short: Ttraduċi awtomatikament l-oġġetti f'
+        auto-translate-query: Ttraduċi awtomatikament l-
+        available: Lingwi disponibbli
+        default: Lingwa Mogħtija
+        flash:
+          alert: 'Il-lingwa speċifikat mhuwiex validu. Lingwi disponibbli: %{locales}'
+          notice: Is-settings tal-lingwi huma saved
+        label: Lingwa
+        settings-label: settings tal-lingwa
+      title: Settings
