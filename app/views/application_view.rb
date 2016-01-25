@@ -35,7 +35,8 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def cache_key
-    'views/' + cache_version + '/' + I18n.locale.to_s + '/' + body_cache_key
+    keys = ['views', cache_version, I18n.locale.to_s, controller.current_user.role || 'guest', body_cache_key]
+    keys.compact.join('/')
   end
 
   # Implement this method in sub-classes to enable body caching
