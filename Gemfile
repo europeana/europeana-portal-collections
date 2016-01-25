@@ -36,6 +36,7 @@ gem 'rails_admin_globalize_field', '~> 0.4'
 gem 'redis-rails', '~> 4.0'
 gem 'redis-rails-instrumentation'
 gem 'sass-rails'
+gem 'soundcloud', '~> 0.3'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
