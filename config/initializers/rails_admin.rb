@@ -88,6 +88,7 @@ RailsAdmin.config do |config|
       end
       field :subject_type
       field :settings_category, :enum
+      field :collections
     end
     edit do
       field :translations
@@ -95,6 +96,9 @@ RailsAdmin.config do |config|
       field :file, :paperclip
       field :subject_type
       field :settings_category, :enum
+      field :collections do
+        inline_add false
+      end
     end
   end
 
@@ -107,6 +111,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Collection' do
+    object_label_method :key
     list do
       sort_by :key
       field :key
