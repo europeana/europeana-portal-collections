@@ -87,18 +87,14 @@ RailsAdmin.config do |config|
         thumb_method :medium
       end
       field :subject_type
-      field :settings_category, :enum do
-        label 'Category'
-      end
+      field :settings_category, :enum
     end
     edit do
       field :translations
       field :query
       field :file, :paperclip
       field :subject_type
-      field :settings_category, :enum do
-        label 'Category'
-      end
+      field :settings_category, :enum
     end
   end
 
@@ -202,7 +198,9 @@ RailsAdmin.config do |config|
     edit do
       field :url, :string
       field :translations
-      field :position
+      field :position do
+        help 'Items with lower positions appear first.'
+      end
       field :settings_category, :enum
       field :settings_wide, :boolean
       field :settings_class, :string
@@ -269,7 +267,6 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Page::Error' do
-    label 'Error Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
@@ -303,7 +300,6 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Page::Landing' do
-    label 'Landing Page'
     object_label_method :title
     configure :translations, :globalize_tabs
     list do
@@ -333,6 +329,10 @@ RailsAdmin.config do |config|
       field :browse_entries do
         orderable true
         nested_form false
+        inline_add false
+        associated_collection_scope do
+          Proc.new { |_scope| BrowseEntry.published }
+        end
       end
       field :banner
     end
