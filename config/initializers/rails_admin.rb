@@ -331,7 +331,7 @@ RailsAdmin.config do |config|
         nested_form false
         inline_add false
         associated_collection_scope do
-          Proc.new { |scope| BrowseEntry.published }
+          Proc.new { |_scope| BrowseEntry.published }
         end
       end
       field :banner
