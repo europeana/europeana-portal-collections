@@ -329,6 +329,10 @@ RailsAdmin.config do |config|
       field :browse_entries do
         orderable true
         nested_form false
+        inline_add false
+        associated_collection_scope do
+          Proc.new { |scope| BrowseEntry.published }
+        end
       end
       field :banner
     end
