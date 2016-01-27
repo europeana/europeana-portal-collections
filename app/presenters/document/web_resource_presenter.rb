@@ -220,6 +220,8 @@ module Document
           :iiif
         when 'pdf'
           :pdf
+        when 'midi'
+          :midi
         when 'text'
           mime_type == 'application/pdf' ? :pdf : :text
         when 'video'
