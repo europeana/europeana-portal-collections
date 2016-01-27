@@ -1,6 +1,8 @@
 class Collection < ActiveRecord::Base
   include HasPublicationStates
 
+  has_and_belongs_to_many :browse_entries
+
   has_paper_trail
 
   validates :key, presence: true, uniqueness: true

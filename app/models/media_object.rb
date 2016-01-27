@@ -5,9 +5,9 @@ class MediaObject < ActiveRecord::Base
   attr_accessor :delete_file
   before_validation { file.clear if delete_file == '1' }
 
-  has_one :browse_entry, dependent: :nullify, inverse_of: :media_object
-  has_one :hero_image, dependent: :nullify, inverse_of: :media_object
-  has_one :promotion, dependent: :nullify, class_name: 'Link::Promotion', inverse_of: :media_object
+  has_one :browse_entry, dependent: :nullify
+  has_one :hero_image, dependent: :nullify
+  has_one :promotion, dependent: :nullify, class_name: 'Link::Promotion'
 
   do_not_validate_attachment_file_type :file
 

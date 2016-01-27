@@ -24,8 +24,9 @@ module Europeana
 
       # Load extra classes
       config.autoload_paths += %W(
-        #{config.root}/app/jobs #{config.root}/app/jobs/concerns
-        #{config.root}/app/routes #{config.root}/app/presenters
+        #{config.root}/app/jobs
+        #{config.root}/app/jobs/concerns
+        #{config.root}/app/presenters
         #{config.root}/app/validators
       )
 

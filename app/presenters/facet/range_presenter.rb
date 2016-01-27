@@ -24,7 +24,7 @@ module Facet
           }
         },
         data: @facet.items.sort_by(&:value).map do |item|
-          p = reset_search_params(params).deep_dup
+          p = Blacklight::SearchState.new(params, blacklight_config).send(:reset_search_params)
           p[:f] ||= {}
           p[:f][@facet.name] = [item.value]
           {

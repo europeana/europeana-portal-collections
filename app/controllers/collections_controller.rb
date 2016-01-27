@@ -17,7 +17,7 @@ class CollectionsController < ApplicationController
     @collection_stats = collection_stats
     @recent_additions = recent_additions
 
-    (@response, @document_list) = search_results(params, search_params_logic) if has_search_parameters?
+    (@response, @document_list) = search_results(params) if has_search_parameters?
 
     respond_to do |format|
       format.html do

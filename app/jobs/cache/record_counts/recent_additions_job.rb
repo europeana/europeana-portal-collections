@@ -29,8 +29,7 @@ module Cache
         (0..23).each do |months_ago|
           time = recent_additions_months_ago_time(months_ago)
 
-          builder = search_builder(search_params_logic)
-          api_query = builder.rows(0).where(time[:range_query]).with_overlay_params(params).merge(profile: 'minimal facets')
+          api_query = search_builder.rows(0).where(time[:range_query]).with_overlay_params(params).merge(profile: 'minimal facets')
           api_response = repository.search(api_query)
 
           next if api_response.total == 0

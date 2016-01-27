@@ -41,7 +41,7 @@ module ControllerExceptionHandling
     log_error(exception)
     report_error(exception) if status == 500
 
-    if ENV['DISABLE_CMS_ERROR_PAGES']
+    if ENV['DISABLE_CMS_ERROR_PAGES'] || self.class.to_s.deconstantize == 'RailsAdmin'
       raise
     elsif format == 'json'
       render_json_error_response(exception, status)

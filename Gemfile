@@ -1,31 +1,31 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'eb00e61'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '2cf73ab'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
 
 gem 'aasm', '~> 4.2'
+gem 'blacklight', '~> 6.0.0'
 gem 'acts_as_list', '~> 0.7'
-gem 'blacklight', '~> 5.17'
 gem 'cancancan', '~> 1.12'
 gem 'clockwork', '~> 1.2'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
-gem 'devise', '~> 3.5'
-gem 'europeana-blacklight', '~> 0.3.3'
+gem 'devise', '~> 3.5.4'
+gem 'europeana-blacklight', '~> 0.4'
 gem 'europeana-api', '~> 0.4.2'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
 gem 'htmlcompressor', '0.3'
-gem 'nokogiri', '~> 1.6.7.1'
+gem 'nokogiri', '~> 1.6.7.2'
 gem 'pg'
 gem 'paperclip', '~> 4.3'
 gem 'paper_trail', '~> 4.0'
