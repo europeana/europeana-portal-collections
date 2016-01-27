@@ -7,7 +7,7 @@ class HeroImage < ActiveRecord::Base
 
   has_one :page, inverse_of: :hero_image
 
-  belongs_to :media_object, dependent: :destroy, inverse_of: :hero_image
+  belongs_to :media_object, dependent: :destroy
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
   delegate :settings_brand_opacity_enum, :settings_brand_position_enum,
