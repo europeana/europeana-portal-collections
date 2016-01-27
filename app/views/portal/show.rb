@@ -324,7 +324,7 @@ module Portal
             social_share: {
               url: URI.escape(document_url(document, format: 'html')),
               facebook: true,
-              pinterest: false,
+              pinterest: true,
               twitter: true,
               googleplus: true
             },
