@@ -5,7 +5,7 @@ class BrowseEntry < ActiveRecord::Base
   has_and_belongs_to_many :collections
   has_many :page_elements, dependent: :destroy, as: :positionable
   has_many :pages, through: :page_elements
-  belongs_to :media_object, dependent: :destroy, inverse_of: :browse_entry
+  belongs_to :media_object, dependent: :destroy
 
   has_settings(:category)
 
