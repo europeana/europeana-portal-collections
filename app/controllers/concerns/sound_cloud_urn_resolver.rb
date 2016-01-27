@@ -6,12 +6,11 @@ module SoundCloudUrnResolver
   def soundcloud_urns_to_urls(doc)
     return {} unless soundcloud_configured?
 
-    doc['aggregations'].each_with_object({}) do |agg, map|
-      next unless agg['edmIsShownBy'].present?
-      urn_match = agg['edmIsShownBy'].match(/\Aurn:soundcloud:(.*)\z/)
+    doc.fetch('aggregations.edmIsShownBy', []).each_with_object({}) do |edm_is_shown_by, map|
+      urn_match = edm_is_shown_by.match(/\Aurn:soundcloud:(.*)\z/)
       unless urn_match.nil?
         begin
-          map[agg['edmIsShownBy']] = soundcloud_url(urn_match[1])
+          map[edm_is_shown_by] = soundcloud_url(urn_match[1])
         rescue SoundCloud::ResponseError
           # do nothing, i.e. no mapping
         end

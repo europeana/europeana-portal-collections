@@ -20,6 +20,7 @@ module Document
         playable: playable?,
         thumbnail: thumbnail,
         play_url: play_url,
+        play_html: play_html,
         technical_metadata: technical_metadata,
         download: {
           url: downloadable? ? download_url : false,
@@ -38,6 +39,13 @@ module Document
     def play_url
       @play_url ||= begin
         @record_presenter.iiif_manifesto || download_url
+      end
+    end
+
+    def play_html
+      @play_html ||= begin
+        return nil unless media_type == 'oembed'
+        @controller.oembed_html[url]
       end
     end
 
@@ -72,7 +80,7 @@ module Document
       case
       when @record_presenter.iiif_manifesto
         'iiif'
-      when url.match(%r{\Ahttp://soundcloud.com/})
+      when !OEmbed::Providers.find(url).nil?
         'oembed'
       end
     end
@@ -161,7 +169,7 @@ module Document
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
         (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
         (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-        (media_type == 'iiif')
+        (playable_without_mime_type?)
     end
 
     def playable?
