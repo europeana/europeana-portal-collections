@@ -740,7 +740,7 @@ module Portal
     def item_players
       @item_players ||= begin
         web_resources = presenter.media_web_resources
-        players = [:audio, :iiif, :image, :pdf, :video].select do |player|
+        players = [:audio, :iiif, :image, :pdf, :video, :midi].select do |player|
           web_resources.any? { |wr| wr.player == player }
         end
         players.map do |player|
