@@ -148,6 +148,9 @@ en:
       FFFFFF: White
   global:
     about-us: About us
+    actions:
+      filter-by: Filter by
+      filter-all: All
     channel:
       archaeology: archaeology
       architecture: architecture
