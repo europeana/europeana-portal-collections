@@ -3,6 +3,8 @@ require 'soundcloud'
 module SoundCloudUrnResolver
   extend ActiveSupport::Concern
 
+  include ActiveSupport::Benchmarkable
+
   def soundcloud_urns_to_urls(doc)
     return {} unless soundcloud_configured?
 
@@ -21,7 +23,9 @@ module SoundCloudUrnResolver
   ##
   # Queries SoundCloud API for track URL from its ID
   def soundcloud_url(id)
-    soundcloud_client.get("/tracks/#{id.strip}").permalink_url
+    benchmark("[SoundCloud API] #{id}", level: :info) do
+      soundcloud_client.get("/tracks/#{id.strip}").permalink_url
+    end
   end
 
   private

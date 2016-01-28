@@ -49,11 +49,11 @@ module Document
           unless edm_is_shown_by_web_resource.nil?
             web_resources.unshift(web_resources.delete(edm_is_shown_by_web_resource))
           end
-          web_resources.uniq! { |web_resource| web_resource.fetch('about', nil) }
         end
         presenters = salient_web_resources.map do |web_resource|
           Document::WebResourcePresenter.new(web_resource, @controller, @configuration, @document, self)
         end
+        presenters.uniq { |presenter| presenter.url }
       end
     end
 

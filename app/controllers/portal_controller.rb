@@ -17,7 +17,8 @@ class PortalController < ApplicationController
   def show
     @response, @document = fetch(doc_id)
     @url_conversions = soundcloud_urns_to_urls(@document)
-    @oembed_html = oembed_html_for_uris(@document, @url_conversions)
+    @oembed_html = oembed_html_for_urls(@document, @url_conversions)
+
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @hierarchy = Europeana::API::Record::new('/' + params[:id]).hierarchy.ancestor_self_siblings
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
