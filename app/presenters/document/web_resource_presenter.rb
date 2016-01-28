@@ -169,7 +169,7 @@ module Document
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
         (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
         (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-        (playable_without_mime_type?)
+        playable_without_mime_type?
     end
 
     def playable?
@@ -241,7 +241,7 @@ module Document
       @player ||= begin
         case media_type
         when 'text'
-          mime_type.match(/\/pdf$/) ? :pdf : :text
+          (mime_type =~ /\/pdf$/) ? :pdf : :text
         else
           media_type.to_sym
         end

@@ -53,7 +53,7 @@ module Document
         presenters = salient_web_resources.map do |web_resource|
           Document::WebResourcePresenter.new(web_resource, @controller, @configuration, @document, self)
         end
-        presenters.uniq { |presenter| presenter.url }
+        presenters.uniq(&:url)
       end
     end
 
