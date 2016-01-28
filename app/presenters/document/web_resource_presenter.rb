@@ -80,7 +80,7 @@ module Document
       case
       when @record_presenter.iiif_manifesto
         'iiif'
-      when !OEmbed::Providers.find(url).nil?
+      when @controller.oembed_html.key?(url)
         'oembed'
       end
     end

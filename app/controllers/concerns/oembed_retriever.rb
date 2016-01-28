@@ -14,7 +14,11 @@ module OembedRetriever
     urls.uniq.each_with_object({}) do |url, map|
       unless OEmbed::Providers.find(url).nil?
         benchmark("[OEmbed] #{url}", level: :info) do
-          map[url] = OEmbed::Providers.get(url).html
+          begin
+            map[url] = OEmbed::Providers.get(url).html
+          rescue OEmbed::Error
+            # no oEmbed HTML available (for a number of possible reasons)
+          end
         end
       end
     end
