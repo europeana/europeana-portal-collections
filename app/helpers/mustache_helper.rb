@@ -394,6 +394,23 @@ module MustacheHelper
     end
   end
 
+  def collection_filter_options
+    ops = Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|
+      val = collection_path(collection).split('/').pop
+      {
+        value: val,
+        label: collection.landing_page.title,
+        selected: params['theme'] == val
+      }
+    end
+    {
+      options: ops.unshift({
+        value: '*',
+        label: t('global.actions.filter-all')
+      })
+    }
+  end
+
   private
 
   def page_banner(id = nil)
