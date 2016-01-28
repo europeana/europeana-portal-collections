@@ -11,7 +11,6 @@ module Catalog
   include ::Blacklight::Base
   include Europeana::Blacklight::Catalog
   include BlacklightConfig
-  include ActiveSupport::Benchmarkable
   include CollectionsHelper
 
   included do

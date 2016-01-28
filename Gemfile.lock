@@ -293,9 +293,17 @@ GEM
     haml (4.0.7)
       tilt
     hashdiff (0.2.3)
+    hashie (2.1.2)
     htmlcompressor (0.3.0)
+    httmultiparty (0.3.16)
+      httparty (>= 0.7.3)
+      mimemagic
+      multipart-post
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
@@ -326,6 +334,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     mustache (1.0.2)
     nested_form (0.3.2)
@@ -471,6 +480,7 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.7)
       tins (<= 1.6.0)
+    ruby-oembed (0.9.0)
     ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
     safe_yaml (1.0.4)
@@ -497,6 +507,9 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+    soundcloud (0.3.2)
+      hashie (~> 2.0)
+      httmultiparty (~> 0.3.0)
     spring (1.6.1)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -588,11 +601,13 @@ DEPENDENCIES
   redis-rails-instrumentation
   rspec-rails (~> 3.0)
   rubocop (= 0.35.1)
+  ruby-oembed (~> 0.9)
   sass-rails
   sdoc (~> 0.4.0)
   selenium-webdriver (~> 2.47)
   shoulda-matchers (~> 3.0)
   simplecov
+  soundcloud (~> 0.3)
   spring (~> 1.6)
   stache!
   uglifier (~> 2.7.2)
