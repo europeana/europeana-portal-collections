@@ -148,6 +148,9 @@ nl:
       FFFFFF: 
   global:
     about-us: Over ons
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: Archeology
       architecture: 'Architectuur '

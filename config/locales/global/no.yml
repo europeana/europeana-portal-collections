@@ -148,6 +148,9 @@
       FFFFFF: 
   global:
     about-us: Om oss
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arkeologi
       architecture: arkitektur

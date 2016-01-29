@@ -148,6 +148,9 @@ ru:
       FFFFFF: 
   global:
     about-us: "О нас"
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: "Археология"
       architecture: "Архитектура"

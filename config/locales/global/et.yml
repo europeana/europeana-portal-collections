@@ -148,6 +148,9 @@ et:
       FFFFFF: Valge
   global:
     about-us: Meist
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arheoloogia
       architecture: arhitektuur

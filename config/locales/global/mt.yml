@@ -148,6 +148,9 @@ mt:
       FFFFFF: 
   global:
     about-us: Min aħna
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arkeoloġija
       architecture: arkitettura

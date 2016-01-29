@@ -148,6 +148,9 @@ uk:
       FFFFFF: 
   global:
     about-us: "Про нас"
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: "археологія"
       architecture: "архітектура"

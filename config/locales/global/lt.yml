@@ -148,6 +148,9 @@ lt:
       FFFFFF: 
   global:
     about-us: Apie mus
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: archeologija
       architecture: architektūra

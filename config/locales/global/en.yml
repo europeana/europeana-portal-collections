@@ -149,8 +149,8 @@ en:
   global:
     about-us: About us
     actions:
-      filter-by: Filter by
       filter-all: All
+      filter-by: Filter by
     channel:
       archaeology: archaeology
       architecture: architecture

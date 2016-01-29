@@ -148,6 +148,9 @@ ro:
       FFFFFF: 
   global:
     about-us: Despre noi
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arheologie
       architecture: arhitectură

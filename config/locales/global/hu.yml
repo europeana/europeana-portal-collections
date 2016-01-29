@@ -148,6 +148,9 @@ hu:
       FFFFFF: 
   global:
     about-us: Rólunk
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: régészet
       architecture: "építészet"

@@ -148,6 +148,9 @@ fi:
       FFFFFF: 
   global:
     about-us: Tietoa meistä
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arkeologia
       architecture: arkkitehtuuri
