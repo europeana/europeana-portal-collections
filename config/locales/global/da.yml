@@ -1,9 +1,9 @@
 da:
-  Symphonies: 
+  Symphonies: Symfonier
   X11:
     colours:
-      '000000': 
-      000080: 
+      '000000': Sort
+      000080: 'Marine '
       00008B: 
       0000CD: 
       0000FF: 
@@ -149,8 +149,8 @@ da:
   global:
     about-us: Om os
     actions:
-      filter-all: 
-      filter-by: 
+      filter-all: Alt
+      filter-by: Filter med
     channel:
       archaeology: arkæologi
       architecture: arkitektur
@@ -168,7 +168,7 @@ da:
     channels-fashion: Mode
     channels-music: Musik
     choose-language: Sprog
-    email-address: email adresse
+    email-address: e-mail adresse
     facet:
       advanced:
         options: Muligheder
@@ -425,40 +425,40 @@ da:
     language-swedish: Svensk
     language-ukranian: Ukrainsk
     login: Login
-    mission: Vi ændre verden med kultur. Vi ønsker at bygge videre på den rige arv fra Europa og gøre det nemmere for folk at bruge, uanset om det er til brug for arbejde, uddannelse eller underholdning.
+    mission: Vi ændre verden med kultur. Vi ønsker at bygge videre på den rige arv fra Europa og gøre det nemmere for folk at bruge uanset om det er til arbejde, uddannelse eller underholdning.
     mission-title: Vores mission
     more:
-      load-more: Mere
-      show-more: Vis mere
-      view-more: Se mere
+      load-more: Flere
+      show-more: Vis flere
+      view-more: Se flere
     more-info: Mere oplysninger
     newsletter:
-      email-address-invalid: Email skal være en tilgængelig email adresse
+      email-address-invalid: E-mail skal være en tilgængelig e-mail adresse
       email-address-required: 'Angiv email adressen '
       language-required: 'Angiv sprog '
-      signup: Tilmeld vores nyhedsbrev
+      signup: Tilmeld dig til vores nyhedsbrev
     our-sites: Vores sider
     password: Adgangskode
     professional: Pro
     professional-text: Bliv involveret, del din data eller brug vores
     refine-your-search: Forfin din søgning
-    register: Registre
+    register: 'Registrér '
     research: Undersøg
     research-text: Bliv en del af det akademiske fælleskab
     search-area:
       search-button-image-alt: Søg
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
-    sitemap: 
-    terms-and-policies: 
-    type: 
+      search-placeholder-text: Tilføj et søgeord
+    search-collections: Samlinger
+    search-collections-text: Opdag Europa's kulturav
+    share: Del
+    sitemap: Sidemappe
+    terms-and-policies: Brugerbetingelser og politikker
+    type: type
   'no': Norge
   pl: Portugal
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Resultater
+        show-results-all: Vis alle resultater
