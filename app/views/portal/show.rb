@@ -309,9 +309,8 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.format',
-                  # fields: ['aggregations.webResources.dcFormat'],
                   fields: ['proxies.dcFormat'],
-                  search_field: 'what'
+                  search_field: 'proxy_dc_format'
                 },
                 {
                   title: 'site.object.meta-label.language',
@@ -587,7 +586,7 @@ module Portal
       return unless val.is_a?(String)
 
       search_val = val.gsub(/[()\[\]<>]/, '')
-      search_path(q: "#{field}:\"#{search_val}\"")
+      search_path(q: "#{field}:#{search_val}")
     end
 
     def data_section_field_subsection(section)
