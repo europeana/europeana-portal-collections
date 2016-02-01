@@ -4,6 +4,19 @@ module Home
       'Europeana Collections'
     end
 
+    def js_slsb_ld
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "http://www.europeana.eu/portal",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "http://www.europeana.eu/portal/search?q={q}",
+          "query-input": "required name=q"
+        }
+      }
+    end
+
     def content
       mustache[:content] ||= begin
         {
