@@ -54,7 +54,7 @@ module Collections
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
-            blogurl: 'http://blog.europeana.eu/tag/#' + @collection.key
+            blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id)
