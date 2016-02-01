@@ -27,4 +27,10 @@ module CollectionsHelper
     return nil unless current_search_session.query_params[:id]
     Collection.find_by_key!(current_search_session.query_params[:id])
   end
+
+  def displayable_collections
+    @displayable_collections ||= Collection.published.select do |c|
+      c.landing_page.present? && c.landing_page.published?
+    end
+  end
 end

@@ -197,7 +197,7 @@ module MustacheHelper
                 text: t('global.navigation.collections'),
                 is_current: controller.controller_name == 'collections',
                 submenu: {
-                  items: Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|
+                  items: displayable_collections.map do |collection|
                     {
                       url: collection_path(collection),
                       text: collection.landing_page.title,
@@ -395,12 +395,11 @@ module MustacheHelper
   end
 
   def collection_filter_options
-    ops = Collection.published.select { |c| c.landing_page.present? && c.landing_page.published? }.map do |collection|
-      val = collection_path(collection).split('/').pop
+    ops = displayable_collections.map do |collection|
       {
-        value: val,
+        value: collection.key,
         label: collection.landing_page.title,
-        selected: params['theme'] == val
+        selected: params['theme'] == collection.key
       }
     end
     {
