@@ -31,7 +31,7 @@ module ControllerExceptionHandling
     end
 
     rescue_from ActionController::UnknownFormat do |exception|
-      handle_error(exception, 500, 'html')
+      handle_error(exception, 404, 'html')
     end
   end
 
@@ -72,7 +72,7 @@ module ControllerExceptionHandling
     else
       page_template = "pages/custom/#{@page.slug}"
       template = template_exists?(page_template) ? page_template : 'pages/show'
-      render template, status: @page.http_code
+      render template, status: @page.http_code, formats: [:html]
     end
   end
 
