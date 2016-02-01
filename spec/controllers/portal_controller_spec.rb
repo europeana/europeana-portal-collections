@@ -170,8 +170,8 @@ RSpec.describe PortalController do
       let(:params) { { id: 'abc/123', format: 'html' } }
       it 'renders an error page' do
         get :similar, params
-        expect(response.status).to eq(500)
-        expect(response).to render_template('pages/show')
+        expect(response.status).to eq(404)
+        expect(response).to render_template('pages/custom/errors/not_found')
       end
     end
   end
@@ -205,8 +205,8 @@ RSpec.describe PortalController do
       let(:params) { { id: 'abc/123', format: 'html' } }
       it 'renders an error page' do
         get :media, params
-        expect(response.status).to eq(500)
-        expect(response).to render_template('pages/show')
+        expect(response.status).to eq(404)
+        expect(response).to render_template('pages/custom/errors/not_found')
       end
     end
   end
