@@ -36,8 +36,7 @@ module FacetsHelper
       unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE', 'IMAGE_SIZE'].include?(facet_name)
         mapped_value = mapped_value.split.map(&:capitalize).join(' ')
       end
-
-      mapped_value
+      mapped_value.size  > 0 ? mapped_value : false
     end
   end
 
