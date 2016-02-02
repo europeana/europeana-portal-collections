@@ -596,7 +596,7 @@ module Portal
       return unless val.is_a?(String)
 
       search_val = val.gsub(/[()\[\]<>]/, '')
-      if(quoted)
+      if (quoted)
         search_path(q: "#{field}:\"#{search_val}\"")
       else
         search_path(q: "#{field}:(#{search_val})")
