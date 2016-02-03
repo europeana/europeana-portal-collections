@@ -12,9 +12,6 @@ class Banner < ActiveRecord::Base
     Banner.update_all(default: false)
   end
 
-  validates :default, inclusion: { in: [false], message: 'has not been published' },
-                      unless: :published?
-
   has_paper_trail
 
   translates :title, :body, fallbacks_for_empty_translations: true
