@@ -57,6 +57,15 @@ class FacetPresenter
     }
   end
 
+  def filter_item(item)
+    {
+      filter: facet_label(@facet.name),
+      value: facet_label(@facet.name, item.value),
+      remove: facet_item_url(item),
+      name: "f[#{@facet.name}][]"
+    }
+  end
+
   def remove_facet_params(item)
     search_state.remove_facet_params(@facet.name, item)
   end
