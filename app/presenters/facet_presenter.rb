@@ -57,9 +57,13 @@ class FacetPresenter
     }
   end
 
+  def remove_facet_params(item)
+    search_state.remove_facet_params(@facet.name, item)
+  end
+
   def facet_item_url(item)
     if facet_in_params?(@facet.name, item)
-      search_action_url(search_state.remove_facet_params(@facet.name, item))
+      search_action_url(remove_facet_params(item))
     else
       search_action_url(search_state.add_facet_params_and_redirect(@facet.name, item))
     end
