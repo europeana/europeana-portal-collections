@@ -5,14 +5,6 @@ RSpec.describe Banner do
   it { is_expected.to delegate_method(:url).to(:link).with_prefix(true) }
   it { is_expected.to delegate_method(:text).to(:link).with_prefix(true) }
 
-  it 'can only be made default if it is published' do
-    draft = banners(:draft_banner)
-    draft.default = true
-    expect(draft).not_to be_valid
-    draft.publish!
-    expect(draft).to be_valid
-  end
-
   it 'should only permit one to be default' do
     expect(Banner.where(default: true).count).to eq(1)
     default_id_was = Banner.find_by_default(true).id
