@@ -38,7 +38,7 @@ module ControllerExceptionHandling
   private
 
   def handle_error(exception, status, format = params[:format])
-    status = 500 if (self.class.to_s.deconstantize == 'RailsAdmin' && status != 403)
+    status = 500 if self.class.to_s.deconstantize == 'RailsAdmin' && status != 403
 
     log_error(exception)
     report_error(exception) if status == 500
