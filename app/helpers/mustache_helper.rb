@@ -6,10 +6,14 @@ module MustacheHelper
   end
 
   def head_links
-    [
+    links = [
       # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
       { rel: 'stylesheet', href: styleguide_url('/css/search/screen.css'), media: 'all' }
     ]
+    if (params[:controller] || '') + '/' + (params[:action] || '') == 'home/index'
+      links << { rel: 'canonical', href: root_url }
+    end
+    links
   end
 
   def page_locale

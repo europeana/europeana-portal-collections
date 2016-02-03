@@ -8,7 +8,7 @@ module Home
       {
         context: 'http://schema.org',
         type: 'WebSite',
-        url: 'http://www.europeana.eu/portal',
+        url: root_url,
         potentialAction: {
           type: 'SearchAction',
           target: root_url + 'search?q={q}',
