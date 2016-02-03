@@ -28,7 +28,7 @@ module Facet
 
     ##
     # Removes all child facets from params
-    def remove_facet_params(field, item, source_params = params)
+    def remove_facet_params(item)
       super.tap do |p|
         if p.key?(:f)
           item_children(item).each do |child|

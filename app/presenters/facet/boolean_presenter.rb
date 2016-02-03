@@ -12,7 +12,7 @@ module Facet
 
     def facet_url
       if boolean_facet_in_params?(@facet.name)
-        search_action_url(search_state.remove_facet_params(@facet.name, facet_params(@facet.name).first))
+        search_action_url(remove_facet_params(facet_params(@facet.name).first))
       elsif facet_checked?
         search_action_url(search_state.add_facet_params_and_redirect(@facet.name, facet_config.boolean[:off]))
       else
