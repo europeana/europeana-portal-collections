@@ -124,12 +124,7 @@ module Portal
       @facets_selected_items = [].tap do |items|
         facets_from_request(facet_field_names).each do |facet|
           facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
-            items << {
-              filter: facet_label(facet.name),
-              value: facet_label(facet.name, item.value),
-              remove: facet_item_url(facet, item),
-              name: "f[#{facet.name}][]"
-            }
+            items << FacetPresenter.build(facet, controller).filter_item(item)
           end
         end
       end
