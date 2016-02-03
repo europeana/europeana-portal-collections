@@ -6,13 +6,13 @@ module Home
 
     def js_slsb_ld
       {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "url": "http://www.europeana.eu/portal",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "http://www.europeana.eu/portal/search?q={q}",
-          "query-input": "required name=q"
+        context: "http://schema.org",
+        type: "WebSite",
+        url: "http://www.europeana.eu/portal",
+        potentialAction: {
+          type: "SearchAction",
+          target: root_url + "search?q={q}",
+          query_input: "required name=q"
         }
       }
     end
