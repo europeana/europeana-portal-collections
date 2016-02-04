@@ -20,6 +20,8 @@ en:
         settings_category: Category
         settings_class: CSS class
         settings_wide: Wide?
+      page:
+        settings_full_width: Full width?
     models:
       page/error:
         one: Error Page

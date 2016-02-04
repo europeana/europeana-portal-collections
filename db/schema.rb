@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126122025) do
+ActiveRecord::Schema.define(version: 20160204135313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20160126122025) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "banner_id"
+    t.text     "settings"
   end
 
   add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree
