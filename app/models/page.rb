@@ -1,5 +1,6 @@
 class Page < ActiveRecord::Base
   include HasPublicationStates
+  include HasSettingsAttribute
 
   belongs_to :hero_image, inverse_of: :page
   belongs_to :banner, inverse_of: :pages
@@ -9,7 +10,18 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries
 
+  has_settings :full_width
+
   delegate :file, to: :hero_image, prefix: true, allow_nil: true
+  delegate :settings_full_width_enum, to: :class
+
+  class << self
+    def settings_full_width_enum
+      ['0', '1']
+    end
+  end
+
+  validates :settings_full_width, inclusion: { in: settings_full_width_enum }, allow_nil: true
 
   has_paper_trail
 

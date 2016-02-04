@@ -270,6 +270,7 @@ RailsAdmin.config do |config|
         nested_form false
       end
       field :banner
+      field :settings_full_width, :boolean
     end
   end
 

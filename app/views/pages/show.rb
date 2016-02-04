@@ -18,7 +18,8 @@ module Pages
       mustache[:content] ||= begin
         {
           title: @page.title,
-          text: @page.body,
+          text: @page.settings[:full_width] == '0' ? @page.body : nil,
+          text_full_width: @page.settings[:full_width] == '1' ? @page.body : nil,
           channel_entry: @page.browse_entries.published.blank? ? nil : {
             items: browse_entry_items(@page.browse_entries.published, @page)
           },
