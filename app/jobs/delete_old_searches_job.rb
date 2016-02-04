@@ -4,6 +4,8 @@ class DeleteOldSearchesJob < ActiveJob::Base
   queue_as :default
 
   def perform
-    Search.destroy_all(['updated_at < ?', Time.zone.now - 1.week])
+    Search.where('updated_at < ?', Time.zone.now - 1.week).find_each do |search|
+      search.destroy
+    end
   end
 end
