@@ -9,7 +9,7 @@ mt:
   global:
     labs-link: Link lejn il-labs
     navigation:
-      agents: 
+      agents: Aġenti
       all_blog_posts: Il-blog posts kollha...
       all_exhibitions: Il-wirjiet kollha...
       blog: Blog
@@ -19,7 +19,7 @@ mt:
       browse_sources: Sorsi
       channels: Kollezzjonijiet
       collections: Kollezzjonijiet
-      concepts: 
+      concepts: Kunċett
       exhibitions: Wirjiet
       home: Paġna Primarja
     pro-link: Link għal pro
@@ -34,12 +34,12 @@ mt:
     blog-link: Link għall-blog
     browse:
       agents:
-        title: 
+        title: Aġenti
       colours:
         description: F'din is-sezzjoni tista' tfittex ritratti bbażati fuq il-kulur tagħhom. Kemm tikklikkja fuq ir-ritratt li jogħġbok biex tara l-kollezzjoni!
         title: Kuluri
       concepts:
-        title: 
+        title: Kunċetti
       newcontent:
         description: F'din is-sezzjoni tista' ssib il-kontenut kollhu li ġie miżjud reċentament fuq il-Kollezzjonijiet ta' Europeana. Hawnhekk tista' tara liema istituzzjoni ppubblikat materjal ġdid, kemm hemm materjal u meta. Ikklikkja fuq il-links hawn taħt biex tara l-kollezzjonijiet kollha!
         tableh1: L-istituzzjonijiet kollha
