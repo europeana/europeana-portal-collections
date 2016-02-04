@@ -149,8 +149,8 @@ mt:
   global:
     about-us: Min aħna
     actions:
-      filter-all: 
-      filter-by: 
+      filter-all: Kollha
+      filter-by: Iffiltra skond
     channel:
       archaeology: arkeoloġija
       architecture: arkitettura
@@ -198,24 +198,24 @@ mt:
         greece: il-Greċja
         hungary: L-Ungerija
         iceland: Islanda
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
+        ireland: L-Irlanda
+        israel: L-Israel
+        italy: L-Italja
+        latvia: Il-Latvja
+        lithuania: Il-Litwanja
+        luxembourg: Il-Lussemburgu
+        malta: Malta
+        netherlands: L-Olanda
+        norway: In-Norveġja
+        poland: Il-Polonja
+        portugal: Il-Portugal
+        romania: Ir-Rumanija
+        russia: Ir-Russja
+        serbia: Is-Serbja
+        slovakia: L-Islovakja
+        slovenia: L-Islovenja
+        spain: Spanja
+        sweden: L-Iżvezja
         switzerland: 
         turkey: 
         ukraine: 
@@ -237,30 +237,30 @@ mt:
         provider: 
         reusability: 
         sound_duration: 
-        sound_hq: 
-        text_fulltext: 
-        type: 
-        ugc: 
-        video_duration: 
-        video_hd: 
-        year: 
+        sound_hq: Kwalita' Għolja
+        text_fulltext: Il-kitba sħiħa
+        type: Il-Medja
+        ugc: Uri l-kontenut kontribut mill-utenti
+        video_duration: Tul
+        video_hd: Kwalita'
+        year: Data
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: "'Landscape'"
+        portrait: "'Portrait"
       image_colour:
-        'false': 
-        'true': 
+        'false': Iswed u abjad
+        'true': Kulur
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: L-Akbar (4MP+)
+        large: Kbir (1-4MP)
+        medium: Medju (0.5-1MP)
+        small: "Żgħir (<0.5MP)"
       language:
         bg: 
         ca: 
         cs: 
-        da: 
-        de: 
+        da: Daniż
+        de: Tedesc
         el: 
         en: 
         es: 
@@ -279,27 +279,27 @@ mt:
         mul: 
         nl: 
         'no': 
-        pl: 
-        pt: 
+        pl: Polakk
+        pt: Portugiż
         ro: 
         ru: 
         sk: 
         sl: 
         sr: 
         sv: 
-        tr: 
+        tr: Tork
         uk: 
         yi: 
-      less: 
+      less: Inqas
       media:
-        'false': 
-        'true': 
-      more: 
-      more-refinements: 
+        'false': Le
+        'true': Iva
+      more: Iktar
+      more-refinements: Iktar rfinar
       resource:
-        type: 
+        type: Tip
       reusability:
-        advanced: 
+        advanced: Avvanzat
         advanced-cc-by: 
         advanced-cc-by-nc: 
         advanced-cc-by-nc-nd: 
@@ -311,35 +311,35 @@ mt:
         advanced-out-of-copyright-non-commercial: 
         advanced-pdm: 
         advanced-rrfa: 
-        advanced-rrpa: 
-        advanced-rrra: 
-        advanced-ucs: 
-        open: 
-        permission: 
-        restricted: 
-        simple: 
+        advanced-rrpa: Drittijiet riżervati - Aċċess mħallas
+        advanced-rrra: Drittijiet riżervati - Aċċess mhux permess
+        advanced-ucs: L-istatus tal-copyright mhux magħruf
+        open: Iva bl-attribuzzjoni
+        permission: Bil-permess biss
+        restricted: Iva bir-restrizzjonijiet
+        simple: Sempliċi
       sound_duration:
-        long: 
-        medium: 
-        short: 
-        very_short: 
+        long: Twil (6+ minuti)
+        medium: Medju (3-6 minuti)
+        short: Qasir (30s - 3 minuti)
+        very_short: Qasir ħafna (<30s)
       sound_hq:
-        'true': 
-      source: 
+        'true': Iva
+      source: Sors
       text_fulltext:
-        'false': 
-        'true': 
+        'false': Le
+        'true': Iva
       type:
-        3d: 
-        image: 
+        3d: 3D
+        image: Immaġni
         sound: 
         text: 
         video: 
       type-image:
         orientation:
-          label: 
-          landscape: 
-          portrait: 
+          label: L-orientazzjoni tal-immaġni
+          landscape: "'Landscape'"
+          portrait: "'Portrait'"
         quality:
           all: 
           hq-only: 
@@ -363,30 +363,30 @@ mt:
           label: 
           long: 
           medium: 
-          short: 
+          short: Qasir (%{data})
       video_duration:
-        long: 
-        medium: 
-        short: 
+        long: Twil (20+ minuti)
+        medium: Medju (4-20 minuta)
+        short: Qasir (<4 minuti)
       video_hd:
-        'true': 
+        'true': Definizzjoni Għolja (576p+)
       year:
-        from: 
-        to: 
-    find-us-elsewhere: 
-    forgot-password: 
-    genres: 
-    genres-chamber-music: 
-    genres-classical-music: 
-    genres-concertos: 
-    genres-non-western-classical-music: 
-    genres-opera: 
-    genres-popular-music: 
-    genres-traditional-music: 
+        from: minn
+        to: għal
+    find-us-elsewhere: Sibna x'imkien ieħor
+    forgot-password: Insejt il-password?
+    genres: tip
+    genres-chamber-music: Mużika 'chamber'
+    genres-classical-music: Mużika klassika
+    genres-concertos: Kunċerti
+    genres-non-western-classical-music: Mużika klassika mhux mill-Punent
+    genres-opera: L-Opera
+    genres-popular-music: Mużika popolari
+    genres-traditional-music: Mużika tradizzjonali
     header:
-      connect: 
-      develop: 
-      discover: 
+      connect: Kkonnektja
+      develop: "Żviluppa"
+      discover: Skopri
       network: 
     help: 
     home: 
@@ -407,12 +407,12 @@ mt:
     language-gaelic: 
     language-german: 
     language-greek: 
-    language-hungarian: 
+    language-hungarian: Ungariż
     language-icelandic: 
-    language-italian: 
+    language-italian: Taljan
     language-latvian: 
     language-lithuanian: 
-    language-maltese: 
+    language-maltese: Malti
     language-norwegian: 
     language-polish: 
     language-portuguese: 
@@ -425,12 +425,12 @@ mt:
     language-ukranian: 
     login: 
     mission: 
-    mission-title: 
+    mission-title: Il-missjoni tagħna
     more:
       load-more: 
       show-more: 
       view-more: 
-    more-info: 
+    more-info: Aktar informazzjoni
     newsletter:
       email-address-invalid: 
       email-address-required: 
