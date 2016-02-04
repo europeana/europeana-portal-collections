@@ -79,6 +79,7 @@ RailsAdmin.config do |config|
       field :title
       field :file, :paperclip
       field :subject_type
+      field :state
     end
     show do
       field :title
@@ -87,6 +88,7 @@ RailsAdmin.config do |config|
         thumb_method :medium
       end
       field :subject_type
+      field :state
       field :settings_category, :enum
       field :collections
     end
