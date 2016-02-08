@@ -10,7 +10,7 @@
 namespace :pg do
   desc 'Dumps the PostgreSQL database to db/backups'
   task dump: :environment do
-    check_fog_configured!
+    ensure_fog_configured!
     dumped_tmp_file do |tmp_file|
       save_to_fog(tmp_file)
     end
@@ -18,9 +18,9 @@ namespace :pg do
 
   private
 
-  def check_fog_configured!
+  def ensure_fog_configured!
     unless fog_configured?
-      puts "ERROR: Fog is not configured. Aborting.".red.bold
+      puts 'ERROR: Fog is not configured. Aborting.'.red.bold
       exit 1
     end
   end
