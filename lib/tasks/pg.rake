@@ -10,12 +10,28 @@
 namespace :pg do
   desc 'Dumps the PostgreSQL database to db/backups'
   task dump: :environment do
+    check_fog_configured!
     dumped_tmp_file do |tmp_file|
       save_to_fog(tmp_file)
     end
   end
 
   private
+
+  def check_fog_configured!
+    unless fog_configured?
+      puts "ERROR: Fog is not configured. Aborting.".red.bold
+      exit 1
+    end
+  end
+
+  def fog_configured?
+    Rails.application.config_for(:fog)
+    true
+  rescue StandardError => e
+    raise e unless e.message =~ /Could not load configuration\./
+    false
+  end
 
   def dump_file_name
     @dump_file_name ||= begin
