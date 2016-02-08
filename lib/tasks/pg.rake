@@ -10,41 +10,48 @@
 namespace :pg do
   desc 'Dumps the PostgreSQL database to db/backups'
   task dump: :environment do
-    backup_dir = backup_directory(true)
-
-    with_config do |app, host, port, db, user, pass|
-      file_name = Time.now.strftime('%Y%m%d%H%M%S') + "_" + db + '.sql'
-
-      sh "export PGPASSWORD='#{pass}'"
-      sh "pg_dump -h #{host} -p #{port} -U #{user} -d #{db} -f #{backup_dir}/#{file_name}"
-      sh 'unset PGPASSWORD'
-
-      save_to_fog(backup_dir, file_name)
-      File.delete("#{backup_dir}/#{file_name}")
+    dumped_tmp_file do |tmp_file|
+      save_to_fog(tmp_file)
     end
   end
 
   private
 
-  def save_to_fog(backup_dir, file_name)
-    # @todo read this from paperclip.yml?
-    fog_config = Rails.application.config_for(:fog).symbolize_keys
-
-    storage = Fog::Storage.new(fog_config)
-
-    dir = storage.directories.create(key: 'backups')
-
-    file = dir.files.create(
-      key: file_name,
-      body: File.open("#{backup_dir}/#{file_name}"),
-      public: false
-    )
+  def dump_file_name
+    @dump_file_name ||= begin
+      with_config do |_app, _host, _port, db, _user, _pass|
+        Time.now.strftime('%Y%m%d%H%M%S') + "_" + db + '.sql'
+      end
+    end
   end
 
-  def backup_directory(create = false)
-    File.expand_path('../../../db/backups', __FILE__).tap do |backup_dir|
-      FileUtils.mkdir_p(backup_dir) if create && !Dir.exists?(backup_dir)
+  def dumped_tmp_file
+    tmp_file = Tempfile.new(dump_file_name)
+    tmp_file.close
+
+    with_config do |app, host, port, db, user, pass|
+      sh "export PGPASSWORD='#{pass}'"
+      sh "pg_dump -h #{host} -p #{port} -U #{user} -d #{db} -f #{tmp_file.path}"
+      sh 'unset PGPASSWORD'
     end
+
+    yield tmp_file
+
+    tmp_file.unlink
+  end
+
+  def save_to_fog(tmp_file)
+    fog_config = Rails.application.config_for(:fog).symbolize_keys
+
+    storage = Fog::Storage.new(fog_config[:credentials].symbolize_keys)
+
+    dir = storage.directories.create(key: fog_config[:directory] + '/backups')
+
+    file = dir.files.create(
+      key: dump_file_name,
+      body: File.open(tmp_file),
+      public: false
+    )
   end
 
   def with_config
