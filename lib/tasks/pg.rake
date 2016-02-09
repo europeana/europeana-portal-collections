@@ -10,7 +10,7 @@
 namespace :pg do
   desc 'Backs up the PostgreSQL database to Fog storage'
   task backup: :environment do
-    ensure_fog_configured
+    check_configuration!
 
     dump_to_tmp_file do |tmp_file|
       save_dump_to_fog(tmp_file)
@@ -19,9 +19,9 @@ namespace :pg do
 
   desc 'Restores the PostgreSQL database from Fog storage'
   task restore: :environment do
-    ensure_fog_configured
+    check_configuration!
 
-    exit_with_error('Specify the timestamp to restore in DUMP') unless ENV['DUMP']
+    exit_with_error!('Specify the timestamp to restore in DUMP') unless ENV['DUMP']
 
     download_dump_from_fog(ENV['DUMP']) do |tmp_file|
       restore_dump_to_pg(tmp_file)
@@ -30,11 +30,22 @@ namespace :pg do
 
   private
 
-  def ensure_fog_configured
-    exit_with_error('Fog is not configured. Aborting.') unless fog_configured?
+  def check_configuration!
+    ensure_db_adapter_is_pg!
+    ensure_fog_configured!
   end
 
-  def exit_with_error(msg)
+  def ensure_db_adapter_is_pg!
+    unless ActiveRecord::Base.connection_config[:adapter] =~ /^postgres/
+      exit_with_error!('Database adapter is not PostgreSQL. Aborting.')
+    end
+  end
+
+  def ensure_fog_configured!
+    exit_with_error!('Fog is not configured. Aborting.') unless fog_configured?
+  end
+
+  def exit_with_error!(msg)
     puts "ERROR: #{msg}".red.bold
     exit 1
   end
@@ -59,7 +70,7 @@ namespace :pg do
 
   def download_dump_from_fog(dump_timestamp)
     file_name = dump_file_name(dump_timestamp)
-    exit_with_error('Dump file not found in backups directory.') if fog_storage_dir.files.head(file_name).nil?
+    exit_with_error!('Dump file not found in backups directory.') if fog_storage_dir.files.head(file_name).nil?
 
     tmp_file = Tempfile.new('pg-dump')
     tmp_file.binmode
