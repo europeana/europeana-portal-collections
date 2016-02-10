@@ -5,7 +5,7 @@ class Page < ActiveRecord::Base
   belongs_to :hero_image, inverse_of: :page
   belongs_to :banner, inverse_of: :pages
   has_many :elements, -> { order(:position) },
-    class_name: 'PageElement', dependent: :destroy, inverse_of: :page
+           class_name: 'PageElement', dependent: :destroy, inverse_of: :page
   has_many :browse_entries, through: :elements, source: :positionable,
                             source_type: 'BrowseEntry'
 
