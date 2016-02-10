@@ -42,8 +42,10 @@ module UrlHelper
     Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |p|
       if p[:qf].blank?
         p.delete(:q)
+      elsif p[:qf].is_a?(Array)
+        p[:q] = p[:qf].shift
       else
-        p[:q] = [p[:qf]].flatten.shift
+        p[:q] = p.delete(:qf)
       end
     end
   end
