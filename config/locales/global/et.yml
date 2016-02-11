@@ -314,6 +314,7 @@ et:
         advanced-rrpa: "Õigused kaitstud - tasuline ligipääs"
         advanced-rrra: "Õigused kaitstud - piiratud ligipääs"
         advanced-ucs: Autorikaitse staatus teadmata
+        expiry: 
         open: Jah, omistamisega
         permission: Ainult loaga
         restricted: Jah, piirangutega

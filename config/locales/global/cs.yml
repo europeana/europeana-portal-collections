@@ -314,6 +314,7 @@ cs:
         advanced-rrpa: 
         advanced-rrra: 
         advanced-ucs: 
+        expiry: 
         open: 
         permission: 
         restricted: 

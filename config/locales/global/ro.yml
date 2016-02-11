@@ -314,6 +314,7 @@ ro:
         advanced-rrpa: ''
         advanced-rrra: ''
         advanced-ucs: ''
+        expiry: 
         open: Da, cu atribuire
         permission: Doar cu permisiune
         restricted: Da, cu restricții

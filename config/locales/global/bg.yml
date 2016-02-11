@@ -314,6 +314,7 @@ bg:
         advanced-rrpa: Rights reserved - Paid access
         advanced-rrra: Rights Reserved - Restricted Access
         advanced-ucs: Unknown copyright status
+        expiry: 
         open: "Да, с посочване на авторските права"
         permission: "Само с разрешение"
         restricted: "Да, с ограничения"
