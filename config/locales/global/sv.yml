@@ -314,6 +314,7 @@ sv:
         advanced-rrpa: 
         advanced-rrra: 
         advanced-ucs: 
+        expiry: 
         open: Ja, med attribuering
         permission: Enbart med tillstånd
         restricted: Ja, med vissa begränsingar

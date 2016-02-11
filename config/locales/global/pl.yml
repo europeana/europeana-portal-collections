@@ -314,6 +314,7 @@ pl:
         advanced-rrpa: ''
         advanced-rrra: ''
         advanced-ucs: ''
+        expiry: 
         open: Tak, ale z podaniem źródła
         permission: Tylko za pisemną zgodą
         restricted: Tak, ale z ograniczeniami

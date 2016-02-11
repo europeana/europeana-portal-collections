@@ -314,6 +314,7 @@ lt:
         advanced-rrpa: Teisės saugomos - mokama prieiga
         advanced-rrra: Teisės saugomos - ribota prieiga
         advanced-ucs: Autorinių teisių statusas nežinomas
+        expiry: 
         open: Taip, su atribucija
         permission: Tik su leidimu
         restricted: Taip, su apribojimais

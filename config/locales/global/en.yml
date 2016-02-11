@@ -314,6 +314,7 @@ en:
         advanced-rrpa: Rights reserved - Paid access
         advanced-rrra: Rights Reserved - Restricted Access
         advanced-ucs: Unknown copyright status
+        expiry: until %{date}
         open: Yes with attribution
         permission: Only with permission
         restricted: Yes with restrictions

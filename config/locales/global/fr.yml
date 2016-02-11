@@ -314,6 +314,7 @@ fr:
         advanced-rrpa: 
         advanced-rrra: 
         advanced-ucs: 
+        expiry: 
         open: Oui avec attribution
         permission: Seulement avec permission
         restricted: Oui avec des restrictions

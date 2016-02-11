@@ -540,9 +540,16 @@ module Portal
     end
 
     def simple_rights_label_data
-      mustache[:simple_rights_label_data] ||= begin
+      rights = mustache[:simple_rights_label_data] ||= begin
         Document::RecordPresenter.new(document, controller).simple_rights_label_data
       end
+      licenses = document.fetch('licenses')
+      if !licenses.nil? && !rights.nil?
+        license_expiry = licenses.first['ccDeprecatedOn']
+        sec = (license_expiry.to_f / 1000).to_s
+        rights[:expiry] = t('global.facet.reusability.expiry', date: Date.strptime(sec, '%s'))
+      end
+      rights
     end
 
     def labels

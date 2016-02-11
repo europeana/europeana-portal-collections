@@ -314,6 +314,7 @@ ru:
         advanced-rrpa: ''
         advanced-rrra: ''
         advanced-ucs: ''
+        expiry: 
         open: "Да с указанием правообладателя"
         permission: "Только с разрешения правообладателя"
         restricted: "Да с ограничениями"

@@ -314,6 +314,7 @@ fi:
         advanced-rrpa: Oikeudet pidätetään - Katselu maksullinen
         advanced-rrra: Oikeudet pidätetään - Rajattu katseluoikeus
         advanced-ucs: Tuntematon tekijänoikeudellinen status
+        expiry: 
         open: Sallittu, kun lähde mainitaan
         permission: Vain luvanvaraisesti
         restricted: Kyllä, rajoituksin

@@ -314,6 +314,7 @@ hu:
         advanced-rrpa: 
         advanced-rrra: 
         advanced-ucs: ''
+        expiry: 
         open: Igen, tulajdonos feltüntetésével
         permission: Csak engedéllyel
         restricted: Igen, korlátozásokkal
