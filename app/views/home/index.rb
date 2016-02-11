@@ -37,6 +37,7 @@ module Home
         title = page_title
         description = truncate(I18n.t('site.home.strapline', total_item_count: @europeana_item_count), length: 350, separator: ' ')
         description = description.strip! || description
+        hero = hero_config(@landing_page.hero_image)
         head_meta = [
           { meta_name: 'description', content: description },
           { meta_property: 'fb:appid', content: '185778248173748' },
@@ -44,10 +45,10 @@ module Home
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
           { meta_property: 'og:sitename', content: title },
           { meta_property: 'og:description', content: description },
-          { meta_property: 'og:image', content: URI.join(root_url, hero_config(@landing_page.hero_image)[:hero_image]) },
           { meta_property: 'og:url', content: request.original_url }
         ]
         head_meta << { meta_property: 'og:title', content: title } unless title.nil?
+        head_meta << { meta_property: 'og:image', content: URI.join(root_url, hero[:hero_image]) } unless hero.nil?
         head_meta + super
       end
     end
