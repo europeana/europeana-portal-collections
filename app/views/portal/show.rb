@@ -546,8 +546,8 @@ module Portal
       licenses = document.fetch('licenses', nil)
       if !licenses.nil? && !rights.nil?
         license_expiry = licenses.first['ccDeprecatedOn']
-        sec = (license_expiry.to_f / 1000).to_s
-        rights[:expiry] = t('global.facet.reusability.expiry', date: Date.strptime(sec, '%s'))
+        date = unix_time_to_local(license_expiry)
+        rights[:expiry] = t('global.facet.reusability.expiry', date: date.to_formatted_s(:date))
       end
       rights
     end
