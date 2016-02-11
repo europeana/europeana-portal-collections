@@ -2,9 +2,21 @@ module Collections
   class Show < ApplicationView
     def head_meta
       mustache[:head_meta] ||= begin
-        [
-          { meta_name: 'description', content: truncate(strip_tags(@landing_page.body), length: 350, separator: ' ') }
-        ] + super
+        title = page_title
+        description = truncate(strip_tags(@landing_page.body), length: 350, separator: ' ')
+        description = description.strip! || description
+        head_meta = [
+          { meta_name: 'description', content: description },
+          { meta_property: 'fb:appid', content: '185778248173748' },
+          { meta_name: 'twitter:card', content: 'summary' },
+          { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+          { meta_property: 'og:sitename', content: title },
+          { meta_property: 'og:description', content: description },
+          { meta_property: 'og:image', content: URI.join(root_url, hero_config(@landing_page.hero_image)[:hero_image])},
+          { meta_property: 'og:url', content: request.original_url }
+        ]
+        head_meta << { meta_property: 'og:title', content: title } unless title.nil?
+        head_meta + super
       end
     end
 
