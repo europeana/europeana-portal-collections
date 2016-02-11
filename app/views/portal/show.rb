@@ -543,7 +543,7 @@ module Portal
       rights = mustache[:simple_rights_label_data] ||= begin
         Document::RecordPresenter.new(document, controller).simple_rights_label_data
       end
-      licenses = document.fetch('licenses')
+      licenses = document.fetch('licenses', nil)
       if !licenses.nil? && !rights.nil?
         license_expiry = licenses.first['ccDeprecatedOn']
         sec = (license_expiry.to_f / 1000).to_s
