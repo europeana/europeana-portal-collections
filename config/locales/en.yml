@@ -5,11 +5,11 @@ en:
         newcontent:
           description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when!  Just click on the links below to see their collections.
         sources:
-          description: Below you see a list of sources for our collections. These sources aggregate and contribute collections to Europeana, click on the link that interests you below to be brought to all their collections!
+          description: Below you see a list of institutions who have contributed their content to Europeana Collections. These institutions aggregate and contribute their data to Europeana, click on the link that interests you below to view a particular partner collection!
   global:
     labs-link: 'link to labs '
     navigation:
-      agents: Agents
+      agents: Persons
       all_blog_posts: All blog posts…
       all_exhibitions: All exhibitions…
       blog: Blog
@@ -19,7 +19,7 @@ en:
       browse_sources: Sources
       channels: Collections
       collections: Collections
-      concepts: Concepts
+      concepts: Subjects and types
       exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
@@ -28,18 +28,18 @@ en:
   site:
     alpha:
       feedback_banner:
-        description: An Beta release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
+        description: A Beta release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
         link-text: Give us your input!
         title: This is a Beta release of our new "Collections" and "Music Collections"
     blog-link: link to blog
     browse:
       agents:
-        title: Agents
+        title: Persons
       colours:
-        description: 'In this section you can search for images based on their colour. Just click on the one that you like to view the collection! '
+        description: In this section you can search for images based on their colour. Just click on a coloured box to view images that contain that colour!
         title: Colours
       concepts:
-        title: Concepts
+        title: Subjects and types
       newcontent:
         description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when. Just click on the links below to see their collections!
         tableh1: All institutions
@@ -47,7 +47,7 @@ en:
         tableh3: Date
         title: New Content
       sources:
-        description: Below you see a list of sources for our collections. These sources aggregate and contribute collections to Europeana, click on the link that interests you below to be brought to all their collections!
+        description: Below you see a list of institutions who have contributed their content to Europeana Collections. These institutions aggregate and contribute their data to Europeana, click on the link that interests you below to view a particular partner collection!
         title: Sources
     collections:
       art-history:
