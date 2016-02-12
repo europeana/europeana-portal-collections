@@ -16,6 +16,7 @@ RSpec.describe 'home/index.html.mustache' do
 
   it 'should have meta description' do
     meta_content = I18n.t('site.home.strapline', total_item_count: europeana_item_count)
+    meta_content = meta_content.strip! || meta_content
     render
     expect(rendered).to have_selector("meta[name=\"description\"][content=\"#{meta_content}\"]", visible: false)
   end
