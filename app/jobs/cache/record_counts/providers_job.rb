@@ -12,7 +12,7 @@ module Cache
       def perform(collection_id = nil)
         cache_key = 'browse/sources/providers'
 
-        builder = search_builder(search_params_logic)
+        builder = search_builder
         api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets', facet: 'PROVIDER')
 
         unless collection_id.nil?
