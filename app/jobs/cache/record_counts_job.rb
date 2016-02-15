@@ -1,26 +1,31 @@
-class Cache::RecordCountsJob < ActiveJob::Base
-  include ApiQueryingJob
+module Cache
+  class RecordCountsJob < ActiveJob::Base
+    include ApiQueryingJob
 
-  queue_as :default
+    queue_as :default
 
-  def perform
-    sets.each_pair do |key, set_params|
-      query = search_builder.rows(0).where(set_params[:query]).with_overlay_params(set_params[:overlay] || {}).merge(profile: 'minimal')
-      count = repository.search(query).total
-      cache_key = "record/counts/#{key}"
-      Rails.cache.write(cache_key, count)
-    end
-  end
+    def perform(collection_id = nil, options = {})
+      api_query = search_builder.rows(0).merge(query: '*:*', profile: 'minimal')
 
-  protected
+      cache_key = 'record/counts'
 
-  def sets
-    {
-      all: { query: '*:*' }
-    }.tap do |sets|
-      Collection.published.each do |collection|
+      if collection_id.nil?
+        cache_key << '/all'
+      else
+        collection = Collection.find(collection_id)
+        unless collection.nil?
+          cache_key << "/collections/#{collection.key}"
+          api_query.with_overlay_params(collection.api_params_hash)
+        end
+      end
+
+      cache_query_count(api_query, cache_key)
+
+      if options[:types]
         %w(IMAGE SOUND TEXT VIDEO 3D).each do |type|
-          sets["collections/#{collection.key}/type/#{type.downcase}"] = { overlay: collection.api_params_hash }.merge(query: "TYPE:#{type}")
+          type_cache_key = "#{cache_key}/type/#{type.downcase}"
+          type_api_query = api_query.merge(query: "TYPE:#{type}")
+          cache_query_count(type_api_query, type_cache_key)
         end
       end
     end
