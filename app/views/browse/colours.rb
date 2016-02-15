@@ -45,6 +45,10 @@ module Browse
       end
     end
 
+    def cache_body
+      false
+    end
+
     def body_cache_key
       'browse/colours' + (@collection.present? ? '/' + @collection.key : '')
     end

@@ -8,7 +8,8 @@ class BrowseController < ApplicationController
   # @todo Load @colours from view helper, to bypass if HTML cached
   def colours
     find_collection
-    @colours = Rails.cache.fetch('browse/colours/facets') || []
+    cache_key = @collection.nil? ? 'browse/colours/facets' : "browse/colours/facets/#{@collection.key}"
+    @colours = Rails.cache.fetch(cache_key) || []
 
     respond_to do |format|
       format.html

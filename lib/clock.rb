@@ -26,7 +26,11 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     Cache::RecordCountsJob.perform_later
     Cache::RecordCounts::RecentAdditionsJob.perform_later
     Cache::RecordCounts::ProvidersJob.perform_later
+
     Collection.published.each do |collection|
+      Cache::ColourFacetsJob.perform_later(collection.id)
+      Cache::RecordCountsJob.perform_later(collection.id, types: true)
+      Cache::RecordCounts::RecentAdditionsJob.perform_later(collection.id)
       Cache::RecordCounts::ProvidersJob.perform_later(collection.id)
     end
   end
