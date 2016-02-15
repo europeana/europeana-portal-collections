@@ -17,6 +17,10 @@ module ControllerExceptionHandling
       handle_error(exception, 404)
     end
 
+    rescue_from Europeana::API::Errors::Request::PaginationError do |exception|
+      handle_error(exception, 400)
+    end
+
     rescue_from Europeana::API::Errors::RequestError do |exception|
       case exception.message
       when /Invalid record identifier/

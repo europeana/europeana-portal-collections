@@ -3,7 +3,8 @@ error_pages = [
   { title: 'Forbidden', body: 'You do not have permission to access this resource.', http_code: 403, slug: 'errors/forbidden' },
   { title: "Sorry, we can't find that page", body: "Unfortunately we couldn't find the page you were looking for. Try searching Europeana or you might like the selected items below.", http_code: 404, slug: 'errors/not_found' },
   { title: 'Bad Request', body: 'There is a problem with your request.', http_code: 400, slug: 'errors/bad_request' },
-  { title: 'Invalid search query', body: 'Your search query is not valid, please try again or have a look at our <a href="/portal/help/search.html">search help page</a>.', http_code: 400, slug: 'exceptions/europeana/api/errors/request_error' } 
+  { title: 'Invalid search query', body: 'Your search query is not valid, please try again or have a look at our <a href="/portal/help/search.html">search help page</a>.', http_code: 400, slug: 'exceptions/europeana/api/errors/request_error' },
+  { title: 'Page limit exceeded', body: 'You cannot navigate beyond the first 1000 items. Try to narrow your search by adding keywords to your query or adding filters to your search.', http_code: 400, slug: 'exceptions/europeana/api/errors/request/pagination_error' }
 ]
 error_pages.each do |attrs|
   unless Page::Error.find_by_slug(attrs[:slug]).present?
