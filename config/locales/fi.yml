@@ -34,11 +34,13 @@ fi:
     blog-link: linkki blogiin
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Värit
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

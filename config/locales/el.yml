@@ -34,11 +34,13 @@ el:
     blog-link: ''
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: "Χρώματα"
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

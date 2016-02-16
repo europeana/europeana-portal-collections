@@ -34,11 +34,13 @@ lv:
     blog-link: saite uz blogu
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: "Šajā sadaļā ir iespējams meklēt attēlus pēc to krāsas. Klikšķiniet uz izvēlētās krāsas un skatiet atlasīto kolekciju!"
         title: Krāsas
       concepts:
+        description: 
         title: 
       newcontent:
         description: "Šajā sadaļā ir apkopots viss saturs, kas nesen ir ticis pievienots Europeana Kolekcijām. Te ir iespējams redzēt, kura institūcija ir publicējusi jaunus materiālus un kad. Klikšķiniet uz zemāk esošajām saitēm, lai apskatītu pievienoto."

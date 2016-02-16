@@ -34,11 +34,13 @@ pt:
     blog-link: ligação ao blogue
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Cores
       concepts:
+        description: 
         title: 
       newcontent:
         description: 
