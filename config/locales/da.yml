@@ -34,11 +34,13 @@ da:
     blog-link: link til blog
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Farver
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

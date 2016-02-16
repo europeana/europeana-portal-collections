@@ -34,11 +34,13 @@ hr:
     blog-link: http://blog.europeana.eu
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: U ovom dijelu možete pretraživati slike po boji. Potrebno je samo kliknuti na onu koja vam se sviđa kako biste vidjeli zbirku!
         title: Boje
       concepts:
+        description: 
         title: 
       newcontent:
         description: U ovom dijelu možete pronaći sav sadržaj koji je nedavno dodan Europeana zbirkama. Ovdje možete vidjeti koja je nova ustanova objavila novi materijal, koliko materijala i kada! Samo kliknite na poveznice u nastavku kako biste vidjeli njihove zbirke.

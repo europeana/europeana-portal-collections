@@ -34,11 +34,13 @@ ca:
     blog-link: enllaç al blog
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Colors
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

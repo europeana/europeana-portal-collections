@@ -34,12 +34,14 @@ sv:
     blog-link: 
     browse:
       agents:
-        title: 
+        description: 
+        title: Personer
       colours:
         description: 
         title: Färger
       concepts:
-        title: 
+        description: 
+        title: "Ämnen och typer"
       newcontent:
         description: 
         tableh1: Alla institutioner

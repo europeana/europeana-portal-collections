@@ -34,11 +34,13 @@
     blog-link: lenke til blogg
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: I denne seksjonen kan du søke etter bilder ut fra farge. Bare klikk på det du vil se på i samlingen!
         title: Farger
       concepts:
+        description: 
         title: 
       newcontent:
         description: I denne seksjonen kan du finne alt innhold som nylig har blitt lagt til på Europeana-samlingene. Her kan du se hvilke nye institusjoner som har publisert nytt innhold, hvor mye innhold og når! Bare klikk på lenkene under for å se samlingene deres.

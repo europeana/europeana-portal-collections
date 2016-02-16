@@ -34,11 +34,13 @@ pl:
     blog-link: link do bloga
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Kolory
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

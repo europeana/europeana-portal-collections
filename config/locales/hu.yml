@@ -34,11 +34,13 @@ hu:
     blog-link: link a blogra
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Színek
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

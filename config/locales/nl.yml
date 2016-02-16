@@ -34,11 +34,13 @@ nl:
     blog-link: link naar de blog
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Kleuren
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

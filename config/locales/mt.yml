@@ -34,11 +34,13 @@ mt:
     blog-link: Link għall-blog
     browse:
       agents:
+        description: 
         title: Aġenti
       colours:
         description: F'din is-sezzjoni tista' tfittex ritratti bbażati fuq il-kulur tagħhom. Kemm tikklikkja fuq ir-ritratt li jogħġbok biex tara l-kollezzjoni!
         title: Kuluri
       concepts:
+        description: 
         title: Kunċetti
       newcontent:
         description: F'din is-sezzjoni tista' ssib il-kontenut kollhu li ġie miżjud reċentament fuq il-Kollezzjonijiet ta' Europeana. Hawnhekk tista' tara liema istituzzjoni ppubblikat materjal ġdid, kemm hemm materjal u meta. Ikklikkja fuq il-links hawn taħt biex tara l-kollezzjonijiet kollha!

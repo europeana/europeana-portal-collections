@@ -34,11 +34,13 @@ et:
     blog-link: link blogisse
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: Selles alaosas saad otsida pilte nende värvist lähtudes. Lihtsalt klõpsa pildile, mis sulle meeldib,et vastavat kogu näha!
         title: Värvid
       concepts:
+        description: 
         title: 
       newcontent:
         description: Selles alaosas leiad sisu, mis on hiljuti lisatud Europeana kogusse. Siin on näha, millised institutsioonid on avaldanud uut ainest nagu ka selle hulka ja avaldamisaega. Lihtsalt klõpsa allolevatele linkidele nende kogude nägemiseks.

@@ -34,11 +34,13 @@ fr:
     blog-link: lien vers le blog
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Couleurs
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

@@ -34,11 +34,13 @@ ru:
     blog-link: "Ссылка на блог"
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: "Цвета"
       concepts:
+        description: 
         title: 
       newcontent:
         description: 

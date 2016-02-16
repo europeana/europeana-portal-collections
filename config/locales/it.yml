@@ -34,11 +34,13 @@ it:
     blog-link: link al blog
     browse:
       agents:
+        description: 
         title: 
       colours:
         description: 
         title: Colori
       concepts:
+        description: 
         title: 
       newcontent:
         description: 
