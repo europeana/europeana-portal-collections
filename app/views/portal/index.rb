@@ -194,17 +194,6 @@ module Portal
       }
     end
 
-    def hidden_inputs_for_search
-      flatten_hash(params_for_search.except(:page, :utf8)).collect do |name, value|
-        [value].flatten.collect do |v|
-          {
-            name: name,
-            value: v.to_s
-          }
-        end
-      end.flatten
-    end
-
     def previous_page_url
       prev_page = Kaminari::Helpers::PrevPage.new(self, current_page: @response.current_page)
       prev_page.url
