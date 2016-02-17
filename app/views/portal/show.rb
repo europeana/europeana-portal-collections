@@ -6,7 +6,7 @@ module Portal
       mustache[:head_links] ||= {
         items: [
           { rel: 'canonical', href: document_url(document, format: 'html') }
-        ] + super[:items]
+        ] + super [:items]
       }
     end
 
