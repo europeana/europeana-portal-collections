@@ -9,6 +9,7 @@ pl:
   global:
     labs-link: link do labs
     navigation:
+      agents: 
       all_blog_posts: Wszystkie wpisy...
       all_exhibitions: Wszystkie wystawy...
       blog: Blog
@@ -18,6 +19,7 @@ pl:
       browse_sources: "Źródła"
       channels: Kolekcje
       collections: Kolekcje
+      concepts: 
       exhibitions: Wystawy
       home: Strona główna
     pro-link: link do Europeana Pro
@@ -31,9 +33,15 @@ pl:
         title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka" oraz "Kolekcji: Historia sztuki".'
     blog-link: link do bloga
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Kolory
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: Wszystkie instytucje

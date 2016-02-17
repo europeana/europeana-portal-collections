@@ -9,6 +9,7 @@ en:
   global:
     labs-link: 'link to labs '
     navigation:
+      agents: Agents
       all_blog_posts: All blog posts…
       all_exhibitions: All exhibitions…
       blog: Blog
@@ -18,6 +19,7 @@ en:
       browse_sources: Sources
       channels: Collections
       collections: Collections
+      concepts: Concepts
       exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
@@ -31,9 +33,15 @@ en:
         title: This is a Beta release of our new "Collections" and "Music Collections"
     blog-link: link to blog
     browse:
+      agents:
+        description: 'Here you can find previously highlighted collections surrounding artists, composers and other people who made a difference in our cultural history. '
+        title: Persons
       colours:
         description: 'In this section you can search for images based on their colour. Just click on the one that you like to view the collection! '
         title: Colours
+      concepts:
+        description: 'Here you can find previous highlighted subjects that have been featured in our Collections. '
+        title: Subjects and types
       newcontent:
         description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when. Just click on the links below to see their collections!
         tableh1: All institutions

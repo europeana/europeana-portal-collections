@@ -148,6 +148,9 @@ tr:
       FFFFFF: 
   global:
     about-us: 
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: 
       architecture: 

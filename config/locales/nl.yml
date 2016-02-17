@@ -9,6 +9,7 @@ nl:
   global:
     labs-link: 'link naar labs '
     navigation:
+      agents: 
       all_blog_posts: Alle berichten...
       all_exhibitions: Alle tentoonstellingen
       blog: Blog
@@ -18,6 +19,7 @@ nl:
       browse_sources: Bronnen
       channels: Collecties
       collections: Collecties
+      concepts: 
       exhibitions: Tentoonstellingen
       home: Home
     pro-link: link naar pro
@@ -31,9 +33,15 @@ nl:
         title: 'Dit is een Beta versie van onze nieuwe Collections, Kunst Geschiedenis- en Muziek Collecties. '
     blog-link: link naar de blog
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Kleuren
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: 

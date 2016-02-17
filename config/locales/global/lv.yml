@@ -148,6 +148,9 @@ lv:
       FFFFFF: 
   global:
     about-us: Par mums
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arheoloģija
       architecture: arhitektūra

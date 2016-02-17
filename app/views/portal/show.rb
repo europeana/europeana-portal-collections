@@ -62,11 +62,13 @@ module Portal
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcType', nil)
                   end.flatten.compact,
-                  search_field: 'what'
+                  search_field: 'what',
+                  quoted: true
                 },
                 {
                   title: 'site.object.meta-label.subject',
                   search_field: 'what',
+                  quoted: true,
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcSubject', nil)
                   end.flatten.compact
@@ -78,6 +80,7 @@ module Portal
                 {
                   title: 'site.object.meta-label.concept',
                   search_field: 'what',
+                  quoted: true,
                   fields: ['concepts.prefLabel'],
                   #fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
                   #override_val: 'true',
@@ -216,6 +219,7 @@ module Portal
                     proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
                   search_field: 'who',
+                  quoted: true,
                   extra: [
                     {
                       field: 'agents.rdaGr2DateOfBirth',
@@ -232,7 +236,8 @@ module Portal
                 {
                   title: 'site.object.meta-label.contributor',
                   fields: ['proxies.dcContributor'],
-                  search_field: 'who'
+                  search_field: 'who',
+                  quoted: true
                 }
               ]
             ),
@@ -259,7 +264,8 @@ module Portal
                 {
                   title: 'site.object.meta-label.publisher',
                   fields: ['proxies.dcPublisher'],
-                  search_field: 'proxy_dc_publisher'
+                  search_field: 'proxy_dc_publisher',
+                  quoted: true
                 },
                 {
                   title: 'site.object.meta-label.identifier',
@@ -268,12 +274,14 @@ module Portal
                 {
                   title: 'site.object.meta-label.data-provider',
                   fields: ['aggregations.edmDataProvider'],
-                  search_field: 'DATA_PROVIDER'
+                  search_field: 'DATA_PROVIDER',
+                  quoted: true
                 },
                 {
                   title: 'site.object.meta-label.provider',
                   fields: ['aggregations.edmProvider'],
-                  search_field: 'PROVIDER'
+                  search_field: 'PROVIDER',
+                  quoted: true
                 },
                 {
                   title: 'site.object.meta-label.providing-country',
@@ -309,14 +317,15 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.format',
-                  # fields: ['aggregations.webResources.dcFormat'],
                   fields: ['proxies.dcFormat'],
-                  search_field: 'what'
+                  search_field: 'proxy_dc_format',
+                  quoted: true
                 },
                 {
                   title: 'site.object.meta-label.language',
                   fields: ['proxies.dcLanguage'],
-                  search_field: 'what'
+                  search_field: 'dc_language',
+                  quoted: false
                 }
               ]
             ),
@@ -324,7 +333,7 @@ module Portal
             social_share: {
               url: URI.escape(document_url(document, format: 'html')),
               facebook: true,
-              pinterest: false,
+              pinterest: true,
               twitter: true,
               googleplus: true
             },
@@ -583,11 +592,15 @@ module Portal
       end
     end
 
-    def data_section_field_search_path(val, field)
+    def data_section_field_search_path(val, field, quoted)
       return unless val.is_a?(String)
 
       search_val = val.gsub(/[()\[\]<>]/, '')
-      search_path(q: "#{field}:\"#{search_val}\"")
+      if (quoted)
+        search_path(q: "#{field}:\"#{search_val}\"")
+      else
+        search_path(q: "#{field}:(#{search_val})")
+      end
     end
 
     def data_section_field_subsection(section)
@@ -599,7 +612,7 @@ module Portal
           if section[:url]
             item[:url] = render_document_show_field_value(document, section[:url])
           elsif section[:search_field]
-            item[:url] = data_section_field_search_path(val, section[:search_field])
+            item[:url] = data_section_field_search_path(val, section[:search_field], section[:quoted])
           end
 
           # text manipulation
@@ -740,7 +753,7 @@ module Portal
     def item_players
       @item_players ||= begin
         web_resources = presenter.media_web_resources
-        players = [:audio, :iiif, :image, :pdf, :video].select do |player|
+        players = [:audio, :iiif, :image, :pdf, :video, :midi, :oembed].select do |player|
           web_resources.any? { |wr| wr.player == player }
         end
         players.map do |player|

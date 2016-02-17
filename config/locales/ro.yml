@@ -9,6 +9,7 @@ ro:
   global:
     labs-link: 
     navigation:
+      agents: 
       all_blog_posts: Toate postările...
       all_exhibitions: Toate expozițiile...
       blog: Blog
@@ -18,6 +19,7 @@ ro:
       browse_sources: Surse
       channels: Colecții
       collections: Colecții
+      concepts: 
       exhibitions: Expoziții
       home: Acasă
     pro-link: 
@@ -31,9 +33,15 @@ ro:
         title: "Aceasta este versiunea Beta a noilor noastre \"Colecții\" și a \"Colecției de Muzică\" si a \n\"Istoria Artei Colecții\""
     blog-link: 
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Culori
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: Instituții

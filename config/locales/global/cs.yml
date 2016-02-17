@@ -148,6 +148,9 @@ cs:
       FFFFFF: 
   global:
     about-us: 
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: 
       architecture: 
@@ -450,8 +453,8 @@ cs:
     sitemap: 
     terms-and-policies: 
     type: 
-  'no': 
-  pl: 
+  'no': Norsko
+  pl: Portugalsko
   site:
     facet:
       language:

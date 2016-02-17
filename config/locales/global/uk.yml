@@ -1,5 +1,5 @@
 uk:
-  Symphonies: 
+  Symphonies: "Симфонії"
   X11:
     colours:
       '000000': 
@@ -147,25 +147,28 @@ uk:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: 
+    about-us: "Про нас"
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
-      archaeology: 
-      architecture: 
-      art: 
-      fashion: 
+      archaeology: "археологія"
+      architecture: "архітектура"
+      art: "мистецтво"
+      fashion: "мода"
       home: 
-      maps: 
-      music: 
-      natural-history: 
-      newspapers: 
+      maps: "карти"
+      music: "музика"
+      natural-history: "природнича історія"
+      newspapers: "газети"
       performing-arts: 
-    channels-art: 
+    channels-art: "Колекції історії мистецтва"
     channels-art-image: 
     channels-art-link: 
     channels-fashion: 
     channels-music: 
     choose-language: 
-    email-address: 
+    email-address: "адреса електронної пошти"
     facet:
       advanced:
         options: 
@@ -180,78 +183,78 @@ uk:
       colour: 
       colour-black-and-white: 
       country:
-        austria: 
-        belgium: 
-        bulgaria: 
-        croatia: 
-        cyprus: 
-        czechrepublic: 
-        denmark: 
-        estonia: 
-        europe: 
-        finland: 
-        france: 
-        germany: 
-        greece: 
-        hungary: 
-        iceland: 
-        ireland: 
-        israel: 
-        italy: 
-        latvia: 
-        lithuania: 
-        luxembourg: 
-        malta: 
-        netherlands: 
-        norway: 
-        poland: 
-        portugal: 
-        romania: 
-        russia: 
-        serbia: 
-        slovakia: 
-        slovenia: 
-        spain: 
-        sweden: 
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
+        austria: "Австрія"
+        belgium: "Бельгія"
+        bulgaria: "Болгарія"
+        croatia: "Хорватія"
+        cyprus: "Кіпр"
+        czechrepublic: "Чехія"
+        denmark: "Данія"
+        estonia: "Естонія"
+        europe: "Європа"
+        finland: "Фінляндія"
+        france: "Франція"
+        germany: "Німеччина"
+        greece: "Греція"
+        hungary: "Угорщина"
+        iceland: "Ісландія"
+        ireland: "Ірландія"
+        israel: "Ізраїль"
+        italy: "Італія"
+        latvia: "Латвія"
+        lithuania: "Литва"
+        luxembourg: "Люксембург"
+        malta: "Мальта"
+        netherlands: "Нідерланди"
+        norway: "Норвегія"
+        poland: "Польща"
+        portugal: "Португалія"
+        romania: "Румунія"
+        russia: "Росія"
+        serbia: "Сербія"
+        slovakia: "Словаччина"
+        slovenia: "Словенія"
+        spain: "Іспанія"
+        sweden: "Швеція"
+        switzerland: "Швейцарія"
+        turkey: "Туреччина"
+        ukraine: "Україна"
+        unitedkingdom: "Великобританія"
+        unitedstatesofamerica: "США"
       creator: 
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
-        media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
-        sound_hq: 
-        text_fulltext: 
+        channel: "Колекції"
+        colourpalette: "Колір"
+        country: "Країна"
+        data_provider: "Установа"
+        image_aspectratio: "Орієнтація"
+        image_colour: "Палітра"
+        image_size: "Розмір"
+        language: "Мова"
+        language_of_description: "Мова опису"
+        media: "Лише елементи з по"
+        mime_type: "Формат файлу"
+        provider: "Агрегатор"
+        reusability: "Чи можу я "
+        sound_duration: "Тривалість"
+        sound_hq: "Висока якість"
+        text_fulltext: "Повний текст"
         type: 
-        ugc: 
-        video_duration: 
-        video_hd: 
-        year: 
+        ugc: "Показувати вміст доданий користувачами"
+        video_duration: "Тривалість"
+        video_hd: "Якість"
+        year: "Дата"
       image_aspectratio:
-        landscape: 
-        portrait: 
+        landscape: "Альбомна"
+        portrait: "Портретна"
       image_colour:
-        'false': 
-        'true': 
+        'false': "Чорнобіле"
+        'true': "Кольорове"
       image_size:
-        extra_large: 
-        large: 
-        medium: 
-        small: 
+        extra_large: "Дуже велике (4MP+)"
+        large: "Велике (1-4MP)"
+        medium: "Середнє (0,5-1MP)"
+        small: "Мале (<0,5MP)"
       language:
         bg: 
         ca: 

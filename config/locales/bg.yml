@@ -9,6 +9,7 @@ bg:
   global:
     labs-link: "линк към лабораториите"
     navigation:
+      agents: 
       all_blog_posts: "Всички постове"
       all_exhibitions: "Всички виртуални изложби"
       blog: "Блог"
@@ -18,6 +19,7 @@ bg:
       browse_sources: "Източници"
       channels: "Колекции"
       collections: "Колекции"
+      concepts: 
       exhibitions: "Виртуални изложби"
       home: "Начало"
     pro-link: "линк към Pro"
@@ -31,9 +33,15 @@ bg:
         title: Това е Beta версия на новите ни страници "Колекции" и "Музикални колекции" и "История на изкуството Колекции".
     blog-link: "линк към блог"
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: "Цветове"
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: "Всички институции"

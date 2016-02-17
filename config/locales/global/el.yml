@@ -148,6 +148,9 @@ el:
       FFFFFF: 
   global:
     about-us: "Σχετικά με εμάς"
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: "αρχαιολογία"
       architecture: "αρχιτεκτονική"

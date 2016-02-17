@@ -6,12 +6,23 @@
 class PortalController < ApplicationController
   include Catalog
   include Europeana::Styleguide
+  include SoundCloudUrnResolver
+  include OembedRetriever
 
   before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
+
+  attr_reader :url_conversions, :oembed_html
+
+  rescue_from URI::InvalidURIError do |exception|
+    handle_error(exception, 404, 'html')
+  end
 
   # GET /record/:id
   def show
     @response, @document = fetch(doc_id)
+    @url_conversions = soundcloud_urns_to_urls(@document)
+    @oembed_html = oembed_html_for_urls(@document, @url_conversions)
+
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @hierarchy = Europeana::API::Record::new('/' + params[:id]).hierarchy.ancestor_self_siblings
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
@@ -37,24 +48,13 @@ class PortalController < ApplicationController
   # GET /record/:id/media
   def media
     @response, @document = fetch(doc_id)
+    @url_conversions = soundcloud_urns_to_urls(@document)
+    @oembed_html = oembed_html_for_urls(@document, @url_conversions)
     @page = params[:page] || 1
     @per_page = params[:per_page] || 4
 
     respond_to do |format|
       format.json { render :media, layout: false }
-    end
-  end
-
-  # @todo move into own controller to isolate record resource related actions
-  def static
-    @page = Page.find_by_slug!(params[:page])
-    authorize! :show, @page
-
-    respond_to do |format|
-      format.html do
-        page_template = "pages/#{@page.slug}"
-        render template_exists?(page_template) ? page_template : 'portal/static'
-      end
     end
   end
 end

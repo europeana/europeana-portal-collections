@@ -9,6 +9,7 @@ lt:
   global:
     labs-link: Nuoroda į Labs
     navigation:
+      agents: 
       all_blog_posts: Visi įrašai
       all_exhibitions: Visos parodos
       blog: Tinklaraštis
@@ -18,6 +19,7 @@ lt:
       browse_sources: Ištekliai
       channels: Kolekcijos
       collections: Kolekcijos
+      concepts: 
       exhibitions: Parodos
       home: Pagrindinis
     pro-link: Nuoroda į Pro
@@ -31,9 +33,15 @@ lt:
         title: Tai mūsų naujųjų "Kolekcijų" ir "Muzikos kolekcijos" Beta versija
     blog-link: Nuoroda į tinklaraštį
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Spalvos
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: Visos institucijos

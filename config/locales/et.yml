@@ -9,6 +9,7 @@ et:
   global:
     labs-link: link Labs'i
     navigation:
+      agents: 
       all_blog_posts: Kõik blogipostitused...
       all_exhibitions: Kõik näitused...
       blog: Blogi
@@ -18,6 +19,7 @@ et:
       browse_sources: Allikad
       channels: Kogud
       collections: Kogud
+      concepts: 
       exhibitions: Näitused
       home: Avaleht
     pro-link: link Pro'sse
@@ -31,9 +33,15 @@ et:
         title: Tegu on "Kogude" ja "Muusikakogu" beta versiooniga.
     blog-link: link blogisse
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: Selles alaosas saad otsida pilte nende värvist lähtudes. Lihtsalt klõpsa pildile, mis sulle meeldib,et vastavat kogu näha!
         title: Värvid
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: Selles alaosas leiad sisu, mis on hiljuti lisatud Europeana kogusse. Siin on näha, millised institutsioonid on avaldanud uut ainest nagu ka selle hulka ja avaldamisaega. Lihtsalt klõpsa allolevatele linkidele nende kogude nägemiseks.
         tableh1: Kõik asutused

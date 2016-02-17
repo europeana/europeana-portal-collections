@@ -9,6 +9,7 @@ pt:
   global:
     labs-link: ''
     navigation:
+      agents: 
       all_blog_posts: Todos os Artigos...
       all_exhibitions: Todas as Exposições...
       blog: Blogue
@@ -18,6 +19,7 @@ pt:
       browse_sources: por Fontes
       channels: Coleções
       collections: Coleções
+      concepts: 
       exhibitions: Exposições
       home: Início
     pro-link: ''
@@ -31,9 +33,15 @@ pt:
         title: Esta é a versão Beta das novas Europeana Coleções, História da Arte Colecções e Europeana Coleções Música
     blog-link: ligação ao blogue
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Cores
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: Todas as instituições

@@ -1,7 +1,7 @@
 class Link::Promotion < Link
   include HasSettingsAttribute
 
-  belongs_to :media_object, dependent: :destroy, inverse_of: :promotion
+  belongs_to :media_object, dependent: :destroy
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
   has_settings(:wide, :category, :class)
@@ -13,7 +13,7 @@ class Link::Promotion < Link
 
   class << self
     def settings_category_enum
-      %w(collection exhibition new partner featured_site)
+      %w(collection exhibition new partner featured_site app timeline playlist gallery)
     end
 
     def settings_wide_enum

@@ -148,6 +148,9 @@ hr:
       FFFFFF: 
   global:
     about-us: O nama
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arheologija
       architecture: arhitektura

@@ -9,6 +9,7 @@ fi:
   global:
     labs-link: linkki labsiin
     navigation:
+      agents: 
       all_blog_posts: Kaikki blogikirjoitukset...
       all_exhibitions: Kaikki näyttelyt...
       blog: Blogi
@@ -18,6 +19,7 @@ fi:
       browse_sources: Lähteet
       channels: Kokoelmat
       collections: Kokoelmat
+      concepts: 
       exhibitions: Näyttelyt
       home: Koti
     pro-link: linkki pro:hon
@@ -31,9 +33,15 @@ fi:
         title: Tämä on Alfa-julkaisu uusista julkaisuistamme "Kokoelmat", "Taidehistorian Kokoelmat" ja "Musiikkikokoelma"
     blog-link: linkki blogiin
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Värit
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: Kaikki instituutiot

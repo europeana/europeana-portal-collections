@@ -9,6 +9,7 @@ hu:
   global:
     labs-link: link a lab-hoz
     navigation:
+      agents: 
       all_blog_posts: Minden bejegyzés...
       all_exhibitions: Minden kiállítás
       blog: Blog
@@ -18,6 +19,7 @@ hu:
       browse_sources: Források
       channels: Gyűjtemények
       collections: Gyűjtemények
+      concepts: 
       exhibitions: Kiállítások
       home: Főoldal
     pro-link: link a pro-ra
@@ -31,9 +33,15 @@ hu:
         title: Ez egy Beta verzió új Gyűjtemények, Művészettörténet gyűjtemények és Zenei Gyűjtemények számára
     blog-link: link a blogra
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Színek
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: Adatszolgáltatók

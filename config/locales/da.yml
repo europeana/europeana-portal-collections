@@ -9,6 +9,7 @@ da:
   global:
     labs-link: link til labs
     navigation:
+      agents: 
       all_blog_posts: Alle poster...
       all_exhibitions: Alle udstillinger
       blog: Blog
@@ -18,6 +19,7 @@ da:
       browse_sources: Kilder
       channels: Samlinger
       collections: Samlinger
+      concepts: 
       exhibitions: Udstillinger
       home: Hjem
     pro-link: link til pro
@@ -31,9 +33,15 @@ da:
         title: 'Dette er en Beta version af vores nye "Samlinger" og "Musiksamling" og "Kunsthistorie Samlinger". '
     blog-link: link til blog
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: Farver
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: 

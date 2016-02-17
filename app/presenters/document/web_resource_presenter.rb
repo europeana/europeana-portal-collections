@@ -10,6 +10,8 @@ module Document
       @record_presenter = record_presenter || (record.nil? ? nil : RecordPresenter.new(record, controller))
     end
 
+    ##
+    # This is the data required by the view template
     def media_item
       {
         media_type: media_type,
@@ -18,6 +20,7 @@ module Document
         playable: playable?,
         thumbnail: thumbnail,
         play_url: play_url,
+        play_html: play_html,
         technical_metadata: technical_metadata,
         download: {
           url: downloadable? ? download_url : false,
@@ -39,8 +42,18 @@ module Document
       end
     end
 
+    def play_html
+      @play_html ||= begin
+        return nil unless media_type == 'oembed'
+        @controller.oembed_html[url]
+      end
+    end
+
     def url
-      @url ||= render_document_show_field_value('about')
+      @url ||= begin
+        url = render_document_show_field_value('about')
+        @controller.url_conversions[url] || url
+      end
     end
 
     def media_rights
@@ -54,32 +67,51 @@ module Document
       @mime_type ||= render_document_show_field_value('ebucoreHasMimeType')
     end
 
+    def record_type
+      @record_type ||= @record_presenter.render_document_show_field_value('type')
+    end
+
     # Media type function normalises mime types
     def media_type
-      @media_type ||= begin
-        if @record_presenter.iiif_manifesto
-          'iiif'
-        else
-          case (mime_type || '').downcase
-          when /^audio\//
-            'audio'
-          when /^image\//
-            'image'
-          when /^video\//
-            'video'
-          when /^text\//, /\/pdf$/
-            'text'
-          else
-            @record_presenter.render_document_show_field_value('type')
-          end
-        end
+      @media_type ||= (media_type_special_case || media_type_from_mime_type || media_type_from_record_type)
+    end
+
+    def media_type_special_case
+      case
+      when @record_presenter.iiif_manifesto
+        'iiif'
+      when @controller.oembed_html.key?(url)
+        'oembed'
+      end
+    end
+
+    def media_type_from_mime_type
+      case (mime_type || '').downcase
+      when /^audio\//
+        'audio'
+      when /^image\//
+        'image'
+      when /^video\//
+        'video'
+      when /^text\//, /\/pdf$/
+        'text'
+      end
+    end
+
+    def media_type_from_record_type
+      case record_type
+      when '3D'
+        '3D'
+      when 'SOUND'
+        'audio'
+      else
+        record_type.downcase
       end
     end
 
     def edm_media_type
       @edm_media_type ||= begin
-        record_type = @record_presenter.render_document_show_field_value('type')
-        if record_type == '3D' || media_type == 'iiif'
+        if record_type == '3D' || %w(iiif oembed).include?(media_type)
           record_type
         elsif media_type == 'audio'
           'SOUND'
@@ -104,8 +136,8 @@ module Document
     end
 
     def technical_metadata
-      width   = render_document_show_field_value('ebucoreWidth')
-      height  = render_document_show_field_value('ebucoreHeight')
+      width = render_document_show_field_value('ebucoreWidth')
+      height = render_document_show_field_value('ebucoreHeight')
 
       file_size = number_to_human_size(render_document_show_field_value('ebucoreFileByteSize')) || ''
       {
@@ -121,26 +153,28 @@ module Document
         runtime: render_document_show_field_value('ebucoreDuration'),
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
         attribution_plain: render_document_show_field_value('textAttributionSnippet'),
-        attribution_html:  render_document_show_field_value('htmlAttributionSnippet')
+        attribution_html: render_document_show_field_value('htmlAttributionSnippet')
       }
     end
 
     def is_avi?
-      avi_fmts = []
-      avi_fmts << 'video/avi'
-      avi_fmts << 'video/msvideo'
-      avi_fmts << 'video/x-msvideo'
-      avi_fmts << 'image/avi'
-      avi_fmts << 'video/xmpg2'
-      avi_fmts << 'application/x-troff-msvideo'
-      avi_fmts << 'audio/aiff'
-      avi_fmts << 'audio/avi'
-      avi_fmts.include? mime_type
+      %w(video/avi video/msvideo video/x-msvideo image/avi video/xmpg2
+         application/x-troff-msvideo audio/aiff audio/avi).include?(mime_type)
+    end
+
+    def displayable?
+      return false if for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by?
+
+      (@record_presenter.edm_object.present? && for_edm_object?) ||
+        (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
+        (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
+        (@record_presenter.has_views.include?(url) && mime_type.present?) ||
+        playable_without_mime_type?
     end
 
     def playable?
       if url.blank? ||
-          (media_type != 'iiif' && mime_type.blank?) ||
+          (mime_type.blank? && !playable_without_mime_type?) ||
           (mime_type == 'video/mpeg') ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
@@ -150,6 +184,10 @@ module Document
       else
         true
       end
+    end
+
+    def playable_without_mime_type?
+      %w(iiif oembed).include?(media_type)
     end
 
     def downloadable?
@@ -170,16 +208,6 @@ module Document
 
     def for_edm_is_shown_by?
       url == @record_presenter.edm_is_shown_by
-    end
-
-    def displayable?
-      return false if for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by?
-
-      (@record_presenter.edm_object.present? && for_edm_object?) ||
-        (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
-        (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
-        (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-        (media_type == 'iiif')
     end
 
     def download_disabled?
@@ -212,18 +240,10 @@ module Document
     def player
       @player ||= begin
         case media_type
-        when 'image'
-          :image
-        when 'audio', 'sound'
-          :audio
-        when 'iiif'
-          :iiif
-        when 'pdf'
-          :pdf
         when 'text'
-          mime_type == 'application/pdf' ? :pdf : :text
-        when 'video'
-          :video
+          (mime_type =~ /\/pdf$/) ? :pdf : :text
+        else
+          media_type.to_sym
         end
       end
     end

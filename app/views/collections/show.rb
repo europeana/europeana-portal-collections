@@ -38,7 +38,7 @@ module Collections
             },
             recent: @recent_additions.blank? ? nil : {
               title: t('site.collections.labels.recent'),
-              items: stylised_recent_additions(@recent_additions, max: 3, skip_date: true)
+              items: stylised_recent_additions(@recent_additions, max: 3, skip_date: true, collection: @collection)
             },
             credits: @landing_page.credits.blank? ? {} : {
               title: t('site.collections.labels.credits'),
@@ -46,17 +46,18 @@ module Collections
             }
           },
           hero_config: hero_config(@landing_page.hero_image),
-          channel_entry: @landing_page.browse_entries.blank? ? nil : {
-            items: browse_entry_items(@landing_page.browse_entries)
+          channel_entry: @landing_page.browse_entries.published.blank? ? nil : {
+            items: browse_entry_items(@landing_page.browse_entries.published, @landing_page)
           },
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
           },
           news: blog_news_items.blank? ? nil : {
             items: blog_news_items,
-            blogurl: 'http://blog.europeana.eu/tag/#' + @collection.key
+            blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
-          social: @landing_page.social_media.blank? ? nil : social_media_links
+          social: @landing_page.social_media.blank? ? nil : social_media_links,
+          banner: banner_content(@landing_page.banner_id)
         }.reverse_merge(helpers.content)
       end
     end

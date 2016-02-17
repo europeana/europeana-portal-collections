@@ -148,6 +148,9 @@
       FFFFFF: 
   global:
     about-us: Om oss
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arkeologi
       architecture: arkitektur
@@ -450,8 +453,8 @@
     sitemap: 
     terms-and-policies: 
     type: 
-  'no': 
-  pl: 
+  'no': Norge
+  pl: Portugal
   site:
     facet:
       language:

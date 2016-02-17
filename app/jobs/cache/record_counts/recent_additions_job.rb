@@ -5,32 +5,31 @@ module Cache
 
       queue_as :default
 
-      def perform
-        sets.each_pair do |cache_key, params|
-          Rails.cache.write(cache_key, recent_additions(params))
+      def perform(collection_id = nil)
+        cache_key = 'browse/new_content/providers'
+        overlay_params = {}
+
+        unless collection_id.nil?
+          collection = Collection.find(collection_id)
+          unless collection.nil?
+            cache_key = "record/counts/collections/#{collection.key}/recent-additions"
+            overlay_params = collection.api_params_hash
+          end
         end
+
+        Rails.cache.write(cache_key, recent_additions(overlay_params))
       end
 
       protected
 
-      def sets
-        {
-          'browse/new_content/providers' => {}
-        }.tap do |sets|
-          Collection.published.each do |collection|
-            cache_key = "record/counts/collections/#{collection.key}/recent-additions"
-            sets[cache_key] = collection.api_params_hash
-          end
-        end
-      end
-
-      def recent_additions(params = {})
+      def recent_additions(overlay_params = {})
         recent_additions = []
         (0..23).each do |months_ago|
           time = recent_additions_months_ago_time(months_ago)
 
-          builder = search_builder(search_params_logic)
-          api_query = builder.rows(0).where(time[:range_query]).with_overlay_params(params).merge(profile: 'minimal facets')
+          api_query = search_builder.rows(0).where(time[:range_query]).merge(profile: 'minimal facets')
+          api_query.with_overlay_params(overlay_params)
+
           api_response = repository.search(api_query)
 
           next if api_response.total == 0

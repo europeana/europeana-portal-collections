@@ -9,6 +9,7 @@ ru:
   global:
     labs-link: Cсылка на Labs
     navigation:
+      agents: 
       all_blog_posts: "Все сообщения"
       all_exhibitions: "Все выставки"
       blog: "Блог"
@@ -18,6 +19,7 @@ ru:
       browse_sources: "Источники"
       channels: "Коллекции"
       collections: "Коллекции"
+      concepts: 
       exhibitions: "Выставки"
       home: "Домой"
     pro-link: "Ссылка на Pro"
@@ -31,9 +33,15 @@ ru:
         title: "Это Beta релиз наших новых проектов Collections и Music Collection и  Art History Collections"
     blog-link: "Ссылка на блог"
     browse:
+      agents:
+        description: 
+        title: 
       colours:
         description: 
         title: "Цвета"
+      concepts:
+        description: 
+        title: 
       newcontent:
         description: 
         tableh1: "Все организации"

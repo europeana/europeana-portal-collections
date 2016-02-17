@@ -148,6 +148,9 @@ pt:
       FFFFFF: 
   global:
     about-us: Sobre nós
+    actions:
+      filter-all: 
+      filter-by: 
     channel:
       archaeology: arqueologia
       architecture: arquitectura

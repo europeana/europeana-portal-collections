@@ -9,6 +9,7 @@ sv:
   global:
     labs-link: Länk till Labs
     navigation:
+      agents: 
       all_blog_posts: Alla bloggposter
       all_exhibitions: Alla utställningar
       blog: Blogg
@@ -18,6 +19,7 @@ sv:
       browse_sources: Våra källor
       channels: Collections
       collections: Samlingar
+      concepts: 
       exhibitions: Utställningar
       home: Start
     pro-link: länk till Pro
@@ -31,9 +33,15 @@ sv:
         title: 
     blog-link: 
     browse:
+      agents:
+        description: 
+        title: Personer
       colours:
         description: 
         title: Färger
+      concepts:
+        description: 
+        title: "Ämnen och typer"
       newcontent:
         description: 
         tableh1: Alla institutioner
