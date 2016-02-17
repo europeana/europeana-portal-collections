@@ -3,10 +3,12 @@ module Portal
     attr_accessor :document, :debug
 
     def head_links
+
+      s = super
       mustache[:head_links] ||= {
         items: [
           { rel: 'canonical', href: document_url(document, format: 'html') }
-        ] + super [:items]
+        ] + s[:items]
       }
     end
 
