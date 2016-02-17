@@ -8,7 +8,7 @@ module OembedRetriever
   # @param doc {Europeana::Blacklight::Document} Document to scan for OEmbed URLs
   # @param conversions {Hash} Map of URL conversions, e.g. for SoundCloud URNs
   def oembed_html_for_urls(doc, conversions = {})
-    uris = (doc.fetch('aggregations.edmIsShownBy', []) || []) + (doc.fetch('webResources.about', []) || [])
+    uris = (doc.fetch('aggregations.edmIsShownBy', []) || []) + (doc.fetch('aggregations.webResources.about', []) || [])
     urls = uris.map { |u| conversions.key?(u) ? conversions[u] : u }
 
     urls.uniq.each_with_object({}) do |url, map|
