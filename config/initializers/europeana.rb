@@ -17,3 +17,11 @@ if ENV['EDM_IS_SHOWN_BY_PROXY'] && !ENV['EUROPEANA_MEDIA_PROXY']
   ENV['EUROPEANA_MEDIA_PROXY'] = ENV['EDM_IS_SHOWN_BY_PROXY']
 end
 Rails.application.config.x.europeana_media_proxy = ENV['EUROPEANA_MEDIA_PROXY']
+
+Rails.application.config.x.europeana_opensearch_host = if ENV['EUROPEANA_OPENSEARCH_HOST']
+                                                         ENV['EUROPEANA_OPENSEARCH_HOST']
+                                                       elsif ENV['HTTP_HOST']
+                                                         ENV['HTTP_HOST']
+                                                       else
+                                                         ''
+                                                       end
