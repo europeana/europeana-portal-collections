@@ -16,7 +16,7 @@ module MustacheHelper
     if params[:controller] == 'home' && params[:action] == 'index'
       links << { rel: 'canonical', href: root_url }
     end
-    links
+    { items: links }
   end
 
   def page_locale
