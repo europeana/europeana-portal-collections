@@ -3,7 +3,6 @@ module Portal
     attr_accessor :document, :debug
 
     def head_links
-
       s = super
       mustache[:head_links] ||= {
         items: [
