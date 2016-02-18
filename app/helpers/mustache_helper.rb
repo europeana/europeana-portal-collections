@@ -8,23 +8,10 @@ module MustacheHelper
   def head_links
     links = [
       # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
-      {
-        rel: 'stylesheet',
-        href: 'http://fonts.googleapis.com/css?family=Ubuntu:300,400,700|Open+Sans:400italic,700italic,400,700&amp;subset=latin,greek,cyrillic',
-        media: 'all',
-        css: 'true'
-      },
-      {
-        rel: 'stylesheet',
-        href: styleguide_url('/css/search/screen.css'),
-        media: 'all',
-        css: 'true'
-      },
-      {
-        rel: 'search', type: 'application/opensearchdescription+xml',
+      { rel: 'stylesheet', href: styleguide_url('/css/search/screen.css'), media: 'all', css: 'true' },
+      { rel: 'search', type: 'application/opensearchdescription+xml',
         href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
-        title: 'Europeana Search'
-      }
+        title: 'Europeana Search' }
     ]
     if params[:controller] == 'home' && params[:action] == 'index'
       links << { rel: 'canonical', href: root_url }
