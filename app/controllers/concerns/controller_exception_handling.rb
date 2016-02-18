@@ -69,7 +69,7 @@ module ControllerExceptionHandling
 
     ErrorMailer.report(
       { class: exception.class.to_s, message: exception.message, backtrace: exception.backtrace },
-      { original_url: request.original_url, method: request.method,referer: request.referer }
+      { original_url: request.original_url, method: request.method, referer: request.referer }
     ).deliver_later
   end
 
