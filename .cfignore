@@ -24,3 +24,6 @@
 
 # Ignore Redis snapshot
 /dump.rdb
+
+# Ignore bundled gems
+/vendor/bundle
