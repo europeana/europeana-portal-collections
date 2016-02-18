@@ -34,8 +34,8 @@ en:
     blog-link: link to blog
     browse:
       agents:
-        description: 'Here you can find previously highlighted collections surrounding artists, composers and other people who made a difference in our cultural history. '
-        title: Persons
+        description: Here you can find previous collection highlights about artists, composers and other important figures who have made a difference in our cultural history.
+        title: People
       colours:
         description: In this section you can search for images based on their colour. Just click on a coloured box to view images that contain that colour!
         title: Colours
