@@ -1,3 +1,4 @@
 <p><%= @request_method %> <%= @request_url %></p>
+<% unless @request_referer.blank? %><p>Referer: <%= @request_referer %></p><% end %>
 <p><strong><%= @class %>:</strong> <%= @message %></p>
 <pre><code><%= @backtrace %></code></pre>

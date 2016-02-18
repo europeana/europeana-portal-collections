@@ -66,7 +66,7 @@ module ControllerExceptionHandling
 
   def report_error(exception)
     return unless Rails.application.config.x.error_report_mail_to.present? # No email recipient configured
-    ErrorMailer.report(exception.class.to_s, exception.message, exception.backtrace, request.original_url, request.method).deliver_later
+    ErrorMailer.report(exception.class.to_s, exception.message, exception.backtrace, request.original_url, request.method, request.referer).deliver_later
   end
 
   def render_html_error_response(exception, status)

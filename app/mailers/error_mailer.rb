@@ -1,7 +1,7 @@
 class ErrorMailer < ApplicationMailer
   include ActionView::Helpers::TextHelper
 
-  def report(klass, message, backtrace, request_url, request_method)
+  def report(klass, message, backtrace, request_url, request_method, request_referer = nil)
     fail Errors::NoRecipient unless Rails.application.config.x.error_report_mail_to.present?
 
     @class = klass
@@ -9,6 +9,7 @@ class ErrorMailer < ApplicationMailer
     @backtrace = Rails.backtrace_cleaner.clean(backtrace).join("\n")
     @request_url = request_url
     @request_method = request_method
+    @request_referer = request_referer
 
     mail(to: Rails.application.config.x.error_report_mail_to, subject: 'New portal error')
   end
