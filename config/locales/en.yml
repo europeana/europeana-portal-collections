@@ -19,7 +19,7 @@ en:
       browse_sources: Sources
       channels: Collections
       collections: Collections
-      concepts: Subjects and types
+      concepts: Topics
       exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
@@ -40,8 +40,8 @@ en:
         description: In this section you can search for images based on their colour. Just click on a coloured box to view images that contain that colour!
         title: Colours
       concepts:
-        description: 'Here you can find previous highlighted subjects that have been featured in our Collections. '
-        title: Subjects and types
+        description: Here you can find previous highlighted topics that have been featured in our Collections.
+        title: Topics
       newcontent:
         description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when. Just click on the links below to see their collections!
         tableh1: All institutions
