@@ -232,7 +232,7 @@ en:
         intro: Sorry, we can't find that page
         text: Unfortunately we couldn't find the page you were looking for. Try searching Europeana or you might like the selected items below.
       about:
-        text: |+
+        text: |-
           <p>Searching for a favourite old painting? Doing some research or writing a school paper?  Looking for an inspiration for your next coffee mug design?  Fancy learning something new? Whatever the reason for your visit to Europeana, welcome!</p>
 
           <p>Delve into Europe's largest online collection of art, culture and science. Europeana Collections brings you material from the famous and the not-so-famous (but always fascinating)  libraries, museums, galleries and archives of Europe.</p>
@@ -241,13 +241,11 @@ en:
 
           <p>Explore, discover, watch, listen, read, download... Enjoy!</p>
 
-          <p>Now why not try out the Europeana Art History Collections or Europeana Music Collections? We also have custom resources for researchers and cultural developers/innovators (this is where you can find our API), as well as a range of virtual exhibitions and a blog. </p>
+          <p>Now why not try out the <a href="http://europeana.eu/portal/collections/art-history">Europeana Art History Collections</a> or <a href="http://europeana.eu/portal/collections/music">Europeana Music Collections</a>? We also have custom resources for <a href="http://research.europeana.eu/">researchers</a> and cultural <a href="http://labs.europeana.eu/">developers/innovators</a> (this is where you can find our <a href="http://labs.europeana.eu/api">APIs</a>), as well as a range of <a href="http://exhibitions.europeana.eu/">virtual exhibitions</a> and a <a href="http://blog.europeana.eu/">blog</a>. </p>
 
-          <p>And if you’re still hungry for more, you can get your daily dose of culture on Facebook, Twitter, Medium, Google+ and Pinterest.</p>
+          <p>And if you’re still hungry for more, you can get your daily dose of culture on <a href="https://www.facebook.com/Europeana">Facebook</a>, <a href="https://twitter.com/Europeanaeu">Twitter</a>, <a href="https://medium.com/@Europeana">Medium</a>, <a href="https://plus.google.com/+europeana">Google+</a>, <a href="http://europeanacollections.tumblr.com/">Tumblr</a> and <a href="https://www.pinterest.com/europeana/">Pinterest</a>.</p>
 
-          <p>For more information on how we work with cultural institutions and their collections, visit Europeana Pro.</p>
-
-
+          <p>For more information on how we work with cultural institutions and their collections, visit <a href="http://pro.europeana.eu/">Europeana Pro</a>.</p>
         title: Welcome, culture lover!
       music-channel-about:
         text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Collection available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Collection. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"

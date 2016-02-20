@@ -9,7 +9,7 @@ pl:
   global:
     labs-link: link do labs
     navigation:
-      agents: 
+      agents: Osoby
       all_blog_posts: Wszystkie wpisy...
       all_exhibitions: Wszystkie wystawy...
       blog: Blog
@@ -19,7 +19,7 @@ pl:
       browse_sources: "Źródła"
       channels: Kolekcje
       collections: Kolekcje
-      concepts: 
+      concepts: Tematy
       exhibitions: Wystawy
       home: Strona główna
     pro-link: link do Europeana Pro
@@ -28,10 +28,10 @@ pl:
   site:
     alpha:
       feedback_banner:
-        description: Wersja alfa oznacza, że strona działa w ograniczonym zakresie, ponieważ jest na bieżąco rozbudowywana. Dlatego też może przejściowo nie działać. Twoja opinia pomoże nam usprawnić jej funkcjonowanie!
+        description: Wersja beta oznacza, że strona działa w ograniczonym zakresie, ponieważ jest na bieżąco rozbudowywana. Dlatego też może przejściowo nie działać. Twoja opinia pomoże nam usprawnić jej funkcjonowanie!
         link-text: Powiedz nam co myślisz!
         title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka" oraz "Kolekcji: Historia sztuki".'
-    blog-link: link do bloga
+    blog-link: http://blog.europeana.eu
     browse:
       agents:
         description: 

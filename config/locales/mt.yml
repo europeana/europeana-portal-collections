@@ -9,7 +9,7 @@ mt:
   global:
     labs-link: Link lejn il-labs
     navigation:
-      agents: Aġenti
+      agents: 
       all_blog_posts: Il-blog posts kollha...
       all_exhibitions: Il-wirjiet kollha...
       blog: Blog
@@ -19,7 +19,7 @@ mt:
       browse_sources: Sorsi
       channels: Kollezzjonijiet
       collections: Kollezzjonijiet
-      concepts: Kunċett
+      concepts: 
       exhibitions: Wirjiet
       home: Paġna Primarja
     pro-link: Link għal pro
