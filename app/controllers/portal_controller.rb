@@ -17,6 +17,15 @@ class PortalController < ApplicationController
     handle_error(exception, 404, 'html')
   end
 
+  # GET /search
+  def index
+    (@response, @document_list) = search_results(params)
+
+    respond_to do |format|
+      format.html { store_preferred_view }
+    end
+  end
+
   # GET /record/:id
   def show
     @response, @document = fetch(doc_id)
@@ -32,7 +41,6 @@ class PortalController < ApplicationController
         render action: 'show'
       end
       format.json { render json: { response: { document: @document } } }
-      additional_export_formats(@document, format)
     end
   end
 
