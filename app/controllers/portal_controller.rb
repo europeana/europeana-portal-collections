@@ -49,7 +49,7 @@ class PortalController < ApplicationController
   def media
     @response, @document = fetch(doc_id)
     @url_conversions = soundcloud_urns_to_urls(@document)
-    @oembed_html = oembed_html_for_urls(@document, @url_conversions)
+    @oembed_html = oembed_for_urls(@document, @url_conversions)
     @page = params[:page] || 1
     @per_page = params[:per_page] || 4
 
