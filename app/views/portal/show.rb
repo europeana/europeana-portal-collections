@@ -7,7 +7,13 @@ module Portal
       mustache[:head_links] ||= {
         items: [
           { rel: 'canonical', href: document_url(document, format: 'html') }
-        ] + s[:items]
+        ] + oembed_links + s[:items]
+      }
+    end
+
+    def oembed_links
+      @oembed_html.map { |_url, oembed|
+        { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
       }
     end
 
