@@ -12,9 +12,9 @@ module Portal
     end
 
     def oembed_links
-      @oembed_html.map { |_url, oembed|
+      @oembed_html.map do |_url, oembed|
         { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
-      }
+      end
     end
 
     def head_meta
