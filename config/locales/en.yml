@@ -3,7 +3,7 @@ en:
     site:
       browse:
         newcontent:
-          description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when!  Just click on the links below to see their collections.
+          description: 'Here, you can explore all the recent additions to Europeana Collections. See which cultural institution has contributed new items, the number of items they''ve added and when. Just click on the links below to find out more. '
         sources:
           description: Below you see a list of institutions who have contributed their content to Europeana Collections. These institutions aggregate and contribute their data to Europeana, click on the link that interests you below to view a particular partner collection!
   global:
@@ -15,7 +15,7 @@ en:
       blog: Blog
       browse: Browse
       browse_colours: Colours
-      browse_newcontent: New content
+      browse_newcontent: What's new?
       browse_sources: Sources
       channels: Collections
       collections: Collections
@@ -34,20 +34,20 @@ en:
     blog-link: link to blog
     browse:
       agents:
-        description: Here you can find previous collection highlights about artists, composers and other important figures who have made a difference in our cultural history.
+        description: Here you can find highlights from our Collections relating to the lives and works of famous artists, composers and other important figures from history.
         title: People
       colours:
-        description: In this section you can search for images based on their colour. Just click on a coloured box to view images that contain that colour!
+        description: Search for images based on their colour. Simply click a coloured box below to discover images containing that colour!
         title: Colours
       concepts:
-        description: Here you can find previous highlighted topics that have been featured in our Collections.
+        description: 'Explore our Collections by topic, theme or genre. '
         title: Topics
       newcontent:
-        description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when. Just click on the links below to see their collections!
+        description: 'Here, you can explore all the recent additions to Europeana Collections. See which cultural institution has contributed new items, the number of items they''ve added and when. Just click on the links below to find out more. '
         tableh1: All institutions
         tableh2: Items
         tableh3: Date
-        title: New Content
+        title: What's new?
       sources:
         description: Below you see a list of institutions who have contributed their content to Europeana Collections. These institutions aggregate and contribute their data to Europeana, click on the link that interests you below to view a particular partner collection!
         title: Sources
