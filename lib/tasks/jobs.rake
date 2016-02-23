@@ -12,7 +12,7 @@ namespace :jobs do
     task record_counts: :environment do
       Cache::RecordCountsJob.perform_later
       Collection.published.each do |collection|
-        Cache::RecordCountsJob.perform_later(collection.id, types: true))
+        Cache::RecordCountsJob.perform_later(collection.id, types: true)
       end
     end
 
