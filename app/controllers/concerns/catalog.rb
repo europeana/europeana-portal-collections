@@ -39,6 +39,13 @@ module Catalog
     [response, documents]
   end
 
+  ##
+  # Override {Blacklight::SearchContext#find_or_initialize_search_session_from_params}
+  # to prevent searches from being logged.
+  def find_or_initialize_search_session_from_params(params)
+    return
+  end
+
   # Overrides {Blacklight::SearchHelper} method to detect Collections searches
   def get_previous_and_next_documents_for_search(index, request_params, extra_controller_params = {})
     p = previous_and_next_document_params(index)
