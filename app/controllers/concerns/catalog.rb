@@ -42,8 +42,7 @@ module Catalog
   ##
   # Override {Blacklight::SearchContext#find_or_initialize_search_session_from_params}
   # to prevent searches from being logged.
-  def find_or_initialize_search_session_from_params(params)
-    return
+  def find_or_initialize_search_session_from_params(_params)
   end
 
   # Overrides {Blacklight::SearchHelper} method to detect Collections searches
