@@ -1,5 +1,5 @@
 module Cache
-  class ColourFacetsJob < ActiveJob::Base
+  class ColourFacetsJob < ApplicationJob
     include ApiQueryingJob
 
     queue_as :default

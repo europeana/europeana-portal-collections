@@ -2,7 +2,7 @@ module Cache
   module RecordCounts
     ##
     # Fetches and counts record counts for each of a provider's data providers
-    class DataProvidersJob < ActiveJob::Base
+    class DataProvidersJob < ApplicationJob
       include ApiQueryingJob
 
       queue_as :default

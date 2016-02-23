@@ -1,7 +1,5 @@
 module Cache
-  class FeedJob < ActiveJob::Base
-    include ActiveSupport::Benchmarkable
-
+  class FeedJob < ApplicationJob
     URLS = {
       blog: {
         all: 'http://blog.europeana.eu/feed/',
