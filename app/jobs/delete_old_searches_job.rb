@@ -1,6 +1,6 @@
 ##
 # Deletes from the database searches older than 1 day
-class DeleteOldSearchesJob < ActiveJob::Base
+class DeleteOldSearchesJob < ApplicationJob
   queue_as :default
 
   def perform

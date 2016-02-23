@@ -1,6 +1,6 @@
 module Cache
   module RecordCounts
-    class RecentAdditionsJob < ActiveJob::Base
+    class RecentAdditionsJob < ApplicationJob
       include ApiQueryingJob
 
       queue_as :default

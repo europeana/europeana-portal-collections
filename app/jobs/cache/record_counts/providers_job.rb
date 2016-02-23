@@ -4,7 +4,7 @@ module Cache
     # Gets and caches the number of records for each provider
     #
     # Queues a {DataProvidersJob} for each provider
-    class ProvidersJob < ActiveJob::Base
+    class ProvidersJob < ApplicationJob
       include ApiQueryingJob
 
       queue_as :default
