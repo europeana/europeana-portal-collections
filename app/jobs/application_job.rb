@@ -8,13 +8,9 @@ class ApplicationJob < ActiveJob::Base
 
     ErrorMailer.report_job(
       { class: exception.class.to_s, message: exception.message, backtrace: exception.backtrace },
-      { class: self.class.to_s, arguments: self.arguments.inspect }
+      { class: self.class.to_s, arguments: arguments.inspect }
     ).deliver_later
 
     raise exception
   end
-
-#   def failure(job)
-#     page_sysadmin_in_the_middle_of_the_night
-#   end
 end
