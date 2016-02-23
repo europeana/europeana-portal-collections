@@ -71,16 +71,16 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
         license_CC_BY_SA: true
       }
     when %r{http://www.europeana.eu/rights/out-of-copyright-non-commercial}
-      begin
-        end_path = URI(media_rights).path.split('/').last;
-        end_path = end_path == 'out-of-copyright-non-commercial' ? nil : end_path
-        {
-          license_human: t('global.facet.reusability.restricted'),
-          license_name: t('global.facet.reusability.advanced-out-of-copyright-non-commercial'),
-          license_url: media_rights,
-          license_OOC: true,
-          expiry: end_path ? t('global.facet.reusability.expiry', date: end_path) : nil
-        }
+    begin
+      end_path = URI(media_rights).path.split('/').last
+      end_path = end_path == 'out-of-copyright-non-commercial' ? nil : end_path
+      {
+        license_human: t('global.facet.reusability.restricted'),
+        license_name: t('global.facet.reusability.advanced-out-of-copyright-non-commercial'),
+        license_url: media_rights,
+        license_OOC: true,
+        expiry: end_path ? t('global.facet.reusability.expiry', date: end_path) : nil
+      }
     end
     when %r{http://www.europeana.eu/rights/rr-f}
       {
