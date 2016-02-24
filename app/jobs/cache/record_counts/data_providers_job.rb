@@ -9,7 +9,8 @@ module Cache
 
       def perform(provider, collection_id = nil)
         builder = search_builder
-        api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets', facet: 'DATA_PROVIDER', qf: "PROVIDER:\"#{provider}\"")
+        api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets', facet: 'DATA_PROVIDER').
+          with_overlay_params(qf: "PROVIDER:\"#{provider}\"")
 
         cache_key = 'browse/sources/providers'
 
@@ -20,6 +21,7 @@ module Cache
             cache_key << '/' << collection.key
           end
         end
+
 
         cache_key << "/#{provider}"
 
