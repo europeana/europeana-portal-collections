@@ -52,6 +52,6 @@ class HierarchyController < ApplicationController
   def check_valid_format
     mimes = collect_mimes_from_class_level
     collector = ActionController::MimeResponds::Collector.new(mimes, request.variant)
-    fail ActionController::UnknownFormat unless format = collector.negotiate_format(request)
+    fail ActionController::UnknownFormat unless collector.negotiate_format(request)
   end
 end
