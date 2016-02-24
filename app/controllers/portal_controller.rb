@@ -4,8 +4,6 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
-  include Catalog
-  include Europeana::Styleguide
   include SoundCloudUrnResolver
   include OembedRetriever
 

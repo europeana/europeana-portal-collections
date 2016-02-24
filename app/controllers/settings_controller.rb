@@ -1,8 +1,6 @@
 ##
 # User settings controller
 class SettingsController < ApplicationController
-  include Europeana::Styleguide
-
   # GET language
   # @todo move this into a resourceful controller and routes for Settings::Languages
   #   per http://guides.rubyonrails.org/routing.html#singular-resources
