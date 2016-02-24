@@ -11,7 +11,7 @@ RSpec.describe 'browse/agents.html.mustache' do
 
   it 'should have meta description' do
     render
-    expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="description"]', visible: false)
   end
 
   it 'should have intro para' do
@@ -23,7 +23,7 @@ RSpec.describe 'browse/agents.html.mustache' do
   it 'should display agent browse entries' do
     assign(:agents, BrowseEntry.agent.published)
     render
-    expect(rendered).to have_selector("ul.browse-entry-list li")
+    expect(rendered).to have_selector('ul.browse-entry-list li')
     BrowseEntry.agent.published.each do |agent|
       url = search_path(q: agent.query)
       expect(rendered).to have_selector("ul.browse-entry-list li a[href=\"#{url}\"] span.title",
