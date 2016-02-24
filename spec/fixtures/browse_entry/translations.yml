@@ -1,0 +1,19 @@
+opera_concept_translations:
+  locale: en
+  title: 'Opera'
+  globalized_model: opera_concept
+
+paintings_concept_translations:
+  locale: en
+  title: 'Paintings'
+  globalized_model: paintings_concept
+
+van_gogh_agent_translations:
+  locale: en
+  title: 'Vincent Van Gogh'
+  globalized_model: van_gogh_agent
+
+hokusai_agent_translations:
+  locale: en
+  title: 'Katsushika Hokusai'
+  globalized_model: hokusai_agent
