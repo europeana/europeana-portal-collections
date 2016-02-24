@@ -57,7 +57,7 @@ RSpec.describe BrowseController do
       ]
     end
 
-    it 'should render the new content Mustache template' do
+    it 'should render the sources Mustache template' do
       expect(response.status).to eq(200)
       expect(response).to render_template('browse/sources')
     end
@@ -68,6 +68,14 @@ RSpec.describe BrowseController do
 
     it 'should assign providers from cache' do
       expect(assigns[:providers].size).to eq(providers.size)
+    end
+
+    it 'should add URLs to providers' do
+      expect(assigns[:providers].all? { |p| p.key?(:url) }).to be(true)
+    end
+
+    it 'should add data providers to providers' do
+      expect(assigns[:providers].all? { |p| p[:data_providers].is_a?(Array) }).to be(true)
     end
   end
 end
