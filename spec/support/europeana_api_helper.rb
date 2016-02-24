@@ -55,6 +55,38 @@ module EuropeanaAPIHelper
           status: 200,
           headers: { 'Content-Type' => 'text/json' })
 
+      stub_request(:get, Europeana::API.url + '/search.json').
+        with(query: hash_including(
+          wskey: ENV['EUROPEANA_API_KEY'],
+          facet: 'DATA_PROVIDER',
+          rows: '0'
+        )).
+        to_return(
+          body: '
+            {
+              "success":true,
+              "items":[],
+              "facets":[{
+                "name": "DATA_PROVIDER",
+                "fields": [
+                  {
+                    "label": "National Library of France",
+                    "count": 2615502
+                  }, {
+                    "label": "Österreichische Nationalbibliothek - Austrian National Library",
+                    "count": 1365991
+                  }, {
+                    "label": "National Library of the Netherlands",
+                    "count": 1291139
+                  }
+                ]
+              }]
+             }
+          ',
+          status: 200,
+          headers: { 'Content-Type' => 'text/json' })
+
+
       # API Record
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+.json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
