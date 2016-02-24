@@ -23,7 +23,7 @@ RSpec.describe 'browse/sources.html.mustache' do
 
   it 'should have meta description' do
     render
-    expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="description"]', visible: false)
   end
 
   it 'should display a list of providers' do
