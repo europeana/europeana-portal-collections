@@ -86,7 +86,6 @@ module EuropeanaAPIHelper
           status: 200,
           headers: { 'Content-Type' => 'text/json' })
 
-
       # API Record
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+.json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
