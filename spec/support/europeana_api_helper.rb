@@ -1,5 +1,6 @@
 module EuropeanaAPIHelper
-  # @todo move into europeana-api gem
+  # @todo move into europeana-api gem?
+  # @todo move responses into fixtures
   RSpec.configure do |config|
     config.before(:each) do
       # API Search
@@ -22,6 +23,37 @@ module EuropeanaAPIHelper
                           }]}]}',
                   status: 200,
                   headers: { 'Content-Type' => 'text/json' })
+
+      stub_request(:get, Europeana::API.url + '/search.json').
+        with(query: hash_including(
+          wskey: ENV['EUROPEANA_API_KEY'],
+          facet: 'PROVIDER',
+          rows: '0'
+        )).
+        to_return(
+          body: '
+            {
+              "success":true,
+              "items":[],
+              "facets":[{
+                "name": "PROVIDER",
+                "fields": [
+                  {
+                    "label": "The European Library",
+                    "count": 11425343
+                  }, {
+                    "label": "AthenaPlus",
+                    "count": 3584988
+                  }, {
+                    "label": "Digitale Collectie",
+                    "count": 2629852
+                  }
+                ]
+              }]
+             }
+          ',
+          status: 200,
+          headers: { 'Content-Type' => 'text/json' })
 
       # API Record
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+.json}).
@@ -52,6 +84,14 @@ module EuropeanaAPIHelper
   def an_api_search_request
     a_request(:get, Europeana::API.url + '/search.json').
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
+  end
+
+  def an_api_collection_search_request(collection_id)
+    collection = Collection.find(collection_id)
+    a_request(:get, Europeana::API.url + '/search.json').
+      with(query: hash_including(
+        { wskey: ENV['EUROPEANA_API_KEY'] }.merge(Rack::Utils.parse_query(collection.api_params))
+      ))
   end
 
   def an_api_record_request_for(id)
