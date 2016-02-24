@@ -1,6 +1,6 @@
 # Europeana Portal with Collections
 
-[![Build Status](https://travis-ci.org/europeana/europeana-portal-collections.svg?branch=develop)](https://travis-ci.org/europeana/europeana-portal-collections) [![Coverage Status](https://coveralls.io/repos/europeana/europeana-portal-collections/badge.svg?branch=develop&service=github)](https://coveralls.io/github/europeana/europeana-portal-collections?branch=develop) [![security](https://hakiri.io/github/europeana/europeana-portal-collections/develop.svg)](https://hakiri.io/github/europeana/europeana-portal-collections/develop) [![Dependency Status](https://gemnasium.com/europeana/europeana-portal-collections.svg)](https://gemnasium.com/europeana/europeana-portal-collections)
+[![Build Status](https://travis-ci.org/europeana/europeana-portal-collections.svg?branch=develop)](https://travis-ci.org/europeana/europeana-portal-collections) [![Coverage Status](https://coveralls.io/repos/github/europeana/europeana-portal-collections/badge.svg?branch=develop)](https://coveralls.io/github/europeana/europeana-portal-collections?branch=develop) [![security](https://hakiri.io/github/europeana/europeana-portal-collections/develop.svg)](https://hakiri.io/github/europeana/europeana-portal-collections/develop) [![Dependency Status](https://gemnasium.com/europeana/europeana-portal-collections.svg)](https://gemnasium.com/europeana/europeana-portal-collections)
 
 Europeana Portal with Collections as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
