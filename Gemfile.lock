@@ -603,6 +603,7 @@ DEPENDENCIES
   rails_admin_globalize_field (~> 0.4)
   redis-rails (~> 4.0)
   redis-rails-instrumentation
+  responders (~> 2.1)
   rspec-rails (~> 3.0)
   rubocop (= 0.35.1)
   ruby-oembed (~> 0.9)
