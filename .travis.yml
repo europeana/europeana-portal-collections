@@ -16,3 +16,5 @@ before_script:
   - "bundle exec rake db:test:prepare"
 env:
   - RAILS_ENV=test
+services:
+  - redis-server
