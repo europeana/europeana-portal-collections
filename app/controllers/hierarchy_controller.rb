@@ -1,52 +1,38 @@
 ##
 # Just dumps out the response from the REST API hierarchy methods
 class HierarchyController < ApplicationController
+  before_action :check_valid_format
+
+  respond_to :json
+
   # GET /record/:id/hierarchy/self
   def self
-    data = record.hierarchy.self(params.slice(:offset, :limit)).merge(garnish)
-    respond_to do |format|
-      format.json { render json: data }
-    end
+    respond_with record.hierarchy.self(params.slice(:offset, :limit)).merge(garnish)
   end
 
   # GET /record/:id/hierarchy/parent
   def parent
-    data = record.hierarchy.self(params.slice(:offset, :limit)).merge(garnish)
-    respond_to do |format|
-      format.json { render json: data }
-    end
+    respond_with record.hierarchy.self(params.slice(:offset, :limit)).merge(garnish)
   end
 
   # GET /record/:id/hierarchy/children
   def children
-    data = record.hierarchy.children(params.slice(:offset, :limit)).merge(garnish)
-    respond_to do |format|
-      format.json { render json: data }
-    end
+    respond_with record.hierarchy.children(params.slice(:offset, :limit)).merge(garnish)
   end
 
   # GET /record/:id/hierarchy/preceding-siblings
   def preceding_siblings
-    data = record.hierarchy.preceding_siblings(params.slice(:offset, :limit)).merge(garnish)
-    respond_to do |format|
-      format.json { render json: data }
-    end
+    respond_with record.hierarchy.preceding_siblings(params.slice(:offset, :limit)).merge(garnish)
   end
 
   # GET /record/:id/hierarchy/following-siblings
   def following_siblings
-    data = record.hierarchy.following_siblings(params.slice(:offset, :limit)).merge(garnish)
-    respond_to do |format|
-      format.json { render json: data }
-    end
+    respond_with record.hierarchy.following_siblings(params.slice(:offset, :limit)).merge(garnish)
   end
 
   # GET /record/:id/hierarchy/ancestor-self-siblings
   def ancestor_self_siblings
-    data = record.hierarchy.ancestor_self_siblings(params.slice(:offset, :limit)).merge(garnish)
-    respond_to do |format|
-      format.json { render json: data }
-    end
+    respond_with record.hierarchy.ancestor_self_siblings(params.slice(:offset, :limit)).merge(garnish)
   end
 
   protected
@@ -57,5 +43,15 @@ class HierarchyController < ApplicationController
 
   def garnish
     { action: [params[:action].dasherize, params[:format]].join('.'), success: true }
+  end
+
+  ##
+  # Do not run expensive API/db queries if invalid format is requested
+  #
+  # @see ActionController::RespondWith::ClassMethods#respond_with
+  def check_valid_format
+    mimes = collect_mimes_from_class_level
+    collector = ActionController::MimeResponds::Collector.new(mimes, request.variant)
+    fail ActionController::UnknownFormat unless format = collector.negotiate_format(request)
   end
 end
