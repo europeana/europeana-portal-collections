@@ -7,22 +7,23 @@ RSpec.describe Cache::FeedJob do
   end
 
   let(:url) { 'http://www.example.com/feed/' }
-  let(:rss_body) { <<-END
-    <?xml version="1.0"?>
-    <rss version="2.0">
-      <channel>
-        <title>Example Channel</title>
-        <link>http://example.com/</link>
-        <description>My example channel</description>
-        <item>
-           <title>Example item</title>
-           <link>http://example.com/item</link>
-           <description>About the example item...</description>
-        </item>
-      </channel>
-    </rss>
+  let(:rss_body) do
+    <<-END
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Example Channel</title>
+    <link>http://example.com/</link>
+    <description>My example channel</description>
+    <item>
+       <title>Example item</title>
+       <link>http://example.com/item</link>
+       <description>About the example item...</description>
+    </item>
+  </channel>
+</rss>
     END
-  }
+  end
 
   it 'should fetch an HTTP feed' do
     subject.perform(url)
