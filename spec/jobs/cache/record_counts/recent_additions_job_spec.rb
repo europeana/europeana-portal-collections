@@ -1,19 +1,35 @@
+require 'support/shared_examples/jobs'
+
+shared_examples 'recent additions record count caching job' do
+  it_behaves_like 'a caching job'
+  it_behaves_like 'an API requesting job'
+
+  it 'should write recent additions record counts to cache' do
+    subject.perform(*args)
+    cached = Rails.cache.fetch(cache_key)
+    expect(cached).to be_a(Array)
+    cached.each do |addition|
+      expect(addition).to include(:label)
+      expect(addition).to include(:count)
+    end
+  end
+end
+
 RSpec.describe Cache::RecordCounts::RecentAdditionsJob do
-  it 'should fetch providers from API' do
-    subject.perform
-    expect(an_api_search_request).to have_been_made.at_least_once
+  context 'without collection ID' do
+    let(:cache_key) { 'browse/new_content/providers' }
+    let(:args) { }
+    let(:api_request) { an_api_search_request }
+
+    it_behaves_like 'recent additions record count caching job'
   end
 
-  it 'should write providers to cache' do
-    Rails.cache.delete('browse/new_content/providers')
-    expect(Rails.cache.fetch('browse/new_content/providers')).to be_nil
-    subject.perform
-    expect(Rails.cache.fetch('browse/new_content/providers')).not_to be_nil
-  end
+  context 'with collection ID' do
+    let(:collection) { Collection.published.first }
+    let(:cache_key) { "record/counts/collections/#{collection.key}/recent-additions" }
+    let(:args) { collection.id }
+    let(:api_request) { an_api_collection_search_request(collection.id) }
 
-  it 'should accept a collection ID argument' do
-    collection_id = Collection.first.id
-    subject.perform(collection_id)
-    expect(an_api_collection_search_request(collection_id)).to have_been_made.at_least_once
+    it_behaves_like 'recent additions record count caching job'
   end
 end

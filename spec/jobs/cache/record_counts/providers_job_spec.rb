@@ -1,18 +1,12 @@
-RSpec.describe Cache::RecordCounts::ProvidersJob do
-  let(:cache_key) { 'browse/sources/providers' }
+require 'support/shared_examples/jobs'
 
-  it 'should fetch providers from API' do
-    subject.perform
-    expect(an_api_search_request).to have_been_made.at_least_once
-  end
+shared_examples 'provider record count caching job' do
+  it_behaves_like 'a caching job'
+  it_behaves_like 'an API requesting job'
 
-  it 'should write providers to cache' do
-    Rails.cache.delete(cache_key)
-    expect(Rails.cache.fetch(cache_key)).to be_nil
-    subject.perform
+  it 'should write provider record counts to cache' do
+    subject.perform(*args)
     cached = Rails.cache.fetch(cache_key)
-    expect(cached).not_to be_nil
-
     expect(cached).to be_a(Array)
     cached.each do |provider|
       expect(provider).to include(:text)
@@ -24,12 +18,25 @@ RSpec.describe Cache::RecordCounts::ProvidersJob do
     data_providers_job_count = Proc.new do
       Delayed::Job.where("handler LIKE '%job_class: Cache::RecordCounts::DataProvidersJob%'").count
     end
-    expect { subject.perform }.to change { data_providers_job_count.call }.by_at_least(1)
+    expect { subject.perform(*args) }.to change { data_providers_job_count.call }.by_at_least(1)
+  end
+end
+
+RSpec.describe Cache::RecordCounts::ProvidersJob do
+  context 'without collection ID' do
+    let(:cache_key) { 'browse/sources/providers' }
+    let(:args) { }
+    let(:api_request) { an_api_search_request }
+
+    it_behaves_like 'provider record count caching job'
   end
 
-  it 'should accept a collection ID argument' do
-    collection_id = Collection.first.id
-    subject.perform(collection_id)
-    expect(an_api_collection_search_request(collection_id)).to have_been_made.at_least_once
+  context 'with collection ID' do
+    let(:collection) { Collection.published.first }
+    let(:cache_key) { "browse/sources/providers/#{collection.key}" }
+    let(:args) { collection.id }
+    let(:api_request) { an_api_collection_search_request(collection.id) }
+
+    it_behaves_like 'provider record count caching job'
   end
 end

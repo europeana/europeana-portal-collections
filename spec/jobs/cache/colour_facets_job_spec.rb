@@ -5,7 +5,7 @@ shared_examples 'colour facet caching job' do
   it_behaves_like 'an API requesting job'
 
   it 'should write colour facets to cache' do
-    subject.perform(args)
+    subject.perform(*args)
     cached = Rails.cache.fetch(cache_key)
     expect(cached).to be_a(Array)
     cached.each do |facet|
