@@ -25,7 +25,7 @@ end
 RSpec.describe Cache::RecordCounts::ProvidersJob do
   context 'without collection ID' do
     let(:cache_key) { 'browse/sources/providers' }
-    let(:args) { }
+    let(:args) {}
     let(:api_request) { an_api_search_request }
 
     it_behaves_like 'provider record count caching job'

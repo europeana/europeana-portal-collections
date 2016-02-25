@@ -18,7 +18,7 @@ end
 RSpec.describe Cache::ColourFacetsJob do
   context 'without collection ID' do
     let(:cache_key) { 'browse/colours/facets' }
-    let(:args) { }
+    let(:args) {}
     let(:api_request) { an_api_search_request }
 
     it_behaves_like 'colour facet caching job'
