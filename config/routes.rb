@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :collections, only: [:show, :index]
-  resources :landing_pages, only: [:show]
 
   get '/channels', to: redirect('collections')
   get '/channels/:id', to: redirect('collections/%{id}')
