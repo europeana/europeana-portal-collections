@@ -19,10 +19,6 @@ module MustacheHelper
     { items: links }
   end
 
-  def fb_campaigns_on
-    true
-  end
-
   def page_locale
     session[:locale]
   end
