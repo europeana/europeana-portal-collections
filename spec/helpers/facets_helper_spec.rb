@@ -58,7 +58,14 @@ RSpec.describe FacetsHelper do
     end
   end
 
-  describe '#create_facet_field_response_for_query_facet_field' do
-    it 'does stuff...'
+  describe '#facet_label' do
+    context 'when facet value is nil' do
+      let(:facet) { 'FAKE_FACET' }
+      let(:facet_label) { 'Faking!' }
+      it 'should get label from I18n' do
+        I18n.backend.store_translations(:en, { global: { facet: { header: { facet.downcase.to_sym => facet_label } } } })
+        expect(helper.facet_label(facet)).to eq(facet_label)
+      end
+    end
   end
 end
