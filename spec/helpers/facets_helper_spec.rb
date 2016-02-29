@@ -63,7 +63,7 @@ RSpec.describe FacetsHelper do
       let(:facet) { 'FAKE_FACET' }
       let(:facet_label) { 'Faking!' }
       it 'should get label from I18n' do
-        I18n.backend.store_translations(:en, { global: { facet: { header: { facet.downcase.to_sym => facet_label } } } })
+        I18n.backend.store_translations(:en, global: { facet: { header: { facet.downcase.to_sym => facet_label } } })
         expect(helper.facet_label(facet)).to eq(facet_label)
       end
     end
