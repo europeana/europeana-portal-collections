@@ -1,9 +1,7 @@
 ##
 # Provides Blacklight search and browse, within a content Collection
 class CollectionsController < ApplicationController
-  include Catalog
   include Europeana::Collections
-  include Europeana::Styleguide
 
   before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'home' }
 

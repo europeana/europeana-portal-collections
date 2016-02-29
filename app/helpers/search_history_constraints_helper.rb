@@ -16,6 +16,6 @@ module SearchHistoryConstraintsHelper
     return ''.html_safe unless within_collection?(params)
 
     label = 'Collection'
-    render_search_to_s_element(label, render_filter_value(params['id']))
+    render_search_to_s_element(label, render_filter_value(params[:id]))
   end
 end

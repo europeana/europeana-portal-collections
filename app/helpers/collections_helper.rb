@@ -1,13 +1,21 @@
 ##
 # Collections helpers
 module CollectionsHelper
+  ##
+  # Returns the keys of all {Collection}s
+  #
+  # @return [Array<String>]
   def available_collections
     Collection.all.map(&:key)
   end
 
+  ##
+  # Tests whether the current request is in the context of a {Collection}
+  #
+  # @return [Boolean]
   def within_collection?(localized_params = params)
-    localized_params['controller'] == 'collections' &&
-      localized_params['id'].present?
+    localized_params[:controller] == 'collections' &&
+      localized_params[:id].present?
   end
 
   ##
@@ -20,14 +28,10 @@ module CollectionsHelper
   end
 
   ##
-  # Returns the collection the current search was performed in
+  # Gets all collections that are published, and have an associated landing
+  # page that is also published.
   #
-  # @return [Collection]
-  def current_search_collection
-    return nil unless current_search_session.query_params[:id]
-    Collection.find_by_key!(current_search_session.query_params[:id])
-  end
-
+  # @return [Array<Collection>]
   def displayable_collections
     @displayable_collections ||= Collection.published.select do |c|
       c.landing_page.present? && c.landing_page.published?

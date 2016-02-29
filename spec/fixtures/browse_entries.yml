@@ -1,0 +1,19 @@
+opera_concept:
+  query: "what:opera"
+  state: 1
+  subject_type: 0
+
+paintings_concept:
+  query: "what:paintings"
+  state: 1
+  subject_type: 0
+
+van_gogh_agent:
+  query: "who:(van gogh)"
+  state: 1
+  subject_type: 1
+
+hokusai_agent:
+  query: "who:hokusai"
+  state: 1
+  subject_type: 1

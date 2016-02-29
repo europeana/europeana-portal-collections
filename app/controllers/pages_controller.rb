@@ -1,9 +1,6 @@
 ##
 # Static pages controller
 class PagesController < ApplicationController
-  include Europeana::Styleguide
-  include Catalog
-
   def show
     @page = Page.find_by_slug!(params[:page])
     authorize! :show, @page
