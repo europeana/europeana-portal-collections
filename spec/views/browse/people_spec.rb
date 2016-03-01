@@ -1,11 +1,11 @@
 require 'support/shared_examples/page_with_top_nav'
 
-RSpec.describe 'browse/concepts.html.mustache' do
+RSpec.describe 'browse/people.html.mustache' do
   it_should_behave_like 'page with top nav'
 
   it 'should have page title' do
     render
-    page_title = t('site.browse.concepts.title')
+    page_title = t('site.browse.people.title')
     expect(rendered).to have_selector('title', visible: false, text: /\A#{page_title}/)
   end
 
@@ -16,18 +16,18 @@ RSpec.describe 'browse/concepts.html.mustache' do
 
   it 'should have intro para' do
     render
-    description = t('site.browse.concepts.description')
+    description = t('site.browse.people.description')
     expect(rendered).to have_selector('section.static-header p', text: description)
   end
 
-  it 'should display concept browse entries' do
-    assign(:concepts, BrowseEntry.concept.published)
+  it 'should display person browse entries' do
+    assign(:people, BrowseEntry.person.published)
     render
     expect(rendered).to have_selector('ul.browse-entry-list li')
-    BrowseEntry.concept.published.each do |concept|
-      url = search_path(q: concept.query)
+    BrowseEntry.person.published.each do |person|
+      url = search_path(q: person.query)
       expect(rendered).to have_selector("ul.browse-entry-list li a[href=\"#{url}\"] span.title",
-                                        text: concept.title)
+                                        text: person.title)
     end
   end
 end
