@@ -33,24 +33,24 @@ ro:
         title: "Aceasta este versiunea Beta a noilor noastre \"Colecții\" și a \"Colecției de Muzică\" si a \n\"Istoria Artei Colecții\""
     blog-link: 
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Culori
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Instituții
         tableh2: "Înregistrări"
         tableh3: Dată
         title: Noi înregistrări
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Surse
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: De la Renaștere până la Suprarelism, de la sculptura Romei Antice la arta contemporană, colecția de Artă și Istoria Artelor din Europeana vă aduce în atenție artiști și opere de artă din întreaga Europă.

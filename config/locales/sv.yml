@@ -33,24 +33,24 @@ sv:
         title: 
     blog-link: 
     browse:
-      agents:
-        description: 
-        title: Personer
       colours:
         description: Här kan du söka efter bilder med en viss färg. Klicka pa en färgruta och finn bilder som innehåller den färgen!
         title: Färger
-      concepts:
-        description: 
-        title: "Ämnen och typer"
       newcontent:
         description: 'Här finner du de senaste uppdateringarna i Europeanas samlingar. Från vilken partner, hur mycket och när. '
         tableh1: Alla institutioner
         tableh2: Poster
         tableh3: Datum
         title: Nytt innehåll
+      people:
+        description: 
+        title: Personer
       sources:
         description: 'Här finner du de senaste uppdateringarna i Europeanas samlingar. Från vilken partner, hur mycket och när. '
         title: Källor
+      topics:
+        description: 
+        title: "Ämnen och typer"
     collections:
       art-history:
         description: 

@@ -33,24 +33,24 @@ fr:
         title: Ceci est une version beta des nouveaux Europeana Collections, Histoire de l'Art Collections et Europeana Collections Musique
     blog-link: lien vers le blog
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Couleurs
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: 
         tableh2: 
         tableh3: 
         title: Nouveau contenu
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Sources
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: 'Depuis la Renaissance jusqu''aux surréalistes, depuis la sculpture Romaine ancienne jusqu''à l''art contemporain, Europeana Collection Art et Histoire de l''Art vous fait découvrir les artistes et oeuvres d''art de toute l''Europe. '

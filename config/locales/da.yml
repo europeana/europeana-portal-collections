@@ -33,24 +33,24 @@ da:
         title: 'Dette er en Beta version af vores nye "Samlinger" og "Musiksamling" og "Kunsthistorie Samlinger". '
     blog-link: link til blog
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Farver
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: 
         tableh2: 
         tableh3: 
         title: Nyt Indhold
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Kilder
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: 'Europeanas Kunst- og Kunsthistoriesamling introducerer dig til kunstnere og værker fra hele Europa, fra renæssancen til surrealismen, og fra antik romersk skulptur til samtidskunsten.  '

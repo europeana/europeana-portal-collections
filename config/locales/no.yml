@@ -33,24 +33,24 @@
         title: Dette er en beta-versjon av våre nye "Samlinger" og "Musikksamlinger"
     blog-link: lenke til blogg
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: I denne seksjonen kan du søke etter bilder ut fra farge. Bare klikk på det du vil se på i samlingen!
         title: Farger
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: I denne seksjonen kan du finne alt innhold som nylig har blitt lagt til på Europeana-samlingene. Her kan du se hvilke nye institusjoner som har publisert nytt innhold, hvor mye innhold og når! Bare klikk på lenkene under for å se samlingene deres.
         tableh1: Alle institusjoner
         tableh2: Objekter
         tableh3: Dato
         title: Nytt innhold
+      people:
+        description: 
+        title: 
       sources:
         description: Under ser du en liste over kilder for våre samlinger. Disse kildene utvider og bidrar til samlinger på Europeana, klikk på lenkene under som interesserer deg for å se på alle samlingene deres!
         title: Kilder
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Fra renessansen til surrealistene, og fra antikkens skulpturer til samtidskunst, Europeana kunsthistoriske samling introduserer deg for kunstnere og kunstverk fra over alt i hele Europa.

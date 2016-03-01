@@ -33,24 +33,24 @@ hu:
         title: Ez egy Beta verzió új Gyűjtemények, Művészettörténet gyűjtemények és Zenei Gyűjtemények számára
     blog-link: link a blogra
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Színek
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Adatszolgáltatók
         tableh2: Elemek
         tableh3: Dátum
         title: "Új tartalom"
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Források
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: A reneszánsztól a szürrealistákig, az ókori római szobrászattól a kortárs művészetig, az Europeana Művészeti és Művészettörténeti Gyűjtemény bevezet a művészek és a műalkotások világába szerte Európából. [Valami interaktív elemről]

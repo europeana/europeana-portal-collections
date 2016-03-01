@@ -33,24 +33,24 @@ bg:
         title: Това е Beta версия на новите ни страници "Колекции" и "Музикални колекции" и "История на изкуството Колекции".
     blog-link: "линк към блог"
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: "Цветове"
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: "Всички институции"
         tableh2: "Обекти"
         tableh3: "Дата"
         title: "Ново съдържание"
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: "Източници"
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: "От Ренесанса до сюрреализма, от древни римски скулптури до модерно изкуство, колекциите на Европеана за изкуство и история на изкуството Ви представя творци и произведения на изкуството от цяла Европа."

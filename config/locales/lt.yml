@@ -33,24 +33,24 @@ lt:
         title: Tai mūsų naujųjų "Kolekcijų" ir "Muzikos kolekcijos" Beta versija
     blog-link: Nuoroda į tinklaraštį
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Spalvos
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Visos institucijos
         tableh2: "Įrašai"
         tableh3: Data
         title: Naujas turinys
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Ištekliai
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Nuo renesanso iki siurrealizmo, nuo Senovės Romos skulptūrų iki šiuolaikinio meno, Europeana meno istorijos kolekcija jums suteikia galimybę susipažinti su Europos menininkais ir jų darbais. [Interaktyvaus elemento aprašymas]

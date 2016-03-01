@@ -33,24 +33,24 @@ pt:
         title: Esta é a versão Beta das novas Europeana Coleções, História da Arte Colecções e Europeana Coleções Música
     blog-link: ligação ao blogue
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Cores
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Todas as instituições
         tableh2: Itens
         tableh3: Data
         title: Novo Conteúdo
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Fontes
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Desde a Renascença aos surrealistas, e desde as esculturas da Roma antiga à arte contemporânea, a Europeana Coleção Arte e História da Arte irá dar-lhe a conhecer artistas e obras de arte de toda a Europa.

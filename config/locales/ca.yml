@@ -33,24 +33,24 @@ ca:
         title: 'Això és una versió Beta de "Colleccions" i "Collecció de Música" i "Art Colleccions d''Història". '
     blog-link: enllaç al blog
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Colors
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Totes les institucions
         tableh2: "Ítems"
         tableh3: Data
         title: Contingut nou
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Fonts
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Del Renaixement als surrealistes, i des de l'esculptura de Antiga Roma a l'art contemporani, la Col·lecció d'Història de l'Art d'Europeana t'introdueix a artistes i obres d'art de tota Europa

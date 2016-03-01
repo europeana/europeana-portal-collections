@@ -33,24 +33,24 @@ pl:
         title: 'To jest wersja alfa nowych "Kolekcji" oraz "Kolekcji: Muzyka" oraz "Kolekcji: Historia sztuki".'
     blog-link: http://blog.europeana.eu
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Kolory
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Wszystkie instytucje
         tableh2: Obiekty
         tableh3: Data
         title: Nowości
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: "Źródła"
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Od renesansu do surrealistów, od starożytnej rzymskiej rzeźby do sztuki współczesnej, Europeana Historia Sztuki, pozwoli Ci zapoznać się z artystami i ich pracami z całej Europy.

@@ -33,13 +33,7 @@ cs:
         title: 
     blog-link: 
     browse:
-      agents:
-        description: 
-        title: 
       colours:
-        description: 
-        title: 
-      concepts:
         description: 
         title: 
       newcontent:
@@ -48,7 +42,13 @@ cs:
         tableh2: 
         tableh3: 
         title: 
+      people:
+        description: 
+        title: 
       sources:
+        description: 
+        title: 
+      topics:
         description: 
         title: 
     collections:

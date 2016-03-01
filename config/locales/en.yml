@@ -33,24 +33,24 @@ en:
         title: This is a Beta release of our new "Collections" and "Music Collections"
     blog-link: link to blog
     browse:
-      agents:
-        description: Here you can find highlights from our Collections relating to the lives and works of famous artists, composers and other important figures from history.
-        title: People
       colours:
         description: Search for images based on their colour. Simply click a coloured box below to discover images containing that colour!
         title: Colours
-      concepts:
-        description: 'Explore our Collections by topic, theme or genre. '
-        title: Topics
       newcontent:
         description: 'Here, you can explore all the recent additions to Europeana Collections. See which cultural institution has contributed new items, the number of items they''ve added and when. Just click on the links below to find out more. '
         tableh1: All institutions
         tableh2: Items
         tableh3: Date
         title: What's new?
+      people:
+        description: Here you can find highlights from our Collections relating to the lives and works of famous artists, composers and other important figures from history.
+        title: People
       sources:
         description: Below you see a list of institutions who have contributed their content to Europeana Collections. These institutions aggregate and contribute their data to Europeana, click on the link that interests you below to view a particular partner collection!
         title: Sources
+      topics:
+        description: 'Explore our Collections by topic, theme or genre. '
+        title: Topics
     collections:
       art-history:
         description: From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art History Collection introduces you to artists and artworks from across the whole of Europe.

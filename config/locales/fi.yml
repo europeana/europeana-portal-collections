@@ -33,24 +33,24 @@ fi:
         title: Tämä on Alfa-julkaisu uusista julkaisuistamme "Kokoelmat", "Taidehistorian Kokoelmat" ja "Musiikkikokoelma"
     blog-link: linkki blogiin
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Värit
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Kaikki instituutiot
         tableh2: Kohteet
         tableh3: Päivämäärä
         title: Uutta sisältöä
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Lähteet
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Renessanssista surrealisteihin ja antiikin Rooman kuvanveistosta nykytaiteeseen, Europeanan taidehistorian kokoelmat esittelevät sinulle taidetta ja taiteilijoita koko Euroopasta.

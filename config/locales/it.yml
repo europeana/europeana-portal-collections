@@ -33,24 +33,24 @@ it:
         title: Questa è una versione Beta delle nostre nuove "Collezioni" e "Arte Storia Collezioni" e  "Collezione musicale"
     blog-link: link al blog
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Colori
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: Tutte le istituzioni
         tableh2: Oggetti
         tableh3: Data
         title: Nuovo contenuto
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Fonti
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Dal Rinascimento ai surrealisti, e dall'antica scultura romana all'arte contemporanea, la Collezione d'Arte e Storia dell'arte di Europeana vi presenta artisti e opere d'arte provenienti da tutta l'Europa.

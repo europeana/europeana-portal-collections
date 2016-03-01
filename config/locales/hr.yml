@@ -33,24 +33,24 @@ hr:
         title: 'Ovo je beta objava naših novih stranica: "Zbirke" i "Glazbene zbirke"'
     blog-link: http://blog.europeana.eu
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: U ovom dijelu možete pretraživati slike po boji. Potrebno je samo kliknuti na onu koja vam se sviđa kako biste vidjeli zbirku!
         title: Boje
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: U ovom dijelu možete pronaći sav sadržaj koji je nedavno dodan Europeana zbirkama. Ovdje možete vidjeti koja je nova ustanova objavila novi materijal, koliko materijala i kada! Samo kliknite na poveznice u nastavku kako biste vidjeli njihove zbirke.
         tableh1: Sve ustanove
         tableh2: Objekti
         tableh3: Datum
         title: Novi sadržaj
+      people:
+        description: 
+        title: 
       sources:
         description: U nastavku možete vidjeti popis izvora za naše zbirke. Oni skupljaju i doprinose svojim zbirkama Europeani. Slijedite poveznicu koja vas zanima i pristupit ćete svim njihovim zbirkama!
         title: Izvori
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Od renesanse do nadrealista te od starorimske skulpture do suvremene umjetnosti, Europeanina povijesno-umjetnička zbirka upoznaje vas s umjetnicima i umjetničkim djelima iz cijele Europe.

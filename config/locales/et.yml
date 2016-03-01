@@ -33,24 +33,24 @@ et:
         title: Tegu on "Kogude" ja "Muusikakogu" beta versiooniga.
     blog-link: link blogisse
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: Selles alaosas saad otsida pilte nende värvist lähtudes. Lihtsalt klõpsa pildile, mis sulle meeldib,et vastavat kogu näha!
         title: Värvid
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: Selles alaosas leiad sisu, mis on hiljuti lisatud Europeana kogusse. Siin on näha, millised institutsioonid on avaldanud uut ainest nagu ka selle hulka ja avaldamisaega. Lihtsalt klõpsa allolevatele linkidele nende kogude nägemiseks.
         tableh1: Kõik asutused
         tableh2: Esemed
         tableh3: Kuupäev
         title: Uus sisu
+      people:
+        description: 
+        title: 
       sources:
         description: Allpool näed loetelu meie kogude allikaist. Need allikad koondavad ja panustavad kogusid Europeanasse. Klõpsa sind huvitavale lingile, et sind viidaks kõikide nende kogudeni!
         title: Allikad
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Renessanssist sürrealistideni, Vana-Rooma skultuuridest tänapäevase kunstini - Europeana Kunstiajaloo Kogu tutvustab Teile kunstnikke ja teoseid kogu Euroopast.

@@ -33,24 +33,24 @@ lv:
         title: Šī ir  mūsu jauno "Kolekciju" un "Mūzikas kolekcijas" "Beta" versija
     blog-link: saite uz blogu
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: "Šajā sadaļā ir iespējams meklēt attēlus pēc to krāsas. Klikšķiniet uz izvēlētās krāsas un skatiet atlasīto kolekciju!"
         title: Krāsas
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: "Šajā sadaļā ir apkopots viss saturs, kas nesen ir ticis pievienots Europeana Kolekcijām. Te ir iespējams redzēt, kura institūcija ir publicējusi jaunus materiālus un kad. Klikšķiniet uz zemāk esošajām saitēm, lai apskatītu pievienoto."
         tableh1: Visas institūcijas
         tableh2: Ieraksti
         tableh3: Datējums
         title: Jauns saturs
+      people:
+        description: 
+        title: 
       sources:
         description: Zemāk esošajā sarakstā ir uzskaitīti mūsu kolekciju avoti. Šie avoti ir apkopojuši kolekcijas un iesnieguši tās Europeana. Klikšķiniet uz zemāk esošajām saitēm, lai iepazītos ar visu to kolekciju saturu.
         title: Avoti
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: No renesances līdz sirreālistiem, no seno romiešu skulptūrām līdz mūsdienu mākslai, Europeana Mākslas vēstures kolekcija iepazīstina ar māksliniekiem un mākslas darbiem no visas Eiropas.

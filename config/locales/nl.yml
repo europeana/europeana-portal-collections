@@ -33,24 +33,24 @@ nl:
         title: 'Dit is een Beta versie van onze nieuwe Collections, Kunst Geschiedenis- en Muziek Collecties. '
     blog-link: link naar de blog
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Kleuren
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: 
         tableh2: 
         tableh3: 
         title: Onlangs toegevoegd
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Bronnen
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Van de Renaissance tot het Surrealisme, van antieke Romeinse sculpturen tot aan hedendaagse kunst; de Europeana Kunst Geschiedenis Collecties bevatten voor elk wat wils en zullen u versteld doen staan van alle kunstwerken en kunstenaars die Europa te bieden heeft!

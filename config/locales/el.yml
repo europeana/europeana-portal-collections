@@ -33,24 +33,24 @@ el:
         title: "Αυτή είναι μία Beta έκδοση της νέας μας αναζήτησης σε Συλλογές και της Συλλογής Μουσική"
     blog-link: ''
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: "Χρώματα"
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: "Όλα τα ιδρύματα"
         tableh2: "Αντικείμενα"
         tableh3: "Ημερομηνία"
         title: "Νέο Περιεχόμενο"
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: "Πηγές"
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: "Από την Αναγγένηση μέχρι τους υπερρεαλιστές, και από την γλυπτική της Αρχαίας Ρώμης στην σύγχρονη τέχνη, η Συλλογή Europeana Τέχνη και Ιστορία της Τέχνης σας παρουσιάζει καλλιτέχνες και έργα τέχνης από όλη την Ευρώπη"

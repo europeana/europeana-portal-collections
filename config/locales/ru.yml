@@ -33,24 +33,24 @@ ru:
         title: "Это Beta релиз наших новых проектов Collections и Music Collection и  Art History Collections"
     blog-link: "Ссылка на блог"
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: "Цвета"
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: "Все организации"
         tableh2: "Элементы"
         tableh3: "Дата"
         title: "Новинки"
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: "Источники"
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: "От художников Возрождения до сюрреалистов, от древнеримской скульптуры до современного искусства, коллекция Europeana Art History знакомит Вас с художниками и произведениями искусства со всей Европы."

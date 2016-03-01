@@ -33,24 +33,24 @@ de:
         title: Dies ist eine Beta Version unserer neuen Sammlungen, Musik Sammlung und Kunstgeschichte Sammlungen
     blog-link: Link zum Blog
     browse:
-      agents:
-        description: 
-        title: 
       colours:
         description: 
         title: Farben
-      concepts:
-        description: 
-        title: 
       newcontent:
         description: 
         tableh1: 
         tableh2: 
         tableh3: 
         title: Neue Inhalte
+      people:
+        description: 
+        title: 
       sources:
         description: 
         title: Quellen
+      topics:
+        description: 
+        title: 
     collections:
       art-history:
         description: Von der Renaissance bis zu den Surrealisten, von antiken römischen Skulpturen bis zur zeitgenössischen Kunst, die Europeana Kunst und Kunstgeschichte Sammlung bringt Sie den Künstlern und Kunstwerken aus ganz Europa näher. [Something about interactive element]
