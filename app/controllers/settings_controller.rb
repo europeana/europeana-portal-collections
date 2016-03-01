@@ -16,7 +16,7 @@ class SettingsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if params[:redirect]
+        if params[:redirect] && params[:redirect] =~ %r{\A/}
           redirect_to params[:redirect]
         else
           render action: :language, status: flash_status
