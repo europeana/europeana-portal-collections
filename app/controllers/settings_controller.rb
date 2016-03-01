@@ -16,8 +16,8 @@ class SettingsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if params[:redirect] && params[:redirect] =~ %r{\A/}
-          redirect_to params[:redirect]
+        if local_redirect
+          redirect_to local_redirect
         else
           render action: :language, status: flash_status
         end
@@ -30,6 +30,16 @@ class SettingsController < ApplicationController
   end
 
   protected
+
+  def local_redirect
+    @local_redirect ||= begin
+      if params[:redirect] && params[:redirect].is_a?(String) && params[:redirect] =~ %r{\A/}
+        params[:redirect]
+      else
+        nil
+      end
+    end
+  end
 
   def flash_status
     flash.key?(:alert) ? 400 : 200
