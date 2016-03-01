@@ -17,7 +17,7 @@ class BrowseEntry < ActiveRecord::Base
 
   # Do not re-order these elements!
   # @see http://api.rubyonrails.org/classes/ActiveRecord/Enum.html
-  enum subject_type: [:concept, :agent]
+  enum subject_type: [:topic, :person]
 
   class << self
     def settings_category_enum

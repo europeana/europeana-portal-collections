@@ -12,4 +12,9 @@ RSpec.describe BrowseEntry do
     subject { described_class.settings_category_enum }
     it { is_expected.to eq(%w(search spotlight)) }
   end
+
+  describe '.subject_types' do
+    subject { described_class.subject_types.keys }
+    it { is_expected.to eq(%w(topic person)) }
+  end
 end

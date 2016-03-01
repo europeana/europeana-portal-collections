@@ -13,18 +13,20 @@ class BrowseController < ApplicationController
     end
   end
 
-  def concepts
+  # GET /browse/topics
+  def topics
     find_collection
-    @concepts = browse_entries(:concept)
+    @topics = browse_entries(:topic)
 
     respond_to do |format|
       format.html
     end
   end
 
-  def agents
+  # GET /browse/people
+  def people
     find_collection
-    @agents = browse_entries(:agent)
+    @people = browse_entries(:person)
 
     respond_to do |format|
       format.html

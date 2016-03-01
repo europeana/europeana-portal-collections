@@ -1,8 +1,8 @@
 module Browse
-  class Concepts < ApplicationView
+  class People < ApplicationView
     def page_title
       mustache[:page_title] ||= begin
-        [t('site.browse.concepts.title'), site_title].join(' - ')
+        [t('site.browse.people.title'), site_title].join(' - ')
       end
     end
 
@@ -10,9 +10,9 @@ module Browse
       mustache[:content] ||= begin
         {
           title: page_title,
-          description: t('site.browse.concepts.description'),
-          browse_entries: @concepts.blank? ? nil : {
-            items: browse_entry_items(@concepts)
+          description: t('site.browse.people.description'),
+          browse_entries: @people.blank? ? nil : {
+            items: browse_entry_items(@people)
           },
         }
       end
