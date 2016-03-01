@@ -68,32 +68,6 @@ module Settings
 
     protected
 
-    def language_map
-      {
-        bg: 'bulgarian',
-        ca: 'catalan',
-        da: 'danish',
-        de: 'german',
-        el: 'greek',
-        en: 'english',
-        es: 'spanish',
-        # et: 'estonian',
-        fi: 'finnish',
-        fr: 'french',
-        hr: 'croatian',
-        hu: 'hungarian',
-        it: 'italian',
-        lt: 'lithuanian',
-        lv: 'latvian',
-        nl: 'dutch',
-        pl: 'polish',
-        pt: 'portuguese',
-        ro: 'romanian',
-        ru: 'russian',
-        sv: 'swedish'
-      }
-    end
-
     def language_item(k, v)
       {
         text: t("global.language-#{v}"),

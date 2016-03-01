@@ -17,9 +17,8 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner Banner::Translation BrowseEntry BrowseEntry::Translation Collection HeroImage
-    Link Link::Translation Link::Promotion Link::Credit Link::SocialMedia MediaObject Page
-    Page::Error Page::Landing Page::Translation User
+    Banner BrowseEntry Collection HeroImage Link Link::Promotion Link::Credit
+    Link::SocialMedia MediaObject Page Page::Error Page::Landing User
   )
 
   config.actions do
@@ -39,8 +38,6 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Banner' do
-    visible true
-    configure :translations, :globalize_tabs
     list do
       field :title
       field :state
@@ -57,7 +54,8 @@ RailsAdmin.config do |config|
       end
     end
     edit do
-      field :translations
+      field :title
+      field :body
       field :default do
         help 'Only one, published, banner can be the default.'
       end
@@ -65,16 +63,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'Banner::Translation' do
-    visible false
-    configure :locale, :hidden do
-      help ''
-    end
-    include_fields :locale, :title, :body
-  end
-
   config.model 'BrowseEntry' do
-    configure :translations, :globalize_tabs
     list do
       field :title
       field :file, :paperclip
@@ -93,7 +82,7 @@ RailsAdmin.config do |config|
       field :collections
     end
     edit do
-      field :translations
+      field :title
       field :query
       field :file, :paperclip
       field :subject_type
@@ -102,14 +91,6 @@ RailsAdmin.config do |config|
         inline_add false
       end
     end
-  end
-
-  config.model 'BrowseEntry::Translation' do
-    visible false
-    configure :locale, :hidden do
-      help ''
-    end
-    include_fields :locale, :title
   end
 
   config.model 'Collection' do
@@ -183,28 +164,18 @@ RailsAdmin.config do |config|
   config.model 'Link' do
     object_label_method :text
     visible false
-    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :translations
+      field :text
     end
-  end
-
-  config.model 'Link::Translation' do
-    visible false
-    configure :locale, :hidden do
-      help ''
-    end
-    include_fields :locale, :text
   end
 
   config.model 'Link::Promotion' do
     object_label_method :text
     visible false
-    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :translations
+      field :text
       field :position do
         help 'Items with lower positions appear first.'
       end
@@ -218,20 +189,18 @@ RailsAdmin.config do |config|
   config.model 'Link::SocialMedia' do
     object_label_method :text
     visible false
-    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :translations
+      field :text
     end
   end
 
   config.model 'Link::Credit' do
     object_label_method :text
     visible false
-    configure :translations, :globalize_tabs
     edit do
       field :url, :string
-      field :translations
+      field :text
     end
   end
 
@@ -244,7 +213,6 @@ RailsAdmin.config do |config|
 
   config.model 'Page' do
     object_label_method :title
-    configure :translations, :globalize_tabs
     list do
       field :slug
       field :title
@@ -263,7 +231,10 @@ RailsAdmin.config do |config|
     end
     edit do
       field :slug
-      field :translations
+      field :title
+      field :body, :text do
+        html_attributes rows: 15, cols: 80
+      end
       field :hero_image
       field :browse_entries do
         orderable true
@@ -276,7 +247,6 @@ RailsAdmin.config do |config|
 
   config.model 'Page::Error' do
     object_label_method :title
-    configure :translations, :globalize_tabs
     list do
       field :slug
       field :http_code
@@ -297,7 +267,10 @@ RailsAdmin.config do |config|
     edit do
       field :slug
       field :http_code
-      field :translations
+      field :title
+      field :body, :text do
+        html_attributes rows: 15, cols: 80
+      end
       field :hero_image
       field :browse_entries do
         orderable true
@@ -309,7 +282,6 @@ RailsAdmin.config do |config|
 
   config.model 'Page::Landing' do
     object_label_method :title
-    configure :translations, :globalize_tabs
     list do
       field :slug
       field :title
@@ -329,7 +301,10 @@ RailsAdmin.config do |config|
     end
     edit do
       field :slug
-      field :translations
+      field :title
+      field :body, :text do
+        html_attributes rows: 15, cols: 80
+      end
       field :hero_image
       field :credits
       field :social_media
@@ -343,20 +318,6 @@ RailsAdmin.config do |config|
         end
       end
       field :banner
-    end
-  end
-
-  config.model 'Page::Translation' do
-    visible false
-    configure :locale, :hidden do
-      help ''
-    end
-    include_fields :locale, :title, :body
-    edit do
-      field :title
-      field :body, :text do
-        html_attributes rows: 15, cols: 80
-      end
     end
   end
 

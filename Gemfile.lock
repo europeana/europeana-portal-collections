@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: a386cb1127370a09939a01e1daae7550714175bf
-  ref: a386cb1
+  revision: ab30cfa3b03002f47de02d834e4788e693e10e03
+  ref: ab30cfa
   specs:
     europeana-styleguide (0.1.0)
       activesupport (~> 4.0)
@@ -406,10 +406,6 @@ GEM
       remotipart (~> 1.0)
       safe_yaml (~> 1.0)
       sass-rails (>= 4.0, < 6)
-    rails_admin_globalize_field (0.4.0)
-      globalize (>= 5.0)
-      rails (>= 4.2)
-      rails_admin (>= 0.6.2)
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.4)
     railties (4.2.5.2)
@@ -600,10 +596,8 @@ DEPENDENCIES
   rails (= 4.2.5.2)
   rails_12factor (~> 0.0.3)
   rails_admin (~> 0.8.0)
-  rails_admin_globalize_field (~> 0.4)
   redis-rails (~> 4.0)
   redis-rails-instrumentation
-  responders (~> 2.1)
   rspec-rails (~> 3.0)
   rubocop (= 0.35.1)
   ruby-oembed (~> 0.9)

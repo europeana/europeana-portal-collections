@@ -15,7 +15,13 @@ class SettingsController < ApplicationController
     locales = set_locale_from_param
 
     respond_to do |format|
-      format.html { render action: :language, status: flash_status }
+      format.html do
+        if params[:redirect]
+          redirect_to params[:redirect]
+        else
+          render action: :language, status: flash_status
+        end
+      end
       format.json do
         render json: flash_json.merge(refresh: (locales.first != locales.last)),
                status: flash_status
