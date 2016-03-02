@@ -25,7 +25,7 @@ RSpec.describe 'browse/topics.html.mustache' do
     render
     expect(rendered).to have_selector('ul.browse-entry-list li')
     BrowseEntry.topic.published.each do |topic|
-      url = search_path(q: topic.query)
+      url = search_path(Rack::Utils.parse_nested_query(topic.query))
       expect(rendered).to have_selector("ul.browse-entry-list li a[href=\"#{url}\"] span.title",
                                         text: topic.title)
     end
