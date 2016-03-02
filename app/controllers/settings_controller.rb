@@ -31,12 +31,12 @@ class SettingsController < ApplicationController
 
   protected
 
+  ##
+  # Ensure that only local paths are accepted as redirect targets
   def local_redirect
     @local_redirect ||= begin
       if params[:redirect] && params[:redirect].is_a?(String) && params[:redirect] =~ %r{\A/}
         params[:redirect]
-      else
-        nil
       end
     end
   end
