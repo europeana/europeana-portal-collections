@@ -54,10 +54,11 @@ module UrlHelper
   # @param browse_entry [BrowseEntry]
   # @return [String] url
   def browse_entry_url(browse_entry, page = nil)
+    browse_entry_query = Rack::Utils.parse_nested_query(browse_entry.query)
     if page.present? && (slug_match = page.slug.match(/\Acollections\/(.*)\Z/))
       collection = Collection.find_by_key(slug_match[1])
-      return collection_path(collection.key, q: browse_entry.query) unless collection.nil?
+      return collection_path(collection.key, browse_entry_query) unless collection.nil?
     end
-    search_path(q: browse_entry.query)
+    search_path(browse_entry_query)
   end
 end
