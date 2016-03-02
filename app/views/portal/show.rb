@@ -3,10 +3,17 @@ module Portal
     attr_accessor :document, :debug
 
     def head_links
-      mustache[:head_links] ||= begin
-        [
+      s = super
+      mustache[:head_links] ||= {
+        items: [
           { rel: 'canonical', href: document_url(document, format: 'html') }
-        ] + super
+        ] + oembed_links + s[:items]
+      }
+    end
+
+    def oembed_links
+      oembed_html.map do |_url, oembed|
+        { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
       end
     end
 
@@ -540,9 +547,16 @@ module Portal
     end
 
     def simple_rights_label_data
-      mustache[:simple_rights_label_data] ||= begin
+      rights = mustache[:simple_rights_label_data] ||= begin
         Document::RecordPresenter.new(document, controller).simple_rights_label_data
       end
+      licenses = document.fetch('licenses', nil)
+      if !licenses.nil? && !rights.nil?
+        license_expiry = licenses.first['ccDeprecatedOn']
+        date = unix_time_to_local(license_expiry)
+        rights[:expiry] = t('global.facet.reusability.expiry', date: date.to_formatted_s(:date))
+      end
+      rights
     end
 
     def labels

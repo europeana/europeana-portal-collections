@@ -194,17 +194,6 @@ module Portal
       }
     end
 
-    def hidden_inputs_for_search
-      flatten_hash(params_for_search.except(:page, :utf8)).collect do |name, value|
-        [value].flatten.collect do |v|
-          {
-            name: name,
-            value: v.to_s
-          }
-        end
-      end.flatten
-    end
-
     def previous_page_url
       prev_page = Kaminari::Helpers::PrevPage.new(self, current_page: @response.current_page)
       prev_page.url
@@ -244,15 +233,19 @@ module Portal
       }
     end
 
+    def form_search_hidden_field(name, value)
+      {
+        hidden_name: name,
+        hidden_value: value
+      }
+    end
+
     def form_search_hidden
-      (params[:f] || []).map do |f, vs|
-        [vs].flatten.map do |v|
-          {
-            hidden_name: "f[#{f}][]",
-            hidden_value: v
-          }
-        end
+      facets = (params[:f] || []).map do |f, values|
+        [values].flatten.map { |v| form_search_hidden_field("f[#{f}][]", v) }
       end.flatten
+
+      facets << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
     end
   end
 end

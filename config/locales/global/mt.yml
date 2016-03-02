@@ -2,11 +2,11 @@ mt:
   Symphonies: 
   X11:
     colours:
-      '000000': 
+      '000000': Iswed
       000080: 
-      00008B: 
+      00008B: Blu Skur
       0000CD: 
-      0000FF: 
+      0000FF: Blu
       '006400': 
       008000: 
       008080: 
@@ -14,7 +14,7 @@ mt:
       00BFFF: 
       00CED1: 
       00FA9A: 
-      00FF00: 
+      00FF00: Aħdar
       00FF7F: 
       00FFFF: 
       '191970': 
@@ -147,7 +147,7 @@ mt:
       FFFFF0: 
       FFFFFF: 
   global:
-    about-us: Min aħna
+    about-us: Dwarna
     actions:
       filter-all: Kollha
       filter-by: Iffiltra skond
@@ -216,27 +216,27 @@ mt:
         slovenia: L-Islovenja
         spain: Spanja
         sweden: L-Iżvezja
-        switzerland: 
-        turkey: 
-        ukraine: 
-        unitedkingdom: 
-        unitedstatesofamerica: 
-      creator: 
+        switzerland: L-Iżvizzera
+        turkey: It-Turkija
+        ukraine: L-Ukranija
+        unitedkingdom: Ir-Renju Unit
+        unitedstatesofamerica: L-Amerika
+      creator: kreatur
       header:
-        channel: 
-        colourpalette: 
-        country: 
-        data_provider: 
-        image_aspectratio: 
-        image_colour: 
-        image_size: 
-        language: 
-        language_of_description: 
-        media: 
-        mime_type: 
-        provider: 
-        reusability: 
-        sound_duration: 
+        channel: Kollezzjonijiet
+        colourpalette: Kulur
+        country: Pajjiż
+        data_provider: Istituzzjoni
+        image_aspectratio: Orientazzjoni
+        image_colour: Paletta
+        image_size: Daqs
+        language: Lingwa
+        language_of_description: Lingwa tad-Deskrizzjoni
+        media: Oġġetti bil-links għall-media biss
+        mime_type: Format tal-fajl
+        provider: Aggregatur
+        reusability: Nista' nużagħha?
+        sound_duration: 'Dewmien '
         sound_hq: Kwalita' Għolja
         text_fulltext: Il-kitba sħiħa
         type: Il-Medja
@@ -262,21 +262,21 @@ mt:
         da: Daniż
         de: Tedesc
         el: 
-        en: 
-        es: 
+        en: Ingliż
+        es: Spanjol
         et: 
         fi: 
-        fr: 
+        fr: Franċiż
         ga: 
         he: 
         hr: 
         hu: 
         is: 
-        it: 
+        it: Taljan
         lt: 
         lv: 
-        mt: 
-        mul: 
+        mt: Malti
+        mul: Aktar minn lingwa waħda
         nl: 
         'no': 
         pl: Polakk
@@ -308,12 +308,13 @@ mt:
         advanced-cc-by-sa: 
         advanced-cc0: 
         advanced-orphan-work: 
-        advanced-out-of-copyright-non-commercial: 
+        advanced-out-of-copyright-non-commercial: Barra mill-copyright - mhux għal użu kummerċjali
         advanced-pdm: 
-        advanced-rrfa: 
+        advanced-rrfa: Drittijiet riżervati - Aċċess b'xejn
         advanced-rrpa: Drittijiet riżervati - Aċċess mħallas
         advanced-rrra: Drittijiet riżervati - Aċċess mhux permess
         advanced-ucs: L-istatus tal-copyright mhux magħruf
+        expiry: 
         open: Iva bl-attribuzzjoni
         permission: Bil-permess biss
         restricted: Iva bir-restrizzjonijiet
@@ -332,37 +333,37 @@ mt:
       type:
         3d: 3D
         image: Immaġni
-        sound: 
-        text: 
-        video: 
+        sound: "Ħoss"
+        text: Kitba
+        video: Video
       type-image:
         orientation:
           label: L-orientazzjoni tal-immaġni
           landscape: "'Landscape'"
           portrait: "'Portrait'"
         quality:
-          all: 
-          hq-only: 
-          label: 
+          all: Uri kollox
+          hq-only: Uri biss ta' kwalita' għolja
+          label: Kwalita'
         size:
-          explanation: 
-          label: 
-          large: 
-          medium: 
-          small: 
-          xl: 
+          explanation: X'ifissru id-daqsijiet?
+          label: Id-daqs tal-immaġni
+          large: Kbir (%{data})
+          medium: Medju (%{data})
+          small: "Żgħir (%{data})"
+          xl: Kbir ħafna (%{data})
       type-sound:
         duration:
-          label: 
-          long: 
-          medium: 
-          short: 
-          very-short: 
+          label: Tul
+          long: Twil (%{data})
+          medium: Medju (%{data})
+          short: Qasir (%{data})
+          very-short: Qasir ħafna (%{data})
       type-video:
         duration:
-          label: 
-          long: 
-          medium: 
+          label: Tul
+          long: Twil (%{data})
+          medium: Medju (%{data})
           short: Qasir (%{data})
       video_duration:
         long: Twil (20+ minuti)
@@ -387,77 +388,77 @@ mt:
       connect: Kkonnektja
       develop: "Żviluppa"
       discover: Skopri
-      network: 
-    help: 
-    home: 
-    javascript-required: 
-    labs: 
-    labs-text: 
+      network: Komunita'
+    help: Għinuna
+    home: Paġna Primarja
+    javascript-required: Biex taċċessa l-kontenut, jekk joġgħbok ħaddem il-JavaScript, u kkonsidra li tuża web browswer li jiflaħ kontenut ta' HTML5.
+    labs: Laboratorji
+    labs-text: Remix tal-kontenut kulturali ma' l-APIs & datasets tagħna
     language-basque: 
-    language-bulgarian: 
+    language-bulgarian: Bulgaru
     language-catalan: 
     language-croatian: 
     language-czech: 
-    language-danish: 
-    language-dutch: 
-    language-english: 
-    language-estonian: 
-    language-finnish: 
-    language-french: 
+    language-danish: Daniż
+    language-dutch: Olandiż
+    language-english: Ingliż
+    language-estonian: Estonjan
+    language-finnish: Finlandiż
+    language-french: Franċiż
     language-gaelic: 
-    language-german: 
-    language-greek: 
+    language-german: Germaniż
+    language-greek: Grieg
     language-hungarian: Ungariż
-    language-icelandic: 
+    language-icelandic: Iżlandiż
     language-italian: Taljan
-    language-latvian: 
-    language-lithuanian: 
+    language-latvian: Latvjan
+    language-lithuanian: Litwan
     language-maltese: Malti
-    language-norwegian: 
-    language-polish: 
-    language-portuguese: 
-    language-romanian: 
-    language-russian: 
-    language-slovakian: 
-    language-slovenian: 
-    language-spanish: 
-    language-swedish: 
-    language-ukranian: 
+    language-norwegian: Norveġiż
+    language-polish: Pollakk
+    language-portuguese: Portugiż
+    language-romanian: Rumen
+    language-russian: Russu
+    language-slovakian: Slovakk
+    language-slovenian: Sloven
+    language-spanish: Spanjol
+    language-swedish: Svediż
+    language-ukranian: Ukrain
     login: 
-    mission: 
+    mission: Aħna nittrasformaw id-dinja permezz tal-kultura! Rridu li nibnu fuq il-wirt għani tal-Ewropa u nagħmluha aktar faċli għal persuni li jużaw, kemm jekk għal xogħol, għat-tagħlim jew biss għall-gost.
     mission-title: Il-missjoni tagħna
     more:
-      load-more: 
-      show-more: 
-      view-more: 
+      load-more: Aktar
+      show-more: Uri aktar
+      view-more: Ara aktar
     more-info: Aktar informazzjoni
     newsletter:
-      email-address-invalid: 
-      email-address-required: 
-      language-required: 
-      signup: 
-    our-sites: 
+      email-address-invalid: L-indirizz ta' l-email għandu jkun validu.
+      email-address-required: Indirizz ta' email għandu jkun speċifikat
+      language-required: Il-lingwa għandha tkun speċifikata
+      signup: Irreġistra għan-newsletter tagħna
+    our-sites: Is-siti tagħna
     password: 
     professional: 
-    professional-text: 
-    refine-your-search: 
-    register: 
-    research: 
-    research-text: 
+    professional-text: Involvi ruħek, aqsam l-ideat tiegħek jew uża tagħna
+    refine-your-search: Irfina t-tfixxija tiegħek
+    register: Irreġistra
+    research: Riċerka
+    research-text: Kkonnetja mal-komunita' akademika
     search-area:
-      search-button-image-alt: 
-      search-placeholder-text: 
-    search-collections: 
-    search-collections-text: 
-    share: 
+      search-button-image-alt: Fittex
+      search-placeholder-text: "Żid terminu fit-tfixxija"
+    search-collections: Kollezzjonijiet
+    search-collections-text: Skopri l-kultura u l-istorja ta' l-Ewropa
+    share: Aqsam
     sitemap: 
-    terms-and-policies: 
-    type: 
-  'no': 
-  pl: 
+    terms-and-policies: Termini u Kundizzjonijiet
+    type: tip
+  'no': In-Norveġja
+  pl: Il-Portugal
   site:
     facet:
       language:
         show:
-          results: 
-        show-results-all: 
+          results: Riżultati
+        show-results-all: Uri r-riżultati kollha

@@ -3,13 +3,13 @@ sv:
     site:
       browse:
         newcontent:
-          description: 
+          description: 'Här finner du de senaste uppdateringarna i Europeanas samlingar. Från vilken partner, hur mycket och när. '
         sources:
-          description: 
+          description: Här finner du alla institutioner som har bidragit till Europeanas samlingar.
   global:
     labs-link: Länk till Labs
     navigation:
-      agents: 
+      agents: Personligheter
       all_blog_posts: Alla bloggposter
       all_exhibitions: Alla utställningar
       blog: Blogg
@@ -19,7 +19,7 @@ sv:
       browse_sources: Våra källor
       channels: Collections
       collections: Samlingar
-      concepts: 
+      concepts: "Ämnen"
       exhibitions: Utställningar
       home: Start
     pro-link: länk till Pro
@@ -37,24 +37,24 @@ sv:
         description: 
         title: Personer
       colours:
-        description: 
+        description: Här kan du söka efter bilder med en viss färg. Klicka pa en färgruta och finn bilder som innehåller den färgen!
         title: Färger
       concepts:
         description: 
         title: "Ämnen och typer"
       newcontent:
-        description: 
+        description: 'Här finner du de senaste uppdateringarna i Europeanas samlingar. Från vilken partner, hur mycket och när. '
         tableh1: Alla institutioner
         tableh2: Poster
         tableh3: Datum
         title: Nytt innehåll
       sources:
-        description: 
+        description: 'Här finner du de senaste uppdateringarna i Europeanas samlingar. Från vilken partner, hur mycket och när. '
         title: Källor
     collections:
       art-history:
         description: 
-        title: 
+        title: Konsthistoria
       data-types:
         3d: 3D objekt
         count: poster

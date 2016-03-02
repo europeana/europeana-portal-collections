@@ -32,6 +32,7 @@ RSpec.describe 'portal/show.html.mustache' do
     allow(view).to receive(:current_search_session).and_return nil
     allow(view).to receive(:search_session).and_return({})
     allow(view).to receive(:search_action_path).and_return('/search')
+    allow(view).to receive(:oembed_html).and_return({})
 
     assign(:document, blacklight_document)
     assign(:similar, [])

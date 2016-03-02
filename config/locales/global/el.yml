@@ -314,6 +314,7 @@ el:
         advanced-rrpa: ''
         advanced-rrra: ''
         advanced-ucs: ''
+        expiry: 
         open: "Ναι με απόδοση πνευματικών δικαιωμάτων"
         permission: "Μόνο με άδεια"
         restricted: "Ναι με περιορισμούς"

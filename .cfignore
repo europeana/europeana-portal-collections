@@ -19,11 +19,11 @@
 # Ignore os files.
 .DS_Store
 
-# Ignore compiled assets
-/public/assets
-
 # Ignore uploaded files
 /public/system
 
 # Ignore Redis snapshot
 /dump.rdb
+
+# Ignore bundled gems
+/vendor/bundle

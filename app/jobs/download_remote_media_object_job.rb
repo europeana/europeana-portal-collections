@@ -2,7 +2,7 @@ require 'open-uri'
 
 # @todo deal with 404's
 # @todo follow redirects?
-class DownloadRemoteMediaObjectJob < ActiveJob::Base
+class DownloadRemoteMediaObjectJob < ApplicationJob
   queue_as :default
 
   def perform(url)

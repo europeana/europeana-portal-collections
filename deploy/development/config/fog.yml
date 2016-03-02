@@ -1,0 +1,5 @@
+development:
+  credentials:
+    provider: Local
+    local_root: <%= File.join(Rails.root, 'tmp') %>
+  directory: fog

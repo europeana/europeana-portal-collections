@@ -45,7 +45,6 @@ module BlacklightConfig
       # Fields to be displayed in the index (search results) view
       #   The ordering of the field names is the order of the display 
       config.add_index_field 'title'
-      config.add_index_field 'edmPreview'
       config.add_index_field 'edmAgentLabelLangAware'
       config.add_index_field 'dcDescription'
       config.add_index_field 'edmConceptPrefLabelLangAware',
@@ -68,6 +67,7 @@ module BlacklightConfig
       config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
+      config.add_facet_field 'YEAR', range: true if ENV['FACET_YEAR_FIELD']
       config.add_facet_field 'REUSABILITY'
       config.add_facet_field 'COUNTRY', limit: 50
       config.add_facet_field 'LANGUAGE', limit: 50

@@ -14,7 +14,7 @@ RSpec.describe 'browse/new_content.html.mustache' do
 
   it 'should have page title' do
     render
-    expect(rendered).to have_selector('title', visible: false, text: 'New Content')
+    expect(rendered).to have_selector('title', visible: false, text: /new/i)
   end
 
   it 'should have meta description' do

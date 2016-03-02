@@ -3,23 +3,23 @@ en:
     site:
       browse:
         newcontent:
-          description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when!  Just click on the links below to see their collections.
+          description: 'Here, you can explore all the recent additions to Europeana Collections. See which cultural institution has contributed new items, the number of items they''ve added and when. Just click on the links below to find out more. '
         sources:
-          description: Below you see a list of sources for our collections. These sources aggregate and contribute collections to Europeana, click on the link that interests you below to be brought to all their collections!
+          description: Below you see a list of institutions who have contributed their content to Europeana Collections. These institutions aggregate and contribute their data to Europeana, click on the link that interests you below to view a particular partner collection!
   global:
     labs-link: 'link to labs '
     navigation:
-      agents: Agents
+      agents: People
       all_blog_posts: All blog posts…
       all_exhibitions: All exhibitions…
       blog: Blog
       browse: Browse
       browse_colours: Colours
-      browse_newcontent: New content
+      browse_newcontent: What's new?
       browse_sources: Sources
       channels: Collections
       collections: Collections
-      concepts: Concepts
+      concepts: Topics
       exhibitions: Exhibitions
       home: Home
     pro-link: 'link to pro '
@@ -28,28 +28,28 @@ en:
   site:
     alpha:
       feedback_banner:
-        description: An Beta release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
+        description: A Beta release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.
         link-text: Give us your input!
         title: This is a Beta release of our new "Collections" and "Music Collections"
     blog-link: link to blog
     browse:
       agents:
-        description: 'Here you can find previously highlighted collections surrounding artists, composers and other people who made a difference in our cultural history. '
-        title: Persons
+        description: Here you can find highlights from our Collections relating to the lives and works of famous artists, composers and other important figures from history.
+        title: People
       colours:
-        description: 'In this section you can search for images based on their colour. Just click on the one that you like to view the collection! '
+        description: Search for images based on their colour. Simply click a coloured box below to discover images containing that colour!
         title: Colours
       concepts:
-        description: 'Here you can find previous highlighted subjects that have been featured in our Collections. '
-        title: Subjects and types
+        description: 'Explore our Collections by topic, theme or genre. '
+        title: Topics
       newcontent:
-        description: In this section you can find all the content that has recently been added to Europeana Collections. Here you can see which new institution has published new material, how much material and when. Just click on the links below to see their collections!
+        description: 'Here, you can explore all the recent additions to Europeana Collections. See which cultural institution has contributed new items, the number of items they''ve added and when. Just click on the links below to find out more. '
         tableh1: All institutions
         tableh2: Items
         tableh3: Date
-        title: New Content
+        title: What's new?
       sources:
-        description: Below you see a list of sources for our collections. These sources aggregate and contribute collections to Europeana, click on the link that interests you below to be brought to all their collections!
+        description: Below you see a list of institutions who have contributed their content to Europeana Collections. These institutions aggregate and contribute their data to Europeana, click on the link that interests you below to view a particular partner collection!
         title: Sources
     collections:
       art-history:
@@ -232,7 +232,7 @@ en:
         intro: Sorry, we can't find that page
         text: Unfortunately we couldn't find the page you were looking for. Try searching Europeana or you might like the selected items below.
       about:
-        text: |+
+        text: |-
           <p>Searching for a favourite old painting? Doing some research or writing a school paper?  Looking for an inspiration for your next coffee mug design?  Fancy learning something new? Whatever the reason for your visit to Europeana, welcome!</p>
 
           <p>Delve into Europe's largest online collection of art, culture and science. Europeana Collections brings you material from the famous and the not-so-famous (but always fascinating)  libraries, museums, galleries and archives of Europe.</p>
@@ -241,13 +241,11 @@ en:
 
           <p>Explore, discover, watch, listen, read, download... Enjoy!</p>
 
-          <p>Now why not try out the Europeana Art History Collections or Europeana Music Collections? We also have custom resources for researchers and cultural developers/innovators (this is where you can find our API), as well as a range of virtual exhibitions and a blog. </p>
+          <p>Now why not try out the <a href="http://europeana.eu/portal/collections/art-history">Europeana Art History Collections</a> or <a href="http://europeana.eu/portal/collections/music">Europeana Music Collections</a>? We also have custom resources for <a href="http://research.europeana.eu/">researchers</a> and cultural <a href="http://labs.europeana.eu/">developers/innovators</a> (this is where you can find our <a href="http://labs.europeana.eu/api">APIs</a>), as well as a range of <a href="http://exhibitions.europeana.eu/">virtual exhibitions</a> and a <a href="http://blog.europeana.eu/">blog</a>. </p>
 
-          <p>And if you’re still hungry for more, you can get your daily dose of culture on Facebook, Twitter, Medium, Google+ and Pinterest.</p>
+          <p>And if you’re still hungry for more, you can get your daily dose of culture on <a href="https://www.facebook.com/Europeana">Facebook</a>, <a href="https://twitter.com/Europeanaeu">Twitter</a>, <a href="https://medium.com/@Europeana">Medium</a>, <a href="https://plus.google.com/+europeana">Google+</a>, <a href="http://europeanacollections.tumblr.com/">Tumblr</a> and <a href="https://www.pinterest.com/europeana/">Pinterest</a>.</p>
 
-          <p>For more information on how we work with cultural institutions and their collections, visit Europeana Pro.</p>
-
-
+          <p>For more information on how we work with cultural institutions and their collections, visit <a href="http://pro.europeana.eu/">Europeana Pro</a>.</p>
         title: Welcome, culture lover!
       music-channel-about:
         text: "<p>Imagine looking at original handwritten manuscripts of a piece of music while listening to different interpretations of it, and reading a biography of the composer. On the Europeana Music Collection, you can.</p> \n\n<p><a href=\"http://www.europeanasounds.eu\">Our partners</a>, all experts in music, from across Europe have carefully curated this collection of music recordings, sheet music, images of musical instruments, books about music and other music-related content. </p>\n\n<p>We’ve made this early test version of the Music Collection available to you, our users, so you can help us shape it as we develop it further. So when you visit the site you will at times be asked to answer questions or surveys that appear on screen. We would really appreciate if you could take the time to answer those questions and surveys!</p>\n\n<p>Also, in the interest of transparency and privacy, you should know that we log user statistics and user behaviour in Google Analytics and a service called Hotjar. We do that because it shows us where we’ve gone wrong in our designs and so helps us to improve the Music Collection. All logs are kept private and anonymised and will only be used to improve our service.</p>\n\n<p>We encourage you to search the collection, play music, view the sheet music or read around it. When copyright allows, you can download the things you love most. And visit our virtual exhibitions to discover music in ways you’ve never done before!</p>"

@@ -4,7 +4,13 @@ module ApiQueryingJob
   include Blacklight::RequestBuilders
 
   def blacklight_config
-    @blacklight_config ||= PortalController.new.blacklight_config
+    @blacklight_config ||= begin
+      PortalController.new.blacklight_config.deep_dup.tap do |blacklight_config|
+        %w(PROVIDER DATA_PROVIDER).each do |field|
+          blacklight_config.facet_fields[field].limit = nil
+        end
+      end
+    end
   end
 
   def repository

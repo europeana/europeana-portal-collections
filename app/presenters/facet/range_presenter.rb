@@ -1,5 +1,7 @@
 module Facet
   class RangePresenter < FacetPresenter
+    include Blacklight::HashAsHiddenFieldsHelperBehavior
+
     def display(_options = {})
       range_min = @facet.items.map(&:value).min
       range_max = @facet.items.map(&:value).max
@@ -13,12 +15,12 @@ module Facet
         },
         range: {
           start: {
-            input_name: "range[#{facet.name}][begin]",
+            input_name: "range[#{@facet.name}][begin]",
             input_value: range_min,
             label_text: 'From:'
           },
           end: {
-            input_name: "range[#{facet.name}][end]",
+            input_name: "range[#{@facet.name}][end]",
             input_value: range_max,
             label_text: 'To:'
           }
@@ -36,6 +38,12 @@ module Facet
         date_start: range_min,
         date_end: range_max
       }
+    end
+
+    def hidden_inputs_for_search
+      flatten_hash(params_for_search.except(:page, :utf8)).map do |name, value|
+        [value].flatten.map { |v| { name: name, value: v.to_s } }
+      end.flatten
     end
   end
 end
