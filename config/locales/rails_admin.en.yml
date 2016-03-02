@@ -16,3 +16,6 @@ en:
     form:
       are_you_sure_you_want_to_publish_the_object: "Are you sure you want to publish this %{model_name}?"
       are_you_sure_you_want_to_unpublish_the_object: "Are you sure you want to unpublish this %{model_name}?"
+    help:
+      browse_entry:
+        query: 'Include everything after the ? in a search URL, e.g. "q=paris&f[TYPE][]=IMAGE". Do not include page or per_page.'
