@@ -246,6 +246,7 @@ module Portal
       end.flatten
 
       facets << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
+      facets
     end
   end
 end
