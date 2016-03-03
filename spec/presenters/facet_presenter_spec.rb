@@ -1,7 +1,7 @@
 RSpec.describe FacetPresenter do
   def facet_items(count)
     (1..count).map do |n|
-      Europeana::Blacklight::Response::Facets::FacetItem.new(value: "Item #{n}", hits: (count + 1 - n) * 100 )
+      Europeana::Blacklight::Response::Facets::FacetItem.new(value: "Item #{n}", hits: (count + 1 - n) * 100)
     end
   end
 

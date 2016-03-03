@@ -80,7 +80,7 @@ class FacetPresenter
   #
   # This data is displayed in the list of _available_ facets. The facet may or
   # may not already be selected. Contrast with {#filter_item}.
-  # 
+  #
   # @param item [Europeana::Blacklight::Response::Facets::FacetItem] Blacklight/Europeana
   #   search result facet item
   # @return [Hash] display data for the facet item
@@ -98,7 +98,7 @@ class FacetPresenter
   #
   # This data is displayed in the list of _already selected_ facets. Contrast
   # with {#facet_item}.
-  # 
+  #
   # @param see {#facet_item}
   # @return [Hash] display data for the facet item
   def filter_item(item)
