@@ -13,7 +13,7 @@ module Collections
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
           { meta_property: 'og:sitename', content: title },
           { meta_property: 'og:description', content: description },
-          { meta_property: 'og:url', content: request.original_url }
+          { meta_property: 'og:url', content: collection_url(@collection.key) }
         ]
         head_meta << { meta_property: 'og:title', content: title } unless title.nil?
         head_meta << { meta_property: 'og:image', content: URI.join(root_url, hero[:hero_image]) } unless hero.nil?
