@@ -142,4 +142,29 @@ RSpec.describe FacetPresenter do
       end
     end
   end
+
+  describe '#filter_item' do
+    let(:facet) { facet_field_class.new('SIMPLE_FIELD', []) }
+    let(:item) { facet_items(10).first }
+    subject { described_class.new(facet, controller, blacklight_config).filter_item(item) }
+    let(:params) { { f: { facet.name => [item.value] } } }
+
+    it 'should include a translated facet title' do
+      I18n.backend.store_translations(:en, global: { facet: { header: { simple_field: 'simple field title' } } })
+      expect(subject[:filter]).to eq('simple field title')
+    end
+
+    it 'should include a translated, capitalized item label' do
+      I18n.backend.store_translations(:en, global: { facet: { simple_field: { item1: 'item label' } } })
+      expect(subject[:value]).to eq('Item Label')
+    end
+
+    it 'should include URL to remove facet' do
+      expect(subject[:remove]).not_to match(facet.name)
+    end
+
+    it 'should include facet URL param name' do
+      expect(subject[:name]).to eq("f[#{facet.name}][]")
+    end
+  end
 end
