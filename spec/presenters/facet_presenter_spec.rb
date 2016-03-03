@@ -1,11 +1,21 @@
 RSpec.describe FacetPresenter do
   def facet_items(count)
     (1..count).map do |n|
-      Europeana::Blacklight::Response::Facets::FacetItem.new(value: "Item #{n}", hits: (count + 1 - n) * 100)
+      Europeana::Blacklight::Response::Facets::FacetItem.new(value: "Item#{n}", hits: (count + 1 - n) * 100)
     end
   end
 
-  let(:controller) { PortalController.new }
+  let(:controller) do
+    PortalController.new.tap do |controller|
+      controller.request = ActionController::TestRequest.new
+      params.each_pair do |k, v|
+        controller.request.parameters[k] = v
+      end
+    end
+  end
+
+  let(:params) { {} }
+
   let(:blacklight_config) do
     Blacklight::Configuration.new do |config|
       config.add_facet_field 'SIMPLE_FIELD'
@@ -17,11 +27,8 @@ RSpec.describe FacetPresenter do
       config.add_facet_field 'SINGLE_SELECT_FIELD', single: true
     end
   end
-  let(:facet_field_class) { Europeana::Blacklight::Response::Facets::FacetField }
 
-  before do
-    controller.request = ActionController::TestRequest.new
-  end
+  let(:facet_field_class) { Europeana::Blacklight::Response::Facets::FacetField }
 
   describe '.build' do
     subject { described_class.build(facet, controller, blacklight_config) }
@@ -72,6 +79,7 @@ RSpec.describe FacetPresenter do
 
     context 'when facet is single-select' do
       let(:facet) { facet_field_class.new('SINGLE_SELECT_FIELD', []) }
+
       it 'should include select_one: true' do
         expect(subject[:select_one]).to be(true)
       end
@@ -87,11 +95,50 @@ RSpec.describe FacetPresenter do
       let(:options) { { count: 4 } }
       let(:items) { facet_items(6) }
       let(:facet) { facet_field_class.new('SIMPLE_FIELD', items) }
+
       it 'should have 4 unhidden items' do
         expect(subject[:items].length).to eq(4)
       end
+
       it 'should have 2 unhidden items' do
         expect(subject[:extra_items][:items].length).to eq(2)
+      end
+    end
+  end
+
+  describe '#facet_item' do
+    let(:facet) { facet_field_class.new('SIMPLE_FIELD', []) }
+    let(:item) { facet_items(10).first }
+    subject { described_class.new(facet, controller, blacklight_config).facet_item(item) }
+
+    it 'should include a translated, capitalized label' do
+      I18n.backend.store_translations(:en, global: { facet: { simple_field: { item1: 'item label' } } })
+      expect(subject[:text]).to eq('Item Label')
+    end
+
+    it 'should include a formatted number of results' do
+      expect(subject[:num_results]).to eq('1,000')
+    end
+
+    context 'when item is not in request params' do
+      it 'should include URL to add facet' do
+        expect(subject[:url]).to match(facet.name)
+      end
+
+      it 'should indicate facet not checked' do
+        expect(subject[:is_checked]).to be(false)
+      end
+    end
+
+    context 'when item is in request params' do
+      let(:params) { { f: { facet.name => [item.value] } } }
+
+      it 'should include URL to remove facet' do
+        expect(subject[:url]).not_to match(facet.name)
+      end
+
+      it 'should indicate facet checked' do
+        expect(subject[:is_checked]).to be(true)
       end
     end
   end
