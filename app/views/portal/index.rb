@@ -71,27 +71,27 @@ module Portal
 
     def results_menu
       {
-         menu_id: 'results_menu',
-         button_title_prefix: 'Per page:',
-         button_title: '12',
-         items: [
-            {
-              url: '&results=12',
-              text: '12'
-            },
-            {
-              url: '&results=24',
-              text: '24'
-            },
-            {
-              url: '&results=36',
-              text: '36'
-            },
-            {
-              url: '&results=48',
-              text: '48'
-            }
-          ]
+        menu_id: 'results_menu',
+        button_title_prefix: 'Per page:',
+        button_title: '12',
+        items: [
+          {
+            url: '&results=12',
+            text: '12'
+          },
+          {
+            url: '&results=24',
+            text: '24'
+          },
+          {
+            url: '&results=36',
+            text: '36'
+          },
+          {
+            url: '&results=48',
+            text: '48'
+          }
+        ]
       }
     end
 
