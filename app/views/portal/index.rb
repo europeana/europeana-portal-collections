@@ -71,25 +71,25 @@ module Portal
 
     def results_menu
       {
-         menu_id: "results_menu",
-         button_title_prefix: "Per page:",
-         button_title: "12",
+         menu_id: 'results_menu',
+         button_title_prefix: 'Per page:',
+         button_title: '12',
          items: [
             {
-              url: "&results=12",
-              text: "12"
+              url: '&results=12',
+              text: '12'
             },
             {
-              url: "&results=24",
-              text: "24"
+              url: '&results=24',
+              text: '24'
             },
             {
-              url: "&results=36",
-              text: "36"
+              url: '&results=36',
+              text: '36'
             },
             {
-              url: "&results=48",
-              text: "48"
+              url: '&results=48',
+              text: '48'
             }
           ]
       }
@@ -141,14 +141,14 @@ module Portal
         viewoptions: {
           items: [
             {
-              text: "Grid",
-              url: "url to grid view",
+              text: 'Grid',
+              url: 'url to grid view',
               icon_grid: true,
               is_current: true
             },
             {
-              text: "List",
-              url: "url to list view",
+              text: 'List',
+              url: 'url to list view',
               icon_list: true
             }
           ]
