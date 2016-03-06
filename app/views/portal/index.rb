@@ -69,6 +69,32 @@ module Portal
       end
     end
 
+    def results_menu
+      {
+         menu_id: "results_menu",
+         button_title_prefix: "Per page:",
+         button_title: "12",
+         items: [
+            {
+              url: "&results=12",
+              text: "12"
+            },
+            {
+              url: "&results=24",
+              text: "24"
+            },
+            {
+              url: "&results=36",
+              text: "36"
+            },
+            {
+              url: "&results=48",
+              text: "48"
+            }
+          ]
+      }
+    end
+
     def query_terms
       mustache[:query_terms] ||= begin
         query_terms = [(params[:q] || [])].flatten.collect do |query_term|
@@ -108,6 +134,26 @@ module Portal
           }
         }.reverse_merge(helpers ? helpers.navigation : {})
       end
+    end
+
+    def menus
+      {
+        viewoptions: {
+          items: [
+            {
+              text: "Grid",
+              url: "url to grid view",
+              icon_grid: true,
+              is_current: true
+            },
+            {
+              text: "List",
+              url: "url to list view",
+              icon_list: true
+            }
+          ]
+        }
+      }
     end
 
     def facets_selected
