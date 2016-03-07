@@ -2,6 +2,10 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
+    def bodyclass
+      params[:view] == 'grid' ? 'display-grid' : nil
+    end
+
     def page_title
       mustache[:page_title] ||= begin
         [params[:q], 'Europeana - Search results'].compact.join(' - ')
@@ -73,25 +77,13 @@ module Portal
       {
         menu_id: 'results_menu',
         button_title_prefix: 'Per page:',
-        button_title: '12',
-        items: [
+        button_title: search_state.params[:per_page],
+        items: blacklight_config.per_page.map do |pp|
           {
-            url: '&results=12',
-            text: '12'
-          },
-          {
-            url: '&results=24',
-            text: '24'
-          },
-          {
-            url: '&results=36',
-            text: '36'
-          },
-          {
-            url: '&results=48',
-            text: '48'
+            url: search_path(search_state.params_for_search(per_page: pp)),
+            text: pp
           }
-        ]
+        end
       }
     end
 
@@ -142,14 +134,15 @@ module Portal
           items: [
             {
               text: 'Grid',
-              url: 'url to grid view',
+              url: search_path(search_state.params_for_search(view: 'grid')),
               icon_grid: true,
-              is_current: true
+              is_current: params[:view] == 'grid'
             },
             {
               text: 'List',
-              url: 'url to list view',
-              icon_list: true
+              url: search_path(search_state.params_for_search(view: 'list')),
+              icon_list: true,
+              is_current: params[:view] != 'grid'
             }
           ]
         }
