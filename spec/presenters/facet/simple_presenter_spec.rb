@@ -1,14 +1,15 @@
-require 'support/shared_examples/facet_presenter'
-
 RSpec.describe Facet::SimplePresenter, presenter: :facet do
+  let(:field_name) { 'SIMPLE_FIELD' }
+  let(:field_options) { {} }
+
   it_behaves_like 'a facet presenter'
+  it_behaves_like 'a text-labelled facet item presenter'
+  it_behaves_like 'a field-showing/hiding presenter'
 
   describe '#display' do
-    let(:facet) { facet_field_class.new('SIMPLE_FIELD', []) }
-    let(:options) { {} }
-    subject { described_class.new(facet, controller, blacklight_config).display(options) }
+    subject { presenter.display }
 
-    it 'is flagged as simple' do
+    it 'flags the facet as simple' do
       expect(subject[:simple]).to be(true)
     end
   end
