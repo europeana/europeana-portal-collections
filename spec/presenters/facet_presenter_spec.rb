@@ -96,12 +96,26 @@ RSpec.describe FacetPresenter do
       let(:items) { facet_items(6) }
       let(:facet) { facet_field_class.new('SIMPLE_FIELD', items) }
 
-      it 'should have 4 unhidden items' do
-        expect(subject[:items].length).to eq(4)
+      context 'with no facet items not in request params' do
+        it 'should have 4 unhidden items' do
+          expect(subject[:items].length).to eq(4)
+        end
+
+        it 'should have 2 hidden items' do
+          expect(subject[:extra_items][:items].length).to eq(2)
+        end
       end
 
-      it 'should have 2 unhidden items' do
-        expect(subject[:extra_items][:items].length).to eq(2)
+      context 'with 5 facet items in request params' do
+        let(:params) { { f: { facet.name => items[0..4].map(&:value) } } }
+
+        it 'should have 5 unhidden items' do
+          expect(subject[:items].length).to eq(5)
+        end
+
+        it 'should have 1 hidden item' do
+          expect(subject[:extra_items][:items].length).to eq(1)
+        end
       end
     end
   end
