@@ -134,14 +134,15 @@ module Portal
           items: [
             {
               text: 'Grid',
-              url: 'url to grid view',
+              url: search_path(search_state.params_for_search(view: 'grid')),
               icon_grid: true,
-              is_current: true
+              is_current: params[:view] == 'grid'
             },
             {
               text: 'List',
-              url: 'url to list view',
-              icon_list: true
+              url: search_path(search_state.params_for_search(view: 'list')),
+              icon_list: true,
+              is_current: params[:view] != 'grid'
             }
           ]
         }
