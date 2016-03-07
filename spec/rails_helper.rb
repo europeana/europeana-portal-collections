@@ -12,7 +12,7 @@ require 'shoulda/matchers'
 require 'webmock_helper'
 
 # Local requires
-require 'support/view_test_helper'
+Dir[Rails.root.join('spec/support/helpers/*.rb')].each { |f| require f }
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -61,6 +61,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Devise::TestHelpers, type: :controller
+  config.include EuropeanaAPIHelper
+  config.include FacetPresenterHelper, presenter: :facet
   config.include ViewTestHelper, type: :view
 
   config.before(:each) do
