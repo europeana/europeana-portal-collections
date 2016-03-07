@@ -5,7 +5,7 @@ RSpec.describe FacetPresenter, presenter: :facet do
     subject { described_class.build(facet, controller, blacklight_config) }
 
     context 'when facet is a simple field' do
-      let(:field_options) { { } }
+      let(:field_options) { {} }
       it { is_expected.to be_a(Facet::SimplePresenter) }
     end
 

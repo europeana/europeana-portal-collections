@@ -19,19 +19,10 @@ RSpec.shared_context 'facet presenter', presenter: :facet do
   let(:blacklight_config) do
     Blacklight::Configuration.new do |config|
       config.add_facet_field field_name, field_options
-#       config.add_facet_field 'SIMPLE_FIELD'
-#       config.add_facet_field 'HIERARCHICAL_PARENT_FIELD', hierarchical: true
-#       config.add_facet_field 'HIERARCHICAL_CHILD_FIELD', hierarchical: true, parent: 'HIERARCHICAL_PARENT_FIELD'
-#       config.add_facet_field 'BOOLEAN_FIELD', boolean: true
-#       config.add_facet_field 'COLOUR_FIELD', colour: true
-#       config.add_facet_field 'RANGE_FIELD', range: true
-#       config.add_facet_field 'SINGLE_SELECT_FIELD', single: true
     end
   end
 
   let(:facet_field_class) { Europeana::Blacklight::Response::Facets::FacetField }
-
-#   let(:facet) { facet_field_class.new(field_name, facet_items) }
 
   let(:items) { [] }
 
