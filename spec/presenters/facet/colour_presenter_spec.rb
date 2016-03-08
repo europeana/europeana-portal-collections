@@ -3,6 +3,8 @@ RSpec.describe Facet::ColourPresenter, presenter: :facet do
   let(:field_options) { { colour: true } }
 
   it_behaves_like 'a facet presenter'
+  it_behaves_like 'a single-selectable facet'
+  it_behaves_like 'a translator of item titles'
   it_behaves_like 'a field-showing/hiding presenter'
 
   describe '#display' do

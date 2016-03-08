@@ -8,20 +8,6 @@ shared_examples 'a facet presenter' do
       I18n.backend.store_translations(:en, global: { facet: { header: { field_name.downcase => 'field title' } } })
       expect(subject[:title]).to eq('field title')
     end
-
-    context 'when facet is single-select' do
-      let(:field_options) { super().merge(single: true) }
-
-      it 'should include select_one: true' do
-        expect(subject[:select_one]).to be(true)
-      end
-    end
-
-    context 'when facet is not single-select' do
-      it 'should include select_one: nil' do
-        expect(subject[:select_one]).to be_nil
-      end
-    end
   end
 
   describe '#facet_item' do
@@ -65,11 +51,6 @@ shared_examples 'a facet presenter' do
       expect(subject[:filter]).to eq('field title')
     end
 
-    it 'should include a translated, capitalized item label' do
-      I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { item1: 'item label' } } })
-      expect(subject[:value]).to eq('Item Label')
-    end
-
     it 'should include URL to remove facet' do
       expect(subject[:remove]).not_to match(facet.name)
     end
@@ -77,6 +58,13 @@ shared_examples 'a facet presenter' do
     it 'should include facet URL param name' do
       expect(subject[:name]).to eq("f[#{facet.name}][]")
     end
+  end
+end
+
+shared_examples 'a translator of item titles' do
+  it 'should include a translated, capitalized item label' do
+    I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { item1: 'item label' } } })
+    expect(subject[:value]).to eq('Item Label')
   end
 end
 
@@ -120,6 +108,26 @@ shared_examples 'a text-labelled facet item presenter' do
     it 'should include a translated, capitalized label' do
       I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { item1: 'item label' } } })
       expect(subject[:text]).to eq('Item Label')
+    end
+  end
+end
+
+shared_examples 'a single-selectable facet' do
+  describe '#display' do
+    subject { presenter.display }
+
+    context 'when facet is single-select' do
+      let(:field_options) { super().merge(single: true) }
+
+      it 'should include select_one: true' do
+        expect(subject[:select_one]).to be(true)
+      end
+    end
+
+    context 'when facet is not single-select' do
+      it 'should include select_one: nil' do
+        expect(subject[:select_one]).to be_nil
+      end
     end
   end
 end
