@@ -2,8 +2,13 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
+
+    def is_grid
+      params[:view] == 'grid'
+    end
+
     def bodyclass
-      params[:view] == 'grid' ? 'display-grid' : nil
+      is_grid ? 'display-grid' : nil
     end
 
     def page_title
@@ -76,8 +81,8 @@ module Portal
     def results_menu
       {
         menu_id: 'results_menu',
-        button_title_prefix: 'Per page:',
-        button_title: search_state.params[:per_page],
+        button_title_prefix: t('site.results.list'),
+        button_title: search_state.params[:per_page] || 12,
         items: blacklight_config.per_page.map do |pp|
           {
             url: search_path(search_state.params_for_search(per_page: pp)),
@@ -133,13 +138,13 @@ module Portal
         viewoptions: {
           items: [
             {
-              text: 'Grid',
+              text: t('site.results.list.results-view.grid'),
               url: search_path(search_state.params_for_search(view: 'grid')),
               icon_grid: true,
               is_current: params[:view] == 'grid'
             },
             {
-              text: 'List',
+              text: t('site.results.list.results-view.list'),
               url: search_path(search_state.params_for_search(view: 'list')),
               icon_list: true,
               is_current: params[:view] != 'grid'
