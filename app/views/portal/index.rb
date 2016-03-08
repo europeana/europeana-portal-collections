@@ -2,13 +2,12 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
-
-    def is_grid
+    def grid_view_active
       params[:view] == 'grid'
     end
 
     def bodyclass
-      is_grid ? 'display-grid' : nil
+      grid_view_active ? 'display-grid' : nil
     end
 
     def page_title
