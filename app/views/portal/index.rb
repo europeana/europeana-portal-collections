@@ -80,7 +80,7 @@ module Portal
     def results_menu
       {
         menu_id: 'results_menu',
-        button_title_prefix: t('site.results.list'),
+        button_title_prefix: t('site.results.list.per-page'),
         button_title: search_state.params[:per_page] || 12,
         items: blacklight_config.per_page.map do |pp|
           {
