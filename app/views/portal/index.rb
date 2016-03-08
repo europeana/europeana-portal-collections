@@ -220,7 +220,7 @@ module Portal
 
       uri = URI.parse(edm_preview)
       query = Rack::Utils.parse_query(uri.query)
-      query['size'] = 'w200'
+      query['size'] = 'w400'
 
       uri.host = @api_uri.host
       uri.path = @api_uri.path + '/thumbnail-by-url.json'
