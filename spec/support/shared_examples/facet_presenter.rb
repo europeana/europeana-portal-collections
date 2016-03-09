@@ -143,11 +143,13 @@ shared_examples 'a labeller of facets' do
     subject { presenter.facet_item_label(facet_item) }
 
     context 'when field is not translatable' do
-      %w(PROVIDER DATA_PROVIDER COLOURPALETTE).each do |unmapped_facet|
-        let(:field_name) { unmapped_facet }
-        let(:facet_item) { 'unmappable text' }
-        it 'does not map the text' do
-          expect(subject).to match(/unmappable text/i)
+      %w(PROVIDER DATA_PROVIDER COLOURPALETTE YEAR).each do |unmapped_facet|
+        context unmapped_facet do
+          let(:field_name) { unmapped_facet }
+          let(:facet_item) { 'unmappable text' }
+          it 'does not translate the value' do
+            expect(subject).to match(/\Aunmappable text\z/i)
+          end
         end
       end
     end
@@ -180,7 +182,7 @@ shared_examples 'a labeller of facets' do
       let(:facet_item) { 'ONE FACET VALUE' }
       it 'looks up a translatation' do
         I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { facet_item.downcase => 'item title' } } })
-        expect(subject).to match(/item title/i)
+        expect(subject).to match(/\Aitem title\z/i)
       end
     end
   end

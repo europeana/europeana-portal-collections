@@ -14,7 +14,7 @@ module Facet
       facet_item.gsub!(/\s+/, '') if @facet.name == 'COUNTRY'
 
       mapped_value = case @facet.name.upcase
-                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE'
+                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR'
                        facet_item
                      when 'MIME_TYPE'
                        mime_type_facet_item_label(facet_item)
