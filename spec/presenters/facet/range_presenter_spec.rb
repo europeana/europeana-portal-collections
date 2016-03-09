@@ -13,7 +13,19 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
     end
   end
 
-  describe '#filter_item' do
-    it 'should not attempt to translate range values'
+  describe '#range_max' do
+    let(:items) { facet_items(6) }
+    subject { presenter.range_max }
+    it 'returns the top of the range' do
+      expect(subject).to eq('6')
+    end
+  end
+
+  describe '#range_min' do
+    let(:items) { facet_items(6) }
+    subject { presenter.range_min }
+    it 'returns the bottom of the range' do
+      expect(subject).to eq('1')
+    end
   end
 end

@@ -2,7 +2,6 @@ RSpec.describe FacetPresenter, presenter: :facet do
   let(:field_name) { 'GENERIC_FIELD' }
 
   it_behaves_like 'a single-selectable facet'
-  it_behaves_like 'a translator of item titles'
 
   describe '.build' do
     subject { described_class.build(facet, controller, blacklight_config) }

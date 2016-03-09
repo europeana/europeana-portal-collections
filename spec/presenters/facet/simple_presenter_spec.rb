@@ -4,7 +4,6 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
 
   it_behaves_like 'a facet presenter'
   it_behaves_like 'a single-selectable facet'
-  it_behaves_like 'a translator of item titles'
   it_behaves_like 'a text-labelled facet item presenter'
   it_behaves_like 'a field-showing/hiding presenter'
 

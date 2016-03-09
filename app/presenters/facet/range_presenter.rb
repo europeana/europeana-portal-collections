@@ -5,7 +5,7 @@ module Facet
     def display(_options = {})
       {
         date: true,
-        title: facet_label(@facet.name),
+        title: facet_label,
         form: display_form,
         range: display_range,
         data: display_data,

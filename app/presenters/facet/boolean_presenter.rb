@@ -2,9 +2,9 @@ module Facet
   class BooleanPresenter < FacetPresenter
     def display(_options = {})
       {
-        title: facet_label(@facet.name),
+        title: facet_label,
         url: facet_url,
-        text: facet_label(@facet.name),
+        text: facet_label,
         is_checked: facet_checked?,
         boolean: true
       }

@@ -46,9 +46,14 @@ shared_examples 'a facet presenter' do
     subject { presenter.filter_item(item) }
     let(:params) { { f: { facet.name => [item.value] } } }
 
-    it 'should include a translated facet title' do
-      I18n.backend.store_translations(:en, global: { facet: { header: { field_name.downcase => 'field title' } } })
-      expect(subject[:filter]).to eq('field title')
+    it 'should include a filter label' do
+      allow(presenter).to receive(:facet_label).and_return('facet filter label')
+      expect(subject[:filter]).to eq('facet filter label')
+    end
+
+    it 'should include an item label' do
+      allow(presenter).to receive(:facet_item_label).and_return('item filter label')
+      expect(subject[:value]).to eq('item filter label')
     end
 
     it 'should include URL to remove facet' do
@@ -58,13 +63,6 @@ shared_examples 'a facet presenter' do
     it 'should include facet URL param name' do
       expect(subject[:name]).to eq("f[#{facet.name}][]")
     end
-  end
-end
-
-shared_examples 'a translator of item titles' do
-  it 'should include a translated, capitalized item label' do
-    I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { item1: 'item label' } } })
-    expect(subject[:value]).to eq('Item Label')
   end
 end
 

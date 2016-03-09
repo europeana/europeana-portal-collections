@@ -5,6 +5,7 @@
 # [Europeana's styleguide](https://github.com/europeana/europeana-styleguide-ruby)
 # to display search result facet data.
 class FacetPresenter
+  include Facet::Labels
   include FacetsHelper
   include UrlHelper
   include ActionView::Helpers::NumberHelper
@@ -66,7 +67,7 @@ class FacetPresenter
     options = options.reverse_merge(count: 5)
     unhidden_items, hidden_items = split_items(options[:count])
     {
-      title: facet_label(@facet.name),
+      title: facet_label,
       select_one: facet_config.single,
       items: unhidden_items.map { |item| facet_item(item) },
       extra_items: hidden_items.blank? ? nil : {
@@ -87,7 +88,7 @@ class FacetPresenter
   def facet_item(item)
     {
       url: facet_item_url(item),
-      text: facet_label(@facet.name, item.value),
+      text: facet_item_label(item.value),
       num_results: number_with_delimiter(item.hits),
       is_checked: facet_in_params?(@facet.name, item)
     }
@@ -103,8 +104,8 @@ class FacetPresenter
   # @return [Hash] display data for the facet item
   def filter_item(item)
     {
-      filter: facet_label(@facet.name),
-      value: facet_label(@facet.name, item.value),
+      filter: facet_label,
+      value: facet_item_label(item.value),
       remove: facet_item_url(item),
       name: "f[#{@facet.name}][]"
     }
