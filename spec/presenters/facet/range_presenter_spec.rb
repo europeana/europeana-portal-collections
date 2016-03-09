@@ -1,3 +1,4 @@
+# @todo spec this better when it's actually in use
 RSpec.describe Facet::RangePresenter, presenter: :facet do
   let(:field_name) { 'RANGE_FIELD' }
   let(:field_options) { { range: true } }
