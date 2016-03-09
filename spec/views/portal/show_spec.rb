@@ -1,12 +1,6 @@
 require 'support/shared_examples/page_with_top_nav'
 
-RSpec.describe 'portal/show.html.mustache' do
-  let(:blacklight_config) do
-    Blacklight::Configuration.new do |config|
-      config.index.title_field = 'title_display'
-    end
-  end
-
+RSpec.describe 'portal/show.html.mustache', :blacklight_config do
   let(:blacklight_document) do
     # @todo Move to factory / fixture
     id = '/abc/123'

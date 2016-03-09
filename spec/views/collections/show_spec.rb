@@ -1,11 +1,13 @@
 require 'support/shared_examples/page_with_top_nav'
 
-RSpec.describe 'collections/show.html.mustache' do
+RSpec.describe 'collections/show.html.mustache', :blacklight_config do
   include ActionView::Helpers::TextHelper
 
   before(:each) do
     assign(:collection, collection)
     assign(:landing_page, landing_page)
+    allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
+    allow(view).to receive(:blacklight_config).and_return(blacklight_config)
   end
 
   let(:collection) { Collection.find_by_key('music') }

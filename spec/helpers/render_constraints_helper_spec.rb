@@ -50,6 +50,8 @@ RSpec.describe RenderConstraintsHelper do
       before do
         def helper.search_action_path(*args)
         end
+        def helper.remove_search_param(*args)
+        end
       end
       let(:params) { { q: 'hat', qf: ['scarf', 'glasses'] } }
       it { is_expected.not_to eq('') }
