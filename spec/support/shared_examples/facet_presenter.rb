@@ -4,9 +4,9 @@ shared_examples 'a facet presenter' do
 
     it { is_expected.to be_a(Hash) }
 
-    it 'should include a translated title' do
-      I18n.backend.store_translations(:en, global: { facet: { header: { field_name.downcase => 'field title' } } })
-      expect(subject[:title]).to eq('field title')
+    it 'should include a facet label' do
+      allow(presenter).to receive(:facet_label).and_return('facet label')
+      expect(subject[:title]).to eq('facet label')
     end
   end
 
@@ -103,9 +103,9 @@ shared_examples 'a text-labelled facet item presenter' do
     let(:item) { facet_items(10).first }
     subject { presenter.facet_item(item) }
 
-    it 'should include a translated, capitalized label' do
-      I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { item1: 'item label' } } })
-      expect(subject[:text]).to eq('Item Label')
+    it 'should include an item label' do
+      allow(presenter).to receive(:facet_item_label).and_return('item label')
+      expect(subject[:text]).to eq('item label')
     end
   end
 end
@@ -125,6 +125,62 @@ shared_examples 'a single-selectable facet' do
     context 'when facet is not single-select' do
       it 'should include select_one: nil' do
         expect(subject[:select_one]).to be_nil
+      end
+    end
+  end
+end
+
+shared_examples 'a labeller of facets' do
+  describe '#facet_label' do
+    subject { presenter.facet_label }
+    it 'returns a translated label for the facet' do
+      I18n.backend.store_translations(:en, global: { facet: { header: { field_name.downcase => 'field title' } } })
+      expect(subject).to eq('field title')
+    end
+  end
+
+  describe '#facet_item_label' do
+    subject { presenter.facet_item_label(facet_item) }
+
+    context "when field is not translatable" do
+      %w(PROVIDER DATA_PROVIDER COLOURPALETTE).each do |unmapped_facet|
+        let(:field_name) { unmapped_facet }
+        let(:facet_item) { 'unmappable text' }
+        it 'does not map the text' do
+          expect(subject).to match(/unmappable text/i)
+        end
+      end
+    end
+
+    context 'when field is MIME_TYPE' do
+      let(:field_name) { 'MIME_TYPE' }
+
+      context 'when item is "text/plain"' do
+        let(:facet_item) { 'text/plain' }
+        it { is_expected.to eq('TXT') }
+      end
+
+      context 'when item is "video/x-msvideo"' do
+        let(:facet_item) { 'video/x-msvideo' }
+        it { is_expected.to eq('AVI') }
+      end
+
+      context 'when item is "image/tiff"' do
+        let(:facet_item) { 'image/tiff' }
+        it { is_expected.to eq('TIFF') }
+      end
+
+      context 'when item is "video/x-ms-wmv"' do
+        let(:facet_item) { 'video/x-ms-wmv' }
+        it { is_expected.to eq('WMV') }
+      end
+    end
+
+    context 'when field is translatable' do
+      let(:facet_item) { 'ONE FACET VALUE' }
+      it 'looks up a translatation' do
+        I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { facet_item.downcase => 'item title' } } })
+        expect(subject).to match(/item title/i)
       end
     end
   end

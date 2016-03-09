@@ -29,6 +29,8 @@ module Facet
       mapped_value.present? ? mapped_value : false
     end
 
+    protected
+
     def mime_type_facet_item_label(facet_item)
       case facet_item
       when 'text/plain'
