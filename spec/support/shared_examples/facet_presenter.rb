@@ -142,7 +142,7 @@ shared_examples 'a labeller of facets' do
   describe '#facet_item_label' do
     subject { presenter.facet_item_label(facet_item) }
 
-    context "when field is not translatable" do
+    context 'when field is not translatable' do
       %w(PROVIDER DATA_PROVIDER COLOURPALETTE).each do |unmapped_facet|
         let(:field_name) { unmapped_facet }
         let(:facet_item) { 'unmappable text' }
