@@ -50,6 +50,7 @@ RSpec.describe RenderConstraintsHelper do
       before do
         def helper.search_action_path(*_)
         end
+
         def helper.remove_search_param(*_)
         end
       end
