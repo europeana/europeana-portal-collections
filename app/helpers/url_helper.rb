@@ -5,19 +5,6 @@
 module UrlHelper
   include Blacklight::UrlHelperBehavior
 
-  def add_facet_params(field, item, source_params = params)
-    return super unless field == 'COLLECTION'
-
-    value = facet_value_for_facet_item(item)
-
-    p = Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params)
-    p[:controller] = :collections
-    p[:action] = :show
-    p[:id] = value
-
-    p
-  end
-
   ##
   # Remove one value from an Array of params
   #
