@@ -48,9 +48,9 @@ RSpec.describe RenderConstraintsHelper do
 
     context 'with qf params' do
       before do
-        def helper.search_action_path(*args)
+        def helper.search_action_path(*_)
         end
-        def helper.remove_search_param(*args)
+        def helper.remove_search_param(*_)
         end
       end
       let(:params) { { q: 'hat', qf: ['scarf', 'glasses'] } }

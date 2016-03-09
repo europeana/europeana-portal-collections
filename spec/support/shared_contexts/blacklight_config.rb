@@ -4,5 +4,4 @@ RSpec.shared_context 'Blacklight config', :blacklight_config do
       config.index.title_field = 'title_display'
     end
   end
-
 end
