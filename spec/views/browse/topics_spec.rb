@@ -1,8 +1,4 @@
-require 'support/shared_examples/page_with_top_nav'
-
-RSpec.describe 'browse/topics.html.mustache' do
-  it_should_behave_like 'page with top nav'
-
+RSpec.describe 'browse/topics.html.mustache', :page_with_top_nav do
   it 'should have page title' do
     render
     page_title = t('site.browse.topics.title')
