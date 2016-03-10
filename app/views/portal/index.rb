@@ -176,7 +176,6 @@ module Portal
 
     def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
-      Rails.logger.debug(("title: "+render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true)).red.bold)
       {
         object_url: document_path(doc, format: 'html'),
         title: truncate(render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
