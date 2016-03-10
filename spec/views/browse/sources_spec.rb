@@ -1,6 +1,4 @@
-require 'support/shared_examples/page_with_top_nav'
-
-RSpec.describe 'browse/sources.html.mustache' do
+RSpec.describe 'browse/sources.html.mustache', :page_with_top_nav do
   let(:providers) do
     [
       { text: 'A Provider', count: 1000,
@@ -13,8 +11,6 @@ RSpec.describe 'browse/sources.html.mustache' do
       { text: 'A Different Provider', count: 500 }
     ]
   end
-
-  it_should_behave_like 'page with top nav'
 
   it 'should have page title' do
     render

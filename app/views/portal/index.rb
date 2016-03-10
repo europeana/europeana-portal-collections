@@ -109,11 +109,7 @@ module Portal
 
     def search_results
       mustache[:search_results] ||= begin
-        counter = 0 + (@response.limit_value * (@response.current_page - 1))
-        @document_list.collect do |doc|
-          counter += 1
-          search_result_for_document(doc, counter)
-        end
+        @document_list.map { |doc| search_result_for_document(doc) }
       end
     end
 
@@ -185,37 +181,64 @@ module Portal
         (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
     end
 
-    def search_result_for_document(doc, counter)
+    def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
       {
         object_url: document_path(doc, format: 'html'),
-        title: render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
-        text: {
-          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
-                           length: 277,
-                           separator: ' ',
-                           escape: false)
-        },
-        year: {
-          long: render_index_field_value(doc, :year)
-        },
-        origin: {
-          text: render_index_field_value(doc, 'dataProvider'),
-          url: render_index_field_value(doc, 'edmIsShownAt')
-        },
+        title: search_result_title(doc),
+        text: search_result_text(doc),
+        year: search_result_year(doc),
+        origin: search_result_origin(doc),
         is_image: doc_type == 'IMAGE',
         is_audio: doc_type == 'SOUND',
         is_text: doc_type == 'TEXT',
         is_video: doc_type == 'VIDEO',
-        img: {
-          src: thumbnail_url(doc),
-          alt: ''
-        },
+        img: search_result_img(doc),
         agent: agent_label(doc),
         concepts: concept_labels(doc),
-        item_type: {
-          name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase.sub('_3d', '3D'))
-        }
+        item_type: search_result_item_type(doc_type)
+      }
+    end
+
+    def search_result_title(doc)
+      truncate(render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
+               length: 225,
+               separator: ' ',
+               escape: false)
+    end
+
+    def search_result_text(doc)
+      {
+        medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
+                         length: 277,
+                         separator: ' ',
+                         escape: false)
+      }
+    end
+
+    def search_result_year(doc)
+      {
+        long: render_index_field_value(doc, :year)
+      }
+    end
+
+    def search_result_origin(doc)
+      {
+        text: render_index_field_value(doc, 'dataProvider'),
+        url: render_index_field_value(doc, 'edmIsShownAt')
+      }
+    end
+
+    def search_result_img(doc)
+      {
+        src: thumbnail_url(doc),
+        alt: ''
+      }
+    end
+
+    def search_result_item_type(doc_type)
+      {
+        name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase.sub('_3d', '3D'))
       }
     end
 
@@ -234,14 +257,6 @@ module Portal
       uri.query = query.to_query
 
       uri.to_s
-    end
-
-    def track_document_path_opts(counter)
-      {
-        per_page: params.fetch(:per_page, search_session['per_page']),
-        counter: counter,
-        search_id: current_search_session.try(:id)
-      }
     end
 
     def previous_page_url

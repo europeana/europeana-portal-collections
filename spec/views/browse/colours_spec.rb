@@ -1,6 +1,4 @@
-require 'support/shared_examples/page_with_top_nav'
-
-RSpec.describe 'browse/colours.html.mustache' do
+RSpec.describe 'browse/colours.html.mustache', :page_with_top_nav do
   let(:colours) do
     [
       Europeana::Blacklight::Response::Facets::FacetItem.new(value: '#DC143C', hits: 16376),
@@ -12,8 +10,6 @@ RSpec.describe 'browse/colours.html.mustache' do
   before(:each) do
     assign(:colours, colours)
   end
-
-  it_should_behave_like 'page with top nav'
 
   it 'should have page title' do
     render

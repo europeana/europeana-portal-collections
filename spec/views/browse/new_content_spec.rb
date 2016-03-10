@@ -1,6 +1,4 @@
-require 'support/shared_examples/page_with_top_nav'
-
-RSpec.describe 'browse/new_content.html.mustache' do
+RSpec.describe 'browse/new_content.html.mustache', :page_with_top_nav do
   let(:providers) do
     time_now = Time.zone.now
     [
@@ -9,8 +7,6 @@ RSpec.describe 'browse/new_content.html.mustache' do
       { label: 'A Different Provider', count: 500, from: time_now }
     ]
   end
-
-  it_should_behave_like 'page with top nav'
 
   it 'should have page title' do
     render

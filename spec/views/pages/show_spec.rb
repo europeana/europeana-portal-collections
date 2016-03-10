@@ -1,13 +1,9 @@
-require 'support/shared_examples/page_with_top_nav'
-
-RSpec.describe 'pages/show.html.mustache' do
+RSpec.describe 'pages/show.html.mustache', :page_with_top_nav do
   before(:each) do
     assign(:page, page)
   end
 
   let(:page) { pages(:about) }
-
-  it_should_behave_like 'page with top nav'
 
   it 'should have meta description' do
     render
