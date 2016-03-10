@@ -46,7 +46,7 @@ RSpec.describe 'portal/index.html.mustache', :page_with_top_nav, :blacklight_con
 
     context 'when title is longer than 225 characters' do
       let(:api_response_items) do
-        [ { id: '/abc/123', title: 'abcdefghi ' * 30 } ]
+        [{ id: '/abc/123', title: 'abcdefghi ' * 30 }]
       end
 
       it 'truncates the title' do
