@@ -59,6 +59,12 @@ module Portal
       end
     end
 
+    def results_range
+      result_number_from = ((@response.current_page - 1) * @response.limit_value) + 1
+      result_number_to   = [result_number_from + @response.limit_value - 1, response.total].min
+      result_number_from.to_s + ' - ' + result_number_to.to_s
+    end
+
     def has_results
       mustache[:has_results] ||= begin
         response.total > 0
@@ -84,6 +90,7 @@ module Portal
         button_title: search_state.params[:per_page] || 12,
         items: blacklight_config.per_page.map do |pp|
           {
+            is_current: @response.limit_value == pp,
             url: search_path(search_state.params_for_search(per_page: pp)),
             text: pp
           }
