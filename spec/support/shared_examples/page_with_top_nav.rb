@@ -1,4 +1,4 @@
-RSpec.shared_examples 'page with top nav' do
+RSpec.shared_examples 'page with top nav', :page_with_top_nav do
   it 'should have top nav link to home' do
     render
     expect(rendered).to have_selector('#main-menu a', text: 'Home')
