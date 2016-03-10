@@ -1,9 +1,20 @@
 RSpec.shared_context 'facet presenter', presenter: :facet do
   def facet_items(count)
     (1..count).map do |n|
-      Europeana::Blacklight::Response::Facets::FacetItem.new(value: "Item#{n}", hits: (count + 1 - n) * 100)
+      hits = (count + 1 - n) * 100
+      value = case item_type
+              when :text
+                "Item#{n}"
+              when :number
+                n.to_s
+              else
+                fail
+              end
+      Europeana::Blacklight::Response::Facets::FacetItem.new(value: value, hits: hits)
     end
   end
+
+  let(:item_type) { :text }
 
   let(:controller) do
     PortalController.new.tap do |controller|
@@ -31,4 +42,6 @@ RSpec.shared_context 'facet presenter', presenter: :facet do
   let(:presenter) { described_class.new(facet, controller, blacklight_config) }
 
   let(:facet_item_text) { true }
+
+  let(:field_options) { {} }
 end
