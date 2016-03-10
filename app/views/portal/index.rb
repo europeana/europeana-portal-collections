@@ -102,11 +102,7 @@ module Portal
 
     def search_results
       mustache[:search_results] ||= begin
-        counter = 0 + (@response.limit_value * (@response.current_page - 1))
-        @document_list.collect do |doc|
-          counter += 1
-          search_result_for_document(doc, counter)
-        end
+        @document_list.map { |doc| search_result_for_document(doc) }
       end
     end
 
@@ -178,7 +174,7 @@ module Portal
         (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
     end
 
-    def search_result_for_document(doc, counter)
+    def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
       {
         object_url: document_path(doc, format: 'html'),
@@ -227,14 +223,6 @@ module Portal
       uri.query = query.to_query
 
       uri.to_s
-    end
-
-    def track_document_path_opts(counter)
-      {
-        per_page: params.fetch(:per_page, search_session['per_page']),
-        counter: counter,
-        search_id: current_search_session.try(:id)
-      }
     end
 
     def previous_page_url
