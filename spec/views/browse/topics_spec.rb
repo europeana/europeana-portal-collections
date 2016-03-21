@@ -1,4 +1,8 @@
 RSpec.describe 'browse/topics.html.mustache', :page_with_top_nav do
+  before do
+    assign(:topics, BrowseEntry.topic.published)
+  end
+
   it 'should have page title' do
     render
     page_title = t('site.browse.topics.title')
@@ -17,7 +21,6 @@ RSpec.describe 'browse/topics.html.mustache', :page_with_top_nav do
   end
 
   it 'should display topic browse entries' do
-    assign(:topics, BrowseEntry.topic.published)
     render
     expect(rendered).to have_selector('ul.browse-entry-list li')
     BrowseEntry.topic.published.each do |topic|
