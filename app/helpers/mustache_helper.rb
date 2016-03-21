@@ -543,10 +543,12 @@ module MustacheHelper
     }.merge(hero_license)
   end
 
-  def media_object_url(media_object, *options)
-    cache_key = "media_object:url:#{media_object.id}-#{media_object.updated_at.to_i}"
+  def media_object_url(media_object, size = nil)
+    cache_key = "media_object:url:#{media_object.id}-"
+    cache_key << "-#{size}" unless size.nil?
+    cache_key << "-#{media_object.updated_at.to_i}"
     Rails.cache.fetch(cache_key) do
-      media_object.file.url(*options)
+      media_object.file.url(size)
     end
   end
 
