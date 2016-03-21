@@ -25,5 +25,11 @@ module Browse
         ] + super
       end
     end
+
+    private
+
+    def body_cache_key
+      'browse/topics' + (@collection.present? ? '/' + @collection.key : '') + '-' + @topics.map(&:updated_at).max.to_i.to_s
+    end
   end
 end

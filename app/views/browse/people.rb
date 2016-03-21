@@ -25,5 +25,11 @@ module Browse
         ] + super
       end
     end
+
+    private
+
+    def body_cache_key
+      'browse/people' + (@collection.present? ? '/' + @collection.key : '') + '-' + @people.map(&:updated_at).max.to_i.to_s
+    end
   end
 end
