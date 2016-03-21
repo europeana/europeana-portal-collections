@@ -226,7 +226,6 @@ module Portal
                     proxy.fetch('dcCreator', nil)
                   end.flatten.compact,
                   search_field: 'who',
-                  quoted: true,
                   extra: [
                     {
                       field: 'agents.rdaGr2DateOfBirth',
@@ -243,8 +242,7 @@ module Portal
                 {
                   title: 'site.object.meta-label.contributor',
                   fields: ['proxies.dcContributor'],
-                  search_field: 'who',
-                  quoted: true
+                  search_field: 'who'
                 }
               ]
             ),
@@ -610,11 +608,11 @@ module Portal
       return unless val.is_a?(String)
 
       search_val = val.gsub(/[()\[\]<>]/, '')
-      if (quoted)
-        search_path(q: "#{field}:\"#{search_val}\"")
-      else
-        search_path(q: "#{field}:(#{search_val})")
-      end
+
+      format = quoted ? '"%s"' : '(%s)'
+      search_val = sprintf(format, search_val)
+
+      search_path(q: "#{field}:#{search_val}")
     end
 
     def data_section_field_subsection(section)
