@@ -524,14 +524,14 @@ module MustacheHelper
     return nil unless img_tag.present?
     url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
     mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
-    mo.nil? ? nil : mo.file.url(:medium)
+    mo.nil? ? nil : media_object_url(mo, :medium)
   end
 
   def hero_config(hero_image)
     return nil unless hero_image.present?
     hero_license = hero_image.license.blank? ? {} : { license_template_var_name(hero_image.license) => true }
     {
-      hero_image: hero_image.file.present? ? hero_image.file.url : nil,
+      hero_image: hero_image.file.present? ? media_object_url(hero_image.media_object) : nil,
       attribution_title: hero_image.settings_attribution_title,
       attribution_creator: hero_image.settings_attribution_creator,
       attribution_institution: hero_image.settings_attribution_institution,
@@ -543,6 +543,13 @@ module MustacheHelper
     }.merge(hero_license)
   end
 
+  def media_object_url(media_object, *options)
+    cache_key = "media_object:url:#{media_object.id}-#{media_object.updated_at.to_i}"
+    Rails.cache.fetch(cache_key) do
+      media_object.file.url(*options)
+    end
+  end
+
   def promoted_items(promotions)
     promotions.map do |promo|
       cat_flag = promo.settings_category.blank? ? {} : { :"is_#{promo.settings_category}" => true }
@@ -551,7 +558,7 @@ module MustacheHelper
         title: promo.text,
         custom_class: promo.settings_class,
         wide: promo.settings_wide == '1',
-        bg_image: promo.file.nil? ? nil : promo.file.url
+        bg_image: promo.file.nil? ? nil : media_object_url(promo.media_object)
       }.merge(cat_flag)
     end
   end
@@ -564,7 +571,7 @@ module MustacheHelper
       {
         title: entry.title,
         url: browse_entry_url(entry, page),
-        image: entry.file.nil? ? nil : entry.file.url,
+        image: entry.file.nil? ? nil : media_object_url(entry.media_object),
         image_alt: nil
       }.merge(cat_flag)
     end
