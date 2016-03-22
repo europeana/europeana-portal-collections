@@ -42,7 +42,7 @@ module Facet
 
     def display_data
       @facet.items.sort_by(&:value).map do |item|
-        p = search_state.params_for_search
+        p = search_state.params_for_search.deep_dup
         p[:f] ||= {}
         p[:f][@facet.name] = [item.value]
         {
