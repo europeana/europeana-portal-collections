@@ -351,7 +351,9 @@ module Portal
             sections: [
               {
                 title: 'site.object.meta-label.is-part-of',
-                fields: ['proxies.dctermsIsPartOf']
+                fields: ['proxies.dctermsIsPartOf'],
+                search_field: 'proxy_dcterms_isPartOf',
+                quoted: true
               },
               {
                 title: 'site.object.meta-label.collection-name',
