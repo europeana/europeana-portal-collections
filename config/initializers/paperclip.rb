@@ -34,3 +34,21 @@ if paperclip_config[:storage] == :fog && fog_directory.present?
     fail "Fog storage directory not public: #{fog_directory}"
   end
 end
+
+# Swift URL retrieval is veeeery slow; cache the URLs
+if paperclip_config[:storage] == :fog && paperclip_config[:fog_credentials][:provider] == 'OpenStack'
+  require 'paperclip/attachment'
+
+  module Paperclip
+    class Attachment
+      alias_method :gem_url, :url
+
+      def url(style_name = default_style, options = {})
+        cache_key = "#{instance.class.to_s.underscore}:#{instance.id}:#{name}:#{instance.updated_at.to_i}:#{style_name}"
+        Rails.cache.fetch(cache_key) do
+          gem_url(style_name, options)
+        end
+      end
+    end
+  end
+end
