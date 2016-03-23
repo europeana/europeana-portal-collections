@@ -19,23 +19,18 @@ module Portal
 
     def head_meta
       mustache[:head_meta] ||= begin
-        desc = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
         landing = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
-        title = render_document_show_field_value(document, 'proxies.dcTitle', unescape: true)
         preview = record_preview_url(render_document_show_field_value(document, 'europeanaAggregation.edmPreview', unescape: true))
 
         head_meta = [
-          { meta_name: 'description', content: truncate(strip_tags(render_document_show_field_value(document, 'proxies.dcDescription')), length: 350, separator: ' ') },
+          { meta_name: 'description', content: meta_description },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
           { meta_property: 'og:sitename', content: 'Europeana Collections' },
+          { meta_property: 'og:title', content: og_title },
+          { meta_property: 'og:description', content: og_description },
           { meta_property: 'fb:appid', content: '185778248173748' }
         ]
-        head_meta << { meta_property: 'og:title', content: title } unless title.nil?
-        head_meta << {
-          meta_property: 'og:description',
-          content: truncate(desc.split('.').first(3).join('.'), length: 200)
-        } unless desc.nil?
         head_meta << { meta_property: 'og:image', content: preview } unless preview.nil?
         head_meta << { meta_property: 'og:url', content: landing } unless landing.nil?
         head_meta + super
@@ -570,6 +565,33 @@ module Portal
     end
 
     private
+
+    def meta_description
+      mustache[:meta_description] ||= begin
+        description = render_document_show_field_value(document, 'proxies.dcDescription')
+        truncate(strip_tags(description), length: 350, separator: ' ')
+      end
+    end
+
+    def og_description
+      mustache[:og_description] ||= begin
+        description = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
+        if description.present?
+          truncate(description.split('.').first(3).join('.'), length: 200)
+        else
+          'Find out more on Europeana'
+        end
+      end
+    end
+
+    def og_title
+      mustache[:og_title] ||= begin
+        render_document_show_field_value(document, 'proxies.dcTitle', unescape: true) ||
+          render_document_show_field_value(document, 'proxies.dctermsAlternative') ||
+          render_document_show_field_value(document, 'proxies.dcDescription') ||
+          render_document_show_field_value(document, 'proxies.dcIdentifier')
+      end
+    end
 
     def collect_values(fields, doc = document)
       fields.map do |field|
