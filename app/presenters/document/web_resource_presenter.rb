@@ -30,8 +30,6 @@ module Document
       }.merge(player_indicator)
     end
 
-
-
     def player_indicator
       if player.nil?
         { is_unknown_type: url }
@@ -175,7 +173,9 @@ module Document
     end
 
     def displayable?
-      return false if for_edm_object? && (@record_presenter.edm_object_thumbnails_edm_is_shown_by? || !@record_presenter.edm_object_thumbnails_has_view?)
+      if for_edm_object?
+        return false if @record_presenter.edm_object_thumbnails_edm_is_shown_by? || !@record_presenter.edm_object_thumbnails_has_view?
+      end
 
       (@record_presenter.edm_object.present? && for_edm_object?) ||
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
