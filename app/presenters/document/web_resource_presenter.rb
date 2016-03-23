@@ -175,7 +175,7 @@ module Document
     end
 
     def displayable?
-      return false if for_edm_object? && @record_presenter.edm_object_is_thumbnail?
+      return false if for_edm_object? && (@record_presenter.edm_object_thumbnails_edm_is_shown_by? || !@record_presenter.edm_object_thumbnails_has_view?)
 
       (@record_presenter.edm_object.present? && for_edm_object?) ||
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
