@@ -303,6 +303,14 @@ module MustacheHelper
               {
                 text: t('site.footer.menu.become-a-provider'),
                 url: 'http://pro.europeana.eu/share-your-data/'
+              },
+              {
+                text: t('site.footer.menu.become-a-provider'),
+                url: 'http://pro.europeana.eu/share-your-data/'
+              },
+              {
+                text: t('site.footer.menu.contact-us'),
+                url: static_page_path('contact', format: 'html')
               }
             ]
           },
