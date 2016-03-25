@@ -11,8 +11,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 457fd0fcbaa6bc84d85a5942987f541369ea62b7
-  ref: 457fd0f
+  revision: cfacff5cf59ad7a57b573edb6941d1a3c9acb943
+  ref: cfacff5
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -342,7 +342,7 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mustache (1.0.2)
+    mustache (1.0.3)
     nested_form (0.3.2)
     netrc (0.11.0)
     nokogiri (1.6.7.2)
