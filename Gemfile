@@ -4,7 +4,7 @@ gem 'rails', '4.2.5.2'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '783ba63'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '9ab71b8'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
