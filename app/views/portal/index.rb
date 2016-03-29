@@ -293,6 +293,7 @@ module Portal
 
     def concept_labels(doc)
       labels = doc.fetch('edmConceptPrefLabelLangAware', []) || []
+      return nil if labels.is_a?(Hash)
       {
         items: labels[0..3].map { |c| { text: c } }
       }
