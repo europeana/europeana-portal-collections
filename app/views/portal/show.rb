@@ -564,6 +564,10 @@ module Portal
       end
     end
 
+    def page_url
+      URI.escape(request.original_url)
+    end
+
     private
 
     def meta_description
