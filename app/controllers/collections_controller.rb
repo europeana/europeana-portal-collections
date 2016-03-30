@@ -30,6 +30,22 @@ class CollectionsController < ApplicationController
     end
   end
 
+  ##
+  # Per-collection Blacklight config
+  #
+  # @todo Move this somewhere else
+  def blacklight_config
+    @collection_blacklight_configs ||= {}
+    @collection_blacklight_configs[@collection.key] ||= begin
+      super.deep_dup.tap do |config|
+        if @collection.key == 'music'
+          config.add_facet_field 'cc_skos_prefLabel.en'
+          config.add_facet_field 'skos_concept'
+        end
+      end
+    end
+  end
+
   protected
 
   def _prefixes

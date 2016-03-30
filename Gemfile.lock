@@ -150,7 +150,7 @@ GEM
     europeana-api (0.5.0)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-    europeana-blacklight (0.4.1)
+    europeana-blacklight (0.4.2)
       blacklight (~> 6.0.0)
       europeana-api (~> 0.5.0)
       iso-639 (~> 0.2.5)
@@ -572,7 +572,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.5.0)
-  europeana-blacklight (~> 0.4.1)
+  europeana-blacklight (~> 0.4.2)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
