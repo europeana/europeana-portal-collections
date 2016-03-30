@@ -27,6 +27,7 @@ module Europeana
         #{config.root}/app/jobs
         #{config.root}/app/jobs/concerns
         #{config.root}/app/presenters
+        #{config.root}/app/presenters/concerns
         #{config.root}/app/validators
       )
 

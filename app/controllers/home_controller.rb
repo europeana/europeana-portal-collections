@@ -1,9 +1,6 @@
 ##
 # Home page
 class HomeController < ApplicationController
-  include Catalog
-  include Europeana::Styleguide
-
   # GET /
   def index
     @collection = find_collection

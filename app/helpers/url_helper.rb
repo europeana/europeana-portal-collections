@@ -5,19 +5,6 @@
 module UrlHelper
   include Blacklight::UrlHelperBehavior
 
-  def add_facet_params(field, item, source_params = params)
-    return super unless field == 'COLLECTION'
-
-    value = facet_value_for_facet_item(item)
-
-    p = Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params)
-    p[:controller] = :collections
-    p[:action] = :show
-    p[:id] = value
-
-    p
-  end
-
   ##
   # Remove one value from an Array of params
   #
@@ -54,10 +41,11 @@ module UrlHelper
   # @param browse_entry [BrowseEntry]
   # @return [String] url
   def browse_entry_url(browse_entry, page = nil)
+    browse_entry_query = Rack::Utils.parse_nested_query(browse_entry.query)
     if page.present? && (slug_match = page.slug.match(/\Acollections\/(.*)\Z/))
       collection = Collection.find_by_key(slug_match[1])
-      return collection_path(collection.key, q: browse_entry.query) unless collection.nil?
+      return collection_path(collection.key, browse_entry_query) unless collection.nil?
     end
-    search_path(q: browse_entry.query)
+    search_path(browse_entry_query)
   end
 end

@@ -31,5 +31,13 @@ namespace :jobs do
         Cache::RecordCounts::ProvidersJob.perform_later(collection.id)
       end
     end
+
+    desc 'Queue Cache::Feed jobs (blogs / exhibitions)'
+    task feeds: :environment do
+      Cache::FeedJob::URLS[:blog].each_pair do |_k, url|
+        Cache::Feed::BlogJob.perform_later(url)
+      end
+      Cache::FeedJob.perform_later(Cache::FeedJob::URLS[:exhibitions][:all])
+    end
   end
 end

@@ -1,9 +1,0 @@
-development:
-  credentials:
-#    provider: Local
-#    local_root: <%= File.join(Rails.root, 'tmp') %>
-    provider: OpenStack
-    openstack_auth_url: https://auth.hydranodes.de:5000/v2.0/tokens
-    openstack_username: "88d36d1d-2b4f-48d5-8d8b-fcafc29856e0.swift.user@a9s.eu"
-    openstack_api_key: DTjyaDjctoSxYteU9OZh
-  directory: test

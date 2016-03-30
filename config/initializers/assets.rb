@@ -1,7 +1,10 @@
 # Be sure to restart your server when you modify this file.
 
-# Version of your assets, change this if you want to expire all your assets.
-Rails.application.config.assets.version = Bundler.environment.dependencies.detect { |d| d.name == 'europeana-styleguide' }.source.ref
+styleguide_source = Bundler.environment.dependencies.detect { |d| d.name == 'europeana-styleguide' }.source
+if styleguide_source.respond_to?(:ref)
+  # Version of your assets, change this if you want to expire all your assets.
+  Rails.application.config.assets.version = styleguide_source.ref
+end
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

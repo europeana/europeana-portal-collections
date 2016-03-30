@@ -1,8 +1,6 @@
 ##
 # User settings controller
 class SettingsController < ApplicationController
-  include Europeana::Styleguide
-
   # GET language
   # @todo move this into a resourceful controller and routes for Settings::Languages
   #   per http://guides.rubyonrails.org/routing.html#singular-resources
@@ -17,7 +15,13 @@ class SettingsController < ApplicationController
     locales = set_locale_from_param
 
     respond_to do |format|
-      format.html { render action: :language, status: flash_status }
+      format.html do
+        if local_redirect
+          redirect_to local_redirect
+        else
+          render action: :language, status: flash_status
+        end
+      end
       format.json do
         render json: flash_json.merge(refresh: (locales.first != locales.last)),
                status: flash_status
@@ -26,6 +30,16 @@ class SettingsController < ApplicationController
   end
 
   protected
+
+  ##
+  # Ensure that only local paths are accepted as redirect targets
+  def local_redirect
+    @local_redirect ||= begin
+      if params[:redirect] && params[:redirect].is_a?(String) && params[:redirect] =~ %r{\A/}
+        params[:redirect]
+      end
+    end
+  end
 
   def flash_status
     flash.key?(:alert) ? 400 : 200

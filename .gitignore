@@ -76,3 +76,7 @@
 
 # Ignore Redis snapshot
 *.rdb
+
+# Ignore generated documentation
+/.yardoc
+/doc

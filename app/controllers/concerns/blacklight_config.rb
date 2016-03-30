@@ -20,12 +20,6 @@ module BlacklightConfig
     end
 
     configure_blacklight do |config|
-      # Default parameters to send to Europeana for all search-like requests.
-      # @see SolrHelper#solr_search_params
-      config.default_solr_params = {
-        rows: 12
-      }
-
       # Response models
       config.document_presenter_class = Document::RecordPresenter
 
@@ -33,9 +27,10 @@ module BlacklightConfig
       # config.europeana_api_cache = Rails.cache
       # config.europeana_api_cache_expires_in = 24.hours
 
-      # items to show per page, each number in the array represents another
-      # option to choose from.
-      config.per_page = [12, 24, 48, 96]
+      # Number of items to show per page
+      config.per_page = [12, 24, 36, 48]
+      config.default_per_page = 12
+      config.max_per_page = 48
 
       # Field configuration for search results/index views
       config.index.title_field = 'title'
@@ -54,7 +49,6 @@ module BlacklightConfig
       config.add_index_field 'edmIsShownAt'
 
       # Facet fields in the order they should be displayed.
-      # config.add_facet_field 'COLLECTION', query: collections_query_facet, single: true
       config.add_facet_field 'TYPE', hierarchical: true
       config.add_facet_field 'IMAGE_COLOUR', parent: %w(TYPE IMAGE)
       config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 20

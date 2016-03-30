@@ -1,0 +1,7 @@
+--title "Europeana Collections portal"
+--markup markdown
+--protected
+--no-private
+--readme README.md
+-
+LICENSE.md

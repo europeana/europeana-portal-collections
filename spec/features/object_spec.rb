@@ -49,7 +49,7 @@ RSpec.feature 'Object page' do
 
         click_button('Search')
 
-        page.all('.results-list ol.result-items li h1 a')[2].click
+        page.all('.results-list ol.result-items li h2 a')[2].click
 
         expect(page).not_to have_css('.next')
         expect(page).not_to have_css('.previous')

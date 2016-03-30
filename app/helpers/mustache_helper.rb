@@ -238,14 +238,14 @@ module MustacheHelper
                       is_current: current_page?(browse_sources_path)
                     },
                     {
-                      url: browse_concepts_path,
+                      url: browse_topics_path,
                       text: t('global.navigation.concepts'),
-                      is_current: current_page?(browse_concepts_path)
+                      is_current: current_page?(browse_topics_path)
                     },
                     {
-                      url: browse_agents_path,
+                      url: browse_people_path,
                       text: t('global.navigation.agents'),
-                      is_current: current_page?(browse_agents_path)
+                      is_current: current_page?(browse_people_path)
                     }
                   ]
                 }
@@ -303,6 +303,10 @@ module MustacheHelper
               {
                 text: t('site.footer.menu.become-a-provider'),
                 url: 'http://pro.europeana.eu/share-your-data/'
+              },
+              {
+                text: t('site.footer.menu.contact-us'),
+                url: static_page_path('contact', format: 'html')
               }
             ]
           },

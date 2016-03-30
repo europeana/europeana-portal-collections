@@ -25,14 +25,24 @@ module Document
         download: {
           url: downloadable? ? download_url : false,
           text: t('site.object.actions.download')
-        }
-      }.tap do |item|
-        if player.nil?
-          item[:is_unknown_type] = url
-        else
-          item[:"is_#{player}"] = true
-        end
-        item[:external_media] = download_url == @record_presenter.edm_object ? @record_presenter.is_shown_by_or_at : download_url
+        },
+        external_media: external_media_url
+      }.merge(player_indicator)
+    end
+
+    def player_indicator
+      if player.nil?
+        { is_unknown_type: url }
+      else
+        { :"is_#{player}" => true }
+      end
+    end
+
+    def external_media_url
+      if download_url == @record_presenter.edm_object
+        @record_presenter.is_shown_by_or_at
+      else
+        download_url
       end
     end
 
@@ -163,7 +173,9 @@ module Document
     end
 
     def displayable?
-      return false if for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by?
+      if for_edm_object?
+        return false if @record_presenter.edm_object_thumbnails_edm_is_shown_by? # || !@record_presenter.edm_object_thumbnails_has_view?
+      end
 
       (@record_presenter.edm_object.present? && for_edm_object?) ||
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||

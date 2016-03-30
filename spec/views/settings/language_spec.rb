@@ -1,6 +1,4 @@
-require 'support/shared_examples/page_with_top_nav'
-
-RSpec.describe 'settings/language.html.mustache' do
+RSpec.describe 'settings/language.html.mustache', :page_with_top_nav do
   before(:each) do
     RSpec.configure do |config|
       config.mock_with :rspec do |mocks|
@@ -21,8 +19,6 @@ RSpec.describe 'settings/language.html.mustache' do
 
     Stache::ViewContext.current = view
   end
-
-  it_should_behave_like 'page with top nav'
 
   it 'should have page title' do
     render

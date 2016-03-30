@@ -40,6 +40,10 @@ module Document
       edm_is_shown_by.present? && edm_object.present? && (edm_object != edm_is_shown_by)
     end
 
+    def edm_object_thumbnails_has_view?
+      edm_object.present? && has_views.include?(edm_object)
+    end
+
     def media_web_resource_presenters
       return [] if web_resources.blank?
 

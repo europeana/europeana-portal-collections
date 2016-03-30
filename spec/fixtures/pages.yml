@@ -24,6 +24,11 @@ music_collection:
   state: 1
   type: 'Page::Landing'
 
+art_collection:
+  slug: 'collections/art'
+  state: 0
+  type: 'Page::Landing'
+
 draft_landing_page:
   slug: 'draft'
   state: 0

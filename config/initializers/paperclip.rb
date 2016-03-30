@@ -19,18 +19,37 @@ rescue RuntimeError
   {}
 end
 
-# Create public Fog directory/bucket if required
 paperclip_config = Paperclip::Attachment.default_options
-fog_directory = paperclip_config[:fog_directory]
 
-if paperclip_config[:storage] == :fog && fog_directory.present?
-  connection = Fog::Storage.new(paperclip_config[:fog_credentials])
-  directory = connection.directories.get(fog_directory)
-  if directory.nil?
-    directory = connection.directories.create(key: fog_directory)
-    directory.public = true if directory.respond_to?(:public=)
-    directory.save
-  elsif directory.respond_to?(:public?) && !directory.public?
-    fail "Fog storage directory not public: #{fog_directory}"
+# Create public Fog directory/bucket if required
+# @todo Move to Rake task, to be run as part of app setup
+# fog_directory = paperclip_config[:fog_directory]
+# if paperclip_config[:storage] == :fog && fog_directory.present?
+#   connection = Fog::Storage.new(paperclip_config[:fog_credentials])
+#   directory = connection.directories.get(fog_directory)
+#   if directory.nil?
+#     directory = connection.directories.create(key: fog_directory)
+#     directory.public = true if directory.respond_to?(:public=)
+#     directory.save
+#   elsif directory.respond_to?(:public?) && !directory.public?
+#     fail "Fog storage directory not public: #{fog_directory}"
+#   end
+# end
+
+# Swift URL retrieval is veeeery slow; cache the URLs
+if paperclip_config[:storage] == :fog && paperclip_config[:fog_credentials][:provider] == 'OpenStack'
+  require 'paperclip/attachment'
+
+  module Paperclip
+    class Attachment
+      alias_method :gem_url, :url
+
+      def url(style_name = default_style, options = {})
+        cache_key = "#{instance.class.to_s.underscore}:#{instance.id}:#{name}:#{instance.updated_at.to_i}:#{style_name}"
+        Rails.cache.fetch(cache_key) do
+          gem_url(style_name, options)
+        end
+      end
+    end
   end
 end

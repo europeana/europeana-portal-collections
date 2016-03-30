@@ -8,6 +8,11 @@ home:
   api_params: 'qf=*:*'
   state: 1
 
+art:
+  key: 'art'
+  api_params: 'qf=what:art'
+  state: 1
+
 draft:
   key: 'draft'
   api_params: 'qf=what:ever'

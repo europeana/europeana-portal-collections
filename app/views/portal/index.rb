@@ -2,6 +2,14 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
+    def grid_view_active
+      params[:view] == 'grid'
+    end
+
+    def bodyclass
+      grid_view_active ? 'display-grid' : nil
+    end
+
     def page_title
       mustache[:page_title] ||= begin
         [params[:q], 'Europeana - Search results'].compact.join(' - ')
@@ -51,6 +59,12 @@ module Portal
       end
     end
 
+    def results_range
+      result_number_from = ((@response.current_page - 1) * @response.limit_value) + 1
+      result_number_to   = [result_number_from + @response.limit_value - 1, response.total].min
+      result_number_from.to_s + ' - ' + result_number_to.to_s
+    end
+
     def has_results
       mustache[:has_results] ||= begin
         response.total > 0
@@ -69,6 +83,21 @@ module Portal
       end
     end
 
+    def results_menu
+      {
+        menu_id: 'results_menu',
+        button_title_prefix: t('site.results.list.per-page'),
+        button_title: search_state.params[:per_page] || 12,
+        items: blacklight_config.per_page.map do |pp|
+          {
+            is_current: @response.limit_value == pp,
+            url: search_path(search_state.params_for_search(per_page: pp)),
+            text: pp
+          }
+        end
+      }
+    end
+
     def query_terms
       mustache[:query_terms] ||= begin
         query_terms = [(params[:q] || [])].flatten.collect do |query_term|
@@ -80,11 +109,7 @@ module Portal
 
     def search_results
       mustache[:search_results] ||= begin
-        counter = 0 + (@response.limit_value * (@response.current_page - 1))
-        @document_list.collect do |doc|
-          counter += 1
-          search_result_for_document(doc, counter)
-        end
+        @document_list.map { |doc| search_result_for_document(doc) }
       end
     end
 
@@ -108,6 +133,27 @@ module Portal
           }
         }.reverse_merge(helpers ? helpers.navigation : {})
       end
+    end
+
+    def menus
+      {
+        viewoptions: {
+          items: [
+            {
+              text: t('site.results.list.results-view.grid'),
+              url: search_path(search_state.params_for_search(view: 'grid')),
+              icon_grid: true,
+              is_current: params[:view] == 'grid'
+            },
+            {
+              text: t('site.results.list.results-view.list'),
+              url: search_path(search_state.params_for_search(view: 'list')),
+              icon_list: true,
+              is_current: params[:view] != 'grid'
+            }
+          ]
+        }
+      }
     end
 
     def facets_selected
@@ -135,37 +181,64 @@ module Portal
         (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
     end
 
-    def search_result_for_document(doc, counter)
+    def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
       {
         object_url: document_path(doc, format: 'html'),
-        title: render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
-        text: {
-          medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
-                           length: 277,
-                           separator: ' ',
-                           escape: false)
-        },
-        year: {
-          long: render_index_field_value(doc, :year)
-        },
-        origin: {
-          text: render_index_field_value(doc, 'dataProvider'),
-          url: render_index_field_value(doc, 'edmIsShownAt')
-        },
+        title: search_result_title(doc),
+        text: search_result_text(doc),
+        year: search_result_year(doc),
+        origin: search_result_origin(doc),
         is_image: doc_type == 'IMAGE',
         is_audio: doc_type == 'SOUND',
         is_text: doc_type == 'TEXT',
         is_video: doc_type == 'VIDEO',
-        img: {
-          src: thumbnail_url(doc),
-          alt: ''
-        },
+        img: search_result_img(doc),
         agent: agent_label(doc),
         concepts: concept_labels(doc),
-        item_type: {
-          name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase.sub('_3d', '3D'))
-        }
+        item_type: search_result_item_type(doc_type)
+      }
+    end
+
+    def search_result_title(doc)
+      truncate(render_index_field_value(doc, ['dcTitleLangAware', 'title'], unescape: true),
+               length: 225,
+               separator: ' ',
+               escape: false)
+    end
+
+    def search_result_text(doc)
+      {
+        medium: truncate(render_index_field_value(doc, ['dcDescriptionLangAware', 'dcDescription'], unescape: true),
+                         length: 277,
+                         separator: ' ',
+                         escape: false)
+      }
+    end
+
+    def search_result_year(doc)
+      {
+        long: render_index_field_value(doc, :year)
+      }
+    end
+
+    def search_result_origin(doc)
+      {
+        text: render_index_field_value(doc, 'dataProvider'),
+        url: render_index_field_value(doc, 'edmIsShownAt')
+      }
+    end
+
+    def search_result_img(doc)
+      {
+        src: thumbnail_url(doc),
+        alt: ''
+      }
+    end
+
+    def search_result_item_type(doc_type)
+      {
+        name: doc_type.nil? ? nil : t('site.results.list.product-' + doc_type.downcase.sub('_3d', '3D'))
       }
     end
 
@@ -177,21 +250,13 @@ module Portal
 
       uri = URI.parse(edm_preview)
       query = Rack::Utils.parse_query(uri.query)
-      query['size'] = 'w200'
+      query['size'] = 'w400'
 
       uri.host = @api_uri.host
       uri.path = @api_uri.path + '/thumbnail-by-url.json'
       uri.query = query.to_query
 
       uri.to_s
-    end
-
-    def track_document_path_opts(counter)
-      {
-        per_page: params.fetch(:per_page, search_session['per_page']),
-        counter: counter,
-        search_id: current_search_session.try(:id)
-      }
     end
 
     def previous_page_url
@@ -228,6 +293,7 @@ module Portal
 
     def concept_labels(doc)
       labels = doc.fetch('edmConceptPrefLabelLangAware', []) || []
+      return nil if labels.is_a?(Hash)
       {
         items: labels[0..3].map { |c| { text: c } }
       }

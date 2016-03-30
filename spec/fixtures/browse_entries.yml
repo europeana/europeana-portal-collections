@@ -1,0 +1,19 @@
+opera_topic:
+  query: "what:opera"
+  state: 1
+  subject_type: 0
+
+paintings_topic:
+  query: "what:paintings"
+  state: 1
+  subject_type: 0
+
+van_gogh_person:
+  query: "who:(van gogh)"
+  state: 1
+  subject_type: 1
+
+hokusai_person:
+  query: "who:hokusai"
+  state: 1
+  subject_type: 1

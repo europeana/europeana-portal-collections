@@ -5,6 +5,7 @@ language: ruby
 rvm:
   - 2.2.2
   - 2.2.3
+  - 2.3.0
 before_install:
   - mkdir travis-phantomjs
   - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
@@ -16,3 +17,5 @@ before_script:
   - "bundle exec rake db:test:prepare"
 env:
   - RAILS_ENV=test
+services:
+  - redis-server
