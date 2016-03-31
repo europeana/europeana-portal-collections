@@ -60,7 +60,7 @@ module Portal
               sections: [
                 {
                   title: 'site.object.meta-label.type',
-                  fields: ['dcType'],
+                  fields: ['proxies.dcType'],
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcType', nil)
                   end.flatten.compact,
@@ -77,21 +77,14 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.has-type',
+                  search_field: 'what',
                   fields: ['proxies.edmHasType']
                 },
                 {
-                  title: 'site.object.meta-label.concept',
-                  search_field: 'what',
+                  title: 'site.object.meta-label.medium',
+                  search_field: 'proxy_dcterms_medium',
                   quoted: true,
-                  fields: ['concepts.prefLabel'],
-                  #fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
-                  #override_val: 'true',
-                  #overrides: [
-                  #  {
-                  #    field_title: t('site.object.meta-label.ugc'),
-                  #    field_url: search_url(f: { 'UGC' => ['true'] })
-                  #  }
-                  #]
+                  fields: 'proxies.dctermsMedium'
                 }
               ]
             ),
@@ -608,7 +601,7 @@ module Portal
     end
 
     def data_section_field_values(section)
-      fields = (section[:fields] || []).map do |field|
+      fields = ([section[:fields]].flatten || []).map do |field|
         val = document.fetch(field, [])
         if !section[:exclude_vals].nil?
           val = val.map do |value|
