@@ -89,9 +89,15 @@ module Portal
         button_title_prefix: t('site.results.list.per-page'),
         button_title: search_state.params[:per_page] || 12,
         items: blacklight_config.per_page.map do |pp|
+          params_for_search = search_state.params_for_search(per_page: pp)
+          url = if @collection.present?
+                  collection_path(@collection, params_for_search)
+                else
+                  search_path(params_for_search)
+                end
           {
             is_current: @response.limit_value == pp,
-            url: search_path(search_state.params_for_search(per_page: pp)),
+            url: url,
             text: pp
           }
         end
