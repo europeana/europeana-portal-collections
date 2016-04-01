@@ -8,10 +8,10 @@ module Collections
         hero = hero_config(@landing_page.hero_image)
         head_meta = [
           { meta_name: 'description', content: description },
-          { meta_property: 'fb:appid', content: '185778248173748' },
+          { meta_property: 'fb:app_id', content: '185778248173748' },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          { meta_property: 'og:sitename', content: title },
+          { meta_property: 'og:site_name', content: title },
           { meta_property: 'og:description', content: description },
           { meta_property: 'og:url', content: collection_url(@collection.key) }
         ]
