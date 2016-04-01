@@ -26,10 +26,10 @@ module Portal
           { meta_name: 'description', content: meta_description },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          { meta_property: 'og:sitename', content: 'Europeana Collections' },
+          { meta_property: 'og:site_name', content: 'Europeana Collections' },
           { meta_property: 'og:title', content: og_title },
           { meta_property: 'og:description', content: og_description },
-          { meta_property: 'fb:appid', content: '185778248173748' }
+          { meta_property: 'fb:app_id', content: '185778248173748' }
         ]
         head_meta << { meta_property: 'og:image', content: preview } unless preview.nil?
         head_meta << { meta_property: 'og:url', content: landing } unless landing.nil?
