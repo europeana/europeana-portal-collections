@@ -46,7 +46,7 @@ module Portal
 
     def subtitle
       lang_codes = {
-        'en' => 'language-basque',
+        'eu' => 'language-basque',
         'bg' => 'language-bulgarian',
         'ca' => 'language-catalan',
         'hr' => 'language-croatian',
