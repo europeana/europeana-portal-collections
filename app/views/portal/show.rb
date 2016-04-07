@@ -446,6 +446,7 @@ module Portal
         lang, subtitle = document['proxies'][0]['dcTitle'].to_a[1]
       end
 
+      return unless subtitle.present?
       return subtitle.first unless locale_language_keys.key?(lang)
 
       lang_label = t('global.language-' + locale_language_keys[lang])
