@@ -44,6 +44,55 @@ module Portal
       end
     end
 
+    def subtitle
+      lang_codes = {
+        'en' => 'language-basque',
+        'bg' => 'language-bulgarian',
+        'ca' => 'language-catalan',
+        'hr' => 'language-croatian',
+        'cs' => 'language-czech',
+        'da' => 'language-danish',
+        'nl' => 'language-dutch',
+        'en' => 'language-english',
+        'et' => 'language-estonian',
+        'fi' => 'language-finnish',
+        'fr' => 'language-french',
+        'ga' => 'language-gaelic',
+        'de' => 'language-german',
+        'el' => 'language-greek',
+        'hu' => 'language-hungarian',
+        'is' => 'language-icelandic',
+        'it' => 'language-italian',
+        'lv' => 'language-latvian',
+        'lt' => 'language-lithuanian',
+        'mt' => 'language-maltese',
+        'no' => 'language-norwegian',
+        'pl' => 'language-polish',
+        'pt' => 'language-portuguese',
+        'ro' => 'language-romanian',
+        'ru' => 'language-russian',
+        'sk' => 'language-slovakian',
+        'sl' => 'language-slovenian',
+        'es' => 'language-spanish',
+        'sv' => 'language-swedish',
+        'uk' => 'language-ukranian'
+      }
+      alternative = document.fetch('proxies.dctermsAlternative', []).first
+      title = nil
+      lang = nil
+
+      if alternative
+        lang = document['proxies'][0]['dctermsAlternative'].keys[0]
+      else
+        title = document.fetch(:title, [])[1]
+        if title
+          lang = document['proxies'][0]['dcTitle'].keys[1]
+        end
+      end
+      lang = (lang && lang != 'def') ? ' (' + t('global.' + lang_codes[lang]) + ')' : ''
+      (alternative || title) + lang
+    end
+
     def navigation
       mustache[:navigation] ||= begin
         { back_url: back_url_from_referer }.reverse_merge(helpers.navigation)
@@ -330,7 +379,7 @@ module Portal
               twitter: true,
               googleplus: true
             },
-            subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
+            subtitle: subtitle,
             title: [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
