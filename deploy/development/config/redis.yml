@@ -1,6 +1,2 @@
 development:
-  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-  port: <%= ENV['REDIS_PORT'] || 6379 %>
-  name: <%= ENV['REDIS_NAME'] || 'redis' %>
-  db: 0
-  namespace: cache
+  url: "redis://redis@localhost:6379/0/cache"
