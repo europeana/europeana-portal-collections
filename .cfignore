@@ -27,3 +27,6 @@
 
 # Ignore bundled gems
 /vendor/bundle
+
+# Ignore Bundler config
+/.bundle
