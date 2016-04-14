@@ -53,7 +53,7 @@ end
 group :development do
   gem 'foreman'
   gem 'spring', '~> 1.6'
-  gem 'web-console', '~> 3.0'
+#  gem 'web-console', '~> 3.0'
 end
 
 group :test do

@@ -134,7 +134,6 @@ GEM
       tins (~> 1.6.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    debug_inspector (0.0.2)
     delayed_job (4.1.1)
       activesupport (>= 3.0, < 5.0)
     delayed_job_active_record (4.1.0)
@@ -544,10 +543,6 @@ GEM
     unf_ext (0.0.7.1)
     warden (1.2.4)
       rack (>= 1.0)
-    web-console (3.0.0)
-      activemodel (>= 4.2)
-      debug_inspector
-      railties (>= 4.2)
     webmock (1.22.3)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -612,9 +607,5 @@ DEPENDENCIES
   stache!
   therubyracer
   uglifier (~> 2.7.2)
-  web-console (~> 3.0)
   webmock (~> 1.22)
   yard
-
-BUNDLED WITH
-   1.11.2
