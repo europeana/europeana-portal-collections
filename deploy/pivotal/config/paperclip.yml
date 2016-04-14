@@ -1,0 +1,8 @@
+production:
+  storage: :fog
+  fog_credentials:
+    provider: OpenStack
+    openstack_auth_url: <%= ENV['SWIFT_URL'] %>tokens
+    openstack_username: "<%= ENV['SWIFT_USERNAME'] %>"
+    openstack_api_key: <%= ENV['SWIFT_API_KEY'] %>
+  fog_directory: <%= ENV['SWIFT_DIRECTORY'] %>

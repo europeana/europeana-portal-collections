@@ -1,0 +1,10 @@
+<%
+if ENV.key?('VCAP_SERVICES')
+  services = JSON.parse(ENV['VCAP_SERVICES'])
+  redis_config = services['rediscloud'].first
+end
+fail 'No Redis service found in environment.' if redis_config.nil?
+redis_url = "redis://:#{redis_config['credentials']['password']}@#{redis_config['credentials']['hostname']}:#{redis_config['credentials']['port']}/0/cache"
+%>
+production:
+  url: "<%= redis_url %>"
