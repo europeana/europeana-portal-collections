@@ -254,7 +254,7 @@ module MustacheHelper
                 url: 'http://exhibitions.europeana.eu/',
                 text: t('global.navigation.exhibitions'),
                 submenu: {
-                  items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][:all], 6) + [
+                  items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][exhibitions_feed_key], 6) + [
                     {
                       url: 'http://exhibitions.europeana.eu/',
                       text: t('global.navigation.all_exhibitions'),
@@ -576,5 +576,9 @@ module MustacheHelper
 
   def license_template_var_name(license)
     'license_' + license.tr('-', '_')
+  end
+
+  def exhibitions_feed_key
+    Cache::FeedJob::URLS[:exhibitions].key?(I18n.locale) ? I18n.locale : :en
   end
 end
