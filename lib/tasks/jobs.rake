@@ -37,7 +37,9 @@ namespace :jobs do
       Cache::FeedJob::URLS[:blog].each_pair do |_k, url|
         Cache::Feed::BlogJob.perform_later(url)
       end
-      Cache::FeedJob.perform_later(Cache::FeedJob::URLS[:exhibitions][:all])
+      Cache::FeedJob::URLS[:exhibitions].each_pair do |_k, url|
+        Cache::FeedJob.perform_later(url)
+      end
     end
   end
 end
