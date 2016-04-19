@@ -6,8 +6,8 @@ module Cache
         music: 'http://blog.europeana.eu/tag/music/feed/',
         art_history: 'http://blog.europeana.eu/tag/art-history/feed/'
       },
-      exhibitions: {
-        all: 'http://exhibitions.europeana.eu/rss/exhibitions.xml'
+      exhibitions: %i(de en).each_with_object({}) { |locale, hash|
+        hash[locale] = (ENV['EXHIBITIONS_HOST'] || 'http://www.europeana.eu') + "/portal/#{locale}/exhibitions/feed.xml"
       }
     }
 
