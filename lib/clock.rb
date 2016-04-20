@@ -18,7 +18,9 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
   end
 
   every(1.day, 'cache.feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
-    Cache::FeedJob.perform_later(Cache::FeedJob::URLS[:exhibitions][:all])
+    Cache::FeedJob::URLS[:exhibitions].values.each do |url|
+      Cache::FeedJob.perform_later(url)
+    end
   end
 
   every(1.day, 'cache.record-counts', at: ENV['SCHEDULE_RECORD_COUNTS']) do
