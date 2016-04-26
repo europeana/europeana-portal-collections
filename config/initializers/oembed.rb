@@ -15,6 +15,7 @@ europeana << 'http://www.ina.fr/*/video/*'
 europeana << 'http://api.picturepipe.net/api/html/widgets/public/playout_cloudfront?token=*'
 europeana << 'https://api.picturepipe.net/api/html/widgets/public/playout_cloudfront?token=*'
 europeana << %r{\Ahttp://archives.crem-cnrs.fr/archives/items/[^/]+/\z}
+europeana << 'http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/*'
 
 # Register the providers to support
 OEmbed::Providers.register(OEmbed::Providers::SoundCloud)
