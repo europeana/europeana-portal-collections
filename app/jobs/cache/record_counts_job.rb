@@ -2,7 +2,7 @@ module Cache
   class RecordCountsJob < ApplicationJob
     include ApiQueryingJob
 
-    queue_as :default
+    queue_as :high_priority
 
     def perform(collection_id = nil, options = {})
       api_query = search_builder.rows(0).merge(query: '*:*', profile: 'minimal')

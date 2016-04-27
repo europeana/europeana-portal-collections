@@ -3,7 +3,7 @@ require 'open-uri'
 # @todo deal with 404's
 # @todo follow redirects?
 class DownloadRemoteMediaObjectJob < ApplicationJob
-  queue_as :default
+  queue_as :high_priority
 
   def perform(url)
     url_hash = MediaObject.hash_source_url(url)

@@ -11,7 +11,7 @@ module Cache
       end
     }
 
-    queue_as :default
+    queue_as :high_priority
 
     def perform(url)
       @feed = begin
