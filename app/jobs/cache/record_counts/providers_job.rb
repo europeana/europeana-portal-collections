@@ -7,7 +7,7 @@ module Cache
     class ProvidersJob < ApplicationJob
       include ApiQueryingJob
 
-      queue_as :default
+      queue_as :high_priority
 
       def perform(collection_id = nil)
         cache_key = 'browse/sources/providers'

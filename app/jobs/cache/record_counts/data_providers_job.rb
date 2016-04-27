@@ -5,7 +5,7 @@ module Cache
     class DataProvidersJob < ApplicationJob
       include ApiQueryingJob
 
-      queue_as :default
+      queue_as :high_priority
 
       def perform(provider, collection_id = nil)
         builder = search_builder
