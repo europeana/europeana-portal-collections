@@ -51,7 +51,7 @@ module MustacheHelper
   end
 
   def version
-    #{ is_alpha: content[:banner].present? }
+    # { is_alpha: content[:banner].present? }
     { is_alpha: true }
   end
 
