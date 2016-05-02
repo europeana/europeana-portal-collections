@@ -93,7 +93,8 @@ module Portal
               sections: [
                 {
                   title: 'site.object.meta-label.rights',
-                  fields: ['proxies.dcRights', 'aggregations.edmRights']
+                  fields: ['proxies.dcRights', 'aggregations.edmRights'],
+                  ga_data: 'dimension5'
                 }
               ]
             ),
@@ -268,18 +269,21 @@ module Portal
                   title: 'site.object.meta-label.data-provider',
                   fields: ['aggregations.edmDataProvider'],
                   search_field: 'DATA_PROVIDER',
+                  ga_data: 'dimension3',
                   quoted: true
                 },
                 {
                   title: 'site.object.meta-label.provider',
                   fields: ['aggregations.edmProvider'],
                   search_field: 'PROVIDER',
+                  ga_data: 'dimension4',
                   quoted: true
                 },
                 {
                   title: 'site.object.meta-label.providing-country',
                   fields: ['europeanaAggregation.edmCountry'],
-                  search_field: 'COUNTRY'
+                  search_field: 'COUNTRY',
+                  ga_data: 'dimension2'
                 },
                 {
                   title: 'site.object.meta-label.timestamp-created',
@@ -661,6 +665,10 @@ module Portal
                 item[:url] = override[:field_url]
               end
             end
+          end
+
+          if section[:ga_data]
+            item[:ga_data] = section[:ga_data]
           end
 
           # extra info on last
