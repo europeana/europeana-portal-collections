@@ -334,7 +334,7 @@ module Portal
               twitter: true,
               googleplus: true
             },
-            subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
+            subtitle: subtitle,
             title: [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
@@ -441,6 +441,20 @@ module Portal
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(helpers.content)
       end
+    end
+
+    def subtitle
+      lang, subtitle = document['proxies'][0]['dctermsAlternative'].to_a[0]
+
+      if subtitle.blank?
+        lang, subtitle = document['proxies'][0]['dcTitle'].to_a[1]
+      end
+
+      return unless subtitle.present?
+      return subtitle.first unless locale_language_keys.key?(lang)
+
+      lang_label = t('global.language-' + locale_language_keys[lang])
+      "#{subtitle.first} (#{lang_label})"
     end
 
     def institution_name_and_link

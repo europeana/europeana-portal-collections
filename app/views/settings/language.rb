@@ -77,7 +77,7 @@ module Settings
     end
 
     def language_default_items
-      languages = language_map.dup
+      languages = enabled_ui_language_keys.dup
       [language_item(:en, languages.delete(:en))] +
         languages.sort_by { |_k, v| v }.map { |k, v| language_item(k, v) }
     end
