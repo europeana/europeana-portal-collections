@@ -283,7 +283,8 @@ module Portal
                   title: 'site.object.meta-label.providing-country',
                   fields: ['europeanaAggregation.edmCountry'],
                   search_field: 'COUNTRY',
-                  ga_data: 'dimension2'
+                  ga_data: 'dimension2',
+                  quoted: true
                 },
                 {
                   title: 'site.object.meta-label.timestamp-created',
