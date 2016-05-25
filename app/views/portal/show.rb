@@ -632,21 +632,28 @@ module Portal
         proxy_fields = document.fetch("proxies.#{section[:entity_proxy_field]}", [])
         entities = document.fetch(section[:entity_name], [])
         entities.select! { |entity| proxy_fields.include?(entity[:about]) }
-        fields = entities.map { |entity| entity.fetch('prefLabel', nil) }
-      else
-        fields = ([section[:fields]].flatten || []).map do |field|
+        fields = entities.map { |entity| entity.fetch('prefLabel', entity[:about]) }
+      elsif section[:fields]
+        fields = [section[:fields]].flatten.map do |field|
           document.fetch(field, [])
         end
+      else
+        fields = []
       end
 
       fields = fields.flatten.compact.uniq
+
       if section[:exclude_vals].present?
         fields = fields - section[:exclude_vals]
       end
 
       return fields if section[:fields_then_fallback] && fields.present?
 
-      ([section[:collected]] + fields).flatten.compact.uniq
+      fields = ([section[:collected]] + fields).flatten.compact.uniq
+      return fields if section[:entity_name] && section[:entity_proxy_field]
+
+      entity_uris = document.fetch('agents.about', [])
+      fields.reject { |field| entity_uris.include?(field) }
     end
 
     def data_section_field_search_path(val, field, quoted)
