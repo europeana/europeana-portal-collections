@@ -488,15 +488,21 @@ module Portal
     end
 
     def named_entity_labels(edm, i18n, *args)
-      fields = document.fetch(edm, []).map do |entity|
-        ([:about, :prefLabel] + (args || [])).map do |f|
-          named_entity_field_label(entity, f, i18n)
-        end
-      end.flatten.compact
+      fields = named_entity_fields(edm, i18n, *args)
+      return nil if fields.size == 0
       {
         title: t("site.object.named-entities.#{i18n}.title"),
         fields: fields
-      } unless fields.size == 0
+      }
+    end
+
+    def named_entity_fields(edm, i18n, *args)
+      document.fetch(edm, []).map do |entity|
+        properties = [:about, :prefLabel] + (args || [])
+        properties.map do |f|
+          named_entity_field_label(entity, f, i18n)
+        end
+      end.flatten.compact
     end
 
     def named_entity_field_label(entity, field, i18n)
