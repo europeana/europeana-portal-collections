@@ -209,11 +209,8 @@ module Portal
               sections: [
                 {
                   title: 'site.object.meta-label.creator',
-                  fields: ['agents.prefLabel'],
-                  fields_then_fallback: true,
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dcCreator', nil)
-                  end.flatten.compact,
+                  entity_name: 'agents',
+                  entity_proxy_field: 'dcCreator',
                   search_field: 'who',
                   extra: [
                     {
@@ -230,7 +227,26 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.contributor',
-                  fields: ['proxies.dcContributor'],
+                  entity_name: 'agents',
+                  entity_proxy_field: 'dcContributor',
+                  search_field: 'who'
+                },
+                {
+                  title: 'site.object.meta-label.subject',
+                  entity_name: 'agents',
+                  entity_proxy_field: 'dcSubject',
+                  search_field: 'who'
+                },
+                {
+                  title: 'site.object.meta-label.publisher',
+                  entity_name: 'agents',
+                  entity_proxy_field: 'dcPublisher',
+                  search_field: 'who'
+                },
+                {
+                  title: 'site.object.meta-label.rights',
+                  entity_name: 'agents',
+                  entity_proxy_field: 'dcRights',
                   search_field: 'who'
                 }
               ]
@@ -488,15 +504,21 @@ module Portal
     end
 
     def named_entity_labels(edm, i18n, *args)
-      fields = document.fetch(edm, []).map do |entity|
-        ([:about, :prefLabel] + (args || [])).map do |f|
-          named_entity_field_label(entity, f, i18n)
-        end
-      end.flatten.compact
+      fields = named_entity_fields(edm, i18n, *args)
+      return nil if fields.empty?
       {
         title: t("site.object.named-entities.#{i18n}.title"),
         fields: fields
-      } unless fields.size == 0
+      }
+    end
+
+    def named_entity_fields(edm, i18n, *args)
+      document.fetch(edm, []).map do |entity|
+        properties = [:about, :prefLabel] + (args || [])
+        properties.map do |f|
+          named_entity_field_label(entity, f, i18n)
+        end
+      end.flatten.compact
     end
 
     def named_entity_field_label(entity, field, i18n)
@@ -606,28 +628,32 @@ module Portal
     end
 
     def data_section_field_values(section)
-      fields = ([section[:fields]].flatten || []).map do |field|
-        val = document.fetch(field, [])
-        if !section[:exclude_vals].nil?
-          val = val.map do |value|
-            if section[:exclude_vals].include? (value)
-              nil
-            else
-              value
-            end
-          end
+      if section[:entity_name] && section[:entity_proxy_field]
+        proxy_fields = document.fetch("proxies.#{section[:entity_proxy_field]}", [])
+        entities = document.fetch(section[:entity_name], [])
+        entities.select! { |entity| proxy_fields.include?(entity[:about]) }
+        fields = entities.map { |entity| entity.fetch('prefLabel', entity[:about]) }
+      elsif section[:fields]
+        fields = [section[:fields]].flatten.map do |field|
+          document.fetch(field, [])
         end
-        val
-      end
-
-      fields = fields.flatten.compact
-
-      if section[:fields_then_fallback] && fields.present?
-        fields
       else
-        values = [section[:collected]] + fields
-        values.flatten.compact.uniq
+        fields = []
       end
+
+      fields = fields.flatten.compact.uniq
+
+      if section[:exclude_vals].present?
+        fields = fields - section[:exclude_vals]
+      end
+
+      return fields if section[:fields_then_fallback] && fields.present?
+
+      fields = ([section[:collected]] + fields).flatten.compact.uniq
+      return fields if section[:entity_name] && section[:entity_proxy_field]
+
+      entity_uris = document.fetch('agents.about', []) || []
+      fields.reject { |field| entity_uris.include?(field) }
     end
 
     def data_section_field_search_path(val, field, quoted)
