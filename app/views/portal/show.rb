@@ -652,7 +652,7 @@ module Portal
       fields = ([section[:collected]] + fields).flatten.compact.uniq
       return fields if section[:entity_name] && section[:entity_proxy_field]
 
-      entity_uris = document.fetch('agents.about', [])
+      entity_uris = document.fetch('agents.about', []) || []
       fields.reject { |field| entity_uris.include?(field) }
     end
 
