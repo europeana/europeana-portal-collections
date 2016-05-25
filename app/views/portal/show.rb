@@ -505,7 +505,7 @@ module Portal
 
     def named_entity_labels(edm, i18n, *args)
       fields = named_entity_fields(edm, i18n, *args)
-      return nil if fields.size == 0
+      return nil if fields.empty?
       {
         title: t("site.object.named-entities.#{i18n}.title"),
         fields: fields
