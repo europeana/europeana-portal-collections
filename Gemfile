@@ -25,7 +25,7 @@ gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
 gem 'htmlcompressor', '0.3'
-gem 'logging-rails', '~> 0.5'
+gem 'logging-rails', '~> 0.5', require: 'logging/rails'
 gem 'newrelic_rpm'
 gem 'nokogiri', '~> 1.6.7.2'
 gem 'ruby-oembed', '~> 0.9'
@@ -55,7 +55,6 @@ end
 group :development do
   gem 'foreman'
   gem 'spring', '~> 1.6'
-#  gem 'web-console', '~> 3.0'
 end
 
 group :test do
