@@ -7,8 +7,8 @@ Logging::Rails.configure do |config|
 
   # The default layout used by the appenders.
   layout = Logging.layouts.pattern(
-                                    pattern: '%d %-5l %c [%t] - %m\n',
-                                    date_pattern: '%FT%T.%L%z'
+                                     pattern: '%d %-5l %c [%t] - %m\n',
+                                     date_pattern: '%FT%T.%L%z'
                                   )
 
   # Setup a color scheme called 'bright' than can be used to add color codes
