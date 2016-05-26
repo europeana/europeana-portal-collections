@@ -42,7 +42,7 @@ gem 'soundcloud', '~> 0.3'
 gem 'therubyracer'
 
 group :production do
-  gem 'rails_12factor', '~> 0.0.3'
+  gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end
 

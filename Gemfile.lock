@@ -395,9 +395,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
     rails_admin (0.8.1)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
@@ -413,7 +410,6 @@ GEM
       safe_yaml (~> 1.0)
       sass-rails (>= 4.0, < 6)
     rails_serve_static_assets (0.0.4)
-    rails_stdout_logging (0.0.4)
     railties (4.2.5.2)
       actionpack (= 4.2.5.2)
       activesupport (= 4.2.5.2)
@@ -594,8 +590,8 @@ DEPENDENCIES
   puma (~> 2.13)
   rack-rewrite
   rails (= 4.2.5.2)
-  rails_12factor (~> 0.0.3)
   rails_admin (~> 0.8.0)
+  rails_serve_static_assets
   redis-rails (~> 4.0)
   redis-rails-instrumentation
   rspec-rails (~> 3.0)
