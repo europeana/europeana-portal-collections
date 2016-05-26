@@ -317,6 +317,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     libv8 (3.16.14.13)
+    little-plugger (1.1.4)
     localeapp (1.0.2)
       gli
       i18n
@@ -324,6 +325,11 @@ GEM
       rack
       rest-client
       ya2yaml
+    logging (2.1.0)
+      little-plugger (~> 1.1)
+      multi_json (~> 1.10)
+    logging-rails (0.5.0)
+      logging (>= 1.8)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -577,6 +583,7 @@ DEPENDENCIES
   globalize-versioning!
   htmlcompressor (= 0.3)
   localeapp (~> 1.0)
+  logging-rails (~> 0.5)
   newrelic_rpm
   nokogiri (~> 1.6.7.2)
   paper_trail (~> 4.0)
