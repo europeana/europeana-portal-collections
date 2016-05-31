@@ -11,7 +11,7 @@ module Facet
     end
 
     def facet_item_label(facet_item)
-      facet_item.gsub!(/\s+/, '') if @facet.name == 'COUNTRY'
+      facet_item = facet_item.dup.gsub(/\s+/, '') if @facet.name == 'COUNTRY'
 
       mapped_value = case @facet.name.upcase
                      when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR'

@@ -204,10 +204,11 @@ module Document
 
     def downloadable?
       if url.blank? ||
-        download_disabled? ||
-        media_type == 'iiif' ||
-        (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-        (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+          download_disabled? ||
+          media_type == 'iiif' ||
+          media_type == 'oembed' ||
+          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
         @record_presenter.has_views.include?(url) || for_edm_is_shown_by?

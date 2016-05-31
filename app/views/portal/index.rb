@@ -24,7 +24,7 @@ module Portal
 
     def filters
       mustache[:filters] ||= begin
-        facets_from_request(facet_field_names).reject do |facet|
+        facets_from_request.reject do |facet|
           blacklight_config.facet_fields[facet.name].advanced ||
             blacklight_config.facet_fields[facet.name].parent
         end.map do |facet|
@@ -39,7 +39,7 @@ module Portal
         [
           {
             advanced_items: {
-              items: facets_from_request(facet_field_names).select do |facet|
+              items: facets_from_request.select do |facet|
                 blacklight_config.facet_fields[facet.name].advanced &&
                   !blacklight_config.facet_fields[facet.name].parent
               end.map do |facet|
@@ -174,7 +174,7 @@ module Portal
       return @facets_selected_items unless @facets_selected_items.nil?
 
       @facets_selected_items = [].tap do |items|
-        facets_from_request(facet_field_names).each do |facet|
+        facets_from_request.each do |facet|
           facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
             items << FacetPresenter.build(facet, controller).filter_item(item)
           end

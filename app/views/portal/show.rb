@@ -60,7 +60,7 @@ module Portal
               sections: [
                 {
                   title: 'site.object.meta-label.type',
-                  fields: ['dcType'],
+                  fields: ['proxies.dcType'],
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcType', nil)
                   end.flatten.compact,
@@ -77,21 +77,14 @@ module Portal
                 },
                 {
                   title: 'site.object.meta-label.has-type',
+                  search_field: 'what',
                   fields: ['proxies.edmHasType']
                 },
                 {
-                  title: 'site.object.meta-label.concept',
-                  search_field: 'what',
+                  title: 'site.object.meta-label.medium',
+                  search_field: 'proxy_dcterms_medium',
                   quoted: true,
-                  fields: ['concepts.prefLabel'],
-                  #fields: ['aggregations.edmUgc', 'concepts.prefLabel'],
-                  #override_val: 'true',
-                  #overrides: [
-                  #  {
-                  #    field_title: t('site.object.meta-label.ugc'),
-                  #    field_url: search_url(f: { 'UGC' => ['true'] })
-                  #  }
-                  #]
+                  fields: 'proxies.dctermsMedium'
                 }
               ]
             ),
@@ -100,7 +93,8 @@ module Portal
               sections: [
                 {
                   title: 'site.object.meta-label.rights',
-                  fields: ['proxies.dcRights', 'aggregations.edmRights']
+                  fields: ['proxies.dcRights', 'aggregations.edmRights'],
+                  ga_data: 'dimension5'
                 }
               ]
             ),
@@ -275,18 +269,22 @@ module Portal
                   title: 'site.object.meta-label.data-provider',
                   fields: ['aggregations.edmDataProvider'],
                   search_field: 'DATA_PROVIDER',
+                  ga_data: 'dimension3',
                   quoted: true
                 },
                 {
                   title: 'site.object.meta-label.provider',
                   fields: ['aggregations.edmProvider'],
                   search_field: 'PROVIDER',
+                  ga_data: 'dimension4',
                   quoted: true
                 },
                 {
                   title: 'site.object.meta-label.providing-country',
                   fields: ['europeanaAggregation.edmCountry'],
-                  search_field: 'COUNTRY'
+                  search_field: 'COUNTRY',
+                  ga_data: 'dimension2',
+                  quoted: true
                 },
                 {
                   title: 'site.object.meta-label.timestamp-created',
@@ -434,7 +432,7 @@ module Portal
                   alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
                   # temporary fix until API contains correct image url
                   # src: render_document_show_field_value(doc, 'edmPreview'),
-                  src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 200)
+                  src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 400)
                 }
               }
             end
@@ -564,6 +562,10 @@ module Portal
       end
     end
 
+    def page_url
+      URI.escape(request.original_url)
+    end
+
     private
 
     def meta_description
@@ -604,7 +606,7 @@ module Portal
     end
 
     def data_section_field_values(section)
-      fields = (section[:fields] || []).map do |field|
+      fields = ([section[:fields]].flatten || []).map do |field|
         val = document.fetch(field, [])
         if !section[:exclude_vals].nil?
           val = val.map do |value|
@@ -664,6 +666,10 @@ module Portal
                 item[:url] = override[:field_url]
               end
             end
+          end
+
+          if section[:ga_data]
+            item[:ga_data] = section[:ga_data]
           end
 
           # extra info on last

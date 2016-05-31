@@ -8,7 +8,7 @@ module RecordHelper
           alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
           # temporary fix until API contains correct image url
           # src: render_document_show_field_value(doc, 'edmPreview'),
-          src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'))
+          src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 400)
         }
       }
     end
