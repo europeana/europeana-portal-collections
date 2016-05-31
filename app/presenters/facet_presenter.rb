@@ -62,10 +62,12 @@ class FacetPresenter
   # @param options [Hash] Options
   # @option options [Fixnum] :count The number of items to display up-front; any
   #  more will be hidden at first.
+  # @option options [String] :parent The value of the parent facet item if this
+  #   facet is a hierarchical child.
   # @return [Hash] display data for the facet
   def display(options = {})
     options = options.reverse_merge(count: 5)
-    unhidden_items, hidden_items = split_items(options[:count])
+    unhidden_items, hidden_items = split_items(options[:count], options[:parent])
     {
       title: facet_label,
       select_one: facet_config.single,
@@ -157,9 +159,12 @@ class FacetPresenter
   #
   # @param count [Fixnum] Maximum number of items to be shown
   # @return [Array<Array>] Two arrays of facet items, first to show, last to hide
-  def split_items(count)
+  def split_items(count, parent = nil)
     unhidden_items = []
+
     hidden_items = @facet.items.dup
+    hidden_items.select! { |item| facet_config.splice.call(parent, item) } if facet_config.splice.present?
+
     hidden_items.select { |item| facet_in_params?(@facet.name, item) }.each do |selected_item|
       unhidden_items << hidden_items.delete(selected_item)
     end

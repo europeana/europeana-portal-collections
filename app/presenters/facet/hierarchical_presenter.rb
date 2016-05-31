@@ -10,7 +10,7 @@ module Facet
       {
         has_subfilters: child_facets.present?,
         filters: child_facets.map do |child|
-          FacetPresenter.build(child, @controller).display
+          FacetPresenter.build(child, @controller).display(parent: item)
         end
       }.merge(super)
     end

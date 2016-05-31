@@ -14,7 +14,7 @@ module Facet
       facet_item = facet_item.dup.gsub(/\s+/, '') if @facet.name == 'COUNTRY'
 
       mapped_value = case @facet.name.upcase
-                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR'
+                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR', 'RIGHTS'
                        facet_item
                      when 'MIME_TYPE'
                        mime_type_facet_item_label(facet_item)
@@ -22,7 +22,7 @@ module Facet
                        t('global.facet.' + @facet.name.downcase + '.' + facet_item.downcase)
                      end
 
-      unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE', 'IMAGE_SIZE'].include?(@facet.name)
+      unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE', 'IMAGE_SIZE', 'RIGHTS'].include?(@facet.name)
         mapped_value = mapped_value.titleize
       end
 

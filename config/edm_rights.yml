@@ -1,6 +1,6 @@
 ---
 cc0:
-  pattern: "http://creativecommons.org/publicdomain/zero"
+  pattern: "http://creativecommons.org/(licenses/)?publicdomain/zero"
   reusability: :open
 cc_by:
   pattern: "http://creativecommons.org/licenses/by/"
