@@ -35,6 +35,8 @@ class CollectionsController < ApplicationController
   #
   # @todo Move this somewhere else
   def blacklight_config
+    return super # hotfix for failed queries with this enabled on production
+
     @collection_blacklight_configs ||= {}
     @collection_blacklight_configs[@collection.key] ||= begin
       super.deep_dup.tap do |config|
