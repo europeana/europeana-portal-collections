@@ -1,0 +1,50 @@
+---
+cc0:
+  pattern: "http://creativecommons.org/publicdomain/zero"
+  reusability: :open
+cc_by:
+  pattern: "http://creativecommons.org/licenses/by/"
+  reusability: :open
+cc_by_nc:
+  pattern: "http://creativecommons.org/licenses/by-nc/"
+  reusability: :open
+cc_by_nc_nd:
+  pattern: "http://creativecommons.org/licenses/by-nc-nd"
+  reusability: :restricted
+cc_by_nc_sa:
+  pattern: "http://creativecommons.org/licenses/by-nc-sa"
+  reusability: :restricted
+cc_by_nd:
+  pattern: "http://creativecommons.org/licenses/by-nd"
+  reusability: :restricted
+cc_by_sa:
+  pattern: "http://creativecommons.org/licenses/by-sa"
+  reusability: :open
+out_of_copyright_non_commercial:
+  pattern: "http://www.europeana.eu/rights/out-of-copyright-non-commercial"
+  reusability: :restricted
+  template_license: OOC
+rrfa:
+  pattern: "http://www.europeana.eu/rights/rr-f"
+  reusability: :permission
+  template_license: RR_free
+rrpa:
+  pattern: "http://www.europeana.eu/rights/rr-p"
+  reusability: :permission
+  template_license: RR_paid
+rrra:
+  pattern: "http://www.europeana.eu/rights/rr-r/"
+  reusability: :permission
+  template_license: RR_restricted
+pdm:
+  pattern: "http://creativecommons.org/publicdomain/mark"
+  reusability: :open
+  template_license: public
+ucs:
+  pattern: "http://www.europeana.eu/rights/unknown"
+  reusability: :permission
+  template_license: unknown
+orphan_work:
+  pattern: "http://www.europeana.eu/rights/test-orphan"
+  reusability: :permission
+  template_license: orphan
