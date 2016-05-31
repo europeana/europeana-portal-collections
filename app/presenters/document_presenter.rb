@@ -32,11 +32,10 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
     begin
       rights = EDM::Rights.normalise(media_rights)
       license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase.tr('_', '-')
-      i18n_scope = 'global.facet.reusability'
 
       {
-        license_human: t(rights.reusability, scope: i18n_scope),
-        license_name: t("advanced-#{rights.id}", scope: i18n_scope),
+        license_human: t(rights.reusability, scope: 'global.facet.reusability'),
+        license_name: rights.label,
         license_url: media_rights,
         :"license_#{license_flag_key}" => true,
         expiry: rights_label_expiry(rights)

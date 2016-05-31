@@ -14,10 +14,12 @@ module Facet
       facet_item = facet_item.dup.gsub(/\s+/, '') if @facet.name == 'COUNTRY'
 
       mapped_value = case @facet.name.upcase
-                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR', 'RIGHTS'
+                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR'
                        facet_item
                      when 'MIME_TYPE'
                        mime_type_facet_item_label(facet_item)
+                     when 'RIGHTS'
+                       rights_facet_item_label(facet_item)
                      else
                        t('global.facet.' + @facet.name.downcase + '.' + facet_item.downcase)
                      end
@@ -41,6 +43,10 @@ module Facet
         subtype = facet_item.split('/')[1] || ''
         subtype.split('-').last.upcase
       end
+    end
+
+    def rights_facet_item_label(facet_item)
+      EDM::Rights.registry.detect { |rights| rights.api_query == facet_item }.label
     end
   end
 end

@@ -17,5 +17,14 @@ module EDM
       end
       fail UnknownRights, "Unknown rights: #{string}"
     end
+
+    def api_query
+      super || pattern + '*'
+    end
+
+    def label
+      key = id.to_s.tr('_', '-')
+      I18n.t("advanced-#{key}", scope: 'global.facet.reusability')
+    end
   end
 end
