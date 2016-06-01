@@ -476,7 +476,7 @@ module MustacheHelper
   def input_search_values(*keys)
     return [] if keys.blank?
     keys.map do |k|
-      [params[k]].flatten.compact.reject { |v| v.blank? }.map do |v|
+      [params[k]].flatten.compact.reject(&:blank?).map do |v|
         {
           name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
           value: input_search_param_value(k, v),
