@@ -4,7 +4,7 @@ gem 'rails', '4.2.5.2'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '61f2a7c'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '574dd9f'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -18,7 +18,7 @@ gem 'clockwork', '~> 1.2'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise', '~> 3.5.4'
-gem 'europeana-blacklight', '~> 0.4.3'
+gem 'europeana-blacklight', '~> 0.4.3', github: 'europeana/europeana-blacklight', branch: 'release/v0.4.4'
 gem 'europeana-api', '~> 0.5.0'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'

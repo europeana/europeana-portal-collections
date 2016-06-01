@@ -18,11 +18,13 @@ module Facet
                        facet_item
                      when 'MIME_TYPE'
                        mime_type_facet_item_label(facet_item)
+                     when 'RIGHTS'
+                       rights_facet_item_label(facet_item)
                      else
                        t('global.facet.' + @facet.name.downcase + '.' + facet_item.downcase)
                      end
 
-      unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE', 'IMAGE_SIZE'].include?(@facet.name)
+      unless ['PROVIDER', 'DATA_PROVIDER', 'MIME_TYPE', 'IMAGE_SIZE', 'RIGHTS'].include?(@facet.name)
         mapped_value = mapped_value.titleize
       end
 
@@ -41,6 +43,10 @@ module Facet
         subtype = facet_item.split('/')[1] || ''
         subtype.split('-').last.upcase
       end
+    end
+
+    def rights_facet_item_label(facet_item)
+      EDM::Rights.registry.detect { |rights| rights.api_query == facet_item }.label
     end
   end
 end
