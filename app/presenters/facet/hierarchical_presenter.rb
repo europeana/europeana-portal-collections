@@ -1,7 +1,17 @@
 module Facet
   class HierarchicalPresenter < FacetPresenter
     def display(options = {})
-      super.merge(hierarchical: true)
+      output = super.merge(hierarchical: true)
+
+      # @todo Make this more reusable when further cases emerge
+      if @facet.name == 'REUSABILITY'
+        output[:hidden_item_data] = {
+          label_show_specific: 'Show specific licenses',
+          label_hide_specific: 'Hide specific licenses'
+        }
+      end
+
+      output
     end
 
     def facet_item(item)
@@ -10,7 +20,7 @@ module Facet
       {
         has_subfilters: child_facets.present?,
         filters: child_facets.map do |child|
-          FacetPresenter.build(child, @controller).display(parent: item)
+          FacetPresenter.build(child, @controller, @blacklight_config, item).display
         end
       }.merge(super)
     end
