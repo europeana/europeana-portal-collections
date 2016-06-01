@@ -178,7 +178,7 @@ class FacetPresenter
     hidden_items.select { |item| facet_in_params?(@facet.name, item) }.each do |selected_item|
       unhidden_items << hidden_items.delete(selected_item)
     end
-    while (unhidden_items.size) < options[:count] && hidden_items.present?
+    while (unhidden_items.size < options[:count]) && hidden_items.present?
       unhidden_items.push(hidden_items.shift)
     end
     [unhidden_items, hidden_items]

@@ -62,11 +62,13 @@ module BlacklightConfig
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'YEAR', range: true if ENV['FACET_YEAR_FIELD']
-      config.add_facet_field 'REUSABILITY', hierarchical: true,
+      config.add_facet_field 'REUSABILITY',
+        hierarchical: true,
         collapsible: { show: 'Show specific licenses', hide: 'Hide specific licenses' }
-      config.add_facet_field 'RIGHTS', hierarchical: true, parent: 'REUSABILITY',
-        splice: lambda { |parent, child| parent.value == EDM::Rights.normalise(child.value).reusability.to_s rescue false },
-        group: lambda { |item| EDM::Rights.normalise(item.value).api_query rescue false }
+      config.add_facet_field 'RIGHTS',
+        hierarchical: true, parent: 'REUSABILITY',
+        splice: lambda { |parent, child| parent.value == EDM::Rights.normalise(child.value).reusability.to_s },
+        group: lambda { |item| EDM::Rights.normalise(item.value).api_query }
       config.add_facet_field 'COUNTRY', limit: 50
       config.add_facet_field 'LANGUAGE', limit: 50
       config.add_facet_field 'PROVIDER', limit: 50

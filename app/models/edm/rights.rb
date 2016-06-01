@@ -1,8 +1,6 @@
 module EDM
   class Rights < OpenStruct
-    class UnknownRights < StandardError; end
-
-    def self.registry(permission = nil)
+    def self.registry
       @registry ||= begin
         rights = YAML.load_file(File.join(Rails.root, 'config', 'edm_rights.yml'))
         rights.map do |id, attrs|
@@ -12,10 +10,7 @@ module EDM
     end
 
     def self.normalise(string)
-      registry.each do |rights|
-        return rights if string.match(rights.pattern)
-      end
-      fail UnknownRights, "Unknown rights: #{string}"
+      registry.detect { |rights| string.match(rights.pattern) }
     end
 
     def api_query

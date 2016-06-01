@@ -12,9 +12,7 @@ RSpec.describe EDM::Rights do
 
     context 'when rights are not recognised' do
       let(:rights) { 'http://www.example.com/rights' }
-      it 'should raise an error' do
-        expect { subject }.to raise_error(described_class.const_get('UnknownRights'))
-      end
+      it { is_expected.to be_nil }
     end
   end
 end

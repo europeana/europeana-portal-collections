@@ -17,8 +17,10 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
   def rights_label_expiry(rights)
     if rights.id == :out_of_copyright_non_commercial
       end_path = URI(media_rights).path.split('/').last
-      unless end_path == 'out-of-copyright-non-commercial'
-        expiry = t('global.facet.reusability.expiry', date: end_path)
+      if end_path == 'out-of-copyright-non-commercial'
+        nil
+      else
+        t('global.facet.reusability.expiry', date: end_path)
       end
     end
   end
