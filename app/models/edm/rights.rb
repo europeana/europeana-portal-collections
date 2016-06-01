@@ -10,6 +10,7 @@ module EDM
     end
 
     def self.normalise(string)
+      return nil unless string.is_a?(String)
       registry.detect { |rights| string.match(rights.pattern) }
     end
 

@@ -67,8 +67,14 @@ module BlacklightConfig
                               collapsible: { show: 'Show specific licenses', hide: 'Hide specific licenses' }
       config.add_facet_field 'RIGHTS',
                               hierarchical: true, parent: 'REUSABILITY',
-                              splice: lambda { |parent, child| parent.value == EDM::Rights.normalise(child.value).reusability.to_s },
-                              group: lambda { |item| EDM::Rights.normalise(item.value).api_query }
+                              splice: lambda { |parent, child|
+                                rights = EDM::Rights.normalise(child.value)
+                                rights.present? ? (parent.value == rights.reusability.to_s) : nil
+                              },
+                              group: lambda { |item|
+                                rights = EDM::Rights.normalise(item.value)
+                                rights.present? ? rights.api_query : nil
+                              }
       config.add_facet_field 'COUNTRY', limit: 50
       config.add_facet_field 'LANGUAGE', limit: 50
       config.add_facet_field 'PROVIDER', limit: 50
