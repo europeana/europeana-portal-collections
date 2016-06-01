@@ -3,11 +3,11 @@ module Facet
     def display(options = {})
       output = super.merge(hierarchical: true)
 
-      # @todo Make this more reusable when further cases emerge
-      if @facet.name == 'REUSABILITY'
+      if facet_config.collapsible.present?
         output[:hidden_item_data] = {
-          label_show_specific: 'Show specific licenses',
-          label_hide_specific: 'Hide specific licenses'
+          label_show_specific: facet_config.collapsible[:show],
+          label_hide_specific: facet_config.collapsible[:hide],
+          has_subselection: any_child_item_checked?(output[:items])
         }
       end
 
@@ -34,6 +34,10 @@ module Facet
           parent == @facet.name
         end
       end
+    end
+
+    def any_child_item_checked?(items)
+      items.any? { |item| item[:filters].any? { |filter| filter[:items].any? { |child_item| child_item[:is_checked] } } }
     end
 
     ##
