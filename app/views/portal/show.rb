@@ -632,7 +632,7 @@ module Portal
         proxy_fields = document.fetch("proxies.#{section[:entity_proxy_field]}", [])
         entities = document.fetch(section[:entity_name], [])
         entities.select! { |entity| proxy_fields.include?(entity[:about]) }
-        fields = entities.map { |entity| entity.fetch('prefLabel', entity[:about]) }
+        fields = entities.map { |entity| entity.fetch('prefLabel', entity.fetch('foafName', entity[:about])) }
       elsif section[:fields]
         fields = [section[:fields]].flatten.map do |field|
           document.fetch(field, [])
