@@ -142,8 +142,11 @@ class FacetPresenter
   def add_facet_params(item)
     facet_params = search_state.add_facet_params_and_redirect(@facet.name, item)
     if @parent && facet_config.parent
-      tmp_search_state = Blacklight::SearchState.new(ActionController::Parameters.new(facet_params), @blacklight_config)
-      facet_params = tmp_search_state.add_facet_params(facet_config.parent, @parent)
+      parent_facet = facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
+      unless facet_in_params?(parent_facet, @parent)
+        tmp_search_state = Blacklight::SearchState.new(ActionController::Parameters.new(facet_params), @blacklight_config)
+        facet_params = tmp_search_state.add_facet_params(parent_facet, @parent)
+      end
     end
     facet_params
   end
