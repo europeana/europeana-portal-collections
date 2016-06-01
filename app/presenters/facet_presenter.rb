@@ -164,7 +164,6 @@ class FacetPresenter
 
     items = @facet.items.dup
     items = spliced(items, parent) if facet_config.splice.present?
-    items = grouped(items) if facet_config.group.present?
     hidden_items = items
 
     hidden_items.select { |item| facet_in_params?(@facet.name, item) }.each do |selected_item|
@@ -177,21 +176,6 @@ class FacetPresenter
   end
 
   private
-
-  def grouped(items)
-    groups = {}
-
-    items.each do |item|
-      item_group = facet_config.group.call(item)
-      if groups.key?(item_group)
-        groups[item_group].hits += item.hits
-      else
-        groups[item_group] = item.class.new(item_group, item.hits)
-      end
-    end
-
-    groups.values.sort_by { |item| -item.hits }
-  end
 
   def spliced(items, parent = nil)
     items.select { |item| facet_config.splice.call(parent, item) } if facet_config.splice.present?
