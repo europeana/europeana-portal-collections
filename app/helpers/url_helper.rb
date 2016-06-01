@@ -28,7 +28,7 @@ module UrlHelper
   def remove_q_param(source_params = params)
     Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |p|
       if p[:qf].blank?
-        p.delete(:q)
+        p[:q] = ''
       elsif p[:qf].is_a?(Array)
         p[:q] = p[:qf].shift
       else

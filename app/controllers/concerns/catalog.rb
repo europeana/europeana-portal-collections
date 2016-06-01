@@ -57,19 +57,9 @@ module Catalog
     when options[:controller]
       url_for(options)
     when params[:controller] == 'collections'
-      search_url = url_for(options.merge(controller: 'collections', action: params[:action]))
-      if !search_url.index('q=')
-        options[:q] = ''
-        search_url = url_for(options.merge(controller: 'collections', action: params[:action]))
-      end
-      search_url
+      url_for(options.merge(controller: 'collections', action: params[:action]))
     else
-      search_url = search_url(options.except(:controller, :action))
-      if !search_url.index('q=')
-        options[:q] = ''
-        search_url = search_url(options.except(:controller, :action))
-      end
-      search_url
+      search_url(options.except(:controller, :action))
     end
   end
 
