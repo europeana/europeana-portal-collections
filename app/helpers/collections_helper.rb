@@ -61,7 +61,8 @@ module CollectionsHelper
           img: {
             src: feed_entry_img_src(item),
             alt: item.title
-          }
+          },
+          title: false
         }
       end
     }
