@@ -12,9 +12,9 @@ module Cache
       def feed_entry_img_src(entry)
         [:summary, :content].each do |method|
           next unless entry.send(method).present?
-          img_tag = entry.send(method).match(/<img [^>]*>/i)[0]
+          img_tag = entry.send(method).match(/<img [^>]*>/i)
           next unless img_tag.present?
-          return img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
+          return img_tag[0].match(/src="(https?:\/\/[^"]*)"/i)[1]
         end
       end
     end
