@@ -15,13 +15,14 @@ module Facet
     end
 
     def facet_item(item)
-      child_facets = item_children(item)
+      subfilters = item_children(item).map do |child|
+        FacetPresenter.build(child, @controller, @blacklight_config, item).display
+      end
+      subfilters.reject! { |sf| sf[:items].blank? }
 
       {
-        has_subfilters: child_facets.present?,
-        filters: child_facets.map do |child|
-          FacetPresenter.build(child, @controller, @blacklight_config, item).display
-        end
+        has_subfilters: subfilters.present?,
+        filters: subfilters
       }.merge(super)
     end
 

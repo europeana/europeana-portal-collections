@@ -70,7 +70,7 @@ class FacetPresenter
     options = options.reverse_merge(count: 5)
     unhidden_items, hidden_items = split_items(options)
     {
-      title: facet_label,
+      title: facet_config.respond_to?(:title) ? facet_config.title : facet_label,
       select_one: facet_config.single,
       items: unhidden_items.map { |item| facet_item(item) },
       extra_items: hidden_items.blank? ? nil : {
