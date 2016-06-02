@@ -66,7 +66,7 @@ module BlacklightConfig
                               hierarchical: true,
                               collapsible: { show: 'Show specific licenses', hide: 'Hide specific licenses' }
       config.add_facet_field 'RIGHTS',
-                              hierarchical: true, parent: 'REUSABILITY',
+                              hierarchical: true, parent: 'REUSABILITY', title: nil,
                               splice: lambda { |parent, child|
                                 rights = EDM::Rights.normalise(child.value)
                                 rights.present? ? (parent.value == rights.reusability.to_s) : nil
