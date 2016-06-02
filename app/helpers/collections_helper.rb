@@ -40,11 +40,11 @@ module CollectionsHelper
     end
   end
 
-  def collection_tumblr_feed_content(options = {})
+  def collection_tumblr_feed_content(collection, options = {})
     page = options[:page] || 1
     per_page = options[:per_page] || 6
 
-    key = @collection.key.underscore.to_sym
+    key = collection.key.underscore.to_sym
     url = Cache::FeedJob::URLS[:tumblr][key]
     feed = cached_feed(url)
     return nil if feed.blank? || feed.entries.blank?
