@@ -3,13 +3,13 @@ module Facet
     def display(options = {})
       output = super.merge(hierarchical: true)
 
-      if facet_config.collapsible.present?
-        output[:hidden_item_data] = {
-          label_show_specific: facet_config.collapsible[:show],
-          label_hide_specific: facet_config.collapsible[:hide],
-          has_subselection: any_child_item_checked?(output[:items])
-        }
-      end
+      # if facet_config.collapsible.present?
+      #   output[:hidden_item_data] = {
+      #     label_show_specific: facet_config.collapsible[:show],
+      #     label_hide_specific: facet_config.collapsible[:hide],
+      #     has_subselection: any_child_item_checked?(output[:items])
+      #   }
+      # end
 
       output
     end
