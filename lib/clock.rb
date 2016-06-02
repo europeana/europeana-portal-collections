@@ -23,6 +23,12 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     end
   end
 
+  every(1.day, 'cache.feed.tumblr', at: ENV['SCHEDULE_FEED_TUMBLR']) do
+    Cache::FeedJob::URLS[:tumblr].values.each do |url|
+      Cache::Feed::BlogJob.perform_later(url)
+    end
+  end
+
   every(1.day, 'cache.record-counts', at: ENV['SCHEDULE_RECORD_COUNTS']) do
     Cache::ColourFacetsJob.perform_later
     Cache::RecordCountsJob.perform_later

@@ -32,13 +32,16 @@ namespace :jobs do
       end
     end
 
-    desc 'Queue Cache::Feed jobs (blogs / exhibitions)'
+    desc 'Queue Cache::Feed jobs (blogs / exhibitions / Tumblr)'
     task feeds: :environment do
       Cache::FeedJob::URLS[:blog].each_pair do |_k, url|
         Cache::Feed::BlogJob.perform_later(url)
       end
       Cache::FeedJob::URLS[:exhibitions].each_pair do |_k, url|
         Cache::FeedJob.perform_later(url)
+      end
+      Cache::FeedJob::URLS[:tumblr].each_pair do |_k, url|
+        Cache::Feed::BlogJob.perform_later(url)
       end
     end
   end
