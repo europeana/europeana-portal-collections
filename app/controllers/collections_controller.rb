@@ -30,6 +30,15 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def tumblr
+    @collection = find_collection
+    respond_to do |format|
+      format.json { render json: collection_tumblr_feed_content(params.slice(:page, :per_page)) }
+    end
+  end
+
+  protected
+
   ##
   # Per-collection Blacklight config
   #
@@ -47,8 +56,6 @@ class CollectionsController < ApplicationController
       end
     end
   end
-
-  protected
 
   def _prefixes
     @_prefixes_with_partials ||= super | %w(catalog)

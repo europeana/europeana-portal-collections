@@ -521,24 +521,13 @@ module MustacheHelper
         },
         url: CGI.unescapeHTML(item.url),
         img: {
-          src: news_item_img_src(item),
+          src: feed_entry_img_src(item),
           alt: nil
         },
         excerpt: {
           short: CGI.unescapeHTML(item.summary)
         }
       }
-    end
-  end
-
-  def news_item_img_src(item)
-    [:summary, :content].each do |method|
-      next unless item.send(method).present?
-      img_tag = item.send(method).match(/<img [^>]*>/i)[0]
-      next unless img_tag.present?
-      url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
-      mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
-      return mo.file.url(:medium) unless mo.nil?
     end
   end
 

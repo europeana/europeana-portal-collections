@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get 'record/*id', to: 'portal#show', as: 'document'
   end
 
-  resources :collections, only: [:show, :index]
+  resources :collections, only: [:show, :index] do
+    get 'tumblr', on: :member
+  end
 
   get '/channels', to: redirect('collections')
   get '/channels/:id', to: redirect('collections/%{id}')
