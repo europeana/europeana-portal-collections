@@ -72,12 +72,34 @@ module Collections
             blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links,
-          banner: banner_content(@landing_page.banner_id)
+          banner: banner_content(@landing_page.banner_id),
+          carousel: carousel_content
         }.reverse_merge(helpers.content)
       end
     end
 
     private
+
+    def carousel_content
+      key = @collection.key.underscore.to_sym
+      url = Cache::FeedJob::URLS[:tumblr][key]
+      feed = cached_feed(url)
+      return nil if feed.entries.blank?
+
+      {
+        title: feed.title,
+        more_items_total: feed.entries.size,
+        items: feed.entries[0..5].map do |item|
+          {
+            url: CGI.unescapeHTML(item.url),
+            img: {
+              src: news_item_img_src(item),
+              alt: item.title
+            }
+          }
+        end
+      }
+    end
 
     def body_cache_key
       @landing_page.cache_key

@@ -1,9 +1,13 @@
 module FeedHelper
   def feed_entries(url)
-    @cached_feed_entries ||= {}
-    @cached_feed_entries[url] ||= begin
-      feed = Rails.cache.fetch("feed/#{url}")
-      feed.present? ? feed.entries : []
+    feed = cached_feed(url)
+    feed.present? ? feed.entries : []
+  end
+
+  def cached_feed(url)
+    @cached_feeds ||= {}
+    @cached_feeds[url] ||= begin
+      Rails.cache.fetch("feed/#{url}")
     end
   end
 end

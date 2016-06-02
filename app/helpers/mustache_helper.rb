@@ -532,12 +532,14 @@ module MustacheHelper
   end
 
   def news_item_img_src(item)
-    return nil unless item.content.present?
-    img_tag = item.content.match(/<img [^>]*>/i)[0]
-    return nil unless img_tag.present?
-    url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
-    mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
-    mo.nil? ? nil : mo.file.url(:medium)
+    [:summary, :content].each do |method|
+      next unless item.send(method).present?
+      img_tag = item.send(method).match(/<img [^>]*>/i)[0]
+      next unless img_tag.present?
+      url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
+      mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
+      return mo.file.url(:medium) unless mo.nil?
+    end
   end
 
   def hero_config(hero_image)
