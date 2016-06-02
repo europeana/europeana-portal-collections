@@ -37,8 +37,6 @@ class CollectionsController < ApplicationController
     end
   end
 
-  protected
-
   ##
   # Per-collection Blacklight config
   #
@@ -56,6 +54,8 @@ class CollectionsController < ApplicationController
       end
     end
   end
+
+  protected
 
   def _prefixes
     @_prefixes_with_partials ||= super | %w(catalog)
