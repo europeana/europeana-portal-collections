@@ -64,7 +64,10 @@ module BlacklightConfig
       config.add_facet_field 'YEAR', range: true if ENV['FACET_YEAR_FIELD']
       config.add_facet_field 'REUSABILITY',
                               hierarchical: true,
-                              collapsible: { show: I18n.t('global.facet.license.show-specific'), hide: I18n.t('global.facet.license.hide-specific') }
+                              collapsible: {
+                                show: I18n.t('global.facet.license.show-specific'),
+                                  hide: I18n.t('global.facet.license.hide-specific')
+                              }
       config.add_facet_field 'RIGHTS',
                               hierarchical: true, parent: 'REUSABILITY', title: nil,
                               splice: lambda { |parent, child|
