@@ -28,7 +28,7 @@ module BlacklightConfig
       # config.europeana_api_cache_expires_in = 24.hours
 
       # Number of items to show per page
-      config.per_page = [12, 24, 36, 48]
+      config.per_page = [12, 24, 36, 48, 72, 96]
       config.default_per_page = 12
       config.max_per_page = 48
 
@@ -38,7 +38,7 @@ module BlacklightConfig
       config.index.timestamp_field = nil # Europeana's is in microseconds
 
       # Fields to be displayed in the index (search results) view
-      #   The ordering of the field names is the order of the display 
+      #   The ordering of the field names is the order of the display
       config.add_index_field 'title'
       config.add_index_field 'edmAgentLabelLangAware'
       config.add_index_field 'dcDescription'
