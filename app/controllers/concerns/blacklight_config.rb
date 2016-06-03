@@ -66,7 +66,7 @@ module BlacklightConfig
                               hierarchical: true,
                               collapsible: {
                                 show: I18n.t('global.facet.license.show-specific'),
-                                  hide: I18n.t('global.facet.license.hide-specific')
+                                hide: I18n.t('global.facet.license.hide-specific')
                               }
       config.add_facet_field 'RIGHTS',
                               hierarchical: true, parent: 'REUSABILITY', title: nil,
