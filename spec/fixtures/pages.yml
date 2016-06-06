@@ -17,6 +17,7 @@ contact:
 home:
   slug: ''
   state: 1
+  strapline: '%{total_item_count} items'
   type: 'Page::Landing'
 
 music_collection:
