@@ -27,7 +27,7 @@ class Page < ActiveRecord::Base
 
   has_paper_trail
 
-  translates :title, :body, fallbacks_for_empty_translations: true
+  translates :title, :body, :strapline, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   validates :slug, uniqueness: true

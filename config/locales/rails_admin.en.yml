@@ -19,3 +19,5 @@ en:
     help:
       browse_entry:
         query: 'Include everything after the ? in a search URL, e.g. "q=paris&f[TYPE][]=IMAGE". Do not include page or per_page.'
+      page/landing:
+        strapline: 'Include "%%{total_item_count}" where the number of items should be displayed.'
