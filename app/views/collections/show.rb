@@ -58,6 +58,7 @@ module Collections
               items: @landing_page.credits.to_a
             }
           },
+          strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : {
             items: browse_entry_items(@landing_page.browse_entries.published, @landing_page),
@@ -79,6 +80,15 @@ module Collections
     end
 
     private
+
+    def strapline
+      @landing_page.strapline.present? ? @landing_page.strapline(total_item_count: total_item_count) : nil
+    end
+
+    # @todo populate from cache
+    def total_item_count
+      0
+    end
 
     def body_cache_key
       @landing_page.cache_key
