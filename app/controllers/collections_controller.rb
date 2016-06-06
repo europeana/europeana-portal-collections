@@ -14,6 +14,7 @@ class CollectionsController < ApplicationController
     @landing_page = find_landing_page
     @collection_stats = collection_stats
     @recent_additions = recent_additions
+    @total_item_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}")
 
     (@response, @document_list) = search_results(params) if has_search_parameters?
 

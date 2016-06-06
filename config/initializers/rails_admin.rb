@@ -292,6 +292,7 @@ RailsAdmin.config do |config|
       field :slug
       field :title
       field :hero_image_file, :paperclip
+      field :strapline
       field :state
       field :credits
       field :social_media
@@ -306,6 +307,7 @@ RailsAdmin.config do |config|
         html_attributes rows: 15, cols: 80
       end
       field :hero_image
+      field :strapline
       field :credits
       field :social_media
       field :promotions
