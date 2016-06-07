@@ -36,6 +36,7 @@ module Catalog
   def search_results(user_params)
     response, documents = super
     response.max_pages_per(960 / response.limit_value)
+    add_collection_facet(response)
     [response, documents]
   end
 
@@ -66,5 +67,13 @@ module Catalog
   def search_facet_url(options = {})
     facet_url_params = { controller: 'portal', action: 'facet' }
     url_for params.merge(facet_url_params).merge(options).except(:page)
+  end
+
+  def add_collection_facet(response)
+    items = displayable_collections.map do |collection|
+      Europeana::Blacklight::Response::Facets::FacetItem.new(value: collection.key)
+    end
+    field = Europeana::Blacklight::Response::Facets::FacetField.new('COLLECTION', items)
+    response.aggregations[field.name] = field
   end
 end

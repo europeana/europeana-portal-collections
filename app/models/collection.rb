@@ -25,7 +25,11 @@ class Collection < ActiveRecord::Base
   end
 
   def landing_page
-    @landing_page ||= Page::Landing.find_by_slug("collections/#{key}")
+    @landing_page ||= Page::Landing.find_by_slug(landing_page_slug)
+  end
+
+  def landing_page_slug
+    key == 'home' ? '' : "collections/#{key}"
   end
 
   def touch_landing_page
