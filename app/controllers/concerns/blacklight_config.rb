@@ -49,6 +49,7 @@ module BlacklightConfig
       config.add_index_field 'edmIsShownAt'
 
       # Facet fields in the order they should be displayed.
+      config.add_facet_field 'COLLECTION', include_in_request: false, single: true
       config.add_facet_field 'TYPE', hierarchical: true
       config.add_facet_field 'IMAGE_COLOUR', parent: %w(TYPE IMAGE)
       config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 20

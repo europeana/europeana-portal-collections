@@ -39,6 +39,8 @@ class FacetPresenter
       Facet::ColourPresenter
     when facet_config.range
       Facet::RangePresenter
+    when facet_config.key == 'COLLECTION'
+      Facet::CollectionPresenter
     else
       Facet::SimplePresenter
     end
@@ -93,7 +95,7 @@ class FacetPresenter
       url: facet_item_url(item),
       text: facet_item_label(item.value),
       num_results: number_with_delimiter(item.hits),
-      is_checked: facet_in_params?(@facet.name, item)
+      is_checked: facet_in_params?(facet_name, item)
     }
   end
 
@@ -110,7 +112,7 @@ class FacetPresenter
       filter: facet_label,
       value: facet_item_label(item.value),
       remove: facet_item_url(item),
-      name: "f[#{@facet.name}][]"
+      name: "f[#{facet_name}][]"
     }
   end
 
@@ -123,7 +125,7 @@ class FacetPresenter
   # @param see {#facet_item}
   # @return [String] URL to add/remove the facet item from the search
   def facet_item_url(item)
-    if facet_in_params?(@facet.name, item)
+    if facet_in_params?(facet_name, item)
       search_action_url(remove_facet_params(item))
     else
       search_action_url(add_facet_params(item))
@@ -136,11 +138,11 @@ class FacetPresenter
   # @param see {#facet_item}
   # @return [Hash] Request parameters without the given facet item
   def remove_facet_params(item)
-    search_state.remove_facet_params(@facet.name, item)
+    search_state.remove_facet_params(facet_name, item)
   end
 
   def add_facet_params(item)
-    facet_params = search_state.add_facet_params_and_redirect(@facet.name, item)
+    facet_params = search_state.add_facet_params_and_redirect(facet_name, item)
     if @parent && facet_config.parent
       parent_facet = facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
       unless facet_in_params?(parent_facet, @parent)
@@ -156,7 +158,7 @@ class FacetPresenter
   #
   # @return [Blacklight::Configuration::FacetField]
   def facet_config
-    @facet_config ||= @blacklight_config.facet_fields[@facet.name]
+    @facet_config ||= @blacklight_config.facet_fields[facet_name]
   end
 
   ##
@@ -174,12 +176,14 @@ class FacetPresenter
   def split_items(options)
     unhidden_items = []
 
-    items = @facet.items.dup
+    items = ordered_items
     items = spliced(items) if facet_config.splice.present? && facet_config.parent.present?
     hidden_items = items
 
-    hidden_items.select { |item| facet_in_params?(@facet.name, item) }.each do |selected_item|
-      unhidden_items << hidden_items.delete(selected_item)
+    unless facet_config.single
+      hidden_items.select { |item| facet_in_params?(facet_name, item) }.each do |selected_item|
+        unhidden_items << hidden_items.delete(selected_item)
+      end
     end
     while (unhidden_items.size < options[:count]) && hidden_items.present?
       unhidden_items.push(hidden_items.shift)
@@ -188,6 +192,18 @@ class FacetPresenter
   end
 
   private
+
+  def ordered_items
+    facet_items.dup
+  end
+
+  def facet_items
+    @facet.items
+  end
+
+  def facet_name
+    @facet.name
+  end
 
   def spliced(items)
     items.select { |item| facet_config.splice.call(@parent, item) } if facet_config.splice.present?
