@@ -24,7 +24,7 @@ module Facet
       params[:controller] == 'collections' ? params[:id] : 'home'
     end
 
-    def ordered_items
+    def ordered(*)
       super.tap do |items|
         if home = items.detect { |item| facet_value_for_facet_item(item) == 'home' }
           items.unshift(items.delete(home))

@@ -7,14 +7,15 @@ module Facet
     #
     # @return [String]
     def facet_label
-      t('global.facet.header.' + @facet.name.downcase)
+      key = facet_config.i18n.present? ? facet_config.i18n : @facet.name.downcase
+      t(key, scope: 'global.facet.header')
     end
 
     def facet_item_label(facet_item)
       facet_item = facet_item.dup.gsub(/\s+/, '') if @facet.name == 'COUNTRY'
 
       mapped_value = case @facet.name.upcase
-                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR'
+                     when 'PROVIDER', 'DATA_PROVIDER', 'COLOURPALETTE', 'YEAR', 'CREATOR'
                        facet_item
                      when 'MIME_TYPE'
                        mime_type_facet_item_label(facet_item)

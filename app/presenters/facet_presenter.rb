@@ -91,9 +91,10 @@ class FacetPresenter
   #   search result facet item
   # @return [Hash] display data for the facet item
   def facet_item(item)
+    label = facet_config.item_label.present? ? facet_config.item_label.call(item) : facet_item_label(item.value)
     {
       url: facet_item_url(item),
-      text: facet_item_label(item.value),
+      text: label,
       num_results: number_with_delimiter(item.hits),
       is_checked: facet_in_params?(facet_name, item)
     }
@@ -176,9 +177,7 @@ class FacetPresenter
   def split_items(options)
     unhidden_items = []
 
-    items = ordered_items
-    items = spliced(items) if facet_config.splice.present? && facet_config.parent.present?
-    hidden_items = items
+    hidden_items = items_to_display
 
     unless facet_config.single
       hidden_items.select { |item| facet_in_params?(facet_name, item) }.each do |selected_item|
@@ -193,8 +192,20 @@ class FacetPresenter
 
   private
 
-  def ordered_items
-    facet_items.dup
+  def items_to_display
+    items = facet_items.dup
+    items = only(items) if facet_config.only
+    items = ordered(items)
+    items = spliced(items) if facet_config.splice.present? && facet_config.parent.present?
+    items
+  end
+
+  def only(items)
+    items.select { |item| facet_config.only.call(item) }
+  end
+
+  def ordered(items)
+    items
   end
 
   def facet_items
