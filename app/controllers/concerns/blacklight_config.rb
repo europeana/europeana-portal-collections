@@ -30,7 +30,7 @@ module BlacklightConfig
       # Number of items to show per page
       config.per_page = [12, 24, 36, 48, 72, 96]
       config.default_per_page = 12
-      config.max_per_page = 48
+      config.max_per_page = 96
 
       # Field configuration for search results/index views
       config.index.title_field = 'title'
