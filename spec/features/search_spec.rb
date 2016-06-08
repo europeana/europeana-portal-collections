@@ -33,7 +33,6 @@ RSpec.feature 'Search page' do
 
           sleep 2 if js
 
-          path_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
           expect(current_path).to eq('/search')
         end
 
@@ -43,6 +42,12 @@ RSpec.feature 'Search page' do
           sleep 3 if js
 
           fill_in('q', with: 'paris')
+
+          click_button('Search')
+
+          sleep 2 if js
+
+          fill_in('qf[]', with: '')
 
           click_button('Search')
 

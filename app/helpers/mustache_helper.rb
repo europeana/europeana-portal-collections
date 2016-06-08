@@ -476,7 +476,7 @@ module MustacheHelper
   def input_search_values(*keys)
     return [] if keys.blank?
     keys.map do |k|
-      [params[k]].flatten.compact.map do |v|
+      [params[k]].flatten.compact.reject(&:blank?).map do |v|
         {
           name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
           value: input_search_param_value(k, v),
@@ -521,7 +521,7 @@ module MustacheHelper
         },
         url: CGI.unescapeHTML(item.url),
         img: {
-          src: news_item_img_src(item),
+          src: feed_entry_img_src(item),
           alt: nil
         },
         excerpt: {
@@ -529,15 +529,6 @@ module MustacheHelper
         }
       }
     end
-  end
-
-  def news_item_img_src(item)
-    return nil unless item.content.present?
-    img_tag = item.content.match(/<img [^>]*>/i)[0]
-    return nil unless img_tag.present?
-    url = img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
-    mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
-    mo.nil? ? nil : mo.file.url(:medium)
   end
 
   def hero_config(hero_image)

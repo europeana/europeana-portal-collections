@@ -4,7 +4,7 @@ gem 'rails', '4.2.5.2'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'c911ef6'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '574dd9f'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -18,15 +18,16 @@ gem 'clockwork', '~> 1.2'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise', '~> 3.5.4'
-gem 'europeana-blacklight', '~> 0.4.3'
+gem 'europeana-blacklight', '~> 0.4.4'
 gem 'europeana-api', '~> 0.5.0'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
 gem 'htmlcompressor', '0.3'
+gem 'logging-rails', '~> 0.5', require: 'logging/rails'
 gem 'newrelic_rpm'
-gem 'nokogiri', '~> 1.6.7.2'
+gem 'nokogiri', '~> 1.6.8'
 gem 'ruby-oembed', '~> 0.9'
 gem 'pg'
 gem 'paperclip', '~> 4.3'
@@ -41,7 +42,7 @@ gem 'soundcloud', '~> 0.3'
 gem 'therubyracer'
 
 group :production do
-  gem 'rails_12factor', '~> 0.0.3'
+  gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end
 
@@ -54,7 +55,6 @@ end
 group :development do
   gem 'foreman'
   gem 'spring', '~> 1.6'
-#  gem 'web-console', '~> 3.0'
 end
 
 group :test do

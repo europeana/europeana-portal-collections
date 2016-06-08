@@ -8,7 +8,10 @@ module Cache
       },
       exhibitions: %i(de en).each_with_object({}) do |locale, hash|
         hash[locale] = (ENV['EXHIBITIONS_HOST'] || 'http://www.europeana.eu') + "/portal/#{locale}/exhibitions/feed.xml"
-      end
+      end,
+      tumblr: {
+        fashion: 'http://europeanafashion.tumblr.com/rss'
+      }
     }
 
     queue_as :default

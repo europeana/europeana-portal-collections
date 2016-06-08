@@ -10,10 +10,12 @@ module Cache
       end
 
       def feed_entry_img_src(entry)
-        return nil unless entry.content.present?
-        img_tag = entry.content.match(/<img [^>]*>/i)[0]
-        return nil unless img_tag.present?
-        img_tag.match(/src="(https?:\/\/[^"]*)"/i)[1]
+        [:summary, :content].each do |method|
+          next unless entry.send(method).present?
+          img_tag = entry.send(method).match(/<img [^>]*>/i)
+          next unless img_tag.present?
+          return img_tag[0].match(/src="(https?:\/\/[^"]*)"/i)[1]
+        end
       end
     end
   end
