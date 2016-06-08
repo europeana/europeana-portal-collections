@@ -81,15 +81,12 @@ class CollectionsController < ApplicationController
   ##
   # Gets from the cache the number of items of each media type within the current collection
   def collection_stats
-    # ['EDM value', 'i18n key']
-    types = [['IMAGE', 'images'], ['TEXT', 'texts'], ['VIDEO', 'moving-images'],
-             ['3D', '3d'], ['SOUND', 'sound']]
-    collection_stats = types.map do |type|
-      type_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}/type/#{type[0].downcase}")
+    collection_stats = EDM::Type.registry.map do |type|
+      type_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}/type/#{type.id.downcase}")
       {
         count: type_count,
-        text: t(type[1], scope: 'site.collections.data-types'),
-        url: collection_path(q: "TYPE:#{type[0]}")
+        text: type.label,
+        url: collection_path(q: "TYPE:#{type.id}")
       }
     end
     collection_stats.reject! { |stats| stats[:count] == 0 }

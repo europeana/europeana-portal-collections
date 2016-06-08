@@ -1,0 +1,15 @@
+---
+3D:
+
+IMAGE:
+  i18n: images
+SOUND:
+  icon: music
+TEXT:
+  i18n: texts
+  icon: book
+VIDEO:
+  i18n: moving-images
+  icon: tv
+3D:
+
