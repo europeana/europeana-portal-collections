@@ -1,16 +1,6 @@
 module EDM
-  class Rights < OpenStruct
+  class Rights < Base
     class << self
-      attr_reader :registry
-
-      def load(rights)
-        @registry = begin
-          rights.map do |id, attrs|
-            new({ id: id.to_sym }.merge(attrs))
-          end
-        end
-      end
-
       def normalise(string)
         return nil unless string.is_a?(String)
         registry.detect { |rights| string.match(rights.pattern) }
