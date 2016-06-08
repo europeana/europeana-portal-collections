@@ -33,15 +33,17 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
 
     begin
       rights = EDM::Rights.normalise(media_rights)
-      license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase.tr('_', '-')
+      license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase
 
-      {
+      output = {
         license_human: t(rights.reusability, scope: 'global.facet.reusability'),
         license_name: rights.label,
         license_url: media_rights,
         :"license_#{license_flag_key}" => true,
         expiry: rights_label_expiry(rights)
       }
+      Rails.logger.debug(output.inspect.red.bold)
+      output
     rescue EDM::Rights::UnknownRights
       {
         license_public: false,
