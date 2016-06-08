@@ -101,7 +101,7 @@ module Collections
     def browse_menu_type_item(type)
       {
         text: type.label,
-        url: collection_path(q: "TYPE:#{type.id}"),
+        url: collection_path(@collection, q: "TYPE:#{type.id}"),
         icon: "icon-#{type.icon}"
       }
     end
