@@ -3,7 +3,10 @@ module Facet
     extend ActiveSupport::Concern
 
     included do
-      label_facet 'COLLECTION', items: { titleize: true, i18n: true }
+      label_facet 'COLLECTION',
+                  items: {
+                    titleize: true, i18n: 'global.channel'
+                  }
       label_facet 'TYPE', items: { titleize: true, i18n: true }
       label_facet 'IMAGE_COLOUR', items: { titleize: true, i18n: true }
       label_facet 'IMAGE_ASPECTRATIO', items: { titleize: true, i18n: true }
@@ -28,7 +31,12 @@ module Facet
                     }
                   }
       label_facet 'MEDIA', items: { titleize: true, i18n: true }
-      label_facet 'REUSABILITY', items: { titleize: true, i18n: true }
+      label_facet 'REUSABILITY',
+                  collapsible: {
+                    show: 'global.facet.license.show-specific',
+                    hide: 'global.facet.license.hide-specific'
+                  },
+                  items: { titleize: true, i18n: true }
       label_facet 'RIGHTS', title: nil,
                   items: {
                     with: lambda { |item|
@@ -88,7 +96,8 @@ module Facet
       end
 
       if labeller[:items] && labeller[:items][:i18n]
-        value = t(value.downcase, scope: "global.facet.#{facet_name.downcase}")
+        scope = labeller[:items][:i18n].is_a?(String) ? labeller[:items][:i18n] : "global.facet.#{facet_name.downcase}"
+        value = t(value.downcase, scope: scope)
       end
 
       if labeller[:items] && labeller[:items][:titleize]

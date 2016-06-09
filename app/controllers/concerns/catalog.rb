@@ -73,6 +73,7 @@ module Catalog
     items = displayable_collections.map do |collection|
       Europeana::Blacklight::Response::Facets::FacetItem.new(value: collection.key)
     end
+    items.unshift(Europeana::Blacklight::Response::Facets::FacetItem.new(value: 'all'))
     field = Europeana::Blacklight::Response::Facets::FacetField.new('COLLECTION', items)
     response.aggregations[field.name] = field
   end
