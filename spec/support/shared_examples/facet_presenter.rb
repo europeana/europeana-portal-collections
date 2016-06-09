@@ -133,10 +133,10 @@ end
 shared_examples 'a labeller of facets' do
   describe '#facet_label' do
     subject { presenter.facet_label }
-    it 'returns a translated label for the facet' do
-      I18n.backend.store_translations(:en, global: { facet: { header: { field_name.downcase => 'field title' } } })
-      expect(subject).to eq('field title')
-    end
+#     it 'returns a translated label for the facet' do
+#       I18n.backend.store_translations(:en, global: { facet: { header: { field_name.downcase => 'field title' } } })
+#       expect(subject).to eq('field title')
+#     end
   end
 
   describe '#facet_item_label' do
