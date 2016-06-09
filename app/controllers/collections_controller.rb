@@ -43,15 +43,25 @@ class CollectionsController < ApplicationController
   #
   # @todo Move this somewhere else
   def blacklight_config
-    return super # hotfix for failed queries with this enabled on production
-
-    @collection_blacklight_configs ||= {}
-    @collection_blacklight_configs[@collection.key] ||= begin
-      super.deep_dup.tap do |config|
-        if @collection.key == 'music'
-          config.add_facet_field 'cc_skos_prefLabel.en'
-          config.add_facet_field 'skos_concept'
-        end
+    @blacklight_config ||= super.tap do |config|
+      case @collection.key
+      # when 'music'
+      #   config.add_facet_field 'cc_skos_prefLabel.en'
+      #   config.add_facet_field 'skos_concept'
+      when 'fashion'
+        config.add_facet_field 'CREATOR',
+                               limit: 100,
+                               only: lambda { |item| item.value.end_with?(' (Designer)') }
+        config.add_facet_field 'proxy_dc_format.en',
+                               limit: 100,
+                               only: lambda { |item| item.value.start_with?('Technique: ') }
+        config.add_facet_field 'cc_skos_prefLabel.en'
+#         config.add_facet_field key: 'colour',
+#                                field: 'proxy_dc_format.en',
+#                                limit: 100,
+#                                only: lambda { |item| item.value =~ /\AColor: / },
+#                                item_label: lambda { |item| item.value.sub(/\AColor: /, '').titleize },
+#                                i18n: 'colour'
       end
     end
   end

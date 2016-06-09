@@ -7,7 +7,7 @@ module Facet
     def add_facet_params(item)
       value = facet_value_for_facet_item(item)
 
-      if value == 'home'
+      if value == 'all'
         params.except(:id).merge(controller: :portal, action: :index)
       else
         params.merge(controller: :collections, action: :show, id: value)
@@ -21,13 +21,13 @@ module Facet
     end
 
     def facet_params(_field)
-      params[:controller] == 'collections' ? params[:id] : 'home'
+      params[:controller] == 'collections' ? params[:id] : 'all'
     end
 
-    def ordered_items
+    def ordered(*)
       super.tap do |items|
-        if home = items.detect { |item| facet_value_for_facet_item(item) == 'home' }
-          items.unshift(items.delete(home))
+        if all = items.detect { |item| facet_value_for_facet_item(item) == 'all' }
+          items.unshift(items.delete(all))
         end
       end
     end

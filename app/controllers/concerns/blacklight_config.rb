@@ -63,22 +63,18 @@ module BlacklightConfig
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'YEAR', range: true if ENV['FACET_YEAR_FIELD']
-      config.add_facet_field 'REUSABILITY',
-                              hierarchical: true,
-                              collapsible: {
-                                show: I18n.t('global.facet.license.show-specific'),
-                                hide: I18n.t('global.facet.license.hide-specific')
-                              }
+      config.add_facet_field 'REUSABILITY', hierarchical: true
       config.add_facet_field 'RIGHTS',
-                              hierarchical: true, parent: 'REUSABILITY', title: nil,
-                              splice: lambda { |parent, child|
-                                rights = EDM::Rights.normalise(child.value)
-                                rights.present? ? (parent.value == rights.reusability.to_s) : nil
-                              },
-                              group: lambda { |item|
-                                rights = EDM::Rights.normalise(item.value)
-                                rights.present? ? rights.api_query : nil
-                              }
+                             hierarchical: true,
+                             parent: 'REUSABILITY',
+                             splice: lambda { |parent, child|
+                               rights = EDM::Rights.normalise(child.value)
+                               rights.present? ? (parent.value == rights.reusability.to_s) : nil
+                             },
+                             group: lambda { |item|
+                               rights = EDM::Rights.normalise(item.value)
+                               rights.present? ? rights.api_query : nil
+                             }
       config.add_facet_field 'COUNTRY', limit: 50
       config.add_facet_field 'LANGUAGE', limit: 50
       config.add_facet_field 'PROVIDER', limit: 50

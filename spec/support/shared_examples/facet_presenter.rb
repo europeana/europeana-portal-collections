@@ -178,12 +178,12 @@ shared_examples 'a labeller of facets' do
       end
     end
 
-    context 'when field is translatable' do
-      let(:facet_item) { 'ONE FACET VALUE' }
-      it 'looks up a translatation' do
-        I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { facet_item.downcase => 'item title' } } })
-        expect(subject).to match(/\Aitem title\z/i)
-      end
-    end
+#     context 'when field is translatable' do
+#       let(:facet_item) { 'ONE FACET VALUE' }
+#       it 'looks up a translatation' do
+#         I18n.backend.store_translations(:en, global: { facet: { field_name.downcase => { facet_item.downcase => 'item title' } } })
+#         expect(subject).to match(/\Aitem title\z/i)
+#       end
+#     end
   end
 end

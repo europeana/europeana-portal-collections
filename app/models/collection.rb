@@ -29,7 +29,7 @@ class Collection < ActiveRecord::Base
   end
 
   def landing_page_slug
-    key == 'home' ? '' : "collections/#{key}"
+    "collections/#{key}"
   end
 
   def touch_landing_page
