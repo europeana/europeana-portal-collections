@@ -37,7 +37,8 @@ module Facet
                     hide: 'global.facet.license.hide-specific'
                   },
                   items: { titleize: true, i18n: true }
-      label_facet 'RIGHTS', title: nil,
+      label_facet 'RIGHTS',
+                  title: nil,
                   items: {
                     with: lambda do |item|
                       EDM::Rights.registry.detect { |rights| rights.api_query == item }.label
