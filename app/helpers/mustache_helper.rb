@@ -178,15 +178,12 @@ module MustacheHelper
 
   def collection_data
     mustache[:collection_data] ||= begin
-      name = nil
-      if !(params[:controller] == 'portal' && params[:action] == 'show')
-        name = params[:id] ? params[:id] : nil
-      end
-      if !name.nil?
+      if within_collection?
+        collection = current_collection
         {
-          name: name,
-          label: t("site.collections.#{name}.title"),
-          url: name ? collection_url(name) : nil
+          name: collection.key,
+          label: collection.landing_page.title,
+          url: collection_url(collection)
         }
       end
     end
