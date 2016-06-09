@@ -5,7 +5,7 @@
 # [Europeana's styleguide](https://github.com/europeana/europeana-styleguide-ruby)
 # to display search result facet data.
 class FacetPresenter
-  include Facet::Labels
+  include Facet::Labelling
   include FacetsHelper
   include UrlHelper
   include ActionView::Helpers::NumberHelper

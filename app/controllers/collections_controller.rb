@@ -51,14 +51,11 @@ class CollectionsController < ApplicationController
       when 'fashion'
         config.add_facet_field 'CREATOR',
                                limit: 100,
-                               only: lambda { |item| item.value =~ / \(Designer\)\z/ },
-                               item_label: lambda { |item| item.value.sub(/ \(Designer\)\z/, '') },
-                               i18n: 'designer'
+                               only: lambda { |item| item.value =~ / \(Designer\)\z/ }
         config.add_facet_field 'proxy_dc_format.en',
                                limit: 100,
-                               only: lambda { |item| item.value =~ /\ATechnique: / },
-                               item_label: lambda { |item| item.value.sub(/\ATechnique: /, '').titleize },
-                               i18n: 'technique'
+                               only: lambda { |item| item.value =~ /\ATechnique: / }
+        config.add_facet_field 'cc_skos_prefLabel.en'
 #         config.add_facet_field key: 'colour',
 #                                field: 'proxy_dc_format.en',
 #                                limit: 100,

@@ -70,7 +70,7 @@ module BlacklightConfig
                                 hide: I18n.t('global.facet.license.hide-specific')
                               }
       config.add_facet_field 'RIGHTS',
-                              hierarchical: true, parent: 'REUSABILITY', title: nil,
+                              hierarchical: true, parent: 'REUSABILITY',
                               splice: lambda { |parent, child|
                                 rights = EDM::Rights.normalise(child.value)
                                 rights.present? ? (parent.value == rights.reusability.to_s) : nil
