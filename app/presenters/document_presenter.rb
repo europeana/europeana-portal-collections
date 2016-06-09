@@ -33,7 +33,7 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
 
     begin
       rights = EDM::Rights.normalise(media_rights)
-      license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase.tr('_', '-')
+      license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase
 
       {
         license_human: t(rights.reusability, scope: 'global.facet.reusability'),

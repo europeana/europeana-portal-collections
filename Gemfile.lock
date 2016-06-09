@@ -596,6 +596,7 @@ DEPENDENCIES
   rails_serve_static_assets
   redis-rails (~> 4.0)
   redis-rails-instrumentation
+  rest-client (~> 1.8.0)
   rspec-rails (~> 3.0)
   rubocop (= 0.35.1)
   ruby-oembed (~> 0.9)
