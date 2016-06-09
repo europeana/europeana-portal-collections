@@ -42,7 +42,7 @@ module CollectionsHelper
 
   def collection_tumblr_feed_content(collection, options = {})
     page = options[:page] || 1
-    per_page = options[:per_page] || 6
+    per_page = options[:per_page] || 12
 
     key = collection.key.underscore.to_sym
     url = Cache::FeedJob::URLS[:tumblr][key]
@@ -53,7 +53,7 @@ module CollectionsHelper
 
     {
       title: feed.title,
-      more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json, per_page: per_page, page: paginated_items.next_page),
+      more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json),
       more_items_total: paginated_items.total_count,
       items: paginated_items.map do |item|
         {
