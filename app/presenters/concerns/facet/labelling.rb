@@ -18,7 +18,7 @@ module Facet
       label_facet 'VIDEO_HD', items: { titleize: true, i18n: true }
       label_facet 'MIME_TYPE',
                   items: {
-                    with: lambda { |item|
+                    with: lambda do |item|
                       case item
                       when 'text/plain'
                         'TXT'
@@ -28,7 +28,7 @@ module Facet
                         subtype = item.split('/')[1] || ''
                         subtype.split('-').last.upcase
                       end
-                    }
+                    end
                   }
       label_facet 'MEDIA', items: { titleize: true, i18n: true }
       label_facet 'REUSABILITY',
@@ -39,9 +39,9 @@ module Facet
                   items: { titleize: true, i18n: true }
       label_facet 'RIGHTS', title: nil,
                   items: {
-                    with: lambda { |item|
+                    with: lambda do |item|
                       EDM::Rights.registry.detect { |rights| rights.api_query == item }.label
-                    }
+                    end
                   }
       label_facet 'COUNTRY',
                   items: {
@@ -59,6 +59,9 @@ module Facet
                   items: {
                     with: lambda { |item| item.sub(/\ATechnique: /, '').titleize }
                   }
+      label_facet 'cc_skos_prefLabel.en',
+                  i18n: 'item_type',
+                  items: { titleize: true }
     end
 
     class_methods do
