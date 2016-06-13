@@ -94,7 +94,7 @@ module BlacklightConfig
                              limit: 100,
                              only: lambda { |item| item.value.start_with?('Technique: ') }
       config.add_facet_field 'cc_skos_prefLabel.en',
-                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' }
       config.add_facet_field 'colour',
                              when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
                              aliases: 'proxy_dc_format.en',
