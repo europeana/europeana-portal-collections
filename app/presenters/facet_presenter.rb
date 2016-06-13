@@ -41,6 +41,8 @@ class FacetPresenter
       Facet::RangePresenter
     when facet_config.key == 'COLLECTION'
       Facet::CollectionPresenter
+    when facet_config.aliases
+      Facet::AliasPresenter
     else
       Facet::SimplePresenter
     end
@@ -70,7 +72,8 @@ class FacetPresenter
   # @return [Hash] display data for the facet
   def display(options = {})
     options = options.reverse_merge(count: 5)
-    unhidden_items, hidden_items = split_items(options)
+
+    unhidden_items, hidden_items = items_to_display(options)
     {
       title: facet_config.respond_to?(:title) ? facet_config.title : facet_label,
       select_one: facet_config.single,
@@ -162,6 +165,16 @@ class FacetPresenter
     @facet_config ||= @blacklight_config.facet_fields[facet_name]
   end
 
+  private
+
+  def items_to_display(options = {})
+    items = facet_items.dup
+    items = only(items) if facet_config.only
+    items = ordered(items)
+    items = spliced(items) if facet_config.splice.present? && facet_config.parent.present?
+    items = split_items(items, options)
+  end
+
   ##
   # Splits the facet's items into two sets, one to be shown, the other hidden
   #
@@ -174,10 +187,9 @@ class FacetPresenter
   # All other items will be in the hidden set.
   #
   # @return [Array<Array>] Two arrays of facet items, first to show, last to hide
-  def split_items(options)
+  def split_items(items, options)
     unhidden_items = []
-
-    hidden_items = items_to_display
+    hidden_items = items
 
     unless facet_config.single
       hidden_items.select { |item| facet_in_params?(facet_name, item) }.each do |selected_item|
@@ -188,16 +200,6 @@ class FacetPresenter
       unhidden_items.push(hidden_items.shift)
     end
     [unhidden_items, hidden_items]
-  end
-
-  private
-
-  def items_to_display
-    items = facet_items.dup
-    items = only(items) if facet_config.only
-    items = ordered(items)
-    items = spliced(items) if facet_config.splice.present? && facet_config.parent.present?
-    items
   end
 
   def only(items)

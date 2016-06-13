@@ -1,0 +1,22 @@
+module FacetsHelper
+  include Blacklight::FacetsHelperBehavior
+
+  ##
+  # Overriding Blacklight's to account for our "aliased" fields
+  def facet_by_field_name(field_or_field_name)
+    case field_or_field_name
+    when String, Symbol, Blacklight::Configuration::FacetField
+      facet_field = facet_configuration_for_field(field_or_field_name)
+      if facet_field.aliases.present?
+        aliased = @response.aggregations[facet_field.aliases]
+        aggregation = aliased.class.new(facet_field.key, aliased.items)
+        aggregation
+      else
+        @response.aggregations[facet_field.key]
+      end
+    else
+      # is this really a useful case?
+      field_or_field_name
+    end
+  end
+end

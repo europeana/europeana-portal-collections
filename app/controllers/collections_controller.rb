@@ -56,12 +56,10 @@ class CollectionsController < ApplicationController
                                limit: 100,
                                only: lambda { |item| item.value.start_with?('Technique: ') }
         config.add_facet_field 'cc_skos_prefLabel.en'
-#         config.add_facet_field key: 'colour',
-#                                field: 'proxy_dc_format.en',
-#                                limit: 100,
-#                                only: lambda { |item| item.value =~ /\AColor: / },
-#                                item_label: lambda { |item| item.value.sub(/\AColor: /, '').titleize },
-#                                i18n: 'colour'
+        config.add_facet_field 'colour',
+                               aliases: 'proxy_dc_format.en',
+                               only: lambda { |item| item.value.start_with?('Color: ') },
+                               include_in_request: false
       end
     end
   end
