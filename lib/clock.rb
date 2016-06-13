@@ -5,16 +5,10 @@ require 'clockwork'
 include Clockwork
 
 unless ENV['DISABLE_SCHEDULED_JOBS']
-  every(1.day, 'cache.feed.blog.home', at: ENV['SCHEDULE_BLOG_HOME']) do
-    Cache::Feed::BlogJob.perform_later(Cache::FeedJob::URLS[:blog][:all])
-  end
-
-  every(1.day, 'cache.feed.blog.art-history', at: ENV['SCHEDULE_BLOG_ART_HISTORY']) do
-    Cache::Feed::BlogJob.perform_later(Cache::FeedJob::URLS[:blog][:art_history])
-  end
-
-  every(1.day, 'cache.feed.blog.music', at: ENV['SCHEDULE_BLOG_MUSIC']) do
-    Cache::Feed::BlogJob.perform_later(Cache::FeedJob::URLS[:blog][:music])
+  every(1.day, 'cache.feed.blogs', at: ENV['SCHEDULE_FEED_BLOGS']) do
+    Cache::FeedJob::URLS[:blog].values.each do |url|
+      Cache::Feed::BlogJob.perform_later(url)
+    end
   end
 
   every(1.day, 'cache.feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
