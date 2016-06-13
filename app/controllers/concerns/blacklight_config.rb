@@ -11,6 +11,16 @@ module BlacklightConfig
   extend ActiveSupport::Concern
   include ::Blacklight::Base
 
+  def blacklight_config
+    @blacklight_config ||= super.tap do |config|
+      config.facet_fields.each_pair do |key, field|
+        if field.when && ! field.when.call(self)
+          config.facet_fields.delete(key)
+        end
+      end
+    end
+  end
+
   included do
     def self.collections_query_facet
       collections = Rails.application.config.x.collections.dup
@@ -75,6 +85,21 @@ module BlacklightConfig
                                rights = EDM::Rights.normalise(item.value)
                                rights.present? ? rights.api_query : nil
                              }
+      config.add_facet_field 'CREATOR',
+                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             limit: 100,
+                             only: lambda { |item| item.value.end_with?(' (Designer)') }
+      config.add_facet_field 'proxy_dc_format.en',
+                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             limit: 100,
+                             only: lambda { |item| item.value.start_with?('Technique: ') }
+      config.add_facet_field 'cc_skos_prefLabel.en',
+                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+      config.add_facet_field 'colour',
+                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             aliases: 'proxy_dc_format.en',
+                             only: lambda { |item| item.value.start_with?('Color: ') },
+                             include_in_request: false
       config.add_facet_field 'COUNTRY', limit: 50
       config.add_facet_field 'LANGUAGE', limit: 50
       config.add_facet_field 'PROVIDER', limit: 50
