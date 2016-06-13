@@ -5,20 +5,24 @@ module BrowsableView
     {
       menu_id: 'browse-menu',
       style_modifier: 'caret-right',
-      items: [
-        {
-          url: '#',
-          text: t('site.search.browse'),
-          text_mobile: t('site.search.or-browse'),
-          submenu: {
-            items: EDM::Type.registry.map { |type| browse_menu_type_item(type) }
-          }
-        }
-      ]
+      items: browse_menu_items
     }
   end
 
   private
+
+  def browse_menu_items
+    [
+      {
+        url: '#',
+        text: t('site.search.browse'),
+        text_mobile: t('site.search.or-browse'),
+        submenu: {
+          items: EDM::Type.registry.map { |type| browse_menu_type_item(type) }
+        }
+      }
+    ]
+  end
 
   def browse_menu_type_item(type)
     {
