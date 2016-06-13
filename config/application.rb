@@ -29,6 +29,7 @@ module Europeana
         #{config.root}/app/presenters
         #{config.root}/app/presenters/concerns
         #{config.root}/app/validators
+        #{config.root}/app/views/concerns
       )
 
       # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.

@@ -1,5 +1,7 @@
 module Collections
   class Show < ApplicationView
+    include BrowsableView
+
     def head_meta
       mustache[:head_meta] ||= begin
         title = page_title
@@ -79,32 +81,7 @@ module Collections
       end
     end
 
-    def browse_menu
-      {
-        menu_id: 'browse-menu',
-        style_modifier: 'caret-right',
-        items: [
-          {
-            url: '#',
-            text: t('site.search.browse'),
-            text_mobile: t('site.search.or-browse'),
-            submenu: {
-              items: EDM::Type.registry.map { |type| browse_menu_type_item(type) }
-            }
-          }
-        ]
-      }
-    end
-
     private
-
-    def browse_menu_type_item(type)
-      {
-        text: type.label,
-        url: collection_path(@collection, q: "TYPE:#{type.id}"),
-        icon: "icon-#{type.icon}"
-      }
-    end
 
     def strapline
       @landing_page.strapline.present? ? @landing_page.strapline(total_item_count: number_with_delimiter(@total_item_count)) : nil
