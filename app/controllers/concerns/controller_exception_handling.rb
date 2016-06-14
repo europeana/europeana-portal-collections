@@ -45,7 +45,6 @@ module ControllerExceptionHandling
     status = 500 if self.class.to_s.deconstantize == 'RailsAdmin' && status != 403
 
     log_error(exception)
-    report_error(exception) if status == 500
 
     if ENV['DISABLE_CMS_ERROR_PAGES']
       raise
