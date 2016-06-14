@@ -14,7 +14,7 @@ module BlacklightConfig
   def blacklight_config
     @blacklight_config ||= super.tap do |config|
       config.facet_fields.each_pair do |key, field|
-        if field.when && ! field.when.call(self)
+        if field.when && !field.when.call(self)
           config.facet_fields.delete(key)
         end
       end
