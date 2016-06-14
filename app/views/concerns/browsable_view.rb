@@ -12,13 +12,15 @@ module BrowsableView
   private
 
   def browse_menu_items
+    items = EDM::Type.registry.map { |type| browse_menu_type_item(type) }
+    items << {'text': t('site.collections.data-types.all'), 'url': collection_url(@collection.key) + '?q=', 'icon': 'icon-ellipsis'}
     [
       {
         url: '#',
         text: t('site.search.browse'),
         text_mobile: t('site.search.or-browse'),
         submenu: {
-          items: EDM::Type.registry.map { |type| browse_menu_type_item(type) }
+          items: items
         }
       }
     ]
