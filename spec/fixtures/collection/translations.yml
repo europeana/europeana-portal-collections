@@ -1,0 +1,19 @@
+music_translations:
+  locale: en
+  title: 'Music'
+  globalized_model: music
+
+all_translations:
+  locale: en
+  title: 'All of Europeana'
+  globalized_model: all
+
+art_translations:
+  locale: en
+  title: 'Art'
+  globalized_model: art
+
+draft_translations:
+  locale: en
+  title: 'Draft'
+  globalized_model: draft

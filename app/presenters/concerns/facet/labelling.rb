@@ -5,7 +5,7 @@ module Facet
     included do
       label_facet 'COLLECTION',
                   items: {
-                    titleize: true, i18n: 'global.channel'
+                    with: lambda { |item| Collection.find_by_key(item).title }
                   }
       label_facet 'TYPE', items: { titleize: true, i18n: true }
       label_facet 'IMAGE_COLOUR', items: { titleize: true, i18n: true }

@@ -849,7 +849,7 @@ module Portal
       referer = request.referer
       return unless referer.present?
 
-      search_urls = [search_url] + Collection.published.map { |c| collection_url(c) }
+      search_urls = [search_url] + displayable_collections.map { |c| collection_url(c) }
       if search_urls.any? { |u| referer.match "^#{u}(\\?|$)" }
         return referer
       end

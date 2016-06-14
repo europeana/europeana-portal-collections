@@ -25,7 +25,7 @@ module Collections
 
     def page_title
       mustache[:page_title] ||= begin
-        (@landing_page.title || @collection.key) + ' Collection'
+        @landing_page.title || @collection.title
       end
     end
 
@@ -70,8 +70,8 @@ module Collections
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
           },
-          news: blog_news_items.blank? ? nil : {
-            items: blog_news_items,
+          news: blog_news_items(@collection).blank? ? nil : {
+            items: blog_news_items(@collection),
             blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links,
@@ -105,14 +105,6 @@ module Collections
         pinterest: detect_link_in_array(@landing_page.social_media, 'pinterest.com'),
         googleplus: detect_link_in_array(@landing_page.social_media, 'plus.google.com')
       }
-    end
-
-    def blog_news_items
-      @blog_news_items ||= begin
-        key = @collection.key.underscore.to_sym
-        url = Cache::FeedJob::URLS[:blog][key]
-        news_items(feed_entries(url))
-      end
     end
 
     def stylised_collection_stats

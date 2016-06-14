@@ -23,8 +23,8 @@ module Home
           hero_config: hero_config(@landing_page.hero_image),
           strapline: @landing_page.strapline(total_item_count: total_item_count),
           promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
-          news: blog_news_items.blank? ? nil : {
-            items: blog_news_items,
+          news: blog_news_items(@collection).blank? ? nil : {
+            items: blog_news_items(@collection),
             blogurl: Cache::FeedJob::URLS[:blog][:all].sub('/feed', '')
           },
           banner: banner_content(@landing_page.banner_id)
@@ -57,10 +57,6 @@ module Home
 
     def body_cache_key
       @landing_page.cache_key
-    end
-
-    def blog_news_items
-      @blog_news_items ||= news_items(feed_entries(Cache::FeedJob::URLS[:blog][:all]))
     end
   end
 end
