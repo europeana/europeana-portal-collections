@@ -58,11 +58,17 @@ module Facet
       label_facet 'proxy_dc_format.en',
                   i18n: 'technique',
                   items: {
-                    with: lambda { |item| item.sub(/\ATechnique: /, '').titleize }
+                    with: lambda { |item| item.sub(/\ATechnique: /, '') },
+                    titleize: true
                   }
       label_facet 'cc_skos_prefLabel.en',
                   i18n: 'item_type',
                   items: { titleize: true }
+      label_facet 'colour',
+                  items: {
+                    with: lambda { |item| item.sub(/\AColor: /, '') },
+                    titleize: true
+                  }
     end
 
     class_methods do
