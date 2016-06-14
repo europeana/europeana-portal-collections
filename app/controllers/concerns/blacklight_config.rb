@@ -32,6 +32,7 @@ module BlacklightConfig
     configure_blacklight do |config|
       # Response models
       config.document_presenter_class = Document::RecordPresenter
+      config.search_builder_class = SearchBuilder
 
       # Europeana API caching
       # config.europeana_api_cache = Rails.cache
@@ -98,8 +99,7 @@ module BlacklightConfig
       config.add_facet_field 'colour',
                              when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
                              aliases: 'proxy_dc_format.en',
-                             only: lambda { |item| item.value.start_with?('Color: ') },
-                             include_in_request: false
+                             only: lambda { |item| item.value.start_with?('Color: ') }
       config.add_facet_field 'COUNTRY', limit: 50
       config.add_facet_field 'LANGUAGE', limit: 50
       config.add_facet_field 'PROVIDER', limit: 50

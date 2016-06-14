@@ -48,7 +48,7 @@ module Catalog
 
   # Overrides {Blacklight::SearchHelper} method to detect Collections searches
   def get_previous_and_next_documents_for_search(*_args)
-    fail "Do not Blacklight's search tracking."
+    fail "Do not use Blacklight's search tracking."
   end
 
   protected

@@ -11,6 +11,8 @@ class FacetPresenter
   include ActionView::Helpers::NumberHelper
   delegate :t, to: I18n
 
+  attr_writer :facet_name
+
   ##
   # Factory to create an instance of the right presenter for a given facet field
   #
@@ -94,10 +96,9 @@ class FacetPresenter
   #   search result facet item
   # @return [Hash] display data for the facet item
   def facet_item(item)
-    label = facet_config.item_label.present? ? facet_config.item_label.call(item) : facet_item_label(item.value)
     {
       url: facet_item_url(item),
-      text: label,
+      text: facet_item_label(item.value),
       num_results: number_with_delimiter(item.hits),
       is_checked: facet_in_params?(facet_name, item)
     }
@@ -215,7 +216,7 @@ class FacetPresenter
   end
 
   def facet_name
-    @facet.name
+    @facet_name ||= @facet.name
   end
 
   def spliced(items)

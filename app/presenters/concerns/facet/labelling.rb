@@ -66,7 +66,7 @@ module Facet
                   items: { titleize: true }
       label_facet 'colour',
                   items: {
-                    with: lambda { |item| item.value.sub(/\AColor: /, '') },
+                    with: lambda { |item| item.sub(/\AColor: /, '') },
                     titleize: true
                   }
     end
