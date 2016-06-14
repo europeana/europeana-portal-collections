@@ -36,7 +36,7 @@ module CollectionsHelper
   # @return [Array<Collection>]
   def displayable_collections
     @displayable_collections ||= Collection.published.select do |c|
-      c.key.present? && c.landing_page.present? && c.landing_page.published?
+      (c.key != 'all') && c.landing_page.present? && c.landing_page.published?
     end
   end
 
