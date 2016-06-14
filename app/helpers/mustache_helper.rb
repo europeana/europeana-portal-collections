@@ -217,7 +217,7 @@ module MustacheHelper
                   items: displayable_collections.map do |collection|
                     {
                       url: collection_path(collection),
-                      text: collection.landing_page.title,
+                      text: collection.title,
                       is_current: current_page?(collection_path(collection))
                     }
                   end
@@ -577,5 +577,14 @@ module MustacheHelper
 
   def exhibitions_feed_key
     Cache::FeedJob::URLS[:exhibitions].key?(I18n.locale) ? I18n.locale : :en
+  end
+
+  def blog_news_items(collection)
+    mustache[:blog_news_items] ||= {}
+    mustache[:blog_news_items][collection.key] ||= begin
+      key = collection.key.underscore.to_sym
+      url = Cache::FeedJob::URLS[:blog][key]
+      news_items(feed_entries(url))
+    end
   end
 end

@@ -36,7 +36,7 @@ module CollectionsHelper
   # @return [Array<Collection>]
   def displayable_collections
     @displayable_collections ||= Collection.published.select do |c|
-      c.landing_page.present? && c.landing_page.published?
+      c.key.present? && c.landing_page.present? && c.landing_page.published?
     end
   end
 
@@ -52,7 +52,7 @@ module CollectionsHelper
     paginated_items = Kaminari.paginate_array(feed.entries).page(page).per(per_page)
 
     {
-      title: feed.title,
+      title: 'Tumblr',
       more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json),
       more_items_total: paginated_items.total_count,
       items: paginated_items.map do |item|

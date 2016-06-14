@@ -25,6 +25,7 @@ unless Page::Landing.find_by_slug('collections/art-history').present?
       slug: 'collections/art-history',
       title: 'Europeana Art History',
       body: 'From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]',
+      strapline: 'Explore %{total_item_count} artworks, artefacts, books, videos and sounds from across Europe.',
       credits: [
         Link::Credit.new(url: 'http://www.smk.dk/', text: 'National Gallery of Denmark', position: 1),
         Link::Credit.new(url: 'https://www.rijksmuseum.nl/', text: 'Rijksmuseum', position: 2)
@@ -125,6 +126,7 @@ unless Page::Landing.find_by_slug('').present?
     home_landing = Page::Landing.create!(
       slug: '',
       title: 'Home',
+      strapline: 'Explore %{total_item_count} artworks, artefacts, books, videos and sounds from across Europe.',
       hero_image: home_hero,
       promotions: [
         Link::Promotion.new(
@@ -188,6 +190,7 @@ unless Page::Landing.find_by_slug('collections/music').present?
     music_landing = Page::Landing.create!(
       slug: 'collections/music',
       title: 'Europeana Music',
+      strapline: 'Explore %{total_item_count} artworks, artefacts, books, videos and sounds from across Europe.',
       body: 'The <strong>Europeana Music Collection</strong> brings together the best music recordings, sheet music, and other music related collections from Europe\'s audio-visual archives, libraries, archives and museums. <a href="/portal/collections/music/about">Find out more about the Music Collection.</a>',
       hero_image: music_hero,
       credits: [

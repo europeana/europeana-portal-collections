@@ -15,7 +15,7 @@ class HomeController < ApplicationController
   protected
 
   def find_collection
-    Collection.find_or_initialize_by(key: 'home').tap do |collection|
+    Collection.find_or_initialize_by(key: 'all').tap do |collection|
       authorize! :show, collection
     end
   end

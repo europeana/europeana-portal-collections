@@ -7,9 +7,9 @@ RSpec.describe 'home/index.html.mustache', :page_with_top_nav do
     end
   end
 
-  let(:landing_page) { Page::Landing.find_by_slug('') }
+  let(:landing_page) { pages(:home) }
 
-  let(:collection) { Collection.find_by_key('home') }
+  let(:collection) { collections(:all) }
 
   before(:each) do
     allow(controller).to receive(:blacklight_config).and_return(blacklight_config)

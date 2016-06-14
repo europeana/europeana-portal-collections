@@ -98,15 +98,18 @@ RailsAdmin.config do |config|
     list do
       sort_by :key
       field :key
+      field :title
       field :state
     end
     show do
       field :key
+      field :title
       field :state
       field :api_params
     end
     edit do
       field :key
+      field :title
       field :api_params
     end
   end

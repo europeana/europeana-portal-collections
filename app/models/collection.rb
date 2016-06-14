@@ -10,6 +10,9 @@ class Collection < ActiveRecord::Base
 
   after_save :touch_landing_page
 
+  translates :title, fallbacks_for_empty_translations: true
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   def to_param
     key
   end
@@ -24,12 +27,20 @@ class Collection < ActiveRecord::Base
     end
   end
 
+  def has_landing_page?
+    landing_page.present?
+  end
+
   def landing_page
     @landing_page ||= Page::Landing.find_by_slug(landing_page_slug)
   end
 
   def landing_page_slug
-    "collections/#{key}"
+    key == 'all' ? '' : "collections/#{key}"
+  end
+
+  def landing_page_title
+    landing_page.present? ? landing_page.title : nil
   end
 
   def touch_landing_page

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606103934) do
+ActiveRecord::Schema.define(version: 20160614093327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,12 +78,24 @@ ActiveRecord::Schema.define(version: 20160606103934) do
   add_index "browse_entry_translations", ["browse_entry_id"], name: "index_browse_entry_translations_on_browse_entry_id", using: :btree
   add_index "browse_entry_translations", ["locale"], name: "index_browse_entry_translations_on_locale", using: :btree
 
+  create_table "collection_translations", force: :cascade do |t|
+    t.integer  "collection_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "title"
+  end
+
+  add_index "collection_translations", ["collection_id"], name: "index_collection_translations_on_collection_id", using: :btree
+  add_index "collection_translations", ["locale"], name: "index_collection_translations_on_locale", using: :btree
+
   create_table "collections", force: :cascade do |t|
     t.string   "key",        limit: 255
     t.text     "api_params"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.integer  "state",                  default: 0
+    t.string   "title"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|

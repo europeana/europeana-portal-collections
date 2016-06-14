@@ -14,11 +14,11 @@ RSpec.describe CollectionsController do
   end
 
   describe 'GET show' do
-    context 'with id=home' do
+    context 'with id=all' do
       before do
         get :show, params
       end
-      let(:collection) { Collection.find_by_key('home') }
+      let(:collection) { Collection.find_by_key('all') }
       let(:params) { { id: collection.key } }
 
       it 'does not query API' do

@@ -3,8 +3,8 @@ music:
   api_params: 'qf=what:music'
   state: 1
 
-home:
-  key: 'home'
+all:
+  key: 'all'
   api_params: 'qf=*:*'
   state: 1
 
