@@ -149,13 +149,13 @@ module Portal
           items: [
             {
               text: t('site.results.list.results-view.grid'),
-              url: search_path(search_state.params_for_search(view: 'grid')),
+              url: search_action_path(search_state.params_for_search(view: 'grid')),
               icon_grid: true,
               is_current: params[:view] == 'grid'
             },
             {
               text: t('site.results.list.results-view.list'),
-              url: search_path(search_state.params_for_search(view: 'list')),
+              url: search_action_path(search_state.params_for_search(view: 'list')),
               icon_list: true,
               is_current: params[:view] != 'grid'
             }
