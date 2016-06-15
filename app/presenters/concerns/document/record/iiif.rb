@@ -55,7 +55,7 @@ module Document
         @iiif_manifest ||= begin
           return if document_iiif_manifester.nil?
 
-          document_iiif_manifester[:url].tap do |url|
+          document_iiif_manifester[:url].dup.tap do |url|
             (document_iiif_manifester[:sub] || {}).each_pair do |field, proc|
               value = @document.fetch(field, nil)
               sub = proc.call(value)
