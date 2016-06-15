@@ -2,6 +2,7 @@ module BrowsableView
   extend ActiveSupport::Concern
 
   def browse_menu
+    return false if has_search_parameters?
     {
       menu_id: 'browse-menu',
       style_modifier: 'caret-right',
