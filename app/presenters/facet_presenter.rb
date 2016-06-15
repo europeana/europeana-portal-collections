@@ -12,6 +12,7 @@ class FacetPresenter
   delegate :t, to: I18n
 
   attr_writer :facet_name
+  attr_reader :controller
 
   ##
   # Factory to create an instance of the right presenter for a given facet field
@@ -82,7 +83,8 @@ class FacetPresenter
       items: unhidden_items.map { |item| facet_item(item) },
       extra_items: hidden_items.blank? ? nil : {
         items: hidden_items.map { |item| facet_item(item) }
-      }
+      },
+      tooltip: facet_tooltip
     }
   end
 

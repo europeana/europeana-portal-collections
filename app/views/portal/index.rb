@@ -159,7 +159,12 @@ module Portal
               icon_list: true,
               is_current: params[:view] != 'grid'
             }
-          ]
+          ],
+          tooltip: {
+            tooltip_text: 'Have you seen the new grid layout?',
+            persistent: true,
+            link_class: 'filter-name'
+          }
         }
       }
     end

@@ -36,7 +36,18 @@ module Facet
                     show: 'global.facet.license.show-specific',
                     hide: 'global.facet.license.hide-specific'
                   },
-                  items: { titleize: true, i18n: true }
+                  items: { titleize: true, i18n: true },
+                  tooltip: lambda { |controller|
+                    {
+                      tooltipped_text: 'Can I use it?',
+                      tooltip_text: 'You can now filter your search on specific license',
+                      persistent: true,
+                      icon: 'icon-help',
+                      link_class: 'filter-name',
+                      link_url: controller.static_page_path('rights', format: 'html'),
+                      trailing: true
+                    }
+                  }
       label_facet 'RIGHTS',
                   title: nil,
                   items: {
@@ -98,6 +109,10 @@ module Facet
 
       key = labeller[:i18n].present? ? labeller[:i18n] : facet_name.downcase
       t(key, scope: 'global.facet.header')
+    end
+
+    def facet_tooltip
+      labeller[:tooltip].call(@controller) if labeller[:tooltip]
     end
 
     def facet_item_label(value)
