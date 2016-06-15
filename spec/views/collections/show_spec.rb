@@ -20,7 +20,7 @@ RSpec.describe 'collections/show.html.mustache', :page_with_top_nav, :blacklight
   end
 
   it 'should have meta HandheldFriendly' do
-    expect(subject).to have_selector("meta[name=\"HandheldFriendly\"]", visible: false)
+    expect(subject).to have_selector('meta[name="HandheldFriendly"]', visible: false)
   end
 
   it 'should have a search field' do
