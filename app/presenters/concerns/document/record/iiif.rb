@@ -39,14 +39,6 @@ module Document
                         values.detect { |value| value.starts_with?('http://gallica.bnf.fr/') }.sub('http://gallica.bnf.fr/', '')
                       } },
                       url: 'http://gallica.bnf.fr/iiif/%{proxies.dcIdentifier}/manifest.json'
-
-        # /portal/record/9200365/BibliographicResource_3000094705862.html
-        manifest_iiif for: { 'proxies.dcIdentifier' => 'http://gallica.bnf.fr/ark:/12148/btv1b84539771' },
-                      url: 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b84539771/manifest.json'
-
-        # /portal/record/9200365/BibliographicResource_3000094948479.html
-        manifest_iiif for: { 'proxies.dcIdentifier' => 'http://gallica.bnf.fr/ark:/12148/btv1b10500687r' },
-                      url: 'http://iiif.biblissima.fr/manifests/ark:/12148/btv1b10500687r/manifest.json'
       end
 
       class_methods do
