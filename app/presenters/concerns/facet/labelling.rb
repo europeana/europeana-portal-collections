@@ -39,13 +39,8 @@ module Facet
                   items: { titleize: true, i18n: true },
                   tooltip: lambda { |controller|
                     {
-                      tooltipped_text: 'Can I use it?',
-                      tooltip_text: 'You can now filter your search on specific license',
-                      persistent: true,
                       icon: 'icon-help',
-                      link_class: 'filter-name',
-                      link_url: controller.static_page_path('rights', format: 'html'),
-                      trailing: true
+                      link_url: controller.static_page_path('rights', format: 'html')
                     }
                   }
       label_facet 'RIGHTS',
