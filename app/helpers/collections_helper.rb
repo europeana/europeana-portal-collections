@@ -15,7 +15,8 @@ module CollectionsHelper
   # Tests whether the current request is in the context of a {Collection}
   #
   # @return [Boolean]
-  def within_collection?(localized_params = params)
+  def within_collection?(localized_params = nil)
+    localized_params ||= (request.respond_to?(:parameters) ? params : {})
     localized_params[:controller] == 'collections' &&
       localized_params[:id].present?
   end
