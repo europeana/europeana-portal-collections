@@ -1,15 +1,15 @@
 ---
-3D:
-
 IMAGE:
   i18n: images
 SOUND:
   icon: music
 TEXT:
   i18n: texts
-  icon: book
+  icon: openbook
 VIDEO:
   i18n: moving-images
-  icon: tv
+  icon: video
 3D:
-
+  i18n: 3d
+  icon: 3d
+  
