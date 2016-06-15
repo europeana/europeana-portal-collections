@@ -8,9 +8,9 @@ module Document
         # * test record: /portal/record/07927/diglit_serradifalco1834bd2.html
         manifest_iiif for: { 'about': %r{/07927/diglit_} },
                       sub: { 'about' => lambda { |value|
-                        about.match(%r{/07927/diglit_(.*)})[1]
+                        value.match(%r{/07927/diglit_(.*)})[1]
                       } },
-                      url: "http://digi.ub.uni-heidelberg.de/diglit/iiif/%{about}/manifest.json"
+                      url: 'http://digi.ub.uni-heidelberg.de/diglit/iiif/%{about}/manifest.json'
 
         # Bodleian library
         # * test record: /portal/record/9200175/BibliographicResource_3000004673129.html
