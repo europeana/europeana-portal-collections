@@ -4,6 +4,7 @@ RSpec.describe 'portal/index.html.mustache', :page_with_top_nav, :blacklight_con
     assign(:document_list, response.documents)
     assign(:params, blacklight_params)
     allow(view).to receive(:search_state).and_return(search_state)
+    allow(view).to receive(:has_search_parameters?).and_return(false)
   end
 
   let(:api_response) do
