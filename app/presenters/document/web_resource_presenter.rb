@@ -48,7 +48,7 @@ module Document
 
     def play_url
       @play_url ||= begin
-        @record_presenter.iiif_manifesto || download_url
+        @record_presenter.iiif_manifest || download_url
       end
     end
 
@@ -88,7 +88,7 @@ module Document
 
     def media_type_special_case
       case
-      when @record_presenter.iiif_manifesto
+      when @record_presenter.iiif_manifest
         'iiif'
       when @controller.oembed_html.key?(url)
         'oembed'
