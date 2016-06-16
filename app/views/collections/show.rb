@@ -74,7 +74,8 @@ module Collections
             items: blog_news_items(@collection),
             blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
-          social: @landing_page.social_media.blank? ? nil : social_media_links,
+          social: @landing_page.social_media.blank? ? nil : social_media_links.merge(
+            social_title: t('global.find-us-social-media', channel: @collection.title)),
           banner: banner_content(@landing_page.banner_id),
           carousel: helpers.collection_tumblr_feed_content(@collection)
         }.reverse_merge(helpers.content)
@@ -103,7 +104,9 @@ module Collections
         facebook: detect_link_in_array(@landing_page.social_media, 'facebook.com'),
         soundcloud: detect_link_in_array(@landing_page.social_media, 'soundcloud.com'),
         pinterest: detect_link_in_array(@landing_page.social_media, 'pinterest.com'),
-        googleplus: detect_link_in_array(@landing_page.social_media, 'plus.google.com')
+        googleplus: detect_link_in_array(@landing_page.social_media, 'plus.google.com'),
+        instagram: detect_link_in_array(@landing_page.social_media, 'instagram.com'),
+        tumblr: detect_link_in_array(@landing_page.social_media, 'tumblr.com')
       }
     end
 

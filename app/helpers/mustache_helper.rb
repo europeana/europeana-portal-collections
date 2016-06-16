@@ -303,6 +303,10 @@ module MustacheHelper
                 url: static_page_path('about', format: 'html')
               },
               {
+                text: t('site.footer.menu.roadmap'),
+                url: static_page_path('roadmap', format: 'html')
+              },
+              {
                 text: t('site.footer.menu.data-providers'),
                 url: static_page_path('browse/sources', format: 'html')
               },
