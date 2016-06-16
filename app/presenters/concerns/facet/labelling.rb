@@ -121,7 +121,7 @@ module Facet
       end
 
       if labeller[:items] && labeller[:items][:titleize]
-        value = value.titleize
+        value = value.humanize
       end
 
       value.present? ? value : false
