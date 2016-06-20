@@ -16,7 +16,6 @@ module MustacheHelper
 
   def head_links
     links = [
-      # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
       { rel: 'search', type: 'application/opensearchdescription+xml',
         href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
         title: 'Europeana Search' }
@@ -51,7 +50,6 @@ module MustacheHelper
   end
 
   def version
-    # { is_alpha: content[:banner].present? }
     { is_alpha: true }
   end
 
@@ -65,88 +63,13 @@ module MustacheHelper
   end
 
   def js_files
-    [{ path: styleguide_url('/js/dist/require.js'),
-      data_main: styleguide_url('/js/dist/main/main-collections') }]
+    [
+      {
+        path: styleguide_url('/js/dist/require.js'),
+        data_main: styleguide_url('/js/dist/main/main-collections')
+      }
+    ]
   end
-
-  # def menus
-  #   {
-  #     actions: {
-  #       button_title: 'Actions',
-  #       menu_id: 'dropdown-result-actions',
-  #       menu_title: 'Save to:',
-  #       items: [
-  #         {
-  #           url: 'http://europeana.eu',
-  #           text: 'First Item'
-  #         },
-  #         {
-  #           url: 'http://europeana.eu',
-  #           text: 'Another Label'
-  #         },
-  #         {
-  #           url: 'http://europeana.eu',
-  #           text: 'Label here'
-  #         },
-  #         {
-  #           url: 'http://europeana.eu',
-  #           text: 'Fourth Item'
-  #         },
-  #         {
-  #           divider: true
-  #         },
-  #         {
-  #           url: 'http://europeana.eu',
-  #           text: 'Another Label',
-  #           calltoaction: true
-  #         },
-  #         {
-  #           divider: true
-  #         },
-  #         {
-  #           url: 'http://europeana.eu',
-  #           text: 'Another Label',
-  #           calltoaction: true
-  #         }
-  #       ]
-  #     },
-  #     sort: {
-  #       button_title: 'Relevance',
-  #       menu_id: 'dropdown-result-sort',
-  #       menu_title: 'Sort by:',
-  #       items: [
-  #         {
-  #           text: 'Date',
-  #           url: 'http://europeana.eu'
-  #         },
-  #         {
-  #           text: 'Alphabetical',
-  #           url: 'http://europeana.eu'
-  #         },
-  #         {
-  #           text: 'Relevance',
-  #           url: 'http://europeana.eu'
-  #         },
-  #         {
-  #           divider: true
-  #         },
-  #         {
-  #           url: 'http://europeana.eu',
-  #           text: 'Another Label',
-  #           calltoaction: true
-  #         },
-  #         {
-  #           divider: true
-  #         },
-  #         {
-  #           text: 'Advanced Search',
-  #           url: 'http://europeana.eu',
-  #           calltoaction: true
-  #         }
-  #       ]
-  #     }
-  #   }
-  # end
 
   def total_item_count
     @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
@@ -214,128 +137,42 @@ module MustacheHelper
                 text: t('global.navigation.collections'),
                 is_current: controller.controller_name == 'collections',
                 submenu: {
-                  items: displayable_collections.map do |collection|
-                    {
-                      url: collection_path(collection),
-                      text: collection.title,
-                      is_current: current_page?(collection_path(collection))
-                    }
-                  end
+                  items: navigation_global_primary_nav_collections_submenu_items
                 }
               },
               {
                 text: t('global.navigation.browse'),
                 is_current: controller.controller_name == 'browse',
                 submenu: {
-                  items: [
-                    {
-                      url: browse_newcontent_path,
-                      text: t('global.navigation.browse_newcontent'),
-                      is_current: current_page?(browse_newcontent_path)
-                    },
-                    {
-                      url: browse_colours_path,
-                      text: t('global.navigation.browse_colours'),
-                      is_current: current_page?(browse_colours_path)
-                    },
-                    {
-                      url: browse_sources_path,
-                      text: t('global.navigation.browse_sources'),
-                      is_current: current_page?(browse_sources_path)
-                    },
-                    {
-                      url: browse_topics_path,
-                      text: t('global.navigation.concepts'),
-                      is_current: current_page?(browse_topics_path)
-                    },
-                    {
-                      url: browse_people_path,
-                      text: t('global.navigation.agents'),
-                      is_current: current_page?(browse_people_path)
-                    }
-                  ]
+                  items: navigation_global_primary_nav_browse_submenu_items
                 }
               },
               {
                 url: 'http://exhibitions.europeana.eu/',
                 text: t('global.navigation.exhibitions'),
                 submenu: {
-                  items: feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][exhibitions_feed_key], 6) + [
-                    {
-                      url: 'http://exhibitions.europeana.eu/',
-                      text: t('global.navigation.all_exhibitions'),
-                      is_morelink: true
-                    }
-                  ]
+                  items: navigation_global_primary_nav_exhibitions_submenu_items
                 }
               },
               {
                 url: 'http://blog.europeana.eu/',
                 text: t('global.navigation.blog'),
                 submenu: {
-                  items: feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6) + [
-                    {
-                      url: 'http://blog.europeana.eu/',
-                      text: t('global.navigation.all_blog_posts'),
-                      is_morelink: true
-                    }
-                  ]
+                  items: navigation_global_primary_nav_blog_submenu_items
                 }
               }
             ]
-          }  # end prim nav
+          }
         },
         home_url: root_url,
         footer: {
           linklist1: {
             title: t('global.more-info'),
-            # Use less elegant way to get footer links
-            #
-            # items: Page.primary.map do |page|
-            #   {
-            #     text: t(page.slug, scope: 'site.footer.menu'),
-            #     url: static_page_path(page, format: 'html')
-            #   }
-            # end
-            items: [
-              {
-                text: t('site.footer.menu.about'),
-                url: static_page_path('about', format: 'html')
-              },
-              {
-                text: t('site.footer.menu.roadmap'),
-                url: static_page_path('roadmap', format: 'html')
-              },
-              {
-                text: t('site.footer.menu.data-providers'),
-                url: static_page_path('browse/sources', format: 'html')
-              },
-              {
-                text: t('site.footer.menu.become-a-provider'),
-                url: 'http://pro.europeana.eu/share-your-data/'
-              },
-              {
-                text: t('site.footer.menu.contact-us'),
-                url: static_page_path('contact', format: 'html')
-              }
-            ]
+            items: navigation_footer_linklist1_items
           },
           linklist2: {
             title: t('global.help'),
-            items: [
-              {
-                text: t('site.footer.menu.search-tips'),
-                url: static_page_path('help', format: 'html')
-              },
-              # {
-              #   text: t('site.footer.menu.using-myeuropeana'),
-              #   url: '#'
-              # },
-              {
-                text: t('global.terms-and-policies'),
-                url: static_page_path('rights', format: 'html')
-              }
-            ]
+            items: navigation_footer_linklist2_items
           },
           social: {
             facebook: true,
@@ -360,50 +197,7 @@ module MustacheHelper
             text: t('global.settings'),
             icon: 'settings',
             submenu: {
-              items: [
-                {
-                  text: t('global.settings'),
-                  subtitle: true,
-                  url: false
-                },
-                {
-                  text: t('site.settings.language.label'),
-                  url: '/portal/settings/language',
-                  is_current: controller.controller_name == 'settings'
-                },
-                # {
-                #   text: 'My Profile',
-                #   url: 'url to profile page'
-                # },
-                # {
-                #   text: 'Advanced',
-                #   url: 'url to settings page'
-                # },
-                # {
-                #   is_divider: true
-                # },
-                # {
-                #   text: 'Admin',
-                #   subtitle: true,
-                #   url: false
-                # },
-                # {
-                #   text: 'Collection Admin',
-                #   url: 'url to admin page'
-                # },
-                # {
-                #   is_divider: true
-                # },
-                # {
-                #   text: 'Account',
-                #   subtitle: true,
-                #   url: false
-                # },
-                # {
-                #   text: 'Log Out',
-                #   url: 'url to login page'
-                # }
-              ]
+              items: utility_nav_items_submenu_items
             }
           }
         ]
@@ -436,6 +230,69 @@ module MustacheHelper
   end
 
   private
+
+  def navigation_global_primary_nav_collections_submenu_items
+    displayable_collections.map do |collection|
+      link_item(collection.title, collection_path(collection),
+                is_current: current_page?(collection_path(collection)))
+    end
+  end
+
+  def navigation_global_primary_nav_browse_submenu_items
+    [
+      link_item(t('global.navigation.browse_newcontent'), browse_newcontent_path,
+                is_current: current_page?(browse_newcontent_path)),
+      link_item(t('global.navigation.browse_colours'), browse_colours_path,
+                is_current: current_page?(browse_colours_path)),
+      link_item(t('global.navigation.browse_sources'), browse_sources_path,
+                is_current: current_page?(browse_sources_path)),
+      link_item(t('global.navigation.concepts'), browse_topics_path,
+                is_current: current_page?(browse_topics_path)),
+      link_item(t('global.navigation.agents'), browse_people_path,
+                is_current: current_page?(browse_people_path))
+    ]
+  end
+
+  def navigation_global_primary_nav_exhibitions_submenu_items
+    feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][exhibitions_feed_key], 6)
+    feed_items << link_item(t('global.navigation.all_exhibitions'), 'http://exhibitions.europeana.eu/',
+                            is_morelink: true)
+  end
+
+  def navigation_global_primary_nav_blog_submenu_items
+    feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6)
+    feed_items << link_item(t('global.navigation.all_blog_posts'), 'http://blog.europeana.eu/',
+                            is_morelink: true)
+  end
+
+  def utility_nav_items_submenu_items
+    [
+      link_item(t('global.settings'), false, subtitle: true),
+      link_item(t('site.settings.language.label'), '/portal/settings/language',
+                is_current: (controller.controller_name == 'settings'))
+    ]
+  end
+
+  def navigation_footer_linklist1_items
+    [
+      link_item(t('site.footer.menu.about'), static_page_path('about', format: 'html')),
+      link_item(t('site.footer.menu.roadmap'), static_page_path('roadmap', format: 'html')),
+      link_item(t('site.footer.menu.data-providers'), static_page_path('browse/sources', format: 'html')),
+      link_item(t('site.footer.menu.become-a-provider'), 'http://pro.europeana.eu/share-your-data/'),
+      link_item(t('site.footer.menu.contact-us'), static_page_path('contact', format: 'html')),
+    ]
+  end
+
+  def navigation_footer_linklist2_items
+    [
+      link_item(t('site.footer.menu.search-tips'), static_page_path('help', format: 'html')),
+      link_item(t('global.terms-and-policies'), static_page_path('rights', format: 'html'))
+    ]
+  end
+
+  def link_item(text, url, options = {})
+    { text: text, url: url }.merge(options)
+  end
 
   def page_banner(id = nil)
     banner = id.nil? ? Banner.find_by_default(true) : Banner.find(id)
