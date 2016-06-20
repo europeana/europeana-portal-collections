@@ -57,20 +57,21 @@ module Facet
                   }
       label_facet 'LANGUAGE', items: { titleize: true, i18n: true }
       label_facet 'CREATOR',
-                  i18n: 'designer',
+                  i18n: 'fashion.designer',
                   items: {
                     with: lambda { |item| item.sub(/ \(Designer\)\z/, '') }
                   }
       label_facet 'proxy_dc_format.en',
-                  i18n: 'technique',
+                  i18n: 'fashion.technique',
                   items: {
                     with: lambda { |item| item.sub(/\ATechnique: /, '') },
                     titleize: true
                   }
       label_facet 'cc_skos_prefLabel.en',
-                  i18n: 'item_type',
+                  i18n: 'fashion.type',
                   items: { titleize: true }
       label_facet 'colour',
+                  i18n: 'fashion.colour',
                   items: {
                     with: lambda { |item| item.sub(/\AColor: /, '') },
                     titleize: true
