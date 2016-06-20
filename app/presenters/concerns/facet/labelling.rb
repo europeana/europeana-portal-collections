@@ -121,7 +121,7 @@ module Facet
       end
 
       if labeller[:items] && labeller[:items][:titleize]
-        value = value.split.map(&:capitalize).join(' ')
+        value = value.titleize
       end
 
       value.present? ? value : false
