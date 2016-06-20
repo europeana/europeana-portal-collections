@@ -99,7 +99,7 @@ module Collections
     # @todo move into {Link::SocialMedia} as {#twitter?} etc
     def social_media_links
       {
-        social_title: t('global.find-us-social-media', channel: @collection.title)
+        social_title: t('global.find-us-social-media', channel: @collection.title),
         twitter: detect_link_in_array(@landing_page.social_media, 'twitter.com'),
         facebook: detect_link_in_array(@landing_page.social_media, 'facebook.com'),
         soundcloud: detect_link_in_array(@landing_page.social_media, 'soundcloud.com'),
