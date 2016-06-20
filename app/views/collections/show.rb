@@ -74,8 +74,7 @@ module Collections
             items: blog_news_items(@collection),
             blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
-          social: @landing_page.social_media.blank? ? nil : social_media_links.merge(
-            social_title: t('global.find-us-social-media', channel: @collection.title)),
+          social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
           carousel: helpers.collection_tumblr_feed_content(@collection)
         }.reverse_merge(helpers.content)
@@ -100,6 +99,7 @@ module Collections
     # @todo move into {Link::SocialMedia} as {#twitter?} etc
     def social_media_links
       {
+        social_title: t('global.find-us-social-media', channel: @collection.title)
         twitter: detect_link_in_array(@landing_page.social_media, 'twitter.com'),
         facebook: detect_link_in_array(@landing_page.social_media, 'facebook.com'),
         soundcloud: detect_link_in_array(@landing_page.social_media, 'soundcloud.com'),
