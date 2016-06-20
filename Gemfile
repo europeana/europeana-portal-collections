@@ -14,7 +14,6 @@ gem 'aasm', '~> 4.2'
 gem 'blacklight', '~> 6.0.0'
 gem 'acts_as_list', '~> 0.7'
 gem 'cancancan', '~> 1.12'
-gem 'clockwork', '~> 1.2'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise', '~> 3.5.4'
@@ -24,16 +23,13 @@ gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
-gem 'htmlcompressor', '0.3'
 gem 'logging-rails', '~> 0.5', require: 'logging/rails'
-gem 'newrelic_rpm'
 gem 'nokogiri', '~> 1.6.8'
 gem 'rest-client', '~> 1.8.0'
 gem 'ruby-oembed', '~> 0.9'
 gem 'pg'
 gem 'paperclip', '~> 4.3'
 gem 'paper_trail', '~> 4.0'
-gem 'puma', '~> 2.13'
 gem 'rack-rewrite'
 gem 'rails_admin', '~> 0.8.0'
 gem 'redis-rails', '~> 4.0'
@@ -44,7 +40,14 @@ gem 'therubyracer'
 
 group :production do
   gem 'rails_serve_static_assets'
+  gem 'newrelic_rpm'
   gem 'uglifier', '~> 2.7.2'
+end
+
+group :development, :production do
+  gem 'clockwork', '~> 1.2'
+  gem 'htmlcompressor', '0.3'
+  gem 'puma', '~> 2.13'
 end
 
 group :development, :test do
