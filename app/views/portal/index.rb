@@ -2,8 +2,6 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
-    include BrowsableView
-
     def grid_view_active
       params[:view] == 'grid'
     end
