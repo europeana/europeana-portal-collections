@@ -36,7 +36,7 @@ module Facet
                     show: 'global.facet.license.show-specific',
                     hide: 'global.facet.license.hide-specific'
                   },
-                  items: { titleize: true, i18n: true },
+                  items: { i18n: true },
                   tooltip: lambda { |controller|
                     {
                       icon: 'icon-help',
