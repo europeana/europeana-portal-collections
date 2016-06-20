@@ -1,11 +1,37 @@
 module Facet
+  ##
+  # Handles facet field and facet item labelling
+  #
+  # @example Usage
+  #   included do
+  #     label_facet 'FACET_NAME', hash_of_labelling_options
+  #   end
+  # @example Labelling options
+  #   {
+  #     title: nil, # prevent facet from having a label
+  #     items: { # item labelling options
+  #       with: lambda { |item| item.sub('-', ' ') }, # custom item labelling proc
+  #       titleize: true, # `titleize` item label if `true` (default `false`)
+  #       i18n: true # look up item label with `I18n` if `true` (default `false`)
+  #     },
+  #     collapsible: { # if present, makes the facet collapsible
+  #       show: 'facet.field.show', # `I18n` key for the "show" link
+  #       hide: 'facet.field.hide' # `I18n` key for the "hide" link
+  #     },
+  #     tooltip: lambda { |controller| # custom proc for tooltip generation
+  #       { # hash passed to Mustache template
+  #         icon: 'icon-help', # tooltip icon
+  #         link_url: controller.static_page_path('rights') # tooltip icon link
+  #       }
+  #     }
+  #   }
   module Labelling
     extend ActiveSupport::Concern
 
     included do
       label_facet 'COLLECTION',
                   items: {
-                    with: lambda { |item| Collection.find_by_key(item).title || I18n.t('global.channel.all') }
+                    with: lambda { |item| Collection.find_by_key(item).title }
                   }
       label_facet 'TYPE', items: { titleize: true, i18n: true }
       label_facet 'IMAGE_COLOUR', items: { titleize: true, i18n: true }
@@ -92,25 +118,11 @@ module Facet
       end
     end
 
-    def labeller
-      @labeller ||= self.class.labeller_for(facet_name)
-    end
-
     ##
-    # Gets a label to display for the facet field
+    # Label to display for a facet item
     #
-    # @return [String]
-    def facet_label
-      return false if labeller.key?(:title) && labeller[:title].blank?
-
-      key = labeller[:i18n].present? ? labeller[:i18n] : facet_name.downcase
-      t(key, scope: 'global.facet.header')
-    end
-
-    def facet_tooltip
-      labeller[:tooltip].call(@controller) if labeller[:tooltip]
-    end
-
+    # @param value [String] Facet item value
+    # @return [String] Facet item label
     def facet_item_label(value)
       if labeller[:items] && labeller[:items][:with]
         value = labeller[:items][:with].call(value)
@@ -126,6 +138,35 @@ module Facet
       end
 
       value.present? ? value : false
+    end
+
+    ##
+    # Label to display for the facet field
+    #
+    # @return [String]
+    def facet_label
+      return false if labeller.key?(:title) && labeller[:title].blank?
+
+      key = labeller[:i18n].present? ? labeller[:i18n] : facet_name.downcase
+      t(key, scope: 'global.facet.header')
+    end
+
+    ##
+    # Tooltip to display for the facet field (if any)
+    #
+    # @return [Hash]
+    def facet_tooltip
+      labeller[:tooltip].call(@controller) if labeller[:tooltip]
+    end
+
+    ##
+    # Labelling options for this facet field
+    #
+    # As declared by the `.label_facet` calls
+    #
+    # @return [Hash]
+    def labeller
+      @labeller ||= self.class.labeller_for(facet_name)
     end
   end
 end
