@@ -5,7 +5,7 @@ Rails.application.configure do
   config.middleware.use Rack::Deflater unless ENV['DISABLE_RACK_HTML_DEFLATER']
 
   # Minify HTML
-  unless ENV['DISABLE_RACK_HTML_COMPRESSOR']
+  unless ENV['DISABLE_RACK_HTML_COMPRESSOR'] || !defined?(HtmlCompressor)
     config.middleware.use HtmlCompressor::Rack,
                           enabled: true,
                           remove_multi_spaces: true,
