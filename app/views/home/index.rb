@@ -1,5 +1,7 @@
 module Home
   class Index < ApplicationView
+    include BrowsableView
+
     def page_title
       'Europeana Collections'
     end
