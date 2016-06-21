@@ -51,11 +51,17 @@ module ControllerExceptionHandling
         end
 
         def process(exception:, **_)
-          trace = Rails.backtrace_cleaner.clean(exception.backtrace)
+          Rails.logger.error(message(exception: exception).red.bold)
+        end
+
+        def message(exception:)
           message = "\n#{exception.class} (#{exception.message}):\n"
           message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
-          message << '  ' << trace.join("\n  ")
-          Rails.logger.error("#{message}\n".red.bold)
+          message << '  ' << trace(exception: exception).join("\n  ") << "\n"
+        end
+
+        def trace(exception:)
+          Rails.backtrace_cleaner.clean(exception.backtrace)
         end
       end
     end
@@ -77,8 +83,8 @@ module ControllerExceptionHandling
           return if status == 500
 
           ErrorMailer.report_http(
-            { class: exception.class.to_s, message: exception.message, backtrace: exception.backtrace },
-            { original_url: request.original_url, method: request.method, referer: request.referer }
+            exception: { class: exception.class.to_s, message: exception.message, backtrace: exception.backtrace },
+            request: { original_url: request.original_url, method: request.method, referer: request.referer }
           ).deliver_later
         end
       end
@@ -106,7 +112,7 @@ module ControllerExceptionHandling
     end
   end
 
-  ERROR_HANDLERS = [ErrorHandlers::Logger, ErrorHandlers::EmailReporter, ErrorHandlers::NewRelicNotifier]
+  ERROR_HANDLERS = [ErrorHandlers::Logger, ErrorHandlers::EmailReporter, ErrorHandlers::NewRelicNotifier].freeze
 
   private
 
@@ -142,18 +148,24 @@ module ControllerExceptionHandling
   ##
   # Render an HTML error page from the CMS
   def render_html_error_response(exception:, status:)
-    @page = Page::Error.for_exception(exception, status)
-    @page ||= Page::Error.generic.find_by_http_code!(status)
+    @page = page_for_html_error_response(exception: exception, status: status)
 
     if failed_in_cms_request?
       # RailsAdmin does not have access to the styleguide templates, so
       # redirect to the absolute path of the error page.
       redirect_to [Rails.configuration.relative_url_root, @page.slug].join('/')
     else
-      page_template = "pages/custom/#{@page.slug}"
-      template = template_exists?(page_template) ? page_template : 'pages/show'
-      render template, status: @page.http_code, formats: [:html]
+      render template_for_html_error_response_page(page: @page), status: @page.http_code, formats: [:html]
     end
+  end
+
+  def page_for_html_error_response(exception:, status:)
+    Page::Error.for_exception(exception, status) || Page::Error.generic.find_by_http_code!(status)
+  end
+
+  def template_for_html_error_response_page(page:)
+    page_template = "pages/custom/#{page.slug}"
+    template = template_exists?(page_template) ? page_template : 'pages/show'
   end
 
   ##
