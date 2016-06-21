@@ -63,6 +63,15 @@ module ControllerExceptionHandling
     logger.error("#{message}\n".red.bold)
   end
 
+  def report_error(exception)
+    return unless Rails.application.config.x.error_report_mail_to.present? # No email recipient configured
+
+    ErrorMailer.report_http(
+      { class: exception.class.to_s, message: exception.message, backtrace: exception.backtrace },
+      { original_url: request.original_url, method: request.method, referer: request.referer }
+    ).deliver_later
+  end
+
   def render_html_error_response(exception, status)
     @page = Page::Error.for_exception(exception, status)
     @page ||= Page::Error.generic.find_by_http_code!(status)
