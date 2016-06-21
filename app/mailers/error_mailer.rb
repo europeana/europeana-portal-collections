@@ -1,7 +1,7 @@
 class ErrorMailer < ApplicationMailer
   include ActionView::Helpers::TextHelper
 
-  def report_http(exception, request)
+  def report_http(exception:, request:)
     fail Errors::NoRecipient unless Rails.application.config.x.error_report_mail_to.present?
 
     @class = exception[:class]
@@ -14,7 +14,7 @@ class ErrorMailer < ApplicationMailer
     mail(to: Rails.application.config.x.error_report_mail_to, subject: 'New portal error')
   end
 
-  def report_job(exception, job)
+  def report_job(exception:, job:)
     fail Errors::NoRecipient unless Rails.application.config.x.error_report_mail_to.present?
 
     @class = exception[:class]
