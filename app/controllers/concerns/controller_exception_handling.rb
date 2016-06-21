@@ -165,7 +165,7 @@ module ControllerExceptionHandling
 
   def template_for_html_error_response_page(page:)
     page_template = "pages/custom/#{page.slug}"
-    template = template_exists?(page_template) ? page_template : 'pages/show'
+    template_exists?(page_template) ? page_template : 'pages/show'
   end
 
   ##
