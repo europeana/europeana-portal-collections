@@ -23,7 +23,9 @@ gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
-gem 'logging-rails', '~> 0.5', require: 'logging/rails'
+gem 'lograge'
+gem 'logstash-event'
+gem 'logstash-logger'
 gem 'nokogiri', '~> 1.6.8'
 gem 'rest-client', '~> 1.8.0'
 gem 'ruby-oembed', '~> 0.9'
@@ -40,7 +42,6 @@ gem 'therubyracer'
 
 group :production do
   gem 'rails_serve_static_assets'
-  gem 'newrelic_rpm'
   gem 'uglifier', '~> 2.7.2'
 end
 
