@@ -8,9 +8,9 @@ module FacetsHelper
     when String, Symbol, Blacklight::Configuration::FacetField
       facet_field = facet_configuration_for_field(field_or_field_name)
       if facet_field.aliases.present?
-        aliased = @response.aggregations[facet_field.aliases]
-        aggregation = aliased.class.new(facet_field.key, aliased.items)
-        aggregation
+        if aliased = @response.aggregations[facet_field.aliases]
+          aliased.class.new(facet_field.key, aliased.items)
+        end
       else
         @response.aggregations[facet_field.key]
       end
