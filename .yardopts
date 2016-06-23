@@ -2,6 +2,7 @@
 --markup markdown
 --protected
 --no-private
+--output-dir ./yardoc
 --readme README.md
 -
 LICENSE.md

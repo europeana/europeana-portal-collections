@@ -82,4 +82,4 @@
 
 # Ignore generated documentation
 /.yardoc
-/doc
+/yardoc
