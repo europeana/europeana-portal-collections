@@ -71,6 +71,9 @@
 /.env
 /.env.*
 
+# Do not ignore dotenv example file.
+!/.env.example
+
 # Ignore code coverage analysis output.
 /coverage
 
