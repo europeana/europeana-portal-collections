@@ -7,7 +7,6 @@ module Cache
     def perform(collection_id = nil)
       builder = search_builder
       api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets')
-      api_query.to_hash.delete('f.COLOURPALETTE.facet.limit')
 
       cache_key = 'browse/colours/facets'
 
@@ -18,6 +17,8 @@ module Cache
           cache_key << '/' << collection.key
         end
       end
+
+      api_query.to_hash.delete('f.COLOURPALETTE.facet.limit')
 
       response = repository.search(api_query)
       colours = response.aggregations['COLOURPALETTE'].items
