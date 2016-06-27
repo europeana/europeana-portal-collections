@@ -93,9 +93,12 @@ module Facet
                     with: lambda { |item| item.sub(/\ATechnique: /, '') },
                     titleize: true
                   }
-      label_facet 'cc_skos_prefLabel.en',
+      label_facet 'proxy_dc_type.en',
                   i18n: 'fashion.type',
-                  items: { titleize: true }
+                  items: {
+                    with: lambda { |item| item.sub(/\AObject Type: /, '') },
+                    titleize: true
+                  }
       label_facet 'colour',
                   i18n: 'fashion.colour',
                   items: {
