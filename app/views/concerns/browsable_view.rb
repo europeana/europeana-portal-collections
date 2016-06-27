@@ -45,7 +45,7 @@ module BrowsableView
   def browse_menu_type_item(type)
     {
       text: type.label,
-      url: search_action_path(q: "TYPE:#{type.id}", f: { 'MEDIA' => ['true'] }),
+      url: search_action_path(f: { 'MEDIA' => ['true'], 'TYPE' => [type.id] }),
       icon: "icon-#{type.icon}"
     }
   end
