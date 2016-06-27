@@ -10,7 +10,9 @@ class ApplicationView < Europeana::Styleguide::View
 
   def cached_body
     lambda do |text|
-      Rails.cache.fetch(cache_key, expires_in: 24.hours, force: !cache_body?) do
+      if cache_body?
+        Rails.cache.fetch(cache_key, expires_in: 24.hours) { render(text) }
+      else
         render(text)
       end
     end
@@ -45,6 +47,6 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def cache_body?
-    !request.format.json?
+    !request.format.json? && !ENV['DISABLE_VIEW_CACHING']
   end
 end
