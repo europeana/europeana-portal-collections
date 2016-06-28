@@ -19,8 +19,10 @@ class ApplicationController < ActionController::Base
     relative_url_root = Europeana::Portal::Application.config.relative_url_root
     dest = if relative_url_root.present?
              request.original_fullpath.sub(/\A#{relative_url_root}/, "#{relative_url_root}/#{I18n.locale}")
+           elsif request.original_fullpath == '/'
+             "/#{I18n.locale}"
            else
-             "#{I18n.locale}/#{request.original_fullpath}"
+             "/#{I18n.locale}#{request.original_fullpath}"
            end
 
     redirect_to dest
