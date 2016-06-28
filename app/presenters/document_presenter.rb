@@ -31,8 +31,14 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
     # global.facet.reusability.open            Yes with attribution
     # global.facet.reusability.restricted      Yes with restrictions
 
-    begin
-      rights = EDM::Rights.normalise(media_rights)
+    rights = EDM::Rights.normalise(media_rights)
+    if rights.nil?
+      {
+        license_public: false,
+        license_name: 'unmatched rights: ' + media_rights,
+        license_url: media_rights
+      }
+    else
       license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase
 
       {
@@ -41,12 +47,6 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
         license_url: media_rights,
         :"license_#{license_flag_key}" => true,
         expiry: rights_label_expiry(rights)
-      }
-    rescue EDM::Rights::UnknownRights
-      {
-        license_public: false,
-        license_name: 'unmatched rights: ' + media_rights,
-        license_url: media_rights
       }
     end
   end
