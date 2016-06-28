@@ -12,14 +12,14 @@ module NavigableView
             settings_active: true
           },
           logo: {
-            url: root_path,
+            url: home_path,
             text: 'Europeana ' + t('global.search-collections')
           },
           primary_nav: {
             menu_id: 'main-menu',
             items: [
               {
-                url: root_path,
+                url: home_path,
                 text: t('global.navigation.home'),
                 is_current: controller.controller_name == 'home'
               },
@@ -54,7 +54,7 @@ module NavigableView
             ]
           }
         },
-        home_url: root_url,
+        home_url: home_url,
         footer: {
           linklist1: {
             title: t('global.more-info'),
