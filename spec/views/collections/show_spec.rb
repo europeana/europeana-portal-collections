@@ -7,6 +7,7 @@ RSpec.describe 'collections/show.html.mustache', :page_with_top_nav, :blacklight
     allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:has_search_parameters?).and_return(false)
+    allow(view).to receive(:params).and_return({ id: collection.id })
     render
   end
 

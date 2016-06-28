@@ -7,8 +7,8 @@ RSpec.describe PortalController do
   describe 'GET index' do
     context 'without q param' do
       it 'redirects to root' do
-        get :index
-        expect(response).to redirect_to(root_url)
+        get :index, { locale: 'en' }
+        expect(response).to redirect_to(home_url(locale: 'en'))
       end
     end
 
@@ -18,7 +18,7 @@ RSpec.describe PortalController do
       end
 
       context 'when q param empty' do
-        let(:params) { { q: '' } }
+        let(:params) { { locale: 'en', q: '' } }
 
         it 'searches the API' do
           expect(an_api_search_request.
@@ -32,7 +32,7 @@ RSpec.describe PortalController do
       end
 
       context 'when q param non-empty' do
-        let(:params) { { q: 'paris' } }
+        let(:params) { { locale: 'en', q: 'paris' } }
 
         it 'searches the API' do
           expect(an_api_search_request.
@@ -46,7 +46,7 @@ RSpec.describe PortalController do
       end
 
       context 'with mlt param' do
-        let(:params) { { mlt: '/abc/123' } }
+        let(:params) { { locale: 'en', mlt: '/abc/123' } }
         let(:record_id) { params[:mlt] }
         it_behaves_like 'a record API request'
         it_behaves_like 'a more like this API request'
@@ -60,7 +60,7 @@ RSpec.describe PortalController do
       get :show, params
     end
 
-    let(:params) { { id: 'abc/123' } }
+    let(:params) { { locale: 'en', id: 'abc/123' } }
     let(:record_id) { '/' + params[:id] }
 
     it_behaves_like 'a record API request'
@@ -91,7 +91,7 @@ RSpec.describe PortalController do
     it 'caches the mime-type response'
 
     context 'when format is HTML' do
-      let(:params) { { id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
 
       it 'renders the object display page' do
         expect(response).to render_template('portal/show')
@@ -104,7 +104,7 @@ RSpec.describe PortalController do
       end
 
       context 'with param debug=json' do
-        let(:params) { { id: 'abc/123', format: 'html', debug: 'json' } }
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'html', debug: 'json' } }
         it 'assigns pretty JSON document to @debug' do
           expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json.merge(hierarchy: assigns(:hierarchy).as_json)))
         end
@@ -122,7 +122,7 @@ RSpec.describe PortalController do
       before do
         get :similar, params
       end
-      let(:params) { { id: 'abc/123', format: 'json' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'json' } }
       let(:record_id) { '/' + params[:id] }
       it_behaves_like 'a record API request'
       it_behaves_like 'a more like this API request'
@@ -137,7 +137,7 @@ RSpec.describe PortalController do
         expect(response).to render_template('portal/similar')
       end
       context 'with page param' do
-        let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'json', page: 2 } }
         it 'paginates' do
           expect(an_api_search_request.with(query: hash_including(start: '5'))).
             to have_been_made
@@ -156,7 +156,7 @@ RSpec.describe PortalController do
         end
       end
       context 'with field limiting param' do
-        let(:params) { { id: 'abc/123', format: 'json', mltf: 'title' } }
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'json', mltf: 'title' } }
         it 'limits MLT items to that field' do
           expect(an_api_search_request.with(query: hash_including(query: /title:/))).
             to have_been_made
@@ -167,7 +167,7 @@ RSpec.describe PortalController do
     end
 
     context 'when format is HTML' do
-      let(:params) { { id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
       it 'renders an error page' do
         get :similar, params
         expect(response.status).to eq(404)
@@ -181,7 +181,7 @@ RSpec.describe PortalController do
       before do
         get :media, params
       end
-      let(:params) { { id: 'abc/123', format: 'json' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'json' } }
       let(:record_id) { '/' + params[:id] }
       it_behaves_like 'a record API request'
       it_behaves_like 'no hierarchy API request'
@@ -195,14 +195,14 @@ RSpec.describe PortalController do
         expect(response).to render_template('portal/media')
       end
       context 'with page param' do
-        let(:params) { { id: 'abc/123', format: 'json', page: 2 } }
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'json', page: 2 } }
         it 'paginates'
         it 'defaults per_page to 4'
       end
     end
 
     context 'when format is HTML' do
-      let(:params) { { id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
       it 'renders an error page' do
         get :media, params
         expect(response.status).to eq(404)

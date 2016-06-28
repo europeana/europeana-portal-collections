@@ -6,8 +6,6 @@
 # Public methods added to this class will be available to all Mustache
 # templates.
 class ApplicationView < Europeana::Styleguide::View
-  include MustacheHelper
-
   def cached_body
     lambda do |text|
       if cache_body?

@@ -5,7 +5,7 @@ RSpec.feature 'Search page' do
     context (js ? 'with JS' : 'without JS'), js: js do
       describe 'search page' do
         it 'expects results' do
-          visit '/'
+          visit '/en'
 
           sleep 3 if js
 
@@ -23,7 +23,7 @@ RSpec.feature 'Search page' do
         end
 
         it 'permits empty searches' do
-          visit '/'
+          visit '/en'
 
           sleep 3 if js
 
@@ -33,11 +33,11 @@ RSpec.feature 'Search page' do
 
           sleep 2 if js
 
-          expect(current_path).to eq('/search')
+          expect(current_path).to eq('/en/search')
         end
 
         it 'ignores 2nd empty search' do
-          visit '/'
+          visit '/en'
 
           sleep 3 if js
 
@@ -57,7 +57,7 @@ RSpec.feature 'Search page' do
         end
 
         it 'does not submit placeholder text' do
-          visit '/'
+          visit '/en'
 
           sleep 3 if js
 

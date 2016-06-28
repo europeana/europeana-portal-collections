@@ -19,12 +19,11 @@ RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_conf
   end
 
   before(:each) do
-    allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
-    allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:current_search_session).and_return nil
     allow(view).to receive(:search_session).and_return({})
     allow(view).to receive(:search_action_path).and_return('/search')
     allow(view).to receive(:oembed_html).and_return({})
+    allow(view).to receive(:params).and_return({ id: 'abc/123' })
 
     assign(:document, blacklight_document)
     assign(:similar, [])
@@ -32,7 +31,6 @@ RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_conf
 
   it 'should have meta description' do
     render
-    # expect(rendered).to have_selector("meta[name=\"description\"][content=\"About Mr Smith\"]", visible: false)
     expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
   end
 

@@ -4,7 +4,7 @@ RSpec.feature 'Object page' do
       # No HTML next/previous links when action caching is in use
       # @todo Make this spec detect the AJAX-added links
 #       it 'expects working previous / next links' do
-#         visit '/'
+#         visit '/en'
 
 #         sleep 3
 
@@ -43,7 +43,7 @@ RSpec.feature 'Object page' do
 
     context 'without JS', js: false do
       it 'expects no working previous / next links' do
-        visit '/'
+        visit '/en'
 
         fill_in('q', with: 'paris')
 

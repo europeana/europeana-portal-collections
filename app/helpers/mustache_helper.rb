@@ -18,11 +18,10 @@ module MustacheHelper
     links = [
       { rel: 'search', type: 'application/opensearchdescription+xml',
         href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
-        title: 'Europeana Search' }
-    ]
-    if params[:controller] == 'home' && params[:action] == 'index'
-      links << { rel: 'canonical', href: root_url }
-    end
+        title: 'Europeana Search' },
+      { rel: 'alternate', href: current_url_without_locale, hreflang: 'x-default' }
+    ] + alternate_language_links
+
     { items: links }
   end
 
@@ -194,7 +193,7 @@ module MustacheHelper
         items: [
           {
             url: '#',
-            text: t('global.settings'),
+            text: t('site.settings.language.label'),
             icon: 'settings',
             submenu: {
               items: utility_nav_items_submenu_items
@@ -231,6 +230,20 @@ module MustacheHelper
 
   private
 
+  def alternate_language_links
+    language_map.keys.map do |locale|
+      { rel: 'alternate', hreflang: locale, href: current_url_for_locale(locale) }
+    end
+  end
+
+  def current_url_for_locale(locale)
+    url_for(params.merge(locale: locale, only_path: false))
+  end
+
+  def current_url_without_locale
+    url_for(params.merge(only_path: false)).sub("/#{I18n.locale}", '')
+  end
+
   def navigation_global_primary_nav_collections_submenu_items
     displayable_collections.map do |collection|
       link_item(collection.title, collection_path(collection),
@@ -266,11 +279,11 @@ module MustacheHelper
   end
 
   def utility_nav_items_submenu_items
-    [
-      link_item(t('global.settings'), false, subtitle: true),
-      link_item(t('site.settings.language.label'), '/portal/settings/language',
-                is_current: (controller.controller_name == 'settings'))
-    ]
+    language_map.map do |locale, i18n|
+      label = t("global.language-#{i18n}", locale: locale)
+      link_item(label, current_url_for_locale(locale),
+                is_current: (locale.to_s == I18n.locale.to_s))
+    end
   end
 
   def navigation_footer_linklist1_items

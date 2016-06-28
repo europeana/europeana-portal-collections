@@ -1,7 +1,7 @@
 RSpec.describe CollectionsController do
   describe 'GET index' do
     before do
-      get :index
+      get :index, { locale: 'en' }
     end
 
     it 'does not query API' do
@@ -19,7 +19,7 @@ RSpec.describe CollectionsController do
         get :show, params
       end
       let(:collection) { Collection.find_by_key('all') }
-      let(:params) { { id: collection.key } }
+      let(:params) { { locale: 'en', id: collection.key } }
 
       it 'does not query API' do
         expect(an_api_search_request).not_to have_been_made
@@ -31,7 +31,7 @@ RSpec.describe CollectionsController do
     end
 
     context 'with id=[unknown collection]' do
-      let(:params) { { id: 'unknown' } }
+      let(:params) { { locale: 'en', id: 'unknown' } }
 
       it 'does not query API' do
         get :show, params
@@ -53,7 +53,7 @@ RSpec.describe CollectionsController do
       let(:landing_page) { Page::Landing.find_by_slug('collections/music') }
 
       context 'without search params' do
-        let(:params) { { id: collection.key } }
+        let(:params) { { locale: 'en', id: collection.key } }
 
         it 'should not query API for collection stats' do
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
@@ -76,7 +76,7 @@ RSpec.describe CollectionsController do
       end
 
       context 'with search params' do
-        let(:params) { { id: collection.key, q: 'search' } }
+        let(:params) { { locale: 'en', id: collection.key, q: 'search' } }
 
         it 'queries API' do
           expect(an_api_search_request).to have_been_made.at_least_once

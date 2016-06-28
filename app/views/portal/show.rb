@@ -3,17 +3,8 @@ module Portal
     attr_accessor :document, :debug
 
     def head_links
-      s = super
-      mustache[:head_links] ||= {
-        items: [
-          { rel: 'canonical', href: document_url(document, format: 'html') }
-        ] + oembed_links + s[:items]
-      }
-    end
-
-    def oembed_links
-      oembed_html.map do |_url, oembed|
-        { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
+      mustache[:head_links] ||= begin
+        { items: oembed_links + helpers.head_links[:items] }
       end
     end
 
@@ -589,6 +580,12 @@ module Portal
     end
 
     private
+
+    def oembed_links
+      oembed_html.map do |_url, oembed|
+        { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
+      end
+    end
 
     def meta_description
       mustache[:meta_description] ||= begin

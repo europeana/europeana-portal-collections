@@ -10,10 +10,10 @@ module Home
       {
         context: 'http://schema.org',
         type: 'WebSite',
-        url: root_url,
+        url: home_url,
         potentialAction: {
           type: 'SearchAction',
-          target: root_url + 'search?q={q}',
+          target: search_url + '?q={q}',
           query_input: 'required name=q'
         }
       }

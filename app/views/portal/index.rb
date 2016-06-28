@@ -18,7 +18,7 @@ module Portal
 
     def form_search
       mustache[:form_search] ||= begin
-        super.merge(hidden: form_search_hidden)
+        helpers.form_search.merge(hidden: form_search_hidden)
       end
     end
 
