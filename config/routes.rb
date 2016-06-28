@@ -30,9 +30,9 @@ Rails.application.routes.draw do
     mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
     devise_for :users
 
-    get 'browse/agents', to: redirect('browse/people')
+    get 'browse/agents', to: redirect('%{locale}/browse/people')
     get 'browse/colours', to: 'browse#colours'
-    get 'browse/concepts', to: redirect('browse/topics')
+    get 'browse/concepts', to: redirect('%{locale}/browse/topics')
     get 'browse/newcontent', to: 'browse#new_content'
     get 'browse/people', to: 'browse#people'
     get 'browse/sources', to: 'browse#sources'
