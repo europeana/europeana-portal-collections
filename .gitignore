@@ -48,7 +48,6 @@
 /config/initializers/cache_version.rb
 
 # Ignore rvm files.
-/.ruby-version
 .ruby-gemset
 
 # Ignore IDE files.
