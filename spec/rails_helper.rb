@@ -64,6 +64,10 @@ RSpec.configure do |config|
   config.include ViewTestHelper, type: :view
 
   config.before(:each) do
+    Europeana::Portal::Application.config.relative_url_root = nil
+  end
+
+  config.before(:each) do
     Rails.cache.clear
   end
 end
