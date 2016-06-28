@@ -1,5 +1,7 @@
 # Start with Rubocop's default style
-inherit_from: https://github.com/bbatsov/rubocop/blob/v0.39.0/config/default.yml
+# (Hound CI does not support inherit_from URLs)
+# inherit_from: https://github.com/bbatsov/rubocop/blob/v0.39.0/config/default.yml
+inherit_from: ./config/rubocop/default.yml
 # Europeana specific changes go below
 Metrics/LineLength:
   Description: Limit lines to 140 characters.
