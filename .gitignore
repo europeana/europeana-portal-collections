@@ -85,6 +85,3 @@
 # Ignore generated documentation
 /.yardoc
 /yardoc
-
-# Ignore Rubocop cached remote configs.
-.rubocop-*
