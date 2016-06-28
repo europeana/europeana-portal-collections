@@ -4,7 +4,7 @@ module Portal
 
     def head_links
       mustache[:head_links] ||= begin
-        { items: oembed_links + helpers.head_links[:items] }
+        { items: oembed_links + super[:items] }
       end
     end
 
@@ -37,7 +37,7 @@ module Portal
 
     def navigation
       mustache[:navigation] ||= begin
-        { back_url: back_url_from_referer }.reverse_merge(helpers.navigation)
+        { back_url: back_url_from_referer }.reverse_merge(super)
       end
     end
 
@@ -447,7 +447,7 @@ module Portal
           named_entities: named_entity_data,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-        }.reverse_merge(helpers.content)
+        }.reverse_merge(super)
       end
     end
 

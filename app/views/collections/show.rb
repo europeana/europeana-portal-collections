@@ -77,7 +77,7 @@ module Collections
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
           carousel: helpers.collection_tumblr_feed_content(@collection)
-        }.reverse_merge(helpers.content)
+        }.reverse_merge(super)
       end
     end
 

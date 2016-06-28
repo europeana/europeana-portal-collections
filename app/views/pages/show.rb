@@ -24,7 +24,7 @@ module Pages
             items: browse_entry_items(@page.browse_entries.published, @page)
           },
           banner: banner_content(@page.banner_id)
-        }.reverse_merge(helpers.content)
+        }.reverse_merge(super)
       end
     end
 
@@ -34,7 +34,7 @@ module Pages
           secondary: {
             items: secondary_navigation_items
           }
-        }).reverse_merge(helpers.navigation)
+        }).reverse_merge(super)
       end
     end
 

@@ -30,7 +30,7 @@ module Home
             blogurl: Cache::FeedJob::URLS[:blog][:all].sub('/feed', '')
           },
           banner: banner_content(@landing_page.banner_id)
-        }.reverse_merge(helpers.content)
+        }.reverse_merge(super)
       end
     end
 
