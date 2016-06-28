@@ -1,7 +1,7 @@
 # Start with Rubocop's default style
 # (Hound CI does not support inherit_from URLs)
 # inherit_from: https://github.com/bbatsov/rubocop/blob/v0.39.0/config/default.yml
-inherit_from: ./config/rubocop/default.yml
+inherit_from: ./.rubocop-default.yml
 # Europeana specific changes go below
 AllCops:
   TargetRubyVersion: 2.3
