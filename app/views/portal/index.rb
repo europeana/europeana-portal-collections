@@ -7,7 +7,7 @@ module Portal
     end
 
     def bodyclass
-      grid_view_active ? 'display-grid' : nil
+      grid_view_active ? "display-grid" : nil
     end
 
     def page_title
