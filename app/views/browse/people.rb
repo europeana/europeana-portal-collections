@@ -1,5 +1,8 @@
 module Browse
   class People < ApplicationView
+    include CollectionFilterableView
+    include BrowseEntryDisplayingView
+
     def page_title
       mustache[:page_title] ||= begin
         [t('site.browse.people.title'), site_title].join(' - ')

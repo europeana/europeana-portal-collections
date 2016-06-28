@@ -18,7 +18,7 @@ module BrowsableView
     }
   end
 
-  private
+  protected
 
   ##
   # Items for the browse menu

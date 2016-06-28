@@ -1,6 +1,10 @@
 module Home
   class Index < ApplicationView
     include BrowsableView
+    include HeroImageDisplayingView
+    include NewsworthyView
+    include PromotionLinkDisplayingView
+    include SearchableView
 
     def page_title
       'Europeana Collections'
@@ -59,6 +63,10 @@ module Home
 
     def body_cache_key
       @landing_page.cache_key
+    end
+
+    def total_item_count
+      @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
     end
   end
 end

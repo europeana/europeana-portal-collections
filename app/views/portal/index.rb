@@ -2,6 +2,8 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
+    include SearchableView
+
     def grid_view_active
       params[:view] == 'grid'
     end
@@ -167,6 +169,20 @@ module Portal
         facets_selected_items.blank? ? nil : { items: facets_selected_items }
       end
     end
+
+    def collection_data
+      mustache[:collection_data] ||= begin
+        if within_collection?
+          collection = current_collection
+          {
+            name: collection.key,
+            label: collection.landing_page.title,
+            url: collection_url(collection)
+          }
+        end
+      end
+    end
+    alias_method :channel_data, :collection_data
 
     private
 

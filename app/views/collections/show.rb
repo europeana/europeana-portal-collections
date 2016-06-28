@@ -1,6 +1,11 @@
 module Collections
   class Show < ApplicationView
     include BrowsableView
+    include BrowseEntryDisplayingView
+    include HeroImageDisplayingView
+    include NewsworthyView
+    include PromotionLinkDisplayingView
+    include SearchableView
 
     def head_meta
       mustache[:head_meta] ||= begin
