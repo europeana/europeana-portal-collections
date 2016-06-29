@@ -7,7 +7,11 @@ class PortalController < ApplicationController
   include SoundCloudUrnResolver
   include OembedRetriever
 
-  before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
+  before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
+
+  def redirect_to_home
+    redirect_to home_path
+  end
 
   attr_reader :url_conversions, :oembed_html
 

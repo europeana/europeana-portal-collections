@@ -6,15 +6,51 @@
 # Public methods added to this class will be available to all Mustache
 # templates.
 class ApplicationView < Europeana::Styleguide::View
-  include MustacheHelper
+  include AssettedView
+  include BanneredView
+  include CacheableView
+  include LocalisableView
+  include NavigableView
 
-  def cached_body
-    lambda do |text|
-      if cache_body?
-        Rails.cache.fetch(cache_key, expires_in: 24.hours) { render(text) }
-      else
-        render(text)
-      end
+  def head_links
+    links = [
+      { rel: 'search', type: 'application/opensearchdescription+xml',
+        href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
+        title: 'Europeana Search' },
+      { rel: 'alternate', href: current_url_without_locale, hreflang: 'x-default' }
+    ] + alternate_language_links
+
+    { items: links }
+  end
+
+  def fb_campaigns_on
+    true
+  end
+
+  def version
+    { is_alpha: true }
+  end
+
+  def page_config
+    {
+      newsletter: true
+    }
+  end
+
+  def newsletter
+    {
+      form: {
+        action: 'http://europeana.us3.list-manage.com/subscribe/post?u=ad318b7566f97eccc895e014e&amp;id=1d4f51a117',
+        language_op: true
+      }
+    }
+  end
+
+  def content
+    mustache[:content] ||= begin
+      {
+        banner: banner_content
+      }
     end
   end
 
@@ -24,29 +60,17 @@ class ApplicationView < Europeana::Styleguide::View
     'Europeana Collections'
   end
 
-  private
-
-  def cache_version
-    @cache_version ||= begin
-      v = Rails.application.config.assets.version.dup
-      unless Rails.application.config.x.cache_version.blank?
-        v << ('-' + Rails.application.config.x.cache_version.dup)
-      end
-      v
+  def alternate_language_links
+    language_map.keys.map do |locale|
+      { rel: 'alternate', hreflang: locale, href: current_url_for_locale(locale) }
     end
   end
 
-  def cache_key
-    keys = ['views', cache_version, I18n.locale.to_s, devise_user.role || 'guest', body_cache_key]
-    keys.compact.join('/')
+  def devise_user
+    current_user || User.new(guest: true)
   end
 
-  # Implement this method in sub-classes to enable body caching
-  def body_cache_key
-    fail NotImplementedError
-  end
-
-  def cache_body?
-    !request.format.json? && !ENV['DISABLE_VIEW_CACHING']
+  def mustache
+    @mustache ||= {}
   end
 end

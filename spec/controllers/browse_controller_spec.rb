@@ -5,7 +5,7 @@ RSpec.describe BrowseController do
       get :colours, params
     end
 
-    let(:params) { {} }
+    let(:params) { { locale: 'en' } }
 
     it 'should render the colour browse Mustache template' do
       expect(response.status).to eq(200)
@@ -21,7 +21,7 @@ RSpec.describe BrowseController do
     end
 
     context 'when theme param is present' do
-      let(:params) { { theme: collections(:music).key } }
+      let(:params) { { locale: 'en', theme: collections(:music).key } }
 
       it 'should load collection' do
         expect(assigns[:collection]).to eq(collections(:music))
@@ -35,7 +35,7 @@ RSpec.describe BrowseController do
       get :new_content, params
     end
 
-    let(:params) { {} }
+    let(:params) { { locale: 'en' } }
     let(:providers) do
       [
         { text: 'A Provider' },
@@ -54,7 +54,7 @@ RSpec.describe BrowseController do
     end
 
     context 'when theme param is present' do
-      let(:params) { { theme: collections(:music).key } }
+      let(:params) { { locale: 'en', theme: collections(:music).key } }
 
       it 'should load collection' do
         expect(assigns[:collection]).to eq(collections(:music))
@@ -68,7 +68,7 @@ RSpec.describe BrowseController do
       get :sources, params
     end
 
-    let(:params) { {} }
+    let(:params) { { locale: 'en' } }
     let(:providers) do
       [
         { text: 'A Provider', count: 5000 },
@@ -99,7 +99,7 @@ RSpec.describe BrowseController do
     end
 
     context 'when theme param is present' do
-      let(:params) { { theme: collections(:music).key } }
+      let(:params) { { locale: 'en', theme: collections(:music).key } }
 
       it 'should load collection' do
         expect(assigns[:collection]).to eq(collections(:music))
@@ -112,7 +112,7 @@ RSpec.describe BrowseController do
       get :people, params
     end
 
-    let(:params) { {} }
+    let(:params) { { locale: 'en' } }
 
     it 'should render the people Mustache template' do
       expect(response.status).to eq(200)
@@ -124,7 +124,7 @@ RSpec.describe BrowseController do
     end
 
     context 'when theme param is present' do
-      let(:params) { { theme: collections(:music).key } }
+      let(:params) { { locale: 'en', theme: collections(:music).key } }
 
       it 'should load collection' do
         expect(assigns[:collection]).to eq(collections(:music))
@@ -137,7 +137,7 @@ RSpec.describe BrowseController do
       get :topics, params
     end
 
-    let(:params) { {} }
+    let(:params) { { locale: 'en' } }
 
     it 'should render the topics Mustache template' do
       expect(response.status).to eq(200)
@@ -149,7 +149,7 @@ RSpec.describe BrowseController do
     end
 
     context 'when theme param is present' do
-      let(:params) { { theme: collections(:music).key } }
+      let(:params) { { locale: 'en', theme: collections(:music).key } }
 
       it 'should load collection' do
         expect(assigns[:collection]).to eq(collections(:music))

@@ -64,6 +64,10 @@ RSpec.configure do |config|
   config.include ViewTestHelper, type: :view
 
   config.before(:each) do
+    Europeana::Portal::Application.config.relative_url_root = nil
+  end
+
+  config.before(:each) do
     Rails.cache.clear
   end
 end
@@ -72,5 +76,11 @@ Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails
+  end
+end
+
+class ActionView::TestCase::TestController
+  def default_url_options(options = {})
+    { locale: I18n.default_locale }
   end
 end

@@ -1,14 +1,14 @@
 RSpec.describe 'Search requests' do
   context 'without query params' do
-    it 'redirects /search to /' do
-      get('/search')
-      expect(response).to redirect_to(root_url)
+    it 'redirects /en/search to /en/' do
+      get('/en/search')
+      expect(response).to redirect_to(home_url)
     end
   end
 
   context 'with q param' do
     before do
-      get('/search?q=paris')
+      get('/en/search?q=paris')
     end
 
     it 'searches the API' do

@@ -2,6 +2,8 @@ module Pages
   module Custom
     module Errors
       class NotFound < Pages::Show
+        include SearchableView
+
         def content
           mustache[:content] ||= begin
             {

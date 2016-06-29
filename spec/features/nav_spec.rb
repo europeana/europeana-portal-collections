@@ -4,27 +4,27 @@ RSpec.feature 'Top navigation' do
       let(:nav) { page.find('#main-menu') }
 
       it 'has top nav' do
-        visit '/'
+        visit '/en'
         expect(nav).not_to be_nil
       end
 
       it 'links to home' do
-        visit '/'
+        visit '/en'
         expect(nav).to have_link('Home')
       end
 
       it 'links to Collections' do
-        visit '/'
+        visit '/en'
         expect(nav).to have_css('span', text: 'Collections')
       end
 
       it 'links to exhibitions' do
-        visit '/'
+        visit '/en'
         expect(nav).to have_link('Exhibitions', href: 'http://exhibitions.europeana.eu/')
       end
 
       it 'links to blogs' do
-        visit '/'
+        visit '/en'
         expect(nav).to have_link('Blog', href: 'http://blog.europeana.eu/')
       end
     end

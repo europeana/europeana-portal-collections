@@ -19,24 +19,40 @@ class ApplicationController < ActionController::Base
     super || User.new(guest: true)
   end
 
-  def default_url_options
+  def default_url_options(options = {})
+    defaults = request_in_cms? ? {} : { locale: I18n.locale }
+    defaults.merge!(options)
     if ENV['HTTP_HOST']
-      { host: ENV['HTTP_HOST'] }
-    else
-      {}
+      defaults.merge!(host: ENV['HTTP_HOST'] )
     end
+    defaults
   end
 
   private
 
   def set_locale
+    session[:locale] = params[:locale] if params.key?(:locale)
+    session[:locale] ||= extract_locale_from_accept_language_header
     session[:locale] ||= I18n.default_locale
-    session[:locale] = I18n.default_locale unless I18n.available_locales.map(&:to_s).include?(session[:locale].to_s)
+
+    unless I18n.available_locales.map(&:to_s).include?(session[:locale].to_s)
+      fail ActionController::RoutingError, "Unknown locale #{session[:locale]}"
+    end
+
     I18n.locale = session[:locale]
   end
 
-  def redirect_to_root
-    redirect_to root_url
+  def extract_locale_from_accept_language_header
+    return unless request.env.key?('HTTP_ACCEPT_LANGUAGE')
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+  end
+
+  def redirect_to_home
+    redirect_to home_url
     return false
+  end
+
+  def request_in_cms?
+    self.class.to_s.deconstantize == 'RailsAdmin'
   end
 end
