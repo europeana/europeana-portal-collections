@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'application#localise'
+  root to: 'locale#index'
 
   scope '/:locale', constraints: { locale: /[a-z]{2}/ } do
     get '', to: 'home#index', as: 'home'
@@ -42,5 +42,6 @@ Rails.application.routes.draw do
     get '*page', to: 'pages#show', as: 'static_page'
   end
 
-  get '*path', to: 'application#localise'
+  put 'locale', to: 'locale#update'
+  get '*path', to: 'locale#show'
 end

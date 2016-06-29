@@ -9,7 +9,7 @@ RSpec.describe CollectionsController do
     end
 
     it 'redirects to root' do
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(home_url)
     end
   end
 

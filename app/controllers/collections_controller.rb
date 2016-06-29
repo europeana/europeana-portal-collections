@@ -3,10 +3,10 @@
 class CollectionsController < ApplicationController
   include Europeana::Collections
 
-  before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'all' }
+  before_action :redirect_to_home, only: :show, if: proc { params[:id] == 'all' }
 
   def index
-    redirect_to_root
+    redirect_to_home
   end
 
   def show
