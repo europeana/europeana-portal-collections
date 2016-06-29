@@ -1,15 +1,7 @@
-require 'support/shared_examples/page_with_top_nav'
-
-RSpec.describe 'pages/custom/errors/not_found.html.mustache', :blacklight_config do
-#   let(:blacklight_config) do
-#     Blacklight::Configuration.new do |config|
-#       config.index.title_field = 'title_display'
-#     end
-#   end
-
+RSpec.describe 'pages/custom/errors/not_found.html.mustache', :blacklight_config, :page_with_top_nav do
   before(:each) do
     assign(:page, page)
-    allow(view).to receive(:params).and_return({ page: page.slug })
+    assign(:params, { page: page.slug })
     controller.request.path_parameters.merge!(controller: 'pages', action: 'show')
   end
 

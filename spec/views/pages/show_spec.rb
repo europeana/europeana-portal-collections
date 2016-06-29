@@ -1,7 +1,7 @@
 RSpec.describe 'pages/show.html.mustache', :page_with_top_nav do
   before(:each) do
     assign(:page, page)
-    allow(view).to receive(:params).and_return({ page: page.slug })
+    assign(:params, { page: page.slug })
   end
 
   let(:page) { pages(:about) }

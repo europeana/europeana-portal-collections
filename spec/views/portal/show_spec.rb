@@ -23,8 +23,8 @@ RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_conf
     allow(view).to receive(:search_session).and_return({})
     allow(view).to receive(:search_action_path).and_return('/search')
     allow(view).to receive(:oembed_html).and_return({})
-    allow(view).to receive(:params).and_return({ id: 'abc/123' })
 
+    assign(:params, { id: 'abc/123' })
     assign(:document, blacklight_document)
     assign(:similar, [])
   end
