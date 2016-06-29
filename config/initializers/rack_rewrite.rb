@@ -60,7 +60,7 @@ Rails.application.configure do
         params.delete('qt')
 
         query = Rack::Utils.build_nested_query(params)
-        Europeana::Portal::Application.config.relative_url_root + '/search?' + query
+        (Europeana::Portal::Application.config.relative_url_root || '') + '/search?' + query
       },
       if: Proc.new { |rack_env|
         (Rack::Utils.parse_query(rack_env['QUERY_STRING']).keys & %w(query rows start qf qt)).present?
