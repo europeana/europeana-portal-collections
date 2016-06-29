@@ -8,7 +8,7 @@ RSpec.describe CollectionsController do
       expect(an_api_search_request).not_to have_been_made
     end
 
-    it 'redirects to root' do
+    it 'redirects to home' do
       expect(response).to redirect_to(home_url)
     end
   end
@@ -25,8 +25,8 @@ RSpec.describe CollectionsController do
         expect(an_api_search_request).not_to have_been_made
       end
 
-      it 'redirects to root' do
-        expect(response).to redirect_to(root_url)
+      it 'redirects to home' do
+        expect(response).to redirect_to(home_url)
       end
     end
 
