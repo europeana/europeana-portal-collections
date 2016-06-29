@@ -24,18 +24,25 @@ module Portal
 
     def filters
       mustache[:filters] ||= begin
-        facets_from_request.reject do |facet|
+        (simple_filters + advanced_filters).reject { |facet| facet[:items].blank? }
+      end
+    end
+
+    def simple_filters
+      mustache[:simple_filters] ||= begin
+        filters = facets_from_request.reject do |facet|
           blacklight_config.facet_fields[facet.name].advanced ||
             blacklight_config.facet_fields[facet.name].parent
-        end.map do |facet|
+        end
+        filters.map do |facet|
           FacetPresenter.build(facet, controller).display
-        end.compact + advanced_filters
+        end
       end
     end
 
     def advanced_filters
-      advanced_count = 0
       mustache[:advanced_filters] ||= begin
+        advanced_count = 0
         [
           {
             advanced_items: {
