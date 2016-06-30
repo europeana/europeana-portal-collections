@@ -26,7 +26,9 @@ module Portal
 
     def filters
       mustache[:filters] ||= begin
-        (simple_filters + advanced_filters).reject { |facet| facet[:items].blank? }
+        (simple_filters + advanced_filters).select do |facet|
+          facet[:boolean] || facet[:date] || facet[:items].present?
+        end
       end
     end
 
