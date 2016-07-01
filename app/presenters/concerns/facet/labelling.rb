@@ -31,7 +31,7 @@ module Facet
     included do
       label_facet 'COLLECTION',
                   items: {
-                    with: lambda { |item| Collection.find_by_key(item).title }
+                    with: ->(item) { Collection.find_by_key(item).title }
                   }
       label_facet 'TYPE', items: { titleize: true, i18n: true }
       label_facet 'IMAGE_COLOUR', items: { titleize: true, i18n: true }
@@ -72,35 +72,35 @@ module Facet
       label_facet 'RIGHTS',
                   title: nil,
                   items: {
-                    with: lambda { |item| EDM::Rights.for_api_query(item).label }
+                    with: ->(item) { EDM::Rights.for_api_query(item).label }
                   }
       label_facet 'COUNTRY',
                   items: {
-                    with: lambda { |item| item.dup.gsub(/\s+/, '') },
+                    with: ->(item) { item.dup.gsub(/\s+/, '') },
                     titleize: true, i18n: true
                   }
       label_facet 'LANGUAGE', items: { titleize: true, i18n: true }
       label_facet 'CREATOR',
                   i18n: 'fashion.designer',
                   items: {
-                    with: lambda { |item| item.sub(/ \(Designer\)\z/, '') }
+                    with: ->(item) { item.sub(/ \(Designer\)\z/, '') }
                   }
       label_facet 'proxy_dc_format.en',
                   i18n: 'fashion.technique',
                   items: {
-                    with: lambda { |item| item.sub(/\ATechnique: /, '') },
+                    with: ->(item) { item.sub(/\ATechnique: /, '') },
                     titleize: true
                   }
       label_facet 'proxy_dc_type.en',
                   i18n: 'fashion.type',
                   items: {
-                    with: lambda { |item| item.sub(/\AObject Type: /, '') },
+                    with: ->(item) { item.sub(/\AObject Type: /, '') },
                     titleize: true
                   }
       label_facet 'colour',
                   i18n: 'fashion.colour',
                   items: {
-                    with: lambda { |item| item.sub(/\AColor: /, '') },
+                    with: ->(item) { item.sub(/\AColor: /, '') },
                     titleize: true
                   }
     end
