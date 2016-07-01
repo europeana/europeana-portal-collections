@@ -72,9 +72,7 @@ module Facet
       label_facet 'RIGHTS',
                   title: nil,
                   items: {
-                    with: lambda do |item|
-                      EDM::Rights.registry.detect { |rights| rights.api_query == item }.label
-                    end
+                    with: lambda { |item| EDM::Rights.for_api_query(item).label }
                   }
       label_facet 'COUNTRY',
                   items: {
