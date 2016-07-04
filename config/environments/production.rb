@@ -48,8 +48,19 @@ Rails.application.configure do
   config.log_level = :info
 
   # Logstash logging
+  config.lograge.custom_options = lambda do |event|
+    data = { component: event.name }
+    data[:redis] = event.payload[:redis_runtime].to_f.round(2) if event.payload.key?(:redis_runtime)
+    data
+  end
   config.lograge.formatter = Lograge::Formatters::Logstash.new
   config.logger = LogStashLogger.new(type: :stdout)
+  LogStashLogger.configure do |config|
+    config.customize_event do |event|
+      event['level'] = event.remove('severity')
+      event['thread'] = Thread.current.object_id.to_s
+    end
+  end
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
