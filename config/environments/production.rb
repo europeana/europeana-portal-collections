@@ -49,9 +49,11 @@ Rails.application.configure do
 
   # Logstash logging
   config.lograge.custom_options = lambda do |event|
-    data = { component: event.name }
-    data[:redis] = event.payload[:redis_runtime].to_f.round(2) if event.payload.key?(:redis_runtime)
-    data
+    if event.payload.key?(:redis_runtime)
+      { redis: event.payload[:redis_runtime].to_f.round(2) }
+    else
+      {}
+    end
   end
   config.lograge.formatter = Lograge::Formatters::Logstash.new
   config.logger = LogStashLogger.new(type: :stdout)
