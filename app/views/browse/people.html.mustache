@@ -1,27 +1,5 @@
 {{>atoms/meta/_head}}
-
 {{#cached_body}}
-
-  {{> templates/Search/Search-colours}}
-
-  <section class="channel-info section">
-
-    {{#content.browse_entries}}
-    <ul class="browse-entry-list lc">
-      {{#items}}
-      <li class="list-item">
-        {{> molecules/blocks/browse-entry }}
-      </li>
-      {{/items}}
-    </ul>
-    {{/content.browse_entries}}
-
-  </section>
-
-  {{> organisms/sections/banner }}
-
-  {{> organisms/global/footer }}
-
+  {{> templates/Search/Search-people}}
 {{/cached_body}}
-
 {{>atoms/meta/_foot}}
