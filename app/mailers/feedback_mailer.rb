@@ -1,5 +1,5 @@
 class FeedbackMailer < ApplicationMailer
-  def post(text: text, type: type, page: page, ip: ip)
+  def post(text:, type:, page:, ip:)
     fail Errors::NoRecipient unless Rails.application.config.x.feedback_mail_to.present?
 
     @text = text
