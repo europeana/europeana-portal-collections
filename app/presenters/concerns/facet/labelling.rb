@@ -66,7 +66,8 @@ module Facet
                   tooltip: lambda { |controller|
                     {
                       icon: 'icon-help',
-                      link_url: controller.static_page_path('rights', format: 'html')
+                      link_url: controller.static_page_path('rights', format: 'html'),
+                      tooltip_id: 'tooltip-facet-reusability'
                     }
                   }
       label_facet 'RIGHTS',
