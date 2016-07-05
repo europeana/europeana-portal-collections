@@ -24,8 +24,8 @@ Rails.application.routes.draw do
       get 'tumblr', on: :member
     end
 
-    get '/channels', to: redirect('%{locale}/collections')
-    get '/channels/:id', to: redirect('%{locale}/collections/%{id}')
+    get 'channels', to: redirect('%{locale}/collections')
+    get 'channels/:id', to: redirect('%{locale}/collections/%{id}')
 
     mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
     devise_for :users
@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     get 'browse/people', to: 'browse#people'
     get 'browse/sources', to: 'browse#sources'
     get 'browse/topics', to: 'browse#topics'
+
+    post 'feedback', to: 'feedback#create'
 
     # Static pages
     get '*page', to: 'pages#show', as: 'static_page'
