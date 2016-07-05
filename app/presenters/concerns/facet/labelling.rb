@@ -67,7 +67,11 @@ module Facet
                     {
                       icon: 'icon-help',
                       link_url: controller.static_page_path('rights', format: 'html'),
-                      tooltip_id: 'tooltip-facet-reusability'
+                      tooltip_id: 'tooltip-facet-reusability',
+                      tooltip_text: I18n.t('global.tooltips.channels.search.new-filter'),
+                      persistent: true,
+                      link_class:'filter-name',
+                      trailing: true
                     }
                   }
       label_facet 'RIGHTS',
