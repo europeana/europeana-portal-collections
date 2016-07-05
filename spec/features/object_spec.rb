@@ -57,6 +57,18 @@ RSpec.feature 'Object page' do
     end
   end
 
+  describe 'feedback form' do
+    [false, true].each do |js|
+      context (js ? 'with JS' : 'without JS'), js: js do
+        it 'is present' do
+          visit '/en/record/abc/123'
+          sleep 1 if js
+          expect(page).to have_css('#feedback-form')
+        end
+      end
+    end
+  end
+
   describe 'search form' do
     [false, true].each do |js|
       context (js ? 'with JS' : 'without JS'), js: js do
