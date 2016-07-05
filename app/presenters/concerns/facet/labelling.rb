@@ -70,7 +70,7 @@ module Facet
                       tooltip_id: 'tooltip-facet-reusability',
                       tooltip_text: I18n.t('global.tooltips.channels.search.new-filter'),
                       persistent: true,
-                      link_class:'filter-name',
+                      link_class: 'filter-name',
                       trailing: true
                     }
                   }

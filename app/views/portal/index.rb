@@ -169,7 +169,7 @@ module Portal
               is_current: params[:view] != 'grid'
             }
           ],
-          tooltip:{
+          tooltip: {
             tooltip_text: t('global.tooltips.channels.search.new-grid'),
             tooltip_id: 'new-grid-layout',
             persistent: true,
