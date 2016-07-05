@@ -1,5 +1,7 @@
 module Portal
   class Show < ApplicationView
+    include SearchableView
+
     attr_accessor :document, :debug
 
     def head_links
