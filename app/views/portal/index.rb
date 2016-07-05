@@ -168,7 +168,13 @@ module Portal
               icon_list: true,
               is_current: params[:view] != 'grid'
             }
-          ]
+          ],
+          tooltip: {
+            tooltip_text: t('global.tooltips.channels.search.new-grid'),
+            tooltip_id: 'new-grid-layout',
+            persistent: true,
+            link_class: 'filter-name'
+          }
         }
       }
     end
