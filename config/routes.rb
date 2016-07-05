@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get 'settings/language', to: 'settings#language'
   put 'settings/language', to: 'settings#update_language'
 
+  get 'debug/exception', to: 'debug#exception'
+
   # Static pages
   get '*page', to: 'pages#show', as: 'static_page'
 end
