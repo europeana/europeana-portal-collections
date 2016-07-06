@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
     post 'feedback', to: 'feedback#create'
 
+    get 'debug/exception', to: 'debug#exception'
+
     # Static pages
     get '*page', to: 'pages#show', as: 'static_page'
   end
