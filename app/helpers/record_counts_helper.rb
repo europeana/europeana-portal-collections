@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+##
+# For working with record counts retrieved from the API
 module RecordCountsHelper
   def stylised_recent_additions(additions, options = {})
     @stylised_recent_additions ||= begin
@@ -23,5 +27,20 @@ module RecordCountsHelper
         }
       end
     end
+  end
+
+  # @param (see #record_count_cache_key)
+  # @return [Fixnum]
+  def cached_record_count(**args)
+    Rails.cache.fetch(record_count_cache_key(**args)) { 0 }
+  end
+
+  # @param type [EDM::Type] EDM type to retrieve record count for
+  # @param collection [Collection] collection to retrieve record count for
+  def record_count_cache_key(type: nil, collection: nil)
+    cache_key = 'record/counts'
+    cache_key += (collection.nil? ? '/all' : "/collections/#{collection.key}")
+    cache_key += "/type/#{type.id.downcase}" if type.present?
+    cache_key
   end
 end
