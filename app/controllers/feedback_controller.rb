@@ -1,7 +1,8 @@
 class FeedbackController < ApplicationController
+  include FeedbackHelper
+
   def create
-    # @todo: fail here if mailer recipient not configured?
-    if FeedbackMailer.post(mailer_post_args).deliver_later
+    if feedback_enabled? && FeedbackMailer.post(mailer_post_args).deliver_later
       respond_to do |format|
         format.json { render json: { success: true } }
       end

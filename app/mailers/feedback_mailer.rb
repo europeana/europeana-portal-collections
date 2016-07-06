@@ -1,6 +1,8 @@
 class FeedbackMailer < ApplicationMailer
+  include FeedbackHelper
+
   def post(text:, type:, page:, ip:)
-    fail Errors::NoRecipient unless Rails.application.config.x.feedback_mail_to.present?
+    fail Errors::NoRecipient unless feedback_enabled?
 
     @text = text
     @type = type
