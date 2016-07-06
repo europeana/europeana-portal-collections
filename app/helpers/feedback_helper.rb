@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Methods used by feedback controller and views
 module FeedbackHelper

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Feedback form display methods
 module FeedbackableView
