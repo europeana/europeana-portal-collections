@@ -5,7 +5,6 @@
 module BrowsableView
   extend ActiveSupport::Concern
 
-  include CollectionsHelper
   include RecordCountsHelper
 
   ##
@@ -64,7 +63,7 @@ module BrowsableView
 
   def browse_menu_salient_types
     EDM::Type.registry.select do |type|
-      cached_record_count(type: type, collection: current_collection) > 0
+      cached_record_count(type: type, collection: @collection) > 0
     end
   end
 end
