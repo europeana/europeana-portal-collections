@@ -39,17 +39,8 @@ module RecordCountsHelper
   # @param collection [Collection] collection to retrieve record count for
   def record_count_cache_key(type: nil, collection: nil)
     cache_key = 'record/counts'
-
-    if collection.nil?
-      cache_key = cache_key + '/all'
-    else
-      cache_key = cache_key + "/collections/#{collection.key}"
-    end
-
-    if type.present?
-      cache_key = cache_key + "/type/#{type.id.downcase}"
-    end
-
+    cache_key += (collection.nil? ? '/all' : "/collections/#{collection.key}")
+    cache_key += "/type/#{type.id.downcase}" if type.present?
     cache_key
   end
 end
