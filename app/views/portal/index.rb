@@ -2,6 +2,8 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
+    include SearchableView
+
     def grid_view_active
       params[:view] == 'grid'
     end
@@ -24,18 +26,27 @@ module Portal
 
     def filters
       mustache[:filters] ||= begin
-        facets_from_request.reject do |facet|
+        (simple_filters + advanced_filters).select do |facet|
+          facet[:boolean] || facet[:date] || facet[:items].present?
+        end
+      end
+    end
+
+    def simple_filters
+      mustache[:simple_filters] ||= begin
+        filters = facets_from_request.reject do |facet|
           blacklight_config.facet_fields[facet.name].advanced ||
             blacklight_config.facet_fields[facet.name].parent
-        end.map do |facet|
+        end
+        filters.map do |facet|
           FacetPresenter.build(facet, controller).display
-        end.compact + advanced_filters
+        end
       end
     end
 
     def advanced_filters
-      advanced_count = 0
       mustache[:advanced_filters] ||= begin
+        advanced_count = 0
         [
           {
             advanced_items: {
@@ -137,7 +148,7 @@ module Portal
               }
             end
           }
-        }.reverse_merge(helpers ? helpers.navigation : {})
+        }.reverse_merge(super)
       end
     end
 
@@ -157,7 +168,13 @@ module Portal
               icon_list: true,
               is_current: params[:view] != 'grid'
             }
-          ]
+          ],
+          tooltip: {
+            tooltip_text: t('global.tooltips.channels.search.new-grid'),
+            tooltip_id: 'new-grid-layout',
+            persistent: true,
+            link_class: 'filter-name'
+          }
         }
       }
     end
@@ -167,6 +184,20 @@ module Portal
         facets_selected_items.blank? ? nil : { items: facets_selected_items }
       end
     end
+
+    def collection_data
+      mustache[:collection_data] ||= begin
+        if within_collection?
+          collection = current_collection
+          {
+            name: collection.key,
+            label: collection.landing_page.title,
+            url: collection_url(collection)
+          }
+        end
+      end
+    end
+    alias_method :channel_data, :collection_data
 
     private
 

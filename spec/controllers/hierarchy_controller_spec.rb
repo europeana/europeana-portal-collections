@@ -1,7 +1,7 @@
 RSpec.describe HierarchyController do
   %w(self parent children preceding_siblings following_siblings ancestor_self_siblings).each do |action|
     context 'when format is JSON' do
-      let(:params) { { id: 'abc/123', format: 'json' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'json' } }
 
       describe "GET #{action}" do
         it 'queries API' do
@@ -17,7 +17,7 @@ RSpec.describe HierarchyController do
     end
 
     context 'when format is HTML' do
-      let(:params) { { id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
 
       describe "GET #{action}" do
         it 'does not query API' do

@@ -4,6 +4,7 @@ RSpec.describe 'collections/show.html.mustache', :page_with_top_nav, :blacklight
   before(:each) do
     assign(:collection, collection)
     assign(:landing_page, landing_page)
+    assign(:params, { id: collection.id })
     allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:has_search_parameters?).and_return(false)

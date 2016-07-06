@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.6'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '1ee40b9'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '8a5e2d7'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -55,7 +55,7 @@ end
 group :development, :test do
   gem 'dotenv-rails', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'
-  gem 'rubocop', '0.35.1', require: false # only update when Hound does
+  gem 'rubocop', '0.39.0', require: false # only update when Hound does
 end
 
 group :development do

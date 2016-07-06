@@ -18,6 +18,8 @@ module Cache
         end
       end
 
+      api_query.to_hash.delete('f.COLOURPALETTE.facet.limit')
+
       response = repository.search(api_query)
       colours = response.aggregations['COLOURPALETTE'].items
 

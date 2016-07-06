@@ -179,6 +179,6 @@ module ControllerExceptionHandling
   ##
   # Did the error occur while using the RailsAdmin CMS?
   def failed_in_cms_request?
-    self.class.to_s.deconstantize == 'RailsAdmin'
+    request_in_cms?
   end
 end

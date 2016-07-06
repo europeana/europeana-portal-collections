@@ -1,11 +1,11 @@
-RSpec.describe 'requests for the /channels path' do
-  it 'redirects GET /channels to /collections' do
-    get('/channels')
-    expect(response).to redirect_to('/collections')
+RSpec.describe 'requests for the /en/channels path' do
+  it 'redirects GET /en/channels to /en/collections' do
+    get('/en/channels')
+    expect(response).to redirect_to('/en/collections')
   end
 
-  it 'redirects GET /channels/:id to /collections/:id' do
-    get('/channels/music')
-    expect(response).to redirect_to('/collections/music')
+  it 'redirects GET /en/channels/:id to /en/collections/:id' do
+    get('/en/channels/music')
+    expect(response).to redirect_to('/en/collections/music')
   end
 end

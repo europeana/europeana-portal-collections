@@ -8,7 +8,7 @@ cc_by:
   reusability: :open
 cc_by_nc:
   pattern: "http://creativecommons.org/licenses/by-nc/"
-  reusability: :open
+  reusability: :restricted
 cc_by_nc_nd:
   pattern: "http://creativecommons.org/licenses/by-nc-nd"
   reusability: :restricted

@@ -26,7 +26,7 @@ module I18nHelper
   end
 
   def language_options_for_select
-    localised = language_map.map { |k, v| [t("global.language-#{v}"), k.to_s] }
+    localised = language_map.map { |k, v| [t("global.language-#{v}", locale: k), k.to_s] }
     localised.sort_by!(&:first)
     options_for_select(localised, I18n.locale.to_s)
   end
