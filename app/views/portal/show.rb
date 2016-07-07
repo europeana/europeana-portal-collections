@@ -734,7 +734,7 @@ module Portal
           # extra entity info
           if section[:entity_extra].present?
             possible_entities = entities(section[:entity_name], section[:entity_proxy_field])
-            salient_entity = possible_entities.detect do |entity| 
+            salient_entity = possible_entities.detect do |entity|
               entity_label(entity).any? { |label| label == val }
             end
             unless salient_entity.nil?
