@@ -78,7 +78,6 @@ RailsAdmin.config do |config|
       end
       field :subject_type
       field :state
-      field :settings_category, :enum
       field :collections
     end
     edit do
@@ -86,7 +85,6 @@ RailsAdmin.config do |config|
       field :query
       field :file, :paperclip
       field :subject_type
-      field :settings_category, :enum
       field :collections do
         inline_add false
       end
