@@ -20,7 +20,7 @@ RSpec.feature 'Top navigation' do
 
       it 'links to exhibitions' do
         visit '/en'
-        expect(nav).to have_link('Exhibitions', href: 'http://exhibitions.europeana.eu/')
+        expect(nav).to have_link('Exhibitions')
       end
 
       it 'links to blogs' do

@@ -38,7 +38,7 @@ module NavigableView
                 }
               },
               {
-                url: 'http://exhibitions.europeana.eu/',
+                url: exhibitions_foyer_path,
                 text: t('global.navigation.exhibitions'),
                 submenu: {
                   items: navigation_global_primary_nav_exhibitions_submenu_items
@@ -125,7 +125,7 @@ module NavigableView
 
   def navigation_global_primary_nav_exhibitions_submenu_items
     feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][exhibitions_feed_key], 6)
-    feed_items << link_item(t('global.navigation.all_exhibitions'), 'http://exhibitions.europeana.eu/',
+    feed_items << link_item(t('global.navigation.all_exhibitions'), exhibitions_foyer_path,
                             is_morelink: true)
   end
 
