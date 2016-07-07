@@ -55,7 +55,9 @@ RailsAdmin.config do |config|
     end
     edit do
       field :title
-      field :body
+      field :body, :text do
+        html_attributes { { rows: 8, cols: 60 } }
+      end
       field :default do
         help 'Only one, published, banner can be the default.'
       end
