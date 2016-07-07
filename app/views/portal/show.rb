@@ -205,6 +205,8 @@ module Portal
                   entity_name: 'agents',
                   entity_proxy_field: 'dcCreator',
                   search_field: 'who',
+                  fields_then_fallback: true,
+                  collected: render_document_show_field_value(document, 'proxies.dcCreator'),
                   extra: [
                     {
                       field: 'agents.rdaGr2DateOfBirth',
@@ -222,7 +224,9 @@ module Portal
                   title: 'site.object.meta-label.contributor',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcContributor',
-                  search_field: 'who'
+                  search_field: 'who',
+                  fields_then_fallback: true,
+                  collected: render_document_show_field_value(document, 'proxies.dcContributor'),
                 },
                 {
                   title: 'site.object.meta-label.subject',
