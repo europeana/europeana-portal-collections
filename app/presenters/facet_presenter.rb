@@ -84,7 +84,8 @@ class FacetPresenter
       extra_items: hidden_items.blank? ? nil : {
         items: hidden_items.map { |item| facet_item(item) }
       },
-      tooltip: facet_tooltip
+      tooltip: facet_tooltip,
+      icon_link: facet_icon_link
     }
   end
 

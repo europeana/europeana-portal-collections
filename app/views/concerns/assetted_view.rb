@@ -25,7 +25,7 @@ module AssettedView
     [
       {
         path: styleguide_url('/js/dist/require.js'),
-        data_main: styleguide_url('/js/dist/main/main-collections')
+        data_main: styleguide_url('/js/dist/main/templates/main-collections')
       }
     ]
   end
