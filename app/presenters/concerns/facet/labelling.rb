@@ -63,10 +63,14 @@ module Facet
                     hide: 'global.facet.license.hide-specific'
                   },
                   items: { i18n: true },
-                  tooltip: lambda { |controller|
+                  icon_link: lambda { |controller|
                     {
                       icon: 'icon-help',
-                      link_url: controller.static_page_path('rights', format: 'html'),
+                      link_url: controller.static_page_path('rights', format: 'html')
+                    }
+                  },
+                  tooltip: lambda { |controller|
+                    {
                       tooltip_id: 'tooltip-facet-reusability',
                       tooltip_text: I18n.t('global.tooltips.channels.search.new-filter'),
                       persistent: true,
@@ -163,6 +167,14 @@ module Facet
     # @return [Hash]
     def facet_tooltip
       labeller[:tooltip].call(@controller) if labeller[:tooltip]
+    end
+    
+    ##
+    # Icon to display for the facet header (if any)
+    #
+    # @return [Hash]
+    def facet_icon_link
+      labeller[:icon_link].call(@controller) if labeller[:icon_link]
     end
 
     ##
