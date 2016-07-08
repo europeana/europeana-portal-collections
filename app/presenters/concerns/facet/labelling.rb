@@ -69,14 +69,12 @@ module Facet
                       link_url: controller.static_page_path('rights', format: 'html')
                     }
                   },
-                  tooltip: lambda { |controller|
-                    {
-                      tooltip_id: 'tooltip-facet-reusability',
-                      tooltip_text: I18n.t('global.tooltips.channels.search.new-filter'),
-                      persistent: true,
-                      link_class: 'filter-name',
-                      trailing: true
-                    }
+                  tooltip: {
+                    tooltip_id: 'tooltip-facet-reusability',
+                    tooltip_text: I18n.t('global.tooltips.channels.search.new-filter'),
+                    persistent: true,
+                    link_class: 'filter-name',
+                    trailing: true
                   }
       label_facet 'RIGHTS',
                   title: nil,
@@ -166,9 +164,9 @@ module Facet
     #
     # @return [Hash]
     def facet_tooltip
-      labeller[:tooltip].call(@controller) if labeller[:tooltip]
+      labeller[:tooltip] if labeller[:tooltip]
     end
-    
+
     ##
     # Icon to display for the facet header (if any)
     #
