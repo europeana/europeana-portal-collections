@@ -85,7 +85,7 @@ module NavigableView
           {
             url: '#',
             text: t('site.settings.language.label'),
-            icon: 'settings',
+            icon: 'language',
             submenu: {
               items: utility_nav_items_submenu_items
             }
