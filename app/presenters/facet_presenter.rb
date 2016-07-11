@@ -78,9 +78,11 @@ class FacetPresenter
 
     display_items = items_to_display(options)
     if display_items.is_a?(Array)
-      unhidden_items, hidden_items = display_items.first, display_items.last
+      unhidden_items = display_items.first
+      hidden_items = display_items.last
     else
-      unhidden_items, hidden_items = display_items, nil
+      unhidden_items = display_items
+      hidden_items = nil
     end
 
     {
