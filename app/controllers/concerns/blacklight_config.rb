@@ -74,7 +74,11 @@ module BlacklightConfig
       config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
-      config.add_facet_field 'YEAR', range: true if ENV['FACET_YEAR_FIELD']
+      config.add_facet_field 'proxy_dcterms_created',
+                             range: true,
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
+                             limit: 200,
+                             only: ->(item) { item.value =~ /\A\d+\z/ }
       config.add_facet_field 'REUSABILITY', hierarchical: true
       config.add_facet_field 'RIGHTS',
                              hierarchical: true,
@@ -107,7 +111,6 @@ module BlacklightConfig
       config.add_facet_field 'LANGUAGE', limit: 50
       config.add_facet_field 'PROVIDER', limit: 50
       config.add_facet_field 'DATA_PROVIDER', limit: 50
-      # config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
 
       # Send all facet field names to Solr.
       config.add_facet_fields_to_solr_request!

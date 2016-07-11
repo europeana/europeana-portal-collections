@@ -2,7 +2,7 @@ module Facet
   class RangePresenter < FacetPresenter
     include Blacklight::HashAsHiddenFieldsHelperBehavior
 
-    def display(_options = {})
+    def display(**_)
       {
         date: true,
         title: facet_label,
@@ -19,7 +19,7 @@ module Facet
     #
     # @return [Fixnum]
     def hits_max
-      @hits_max ||= @facet.items.map(&:hits).max
+      @hits_max ||= items_to_display.map(&:hits).max
     end
 
     ##
@@ -27,7 +27,7 @@ module Facet
     #
     # @return [Object]
     def range_min
-      @range_min ||= @facet.items.map(&:value).min
+      @range_min ||= items_to_display.map(&:value).min
     end
 
     ##
@@ -35,13 +35,21 @@ module Facet
     #
     # @return [Object]
     def range_max
-      @range_max ||= @facet.items.map(&:value).max
+      @range_max ||= items_to_display.map(&:value).max
+    end
+
+    def apply_split_to_items?
+      false
     end
 
     protected
 
+    def items_to_display(*_)
+      @items_to_display ||= super
+    end
+
     def display_data
-      @facet.items.sort_by(&:value).map do |item|
+      items_to_display.sort_by(&:value).map do |item|
         p = search_state.params_for_search.deep_dup
         p[:f] ||= {}
         p[:f][@facet.name] = [item.value]
