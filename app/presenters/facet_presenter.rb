@@ -73,10 +73,18 @@ class FacetPresenter
   # @option options [Fixnum] :count The number of items to display up-front; any
   #  more will be hidden at first.
   # @return [Hash] display data for the facet
-  def display(options = {})
-    options = options.reverse_merge(count: 5)
+  def display(**options)
+    options.reverse_merge!(count: 5)
 
-    unhidden_items, hidden_items = items_to_display(options)
+    display_items = items_to_display(options)
+    if display_items.is_a?(Array)
+      unhidden_items = display_items.first
+      hidden_items = display_items.last
+    else
+      unhidden_items = display_items
+      hidden_items = nil
+    end
+
     {
       title: facet_config.respond_to?(:title) ? facet_config.title : facet_label,
       select_one: facet_config.single,
@@ -171,12 +179,40 @@ class FacetPresenter
 
   private
 
-  def items_to_display(options = {})
+  def items_to_display(**options)
     items = facet_items.dup
-    items = only(items) if facet_config.only
-    items = ordered(items)
-    items = spliced(items) if facet_config.splice.present? && facet_config.parent.present?
-    items = split_items(items, options)
+    %i{only order splice split}.each do |mod|
+      items = send(:"apply_#{mod}_to_items", items, options) if send(:"apply_#{mod}_to_items?")
+    end
+    items
+  end
+
+  def apply_only_to_items?
+    facet_config.only.present?
+  end
+
+  def apply_order_to_items?
+    true
+  end
+
+  def apply_splice_to_items?
+    facet_config.splice.present? && facet_config.parent.present?
+  end
+
+  def apply_split_to_items?
+    true
+  end
+
+  def apply_only_to_items(items, **_)
+    items.select { |item| facet_config.only.call(item) }
+  end
+
+  def apply_order_to_items(items, **_)
+    items
+  end
+
+  def apply_splice_to_items(items, **_)
+    items.select { |item| facet_config.splice.call(@parent, item) } if facet_config.splice.present?
   end
 
   ##
@@ -191,7 +227,7 @@ class FacetPresenter
   # All other items will be in the hidden set.
   #
   # @return [Array<Array>] Two arrays of facet items, first to show, last to hide
-  def split_items(items, options)
+  def apply_split_to_items(items, **options)
     unhidden_items = []
     hidden_items = items
 
@@ -206,24 +242,12 @@ class FacetPresenter
     [unhidden_items, hidden_items]
   end
 
-  def only(items)
-    items.select { |item| facet_config.only.call(item) }
-  end
-
-  def ordered(items)
-    items
-  end
-
   def facet_items
     @facet.items
   end
 
   def facet_name
     @facet_name ||= @facet.name
-  end
-
-  def spliced(items)
-    items.select { |item| facet_config.splice.call(@parent, item) } if facet_config.splice.present?
   end
 
   ##

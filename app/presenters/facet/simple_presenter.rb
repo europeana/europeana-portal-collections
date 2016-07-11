@@ -1,6 +1,6 @@
 module Facet
   class SimplePresenter < FacetPresenter
-    def display(_options = {})
+    def display(**options)
       super.merge(simple: true)
     end
   end
