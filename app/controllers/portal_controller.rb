@@ -70,6 +70,6 @@ class PortalController < ApplicationController
 
   def document_hierarchy(document)
     return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
-    Europeana::API::Record::new(document.id).hierarchy.ancestor_self_siblings
+    Europeana::API::Record.new(document.id).hierarchy.ancestor_self_siblings
   end
 end
