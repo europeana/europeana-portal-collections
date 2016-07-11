@@ -6,7 +6,7 @@ shared_examples 'a record API request' do
 end
 
 shared_examples 'a hierarchy API request' do
-  it 'does not query the API for the record hierarchy' do
+  it 'queries the API for the record hierarchy' do
     expect(an_api_hierarchy_request_for(record_id)).
       to have_been_made
   end
