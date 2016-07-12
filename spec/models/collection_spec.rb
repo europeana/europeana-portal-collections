@@ -11,4 +11,11 @@ RSpec.describe Collection do
       it { is_expected.to eq(collection.key) }
     end
   end
+
+  describe '#publish' do
+    subject { collections(:draft).publish }
+    it 'should enqueue a record counts job' do
+      expect { subject }.to change { Delayed::Job.where("handler LIKE '%Cache::RecordCountsJob%'").count }.by(1)
+    end
+  end
 end

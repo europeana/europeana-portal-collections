@@ -10,7 +10,7 @@ module HasPublicationStates
       state :draft, initial: true
       state :published
 
-      event :publish do
+      event :publish, after: :after_publish do
         transitions from: :draft, to: :published
       end
 
@@ -18,5 +18,10 @@ module HasPublicationStates
         transitions from: :published, to: :draft
       end
     end
+  end
+
+  ##
+  # Override this per-model if required
+  def after_publish
   end
 end

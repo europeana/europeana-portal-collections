@@ -27,6 +27,10 @@ RSpec.describe Cache::RecordCountsJob do
     let(:api_request) { an_api_collection_search_request(collection.id) }
 
     it_behaves_like 'record count caching job'
+
+    it 'should touch the landing page' do
+      expect { subject.perform(*args) }.to change { collection.landing_page.reload.updated_at }
+    end
   end
 
   context 'with `types` option = true' do
