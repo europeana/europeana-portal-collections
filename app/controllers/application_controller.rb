@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
     session[:locale] ||= I18n.default_locale
 
     unless I18n.available_locales.map(&:to_s).include?(session[:locale].to_s)
+      session.delete(:locale)
       fail ActionController::RoutingError, "Unknown locale #{session[:locale]}"
     end
 
