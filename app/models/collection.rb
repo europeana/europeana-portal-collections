@@ -46,4 +46,12 @@ class Collection < ActiveRecord::Base
   def touch_landing_page
     landing_page.touch if landing_page.present?
   end
+
+  def after_publish
+    trigger_record_counts_job
+  end
+
+  def trigger_record_counts_job
+    Cache::RecordCountsJob.perform_later(id, types: true)
+  end
 end
