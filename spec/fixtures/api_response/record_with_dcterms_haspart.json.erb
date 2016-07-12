@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "object": {
+    "about": "<%= id %>",
+    "title": ["<%= id %>"],
+    "proxies": [
+      {
+        "dctermsHasPart": {
+          "def": ["http://provider.example.com/child"]
+        }
+      }
+    ],
+    "aggregations": [
+      {
+        "edmIsShownBy": "http://provider.example.com/<%= id %>"
+      }
+    ]
+  }
+}

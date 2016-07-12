@@ -65,7 +65,20 @@ RSpec.describe PortalController do
 
     it_behaves_like 'a record API request'
     it_behaves_like 'a more like this API request'
-    it_behaves_like 'a hierarchy API request'
+
+    context 'with dcterms:isPartOf' do
+      let(:params) { { locale: 'en', id: 'with/dcterms:isPartOf' } }
+      it_behaves_like 'a hierarchy API request'
+    end
+
+    context 'with dcterms:hasPart' do
+      let(:params) { { locale: 'en', id: 'with/dcterms:hasPart' } }
+      it_behaves_like 'a hierarchy API request'
+    end
+
+    context 'without dcterms:isPartOf or dcterms:hasPart' do
+      it_behaves_like 'no hierarchy API request'
+    end
 
     it 'assigns the response to @response' do
       expect(assigns(:response)).to be_a(Europeana::Blacklight::Response)
