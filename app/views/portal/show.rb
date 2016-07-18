@@ -753,7 +753,7 @@ module Portal
         }
       end
 
-      sections.reject! { |section| section[:items].blank? }
+      sections.reject! { |section| section[:items].blank? || section[:items][0][:text].blank? }
 
       sections.blank? ? nil : {
         title: t(data[:title]),
