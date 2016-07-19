@@ -440,7 +440,7 @@ module Portal
               },
               {
                 title: 'edm.was-present-at',
-                fields: ['proxies.edmRealizes']
+                fields: ['proxies.wasPresentAt']
               }
             ]
           ),
