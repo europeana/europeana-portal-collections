@@ -29,6 +29,7 @@ class Page < ActiveRecord::Base
 
   translates :title, :body, :strapline, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
+  default_scope { includes(:translations) }
 
   validates :slug, uniqueness: true
   validates :browse_entries, length: { maximum: 6 }

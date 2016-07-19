@@ -39,7 +39,11 @@ RailsAdmin.config do |config|
 
   config.model 'Banner' do
     list do
-      field :title
+      field :title do
+        searchable 'banner_translations.title'
+        queryable true
+        filterable true
+      end
       field :state
       field :default
     end
@@ -67,7 +71,11 @@ RailsAdmin.config do |config|
 
   config.model 'BrowseEntry' do
     list do
-      field :title
+      field :title do
+        searchable 'browse_entry_translations.title'
+        queryable true
+        filterable true
+      end
       field :file, :paperclip
       field :subject_type
       field :state
@@ -98,7 +106,11 @@ RailsAdmin.config do |config|
     list do
       sort_by :key
       field :key
-      field :title
+      field :title do
+        searchable 'collection_translations.title'
+        queryable true
+        filterable true
+      end
       field :state
     end
     show do
@@ -218,7 +230,11 @@ RailsAdmin.config do |config|
     object_label_method :title
     list do
       field :slug
-      field :title
+      field :title do
+        searchable 'page_translations.title'
+        queryable true
+        filterable true
+      end
       field :hero_image_file, :paperclip
       field :state
       scopes [:static]
@@ -253,7 +269,11 @@ RailsAdmin.config do |config|
     list do
       field :slug
       field :http_code
-      field :title
+      field :title do
+        searchable 'page_translations.title'
+        queryable true
+        filterable true
+      end
       field :hero_image_file, :paperclip
       field :state
     end
@@ -293,7 +313,11 @@ RailsAdmin.config do |config|
     end
     show do
       field :slug
-      field :title
+      field :title do
+        searchable 'page_translations.title'
+        queryable true
+        filterable true
+      end
       field :hero_image_file, :paperclip
       field :strapline
       field :state
