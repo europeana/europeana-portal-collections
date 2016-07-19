@@ -49,10 +49,10 @@ module Portal
           object: {
             creator: creator_title,
             concepts: data_section(
-              title: 'site.object.meta-label.concepts',
+              title: 'concepts',
               sections: [
                 {
-                  title: 'site.object.meta-label.type',
+                  title: 'type',
                   fields: ['proxies.dcType'],
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dcType', nil)
@@ -61,7 +61,7 @@ module Portal
                   quoted: true
                 },
                 {
-                  title: 'site.object.meta-label.subject',
+                  title: 'subject',
                   search_field: 'what',
                   quoted: true,
                   collected: document.proxies.map do |proxy|
@@ -69,12 +69,12 @@ module Portal
                   end.flatten.compact
                 },
                 {
-                  title: 'site.object.meta-label.has-type',
+                  title: 'has-type',
                   search_field: 'what',
                   fields: ['proxies.edmHasType']
                 },
                 {
-                  title: 'site.object.meta-label.medium',
+                  title: 'medium',
                   search_field: 'proxy_dcterms_medium',
                   quoted: true,
                   fields: 'proxies.dctermsMedium'
@@ -82,10 +82,10 @@ module Portal
               ]
             ),
             copyright: data_section(
-              title: 'site.object.meta-label.copyright',
+              title: 'copyright',
               sections: [
                 {
-                  title: 'site.object.meta-label.rights',
+                  title: 'rights',
                   fields: ['proxies.dcRights', 'aggregations.edmRights'],
                   ga_data: 'dimension5'
                 }
@@ -93,43 +93,43 @@ module Portal
             ),
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
             dates: data_section(
-              title: 'site.object.meta-label.time',
+              title: 'time',
               sections: [
                 {
-                  title: 'site.object.meta-label.date',
+                  title: 'date',
                   fields: ['proxies.dcDate']
                 },
                 {
-                  title: 'site.object.meta-label.creation-date',
+                  title: 'creation-date',
                   fields: ['proxies.dctermsIssued'],
                   collected: document.proxies.map do |proxy|
                     proxy.fetch('dctermsCreated', nil)
                   end.flatten.compact.join(', ')
                 },
                 {
-                  title: 'site.object.meta-label.period',
+                  title: 'period',
                   fields: ['timespans.prefLabel']
                 },
                 {
-                  title: 'site.object.meta-label.publication-date',
+                  title: 'publication-date',
                   fields: ['proxies.dctermsPublished']
                 },
                 {
-                  title: 'site.object.meta-label.issued',
+                  title: 'issued',
                   fields: ['proxies.dctermsIssued']
                 },
                 {
-                  title: 'site.object.meta-label.temporal',
+                  title: 'temporal',
                   fields: ['proxies.dctermsTemporal']
                 },
                 {
-                  title: 'site.object.meta-label.place-time',
+                  title: 'place-time',
                   fields: ['proxies.dcCoverage']
                 }
               ]
             ),
             description: data_section(
-              title: 'site.object.meta-label.description',
+              title: 'description',
               sections: [
                 {
                   title: false,
@@ -152,20 +152,20 @@ module Portal
                   document.fetch('places.longitude', []).size > 0
                 ),
               places: data_section(
-                title: 'site.object.meta-label.location',
+                title: 'location',
                 sections: [
                   {
-                    title: 'site.object.meta-label.location',
+                    title: 'location',
                     fields: ['proxies.dctermsSpatial'],
                     collected: pref_label('places.prefLabel')
                     #collected: document.fetch('places.prefLabel', []).first,
                   },
                   {
-                    title: 'site.object.meta-label.place-time',
+                    title: 'place-time',
                     fields: ['proxies.dcCoverage']
                   },
                   {
-                    title: 'site.object.meta-label.current-location',
+                    title: 'current-location',
                     fields: ['proxies.edmCurrentLocation']
                   }
                 ]
@@ -198,10 +198,10 @@ module Portal
                 search_path(f: { 'DATA_PROVIDER' => [render_document_show_field_value(document, 'aggregations.edmDataProvider')] }) : false
             },
             people: data_section(
-              title: 'site.object.meta-label.people',
+              title: 'people',
               sections: [
                 {
-                  title: 'site.object.meta-label.creator',
+                  title: 'creator',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcCreator',
                   entity_extra: [
@@ -221,7 +221,7 @@ module Portal
                   collected: render_document_show_field_value(document, 'proxies.dcCreator')
                 },
                 {
-                  title: 'site.object.meta-label.contributor',
+                  title: 'contributor',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcContributor',
                   entity_extra: [
@@ -241,19 +241,19 @@ module Portal
                   collected: render_document_show_field_value(document, 'proxies.dcContributor'),
                 },
                 {
-                  title: 'site.object.meta-label.subject',
+                  title: 'subject',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcSubject',
                   search_field: 'who'
                 },
                 {
-                  title: 'site.object.meta-label.publisher',
+                  title: 'publisher',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcPublisher',
                   search_field: 'who'
                 },
                 {
-                  title: 'site.object.meta-label.rights',
+                  title: 'rights',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcRights',
                   search_field: 'who'
@@ -261,10 +261,10 @@ module Portal
               ]
             ),
             provenance: data_section(
-              title: 'site.object.meta-label.provenance',
+              title: 'provenance',
               sections: [
                 {
-                  title: 'site.object.meta-label.source',
+                  title: 'source',
                   collected: document.aggregations.map do |aggregation|
                     if aggregation.fetch('edmUgc', nil) == 'true'
                       t('site.object.meta-label.ugc')
@@ -272,80 +272,80 @@ module Portal
                   end.flatten.compact
                 },
                 {
-                  title: 'site.object.meta-label.provenance',
+                  title: 'provenance',
                   fields: ['proxies.dctermsProvenance'],
                 },
                 {
-                  title: 'site.object.meta-label.provenance',
+                  title: 'provenance',
                   fields: ['proxies.dcSource'],
                   exclude_vals: ['ugc', 'UGC']
                 },
                 {
-                  title: 'site.object.meta-label.publisher',
+                  title: 'publisher',
                   fields: ['proxies.dcPublisher'],
                   search_field: 'proxy_dc_publisher',
                   quoted: true
                 },
                 {
-                  title: 'site.object.meta-label.identifier',
+                  title: 'identifier',
                   fields: ['proxies.dcIdentifier']
                 },
                 {
-                  title: 'site.object.meta-label.data-provider',
+                  title: 'data-provider',
                   fields: ['aggregations.edmDataProvider'],
                   search_field: 'DATA_PROVIDER',
                   ga_data: 'dimension3',
                   quoted: true
                 },
                 {
-                  title: 'site.object.meta-label.provider',
+                  title: 'provider',
                   fields: ['aggregations.edmProvider'],
                   search_field: 'PROVIDER',
                   ga_data: 'dimension4',
                   quoted: true
                 },
                 {
-                  title: 'site.object.meta-label.providing-country',
+                  title: 'providing-country',
                   fields: ['europeanaAggregation.edmCountry'],
                   search_field: 'COUNTRY',
                   ga_data: 'dimension2',
                   quoted: true
                 },
                 {
-                  title: 'site.object.meta-label.timestamp-created',
+                  title: 'timestamp-created',
                   fields: ['timestamp_created'],
                   format_date: '%Y-%m-%d'
                 },
                 {
-                  title: 'site.object.meta-label.timestamp-updated',
+                  title: 'timestamp-updated',
                   fields: ['timestamp_update'],
                   format_date: '%Y-%m-%d'
                 }
               ]
             ),
             properties: data_section(
-              title: 'site.object.meta-label.properties',
+              title: 'properties',
               sections: [
                 {
-                  title: 'site.object.meta-label.extent',
+                  title: 'extent',
                   fields: ['proxies.dctermsExtent']
                 },
                 {
-                  title: 'site.object.meta-label.duration',
+                  title: 'duration',
                   fields: ['proxies.dcDuration']
                 },
                 {
-                  title: 'site.object.meta-label.medium',
+                  title: 'medium',
                   fields: ['proxies.dcMedium']
                 },
                 {
-                  title: 'site.object.meta-label.format',
+                  title: 'format',
                   fields: ['proxies.dcFormat'],
                   search_field: 'proxy_dc_format',
                   quoted: true
                 },
                 {
-                  title: 'site.object.meta-label.language',
+                  title: 'language',
                   fields: ['proxies.dcLanguage'],
                   search_field: 'dc_language',
                   quoted: false
@@ -365,81 +365,81 @@ module Portal
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: data_section(
-            title: 'site.object.meta-label.refs-rels',
+            title: 'refs-rels',
             sections: [
               {
-                title: 'site.object.meta-label.is-part-of',
+                title: 'is-part-of',
                 fields: ['proxies.dctermsIsPartOf'],
                 search_field: 'proxy_dcterms_isPartOf',
                 quoted: true
               },
               {
-                title: 'site.object.meta-label.collection-name',
+                title: 'collection-name',
                 fields: ['europeanaCollectionName'],
                 search_field: 'europeana_collectionName'
               },
               {
-                title: 'site.object.meta-label.relations',
+                title: 'relations',
                 fields: ['proxies.dcRelation']
               },
               {
-                title: 'site.object.meta-label.references',
+                title: 'references',
                 fields: ['proxies.dctermsReferences']
               },
               {
-                title: 'site.object.meta-label.consists-of',
+                title: 'consists-of',
                 fields: ['proxies.dctermsHasPart']
               },
               {
-                title: 'site.object.meta-label.version',
+                title: 'version',
                 fields: ['proxies.dctermsHasVersion']
               },
               {
-                title: 'site.object.meta-label.is-format-of',
+                title: 'is-format-of',
                 fields: ['proxies.dctermsIsFormatOf']
               },
               {
-                title: 'site.object.meta-label.is-referenced-by',
+                title: 'is-referenced-by',
                 fields: ['proxies.dctermsIsReferencedBy']
               },
               {
-                title: 'site.object.meta-label.is-replaced-by',
+                title: 'is-replaced-by',
                 fields: ['proxies.dctermsIsReplacedBy']
               },
               {
-                title: 'site.object.meta-label.is-required-by',
+                title: 'is-required-by',
                 fields: ['proxies.dctermsIsRequiredBy']
               },
               {
-                title: 'site.object.meta-label.edm.has-met',
+                title: 'edm.has-met',
                 fields: ['proxies.edmHasMet']
               },
               {
-                title: 'site.object.meta-label.edm.incorporates',
+                title: 'edm.incorporates',
                 fields: ['proxies.edmIncorporates']
               },
               {
-                title: 'site.object.meta-label.edm.is-derivative-of',
+                title: 'edm.is-derivative-of',
                 fields: ['proxies.edmIsDerivativeOf']
               },
               {
-                title: 'site.object.meta-label.edm.is-representation-of',
+                title: 'edm.is-representation-of',
                 fields: ['proxies.edmIsRepresentationOf']
               },
               {
-                title: 'site.object.meta-label.edm.is-similar-to',
+                title: 'edm.is-similar-to',
                 fields: ['proxies.edmIsSimilarTo']
               },
               {
-                title: 'site.object.meta-label.edm.is-successor-of',
+                title: 'edm.is-successor-of',
                 fields: ['proxies.edmIsSuccessorOf']
               },
               {
-                title: 'site.object.meta-label.edm.realises',
+                title: 'edm.realises',
                 fields: ['proxies.edmRealizes']
               },
               {
-                title: 'site.object.meta-label.edm.was-present-at',
+                title: 'edm.was-present-at',
                 fields: ['proxies.edmRealizes']
               }
             ]
@@ -748,7 +748,7 @@ module Portal
     def data_section(data)
       sections = data[:sections].map do |section|
         {
-          title: section[:title].nil? ? false : t(section[:title]),
+          title: section[:title].nil? ? false : t(section[:title], scope: 'site.object.meta-label'),
           items: data_section_field_subsection(section)
         }
       end
@@ -756,7 +756,7 @@ module Portal
       sections.reject! { |section| section[:items].blank? || section[:items][0][:text].blank? }
 
       sections.blank? ? nil : {
-        title: t(data[:title]),
+        title: t(data[:title], scope: 'site.object.meta-label'),
         sections: sections
       }
     end
