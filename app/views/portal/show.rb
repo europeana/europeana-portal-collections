@@ -686,7 +686,7 @@ module Portal
     end
 
     def entity_label(entity)
-      entity.fetch('prefLabel', entity.fetch('foafName', entity[:about]))
+      [entity.fetch('prefLabel', entity.fetch('foafName', entity[:about]))].flatten
     end
 
     def data_section_field_search_path(val, field, quoted)
