@@ -22,7 +22,7 @@ module Document
       end
 
       def entity_label(entity)
-        entity.fetch('prefLabel', entity.fetch('foafName', entity[:about]))
+        [entity.fetch('prefLabel', entity.fetch('foafName', entity[:about]))].flatten
       end
 
       def named_entity_labels(edm, i18n, *args)
