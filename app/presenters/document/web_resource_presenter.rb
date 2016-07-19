@@ -180,7 +180,7 @@ module Document
       end
     end
 
-    def colour_palette_data()
+    def colour_palette_data
       data = render_document_show_field_value('aggregations.edmComponentColor')
       return [] if data.blank?
       result = []
