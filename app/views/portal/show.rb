@@ -1,6 +1,8 @@
 module Portal
   class Show < ApplicationView
     include SearchableView
+    include Document::Field::Labelling
+    include Document::Field::Entities
 
     attr_accessor :document, :debug
 
@@ -48,425 +50,56 @@ module Portal
         {
           object: {
             creator: creator_title,
-            concepts: data_section(
-              title: 'concepts',
-              sections: [
-                {
-                  title: 'type',
-                  fields: ['proxies.dcType'],
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dcType', nil)
-                  end.flatten.compact,
-                  search_field: 'what',
-                  quoted: true
-                },
-                {
-                  title: 'subject',
-                  search_field: 'what',
-                  quoted: true,
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dcSubject', nil)
-                  end.flatten.compact
-                },
-                {
-                  title: 'has-type',
-                  search_field: 'what',
-                  fields: ['proxies.edmHasType']
-                },
-                {
-                  title: 'medium',
-                  search_field: 'proxy_dcterms_medium',
-                  quoted: true,
-                  fields: 'proxies.dctermsMedium'
-                }
-              ]
-            ),
-            copyright: data_section(
-              title: 'copyright',
-              sections: [
-                {
-                  title: 'rights',
-                  fields: ['proxies.dcRights', 'aggregations.edmRights'],
-                  ga_data: 'dimension5'
-                }
-              ]
-            ),
+            concepts: presenter.field_group(:concepts),
+            copyright: presenter.field_group(:copyright),
             creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
-            dates: data_section(
-              title: 'time',
-              sections: [
-                {
-                  title: 'date',
-                  fields: ['proxies.dcDate']
-                },
-                {
-                  title: 'creation-date',
-                  fields: ['proxies.dctermsIssued'],
-                  collected: document.proxies.map do |proxy|
-                    proxy.fetch('dctermsCreated', nil)
-                  end.flatten.compact.join(', ')
-                },
-                {
-                  title: 'period',
-                  fields: ['timespans.prefLabel']
-                },
-                {
-                  title: 'publication-date',
-                  fields: ['proxies.dctermsPublished']
-                },
-                {
-                  title: 'issued',
-                  fields: ['proxies.dctermsIssued']
-                },
-                {
-                  title: 'temporal',
-                  fields: ['proxies.dctermsTemporal']
-                },
-                {
-                  title: 'place-time',
-                  fields: ['proxies.dcCoverage']
-                }
-              ]
-            ),
-            description: data_section(
-              title: 'description',
-              sections: [
-                {
-                  title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dctermsTOC')
-                },
-                {
-                  title: false,
-                  collected: render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
-                }
-              ]
-            ),
+            dates: presenter.field_group(:time),
+            description: presenter.field_group(:description),
             # download: content_object_download,
             media: media_items,
-            meta_additional: {
-              present: document.fetch('proxies.dctermsSpatial', []).size > 0 ||
-                document.fetch('proxies.dcCoverage', []).size > 0 ||
-                document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
-                (
-                  document.fetch('places.latitude', []).size > 0 &&
-                  document.fetch('places.longitude', []).size > 0
-                ),
-              places: data_section(
-                title: 'location',
-                sections: [
-                  {
-                    title: 'location',
-                    fields: ['proxies.dctermsSpatial'],
-                    collected: pref_label('places.prefLabel')
-                    #collected: document.fetch('places.prefLabel', []).first,
-                  },
-                  {
-                    title: 'place-time',
-                    fields: ['proxies.dcCoverage']
-                  },
-                  {
-                    title: 'current-location',
-                    fields: ['proxies.edmCurrentLocation']
-                  }
-                ]
-              ),
-              geo: {
-                latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
-                longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
-                long_and_lat: long_and_lat?,
-                #placeName: document.fetch('places.prefLabel', []).first,
-                placeName: pref_label('places.prefLabel'),
-                labels: {
-                  longitude: t('site.object.meta-label.longitude') + ':',
-                  latitude: t('site.object.meta-label.latitude') + ':',
-                  map: t('site.object.meta-label.map'),
-                  points: {
-                    n: t('site.object.points.north'),
-                    s: t('site.object.points.south'),
-                    e: t('site.object.points.east'),
-                    w: t('site.object.points.west')
-                  }
-                }
-              }
-            },
-            origin: {
-              url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-              institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
-              institution_name_and_link: institution_name_and_link,
-              institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
-              institution_canned_search: render_document_show_field_value(document, 'aggregations.edmDataProvider') ?
-                search_path(f: { 'DATA_PROVIDER' => [render_document_show_field_value(document, 'aggregations.edmDataProvider')] }) : false
-            },
-            people: data_section(
-              title: 'people',
-              sections: [
-                {
-                  title: 'creator',
-                  entity_name: 'agents',
-                  entity_proxy_field: 'dcCreator',
-                  entity_extra: [
-                    {
-                      field: 'rdaGr2DateOfBirth',
-                      map_to: 'life.from.short',
-                      format_date: '%Y-%m-%d'
-                    },
-                    {
-                      field: 'rdaGr2DateOfDeath',
-                      map_to: 'life.to.short',
-                      format_date: '%Y-%m-%d'
-                    }
-                  ],
-                  search_field: 'who',
-                  fields_then_fallback: true,
-                  collected: render_document_show_field_value(document, 'proxies.dcCreator')
-                },
-                {
-                  title: 'contributor',
-                  entity_name: 'agents',
-                  entity_proxy_field: 'dcContributor',
-                  entity_extra: [
-                    {
-                      field: 'rdaGr2DateOfBirth',
-                      map_to: 'life.from.short',
-                      format_date: '%Y-%m-%d'
-                    },
-                    {
-                      field: 'rdaGr2DateOfDeath',
-                      map_to: 'life.to.short',
-                      format_date: '%Y-%m-%d'
-                    }
-                  ],
-                  search_field: 'who',
-                  fields_then_fallback: true,
-                  collected: render_document_show_field_value(document, 'proxies.dcContributor'),
-                },
-                {
-                  title: 'subject',
-                  entity_name: 'agents',
-                  entity_proxy_field: 'dcSubject',
-                  search_field: 'who'
-                },
-                {
-                  title: 'publisher',
-                  entity_name: 'agents',
-                  entity_proxy_field: 'dcPublisher',
-                  search_field: 'who'
-                },
-                {
-                  title: 'rights',
-                  entity_name: 'agents',
-                  entity_proxy_field: 'dcRights',
-                  search_field: 'who'
-                }
-              ]
-            ),
-            provenance: data_section(
-              title: 'provenance',
-              sections: [
-                {
-                  title: 'source',
-                  collected: document.aggregations.map do |aggregation|
-                    if aggregation.fetch('edmUgc', nil) == 'true'
-                      t('site.object.meta-label.ugc')
-                    end
-                  end.flatten.compact
-                },
-                {
-                  title: 'provenance',
-                  fields: ['proxies.dctermsProvenance'],
-                },
-                {
-                  title: 'provenance',
-                  fields: ['proxies.dcSource'],
-                  exclude_vals: ['ugc', 'UGC']
-                },
-                {
-                  title: 'publisher',
-                  fields: ['proxies.dcPublisher'],
-                  search_field: 'proxy_dc_publisher',
-                  quoted: true
-                },
-                {
-                  title: 'identifier',
-                  fields: ['proxies.dcIdentifier']
-                },
-                {
-                  title: 'data-provider',
-                  fields: ['aggregations.edmDataProvider'],
-                  search_field: 'DATA_PROVIDER',
-                  ga_data: 'dimension3',
-                  quoted: true
-                },
-                {
-                  title: 'provider',
-                  fields: ['aggregations.edmProvider'],
-                  search_field: 'PROVIDER',
-                  ga_data: 'dimension4',
-                  quoted: true
-                },
-                {
-                  title: 'providing-country',
-                  fields: ['europeanaAggregation.edmCountry'],
-                  search_field: 'COUNTRY',
-                  ga_data: 'dimension2',
-                  quoted: true
-                },
-                {
-                  title: 'timestamp-created',
-                  fields: ['timestamp_created'],
-                  format_date: '%Y-%m-%d'
-                },
-                {
-                  title: 'timestamp-updated',
-                  fields: ['timestamp_update'],
-                  format_date: '%Y-%m-%d'
-                }
-              ]
-            ),
-            properties: data_section(
-              title: 'properties',
-              sections: [
-                {
-                  title: 'extent',
-                  fields: ['proxies.dctermsExtent']
-                },
-                {
-                  title: 'duration',
-                  fields: ['proxies.dcDuration']
-                },
-                {
-                  title: 'medium',
-                  fields: ['proxies.dcMedium']
-                },
-                {
-                  title: 'format',
-                  fields: ['proxies.dcFormat'],
-                  search_field: 'proxy_dc_format',
-                  quoted: true
-                },
-                {
-                  title: 'language',
-                  fields: ['proxies.dcLanguage'],
-                  search_field: 'dc_language',
-                  quoted: false
-                }
-              ]
-            ),
+            meta_additional: meta_additional,
+            origin: origin,
+            people: presenter.field_group(:people),
+            provenance: presenter.field_group(:provenance),
+            properties: presenter.field_group(:properties),
             rights: simple_rights_label_data,
-            social_share: {
-              url: URI.escape(document_url(document, format: 'html')),
-              facebook: true,
-              pinterest: true,
-              twitter: true,
-              googleplus: true
-            },
+            social_share: social_share,
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
             title: [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
-          refs_rels: data_section(
-            title: 'refs-rels',
-            sections: [
-              {
-                title: 'is-part-of',
-                fields: ['proxies.dctermsIsPartOf'],
-                search_field: 'proxy_dcterms_isPartOf',
-                quoted: true
-              },
-              {
-                title: 'collection-name',
-                fields: ['europeanaCollectionName'],
-                search_field: 'europeana_collectionName'
-              },
-              {
-                title: 'relations',
-                fields: ['proxies.dcRelation']
-              },
-              {
-                title: 'references',
-                fields: ['proxies.dctermsReferences']
-              },
-              {
-                title: 'consists-of',
-                fields: ['proxies.dctermsHasPart']
-              },
-              {
-                title: 'version',
-                fields: ['proxies.dctermsHasVersion']
-              },
-              {
-                title: 'is-format-of',
-                fields: ['proxies.dctermsIsFormatOf']
-              },
-              {
-                title: 'is-referenced-by',
-                fields: ['proxies.dctermsIsReferencedBy']
-              },
-              {
-                title: 'is-replaced-by',
-                fields: ['proxies.dctermsIsReplacedBy']
-              },
-              {
-                title: 'is-required-by',
-                fields: ['proxies.dctermsIsRequiredBy']
-              },
-              {
-                title: 'edm.has-met',
-                fields: ['proxies.edmHasMet']
-              },
-              {
-                title: 'edm.incorporates',
-                fields: ['proxies.edmIncorporates']
-              },
-              {
-                title: 'edm.is-derivative-of',
-                fields: ['proxies.edmIsDerivativeOf']
-              },
-              {
-                title: 'edm.is-representation-of',
-                fields: ['proxies.edmIsRepresentationOf']
-              },
-              {
-                title: 'edm.is-similar-to',
-                fields: ['proxies.edmIsSimilarTo']
-              },
-              {
-                title: 'edm.is-successor-of',
-                fields: ['proxies.edmIsSuccessorOf']
-              },
-              {
-                title: 'edm.realises',
-                fields: ['proxies.edmRealizes']
-              },
-              {
-                title: 'edm.was-present-at',
-                fields: ['proxies.wasPresentAt']
-              }
-            ]
-          ),
-          similar: @hierarchy.blank? ? {
-            title: t('site.object.similar-items'),
-            more_items_query: search_path(mlt: document.id),
-            more_items_load: document_similar_url(document, format: 'json'),
-            more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
-            items: @similar.map do |doc|
-              {
-                url: document_path(doc, format: 'html'),
-                title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-                img: {
-                  alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
-                  # temporary fix until API contains correct image url
-                  # src: render_document_show_field_value(doc, 'edmPreview'),
-                  src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 400)
-                }
-              }
-            end
-          } : false,
-          named_entities: named_entity_data,
+          refs_rels: presenter.field_group(:refs_rels),
+          similar: similar_items,
+          named_entities: named_entities,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(super)
       end
+    end
+
+    def labels
+      mustache[:labels] ||= begin
+        {
+          show_more_meta: t('site.object.actions.show-more-data'),
+          show_less_meta: t('site.object.actions.show-less-data'),
+          rights: t('site.object.meta-label.rights-human')
+        }
+      end
+    end
+
+    def page_url
+      URI.escape(request.original_url)
+    end
+
+    private
+
+    def named_entities
+      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels].compact
+      {
+        title: t('site.object.named-entities.title'),
+        data: data,
+        inline: true,
+      } unless data.size == 0
     end
 
     def institution_name_and_link
@@ -487,13 +120,67 @@ module Portal
       end
     end
 
-    def named_entity_data
-      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels].compact
+    def simple_rights_label_data
+      rights = presenter.simple_rights_label_data
+      licenses = document.fetch('licenses', nil)
+      if !licenses.nil? && !rights.nil?
+        license_expiry = licenses.first['ccDeprecatedOn']
+        date = unix_time_to_local(license_expiry)
+        rights[:expiry] = t('global.facet.reusability.expiry', date: date.to_formatted_s(:date))
+      end
+      rights
+    end
+
+    def social_share
       {
-        title: t('site.object.named-entities.title'),
-        data: data,
-        inline: true,
-      } unless data.size == 0
+        url: URI.escape(document_url(document, format: 'html')),
+        facebook: true,
+        pinterest: true,
+        twitter: true,
+        googleplus: true
+      }
+    end
+
+    def origin
+      {
+        url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+        institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
+        institution_name_and_link: institution_name_and_link,
+        institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
+        institution_canned_search: render_document_show_field_value(document, 'aggregations.edmDataProvider') ?
+          search_path(f: { 'DATA_PROVIDER' => [render_document_show_field_value(document, 'aggregations.edmDataProvider')] }) : false
+      }
+    end
+
+    def meta_additional
+      {
+        present: document.fetch('proxies.dctermsSpatial', []).size > 0 ||
+          document.fetch('proxies.dcCoverage', []).size > 0 ||
+          document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
+          (
+            document.fetch('places.latitude', []).size > 0 &&
+            document.fetch('places.longitude', []).size > 0
+          ),
+        places: presenter.field_group(:location),
+        geo: {
+          latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
+          longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
+          long_and_lat: long_and_lat?,
+          #placeName: document.fetch('places.prefLabel', []).first,
+          placeName: pref_label(document, 'places.prefLabel'),
+          labels: {
+            longitude: t('site.object.meta-label.longitude') + ':',
+            latitude: t('site.object.meta-label.latitude') + ':',
+            map: t('site.object.meta-label.map'),
+            points: {
+              n: t('site.object.points.north'),
+              s: t('site.object.points.south'),
+              e: t('site.object.points.east'),
+              w: t('site.object.points.west')
+            }
+          }
+        }
+      }
     end
 
     def collect_agent_labels
@@ -512,92 +199,26 @@ module Portal
       named_entity_labels('concepts', 'what', :broader)
     end
 
-    def named_entity_labels(edm, i18n, *args)
-      fields = named_entity_fields(edm, i18n, *args)
-      return nil if fields.empty?
-      {
-        title: t("site.object.named-entities.#{i18n}.title"),
-        fields: fields
-      }
-    end
-
-    def named_entity_fields(edm, i18n, *args)
-      document.fetch(edm, []).map do |entity|
-        properties = [:about, :prefLabel] + (args || [])
-        properties.map do |f|
-          named_entity_field_label(entity, f, i18n)
+    def similar_items
+      @hierarchy.blank? ? {
+        title: t('site.object.similar-items'),
+        more_items_query: search_path(mlt: document.id),
+        more_items_load: document_similar_url(document, format: 'json'),
+        more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
+        items: @similar.map do |doc|
+          {
+            url: document_path(doc, format: 'html'),
+            title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+            img: {
+              alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+              # temporary fix until API contains correct image url
+              # src: render_document_show_field_value(doc, 'edmPreview'),
+              src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 400)
+            }
+          }
         end
-      end.flatten.compact
+      } : false
     end
-
-    def named_entity_field_label(entity, field, i18n)
-      val = normalise_named_entity(entity[field.to_sym], named_entity_link_field?(field))
-
-      if val.present?
-        val = val.first if val.is_a?(Array) && val.size == 1
-        multi = (val.is_a?(Hash) || val.is_a?(Array)) && (val.size > 1)
-
-        {
-          key: t(named_entity_field_label_i18n_key(field), scope: "site.object.named-entities.#{i18n}"),
-          val: multi ? nil : val,
-          vals: multi ? val : nil,
-          multi: multi,
-          foldable_link: named_entity_link_field?(field)
-        }
-      end
-    end
-
-    def named_entity_field_label_i18n_key(field)
-      map = { about: 'term', prefLabel: 'label' }
-      map.key?(field) ? map[field] : field
-    end
-
-    def named_entity_link_field?(field)
-      [:about, :broader].include?(field)
-    end
-
-    def normalise_named_entity(named_entity, foldable_link = false)
-      return [] if named_entity.nil?
-      return named_entity unless named_entity.is_a?(Hash)
-      return named_entity[:def] if named_entity.key?(:def) && named_entity.size == 1
-
-      named_entity.map do |key, val|
-        if key && val.nil?
-          { val: key, key: nil, foldable_link: foldable_link }
-        else
-          { key: key, val: val, foldable_link: foldable_link }
-        end
-      end
-    end
-
-    def simple_rights_label_data
-      rights = mustache[:simple_rights_label_data] ||= begin
-        Document::RecordPresenter.new(document, controller).simple_rights_label_data
-      end
-      licenses = document.fetch('licenses', nil)
-      if !licenses.nil? && !rights.nil?
-        license_expiry = licenses.first['ccDeprecatedOn']
-        date = unix_time_to_local(license_expiry)
-        rights[:expiry] = t('global.facet.reusability.expiry', date: date.to_formatted_s(:date))
-      end
-      rights
-    end
-
-    def labels
-      mustache[:labels] ||= begin
-        {
-          show_more_meta: t('site.object.actions.show-more-data'),
-          show_less_meta: t('site.object.actions.show-less-data'),
-          rights: t('site.object.meta-label.rights-human')
-        }
-      end
-    end
-
-    def page_url
-      URI.escape(request.original_url)
-    end
-
-    private
 
     def oembed_links
       oembed_html.map do |_url, oembed|
@@ -642,146 +263,6 @@ module Portal
       collect_values(fields).join(separator)
     end
 
-    def data_section_field_values(section)
-      if section[:entity_name] && section[:entity_proxy_field]
-        fields = entity_fields(section[:entity_name], section[:entity_proxy_field])
-      elsif section[:fields]
-        fields = [section[:fields]].flatten.map do |field|
-          document.fetch(field, [])
-        end
-      else
-        fields = []
-      end
-
-      fields = fields.flatten.compact.uniq
-
-      if section[:exclude_vals].present?
-        fields = fields - section[:exclude_vals]
-      end
-
-      return fields if section[:fields_then_fallback] && fields.present?
-
-      fields = ([section[:collected]] + fields).flatten.compact.uniq
-      return fields if section[:entity_name] && section[:entity_proxy_field]
-
-      entity_uris = document.fetch('agents.about', []) || []
-      fields.reject { |field| entity_uris.include?(field) }
-    end
-
-    def entities(entity_name, proxy_field = nil)
-      @entities ||= {}
-      @entities[entity_name] ||= {}
-      @entities[entity_name][proxy_field] ||= begin
-        entities = document.fetch(entity_name, [])
-        unless proxy_field.nil?
-          proxy_fields = document.fetch("proxies.#{proxy_field}", [])
-          entities.select! { |entity| proxy_fields.include?(entity[:about]) }
-        end
-        entities || []
-      end
-    end
-
-    def entity_fields(entity_name, proxy_field = nil)
-      entities(entity_name, proxy_field).map { |entity| entity_label(entity) }
-    end
-
-    def entity_label(entity)
-      entity.fetch('prefLabel', entity.fetch('foafName', entity[:about]))
-    end
-
-    def data_section_field_search_path(val, field, quoted)
-      return unless val.is_a?(String)
-
-      search_val = val.gsub(/[()\[\]<>]/, '')
-
-      format = quoted ? '"%s"' : '(%s)'
-      search_val = sprintf(format, search_val)
-
-      search_path(q: "#{field}:#{search_val}")
-    end
-
-    def data_section_field_subsection(section)
-      field_values = data_section_field_values(section)
-
-      field_values.compact.map do |val|
-        {}.tap do |item|
-          item[:text] = val
-          if section[:url]
-            item[:url] = render_document_show_field_value(document, section[:url])
-          elsif section[:search_field]
-            item[:url] = data_section_field_search_path(val, section[:search_field], section[:quoted])
-          end
-
-          # text manipulation
-          item[:text] = format_date(val, section[:format_date])
-
-          # overrides
-          if section[:overrides] && item[:text] == section[:override_val]
-            section[:overrides].map do |override|
-              if override[:field_title]
-                item[:text] = override[:field_title]
-              end
-              if override[:field_url]
-                item[:url] = override[:field_url]
-              end
-            end
-          end
-
-          if section[:ga_data]
-            item[:ga_data] = section[:ga_data]
-          end
-
-          # extra entity info
-          if section[:entity_extra].present?
-            possible_entities = entities(section[:entity_name], section[:entity_proxy_field])
-            salient_entity = possible_entities.detect do |entity|
-              entity_label(entity).any? { |label| label == val }
-            end
-            unless salient_entity.nil?
-              item[:extra_info] = data_section_nested_hash(section[:entity_extra], salient_entity)
-            end
-          end
-        end
-      end
-    end
-
-    def data_section(data)
-      sections = data[:sections].map do |section|
-        {
-          title: section[:title].nil? ? false : t(section[:title], scope: 'site.object.meta-label'),
-          items: data_section_field_subsection(section)
-        }
-      end
-
-      sections.reject! { |section| section[:items].blank? || section[:items][0][:text].blank? }
-
-      sections.blank? ? nil : {
-        title: t(data[:title], scope: 'site.object.meta-label'),
-        sections: sections
-      }
-    end
-
-    ##
-    # Creates a nested hash of field values for Mustache template
-    def data_section_nested_hash(mappings, subject = document)
-      {}.tap do |hash|
-        mappings.each do |mapping|
-          val = render_document_show_field_value(subject, mapping[:field])
-          if val.present?
-            keys = (mapping[:map_to] || mapping[:field]).split('.')
-            last = keys.pop
-
-            context = hash
-            keys.each do |k|
-              context[k] ||= {}
-              context = context[k]
-            end
-            context[last] = format_date(val, mapping[:format_date])
-          end
-        end
-      end
-    end
-
     def long_and_lat?
       latitude = render_document_show_field_value(document, 'places.latitude')
       longitude = render_document_show_field_value(document, 'places.longitude')
@@ -803,23 +284,6 @@ module Portal
         render_document_show_field_value(document, 'proxies.dcTitle')
       else
         title.first
-      end
-    end
-
-    def pref_label(field_name)
-      val = @document.fetch(field_name, [])
-      pref = nil
-      if val.size > 0
-        if val.is_a?(Array)
-          val[0]
-        else
-          pref = val[0][I18n.locale.to_sym]
-          if pref.size > 0
-            pref[0]
-          else
-            val[0][:en]
-          end
-        end
       end
     end
 
@@ -875,13 +339,6 @@ module Portal
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
-    end
-
-    def format_date(text, format)
-      return text if format.nil? || (text !=~ /^.+-/)
-      Time.parse(text).strftime(format)
-    rescue ArgumentError
-      text
     end
 
     def back_url_from_referer
