@@ -3,6 +3,7 @@ module Document
   # Blacklight document presenter for a Europeana web resource
   class WebResourcePresenter < DocumentPresenter
     include ActionView::Helpers::NumberHelper
+    include Metadata::Rights
 
     def initialize(document, controller, configuration = controller.blacklight_config, record = nil, record_presenter = nil)
       super(document, controller, configuration)

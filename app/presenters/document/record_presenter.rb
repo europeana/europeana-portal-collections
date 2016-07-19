@@ -3,6 +3,7 @@ module Document
   # Blacklight document presenter for a Europeana record
   class RecordPresenter < DocumentPresenter
     include Record::IIIF
+    include Metadata::Rights
 
     def edm_is_shown_by
       @edm_is_shown_by ||= render_document_show_field_value('aggregations.edmIsShownBy')
@@ -74,6 +75,11 @@ module Document
 
     def media_rights
       @media_rights ||= render_document_show_field_value('aggregations.edmRights')
+    end
+
+    def field_group(id)
+      @field_group_presenter ||= Document::FieldGroupPresenter.new(document, controller)
+      @field_group_presenter.display(id)
     end
   end
 end
