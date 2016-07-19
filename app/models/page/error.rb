@@ -8,6 +8,7 @@ class Page::Error < Page
 
   translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
+  default_scope { includes(:translations) }
 
   scope :exception, -> { where("slug LIKE 'exceptions/%'") }
   scope :generic, -> { where("slug LIKE 'errors/%'") }

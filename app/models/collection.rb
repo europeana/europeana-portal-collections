@@ -12,6 +12,7 @@ class Collection < ActiveRecord::Base
 
   translates :title, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
+  default_scope { includes(:translations) }
 
   def to_param
     key
