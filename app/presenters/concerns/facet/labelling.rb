@@ -168,7 +168,7 @@ module Facet
     #
     # @return [Hash]
     def facet_tooltip
-      labeller[:tooltip].call(@controller) if labeller[:tooltip]
+      # labeller[:tooltip].call(@controller) if labeller[:tooltip]
     end
 
     ##
