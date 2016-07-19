@@ -6,6 +6,7 @@ rvm:
   - 2.3.1
 bundler_args: --without development:production:doc:localeapp
 cache:
+  bundler: true
   directories:
     - "travis_phantomjs"
 before_install:
