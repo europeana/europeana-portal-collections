@@ -172,11 +172,11 @@ module Document
     def colour_search_url(colour)
       query_params = { f: { 'COLOURPALETTE' => [colour], 'TYPE' => ['IMAGE'] } }
       if @collection.present?
-        #collection_path(@collection, query_params)
-        "javascript:alert('url for colour search: \"" + colour + "\"')"
+        # collection_path(@collection, query_params)
+        "javascript:alert('collection url for colour search: \"" + colour + "\"')"
       else
-        #search_path(query_params)
-        "javascript:alert('url for colour search: \"" + colour + "\"')"
+        # search_path(query_params)
+        "javascript:alert('query url for colour search: \"" + colour + "\"')"
       end
     end
 
@@ -191,7 +191,7 @@ module Document
           url: colour_search_url(clean_colour)
         }
       end
-      {items: result}
+      { items: result }
     end
 
     def is_avi?
