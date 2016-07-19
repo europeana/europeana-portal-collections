@@ -164,8 +164,34 @@ module Document
         runtime: render_document_show_field_value('ebucoreDuration'),
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
         attribution_plain: render_document_show_field_value('textAttributionSnippet'),
-        attribution_html: render_document_show_field_value('htmlAttributionSnippet')
+        attribution_html: render_document_show_field_value('htmlAttributionSnippet'),
+        colours: colour_palette_data
       }
+    end
+
+    def colour_search_url(colour)
+      query_params = { f: { 'COLOURPALETTE' => [colour], 'TYPE' => ['IMAGE'] } }
+      if @collection.present?
+        # collection_path(@collection, query_params)
+        "javascript:alert('collection url for colour search: \"" + colour + "\"')"
+      else
+        # search_path(query_params)
+        "javascript:alert('query url for colour search: \"" + colour + "\"')"
+      end
+    end
+
+    def colour_palette_data
+      data = render_document_show_field_value('aggregations.edmComponentColor')
+      return [] if data.blank?
+      result = []
+      data.split(',').each  do |colour|
+        clean_colour = colour.gsub('and', '').strip
+        result << {
+          hex: clean_colour,
+          url: colour_search_url(clean_colour)
+        }
+      end
+      { items: result }
     end
 
     def is_avi?
