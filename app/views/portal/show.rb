@@ -99,7 +99,7 @@ module Portal
         title: t('site.object.named-entities.title'),
         data: data,
         inline: true,
-      } unless data.size == 0
+      } unless data.empty?
     end
 
     def institution_name_and_link
@@ -147,20 +147,29 @@ module Portal
         institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
         institution_name_and_link: institution_name_and_link,
         institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
-        institution_canned_search: render_document_show_field_value(document, 'aggregations.edmDataProvider') ?
-          search_path(f: { 'DATA_PROVIDER' => [render_document_show_field_value(document, 'aggregations.edmDataProvider')] }) : false
+        institution_canned_search: institution_canned_search
       }
+    end
+
+    def institution_canned_search
+      edm_data_provider = render_document_show_field_value(document, 'aggregations.edmDataProvider')
+      return false if edm_data_provider.blank?
+      search_path(f: { 'DATA_PROVIDER' => [edm_data_provider] })
+    end
+
+    def meta_additional_present?
+      !document.fetch('proxies.dctermsSpatial', []).empty? ||
+        !document.fetch('proxies.dcCoverage', []).empty? ||
+        !document.fetch('proxies.edmCurrentLocation', []).empty? ||
+        (
+          !document.fetch('places.latitude', []).empty? &&
+          !document.fetch('places.longitude', []).empty?
+        )
     end
 
     def meta_additional
       {
-        present: document.fetch('proxies.dctermsSpatial', []).size > 0 ||
-          document.fetch('proxies.dcCoverage', []).size > 0 ||
-          document.fetch('proxies.edmCurrentLocation', []).size > 0 ||
-          (
-            document.fetch('places.latitude', []).size > 0 &&
-            document.fetch('places.longitude', []).size > 0
-          ),
+        present: meta_additional_present?,
         places: presenter.field_group(:location),
         geo: {
           latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
@@ -200,7 +209,8 @@ module Portal
     end
 
     def similar_items
-      @hierarchy.blank? ? {
+      return false unless @hierarchy.blank?
+      {
         title: t('site.object.similar-items'),
         more_items_query: search_path(mlt: document.id),
         more_items_load: document_similar_url(document, format: 'json'),
@@ -208,16 +218,16 @@ module Portal
         items: @similar.map do |doc|
           {
             url: document_path(doc, format: 'html'),
-            title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+            title: render_document_show_field_value(doc, %w(dcTitleLangAware title)),
             img: {
-              alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+              alt: render_document_show_field_value(doc, %w(dcTitleLangAware title)),
               # temporary fix until API contains correct image url
               # src: render_document_show_field_value(doc, 'edmPreview'),
               src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 400)
             }
           }
         end
-      } : false
+      }
     end
 
     def oembed_links
@@ -302,7 +312,7 @@ module Portal
     def media_items
       @media_items ||= begin
         items = presenter.media_web_resources(per_page: 10, page: 1).map(&:media_item)
-        items.first[:is_current] = true unless items.size == 0
+        items.first[:is_current] = true unless items.empty?
 
         {
           required_players: item_players,
@@ -310,7 +320,7 @@ module Portal
           external_media: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
             render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
           single_item: items.size == 1,
-          empty_item: items.size == 0,
+          empty_item: items.empty?,
           items: items,
           # The page parameter gets added by the javascript - base url needed here
           more_thumbs_url: document_media_path(document, format: 'json'),

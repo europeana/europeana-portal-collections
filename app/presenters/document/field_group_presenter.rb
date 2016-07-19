@@ -26,7 +26,7 @@ module Document
     protected
 
     def format_date(text, format)
-      return text if format.nil? || (text !=~ /^.+-/)
+      return text if format.nil? || (text ! =~ /^.+-/)
       Time.parse(text).strftime(format)
     rescue ArgumentError
       text
@@ -46,7 +46,7 @@ module Document
       fields = fields.flatten.compact.uniq
 
       if section[:exclude_vals].present?
-        fields = fields - section[:exclude_vals]
+        fields -= section[:exclude_vals]
       end
 
       return fields if section[:fields_then_fallback] && fields.present?
@@ -121,17 +121,17 @@ module Document
       {}.tap do |hash|
         mappings.each do |mapping|
           val = render_document_show_field_value(subject, mapping[:field])
-          if val.present?
-            keys = (mapping[:map_to] || mapping[:field]).split('.')
-            last = keys.pop
+          next unless val.present?
 
-            context = hash
-            keys.each do |k|
-              context[k] ||= {}
-              context = context[k]
-            end
-            context[last] = format_date(val, mapping[:format_date])
+          keys = (mapping[:map_to] || mapping[:field]).split('.')
+          last = keys.pop
+
+          context = hash
+          keys.each do |k|
+            context[k] ||= {}
+            context = context[k]
           end
+          context[last] = format_date(val, mapping[:format_date])
         end
       end
     end
