@@ -33,15 +33,13 @@ module Document
     end
 
     def section_field_values(section)
-      if section[:entity_name] && section[:entity_proxy_field]
-        fields = entity_fields(section[:entity_name], section[:entity_proxy_field])
-      elsif section[:fields]
-        fields = [section[:fields]].flatten.map do |field|
-          document.fetch(field, [])
-        end
-      else
-        fields = []
-      end
+      fields = if section[:entity_name] && section[:entity_proxy_field]
+                 entity_fields(section[:entity_name], section[:entity_proxy_field])
+               elsif section[:fields]
+                 [section[:fields]].flatten.map { |field| document.fetch(field, []) }
+               else
+                 []
+               end
 
       fields = fields.flatten.compact.uniq
 

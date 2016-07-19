@@ -144,11 +144,16 @@ module Portal
     def origin
       {
         url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
-        institution_name: render_document_show_field_value(document, 'aggregations.edmDataProvider') || render_document_show_field_value(document, 'aggregations.edmProvider'),
+        institution_name: institution_name,
         institution_name_and_link: institution_name_and_link,
         institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
         institution_canned_search: institution_canned_search
       }
+    end
+
+    def institution_name
+      render_document_show_field_value(document, 'aggregations.edmDataProvider') ||
+        render_document_show_field_value(document, 'aggregations.edmProvider')
     end
 
     def institution_canned_search

@@ -53,7 +53,7 @@ module Document
             sections: [
               {
                 title: 'rights',
-                fields: ['proxies.dcRights', 'aggregations.edmRights'],
+                fields: %w(proxies.dcRights aggregations.edmRights),
                 ga_data: 'dimension5'
               }
             ]
@@ -127,7 +127,6 @@ module Document
                 title: 'location',
                 fields: ['proxies.dctermsSpatial'],
                 collected: ->(document) { pref_label(document, 'places.prefLabel') }
-                #collected: document.fetch('places.prefLabel', []).first,
               },
               {
                 title: 'place-time',
@@ -228,7 +227,7 @@ module Document
               {
                 title: 'provenance',
                 fields: ['proxies.dcSource'],
-                exclude_vals: ['ugc', 'UGC']
+                exclude_vals: %w(ugc UGC)
               },
               {
                 title: 'publisher',
