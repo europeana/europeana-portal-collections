@@ -1,6 +1,8 @@
 ##
 # Static pages controller
 class PagesController < ApplicationController
+  include EnforceDefaultFormat
+
   def show
     @page = Page.find_by_slug!(params[:page])
     authorize! :show, @page

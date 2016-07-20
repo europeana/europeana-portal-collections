@@ -1,6 +1,8 @@
 ##
 # Various ways of browsing the Europeana portal
 class BrowseController < ApplicationController
+  include EnforceDefaultFormat
+
   # GET /browse/colours
   # @todo Load @colours from view helper, to bypass if HTML cached
   def colours
