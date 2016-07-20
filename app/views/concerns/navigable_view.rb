@@ -110,16 +110,16 @@ module NavigableView
 
   def navigation_global_primary_nav_browse_submenu_items
     [
-      link_item(t('global.navigation.browse_newcontent'), browse_newcontent_path,
-                is_current: current_page?(browse_newcontent_path)),
-      link_item(t('global.navigation.browse_colours'), browse_colours_path,
-                is_current: current_page?(browse_colours_path)),
-      link_item(t('global.navigation.browse_sources'), browse_sources_path,
-                is_current: current_page?(browse_sources_path)),
-      link_item(t('global.navigation.concepts'), browse_topics_path,
-                is_current: current_page?(browse_topics_path)),
-      link_item(t('global.navigation.agents'), browse_people_path,
-                is_current: current_page?(browse_people_path))
+      link_item(t('global.navigation.browse_newcontent'), browse_newcontent_path(format: 'html'),
+                is_current: current_page?(browse_newcontent_path(format: 'html'))),
+      link_item(t('global.navigation.browse_colours'), browse_colours_path(format: 'html'),
+                is_current: current_page?(browse_colours_path(format: 'html'))),
+      link_item(t('global.navigation.browse_sources'), browse_sources_path(format: 'html'),
+                is_current: current_page?(browse_sources_path(format: 'html'))),
+      link_item(t('global.navigation.concepts'), browse_topics_path(format: 'html'),
+                is_current: current_page?(browse_topics_path(format: 'html'))),
+      link_item(t('global.navigation.agents'), browse_people_path(format: 'html'),
+                is_current: current_page?(browse_people_path(format: 'html')))
     ]
   end
 
