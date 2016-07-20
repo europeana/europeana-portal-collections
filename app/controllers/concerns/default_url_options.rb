@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 module DefaultUrlOptions
   def default_url_options(options = {})
     defaults = request_in_cms? ? {} : { locale: I18n.locale }
     defaults.merge!(options)
-    if ENV['HTTP_HOST']
-      defaults.merge!(host: ENV['HTTP_HOST'] )
-    end
+    defaults[:host] = ENV['HTTP_HOST'] if ENV['HTTP_HOST']
     defaults
   end
 
