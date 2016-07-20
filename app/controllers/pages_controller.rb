@@ -1,8 +1,9 @@
 ##
 # Static pages controller
 class PagesController < ApplicationController
-  before_action :find_page! # needs to occur before `include EnforceDefaultFormat`
-                            # to catch 404 errors first, and not redirect them
+  # needs to occur before `include EnforceDefaultFormat`
+  # to catch 404 errors first, and not redirect them to .html extension
+  before_action :find_page!
 
   include EnforceDefaultFormat
 
