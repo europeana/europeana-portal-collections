@@ -1,4 +1,4 @@
-RSpec.describe 'browse/topics.html.mustache', :page_with_top_nav do
+RSpec.describe 'browse/topics.html.mustache', :common_view_components do
   before do
     assign(:topics, BrowseEntry.topic.published)
   end

@@ -1,4 +1,4 @@
-RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_config do
+RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config do
   include ApiResponseFixtures
 
   let(:blacklight_document_source) do

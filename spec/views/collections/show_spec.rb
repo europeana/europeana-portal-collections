@@ -1,4 +1,4 @@
-RSpec.describe 'collections/show.html.mustache', :page_with_top_nav, :blacklight_config do
+RSpec.describe 'collections/show.html.mustache', :common_view_components, :blacklight_config do
   include ActionView::Helpers::TextHelper
 
   before(:each) do
