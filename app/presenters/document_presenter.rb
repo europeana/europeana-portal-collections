@@ -5,6 +5,9 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
 
   attr_reader :document, :controller
 
+  include DefaultUrlOptions
+  include Rails.application.routes.url_helpers
+
   ##
   # Override to prevent HTML escaping, handled by {Mustache}
   #
@@ -14,11 +17,5 @@ class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
     options = field_config.separator_options if field_config && field_config.separator_options
 
     values.to_sentence(options)
-  end
-
-  protected
-
-  def routes
-    Rails.application.routes.url_helpers
   end
 end

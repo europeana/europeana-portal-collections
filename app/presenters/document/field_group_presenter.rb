@@ -65,7 +65,7 @@ module Document
       format = quoted ? '"%s"' : '(%s)'
       search_val = sprintf(format, search_val)
 
-      routes.search_path(controller.default_url_options.merge(q: "#{field}:#{search_val}"))
+      search_path(controller.default_url_options.merge(q: "#{field}:#{search_val}"))
     end
 
     def section_field_subsection(section)
