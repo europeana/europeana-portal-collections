@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include ControllerExceptionHandling
   include Europeana::Styleguide
   include Catalog
+  include DefaultUrlOptions
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -17,15 +18,6 @@ class ApplicationController < ActionController::Base
 
   def current_user
     super || User.new(guest: true)
-  end
-
-  def default_url_options(options = {})
-    defaults = request_in_cms? ? {} : { locale: I18n.locale }
-    defaults.merge!(options)
-    if ENV['HTTP_HOST']
-      defaults.merge!(host: ENV['HTTP_HOST'] )
-    end
-    defaults
   end
 
   private
@@ -51,9 +43,5 @@ class ApplicationController < ActionController::Base
   def redirect_to_home
     redirect_to home_url
     return false
-  end
-
-  def request_in_cms?
-    self.class.to_s.deconstantize == 'RailsAdmin'
   end
 end
