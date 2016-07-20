@@ -1,4 +1,4 @@
-RSpec.describe 'pages/custom/errors/not_found.html.mustache', :blacklight_config, :page_with_top_nav do
+RSpec.describe 'pages/custom/errors/not_found.html.mustache', :blacklight_config, :common_view_components do
   before(:each) do
     assign(:page, page)
     assign(:params, { page: page.slug })
@@ -6,8 +6,6 @@ RSpec.describe 'pages/custom/errors/not_found.html.mustache', :blacklight_config
   end
 
   let(:page) { pages(:not_found) }
-
-  it_should_behave_like 'page with top nav'
 
   it 'should have page title' do
     render

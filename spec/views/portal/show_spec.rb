@@ -1,4 +1,4 @@
-RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_config do
+RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config do
   let(:blacklight_document) do
     # @todo Move to factory / fixture
     id = '/abc/123'
