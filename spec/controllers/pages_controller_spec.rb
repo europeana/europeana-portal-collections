@@ -6,7 +6,7 @@ RSpec.describe PagesController do
 
     context 'with existent page param' do
       context 'without custom page template' do
-        let(:params) { { locale: 'en', page: 'about' } }
+        let(:params) { { locale: 'en', format: 'html', page: 'about' } }
 
         it 'renders generic static page template' do
           expect(response.status).to eq(200)
@@ -15,7 +15,7 @@ RSpec.describe PagesController do
       end
 
       context 'with custom page template and code' do
-        let(:params) { { locale: 'en', page: 'errors/not_found' } }
+        let(:params) { { locale: 'en', format: 'html', page: 'errors/not_found' } }
 
         it 'renders custom page template' do
           expect(response.status).to eq(404)
@@ -25,7 +25,7 @@ RSpec.describe PagesController do
     end
 
     context 'with non-existent page param' do
-      let(:params) { { locale: 'en', page: 'unknown/page' } }
+      let(:params) { { locale: 'en', format: 'html', page: 'unknown/page' } }
 
       it 'renders error page' do
         expect(response.status).to eq(404)

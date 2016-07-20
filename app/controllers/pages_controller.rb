@@ -1,10 +1,12 @@
 ##
 # Static pages controller
 class PagesController < ApplicationController
+  before_action :find_page! # needs to occur before `include EnforceDefaultFormat`
+                            # to catch 404 errors first, and not redirect them
+
   include EnforceDefaultFormat
 
   def show
-    @page = Page.find_by_slug!(params[:page])
     authorize! :show, @page
 
     respond_to do |format|
@@ -14,5 +16,11 @@ class PagesController < ApplicationController
         render template, status: @page.http_code
       end
     end
+  end
+
+  protected
+
+  def find_page!
+    @page = Page.find_by_slug!(params[:page])
   end
 end
