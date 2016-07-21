@@ -61,6 +61,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.include ApiResponseFixtures
+  config.include CiEnvHelper
   config.include EuropeanaAPIHelper
   config.include ViewTestHelper, type: :view
 
