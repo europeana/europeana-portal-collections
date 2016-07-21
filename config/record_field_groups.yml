@@ -143,6 +143,10 @@ provenance:
     search_field: DATA_PROVIDER
     ga_data: dimension3
     quoted: true
+  - title: intermediate-provider
+    fields:
+    - aggregations.edmIntermediateProvider
+    search_field: false
   - title: provider
     fields:
     - aggregations.edmProvider
