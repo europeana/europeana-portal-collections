@@ -19,7 +19,7 @@ module Facet
     #
     # @param see {#facet_item}
     # @return [Hash] Request parameters without the collection
-    def remove_facet_params(item)
+    def remove_facet_params(_item)
       params.except(:id).merge(controller: :portal, action: :index)
     end
 
