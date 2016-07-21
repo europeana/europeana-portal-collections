@@ -1,4 +1,4 @@
-module Browse
+module Explore
   class Colours < ApplicationView
     include CollectionFilterableView
 
@@ -52,7 +52,7 @@ module Browse
     end
 
     def body_cache_key
-      'browse/colours' + (@collection.present? ? '/' + @collection.key : '')
+      'explore/colours' + (@collection.present? ? '/' + @collection.key : '')
     end
   end
 end

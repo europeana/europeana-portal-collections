@@ -1,4 +1,4 @@
-module Browse
+module Explore
   class Sources < ApplicationView
     include CollectionFilterableView
 
@@ -66,7 +66,7 @@ module Browse
     private
 
     def body_cache_key
-      'browse/sources' + (@collection.present? ? '/' + @collection.key : '')
+      'explore/sources' + (@collection.present? ? '/' + @collection.key : '')
     end
   end
 end

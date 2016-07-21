@@ -12,11 +12,11 @@ RSpec.shared_examples 'common view components', :common_view_components do
   it 'should have top nav links to explore pages' do
     render
     expect(rendered).to have_selector('#main-menu a', text: 'Explore')
-    expect(rendered).to have_selector('#main-menu a[href$="/browse/newcontent.html"]')
-    expect(rendered).to have_selector('#main-menu a[href$="/browse/colours.html"]')
-    expect(rendered).to have_selector('#main-menu a[href$="/browse/sources.html"]')
-    expect(rendered).to have_selector('#main-menu a[href$="/browse/topics.html"]')
-    expect(rendered).to have_selector('#main-menu a[href$="/browse/people.html"]')
+    expect(rendered).to have_selector('#main-menu a[href$="/explore/newcontent.html"]')
+    expect(rendered).to have_selector('#main-menu a[href$="/explore/colours.html"]')
+    expect(rendered).to have_selector('#main-menu a[href$="/explore/sources.html"]')
+    expect(rendered).to have_selector('#main-menu a[href$="/explore/topics.html"]')
+    expect(rendered).to have_selector('#main-menu a[href$="/explore/people.html"]')
   end
 
   it 'should have x-default alternate link' do

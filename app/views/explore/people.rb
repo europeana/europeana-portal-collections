@@ -1,4 +1,4 @@
-module Browse
+module Explore
   class People < ApplicationView
     include CollectionFilterableView
     include BrowseEntryDisplayingView
@@ -32,7 +32,7 @@ module Browse
     private
 
     def body_cache_key
-      'browse/people' + (@collection.present? ? '/' + @collection.key : '') + '-' + @people.map(&:updated_at).max.to_i.to_s
+      'explore/people' + (@collection.present? ? '/' + @collection.key : '') + '-' + @people.map(&:updated_at).max.to_i.to_s
     end
   end
 end

@@ -1,11 +1,11 @@
-RSpec.describe 'browse/topics.html.mustache', :common_view_components do
+RSpec.describe 'explore/people.html.mustache', :common_view_components do
   before do
-    assign(:topics, BrowseEntry.topic.published)
+    assign(:people, BrowseEntry.person.published)
   end
 
   it 'should have page title' do
     render
-    page_title = t('site.browse.topics.title')
+    page_title = t('site.browse.people.title')
     expect(rendered).to have_selector('title', visible: false, text: /\A#{page_title}/)
   end
 
@@ -16,17 +16,17 @@ RSpec.describe 'browse/topics.html.mustache', :common_view_components do
 
   it 'should have intro para' do
     render
-    description = t('site.browse.topics.description')
+    description = t('site.browse.people.description')
     expect(rendered).to have_selector('section.static-header p', text: description)
   end
 
-  it 'should display topic browse entries' do
+  it 'should display person browse entries' do
     render
     expect(rendered).to have_selector('ul.browse-entry-list li')
-    BrowseEntry.topic.published.each do |topic|
-      url = search_path(Rack::Utils.parse_nested_query(topic.query))
+    BrowseEntry.person.published.each do |person|
+      url = search_path(Rack::Utils.parse_nested_query(person.query))
       expect(rendered).to have_selector("ul.browse-entry-list li a[href=\"#{url}\"] span.title",
-                                        text: topic.title)
+                                        text: person.title)
     end
   end
 end

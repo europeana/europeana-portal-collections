@@ -1,4 +1,4 @@
-module Browse
+module Explore
   class Topics < ApplicationView
     include CollectionFilterableView
     include BrowseEntryDisplayingView
@@ -32,7 +32,7 @@ module Browse
     private
 
     def body_cache_key
-      'browse/topics' + (@collection.present? ? '/' + @collection.key : '') + '-' + @topics.map(&:updated_at).max.to_i.to_s
+      'explore/topics' + (@collection.present? ? '/' + @collection.key : '') + '-' + @topics.map(&:updated_at).max.to_i.to_s
     end
   end
 end
