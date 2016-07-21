@@ -4,9 +4,21 @@ module Document
   # Presenter for a group of document fields
   class FieldGroupPresenter < DocumentPresenter
     include Field::Entities
+    include Field::Labelling
+
+    ##
+    # Load the field group definition from the config file
+    def self.definition(id)
+      @definitions ||= load_definitions
+      @definitions[id]
+    end
+
+    def self.load_definitions
+      YAML::load_file(File.join(Rails.root, 'config', 'record_field_groups.yml')).with_indifferent_access
+    end
 
     def display(id)
-      definition = Document::Field::Groups.send(id)
+      definition = self.class.definition(id)
 
       sections = definition[:sections].map do |section|
         {
@@ -32,25 +44,34 @@ module Document
       text
     end
 
+    def map_field_values(values, map)
+      values.map do |val|
+        map.key?(val) ? I18n.t(map[val]) : val
+      end
+    end
+
     def section_field_values(section)
       fields = if section[:entity_name] && section[:entity_proxy_field]
                  entity_fields(section[:entity_name], section[:entity_proxy_field])
                elsif section[:fields]
-                 [section[:fields]].flatten.map { |field| document.fetch(field, []) }
+                 [section[:fields]].flatten.map do |field|
+                   field.ends_with?('.prefLabel') ? pref_label(document, field) : document.fetch(field, [])
+                 end
                else
                  []
                end
 
       fields = fields.flatten.compact.uniq
 
-      if section[:exclude_vals].present?
-        fields -= section[:exclude_vals]
+      fields -= section[:exclude_vals] if section[:exclude_vals].present?
+
+      fields = map_field_values(fields, section[:map_values]) if section[:map_values]
+
+      if section[:entity_fallback]
+        return fields if fields.present?
+        fields = section_field_values(fields: section[:entity_fallback])
       end
 
-      return fields if section[:fields_then_fallback] && fields.present?
-
-      collected = section[:collected].present? ? section[:collected].call(document) : nil
-      fields = ([collected] + fields).flatten.compact.uniq
       return fields if section[:entity_name] && section[:entity_proxy_field]
 
       entity_uris = document.fetch('agents.about', []) || []
@@ -118,7 +139,8 @@ module Document
     def section_nested_hash(mappings, subject = document)
       {}.tap do |hash|
         mappings.each do |mapping|
-          val = render_document_show_field_value(subject, mapping[:field])
+          val = subject.fetch(mapping[:field])
+          val = render_field_value(val)
           next unless val.present?
 
           keys = (mapping[:map_to] || mapping[:field]).split('.')
