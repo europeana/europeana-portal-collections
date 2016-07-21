@@ -2,8 +2,10 @@ RSpec.describe 'collections/show.html.mustache', :page_with_top_nav, :blacklight
   include ActionView::Helpers::TextHelper
 
   before(:each) do
+    Rails.cache.write('record/counts/collections/music/type/image', 10)
     assign(:collection, collection)
     assign(:landing_page, landing_page)
+    assign(:params, { id: collection.id })
     allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:has_search_parameters?).and_return(false)
@@ -30,6 +32,8 @@ RSpec.describe 'collections/show.html.mustache', :page_with_top_nav, :blacklight
 
   it 'should have a browse menu' do
     expect(subject).to have_selector('#browse-menu')
+    expect(subject).to have_link('All')
     expect(subject).to have_link('Images')
+    expect(subject).not_to have_link('3D')
   end
 end

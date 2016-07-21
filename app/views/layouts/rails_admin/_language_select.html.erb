@@ -1,5 +1,5 @@
-<%= form_tag(main_app.settings_language_path, method: :put) do %>
-  <%= select_tag('locale', language_options_for_select, title: t('site.settings.language.label')) %>
+<%= form_tag(main_app.locale_path(locale: nil), method: :put) do %>
+  <%= select_tag('l', language_options_for_select, title: t('site.settings.language.label')) %>
   <%= hidden_field_tag('redirect', request.fullpath) %>
   <%= submit_tag('Go') %>
 <% end %>

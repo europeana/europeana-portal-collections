@@ -55,7 +55,9 @@ RailsAdmin.config do |config|
     end
     edit do
       field :title
-      field :body
+      field :body, :text do
+        html_attributes { { rows: 8, cols: 60 } }
+      end
       field :default do
         help 'Only one, published, banner can be the default.'
       end
@@ -78,7 +80,6 @@ RailsAdmin.config do |config|
       end
       field :subject_type
       field :state
-      field :settings_category, :enum
       field :collections
     end
     edit do
@@ -86,7 +87,6 @@ RailsAdmin.config do |config|
       field :query
       field :file, :paperclip
       field :subject_type
-      field :settings_category, :enum
       field :collections do
         inline_add false
       end

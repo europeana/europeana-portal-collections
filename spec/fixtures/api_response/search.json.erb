@@ -1,0 +1,26 @@
+<%
+items = (0..20).map do |index|
+  id = '/sample/record' + index.to_s
+  '{"id":"' + id + '","title":["' + id + '"]}'
+end
+%>
+{
+  "success":true,
+  "itemsCount":<%= items.size.to_s %>,
+  "totalResults":<%= items.size.to_s %>,
+  "items":[<%= items.join(',') %>],
+  "facets":[
+    {
+      "name": "COLOURPALETTE",
+      "fields": [
+        {
+          "label": "#000000",
+          "count": 2000
+        }, {
+          "label": "#FFFFFF",
+          "count": 1000
+        }
+      ]
+    }
+  ]
+}

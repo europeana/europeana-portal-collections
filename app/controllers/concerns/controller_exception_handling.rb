@@ -57,7 +57,7 @@ module ControllerExceptionHandling
         def message(exception:)
           message = "\n#{exception.class} (#{exception.message}):\n"
           message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
-          message << '  ' << trace(exception: exception).join("\n  ") << "\n"
+          message << '  ' << trace(exception: exception).join("\n  ")
         end
 
         def trace(exception:)
@@ -179,6 +179,6 @@ module ControllerExceptionHandling
   ##
   # Did the error occur while using the RailsAdmin CMS?
   def failed_in_cms_request?
-    self.class.to_s.deconstantize == 'RailsAdmin'
+    request_in_cms?
   end
 end

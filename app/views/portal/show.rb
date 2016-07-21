@@ -1,19 +1,12 @@
 module Portal
   class Show < ApplicationView
+    include SearchableView
+
     attr_accessor :document, :debug
 
     def head_links
-      s = super
-      mustache[:head_links] ||= {
-        items: [
-          { rel: 'canonical', href: document_url(document, format: 'html') }
-        ] + oembed_links + s[:items]
-      }
-    end
-
-    def oembed_links
-      oembed_html.map do |_url, oembed|
-        { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
+      mustache[:head_links] ||= begin
+        { items: oembed_links + super[:items] }
       end
     end
 
@@ -46,7 +39,7 @@ module Portal
 
     def navigation
       mustache[:navigation] ||= begin
-        { back_url: back_url_from_referer }.reverse_merge(helpers.navigation)
+        { back_url: back_url_from_referer }.reverse_merge(super)
       end
     end
 
@@ -211,25 +204,41 @@ module Portal
                   title: 'site.object.meta-label.creator',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcCreator',
-                  search_field: 'who',
-                  extra: [
+                  entity_extra: [
                     {
-                      field: 'agents.rdaGr2DateOfBirth',
+                      field: 'rdaGr2DateOfBirth',
                       map_to: 'life.from.short',
                       format_date: '%Y-%m-%d'
                     },
                     {
-                      field: 'agents.rdaGr2DateOfDeath',
+                      field: 'rdaGr2DateOfDeath',
                       map_to: 'life.to.short',
                       format_date: '%Y-%m-%d'
                     }
-                  ]
+                  ],
+                  search_field: 'who',
+                  fields_then_fallback: true,
+                  collected: render_document_show_field_value(document, 'proxies.dcCreator')
                 },
                 {
                   title: 'site.object.meta-label.contributor',
                   entity_name: 'agents',
                   entity_proxy_field: 'dcContributor',
-                  search_field: 'who'
+                  entity_extra: [
+                    {
+                      field: 'rdaGr2DateOfBirth',
+                      map_to: 'life.from.short',
+                      format_date: '%Y-%m-%d'
+                    },
+                    {
+                      field: 'rdaGr2DateOfDeath',
+                      map_to: 'life.to.short',
+                      format_date: '%Y-%m-%d'
+                    }
+                  ],
+                  search_field: 'who',
+                  fields_then_fallback: true,
+                  collected: render_document_show_field_value(document, 'proxies.dcContributor'),
                 },
                 {
                   title: 'site.object.meta-label.subject',
@@ -456,7 +465,7 @@ module Portal
           named_entities: named_entity_data,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
-        }.reverse_merge(helpers.content)
+        }.reverse_merge(super)
       end
     end
 
@@ -590,6 +599,12 @@ module Portal
 
     private
 
+    def oembed_links
+      oembed_html.map do |_url, oembed|
+        { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
+      end
+    end
+
     def meta_description
       mustache[:meta_description] ||= begin
         description = render_document_show_field_value(document, 'proxies.dcDescription')
@@ -629,10 +644,7 @@ module Portal
 
     def data_section_field_values(section)
       if section[:entity_name] && section[:entity_proxy_field]
-        proxy_fields = document.fetch("proxies.#{section[:entity_proxy_field]}", [])
-        entities = document.fetch(section[:entity_name], [])
-        entities.select! { |entity| proxy_fields.include?(entity[:about]) }
-        fields = entities.map { |entity| entity.fetch('prefLabel', entity.fetch('foafName', entity[:about])) }
+        fields = entity_fields(section[:entity_name], section[:entity_proxy_field])
       elsif section[:fields]
         fields = [section[:fields]].flatten.map do |field|
           document.fetch(field, [])
@@ -654,6 +666,27 @@ module Portal
 
       entity_uris = document.fetch('agents.about', []) || []
       fields.reject { |field| entity_uris.include?(field) }
+    end
+
+    def entities(entity_name, proxy_field = nil)
+      @entities ||= {}
+      @entities[entity_name] ||= {}
+      @entities[entity_name][proxy_field] ||= begin
+        entities = document.fetch(entity_name, [])
+        unless proxy_field.nil?
+          proxy_fields = document.fetch("proxies.#{proxy_field}", [])
+          entities.select! { |entity| proxy_fields.include?(entity[:about]) }
+        end
+        entities || []
+      end
+    end
+
+    def entity_fields(entity_name, proxy_field = nil)
+      entities(entity_name, proxy_field).map { |entity| entity_label(entity) }
+    end
+
+    def entity_label(entity)
+      [entity.fetch('prefLabel', entity.fetch('foafName', entity[:about]))].flatten
     end
 
     def data_section_field_search_path(val, field, quoted)
@@ -698,9 +731,15 @@ module Portal
             item[:ga_data] = section[:ga_data]
           end
 
-          # extra info on last
-          if val == field_values.last && !section[:extra].nil?
-            item[:extra_info] = data_section_nested_hash(section[:extra])
+          # extra entity info
+          if section[:entity_extra].present?
+            possible_entities = entities(section[:entity_name], section[:entity_proxy_field])
+            salient_entity = possible_entities.detect do |entity|
+              entity_label(entity).any? { |label| label == val }
+            end
+            unless salient_entity.nil?
+              item[:extra_info] = data_section_nested_hash(section[:entity_extra], salient_entity)
+            end
           end
         end
       end
@@ -724,10 +763,10 @@ module Portal
 
     ##
     # Creates a nested hash of field values for Mustache template
-    def data_section_nested_hash(mappings)
+    def data_section_nested_hash(mappings, subject = document)
       {}.tap do |hash|
         mappings.each do |mapping|
-          val = render_document_show_field_value(document, mapping[:field])
+          val = render_document_show_field_value(subject, mapping[:field])
           if val.present?
             keys = (mapping[:map_to] || mapping[:field]).split('.')
             last = keys.pop

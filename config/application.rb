@@ -36,12 +36,12 @@ module Europeana
       # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
       config.time_zone = 'Amsterdam'
 
-      # Set the logging destination(s)
-      config.log_to = %w[stdout]
-
       # Use the lowest log level to ensure availability of diagnostic information
       # when problems arise.
       config.log_level = :debug
+
+      # Enable Lograge
+      config.lograge.enabled = true
 
       # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
       # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

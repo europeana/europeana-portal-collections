@@ -1,10 +1,10 @@
 RSpec.feature 'Object page' do
-  describe 'Navigation' do
+  describe 'navigation' do
     context 'with JS', js: true do
       # No HTML next/previous links when action caching is in use
       # @todo Make this spec detect the AJAX-added links
 #       it 'expects working previous / next links' do
-#         visit '/'
+#         visit '/en'
 
 #         sleep 3
 
@@ -43,7 +43,7 @@ RSpec.feature 'Object page' do
 
     context 'without JS', js: false do
       it 'expects no working previous / next links' do
-        visit '/'
+        visit '/en'
 
         fill_in('q', with: 'paris')
 
@@ -53,6 +53,32 @@ RSpec.feature 'Object page' do
 
         expect(page).not_to have_css('.next')
         expect(page).not_to have_css('.previous')
+      end
+    end
+  end
+
+  describe 'feedback form' do
+    [false, true].each do |js|
+      context (js ? 'with JS' : 'without JS'), js: js do
+        it 'is present' do
+          visit '/en/record/abc/123'
+          sleep 1 if js
+          expect(page).to have_css('#feedback-form')
+        end
+      end
+    end
+  end
+
+  describe 'search form' do
+    [false, true].each do |js|
+      context (js ? 'with JS' : 'without JS'), js: js do
+        it 'has a working search form' do
+          visit '/en/record/abc/123'
+          sleep 1 if js
+          fill_in('q', with: 'paris')
+          click_button('Search')
+          expect(current_path).to eq('/en/search')
+        end
       end
     end
   end

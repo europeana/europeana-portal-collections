@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # URL helpers
 #
@@ -47,5 +49,13 @@ module UrlHelper
       return collection_path(collection.key, browse_entry_query) unless collection.nil?
     end
     search_path(browse_entry_query)
+  end
+
+  def exhibitions_path
+    home_path + '/exhibitions'
+  end
+
+  def exhibitions_foyer_path
+    exhibitions_path + '/foyer'
   end
 end

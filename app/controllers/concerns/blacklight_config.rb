@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Configures Blacklight for Europeana Portal & Collections
 #
@@ -53,8 +55,7 @@ module BlacklightConfig
       config.add_index_field 'title'
       config.add_index_field 'edmAgentLabelLangAware'
       config.add_index_field 'dcDescription'
-      config.add_index_field 'edmConceptPrefLabelLangAware',
-        separator: '; ', limit: 4
+      config.add_index_field 'edmConceptPrefLabelLangAware', separator: '; ', limit: 4
       config.add_index_field 'year'
       config.add_index_field 'dataProvider'
       config.add_index_field 'edmIsShownAt'
@@ -73,7 +74,11 @@ module BlacklightConfig
       config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
-      config.add_facet_field 'YEAR', range: true if ENV['FACET_YEAR_FIELD']
+      config.add_facet_field 'proxy_dcterms_created',
+                             range: true,
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
+                             limit: 200,
+                             only: ->(item) { item.value =~ /\A\d+\z/ }
       config.add_facet_field 'REUSABILITY', hierarchical: true
       config.add_facet_field 'RIGHTS',
                              hierarchical: true,
@@ -87,26 +92,25 @@ module BlacklightConfig
                                rights.present? ? rights.api_query : nil
                              }
       config.add_facet_field 'CREATOR',
-                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
                              limit: 100,
-                             only: lambda { |item| item.value.end_with?(' (Designer)') }
+                             only: ->(item) { item.value.end_with?(' (Designer)') }
       config.add_facet_field 'proxy_dc_format.en',
-                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
                              limit: 100,
-                             only: lambda { |item| item.value.start_with?('Technique: ') }
+                             only: ->(item) { item.value.start_with?('Technique: ') }
       config.add_facet_field 'proxy_dc_type.en',
-                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
                              limit: 100,
-                             only: lambda { |item| item.value.start_with?('Object Type: ') }
+                             only: ->(item) { item.value.start_with?('Object Type: ') }
       config.add_facet_field 'colour',
-                             when: lambda { |context| context.within_collection? && context.current_collection.key == 'fashion' },
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
                              aliases: 'proxy_dc_format.en',
-                             only: lambda { |item| item.value.start_with?('Color: ') }
+                             only: ->(item) { item.value.start_with?('Color: ') }
       config.add_facet_field 'COUNTRY', limit: 50
       config.add_facet_field 'LANGUAGE', limit: 50
       config.add_facet_field 'PROVIDER', limit: 50
       config.add_facet_field 'DATA_PROVIDER', limit: 50
-      # config.add_facet_field 'UGC', advanced: true, boolean: { on: nil, off: 'false', default: :on }
 
       # Send all facet field names to Solr.
       config.add_facet_fields_to_solr_request!

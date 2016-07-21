@@ -1,7 +1,7 @@
 module Facet
   class AliasPresenter < FacetPresenter
-    def display(options = {})
-      aliased_presenter.display(options)
+    def display(*args)
+      aliased_presenter.display(*args)
     end
 
     private

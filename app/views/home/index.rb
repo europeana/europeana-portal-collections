@@ -1,6 +1,10 @@
 module Home
   class Index < ApplicationView
     include BrowsableView
+    include HeroImageDisplayingView
+    include NewsworthyView
+    include PromotionLinkDisplayingView
+    include SearchableView
 
     def page_title
       'Europeana Collections'
@@ -10,10 +14,10 @@ module Home
       {
         context: 'http://schema.org',
         type: 'WebSite',
-        url: root_url,
+        url: home_url,
         potentialAction: {
           type: 'SearchAction',
-          target: root_url + 'search?q={q}',
+          target: search_url + '?q={q}',
           query_input: 'required name=q'
         }
       }
@@ -30,7 +34,7 @@ module Home
             blogurl: Cache::FeedJob::URLS[:blog][:all].sub('/feed', '')
           },
           banner: banner_content(@landing_page.banner_id)
-        }.reverse_merge(helpers.content)
+        }.reverse_merge(super)
       end
     end
 
@@ -59,6 +63,10 @@ module Home
 
     def body_cache_key
       @landing_page.cache_key
+    end
+
+    def total_item_count
+      @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
     end
   end
 end

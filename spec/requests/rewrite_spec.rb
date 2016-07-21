@@ -1,5 +1,5 @@
 RSpec.describe 'rewritten search requests' do
-  let(:relative_url_root) { Europeana::Portal::Application.config.relative_url_root }
+  let(:relative_url_root) { Europeana::Portal::Application.config.relative_url_root || '' }
 
   it 'rewrites old search params to new and redirects' do
     get('/search.html?query=japan&rows=24&start=25&qf=TYPE%3AIMAGE&qf=LANGUAGE%3Anl&qf=tokyo')

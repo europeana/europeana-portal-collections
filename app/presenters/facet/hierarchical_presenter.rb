@@ -1,6 +1,6 @@
 module Facet
   class HierarchicalPresenter < FacetPresenter
-    def display(options = {})
+    def display(**options)
       output = super.merge(hierarchical: true)
 
       if labeller[:collapsible].present?

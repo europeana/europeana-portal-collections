@@ -7,7 +7,11 @@ class PortalController < ApplicationController
   include SoundCloudUrnResolver
   include OembedRetriever
 
-  before_action :redirect_to_root, only: :index, unless: :has_search_parameters?
+  before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
+
+  def redirect_to_home
+    redirect_to home_path
+  end
 
   attr_reader :url_conversions, :oembed_html
 
@@ -31,13 +35,11 @@ class PortalController < ApplicationController
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
-    @hierarchy = Europeana::API::Record::new('/' + params[:id]).hierarchy.ancestor_self_siblings
+    @hierarchy = document_hierarchy(@document)
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 
     respond_to do |format|
-      format.html do
-        render action: 'show'
-      end
+      format.html
       format.json { render json: { response: { document: @document } } }
     end
   end
@@ -62,5 +64,12 @@ class PortalController < ApplicationController
     respond_to do |format|
       format.json { render :media, layout: false }
     end
+  end
+
+  protected
+
+  def document_hierarchy(document)
+    return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
+    Europeana::API::Record.new(document.id).hierarchy.ancestor_self_siblings
   end
 end

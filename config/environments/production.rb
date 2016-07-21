@@ -44,6 +44,26 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
+  # Reduce log level from default of :debug
+  config.log_level = :info
+
+  # Logstash logging
+  config.lograge.custom_options = lambda do |event|
+    if event.payload.key?(:redis_runtime)
+      { redis: event.payload[:redis_runtime].to_f.round(2) }
+    else
+      {}
+    end
+  end
+  config.lograge.formatter = Lograge::Formatters::Logstash.new
+  config.logger = LogStashLogger.new(type: :stdout)
+  LogStashLogger.configure do |config|
+    config.customize_event do |event|
+      event['level'] = event.remove('severity')
+      event['thread'] = Thread.current.object_id.to_s
+    end
+  end
+
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
@@ -75,7 +95,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  # Show the logging configuration on STDOUT
-  config.show_log_configuration = false
 end

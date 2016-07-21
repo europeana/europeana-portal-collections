@@ -1,26 +1,42 @@
 module EuropeanaAPIHelper
+  ##
+  # Renders ERB fixtures with local variables
+  class Fixture
+    def self.empty_binding
+      binding
+    end
+
+    def self.render(template_content, **locals)
+      b = empty_binding
+      locals.each { |k, v| b.local_variable_set(k, v) }
+      ERB.new(template_content).result(b)
+    end
+  end
+
+  ##
+  # Renders one API response fixture, mimicking Rails fixture accessor naming
+  #
+  # API response fixtures are .json.erb files in spec/fixtures/api_response/
+  #
+  # @param name [Symbol] API response fixture name
+  # @param locals [Hash] Local variables to pass to the ERB template
+  # @return [String] JSON string for an API response to use in a stubbed request
+  def api_responses(name, **locals)
+    path = File.expand_path("../../../fixtures/api_response/#{name}.json.erb", __FILE__)
+    Fixture.render(File.read(path), **locals)
+  end
+
+  def record_id_from_request_uri(request)
+    request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
+  end
+
   # @todo move into europeana-api gem?
-  # @todo move responses into fixtures
   RSpec.configure do |config|
     config.before(:each) do
       # API Search
-      items = (0..20).map do |index|
-        id = '/sample/record' + index.to_s
-        '{"id":"' + id + '","title":["' + id + '"]}'
-      end.join(',')
-
       stub_request(:get, Europeana::API.url + '/search.json').
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
-        to_return(body: '{"success":true,"itemsCount":' + items.size.to_s + ',"totalResults":' + items.size.to_s + ',"items":[' + items + '],
-                          "facets":[{
-                          "name": "COLOURPALETTE",
-                          "fields": [{
-                            "label": "#000000",
-                            "count": 2000
-                          }, {
-                            "label": "#FFFFFF",
-                            "count": 1000
-                          }]}]}',
+        to_return(body: api_responses(:search),
                   status: 200,
                   headers: { 'Content-Type' => 'text/json' })
 
@@ -31,27 +47,7 @@ module EuropeanaAPIHelper
           rows: '0'
         )).
         to_return(
-          body: '
-            {
-              "success":true,
-              "items":[],
-              "facets":[{
-                "name": "PROVIDER",
-                "fields": [
-                  {
-                    "label": "The European Library",
-                    "count": 11425343
-                  }, {
-                    "label": "AthenaPlus",
-                    "count": 3584988
-                  }, {
-                    "label": "Digitale Collectie",
-                    "count": 2629852
-                  }
-                ]
-              }]
-             }
-          ',
+          body: api_responses(:search_facet_provider),
           status: 200,
           headers: { 'Content-Type' => 'text/json' })
 
@@ -62,27 +58,7 @@ module EuropeanaAPIHelper
           rows: '0'
         )).
         to_return(
-          body: '
-            {
-              "success":true,
-              "items":[],
-              "facets":[{
-                "name": "DATA_PROVIDER",
-                "fields": [
-                  {
-                    "label": "National Library of France",
-                    "count": 2615502
-                  }, {
-                    "label": "Österreichische Nationalbibliothek - Austrian National Library",
-                    "count": 1365991
-                  }, {
-                    "label": "National Library of the Netherlands",
-                    "count": 1291139
-                  }
-                ]
-              }]
-             }
-          ',
+          body: api_responses(:search_facet_data_provider),
           status: 200,
           headers: { 'Content-Type' => 'text/json' })
 
@@ -90,9 +66,30 @@ module EuropeanaAPIHelper
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+.json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return do |request|
-          id = request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
           {
-            body: '{"success":true,"object":{"about": "' + id + '", "title":["' + id + '"], "proxies": [{"dcCreator":{"def":["Mister Smith"]}}], "aggregations": [{"edmIsShownBy":"http://provider.example.com/ ' + id + '"}]}}',
+            body: api_responses(:record, id: record_id_from_request_uri(request)),
+            status: 200,
+            headers: { 'Content-Type' => 'text/json' }
+          }
+        end
+
+      # Record with dcterms:hasPart in proxy
+      stub_request(:get, %r{#{Europeana::API.url}/record/with/dcterms:hasPart.json}).
+        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
+        to_return do |request|
+          {
+            body: api_responses(:record_with_dcterms_haspart, id: record_id_from_request_uri(request)),
+            status: 200,
+            headers: { 'Content-Type' => 'text/json' }
+          }
+        end
+
+      # Record with dcterms:isPartOf in proxy
+      stub_request(:get, %r{#{Europeana::API.url}/record/with/dcterms:isPartOf.json}).
+        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
+        to_return do |request|
+          {
+            body: api_responses(:record_with_dcterms_ispartof, id: record_id_from_request_uri(request)),
             status: 200,
             headers: { 'Content-Type' => 'text/json' }
           }
@@ -101,7 +98,7 @@ module EuropeanaAPIHelper
       # Hierarchy API
       stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
-        to_return(body: '{"success":false,"message":"This record has no hierarchical structure!"}',
+        to_return(body: api_responses(:no_hierarchy),
                   status: 200,
                   headers: { 'Content-Type' => 'text/json' })
 

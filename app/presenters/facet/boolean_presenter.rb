@@ -1,6 +1,6 @@
 module Facet
   class BooleanPresenter < FacetPresenter
-    def display(_options = {})
+    def display(**_)
       {
         title: facet_label,
         url: facet_url,

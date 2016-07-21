@@ -5,7 +5,7 @@ RSpec.feature 'Home page' do
     context (js ? 'with JS' : 'without JS'), js: js do
       describe 'home page' do
         it 'welcomes the user' do
-          visit '/'
+          visit '/en'
           expect(page).to have_content('Europeana')
         end
       end

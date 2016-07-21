@@ -2,11 +2,12 @@
 # Provides Blacklight search and browse, within a content Collection
 class CollectionsController < ApplicationController
   include Europeana::Collections
+  include RecordCountsHelper
 
-  before_action :redirect_to_root, only: :show, if: proc { params[:id] == 'all' }
+  before_action :redirect_to_home, only: :show, if: proc { params[:id] == 'all' }
 
   def index
-    redirect_to_root
+    redirect_to_home
   end
 
   def show
@@ -64,9 +65,8 @@ class CollectionsController < ApplicationController
   # Gets from the cache the number of items of each media type within the current collection
   def collection_stats
     collection_stats = EDM::Type.registry.map do |type|
-      type_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}/type/#{type.id.downcase}")
       {
-        count: type_count,
+        count: cached_record_count(collection: @collection, type: type),
         text: type.label,
         url: collection_path(q: "TYPE:#{type.id}")
       }

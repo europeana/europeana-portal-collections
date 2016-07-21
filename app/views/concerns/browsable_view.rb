@@ -5,6 +5,8 @@
 module BrowsableView
   extend ActiveSupport::Concern
 
+  include RecordCountsHelper
+
   ##
   # Browse menu template data
   #
@@ -18,7 +20,7 @@ module BrowsableView
     }
   end
 
-  private
+  protected
 
   ##
   # Items for the browse menu
@@ -55,7 +57,13 @@ module BrowsableView
   #
   # @return [Array<Hash>]
   def browse_submenu_items
-    items = EDM::Type.registry.map { |type| browse_menu_type_item(type) }
+    items = browse_menu_salient_types.map { |type| browse_menu_type_item(type) }
     items << { text: t('site.collections.data-types.all'), url: search_action_path(q: ''), icon: 'icon-ellipsis' }
+  end
+
+  def browse_menu_salient_types
+    EDM::Type.registry.select do |type|
+      cached_record_count(type: type, collection: @collection) > 0
+    end
   end
 end

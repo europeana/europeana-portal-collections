@@ -2,6 +2,8 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
+    include SearchableView
+
     def grid_view_active
       params[:view] == 'grid'
     end
@@ -146,7 +148,7 @@ module Portal
               }
             end
           }
-        }.reverse_merge(helpers ? helpers.navigation : {})
+        }.reverse_merge(super)
       end
     end
 
@@ -166,7 +168,13 @@ module Portal
               icon_list: true,
               is_current: params[:view] != 'grid'
             }
-          ]
+          ],
+          tooltip: {
+            tooltip_text: t('global.tooltips.channels.search.new-grid'),
+            tooltip_id: 'new-grid-layout',
+            persistent: true,
+            link_class: 'filter-name'
+          }
         }
       }
     end
@@ -176,6 +184,20 @@ module Portal
         facets_selected_items.blank? ? nil : { items: facets_selected_items }
       end
     end
+
+    def collection_data
+      mustache[:collection_data] ||= begin
+        if within_collection?
+          collection = current_collection
+          {
+            name: collection.key,
+            label: collection.landing_page.title,
+            url: collection_url(collection)
+          }
+        end
+      end
+    end
+    alias_method :channel_data, :collection_data
 
     private
 

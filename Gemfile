@@ -4,7 +4,7 @@ gem 'rails', '4.2.6'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '04cb625'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '89958fc'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -23,7 +23,9 @@ gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
-gem 'logging-rails', '~> 0.5', require: 'logging/rails'
+gem 'lograge'
+gem 'logstash-event'
+gem 'logstash-logger'
 gem 'nokogiri', '~> 1.6.8'
 gem 'rest-client', '~> 1.8.0'
 gem 'ruby-oembed', '~> 0.9'
