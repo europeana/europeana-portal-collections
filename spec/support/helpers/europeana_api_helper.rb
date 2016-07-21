@@ -1,3 +1,5 @@
+require 'support/helpers/api_response_fixtures'
+
 module EuropeanaAPIHelper
   include ApiResponseFixtures
 
