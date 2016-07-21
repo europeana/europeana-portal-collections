@@ -1,8 +1,4 @@
-require 'support/helpers/api_response_fixtures'
-
 module EuropeanaAPIHelper
-  include ApiResponseFixtures
-
   def record_id_from_request_uri(request)
     request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
   end

@@ -1,6 +1,4 @@
 RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config do
-  include ApiResponseFixtures
-
   let(:blacklight_document_source) do
     # @todo Move to factory / fixture
     id = '/abc/123'
