@@ -205,6 +205,11 @@ module Portal
       return @facets_selected_items unless @facets_selected_items.nil?
 
       @facets_selected_items = [].tap do |items|
+        if within_collection?
+          collection_facet_item = Europeana::Blacklight::Response::Facets::FacetItem.new(value: @collection.key)
+          collection_facet_field = Europeana::Blacklight::Response::Facets::FacetField.new('COLLECTION', [collection_facet_item])
+          items << FacetPresenter.build(collection_facet_field,controller).filter_item(collection_facet_item)
+        end
         facets_from_request.each do |facet|
           facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
             items << FacetPresenter.build(facet, controller).filter_item(item)
