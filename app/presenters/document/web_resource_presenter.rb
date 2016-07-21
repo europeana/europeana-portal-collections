@@ -175,8 +175,10 @@ module Document
     end
 
     def colour_palette_data
+      colours = document.fetch('edmComponentColor', [])
       {
-        items: document.fetch('edmComponentColor', []).map do |colour|
+        present: !colours.blank?,
+        items: colours.map do |colour|
           {
             hex: colour,
             url: colour_search_url(colour)
