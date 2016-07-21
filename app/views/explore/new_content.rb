@@ -1,4 +1,4 @@
-module Browse
+module Explore
   class NewContent < ApplicationView
     include CollectionFilterableView
 
@@ -35,7 +35,7 @@ module Browse
     private
 
     def body_cache_key
-      'browse/newcontent' + (@collection.present? ? '/' + @collection.key : '')
+      'explore/newcontent' + (@collection.present? ? '/' + @collection.key : '')
     end
   end
 end

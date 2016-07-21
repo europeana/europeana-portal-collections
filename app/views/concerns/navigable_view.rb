@@ -32,9 +32,9 @@ module NavigableView
               },
               {
                 text: t('global.navigation.browse'),
-                is_current: controller.controller_name == 'browse',
+                is_current: controller.controller_name == 'explore',
                 submenu: {
-                  items: navigation_global_primary_nav_browse_submenu_items
+                  items: navigation_global_primary_nav_explore_submenu_items
                 }
               },
               {
@@ -108,18 +108,18 @@ module NavigableView
     end
   end
 
-  def navigation_global_primary_nav_browse_submenu_items
+  def navigation_global_primary_nav_explore_submenu_items
     [
-      link_item(t('global.navigation.browse_newcontent'), browse_newcontent_path(format: 'html'),
-                is_current: current_page?(browse_newcontent_path(format: 'html'))),
-      link_item(t('global.navigation.browse_colours'), browse_colours_path(format: 'html'),
-                is_current: current_page?(browse_colours_path(format: 'html'))),
-      link_item(t('global.navigation.browse_sources'), browse_sources_path(format: 'html'),
-                is_current: current_page?(browse_sources_path(format: 'html'))),
-      link_item(t('global.navigation.concepts'), browse_topics_path(format: 'html'),
-                is_current: current_page?(browse_topics_path(format: 'html'))),
-      link_item(t('global.navigation.agents'), browse_people_path(format: 'html'),
-                is_current: current_page?(browse_people_path(format: 'html')))
+      link_item(t('global.navigation.browse_newcontent'), explore_newcontent_path(format: 'html'),
+                is_current: current_page?(explore_newcontent_path(format: 'html'))),
+      link_item(t('global.navigation.browse_colours'), explore_colours_path(format: 'html'),
+                is_current: current_page?(explore_colours_path(format: 'html'))),
+      link_item(t('global.navigation.browse_sources'), explore_sources_path(format: 'html'),
+                is_current: current_page?(explore_sources_path(format: 'html'))),
+      link_item(t('global.navigation.concepts'), explore_topics_path(format: 'html'),
+                is_current: current_page?(explore_topics_path(format: 'html'))),
+      link_item(t('global.navigation.agents'), explore_people_path(format: 'html'),
+                is_current: current_page?(explore_people_path(format: 'html')))
     ]
   end
 
@@ -147,7 +147,7 @@ module NavigableView
     [
       link_item(t('site.footer.menu.about'), static_page_path('about', format: 'html')),
       link_item(t('site.footer.menu.roadmap'), static_page_path('roadmap', format: 'html')),
-      link_item(t('site.footer.menu.data-providers'), static_page_path('browse/sources', format: 'html')),
+      link_item(t('site.footer.menu.data-providers'), explore_sources_path(format: 'html')),
       link_item(t('site.footer.menu.become-a-provider'), 'http://pro.europeana.eu/share-your-data/'),
       link_item(t('site.footer.menu.contact-us'), static_page_path('contact', format: 'html')),
     ]

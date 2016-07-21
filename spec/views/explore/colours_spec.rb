@@ -1,4 +1,4 @@
-RSpec.describe 'browse/colours.html.mustache', :common_view_components do
+RSpec.describe 'explore/colours.html.mustache', :common_view_components do
   let(:colours) do
     [
       Europeana::Blacklight::Response::Facets::FacetItem.new(value: '#DC143C', hits: 16376),

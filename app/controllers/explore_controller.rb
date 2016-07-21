@@ -1,9 +1,8 @@
 ##
-# Various ways of browsing the Europeana portal
-class BrowseController < ApplicationController
+# Various ways of browsing/exploring the Europeana portal
+class ExploreController < ApplicationController
   include EnforceDefaultFormat
 
-  # GET /browse/colours
   # @todo Load @colours from view helper, to bypass if HTML cached
   def colours
     find_collection
@@ -15,7 +14,6 @@ class BrowseController < ApplicationController
     end
   end
 
-  # GET /browse/topics
   def topics
     find_collection
     @topics = browse_entries(:topic)
@@ -25,7 +23,6 @@ class BrowseController < ApplicationController
     end
   end
 
-  # GET /browse/people
   def people
     find_collection
     @people = browse_entries(:person)
@@ -35,7 +32,6 @@ class BrowseController < ApplicationController
     end
   end
 
-  # GET /browse/newcontent
   # @todo Load @providers from view helper, to bypass if HTML cached
   def new_content
     find_collection
@@ -47,7 +43,6 @@ class BrowseController < ApplicationController
     end
   end
 
-  # GET /browse/sources
   # @todo Load @providers from view helper, to bypass if HTML cached
   def sources
     find_collection
