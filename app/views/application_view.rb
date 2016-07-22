@@ -55,6 +55,12 @@ class ApplicationView < Europeana::Styleguide::View
     end
   end
 
+  def cookie_disclaimer
+    {
+      more_link: controller.static_page_path('rights/privacy', format: 'html')
+    }
+  end
+
   protected
 
   def site_title
