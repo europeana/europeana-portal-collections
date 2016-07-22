@@ -783,6 +783,8 @@ module Portal
     end
 
     def long_and_lat?
+      # Prevent map display until deprecated MapQuest service replaced
+      return false
       latitude = render_document_show_field_value(document, 'places.latitude')
       longitude = render_document_show_field_value(document, 'places.longitude')
       !latitude.nil? && latitude.size > 0 && !longitude.nil? && longitude.size > 0
