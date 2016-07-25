@@ -1,7 +1,7 @@
 RSpec.shared_examples 'common view components', :common_view_components do
-  it 'should have top nav link to home' do
+  it 'should have no top nav link to home' do
     render
-    expect(rendered).to have_selector('#main-menu a', pages(:home).title)
+    expect(rendered).not_to have_selector('#main-menu a[href$="/"]', text: pages(:home).title)
   end
 
   it 'should have top nav links to published collections' do
