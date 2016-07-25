@@ -8,9 +8,9 @@ RSpec.feature 'Top navigation' do
         expect(nav).not_to be_nil
       end
 
-      it 'links to home' do
+      it 'does not link to home' do
         visit '/en'
-        expect(nav).to have_link('Home')
+        expect(nav).not_to have_link('Home')
       end
 
       it 'links to Collections' do
