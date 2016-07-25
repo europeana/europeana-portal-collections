@@ -19,11 +19,6 @@ module NavigableView
             menu_id: 'main-menu',
             items: [
               {
-                url: home_path,
-                text: t('global.navigation.home'),
-                is_current: controller.controller_name == 'home'
-              },
-              {
                 text: t('global.navigation.collections'),
                 is_current: controller.controller_name == 'collections',
                 submenu: {
