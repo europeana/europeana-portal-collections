@@ -201,7 +201,7 @@ module Document
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
         (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
         (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-        playable_without_mime_type?
+        media_type == 'oembed'
     end
 
     def playable?
