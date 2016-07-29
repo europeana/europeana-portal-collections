@@ -63,9 +63,9 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     let(:blacklight_document_source) { JSON.parse(api_responses(:record_with_colourpalette, id: '/abc/123'))['object'] }
     it 'shows colour links' do
       render
-      expect(rendered).to have_selector('.color-data')
+      expect(rendered).to have_selector('.colour-data')
       blacklight_document.fetch('aggregations.webResources.edmComponentColor').each do |colour|
-        expect(rendered).to have_selector('.color-data .color-datum', text: colour)
+        expect(rendered).to have_selector('.colour-data .colour-datum', text: colour)
       end
     end
   end
