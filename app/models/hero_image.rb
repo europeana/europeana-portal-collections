@@ -3,7 +3,7 @@ class HeroImage < ActiveRecord::Base
 
   has_settings(:attribution_title, :attribution_creator, :attribution_institution,
                :attribution_url, :attribution_text, :brand_opacity, :brand_position,
-               :brand_colour)
+               :brand_colour, :ripple_width)
 
   has_one :page, inverse_of: :hero_image
 
@@ -11,7 +11,7 @@ class HeroImage < ActiveRecord::Base
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
   delegate :settings_brand_opacity_enum, :settings_brand_position_enum,
-           :settings_brand_colour_enum, to: :class
+           :settings_brand_colour_enum, :settings_ripple_width_enum, to: :class
 
   delegate :file, to: :media_object, allow_nil: true
 
@@ -35,6 +35,10 @@ class HeroImage < ActiveRecord::Base
 
     def settings_brand_colour_enum
       %w(site white black)
+    end
+
+    def settings_ripple_width_enum
+      %w(thin medium thick)
     end
   end
 

@@ -7,6 +7,7 @@ en:
         settings_brand_colour: Brand colour
         settings_brand_opacity: Brand opacity
         settings_brand_position: Brand position
+        settings_ripple_width: Ripple width
         settings_attribution_title: Attribution title
         settings_attribution_creator: Attribution creator
         settings_attribution_institution: Attribution institution
