@@ -145,6 +145,7 @@ RailsAdmin.config do |config|
         end
         field :settings_brand_position, :enum
         field :settings_brand_colour, :enum
+        field :settings_ripple_width, :enum
       end
       group :attribution do
         field :settings_attribution_title
@@ -165,13 +166,14 @@ RailsAdmin.config do |config|
         end
         field :settings_brand_position, :enum
         field :settings_brand_colour, :enum
+        field :settings_brand_colour, :enum
+        field :settings_ripple_width, :enum
       end
       group :attribution do
         field :settings_attribution_title
         field :settings_attribution_creator
         field :settings_attribution_institution
         field :settings_attribution_url
-        field :settings_attribution_text, :text
       end
     end
   end
