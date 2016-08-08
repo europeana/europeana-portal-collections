@@ -91,7 +91,7 @@ module NavigableView
   end
 
   def styleguide_root
-    styleguide_url()
+    styleguide_url
   end
 
   protected
