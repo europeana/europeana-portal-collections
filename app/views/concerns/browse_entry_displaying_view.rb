@@ -28,7 +28,6 @@ module BrowseEntryDisplayingView
 
     type1 = []
     type2 = []
-    more_image = styleguide_url('/images/icons/browse_entry_bkg.png')
 
     browse_entries.each do |entry|
       (entry.subject_type == 'person' ? type1 : type2) << browse_entry_item(entry, page)
@@ -38,13 +37,11 @@ module BrowseEntryDisplayingView
       {
         more_link: browse_people_path(theme: collection.key),
         more_text: t('global.navigation.more.agents'),
-        more_image: more_image,
         items: type1
       },
       {
         more_link: browse_topics_path(theme: collection.key),
         more_text: t('global.navigation.more.topics'),
-        more_image: more_image,
         items: type2
       }
     ]

@@ -90,6 +90,10 @@ module NavigableView
     end
   end
 
+  def styleguide_root
+    styleguide_url()
+  end
+
   protected
 
   def exhibitions_feed_key
