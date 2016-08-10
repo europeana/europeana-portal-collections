@@ -185,6 +185,10 @@ module Portal
       end
     end
 
+    def active_filter_count
+      facets_selected_items.blank? ? 0 : facets_selected_items.length
+    end
+
     def collection_data
       mustache[:collection_data] ||= begin
         if within_collection?
