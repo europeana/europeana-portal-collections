@@ -336,7 +336,9 @@ RailsAdmin.config do |config|
         html_attributes rows: 15, cols: 80
       end
       field :hero_image
-      field :strapline
+      field :strapline, :text do
+        html_attributes rows: 15, cols: 80
+      end
       field :credits
       field :social_media
       field :promotions
