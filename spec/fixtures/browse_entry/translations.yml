@@ -3,6 +3,31 @@ opera_topic_translations:
   title: 'Opera'
   globalized_model: opera_topic
 
+cinema_topic_translations:
+  locale: en
+  title: 'Cinema'
+  globalized_model: cinema_topic
+
+music_topic_translations:
+  locale: en
+  title: 'Music'
+  globalized_model: music_topic
+
+harp_topic_translations:
+  locale: en
+  title: 'Harp'
+  globalized_model: harp_topic
+
+manuscripts_topic_translations:
+  locale: en
+  title: 'Manuscripts'
+  globalized_model: manuscripts_topic
+
+books_topic_translations:
+  locale: en
+  title: 'Books'
+  globalized_model: books_topic
+
 paintings_topic_translations:
   locale: en
   title: 'Paintings'
@@ -17,3 +42,8 @@ hokusai_person_translations:
   locale: en
   title: 'Katsushika Hokusai'
   globalized_model: hokusai_person
+
+sandro_botticelli_person_translations:
+  locale: en
+  title: 'Sandro Botticelli'
+  globalized_model: sandro_botticelli_person
