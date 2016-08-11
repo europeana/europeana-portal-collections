@@ -23,6 +23,7 @@ module Document
         play_url: play_url,
         play_html: play_html,
         technical_metadata: technical_metadata,
+        media_metadata: media_metadata,
         download: {
           url: downloadable? ? download_url : false,
           text: t('site.object.actions.download')
@@ -166,6 +167,16 @@ module Document
         attribution_plain: render_document_show_field_value('textAttributionSnippet'),
         attribution_html: render_document_show_field_value('htmlAttributionSnippet'),
         colours: colour_palette_data
+      }
+    end
+
+    def media_metadata
+      {
+          description: @record_presenter.field_group(:description),
+          people: @record_presenter.field_group(:people),
+          provenance: @record_presenter.field_group(:provenance),
+          copyright: @record_presenter.field_group(:copyright)
+
       }
     end
 
