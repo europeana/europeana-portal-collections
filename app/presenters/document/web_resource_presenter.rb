@@ -3,6 +3,7 @@ module Document
   # Blacklight document presenter for a Europeana web resource
   class WebResourcePresenter < DocumentPresenter
     include ActionView::Helpers::NumberHelper
+    include Metadata::Rights
 
     def initialize(document, controller, configuration = controller.blacklight_config, record = nil, record_presenter = nil)
       super(document, controller, configuration)
@@ -163,7 +164,26 @@ module Document
         runtime: render_document_show_field_value('ebucoreDuration'),
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
         attribution_plain: render_document_show_field_value('textAttributionSnippet'),
-        attribution_html: render_document_show_field_value('htmlAttributionSnippet')
+        attribution_html: render_document_show_field_value('htmlAttributionSnippet'),
+        colours: colour_palette_data
+      }
+    end
+
+    def colour_search_url(colour)
+      query_params = { f: { 'COLOURPALETTE' => [colour], 'TYPE' => ['IMAGE'] } }
+      search_path(query_params)
+    end
+
+    def colour_palette_data
+      colours = document.fetch('edmComponentColor', [])
+      {
+        present: !colours.blank?,
+        items: colours.map do |colour|
+          {
+            hex: colour,
+            url: colour_search_url(colour)
+          }
+        end
       }
     end
 
@@ -181,7 +201,7 @@ module Document
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
         (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
         (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-        playable_without_mime_type?
+        media_type == 'oembed'
     end
 
     def playable?

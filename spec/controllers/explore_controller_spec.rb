@@ -1,15 +1,27 @@
-RSpec.describe BrowseController do
+RSpec.shared_examples 'collection aware' do
+  context 'when theme param is present' do
+    let(:params) { { locale: 'en', format: 'html', theme: collections(:music).key } }
+
+    it 'should load collection' do
+      expect(assigns[:collection]).to eq(collections(:music))
+    end
+  end
+end
+
+RSpec.describe ExploreController do
   describe 'GET colours' do
     before(:each) do
-      Rails.cache.write('browse/colours/facets', [])
+      Rails.cache.write('explore/colours/facets', [])
       get :colours, params
     end
 
-    let(:params) { { locale: 'en' } }
+    let(:params) { { locale: 'en', format: 'html' } }
 
-    it 'should render the colour browse Mustache template' do
+    it_behaves_like 'collection aware'
+
+    it 'should render the colour explore Mustache template' do
       expect(response.status).to eq(200)
-      expect(response).to render_template('browse/colours')
+      expect(response).to render_template('explore/colours')
     end
 
     it 'should not get colours from the API' do
@@ -19,14 +31,6 @@ RSpec.describe BrowseController do
     it 'should assign colours from COLOURPALETTE facet' do
       expect(assigns[:colours]).to be_a(Array)
     end
-
-    context 'when theme param is present' do
-      let(:params) { { locale: 'en', theme: collections(:music).key } }
-
-      it 'should load collection' do
-        expect(assigns[:collection]).to eq(collections(:music))
-      end
-    end
   end
 
   describe 'GET new_content' do
@@ -35,7 +39,7 @@ RSpec.describe BrowseController do
       get :new_content, params
     end
 
-    let(:params) { { locale: 'en' } }
+    let(:params) { { locale: 'en', format: 'html' } }
     let(:providers) do
       [
         { text: 'A Provider' },
@@ -46,20 +50,14 @@ RSpec.describe BrowseController do
 
     it 'should render the new content Mustache template' do
       expect(response.status).to eq(200)
-      expect(response).to render_template('browse/new_content')
+      expect(response).to render_template('explore/new_content')
     end
 
     it 'should assign providers from cache' do
       expect(assigns[:providers]).to eq(providers)
     end
 
-    context 'when theme param is present' do
-      let(:params) { { locale: 'en', theme: collections(:music).key } }
-
-      it 'should load collection' do
-        expect(assigns[:collection]).to eq(collections(:music))
-      end
-    end
+    it_behaves_like 'collection aware'
   end
 
   describe 'GET sources' do
@@ -68,7 +66,7 @@ RSpec.describe BrowseController do
       get :sources, params
     end
 
-    let(:params) { { locale: 'en' } }
+    let(:params) { { locale: 'en', format: 'html' } }
     let(:providers) do
       [
         { text: 'A Provider', count: 5000 },
@@ -79,7 +77,7 @@ RSpec.describe BrowseController do
 
     it 'should render the sources Mustache template' do
       expect(response.status).to eq(200)
-      expect(response).to render_template('browse/sources')
+      expect(response).to render_template('explore/sources')
     end
 
     it 'should not get providers from the API' do
@@ -98,13 +96,7 @@ RSpec.describe BrowseController do
       expect(assigns[:providers].all? { |p| p[:data_providers].is_a?(Array) }).to be(true)
     end
 
-    context 'when theme param is present' do
-      let(:params) { { locale: 'en', theme: collections(:music).key } }
-
-      it 'should load collection' do
-        expect(assigns[:collection]).to eq(collections(:music))
-      end
-    end
+    it_behaves_like 'collection aware'
   end
 
   describe 'GET people' do
@@ -112,24 +104,18 @@ RSpec.describe BrowseController do
       get :people, params
     end
 
-    let(:params) { { locale: 'en' } }
+    let(:params) { { locale: 'en', format: 'html' } }
 
     it 'should render the people Mustache template' do
       expect(response.status).to eq(200)
-      expect(response).to render_template('browse/people')
+      expect(response).to render_template('explore/people')
     end
 
-    it 'should assign browse entries from db' do
+    it 'should assign explore entries from db' do
       expect(assigns[:people].sort).to eq(BrowseEntry.person.sort)
     end
 
-    context 'when theme param is present' do
-      let(:params) { { locale: 'en', theme: collections(:music).key } }
-
-      it 'should load collection' do
-        expect(assigns[:collection]).to eq(collections(:music))
-      end
-    end
+    it_behaves_like 'collection aware'
   end
 
   describe 'GET topics' do
@@ -137,23 +123,17 @@ RSpec.describe BrowseController do
       get :topics, params
     end
 
-    let(:params) { { locale: 'en' } }
+    let(:params) { { locale: 'en', format: 'html' } }
 
     it 'should render the topics Mustache template' do
       expect(response.status).to eq(200)
-      expect(response).to render_template('browse/topics')
+      expect(response).to render_template('explore/topics')
     end
 
-    it 'should assign browse entries from db' do
+    it 'should assign explore entries from db' do
       expect(assigns[:topics].sort).to eq(BrowseEntry.topic.sort)
     end
 
-    context 'when theme param is present' do
-      let(:params) { { locale: 'en', theme: collections(:music).key } }
-
-      it 'should load collection' do
-        expect(assigns[:collection]).to eq(collections(:music))
-      end
-    end
+    it_behaves_like 'collection aware'
   end
 end

@@ -68,9 +68,7 @@ module Collections
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : {
-            items: browse_entry_items(@landing_page.browse_entries.published, @landing_page),
-            more_link_1: browse_topics_path(theme: collection.key),
-            more_link_2: browse_people_path(theme: collection.key)
+            grouped_items: browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page)
           },
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)

@@ -1,31 +1,4 @@
 module EuropeanaAPIHelper
-  ##
-  # Renders ERB fixtures with local variables
-  class Fixture
-    def self.empty_binding
-      binding
-    end
-
-    def self.render(template_content, **locals)
-      b = empty_binding
-      locals.each { |k, v| b.local_variable_set(k, v) }
-      ERB.new(template_content).result(b)
-    end
-  end
-
-  ##
-  # Renders one API response fixture, mimicking Rails fixture accessor naming
-  #
-  # API response fixtures are .json.erb files in spec/fixtures/api_response/
-  #
-  # @param name [Symbol] API response fixture name
-  # @param locals [Hash] Local variables to pass to the ERB template
-  # @return [String] JSON string for an API response to use in a stubbed request
-  def api_responses(name, **locals)
-    path = File.expand_path("../../../fixtures/api_response/#{name}.json.erb", __FILE__)
-    Fixture.render(File.read(path), **locals)
-  end
-
   def record_id_from_request_uri(request)
     request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
   end
@@ -90,6 +63,17 @@ module EuropeanaAPIHelper
         to_return do |request|
           {
             body: api_responses(:record_with_dcterms_ispartof, id: record_id_from_request_uri(request)),
+            status: 200,
+            headers: { 'Content-Type' => 'text/json' }
+          }
+        end
+
+      # Record with dcterms:isPartOf in proxy
+      stub_request(:get, %r{#{Europeana::API.url}/record/with/colourpalette.json}).
+        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
+        to_return do |request|
+          {
+            body: api_responses(:record_with_colourpalette, id: record_id_from_request_uri(request)),
             status: 200,
             headers: { 'Content-Type' => 'text/json' }
           }

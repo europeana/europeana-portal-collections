@@ -1,4 +1,4 @@
-RSpec.describe 'browse/sources.html.mustache', :page_with_top_nav do
+RSpec.describe 'explore/sources.html.mustache', :common_view_components do
   let(:providers) do
     [
       { text: 'A Provider', count: 1000,

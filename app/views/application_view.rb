@@ -41,7 +41,7 @@ class ApplicationView < Europeana::Styleguide::View
   def newsletter
     {
       form: {
-        action: 'http://europeana.us3.list-manage.com/subscribe/post?u=ad318b7566f97eccc895e014e&amp;id=1d4f51a117',
+        action: 'https://europeana.us3.list-manage.com/subscribe/post?u=ad318b7566f97eccc895e014e&amp;id=1d4f51a117',
         language_op: true
       }
     }
@@ -53,6 +53,12 @@ class ApplicationView < Europeana::Styleguide::View
         banner: banner_content
       }
     end
+  end
+
+  def cookie_disclaimer
+    {
+      more_link: controller.static_page_path('rights/privacy', format: 'html')
+    }
   end
 
   protected

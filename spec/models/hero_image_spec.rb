@@ -7,6 +7,7 @@ RSpec.describe HeroImage do
   it { is_expected.to delegate_method(:settings_brand_opacity_enum).to(:class) }
   it { is_expected.to delegate_method(:settings_brand_position_enum).to(:class) }
   it { is_expected.to delegate_method(:settings_brand_colour_enum).to(:class) }
+  it { is_expected.to delegate_method(:settings_ripple_width_enum).to(:class) }
   it { is_expected.to accept_nested_attributes_for(:media_object) }
   it { is_expected.to validate_inclusion_of(:license).in_array(described_class.license_enum) }
 
@@ -33,6 +34,11 @@ RSpec.describe HeroImage do
   describe '.settings_brand_colour_enum' do
     subject { described_class.settings_brand_colour_enum }
     it { is_expected.to eq(%w(site white black)) }
+  end
+
+  describe '.settings_ripple_width_enum' do
+    subject { described_class.settings_ripple_width_enum }
+    it { is_expected.to eq(%w(thin medium thick)) }
   end
 
   # @todo move into spec for HasSettingsAttr concern

@@ -60,10 +60,26 @@ RSpec.feature 'Object page' do
   describe 'feedback form' do
     [false, true].each do |js|
       context (js ? 'with JS' : 'without JS'), js: js do
-        it 'is present' do
-          visit '/en/record/abc/123'
-          sleep 1 if js
-          expect(page).to have_css('#feedback-form')
+        context 'with recipient configured' do
+          before do
+            Rails.application.config.x.feedback_mail_to = 'feedback@example.com'
+          end
+          it 'is present' do
+            visit '/en/record/abc/123'
+            sleep 1 if js
+            expect(page).to have_css('#feedback-form')
+          end
+        end
+
+        context 'without recipient configured' do
+          before do
+            Rails.application.config.x.feedback_mail_to = nil
+          end
+          it 'is not present' do
+            visit '/en/record/abc/123'
+            sleep 1 if js
+            expect(page).to_not have_css('#feedback-form')
+          end
         end
       end
     end
@@ -75,6 +91,7 @@ RSpec.feature 'Object page' do
         it 'has a working search form' do
           visit '/en/record/abc/123'
           sleep 1 if js
+          page.find(:xpath, '//a[@class="cc_btn cc_btn_accept_all"]').click if js
           fill_in('q', with: 'paris')
           click_button('Search')
           expect(current_path).to eq('/en/search')

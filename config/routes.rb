@@ -30,13 +30,19 @@ Rails.application.routes.draw do
     mount RailsAdmin::Engine => '/cms', as: 'rails_admin'
     devise_for :users
 
-    get 'browse/agents', to: redirect('%{locale}/browse/people')
-    get 'browse/colours', to: 'browse#colours'
-    get 'browse/concepts', to: redirect('%{locale}/browse/topics')
-    get 'browse/newcontent', to: 'browse#new_content'
-    get 'browse/people', to: 'browse#people'
-    get 'browse/sources', to: 'browse#sources'
-    get 'browse/topics', to: 'browse#topics'
+    get 'browse/agents', to: redirect('%{locale}/explore/people')
+    get 'browse/colours', to: redirect('%{locale}/explore/colours')
+    get 'browse/concepts', to: redirect('%{locale}/explore/topics')
+    get 'browse/newcontent', to: redirect('%{locale}/explore/newcontent')
+    get 'browse/people', to: redirect('%{locale}/explore/people')
+    get 'browse/sources', to: redirect('%{locale}/explore/sources')
+    get 'browse/topics', to: redirect('%{locale}/explore/topics')
+
+    get 'explore/colours', to: 'explore#colours'
+    get 'explore/newcontent', to: 'explore#new_content'
+    get 'explore/people', to: 'explore#people'
+    get 'explore/sources', to: 'explore#sources'
+    get 'explore/topics', to: 'explore#topics'
 
     post 'feedback', to: 'feedback#create'
 

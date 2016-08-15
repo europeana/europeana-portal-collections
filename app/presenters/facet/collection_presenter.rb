@@ -1,8 +1,5 @@
 module Facet
   class CollectionPresenter < SimplePresenter
-    def facet_item_url(item)
-      search_action_url(add_facet_params(item))
-    end
 
     def add_facet_params(item)
       value = facet_value_for_facet_item(item)
@@ -12,6 +9,18 @@ module Facet
       else
         params.merge(controller: :collections, action: :show, id: value)
       end
+    end
+
+    ##
+    # Removing the collection facet only works when in a collection,
+    # as it redirects to the standard search.
+    # The only reason it takes a facet_item as a param is because
+    # this overrides {FacetPresenter}
+    #
+    # @param see {#facet_item}
+    # @return [Hash] Request parameters without the collection
+    def remove_facet_params(_item)
+      params.except(:id).merge(controller: :portal, action: :index)
     end
 
     def facet_in_params?(field, item)

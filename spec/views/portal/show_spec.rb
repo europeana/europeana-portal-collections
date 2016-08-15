@@ -1,8 +1,8 @@
-RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_config do
-  let(:blacklight_document) do
+RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config do
+  let(:blacklight_document_source) do
     # @todo Move to factory / fixture
     id = '/abc/123'
-    source = {
+    {
       about: id,
       title: [id],
       proxies: [
@@ -15,14 +15,16 @@ RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_conf
         { edmIsShownBy: "http://provider.example.com#{id}" }
       ]
     }
-    Europeana::Blacklight::Document.new(source)
   end
+  let(:blacklight_document) { Europeana::Blacklight::Document.new(blacklight_document_source.with_indifferent_access) }
 
   before(:each) do
     allow(view).to receive(:current_search_session).and_return nil
     allow(view).to receive(:search_session).and_return({})
     allow(view).to receive(:search_action_path).and_return('/search')
     allow(view).to receive(:oembed_html).and_return({})
+    allow(controller).to receive(:url_conversions).and_return({})
+    allow(controller).to receive(:oembed_html).and_return({})
 
     assign(:params, { id: 'abc/123' })
     assign(:document, blacklight_document)
@@ -54,6 +56,17 @@ RSpec.describe 'portal/show.html.mustache', :page_with_top_nav, :blacklight_conf
     it 'hides debug output' do
       render
       expect(rendered).not_to have_selector('pre.utility_debug')
+    end
+  end
+
+  context 'with colourpalette in API response' do
+    let(:blacklight_document_source) { JSON.parse(api_responses(:record_with_colourpalette, id: '/abc/123'))['object'] }
+    it 'shows colour links' do
+      render
+      expect(rendered).to have_selector('.colour-data')
+      blacklight_document.fetch('aggregations.webResources.edmComponentColor').each do |colour|
+        expect(rendered).to have_selector('.colour-data .colour-datum', text: colour)
+      end
     end
   end
 end

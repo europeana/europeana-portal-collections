@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'dcabd72'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '7db199b'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -32,6 +32,7 @@ gem 'ruby-oembed', '~> 0.9'
 gem 'pg'
 gem 'paperclip', '~> 4.3'
 gem 'paper_trail', '~> 4.0'
+gem 'rails_with_relative_url_root', '~> 0.1'
 gem 'rack-rewrite'
 gem 'rails_admin', '~> 0.8.0'
 gem 'redis-rails', '~> 4.0'
