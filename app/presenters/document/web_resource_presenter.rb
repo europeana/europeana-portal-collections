@@ -22,7 +22,6 @@ module Document
         thumbnail: thumbnail,
         play_url: play_url,
         play_html: play_html,
-        technical_metadata: technical_metadata,
         media_metadata: media_metadata,
         download: {
           url: downloadable? ? download_url : false,
@@ -147,7 +146,7 @@ module Document
       end
     end
 
-    def technical_metadata
+    def media_metadata
       width = render_document_show_field_value('ebucoreWidth')
       height = render_document_show_field_value('ebucoreHeight')
 
@@ -166,17 +165,12 @@ module Document
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
         attribution_plain: render_document_show_field_value('textAttributionSnippet'),
         attribution_html: render_document_show_field_value('htmlAttributionSnippet'),
-        colours: colour_palette_data
-      }
-    end
-
-    def media_metadata
-      {
-          description: @record_presenter.field_group(:description),
-          people: @record_presenter.field_group(:people),
-          provenance: @record_presenter.field_group(:provenance),
-          copyright: @record_presenter.field_group(:copyright)
-
+        colours: colour_palette_data,
+        dcDescription: render_document_show_field_value('dcDescription'),
+        dcCreator: render_document_show_field_value('dcCreator'),
+        dcSource: render_document_show_field_value('dcSource'),
+        webResourceDcRights: render_document_show_field_value('webResourceDcRights'),
+        webResourceEdmRights: render_document_show_field_value('webResourceEdmRights')
       }
     end
 
