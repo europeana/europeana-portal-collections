@@ -140,7 +140,7 @@ module Document
     def section_nested_hash(mappings, subject = document)
       {}.tap do |hash|
         mappings.each do |mapping|
-          val = subject.fetch(mapping[:field])
+          val = subject.fetch(mapping[:field], nil)
           val = render_field_value(val)
           next unless val.present?
 
