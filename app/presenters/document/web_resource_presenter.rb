@@ -22,7 +22,7 @@ module Document
         thumbnail: thumbnail,
         play_url: play_url,
         play_html: play_html,
-        media_metadata: media_metadata,
+        technical_metadata: media_metadata,
         download: {
           url: downloadable? ? download_url : false,
           text: t('site.object.actions.download')
@@ -166,11 +166,12 @@ module Document
         attribution_plain: render_document_show_field_value('textAttributionSnippet'),
         attribution_html: render_document_show_field_value('htmlAttributionSnippet'),
         colours: colour_palette_data,
-        dcDescription: render_document_show_field_value('dcDescription'),
-        dcCreator: render_document_show_field_value('dcCreator'),
-        dcSource: render_document_show_field_value('dcSource'),
-        webResourceDcRights: render_document_show_field_value('webResourceDcRights'),
-        webResourceEdmRights: render_document_show_field_value('webResourceEdmRights')
+
+        dc_description: render_document_show_field_value('dcDescription'),
+        dc_creator: render_document_show_field_value('dcCreator'),
+        dc_source: render_document_show_field_value('dcSource'),
+        dc_rights: render_document_show_field_value('webResourceDcRights'),
+        edm_rights: render_document_show_field_value('webResourceEdmRights')
       }
     end
 
