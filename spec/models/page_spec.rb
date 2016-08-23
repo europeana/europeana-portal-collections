@@ -7,6 +7,95 @@ RSpec.describe Page do
 
   it { is_expected.to accept_nested_attributes_for(:hero_image) }
 
+  describe 'browse_entry validation' do
+    subject { pages(:about) }
+    context 'when there are no browse entries' do
+      it 'should be valid' do
+       expect(subject).to be_valid
+      end
+    end
+    context 'when there are 3 topic browse entries' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+        subject.browse_entries.append(browse_entries(:cinema_topic))
+        subject.browse_entries.append(browse_entries(:music_topic))
+      end
+      it 'should be valid' do
+        expect(subject).to be_valid
+      end
+    end
+    context 'when there are 6 topic browse entries' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+        subject.browse_entries.append(browse_entries(:cinema_topic))
+        subject.browse_entries.append(browse_entries(:music_topic))
+        subject.browse_entries.append(browse_entries(:harp_topic))
+        subject.browse_entries.append(browse_entries(:manuscripts_topic))
+        subject.browse_entries.append(browse_entries(:books_topic))
+      end
+      it 'should be valid' do
+        expect(subject).to be_valid
+      end
+    end
+    context 'when there are 3 topic and 3 person browse entries' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+        subject.browse_entries.append(browse_entries(:cinema_topic))
+        subject.browse_entries.append(browse_entries(:music_topic))
+        subject.browse_entries.append(browse_entries(:van_gogh_person))
+        subject.browse_entries.append(browse_entries(:hokusai_person))
+        subject.browse_entries.append(browse_entries(:sandro_botticelli_person))
+      end
+      it 'should be valid' do
+        expect(subject).to be_valid
+      end
+    end
+    context 'when there are 7 topic browse entries' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+        subject.browse_entries.append(browse_entries(:cinema_topic))
+        subject.browse_entries.append(browse_entries(:music_topic))
+        subject.browse_entries.append(browse_entries(:harp_topic))
+        subject.browse_entries.append(browse_entries(:manuscripts_topic))
+        subject.browse_entries.append(browse_entries(:books_topic))
+        subject.browse_entries.append(browse_entries(:paintings_topic))
+      end
+      it 'should not be valid' do
+        expect(subject).to_not be_valid
+      end
+    end
+    context 'when there are 3 topic and 2 person browse entries' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+        subject.browse_entries.append(browse_entries(:cinema_topic))
+        subject.browse_entries.append(browse_entries(:music_topic))
+        subject.browse_entries.append(browse_entries(:van_gogh_person))
+        subject.browse_entries.append(browse_entries(:hokusai_person))
+      end
+      it 'should not be valid' do
+        expect(subject).to_not be_valid
+      end
+    end
+    context 'when there are 2 topic and 1 person browse entries' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+        subject.browse_entries.append(browse_entries(:cinema_topic))
+        subject.browse_entries.append(browse_entries(:van_gogh_person))
+      end
+      it 'should not be valid' do
+        expect(subject).to_not be_valid
+      end
+    end
+    context 'when there is 1 topic browse entry' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+      end
+      it 'should not be valid' do
+        expect(subject).to_not be_valid
+      end
+    end
+  end
+
   describe 'modules' do
     subject { described_class }
     it { is_expected.to include(PaperTrail::Model::InstanceMethods) }
