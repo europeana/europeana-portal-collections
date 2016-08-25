@@ -23,7 +23,6 @@ module Document
       end
 
       def simple_rights(rights)
-
         if rights.nil?
           {
             license_public: false,
