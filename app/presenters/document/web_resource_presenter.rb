@@ -171,7 +171,13 @@ module Document
         dc_creator: render_document_show_field_value('dcCreator'),
         dc_source: render_document_show_field_value('dcSource'),
         dc_rights: render_document_show_field_value('webResourceDcRights'),
-        edm_rights: render_document_show_field_value('webResourceEdmRights')
+        edm_rights: {
+          model: simple_rights(
+            EDM::Rights.normalise(
+              render_document_show_field_value('webResourceEdmRights')
+            )
+          )
+        }.as_json.to_s.gsub!('=>', ': ').gsub!('nil', 'false')
       }
     end
 

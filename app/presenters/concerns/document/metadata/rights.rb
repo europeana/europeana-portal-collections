@@ -18,8 +18,11 @@ module Document
         # global.facet.reusability.permission      Only with permission
         # global.facet.reusability.open            Yes with attribution
         # global.facet.reusability.restricted      Yes with restrictions
-
         rights = EDM::Rights.normalise(media_rights)
+        simple_rights(rights)
+      end
+
+      def simple_rights(rights)
         if rights.nil?
           {
             license_public: false,
