@@ -86,7 +86,9 @@ class FacetPresenter
     end
 
     {
+      name: facet_name,
       title: facet_config.respond_to?(:title) ? facet_config.title : facet_label,
+      filter_open: filter_open?,
       select_one: facet_config.single,
       items: unhidden_items.map { |item| facet_item(item) },
       extra_items: hidden_items.blank? ? nil : {
@@ -248,6 +250,14 @@ class FacetPresenter
 
   def facet_name
     @facet_name ||= @facet.name
+  end
+
+  def filter_open?
+    facet_items.select do |facet|
+      facet[:boolean] || facet[:date] || facet[:items].present?
+    end.map { |item|
+      facet_item(item)
+    }.select{|item| item[:is_checked]}.count > 0
   end
 
   ##

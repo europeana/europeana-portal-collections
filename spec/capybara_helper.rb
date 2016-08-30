@@ -23,7 +23,8 @@ else
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app,
       phantomjs_options: [
-        '--local-to-remote-url-access=true'
+        '--local-to-remote-url-access=true',
+        '--ignore-ssl-errors=true'
       ],
       js_errors: true,
       debug: false
