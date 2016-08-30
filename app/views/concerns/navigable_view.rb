@@ -33,7 +33,7 @@ module NavigableView
                 }
               },
               {
-                url: exhibitions_foyer_path,
+                url: exhibitions_foyer_path(exhibitions_feed_key),
                 text: t('global.navigation.exhibitions'),
                 submenu: {
                   items: navigation_global_primary_nav_exhibitions_submenu_items
@@ -97,7 +97,7 @@ module NavigableView
   protected
 
   def exhibitions_feed_key
-    Cache::FeedJob::URLS[:exhibitions].key?(I18n.locale) ? I18n.locale : :en
+    @exhibitions_feed_key ||= Cache::FeedJob::URLS[:exhibitions].key?(I18n.locale) ? I18n.locale : :en
   end
 
   def navigation_global_primary_nav_collections_submenu_items
@@ -124,7 +124,7 @@ module NavigableView
 
   def navigation_global_primary_nav_exhibitions_submenu_items
     feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][exhibitions_feed_key], 6)
-    feed_items << link_item(t('global.navigation.all_exhibitions'), exhibitions_foyer_path,
+    feed_items << link_item(t('global.navigation.all_exhibitions'), exhibitions_foyer_path(exhibitions_feed_key),
                             is_morelink: true)
   end
 

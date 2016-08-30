@@ -51,11 +51,11 @@ module UrlHelper
     search_path(browse_entry_query)
   end
 
-  def exhibitions_path
-    home_path + '/exhibitions'
+  def exhibitions_path locale = I18n.locale
+    home_path(locale: locale) + '/exhibitions'
   end
 
-  def exhibitions_foyer_path
-    exhibitions_path + '/foyer'
+  def exhibitions_foyer_path locale = I18n.locale
+    exhibitions_path(locale) + '/foyer'
   end
 end
