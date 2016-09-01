@@ -20,8 +20,10 @@ class FacetPresenter
   # @param (see #initialize)
   # @return {FacetPresenter} subclass instance for the facet
   def self.build(facet, controller, blacklight_config = controller.blacklight_config, parent = nil)
-    facet_config = blacklight_config.facet_fields[facet.name]
-    class_for_facet(facet_config).new(facet, controller, blacklight_config, parent)
+    if !facet.nil?
+      facet_config = blacklight_config.facet_fields[facet.name]
+      class_for_facet(facet_config).new(facet, controller, blacklight_config, parent)
+    end
   end
 
   ##
