@@ -1,7 +1,7 @@
 RSpec.shared_examples 'common view components', :common_view_components do
-  let(:available_locales) {
+  let(:available_locales) do
     [:bg, :ca, :da, :de, :el, :en, :es, :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl, :pl, :pt, :ro, :ru, :sv]
-  }
+  end
 
   it 'should have no top nav link to home' do
     render
