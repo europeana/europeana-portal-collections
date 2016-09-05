@@ -255,9 +255,7 @@ class FacetPresenter
   end
 
   def filter_open?
-    facet_items.select do |facet|
-      facet[:boolean] || facet[:date] || facet[:items].present?
-    end.map { |item|
+    facet_items.select{ |item| item.value.present?}.map { |item|
       facet_item(item)
     }.select{|item| item[:is_checked]}.count > 0
   end
