@@ -16,6 +16,8 @@ module I18nHelper
       it: 'italian',
       lt: 'lithuanian',
       lv: 'latvian',
+      mt: 'maltese',
+      no: 'norwegian',
       nl: 'dutch',
       pl: 'polish',
       pt: 'portuguese',
