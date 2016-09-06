@@ -9,6 +9,6 @@ RSpec.describe BrowseEntry do
 
   describe '.subject_types' do
     subject { described_class.subject_types.keys }
-    it { is_expected.to eq(%w(topic person)) }
+    it { is_expected.to eq(%w(topic person period)) }
   end
 end

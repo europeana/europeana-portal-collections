@@ -25,39 +25,37 @@ module BrowseEntryDisplayingView
   ##
   # @param page [Page]
   def browse_entry_items_grouped(browse_entries, page = nil)
-    grouped_items, type1, type2 = [], [], []
+    grouped_items, type1, type2, type3 = [], [], [], []
 
-    more_links = [browse_people_path(theme: collection.key), browse_topics_path(theme: collection.key)]
-    more_link_texts = [t('global.navigation.more.agents'), t('global.navigation.more.topics')]
-
-    if browse_entries[0].subject_type != 'person'
-      more_links.reverse!
-      more_link_texts.reverse!
-    end
+    more_links = [browse_people_path(theme: collection.key), browse_topics_path(theme: collection.key), browse_periods_path(theme: collection.key)]
+    more_link_texts = [t('global.navigation.more.agents'), t('global.navigation.more.topics'), t('global.navigation.more.periods')]
 
     browse_entries.each do |entry|
-      (entry.subject_type == browse_entries[0].subject_type ? type1 : type2) << browse_entry_item(entry, page)
+      case entry.subject_type
+        when 'person'
+          type1 << browse_entry_item(entry, page)
+        when 'topic'
+          type2 << browse_entry_item(entry, page)
+        when 'period'
+          type3 << browse_entry_item(entry, page)
+      end
     end
 
-    if type1.count > 0
-      grouped_items << {
-                         more_link: more_links[0],
-                         more_text: more_link_texts[0],
-                         items: type1
-                       }
-    end
-
-    if type2.count > 0
-      grouped_items << {
-                         more_link: more_links[1],
-                         more_text: more_link_texts[1],
-                         items: type2
-                       }
+    no_of_item_types = 0
+    [type1, type2, type3].each_with_index do |type, index|
+      if type.count > 0
+        grouped_items << {
+            more_link: more_links[index],
+            more_text: more_link_texts[index],
+            items: type
+        }
+        no_of_item_types += 1
+      end
     end
 
     return {
       grouped_items: grouped_items,
-      is_single_type: type1.count == 0 || type2.count == 0
+      is_single_type: no_of_item_types == 1
     }
   end
 end

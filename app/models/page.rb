@@ -74,16 +74,20 @@ class Page < ActiveRecord::Base
   end
 
   def browse_entries_validation
-    topic_count, person_count = 0 , 0
+    topic_count, person_count, period_count = 0, 0, 0
     browse_entries.each do |browse_entry|
       topic_count += 1 if browse_entry.subject_type == 'topic'
       person_count += 1 if browse_entry.subject_type == 'person'
+      period_count += 1 if browse_entry.subject_type == 'period'
     end
     unless topic_count % 3 == 0
       errors.add(:browse_entries, "for topics need to be in groups of 3, you have provided #{topic_count}")
     end
     unless person_count % 3 == 0
       errors.add(:browse_entries, "for persons need to be in groups of 3, you have provided #{person_count}")
+    end
+    unless period_count % 3 == 0
+      errors.add(:browse_entries, "for periods need to be in groups of 3, you have provided #{period_count}")
     end
   end
 end
