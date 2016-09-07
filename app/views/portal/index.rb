@@ -5,7 +5,7 @@ module Portal
     include SearchableView
 
     def grid_view_active
-      params[:view] == 'grid'
+      params[:view] == 'grid' || collection.key == 'fashion'
     end
 
     def bodyclass
