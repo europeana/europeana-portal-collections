@@ -12,6 +12,7 @@ RSpec.describe SearchBuilder do
     context 'when a facet field is aliased' do
       let(:blacklight_config) do
         Blacklight::Configuration.new do |config|
+          config.add_facet_field 'proxy_dc_format.en'
           config.add_facet_field 'colour', aliases: 'proxy_dc_format.en'
           config.add_facet_fields_to_solr_request!
         end
@@ -71,13 +72,6 @@ RSpec.describe SearchBuilder do
 
       it 'should return the aliased facet with the passed value' do
         expect(subject.with(f: { 'colour' => ['yellow'] }).salient_facets_for_api_facet_qf).to eq('proxy_dc_format.en' => ['yellow'])
-      end
-
-      context 'when the facet is a STANDALONE_FACET' do
-        it 'should return a hash of no facets' do
-          stub_const("#{described_class}::STANDALONE_FACETS", %w(colour))
-          expect(subject.with(f: { 'colour' => ['yellow'] }).salient_facets_for_api_facet_qf).to eq(nil => nil)
-        end
       end
     end
   end
