@@ -58,4 +58,22 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
       end
     end
   end
+
+  context 'when within a collection' do
+    context 'with a default layout' do
+      let(:collection) { collections(:grid_layout) }
+      it 'sets that default layout' do
+        render
+        expect(rendered).to have_selector('body.display-grid')
+      end
+    end
+
+    context 'without a default layout' do
+      let(:collection) { collections(:art) }
+      it 'defaults layout to list' do
+        render
+        expect(rendered).not_to have_selector('body.display-grid')
+      end
+    end
+  end
 end

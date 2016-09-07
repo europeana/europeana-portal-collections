@@ -17,3 +17,9 @@ draft:
   key: 'draft'
   api_params: 'qf=what:ever'
   state: 0
+
+grid_layout:
+  key: 'grid_layout'
+  api_params: 'qf=grid'
+  state: 1
+  settings: "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ndefault_search_layout: grid"

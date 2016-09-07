@@ -3,6 +3,7 @@ RSpec.describe Collection do
   it { is_expected.to validate_presence_of(:key) }
   it { is_expected.to validate_uniqueness_of(:key) }
   it { is_expected.to validate_presence_of(:api_params) }
+  it { is_expected.to delegate_method(:settings_default_search_layout_enum).to(:class) }
 
   describe '#to_param' do
     context 'when key eq "music"' do
@@ -17,5 +18,10 @@ RSpec.describe Collection do
     it 'should enqueue a record counts job' do
       expect { subject }.to change { Delayed::Job.where("handler LIKE '%Cache::RecordCountsJob%'").count }.by(1)
     end
+  end
+
+  describe '.settings_default_search_layout_enum' do
+    subject { described_class.settings_default_search_layout_enum }
+    it { is_expected.to eq(%w(list grid)) }
   end
 end
