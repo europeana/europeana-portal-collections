@@ -3,6 +3,7 @@ en:
     attributes:
       collection:
         api_params: API parameters
+        settings_default_search_layout: Default search layout
       hero_image:
         settings_brand_colour: Brand colour
         settings_brand_opacity: Brand opacity

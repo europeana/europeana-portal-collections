@@ -207,7 +207,7 @@ module Portal
             name: collection.key,
             label: collection.landing_page.title,
             url: collection_url(collection),
-            def_view: collection.key == 'fashion' ? 'grid' : 'list'
+            def_view: collection.settings['default_search_layout']
           }
         end
       end

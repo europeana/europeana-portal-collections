@@ -118,11 +118,13 @@ RailsAdmin.config do |config|
       field :title
       field :state
       field :api_params
+      field :settings_default_search_layout, :enum
     end
     edit do
       field :key
       field :title
       field :api_params
+      field :settings_default_search_layout, :enum
     end
   end
 
