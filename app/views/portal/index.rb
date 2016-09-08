@@ -248,7 +248,7 @@ module Portal
     def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
       {
-        object_url: document_path(doc, format: 'html'),
+        object_url: document_path(doc, format: 'html', q: params[:q]),
         title: search_result_title(doc),
         text: search_result_text(doc),
         year: search_result_year(doc),

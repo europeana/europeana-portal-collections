@@ -37,11 +37,11 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
   end
 
   describe 'search result for a document' do
-    it 'links to the record page' do
+    it 'links to the record page with the query' do
       render
       api_response[:items].each do |item|
         id_param = item[:id][1..-1] # omitting leading slash
-        expect(rendered).to have_link(item[:title], href: document_path(id_param, format: 'html'))
+        expect(rendered).to have_link(item[:title], href: document_path(id_param, format: 'html', q: blacklight_params[:q]))
       end
     end
 

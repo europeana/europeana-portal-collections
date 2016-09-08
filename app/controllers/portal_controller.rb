@@ -4,7 +4,7 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
-  include SoundCloudUrnResolver
+  include Europeana::UrlConversions
   include OembedRetriever
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
@@ -16,7 +16,7 @@ class PortalController < ApplicationController
   attr_reader :url_conversions, :oembed_html
 
   rescue_from URI::InvalidURIError do |exception|
-    handle_error(exception, 404, 'html')
+    handle_error(exception: exception, status: 404, format: 'html')
   end
 
   # GET /search
@@ -30,7 +30,7 @@ class PortalController < ApplicationController
   # GET /record/:id
   def show
     @response, @document = fetch(doc_id)
-    @url_conversions = soundcloud_urns_to_urls(@document)
+    @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
@@ -55,7 +55,7 @@ class PortalController < ApplicationController
   # GET /record/:id/media
   def media
     @response, @document = fetch(doc_id)
-    @url_conversions = soundcloud_urns_to_urls(@document)
+    @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
     @page = params[:page] || 1
     @per_page = params[:per_page] || 4
