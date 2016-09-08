@@ -10,7 +10,8 @@ module Facet
         range: display_range,
         data: display_data,
         date_start: range_min,
-        date_end: range_max
+        date_end: range_max,
+        show_bars: range_min != range_max
       }
     end
 
@@ -77,7 +78,9 @@ module Facet
     end
 
     def display_range_start
-      if search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
+      if range_min == range_max
+        range_min
+      elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
         search_state.params_for_search[:range][@facet.name][:begin]
       else
         range_min
@@ -85,7 +88,9 @@ module Facet
     end
 
     def display_range_end
-      if search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
+      if range_min == range_max
+        range_min
+      elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
         search_state.params_for_search[:range][@facet.name][:end]
       else
         range_max
