@@ -16,7 +16,7 @@ class PortalController < ApplicationController
   attr_reader :url_conversions, :oembed_html
 
   rescue_from URI::InvalidURIError do |exception|
-    handle_error(exception, 404, 'html')
+    handle_error(exception: exception, status: 404, format: 'html')
   end
 
   # GET /search
