@@ -56,45 +56,59 @@ RSpec.describe PortalController do
   end
 
   describe 'GET show' do
-    before do
-      get :show, params
-    end
-
     let(:params) { { locale: 'en', id: 'abc/123' } }
     let(:record_id) { '/' + params[:id] }
 
-    it_behaves_like 'a record API request'
-    it_behaves_like 'a more like this API request'
+    describe 'API requests' do
+      before do
+        get :show, params
+      end
+      it_behaves_like 'a record API request'
+      it_behaves_like 'a more like this API request'
+    end
 
     context 'with dcterms:isPartOf' do
+      before do
+        get :show, params
+      end
       let(:params) { { locale: 'en', id: 'with/dcterms:isPartOf' } }
       it_behaves_like 'a hierarchy API request'
     end
 
     context 'with dcterms:hasPart' do
+      before do
+        get :show, params
+      end
       let(:params) { { locale: 'en', id: 'with/dcterms:hasPart' } }
       it_behaves_like 'a hierarchy API request'
     end
 
     context 'without dcterms:isPartOf or dcterms:hasPart' do
+      before do
+        get :show, params
+      end
       it_behaves_like 'no hierarchy API request'
     end
 
     it 'assigns the response to @response' do
+      get :show, params
       expect(assigns(:response)).to be_a(Europeana::Blacklight::Response)
     end
 
     it 'assigns the document to @document' do
+      get :show, params
       expect(assigns(:document)).to be_a(Europeana::Blacklight::Document)
       expect(assigns(:document)).to eq(assigns(:response).documents.first)
     end
 
     it 'assigns similar items to @similar' do
+      get :show, params
       expect(assigns(:similar)).to be_a(Array)
       expect(assigns(:similar)).to all(be_a(Europeana::Blacklight::Document))
     end
 
     it 'does not request the MIME type from the proxy service' do
+      get :show, params
       expect(a_media_proxy_request_for(record_id)).not_to have_been_made
     end
 
@@ -107,11 +121,13 @@ RSpec.describe PortalController do
       let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
 
       it 'renders the object display page' do
+        get :show, params
         expect(response).to render_template('portal/show')
       end
 
       context 'without param debug' do
         it 'does not assign @debug' do
+          get :show, params
           expect(assigns(:debug)).to be_nil
         end
       end
@@ -119,7 +135,31 @@ RSpec.describe PortalController do
       context 'with param debug=json' do
         let(:params) { { locale: 'en', id: 'abc/123', format: 'html', debug: 'json' } }
         it 'assigns pretty JSON document to @debug' do
+          get :show, params
           expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json.merge(hierarchy: assigns(:hierarchy).as_json)))
+        end
+      end
+
+      describe 'URL conversions' do
+        context 'when item has TEL newspaper' do
+          context 'with query param' do
+            let(:params) { { locale: 'en', id: 'abc/123', format: 'html', q: 'paris' } }
+            let(:api_response) { JSON.parse(api_responses(:record_with_tel_web_resource, id: params[:id])) }
+            let(:bl_response) { Europeana::Blacklight::Response.new(api_response, {}) }
+            let(:document) { bl_response.documents.first }
+
+            it 'has a conversion for the TEL URL' do
+              stub_request(:get, 'http://oembed.europeana.eu/?format=json&url=http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/abc/123?query=paris')
+
+              allow(controller).to receive(:fetch).and_return([bl_response, document])
+              get :show, params
+
+              expect(an_api_record_request_for('/abc/123')).not_to have_been_made
+              expect(response.status).to eq(200)
+
+              expect(assigns[:url_conversions]).to have_key('http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/abc/123')
+            end
+          end
         end
       end
     end
