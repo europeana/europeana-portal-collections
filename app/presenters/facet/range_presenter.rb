@@ -65,12 +65,12 @@ module Facet
       {
         start: {
           input_name: "range[#{@facet.name}][begin]",
-          input_value: range_min,
+          input_value: search_state.params_for_search[:range][@facet.name][:begin],
           label_text: 'From:'
         },
         end: {
           input_name: "range[#{@facet.name}][end]",
-          input_value: range_max,
+          input_value: search_state.params_for_search[:range][@facet.name][:end],
           label_text: 'To:'
         }
       }
