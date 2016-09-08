@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908141655) do
+ActiveRecord::Schema.define(version: 20160908144501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,14 @@ ActiveRecord::Schema.define(version: 20160908141655) do
     t.string   "title"
     t.text     "settings"
   end
+
+  create_table "data_provider_logos", force: :cascade do |t|
+    t.integer  "data_provider_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "data_provider_logos", ["data_provider_id"], name: "index_data_provider_logos_on_data_provider_id", using: :btree
 
   create_table "data_providers", force: :cascade do |t|
     t.string   "name"
