@@ -26,7 +26,6 @@ copyright:
   - title: rights
     fields:
     - proxies.dcRights
-    - aggregations.edmRights
     ga_data: dimension5
 time:
   title: time
