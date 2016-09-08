@@ -4,12 +4,13 @@ module Portal
   class Index < ApplicationView
     include SearchableView
 
-    def grid_view_active
-      params[:view] == 'grid'
+    def grid_view_active?
+      params[:view] == 'grid' || (within_collection? && collection.key == 'fashion')
     end
+    alias_method :grid_view_active, :grid_view_active?
 
     def bodyclass
-      grid_view_active ? 'display-grid' : nil
+      grid_view_active? ? 'display-grid' : nil
     end
 
     def page_title
