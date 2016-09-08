@@ -4,6 +4,7 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     assign(:document_list, response.documents)
     assign(:params, blacklight_params)
     allow(view).to receive(:search_state).and_return(search_state)
+    allow(controller).to receive(:search_action_url).and_return('/search')
   end
 
   let(:api_response) do
@@ -60,6 +61,12 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
   end
 
   context 'when within a collection' do
+    before(:each) do
+      allow(view).to receive(:within_collection?).and_return(true)
+      allow(view).to receive(:current_collection).and_return(collection)
+      assign(:collection, collection)
+    end
+
     context 'with a default layout' do
       let(:collection) { collections(:grid_layout) }
       it 'sets that default layout' do

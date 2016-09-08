@@ -5,7 +5,13 @@ module Portal
     include SearchableView
 
     def grid_view_active?
-      params[:view] == 'grid' || (within_collection? && collection.key == 'fashion')
+      if params[:view] == 'grid'
+        true
+      elsif !within_collection?
+        false
+      else
+        current_collection.settings['default_search_layout'] == 'grid'
+      end
     end
     alias_method :grid_view_active, :grid_view_active?
 
