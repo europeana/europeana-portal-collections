@@ -86,6 +86,7 @@ module Facet
                     with: ->(item) { EDM::Rights.for_api_query(item).label }
                   }
       label_facet 'COUNTRY',
+                  i18n: 'providing_country',
                   items: {
                     with: ->(item) { item.dup.gsub(/\s+/, '') },
                     titleize: true, i18n: true

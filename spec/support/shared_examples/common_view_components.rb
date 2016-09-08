@@ -1,4 +1,8 @@
 RSpec.shared_examples 'common view components', :common_view_components do
+  let(:available_locales) do
+    [:bg, :ca, :da, :de, :el, :en, :es, :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl, :pl, :pt, :ro, :ru, :sv]
+  end
+
   it 'should have no top nav link to home' do
     render
     expect(rendered).not_to have_selector('#main-menu a[href$="/"]', text: pages(:home).title)
@@ -25,13 +29,22 @@ RSpec.shared_examples 'common view components', :common_view_components do
   end
 
   it 'should have alternate links to all locales' do
+    render
+    available_locales.each do |locale|
+      expect(rendered).to have_selector("link[rel=\"alternate\"][hreflang=\"#{locale}\"]", visible: false)
+    end
+  end
+
+  it 'should have language menu links to all locales' do
     class AvailableLocales
       include I18nHelper
     end
+    language_map = AvailableLocales.new.language_map
 
     render
-    AvailableLocales.new.language_map.keys.each do |locale|
-      expect(rendered).to have_selector("link[rel=\"alternate\"][hreflang=\"#{locale}\"]", visible: false)
+    available_locales.each do |locale|
+      label = I18n.t("global.language-#{language_map[locale]}", locale: locale)
+      expect(rendered).to have_selector('#settings-menu a', text: label)
     end
   end
 end

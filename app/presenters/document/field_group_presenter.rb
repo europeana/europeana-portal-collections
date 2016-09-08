@@ -23,7 +23,8 @@ module Document
       sections = definition[:sections].map do |section|
         {
           title: section[:title].nil? ? false : t(section[:title], scope: 'site.object.meta-label'),
-          items: section_field_subsection(section)
+          items: section_field_subsection(section),
+          is_desc: id.to_s == 'description'
         }
       end
 

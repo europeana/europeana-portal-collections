@@ -27,10 +27,20 @@ module Portal
     def filters
       mustache[:filters] ||= begin
         (simple_filters + advanced_filters).select do |facet|
-          facet[:boolean] || facet[:date] || facet[:items].present?
+          (facet[:boolean] && !facet[:title] == 'MEDIA') || facet[:date] || facet[:items].present?
+        end.each_with_index.map do |facet,index|
+          # First 3 facets are always open
+          facet[:filter_open] = true if index < 3
+          # Add the media facet under type
+          if facet[:name] == 'TYPE'
+            facet[:items] << { is_separator: true }
+            facet[:items] << FacetPresenter.build(facet_by_field_name('MEDIA'), controller).display
+          end
+          facet
         end
       end
     end
+
 
     def simple_filters
       mustache[:simple_filters] ||= begin
@@ -183,6 +193,10 @@ module Portal
       mustache[:facets_selected] ||= begin
         facets_selected_items.blank? ? nil : { items: facets_selected_items }
       end
+    end
+
+    def active_filter_count
+      facets_selected_items.blank? ? 0 : facets_selected_items.length
     end
 
     def collection_data

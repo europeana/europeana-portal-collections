@@ -20,8 +20,10 @@ class FacetPresenter
   # @param (see #initialize)
   # @return {FacetPresenter} subclass instance for the facet
   def self.build(facet, controller, blacklight_config = controller.blacklight_config, parent = nil)
-    facet_config = blacklight_config.facet_fields[facet.name]
-    class_for_facet(facet_config).new(facet, controller, blacklight_config, parent)
+    if !facet.nil?
+      facet_config = blacklight_config.facet_fields[facet.name]
+      class_for_facet(facet_config).new(facet, controller, blacklight_config, parent)
+    end
   end
 
   ##
@@ -86,7 +88,9 @@ class FacetPresenter
     end
 
     {
+      name: facet_name,
       title: facet_config.respond_to?(:title) ? facet_config.title : facet_label,
+      filter_open: filter_open?,
       select_one: facet_config.single,
       items: unhidden_items.map { |item| facet_item(item) },
       extra_items: hidden_items.blank? ? nil : {
@@ -248,6 +252,12 @@ class FacetPresenter
 
   def facet_name
     @facet_name ||= @facet.name
+  end
+
+  def filter_open?
+    facet_items.select{ |item| item.value.present?}.map { |item|
+      facet_item(item)
+    }.select{|item| item[:is_checked]}.count > 0
   end
 
   ##

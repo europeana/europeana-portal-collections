@@ -2,6 +2,7 @@ module Facet
   class BooleanPresenter < FacetPresenter
     def display(**_)
       {
+        name: facet_name,
         title: facet_label,
         url: facet_url,
         text: facet_label,

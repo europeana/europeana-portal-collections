@@ -5,6 +5,7 @@ RSpec.describe BrowseEntry do
   it { is_expected.to belong_to(:media_object) }
   it { is_expected.to delegate_method(:file).to(:media_object) }
   it { is_expected.to accept_nested_attributes_for(:media_object) }
+  it { is_expected.to validate_presence_of(:subject_type) }
 
   describe '.subject_types' do
     subject { described_class.subject_types.keys }

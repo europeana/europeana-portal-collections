@@ -3,6 +3,31 @@ opera_topic:
   state: 1
   subject_type: 0
 
+cinema_topic:
+  query: "what:cinema"
+  state: 1
+  subject_type: 0
+
+music_topic:
+    query: "what:music"
+    state: 1
+    subject_type: 0
+
+harp_topic:
+    query: "what:harp"
+    state: 1
+    subject_type: 0
+
+manuscripts_topic:
+  query: "what:manuscripts"
+  state: 1
+  subject_type: 0
+
+books_topic:
+  query: "what:books"
+  state: 1
+  subject_type: 0
+
 paintings_topic:
   query: "what:paintings"
   state: 1
@@ -15,5 +40,10 @@ van_gogh_person:
 
 hokusai_person:
   query: "who:hokusai"
+  state: 1
+  subject_type: 1
+
+sandro_botticelli_person:
+  query: "who:sandro botticelli"
   state: 1
   subject_type: 1

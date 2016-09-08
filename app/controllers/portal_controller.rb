@@ -22,7 +22,6 @@ class PortalController < ApplicationController
   # GET /search
   def index
     (@response, @document_list) = search_results(params)
-
     respond_to do |format|
       format.html { store_preferred_view }
     end

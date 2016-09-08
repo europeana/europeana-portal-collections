@@ -10,7 +10,7 @@ module PromotionLinkDisplayingView
       cat_flag = promo.settings_category.blank? ? {} : { :"is_#{promo.settings_category}" => true }
       {
         url: promo.url,
-        # is_external: !(URI(promo.url).host.blank? || URI(promo.url).host.match(/[^\.]+\.\w+$/).to_s == request.host),
+        is_external: !(URI(promo.url).host.blank? || URI(promo.url).host == request.host),
         title: promo.text,
         custom_class: promo.settings_class,
         wide: promo.settings_wide == '1',
