@@ -17,8 +17,9 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection HeroImage Link Link::Promotion Link::Credit
-    Link::SocialMedia MediaObject Page Page::Error Page::Landing User
+    Banner BrowseEntry Collection DataProvider HeroImage Link Link::Promotion
+    Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing
+    User
   )
 
   config.actions do
@@ -125,6 +126,22 @@ RailsAdmin.config do |config|
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
+    end
+  end
+
+  config.model 'DataProvider' do
+    list do
+      sort_by :uri
+      field :uri
+      field :name
+    end
+    show do
+      field :uri
+      field :name
+    end
+    edit do
+      field :uri
+      field :name
     end
   end
 

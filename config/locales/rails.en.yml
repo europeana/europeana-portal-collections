@@ -4,6 +4,8 @@ en:
       collection:
         api_params: API parameters
         settings_default_search_layout: Default search layout
+      data_provider:
+        uri: URI
       hero_image:
         settings_brand_colour: Brand colour
         settings_brand_opacity: Brand opacity
