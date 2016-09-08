@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'soundcloud'
 
 module Europeana
@@ -19,7 +20,7 @@ module Europeana
         !soundcloud_urn_match(uri).nil?
       end
 
-      def is_runnable?
+      def runnable?
         ENV.key?('SOUNDCLOUD_CLIENT_ID')
       end
 

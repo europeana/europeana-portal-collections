@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Europeana
   module UrlConversions
     class TelQueryAppender < Base
@@ -9,7 +10,7 @@ module Europeana
         !uri.match(%r{\Ahttp://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/}).nil?
       end
 
-      def is_runnable?
+      def runnable?
         @controller.params.key?(:q)
       end
     end
