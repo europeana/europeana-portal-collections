@@ -65,15 +65,31 @@ module Facet
       {
         start: {
           input_name: "range[#{@facet.name}][begin]",
-          input_value: search_state.params_for_search[:range][@facet.name][:begin],
+          input_value: display_range_start,
           label_text: 'From:'
         },
         end: {
           input_name: "range[#{@facet.name}][end]",
-          input_value: search_state.params_for_search[:range][@facet.name][:end],
+          input_value: display_range_end,
           label_text: 'To:'
         }
       }
+    end
+
+    def display_range_start
+      if search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
+        search_state.params_for_search[:range][@facet.name][:begin]
+      else
+        range_min
+      end
+    end
+
+    def display_range_end
+      if search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
+        search_state.params_for_search[:range][@facet.name][:end]
+      else
+        range_max
+      end
     end
 
     def display_form
