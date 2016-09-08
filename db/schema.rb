@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907132925) do
+ActiveRecord::Schema.define(version: 20160908141655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(version: 20160907132925) do
     t.string   "title"
     t.text     "settings"
   end
+
+  create_table "data_providers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "uri"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "data_providers", ["name"], name: "index_data_providers_on_name", unique: true, using: :btree
+  add_index "data_providers", ["uri"], name: "index_data_providers_on_uri", unique: true, using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",               default: 0, null: false
