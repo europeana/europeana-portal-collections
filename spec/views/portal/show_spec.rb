@@ -17,6 +17,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     }
   end
   let(:blacklight_document) { Europeana::Blacklight::Document.new(blacklight_document_source.with_indifferent_access) }
+  let(:params) { { id: 'abc/123' } }
 
   before(:each) do
     allow(view).to receive(:current_search_session).and_return nil
@@ -26,7 +27,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     allow(controller).to receive(:url_conversions).and_return({})
     allow(controller).to receive(:oembed_html).and_return({})
 
-    assign(:params, { id: 'abc/123' })
+    assign(:params, params)
     assign(:document, blacklight_document)
     assign(:similar, [])
   end
