@@ -100,7 +100,7 @@ module Facet
     end
 
     def hidden_inputs_for_search
-      flatten_hash(search_state.params_for_search.except(:page, :utf8)).map do |name, value|
+      flatten_hash(search_state.params_for_search.except(:page, :utf8, :range, :locale)).map do |name, value|
         [value].flatten.map { |v| { name: name, value: v.to_s } }
       end.flatten
     end
