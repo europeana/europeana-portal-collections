@@ -9,7 +9,8 @@ module FeedbackableView
     return nil unless feedback_enabled?
     {
       form_action: feedback_path,
-      maxlength: 400
+      maxlength: 400,
+      minwords: 5
     }
   end
 end
