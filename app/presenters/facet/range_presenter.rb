@@ -78,13 +78,13 @@ module Facet
       }
     end
 
-    def is_single_date?
+    def single_date?
       # This should be based on the request parameters, not range available for those parameters
       range_min == range_max
     end
 
     def display_range_start
-      if is_single_date?
+      if single_date?
         range_min
       elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
         search_state.params_for_search[:range][@facet.name][:begin]
@@ -94,7 +94,7 @@ module Facet
     end
 
     def display_range_end
-      if is_single_date?
+      if single_date?
         range_min
       elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
         search_state.params_for_search[:range][@facet.name][:end]
