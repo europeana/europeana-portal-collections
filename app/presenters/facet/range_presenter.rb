@@ -10,9 +10,9 @@ module Facet
         range: display_range,
         data: display_data,
         date_start: range_min,
-        date_middle: Integer((Integer(range_min) + Integer(range_max)) / 2),
+        date_middle: (range_min.nil? || range_max.nil?) ? NIL : Integer((Integer(range_min) + Integer(range_max)) / 2),
         date_end: range_max,
-        show_bars: range_min != range_max
+        show_bars: !single_date?
       }
     end
 
