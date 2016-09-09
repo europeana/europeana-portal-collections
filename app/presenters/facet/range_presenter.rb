@@ -10,8 +10,9 @@ module Facet
         range: display_range,
         data: display_data,
         date_start: range_min,
+        date_middle: (range_min.nil? || range_max.nil?) ? NIL : Integer((Integer(range_min) + Integer(range_max)) / 2),
         date_end: range_max,
-        show_bars: range_min != range_max
+        show_bars: !single_date?
       }
     end
 
@@ -77,8 +78,13 @@ module Facet
       }
     end
 
+    def single_date?
+      # This should be based on the request parameters, not range available for those parameters
+      range_min == range_max
+    end
+
     def display_range_start
-      if range_min == range_max
+      if single_date?
         range_min
       elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
         search_state.params_for_search[:range][@facet.name][:begin]
@@ -88,7 +94,7 @@ module Facet
     end
 
     def display_range_end
-      if range_min == range_max
+      if single_date?
         range_min
       elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
         search_state.params_for_search[:range][@facet.name][:end]
