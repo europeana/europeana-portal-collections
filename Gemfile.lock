@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: b2d22955c1c03cffa222492e0e52607afc6d060f
-  ref: b2d2295
+  revision: 8a1e2e027233381428e1763f2485a075075945c8
+  ref: 8a1e2e0
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -147,7 +147,7 @@ GEM
     europeana-api (0.5.0)
       activesupport (>= 3.0)
       multi_json (~> 1.0)
-    europeana-blacklight (0.4.5)
+    europeana-blacklight (0.4.6)
       blacklight (~> 6.0.0)
       europeana-api (~> 0.5.0)
       iso-639 (~> 0.2.5)
@@ -577,7 +577,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.5.0)
-  europeana-blacklight (~> 0.4.5)
+  europeana-blacklight (~> 0.4.6)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
@@ -619,6 +619,3 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
-
-BUNDLED WITH
-   1.12.5

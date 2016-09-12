@@ -2,6 +2,8 @@ RSpec.shared_context 'Blacklight config', :blacklight_config do
   let(:blacklight_config) do
     Blacklight::Configuration.new do |config|
       config.index.title_field = 'title_display'
+      config.add_facet_field 'COLLECTION', include_in_request: false, single: true
+      config.add_facet_field 'TYPE', hierarchical: true
     end
   end
 

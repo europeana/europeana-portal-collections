@@ -10,7 +10,9 @@ module Facet
         range: display_range,
         data: display_data,
         date_start: range_min,
-        date_end: range_max
+        date_middle: (range_min.nil? || range_max.nil?) ? NIL : Integer((Integer(range_min) + Integer(range_max)) / 2),
+        date_end: range_max,
+        show_bars: !single_date?
       }
     end
 
@@ -65,15 +67,40 @@ module Facet
       {
         start: {
           input_name: "range[#{@facet.name}][begin]",
-          input_value: range_min,
+          input_value: display_range_start,
           label_text: 'From:'
         },
         end: {
           input_name: "range[#{@facet.name}][end]",
-          input_value: range_max,
+          input_value: display_range_end,
           label_text: 'To:'
         }
       }
+    end
+
+    def single_date?
+      # This should be based on the request parameters, not range available for those parameters
+      range_min == range_max
+    end
+
+    def display_range_start
+      if single_date?
+        range_min
+      elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
+        search_state.params_for_search[:range][@facet.name][:begin]
+      else
+        range_min
+      end
+    end
+
+    def display_range_end
+      if single_date?
+        range_min
+      elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
+        search_state.params_for_search[:range][@facet.name][:end]
+      else
+        range_max
+      end
     end
 
     def display_form
@@ -84,7 +111,7 @@ module Facet
     end
 
     def hidden_inputs_for_search
-      flatten_hash(search_state.params_for_search.except(:page, :utf8)).map do |name, value|
+      flatten_hash(search_state.params_for_search.except(:page, :utf8, :range, :locale)).map do |name, value|
         [value].flatten.map { |v| { name: name, value: v.to_s } }
       end.flatten
     end

@@ -4,12 +4,19 @@ module Portal
   class Index < ApplicationView
     include SearchableView
 
-    def grid_view_active
-      params[:view] == 'grid'
+    def grid_view_active?
+      if params[:view] == 'grid'
+        true
+      elsif !within_collection?
+        false
+      else
+        current_collection.settings['default_search_layout'] == 'grid'
+      end
     end
+    alias_method :grid_view_active, :grid_view_active?
 
     def bodyclass
-      grid_view_active ? 'display-grid' : nil
+      grid_view_active? ? 'display-grid' : nil
     end
 
     def page_title
@@ -206,7 +213,8 @@ module Portal
           {
             name: collection.key,
             label: collection.landing_page.title,
-            url: collection_url(collection)
+            url: collection_url(collection),
+            def_view: collection.settings['default_search_layout']
           }
         end
       end
@@ -240,7 +248,7 @@ module Portal
     def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
       {
-        object_url: document_path(doc, format: 'html'),
+        object_url: document_path(doc, format: 'html', q: params[:q]),
         title: search_result_title(doc),
         text: search_result_text(doc),
         year: search_result_year(doc),

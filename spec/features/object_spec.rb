@@ -91,7 +91,11 @@ RSpec.feature 'Object page' do
         it 'has a working search form' do
           visit '/en/record/abc/123'
           sleep 1 if js
-          page.find(:xpath, '//a[@class="cc_btn cc_btn_accept_all"]').click if js
+          begin
+            page.find(:xpath, '//a[@class="cc_btn cc_btn_accept_all"]').click if js
+          rescue Capybara::ElementNotFound
+            # The above click statement fails on Travis as the disclaimer isn't present
+          end
           fill_in('q', with: 'paris')
           click_button('Search')
           expect(current_path).to eq('/en/search')
