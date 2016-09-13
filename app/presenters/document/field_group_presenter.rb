@@ -105,7 +105,8 @@ module Document
           # text manipulation
           item[:text] = format_date(val, section[:format_date])
 
-          # overrides
+#          puts item.as_json.to_s
+
           if section[:overrides] && item[:text] == section[:override_val]
             section[:overrides].map do |override|
               if override[:field_title]
@@ -115,6 +116,10 @@ module Document
                 item[:url] = override[:field_url]
               end
             end
+          end
+
+          if val.start_with?('http')
+            item[:url] = val
           end
 
           if section[:ga_data]
