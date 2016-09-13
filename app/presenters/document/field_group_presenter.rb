@@ -47,7 +47,11 @@ module Document
 
     def map_field_values(values, map)
       values.map do |val|
-        map.key?(val) ? I18n.t(map[val]) : val
+        if map.key?(val)
+          map[val] ? I18n.t(map[val]) : nil
+        else
+          val
+        end
       end
     end
 

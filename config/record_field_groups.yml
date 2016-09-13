@@ -119,6 +119,7 @@ provenance:
     - aggregations.edmUgc
     map_values:
       'true': site.object.meta-label.ugc
+      'false': ~
   - title: provenance
     fields:
     - proxies.dctermsProvenance
