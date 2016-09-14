@@ -123,8 +123,9 @@ module Document
     def media_type_from_iiif_mapping
       if render_document_show_field_value('svcsHasService').nil?
         false
+      else
+        'iiif'
       end
-      'iiif'
     end
 
     def edm_media_type
