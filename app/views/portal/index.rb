@@ -4,6 +4,10 @@ module Portal
   class Index < ApplicationView
     include SearchableView
 
+    def js_vars
+      [{ name: 'pageName', value: 'portal/index' }]
+    end
+
     def grid_view_active?
       if params[:view] == 'grid'
         true
