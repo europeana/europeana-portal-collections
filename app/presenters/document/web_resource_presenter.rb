@@ -49,7 +49,7 @@ module Document
 
     def play_url
       @play_url ||= begin
-        @record_presenter.iiif_manifest || download_url
+        @record_presenter.iiif_manifest || iiif_url || download_url
       end
     end
 
@@ -84,7 +84,7 @@ module Document
 
     # Media type function normalises mime types
     def media_type
-      @media_type ||= (media_type_special_case || media_type_from_mime_type || media_type_from_record_type)
+      @media_type ||= (media_type_special_case || media_type_from_iiif_mapping || media_type_from_mime_type || media_type_from_record_type)
     end
 
     def media_type_special_case
@@ -120,6 +120,13 @@ module Document
       end
     end
 
+    def media_type_from_iiif_mapping
+      if (render_document_show_field_value('svcsHasService').nil?)
+        false
+      end
+      'iiif'
+    end
+
     def edm_media_type
       @edm_media_type ||= begin
         if record_type == '3D' || %w(iiif oembed).include?(media_type)
@@ -134,6 +141,13 @@ module Document
 
     def use_media_proxy?
       Rails.application.config.x.europeana_media_proxy && mime_type.present?
+    end
+
+    def iiif_url
+      x = render_document_show_field_value('svcsHasService')
+      if !x.nil?
+        x + '/info.json'
+      end
     end
 
     def download_url
@@ -213,7 +227,7 @@ module Document
         (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
         (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
         (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-        media_type == 'oembed'
+      media_type == 'oembed'
     end
 
     def playable?
@@ -230,7 +244,7 @@ module Document
     end
 
     def playable_without_mime_type?
-      %w(iiif oembed).include?(media_type)
+      %w(iiif oembed).include?(media_type) || media_type_from_iiif_mapping
     end
 
     def downloadable?
