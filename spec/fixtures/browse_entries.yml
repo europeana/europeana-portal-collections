@@ -47,3 +47,18 @@ sandro_botticelli_person:
   query: "who:sandro botticelli"
   state: 1
   subject_type: 1
+
+century_16_period:
+  query: "when:16??"
+  state: 1
+  subject_type: 2
+
+century_17_period:
+  query: "when:17??"
+  state: 1
+  subject_type: 2
+
+century_18_period:
+  query: "when:18??"
+  state: 1
+  subject_type: 2

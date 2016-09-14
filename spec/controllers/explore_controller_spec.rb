@@ -106,7 +106,7 @@ RSpec.describe ExploreController do
 
     let(:params) { { locale: 'en', format: 'html' } }
 
-    it 'should render the people Mustache template' do
+    it 'should render the Mustache template' do
       expect(response.status).to eq(200)
       expect(response).to render_template('explore/people')
     end
@@ -125,13 +125,32 @@ RSpec.describe ExploreController do
 
     let(:params) { { locale: 'en', format: 'html' } }
 
-    it 'should render the topics Mustache template' do
+    it 'should render the Mustache template' do
       expect(response.status).to eq(200)
       expect(response).to render_template('explore/topics')
     end
 
     it 'should assign explore entries from db' do
       expect(assigns[:topics].sort).to eq(BrowseEntry.topic.sort)
+    end
+
+    it_behaves_like 'collection aware'
+  end
+
+  describe 'GET periods' do
+    before(:each) do
+      get :periods, params
+    end
+
+    let(:params) { { locale: 'en', format: 'html' } }
+
+    it 'should render the Mustache template' do
+      expect(response.status).to eq(200)
+      expect(response).to render_template('explore/periods')
+    end
+
+    it 'should assign explore entries from db' do
+      expect(assigns[:periods].sort).to eq(BrowseEntry.period.sort)
     end
 
     it_behaves_like 'collection aware'

@@ -32,6 +32,15 @@ class ExploreController < ApplicationController
     end
   end
 
+  def periods
+    find_collection
+    @periods = browse_entries(:period)
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
   # @todo Load @providers from view helper, to bypass if HTML cached
   def new_content
     find_collection
