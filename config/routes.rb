@@ -37,12 +37,14 @@ Rails.application.routes.draw do
     get 'browse/people', to: redirect('%{locale}/explore/people')
     get 'browse/sources', to: redirect('%{locale}/explore/sources')
     get 'browse/topics', to: redirect('%{locale}/explore/topics')
+    get 'browse/periods', to: redirect('%{locale}/explore/periods')
 
     get 'explore/colours', to: 'explore#colours'
     get 'explore/newcontent', to: 'explore#new_content'
     get 'explore/people', to: 'explore#people'
     get 'explore/sources', to: 'explore#sources'
     get 'explore/topics', to: 'explore#topics'
+    get 'explore/periods', to: 'explore#periods'
 
     post 'feedback', to: 'feedback#create'
 

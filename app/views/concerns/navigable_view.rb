@@ -118,7 +118,9 @@ module NavigableView
       link_item(t('global.navigation.concepts'), explore_topics_path(format: 'html'),
                 is_current: current_page?(explore_topics_path(format: 'html'))),
       link_item(t('global.navigation.agents'), explore_people_path(format: 'html'),
-                is_current: current_page?(explore_people_path(format: 'html')))
+                is_current: current_page?(explore_people_path(format: 'html'))),
+      link_item(t('global.navigation.periods'), explore_periods_path(format: 'html'),
+                is_current: current_page?(explore_periods_path(format: 'html')))
     ]
   end
 
