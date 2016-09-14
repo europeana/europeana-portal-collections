@@ -121,7 +121,7 @@ module Document
     end
 
     def media_type_from_iiif_mapping
-      if (render_document_show_field_value('svcsHasService').nil?)
+      if render_document_show_field_value('svcsHasService').nil?
         false
       end
       'iiif'
@@ -145,9 +145,7 @@ module Document
 
     def iiif_url
       x = render_document_show_field_value('svcsHasService')
-      if !x.nil?
-        x + '/info.json'
-      end
+      x + '/info.json' unless x.nil?
     end
 
     def download_url
@@ -224,9 +222,9 @@ module Document
       end
 
       (@record_presenter.edm_object.present? && for_edm_object?) ||
-        (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
-        (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
-        (@record_presenter.has_views.include?(url) && mime_type.present?) ||
+      (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
+      (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
+      (@record_presenter.has_views.include?(url) && mime_type.present?) ||
       media_type == 'oembed'
     end
 
