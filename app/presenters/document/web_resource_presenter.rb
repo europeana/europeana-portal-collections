@@ -222,10 +222,10 @@ module Document
       end
 
       (@record_presenter.edm_object.present? && for_edm_object?) ||
-      (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
-      (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
-      (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-      media_type == 'oembed'
+        (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
+        (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
+        (@record_presenter.has_views.include?(url) && mime_type.present?) ||
+        media_type == 'oembed'
     end
 
     def playable?
