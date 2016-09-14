@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Explore
   class Periods < ApplicationView
     include CollectionFilterableView
@@ -12,11 +13,11 @@ module Explore
     def content
       mustache[:content] ||= begin
         {
-            title: page_title,
-            description: t('site.browse.periods.description'),
-            browse_entries: @periods.blank? ? nil : {
-                items: browse_entry_items(@periods)
-            },
+          title: page_title,
+          description: t('site.browse.periods.description'),
+          browse_entries: @periods.blank? ? nil : {
+            items: browse_entry_items(@periods)
+          },
         }
       end
     end
@@ -24,7 +25,7 @@ module Explore
     def head_meta
       mustache[:head_meta] ||= begin
         [
-            { meta_name: 'description', content: page_title }
+          { meta_name: 'description', content: page_title }
         ] + super
       end
     end

@@ -80,13 +80,13 @@ class Page < ActiveRecord::Base
       person_count += 1 if browse_entry.subject_type == 'person'
       period_count += 1 if browse_entry.subject_type == 'period'
     end
-    unless topic_count % 3 == 0
+    unless (topic_count % 3).zero?
       errors.add(:browse_entries, "for topics need to be in groups of 3, you have provided #{topic_count}")
     end
-    unless person_count % 3 == 0
+    unless (person_count % 3).zero?
       errors.add(:browse_entries, "for persons need to be in groups of 3, you have provided #{person_count}")
     end
-    unless period_count % 3 == 0
+    unless (period_count % 3).zero?
       errors.add(:browse_entries, "for periods need to be in groups of 3, you have provided #{period_count}")
     end
   end

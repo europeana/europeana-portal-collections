@@ -32,25 +32,24 @@ module BrowseEntryDisplayingView
 
     browse_entries.each do |entry|
       case entry.subject_type
-        when 'person'
-          type1 << browse_entry_item(entry, page)
-        when 'topic'
-          type2 << browse_entry_item(entry, page)
-        when 'period'
-          type3 << browse_entry_item(entry, page)
+      when 'person'
+        type1 << browse_entry_item(entry, page)
+      when 'topic'
+        type2 << browse_entry_item(entry, page)
+      when 'period'
+        type3 << browse_entry_item(entry, page)
       end
     end
 
     no_of_item_types = 0
     [type1, type2, type3].each_with_index do |type, index|
-      if type.count > 0
-        grouped_items << {
-            more_link: more_links[index],
-            more_text: more_link_texts[index],
-            items: type
-        }
-        no_of_item_types += 1
-      end
+      next unless type.count.positive?
+      grouped_items << {
+        more_link: more_links[index],
+        more_text: more_link_texts[index],
+        items: type
+      }
+      no_of_item_types += 1
     end
 
     return {
