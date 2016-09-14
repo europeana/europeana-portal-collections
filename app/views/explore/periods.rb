@@ -33,7 +33,7 @@ module Explore
     private
 
     def body_cache_key
-      'explore/people' + (@collection.present? ? '/' + @collection.key : '') + '-' + @periods.map(&:updated_at).max.to_i.to_s
+      'explore/periods' + (@collection.present? ? '/' + @collection.key : '') + '-' + @periods.map(&:updated_at).max.to_i.to_s
     end
   end
 end
