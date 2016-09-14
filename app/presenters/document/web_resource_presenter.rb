@@ -222,7 +222,6 @@ module Document
           (mime_type == 'video/mpeg') ||
           (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'image') ||
           is_avi?
         false
       else
