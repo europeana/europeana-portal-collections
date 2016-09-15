@@ -10,10 +10,42 @@ module Facet
         range: display_range,
         data: display_data,
         date_start: range_min,
-        date_middle: (range_min.nil? || range_max.nil?) ? NIL : Integer((Integer(range_min) + Integer(range_max)) / 2),
+        date_middle: range_middle,
         date_end: range_max,
-        show_bars: !single_date?
+        show_bars: !single_value?
       }
+    end
+
+    def filter_item(item)
+      fail NotImplementedError
+    end
+
+    def items_in_params
+      fail NotImplementedError
+    end
+
+    def facet_item_url(item)
+      fail NotImplementedError
+    end
+
+    def filter_items
+      return [] unless range_in_params?
+      [
+        {
+          filter: facet_label,
+          value: "#{display_range_start}–#{display_range_end}",
+          remove: search_action_url(remove_link_params),
+          name: "range[#{facet_name}][]"
+        }
+      ]
+    end
+
+    def remove_link_params
+      p = search_state.params_for_search.deep_dup
+      p[:range] = (p[:range] || {}).dup
+      p[:range].delete(facet_config.key)
+      p.delete(:range) if p[:range].empty?
+      p
     end
 
     ##
@@ -29,7 +61,7 @@ module Facet
     #
     # @return [Object]
     def range_min
-      @range_min ||= items_to_display.map(&:value).min
+      @range_min ||= range_values.min
     end
 
     ##
@@ -37,7 +69,21 @@ module Facet
     #
     # @return [Object]
     def range_max
-      @range_max ||= items_to_display.map(&:value).max
+      @range_max ||= range_values.max
+    end
+
+    def range_values
+      @range_values ||= items_to_display.map(&:value)
+    end
+
+    def range_middle
+      @range_middle ||= begin
+        if !range_min.is_a?(Fixnum) || !range_max.is_a?
+          nil
+        else
+          (range_min + range_max) / 2
+        end
+      end
     end
 
     def apply_split_to_items?
@@ -78,29 +124,26 @@ module Facet
       }
     end
 
-    def single_date?
-      # This should be based on the request parameters, not range available for those parameters
+    def single_value?
       range_min == range_max
     end
 
-    def display_range_start
-      if single_date?
-        range_min
-      elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
-        search_state.params_for_search[:range][@facet.name][:begin]
-      else
-        range_min
+    def search_state_param
+      @search_state_param ||= begin
+        range_in_params? ? search_state.params_for_search[:range][facet_name] : nil
       end
     end
 
+    def range_in_params?
+      search_state.params_for_search[:range] && search_state.params_for_search[:range][facet_name]
+    end
+
+    def display_range_start
+      search_state_param.present? ? search_state_param[:begin] : range_min
+    end
+
     def display_range_end
-      if single_date?
-        range_min
-      elsif search_state.params_for_search[:range] && search_state.params_for_search[:range][@facet.name]
-        search_state.params_for_search[:range][@facet.name][:end]
-      else
-        range_max
-      end
+      search_state_param.present? ? search_state_param[:end] : range_max
     end
 
     def display_form
