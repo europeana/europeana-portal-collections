@@ -373,7 +373,7 @@ module Portal
 
       fields += (params[:range] || {}).map do |f, range|
         range.map do |k, v|
-            form_search_hidden_field("range[#{f}][#{k}]", v)
+          form_search_hidden_field("range[#{f}][#{k}]", v)
         end
       end.flatten
 
