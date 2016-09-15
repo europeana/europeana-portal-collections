@@ -16,7 +16,7 @@ module Facet
       }
     end
 
-    def filter_item(item)
+    def filter_item(_)
       fail NotImplementedError
     end
 
@@ -24,7 +24,7 @@ module Facet
       fail NotImplementedError
     end
 
-    def facet_item_url(item)
+    def facet_item_url(_)
       fail NotImplementedError
     end
 
