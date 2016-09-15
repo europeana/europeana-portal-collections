@@ -367,12 +367,18 @@ module Portal
     end
 
     def form_search_hidden
-      facets = (params[:f] || []).map do |f, values|
+      fields = (params[:f] || {}).map do |f, values|
         [values].flatten.map { |v| form_search_hidden_field("f[#{f}][]", v) }
       end.flatten
 
-      facets << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
-      facets
+      fields += (params[:range] || {}).map do |f, range|
+        range.map do |k, v|
+            form_search_hidden_field("range[#{f}][#{k}]", v)
+        end
+      end.flatten
+
+      fields << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
+      fields
     end
   end
 end
