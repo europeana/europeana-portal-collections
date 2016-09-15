@@ -4,8 +4,6 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
   let(:field_options) { { range: true } }
   let(:item_type) { :number }
 
-  it_behaves_like 'a facet presenter'
-
   describe '#hits_max' do
     let(:items) { facet_items(6) }
     subject { presenter.hits_max }
