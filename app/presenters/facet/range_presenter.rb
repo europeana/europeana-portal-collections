@@ -33,7 +33,7 @@ module Facet
       [
         {
           filter: facet_label,
-          value: "#{display_range_start}–#{display_range_end}",
+          value: display_range_value,
           remove: search_action_url(remove_link_params),
           name: "range[#{facet_name}][]"
         }
@@ -99,33 +99,43 @@ module Facet
     def display_data
       items_to_display.sort_by(&:value).map do |item|
         p = search_state.params_for_search.deep_dup
-        p[:f] ||= {}
-        p[:f][@facet.name] = [item.value]
+        p[:range] ||= {}
+        p[:range][facet_name] ||= {}
+        p[:range][facet_name][:begin] = item.value
+        p[:range][facet_name][:end] = item.value
         {
-          percent_of_max: (item.hits.to_f / hits_max.to_f * 100).to_i,
+          percent_of_max: percent_of_max(item.hits),
           value: "#{item.value} (#{item.hits})",
           url: search_action_url(p)
         }
       end
     end
 
+    def percent_of_max(hits)
+      (hits.to_f / hits_max.to_f * 100).to_i
+    end
+
     def display_range
       {
         start: {
-          input_name: "range[#{@facet.name}][begin]",
+          input_name: "range[#{facet_name}][begin]",
           input_value: display_range_start,
           label_text: 'From:'
         },
         end: {
-          input_name: "range[#{@facet.name}][end]",
+          input_name: "range[#{facet_name}][end]",
           input_value: display_range_end,
           label_text: 'To:'
         }
       }
     end
 
+    def display_range_value
+      single_value? ? display_range_start : "#{display_range_start}–#{display_range_end}"
+    end
+
     def single_value?
-      range_min == range_max
+      display_range_start == display_range_end
     end
 
     def search_state_param
