@@ -123,6 +123,8 @@ module Document
     def media_type_from_iiif_mapping
       if render_document_show_field_value('svcsHasService').nil?
         false
+      elsif render_document_show_field_value('svcsHasService').blank?
+        false
       else
         'iiif'
       end
@@ -146,7 +148,7 @@ module Document
 
     def iiif_url
       x = render_document_show_field_value('svcsHasService')
-      x + '/info.json' unless x.nil?
+      x + '/info.json' unless x.nil? || x.blank?
     end
 
     def download_url
