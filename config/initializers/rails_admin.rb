@@ -146,7 +146,9 @@ RailsAdmin.config do |config|
     edit do
       field :uri
       field :name
-      field :image, :paperclip
+      field :image, :paperclip do
+        help 'Minimum 300px in width, transparent & greyscale'
+      end
     end
   end
 
