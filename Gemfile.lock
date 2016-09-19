@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-feedback-button
-  revision: b6a43a7a87fd8cfea150365e62a200e2e8dc9f01
+  revision: 4ac72216fc3afe82573818f10cd7cfeab709dc1e
   specs:
     europeana-feedback-button (0.0.2)
       rails (~> 4.2, >= 4.2.7.1)

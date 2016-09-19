@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     get 'explore/topics', to: 'explore#topics'
     get 'explore/periods', to: 'explore#periods'
 
-    mount Europeana::FeedbackButton::Engine, at: "/feedback"
+    mount Europeana::FeedbackButton::Engine, at: "/"
 
     get 'debug/exception', to: 'debug#exception'
 
