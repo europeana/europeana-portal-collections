@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908144501) do
+ActiveRecord::Schema.define(version: 20160919142815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,8 +100,12 @@ ActiveRecord::Schema.define(version: 20160908144501) do
 
   create_table "data_provider_logos", force: :cascade do |t|
     t.integer  "data_provider_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "data_provider_logos", ["data_provider_id"], name: "index_data_provider_logos_on_data_provider_id", using: :btree
