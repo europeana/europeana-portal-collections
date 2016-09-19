@@ -41,7 +41,7 @@ gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'therubyracer'
 
-gem 'europeana-feedback-button', :git => "https://github.com/europeana/europeana-feedback-button"
+gem 'europeana-feedback-button', :git => "https://github.com/europeana/europeana-feedback-button", branch: 'develop'
 
 group :production do
   gem 'rails_serve_static_assets'
