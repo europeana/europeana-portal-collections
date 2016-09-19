@@ -17,9 +17,9 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection DataProvider HeroImage Link Link::Promotion
-    Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing
-    User
+    Banner BrowseEntry Collection DataProvider DataProviderLogo HeroImage Link
+    Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error
+    Page::Landing User
   )
 
   config.actions do
@@ -134,14 +134,26 @@ RailsAdmin.config do |config|
       sort_by :uri
       field :uri
       field :name
+      field :image, :paperclip
     end
     show do
       field :uri
       field :name
+      field :image, :paperclip do
+        thumb_method :medium
+      end
     end
     edit do
       field :uri
       field :name
+      field :image, :paperclip
+    end
+  end
+
+  config.model 'DataProviderLogo' do
+    visible false
+    field :image do
+      thumb_method :medium
     end
   end
 
