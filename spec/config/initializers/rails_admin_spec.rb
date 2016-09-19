@@ -1,7 +1,7 @@
 RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }
-    it { is_expected.to eq(%w(Banner BrowseEntry Collection HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing User)) }
+    it { is_expected.to eq(%w(Banner BrowseEntry Collection DataProvider DataProviderLogo HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing User)) }
   end
 
   describe '#model' do
