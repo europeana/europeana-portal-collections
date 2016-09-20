@@ -6,7 +6,10 @@ end
 
 # Basic Paperclip file storage settings
 Paperclip::Attachment.default_options.merge!(
-  path: ':class/:id_partition/:attachment/:fingerprint.:style.:extension',
+  path_prefix: '',
+  url_prefix: '',
+  path: ':path_prefix/:class/:id_partition/:attachment/:fingerprint.:style.:extension',
+  url: ':url_prefix/:class/:id_partition/:attachment/:fingerprint.:style.:extension',
   styles: { small: '200>', medium: '400>', large: '600>' } # max-width
 )
 
@@ -17,6 +20,19 @@ Paperclip::Attachment.default_options.merge! begin
   paperclip_config.deep_symbolize_keys
 rescue RuntimeError
   {}
+end
+
+Paperclip.interpolates :path_prefix do |attachment, style|
+  Paperclip::Interpolations.interpolate(Paperclip::Attachment.default_options[:path_prefix], attachment, style)
+end
+
+Paperclip.interpolates :url_prefix do |attachment, style|
+  Paperclip::Interpolations.interpolate(Paperclip::Attachment.default_options[:url_prefix], attachment, style)
+end
+
+# Interpolation for data provider org ID
+Paperclip.interpolates :data_provider_org_id do |attachment, _style|
+  attachment.instance.data_provider.org_id
 end
 
 paperclip_config = Paperclip::Attachment.default_options

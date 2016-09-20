@@ -13,4 +13,8 @@ class DataProvider < ActiveRecord::Base
   def image=(*args)
     (logo || build_logo).send(:image=, *args)
   end
+
+  def org_id
+    uri.sub('http://data.europeana.eu/organization/', '')
+  end
 end
