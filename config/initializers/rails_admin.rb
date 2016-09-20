@@ -134,7 +134,9 @@ RailsAdmin.config do |config|
       sort_by :uri
       field :uri
       field :name
-      field :image, :paperclip
+      field :image, :paperclip do
+        thumb_method :medium
+      end
     end
     show do
       field :uri
@@ -148,6 +150,7 @@ RailsAdmin.config do |config|
       field :name
       field :image, :paperclip do
         help 'Minimum 300px in width, transparent & greyscale'
+        thumb_method :medium
       end
     end
   end
