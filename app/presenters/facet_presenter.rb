@@ -136,6 +136,14 @@ class FacetPresenter
     }
   end
 
+  def items_in_params
+    @facet.items.select { |item| facet_in_params?(facet_name, item) }
+  end
+
+  def filter_items
+    items_in_params.map { |item| filter_item(item) }
+  end
+
   ##
   # URL for a facet item to link to
   #
