@@ -31,7 +31,7 @@ Paperclip.interpolates :url_prefix do |attachment, style|
 end
 
 # Interpolation for data provider org ID
-Paperclip.interpolates :data_provider_org_id do |attachment, style|
+Paperclip.interpolates :data_provider_org_id do |attachment, _style|
   attachment.instance.data_provider.org_id
 end
 

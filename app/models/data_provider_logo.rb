@@ -3,7 +3,8 @@ class DataProviderLogo < ActiveRecord::Base
 
   belongs_to :data_provider, inverse_of: :logo
 
-  has_attached_file :image, styles: { medium: "#{MIN_WIDTH}>" },
+  has_attached_file :image,
+    styles: { medium: "#{MIN_WIDTH}>" },
     path: ':path_prefix/:class/:data_provider_org_id.:style.:extension',
     url: ':url_prefix/:class/:data_provider_org_id.:style.:extension'
 
