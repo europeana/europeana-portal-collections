@@ -9,7 +9,7 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
 
   let(:api_response) do
     {
-      'totalResults': 2278183,
+      'totalResults': 2_278_183,
       items: api_response_items
     }
   end
@@ -41,7 +41,7 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
       render
       api_response[:items].each_with_index do |item, index|
         id_param = item[:id][1..-1] # omitting leading slash
-        log_params = { p: { q: blacklight_params[:q] }, t: 2278183, r: index + 1 }
+        log_params = { p: { q: blacklight_params[:q] }, t: 2_278_183, r: index + 1 }
         expect(rendered).to have_link(item[:title], href: document_path(id_param, format: 'html', l: log_params, q: blacklight_params[:q]))
       end
     end
