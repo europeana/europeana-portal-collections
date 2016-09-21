@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
 
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
-  helper Europeana::FeedbackButton::FeedbackHelper
-
   def current_user
     super || User.new(guest: true)
   end
