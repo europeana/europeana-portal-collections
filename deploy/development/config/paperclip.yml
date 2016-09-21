@@ -1,4 +1,4 @@
 development:
   storage: :filesystem
-  path: ":rails_root/public/system/<%= Paperclip::Attachment.default_options[:path] %>"
-  url: ":rails_relative_url_root/system/<%= Paperclip::Attachment.default_options[:path] %>"
+  path_prefix: ":rails_root/public/system"
+  url_prefix: ":rails_relative_url_root/system"
