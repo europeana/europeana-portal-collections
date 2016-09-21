@@ -77,8 +77,8 @@ module BlacklightConfig
       config.add_facet_field 'proxy_dcterms_created',
                              range: true,
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
-                             limit: 4000,
-                             only: ->(item) { item.value =~ /\A\d+\z/ }
+                             limit: 10_000,
+                             only: ->(item) { item.value =~ /\A-?\d+\z/ }
       config.add_facet_field 'REUSABILITY', hierarchical: true
       config.add_facet_field 'RIGHTS',
                              hierarchical: true,
