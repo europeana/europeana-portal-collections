@@ -244,7 +244,7 @@ module Portal
     def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
       {
-        object_url: document_path(doc, format: 'html', q: params[:q]),
+        object_url: document_path(doc, format: 'html', q: params[:q], l: params_to_log(doc)),
         title: search_result_title(doc),
         text: search_result_text(doc),
         year: search_result_year(doc),
@@ -257,6 +257,14 @@ module Portal
         agent: agent_label(doc),
         concepts: concept_labels(doc),
         item_type: search_result_item_type(doc_type)
+      }
+    end
+
+    def params_to_log(doc)
+      {
+        p: params.slice(:q, :f, :mlt, :range),
+        r: doc.rank,
+        t: response.total
       }
     end
 
