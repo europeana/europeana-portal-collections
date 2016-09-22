@@ -1,29 +1,28 @@
+# frozen_string_literal: true
 module Cache
   class ColourFacetsJob < ApplicationJob
     include ApiQueryingJob
 
+    requests_facet 'COLOURPALETTE', limit: 1_000
+
     queue_as :default
 
     def perform(collection_id = nil)
-      builder = search_builder
-      api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets')
+      @collection = Collection.find_by_id(collection_id)
+      Rails.cache.write(cache_key, payload)
+    end
 
-      cache_key = 'browse/colours/facets'
+    protected
 
-      unless collection_id.nil?
-        collection = Collection.find(collection_id)
-        unless collection.nil?
-          api_query.with_overlay_params(collection.api_params_hash)
-          cache_key << '/' << collection.key
-        end
-      end
+    def payload
+      facet_response.aggregations['COLOURPALETTE'].items
+    end
 
-      api_query.to_hash.delete('f.COLOURPALETTE.facet.limit')
-
-      response = repository.search(api_query)
-      colours = response.aggregations['COLOURPALETTE'].items
-
-      Rails.cache.write(cache_key, colours)
+    def cache_key
+      [
+        'browse/colours/facets',
+        (@collection.nil? ? nil : @collection.key)
+      ].compact.join('/')
     end
   end
 end
