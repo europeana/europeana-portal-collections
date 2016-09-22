@@ -19,7 +19,10 @@ module Cache
       protected
 
       def facet_api_query
-        super.with_overlay_params(qf: "PROVIDER:\"#{@provider}\"")
+        api_query = search_builder.rows(0).merge(query: '*:*', profile: 'minimal facets')
+        api_query.with_overlay_params(qf: "PROVIDER:\"#{@provider}\"")
+        api_query.with_overlay_params(@collection.api_params_hash) unless @collection.nil?
+        api_query
       end
 
       def cache_key
