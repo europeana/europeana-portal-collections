@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Cache
   module RecordCounts
     ##
@@ -7,33 +8,38 @@ module Cache
     class ProvidersJob < ApplicationJob
       include ApiQueryingJob
 
+      requests_facet 'PROVIDER', limit: 1_000
+
       queue_as :default
 
       def perform(collection_id = nil)
-        cache_key = 'browse/sources/providers'
-
-        builder = search_builder
-        api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets', facet: 'PROVIDER')
-
-        unless collection_id.nil?
-          collection = Collection.find(collection_id)
-          unless collection.nil?
-            api_query.with_overlay_params(collection.api_params_hash)
-            cache_key << '/' << collection.key
-          end
+        @collection = Collection.find_by_id(collection_id)
+        payload.tap do |providers|
+          Rails.cache.write(cache_key, providers)
+          queue_data_provider_jobs(providers)
         end
+      end
 
-        response = repository.search(api_query)
-        providers = response.aggregations['PROVIDER'].items.map do |item|
+      protected
+
+      def cache_key
+        cache_key = 'browse/sources/providers'
+        cache_key += '/' << @collection.key unless @collection.nil?
+        cache_key
+      end
+
+      def payload
+        facet_response.aggregations['PROVIDER'].items.map do |item|
           {
             text: item.value,
             count: item.hits
           }
         end
-        Rails.cache.write(cache_key, providers)
+      end
 
+      def queue_data_provider_jobs(providers)
         providers.each do |provider|
-          DataProvidersJob.perform_later(provider[:text], collection_id)
+          DataProvidersJob.perform_later(provider[:text], @collection.present? ? @collection.id : nil)
         end
       end
     end
