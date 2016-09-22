@@ -19,9 +19,10 @@ module Cache
     end
 
     def cache_key
-      cache_key = 'browse/colours/facets'
-      cache_key += '/' << @collection.key unless @collection.nil?
-      cache_key
+      [
+        'browse/colours/facets',
+        (@collection.nil? ? nil : @collection.key)
+      ].compact.join('/')
     end
   end
 end

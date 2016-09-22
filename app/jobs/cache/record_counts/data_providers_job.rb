@@ -23,10 +23,11 @@ module Cache
       end
 
       def cache_key
-        cache_key = 'browse/sources/providers'
-        cache_key += '/' << @collection.key unless @collection.nil?
-        cache_key += "/#{@provider}"
-        cache_key
+        [
+          'browse/sources/providers',
+          (@collection.nil? ? nil : @collection.key),
+          @provider
+        ].compact.join('/')
       end
 
       def payload
