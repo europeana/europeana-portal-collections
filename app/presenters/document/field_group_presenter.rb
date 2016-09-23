@@ -109,8 +109,6 @@ module Document
           # text manipulation
           item[:text] = format_date(val, section[:format_date])
 
-#          puts item.as_json.to_s
-
           if section[:overrides] && item[:text] == section[:override_val]
             section[:overrides].map do |override|
               if override[:field_title]
@@ -122,9 +120,7 @@ module Document
             end
           end
 
-          if val.start_with?('http')
-            item[:url] = val
-          end
+          item[:url] = val if linkable_value?(val)
 
           if section[:ga_data]
             item[:ga_data] = section[:ga_data]
@@ -142,6 +138,11 @@ module Document
           end
         end
       end
+    end
+
+    def linkable_value?(value)
+      return false unless value.is_a?(String)
+      value.start_with?('http://') || value.start_with?('https://')
     end
 
     ##
