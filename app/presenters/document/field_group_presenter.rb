@@ -142,7 +142,7 @@ module Document
 
     def linkable_value?(value)
       return false unless value.is_a?(String)
-      value.start_with?('http://') || value.start_with?('https://')
+      value.start_with?('http://', 'https://')
     end
 
     ##
