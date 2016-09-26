@@ -46,12 +46,12 @@ Rails.application.routes.draw do
     get 'explore/topics', to: 'explore#topics'
     get 'explore/periods', to: 'explore#periods'
 
-    mount Europeana::FeedbackButton::Engine, at: '/'
-
     get 'debug/exception', to: 'debug#exception'
 
     # Static pages
     get '*page', to: 'pages#show', as: 'static_page'
+
+    mount Europeana::FeedbackButton::Engine, at: '/'
   end
 
   put 'locale', to: 'locale#update'
