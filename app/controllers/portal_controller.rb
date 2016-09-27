@@ -30,7 +30,7 @@ class PortalController < ApplicationController
 
   # GET /record/:id
   def show
-    @response, @document = fetch(doc_id)
+    @response, @document = fetch(doc_id, api_query_params)
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
@@ -94,10 +94,14 @@ class PortalController < ApplicationController
 
   def document_hierarchy(document)
     return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
-    Europeana::API::Record.new(document.id).hierarchy.ancestor_self_siblings
+    Europeana::API::Record.new(document.id).hierarchy.ancestor_self_siblings(api_query_params)
   end
 
   def has_loggable_parameters?
     params.key?(:l)
+  end
+
+  def api_query_params
+    params.slice(:api_url)
   end
 end
