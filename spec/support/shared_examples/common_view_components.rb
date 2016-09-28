@@ -13,6 +13,11 @@ RSpec.shared_examples 'common view components', :common_view_components do
     expect(rendered).to have_selector('#main-menu a[href$="/collections/music"]', text: collections(:music).title)
   end
 
+  it 'should have meta referrer tag' do
+    render
+    expect(rendered).to have_selector('meta[name="referrer"][content="always"]', visible: false)
+  end
+
   it 'should have top nav links to explore pages' do
     render
     expect(rendered).to have_selector('#main-menu a', text: 'Explore')
