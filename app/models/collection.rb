@@ -1,5 +1,7 @@
+# frozen_string_literal: true
 class Collection < ActiveRecord::Base
   include HasPublicationStates
+  include HasSettingsAttribute
 
   has_and_belongs_to_many :browse_entries
 
@@ -13,6 +15,16 @@ class Collection < ActiveRecord::Base
   translates :title, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
   default_scope { includes(:translations) }
+
+  has_settings :default_search_layout
+
+  delegate :settings_default_search_layout_enum, to: :class
+
+  class << self
+    def settings_default_search_layout_enum
+      %w(list grid)
+    end
+  end
 
   def to_param
     key

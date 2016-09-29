@@ -26,7 +26,6 @@ copyright:
   - title: rights
     fields:
     - proxies.dcRights
-    - aggregations.edmRights
     ga_data: dimension5
 time:
   title: time
@@ -120,6 +119,7 @@ provenance:
     - aggregations.edmUgc
     map_values:
       'true': site.object.meta-label.ugc
+      'false': ~
   - title: provenance
     fields:
     - proxies.dctermsProvenance

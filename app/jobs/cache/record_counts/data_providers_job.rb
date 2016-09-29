@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Cache
   module RecordCounts
     ##
@@ -5,34 +6,41 @@ module Cache
     class DataProvidersJob < ApplicationJob
       include ApiQueryingJob
 
+      requests_facet 'DATA_PROVIDER', limit: 1_000
+
       queue_as :default
 
       def perform(provider, collection_id = nil)
-        builder = search_builder
-        api_query = builder.rows(0).merge(query: '*:*', profile: 'minimal facets', facet: 'DATA_PROVIDER').
-                    with_overlay_params(qf: "PROVIDER:\"#{provider}\"")
+        @provider = provider
+        @collection = Collection.find_by_id(collection_id)
+        Rails.cache.write(cache_key, payload)
+      end
 
-        cache_key = 'browse/sources/providers'
+      protected
 
-        unless collection_id.nil?
-          collection = Collection.find(collection_id)
-          unless collection.nil?
-            api_query.with_overlay_params(collection.api_params_hash)
-            cache_key << '/' << collection.key
-          end
-        end
+      def facet_api_query
+        api_query = search_builder.rows(0).merge(query: '*:*', profile: 'minimal facets')
+        api_query.with_overlay_params(qf: "PROVIDER:\"#{@provider}\"")
+        api_query.with_overlay_params(@collection.api_params_hash) unless @collection.nil?
+        api_query
+      end
 
-        cache_key << "/#{provider}"
+      def cache_key
+        [
+          'browse/sources/providers',
+          (@collection.nil? ? nil : @collection.key),
+          @provider
+        ].compact.join('/')
+      end
 
-        response = repository.search(api_query)
-        data_provider_facet = response.aggregations['DATA_PROVIDER']
-        data_providers = (data_provider_facet.nil? ? [] : data_provider_facet.items).map do |item|
+      def payload
+        data_provider_facet = facet_response.aggregations['DATA_PROVIDER']
+        (data_provider_facet.nil? ? [] : data_provider_facet.items).map do |item|
           {
             text: item.value,
             count: item.hits
           }
         end
-        Rails.cache.write(cache_key, data_providers)
       end
     end
   end

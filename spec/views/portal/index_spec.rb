@@ -4,11 +4,12 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     assign(:document_list, response.documents)
     assign(:params, blacklight_params)
     allow(view).to receive(:search_state).and_return(search_state)
+    allow(controller).to receive(:search_action_url).and_return('/search')
   end
 
   let(:api_response) do
     {
-      'totalResults': 2278183,
+      'totalResults': 2_278_183,
       items: api_response_items
     }
   end
@@ -21,7 +22,7 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
   end
 
   let(:blacklight_params) { { q: 'paris', per_page: 12 } }
-  let(:request_params) { { query: 'paris', rows: 12 } }
+  let(:request_params) { { query: 'paris', rows: 12, start: 1 } }
   let(:response) { Europeana::Blacklight::Response.new(api_response, request_params) }
   let(:search_state) { Blacklight::SearchState.new(blacklight_params, blacklight_config) }
 
@@ -36,11 +37,12 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
   end
 
   describe 'search result for a document' do
-    it 'links to the record page' do
+    it 'links to the record page with the query and log params' do
       render
-      api_response[:items].each do |item|
+      api_response[:items].each_with_index do |item, index|
         id_param = item[:id][1..-1] # omitting leading slash
-        expect(rendered).to have_link(item[:title], href: document_path(id_param, format: 'html'))
+        log_params = { p: { q: blacklight_params[:q] }, t: 2_278_183, r: index + 1 }
+        expect(rendered).to have_link(item[:title], href: document_path(id_param, format: 'html', l: log_params, q: blacklight_params[:q]))
       end
     end
 
@@ -55,6 +57,30 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
         render
         expect(rendered).not_to have_link(full_title)
         expect(rendered).to have_link(truncated_title)
+      end
+    end
+  end
+
+  context 'when within a collection' do
+    before(:each) do
+      allow(view).to receive(:within_collection?).and_return(true)
+      allow(view).to receive(:current_collection).and_return(collection)
+      assign(:collection, collection)
+    end
+
+    context 'with a default layout' do
+      let(:collection) { collections(:grid_layout) }
+      it 'sets that default layout' do
+        render
+        expect(rendered).to have_selector('body.display-grid')
+      end
+    end
+
+    context 'without a default layout' do
+      let(:collection) { collections(:art) }
+      it 'defaults layout to list' do
+        render
+        expect(rendered).not_to have_selector('body.display-grid')
       end
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707092744) do
+ActiveRecord::Schema.define(version: 20160919142815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,30 @@ ActiveRecord::Schema.define(version: 20160707092744) do
     t.datetime "updated_at",                         null: false
     t.integer  "state",                  default: 0
     t.string   "title"
+    t.text     "settings"
   end
+
+  create_table "data_provider_logos", force: :cascade do |t|
+    t.integer  "data_provider_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "data_provider_logos", ["data_provider_id"], name: "index_data_provider_logos_on_data_provider_id", using: :btree
+
+  create_table "data_providers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "uri"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "data_providers", ["name"], name: "index_data_providers_on_name", unique: true, using: :btree
+  add_index "data_providers", ["uri"], name: "index_data_providers_on_uri", unique: true, using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",               default: 0, null: false

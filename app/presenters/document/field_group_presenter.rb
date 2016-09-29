@@ -47,7 +47,11 @@ module Document
 
     def map_field_values(values, map)
       values.map do |val|
-        map.key?(val) ? I18n.t(map[val]) : val
+        if map.key?(val)
+          map[val] ? I18n.t(map[val]) : nil
+        else
+          val
+        end
       end
     end
 
@@ -105,7 +109,6 @@ module Document
           # text manipulation
           item[:text] = format_date(val, section[:format_date])
 
-          # overrides
           if section[:overrides] && item[:text] == section[:override_val]
             section[:overrides].map do |override|
               if override[:field_title]
@@ -116,6 +119,8 @@ module Document
               end
             end
           end
+
+          item[:url] = val if linkable_value?(val)
 
           if section[:ga_data]
             item[:ga_data] = section[:ga_data]
@@ -133,6 +138,11 @@ module Document
           end
         end
       end
+    end
+
+    def linkable_value?(value)
+      return false unless value.is_a?(String)
+      value.start_with?('http://', 'https://')
     end
 
     ##

@@ -8,12 +8,19 @@ module Portal
       [{ name: 'pageName', value: 'portal/index' }]
     end
 
-    def grid_view_active
-      params[:view] == 'grid'
+    def grid_view_active?
+      if params[:view] == 'grid'
+        true
+      elsif !within_collection?
+        false
+      else
+        current_collection.settings['default_search_layout'] == 'grid'
+      end
     end
+    alias_method :grid_view_active, :grid_view_active?
 
     def bodyclass
-      grid_view_active ? 'display-grid' : nil
+      grid_view_active? ? 'display-grid' : nil
     end
 
     def page_title
@@ -44,7 +51,6 @@ module Portal
         end
       end
     end
-
 
     def simple_filters
       mustache[:simple_filters] ||= begin
@@ -210,7 +216,8 @@ module Portal
           {
             name: collection.key,
             label: collection.landing_page.title,
-            url: collection_url(collection)
+            url: collection_url(collection),
+            def_view: collection.settings['default_search_layout']
           }
         end
       end
@@ -222,17 +229,10 @@ module Portal
     def facets_selected_items
       return @facets_selected_items unless @facets_selected_items.nil?
 
-      @facets_selected_items = [].tap do |items|
-        if within_collection?
-          collection_facet_item = Europeana::Blacklight::Response::Facets::FacetItem.new(value: @collection.key)
-          collection_facet_field = Europeana::Blacklight::Response::Facets::FacetField.new('COLLECTION', [collection_facet_item])
-          items << FacetPresenter.build(collection_facet_field, controller).filter_item(collection_facet_item)
-        end
-        facets_from_request.each do |facet|
-          facet.items.select { |item| facet_in_params?(facet.name, item) }.each do |item|
-            items << FacetPresenter.build(facet, controller).filter_item(item)
-          end
-        end
+      @facets_selected_items = begin
+        facets_from_request.map do |facet|
+          FacetPresenter.build(facet, controller).filter_items
+        end.flatten
       end
     end
 
@@ -244,7 +244,7 @@ module Portal
     def search_result_for_document(doc)
       doc_type = doc.fetch(:type, nil)
       {
-        object_url: document_path(doc, format: 'html'),
+        object_url: document_path(doc, format: 'html', q: params[:q], l: params_to_log(doc)),
         title: search_result_title(doc),
         text: search_result_text(doc),
         year: search_result_year(doc),
@@ -257,6 +257,14 @@ module Portal
         agent: agent_label(doc),
         concepts: concept_labels(doc),
         item_type: search_result_item_type(doc_type)
+      }
+    end
+
+    def params_to_log(doc)
+      {
+        p: params.slice(:q, :f, :mlt, :range),
+        r: doc.rank,
+        t: response.total
       }
     end
 
@@ -367,12 +375,18 @@ module Portal
     end
 
     def form_search_hidden
-      facets = (params[:f] || []).map do |f, values|
+      fields = (params[:f] || {}).map do |f, values|
         [values].flatten.map { |v| form_search_hidden_field("f[#{f}][]", v) }
       end.flatten
 
-      facets << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
-      facets
+      fields += (params[:range] || {}).map do |f, range|
+        range.map do |k, v|
+          form_search_hidden_field("range[#{f}][#{k}]", v)
+        end
+      end.flatten
+
+      fields << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
+      fields
     end
   end
 end

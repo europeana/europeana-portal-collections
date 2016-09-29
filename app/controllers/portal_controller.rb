@@ -4,10 +4,11 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
-  include SoundCloudUrnResolver
+  include Europeana::UrlConversions
   include OembedRetriever
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
+  before_action :log_search_interaction, only: :show, if: :has_loggable_parameters?
 
   def redirect_to_home
     redirect_to home_path
@@ -16,7 +17,7 @@ class PortalController < ApplicationController
   attr_reader :url_conversions, :oembed_html
 
   rescue_from URI::InvalidURIError do |exception|
-    handle_error(exception, 404, 'html')
+    handle_error(exception: exception, status: 404, format: 'html')
   end
 
   # GET /search
@@ -30,7 +31,7 @@ class PortalController < ApplicationController
   # GET /record/:id
   def show
     @response, @document = fetch(doc_id)
-    @url_conversions = soundcloud_urns_to_urls(@document)
+    @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
@@ -55,7 +56,7 @@ class PortalController < ApplicationController
   # GET /record/:id/media
   def media
     @response, @document = fetch(doc_id)
-    @url_conversions = soundcloud_urns_to_urls(@document)
+    @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
     @page = params[:page] || 1
     @per_page = params[:per_page] || 4
@@ -67,8 +68,36 @@ class PortalController < ApplicationController
 
   protected
 
+  def log_search_interaction
+    Rails.logger.info(search_interaction_msg.chomp) if referer_was_search_request?
+
+    redirect_to url_for(params.except(:l))
+  end
+
+  def search_interaction_msg
+    <<~EOS
+      Search interaction:
+      * Record: /#{params[:id]}
+      * Search parameters: #{params[:l][:p].inspect}
+      * Total hits: #{params[:l][:t]}
+      * Result rank: #{params[:l][:r]}
+    EOS
+  end
+
+  def referer_was_search_request?
+    referer = request.referer
+    return false unless referer.present?
+
+    search_urls = [search_url] + displayable_collections.map { |c| collection_url(c) }
+    search_urls.any? { |u| referer.match "^#{u}(\\?|$)" }
+  end
+
   def document_hierarchy(document)
     return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
     Europeana::API::Record.new(document.id).hierarchy.ancestor_self_siblings
+  end
+
+  def has_loggable_parameters?
+    params.key?(:l)
   end
 end

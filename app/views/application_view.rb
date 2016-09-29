@@ -9,7 +9,7 @@ class ApplicationView < Europeana::Styleguide::View
   include AssettedView
   include BanneredView
   include CacheableView
-  include FeedbackableView
+  include Europeana::FeedbackButton::FeedbackableView
   include LocalisableView
   include NavigableView
 

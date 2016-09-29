@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# frozen_string_literal: truez
 begin
   proxy_config = Rails.application.config_for(:proxies)
   proxy_ips = proxy_config.map { |proxy| IPAddr.new(proxy) }

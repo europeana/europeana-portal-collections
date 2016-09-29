@@ -57,7 +57,7 @@ module Facet
                     end
                   }
       label_facet 'MEDIA', items: { titleize: true, i18n: true }
-      label_facet 'proxy_dcterms_created', i18n: 'year'
+      label_facet 'proxy_dcterms_created'
       label_facet 'REUSABILITY',
                   collapsible: {
                     show: 'global.facet.license.show-specific',
@@ -126,7 +126,7 @@ module Facet
         labellers[field] || {}
       end
 
-      def label_facet(field, options)
+      def label_facet(field, **options)
         labellers[field] = options
       end
     end
