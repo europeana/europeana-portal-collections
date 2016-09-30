@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get 'record/*id', to: 'portal#show', as: 'document'
     end
 
+    get 'collections/art-history', to: redirect('%{locale}/collections/art')
+
     resources :collections, only: [:show, :index] do
       get 'tumblr', on: :member
     end
