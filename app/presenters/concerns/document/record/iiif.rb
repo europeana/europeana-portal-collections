@@ -44,8 +44,8 @@ module Document
         # * test record: /portal/en/record/07931/diglit_baer1877.html
         # * dataset: /portal/search?q=sv_dcterms_conformsTo%3A*iiif*
         manifest_iiif for: { 'aggregations.webResources.svcsHasService' => // },
-                      url: '%{aggregations.webResources.svcsHasService}/info.json',
-                      sub: { 'aggregations.webResources.svcsHasService' => ->(value) { value.join } }
+                      url: '%{aggregations.webResources.dctermsIsReferencedBy}',
+                      sub: { 'aggregations.webResources.dctermsIsReferencedBy' => ->(value) { value.first } }
       end
 
       class_methods do
