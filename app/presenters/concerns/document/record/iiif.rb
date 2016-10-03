@@ -43,7 +43,8 @@ module Document
         # Generic IIIF support in EDM
         # * test record: /portal/en/record/07931/diglit_baer1877.html
         # * dataset: /portal/search?q=sv_dcterms_conformsTo%3A*iiif*
-        manifest_iiif for: { 'aggregations.webResources.svcsHasService' => // },
+        manifest_iiif for: { 'aggregations.webResources.svcsHasService' => //,
+                             'aggregations.webResources.dctermsIsReferencedBy' => // },
                       url: '%{aggregations.webResources.dctermsIsReferencedBy}',
                       sub: { 'aggregations.webResources.dctermsIsReferencedBy' => ->(value) { value.first } }
       end
