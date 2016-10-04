@@ -88,10 +88,12 @@ module Facet
       label_facet 'COUNTRY',
                   i18n: 'providing_country',
                   items: {
-                    with: ->(item) { item.dup.gsub(/\s+/, '') },
-                    titleize: true, i18n: true
+                    with: ->(item) { country_facet_item_label(item) }
                   }
-      label_facet 'LANGUAGE', items: { titleize: true, i18n: true }
+      label_facet 'LANGUAGE',
+                  items: {
+                    with: ->(item) { language_facet_item_label(item) }
+                  }
       label_facet 'CREATOR',
                   i18n: 'fashion.designer',
                   items: {
@@ -128,6 +130,38 @@ module Facet
 
       def label_facet(field, **options)
         labellers[field] = options
+      end
+
+      ##
+      # Special label for the Language facet items
+      #
+      # Makes use of both I18nData (https://github.com/grosser/i18n_data) and localeapp via I18n translations
+      #
+      # @return [String]
+      def language_facet_item_label(item)
+        language_code = item.dup
+        i18ndata_label = I18nData.languages(I18n.locale)[language_code.upcase]
+        if i18ndata_label.blank?
+          I18n.t(language_code.to_sym, scope: 'global.facet.language', default: language_code.upcase)
+        else
+          i18ndata_label
+        end
+      end
+
+      ##
+      # Special label for the Country facet items
+      #
+      # Makes use of both I18nData (https://github.com/grosser/i18n_data) and localeapp via I18n translations
+      #
+      # @return [String]
+      def country_facet_item_label(item)
+        country_name = item.dup
+        i18ndata_label = I18nData.countries(I18n.locale)[I18nData.country_code(country_name.titleize)]
+        if i18ndata_label.blank?
+          I18n.t(country_name.gsub(/\s+/, '').to_sym, scope: 'global.facet.country', default: country_name.titleize)
+        else
+          i18ndata_label
+        end
       end
     end
 
