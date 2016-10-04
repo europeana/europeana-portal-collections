@@ -138,7 +138,7 @@ module Facet
       # Makes use of both I18nData (https://github.com/grosser/i18n_data) and localeapp via I18n translations
       #
       # @return [String]
-      def language_facet_item_label item
+      def language_facet_item_label(item)
         language_code = item.dup
         i18ndata_label = I18nData.languages(I18n.locale)[language_code.upcase]
         if i18ndata_label.blank?
@@ -154,7 +154,7 @@ module Facet
       # Makes use of both I18nData (https://github.com/grosser/i18n_data) and localeapp via I18n translations
       #
       # @return [String]
-      def country_facet_item_label item
+      def country_facet_item_label(item)
         country_name = item.dup
         i18ndata_label = I18nData.countries(I18n.locale)[I18nData.country_code(country_name.titleize)]
         if i18ndata_label.blank?
