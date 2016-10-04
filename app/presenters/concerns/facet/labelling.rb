@@ -158,7 +158,7 @@ module Facet
         country_name = item.dup
         i18ndata_label = I18nData.countries(I18n.locale)[I18nData.country_code(country_name.titleize)]
         if i18ndata_label.blank?
-          I18n.t(country_name.gsub(/\s+/, '').to_sym, scope: 'global.facet.country', default: country_name.titleize )
+          I18n.t(country_name.gsub(/\s+/, '').to_sym, scope: 'global.facet.country', default: country_name.titleize)
         else
           i18ndata_label
         end
