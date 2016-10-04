@@ -41,6 +41,7 @@ gem 'redis-rails-instrumentation'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'therubyracer'
+gem 'i18n_data'
 
 group :production do
   gem 'rails_serve_static_assets'

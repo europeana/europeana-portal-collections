@@ -88,10 +88,28 @@ module Facet
       label_facet 'COUNTRY',
                   i18n: 'providing_country',
                   items: {
-                    with: ->(item) { item.dup.gsub(/\s+/, '') },
-                    titleize: true, i18n: true
+                            with: ->(item) {
+                                              country_name = item.dup
+                                              i18ndata_label = I18nData.countries(I18n.locale)[I18nData.country_code(country_name.titleize)]
+                                              if i18ndata_label.blank?
+                                                I18n.t(country_name.gsub(/\s+/, '').to_sym, scope: "global.facet.country")
+                                              else
+                                                i18ndata_label
+                                              end
+                                           }
                   }
-      label_facet 'LANGUAGE', items: { titleize: true, i18n: true }
+      label_facet 'LANGUAGE',
+                  items: {
+                            with: ->(item){
+                                            language_code = item.dup
+                                            i18ndata_label = I18nData.languages(I18n.locale)[language_code.upcase]
+                                            if i18ndata_label.blank?
+                                              I18n.t(language_code.to_sym, scope: "global.facet.language")
+                                            else
+                                              i18ndata_label
+                                            end
+                            }
+                          }
       label_facet 'CREATOR',
                   i18n: 'fashion.designer',
                   items: {
