@@ -270,7 +270,7 @@ module Portal
     end
 
     def search_result_creator(doc)
-      truncate(render_index_field_value(doc, ['dcCreator', 'title'], unescape: true),
+      truncate(render_index_field_value(doc, 'dcCreator', unescape: true),
                length: 225,
                separator: ' ',
                escape: false)
