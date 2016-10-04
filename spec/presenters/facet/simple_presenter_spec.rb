@@ -20,24 +20,24 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
 
       context 'when the value is in the I18nData gem' do
         before do
-          allow(items.first).to receive(:value) { "nl" }
+          allow(items.first).to receive(:value) { 'nl' }
         end
 
         it 'should use the I18nData translation' do
-          expect(I18n).to_not receive(:t).with(:nl , scope: "global.facet.language")
+          expect(I18n).to_not receive(:t).with(:nl, scope: 'global.facet.language', default: 'XY')
           expect(subject[:items].first[:text]).to eq 'Dutch; Flemish'
         end
       end
 
       context 'when the value is NOT in the I18nData gem' do
         before do
-          allow(items.first).to receive(:value) { "xy" }
+          allow(items.first).to receive(:value) { 'xy' }
         end
 
         context 'when the value is in localeapp' do
           before do
             allow(I18n).to receive(:t) { 'default translation' }
-            allow(I18n).to receive(:t).with(:xy , scope: "global.facet.language") { 'Localeapp Dutch' }
+            allow(I18n).to receive(:t).with(:xy, scope: 'global.facet.language', default: 'XY') { 'Localeapp Dutch' }
           end
           it 'should use the localeapp translation' do
             expect(subject[:items].first[:text]).to eq 'Localeapp Dutch'
@@ -45,8 +45,8 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
         end
 
         context 'when the value is not in localeapp' do
-          it 'should use the literal value' do
-            expect(subject[:items].first[:text]).to eq 'translation missing: en.global.facet.language.xy'
+          it 'should use the formated literal value' do
+            expect(subject[:items].first[:text]).to eq 'XY'
           end
         end
       end
@@ -58,24 +58,24 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
 
       context 'when the value is in the I18nData gem' do
         before do
-          allow(items.first).to receive(:value) { "macedonia" }
+          allow(items.first).to receive(:value) { 'macedonia' }
         end
 
         it 'should use the I18nData translation' do
-          expect(I18n).to_not receive(:t).with(:narnia , scope: "global.facet.country")
+          expect(I18n).to_not receive(:t).with(:narnia, scope: 'global.facet.country', default: 'Narnia')
           expect(subject[:items].first[:text]).to eq 'Macedonia, Republic of'
         end
       end
 
       context 'when the value is NOT in the I18nData gem' do
         before do
-          allow(items.first).to receive(:value) { "narnia" }
+          allow(items.first).to receive(:value) { 'narnia' }
         end
 
         context 'when the value is in localeapp' do
           before do
             allow(I18n).to receive(:t) { 'default translation' }
-            allow(I18n).to receive(:t).with(:narnia , scope: "global.facet.country") { 'Localeapp Narnia' }
+            allow(I18n).to receive(:t).with(:narnia, scope: 'global.facet.country', default: 'Narnia') { 'Localeapp Narnia' }
           end
           it 'should use the localeapp translation' do
             expect(subject[:items].first[:text]).to eq 'Localeapp Narnia'
@@ -83,8 +83,8 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
         end
 
         context 'when the value is not in localeapp' do
-          it 'should use the literal value' do
-            expect(subject[:items].first[:text]).to eq 'translation missing: en.global.facet.country.narnia'
+          it 'should use the formated literal value' do
+            expect(subject[:items].first[:text]).to eq 'Narnia'
           end
         end
       end
