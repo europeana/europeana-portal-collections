@@ -256,6 +256,7 @@ module Portal
         img: search_result_img(doc),
         agent: agent_label(doc),
         concepts: concept_labels(doc),
+        creator: search_result_creator(doc),
         item_type: search_result_item_type(doc_type)
       }
     end
@@ -266,6 +267,13 @@ module Portal
         r: doc.rank,
         t: response.total
       }
+    end
+
+    def search_result_creator(doc)
+      truncate(render_index_field_value(doc, 'dcCreator', unescape: true),
+               length: 225,
+               separator: ' ',
+               escape: false)
     end
 
     def search_result_title(doc)
