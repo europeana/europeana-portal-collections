@@ -13,7 +13,7 @@ end
 
 unless Page::Landing.find_by_slug('collections/art').present?
   ActiveRecord::Base.transaction do
-    art_history_hero = HeroImage.create(
+    art_hero = HeroImage.create(
       settings_attribution_title: 'Ships in a storm off a rocky coast',
       settings_attribution_creator: 'Jan Porcellis',
       settings_attribution_institution: 'Hallwylska museet',
