@@ -81,9 +81,5 @@ module Document
       @field_group_presenter ||= Document::FieldGroupPresenter.new(document, controller)
       @field_group_presenter.display(id)
     end
-
-    def iiif_mapping
-      @iiif_mapping ||= aggregation.fetch('edmObject', nil)
-    end
   end
 end
