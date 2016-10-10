@@ -57,7 +57,7 @@ module Facet
                     end
                   }
       label_facet 'MEDIA', items: { titleize: true, i18n: true }
-      label_facet 'proxy_dcterms_created'
+      label_facet 'YEAR'
       label_facet 'REUSABILITY',
                   collapsible: {
                     show: 'global.facet.license.show-specific',
