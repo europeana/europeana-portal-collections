@@ -284,7 +284,7 @@ module Portal
     def search_result_creator(doc)
       labels = doc.fetch('dcCreatorLangAware', []) || []
       return nil if labels.is_a?(Hash)
-      labels.map{|label| uri?(label) ? false : label}.join(" | ")
+      labels.map{ |label| uri?(label) ? false : label }.join(' | ')
     end
 
     def search_result_title(doc)
