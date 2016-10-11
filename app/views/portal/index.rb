@@ -272,11 +272,19 @@ module Portal
       }
     end
 
+    def uri?(string)
+      uri = URI.parse(string)
+      %w( http https ).include?(uri.scheme)
+    rescue URI::BadURIError
+      false
+    rescue URI::InvalidURIError
+      false
+    end
+
     def search_result_creator(doc)
-      truncate(render_index_field_value(doc, 'dcCreator', unescape: true),
-               length: 225,
-               separator: ' ',
-               escape: false)
+      labels = doc.fetch('dcCreatorLangAware', []) || []
+      return nil if labels.is_a?(Hash)
+      labels.map{|label| uri?(label) ? false : label}.join(" | ")
     end
 
     def search_result_title(doc)
