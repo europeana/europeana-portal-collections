@@ -79,6 +79,8 @@ module Europeana
       rescue RuntimeError
         {}
       end
+
+      config.middleware.use Rack::SslEnforcer, except_hosts: 'localhost'
     end
   end
 end

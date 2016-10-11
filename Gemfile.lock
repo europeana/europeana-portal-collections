@@ -383,6 +383,7 @@ GEM
       nokogiri (~> 1.5)
       rack (~> 1.1)
     rack-rewrite (1.5.1)
+    rack-ssl-enforcer (0.2.9)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.7.1)
@@ -604,6 +605,7 @@ DEPENDENCIES
   poltergeist
   puma (~> 2.13)
   rack-rewrite
+  rack-ssl-enforcer
   rails (= 4.2.7.1)
   rails_admin (~> 0.8.0)
   rails_serve_static_assets
@@ -625,3 +627,6 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
+
+BUNDLED WITH
+   1.13.1
