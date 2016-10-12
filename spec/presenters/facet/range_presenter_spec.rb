@@ -16,7 +16,7 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
     let(:items) { facet_items(6) }
     subject { presenter.range_max }
     it 'returns the top of the range' do
-      expect(subject).to eq('6')
+      expect(subject).to eq(6)
     end
   end
 
@@ -24,7 +24,8 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
     let(:items) { facet_items(6) }
     subject { presenter.range_min }
     it 'returns the bottom of the range' do
-      expect(subject).to eq('1')
+      expect(subject).to eq(1)
     end
   end
+
 end
