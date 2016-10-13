@@ -22,7 +22,7 @@ module Catalog
   end
 
   def more_like_this(document, field = nil, extra_controller_params = {})
-    mlt_params = params.dup.slice(:page, :per_page)
+    mlt_params = params.dup.slice(:page, :per_page, :api_url)
     mlt_params.merge!(mlt: document, mltf: field)
     mlt_params.merge!(extra_controller_params)
     search_results(mlt_params)

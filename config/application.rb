@@ -9,6 +9,7 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'sprockets/railtie'
+require 'i18n_data'
 # require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
@@ -40,9 +41,6 @@ module Europeana
       # Use the lowest log level to ensure availability of diagnostic information
       # when problems arise.
       config.log_level = :debug
-
-      # Enable Lograge
-      config.lograge.enabled = true
 
       # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
       # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

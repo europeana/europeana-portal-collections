@@ -17,7 +17,9 @@ module EDM
 
     def label
       key = id.to_s.tr('_', '-')
-      I18n.t("advanced-#{key}", scope: 'global.facet.reusability')
+      return_label = I18n.t("advanced-#{key}", scope: 'global.facet.reusability')
+      return_label = I18n.t("advanced-#{key}", scope: 'global.facet.reusability', locale: :en) if return_label.blank?
+      return_label
     end
   end
 end

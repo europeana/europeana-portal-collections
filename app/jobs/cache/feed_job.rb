@@ -3,7 +3,7 @@ module Cache
     URLS = {
       blog: {
         all: 'http://blog.europeana.eu/feed/',
-        art_history: 'http://blog.europeana.eu/tag/art-history/feed/',
+        art: 'http://blog.europeana.eu/tag/art-history/feed/',
         fashion: 'http://blog.europeana.eu/tag/fashion/feed/',
         music: 'http://blog.europeana.eu/tag/music/feed/'
       },

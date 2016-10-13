@@ -44,8 +44,11 @@ module Portal
           facet[:filter_open] = true if index < 3
           # Add the media facet under type
           if facet[:name] == 'TYPE'
-            facet[:items] << { is_separator: true }
-            facet[:items] << FacetPresenter.build(facet_by_field_name('MEDIA'), controller).display
+            merged_facet = FacetPresenter.build(facet_by_field_name('MEDIA'), controller).display
+            if merged_facet
+              facet[:items] << { is_separator: true }
+              facet[:items] << merged_facet
+            end
           end
           facet
         end
@@ -266,6 +269,15 @@ module Portal
         r: doc.rank,
         t: response.total
       }
+    end
+
+    def uri?(string)
+      uri = URI.parse(string)
+      %w(http|https).include?(uri.scheme)
+    rescue URI::BadURIError
+      false
+    rescue URI::InvalidURIError
+      false
     end
 
     def search_result_title(doc)

@@ -11,9 +11,9 @@ def find_or_download_styleguide_image(path)
   media_object
 end
 
-unless Page::Landing.find_by_slug('collections/art-history').present?
+unless Page::Landing.find_by_slug('collections/art').present?
   ActiveRecord::Base.transaction do
-    art_history_hero = HeroImage.create(
+    art_hero = HeroImage.create(
       settings_attribution_title: 'Ships in a storm off a rocky coast',
       settings_attribution_creator: 'Jan Porcellis',
       settings_attribution_institution: 'Hallwylska museet',
@@ -22,15 +22,15 @@ unless Page::Landing.find_by_slug('collections/art-history').present?
       media_object: find_or_download_styleguide_image('sample/channel_hero_art.jpg')
     )
     art_history_landing = Page::Landing.create!(
-      slug: 'collections/art-history',
-      title: 'Europeana Art History',
+      slug: 'collections/art',
+      title: 'Europeana Art',
       body: 'From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]',
       strapline: 'Explore %{total_item_count} artworks, artefacts, books, videos and sounds from across Europe.',
       credits: [
         Link::Credit.new(url: 'http://www.smk.dk/', text: 'National Gallery of Denmark', position: 1),
         Link::Credit.new(url: 'https://www.rijksmuseum.nl/', text: 'Rijksmuseum', position: 2)
       ],
-      hero_image: art_history_hero,
+      hero_image: art_hero,
       promotions: [
         Link::Promotion.new(
           position: 1,

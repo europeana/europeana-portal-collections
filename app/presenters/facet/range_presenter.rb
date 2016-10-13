@@ -73,12 +73,12 @@ module Facet
     end
 
     def range_values
-      @range_values ||= items_to_display.map(&:value)
+      @range_values ||= items_to_display.map{ |item| item.value.to_i }
     end
 
     def range_middle
       @range_middle ||= begin
-        if !range_min.is_a?(Fixnum) || !range_max.is_a?
+        if !range_min.is_a?(Fixnum) || !range_max.is_a?(Fixnum)
           nil
         else
           (range_min + range_max) / 2
@@ -97,7 +97,7 @@ module Facet
     end
 
     def display_data
-      items_to_display.sort_by(&:value).map do |item|
+      items_to_display.sort{ |a, b| a.value.to_i <=> b.value.to_i }.map do |item|
         p = search_state.params_for_search.deep_dup
         p[:range] ||= {}
         p[:range][facet_name] ||= {}
