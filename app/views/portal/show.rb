@@ -133,7 +133,7 @@ module Portal
 
     def social_share
       {
-        url: URI.escape(document_url(document, format: 'html')),
+        url: URI.escape(render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')),
         facebook: true,
         pinterest: true,
         twitter: true,
