@@ -20,5 +20,6 @@ module FeedHelper
       mo = MediaObject.find_by_source_url_hash(MediaObject.hash_source_url(url))
       return mo.file.url(:medium) unless mo.nil?
     end
+    nil
   end
 end
