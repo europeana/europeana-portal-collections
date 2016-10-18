@@ -34,7 +34,7 @@ module Portal
 
     def page_title
       mustache[:page_title] ||= begin
-        title = [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title]
+        title = [display_title, creator_title]
         CGI.unescapeHTML(title.compact.join(' | ')) + ' - Europeana'
       end
     end
@@ -65,7 +65,7 @@ module Portal
             rights: simple_rights_label_data,
             social_share: social_share,
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
-            title: [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title].compact.join(' | '),
+            title: [display_title, creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: presenter.field_group(:refs_rels),
@@ -303,6 +303,11 @@ module Portal
       else
         title.first
       end
+    end
+
+    def display_title
+      render_document_show_field_value(document, 'proxies.dcTitle') ||
+        truncate(render_document_show_field_value(document, 'proxies.dcDescription'), length: 200, separator: ' ')
     end
 
     def creator_title
