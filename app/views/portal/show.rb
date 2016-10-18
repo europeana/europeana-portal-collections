@@ -132,8 +132,9 @@ module Portal
     end
 
     def social_share
+      url = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
       {
-        url: URI.escape(render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')),
+        url: url ? URI.escape(url) : false,
         facebook: true,
         pinterest: true,
         twitter: true,
