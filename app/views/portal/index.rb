@@ -3,6 +3,7 @@ module Portal
   # Portal search results view
   class Index < ApplicationView
     include SearchableView
+    include HeroImageDisplayingView
 
     def js_vars
       [{ name: 'pageName', value: 'portal/index' }]
@@ -136,6 +137,12 @@ module Portal
           }
         end
       }
+    end
+
+    def hero
+      if @collection.present? && !@landing_page.nil?
+        hero_config(@landing_page.hero_image)
+      end
     end
 
     def query_terms

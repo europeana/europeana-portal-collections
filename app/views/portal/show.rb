@@ -132,8 +132,9 @@ module Portal
     end
 
     def social_share
+      url = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
       {
-        url: URI.escape(document_url(document, format: 'html')),
+        url: url ? URI.escape(url) : false,
         facebook: true,
         pinterest: true,
         twitter: true,
@@ -328,6 +329,7 @@ module Portal
             render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
           single_item: items.size == 1,
           empty_item: items.empty?,
+          empty_item_more_link: t('site.object.preview_unavailable', institution_name_and_link: institution_name_and_link),
           items: items,
           # The page parameter gets added by the javascript - base url needed here
           more_thumbs_url: document_media_path(document, format: 'json'),
