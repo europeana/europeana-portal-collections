@@ -63,7 +63,7 @@ module RecordHelper
   def record_preview_url(edm_preview, size = 200)
     return edm_preview if edm_preview.nil?
     edm_preview.tap do |preview|
-      preview.sub!('http://europeanastatic.eu/api/image?', Europeana::API.url + '/thumbnail-by-url.json?')
+      preview.sub!('http://europeanastatic.eu/api/image?', api_url + '/thumbnail-by-url.json?')
       preview.sub!('&size=LARGE', "&size=w#{size}")
     end
   end

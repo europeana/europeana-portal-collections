@@ -4,6 +4,9 @@ module Document
   class WebResourcePresenter < DocumentPresenter
     include ActionView::Helpers::NumberHelper
     include Metadata::Rights
+    include ApiHelper
+
+    delegate :params, to: :controller
 
     def initialize(document, controller, configuration = controller.blacklight_config, record = nil, record_presenter = nil)
       super(document, controller, configuration)
@@ -278,7 +281,7 @@ module Document
 
     def api_thumbnail(use_small)
       width = use_small ? '200' : '400'
-      Europeana::API.url + '/thumbnail-by-url.json?size=w' + width + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+      api_url + '/thumbnail-by-url.json?size=w' + width + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 
     def player

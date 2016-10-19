@@ -1,0 +1,5 @@
+module ApiHelper
+  def api_url
+    params[:api_url] || Europeana::API.url
+  end
+end
