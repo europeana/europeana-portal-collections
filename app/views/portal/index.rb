@@ -333,7 +333,7 @@ module Portal
       edm_preview = render_index_field_value(doc, 'edmPreview')
       return nil if edm_preview.blank?
 
-      @api_uri ||= URI.parse(Europeana::API.url)
+      @api_uri ||= URI.parse(api_url)
 
       uri = URI.parse(edm_preview)
       query = Rack::Utils.parse_query(uri.query)
