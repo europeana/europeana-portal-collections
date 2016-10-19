@@ -58,7 +58,7 @@ class FeedEntryImage
 
   def first_url_attr_on_element(element_name, tag_name, attr_name)
     attr_value = first_attr_on_element(element_name, tag_name, attr_name)
-    (attr_value.present? && attr_value =~ %r{\Ahttps?://}) ? attr_value : nil
+    attr_value.present? && attr_value =~ %r{\Ahttps?://} ? attr_value : nil
   end
 
   def first_url_attr(tag_name, attr_name)
