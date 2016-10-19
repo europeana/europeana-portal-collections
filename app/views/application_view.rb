@@ -18,7 +18,7 @@ class ApplicationView < Europeana::Styleguide::View
       { rel: 'search', type: 'application/opensearchdescription+xml',
         href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
         title: 'Europeana Search' },
-      { rel: 'alternate', href: current_url_without_locale, hreflang: 'x-default' }
+      { rel: 'alternate', href: current_url_without_locale_or_query, hreflang: 'x-default' }
     ] + alternate_language_links
 
     { items: links }
