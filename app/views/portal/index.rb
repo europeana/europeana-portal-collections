@@ -140,7 +140,7 @@ module Portal
     end
 
     def hero
-      if @collection.present? && !@landing_page.nil?
+      if !@landing_page.nil?
         hero_config(@landing_page.hero_image)
       end
     end

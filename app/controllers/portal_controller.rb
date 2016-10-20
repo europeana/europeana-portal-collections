@@ -22,6 +22,7 @@ class PortalController < ApplicationController
 
   # GET /search
   def index
+    @landing_page = find_landing_page
     (@response, @document_list) = search_results(params)
     respond_to do |format|
       format.html { store_preferred_view }
@@ -67,6 +68,12 @@ class PortalController < ApplicationController
   end
 
   protected
+
+  def find_landing_page
+    Page::Landing.find_or_initialize_by(slug: '').tap do |landing_page|
+      authorize! :show, landing_page
+    end
+  end
 
   def log_search_interaction
     Rails.logger.info(search_interaction_msg.chomp) if referer_was_search_request?
