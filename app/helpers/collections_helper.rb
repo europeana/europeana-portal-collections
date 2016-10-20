@@ -61,7 +61,7 @@ module CollectionsHelper
         {
           url: CGI.unescapeHTML(item.url),
           img: {
-            src: feed_entry_img_src(item),
+            src: feed_entry_thumbnail_url(item),
             alt: item.title
           },
           title: false

@@ -14,7 +14,7 @@ module NewsworthyView
         },
         url: CGI.unescapeHTML(item.url),
         img: {
-          src: feed_entry_img_src(item),
+          src: feed_entry_thumbnail_url(item),
           alt: nil
         },
         excerpt: {
