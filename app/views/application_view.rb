@@ -69,7 +69,7 @@ class ApplicationView < Europeana::Styleguide::View
 
   def alternate_language_links
     language_map.keys.map do |locale|
-      { rel: 'alternate', hreflang: locale, href: current_url_for_locale(locale) }
+      { rel: 'alternate', hreflang: locale, href: current_url_for_locale_without_params(locale) }
     end
   end
 
