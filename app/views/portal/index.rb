@@ -339,6 +339,7 @@ module Portal
       query = Rack::Utils.parse_query(uri.query)
       query['size'] = 'w400'
 
+      uri.scheme = @api_uri.scheme
       uri.host = @api_uri.host
       uri.path = @api_uri.path + '/thumbnail-by-url.json'
       uri.query = query.to_query
