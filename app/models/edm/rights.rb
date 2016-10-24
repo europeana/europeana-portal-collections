@@ -1,6 +1,16 @@
 module EDM
   class Rights < Base
     class << self
+      def registry
+        @registry ||= begin
+          registry_entries.flat_map do |permission, entries|
+            entries.map do |id, attrs|
+              new({ id: id.to_sym, permission: permission }.merge(attrs || {}))
+            end
+          end
+        end
+      end
+
       def normalise(string)
         return nil unless string.is_a?(String)
         registry.detect { |rights| string.match(rights.pattern) }
