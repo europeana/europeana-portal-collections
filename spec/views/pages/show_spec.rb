@@ -1,4 +1,4 @@
-RSpec.describe 'pages/show.html.mustache', :common_view_components do
+RSpec.describe 'pages/show.html.mustache', :common_view_components, :stable_version_view do
   before(:each) do
     assign(:page, page)
     assign(:params, { page: page.slug })

@@ -1,4 +1,4 @@
-RSpec.describe 'explore/new_content.html.mustache', :common_view_components do
+RSpec.describe 'explore/new_content.html.mustache', :common_view_components, :stable_version_view do
   let(:providers) do
     time_now = Time.zone.now
     [

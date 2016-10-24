@@ -1,4 +1,4 @@
-RSpec.describe 'portal/index.html.mustache', :common_view_components, :blacklight_config do
+RSpec.describe 'portal/index.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
   before do
     assign(:response, response)
     assign(:document_list, response.documents)
