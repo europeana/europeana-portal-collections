@@ -3,9 +3,9 @@ module EDM
     class << self
       def registry
         @registry ||= begin
-          registry_entries.flat_map do |permission, entries|
+          registry_entries.flat_map do |reusability, entries|
             entries.map do |id, attrs|
-              new({ id: id.to_sym, permission: permission }.merge(attrs || {}))
+              new({ id: id.to_sym, reusability: reusability }.merge(attrs || {}))
             end
           end
         end
