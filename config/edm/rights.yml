@@ -24,6 +24,12 @@ restricted:
   out_of_copyright_non_commercial:
     pattern: "http://www.europeana.eu/rights/out-of-copyright-non-commercial"
     template_license: OOC
+  rs_inc_edu:
+    pattern: "http://rightsstatements.org/vocab/InC-EDU/*"
+  rs_noc_nc:
+    pattern: "http://rightsstatements.org/vocab/NoC-NC/*"
+  rs_noc_oklr:
+    pattern: "http://rightsstatements.org/vocab/NoC-OKLR/*"
 # No re-use / REUSABILITY="permission"
 permission:
   rrfa:
@@ -41,3 +47,9 @@ permission:
   orphan_work:
     pattern: "http://www.europeana.eu/rights/test-orphan"
     template_license: orphan
+  rs_inc:
+    pattern: "http://rightsstatements.org/vocab/InC/*"
+  rs_inc_ow_eu:
+    pattern: "http://rightsstatements.org/vocab/InC-OW-EU/*"
+  rs_cne:
+    pattern: "http://rightsstatements.org/vocab/CNE/*"
