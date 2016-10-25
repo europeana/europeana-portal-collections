@@ -72,31 +72,37 @@ unless Page::Landing.find_by_slug('collections/art').present?
         BrowseEntry.new(
           title: 'All Paintings',
           query: 'what:paintings',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-painting-square.jpg')
         ),
         BrowseEntry.new(
           title: 'All Sculptures',
           query: 'what:(sculpture OR sculptuur OR skulptur)',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-sculpture-square.jpg')
         ),
         BrowseEntry.new(
           title: 'All Art history publications',
           query: '(what: "art history") OR (what: "http://vocab.getty.edu/aat/300041273") OR (what: histoire art) OR (what: kunstgeschichte) OR (what: "estudio de la historia del arte") OR (what: Kunstgeschiedenis)',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-documents-square.jpg')
         ),
         BrowseEntry.new(
           title: 'Spotlight on Botticelli',
           query: 'who:sandro botticelli',
+          subject_type: :person,
           media_object: find_or_download_styleguide_image('sample/entry-botticelli-square.jpg')
         ),
         BrowseEntry.new(
           title: 'Spotlight on Alexander Roslin',
           query: 'who:alexander roslin',
+          subject_type: :person,
           media_object: find_or_download_styleguide_image('sample/entry-roslin-square.jpg')
         ),
         BrowseEntry.new(
           title: 'Spotlight on Hokusai',
           query: 'who:hokusai',
+          subject_type: :person,
           media_object: find_or_download_styleguide_image('sample/entry-hokusai-square.jpg')
         ),
       ]
@@ -230,31 +236,37 @@ unless Page::Landing.find_by_slug('collections/music').present?
         BrowseEntry.new(
           title: 'Opera',
           query: 'what:(oper OR Óperas) OR title:oper OR (oper AND what:gesang)',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-opera-square.jpg')
         ),
         BrowseEntry.new(
           title: 'Folk Music',
           query: 'what:folk music',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-folk-square.jpg')
         ),
         BrowseEntry.new(
           title: 'Musical Instruments',
           query: 'PROVIDER:"MIMO - Musical Instrument Museums Online"',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-intruments-square.jpg')
         ),
         BrowseEntry.new(
           title: "Georges Bizet's Carmen",
           query: 'georges bizet carmen',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-carmen-square.jpg')
         ),
         BrowseEntry.new(
           title: 'Spotlight: The Lute',
           query: 'title:(lute OR luth) OR what:(lute OR luth)',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-lute-square.jpg')
         ),
         BrowseEntry.new(
           title: 'Spotlight: The Harpsichord',
           query: 'harpsichord',
+          subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-harpsichord-square.jpg')
         )
       ]

@@ -43,6 +43,11 @@ RSpec.describe PortalController do
           expect(response.status).to eq(200)
           expect(response).to render_template('portal/index')
         end
+
+        it 'assigns the default landing page to @landing_page' do
+          get :index, params
+          expect(assigns(:landing_page)).to be_a(Page::Landing)
+        end
       end
 
       context 'with mlt param' do

@@ -3,6 +3,7 @@ module Portal
   # Portal search results view
   class Index < ApplicationView
     include SearchableView
+    include HeroImageDisplayingView
 
     def js_vars
       [{ name: 'pageName', value: 'portal/index' }]
@@ -136,6 +137,12 @@ module Portal
           }
         end
       }
+    end
+
+    def hero
+      if !@landing_page.nil?
+        hero_config(@landing_page.hero_image)
+      end
     end
 
     def query_terms
@@ -326,12 +333,13 @@ module Portal
       edm_preview = render_index_field_value(doc, 'edmPreview')
       return nil if edm_preview.blank?
 
-      @api_uri ||= URI.parse(Europeana::API.url)
+      @api_uri ||= URI.parse(api_url)
 
       uri = URI.parse(edm_preview)
       query = Rack::Utils.parse_query(uri.query)
       query['size'] = 'w400'
 
+      uri.scheme = @api_uri.scheme
       uri.host = @api_uri.host
       uri.path = @api_uri.path + '/thumbnail-by-url.json'
       uri.query = query.to_query

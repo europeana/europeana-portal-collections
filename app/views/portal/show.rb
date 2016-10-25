@@ -34,7 +34,7 @@ module Portal
 
     def page_title
       mustache[:page_title] ||= begin
-        title = [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title]
+        title = [display_title, creator_title]
         CGI.unescapeHTML(title.compact.join(' | ')) + ' - Europeana'
       end
     end
@@ -65,7 +65,7 @@ module Portal
             rights: simple_rights_label_data,
             social_share: social_share,
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
-            title: [render_document_show_field_value(document, 'proxies.dcTitle', unescape: true), creator_title].compact.join(' | '),
+            title: [display_title, creator_title].compact.join(' | '),
             type: render_document_show_field_value(document, 'proxies.dcType')
           },
           refs_rels: presenter.field_group(:refs_rels),
@@ -132,8 +132,9 @@ module Portal
     end
 
     def social_share
+      url = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
       {
-        url: URI.escape(document_url(document, format: 'html')),
+        url: url ? URI.escape(url) : false,
         facebook: true,
         pinterest: true,
         twitter: true,
@@ -304,6 +305,11 @@ module Portal
       end
     end
 
+    def display_title
+      render_document_show_field_value(document, 'proxies.dcTitle') ||
+        truncate(render_document_show_field_value(document, 'proxies.dcDescription'), length: 200, separator: ' ')
+    end
+
     def creator_title
       @creator_title ||= begin
         document.fetch('agents.prefLabel', []).first ||
@@ -328,6 +334,7 @@ module Portal
             render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
           single_item: items.size == 1,
           empty_item: items.empty?,
+          empty_item_more_link: t('site.object.preview_unavailable', institution_name_and_link: institution_name_and_link),
           items: items,
           # The page parameter gets added by the javascript - base url needed here
           more_thumbs_url: document_media_path(document, format: 'json'),

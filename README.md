@@ -63,6 +63,16 @@ In a development environment, copy the provided sample from
 If the file config/redis.yml exists, the application will use Redis as a cache
 store.
 
+### Site Administration/Users
+
+Site content and to some other "configuration" is managed through the cms.
+The cms by default is available at `[hostname]/portal/en/cms/`
+
+To login and perform certain actions, an admin user account is required.
+To set up an admin user, run:
+
+`bundle exec rake user:create EMAIL=you@example.com PASSWORD=REPLACE ROLE=admin`
+
 Example configurations for different environments are in [deploy/](deploy/).
 
 ## Usage

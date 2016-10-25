@@ -106,7 +106,7 @@ module ControllerExceptionHandling
 
         def process(exception:, request:, **_)
           NewRelic::Agent.notice_error(exception,
-                                       uri: request.original_url, referer: request.referer)
+                                       uri: request.original_url)
         end
       end
     end
