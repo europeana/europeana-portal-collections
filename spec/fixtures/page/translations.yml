@@ -15,6 +15,12 @@ music_collection_translations:
   body: 'About music'
   globalized_model: music_collection
 
+fashion_collection_translations:
+  locale: en
+  title: 'Europeana Fashion'
+  body: 'About fashion'
+  globalized_model: fashion_collection
+
 not_found_translations:
   locale: en
   title: 'Not Found'

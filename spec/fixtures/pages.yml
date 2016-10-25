@@ -30,6 +30,11 @@ art_collection:
   state: 0
   type: 'Page::Landing'
 
+fashion_collection:
+  slug: 'collections/fashion'
+  state: 1
+  type: 'Page::Landing'
+
 grid_layout_collection:
   slug: 'collections/grid_layout'
   state: 1

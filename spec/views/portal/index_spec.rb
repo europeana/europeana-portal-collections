@@ -82,6 +82,13 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
         render
         expect(rendered).not_to have_selector('body.display-grid')
       end
+
+      it_behaves_like 'stable version view'
+    end
+
+    context 'when collection is fashion' do
+      let(:collection) { collections(:fashion) }
+      it_behaves_like 'beta version view'
     end
   end
 end

@@ -82,6 +82,10 @@ module Collections
       end
     end
 
+    def version
+      { is_alpha: beta_collection?(@collection) }
+    end
+
     private
 
     def strapline
