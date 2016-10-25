@@ -16,6 +16,7 @@ module Explore
           providers: @providers.blank? ? nil : {
             title: page_title,
             data: stylised_providers,
+            searchable: true,
             inline: true
           }
         }
