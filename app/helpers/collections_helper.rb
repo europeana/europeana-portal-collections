@@ -69,4 +69,8 @@ module CollectionsHelper
       end
     }
   end
+
+  def beta_collection?(collection)
+    collection.key == 'fashion'
+  end
 end

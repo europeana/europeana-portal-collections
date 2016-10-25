@@ -234,6 +234,10 @@ module Portal
     end
     alias_method :channel_data, :collection_data
 
+    def version
+      { is_alpha: within_collection? && beta_collection?(current_collection) }
+    end
+
     private
 
     def facets_selected_items

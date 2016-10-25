@@ -1,4 +1,4 @@
-RSpec.describe 'explore/sources.html.mustache', :common_view_components do
+RSpec.describe 'explore/sources.html.mustache', :common_view_components, :stable_version_view do
   let(:providers) do
     [
       { text: 'A Provider', count: 1000,

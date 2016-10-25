@@ -1,4 +1,4 @@
-RSpec.describe 'collections/show.html.mustache', :common_view_components, :blacklight_config do
+RSpec.describe 'collections/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
   include ActionView::Helpers::TextHelper
 
   before(:each) do
@@ -35,5 +35,10 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     expect(subject).to have_link('All')
     expect(subject).to have_link('Images')
     expect(subject).not_to have_link('3D')
+  end
+
+  context 'when collection is fashion' do
+    let(:collection) { collections(:fashion) }
+    it_behaves_like 'beta version view'
   end
 end
