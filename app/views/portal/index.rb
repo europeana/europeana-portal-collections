@@ -53,7 +53,7 @@ module Portal
           end
           # Order collection names alphabetically
           if facet[:name] == 'COLLECTION'
-            facet[:items].sort_by! { |hsh| hsh[:text] }
+            facet[:items].sort_by! { |hsh| hsh[:text].to_s }
           end
           facet
         end

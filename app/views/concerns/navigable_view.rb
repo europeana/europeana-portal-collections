@@ -101,7 +101,7 @@ module NavigableView
   end
 
   def navigation_global_primary_nav_collections_submenu_items
-    displayable_collections.sort_by { |c| c[:title] }.map do |collection|
+    displayable_collections.sort_by { |c| c.title.to_s }.map do |collection|
       link_item(collection.title, collection_path(collection),
                 is_current: current_page?(collection_path(collection)))
     end
