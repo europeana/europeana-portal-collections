@@ -51,6 +51,10 @@ module Portal
               facet[:items] << merged_facet
             end
           end
+          # Order collection names alphabetically
+          if facet[:name] == 'COLLECTION'
+            facet[:items].sort_by! { |hsh| hsh[:text] }
+          end
           facet
         end
       end
