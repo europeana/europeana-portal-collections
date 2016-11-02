@@ -65,7 +65,7 @@ store.
 
 ### Site Administration/Users
 
-Site content and to some other "configuration" is managed through the cms.
+Site content and some other "configuration" is managed through the cms.
 The cms by default is available at `[hostname]/portal/en/cms/`
 
 To login and perform certain actions, an admin user account is required.
