@@ -56,7 +56,7 @@ module Catalog
   def search_action_url(options = {})
     case
     when options[:controller]
-      url_for(options)
+      url_for(options.except(:page))
     when params[:controller] == 'collections'
       url_for(options.merge(controller: 'collections', action: params[:action]))
     else
