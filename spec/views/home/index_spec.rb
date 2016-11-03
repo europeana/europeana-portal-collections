@@ -1,4 +1,4 @@
-RSpec.describe 'home/index.html.mustache', :common_view_components do
+RSpec.describe 'home/index.html.mustache', :common_view_components, :stable_version_view do
   let(:europeana_item_count) { 1234 }
 
   let(:blacklight_config) do

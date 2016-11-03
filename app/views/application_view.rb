@@ -28,10 +28,6 @@ class ApplicationView < Europeana::Styleguide::View
     true
   end
 
-  def version
-    { is_alpha: true }
-  end
-
   def page_config
     {
       newsletter: true

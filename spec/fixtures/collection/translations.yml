@@ -13,6 +13,11 @@ art_translations:
   title: 'Art'
   globalized_model: art
 
+fashion_translations:
+  locale: en
+  title: 'Fashion'
+  globalized_model: fashion
+
 draft_translations:
   locale: en
   title: 'Draft'

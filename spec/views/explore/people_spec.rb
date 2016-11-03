@@ -1,4 +1,4 @@
-RSpec.describe 'explore/people.html.mustache', :common_view_components do
+RSpec.describe 'explore/people.html.mustache', :common_view_components, :stable_version_view do
   before do
     assign(:people, BrowseEntry.person.published)
   end
