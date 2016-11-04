@@ -34,7 +34,7 @@ module SearchableView
       [params[k]].flatten.compact.reject(&:blank?).map do |v|
         {
           name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
-          value: input_search_param_value(k, v),
+          value: k.to_s == 'mlt' ? t('site.navigation.breadcrumb.results_list_mlt') : input_search_param_value(k, v),
           remove: search_action_url(remove_search_param(k, v, params))
         }
       end

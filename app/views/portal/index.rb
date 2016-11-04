@@ -223,6 +223,10 @@ module Portal
       facets_selected_items.blank? ? 0 : facets_selected_items.length
     end
 
+    def mlt_src
+      'record' + params[:mlt] unless params[:mlt].nil?
+    end
+
     def collection_data
       mustache[:collection_data] ||= begin
         if within_collection?
