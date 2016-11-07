@@ -30,12 +30,14 @@ module SearchableView
   # @return [Array<Hash>]
   def input_search_values(*keys)
     return [] if keys.blank?
+     
     keys.map do |k|
       [params[k]].flatten.compact.reject(&:blank?).map do |v|
         {
           name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
-          value: k.to_s == 'mlt' ? t('site.navigation.breadcrumb.results_list_mlt') : input_search_param_value(k, v),
-          remove: search_action_url(remove_search_param(k, v, params))
+          is_mlt: k.to_s == 'mlt',
+          value: k.to_s == 'mlt' ? params[:mlt] : input_search_param_value(k, v),
+          remove: k.to_s == 'mlt' && params[:q].blank? && params[:qf].blank? ? mlt_src : search_action_url(remove_search_param(k, v, params))
         }
       end
     end.flatten.compact
