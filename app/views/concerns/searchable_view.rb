@@ -30,7 +30,7 @@ module SearchableView
   # @return [Array<Hash>]
   def input_search_values(*keys)
     return [] if keys.blank?
-     
+    
     keys.map do |k|
       [params[k]].flatten.compact.reject(&:blank?).map do |v|
         {
