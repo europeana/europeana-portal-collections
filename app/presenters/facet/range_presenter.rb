@@ -86,8 +86,7 @@ module Facet
     #
     # @return [Object]
     def range_min
-      @range_min ||= search_state_param && search_state_param[:begin] ?
-        [range_values.min, search_state_param[:begin].to_i].max : range_values.min
+      @range_min ||= search_state_param && search_state_param[:begin] ? [range_values.min, search_state_param[:begin].to_i].max : range_values.min
     end
 
     ##
