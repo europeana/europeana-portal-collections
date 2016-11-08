@@ -47,7 +47,7 @@ module Facet
           end
         end
         last_val = val
-        item[:value] = "#{item[:value]} (#{item[:hits]})"
+        item[:value] = item[:value].to_s + ' (' + item[:hits].to_s + ')'
         res << item
       end
       res
