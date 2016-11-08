@@ -43,7 +43,7 @@ module Facet
               value: last_val+1,
               url: false
             }
-            last_val = last_val + 1
+            last_val += 1
           end
         end
         last_val = val
@@ -145,7 +145,7 @@ module Facet
         skip ? nil : {
           percent_of_max: percent_of_max(item.hits),
           value: item.value,
-          hits: "#{item.hits}",
+          hits: item.hits,
           url: search_action_url(p)
         }
       end
