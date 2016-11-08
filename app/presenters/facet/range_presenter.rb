@@ -3,16 +3,18 @@ module Facet
     include Blacklight::HashAsHiddenFieldsHelperBehavior
 
     def display(**_)
+      range_data = padded_dates
       {
         date: true,
         title: facet_label,
         form: display_form,
         range: display_range,
-        data: display_data,
+        data: range_data,
         date_start: range_min,
         date_middle: range_middle,
         date_end: range_max,
-        show_bars: !single_value?
+        show_bars: !single_value?,
+        show_borders: range_data.length < 50
       }
     end
 
@@ -26,6 +28,29 @@ module Facet
 
     def facet_item_url(_)
       fail NotImplementedError
+    end
+
+    def padded_dates
+      res = []
+      last_val = nil
+
+      display_data.flatten.compact.each do |item|
+        val = item[:value].to_i
+        if last_val
+          until last_val+1 >= val do
+            res << {
+              percent_of_max: 0,
+              value: last_val+1,
+              url: false
+            }
+            last_val = last_val + 1
+          end
+        end
+        last_val = val
+        item[:value] = "#{item[:value]} (#{item[:hits]})"
+        res << item
+      end
+      res
     end
 
     def filter_items
@@ -57,19 +82,21 @@ module Facet
     end
 
     ##
-    # Lowest value in the range
+    # Lowest value in the range - confined to begin parameter
     #
     # @return [Object]
     def range_min
-      @range_min ||= range_values.min
+      @range_min ||= search_state_param && search_state_param[:begin] ?
+        [range_values.min, search_state_param[:begin].to_i].max : range_values.min
     end
 
     ##
-    # Highest value in the range
+    # Highest value in the range - confined to end parameter
     #
     # @return [Object]
     def range_max
-      @range_max ||= range_values.max
+      @range_max ||= search_state_param && search_state_param[:end] ?
+        [range_values.max, search_state_param[:end].to_i].min : range_values.max
     end
 
     def range_values
@@ -103,9 +130,22 @@ module Facet
         p[:range][facet_name] ||= {}
         p[:range][facet_name][:begin] = item.value
         p[:range][facet_name][:end] = item.value
-        {
+
+        skip = false
+        has_begin = search_state_param && search_state_param[:begin]
+        has_end = search_state_param && search_state_param[:end]
+
+        if has_begin && item.value.to_i < search_state_param[:begin].to_i
+          skip = true
+        end
+        if has_end && item.value.to_i > search_state_param[:end].to_i
+          skip = true
+        end
+
+        skip ? nil : {
           percent_of_max: percent_of_max(item.hits),
-          value: "#{item.value} (#{item.hits})",
+          value: item.value,
+          hits: "#{item.hits}",
           url: search_action_url(p)
         }
       end
