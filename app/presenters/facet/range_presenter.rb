@@ -3,18 +3,17 @@ module Facet
     include Blacklight::HashAsHiddenFieldsHelperBehavior
 
     def display(**_)
-      range_data = padded_dates
       {
         date: true,
         title: facet_label,
         form: display_form,
         range: display_range,
-        data: range_data,
+        data: display_data,
         date_start: range_min,
         date_middle: range_middle,
         date_end: range_max,
         show_bars: !single_value?,
-        show_borders: range_data.length < 50
+        show_borders: display_data.length < 50
       }
     end
 
@@ -30,27 +29,21 @@ module Facet
       fail NotImplementedError
     end
 
-    def padded_dates
-      res = []
-      last_val = nil
-
-      display_data.flatten.compact.each do |item|
-        val = item[:value].to_i
-        if last_val
-          until last_val+1 >= val do
-            res << {
-              percent_of_max: 0,
-              value: last_val+1,
-              url: false
-            }
-            last_val += 1
-          end
-        end
-        last_val = val
-        item[:value] = item[:value].to_s + ' (' + item[:hits].to_s + ')'
-        res << item
+    def pad_range items
+      return_hash = []
+      items.sort!{ |a, b| a.value.to_i <=> b.value.to_i } unless has_begin && has_end
+      begin_value = (has_begin ? search_state_param[:begin] : items.first[:value]).to_i
+      end_value = (has_end ? search_state_param[:end] : items.last[:value]).to_i
+      (begin_value..end_value).each do |item_value|
+        item_to_add = items.select {|i| i.value == item_value.to_s}.first
+        item_to_add ||=  OpenStruct.new({ percent_of_max: 0,
+                                          value: item_value,
+                                          hits: 0,
+                                          url: false
+                                        })
+        return_hash << item_to_add
       end
-      res
+      return_hash
     end
 
     def filter_items
@@ -74,11 +67,17 @@ module Facet
     end
 
     ##
-    # Maximum number of hits in any of the facet items
+    # Maximum number of hits in any of the facet items - constrained to the selection
     #
     # @return [Fixnum]
     def hits_max
-      @hits_max ||= items_to_display.map(&:hits).max
+      @hits_max ||= items_to_display.map do |item|
+        if item.value.to_i < range_min || item.value.to_i > range_max
+          0
+        else
+          item.hits
+        end
+      end.max
     end
 
     ##
@@ -86,7 +85,7 @@ module Facet
     #
     # @return [Object]
     def range_min
-      @range_min ||= search_state_param && search_state_param[:begin] ? [range_values.min, search_state_param[:begin].to_i].max : range_values.min
+      @range_min ||= has_begin ? search_state_param[:begin].to_i : range_values.min
     end
 
     ##
@@ -94,8 +93,7 @@ module Facet
     #
     # @return [Object]
     def range_max
-      @range_max ||= search_state_param && search_state_param[:end] ?
-        [range_values.max, search_state_param[:end].to_i].min : range_values.max
+      @range_max ||= has_end ? search_state_param[:end].to_i : range_values.max
     end
 
     def range_values
@@ -123,7 +121,7 @@ module Facet
     end
 
     def display_data
-      items_to_display.sort{ |a, b| a.value.to_i <=> b.value.to_i }.map do |item|
+      @display_data ||= pad_range(items_to_display).map do |item|
         p = search_state.params_for_search.deep_dup
         p[:range] ||= {}
         p[:range][facet_name] ||= {}
@@ -131,8 +129,6 @@ module Facet
         p[:range][facet_name][:end] = item.value
 
         skip = false
-        has_begin = search_state_param && search_state_param[:begin]
-        has_end = search_state_param && search_state_param[:end]
 
         if has_begin && item.value.to_i < search_state_param[:begin].to_i
           skip = true
@@ -143,11 +139,26 @@ module Facet
 
         skip ? nil : {
           percent_of_max: percent_of_max(item.hits),
-          value: item.value,
+          value: "#{item.value} (#{item.hits})" ,
           hits: item.hits,
           url: search_action_url(p)
         }
-      end
+      end.compact
+    end
+
+
+    ##
+    # returns boolean for wheter or not there is a start value specified to facet on
+    #
+    def has_begin
+      @has_begin = search_state_param && search_state_param[:begin]
+    end
+
+    ##
+    # returns boolean for wheter or not there is an end value specified to facet on
+    #
+    def has_end
+      @has_end = search_state_param && search_state_param[:end]
     end
 
     def percent_of_max(hits)
