@@ -77,6 +77,10 @@ module Document
       @media_rights ||= render_document_show_field_value('aggregations.edmRights')
     end
 
+    def media_licenses
+      @media_licenses ||= eval(render_document_show_field_value('proxy.licenses'))
+    end
+
     def field_group(id)
       @field_group_presenter ||= Document::FieldGroupPresenter.new(document, controller)
       @field_group_presenter.display(id)

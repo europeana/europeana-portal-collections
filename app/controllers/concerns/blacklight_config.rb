@@ -127,6 +127,7 @@ module BlacklightConfig
       config.add_show_field 'aggregations.webResources.dctermsCreated'
       config.add_show_field 'proxies.dctermsExtent'
       config.add_show_field 'proxies.dcTitle'
+      config.add_show_field 'proxies.licenses'
       config.add_show_field 'europeanaAggregation.edmCountry'
       config.add_show_field 'edmDatasetName'
       config.add_show_field 'aggregations.edmIsShownAt'

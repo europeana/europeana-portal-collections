@@ -31,7 +31,9 @@ module Document
           }
         else
           license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase
-
+          if license_flag_key == 'OOC' && media_licenses && !media_licenses['odrlInheritFrom'].blank?
+            rights = EDM::Rights.normalise(media_licenses['odrlInheritFrom'])
+          end
           {
             license_human: t(rights.reusability, scope: 'global.facet.reusability'),
             license_name: rights.label,

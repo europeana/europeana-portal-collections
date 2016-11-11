@@ -77,6 +77,10 @@ module Document
       end
     end
 
+    def media_licenses
+      @media_licenses ||= eval(render_document_show_field_value('proxy.licenses'))
+    end
+
     def mime_type
       @mime_type ||= render_document_show_field_value('ebucoreHasMimeType')
     end
