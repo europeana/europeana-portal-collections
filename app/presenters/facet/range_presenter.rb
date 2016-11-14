@@ -107,7 +107,6 @@ module Facet
       @items_to_display ||= super
     end
 
-
     ##
     # Loops through the available facets and generates the facet links and display values for each item in the range.
     #
@@ -141,18 +140,18 @@ module Facet
       if items.count > max_intervals && ((items.count / max_intervals) != 1)
         aggregated_items = []
         interval = items.count / max_intervals
-        temp_item = DisplayableRangeItem.new()
-        items.each_with_index do | item, index |
-          if (index + 1) % interval != 0
+        temp_item = DisplayableRangeItem.new
+        items.each_with_index do |item, index|
+          if ((index + 1) % interval).nonzero?
             temp_item.hits += item.hits
             temp_item.min_value = item.value unless temp_item.min_value
           else
             temp_item.max_value = item.value
             aggregated_items << temp_item
-            temp_item = DisplayableRangeItem.new()
+            temp_item = DisplayableRangeItem.new
           end
         end
-        @hits_max = aggregated_items.max_by{|x| x[:hits]}.hits
+        @hits_max = aggregated_items.max_by { |x| x[:hits] }.hits
         aggregated_items
       else
         items
@@ -183,11 +182,11 @@ module Facet
     def padded_items
       items = items_to_display
       return_hash = []
-      items.sort!{ |a, b| a.value.to_i <=> b.value.to_i } unless has_begin && has_end
+      items.sort! { |a, b| a.value.to_i <=> b.value.to_i } unless has_begin && has_end
       begin_value = (has_begin ? search_state_param[:begin] : items.first[:value]).to_i
       end_value = (has_end ? search_state_param[:end] : items.last[:value]).to_i
       (begin_value..end_value).each do |item_value|
-        item_to_add = items.select {|i| i.value == item_value.to_s}.first
+        item_to_add = items.select { |i| i.value == item_value.to_s }.first
         item_to_add ||= DisplayableRangeItem.new(0, item_value,item_value,item_value, 0, false)
         return_hash << item_to_add
       end
@@ -213,7 +212,7 @@ module Facet
     end
 
     def percent_of_max(hits)
-      if hits_max.to_f > 0
+      if hits_max.to_f.positive?
         (hits.to_f / hits_max.to_f * 100).to_i
       else
         0

@@ -33,9 +33,9 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
     subject { presenter.send(:aggregated_items) }
     it 'returns the items aggregated into segments corresponding to max_intervals' do
       expect(subject.count).to eq(presenter.send(:max_intervals))
-      expect(subject.first.min_value).to eq("1")
-      expect(subject.first.max_value).to eq("6")
-      expect(subject.first.hits).to eq(299000)
+      expect(subject.first.min_value).to eq('1')
+      expect(subject.first.max_value).to eq('6')
+      expect(subject.first.hits).to eq(299_000)
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
     let(:items) { facet_items(6) }
     subject { presenter.send(:limited_items) }
     it 'returns the items limited to the range in the params'
-    #this spec requires params set, pending for now
+    # this spec requires params set, pending for now
   end
 
   describe '#padded_items' do
@@ -60,5 +60,4 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
       expect(subject).to eq(100)
     end
   end
-
 end
