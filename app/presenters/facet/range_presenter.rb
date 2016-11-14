@@ -187,7 +187,7 @@ module Facet
       end_value = (has_end ? search_state_param[:end] : items.last[:value]).to_i
       (begin_value..end_value).each do |item_value|
         item_to_add = items.select { |i| i.value == item_value.to_s }.first
-        item_to_add ||= DisplayableRangeItem.new(0, item_value,item_value,item_value, 0, false)
+        item_to_add ||= DisplayableRangeItem.new(0, item_value, item_value, item_value, 0, false)
         return_hash << item_to_add
       end
       return_hash
