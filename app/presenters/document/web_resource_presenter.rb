@@ -77,6 +77,10 @@ module Document
       end
     end
 
+    def media_licenses_about
+      @media_licenses_about ||= render_document_show_field_value('licenses.about')
+    end
+
     def media_licenses_odrlInheritFrom
       @media_licenses_odrlInheritFrom ||= render_document_show_field_value('licenses.odrlInheritFrom')
     end

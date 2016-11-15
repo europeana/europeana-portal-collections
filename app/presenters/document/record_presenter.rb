@@ -64,6 +64,10 @@ module Document
       end
     end
 
+    def media_licenses_about
+      @media_licenses_about ||= render_document_show_field_value('licenses.about')
+    end
+
     def displayable_media_web_resource_presenters
       media_web_resource_presenters.select(&:displayable?)
     end
