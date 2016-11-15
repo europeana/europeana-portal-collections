@@ -4,23 +4,6 @@ module Document
       extend ActiveSupport::Concern
 
       included do
-        # University of Heidelberg
-        # * test record: /portal/record/07927/diglit_serradifalco1834bd2.html
-        manifest_iiif for: { 'about': %r{/07927/diglit_} },
-                      sub: { 'about' => lambda { |value|
-                        value.match(%r{/07927/diglit_(.*)})[1]
-                      } },
-                      url: 'http://digi.ub.uni-heidelberg.de/diglit/iiif/%{about}/manifest.json'
-
-        # Bodleian library
-        # * test record: /portal/record/9200175/BibliographicResource_3000004673129.html
-        # * dataset: /portal/search?q=europeana_collectionName%3A9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian
-        manifest_iiif for: { 'europeanaCollectionName' => '9200175_Ag_EU_TEL_a1008_EU_Libraries_Bodleian' },
-                      sub: { 'proxies.dcIdentifier' => lambda { |values|
-                        values.detect { |value| value.starts_with?('http://purl.ox.ac.uk/uuid/') }.sub('http://purl.ox.ac.uk/uuid/', '')
-                      } },
-                      url: 'http://iiif.bodleian.ox.ac.uk/iiif/manifest/%{proxies.dcIdentifier}.json'
-
         # National Library of Wales
         # * test record: /portal/record/9200173/9B976C77421CE43F3BDA72EF47BCCC08AF94A238.html
         # * dataset: /portal/search?q=europeana_collectionName%3A9200173*
