@@ -147,7 +147,7 @@ GEM
     europeana-api (0.5.2)
       activesupport (>= 3.0, < 5)
       multi_json (~> 1.0)
-    europeana-blacklight (0.4.9)
+    europeana-blacklight (0.5.0)
       blacklight (~> 6.0.0)
       europeana-api (~> 0.5.2)
       iso-639 (~> 0.2.5)
@@ -594,7 +594,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 0.5.2)
-  europeana-blacklight (~> 0.4.9)
+  europeana-blacklight (~> 0.5.0)
   europeana-feedback-button (= 0.0.4)
   europeana-logging (~> 0.0.4)
   europeana-styleguide!
@@ -639,3 +639,6 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
+
+BUNDLED WITH
+   1.13.1

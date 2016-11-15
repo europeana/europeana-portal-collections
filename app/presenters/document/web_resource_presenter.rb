@@ -77,8 +77,8 @@ module Document
       end
     end
 
-    def media_licenses
-      @media_licenses ||= eval(render_document_show_field_value('proxy.licenses'))
+    def media_licenses_odrlInheritFrom
+      @media_licenses_odrlInheritFrom ||= render_document_show_field_value('licenses.odrlInheritFrom')
     end
 
     def mime_type
