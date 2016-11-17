@@ -177,7 +177,7 @@ module Facet
 
         (displayable_begin_value(items)..displayable_end_value(items)).map do |item_value|
           items.detect { |i| i.value == item_value } ||
-            Europeana::Blacklight::Response::Facets::FacetItem(value: item_value, hits: 0)
+            Europeana::Blacklight::Response::Facets::FacetItem.new(value: item_value, hits: 0)
         end
       end
     end
