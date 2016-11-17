@@ -66,7 +66,7 @@ module Facet
     #
     # @return [Object]
     def range_min
-      @range_min ||= search_state_has_begin? ? search_state_param[:begin].to_i : range_values.min
+      @range_min ||= search_state_has_begin? ? search_state_param[:begin] : items_to_display.map(&:min_value).min
     end
 
     ##
@@ -74,11 +74,11 @@ module Facet
     #
     # @return [Object]
     def range_max
-      @range_max ||= search_state_has_end? ? search_state_param[:end].to_i : range_values.max
+      @range_max ||= search_state_has_end? ? search_state_param[:end] : items_to_display.map(&:max_value).max
     end
 
     def range_values
-      @range_values ||= items_to_display.map { |item| item.value.to_i }
+      @range_values ||= items_to_display.map { |item| item.value }
     end
 
     def range_middle
@@ -145,7 +145,7 @@ module Facet
       [[]].tap do |groups|
         items.each_with_index do |item, index|
           groups.last << item
-          groups << [] if interval.zero? || ((index + 1) % interval).zero?
+          groups << [] if (index < items.length - 1) && (interval.zero? || ((index + 1) % interval).zero?)
         end
       end
     end
@@ -176,14 +176,14 @@ module Facet
         items = items.dup.sort_by(&:value)
 
         (displayable_begin_value(items)..displayable_end_value(items)).map do |item_value|
-          items.detect { |i| i.value == item_value.to_s } ||
-            DisplayableRangeItem.new(0, item_value, item_value, item_value, 0, false)
+          items.detect { |i| i.value == item_value } ||
+            Europeana::Blacklight::Response::Facets::FacetItem(value: item_value, hits: 0)
         end
       end
     end
 
     def max_intervals
-      100
+     100
     end
 
     ##
