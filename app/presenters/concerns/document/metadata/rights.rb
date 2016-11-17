@@ -11,7 +11,6 @@ module Document
             t('global.facet.reusability.expiry', date: end_path)
           end
         elsif !media_licenses_odrlInheritFrom.blank?
-          puts "in elseif"
           end_path = URI(media_licenses_about).path.split('/').last
           if end_path == 'out-of-copyright-non-commercial'
             nil
