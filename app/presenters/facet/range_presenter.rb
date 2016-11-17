@@ -78,7 +78,7 @@ module Facet
     end
 
     def range_values
-      @range_values ||= items_to_display.map { |item| item.value }
+      @range_values ||= items_to_display.map(&:value)
     end
 
     def range_middle
@@ -183,7 +183,7 @@ module Facet
     end
 
     def max_intervals
-     100
+      100
     end
 
     ##
