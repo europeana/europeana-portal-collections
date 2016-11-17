@@ -58,13 +58,7 @@ module Facet
     #
     # @return [Fixnum]
     def hits_max
-      @hits_max ||= items_to_display.map do |item|
-        if item.value.to_i < range_min || item.value.to_i > range_max
-          0
-        else
-          item.hits
-        end
-      end.max
+      @hits_max ||= items_to_display.map(&:hits).max
     end
 
     ##
@@ -72,7 +66,7 @@ module Facet
     #
     # @return [Object]
     def range_min
-      @range_min ||= has_begin ? search_state_param[:begin].to_i : range_values.min
+      @range_min ||= search_state_has_begin? ? search_state_param[:begin] : items_to_display.map(&:min_value).min
     end
 
     ##
@@ -80,11 +74,11 @@ module Facet
     #
     # @return [Object]
     def range_max
-      @range_max ||= has_end ? search_state_param[:end].to_i : range_values.max
+      @range_max ||= search_state_has_end? ? search_state_param[:end] : items_to_display.map(&:max_value).max
     end
 
     def range_values
-      @range_values ||= items_to_display.map{ |item| item.value.to_i }
+      @range_values ||= items_to_display.map(&:value)
     end
 
     def range_middle
@@ -104,14 +98,14 @@ module Facet
     protected
 
     def items_to_display(*_)
-      @items_to_display ||= super
+      @items_to_display ||= aggregated_items(limited_items(padded_items(super)))
     end
 
     ##
     # Loops through the available facets and generates the facet links and display values for each item in the range.
     #
     def display_data
-      @display_data ||= aggregated_items.map do |item|
+      @display_data ||= items_to_display.map do |item|
         p = search_state.params_for_search.deep_dup
         p[:range] ||= {}
         p[:range][facet_name] ||= {}
@@ -135,62 +129,57 @@ module Facet
     # will be determined by the max_intervals method. This is to avoid filling the graph with too many
     # bars.
     #
-    def aggregated_items
-      items = limited_items
-      if items.count > max_intervals && ((items.count / max_intervals) != 1)
-        aggregated_items = []
-        interval = items.count / max_intervals
-        temp_item = DisplayableRangeItem.new
+    def aggregated_items(items)
+      grouped_items(items).map do |group|
+        DisplayableRangeItem.new.tap do |item|
+          item.hits = group.map(&:hits).sum
+          item.min_value = group.map(&:value).min
+          item.max_value = group.map(&:value).max
+          item.value = item.min_value == item.max_value ? item.min_value : item.min_value..item.max_value
+        end
+      end
+    end
+
+    def grouped_items(items)
+      interval = items.count / max_intervals
+      [[]].tap do |groups|
         items.each_with_index do |item, index|
-          if ((index + 1) % interval).nonzero?
-            temp_item.hits += item.hits
-            temp_item.min_value = item.value unless temp_item.min_value
-          else
-            temp_item.max_value = item.value
-            aggregated_items << temp_item
-            temp_item = DisplayableRangeItem.new
-          end
+          groups.last << item
+          groups << [] if (index < items.length - 1) && (interval.zero? || ((index + 1) % interval).zero?)
         end
-        @hits_max = aggregated_items.max_by { |x| x[:hits] }.hits
-        aggregated_items
-      else
-        items
       end
     end
 
     ##
-    # A method to limit the range of facet items to display to the range specified by the user.
+    # Limits the range of facet items to display to the range specified by the user.
     #
-    def limited_items
-      padded_items.map do |item|
-        skip = false
-
-        if has_begin && item.value.to_i < search_state_param[:begin].to_i
-          skip = true
-        end
-        if has_end && item.value.to_i > search_state_param[:end].to_i
-          skip = true
-        end
-
-        skip ? nil : item
+    def limited_items(items)
+      items.reject do |item|
+        (search_state_has_begin? && item.value < search_state_param[:begin]) ||
+          (search_state_has_end? && item.value > search_state_param[:end])
       end
     end
 
+    def displayable_begin_value(items)
+      search_state_has_begin? ? search_state_param[:begin] : items.first[:value]
+    end
+
+    def displayable_end_value(items)
+      search_state_has_end? ? search_state_param[:end] : items.last[:value]
+    end
+
     ##
-    # Method to fill in gaps in the facet range values with empty values.
+    # Fills in gaps in the facet range values with empty values.
     #
-    def padded_items
-      items = items_to_display
-      return_hash = []
-      items.sort! { |a, b| a.value.to_i <=> b.value.to_i } unless has_begin && has_end
-      begin_value = (has_begin ? search_state_param[:begin] : items.first[:value]).to_i
-      end_value = (has_end ? search_state_param[:end] : items.last[:value]).to_i
-      (begin_value..end_value).each do |item_value|
-        item_to_add = items.select { |i| i.value == item_value.to_s }.first
-        item_to_add ||= DisplayableRangeItem.new(0, item_value, item_value, item_value, 0, false)
-        return_hash << item_to_add
+    def padded_items(items)
+      @padded_items ||= begin
+        items = items.dup.sort_by(&:value)
+
+        (displayable_begin_value(items)..displayable_end_value(items)).map do |item_value|
+          items.detect { |i| i.value == item_value } ||
+            Europeana::Blacklight::Response::Facets::FacetItem.new(value: item_value, hits: 0)
+        end
       end
-      return_hash
     end
 
     def max_intervals
@@ -200,15 +189,15 @@ module Facet
     ##
     # returns boolean for whether or not there is a start value specified to facet on
     #
-    def has_begin
-      @has_begin = search_state_param && search_state_param[:begin]
+    def search_state_has_begin?
+      search_state_param && search_state_param[:begin]
     end
 
     ##
     # returns boolean for whether or not there is an end value specified to facet on
     #
-    def has_end
-      @has_end = search_state_param && search_state_param[:end]
+    def search_state_has_end?
+      search_state_param && search_state_param[:end]
     end
 
     def percent_of_max(hits)

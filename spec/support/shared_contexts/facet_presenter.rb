@@ -6,7 +6,7 @@ RSpec.shared_context 'facet presenter', presenter: :facet do
               when :text
                 "Item#{n}"
               when :number
-                n.to_s
+                n
               else
                 fail
               end
