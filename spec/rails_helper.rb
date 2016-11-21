@@ -82,6 +82,8 @@ Shoulda::Matchers.configure do |config|
 end
 
 class ActionView::TestCase::TestController
+  include Catalog
+
   def default_url_options(options = {})
     { locale: I18n.default_locale }
   end

@@ -41,11 +41,13 @@ module SearchableView
 
     keys.map do |k|
       [params[k]].flatten.compact.reject(&:blank?).map do |v|
+        remove_params = remove_search_param(k, v, params)
+        remove_params[:q] = '' if (k.to_s == 'mlt') && !remove_params.key?(:q)
         {
           name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
           is_mlt: k.to_s == 'mlt',
           value: k.to_s == 'mlt' ? params[:mlt] : input_search_param_value(k, v),
-          remove: k.to_s == 'mlt' && params[:q].blank? && params[:qf].blank? ? mlt_src : search_action_url(remove_search_param(k, v, params))
+          remove: search_action_path(remove_params)
         }
       end
     end.flatten.compact

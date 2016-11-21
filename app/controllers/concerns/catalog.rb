@@ -51,7 +51,13 @@ module Catalog
     fail "Do not use Blacklight's search tracking."
   end
 
-  protected
+  def search_action_path(*args)
+    if args[0].is_a?(Hash)
+      args[0] = args.first.symbolize_keys
+      args[0][:only_path] = true
+    end
+    search_action_url(*args)
+  end
 
   def search_action_url(options = {})
     case
@@ -63,6 +69,8 @@ module Catalog
       search_url(options.except(:controller, :action))
     end
   end
+
+  protected
 
   def search_facet_url(options = {})
     facet_url_params = { controller: 'portal', action: 'facet' }
