@@ -7,6 +7,9 @@
 module UrlHelper
   include Blacklight::UrlHelperBehavior
 
+  # @see Catalog
+  delegate :search_action_path, :search_action_url, to: :controller
+
   ##
   # Remove one value from an Array of params
   #
@@ -16,6 +19,7 @@ module UrlHelper
   # @return [Hash] a copy of params with the passed value removed
   def remove_search_param(key, value, source_params = params)
     p = Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params)
+    p.delete(:locale)
     p[key] = ([p[key]].flatten || []).dup
     p[key] = p[key] - [value]
     p.delete(key) if p[key].empty?
@@ -29,6 +33,7 @@ module UrlHelper
   # @return [Hash] modified params
   def remove_q_param(source_params = params)
     Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |p|
+      p.delete(:locale)
       if p[:qf].blank?
         p[:q] = ''
       elsif p[:qf].is_a?(Array)
@@ -51,11 +56,11 @@ module UrlHelper
     search_path(browse_entry_query)
   end
 
-  def exhibitions_path locale = I18n.locale
+  def exhibitions_path(locale = I18n.locale)
     home_path(locale: locale) + '/exhibitions'
   end
 
-  def exhibitions_foyer_path locale = I18n.locale
+  def exhibitions_foyer_path(locale = I18n.locale)
     exhibitions_path(locale) + '/foyer'
   end
 end

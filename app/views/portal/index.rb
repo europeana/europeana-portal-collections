@@ -224,7 +224,8 @@ module Portal
     end
 
     def mlt_src
-      'record' + params[:mlt] unless params[:mlt].nil?
+      return nil unless params[:mlt]
+      document_path(id: params[:mlt][1..-1], format: 'html')
     end
 
     def collection_data
@@ -417,7 +418,6 @@ module Portal
         end
       end.flatten
 
-      fields << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
       fields
     end
   end
