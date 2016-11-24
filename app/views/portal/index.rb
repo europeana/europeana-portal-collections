@@ -223,6 +223,11 @@ module Portal
       facets_selected_items.blank? ? 0 : facets_selected_items.length
     end
 
+    def mlt_src
+      return nil unless params[:mlt]
+      document_path(id: params[:mlt][1..-1], format: 'html')
+    end
+
     def collection_data
       mustache[:collection_data] ||= begin
         if within_collection?
@@ -413,7 +418,6 @@ module Portal
         end
       end.flatten
 
-      fields << form_search_hidden_field('mlt', params[:mlt]) if params.key?(:mlt)
       fields
     end
   end

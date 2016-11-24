@@ -27,7 +27,7 @@ module BrowseEntryDisplayingView
   def browse_entry_items_grouped(browse_entries, page = nil)
     grouped_items, type1, type2, type3 = [], [], [], []
 
-    more_links = [browse_people_path(theme: collection.key), browse_topics_path(theme: collection.key), browse_periods_path(theme: collection.key)]
+    more_links = [explore_people_path(theme: collection.key), explore_topics_path(theme: collection.key), explore_periods_path(theme: collection.key)]
     more_link_texts = [t('global.navigation.more.agents'), t('global.navigation.more.topics'), t('global.navigation.more.periods')]
 
     browse_entries.each do |entry|

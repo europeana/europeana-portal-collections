@@ -4,7 +4,6 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     assign(:document_list, response.documents)
     assign(:params, blacklight_params)
     allow(view).to receive(:search_state).and_return(search_state)
-    allow(controller).to receive(:search_action_url).and_return('/search')
   end
 
   let(:api_response) do
@@ -89,6 +88,20 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     context 'when collection is fashion' do
       let(:collection) { collections(:fashion) }
       it_behaves_like 'beta version view'
+    end
+  end
+
+  context 'when searching for similar items' do
+    let(:blacklight_params) { { mlt: '/abc/123' } }
+
+    it 'shows a similar items search filter' do
+      render
+      expect(rendered).to have_selector('.search-tags li.mlt a[href="/en/search?q="]')
+    end
+
+    it 'shows the item in the breadcrumb' do
+      render
+      expect(rendered).to have_selector('.breadcrumbs li a[href="/en/record/abc/123.html"]')
     end
   end
 end
