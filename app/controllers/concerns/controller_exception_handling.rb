@@ -17,7 +17,7 @@ module ControllerExceptionHandling
       handle_error(exception: exception, status: 404)
     end
 
-    rescue_from Europeana::API::Errors::Request::PaginationError do |exception|
+    rescue_from Europeana::API::Errors::PaginationError do |exception|
       handle_error(exception: exception, status: 400)
     end
 

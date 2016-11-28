@@ -12,7 +12,7 @@ RSpec.describe 'Search requests' do
     end
 
     it 'searches the API' do
-      expect(a_request(:get, Europeana::API.url + '/search.json').
+      expect(a_request(:get, Europeana::API.url + '/v2/search.json').
         with(query: hash_including(query: 'paris'))).to have_been_made.at_least_once
     end
 

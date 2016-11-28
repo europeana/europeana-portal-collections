@@ -7,13 +7,13 @@ module EuropeanaAPIHelper
   RSpec.configure do |config|
     config.before(:each) do
       # API Search
-      stub_request(:get, Europeana::API.url + '/search.json').
+      stub_request(:get, Europeana::API.url + '/v2/search.json').
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return(body: api_responses(:search),
                   status: 200,
                   headers: { 'Content-Type' => 'text/json' })
 
-      stub_request(:get, Europeana::API.url + '/search.json').
+      stub_request(:get, Europeana::API.url + '/v2/search.json').
         with(query: hash_including(
           wskey: ENV['EUROPEANA_API_KEY'],
           facet: 'PROVIDER',
@@ -24,7 +24,7 @@ module EuropeanaAPIHelper
           status: 200,
           headers: { 'Content-Type' => 'text/json' })
 
-      stub_request(:get, Europeana::API.url + '/search.json').
+      stub_request(:get, Europeana::API.url + '/v2/search.json').
         with(query: hash_including(
           wskey: ENV['EUROPEANA_API_KEY'],
           facet: 'DATA_PROVIDER',
@@ -36,7 +36,7 @@ module EuropeanaAPIHelper
           headers: { 'Content-Type' => 'text/json' })
 
       # API Record
-      stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+.json}).
+      stub_request(:get, %r{#{Europeana::API.url}/v2/record/[^/]+/[^/]+.json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return do |request|
           {
@@ -47,7 +47,7 @@ module EuropeanaAPIHelper
         end
 
       # Record with dcterms:hasPart in proxy
-      stub_request(:get, %r{#{Europeana::API.url}/record/with/dcterms:hasPart.json}).
+      stub_request(:get, %r{#{Europeana::API.url}/v2/record/with/dcterms:hasPart.json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return do |request|
           {
@@ -58,7 +58,7 @@ module EuropeanaAPIHelper
         end
 
       # Record with dcterms:isPartOf in proxy
-      stub_request(:get, %r{#{Europeana::API.url}/record/with/dcterms:isPartOf.json}).
+      stub_request(:get, %r{#{Europeana::API.url}/v2/record/with/dcterms:isPartOf.json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return do |request|
           {
@@ -69,7 +69,7 @@ module EuropeanaAPIHelper
         end
 
       # Record with dcterms:isPartOf in proxy
-      stub_request(:get, %r{#{Europeana::API.url}/record/with/colourpalette.json}).
+      stub_request(:get, %r{#{Europeana::API.url}/v2/record/with/colourpalette.json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return do |request|
           {
@@ -80,7 +80,7 @@ module EuropeanaAPIHelper
         end
 
       # Hierarchy API
-      stub_request(:get, %r{#{Europeana::API.url}/record/[^/]+/[^/]+/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
+      stub_request(:get, %r{#{Europeana::API.url}/v2/record/[^/]+/[^/]+/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return(body: api_responses(:no_hierarchy),
                   status: 200,
@@ -94,25 +94,25 @@ module EuropeanaAPIHelper
   end
 
   def an_api_search_request
-    a_request(:get, Europeana::API.url + '/search.json').
+    a_request(:get, Europeana::API.url + '/v2/search.json').
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
   end
 
   def an_api_collection_search_request(collection_id)
     collection = Collection.find(collection_id)
-    a_request(:get, Europeana::API.url + '/search.json').
+    a_request(:get, Europeana::API.url + '/v2/search.json').
       with(query: hash_including(
         { wskey: ENV['EUROPEANA_API_KEY'] }.merge(Rack::Utils.parse_query(collection.api_params))
       ))
   end
 
   def an_api_record_request_for(id)
-    a_request(:get, Europeana::API.url + "/record#{id}.json").
+    a_request(:get, Europeana::API.url + "/v2/record#{id}.json").
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
   end
 
   def an_api_hierarchy_request_for(id)
-    a_request(:get, %r{#{Europeana::API.url}/record#{id}/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
+    a_request(:get, %r{#{Europeana::API.url}/v2/record#{id}/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
   end
 

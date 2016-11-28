@@ -101,7 +101,9 @@ class PortalController < ApplicationController
 
   def document_hierarchy(document)
     return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
-    Europeana::API::Record.new(document.id).hierarchy.ancestor_self_siblings(api_query_params)
+    Europeana::API.record.ancestor_self_siblings(api_query_params.merge(id: document.id))
+  rescue Europeana::API::Errors::ResourceNotFoundError
+    nil
   end
 
   def has_loggable_parameters?

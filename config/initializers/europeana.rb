@@ -3,7 +3,7 @@ if ENV['EUROPEANA_API_URL']
   require 'europeana/api'
   Europeana::API.url = ENV['EUROPEANA_API_URL']
 end
-Europeana::API.api_key = Blacklight.connection_config[:europeana_api_key]
+Europeana::API.key = Blacklight.connection_config[:europeana_api_key]
 
 # Read some app settings from env vars
 if ENV['EUROPEANA_STYLEGUIDE_CDN'] && !ENV['EUROPEANA_STYLEGUIDE_ASSET_HOST']
