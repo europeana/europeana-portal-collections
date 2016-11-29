@@ -4,6 +4,7 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
+  include Europeana::AnnotationsApiConsumer
   include Europeana::UrlConversions
   include OembedRetriever
 
@@ -106,30 +107,6 @@ class PortalController < ApplicationController
     Europeana::API.record.ancestor_self_siblings(api_query_params.merge(id: document.id))
   rescue Europeana::API::Errors::ResourceNotFoundError
     nil
-  end
-
-  def document_annotations(document)
-    anno_search_params = {
-      wskey: ENV['EUROPEANA_ANNOTATIONS_API_KEY'] || Europeana::API.key,
-      api_url: ENV['EUROPEANA_ANNOTATIONS_API_URL'] || Europeana::API.url,
-      qf: [
-        %(generator_name:"#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu'}"),
-        %(target_id:"http://data.europeana.eu/item#{document.id}")
-      ],
-      query: '*:*',
-      pageSize: 100
-    }
-    Europeana::API.annotation.search(anno_search_params).fetch('items', []).map do |anno|
-      provider = anno.split('/')[-2]
-      id = anno.split('/')[-1]
-      anno_fetch_params = {
-        provider: provider,
-        id: id,
-        wskey: ENV['EUROPEANA_ANNOTATIONS_API_KEY'] || Europeana::API.key,
-        api_url: ENV['EUROPEANA_ANNOTATIONS_API_URL'] || Europeana::API.url,
-      }
-      Europeana::API.annotation.fetch(anno_fetch_params)['body']['@graph']['sameAs']
-    end
   end
 
   def has_loggable_parameters?
