@@ -122,6 +122,11 @@ RSpec.describe PortalController do
     it 'checks that the edm:isShownBy value is sane, i.e. http:// or https://'
     it 'caches the mime-type response'
 
+    it 'requests annotations from the API' do
+      get :show, params
+      expect(an_annotations_api_search_request_for(record_id)).to have_been_made
+    end
+
     context 'when format is HTML' do
       let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
 

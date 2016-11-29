@@ -11,7 +11,7 @@ module EuropeanaAPIHelper
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return(body: api_responses(:search),
                   status: 200,
-                  headers: { 'Content-Type' => 'text/json' })
+                  headers: { 'Content-Type' => 'application/json' })
 
       stub_request(:get, Europeana::API.url + '/v2/search.json').
         with(query: hash_including(
@@ -22,7 +22,7 @@ module EuropeanaAPIHelper
         to_return(
           body: api_responses(:search_facet_provider),
           status: 200,
-          headers: { 'Content-Type' => 'text/json' })
+          headers: { 'Content-Type' => 'application/json' })
 
       stub_request(:get, Europeana::API.url + '/v2/search.json').
         with(query: hash_including(
@@ -33,7 +33,7 @@ module EuropeanaAPIHelper
         to_return(
           body: api_responses(:search_facet_data_provider),
           status: 200,
-          headers: { 'Content-Type' => 'text/json' })
+          headers: { 'Content-Type' => 'application/json' })
 
       # API Record
       stub_request(:get, %r{#{Europeana::API.url}/v2/record/[^/]+/[^/]+.json}).
@@ -42,7 +42,7 @@ module EuropeanaAPIHelper
           {
             body: api_responses(:record, id: record_id_from_request_uri(request)),
             status: 200,
-            headers: { 'Content-Type' => 'text/json' }
+            headers: { 'Content-Type' => 'application/json' }
           }
         end
 
@@ -53,7 +53,7 @@ module EuropeanaAPIHelper
           {
             body: api_responses(:record_with_dcterms_haspart, id: record_id_from_request_uri(request)),
             status: 200,
-            headers: { 'Content-Type' => 'text/json' }
+            headers: { 'Content-Type' => 'application/json' }
           }
         end
 
@@ -64,7 +64,7 @@ module EuropeanaAPIHelper
           {
             body: api_responses(:record_with_dcterms_ispartof, id: record_id_from_request_uri(request)),
             status: 200,
-            headers: { 'Content-Type' => 'text/json' }
+            headers: { 'Content-Type' => 'application/json' }
           }
         end
 
@@ -75,7 +75,7 @@ module EuropeanaAPIHelper
           {
             body: api_responses(:record_with_colourpalette, id: record_id_from_request_uri(request)),
             status: 200,
-            headers: { 'Content-Type' => 'text/json' }
+            headers: { 'Content-Type' => 'application/json' }
           }
         end
 
@@ -84,7 +84,14 @@ module EuropeanaAPIHelper
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
         to_return(body: api_responses(:no_hierarchy),
                   status: 200,
-                  headers: { 'Content-Type' => 'text/json' })
+                  headers: { 'Content-Type' => 'application/json' })
+
+      # Annotations API
+      stub_request(:get, %r{#{Europeana::API.url}/annotations/search}).
+        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
+        to_return(body: api_responses(:annotations_search),
+                  status: 200,
+                  headers: { 'Content-Type' => 'application/ld+json' })
 
       # Media proxy
       stub_request(:head, %r{#{Rails.application.config.x.europeana_media_proxy}/[^/]+/[^/]+}).
@@ -114,6 +121,22 @@ module EuropeanaAPIHelper
   def an_api_hierarchy_request_for(id)
     a_request(:get, %r{#{Europeana::API.url}/v2/record#{id}/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
+  end
+
+  def an_annotations_api_search_request_for(id)
+    a_request(:get, Europeana::API.url + "/annotations/search").
+      with(query: hash_including(
+        wskey: ENV['EUROPEANA_API_KEY'],
+        qf: %(target_id:"http://data.europeana.eu/item#{id}")
+      ))
+  end
+
+  def an_annotations_api_fetch_request_for(id)
+    a_request(:get, Europeana::API.url + "/annotations/search").
+      with(query: hash_including(
+        wskey: ENV['EUROPEANA_API_KEY'],
+        qf: %(target_id:"http://data.europeana.eu/item#{id}")
+      ))
   end
 
   def a_media_proxy_request_for(id)
