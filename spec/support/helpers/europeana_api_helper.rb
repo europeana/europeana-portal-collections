@@ -22,7 +22,8 @@ module EuropeanaAPIHelper
         to_return(
           body: api_responses(:search_facet_provider),
           status: 200,
-          headers: { 'Content-Type' => 'application/json' })
+          headers: { 'Content-Type' => 'application/json' }
+        )
 
       stub_request(:get, Europeana::API.url + '/v2/search.json').
         with(query: hash_including(
@@ -33,7 +34,8 @@ module EuropeanaAPIHelper
         to_return(
           body: api_responses(:search_facet_data_provider),
           status: 200,
-          headers: { 'Content-Type' => 'application/json' })
+          headers: { 'Content-Type' => 'application/json' }
+        )
 
       # API Record
       stub_request(:get, %r{#{Europeana::API.url}/v2/record/[^/]+/[^/]+.json}).
@@ -124,15 +126,7 @@ module EuropeanaAPIHelper
   end
 
   def an_annotations_api_search_request_for(id)
-    a_request(:get, Europeana::API.url + "/annotations/search").
-      with(query: hash_including(
-        wskey: ENV['EUROPEANA_API_KEY'],
-        qf: %(target_id:"http://data.europeana.eu/item#{id}")
-      ))
-  end
-
-  def an_annotations_api_fetch_request_for(id)
-    a_request(:get, Europeana::API.url + "/annotations/search").
+    a_request(:get, Europeana::API.url + '/annotations/search').
       with(query: hash_including(
         wskey: ENV['EUROPEANA_API_KEY'],
         qf: %(target_id:"http://data.europeana.eu/item#{id}")
