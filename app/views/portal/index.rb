@@ -354,7 +354,7 @@ module Portal
 
       uri.scheme = @api_uri.scheme
       uri.host = @api_uri.host
-      uri.path = @api_uri.path + '/thumbnail-by-url.json'
+      uri.path = @api_uri.path + '/v2/thumbnail-by-url.json'
       uri.query = query.to_query
 
       uri.to_s

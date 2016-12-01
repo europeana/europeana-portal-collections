@@ -41,7 +41,11 @@ module Portal
 
     def navigation
       mustache[:navigation] ||= begin
-        { back_url: back_url_from_referer }.reverse_merge(super)
+        {
+          back_url: back_url_from_referer,
+          back_label: t('site.navigation.breadcrumb.results_list'),
+          last_label: t('site.navigation.breadcrumb.item_detail')
+        }.reverse_merge(super)
       end
     end
 

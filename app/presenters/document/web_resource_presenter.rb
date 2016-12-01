@@ -281,7 +281,7 @@ module Document
 
     def api_thumbnail(use_small)
       width = use_small ? '200' : '400'
-      api_url + '/thumbnail-by-url.json?size=w' + width + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+      api_url + '/v2/thumbnail-by-url.json?size=w' + width + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
     end
 
     def player
