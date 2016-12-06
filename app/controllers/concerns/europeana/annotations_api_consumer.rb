@@ -18,8 +18,6 @@ module Europeana
       responses.map do |annotation|
         if annotation['body'] && annotation['body']['@graph']
           annotation['body']['@graph']['sameAs']
-        else
-          nil
         end
       end.compact
     end
