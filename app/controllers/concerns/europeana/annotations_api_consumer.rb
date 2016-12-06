@@ -6,11 +6,22 @@ module Europeana
     extend ActiveSupport::Concern
 
     def document_annotations(document)
-      Europeana::API.annotation.search(annotations_api_search_params(document)).fetch('items', []).map do |anno|
-        provider = anno.split('/')[-2]
-        id = anno.split('/')[-1]
-        Europeana::API.annotation.fetch(annotations_api_fetch_params(provider, id))['body']['@graph']['sameAs']
+      search = Europeana::API.annotation.search(annotations_api_search_params(document))
+
+      responses = Europeana::API.in_parallel do |queue|
+        search.fetch('items', []).each do |item|
+          provider, id = item.split('/')[-2..-1]
+          queue.add(:annotation, :fetch, annotations_api_fetch_params(provider, id))
+        end
       end
+
+      responses.map do |annotation|
+        if annotation['body'] && annotation['body']['@graph']
+          annotation['body']['@graph']['sameAs']
+        else
+          nil
+        end
+      end.compact
     end
 
     def annotations_api_search_params(document)
