@@ -85,11 +85,11 @@ module Portal
     def record_annotations
       {
         title: t('annotations', scope: 'site.object.meta-label'),
+        info: static_page_path('annotations', format: 'html'),
         sections: [
           {
-            info: static_page_path('annotations', format: 'html'),
             items: @annotations.map { |anno| { url: anno, text: anno, preserve_case: true } },
-            title: false
+            title: t('site.object.meta-label.relations')
           }
         ]
       }
