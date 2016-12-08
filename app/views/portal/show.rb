@@ -88,7 +88,8 @@ module Portal
         sections: [
           {
             info: static_page_path('annotations', format: 'html'),
-            items: @annotations.map { |anno| { url: anno, text: anno } }
+            items: @annotations.map { |anno| { url: anno, text: anno, preserve_case: true } },
+            title: false
           }
         ]
       }
