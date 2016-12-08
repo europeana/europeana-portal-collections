@@ -53,6 +53,7 @@ module Portal
       mustache[:content] ||= begin
         {
           object: {
+            annotations: @annotations.blank? ? nil : record_annotations,
             creator: creator_title,
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
@@ -79,6 +80,18 @@ module Portal
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(super)
       end
+    end
+
+    def record_annotations
+      {
+        title: t('annotations', scope: 'site.object.meta-label'),
+        sections: [
+          {
+            info: static_page_path('annotations', format: 'html'),
+            items: @annotations.map { |anno| { url: anno, text: anno } }
+          }
+        ]
+      }
     end
 
     def labels
