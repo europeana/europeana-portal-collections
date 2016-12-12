@@ -20,7 +20,6 @@ gem 'devise', '~> 3.5.4'
 gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', branch: 'develop'
 gem 'europeana-blacklight', '~> 0.5.0', github: 'europeana/europeana-blacklight', branch: 'develop'
 gem 'europeana-feedback-button', '0.0.4'
-gem 'europeana-logging', '~> 0.0.4'
 gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
@@ -45,6 +44,7 @@ gem 'therubyracer'
 gem 'i18n_data'
 
 group :production do
+  gem 'europeana-logging', '~> 0.1.0'
   gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end
