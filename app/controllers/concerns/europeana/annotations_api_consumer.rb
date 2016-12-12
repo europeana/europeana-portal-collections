@@ -25,7 +25,7 @@ module Europeana
     def annotations_api_search_params(document)
       {
         qf: [
-          %(generator_name:"#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu'}"),
+          %(generator_name:#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu*'}),
           %(target_id:"http://data.europeana.eu/item#{document.id}")
         ],
         query: '*:*',
