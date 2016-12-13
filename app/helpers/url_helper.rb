@@ -56,6 +56,14 @@ module UrlHelper
     search_path(browse_entry_query)
   end
 
+  def enquote_and_escape(val)
+    '"' +  val.gsub('"', '\\"') + '"'
+  end
+
+  def parenthesise_and_escape(val)
+    '(' +  val.gsub('(', '\\(').gsub(')', '\\)') + ')'
+  end
+
   def exhibitions_path(locale = I18n.locale)
     home_path(locale: locale) + '/exhibitions'
   end
