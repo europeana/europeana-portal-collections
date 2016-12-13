@@ -5,6 +5,7 @@ module Document
   class FieldGroupPresenter < DocumentPresenter
     include Field::Entities
     include Field::Labelling
+    include UrlHelper
 
     ##
     # Load the field group definition from the config file
@@ -88,11 +89,7 @@ module Document
 
       search_val = val.gsub(/[()\[\]<>]/, '')
 
-      if quoted
-        search_val = sprintf('"%s"', search_val.gsub('"', '\\"'))
-      else
-        search_val = sprintf('(%s)', search_val.gsub('(', '\\(').gsub(')', '\\)'))
-      end
+      search_val = quoted ? enquote_facet_url_parameter(search_val) : parenthesise_facet_url_parameter(search_val)
 
       search_path(controller.default_url_options.merge(q: "#{field}:#{search_val}"))
     end
