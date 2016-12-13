@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ##
 # Logs search interactions
 module SearchInteractionLogging
@@ -17,7 +18,7 @@ module SearchInteractionLogging
   end
 
   def current_page_is_search_request?
-    is_search_request?(current_path)
+    search_request?(current_path)
   end
 
   def search_urls
@@ -25,10 +26,10 @@ module SearchInteractionLogging
   end
 
   def referer_was_search_request?
-    is_search_request?(request.referer)
+    search_request?(request.referer)
   end
 
-  def is_search_request?(url)
+  def search_request?(url)
     return false unless url.present?
     search_urls.any? { |u| url.match "^#{u}(\\?|$)" }
   end
