@@ -88,8 +88,11 @@ module Document
 
       search_val = val.gsub(/[()\[\]<>]/, '')
 
-      format = quoted ? '"%s"' : '(%s)'
-      search_val = sprintf(format, search_val)
+      if quoted
+        search_val = sprintf('"%s"', search_val.gsub('"', '\\"'))
+      else
+        search_val = sprintf('(%s)', search_val.gsub('(', '\\(').gsub(')', '\\)'))
+      end
 
       search_path(controller.default_url_options.merge(q: "#{field}:#{search_val}"))
     end
