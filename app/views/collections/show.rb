@@ -65,6 +65,7 @@ module Collections
               items: @landing_page.credits.to_a
             }
           },
+          "layout_#{@landing_page.layout_type}".to_sym => true,
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),

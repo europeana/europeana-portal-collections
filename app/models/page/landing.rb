@@ -10,4 +10,24 @@ class Page::Landing < Page
   translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
   default_scope { includes(:translations) }
+
+  validates :layout_type, inclusion: { in: :layout_type_enum }
+
+  def layout_type_enum
+    %w(default browse)
+  end
+
+  def layout_type=(value)
+    if self.class.column_names.include? 'layout_type'
+      write_attribute(:layout_type, value)
+    end
+  end
+
+  def layout_type
+    if self.class.column_names.include? 'layout_type'
+      return read_attribute(:layout_type)
+    else
+      return 'default'
+    end
+  end
 end
