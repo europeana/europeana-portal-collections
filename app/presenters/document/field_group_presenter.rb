@@ -89,7 +89,7 @@ module Document
 
       search_val = val.gsub(/[()\[\]<>]/, '')
 
-      search_val = quoted ? enquote_facet_url_parameter(search_val) : parenthesise_facet_url_parameter(search_val)
+      search_val = quoted ? enquote_and_escape(search_val) : parenthesise_and_escape(search_val)
 
       search_path(controller.default_url_options.merge(q: "#{field}:#{search_val}"))
     end
