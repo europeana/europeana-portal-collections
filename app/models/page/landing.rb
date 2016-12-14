@@ -11,23 +11,19 @@ class Page::Landing < Page
   accepts_nested_attributes_for :translations, allow_destroy: true
   default_scope { includes(:translations) }
 
-  validates :layout_type, inclusion: { in: :layout_type_enum }
+  has_settings :layout_type
 
-  def layout_type_enum
-    %w(default browse)
-  end
+  validates :settings_layout_type, inclusion: { in: :settings_layout_type_enum }
 
-  def layout_type=(value)
-    if self.class.column_names.include? 'layout_type'
-      write_attribute(:layout_type, value)
+  delegate :settings_layout_type_enum, to: :class
+
+  class << self
+    def settings_layout_type_enum
+      %w(default browse)
     end
   end
 
-  def layout_type
-    if self.class.column_names.include? 'layout_type'
-      return read_attribute(:layout_type)
-    else
-      return 'default'
-    end
+  def settings_layout_type
+    settings[:layout_type] ? settings[:layout_type] : 'default'
   end
 end

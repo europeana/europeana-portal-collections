@@ -368,7 +368,7 @@ RailsAdmin.config do |config|
     edit do
       field :slug
       field :title
-      field :layout_type, :enum
+      field :settings_layout_type, :enum
       field :body, :text do
         html_attributes rows: 15, cols: 80
       end
