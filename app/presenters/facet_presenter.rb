@@ -140,8 +140,18 @@ class FacetPresenter
     @facet.items.select { |item| facet_in_params?(facet_name, item) }
   end
 
+  ##
+  # Sometimes selected facets are not returned by the API, so we need to inject
+  # them from the URL parameters.
+  def items_from_params
+    ips = items_in_params
+    fps = facet_params(facet_name)
+    extras = fps.nil? ? [] : fps.reject { |fp| ips.any? { |ip| ip.value == fp } }
+    ips + extras.map { |e| Europeana::Blacklight::Response::Facets::FacetItem.new(value: e) }
+  end
+
   def filter_items
-    items_in_params.map { |item| filter_item(item) }
+    items_from_params.map { |item| filter_item(item) }
   end
 
   ##
