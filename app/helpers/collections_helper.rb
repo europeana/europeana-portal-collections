@@ -2,6 +2,7 @@
 # Collections helpers
 module CollectionsHelper
   include FeedHelper
+  include NewsworthyView
 
   ##
   # Returns the keys of all {Collection}s
@@ -64,10 +65,19 @@ module CollectionsHelper
             src: feed_entry_thumbnail_url(item),
             alt: item.title
           },
-          title: false
+          title: false,
+          date: item.published,
+          excerpt: {
+              short: CGI.unescapeHTML(item.summary)
+          },
+          type: 'tumblr'
         }
       end
     }
+  end
+
+  def collection_feeds_content(collection, options = {})
+    collection_tumblr_feed_content(collection, options)
   end
 
   def beta_collection?(collection)

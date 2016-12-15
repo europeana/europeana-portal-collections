@@ -78,7 +78,7 @@ module Collections
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
-          carousel: helpers.collection_tumblr_feed_content(@collection)
+          carousel: carousel_data
         }.reverse_merge(super)
       end
     end
@@ -88,6 +88,15 @@ module Collections
     end
 
     private
+
+    def carousel_data
+      case @landing_page.settings[:layout_type]
+        when 'default'
+          helpers.collection_tumblr_feed_content(@collection)
+        when 'browse'
+          helpers.collection_feeds_content(@collection)
+      end
+    end
 
     def strapline
       @landing_page.strapline.present? ? @landing_page.strapline(total_item_count: number_with_delimiter(@total_item_count)) : nil
