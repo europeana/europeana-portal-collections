@@ -38,6 +38,112 @@ module Collections
       'channel_landing'
     end
 
+    # TODO: configure this in the CMS
+    def logo_class
+      'fashion-logo'
+    end
+
+    # TODO: configure this in the CMS
+    def entry_points
+      [
+        {
+          title: 'Designer',
+          items: [
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Alexander McQueen',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_7.png'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Agath Ruiz de la Prada',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_8.png'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Vivienne Westwood',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_9.png'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Christian Dior',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_10.png'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Armani',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_11.png'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Burberry',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_12.png'
+          }
+        ]
+      },
+      {
+        title: 'Item Type',
+        items: [
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Shoes',
+            image_url: false
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Couture Collections',
+            image_url: false
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Hats',
+            image_url: false
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Jewellery',
+            image_url: false
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Sketches',
+            image_url: false
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            label: 'Illlustrations',
+            image_url: false
+          }
+        ]
+      },
+      {
+        title: "Technique",
+        items: [
+          {
+            url: 'javascript:alert(\'follow link\');',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_13.png',
+            label: 'Patterns'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_14.png',
+            label: 'Winter'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_15.png',
+            label: 'Zoolander'
+          },
+          {
+            url: 'javascript:alert(\'follow link\');',
+            image_url: 'http://styleguide.europeana.eu/images/sample/entry_fashion_16.png',
+            label: 'Ga-ga-Gangnam'
+          }
+        ]
+      }
+    ]
+    end
+
     def globalnav_options
       mustache[:globalnav_options] ||= begin
         {
@@ -68,6 +174,7 @@ module Collections
           "layout_#{@landing_page.settings_layout_type}".to_sym => true,
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
+          entry_points: entry_points,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
