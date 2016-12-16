@@ -2,7 +2,6 @@
 # Collections helpers
 module CollectionsHelper
   include FeedHelper
-  include NewsworthyView
 
   ##
   # Returns the keys of all {Collection}s
@@ -45,39 +44,85 @@ module CollectionsHelper
   def collection_tumblr_feed_content(collection, options = {})
     page = options[:page] || 1
     per_page = options[:per_page] || 12
-
     key = collection.key.underscore.to_sym
-    url = Cache::FeedJob::URLS[:tumblr][key]
-    feed = cached_feed(url)
-    return nil if feed.blank? || feed.entries.blank?
+    options[:feed_job_url] = :tumblr
+    items = collections_feed_items_for(collection, options = {})
 
-    paginated_items = Kaminari.paginate_array(feed.entries).page(page).per(per_page)
+    return nil if items.blank?
 
+    paginated_items = Kaminari.paginate_array(items).page(page).per(per_page)
     {
       title: 'Tumblr',
       tumblr_url: Cache::FeedJob::URLS[:tumblr][key].sub('/rss', ''),
       more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json),
       more_items_total: paginated_items.total_count,
-      items: paginated_items.map do |item|
-        {
+      items: items
+    }
+  end
+
+
+  def collections_feed_items_for(collection, options = {})
+    feed_job_urls_key =  options[:feed_job_url] || :blog
+    key = collection.key.underscore.to_sym
+    url = Cache::FeedJob::URLS[feed_job_urls_key][key]
+    feed = cached_feed(url)
+
+    return [] if feed.blank? || feed.entries.blank?
+
+    feed.entries.map do |item|
+      {
           url: CGI.unescapeHTML(item.url),
           img: {
-            src: feed_entry_thumbnail_url(item),
-            alt: item.title
+              src: feed_entry_thumbnail_url(item),
+              alt: item.title
           },
           title: false,
           date: item.published,
           excerpt: {
               short: CGI.unescapeHTML(item.summary)
           },
-          type: 'tumblr'
-        }
-      end
-    }
+          type: feed_job_urls_key.to_s
+      }
+    end
   end
 
+
+
   def collection_feeds_content(collection, options = {})
-    collection_tumblr_feed_content(collection, options)
+    page = options[:page] || 1
+    per_page = options[:per_page] || 12
+    key = collection.key.underscore.to_sym
+
+    options[:feed_job_url] = :tumblr
+    tumblr_items = collections_feed_items_for(collection, options)
+    options[:feed_job_url] = :blog
+    news_items = collections_feed_items_for(collection, options)
+
+    combined_items = tumblr_items + news_items
+    combined_items.sort_by! { |item| item[:date] }
+    combined_items.reverse!
+
+    return nil if combined_items.blank?
+
+    paginated_items = Kaminari.paginate_array(combined_items).page(page).per(per_page)
+
+    content = {
+      title: false,
+      tumblr_url: Cache::FeedJob::URLS[:tumblr][key].sub('/rss', ''),
+      more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json),
+      more_items_total: paginated_items.total_count,
+      rss_urls: [
+        {
+          label: 'tumblr',
+          url: Cache::FeedJob::URLS[:tumblr][key]
+        },
+        {
+          label: 'news',
+          url: Cache::FeedJob::URLS[:blog][key]
+        }
+      ],
+      items: paginated_items
+    }
   end
 
   def beta_collection?(collection)
