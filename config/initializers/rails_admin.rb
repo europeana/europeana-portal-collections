@@ -96,6 +96,8 @@ RailsAdmin.config do |config|
       field :query
       field :file, :paperclip
       field :subject_type
+      field :is_facet, :boolean
+      field :facet_field
       field :collections do
         inline_add false
       end

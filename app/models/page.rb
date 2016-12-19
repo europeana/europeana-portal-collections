@@ -32,7 +32,6 @@ class Page < ActiveRecord::Base
   default_scope { includes(:translations) }
 
   validates :slug, uniqueness: true
-  validates :browse_entries, length: { maximum: 6 }
   validate :browse_entries_validation
 
 
@@ -63,6 +62,10 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def facet_entries
+    browse_entries.where(is_facet: true)
+  end
+
   def browse_entry_ids=(ids)
     super
 
@@ -88,6 +91,9 @@ class Page < ActiveRecord::Base
     end
     unless (period_count % 3).zero?
       errors.add(:browse_entries, "for periods need to be in groups of 3, you have provided #{period_count}")
+    end
+    unless period_count + topic_count + person_count <=6
+      errors.add(:browse_entries, "total count of 'non facet' Type entries need to be equal to 3 or 6.")
     end
   end
 end
