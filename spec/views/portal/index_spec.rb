@@ -4,6 +4,7 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     assign(:document_list, response.documents)
     assign(:params, blacklight_params)
     allow(view).to receive(:search_state).and_return(search_state)
+    allow(controller).to receive(:params).and_return(blacklight_params)
   end
 
   let(:api_response) do
