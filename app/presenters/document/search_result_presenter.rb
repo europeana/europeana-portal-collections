@@ -39,7 +39,7 @@ module Document
     end
 
     def field_value(fields, **options)
-      super(fields, options.merge(context: :index)
+      super(fields, options.merge(context: :index))
     end
 
     def title

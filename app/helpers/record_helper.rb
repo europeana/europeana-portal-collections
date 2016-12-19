@@ -3,9 +3,9 @@ module RecordHelper
     similar.map do |doc|
       {
         url: document_path(doc, format: 'html'),
-        title: presenter(doc).field_value(['dcTitleLangAware', 'title']),
+        title: presenter(doc).field_value(%w(dcTitleLangAware title)),
         img: {
-          alt: presenter(doc).field_value(['dcTitleLangAware', 'title']),
+          alt: presenter(doc).field_value(%w(dcTitleLangAware title)),
           # temporary fix until API contains correct image url
           # src: render_document_show_field_value(doc, 'edmPreview'),
           src: record_preview_url(presenter(doc).field_value('edmPreview'), 400)
