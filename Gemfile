@@ -44,7 +44,7 @@ gem 'therubyracer'
 gem 'i18n_data'
 
 group :production do
-  gem 'europeana-logging', '~> 0.1.0'
+  gem 'europeana-logging', '~> 0.1.1'
   gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end
