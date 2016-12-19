@@ -5,18 +5,6 @@ module Document
     include Record::IIIF
     include Metadata::Rights
 
-    def field_value(fields, **options)
-      unescape = options[:unescape]
-
-      [fields].flatten.each do |field|
-        value = render_document_show_field_value(field, options.except(:unescape))
-        value = CGI.unescapeHTML(value.to_str) if unescape
-        return value unless value.blank?
-      end
-
-      nil
-    end
-
     def edm_is_shown_by
       @edm_is_shown_by ||= field_value('aggregations.edmIsShownBy')
     end

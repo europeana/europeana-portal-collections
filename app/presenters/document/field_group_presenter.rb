@@ -101,7 +101,7 @@ module Document
         {}.tap do |item|
           item[:text] = val
           if section[:url]
-            item[:url] = render_document_show_field_value(document, section[:url])
+            item[:url] = field_value(section[:url])
           elsif section[:search_field]
             item[:url] = section_field_search_path(val, section[:search_field], section[:quoted])
           end

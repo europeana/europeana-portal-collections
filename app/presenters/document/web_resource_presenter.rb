@@ -65,24 +65,24 @@ module Document
 
     def url
       @url ||= begin
-        url = render_document_show_field_value('about')
+        url = field_value('about')
         @controller.url_conversions[url] || url
       end
     end
 
     def media_rights
       @media_rights ||= begin
-        rights = render_document_show_field_value('webResourceEdmRights')
+        rights = field_value('webResourceEdmRights')
         rights.blank? ? @record_presenter.media_rights : rights
       end
     end
 
     def mime_type
-      @mime_type ||= render_document_show_field_value('ebucoreHasMimeType')
+      @mime_type ||= field_value('ebucoreHasMimeType')
     end
 
     def record_type
-      @record_type ||= @record_presenter.render_document_show_field_value('type')
+      @record_type ||= @record_presenter.field_value('type')
     end
 
     # Media type function normalises mime types
@@ -150,36 +150,32 @@ module Document
     end
 
     def media_metadata
-      width = render_document_show_field_value('ebucoreWidth')
-      height = render_document_show_field_value('ebucoreHeight')
+      width = field_value('ebucoreWidth')
+      height = field_value('ebucoreHeight')
 
-      file_size = number_to_human_size(render_document_show_field_value('ebucoreFileByteSize')) || ''
+      file_size = number_to_human_size(field_value('ebucoreFileByteSize')) || ''
       {
         mime_type: mime_type,
-        format: render_document_show_field_value('ebucoreHasMimeType'),
+        format: field_value('ebucoreHasMimeType'),
         file_size: file_size.split(' ').first,
         file_unit: file_size.split(' ').last,
-        codec: render_document_show_field_value('edmCodecName'),
+        codec: field_value('edmCodecName'),
         width: width,
         height: height,
         width_or_height: !(width.blank? && height.blank?),
         size_unit: 'pixels',
-        runtime: render_document_show_field_value('ebucoreDuration'),
+        runtime: field_value('ebucoreDuration'),
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
-        attribution_plain: render_document_show_field_value('textAttributionSnippet'),
-        attribution_html: render_document_show_field_value('htmlAttributionSnippet'),
+        attribution_plain: field_value('textAttributionSnippet'),
+        attribution_html: field_value('htmlAttributionSnippet'),
         colours: colour_palette_data,
 
-        dc_description: render_document_show_field_value('dcDescription'),
-        dc_creator: render_document_show_field_value('dcCreator'),
-        dc_source: render_document_show_field_value('dcSource'),
-        dc_rights: render_document_show_field_value('webResourceDcRights'),
+        dc_description: field_value('dcDescription'),
+        dc_creator: field_value('dcCreator'),
+        dc_source: field_value('dcSource'),
+        dc_rights: field_value('webResourceDcRights'),
         edm_rights: {
-          model: simple_rights(
-            EDM::Rights.normalise(
-              render_document_show_field_value('webResourceEdmRights')
-            )
-          )
+          model: simple_rights(EDM::Rights.normalise(field_value('webResourceEdmRights')))
         }.as_json.to_s.gsub!('=>', ': ').gsub!('nil', 'false')
       }
     end

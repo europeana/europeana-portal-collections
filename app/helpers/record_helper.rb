@@ -3,12 +3,12 @@ module RecordHelper
     similar.map do |doc|
       {
         url: document_path(doc, format: 'html'),
-        title: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+        title: presenter(doc).field_value(['dcTitleLangAware', 'title']),
         img: {
-          alt: render_document_show_field_value(doc, ['dcTitleLangAware', 'title']),
+          alt: presenter(doc).field_value(['dcTitleLangAware', 'title']),
           # temporary fix until API contains correct image url
           # src: render_document_show_field_value(doc, 'edmPreview'),
-          src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 400)
+          src: record_preview_url(presenter(doc).field_value('edmPreview'), 400)
         }
       }
     end
@@ -48,8 +48,8 @@ module RecordHelper
   def hierarchy_node(item)
     return nil unless item.present?
     {
-      title: render_document_show_field_value(item, 'title'),
-      index: render_document_show_field_value(item, 'index'),
+      title: presenter(doc).field_value(item, 'title'),
+      index: presenter(doc).field_value(item, 'index'),
       url: document_path(item, format: 'html'),
       is_current: (item.id == @document.id)
     }

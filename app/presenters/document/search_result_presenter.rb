@@ -39,15 +39,7 @@ module Document
     end
 
     def field_value(fields, **options)
-      unescape = options[:unescape]
-
-      [fields].flatten.each do |field|
-        value = render_index_field_value(field, options.except(:unescape))
-        value = CGI.unescapeHTML(value.to_str) if unescape
-        return value unless value.blank?
-      end
-
-      nil
+      super(fields, options.merge(context: :index)
     end
 
     def title
