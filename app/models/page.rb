@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Page < ActiveRecord::Base
   include HasPublicationStates
   include HasSettingsAttribute
@@ -92,7 +93,7 @@ class Page < ActiveRecord::Base
     unless (period_count % 3).zero?
       errors.add(:browse_entries, "for periods need to be in groups of 3, you have provided #{period_count}")
     end
-    unless period_count + topic_count + person_count <=6
+    unless period_count + topic_count + person_count <= 6
       errors.add(:browse_entries, "total count of 'non facet' Type entries need to be equal to 3 or 6.")
     end
   end
