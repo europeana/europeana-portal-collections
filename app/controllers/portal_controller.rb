@@ -29,7 +29,14 @@ class PortalController < ApplicationController
     )
 
     respond_to do |format|
-      format.html { store_preferred_view }
+      format.html
+      format.json do
+        render json: {
+          search_results: @document_list.map do |doc|
+            Document::SearchResultPresenter.new(doc, @response, self).content
+          end
+        }
+      end
     end
   end
 
