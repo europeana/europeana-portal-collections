@@ -62,3 +62,8 @@ century_18_period:
   query: "when:18??"
   state: 1
   subject_type: 2
+
+designer_someone_facet:
+  query: "f[Creator][]=someone"
+  state: 1
+  facet_field: 'Designer'

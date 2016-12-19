@@ -50,6 +50,20 @@ RSpec.describe Page do
         expect(subject).to be_valid
       end
     end
+    context 'when there are 3 topic and 3 person browse entries and a facet browse entry' do
+      before do
+        subject.browse_entries.append(browse_entries(:opera_topic))
+        subject.browse_entries.append(browse_entries(:cinema_topic))
+        subject.browse_entries.append(browse_entries(:music_topic))
+        subject.browse_entries.append(browse_entries(:van_gogh_person))
+        subject.browse_entries.append(browse_entries(:hokusai_person))
+        subject.browse_entries.append(browse_entries(:sandro_botticelli_person))
+        subject.browse_entries.append(browse_entries(:designer_someone_facet))
+      end
+      it 'should be valid' do
+        expect(subject).to be_valid
+      end
+    end
     context 'when there are 7 topic browse entries' do
       before do
         subject.browse_entries.append(browse_entries(:opera_topic))
