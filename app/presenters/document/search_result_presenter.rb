@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Document
   ##
   # Presenter for a search result
@@ -50,7 +51,7 @@ module Document
     end
 
     def title
-      truncate(field_value(['dcTitleLangAware', 'title'], unescape: true),
+      truncate(field_value(%w(dcTitleLangAware title), unescape: true),
                length: 225,
                separator: ' ',
                escape: false)
@@ -58,7 +59,7 @@ module Document
 
     def text
       {
-        medium: truncate(field_value(['dcDescriptionLangAware', 'dcDescription'], unescape: true),
+        medium: truncate(field_value(%w(dcDescriptionLangAware dcDescription), unescape: true),
                          length: 277,
                          separator: ' ',
                          escape: false)
