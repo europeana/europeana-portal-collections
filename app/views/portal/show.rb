@@ -14,8 +14,8 @@ module Portal
 
     def head_meta
       mustache[:head_meta] ||= begin
-        landing = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
-        preview = record_preview_url(render_document_show_field_value(document, 'europeanaAggregation.edmPreview', unescape: true))
+        landing = field_value('europeanaAggregation.edmLandingPage')
+        preview = record_preview_url(field_value('europeanaAggregation.edmPreview', unescape: true))
 
         head_meta = [
           { meta_name: 'description', content: meta_description },
@@ -57,7 +57,7 @@ module Portal
             creator: creator_title,
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
-            creation_date: render_document_show_field_value(document, 'proxies.dctermsCreated'),
+            creation_date: field_value('proxies.dctermsCreated'),
             dates: presenter.field_group(:time),
             description: presenter.field_group(:description),
             # download: content_object_download,
@@ -71,13 +71,13 @@ module Portal
             social_share: social_share,
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
             title: [display_title, creator_title].compact.join(' | '),
-            type: render_document_show_field_value(document, 'proxies.dcType')
+            type: field_value('proxies.dcType')
           },
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
-          thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+          thumbnail: field_value('europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(super)
       end
     end
@@ -121,12 +121,12 @@ module Portal
     end
 
     def institution_name_and_link
-      is_shown_at = render_document_show_field_value(document, 'aggregations.edmIsShownAt')
-      is_shown_by = nil # render_document_show_field_value(document, 'aggregations.edmIsShownBy')
+      is_shown_at = field_value('aggregations.edmIsShownAt')
+      is_shown_by = nil # field_value('aggregations.edmIsShownBy')
       at_or_by = is_shown_at || is_shown_by
 
-      provider = render_document_show_field_value(document, 'aggregations.edmProvider')
-      data_provider = render_document_show_field_value(document, 'aggregations.edmDataProvider')
+      provider = field_value('aggregations.edmProvider')
+      data_provider = field_value('aggregations.edmDataProvider')
       data_provider_or_provider = data_provider || provider
 
       if at_or_by && data_provider_or_provider
@@ -150,7 +150,7 @@ module Portal
     end
 
     def social_share
-      url = render_document_show_field_value(document, 'europeanaAggregation.edmLandingPage')
+      url = field_value('europeanaAggregation.edmLandingPage')
       {
         url: url ? URI.escape(url) : false,
         facebook: true,
@@ -163,21 +163,21 @@ module Portal
 
     def origin
       {
-        url: render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+        url: field_value('aggregations.edmIsShownAt'),
         institution_name: institution_name,
         institution_name_and_link: institution_name_and_link,
-        institution_country: render_document_show_field_value(document, 'europeanaAggregation.edmCountry'),
+        institution_country: field_value('europeanaAggregation.edmCountry'),
         institution_canned_search: institution_canned_search
       }
     end
 
     def institution_name
-      render_document_show_field_value(document, 'aggregations.edmDataProvider') ||
-        render_document_show_field_value(document, 'aggregations.edmProvider')
+      field_value('aggregations.edmDataProvider') ||
+        field_value('aggregations.edmProvider')
     end
 
     def institution_canned_search
-      edm_data_provider = render_document_show_field_value(document, 'aggregations.edmDataProvider')
+      edm_data_provider = field_value('aggregations.edmDataProvider')
       return false if edm_data_provider.blank?
       search_path(f: { 'DATA_PROVIDER' => [edm_data_provider] })
     end
@@ -197,8 +197,8 @@ module Portal
         present: meta_additional_present?,
         places: presenter.field_group(:location),
         geo: {
-          latitude: '"' + (render_document_show_field_value(document, 'places.latitude') || '') + '"',
-          longitude: '"' + (render_document_show_field_value(document, 'places.longitude') || '') + '"',
+          latitude: '"' + (field_value('places.latitude') || '') + '"',
+          longitude: '"' + (field_value('places.longitude') || '') + '"',
           long_and_lat: long_and_lat?,
           #placeName: document.fetch('places.prefLabel', []).first,
           placeName: pref_label(document, 'places.prefLabel'),
@@ -244,12 +244,12 @@ module Portal
         items: @similar.map do |doc|
           {
             url: document_path(doc, format: 'html'),
-            title: render_document_show_field_value(doc, %w(dcTitleLangAware title)),
+            title: field_value(%w(dcTitleLangAware title)),
             img: {
-              alt: render_document_show_field_value(doc, %w(dcTitleLangAware title)),
+              alt: field_value(%w(dcTitleLangAware title)),
               # temporary fix until API contains correct image url
-              # src: render_document_show_field_value(doc, 'edmPreview'),
-              src: record_preview_url(render_document_show_field_value(doc, 'edmPreview'), 400)
+              # src: field_value('edmPreview'),
+              src: record_preview_url(field_value('edmPreview'), 400)
             }
           }
         end
@@ -264,14 +264,14 @@ module Portal
 
     def meta_description
       mustache[:meta_description] ||= begin
-        description = render_document_show_field_value(document, 'proxies.dcDescription')
+        description = field_value('proxies.dcDescription')
         truncate(strip_tags(description), length: 350, separator: ' ')
       end
     end
 
     def og_description
       mustache[:og_description] ||= begin
-        description = render_document_show_field_value(document, 'proxies.dcDescription', unescape: true)
+        description = field_value('proxies.dcDescription', unescape: true)
         if description.present?
           truncate(description.split('.').first(3).join('.'), length: 200)
         else
@@ -282,16 +282,16 @@ module Portal
 
     def og_title
       mustache[:og_title] ||= begin
-        render_document_show_field_value(document, 'proxies.dcTitle', unescape: true) ||
-          render_document_show_field_value(document, 'proxies.dctermsAlternative') ||
-          render_document_show_field_value(document, 'proxies.dcDescription') ||
-          render_document_show_field_value(document, 'proxies.dcIdentifier')
+        field_value('proxies.dcTitle', unescape: true) ||
+          field_value('proxies.dctermsAlternative') ||
+          field_value('proxies.dcDescription') ||
+          field_value('proxies.dcIdentifier')
       end
     end
 
     def collect_values(fields, doc = document)
       fields.map do |field|
-        render_document_show_field_value(doc, field)
+        field_value(field)
       end.compact.uniq
     end
 
@@ -300,8 +300,8 @@ module Portal
     end
 
     def long_and_lat?
-      latitude = render_document_show_field_value(document, 'places.latitude')
-      longitude = render_document_show_field_value(document, 'places.longitude')
+      latitude = field_value('places.latitude')
+      longitude = field_value('places.longitude')
       !latitude.nil? && latitude.size > 0 && !longitude.nil? && longitude.size > 0
     end
 
@@ -317,27 +317,27 @@ module Portal
       title = document.fetch(:title, nil)
 
       if title.blank?
-        render_document_show_field_value(document, 'proxies.dcTitle')
+        field_value('proxies.dcTitle')
       else
         title.first
       end
     end
 
     def display_title
-      render_document_show_field_value(document, 'proxies.dcTitle') ||
-        truncate(render_document_show_field_value(document, 'proxies.dcDescription'), length: 200, separator: ' ')
+      field_value('proxies.dcTitle') ||
+        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ')
     end
 
     def creator_title
       @creator_title ||= begin
         document.fetch('agents.prefLabel', []).first ||
-          render_document_show_field_value(document, 'dcCreator') ||
-          render_document_show_field_value(document, 'proxies.dcCreator')
+          field_value('dcCreator') ||
+          field_value('proxies.dcCreator')
       end
     end
 
     def edm_preview
-      @edm_preview ||= render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
+      @edm_preview ||= field_value('europeanaAggregation.edmPreview', tag: false)
     end
 
     def media_items
@@ -348,8 +348,8 @@ module Portal
         {
           required_players: item_players,
           has_downloadable_media: has_downloadable_media?,
-          external_media: render_document_show_field_value(document, 'aggregations.edmIsShownBy') ||
-            render_document_show_field_value(document, 'aggregations.edmIsShownAt'),
+          external_media: field_value('aggregations.edmIsShownBy') ||
+            field_value('aggregations.edmIsShownAt'),
           single_item: items.size == 1,
           empty_item: items.empty?,
           empty_item_more_link: t('site.object.preview_unavailable', institution_name_and_link: institution_name_and_link),
@@ -362,6 +362,8 @@ module Portal
         }
       end
     end
+
+    delegate :field_value, to: :presenter
 
     def item_players
       @item_players ||= begin

@@ -26,7 +26,7 @@ module Document
         if rights.nil?
           {
             license_public: false,
-            license_name: 'unmatched rights: ' + media_rights,
+            license_name: 'unmatched rights: ' + media_rights.to_s,
             license_url: media_rights
           }
         else

@@ -32,7 +32,14 @@ class CollectionsController < ApplicationController
       end
       format.rss { render 'catalog/index', layout: false }
       format.atom { render 'catalog/index', layout: false }
-      format.json { render json: render_search_results_as_json }
+      format.json do
+        fail ActionController::UnknownFormat unless has_search_parameters?
+        render json: {
+          search_results: @document_list.map do |doc|
+            Document::SearchResultPresenter.new(doc, @response, self).content
+          end
+        }
+      end
 
       additional_response_formats(format)
       document_export_formats(format)
