@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'entities/suggest'
+
   root to: 'locale#index'
 
   scope '/:locale', constraints: { locale: /[a-z]{2}/ } do
