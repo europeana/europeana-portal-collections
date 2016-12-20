@@ -10,7 +10,7 @@ class Page < ActiveRecord::Base
   has_many :browse_entries, through: :elements, source: :positionable,
                             source_type: 'BrowseEntry'
   has_many :facet_entries, through: :elements, source: :positionable,
-           source_type: 'BrowseEntry::FacetEntry'
+                           source_type: 'BrowseEntry::FacetEntry'
 
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries
@@ -22,7 +22,7 @@ class Page < ActiveRecord::Base
 
   class << self
     def settings_full_width_enum
-      ['0', '1']
+      %w(0 1)
     end
   end
 
@@ -37,9 +37,8 @@ class Page < ActiveRecord::Base
   validates :slug, uniqueness: true
   validate :browse_entries_validation
 
-
   scope :static, -> { where(type: nil) }
-  scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', "%/%") }
+  scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', '%/%') }
 
   def to_param
     slug
@@ -76,7 +75,9 @@ class Page < ActiveRecord::Base
   end
 
   def browse_entries_validation
-    topic_count, person_count, period_count = 0, 0, 0
+    topic_count = 0
+    person_count = 0
+    period_count = 0
     browse_entries.each do |browse_entry|
       topic_count += 1 if browse_entry.subject_type == 'topic'
       person_count += 1 if browse_entry.subject_type == 'person'

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class BrowseEntry < ActiveRecord::Base
   include HasPublicationStates
 
@@ -10,7 +11,7 @@ class BrowseEntry < ActiveRecord::Base
 
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
-  validates :subject_type, presence: true, unless: :is_facet?
+  validates :subject_type, presence: true, unless: :facet?
 
   scope :search, -> { where(type: nil) }
 
@@ -26,7 +27,7 @@ class BrowseEntry < ActiveRecord::Base
   after_touch :touch_pages
   after_destroy :touch_pages
 
-  def is_facet?
+  def facet?
     false
   end
 

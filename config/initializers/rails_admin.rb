@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_admin/config/actions/publish'
 require 'rails_admin/config/actions/unpublish'
 
@@ -418,7 +419,7 @@ RailsAdmin.config do |config|
         nested_form false
         inline_add false
         associated_collection_scope do
-          Proc.new { |_scope| BrowseEntry.search.published }
+          proc { |_scope| BrowseEntry.search.published }
         end
       end
       field :facet_entries do
@@ -426,7 +427,7 @@ RailsAdmin.config do |config|
         nested_form false
         inline_add false
         associated_collection_scope do
-          Proc.new { |_scope| BrowseEntry::FacetEntry.published }
+          proc { |_scope| BrowseEntry::FacetEntry.published }
         end
       end
       field :banner
