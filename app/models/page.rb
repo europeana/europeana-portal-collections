@@ -9,6 +9,8 @@ class Page < ActiveRecord::Base
            class_name: 'PageElement', dependent: :destroy, inverse_of: :page
   has_many :browse_entries, through: :elements, source: :positionable,
                             source_type: 'BrowseEntry'
+  has_many :facet_entries, through: :elements, source: :positionable,
+           source_type: 'BrowseEntry::FacetEntry'
 
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries
@@ -61,10 +63,6 @@ class Page < ActiveRecord::Base
         self.class.static.where('slug LIKE ? AND slug NOT LIKE ?', "#{slug}/%", "#{slug}/%/%")
       end
     end
-  end
-
-  def facet_entries
-    browse_entries.where(is_facet: true)
   end
 
   def browse_entry_ids=(ids)

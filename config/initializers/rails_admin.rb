@@ -17,7 +17,7 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection DataProvider DataProviderLogo HeroImage Link
+    Banner BrowseEntry BrowseEntry::FacetEntry Collection DataProvider DataProviderLogo HeroImage Link
     Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error
     Page::Landing User
   )
@@ -80,6 +80,7 @@ RailsAdmin.config do |config|
       field :file, :paperclip
       field :subject_type
       field :state
+      scopes [:search]
     end
     show do
       field :title
@@ -96,8 +97,39 @@ RailsAdmin.config do |config|
       field :query
       field :file, :paperclip
       field :subject_type
-      field :is_facet, :boolean
+      field :collections do
+        inline_add false
+      end
+    end
+  end
+
+  config.model 'BrowseEntry::FacetEntry' do
+    list do
+      field :title do
+        searchable 'browse_entry_translations.title'
+        queryable true
+        filterable true
+      end
+      field :file, :paperclip
       field :facet_field
+      field :facet_value
+      field :state
+    end
+    show do
+      field :title
+      field :query
+      field :file, :paperclip do
+        thumb_method :medium
+      end
+      field :subject_type
+      field :state
+      field :collections
+    end
+    edit do
+      field :title
+      field :file, :paperclip
+      field :facet_field, :enum
+      field :facet_value
       field :collections do
         inline_add false
       end
@@ -386,7 +418,15 @@ RailsAdmin.config do |config|
         nested_form false
         inline_add false
         associated_collection_scope do
-          Proc.new { |_scope| BrowseEntry.published }
+          Proc.new { |_scope| BrowseEntry.search.published }
+        end
+      end
+      field :facet_entries do
+        orderable true
+        nested_form false
+        inline_add false
+        associated_collection_scope do
+          Proc.new { |_scope| BrowseEntry::FacetEntry.published }
         end
       end
       field :banner

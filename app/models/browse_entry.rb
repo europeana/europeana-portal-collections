@@ -11,7 +11,8 @@ class BrowseEntry < ActiveRecord::Base
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
   validates :subject_type, presence: true, unless: :is_facet?
-  validates :facet_field, presence: true, if: :is_facet?
+
+  scope :search, -> { where(type: nil) }
 
   # Do not re-order these elements!
   # @see http://api.rubyonrails.org/classes/ActiveRecord/Enum.html
@@ -24,6 +25,10 @@ class BrowseEntry < ActiveRecord::Base
   after_update :touch_pages
   after_touch :touch_pages
   after_destroy :touch_pages
+
+  def is_facet?
+    false
+  end
 
   ##
   # Touch associated pages to invalidate cache

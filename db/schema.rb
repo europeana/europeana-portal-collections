@@ -56,8 +56,9 @@ ActiveRecord::Schema.define(version: 20161219134240) do
     t.datetime "updated_at",                  null: false
     t.integer  "state",           default: 0
     t.integer  "subject_type"
-    t.boolean  "is_facet"
+    t.string   "type"
     t.string   "facet_field"
+    t.string   "facet_value"
   end
 
   add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree
