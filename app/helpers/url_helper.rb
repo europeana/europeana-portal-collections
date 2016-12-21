@@ -44,16 +44,20 @@ module UrlHelper
     end
   end
 
-  # @param page [Page]
   # @param browse_entry [BrowseEntry]
+  # @param page [Page]
   # @return [String] url
-  def browse_entry_url(browse_entry, page = nil)
+  def browse_entry_url(browse_entry, page = nil, options = {})
     browse_entry_query = Rack::Utils.parse_nested_query(browse_entry.query)
     if page.present? && (slug_match = page.slug.match(/\Acollections\/(.*)\Z/))
       collection = Collection.find_by_key(slug_match[1])
-      return collection_path(collection.key, browse_entry_query) unless collection.nil?
+      return collection_url(collection.key, browse_entry_query.reverse_merge(options)) unless collection.nil?
     end
-    search_path(browse_entry_query)
+    search_url(browse_entry_query.reverse_merge(options))
+  end
+
+  def browse_entry_path(browse_entry, page = nil, options = {})
+    browse_entry_url(browse_entry, page, options.merge(only_path: true))
   end
 
   def enquote_and_escape(val)
