@@ -8,7 +8,7 @@ module BrowseEntryDisplayingView
   def browse_entry_item(entry, page = nil)
     {
       title: entry.title,
-      url: browse_entry_url(entry, page),
+      url: browse_entry_path(entry, page),
       image: entry.file.nil? ? nil : entry.file.url,
       image_alt: nil
     }

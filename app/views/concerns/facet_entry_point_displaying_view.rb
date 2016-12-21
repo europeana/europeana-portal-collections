@@ -8,7 +8,7 @@ module FacetEntryPointDisplayingView
 
   def facet_entry_item(entry, page = nil)
     {
-      url: browse_entry_url(entry, page),
+      url: browse_entry_path(entry, page),
       label: entry.title,
       image_url: entry.file.nil? ? nil : entry.file.url,
       image_alt: nil
@@ -17,7 +17,7 @@ module FacetEntryPointDisplayingView
     # however this needs frontend alignment.
     # {
     #     title: entry.title,
-    #     url: browse_entry_url(entry, page),
+    #     url: browse_entry_path(entry, page),
     #     image: entry.file.nil? ? nil : entry.file.url,
     #     image_alt: nil
     # }
