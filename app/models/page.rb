@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Page < ActiveRecord::Base
   include HasPublicationStates
   include HasSettingsAttribute
@@ -8,6 +9,8 @@ class Page < ActiveRecord::Base
            class_name: 'PageElement', dependent: :destroy, inverse_of: :page
   has_many :browse_entries, through: :elements, source: :positionable,
                             source_type: 'BrowseEntry'
+  has_many :facet_entries, through: :elements, source: :positionable,
+                           source_type: 'BrowseEntry::FacetEntry'
 
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries
@@ -19,7 +22,7 @@ class Page < ActiveRecord::Base
 
   class << self
     def settings_full_width_enum
-      ['0', '1']
+      %w(0 1)
     end
   end
 
@@ -32,12 +35,10 @@ class Page < ActiveRecord::Base
   default_scope { includes(:translations) }
 
   validates :slug, uniqueness: true
-  validates :browse_entries, length: { maximum: 6 }
   validate :browse_entries_validation
 
-
   scope :static, -> { where(type: nil) }
-  scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', "%/%") }
+  scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', '%/%') }
 
   def to_param
     slug
@@ -74,7 +75,9 @@ class Page < ActiveRecord::Base
   end
 
   def browse_entries_validation
-    topic_count, person_count, period_count = 0, 0, 0
+    topic_count = 0
+    person_count = 0
+    period_count = 0
     browse_entries.each do |browse_entry|
       topic_count += 1 if browse_entry.subject_type == 'topic'
       person_count += 1 if browse_entry.subject_type == 'person'
@@ -88,6 +91,9 @@ class Page < ActiveRecord::Base
     end
     unless (period_count % 3).zero?
       errors.add(:browse_entries, "for periods need to be in groups of 3, you have provided #{period_count}")
+    end
+    unless period_count + topic_count + person_count <= 6
+      errors.add(:browse_entries, "total count of 'non facet' Type entries need to be equal to 3 or 6.")
     end
   end
 end

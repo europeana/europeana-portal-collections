@@ -2,6 +2,7 @@ module Collections
   class Show < ApplicationView
     include BrowsableView
     include BrowseEntryDisplayingView
+    include FacetEntryPointDisplayingView
     include HeroImageDisplayingView
     include NewsworthyView
     include PromotionLinkDisplayingView
@@ -38,6 +39,11 @@ module Collections
       'channel_landing'
     end
 
+    # TODO: configure this in the CMS
+    def logo_class
+      'fashion-logo'
+    end
+
     def globalnav_options
       mustache[:globalnav_options] ||= begin
         {
@@ -68,6 +74,7 @@ module Collections
           "layout_#{@landing_page.settings_layout_type}".to_sym => true,
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
+          entry_points: facet_entry_items_grouped(@landing_page.facet_entries, @landing_page),
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)

@@ -47,3 +47,8 @@ sandro_botticelli_person_translations:
   locale: en
   title: 'Sandro Botticelli'
   globalized_model: sandro_botticelli_person
+
+designer_someone_facet_translations:
+  locale: en
+  title: 'Someneone'
+  globalized_model: designer_someone_facet
