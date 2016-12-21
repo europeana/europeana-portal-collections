@@ -75,6 +75,7 @@ module Collections
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
           entry_points: facet_entry_items_grouped(@landing_page.facet_entries, @landing_page),
+          preview_search_url: preview_search_url,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
@@ -140,6 +141,10 @@ module Collections
           stats[:count] = number_with_delimiter(stats[:count])
         end
       end
+    end
+
+    def preview_search_url
+      @landing_page.facet_entries.blank? ? nil : browse_entry_url(@landing_page.facet_entries.sample, @landing_page)
     end
   end
 end
