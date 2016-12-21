@@ -53,7 +53,7 @@ module UrlHelper
       collection = Collection.find_by_key(slug_match[1])
       return collection_url(collection.key, browse_entry_query.reverse_merge(options)) unless collection.nil?
     end
-    search_url(browse_entry_query, options)
+    search_url(browse_entry_query.reverse_merge(options))
   end
 
   def browse_entry_path(browse_entry, page = nil, options = {})
