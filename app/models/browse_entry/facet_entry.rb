@@ -10,7 +10,12 @@ class BrowseEntry
 
     class << self
       def facet_field_enum
-        PortalController.blacklight_config.facet_fields.keys
+        PortalController.blacklight_config.facet_fields.keys.each_with_object({}) do |facet_field, h|
+          ff = Europeana::Blacklight::Response::Facets::FacetField.new(facet_field, [])
+          presenter = FacetPresenter.build(ff, PortalController.new, PortalController.blacklight_config)
+          facet_title = presenter.facet_title || facet_field
+          h[facet_title] = facet_field
+        end
       end
     end
 
