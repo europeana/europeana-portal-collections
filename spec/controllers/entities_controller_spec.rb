@@ -8,12 +8,12 @@ RSpec.describe EntitiesController do
     end
 
     it 'returns http success' do
-      get :suggest, { locale: 'en' }
+      get :suggest, locale: 'en'
       expect(response).to have_http_status(:success)
     end
 
     it 'queries the entity API' do
-      get :suggest, { locale: 'en', text: 'van' }
+      get :suggest, locale: 'en', text: 'van'
 
       expect(
           a_request(:get, Europeana::API.url + '/entities/suggest').
