@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     get 'explore/topics', to: 'explore#topics'
     get 'explore/periods', to: 'explore#periods'
 
+    get 'entities/suggest'
+
     get 'debug/exception', to: 'debug#exception'
 
     # Static pages
