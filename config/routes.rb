@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'entities/suggest'
-
   root to: 'locale#index'
 
   scope '/:locale', constraints: { locale: /[a-z]{2}/ } do
@@ -51,6 +49,8 @@ Rails.application.routes.draw do
     get 'explore/sources', to: 'explore#sources'
     get 'explore/topics', to: 'explore#topics'
     get 'explore/periods', to: 'explore#periods'
+
+    get 'entities/suggest'
 
     get 'debug/exception', to: 'debug#exception'
 

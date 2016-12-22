@@ -7,7 +7,7 @@ module SearchableView
     {
       action: search_action_path(only_path: true),
       autocomplete: {
-        url: 'http://test-entity.europeana.eu/entity/suggest?wskey=apidemo&text=',
+        url: entities_suggest_url + '?text=',
         translations: {
           agents: t('global.navigation.agents', default: 'People'),
           concepts: t('global.navigation.concepts', default: 'Topics'),
