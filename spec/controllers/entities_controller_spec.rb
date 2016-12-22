@@ -4,7 +4,7 @@ RSpec.describe EntitiesController do
     before do
       stub_request(:get, Europeana::API.url + '/entities/suggest').
         with(query: hash_including(scope: 'europeana')).
-        to_return(status: 200, body: '{}', headers: {'Content-Type' => 'application/ld+json'})
+        to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
     end
 
     it 'returns http success' do
@@ -16,8 +16,8 @@ RSpec.describe EntitiesController do
       get :suggest, locale: 'en', text: 'van'
 
       expect(
-          a_request(:get, Europeana::API.url + '/entities/suggest').
-          with(query: hash_including(text: 'van', scope: 'europeana'))
+        a_request(:get, Europeana::API.url + '/entities/suggest').
+        with(query: hash_including(text: 'van', scope: 'europeana'))
       ).to have_been_made.once
     end
   end
