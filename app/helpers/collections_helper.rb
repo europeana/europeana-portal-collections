@@ -116,6 +116,7 @@ module CollectionsHelper
   end
 
   def clicktip
+    key = collection.key.underscore.to_sym
     {
       activator: '.show-feeds',
       direction: 'top',
@@ -123,13 +124,11 @@ module CollectionsHelper
       tooltip_links: [
         {
           text: 'tumblr',
-          url: 'XXX',
-    #      Xurl: Cache::FeedJob::URLS[:tumblr][key]
+          url: Cache::FeedJob::URLS[:tumblr][key]
         },
         {
           text: 'news',
-          url: 'RRRRRRRRRRRR',
-   #       Xurl: Cache::FeedJob::URLS[:blog][key]
+          url: Cache::FeedJob::URLS[:blog][key]
         }
       ]
     }
