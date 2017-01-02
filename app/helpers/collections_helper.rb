@@ -111,17 +111,27 @@ module CollectionsHelper
       tumblr_url: Cache::FeedJob::URLS[:tumblr][key].sub('/rss', ''),
       more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json),
       more_items_total: paginated_items.total_count,
-      rss_urls: [
+      items: paginated_items
+    }
+  end
+
+  def clicktip
+    {
+      activator: '.show-feeds',
+      direction: 'top',
+      has_tooltip_links: true,
+      tooltip_links: [
         {
-          label: 'tumblr',
-          url: Cache::FeedJob::URLS[:tumblr][key]
+          text: 'tumblr',
+          url: 'XXX',
+    #      Xurl: Cache::FeedJob::URLS[:tumblr][key]
         },
         {
-          label: 'news',
-          url: Cache::FeedJob::URLS[:blog][key]
+          text: 'news',
+          url: 'RRRRRRRRRRRR',
+   #       Xurl: Cache::FeedJob::URLS[:blog][key]
         }
-      ],
-      items: paginated_items
+      ]
     }
   end
 

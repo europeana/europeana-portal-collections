@@ -218,11 +218,12 @@ ActiveRecord::Schema.define(version: 20161219134240) do
     t.integer  "state",                     default: 0
     t.string   "type",          limit: 255
     t.integer  "http_code"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "banner_id"
     t.text     "settings"
     t.string   "strapline"
+    t.string   "layout_type",               default: "default"
   end
 
   add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree
