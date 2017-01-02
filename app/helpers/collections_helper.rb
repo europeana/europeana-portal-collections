@@ -116,7 +116,7 @@ module CollectionsHelper
   end
 
   def clicktip
-    key = collection.key.underscore.to_sym
+    key = current_collection.key.underscore.to_sym
     {
       activator: '.show-feeds',
       direction: 'top',

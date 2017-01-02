@@ -223,7 +223,6 @@ ActiveRecord::Schema.define(version: 20161219134240) do
     t.integer  "banner_id"
     t.text     "settings"
     t.string   "strapline"
-    t.string   "layout_type",               default: "default"
   end
 
   add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree
