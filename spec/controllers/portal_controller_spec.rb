@@ -4,7 +4,7 @@ RSpec.describe PortalController do
   # workaround for https://github.com/jnicklas/capybara/issues/1396
   include RSpec::Matchers.clone
 
-  it { expect(subject.class.ancestors.include? Europeana::AnnotationsApiConsumer).to eq(true) }
+  it { expect(subject.class.ancestors.include?(Europeana::AnnotationsApiConsumer)).to eq(true) }
 
   describe 'GET index' do
     context 'without q param' do
