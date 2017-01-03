@@ -23,7 +23,7 @@ RSpec.describe Europeana::AnnotationsApiConsumer do
       expect(Europeana::API).to receive(:in_parallel) {
         [
           { 'body' => 'http://uri.one' },
-          { 'body' =>  { '@graph' => { 'sameAs'=> 'http://uri.two' } } }
+          { 'body' =>  { '@graph' => { 'sameAs' => 'http://uri.two' } } }
         ]
       }
 
