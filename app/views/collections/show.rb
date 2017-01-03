@@ -144,7 +144,7 @@ module Collections
     end
 
     def preview_search_url
-      @landing_page.facet_entries.blank? ? nil : browse_entry_url(@landing_page.facet_entries.sample, @landing_page)
+      @landing_page.facet_entries.blank? ? nil : browse_entry_url(@landing_page.facet_entries.sample, @landing_page, format: 'json')
     end
   end
 end
