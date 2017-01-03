@@ -76,10 +76,10 @@ module CollectionsHelper
               src: feed_entry_thumbnail_url(item),
               alt: item.title
           },
-          title: false,
-          date: item.published,
+          title: item.title,
+          date: I18n.l(item.published),
           excerpt: {
-              short: CGI.unescapeHTML(item.summary)
+              short: strip_tags(CGI.unescapeHTML(item.summary))
           },
           type: feed_job_urls_key.to_s
       }
