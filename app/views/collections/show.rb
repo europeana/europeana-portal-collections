@@ -150,7 +150,7 @@ module Collections
         random = @landing_page.facet_entries.sample
         {
           preview_search_title: 'the "facet title" - i.e. Alexander McQueen',
-          preview_search_type: random.facet_field + ' ('  + t('site.collections.labels.designer') + ')',
+          preview_search_type: random.facet_field + ' (' + t('site.collections.labels.designer') + ')',
           preview_search_url: browse_entry_url(random, @landing_page, format: 'json')
         }
       end
