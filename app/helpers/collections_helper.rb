@@ -46,7 +46,7 @@ module CollectionsHelper
     per_page = options[:per_page] || 12
     key = collection.key.underscore.to_sym
     options[:feed_job_url] = :tumblr
-    items = collections_feed_items_for(collection, options = {})
+    items = collections_feed_items_for(collection, options)
 
     return nil if items.blank?
 
