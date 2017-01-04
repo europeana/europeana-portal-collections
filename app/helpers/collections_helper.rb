@@ -79,7 +79,7 @@ module CollectionsHelper
           title: item.title,
           date: I18n.l(item.published),
           excerpt: {
-              short: strip_tags(CGI.unescapeHTML(item.summary))
+              short: ActionController::Base.helpers.strip_tags(CGI.unescapeHTML(item.summary))
           },
           type: feed_job_urls_key.to_s
       }
