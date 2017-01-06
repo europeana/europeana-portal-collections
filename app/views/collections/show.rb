@@ -53,6 +53,12 @@ module Collections
       end
     end
 
+    def include_nav_searchbar
+      mustache[:include_nav_searchbar] ||= begin
+        @landing_page.settings_layout_type == 'browse'
+      end
+    end
+
     def content
       mustache[:content] ||= begin
         {
