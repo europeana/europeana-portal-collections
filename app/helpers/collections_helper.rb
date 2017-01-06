@@ -77,7 +77,7 @@ module CollectionsHelper
               alt: item.title
           },
           title: item.title,
-          date: I18n.l(item.published),
+          date: I18n.l(item.published, format: :short),
           excerpt: {
               short: ActionController::Base.helpers.strip_tags(CGI.unescapeHTML(item.summary))
           },
