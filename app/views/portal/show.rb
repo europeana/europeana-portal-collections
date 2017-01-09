@@ -92,7 +92,7 @@ module Portal
         info: static_page_path('annotations', format: 'html'),
         sections: [
           {
-            items: @annotations.map { |anno| { url: anno, text: anno, preserve_case: true } },
+            items: @annotations.map { |anno| { url: anno, text: anno } },
             title: t('site.object.meta-label.relations')
           }
         ]

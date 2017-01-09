@@ -159,6 +159,7 @@ provenance:
     search_field: COUNTRY
     ga_data: dimension2
     quoted: true
+    capitalised: true
   - title: timestamp-created
     fields:
     - timestamp_created
