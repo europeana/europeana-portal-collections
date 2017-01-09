@@ -99,7 +99,7 @@ module Document
 
       field_values.compact.map do |val|
         {}.tap do |item|
-          item[:text] = val
+          item[:text] = val.nil? ? nil : section[:capitalised] ? val.split.map(&:capitalize)*' ' : val
           if section[:url]
             item[:url] = field_value(section[:url])
           elsif section[:search_field]
@@ -107,7 +107,7 @@ module Document
           end
 
           # text manipulation
-          item[:text] = format_date(val, section[:format_date])
+          item[:text] = format_date(item[:text], section[:format_date])
 
           if section[:overrides] && item[:text] == section[:override_val]
             section[:overrides].map do |override|
