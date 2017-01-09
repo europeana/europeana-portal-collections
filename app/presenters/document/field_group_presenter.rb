@@ -101,7 +101,7 @@ module Document
         {}.tap do |item|
           item[:text] = val
           if !val.nil? && section[:capitalised]
-            item[:text] = val.split.map(&:capitalize) * ' '
+            item[:text] = val.titleize
           end
           if section[:url]
             item[:url] = field_value(section[:url])
