@@ -100,7 +100,7 @@ module Document
       field_values.compact.map do |val|
         {}.tap do |item|
           item[:text] = val
-          if(!val.nil? && section[:capitalised])
+          if !val.nil? && section[:capitalised]
             item[:text] = val.split.map(&:capitalize) * ' '
           end
           if section[:url]
