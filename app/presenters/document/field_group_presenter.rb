@@ -99,7 +99,10 @@ module Document
 
       field_values.compact.map do |val|
         {}.tap do |item|
-          item[:text] = val.nil? ? nil : section[:capitalised] ? val.split.map(&:capitalize)*' ' : val
+          item[:text] = val
+          if(!val.nil? && section[:capitalised])
+            item[:text] = val.split.map(&:capitalize) * ' '
+          end
           if section[:url]
             item[:url] = field_value(section[:url])
           elsif section[:search_field]
