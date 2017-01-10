@@ -6,7 +6,7 @@ module Document
     include Metadata::Rights
 
     def edm_is_shown_by
-      @edm_is_shown_by ||= render_document_show_field_value('aggregations.edmIsShownBy')
+      @edm_is_shown_by ||= field_value('aggregations.edmIsShownBy')
     end
 
     def edm_object
@@ -74,7 +74,7 @@ module Document
     end
 
     def media_rights
-      @media_rights ||= render_document_show_field_value('aggregations.edmRights')
+      @media_rights ||= field_value('aggregations.edmRights')
     end
 
     def field_group(id)

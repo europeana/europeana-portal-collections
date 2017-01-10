@@ -6,6 +6,8 @@ require 'oembed'
 # Custom providers (not included in ruby-oembed)
 sketchfab = OEmbed::Provider.new('https://sketchfab.com/oembed')
 sketchfab << 'https://sketchfab.com/models/*'
+dismarc = OEmbed::Provider.new('http://www.dismarc.org/player/oembed')
+dismarc << 'http://eusounds.ait.co.at/player/*'
 
 # Europeana provider
 europeana = OEmbed::Provider.new(ENV['EUROPEANA_OEMBED_PROVIDER'] || 'http://oembed.europeana.eu/')
@@ -22,4 +24,5 @@ OEmbed::Providers.register(OEmbed::Providers::SoundCloud)
 OEmbed::Providers.register(OEmbed::Providers::Vimeo)
 OEmbed::Providers.register(OEmbed::Providers::Youtube)
 OEmbed::Providers.register(sketchfab)
+OEmbed::Providers.register(dismarc)
 OEmbed::Providers.register(europeana)

@@ -24,6 +24,7 @@ en:
         settings_wide: Wide?
       page:
         settings_full_width: Full width?
+        settings_layout_type: Layout
     models:
       page/error:
         one: Error Page

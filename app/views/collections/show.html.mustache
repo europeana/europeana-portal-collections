@@ -1,5 +1,10 @@
 {{>atoms/meta/_head}}
 {{#cached_body}}
-  {{>templates/Search/Channels-landing}}
+  {{#content.layout_default}}
+    {{>templates/Search/Channels-landing}}
+  {{/content.layout_default}}
+  {{#content.layout_browse}}
+      {{>templates/Search/Channels-landing-browse}}
+  {{/content.layout_browse}}
 {{/cached_body}}
 {{>atoms/meta/_foot}}

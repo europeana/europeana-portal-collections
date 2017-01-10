@@ -20,9 +20,9 @@ class FacetPresenter
   # @param (see #initialize)
   # @return {FacetPresenter} subclass instance for the facet
   def self.build(facet, controller, blacklight_config = controller.blacklight_config, parent = nil)
-    if !facet.nil?
+    unless facet.nil?
       facet_config = blacklight_config.facet_fields[facet.name]
-      class_for_facet(facet_config).new(facet, controller, blacklight_config, parent)
+      class_for_facet(facet_config).new(facet, controller, blacklight_config, parent) unless facet_config.nil?
     end
   end
 
@@ -89,7 +89,7 @@ class FacetPresenter
 
     {
       name: facet_name,
-      title: facet_config.respond_to?(:title) ? facet_config.title : facet_label,
+      title: facet_title,
       filter_open: filter_open?,
       select_one: facet_config.single,
       items: unhidden_items.map { |item| facet_item(item) },
@@ -99,6 +99,10 @@ class FacetPresenter
       tooltip: facet_tooltip,
       icon_link: facet_icon_link
     }
+  end
+
+  def facet_title
+    facet_config.respond_to?(:title) ? facet_config.title : facet_label
   end
 
   ##
@@ -140,8 +144,18 @@ class FacetPresenter
     @facet.items.select { |item| facet_in_params?(facet_name, item) }
   end
 
+  ##
+  # Sometimes selected facets are not returned by the API, so we need to inject
+  # them from the URL parameters.
+  def items_from_params
+    ips = items_in_params
+    fps = facet_params(facet_name)
+    extras = fps.nil? ? [] : fps.reject { |fp| ips.any? { |ip| ip.value == fp } }
+    ips + extras.map { |e| Europeana::Blacklight::Response::Facets::FacetItem.new(value: e) }
+  end
+
   def filter_items
-    items_in_params.map { |item| filter_item(item) }
+    items_from_params.map { |item| filter_item(item) }
   end
 
   ##

@@ -1,7 +1,7 @@
 RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }
-    it { is_expected.to eq(%w(Banner BrowseEntry Collection DataProvider DataProviderLogo HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing User)) }
+    it { is_expected.to eq(%w(Banner BrowseEntry BrowseEntry::FacetEntry Collection DataProvider DataProviderLogo HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing User)) }
   end
 
   describe '#model' do
@@ -17,6 +17,14 @@ RSpec.describe RailsAdmin.config do
 
     context 'when model is BrowseEntry' do
       let(:model_name) { 'BrowseEntry' }
+      describe '.visible' do
+        subject { model.visible }
+        it { is_expected.to be true }
+      end
+    end
+
+    context 'when model is BrowseEntry::FacetEntry' do
+      let(:model_name) { 'BrowseEntry::FacetEntry' }
       describe '.visible' do
         subject { model.visible }
         it { is_expected.to be true }

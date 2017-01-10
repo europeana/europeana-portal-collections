@@ -5,7 +5,15 @@ module SearchableView
 
   def form_search
     {
-      action: search_action_path(only_path: true)
+      action: search_action_path(only_path: true),
+      autocomplete: {
+        url: entities_suggest_url + '?text=',
+        translations: {
+          agents: t('global.navigation.agents', default: 'People'),
+          concepts: t('global.navigation.concepts', default: 'Topics'),
+          places: t('global.navigation.places', default: 'Places')
+        }
+      }
     }
   end
 

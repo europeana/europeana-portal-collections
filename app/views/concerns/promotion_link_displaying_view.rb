@@ -9,6 +9,8 @@ module PromotionLinkDisplayingView
     promotions.map do |promo|
       cat_flag = promo.settings_category.blank? ? {} : { :"is_#{promo.settings_category}" => true }
       {
+        featured: promo.position.nil? ? false : promo.position.zero?,
+        hide_branding_text: promo.position.nil? ? false : promo.position.zero?,
         url: promo.url,
         is_external: !(URI(promo.url).host.blank? || URI(promo.url).host == request.host),
         title: promo.text,

@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 class BrowseEntry < ActiveRecord::Base
   include HasPublicationStates
-  include HasSettingsAttribute
 
   has_and_belongs_to_many :collections
   has_many :page_elements, dependent: :destroy, as: :positionable
@@ -11,7 +11,9 @@ class BrowseEntry < ActiveRecord::Base
 
   accepts_nested_attributes_for :media_object, allow_destroy: true
 
-  validates :subject_type, presence: true
+  validates :subject_type, presence: true, unless: :facet?
+
+  scope :search, -> { where(type: nil) }
 
   # Do not re-order these elements!
   # @see http://api.rubyonrails.org/classes/ActiveRecord/Enum.html
@@ -24,6 +26,10 @@ class BrowseEntry < ActiveRecord::Base
   after_update :touch_pages
   after_touch :touch_pages
   after_destroy :touch_pages
+
+  def facet?
+    false
+  end
 
   ##
   # Touch associated pages to invalidate cache

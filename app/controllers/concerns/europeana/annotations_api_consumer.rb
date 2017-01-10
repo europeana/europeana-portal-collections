@@ -16,7 +16,10 @@ module Europeana
       end
 
       responses.map do |annotation|
-        if annotation['body'] && annotation['body']['@graph']
+        puts annotation
+        if annotation['body'].is_a?(String) && annotation['body'] =~ URI.regexp
+          annotation['body']
+        elsif annotation['body'] && annotation['body']['@graph']
           annotation['body']['@graph']['sameAs']
         end
       end.compact

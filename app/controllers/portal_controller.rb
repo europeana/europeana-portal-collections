@@ -7,13 +7,10 @@ class PortalController < ApplicationController
   include Europeana::AnnotationsApiConsumer
   include Europeana::UrlConversions
   include OembedRetriever
+  include SearchInteractionLogging
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
-  before_action :log_search_interaction, only: :show, if: :has_loggable_parameters?
-
-  def redirect_to_home
-    redirect_to home_path
-  end
+  before_action :log_show_search_interaction, only: :show
 
   attr_reader :url_conversions, :oembed_html
 
@@ -25,8 +22,21 @@ class PortalController < ApplicationController
   def index
     @landing_page = find_landing_page
     (@response, @document_list) = search_results(params)
+
+    log_search_interaction(
+      search: params.slice(:q, :f, :mlt, :range).inspect,
+      total: @response.total
+    )
+
     respond_to do |format|
-      format.html { store_preferred_view }
+      format.html
+      format.json do
+        render json: {
+          search_results: @document_list.map do |doc|
+            Document::SearchResultPresenter.new(doc, @response, self).content
+          end
+        }
+      end
     end
   end
 
@@ -78,30 +88,6 @@ class PortalController < ApplicationController
     end
   end
 
-  def log_search_interaction
-    Rails.logger.info(search_interaction_msg.chomp) if referer_was_search_request?
-
-    redirect_to url_for(params.except(:l))
-  end
-
-  def search_interaction_msg
-    <<~EOS
-      Search interaction:
-      * Record: /#{params[:id]}
-      * Search parameters: #{params[:l][:p].inspect}
-      * Total hits: #{params[:l][:t]}
-      * Result rank: #{params[:l][:r]}
-    EOS
-  end
-
-  def referer_was_search_request?
-    referer = request.referer
-    return false unless referer.present?
-
-    search_urls = [search_url] + displayable_collections.map { |c| collection_url(c) }
-    search_urls.any? { |u| referer.match "^#{u}(\\?|$)" }
-  end
-
   def document_hierarchy(document)
     return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
     Europeana::API.record.ancestor_self_siblings(api_query_params.merge(id: document.id))
@@ -109,11 +95,22 @@ class PortalController < ApplicationController
     nil
   end
 
-  def has_loggable_parameters?
-    params.key?(:l)
-  end
-
   def api_query_params
     params.slice(:api_url)
+  end
+
+  def log_show_search_interaction
+    return unless referer_was_search_request? && params.key?(:l)
+    log_search_interaction(
+      record: params[:id],
+      search: params[:l][:p].inspect,
+      total: params[:l][:t],
+      rank: params[:l][:r]
+    )
+    redirect_to url_for(params.except(:l))
+  end
+
+  def redirect_to_home
+    redirect_to home_path
   end
 end

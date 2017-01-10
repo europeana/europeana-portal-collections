@@ -2,6 +2,7 @@ module Collections
   class Show < ApplicationView
     include BrowsableView
     include BrowseEntryDisplayingView
+    include FacetEntryPointDisplayingView
     include HeroImageDisplayingView
     include NewsworthyView
     include PromotionLinkDisplayingView
@@ -38,6 +39,11 @@ module Collections
       'channel_landing'
     end
 
+    # TODO: configure this in the CMS
+    def logo_class
+      'fashion-logo'
+    end
+
     def globalnav_options
       mustache[:globalnav_options] ||= begin
         {
@@ -65,8 +71,11 @@ module Collections
               items: @landing_page.credits.to_a
             }
           },
+          "layout_#{@landing_page.settings_layout_type}".to_sym => true,
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
+          entry_points: facet_entry_items_grouped(@landing_page.facet_entries, @landing_page),
+          preview_search_url: preview_search_url,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
@@ -77,7 +86,7 @@ module Collections
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
-          carousel: helpers.collection_tumblr_feed_content(@collection)
+          carousel: carousel_data
         }.reverse_merge(super)
       end
     end
@@ -87,6 +96,15 @@ module Collections
     end
 
     private
+
+    def carousel_data
+      case @landing_page.settings[:layout_type]
+        when 'default'
+          helpers.collection_tumblr_feed_content(@collection)
+        when 'browse'
+          helpers.collection_feeds_content(@collection)
+      end
+    end
 
     def strapline
       @landing_page.strapline.present? ? @landing_page.strapline(total_item_count: number_with_delimiter(@total_item_count)) : nil
@@ -123,6 +141,10 @@ module Collections
           stats[:count] = number_with_delimiter(stats[:count])
         end
       end
+    end
+
+    def preview_search_url
+      @landing_page.facet_entries.blank? ? nil : browse_entry_url(@landing_page.facet_entries.sample, @landing_page, format: 'json')
     end
   end
 end

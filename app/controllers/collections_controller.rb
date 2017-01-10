@@ -3,6 +3,7 @@
 class CollectionsController < ApplicationController
   include Europeana::Collections
   include RecordCountsHelper
+  include SearchInteractionLogging
 
   before_action :redirect_to_home, only: :show, if: proc { params[:id] == 'all' }
 
@@ -17,7 +18,13 @@ class CollectionsController < ApplicationController
     @recent_additions = recent_additions
     @total_item_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}")
 
-    (@response, @document_list) = search_results(params) if has_search_parameters?
+    if has_search_parameters?
+      (@response, @document_list) = search_results(params)
+      log_search_interaction(
+        search: params.slice(:q, :f, :mlt, :range).inspect,
+        total: @response.total
+      )
+    end
 
     respond_to do |format|
       format.html do
@@ -25,7 +32,14 @@ class CollectionsController < ApplicationController
       end
       format.rss { render 'catalog/index', layout: false }
       format.atom { render 'catalog/index', layout: false }
-      format.json { render json: render_search_results_as_json }
+      format.json do
+        fail ActionController::UnknownFormat unless has_search_parameters?
+        render json: {
+          search_results: @document_list.map do |doc|
+            Document::SearchResultPresenter.new(doc, @response, self).content
+          end
+        }
+      end
 
       additional_response_formats(format)
       document_export_formats(format)
