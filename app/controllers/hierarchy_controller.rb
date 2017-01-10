@@ -7,38 +7,45 @@ class HierarchyController < ApplicationController
 
   # GET /record/:id/hierarchy/self
   def self
-    respond_with record.hierarchy.self(params.slice(:offset, :limit)).merge(garnish)
+    respond_with hierarchy_for(:self)
   end
 
   # GET /record/:id/hierarchy/parent
   def parent
-    respond_with record.hierarchy.self(params.slice(:offset, :limit)).merge(garnish)
+    respond_with hierarchy_for(:parent)
   end
 
   # GET /record/:id/hierarchy/children
   def children
-    respond_with record.hierarchy.children(params.slice(:offset, :limit)).merge(garnish)
+    respond_with hierarchy_for(:children)
   end
 
   # GET /record/:id/hierarchy/preceding-siblings
   def preceding_siblings
-    respond_with record.hierarchy.preceding_siblings(params.slice(:offset, :limit)).merge(garnish)
+    respond_with hierarchy_for(:preceding_siblings)
   end
 
   # GET /record/:id/hierarchy/following-siblings
   def following_siblings
-    respond_with record.hierarchy.following_siblings(params.slice(:offset, :limit)).merge(garnish)
+    respond_with hierarchy_for(:following_siblings)
   end
 
   # GET /record/:id/hierarchy/ancestor-self-siblings
   def ancestor_self_siblings
-    respond_with record.hierarchy.ancestor_self_siblings(params.slice(:offset, :limit)).merge(garnish)
+    respond_with hierarchy_for(:ancestor_self_siblings)
   end
 
   protected
 
-  def record
-    Europeana::API::Record::new('/' + params[:id])
+  def hierarchy_for(method)
+    hierarchy_api_response(method).with_indifferent_access.except(:apikey).merge(garnish)
+  end
+
+  def hierarchy_api_response(method)
+    api_params = params.slice(:offset, :limit).merge(id: '/' + params[:id])
+    Europeana::API.record.send(method, api_params)
+  rescue Europeana::API::Errors::ResourceNotFoundError => e
+    e.faraday_response.body
   end
 
   def garnish

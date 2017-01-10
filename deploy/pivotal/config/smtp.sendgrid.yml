@@ -1,0 +1,12 @@
+<%
+if ENV.key?('VCAP_SERVICES')
+  services = JSON.parse(ENV['VCAP_SERVICES'])
+  sendgrid_config = services.fetch('sendgrid', []).first
+end
+fail 'No SendGrid service found in environment.' if sendgrid_config.nil?
+credentials = sendgrid_config['credentials']
+%>
+production:
+  address: '<%= credentials['hostname'] %>'
+  user_name: '<%= credentials['username'] %>'
+  password: '<%= credentials['password'] %>'

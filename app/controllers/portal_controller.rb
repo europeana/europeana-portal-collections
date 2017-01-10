@@ -4,6 +4,7 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
+  include Europeana::AnnotationsApiConsumer
   include Europeana::UrlConversions
   include OembedRetriever
 
@@ -37,6 +38,8 @@ class PortalController < ApplicationController
 
     @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @hierarchy = document_hierarchy(@document)
+    @annotations = document_annotations(@document)
+
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 
     respond_to do |format|
@@ -101,7 +104,9 @@ class PortalController < ApplicationController
 
   def document_hierarchy(document)
     return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
-    Europeana::API::Record.new(document.id).hierarchy.ancestor_self_siblings(api_query_params)
+    Europeana::API.record.ancestor_self_siblings(api_query_params.merge(id: document.id))
+  rescue Europeana::API::Errors::ResourceNotFoundError
+    nil
   end
 
   def has_loggable_parameters?

@@ -41,7 +41,11 @@ module Portal
 
     def navigation
       mustache[:navigation] ||= begin
-        { back_url: back_url_from_referer }.reverse_merge(super)
+        {
+          back_url: back_url_from_referer,
+          back_label: t('site.navigation.breadcrumb.results_list'),
+          last_label: t('site.navigation.breadcrumb.item_detail')
+        }.reverse_merge(super)
       end
     end
 
@@ -49,6 +53,7 @@ module Portal
       mustache[:content] ||= begin
         {
           object: {
+            annotations: @annotations.blank? ? nil : record_annotations,
             creator: creator_title,
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
@@ -75,6 +80,19 @@ module Portal
           thumbnail: render_document_show_field_value(document, 'europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(super)
       end
+    end
+
+    def record_annotations
+      {
+        title: t('annotations', scope: 'site.object.meta-label'),
+        info: static_page_path('annotations', format: 'html'),
+        sections: [
+          {
+            items: @annotations.map { |anno| { url: anno, text: anno, preserve_case: true } },
+            title: t('site.object.meta-label.relations')
+          }
+        ]
+      }
     end
 
     def labels
