@@ -36,7 +36,7 @@ class CollectionsController < ApplicationController
         fail ActionController::UnknownFormat unless has_search_parameters?
         render json: {
           search_results: @document_list.map do |doc|
-            Document::SearchResultPresenter.new(doc, @response, self).content
+            Document::SearchResultPresenter.new(doc, self, @response).content
           end
         }
       end
