@@ -8,4 +8,8 @@ class Link < ActiveRecord::Base
 
   translates :text, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
+
+  def url_in_domain?(domain)
+    !(url =~ %r(://([^/]*.)?#{domain}/)).nil?
+  end
 end

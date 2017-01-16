@@ -120,23 +120,22 @@ module Collections
       @landing_page.cache_key
     end
 
-    def detect_link_in_array(links, domain)
-      matcher = %r(://([^/]*.)?#{domain}/)
-      links.detect { |l| l.url =~ matcher }
-    end
-
-    # @todo move into {Link::SocialMedia} as {#twitter?} etc
     def social_media_links
       {
         social_title: t('global.find-us-social-media', channel: @landing_page.title),
-        twitter: detect_link_in_array(@landing_page.social_media, 'twitter.com'),
-        facebook: detect_link_in_array(@landing_page.social_media, 'facebook.com'),
-        soundcloud: detect_link_in_array(@landing_page.social_media, 'soundcloud.com'),
-        pinterest: detect_link_in_array(@landing_page.social_media, 'pinterest.com'),
-        googleplus: detect_link_in_array(@landing_page.social_media, 'plus.google.com'),
-        instagram: detect_link_in_array(@landing_page.social_media, 'instagram.com'),
-        tumblr: detect_link_in_array(@landing_page.social_media, 'tumblr.com')
+        twitter: social_media_link_for(:twitter),
+        facebook: social_media_link_for(:facebook),
+        soundcloud: social_media_link_for(:soundcloud),
+        pinterest: social_media_link_for(:pinterest),
+        googleplus: social_media_link_for(:googleplus),
+        instagram: social_media_link_for(:instagram),
+        tumblr: social_media_link_for(:tumblr),
+        linkedin: social_media_link_for(:linkedin)
       }
+    end
+
+    def social_media_link_for(provider)
+      @landing_page.social_media.detect(&:"#{provider}?")
     end
 
     def stylised_collection_stats
