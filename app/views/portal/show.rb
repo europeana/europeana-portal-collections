@@ -394,7 +394,7 @@ module Portal
         title: presenter.field_value(%w(dcTitleLangAware title)),
         img: {
           alt: presenter.field_value(%w(dcTitleLangAware title)),
-          src: presenter.thumbnail_url
+          src: presenter.thumbnail_url(generic: true)
         }
       }
     end

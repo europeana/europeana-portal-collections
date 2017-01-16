@@ -84,11 +84,12 @@ module Document
       }
     end
 
-    def thumbnail_url
+    def thumbnail_url(generic: false)
       uri = URI.parse(api_url)
       query = {}
 
       edm_preview = field_value('edmPreview')
+      return nil if edm_preview.blank? && !generic
       unless edm_preview.blank?
         edm_preview_uri = URI.parse(edm_preview)
         query = Rack::Utils.parse_query(edm_preview_uri.query)
