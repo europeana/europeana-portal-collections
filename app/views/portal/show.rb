@@ -242,14 +242,19 @@ module Portal
 
     def similar_items
       return false unless @hierarchy.blank?
-      {
+      res = {
         title: t('site.object.similar-items'),
-        more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id)),
         more_items_load: document_similar_url(document, format: 'json'),
         more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
         more_items_total_formatted: number_with_delimiter(@mlt_response.present? ? @mlt_response.total : 0),
         items: @similar.map { |doc| similar_items_item(doc) }
       }
+
+      if res[:more_items_total] > res[:items].length
+        res[:more_items_query] = search_path(params.slice(:api_url).merge(mlt: document.id))
+      end
+
+      res
     end
 
     def oembed_links
