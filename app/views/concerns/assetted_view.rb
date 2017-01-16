@@ -6,7 +6,7 @@ module AssettedView
   def css_files
     [
       {
-        path: styleguide_url('/css_min/search/screen.css'),
+        path: styleguide_url('/css/search/screen.css'),
         media: 'all'
       }
     ]
@@ -24,8 +24,8 @@ module AssettedView
   def js_files
     [
       {
-        path: styleguide_url('/js_min/modules/require.js'),
-        data_main: styleguide_url('/js_min/modules/main/templates/main-collections')
+        path: styleguide_url('/js/modules/require.js'),
+        data_main: styleguide_url('/js/modules/main/templates/main-collections')
       }
     ]
   end
