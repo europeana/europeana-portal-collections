@@ -70,4 +70,12 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
       end
     end
   end
+
+  context 'with q param' do
+    let(:params) { { id: 'abc/123', q: 'paris' } }
+    it 'should not have alternate links with q param' do
+      render
+      expect(rendered).not_to have_selector("link[rel=\"alternate\"][hreflang=\"x-default\"][href*=\"q=paris\"]", visible: false)
+    end
+  end
 end
