@@ -97,8 +97,8 @@ module Collections
               placeholder: t('global.email-address')
             },
             labels: {
-              heading: 'Get the scoop!',
-              subheading: 'Sign up for the Europeana fashion newsletter and stay in the know!'
+              heading: t('global.newsletter.fashion.heading'),
+              subheading: t('global.newsletter.fashion.subheading')
             }
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links,
