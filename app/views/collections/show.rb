@@ -98,7 +98,7 @@ module Collections
             },
             labels: {
               heading: t('global.newsletter.fashion.heading'),
-              subheading: t('global.newsletter.fashion.heading')
+              subheading: t('global.newsletter.fashion.subheading')
             }
           },
           social: @landing_page.social_media.blank? ? nil : social_media_links,
