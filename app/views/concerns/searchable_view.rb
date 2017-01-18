@@ -5,16 +5,20 @@ module SearchableView
 
   def form_search
     {
-      action: search_action_path(only_path: true),
-      autocomplete: {
-        url: entities_suggest_url + '?text=',
-        translations: {
-          agents: t('global.navigation.agents', default: 'People'),
-          concepts: t('global.navigation.concepts', default: 'Topics'),
-          places: t('global.navigation.places', default: 'Places')
+      action: search_action_path(only_path: true)
+    }.tap do |fs|
+      # Auto-complete is not production ready. Only enable it on dev/test envs.
+      if ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE']
+        fs[:autocomplete] = {
+          url: entities_suggest_url + '?text=',
+          translations: {
+            agents: t('global.navigation.agents', default: 'People'),
+            concepts: t('global.navigation.concepts', default: 'Topics'),
+            places: t('global.navigation.places', default: 'Places')
+          }
         }
-      }
-    }
+      end
+    end
   end
 
   # model for the search form
