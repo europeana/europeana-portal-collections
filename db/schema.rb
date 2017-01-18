@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219134240) do
+ActiveRecord::Schema.define(version: 20170118164140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,13 +92,14 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   add_index "collection_translations", ["locale"], name: "index_collection_translations_on_locale", using: :btree
 
   create_table "collections", force: :cascade do |t|
-    t.string   "key",        limit: 255
+    t.string   "key",            limit: 255
     t.text     "api_params"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "state",                  default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "state",                      default: 0
     t.string   "title"
     t.text     "settings"
+    t.string   "newsletter_url"
   end
 
   create_table "data_provider_logos", force: :cascade do |t|
@@ -218,8 +219,8 @@ ActiveRecord::Schema.define(version: 20161219134240) do
     t.integer  "state",                     default: 0
     t.string   "type",          limit: 255
     t.integer  "http_code"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "banner_id"
     t.text     "settings"
     t.string   "strapline"

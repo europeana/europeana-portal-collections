@@ -58,7 +58,8 @@ unless Collection.find_by_key('fashion').present?
     Collection.create!(
       key: 'fashion',
       title: 'Fashion',
-      api_params: 'qf=(PROVIDER: "Europeana Fashion")'
+      api_params: 'qf=(PROVIDER: "Europeana Fashion")',
+      newsletter_url: 'http://europeanafashion.us5.list-manage.com/subscribe?u=08acbb4918e78ab1b8b1cb158&id=eeaec60e70'
     ).publish!
   end
 end
