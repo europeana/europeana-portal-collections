@@ -155,12 +155,14 @@ RailsAdmin.config do |config|
       field :state
       field :api_params
       field :settings_default_search_layout, :enum
+      field :newsletter_url
     end
     edit do
       field :key
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
+      field :newsletter_url
     end
   end
 
