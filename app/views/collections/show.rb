@@ -133,7 +133,7 @@ module Collections
 
     def social_media_links
       {
-        social_title: t('global.find-us-social-media', channel: @landing_page.title),
+        social_title: t('global.follow-channel', channel: @landing_page.title),
         twitter: social_media_link_for(:twitter),
         facebook: social_media_link_for(:facebook),
         soundcloud: social_media_link_for(:soundcloud),
