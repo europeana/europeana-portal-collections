@@ -390,6 +390,16 @@ module Portal
       end
     end
 
+    ##
+    # Override method from `LocalisableView` to exlude q param
+    def current_url_without_locale
+      url_without_params(super)
+    end
+
+    def current_url_for_locale(_)
+      url_without_params(super)
+    end
+
     protected
 
     def similar_items_item(doc)
