@@ -24,8 +24,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: b06f2f4ef9ce0fcbae21de0deebc7f7e9a9328e1
-  ref: b06f2f4
+  revision: e51e55d4268d37dbedce6c60ffaf1d1419ceed9f
+  ref: e51e55d
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -665,4 +665,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.13.1
+   1.12.5
