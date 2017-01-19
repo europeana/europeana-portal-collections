@@ -90,17 +90,7 @@ module Collections
             items: blog_news_items(@collection),
             blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
-          newsletter: {
-            form: {
-              action: 'http://europeanafashion.us5.list-manage.com/subscribe?u=08acbb4918e78ab1b8b1cb158&id=eeaec60e70',
-              language_op: false,
-              placeholder: t('global.email-address')
-            },
-            labels: {
-              heading: t('global.newsletter.fashion.heading'),
-              subheading: t('global.newsletter.fashion.subheading')
-            }
-          },
+          newsletter: newsletter_content,
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
           carousel: carousel_data
@@ -113,6 +103,21 @@ module Collections
     end
 
     private
+
+    def newsletter_content
+      return nil unless @collection.newsletter_url.present?
+      {
+        form: {
+          action: @collection.newsletter_url,
+          language_op: false,
+          placeholder: t('global.email-address')
+        },
+        labels: {
+          heading: t("global.newsletter.#{@collection.key}.heading"),
+          subheading: t("global.newsletter.#{@collection.key}.subheading")
+        }
+      }
+    end
 
     def carousel_data
       case @landing_page.settings[:layout_type]
