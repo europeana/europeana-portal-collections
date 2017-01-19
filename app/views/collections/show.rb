@@ -165,14 +165,13 @@ module Collections
     end
 
     def preview_search_data
-      if @landing_page.facet_entries.blank?
-        nil
-      else
-        random = @landing_page.facet_entries.sample
+      return nil if @landing_page.facet_entries.blank?
+
+      @landing_page.facet_entries.map do |facet_entry|
         {
-          preview_search_title: random.title,
-          preview_search_type: facet_entry_field_title(random),
-          preview_search_url: browse_entry_url(random, @landing_page, format: 'json')
+          preview_search_title: facet_entry.title,
+          preview_search_type: facet_entry_field_title(facet_entry),
+          preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json')
         }
       end
     end
