@@ -9,8 +9,6 @@ class Page < ActiveRecord::Base
            class_name: 'PageElement', dependent: :destroy, inverse_of: :page
   has_many :browse_entries, through: :elements, source: :positionable,
                             source_type: 'BrowseEntry'
-  has_many :facet_entries, through: :elements, source: :positionable,
-                           source_type: 'BrowseEntry::FacetEntry'
 
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries
