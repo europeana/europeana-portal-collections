@@ -203,8 +203,6 @@ class FacetPresenter
     @facet_config ||= @blacklight_config.facet_fields[facet_name]
   end
 
-  private
-
   def items_to_display(**options)
     items = facet_items.dup
     %i{only order splice split}.each do |mod|
@@ -212,6 +210,8 @@ class FacetPresenter
     end
     items
   end
+
+  private
 
   def apply_only_to_items?
     facet_config.only.present?
@@ -226,7 +226,8 @@ class FacetPresenter
   end
 
   def apply_split_to_items?
-    true
+    return true if facet_config.split.nil?
+    facet_config.split
   end
 
   def apply_only_to_items(items, **_)
