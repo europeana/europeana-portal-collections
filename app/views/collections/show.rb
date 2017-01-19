@@ -82,7 +82,7 @@ module Collections
           hero_config: hero_config(@landing_page.hero_image),
           entry_points: facet_entry_items_grouped(@landing_page),
           preview_search_data: preview_search_data,
-          preview_search_data_present: preview_search_data.size > 0,
+          preview_search_data_present: preview_search_data.present?,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
