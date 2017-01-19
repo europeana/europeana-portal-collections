@@ -82,6 +82,7 @@ module Collections
           hero_config: hero_config(@landing_page.hero_image),
           entry_points: facet_entry_items_grouped(@landing_page),
           preview_search_data: preview_search_data,
+          preview_search_data_present: preview_search_data.present?,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
@@ -165,14 +166,13 @@ module Collections
     end
 
     def preview_search_data
-      if @landing_page.facet_entries.blank?
-        nil
-      else
-        random = @landing_page.facet_entries.sample
+      return nil if @landing_page.facet_entries.blank?
+
+      @landing_page.facet_entries.map do |facet_entry|
         {
-          preview_search_title: random.title,
-          preview_search_type: facet_entry_field_title(random),
-          preview_search_url: browse_entry_url(random, @landing_page, format: 'json')
+          preview_search_title: facet_entry.title,
+          preview_search_type: facet_entry_field_title(facet_entry),
+          preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json')
         }
       end
     end
