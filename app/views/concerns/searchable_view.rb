@@ -19,6 +19,7 @@ module SearchableView
         }
       end
     end
+    }
   end
 
   # model for the search form
