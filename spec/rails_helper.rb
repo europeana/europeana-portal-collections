@@ -8,6 +8,7 @@ require 'rspec/rails'
 # Gem requires
 require 'cancan/matchers'
 require 'capybara_helper'
+require 'paper_trail/frameworks/rspec'
 require 'shoulda/matchers'
 require 'webmock_helper'
 
