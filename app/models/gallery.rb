@@ -10,6 +10,6 @@ class Gallery < ActiveRecord::Base
 
   has_paper_trail
 
-  validates :title, presence: true, length: { maximum: 280 }
+  validates :title, presence: true, length: { maximum: 60 }
   validates :description, length: { maximum: 280 }
 end
