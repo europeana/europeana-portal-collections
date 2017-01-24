@@ -18,9 +18,9 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup HeroImage Link
-    Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error
-    Page::Landing User
+    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
+    Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
+    MediaObject Page Page::Error Page::Landing User
   )
 
   config.actions do
@@ -178,6 +178,29 @@ RailsAdmin.config do |config|
       field :facet_field, :enum
       field :facet_values_count, :integer
       field :thumbnails, :boolean
+    end
+  end
+
+  config.model 'Gallery' do
+    list do
+      field :title do
+        searchable 'gallery_translations.title'
+        queryable true
+        filterable true
+      end
+      field :state
+    end
+    show do
+      field :title
+      field :description
+      field :state
+    end
+    edit do
+      field :title
+      field :description, :text
+      field :image_record_urls, :text do
+        html_attributes rows: 15, cols: 80
+      end
     end
   end
 

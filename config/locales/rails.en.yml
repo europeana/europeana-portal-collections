@@ -7,6 +7,9 @@ en:
         settings_default_search_layout: Default search layout
       data_provider:
         uri: URI
+      gallery:
+        image_record_urls:
+          Record URLs
       hero_image:
         settings_brand_colour: Brand colour
         settings_brand_opacity: Brand opacity

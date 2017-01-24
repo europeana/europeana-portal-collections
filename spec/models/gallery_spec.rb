@@ -19,4 +19,52 @@ RSpec.describe Gallery do
   it 'should translate description' do
     expect(described_class.translated_attribute_names).to include(:description)
   end
+
+  describe '#image_record_urls' do
+    it 'should return a new line-separated list of gallery image record URLs' do
+      expect(galleries(:fashion_dresses).image_record_urls).to eq("http://www.europeana.eu/portal/record/dresses/1.html\n\nhttp://www.europeana.eu/portal/record/dresses/2.html")
+    end
+  end
+
+  describe '#set_images_from_record_urls' do
+    context '(on create)' do
+      let(:gallery) { Gallery.new(title: 'Nice', image_record_urls: 'http://www.europeana.eu/portal/record/nice/1.html http://www.europeana.eu/portal/record/nice/2.html') }
+
+      it 'should create images for new URLs' do
+        gallery.save
+        expect(gallery.images.count).to eq(2)
+        expect(gallery.images.where(record_url: 'http://www.europeana.eu/portal/record/nice/1.html')).not_to be_blank
+        expect(gallery.images.where(record_url: 'http://www.europeana.eu/portal/record/nice/2.html')).not_to be_blank
+      end
+
+      it 'should set image position' do
+        gallery.save
+        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/nice/1.html').position).to eq(1)
+        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/nice/2.html').position).to eq(2)
+      end
+    end
+
+    context '(on update)' do
+      let(:gallery) { galleries(:fashion_dresses) }
+
+      it 'should create images for new URLs' do
+        gallery.image_record_urls = 'http://www.europeana.eu/portal/record/nice/1.html'
+        gallery.save
+        expect(gallery.images.where(record_url: 'http://www.europeana.eu/portal/record/nice/1.html')).not_to be_blank
+      end
+
+      it 'should set image position' do
+        gallery.image_record_urls = 'http://www.europeana.eu/portal/record/dresses/2.html http://www.europeana.eu/portal/record/nice/1.html'
+        gallery.save
+        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/dresses/2.html').position).to eq(1)
+        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/nice/1.html').position).to eq(2)
+      end
+
+      it 'should delete images for absent URLs' do
+        gallery.image_record_urls = 'http://www.europeana.eu/portal/record/nice/1.html'
+        gallery.save
+        expect(gallery.images.count).to eq(1)
+      end
+    end
+  end
 end
