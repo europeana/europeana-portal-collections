@@ -5,6 +5,8 @@ RSpec.describe Gallery do
   it { should validate_length_of(:title).is_at_most(280) }
   it { should validate_length_of(:description).is_at_most(280) }
   it { is_expected.to be_versioned }
+  it { should accept_nested_attributes_for(:images).allow_destroy(true) }
+  it { should accept_nested_attributes_for(:translations).allow_destroy(true) }
 
   it 'should have publication states' do
     expect(described_class).to include(HasPublicationStates)
