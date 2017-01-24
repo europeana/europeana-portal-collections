@@ -2,7 +2,7 @@
 class GalleryImage < ActiveRecord::Base
   belongs_to :gallery, inverse_of: :images
 
-  validates :gallery_id, presence: true
+  validates :gallery, presence: true
   validates :record_url, presence: true
   validates :position, uniqueness: { scope: :gallery_id }
 end
