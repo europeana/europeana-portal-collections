@@ -4,5 +4,4 @@ class GalleryImage < ActiveRecord::Base
 
   validates :gallery, presence: true
   validates :record_url, presence: true
-  validates :position, uniqueness: { scope: :gallery_id }
 end
