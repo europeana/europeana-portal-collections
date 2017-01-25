@@ -4,7 +4,7 @@ gem 'rails', '4.2.7.1'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '6db36b7'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'e51e55d'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -38,7 +38,6 @@ gem 'rails_with_relative_url_root', '~> 0.1'
 gem 'rack-rewrite'
 gem 'rails_admin', '~> 0.8.0'
 gem 'redis-rails', '~> 4.0'
-gem 'redis-rails-instrumentation'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'therubyracer'
@@ -65,6 +64,7 @@ end
 
 group :development do
   gem 'foreman'
+  gem 'redis-rails-instrumentation' # WARNING: may break with logstash, i.e. europeana-logging
   gem 'spring', '~> 1.6'
 end
 

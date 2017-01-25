@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Portal
   class Show < ApplicationView
     include SearchableView
@@ -5,6 +6,8 @@ module Portal
     include Document::Field::Entities
 
     attr_accessor :document, :debug
+
+    delegate :field_value, to: :presenter
 
     def head_links
       mustache[:head_links] ||= begin
@@ -49,6 +52,10 @@ module Portal
       end
     end
 
+    def include_nav_searchbar
+     true
+    end
+
     def content
       mustache[:content] ||= begin
         {
@@ -88,7 +95,7 @@ module Portal
         info: static_page_path('annotations', format: 'html'),
         sections: [
           {
-            items: @annotations.map { |anno| { url: anno, text: anno, preserve_case: true } },
+            items: @annotations.map { |anno| { url: anno, text: anno } },
             title: t('site.object.meta-label.relations')
           }
         ]
@@ -235,25 +242,19 @@ module Portal
 
     def similar_items
       return false unless @hierarchy.blank?
-      {
+      res = {
         title: t('site.object.similar-items'),
-        more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id)),
         more_items_load: document_similar_url(document, format: 'json'),
         more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
         more_items_total_formatted: number_with_delimiter(@mlt_response.present? ? @mlt_response.total : 0),
-        items: @similar.map do |doc|
-          {
-            url: document_path(doc, format: 'html'),
-            title: field_value(%w(dcTitleLangAware title)),
-            img: {
-              alt: field_value(%w(dcTitleLangAware title)),
-              # temporary fix until API contains correct image url
-              # src: field_value('edmPreview'),
-              src: record_preview_url(field_value('edmPreview'), 400)
-            }
-          }
-        end
+        items: @similar.map { |doc| similar_items_item(doc) }
       }
+
+      if res[:more_items_total] > res[:items].length
+        res[:more_items_query] = search_path(params.slice(:api_url).merge(mlt: document.id))
+      end
+
+      res
     end
 
     def oembed_links
@@ -363,8 +364,6 @@ module Portal
       end
     end
 
-    delegate :field_value, to: :presenter
-
     def item_players
       @item_players ||= begin
         web_resources = presenter.media_web_resources
@@ -381,10 +380,6 @@ module Portal
       presenter.media_web_resources.any? { |wr| wr.downloadable? }
     end
 
-    def presenter
-      @presenter ||= Document::RecordPresenter.new(document, controller)
-    end
-
     def back_url_from_referer
       referer = request.referer
       return unless referer.present?
@@ -393,6 +388,34 @@ module Portal
       if search_urls.any? { |u| referer.match "^#{u}(\\?|$)" }
         return referer
       end
+    end
+
+    ##
+    # Override method from `LocalisableView` to exlude q param
+    def current_url_without_locale
+      url_without_params(super)
+    end
+
+    def current_url_for_locale(_)
+      url_without_params(super)
+    end
+
+    protected
+
+    def similar_items_item(doc)
+      presenter = Document::SearchResultPresenter.new(doc, controller)
+      {
+        url: document_path(doc, format: 'html'),
+        title: presenter.field_value(%w(dcTitleLangAware title)),
+        img: {
+          alt: presenter.field_value(%w(dcTitleLangAware title)),
+          src: presenter.thumbnail_url(generic: true)
+        }
+      }
+    end
+
+    def presenter
+      @presenter ||= Document::RecordPresenter.new(document, controller)
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219134240) do
+ActiveRecord::Schema.define(version: 20170118164140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,13 +52,13 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   create_table "browse_entries", force: :cascade do |t|
     t.text     "query"
     t.integer  "media_object_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "state",           default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "state",               default: 0
     t.integer  "subject_type"
     t.string   "type"
-    t.string   "facet_field"
     t.string   "facet_value"
+    t.integer  "facet_link_group_id"
   end
 
   add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree
@@ -92,13 +92,14 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   add_index "collection_translations", ["locale"], name: "index_collection_translations_on_locale", using: :btree
 
   create_table "collections", force: :cascade do |t|
-    t.string   "key",        limit: 255
+    t.string   "key",            limit: 255
     t.text     "api_params"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "state",                  default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "state",                      default: 0
     t.string   "title"
     t.text     "settings"
+    t.string   "newsletter_url"
   end
 
   create_table "data_provider_logos", force: :cascade do |t|
@@ -138,6 +139,15 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "facet_link_groups", force: :cascade do |t|
+    t.string   "facet_field"
+    t.integer  "facet_values_count"
+    t.boolean  "thumbnails"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "hero_images", force: :cascade do |t|
     t.integer  "media_object_id"
@@ -218,8 +228,8 @@ ActiveRecord::Schema.define(version: 20161219134240) do
     t.integer  "state",                     default: 0
     t.string   "type",          limit: 255
     t.integer  "http_code"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "banner_id"
     t.text     "settings"
     t.string   "strapline"
@@ -284,8 +294,10 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
+  add_foreign_key "browse_entries", "facet_link_groups"
   add_foreign_key "browse_entries_collections", "browse_entries"
   add_foreign_key "browse_entries_collections", "collections"
+  add_foreign_key "facet_link_groups", "pages"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
 end

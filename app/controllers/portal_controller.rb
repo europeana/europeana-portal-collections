@@ -33,7 +33,7 @@ class PortalController < ApplicationController
       format.json do
         render json: {
           search_results: @document_list.map do |doc|
-            Document::SearchResultPresenter.new(doc, @response, self).content
+            Document::SearchResultPresenter.new(doc, self, @response).content
           end
         }
       end
