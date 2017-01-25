@@ -162,14 +162,15 @@ module NavigableView
   end
 
   def link_item(text, url, options = {})
-    { text: text, url: url }.merge(options)
+    { text: text, url: url, submenu: false }.merge(options)
   end
 
   def feed_entry_nav_items(url, max)
     feed_entries(url)[0..(max - 1)].map do |item|
       {
         url: CGI.unescapeHTML(item.url),
-        text: CGI.unescapeHTML(item.title)
+        text: CGI.unescapeHTML(item.title),
+        submenu: false
       }
     end
   end
