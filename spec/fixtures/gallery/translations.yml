@@ -1,3 +1,8 @@
+empty_translations:
+  locale: en
+  title: 'An empty gallery'
+  globalized_model: empty
+
 fashion_dresses_translations:
   locale: en
   title: 'Fashion: dresses'

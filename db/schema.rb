@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124111514) do
+ActiveRecord::Schema.define(version: 20170126103123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,15 @@ ActiveRecord::Schema.define(version: 20170124111514) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "europeana_records", force: :cascade do |t|
+    t.string   "europeana_id"
+    t.json     "metadata"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "europeana_records", ["europeana_id"], name: "index_europeana_records_on_europeana_id", unique: true, using: :btree
+
   create_table "facet_link_groups", force: :cascade do |t|
     t.string   "facet_field"
     t.integer  "facet_values_count"
@@ -159,11 +168,10 @@ ActiveRecord::Schema.define(version: 20170124111514) do
 
   create_table "gallery_images", force: :cascade do |t|
     t.integer  "gallery_id"
+    t.integer  "europeana_record_id"
     t.integer  "position"
-    t.string   "record_url"
-    t.json     "record_metadata"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "gallery_images", ["position"], name: "index_gallery_images_on_position", using: :btree
@@ -329,6 +337,7 @@ ActiveRecord::Schema.define(version: 20170124111514) do
   add_foreign_key "browse_entries_collections", "browse_entries"
   add_foreign_key "browse_entries_collections", "collections"
   add_foreign_key "facet_link_groups", "pages"
+  add_foreign_key "gallery_images", "europeana_records"
   add_foreign_key "gallery_images", "galleries"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"

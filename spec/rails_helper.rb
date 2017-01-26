@@ -68,9 +68,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Europeana::Portal::Application.config.relative_url_root = nil
-  end
-
-  config.before(:each) do
+    ActiveJob::Base.queue_adapter = :test
     Rails.cache.clear
   end
 end

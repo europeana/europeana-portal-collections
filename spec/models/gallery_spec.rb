@@ -33,14 +33,14 @@ RSpec.describe Gallery do
       it 'should create images for new URLs' do
         gallery.save
         expect(gallery.images.count).to eq(2)
-        expect(gallery.images.where(record_url: 'http://www.europeana.eu/portal/record/nice/1.html')).not_to be_blank
-        expect(gallery.images.where(record_url: 'http://www.europeana.eu/portal/record/nice/2.html')).not_to be_blank
+        expect(gallery.images.reload.detect { |image| image.url == 'http://www.europeana.eu/portal/record/nice/1.html' }).not_to be_blank
+        expect(gallery.images.reload.detect { |image| image.url == 'http://www.europeana.eu/portal/record/nice/2.html' }).not_to be_blank
       end
 
       it 'should set image position' do
         gallery.save
-        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/nice/1.html').position).to eq(1)
-        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/nice/2.html').position).to eq(2)
+        expect(gallery.images.reload.detect { |image| image.url == 'http://www.europeana.eu/portal/record/nice/1.html' }.position).to eq(1)
+        expect(gallery.images.reload.detect { |image| image.url == 'http://www.europeana.eu/portal/record/nice/2.html' }.position).to eq(2)
       end
     end
 
@@ -50,21 +50,29 @@ RSpec.describe Gallery do
       it 'should create images for new URLs' do
         gallery.image_record_urls = 'http://www.europeana.eu/portal/record/nice/1.html'
         gallery.save
-        expect(gallery.images.where(record_url: 'http://www.europeana.eu/portal/record/nice/1.html')).not_to be_blank
+        expect(gallery.images.reload.detect { |image| image.url == 'http://www.europeana.eu/portal/record/nice/1.html' }).not_to be_blank
       end
 
       it 'should set image position' do
         gallery.image_record_urls = 'http://www.europeana.eu/portal/record/dresses/2.html http://www.europeana.eu/portal/record/nice/1.html'
         gallery.save
-        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/dresses/2.html').position).to eq(1)
-        expect(gallery.images.find_by_record_url('http://www.europeana.eu/portal/record/nice/1.html').position).to eq(2)
+        expect(gallery.images.reload.detect { |image| image.url == 'http://www.europeana.eu/portal/record/dresses/2.html' }.position).to eq(1)
+        expect(gallery.images.reload.detect { |image| image.url == 'http://www.europeana.eu/portal/record/nice/1.html' }.position).to eq(2)
       end
 
       it 'should delete images for absent URLs' do
         gallery.image_record_urls = 'http://www.europeana.eu/portal/record/nice/1.html'
         gallery.save
-        expect(gallery.images.count).to eq(1)
+        expect(gallery.images.reload.count).to eq(1)
       end
     end
+  end
+
+  it 'should validate image URLs before saving' do
+    gallery = galleries(:empty)
+    expect(gallery).to be_valid
+    gallery.image_record_urls = 'http://www.google.co.uk'
+    expect(gallery).not_to be_valid
+    expect(gallery.errors[:image_record_urls]).not_to be_none
   end
 end
