@@ -2,8 +2,8 @@
 class Gallery < ActiveRecord::Base
   include HasPublicationStates
 
-  has_many :images, -> { order(:position) }, class_name: 'GalleryImage',
-    dependent: :destroy, inverse_of: :gallery
+  has_many :images, -> { order(:position) },
+    class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
   accepts_nested_attributes_for :images, allow_destroy: true
 
   translates :title, :description, fallbacks_for_empty_translations: true
@@ -36,9 +36,10 @@ class Gallery < ActiveRecord::Base
     transaction do
       @image_record_urls.strip.split(/\s+/).compact.tap do |urls|
         urls.each_with_index do |url, i|
-          image = images.detect { |image| image.url == url }
-          image ||= GalleryImage.create(gallery: self, url: url)
-          image.update_attributes(position: i + 1)
+          images.detect { |image| image.url == url }.tap do |image|
+            image ||= GalleryImage.create(gallery: self, url: url)
+            image.update_attributes(position: i + 1)
+          end
         end
         images.reject { |image| urls.include?(image.url) }.each(&:destroy)
       end

@@ -8,18 +8,16 @@ RSpec.describe Europeana::Record do
 
   context 'when created' do
     it 'should enqueue a job to retrieve record metadata' do
-      expect {
-        described_class.create(europeana_id: '/job/enqueue')
-      }.to have_enqueued_job(HarvestEuropeanaRecordJob)
+      expect { described_class.create(europeana_id: '/job/enqueue') }.
+        to have_enqueued_job(HarvestEuropeanaRecordJob)
     end
   end
 
   context 'when updated' do
     it 'should not enqueue a job to retrieve record metadata' do
       record = described_class.create(europeana_id: '/job/enqueue')
-      expect {
-        record.update_attributes(europeana_id: '/no/job')
-      }.not_to have_enqueued_job(HarvestEuropeanaRecordJob)
+      expect { record.update_attributes(europeana_id: '/no/job') }.
+        not_to have_enqueued_job(HarvestEuropeanaRecordJob)
     end
   end
 

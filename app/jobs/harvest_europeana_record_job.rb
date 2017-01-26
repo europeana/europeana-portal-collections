@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ##
 # Job to harvest from the Europeana Record API the metadata for a single
 # `Europeana::Record`

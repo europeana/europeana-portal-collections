@@ -11,7 +11,7 @@ class CreateGalleries < ActiveRecord::Migration
         Gallery.create_translation_table! title: :string, description: :text
       end
 
-      dir.down do 
+      dir.down do
         Gallery.drop_translation_table!
       end
     end

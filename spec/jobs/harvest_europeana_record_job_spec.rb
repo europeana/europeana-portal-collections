@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe HarvestEuropeanaRecordJob  do
   it 'should send a request to the Record API' do
     record = europeana_records(:bird_picture)
