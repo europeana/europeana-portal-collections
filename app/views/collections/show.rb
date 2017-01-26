@@ -172,7 +172,8 @@ module Collections
         {
           preview_search_title: facet_entry.title,
           preview_search_type: facet_entry_field_title(facet_entry),
-          preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json')
+          preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json'),
+          preview_search_more_link: browse_entry_url(facet_entry, @landing_page)
         }
       end
     end
