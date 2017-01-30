@@ -165,6 +165,10 @@ module Collections
       end
     end
 
+    # @todo refactor to:
+    # - make modular have this be a concern
+    # - lookup proper search title & type using labeling from  presenters/concerns/facet/labelling.rb
+    # - refactor facet_entry_field_title to not be called for each facet entry
     def preview_search_data
       return nil if @landing_page.facet_entries.blank?
 
@@ -176,6 +180,12 @@ module Collections
           preview_search_more_link: browse_entry_url(facet_entry, @landing_page)
         }
       end
+    end
+
+    def facet_entry_field_title(facet_entry)
+      ff = Europeana::Blacklight::Response::Facets::FacetField.new(facet_entry.facet_field, [])
+      presenter = FacetPresenter.build(ff, controller)
+      presenter.facet_title || facet_entry.facet_field
     end
   end
 end
