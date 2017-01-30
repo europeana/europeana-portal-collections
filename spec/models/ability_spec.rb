@@ -22,7 +22,6 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, DataProvider.new) }
     it { is_expected.not_to be_able_to(:manage, Gallery.new) }
-    it { is_expected.not_to be_able_to(:manage, GalleryImage.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, Page.new) }
     it { is_expected.not_to be_able_to(:manage, Page::Error.new) }
@@ -51,7 +50,6 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, DataProvider.new) }
     it { is_expected.not_to be_able_to(:manage, Gallery.new) }
-    it { is_expected.not_to be_able_to(:manage, GalleryImage.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, Page.new) }
     it { is_expected.not_to be_able_to(:manage, Page::Error.new) }
@@ -79,7 +77,6 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:manage, Collection.new) }
     it { is_expected.to be_able_to(:manage, DataProvider.new) }
     it { is_expected.to be_able_to(:manage, Gallery.new) }
-    it { is_expected.to be_able_to(:manage, GalleryImage.new) }
     it { is_expected.to be_able_to(:manage, HeroImage.new) }
     it { is_expected.to be_able_to(:manage, Page.new) }
     it { is_expected.to be_able_to(:manage, Page::Error.new) }

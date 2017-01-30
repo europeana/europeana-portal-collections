@@ -198,7 +198,7 @@ RailsAdmin.config do |config|
     edit do
       field :title
       field :description, :text
-      field :image_record_urls, :text do
+      field :image_portal_urls, :text do
         html_attributes rows: 15, cols: 80
       end
     end

@@ -13,18 +13,18 @@ class Gallery < ActiveRecord::Base
 
   validates :title, presence: true, length: { maximum: 60 }
   validates :description, length: { maximum: 280 }
-  validate :validate_image_record_urls
+  validate :validate_image_portal_urls
 
   default_scope { includes(:translations) }
 
-  after_save :set_images_from_record_urls
+  after_save :set_images_from_portal_urls
 
-  attr_writer :image_record_urls
+  attr_writer :image_portal_urls
 
   # Double newline separated list of image record URLs for use in a textarea
   # input field in the CMS.
-  def image_record_urls
-    @image_record_urls ||= images.map(&:url).join("\n\n")
+  def image_portal_urls
+    @image_portal_urls ||= images.map(&:portal_url).join("\n\n")
   end
 
   protected
@@ -32,25 +32,28 @@ class Gallery < ActiveRecord::Base
   # Create/update/delete images from a newline separated list of record URLs,
   # to set images and their positioning from a space-separated list of URLs,
   # as would come from a textarea input field in the CMS.
-  def set_images_from_record_urls
+  def set_images_from_portal_urls
     transaction do
-      @image_record_urls.strip.split(/\s+/).compact.tap do |urls|
-        urls.each_with_index do |url, i|
-          images.detect { |image| image.url == url }.tap do |image|
-            image ||= GalleryImage.create(gallery: self, url: url)
+      enumerable_image_portal_urls.map { |url| Europeana::Record.id_from_portal_url(url) }.tap do |record_ids|
+        record_ids.each_with_index do |record_id, i|
+          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id).tap do |image|
             image.update_attributes(position: i + 1)
           end
         end
-        images.reject { |image| urls.include?(image.url) }.each(&:destroy)
+        images.where.not(europeana_record_id: record_ids).destroy_all
       end
     end
   end
 
-  def validate_image_record_urls
-    return unless @image_record_urls.present?
-    @image_record_urls.strip.split(/\s+/).compact.each do |url|
-      if Europeana::Record.europeana_id_from_url(url).nil?
-        errors.add(:image_record_urls, %(not a Europeana record URL: "#{url}"))
+  def enumerable_image_portal_urls
+    image_portal_urls.strip.split(/\s+/).compact
+  end
+
+  def validate_image_portal_urls
+    return unless @image_portal_urls.present?
+    enumerable_image_portal_urls.each do |url|
+      if Europeana::Record.id_from_portal_url(url).nil?
+        errors.add(:image_portal_urls, %(not a Europeana record URL: "#{url}"))
       end
     end
   end
