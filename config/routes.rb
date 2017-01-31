@@ -29,8 +29,6 @@ Rails.application.routes.draw do
       get 'tumblr', on: :member
     end
 
-    resources :galleries, only: [:show, :index]
-
     get 'channels', to: redirect('%{locale}/collections')
     get 'channels/:id', to: redirect('%{locale}/collections/%{id}')
 
@@ -52,6 +50,10 @@ Rails.application.routes.draw do
     get 'explore/sources', to: 'explore#sources'
     get 'explore/topics', to: 'explore#topics'
     get 'explore/periods', to: 'explore#periods'
+
+    scope '/explore' do
+      resources :galleries, only: [:show, :index]
+    end
 
     get 'entities/suggest'
 
