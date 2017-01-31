@@ -3,6 +3,14 @@ module Galleries
   class Show < ApplicationView
     include GalleryDisplayingView
 
+    def bodyclass
+      'channel_landing'
+    end
+
+    def js_vars
+      [{ name: 'pageName', value: 'collections/galleries' }]
+    end
+
     def content
       {
         galleries_link: galleries_path,
