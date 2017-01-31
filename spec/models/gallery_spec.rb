@@ -20,6 +20,13 @@ RSpec.describe Gallery do
     expect(described_class.translated_attribute_names).to include(:description)
   end
 
+  describe '#to_param' do
+    it 'should return the slug' do
+      gallery = Gallery.new(title: 'Pianos', slug: 'pianos')
+      expect(gallery.to_param).to eq('pianos')
+    end
+  end
+
   describe '#image_portal_urls' do
     it 'should return a new line-separated list of gallery image record URLs' do
       expect(galleries(:fashion_dresses).image_portal_urls).to eq("http://www.europeana.eu/portal/record/dresses/1.html\n\nhttp://www.europeana.eu/portal/record/dresses/2.html")

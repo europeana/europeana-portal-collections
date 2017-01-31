@@ -13,7 +13,11 @@ class Gallery < ActiveRecord::Base
 
   validates :title, presence: true, length: { maximum: 60 }
   validates :description, length: { maximum: 280 }
+  validates :slug, presence: true
   validate :validate_image_portal_urls
+
+  acts_as_url :title, url_attribute: :slug, only_when_blank: true,
+                      allow_duplicates: false
 
   default_scope { includes(:translations) }
 
@@ -25,6 +29,10 @@ class Gallery < ActiveRecord::Base
   # input field in the CMS.
   def image_portal_urls
     @image_portal_urls ||= images.map(&:portal_url).join("\n\n")
+  end
+
+  def to_param
+    slug
   end
 
   protected

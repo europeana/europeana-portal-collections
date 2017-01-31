@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126103123) do
+ActiveRecord::Schema.define(version: 20170131150633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,8 +153,10 @@ ActiveRecord::Schema.define(version: 20170126103123) do
     t.integer  "state",      default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.text     "slug"
   end
 
+  add_index "galleries", ["slug"], name: "index_galleries_on_slug", unique: true, using: :btree
   add_index "galleries", ["state"], name: "index_galleries_on_state", using: :btree
 
   create_table "gallery_images", force: :cascade do |t|
