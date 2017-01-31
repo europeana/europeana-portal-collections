@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   root to: 'locale#index'
 
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
     resources :collections, only: [:show, :index] do
       get 'tumblr', on: :member
     end
+
+    resources :galleries, only: [:show, :index]
 
     get 'channels', to: redirect('%{locale}/collections')
     get 'channels/:id', to: redirect('%{locale}/collections/%{id}')
