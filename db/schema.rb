@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118164140) do
+ActiveRecord::Schema.define(version: 20170126103123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,36 @@ ActiveRecord::Schema.define(version: 20170118164140) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "galleries", force: :cascade do |t|
+    t.integer  "state",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "galleries", ["state"], name: "index_galleries_on_state", using: :btree
+
+  create_table "gallery_images", force: :cascade do |t|
+    t.integer  "gallery_id"
+    t.string   "europeana_record_id"
+    t.integer  "position"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "gallery_images", ["position"], name: "index_gallery_images_on_position", using: :btree
+
+  create_table "gallery_translations", force: :cascade do |t|
+    t.integer  "gallery_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "gallery_translations", ["gallery_id"], name: "index_gallery_translations_on_gallery_id", using: :btree
+  add_index "gallery_translations", ["locale"], name: "index_gallery_translations_on_locale", using: :btree
 
   create_table "hero_images", force: :cascade do |t|
     t.integer  "media_object_id"
@@ -298,6 +328,7 @@ ActiveRecord::Schema.define(version: 20170118164140) do
   add_foreign_key "browse_entries_collections", "browse_entries"
   add_foreign_key "browse_entries_collections", "collections"
   add_foreign_key "facet_link_groups", "pages"
+  add_foreign_key "gallery_images", "galleries"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
 end

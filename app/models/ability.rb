@@ -27,7 +27,7 @@ class Ability
   def admin!
     can :access, :rails_admin
     can :dashboard
-    can :manage, [Banner, BrowseEntry, Collection, DataProvider, HeroImage,
-                  Link, MediaObject, Page, User]
+    can :manage, [Banner, BrowseEntry, Collection, DataProvider, Gallery,
+                  HeroImage, Link, MediaObject, Page, User]
   end
 end
