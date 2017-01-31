@@ -13,7 +13,7 @@ class GalleriesController < ApplicationController
   protected
 
   def gallery_images_for_foyer(galleries)
-    @galleries.map { |gallery| gallery.images.first(3) }.flatten
+    galleries.map { |gallery| gallery.images.first(3) }.flatten
   end
 
   # @return [Array<Europeana::Blacklight::Document>]
