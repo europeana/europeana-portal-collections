@@ -4,6 +4,8 @@ class Gallery < ActiveRecord::Base
 
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
+  has_and_belongs_to_many :collections, inverse_of: :galleries
+
   accepts_nested_attributes_for :images, allow_destroy: true
 
   translates :title, :description, fallbacks_for_empty_translations: true
