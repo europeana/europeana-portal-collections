@@ -72,8 +72,8 @@ class Gallery < ActiveRecord::Base
   def ensure_unique_title
     i = 0
     unique_title = title
-    while !Gallery.where(title: unique_title).where.not(id: id).blank?
-      i = i + 1
+    until Gallery.where(title: unique_title).where.not(id: id).blank?
+      i += 1
       unique_title = "#{title} #{i}"
     end
     self.title = unique_title
