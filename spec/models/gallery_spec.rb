@@ -16,6 +16,15 @@ RSpec.describe Gallery do
     expect(described_class.translated_attribute_names).to include(:title)
   end
 
+  it 'should enforce unique titles' do
+    g1 = Gallery.create(title: 'Stuff')
+    g2 = Gallery.create(title: 'Stuff')
+    g3 = Gallery.create(title: 'Stuff')
+    expect(g1.reload.title).to eq('Stuff')
+    expect(g2.reload.title).to eq('Stuff 1')
+    expect(g3.reload.title).to eq('Stuff 2')
+  end
+
   it 'should translate description' do
     expect(described_class.translated_attribute_names).to include(:description)
   end

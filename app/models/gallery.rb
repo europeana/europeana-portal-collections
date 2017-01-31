@@ -21,6 +21,7 @@ class Gallery < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
+  before_save :ensure_unique_title
   after_save :set_images_from_portal_urls
 
   attr_writer :image_portal_urls
@@ -64,5 +65,15 @@ class Gallery < ActiveRecord::Base
         errors.add(:image_portal_urls, %(not a Europeana record URL: "#{url}"))
       end
     end
+  end
+
+  def ensure_unique_title
+    i = 0
+    unique_title = title
+    while !Gallery.where(title: unique_title).where.not(id: id).blank?
+      i = i + 1
+      unique_title = "#{title} #{i}"
+    end
+    self.title = unique_title
   end
 end
