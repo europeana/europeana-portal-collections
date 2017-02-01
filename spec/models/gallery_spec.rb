@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 RSpec.describe Gallery do
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
+  it { is_expected.to have_and_belong_to_many(:collections).inverse_of(:galleries) }
   it { is_expected.to validate_presence_of(:title) }
-  it { should validate_length_of(:title).is_at_most(60) }
-  it { should validate_length_of(:description).is_at_most(280) }
+  it { is_expected.to validate_length_of(:title).is_at_most(60) }
+  it { is_expected.to validate_length_of(:description).is_at_most(280) }
   it { is_expected.to be_versioned }
-  it { should accept_nested_attributes_for(:images).allow_destroy(true) }
-  it { should accept_nested_attributes_for(:translations).allow_destroy(true) }
+  it { is_expected.to accept_nested_attributes_for(:images).allow_destroy(true) }
+  it { is_expected.to accept_nested_attributes_for(:translations).allow_destroy(true) }
 
   it 'should have publication states' do
     expect(described_class).to include(HasPublicationStates)
@@ -16,8 +17,24 @@ RSpec.describe Gallery do
     expect(described_class.translated_attribute_names).to include(:title)
   end
 
+  it 'should enforce unique titles' do
+    g1 = Gallery.create(title: 'Stuff')
+    g2 = Gallery.create(title: 'Stuff')
+    g3 = Gallery.create(title: 'Stuff')
+    expect(g1.reload.title).to eq('Stuff')
+    expect(g2.reload.title).to eq('Stuff 1')
+    expect(g3.reload.title).to eq('Stuff 2')
+  end
+
   it 'should translate description' do
     expect(described_class.translated_attribute_names).to include(:description)
+  end
+
+  describe '#to_param' do
+    it 'should return the slug' do
+      gallery = Gallery.new(title: 'Pianos', slug: 'pianos')
+      expect(gallery.to_param).to eq('pianos')
+    end
   end
 
   describe '#image_portal_urls' do

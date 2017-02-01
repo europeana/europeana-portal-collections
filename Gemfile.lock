@@ -556,6 +556,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stringex (2.6.1)
     sweet_notifications (0.2.1)
       activesupport (>= 4.0, < 6)
       railties (>= 4.0, < 6)
@@ -659,6 +660,7 @@ DEPENDENCIES
   soundcloud (~> 0.3)
   spring (~> 1.6)
   stache!
+  stringex (~> 2.6)
   therubyracer
   uglifier (~> 2.7.2)
   webmock (~> 1.22)

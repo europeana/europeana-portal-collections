@@ -40,6 +40,7 @@ gem 'rails_admin', '~> 0.8.0'
 gem 'redis-rails', '~> 4.0'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
+gem 'stringex', '~> 2.6'
 gem 'therubyracer'
 gem 'i18n_data'
 

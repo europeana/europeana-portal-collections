@@ -198,6 +198,9 @@ RailsAdmin.config do |config|
     edit do
       field :title
       field :description, :text
+      field :collections do
+        inline_add false
+      end
       field :image_portal_urls, :text do
         html_attributes rows: 15, cols: 80
       end

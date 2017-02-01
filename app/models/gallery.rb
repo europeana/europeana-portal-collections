@@ -4,6 +4,8 @@ class Gallery < ActiveRecord::Base
 
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
+  has_and_belongs_to_many :collections, inverse_of: :galleries
+
   accepts_nested_attributes_for :images, allow_destroy: true
 
   translates :title, :description, fallbacks_for_empty_translations: true
@@ -13,10 +15,15 @@ class Gallery < ActiveRecord::Base
 
   validates :title, presence: true, length: { maximum: 60 }
   validates :description, length: { maximum: 280 }
+  validates :slug, presence: true
   validate :validate_image_portal_urls
+
+  acts_as_url :title, url_attribute: :slug, only_when_blank: true,
+                      allow_duplicates: false
 
   default_scope { includes(:translations) }
 
+  before_save :ensure_unique_title
   after_save :set_images_from_portal_urls
 
   attr_writer :image_portal_urls
@@ -25,6 +32,10 @@ class Gallery < ActiveRecord::Base
   # input field in the CMS.
   def image_portal_urls
     @image_portal_urls ||= images.map(&:portal_url).join("\n\n")
+  end
+
+  def to_param
+    slug
   end
 
   protected
@@ -56,5 +67,15 @@ class Gallery < ActiveRecord::Base
         errors.add(:image_portal_urls, %(not a Europeana record URL: "#{url}"))
       end
     end
+  end
+
+  def ensure_unique_title
+    i = 0
+    unique_title = title
+    until Gallery.where(title: unique_title).where.not(id: id).blank?
+      i += 1
+      unique_title = "#{title} #{i}"
+    end
+    self.title = unique_title
   end
 end

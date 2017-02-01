@@ -6,7 +6,7 @@ class GalleriesController < ApplicationController
   end
 
   def show
-    @gallery = Gallery.find(params[:id])
+    @gallery = Gallery.find_by_slug(params[:id])
     @documents = search_api_for_image_metadata(@gallery.images)
   end
 

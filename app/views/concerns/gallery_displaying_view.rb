@@ -17,8 +17,7 @@ module GalleryDisplayingView
     @presenters ||= {}
     @presenters[image.id] ||= begin
       document = document_for_gallery_image(image)
-      return nil if document.nil?
-      Document::SearchResultPresenter.new(document, controller)
+      document.nil? ? nil : Document::SearchResultPresenter.new(document, controller)
     end
   end
 

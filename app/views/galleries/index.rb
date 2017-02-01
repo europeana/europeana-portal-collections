@@ -3,6 +3,14 @@ module Galleries
   class Index < ApplicationView
     include GalleryDisplayingView
 
+    def bodyclass
+      'channel_landing'
+    end
+
+    def js_vars
+      [{ name: 'pageName', value: 'collections/galleries' }]
+    end
+
     def content
       {
         galleries: galleries_content
