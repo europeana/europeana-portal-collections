@@ -35,17 +35,17 @@ RSpec.describe GalleriesController do
       let(:gallery) { Gallery.published.first }
 
       it 'returns http success' do
-        get :show, locale: 'en', id: gallery.id
+        get :show, locale: 'en', id: gallery.slug
         expect(response).to have_http_status(:success)
       end
 
       it 'assigns gallery to @gallery' do
-        get :show, locale: 'en', id: gallery.id
+        get :show, locale: 'en', id: gallery.slug
         expect(assigns[:gallery]).to eq(gallery)
       end
 
       it 'searches the API for the gallery image metadata' do
-        get :show, locale: 'en', id: gallery.id
+        get :show, locale: 'en', id: gallery.slug
         ids = gallery.images.map(&:europeana_record_id)
         api_query = %[europeana_id:("#{ids.join('" OR "')}")]
         expect(an_api_search_request.
