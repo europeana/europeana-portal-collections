@@ -7,17 +7,32 @@ module Galleries
       'channel_landing'
     end
 
+    def page_title
+      mustache[:page_title] ||= ['Galleries', site_title].join(' - ') # @todo get this from Localeapp
+    end
+
     def js_vars
       [{ name: 'pageName', value: 'collections/galleries' }]
     end
 
     def content
-      {
-        galleries: galleries_content
-      }
+      mustache[:content] ||= begin
+        {
+          hero: hero_content,
+          galleries: galleries_content
+        }
+      end
     end
 
     private
+
+    def hero_content
+      {
+        url: @hero_image.file.present? ? @hero_image.file.url : nil,
+        title: 'Galleries', # @todo get this from Localeapp
+        subtitle: ''
+      }
+    end
 
     def galleries_content
       @galleries.map { |gallery| gallery_content(gallery) }
