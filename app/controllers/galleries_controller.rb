@@ -3,6 +3,7 @@ class GalleriesController < ApplicationController
   def index
     @galleries = Gallery.includes(:images).published
     @documents = search_api_for_image_metadata(gallery_images_for_foyer(@galleries))
+    @hero_image = homepage_hero_image
   end
 
   def show
@@ -27,5 +28,10 @@ class GalleriesController < ApplicationController
 
   def search_api_query_for_images(images)
     'europeana_id:("' + images.map(&:europeana_record_id).join('" OR "') + '")'
+  end
+
+  def homepage_hero_image
+    landing_page = Page::Landing.find_by_slug('')
+    landing_page.nil? ? nil : landing_page.hero_image
   end
 end
