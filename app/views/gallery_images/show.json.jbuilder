@@ -1,10 +1,9 @@
 # frozen_string_literal: true
-json.description render_document_show_field_value(@document, 'proxies.dcDescription')
-json.creation_date render_document_show_field_value(@document, 'proxies.dcDate')
-json.data_provider render_document_show_field_value(@document, 'aggregations.edmDataProvider')
-json.provider render_document_show_field_value(@document, 'aggregations.edmProvider')
-json.rights do |rights|
-  rights.license_CC0
-  rights.license_url render_document_show_field_value(@document, 'aggregations.edmRights')
-end
-json.url_collection search_url(q: %(edm_datasetName:"#{render_document_show_field_value(@document, 'edmDatasetName')}"))
+presenter = Document::RecordPresenter.new(@document, controller)
+
+json.description presenter.field_value('proxies.dcDescription')
+json.creation_date presenter.field_value('proxies.dcDate')
+json.data_provider presenter.field_value('aggregations.edmDataProvider')
+json.provider presenter.field_value('aggregations.edmProvider')
+json.rights presenter.simple_rights_label_data
+json.url_collection search_url(q: %(edm_datasetName:"#{presenter.field_value('edmDatasetName')}"))
