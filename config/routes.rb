@@ -51,8 +51,10 @@ Rails.application.routes.draw do
     get 'explore/topics', to: 'explore#topics'
     get 'explore/periods', to: 'explore#periods'
 
-    scope '/explore' do
-      resources :galleries, only: [:show, :index]
+    scope 'explore' do
+      resources :galleries, only: [:show, :index], param: :slug do
+        resources :gallery_images, only: :show, path: 'images', as: 'images', param: :position
+      end
     end
 
     get 'entities/suggest'
