@@ -15,13 +15,17 @@ module Europeana
         end
       end
 
-      responses.map do |annotation|
-        if annotation['body'].is_a?(String) && annotation['body'] =~ URI.regexp
-          annotation['body']
-        elsif annotation['body'] && annotation['body']['@graph']
-          annotation['body']['@graph']['sameAs']
+      responses.map { |annotation| annotation_text_to_display(annotation) }.compact
+    end
+
+    def annotation_text_to_display(annotation)
+      if annotation['body'].is_a?(String) && annotation['body'] =~ URI.regexp
+        annotation['body']
+      elsif annotation['body'] && annotation['body']['@graph']
+        %w(sameAs isShownAt isShownBy).each do |graph_field|
+          return annotation['body']['@graph'][graph_field] if annotation['body']['@graph'][graph_field]
         end
-      end.compact
+      end
     end
 
     def annotations_api_search_params(document)

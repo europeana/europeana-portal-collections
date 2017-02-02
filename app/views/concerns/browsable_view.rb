@@ -48,7 +48,8 @@ module BrowsableView
     {
       text: type.label,
       url: search_action_path(f: { 'MEDIA' => ['true'], 'TYPE' => [type.id] }),
-      icon: "icon-#{type.icon}"
+      icon: "icon-#{type.icon}",
+      submenu: false
     }
   end
 
@@ -58,7 +59,7 @@ module BrowsableView
   # @return [Array<Hash>]
   def browse_submenu_items
     items = browse_menu_salient_types.map { |type| browse_menu_type_item(type) }
-    items << { text: t('site.collections.data-types.all'), url: search_action_path(q: ''), icon: 'icon-ellipsis' }
+    items << { text: t('site.collections.data-types.all'), url: search_action_path(q: ''), icon: 'icon-ellipsis', submenu: false }
   end
 
   def browse_menu_salient_types

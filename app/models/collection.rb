@@ -4,6 +4,7 @@ class Collection < ActiveRecord::Base
   include HasSettingsAttribute
 
   has_and_belongs_to_many :browse_entries
+  has_and_belongs_to_many :galleries, inverse_of: :collections
 
   has_paper_trail
 

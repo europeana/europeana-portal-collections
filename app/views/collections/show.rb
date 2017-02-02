@@ -80,7 +80,7 @@ module Collections
           "layout_#{@landing_page.settings_layout_type}".to_sym => true,
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
-          entry_points: facet_entry_items_grouped(@landing_page),
+          entry_points: @landing_page.settings_layout_type == 'browse' ? facet_entry_items_grouped(@landing_page) : [],
           preview_search_data: preview_search_data,
           preview_search_data_present: preview_search_data.present?,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
@@ -165,6 +165,10 @@ module Collections
       end
     end
 
+    # @todo refactor to:
+    # - make modular have this be a concern
+    # - lookup proper search title & type using labeling from  presenters/concerns/facet/labelling.rb
+    # - refactor facet_entry_field_title to not be called for each facet entry
     def preview_search_data
       return nil if @landing_page.facet_entries.blank?
 
@@ -172,9 +176,16 @@ module Collections
         {
           preview_search_title: facet_entry.title,
           preview_search_type: facet_entry_field_title(facet_entry),
-          preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json')
+          preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json'),
+          preview_search_more_link: browse_entry_url(facet_entry, @landing_page)
         }
       end
+    end
+
+    def facet_entry_field_title(facet_entry)
+      ff = Europeana::Blacklight::Response::Facets::FacetField.new(facet_entry.facet_field, [])
+      presenter = FacetPresenter.build(ff, controller)
+      presenter.facet_title || facet_entry.facet_field
     end
   end
 end
