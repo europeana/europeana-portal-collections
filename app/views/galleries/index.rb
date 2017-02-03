@@ -45,7 +45,7 @@ module Galleries
         count: gallery.images.size,
         images: gallery_images_content(gallery),
         clicktip: {
-         tooltip_text: gallery.description
+          tooltip_text: gallery.description
         }
       }
     end
