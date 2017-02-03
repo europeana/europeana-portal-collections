@@ -46,7 +46,7 @@ module Galleries
         title: presenter.title,
         creator: presenter.field_value('dataProvider'),
         thumb_url: gallery_image_thumbnail(image),
-        full_url: presenter.field_value('edmPreview')
+        full_url:  presenter.field_value('aggregations.edmIsShownBy')
       }
     end
   end

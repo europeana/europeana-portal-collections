@@ -8,7 +8,7 @@ module Galleries
     end
 
     def page_title
-      mustache[:page_title] ||= ['Galleries', site_title].join(' - ') # @todo get this from Localeapp
+      mustache[:page_title] ||= [t('global.galleries'), site_title].join(' - ')
     end
 
     def js_vars
