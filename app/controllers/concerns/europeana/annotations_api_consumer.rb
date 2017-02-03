@@ -9,7 +9,7 @@ module Europeana
       search = nil
       begin
         search = Europeana::API.annotation.search(annotations_api_search_params(document))
-      rescue Faraday::ResourceNotFound
+      rescue Europeana::API::Errors::ServerError
         return nil
       end
       responses = Europeana::API.in_parallel do |queue|
