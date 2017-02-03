@@ -6,8 +6,12 @@ module Europeana
     extend ActiveSupport::Concern
 
     def document_annotations(document)
-      search = Europeana::API.annotation.search(annotations_api_search_params(document))
-
+      search = nil
+      begin
+        search = Europeana::API.annotation.search(annotations_api_search_params(document))
+      rescue Faraday::ResourceNotFound
+        return nil
+      end
       responses = Europeana::API.in_parallel do |queue|
         search.fetch('items', []).each do |item|
           provider, id = item.split('/')[-2..-1]
