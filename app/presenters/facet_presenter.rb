@@ -180,7 +180,7 @@ class FacetPresenter
   # @param see {#facet_item}
   # @return [Hash] Request parameters without the given facet item
   def remove_facet_params(item)
-    search_state.remove_facet_params(facet_name, item)
+    search_state.remove_facet_params(facet_name, item).except(:locale, :api_url)
   end
 
   def add_facet_params(item)
@@ -192,7 +192,7 @@ class FacetPresenter
         facet_params = tmp_search_state.add_facet_params(parent_facet, @parent)
       end
     end
-    facet_params
+    facet_params.except(:locale, :api_url)
   end
 
   ##
