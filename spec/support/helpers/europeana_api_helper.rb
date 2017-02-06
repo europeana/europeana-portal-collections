@@ -95,6 +95,14 @@ module EuropeanaAPIHelper
                   status: 200,
                   headers: { 'Content-Type' => 'application/ld+json' })
 
+      stub_request(:get, %r{#{Europeana::API.url}/annotations/[^/]+/[^/]+}).
+        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
+        to_return { |request| {
+          body: api_responses(:annotations_fetch, id: request.uri.path.split('/')[-2..-1].join('/')),
+          status: 200,
+          headers: { 'Content-Type' => 'application/ld+json' }
+        } }
+
       # Media proxy
       stub_request(:head, %r{#{Rails.application.config.x.europeana_media_proxy}/[^/]+/[^/]+}).
         to_return(status: 200,
