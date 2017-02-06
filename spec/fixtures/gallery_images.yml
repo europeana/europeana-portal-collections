@@ -1,0 +1,9 @@
+fashion_dresses_image1:
+  gallery: fashion_dresses
+  europeana_record_id: /dresses/1
+  position: 1
+
+fashion_dresses_image2:
+  gallery: fashion_dresses
+  europeana_record_id: /dresses/2
+  position: 2

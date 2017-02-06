@@ -21,11 +21,10 @@ class FacetLinkGroupGeneratorJob < ApplicationJob
   protected
 
   def set_facet_entries
-    facets = displayable_facet_values
+    facets = displayable_facet_values.first(facet_values_limit)
     BrowseEntry::FacetEntry.transaction do
       @facet_link_group.browse_entry_facet_entries.where.not(facet_value: facets.map(&:value)).destroy_all
-      limit = @facet_link_group.facet_values_count ? @facet_link_group.facet_values_count : 6
-      facets.first(limit).each do |facet|
+      facets.each do |facet|
         facet_entry = @facet_link_group.browse_entry_facet_entries.where(facet_value: facet.value).first
         facet_value = facet.value
 
@@ -45,6 +44,10 @@ class FacetLinkGroupGeneratorJob < ApplicationJob
         Rails.cache.write("facet_link_groups/#{@facet_link_group.id}/#{new_entry.id}/thumbnail_url", thumbnail)
       end
     end
+  end
+
+  def facet_values_limit
+    @facet_link_group.facet_values_count ? @facet_link_group.facet_values_count : 6
   end
 
   def facet_field

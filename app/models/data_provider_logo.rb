@@ -1,5 +1,5 @@
 class DataProviderLogo < ActiveRecord::Base
-  MIN_WIDTH = 300
+  MIN_WIDTH = 0
 
   belongs_to :data_provider, inverse_of: :logo
 

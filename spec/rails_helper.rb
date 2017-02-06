@@ -8,6 +8,7 @@ require 'rspec/rails'
 # Gem requires
 require 'cancan/matchers'
 require 'capybara_helper'
+require 'paper_trail/frameworks/rspec'
 require 'shoulda/matchers'
 require 'webmock_helper'
 
@@ -67,9 +68,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Europeana::Portal::Application.config.relative_url_root = nil
-  end
-
-  config.before(:each) do
     Rails.cache.clear
   end
 end

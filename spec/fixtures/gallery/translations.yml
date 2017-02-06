@@ -1,0 +1,15 @@
+draft_translations:
+  locale: en
+  title: 'A draft gallery'
+  globalized_model: draft
+
+empty_translations:
+  locale: en
+  title: 'An empty gallery'
+  globalized_model: empty
+
+fashion_dresses_translations:
+  locale: en
+  title: 'Fashion: dresses'
+  description: 'A gallery of pictures about dresses.'
+  globalized_model: fashion_dresses

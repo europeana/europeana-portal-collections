@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   root to: 'locale#index'
 
@@ -49,6 +50,12 @@ Rails.application.routes.draw do
     get 'explore/sources', to: 'explore#sources'
     get 'explore/topics', to: 'explore#topics'
     get 'explore/periods', to: 'explore#periods'
+
+    scope 'explore' do
+      resources :galleries, only: [:show, :index], param: :slug do
+        resources :gallery_images, only: :show, path: 'images', as: 'images', param: :position
+      end
+    end
 
     get 'entities/suggest'
 

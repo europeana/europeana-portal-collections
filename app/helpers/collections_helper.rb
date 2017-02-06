@@ -108,7 +108,7 @@ module CollectionsHelper
 
     content = {
       title: false,
-      tumblr_url: Cache::FeedJob::URLS[:tumblr][key].sub('/rss', ''),
+      tumblr_url: Cache::FeedJob::URLS[:tumblr][key].to_s.sub('/rss', ''),
       more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json),
       more_items_total: paginated_items.total_count,
       items: paginated_items
