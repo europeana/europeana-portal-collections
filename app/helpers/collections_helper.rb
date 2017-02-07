@@ -103,14 +103,12 @@ module CollectionsHelper
 
     return nil if combined_items.blank?
 
-    paginated_items = Kaminari.paginate_array(combined_items).page(page).per(per_page)
-
     content = {
       title: false,
       tumblr_url: nil,
       more_items_load: nil,
       more_items_total: combined_items.count,
-      items: paginated_items
+      items: combined_items
     }
   end
 
