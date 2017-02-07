@@ -22,4 +22,4 @@ en:
       page/landing:
         strapline: 'Include "%%{total_item_count}" where the number of items should be displayed.'
       gallery:
-        image_record_urls: Enter URLs to record pages on Europeana, separated by any amount of white space. The edm:isShownBy for the record will be used for that image. Change the URL order to change the position of an image in the gallery.
+        image_portal_urls: 'Enter 6-24 URLs to record pages on Europeana, separated by any amount of white space. The edm:isShownBy for the record will be used for that image. Change the URL order to change the position of an image in the gallery.'
