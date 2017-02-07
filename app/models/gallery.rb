@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class Gallery < ActiveRecord::Base
+  NUMBER_OF_IMAGES = 6..24
+
   include HasPublicationStates
 
   has_many :images, -> { order(:position) },
@@ -17,6 +19,7 @@ class Gallery < ActiveRecord::Base
   validates :description, length: { maximum: 280 }
   validates :slug, presence: true
   validate :validate_image_portal_urls
+  validate :validate_number_of_image_portal_urls
 
   acts_as_url :title, url_attribute: :slug, only_when_blank: true,
                       allow_duplicates: false
@@ -66,6 +69,13 @@ class Gallery < ActiveRecord::Base
       if Europeana::Record.id_from_portal_url(url).nil?
         errors.add(:image_portal_urls, %(not a Europeana record URL: "#{url}"))
       end
+    end
+  end
+
+  def validate_number_of_image_portal_urls
+    incoming_urls = enumerable_image_portal_urls.size
+    unless NUMBER_OF_IMAGES.cover?(incoming_urls)
+      errors.add(:image_portal_urls, "must include #{NUMBER_OF_IMAGES} URLs, not #{incoming_urls}")
     end
   end
 

@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 RSpec.describe Gallery do
+  def gallery_image_portal_urls(number: 10, format: "http://www.europeana.eu/portal/record/pic/%{n}.html")
+    (1..number).map { |n| format(format, n: n) }.join(' ')
+  end
+
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
   it { is_expected.to have_and_belong_to_many(:collections).inverse_of(:galleries) }
   it { is_expected.to validate_presence_of(:title) }
@@ -18,9 +22,9 @@ RSpec.describe Gallery do
   end
 
   it 'should enforce unique titles' do
-    g1 = Gallery.create(title: 'Stuff')
-    g2 = Gallery.create(title: 'Stuff')
-    g3 = Gallery.create(title: 'Stuff')
+    g1 = Gallery.create(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
+    g2 = Gallery.create(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
+    g3 = Gallery.create(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
     expect(g1.reload.title).to eq('Stuff')
     expect(g2.reload.title).to eq('Stuff 1')
     expect(g3.reload.title).to eq('Stuff 2')
@@ -45,51 +49,72 @@ RSpec.describe Gallery do
 
   describe '#set_images_from_portal_urls' do
     context '(on create)' do
-      let(:gallery) { Gallery.new(title: 'Nice', image_portal_urls: 'http://www.europeana.eu/portal/record/nice/1.html http://www.europeana.eu/portal/record/nice/2.html') }
+      let(:gallery) { Gallery.new(title: 'Pictures', image_portal_urls: gallery_image_portal_urls(number: 10)) }
 
       it 'should create images for new URLs' do
         gallery.save
-        expect(gallery.images.count).to eq(2)
-        expect(gallery.images.reload.detect { |image| image.europeana_record_id == '/nice/1' }).not_to be_blank
-        expect(gallery.images.reload.detect { |image| image.europeana_record_id == '/nice/2' }).not_to be_blank
+        expect(gallery.images.count).to eq(10)
+        gallery.images.reload
+        (1..10).each do |number|
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/pic/#{number}" }).not_to be_blank
+        end
       end
 
       it 'should set image position' do
         gallery.save
-        expect(gallery.images.reload.detect { |image| image.europeana_record_id == '/nice/1' }.position).to eq(1)
-        expect(gallery.images.reload.detect { |image| image.europeana_record_id == '/nice/2' }.position).to eq(2)
+        gallery.images.reload
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/1' }.position).to eq(1)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/2' }.position).to eq(2)
       end
     end
 
     context '(on update)' do
-      let(:gallery) { galleries(:fashion_dresses) }
+      let(:gallery) { Gallery.create(title: 'Pictures', image_portal_urls: gallery_image_portal_urls(number: 10)) }
 
       it 'should create images for new URLs' do
-        gallery.image_portal_urls = 'http://www.europeana.eu/portal/record/nice/1.html'
+        gallery.image_portal_urls = gallery_image_portal_urls(number: 20)
         gallery.save
-        expect(gallery.images.reload.detect { |image| image.europeana_record_id == '/nice/1' }).not_to be_blank
+        gallery.images.reload
+        (1..20).each do |number|
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/pic/#{number}" }).not_to be_blank
+        end
       end
 
       it 'should set image position' do
-        gallery.image_portal_urls = 'http://www.europeana.eu/portal/record/dresses/2.html http://www.europeana.eu/portal/record/nice/1.html'
+        gallery.images.find_by_europeana_record_id('/pic/1').update_attributes(position: 2)
+        gallery.images.find_by_europeana_record_id('/pic/2').update_attributes(position: 1)
+        gallery.image_portal_urls = gallery_image_portal_urls(number: 20)
         gallery.save
-        expect(gallery.images.reload.detect { |image| image.europeana_record_id == '/dresses/2' }.position).to eq(1)
-        expect(gallery.images.reload.detect { |image| image.europeana_record_id == '/nice/1' }.position).to eq(2)
+        gallery.images.reload
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/1' }.position).to eq(1)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/2' }.position).to eq(2)
       end
 
       it 'should delete images for absent URLs' do
-        gallery.image_portal_urls = 'http://www.europeana.eu/portal/record/nice/1.html'
+        gallery.image_portal_urls = gallery_image_portal_urls(number: 8)
         gallery.save
-        expect(gallery.images.reload.count).to eq(1)
+        expect(gallery.images.reload.count).to eq(8)
       end
     end
   end
 
   it 'should validate image URLs before saving' do
     gallery = galleries(:empty)
-    expect(gallery).to be_valid
-    gallery.image_portal_urls = 'http://www.google.co.uk'
+    gallery.image_portal_urls = gallery_image_portal_urls(format: 'http://www.example.com/%{n}')
     expect(gallery).not_to be_valid
     expect(gallery.errors[:image_portal_urls]).not_to be_none
+  end
+
+  it 'should require 6-24 images' do
+    gallery = galleries(:empty)
+    (1..30).each do |number|
+      gallery.image_portal_urls = gallery_image_portal_urls(number: number)
+      if number < 6 || number > 24
+        expect(gallery).not_to be_valid
+        expect(gallery.errors[:image_portal_urls]).not_to be_none
+      else
+        expect(gallery).to be_valid
+      end
+    end
   end
 end
