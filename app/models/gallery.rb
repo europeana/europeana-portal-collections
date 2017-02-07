@@ -75,7 +75,7 @@ class Gallery < ActiveRecord::Base
   def validate_number_of_image_portal_urls
     incoming_urls = enumerable_image_portal_urls.size
     unless NUMBER_OF_IMAGES.cover?(incoming_urls)
-      errors.add(:image_portal_urls, "must include #{NUMBER_OF_IMAGES} URLs, not #{incoming_urls}")
+      errors.add(:image_portal_urls, "must include #{NUMBER_OF_IMAGES.first}-#{NUMBER_OF_IMAGES.last} URLs, not #{incoming_urls}")
     end
   end
 
