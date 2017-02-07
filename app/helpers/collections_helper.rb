@@ -115,7 +115,6 @@ module CollectionsHelper
   end
 
   def clicktip
-    return
   end
 
   def beta_collection?(collection)
