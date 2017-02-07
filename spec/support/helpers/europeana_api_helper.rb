@@ -81,6 +81,17 @@ module EuropeanaAPIHelper
           }
         end
 
+      # Record with edm:dataProvider in aggregation
+      stub_request(:get, %r{#{Europeana::API.url}/v2/record/with/edm:dataProvider.json}).
+        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
+        to_return do |request|
+          {
+            body: api_responses(:record_with_edm_dataprovider, id: record_id_from_request_uri(request)),
+            status: 200,
+            headers: { 'Content-Type' => 'application/json' }
+          }
+        end
+
       # Hierarchy API
       stub_request(:get, %r{#{Europeana::API.url}/v2/record/[^/]+/[^/]+/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
