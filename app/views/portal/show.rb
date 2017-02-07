@@ -402,6 +402,11 @@ module Portal
 
     protected
 
+    def data_provider_logo_url
+      return nil unless @data_provider.present? && @data_provider.image.present?
+      @data_provider.image.url(:medium)
+    end
+
     def similar_items_item(doc)
       presenter = Document::SearchResultPresenter.new(doc, controller)
       {
