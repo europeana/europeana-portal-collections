@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 RSpec.describe Gallery do
-  def gallery_image_portal_urls(number: 10, format: "http://www.europeana.eu/portal/record/pic/%{n}.html")
+  def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/pic/%{n}.html')
     (1..number).map { |n| format(format, n: n) }.join(' ')
   end
 
