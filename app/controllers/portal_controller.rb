@@ -85,7 +85,7 @@ class PortalController < ApplicationController
   protected
 
   def document_data_provider(document)
-    data_provider_name = document.fetch('aggregations.edmDataProvider').first
+    data_provider_name = document.fetch('aggregations.edmDataProvider', []).first
     DataProvider.find_by_name(data_provider_name)
   end
 
