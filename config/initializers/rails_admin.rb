@@ -153,7 +153,7 @@ RailsAdmin.config do |config|
       field :uri
       field :name
       field :image, :paperclip do
-        help 'Minimum 300px in width, transparent & greyscale'
+        help 'transparent & greyscale'
         thumb_method :medium
       end
     end
