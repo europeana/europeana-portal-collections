@@ -19,7 +19,8 @@ module Galleries
       mustache[:content] ||= begin
         {
           hero: hero_content,
-          galleries: galleries_content
+          galleries: galleries_content,
+          social: galleries_social
         }
       end
     end
@@ -58,6 +59,32 @@ module Galleries
       {
         index: image.position,
         url: gallery_image_thumbnail(image)
+      }
+    end
+
+    def galleries_social
+      {
+        social_title: t('global.share-galleries'),
+        facebook: {
+          url: 'https://www.facebook.com/Europeana',
+          text: 'Facebook'
+        },
+        twitter: {
+          url: 'https://twitter.com/Europeanaeu',
+          text: 'Twitter'
+        },
+        pinterest: {
+          url: 'https://uk.pinterest.com/europeana/',
+          text: 'Pinterest'
+        },
+        googleplus: {
+          url: 'https://plus.google.com/+europeana/posts',
+          text: 'Google Plus'
+        },
+        tumblr: {
+          url: 'http://europeanacollections.tumblr.com/',
+          text: 'Tumblr'
+        }
       }
     end
   end
