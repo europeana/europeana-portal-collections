@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170131154042) do
+ActiveRecord::Schema.define(version: 20170207155507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -290,6 +290,26 @@ ActiveRecord::Schema.define(version: 20170131154042) do
   end
 
   add_index "searches", ["user_id"], name: "index_searches_on_user_id", using: :btree
+
+  create_table "topic_translations", force: :cascade do |t|
+    t.integer  "topic_id",   null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  add_index "topic_translations", ["locale"], name: "index_topic_translations_on_locale", using: :btree
+  add_index "topic_translations", ["topic_id"], name: "index_topic_translations_on_topic_id", using: :btree
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "slug"
+    t.text     "entity_uri"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "topics", ["slug"], name: "index_topics_on_slug", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
