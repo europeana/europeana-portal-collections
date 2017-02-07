@@ -91,7 +91,6 @@ module CollectionsHelper
   def collection_feeds_content(collection, options = {})
     page = options[:page] || 1
     per_page = options[:per_page] || 12
-    key = collection.key.underscore.to_sym
 
     options[:feed_job_url] = :tumblr
     tumblr_items = collections_feed_items_for(collection, options)
