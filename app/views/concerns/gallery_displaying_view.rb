@@ -50,5 +50,4 @@ module GalleryDisplayingView
       }
     }
   end
-
 end
