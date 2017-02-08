@@ -28,6 +28,7 @@ module GalleryDisplayingView
   def galleries_social
     {
       social_title: t('global.share-galleries'),
+      style_blue: true,
       facebook: {
         url: 'https://www.facebook.com/Europeana',
         text: 'Facebook'
