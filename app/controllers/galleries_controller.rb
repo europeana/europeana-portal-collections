@@ -8,6 +8,7 @@ class GalleriesController < ApplicationController
 
   def show
     @gallery = Gallery.find_by_slug(params[:slug])
+    authorize! :show, @gallery
     @documents = search_api_for_image_metadata(@gallery.images)
   end
 
