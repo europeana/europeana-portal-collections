@@ -26,6 +26,10 @@ module Galleries
       end
     end
 
+    def body_cache_key
+      'explore/' + @gallery.cache_key
+    end
+
     private
 
     def gallery_hero_content
@@ -50,9 +54,5 @@ module Galleries
         full_url: presenter.field_value('aggregations.edmIsShownBy')
       }
     end
-  end
-
-  def body_cache_key
-    'explore/' + @gallery.cache_key
   end
 end

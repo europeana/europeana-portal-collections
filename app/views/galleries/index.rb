@@ -26,7 +26,7 @@ module Galleries
     end
 
     def body_cache_key
-      'explore/galleries/'+ @galleries.map(&:updated_at).max.to_i.to_s
+      'explore/galleries/' + @galleries.map(&:updated_at).max.to_i.to_s
     end
 
     private
