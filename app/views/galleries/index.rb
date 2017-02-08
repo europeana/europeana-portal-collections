@@ -25,6 +25,10 @@ module Galleries
       end
     end
 
+    def body_cache_key
+      'explore/galleries/'+ @galleries.map(&:updated_at).max.to_i.to_s
+    end
+
     private
 
     def hero_content
@@ -61,6 +65,5 @@ module Galleries
         url: gallery_image_thumbnail(image)
       }
     end
-
   end
 end

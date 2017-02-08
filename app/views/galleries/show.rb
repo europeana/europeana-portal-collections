@@ -51,4 +51,8 @@ module Galleries
       }
     end
   end
+
+  def body_cache_key
+    'explore/' + @gallery.cache_key
+  end
 end
