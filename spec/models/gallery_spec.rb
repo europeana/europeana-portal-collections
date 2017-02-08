@@ -5,7 +5,7 @@ RSpec.describe Gallery do
   end
 
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
-  it { is_expected.to have_and_belong_to_many(:collections).inverse_of(:galleries) }
+  it { is_expected.to have_one(:topic).through(:categorisation) }
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_length_of(:title).is_at_most(60) }
   it { is_expected.to validate_length_of(:description).is_at_most(280) }
@@ -15,6 +15,10 @@ RSpec.describe Gallery do
 
   it 'should have publication states' do
     expect(described_class).to include(HasPublicationStates)
+  end
+
+  it 'should be categorisable' do
+    expect(described_class).to include(IsCategorisable)
   end
 
   it 'should translate title' do

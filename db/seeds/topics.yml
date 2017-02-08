@@ -1,0 +1,28 @@
+---
+- :name: Archaeology
+  :entity_uri: http://data.europeana.eu/concept/base/80
+- :name: Architecture
+  :entity_uri: http://data.europeana.eu/concept/base/94
+- :name: Art
+  :entity_uri: http://data.europeana.eu/concept/base/190
+- :name: Fashion
+- :name: First World War
+  :entity_uri: http://data.europeana.eu/concept/base/83
+- :name: Food and Drink
+  :entity_uri: http://data.europeana.eu/concept/base/124
+- :name: History
+  :entity_uri: http://data.europeana.eu/concept/base/79
+- :name: History of Science
+- :name: History of Travel
+- :name: Literature
+- :name: Maps and Cartography
+  :entity_uri: http://data.europeana.eu/concept/base/43
+- :name: Migration
+  :entity_uri: http://data.europeana.eu/concept/base/128
+- :name: Military history
+- :name: Music
+  :entity_uri: http://data.europeana.eu/concept/base/62
+- :name: Natural history
+  :entity_uri: http://data.europeana.eu/concept/base/156
+- :name: Performing Arts
+- :name: Photography

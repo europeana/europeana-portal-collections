@@ -3,10 +3,10 @@ class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..24
 
   include HasPublicationStates
+  include IsCategorisable
 
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
-  has_and_belongs_to_many :collections, inverse_of: :galleries
 
   accepts_nested_attributes_for :images, allow_destroy: true
 

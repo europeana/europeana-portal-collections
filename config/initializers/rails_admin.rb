@@ -18,9 +18,9 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
+    Banner BrowseEntry Categorisation Collection DataProvider DataProviderLogo FacetLinkGroup
     Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
-    MediaObject Page Page::Error Page::Landing User
+    MediaObject Page Page::Error Page::Landing Topic User
   )
 
   config.actions do
@@ -100,6 +100,17 @@ RailsAdmin.config do |config|
       field :subject_type
       field :collections do
         inline_add false
+      end
+    end
+  end
+
+  config.model 'Categorisation' do
+    object_label_method :topic_name
+    visible false
+    edit do
+      field :topic do
+        inline_add false
+        inline_edit false
       end
     end
   end
@@ -198,9 +209,7 @@ RailsAdmin.config do |config|
     edit do
       field :title
       field :description, :text
-      field :collections do
-        inline_add false
-      end
+      field :categorisation
       field :image_portal_urls, :text do
         html_attributes rows: 15, cols: 80
       end
@@ -435,6 +444,25 @@ RailsAdmin.config do |config|
         end
       end
       field :banner
+    end
+  end
+
+  config.model 'Topic' do
+    list do
+      field :name do
+        searchable 'topic_translations.name'
+        queryable true
+        filterable true
+      end
+      field :entity_uri
+    end
+    show do
+      field :name
+      field :entity_uri
+    end
+    edit do
+      field :name
+      field :entity_uri, :string
     end
   end
 
