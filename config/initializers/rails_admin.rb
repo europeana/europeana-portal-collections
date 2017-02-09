@@ -448,6 +448,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Topic' do
+    object_label_method :label
     list do
       field :label do
         searchable 'topic_translations.label'
