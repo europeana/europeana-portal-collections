@@ -9,7 +9,7 @@ class Topic < ActiveRecord::Base
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   acts_as_url :label, url_attribute: :slug, only_when_blank: true,
-                     allow_duplicates: false
+                      allow_duplicates: false
 
   default_scope { includes(:translations).order('topic_translations.label') }
 

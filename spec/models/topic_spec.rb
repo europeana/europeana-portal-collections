@@ -6,7 +6,7 @@ RSpec.describe Topic do
   it { is_expected.to have_many(:categorisations).inverse_of(:topic).dependent(:destroy) }
 
   it 'should translate label' do
-    expect(described_class.translated_attribute_labels).to include(:label)
+    expect(described_class.translated_attribute_names).to include(:label)
   end
 
   it 'should set the slug from the label' do
