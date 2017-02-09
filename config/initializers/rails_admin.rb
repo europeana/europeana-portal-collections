@@ -108,7 +108,10 @@ RailsAdmin.config do |config|
     object_label_method :topic_label
     visible false
     edit do
-      field :topic do
+      field :topic, :enum do
+        enum do
+          Topic.where('topic_translations.locale=?', I18n.locale).map { |topic| [topic.label, topic.id] }
+        end
         inline_add false
         inline_edit false
       end
