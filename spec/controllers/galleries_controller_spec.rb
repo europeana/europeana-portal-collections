@@ -15,11 +15,9 @@ RSpec.describe GalleriesController do
     end
 
     it 'paginates galleries' do
-      galleries = (1..30).each do |gallery_num|
+      (1..30).each do |gallery_num|
         urls = (1..6).map { |image_num| "http://www.europeana.eu/portal/record/#{gallery_num}/#{image_num}.html" }.join(' ')
-        Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls: urls).tap do |gallery|
-          gallery.publish!
-        end
+        Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls: urls).publish!
       end
 
       get :index, locale: 'en'
