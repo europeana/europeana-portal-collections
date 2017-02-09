@@ -449,19 +449,19 @@ RailsAdmin.config do |config|
 
   config.model 'Topic' do
     list do
-      field :name do
-        searchable 'topic_translations.name'
+      field :label do
+        searchable 'topic_translations.label'
         queryable true
         filterable true
       end
       field :entity_uri
     end
     show do
-      field :name
+      field :label
       field :entity_uri
     end
     edit do
-      field :name
+      field :label
       field :entity_uri, :string
     end
   end
