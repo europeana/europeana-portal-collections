@@ -64,23 +64,22 @@ module Galleries
     end
 
     def galleries_themes
-     {
-       options: [
-         {
-           label: 'All',
-           value: 'all'
-         },
-         {
-           label: 'Art',
-           value: 'art'
-         },
-         {
-           label: 'Fashion',
-           value: 'fashion'
-         }
-       ]
-     }
+      {
+        options: [
+          {
+            label: 'All',
+            value: 'all'
+          },
+          {
+            label: 'Art',
+            value: 'art'
+          },
+          {
+            label: 'Fashion',
+            value: 'fashion'
+          }
+        ]
+      }
     end
-
   end
 end
