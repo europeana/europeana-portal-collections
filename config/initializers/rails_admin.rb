@@ -105,7 +105,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Categorisation' do
-    object_label_method :topic_name
+    object_label_method :topic_label
     visible false
     edit do
       field :topic do

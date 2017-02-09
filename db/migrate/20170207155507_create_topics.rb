@@ -9,7 +9,7 @@ class CreateTopics < ActiveRecord::Migration
 
     reversible do |dir|
       dir.up do
-        Topic.create_translation_table! name: :string
+        Topic.create_translation_table! label: :string
       end
 
       dir.down do

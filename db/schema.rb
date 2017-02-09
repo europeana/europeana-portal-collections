@@ -307,7 +307,7 @@ ActiveRecord::Schema.define(version: 20170208102105) do
     t.string   "locale",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "name"
+    t.string   "label"
   end
 
   add_index "topic_translations", ["locale"], name: "index_topic_translations_on_locale", using: :btree

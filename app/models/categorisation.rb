@@ -8,7 +8,7 @@ class Categorisation < ActiveRecord::Base
 
   default_scope { includes(:topic) }
 
-  def topic_name
-    topic.name
+  def topic_label
+    topic.label
   end
 end
