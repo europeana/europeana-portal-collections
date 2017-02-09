@@ -14,6 +14,18 @@ RSpec.describe GalleriesController do
       end
     end
 
+    it 'paginates galleries' do
+      galleries = (1..30).each do |gallery_num|
+        urls = (1..6).map { |image_num| "http://www.europeana.eu/portal/record/#{gallery_num}/#{image_num}.html" }.join(' ')
+        Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls: urls).tap do |gallery|
+          gallery.publish!
+        end
+      end
+
+      get :index, locale: 'en'
+      expect(assigns[:galleries].length).to eq(24)
+    end
+
     it 'searches the API for the gallery image metadata' do
       get :index, locale: 'en'
       ids = Gallery.published.map(&:images).flatten.map(&:europeana_record_id)

@@ -37,10 +37,10 @@ class GalleriesController < ApplicationController
   end
 
   def gallery_page
-    params[:page].to_i || 1
+    (params[:page] || 1).to_i
   end
 
   def gallery_per
-    params[:per_page].to_i || 24
+    (params[:per_page] || 24).to_i
   end
 end
