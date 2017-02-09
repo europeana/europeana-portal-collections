@@ -20,7 +20,8 @@ module Galleries
         {
           hero: hero_content,
           galleries: galleries_content,
-          social: galleries_social
+          social: galleries_social,
+          gallery_filter_options: galleries_themes
         }
       end
     end
@@ -60,6 +61,25 @@ module Galleries
         index: image.position,
         url: gallery_image_thumbnail(image)
       }
+    end
+
+    def galleries_themes
+     {
+       options: [
+         {
+           label: 'All',
+           value: 'all'
+         },
+         {
+           label: 'Art',
+           value: 'art'
+         },
+         {
+           label: 'Fashion',
+           value: 'fashion'
+         }
+       ]
+     }
     end
 
   end
