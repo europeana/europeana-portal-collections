@@ -8,8 +8,10 @@ RSpec.describe GalleriesController do
 
     it 'assigns published galleries to @galleries' do
       get :index, locale: 'en'
-      expect(assigns[:galleries]).to eq(Gallery.published)
-      expect(assigns[:galleries]).not_to include(galleries(:draft))
+      expect(assigns[:galleries]).not_to be_blank
+      assigns[:galleries].each do |gallery|
+        expect(gallery).to be_published
+      end
     end
 
     it 'searches the API for the gallery image metadata' do
