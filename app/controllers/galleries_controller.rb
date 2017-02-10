@@ -24,7 +24,7 @@ class GalleriesController < ApplicationController
   end
 
   def blacklight_api_params_for_images(images)
-    { q: search_api_query_for_images(images), per_page: 100 }
+    { q: Gallery.search_api_query_for_images(images), per_page: 100 }
   end
 
   def search_api_query_for_images(images)
