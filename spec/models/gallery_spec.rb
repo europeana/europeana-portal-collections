@@ -62,6 +62,31 @@ RSpec.describe Gallery do
     expect(described_class).to include(HasPublicationStates)
   end
 
+  it 'should set the published_on date when first publishing' do
+    stubbed_now = DateTime.now
+    allow(DateTime).to receive(:now) { stubbed_now }
+    gallery = galleries(:draft)
+    allow(gallery).to receive(:validate_image_source_items) { true }
+    allow(gallery).to receive(:validate_number_of_image_portal_urls) { true }
+    allow(gallery).to receive(:validate_image_portal_urls) { true }
+    gallery.publish!
+    expect(gallery.published_on).to eq(stubbed_now)
+  end
+
+  it 'should NOT modify the published_on date when un and re-publishing' do
+    stubbed_now = DateTime.now
+    allow(DateTime).to receive(:now) { stubbed_now }
+    gallery = galleries(:draft)
+    allow(gallery).to receive(:validate_image_source_items) { true }
+    allow(gallery).to receive(:validate_number_of_image_portal_urls) { true }
+    allow(gallery).to receive(:validate_image_portal_urls) { true }
+    gallery.publish!
+    gallery.unpublish!
+    allow(DateTime).to receive(:now) { stubbed_now + 1.hour }
+    gallery.publish!
+    expect(gallery.published_on).to eq(stubbed_now)
+  end
+
   it 'should translate title' do
     expect(described_class.translated_attribute_names).to include(:title)
   end

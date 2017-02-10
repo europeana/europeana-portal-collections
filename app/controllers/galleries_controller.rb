@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class GalleriesController < ApplicationController
   def index
-    @galleries = Gallery.includes(:images).published.page(gallery_page).per(gallery_per)
+    @galleries = Gallery.includes(:images).published.order(published_on: :desc).page(gallery_page).per(gallery_per)
     @documents = search_api_for_image_metadata(gallery_images_for_foyer(@galleries))
     @hero_image = homepage_hero_image
   end

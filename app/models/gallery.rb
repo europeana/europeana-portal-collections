@@ -146,4 +146,12 @@ class Gallery < ActiveRecord::Base
     end
     self.title = unique_title
   end
+
+  # Overriding the after_publish method, to track first publication.
+  def after_publish
+    unless published_on
+      self.published_on = DateTime.now
+      save
+    end
+  end
 end
