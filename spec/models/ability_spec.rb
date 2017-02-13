@@ -30,6 +30,7 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.not_to be_able_to(:manage, Link.new) }
     it { is_expected.not_to be_able_to(:manage, MediaObject.new) }
+    it { is_expected.not_to be_able_to(:manage, Topic.new) }
     it { is_expected.not_to be_able_to(:manage, User.new) }
 
     it { is_expected.not_to be_able_to(:show, draft_banner) }
@@ -60,6 +61,7 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.not_to be_able_to(:manage, Link.new) }
     it { is_expected.not_to be_able_to(:manage, MediaObject.new) }
+    it { is_expected.not_to be_able_to(:manage, Topic.new) }
     it { is_expected.not_to be_able_to(:manage, User.new) }
 
     it { is_expected.not_to be_able_to(:show, draft_banner) }
@@ -89,6 +91,7 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:manage, Page::Landing.new) }
     it { is_expected.to be_able_to(:manage, Link.new) }
     it { is_expected.to be_able_to(:manage, MediaObject.new) }
+    it { is_expected.to be_able_to(:manage, Topic.new) }
     it { is_expected.to be_able_to(:manage, User.new) }
 
     it { is_expected.to be_able_to(:show, draft_banner) }

@@ -3,10 +3,10 @@ class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..24
 
   include HasPublicationStates
+  include IsCategorisable
 
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
-  has_and_belongs_to_many :collections, inverse_of: :galleries
 
   accepts_nested_attributes_for :images, allow_destroy: true
 
@@ -21,6 +21,8 @@ class Gallery < ActiveRecord::Base
 
   validate :validate_image_portal_urls
   validate :validate_number_of_image_portal_urls
+  # @todo move this into a configurable class method in `IsCategorisable`
+  validate :validate_number_of_categorisations
   validate :validate_image_source_items
 
   acts_as_url :title, url_attribute: :slug, only_when_blank: true,
@@ -145,5 +147,11 @@ class Gallery < ActiveRecord::Base
       unique_title = "#{title} #{i}"
     end
     self.title = unique_title
+  end
+
+  def validate_number_of_categorisations
+    if categorisations.size > 3
+      errors.add(:categorisations, 'can have at most 3 topics')
+    end
   end
 end
