@@ -4,6 +4,7 @@ class Gallery < ActiveRecord::Base
 
   include HasPublicationStates
 
+  belongs_to :publisher, foreign_key: 'user_id', class_name: 'User', inverse_of: :galleries
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
   has_and_belongs_to_many :collections, inverse_of: :galleries
@@ -151,6 +152,9 @@ class Gallery < ActiveRecord::Base
   def after_publish
     unless published_on
       self.published_on = DateTime.now
+      if ::PaperTrail.whodunnit
+        self.publisher = User.find(::PaperTrail.whodunnit)
+      end
       save
     end
   end

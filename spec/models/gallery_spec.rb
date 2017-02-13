@@ -62,29 +62,33 @@ RSpec.describe Gallery do
     expect(described_class).to include(HasPublicationStates)
   end
 
-  it 'should set the published_on date when first publishing' do
-    stubbed_now = DateTime.now
-    allow(DateTime).to receive(:now) { stubbed_now }
-    gallery = galleries(:draft)
-    allow(gallery).to receive(:validate_image_source_items) { true }
-    allow(gallery).to receive(:validate_number_of_image_portal_urls) { true }
-    allow(gallery).to receive(:validate_image_portal_urls) { true }
-    gallery.publish!
-    expect(gallery.published_on).to eq(stubbed_now)
-  end
+  context 'publishing' do
+    let(:stubbed_now) { DateTime.now }
+    let(:gallery) { galleries(:draft) }
+    before do
+      stubbed_now # Calling to set this, and avoid infinite recursion
+      allow(DateTime).to receive(:now) { stubbed_now }
+      allow(gallery).to receive(:validate_image_source_items) { true }
+      allow(gallery).to receive(:validate_number_of_image_portal_urls) { true }
+      allow(gallery).to receive(:validate_image_portal_urls) { true }
+      allow(::PaperTrail).to receive(:whodunnit) { users(:user) }
+    end
 
-  it 'should NOT modify the published_on date when un and re-publishing' do
-    stubbed_now = DateTime.now
-    allow(DateTime).to receive(:now) { stubbed_now }
-    gallery = galleries(:draft)
-    allow(gallery).to receive(:validate_image_source_items) { true }
-    allow(gallery).to receive(:validate_number_of_image_portal_urls) { true }
-    allow(gallery).to receive(:validate_image_portal_urls) { true }
-    gallery.publish!
-    gallery.unpublish!
-    allow(DateTime).to receive(:now) { stubbed_now + 1.hour }
-    gallery.publish!
-    expect(gallery.published_on).to eq(stubbed_now)
+    it 'should set the publisher and published_on date when first publishing' do
+      gallery.publish!
+      expect(gallery.published_on).to eq(stubbed_now)
+      expect(gallery.publisher).to eq(users(:user))
+    end
+
+    it 'should NOT modify the publisher and published_on date when un and re-publishing' do
+      gallery.publish!
+      gallery.unpublish!
+      allow(DateTime).to receive(:now) { stubbed_now + 1.hour }
+      allow(::PaperTrail).to receive(:whodunnit) { users(:admin) }
+      gallery.publish!
+      expect(gallery.published_on).to eq(stubbed_now)
+      expect(gallery.publisher).to eq(users(:user))
+    end
   end
 
   it 'should translate title' do

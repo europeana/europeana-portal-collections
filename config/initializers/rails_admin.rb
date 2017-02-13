@@ -189,11 +189,15 @@ RailsAdmin.config do |config|
         filterable true
       end
       field :state
+      field :publisher
+      field :published_on
     end
     show do
       field :title
       field :description
       field :state
+      field :published_on
+      field :publisher
     end
     edit do
       field :title

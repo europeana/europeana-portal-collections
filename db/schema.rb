@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210140550) do
+ActiveRecord::Schema.define(version: 20170213115802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,10 +163,12 @@ ActiveRecord::Schema.define(version: 20170210140550) do
     t.datetime "updated_at",               null: false
     t.text     "slug"
     t.datetime "published_on"
+    t.integer  "user_id"
   end
 
   add_index "galleries", ["slug"], name: "index_galleries_on_slug", unique: true, using: :btree
   add_index "galleries", ["state"], name: "index_galleries_on_state", using: :btree
+  add_index "galleries", ["user_id"], name: "index_galleries_on_user_id", using: :btree
 
   create_table "gallery_images", force: :cascade do |t|
     t.integer  "gallery_id"
@@ -339,6 +341,7 @@ ActiveRecord::Schema.define(version: 20170210140550) do
   add_foreign_key "browse_entries_collections", "browse_entries"
   add_foreign_key "browse_entries_collections", "collections"
   add_foreign_key "facet_link_groups", "pages"
+  add_foreign_key "galleries", "users"
   add_foreign_key "gallery_images", "galleries"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
