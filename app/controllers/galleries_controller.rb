@@ -43,4 +43,8 @@ class GalleriesController < ApplicationController
   def gallery_per
     (params[:per_page] || 24).to_i
   end
+
+  def gallery_theme
+    (params[:theme] || 'all')
+  end
 end

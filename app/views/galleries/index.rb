@@ -20,7 +20,8 @@ module Galleries
         {
           hero: hero_content,
           galleries: galleries_content,
-          social: galleries_social
+          social: galleries_social,
+          gallery_filter_options: galleries_themes
         }
       end
     end
@@ -63,6 +64,17 @@ module Galleries
         url: @hero_image.file.present? ? @hero_image.file.url : nil,
         title: 'Galleries', # @todo get this from Localeapp
         subtitle: ''
+      }
+    end
+
+    def galleries_themes
+      {
+        options: Topic.with_galleries.map do |topic|
+          {
+            label: topic.label,
+            value: topic.to_param
+          }
+        end.unshift({ label: 'All', value: 'all' })
       }
     end
 
