@@ -5,7 +5,7 @@ RSpec.describe Gallery do
   end
 
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
-  it { is_expected.to have_one(:topic).through(:categorisation) }
+  it { is_expected.to have_many(:topics).through(:categorisations) }
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_length_of(:title).is_at_most(60) }
   it { is_expected.to validate_length_of(:description).is_at_most(280) }

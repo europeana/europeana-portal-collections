@@ -20,6 +20,8 @@ class Gallery < ActiveRecord::Base
   validates :slug, presence: true
   validate :validate_image_portal_urls
   validate :validate_number_of_image_portal_urls
+  # @todo move this into a configurable class method in `IsCategorisable`
+  validate :validate_number_of_categorisations
 
   acts_as_url :title, url_attribute: :slug, only_when_blank: true,
                       allow_duplicates: false
@@ -87,5 +89,11 @@ class Gallery < ActiveRecord::Base
       unique_title = "#{title} #{i}"
     end
     self.title = unique_title
+  end
+
+  def validate_number_of_categorisations
+    if categorisations.size > 3
+      errors.add(:categorisations, "can have at most 3 topics")
+    end
   end
 end

@@ -1,7 +1,7 @@
 RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }
-    it { is_expected.to eq(%w(Banner BrowseEntry Categorisation Collection DataProvider DataProviderLogo FacetLinkGroup Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User)) }
+    it { is_expected.to eq(%w(Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User)) }
   end
 
   describe '#model' do
@@ -16,7 +16,7 @@ RSpec.describe RailsAdmin.config do
       end
     end
 
-    %w(Categorisation HeroImage Link MediaObject).each do |model_name|
+    %w(HeroImage Link MediaObject).each do |model_name|
       context "when model is #{model_name}" do
         let(:model_name) { model_name }
         it 'should not be visible' do

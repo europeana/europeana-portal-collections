@@ -18,7 +18,7 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Categorisation Collection DataProvider DataProviderLogo FacetLinkGroup
+    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
     Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
     MediaObject Page Page::Error Page::Landing Topic User
   )
@@ -100,20 +100,6 @@ RailsAdmin.config do |config|
       field :subject_type
       field :collections do
         inline_add false
-      end
-    end
-  end
-
-  config.model 'Categorisation' do
-    object_label_method :topic_label
-    visible false
-    edit do
-      field :topic, :enum do
-        enum do
-          Topic.where('topic_translations.locale=?', I18n.locale).map { |topic| [topic.label, topic.id] }
-        end
-        inline_add false
-        inline_edit false
       end
     end
   end
@@ -212,7 +198,9 @@ RailsAdmin.config do |config|
     edit do
       field :title
       field :description, :text
-      field :categorisation
+      field :topic_ids, :enum do
+        multiple true
+      end
       field :image_portal_urls, :text do
         html_attributes rows: 15, cols: 80
       end

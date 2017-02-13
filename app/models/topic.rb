@@ -11,7 +11,7 @@ class Topic < ActiveRecord::Base
   acts_as_url :label, url_attribute: :slug, only_when_blank: true,
                       allow_duplicates: false
 
-  default_scope { includes(:translations).order('topic_translations.label') }
+  default_scope { includes(:translations) }
 
   def to_param
     slug
