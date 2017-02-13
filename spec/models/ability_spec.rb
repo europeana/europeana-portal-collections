@@ -7,6 +7,8 @@ RSpec.describe Ability do
   let(:published_banner) { banners(:default_banner) }
   let(:draft_collection) { collections(:draft) }
   let(:published_collection) { collections(:music) }
+  let(:draft_gallery) { galleries(:draft) }
+  let(:published_gallery) { galleries(:fashion_dresses) }
   let(:draft_landing_page) { pages(:draft_landing_page) }
   let(:published_landing_page) { pages(:music_collection) }
 
@@ -35,6 +37,8 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:show, published_banner) }
     it { is_expected.not_to be_able_to(:show, draft_collection) }
     it { is_expected.to be_able_to(:show, published_collection) }
+    it { is_expected.not_to be_able_to(:show, draft_gallery) }
+    it { is_expected.to be_able_to(:show, published_gallery) }
     it { is_expected.not_to be_able_to(:show, draft_landing_page) }
     it { is_expected.to be_able_to(:show, published_landing_page) }
   end
@@ -64,6 +68,8 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:show, published_banner) }
     it { is_expected.not_to be_able_to(:show, draft_collection) }
     it { is_expected.to be_able_to(:show, published_collection) }
+    it { is_expected.not_to be_able_to(:show, draft_gallery) }
+    it { is_expected.to be_able_to(:show, published_gallery) }
     it { is_expected.not_to be_able_to(:show, draft_landing_page) }
     it { is_expected.to be_able_to(:show, published_landing_page) }
   end
@@ -92,6 +98,8 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:show, published_banner) }
     it { is_expected.to be_able_to(:show, draft_collection) }
     it { is_expected.to be_able_to(:show, published_collection) }
+    it { is_expected.to be_able_to(:show, draft_gallery) }
+    it { is_expected.to be_able_to(:show, published_gallery) }
     it { is_expected.to be_able_to(:show, draft_landing_page) }
     it { is_expected.to be_able_to(:show, published_landing_page) }
   end

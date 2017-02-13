@@ -174,7 +174,8 @@ module Portal
         institution_name: institution_name,
         institution_name_and_link: institution_name_and_link,
         institution_country: field_value('europeanaAggregation.edmCountry'),
-        institution_canned_search: institution_canned_search
+        institution_canned_search: institution_canned_search,
+        institution_logo: data_provider_logo_url
       }
     end
 

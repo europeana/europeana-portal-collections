@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 class GalleriesController < ApplicationController
   def index
-    @galleries = Gallery.includes(:images).published
+    @galleries = Gallery.includes(:images).published.page(gallery_page).per(gallery_per)
     @documents = search_api_for_image_metadata(gallery_images_for_foyer(@galleries))
     @hero_image = homepage_hero_image
   end
 
   def show
     @gallery = Gallery.find_by_slug(params[:slug])
+    authorize! :show, @gallery
     @documents = search_api_for_image_metadata(@gallery.images)
   end
 
@@ -23,7 +24,7 @@ class GalleriesController < ApplicationController
   end
 
   def blacklight_api_params_for_images(images)
-    { q: search_api_query_for_images(images), per_page: 100 }
+    { q: Gallery.search_api_query_for_images(images), per_page: 100 }
   end
 
   def search_api_query_for_images(images)
@@ -33,5 +34,13 @@ class GalleriesController < ApplicationController
   def homepage_hero_image
     landing_page = Page::Landing.find_by_slug('')
     landing_page.nil? ? nil : landing_page.hero_image
+  end
+
+  def gallery_page
+    (params[:page] || 1).to_i
+  end
+
+  def gallery_per
+    (params[:per_page] || 24).to_i
   end
 end

@@ -31,6 +31,20 @@ module Europeana
       def portal_url_from_id(id)
         "http://www.europeana.eu/portal/record#{id}.html"
       end
+
+      ##
+      # Constructs a Search API query for all of the passed IDS.
+      #
+      # This only returns what would need to go in the `query` parameter sent to
+      # the API (or Blacklight's `q` parameter), nothing else. The caller will need
+      # to ensure that other parameters are set, such as ensuring that the API
+      # returns enough rows to get the entire gallery back.
+      #
+      # @param record_ids [Array<String>]
+      # @return [String]
+      def search_api_query_for_record_ids(record_ids)
+        'europeana_id:("' + record_ids.join('" OR "') + '")'
+      end
     end
   end
 end

@@ -1,5 +1,50 @@
 # frozen_string_literal: true
 RSpec.describe Gallery do
+  before do
+    stub_request(:get, Europeana::API.url + '/v2/search.json').
+      with(query: hash_including(
+        wskey: ENV['EUROPEANA_API_KEY'],
+        query: /\Aeuropeana_id:\(.*\)\z/,
+        rows: '100',
+        profile: 'rich'
+      )).
+      to_return do |request|
+        query_param = Rack::Utils.parse_nested_query(request.uri.query)['query']
+        ids = query_param.scan(/"([^"]+)"/).flatten
+        {
+          body: gallery_image_search_api_response(ids, gallery_image_search_api_response_options).to_json,
+          status: 200,
+          headers: { 'Content-Type' => 'application/json' }
+        }
+      end
+  end
+
+  let(:gallery_image_search_api_response_options) { {} }
+
+  def gallery_image_search_api_response(ids, **options)
+    options.reverse_merge!(item: true, edm_is_shown_by: true, type: 'IMAGE')
+    {
+      success: true,
+      itemsCount: ids.size,
+      totalResults: ids.size,
+      items: gallery_image_search_api_response_items(ids, **options)
+    }
+  end
+
+  def gallery_image_search_api_response_items(ids, **options)
+    if !options[:item]
+      nil
+    else
+      ids.map do |id|
+        {
+          id: id,
+          edmIsShownBy: options[:edm_is_shown_by] ? ["http://www.example.com/media#{id}"] : nil,
+          type: options[:type]
+        }
+      end
+    end
+  end
+
   def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/pic/%{n}.html')
     (1..number).map { |n| format(format, n: n) }.join(' ')
   end
@@ -26,9 +71,9 @@ RSpec.describe Gallery do
   end
 
   it 'should enforce unique titles' do
-    g1 = Gallery.create(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
-    g2 = Gallery.create(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
-    g3 = Gallery.create(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
+    g1 = Gallery.create!(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
+    g2 = Gallery.create!(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
+    g3 = Gallery.create!(title: 'Stuff', image_portal_urls: gallery_image_portal_urls)
     expect(g1.reload.title).to eq('Stuff')
     expect(g2.reload.title).to eq('Stuff 1')
     expect(g3.reload.title).to eq('Stuff 2')
@@ -118,6 +163,59 @@ RSpec.describe Gallery do
         expect(gallery.errors[:image_portal_urls]).not_to be_none
       else
         expect(gallery).to be_valid
+      end
+    end
+  end
+
+  describe 'per-image API response validation' do
+    context 'when image_portal_urls has other errors' do
+      it 'is skipped' do
+        gallery = Gallery.new
+        gallery.valid?
+        expect(gallery.errors[:image_portal_urls]).not_to be_none
+        expect(an_api_search_request).not_to have_been_made
+      end
+    end
+
+    context 'when image_portal_urls has no other errors' do
+      it 'is performed' do
+        gallery = galleries(:empty)
+        gallery.image_portal_urls = gallery_image_portal_urls
+        expect(gallery).to be_valid
+        expect(an_api_search_request).to have_been_made.once
+      end
+
+      context 'when images have no item in API response' do
+        let(:gallery_image_search_api_response_options) { { item: false } }
+        it 'is invalid' do
+          gallery = galleries(:empty)
+          gallery.image_portal_urls = gallery_image_portal_urls
+          expect(gallery).not_to be_valid
+          expect(gallery.errors[:image_portal_urls]).not_to be_none
+          expect(gallery.errors[:image_portal_urls]).to include(match('item not found by the API'))
+        end
+      end
+
+      context 'when items in API response are not type="IMAGE"' do
+        let(:gallery_image_search_api_response_options) { { type: 'SOUND' } }
+        it 'is invalid' do
+          gallery = galleries(:empty)
+          gallery.image_portal_urls = gallery_image_portal_urls
+          expect(gallery).not_to be_valid
+          expect(gallery.errors[:image_portal_urls]).not_to be_none
+          expect(gallery.errors[:image_portal_urls]).to include(match('item has type "SOUND", not "IMAGE"'))
+        end
+      end
+
+      context 'when items in API response have no edm:isShownBy' do
+        let(:gallery_image_search_api_response_options) { { edm_is_shown_by: false } }
+        it 'is invalid' do
+          gallery = galleries(:empty)
+          gallery.image_portal_urls = gallery_image_portal_urls
+          expect(gallery).not_to be_valid
+          expect(gallery.errors[:image_portal_urls]).not_to be_none
+          expect(gallery.errors[:image_portal_urls]).to include(match('item has no edm:isShownBy'))
+        end
       end
     end
   end
