@@ -52,7 +52,8 @@ class PortalController < ApplicationController
     if @hierarchy.nil?
       @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     else
-      @mlt_response, @similar = [nil, []]
+      @mlt_response = nil
+      @similar = []
     end
     @annotations = document_annotations(@document)
 
