@@ -151,7 +151,7 @@ class Gallery < ActiveRecord::Base
 
   def validate_number_of_categorisations
     if categorisations.size > 3
-      errors.add(:categorisations, "can have at most 3 topics")
+      errors.add(:categorisations, 'can have at most 3 topics')
     end
   end
 end
