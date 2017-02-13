@@ -48,7 +48,6 @@ class PortalController < ApplicationController
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
-    @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @hierarchy = document_hierarchy(@document)
     @annotations = document_annotations(@document)
 
