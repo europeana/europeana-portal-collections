@@ -74,9 +74,9 @@ module Galleries
             label: topic.label,
             value: topic.to_param
           }
-        end.unshift({ label: 'All', value: 'all' })
+        end.unshift(label: 'All', value: 'all')
       }
-      @topics[:options].unshift(@topics[:options].select{|topic| topic[:value] == @selected_topic}.first).uniq!
+      @topics[:options].unshift(@topics[:options].select { |topic| topic[:value] == @selected_topic }.first).uniq!
       @topics
     end
 

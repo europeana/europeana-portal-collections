@@ -13,7 +13,9 @@ class Topic < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
-  scope :with_galleries, -> { includes(:translations).joins(:categorisations).joins('INNER JOIN galleries on (categorisations.categorisable_id = galleries.id)') }
+  scope :with_galleries, -> do
+    includes(:translations).joins(:categorisations).joins('INNER JOIN galleries on (categorisations.categorisable_id = galleries.id)')
+  end
 
   def to_param
     slug
