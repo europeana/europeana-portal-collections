@@ -9,6 +9,7 @@ class Gallery < ActiveRecord::Base
     topic_slug == 'all' ? all : joins(:categorisations).joins(:topics).where("\"topics\".\"slug\" like '#{topic_slug}'")
   end
 
+  belongs_to :publisher, foreign_key: 'published_by', class_name: 'User', inverse_of: :galleries
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
 
@@ -156,6 +157,17 @@ class Gallery < ActiveRecord::Base
   def validate_number_of_categorisations
     if categorisations.size > 3
       errors.add(:categorisations, 'can have at most 3 topics')
+    end
+  end
+
+  # Overriding the after_publish method, to track first publication.
+  def after_publish
+    unless published_at
+      self.published_at = DateTime.now
+      if ::PaperTrail.whodunnit
+        self.publisher = User.find(::PaperTrail.whodunnit)
+      end
+      save
     end
   end
 end
