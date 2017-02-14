@@ -4,7 +4,7 @@ gem 'rails', '4.2.7.1'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '3fe700b'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '480d116'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -24,10 +24,12 @@ gem 'feedjira', '~> 2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
+gem 'jbuilder', '~> 2.6.0'
 gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
 gem 'nokogiri', '~> 1.6.8'
+gem 'redis', '3.3.1' # locked to fix: https://app.assembla.com/spaces/europeana-npc/tickets/1811
 gem 'rest-client', '~> 1.8.0'
 gem 'ruby-oembed', '~> 0.9'
 gem 'pg'
@@ -37,9 +39,9 @@ gem 'rails_with_relative_url_root', '~> 0.1'
 gem 'rack-rewrite'
 gem 'rails_admin', '~> 0.8.0'
 gem 'redis-rails', '~> 4.0'
-gem 'redis-rails-instrumentation'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
+gem 'stringex', '~> 2.6'
 gem 'therubyracer'
 gem 'i18n_data'
 
@@ -64,6 +66,7 @@ end
 
 group :development do
   gem 'foreman'
+  gem 'redis-rails-instrumentation' # WARNING: may break with logstash, i.e. europeana-logging
   gem 'spring', '~> 1.6'
 end
 

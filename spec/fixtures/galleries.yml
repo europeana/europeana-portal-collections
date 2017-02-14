@@ -1,0 +1,11 @@
+draft:
+  state: 0
+  slug: draft
+
+empty:
+  state: 1
+  slug: empty
+
+fashion_dresses:
+  state: 1
+  slug: fashion-dresses

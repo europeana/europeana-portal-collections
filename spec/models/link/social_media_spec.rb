@@ -1,3 +1,99 @@
 RSpec.describe Link::SocialMedia do
   it { is_expected.to be_a(Link) }
+
+  describe '#facebook?' do
+    context 'when URL is for facebook.com' do
+      subject { described_class.new(url: 'https://www.facebook.com/Europeana').facebook? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').facebook? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#googleplus?' do
+    context 'when URL is for plus.google.com' do
+      subject { described_class.new(url: 'https://plus.google.com/+europeana').googleplus? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').googleplus? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#instagram?' do
+    context 'when URL is for instagram.com' do
+      subject { described_class.new(url: 'https://instagram.com/europeanaeu').instagram? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').instagram? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#linkedin?' do
+    context 'when URL is for linkedin.com' do
+      subject { described_class.new(url: 'https://www.linkedin.com/company/europeana').linkedin? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').linkedin? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#pinterest?' do
+    context 'when URL is for pinterest.com' do
+      subject { described_class.new(url: 'https://www.pinterest.com/europeana/').pinterest? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').pinterest? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#soundcloud?' do
+    context 'when URL is for soundcloud.com' do
+      subject { described_class.new(url: 'https://soundcloud.com/europeana').soundcloud? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').soundcloud? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#tumblr?' do
+    context 'when URL is for tumblr.com' do
+      subject { described_class.new(url: 'http://europeanacollections.tumblr.com/').tumblr? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').tumblr? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#twitter?' do
+    context 'when URL is for twitter.com' do
+      subject { described_class.new(url: 'https://twitter.com/europeanaeu').twitter? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').twitter? }
+      it { is_expected.to be false }
+    end
+  end
 end

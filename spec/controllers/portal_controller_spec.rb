@@ -4,6 +4,8 @@ RSpec.describe PortalController do
   # workaround for https://github.com/jnicklas/capybara/issues/1396
   include RSpec::Matchers.clone
 
+  it { expect(subject.class.ancestors.include?(Europeana::AnnotationsApiConsumer)).to eq(true) }
+
   describe 'GET index' do
     context 'without q param' do
       it 'redirects to root' do
@@ -104,6 +106,16 @@ RSpec.describe PortalController do
       get :show, params
       expect(assigns(:document)).to be_a(Europeana::Blacklight::Document)
       expect(assigns(:document)).to eq(assigns(:response).documents.first)
+    end
+
+    context 'with edm:dataProvider' do
+      before do
+        get :show, params
+      end
+      let(:params) { { locale: 'en', id: 'with/edm:dataProvider' } }
+      it 'assigns the data provider to @data_provider' do
+        expect(assigns(:data_provider)).to eq(data_providers(:anonymous))
+      end
     end
 
     it 'assigns similar items to @similar' do

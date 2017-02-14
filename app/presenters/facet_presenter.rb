@@ -180,7 +180,7 @@ class FacetPresenter
   # @param see {#facet_item}
   # @return [Hash] Request parameters without the given facet item
   def remove_facet_params(item)
-    search_state.remove_facet_params(facet_name, item)
+    search_state.remove_facet_params(facet_name, item).except(:locale, :api_url)
   end
 
   def add_facet_params(item)
@@ -192,7 +192,7 @@ class FacetPresenter
         facet_params = tmp_search_state.add_facet_params(parent_facet, @parent)
       end
     end
-    facet_params
+    facet_params.except(:locale, :api_url)
   end
 
   ##
@@ -203,8 +203,6 @@ class FacetPresenter
     @facet_config ||= @blacklight_config.facet_fields[facet_name]
   end
 
-  private
-
   def items_to_display(**options)
     items = facet_items.dup
     %i{only order splice split}.each do |mod|
@@ -212,6 +210,8 @@ class FacetPresenter
     end
     items
   end
+
+  private
 
   def apply_only_to_items?
     facet_config.only.present?
@@ -226,7 +226,8 @@ class FacetPresenter
   end
 
   def apply_split_to_items?
-    true
+    return true if facet_config.split.nil?
+    facet_config.split
   end
 
   def apply_only_to_items(items, **_)

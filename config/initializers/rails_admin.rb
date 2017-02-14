@@ -18,9 +18,9 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry BrowseEntry::FacetEntry Collection DataProvider DataProviderLogo HeroImage Link
-    Link::Promotion Link::Credit Link::SocialMedia MediaObject Page Page::Error
-    Page::Landing User
+    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
+    Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
+    MediaObject Page Page::Error Page::Landing Topic User
   )
 
   config.actions do
@@ -104,39 +104,6 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'BrowseEntry::FacetEntry' do
-    list do
-      field :title do
-        searchable 'browse_entry_translations.title'
-        queryable true
-        filterable true
-      end
-      field :file, :paperclip
-      field :facet_field
-      field :facet_value
-      field :state
-    end
-    show do
-      field :title
-      field :query
-      field :file, :paperclip do
-        thumb_method :medium
-      end
-      field :subject_type
-      field :state
-      field :collections
-    end
-    edit do
-      field :title
-      field :file, :paperclip
-      field :facet_field, :enum
-      field :facet_value
-      field :collections do
-        inline_add false
-      end
-    end
-  end
-
   config.model 'Collection' do
     object_label_method :key
     list do
@@ -155,12 +122,14 @@ RailsAdmin.config do |config|
       field :state
       field :api_params
       field :settings_default_search_layout, :enum
+      field :newsletter_url
     end
     edit do
       field :key
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
+      field :newsletter_url
     end
   end
 
@@ -184,7 +153,7 @@ RailsAdmin.config do |config|
       field :uri
       field :name
       field :image, :paperclip do
-        help 'Minimum 300px in width, transparent & greyscale'
+        help 'transparent & greyscale'
         thumb_method :medium
       end
     end
@@ -194,6 +163,47 @@ RailsAdmin.config do |config|
     visible false
     field :image do
       thumb_method :medium
+    end
+  end
+
+  config.model 'FacetLinkGroup' do
+    object_label_method :facet_field
+    visible false
+    show do
+      field :facet_field
+      field :facet_values_count
+      field :thumbnails
+    end
+    edit do
+      field :facet_field, :enum
+      field :facet_values_count, :integer
+      field :thumbnails, :boolean
+    end
+  end
+
+  config.model 'Gallery' do
+    list do
+      field :title do
+        searchable 'gallery_translations.title'
+        queryable true
+        filterable true
+      end
+      field :state
+    end
+    show do
+      field :title
+      field :description
+      field :state
+    end
+    edit do
+      field :title
+      field :description, :text
+      field :topic_ids, :enum do
+        multiple true
+      end
+      field :image_portal_urls, :text do
+        html_attributes rows: 15, cols: 80
+      end
     end
   end
 
@@ -398,6 +408,7 @@ RailsAdmin.config do |config|
       field :social_media
       field :promotions
       field :browse_entries
+      field :facet_link_groups
       field :banner
     end
     edit do
@@ -414,6 +425,7 @@ RailsAdmin.config do |config|
       field :credits
       field :social_media
       field :promotions
+      field :facet_link_groups
       field :browse_entries do
         orderable true
         nested_form false
@@ -422,15 +434,27 @@ RailsAdmin.config do |config|
           proc { |_scope| BrowseEntry.search.published }
         end
       end
-      field :facet_entries do
-        orderable true
-        nested_form false
-        inline_add false
-        associated_collection_scope do
-          proc { |_scope| BrowseEntry::FacetEntry.published }
-        end
-      end
       field :banner
+    end
+  end
+
+  config.model 'Topic' do
+    object_label_method :label
+    list do
+      field :label do
+        searchable 'topic_translations.label'
+        queryable true
+        filterable true
+      end
+      field :entity_uri
+    end
+    show do
+      field :label
+      field :entity_uri
+    end
+    edit do
+      field :label
+      field :entity_uri, :string
     end
   end
 

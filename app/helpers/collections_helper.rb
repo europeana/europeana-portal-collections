@@ -46,7 +46,7 @@ module CollectionsHelper
     per_page = options[:per_page] || 12
     key = collection.key.underscore.to_sym
     options[:feed_job_url] = :tumblr
-    items = collections_feed_items_for(collection, options = {})
+    items = collections_feed_items_for(collection, options)
 
     return nil if items.blank?
 
@@ -76,10 +76,10 @@ module CollectionsHelper
               src: feed_entry_thumbnail_url(item),
               alt: item.title
           },
-          title: false,
-          date: item.published,
+          title: item.title,
+          date: I18n.l(item.published, format: :short),
           excerpt: {
-              short: CGI.unescapeHTML(item.summary)
+              short: ActionController::Base.helpers.strip_tags(CGI.unescapeHTML(item.summary))
           },
           type: feed_job_urls_key.to_s
       }
@@ -91,7 +91,6 @@ module CollectionsHelper
   def collection_feeds_content(collection, options = {})
     page = options[:page] || 1
     per_page = options[:per_page] || 12
-    key = collection.key.underscore.to_sym
 
     options[:feed_job_url] = :tumblr
     tumblr_items = collections_feed_items_for(collection, options)
@@ -104,25 +103,16 @@ module CollectionsHelper
 
     return nil if combined_items.blank?
 
-    paginated_items = Kaminari.paginate_array(combined_items).page(page).per(per_page)
-
     content = {
       title: false,
-      tumblr_url: Cache::FeedJob::URLS[:tumblr][key].sub('/rss', ''),
-      more_items_load: paginated_items.last_page? ? nil : tumblr_collection_path(id: key, format: :json),
-      more_items_total: paginated_items.total_count,
-      rss_urls: [
-        {
-          label: 'tumblr',
-          url: Cache::FeedJob::URLS[:tumblr][key]
-        },
-        {
-          label: 'news',
-          url: Cache::FeedJob::URLS[:blog][key]
-        }
-      ],
-      items: paginated_items
+      tumblr_url: nil,
+      more_items_load: nil,
+      more_items_total: combined_items.count,
+      items: combined_items
     }
+  end
+
+  def clicktip
   end
 
   def beta_collection?(collection)

@@ -53,6 +53,12 @@ module Collections
       end
     end
 
+    def include_nav_searchbar
+      mustache[:include_nav_searchbar] ||= begin
+        @landing_page.settings_layout_type == 'browse'
+      end
+    end
+
     def content
       mustache[:content] ||= begin
         {
@@ -74,8 +80,9 @@ module Collections
           "layout_#{@landing_page.settings_layout_type}".to_sym => true,
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
-          entry_points: facet_entry_items_grouped(@landing_page.facet_entries, @landing_page),
-          preview_search_url: preview_search_url,
+          entry_points: @landing_page.settings_layout_type == 'browse' ? facet_entry_items_grouped(@landing_page) : [],
+          preview_search_data: preview_search_data,
+          preview_search_data_present: preview_search_data.present?,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
@@ -84,6 +91,7 @@ module Collections
             items: blog_news_items(@collection),
             blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
           },
+          newsletter: newsletter_content,
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
           carousel: carousel_data
@@ -96,6 +104,21 @@ module Collections
     end
 
     private
+
+    def newsletter_content
+      return nil unless @collection.newsletter_url.present?
+      {
+        form: {
+          action: @collection.newsletter_url,
+          language_op: false,
+          placeholder: t('global.email-address')
+        },
+        labels: {
+          heading: t("global.newsletter.#{@collection.key}.heading"),
+          subheading: t("global.newsletter.#{@collection.key}.subheading")
+        }
+      }
+    end
 
     def carousel_data
       case @landing_page.settings[:layout_type]
@@ -114,23 +137,23 @@ module Collections
       @landing_page.cache_key
     end
 
-    def detect_link_in_array(links, domain)
-      matcher = %r(://([^/]*.)?#{domain}/)
-      links.detect { |l| l.url =~ matcher }
-    end
-
-    # @todo move into {Link::SocialMedia} as {#twitter?} etc
     def social_media_links
       {
-        social_title: t('global.find-us-social-media', channel: @landing_page.title),
-        twitter: detect_link_in_array(@landing_page.social_media, 'twitter.com'),
-        facebook: detect_link_in_array(@landing_page.social_media, 'facebook.com'),
-        soundcloud: detect_link_in_array(@landing_page.social_media, 'soundcloud.com'),
-        pinterest: detect_link_in_array(@landing_page.social_media, 'pinterest.com'),
-        googleplus: detect_link_in_array(@landing_page.social_media, 'plus.google.com'),
-        instagram: detect_link_in_array(@landing_page.social_media, 'instagram.com'),
-        tumblr: detect_link_in_array(@landing_page.social_media, 'tumblr.com')
+        social_title: t('global.follow-channel', channel: @landing_page.title),
+        style_blue: true,
+        twitter: social_media_link_for(:twitter),
+        facebook: social_media_link_for(:facebook),
+        soundcloud: social_media_link_for(:soundcloud),
+        pinterest: social_media_link_for(:pinterest),
+        googleplus: social_media_link_for(:googleplus),
+        instagram: social_media_link_for(:instagram),
+        tumblr: social_media_link_for(:tumblr),
+        linkedin: social_media_link_for(:linkedin)
       }
+    end
+
+    def social_media_link_for(provider)
+      @landing_page.social_media.detect(&:"#{provider}?")
     end
 
     def stylised_collection_stats
@@ -143,8 +166,27 @@ module Collections
       end
     end
 
-    def preview_search_url
-      @landing_page.facet_entries.blank? ? nil : browse_entry_url(@landing_page.facet_entries.sample, @landing_page)
+    # @todo refactor to:
+    # - make modular have this be a concern
+    # - lookup proper search title & type using labeling from  presenters/concerns/facet/labelling.rb
+    # - refactor facet_entry_field_title to not be called for each facet entry
+    def preview_search_data
+      return nil if @landing_page.facet_entries.blank?
+
+      @landing_page.facet_entries.map do |facet_entry|
+        {
+          preview_search_title: facet_entry.title,
+          preview_search_type: facet_entry_field_title(facet_entry),
+          preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json'),
+          preview_search_more_link: browse_entry_url(facet_entry, @landing_page)
+        }
+      end
+    end
+
+    def facet_entry_field_title(facet_entry)
+      ff = Europeana::Blacklight::Response::Facets::FacetField.new(facet_entry.facet_field, [])
+      presenter = FacetPresenter.build(ff, controller)
+      presenter.facet_title || facet_entry.facet_field
     end
   end
 end

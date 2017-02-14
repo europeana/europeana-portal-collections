@@ -15,9 +15,17 @@ module PromotionLinkDisplayingView
         is_external: !(URI(promo.url).host.blank? || URI(promo.url).host == request.host),
         title: promo.text,
         custom_class: promo.settings_class,
-        wide: promo.settings_wide == '1',
+        wide: normalise_wide(promo.settings_wide),
         bg_image: promo.file.nil? ? nil : promo.file.url
       }.merge(cat_flag)
+    end
+  end
+
+  def normalise_wide(promo_wide_setting)
+    if @landing_page.settings_layout_type == 'browse'
+      false
+    else
+      promo_wide_setting == '1'
     end
   end
 end

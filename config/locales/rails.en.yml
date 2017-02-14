@@ -3,9 +3,13 @@ en:
     attributes:
       collection:
         api_params: API parameters
+        newsletter_url: Newsletter URL
         settings_default_search_layout: Default search layout
       data_provider:
         uri: URI
+      gallery:
+        image_portal_urls:
+          Item URLs on the portal
       hero_image:
         settings_brand_colour: Brand colour
         settings_brand_opacity: Brand opacity
@@ -25,6 +29,8 @@ en:
       page:
         settings_full_width: Full width?
         settings_layout_type: Layout
+      topic:
+        entity_uri: Entity Collection URI
     models:
       page/error:
         one: Error Page

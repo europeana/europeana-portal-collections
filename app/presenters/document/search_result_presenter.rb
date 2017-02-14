@@ -6,7 +6,8 @@ module Document
     include ActionView::Helpers::TextHelper
     include ApiHelper
 
-    def initialize(document, response, controller, configuration = controller.blacklight_config)
+    # @param response [Europeana::Blacklight::Response]
+    def initialize(document, controller, response = nil, configuration = controller.blacklight_config)
       super(document, controller, configuration)
       @response = response
     end
@@ -14,7 +15,6 @@ module Document
     ##
     # Constructs a hash of data to render a search result for one document
     #
-    # @param response [Europeana::Blacklight::Response]
     # @return [Hash]
     def content
       {
@@ -84,25 +84,27 @@ module Document
       }
     end
 
-    protected
+    def thumbnail_url(generic: false)
+      uri = URI.parse(api_url)
+      query = {}
 
-    def thumbnail_url
       edm_preview = field_value('edmPreview')
-      return nil if edm_preview.blank?
+      return nil if edm_preview.blank? && !generic
+      unless edm_preview.blank?
+        edm_preview_uri = URI.parse(edm_preview)
+        query = Rack::Utils.parse_query(edm_preview_uri.query)
+      end
 
-      api_uri ||= URI.parse(api_url)
-
-      uri = URI.parse(edm_preview)
-      query = Rack::Utils.parse_query(uri.query)
       query['size'] = 'w400'
+      query['type'] ||= doc_type
 
-      uri.scheme = api_uri.scheme
-      uri.host = api_uri.host
-      uri.path = api_uri.path + '/v2/thumbnail-by-url.json'
+      uri.path = uri.path + '/v2/thumbnail-by-url.json'
       uri.query = query.to_query
 
       uri.to_s
     end
+
+    protected
 
     def agent_label
       field_value('edmAgentLabelLangAware') || field_value('edmAgentLabel') || field_value('dcCreator')
@@ -124,7 +126,7 @@ module Document
       {
         p: params.slice(:q, :f, :mlt, :range),
         r: @document.rank,
-        t: @response.total
+        t: @response.nil? ? nil : @response.total
       }
     end
   end

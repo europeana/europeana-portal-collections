@@ -6,39 +6,11 @@ module FacetEntryPointDisplayingView
 
   protected
 
-  def facet_entry_item(entry, page = nil)
-    {
-      url: browse_entry_path(entry, page),
-      label: entry.title,
-      image_url: entry.file.nil? ? nil : entry.file.url,
-      image_alt: nil
-    }
-    # Use this model to behave more like normal browse entries,
-    # however this needs frontend alignment.
-    # {
-    #     title: entry.title,
-    #     url: browse_entry_path(entry, page),
-    #     image: entry.file.nil? ? nil : entry.file.url,
-    #     image_alt: nil
-    # }
-  end
-
   ##
   # @param page [Page]
-  def facet_entry_items_grouped(browse_entries, page = nil)
-    grouped_items = {}
-
-    browse_entries.each do |entry|
-      facet_field = entry.facet_field
-      grouped_items[facet_field.parameterize.underscore.to_sym] ||= { title: facet_entry_field_title(entry), items: [] }
-      grouped_items[facet_field.parameterize.underscore.to_sym][:items] << facet_entry_item(entry, page)
+  def facet_entry_items_grouped(page)
+    page.facet_link_groups.map do |facet_link_group|
+      FacetLinkGroupPresenter.new(facet_link_group, controller, blacklight_config, page).display
     end
-    grouped_items.values
-  end
-
-  def facet_entry_field_title(entry)
-    ff = Europeana::Blacklight::Response::Facets::FacetField.new(entry.facet_field, [])
-    presenter = FacetPresenter.build(ff, controller)
-    presenter.facet_title || entry.facet_field
   end
 end

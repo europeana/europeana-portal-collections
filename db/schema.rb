@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219134240) do
+ActiveRecord::Schema.define(version: 20170208102105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,13 +52,13 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   create_table "browse_entries", force: :cascade do |t|
     t.text     "query"
     t.integer  "media_object_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "state",           default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "state",               default: 0
     t.integer  "subject_type"
     t.string   "type"
-    t.string   "facet_field"
     t.string   "facet_value"
+    t.integer  "facet_link_group_id"
   end
 
   add_index "browse_entries", ["media_object_id"], name: "index_browse_entries_on_media_object_id", using: :btree
@@ -80,6 +80,17 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   add_index "browse_entry_translations", ["browse_entry_id"], name: "index_browse_entry_translations_on_browse_entry_id", using: :btree
   add_index "browse_entry_translations", ["locale"], name: "index_browse_entry_translations_on_locale", using: :btree
 
+  create_table "categorisations", force: :cascade do |t|
+    t.integer  "topic_id"
+    t.integer  "categorisable_id"
+    t.string   "categorisable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "categorisations", ["categorisable_type", "categorisable_id"], name: "index_categorisations_on_categorisable", using: :btree
+  add_index "categorisations", ["topic_id"], name: "index_categorisations_on_topic_id", using: :btree
+
   create_table "collection_translations", force: :cascade do |t|
     t.integer  "collection_id", null: false
     t.string   "locale",        null: false
@@ -92,14 +103,23 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   add_index "collection_translations", ["locale"], name: "index_collection_translations_on_locale", using: :btree
 
   create_table "collections", force: :cascade do |t|
-    t.string   "key",        limit: 255
+    t.string   "key",            limit: 255
     t.text     "api_params"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "state",                  default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "state",                      default: 0
     t.string   "title"
     t.text     "settings"
+    t.string   "newsletter_url"
   end
+
+  create_table "collections_galleries", force: :cascade do |t|
+    t.integer "collection_id"
+    t.integer "gallery_id"
+  end
+
+  add_index "collections_galleries", ["collection_id"], name: "index_collections_galleries_on_collection_id", using: :btree
+  add_index "collections_galleries", ["gallery_id"], name: "index_collections_galleries_on_gallery_id", using: :btree
 
   create_table "data_provider_logos", force: :cascade do |t|
     t.integer  "data_provider_id"
@@ -138,6 +158,47 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "facet_link_groups", force: :cascade do |t|
+    t.string   "facet_field"
+    t.integer  "facet_values_count"
+    t.boolean  "thumbnails"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "galleries", force: :cascade do |t|
+    t.integer  "state",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.text     "slug"
+  end
+
+  add_index "galleries", ["slug"], name: "index_galleries_on_slug", unique: true, using: :btree
+  add_index "galleries", ["state"], name: "index_galleries_on_state", using: :btree
+
+  create_table "gallery_images", force: :cascade do |t|
+    t.integer  "gallery_id"
+    t.string   "europeana_record_id"
+    t.integer  "position"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "gallery_images", ["position"], name: "index_gallery_images_on_position", using: :btree
+
+  create_table "gallery_translations", force: :cascade do |t|
+    t.integer  "gallery_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "gallery_translations", ["gallery_id"], name: "index_gallery_translations_on_gallery_id", using: :btree
+  add_index "gallery_translations", ["locale"], name: "index_gallery_translations_on_locale", using: :btree
 
   create_table "hero_images", force: :cascade do |t|
     t.integer  "media_object_id"
@@ -241,6 +302,26 @@ ActiveRecord::Schema.define(version: 20161219134240) do
 
   add_index "searches", ["user_id"], name: "index_searches_on_user_id", using: :btree
 
+  create_table "topic_translations", force: :cascade do |t|
+    t.integer  "topic_id",   null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "label"
+  end
+
+  add_index "topic_translations", ["locale"], name: "index_topic_translations_on_locale", using: :btree
+  add_index "topic_translations", ["topic_id"], name: "index_topic_translations_on_topic_id", using: :btree
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "slug"
+    t.text     "entity_uri"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "topics", ["slug"], name: "index_topics_on_slug", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
@@ -284,8 +365,12 @@ ActiveRecord::Schema.define(version: 20161219134240) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
+  add_foreign_key "browse_entries", "facet_link_groups"
   add_foreign_key "browse_entries_collections", "browse_entries"
   add_foreign_key "browse_entries_collections", "collections"
+  add_foreign_key "categorisations", "topics"
+  add_foreign_key "facet_link_groups", "pages"
+  add_foreign_key "gallery_images", "galleries"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
 end
