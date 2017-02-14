@@ -197,7 +197,7 @@ RailsAdmin.config do |config|
       field :description
       field :state
       field :publisher
-      field :published_by
+      field :published_at
     end
     edit do
       field :title
