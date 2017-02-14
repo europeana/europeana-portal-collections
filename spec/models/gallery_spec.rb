@@ -76,7 +76,7 @@ RSpec.describe Gallery do
 
     it 'should set the publisher and published_on date when first publishing' do
       gallery.publish!
-      expect(gallery.published_on).to eq(stubbed_now)
+      expect(gallery.published_at).to eq(stubbed_now)
       expect(gallery.publisher).to eq(users(:user))
     end
 
@@ -86,7 +86,7 @@ RSpec.describe Gallery do
       allow(DateTime).to receive(:now) { stubbed_now + 1.hour }
       allow(::PaperTrail).to receive(:whodunnit) { users(:admin) }
       gallery.publish!
-      expect(gallery.published_on).to eq(stubbed_now)
+      expect(gallery.published_at).to eq(stubbed_now)
       expect(gallery.publisher).to eq(users(:user))
     end
   end

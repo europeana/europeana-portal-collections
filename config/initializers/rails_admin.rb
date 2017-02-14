@@ -190,14 +190,14 @@ RailsAdmin.config do |config|
       end
       field :state
       field :publisher
-      field :published_on
+      field :published_at
     end
     show do
       field :title
       field :description
       field :state
-      field :published_on
       field :publisher
+      field :published_by
     end
     edit do
       field :title
