@@ -66,7 +66,7 @@ RSpec.describe Gallery do
     expect(described_class).to include(IsCategorisable)
   end
 
- context 'publishing' do
+  context 'publishing' do
     let(:stubbed_now) { DateTime.now }
     let(:gallery) { galleries(:draft) }
     before do
@@ -78,13 +78,13 @@ RSpec.describe Gallery do
       allow(::PaperTrail).to receive(:whodunnit) { users(:user) }
     end
 
-    it 'should set the publisher and published_on date when first publishing' do
+    it 'should set the publisher and published_at date when first publishing' do
       gallery.publish!
       expect(gallery.published_at).to eq(stubbed_now)
       expect(gallery.publisher).to eq(users(:user))
     end
 
-    it 'should NOT modify the publisher and published_on date when un and re-publishing' do
+    it 'should NOT modify the publisher and published_at date when un and re-publishing' do
       gallery.publish!
       gallery.unpublish!
       allow(DateTime).to receive(:now) { stubbed_now + 1.hour }
