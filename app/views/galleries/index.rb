@@ -21,7 +21,7 @@ module Galleries
           hero: hero_content,
           galleries: galleries_content,
           social: galleries_social,
-          gallery_filter_options: galleries_themes
+          gallery_filter_options: galleries_topics
         }
       end
     end
@@ -67,8 +67,8 @@ module Galleries
       }
     end
 
-    def galleries_themes
-      {
+    def galleries_topics
+      @topics ||= {
         options: Topic.with_galleries.map do |topic|
           {
             label: topic.label,
@@ -76,6 +76,8 @@ module Galleries
           }
         end.unshift({ label: 'All', value: 'all' })
       }
+      @topics[:options].unshift(@topics[:options].select{|topic| topic[:value] == @selected_topic}.first).uniq!
+      @topics
     end
 
     def galleries_content

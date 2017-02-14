@@ -5,6 +5,10 @@ class Gallery < ActiveRecord::Base
   include HasPublicationStates
   include IsCategorisable
 
+  scope :with_topic, -> (topic_slug) do
+    topic_slug == 'all' ? all : joins(:categorisations).joins(:topics).where("\"topics\".\"slug\" like '#{topic_slug}'")
+  end
+
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
 

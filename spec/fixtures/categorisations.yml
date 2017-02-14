@@ -1,0 +1,4 @@
+fashion_dresses_fashion_topic:
+  topic: fashion_topic
+  categorisable:  fashion_dresses
+  categorisable_type: 'Gallery'
