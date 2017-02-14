@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 class GalleriesController < ApplicationController
   def index
-    @galleries = Gallery.includes(:images).published.order(published_at: :desc).page(gallery_page).per(gallery_per).with_topic(gallery_topic)
+    @galleries = Gallery.includes(:images).published.order(published_at: :desc).
+                 page(gallery_page).per(gallery_per).with_topic(gallery_topic)
     @selected_topic = gallery_topic
     @documents = search_api_for_image_metadata(gallery_images_for_foyer(@galleries))
     @hero_image = homepage_hero_image
@@ -47,6 +48,6 @@ class GalleriesController < ApplicationController
   end
 
   def gallery_topic
-    (params[:theme] || 'all')
+    params[:theme] || 'all'
   end
 end

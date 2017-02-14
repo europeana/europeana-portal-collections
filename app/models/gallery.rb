@@ -6,7 +6,7 @@ class Gallery < ActiveRecord::Base
   include IsCategorisable
 
   scope :with_topic, ->(topic_slug) do
-    topic_slug == 'all' ? all : joins(:categorisations).joins(:topics).where("\"topics\".\"slug\" like '#{topic_slug}'")
+    topic_slug == 'all' ? all : joins(:categorisations, :topics).where(topics: { slug: topic_slug }).distinct
   end
 
   belongs_to :publisher, foreign_key: 'published_by', class_name: 'User', inverse_of: :galleries
