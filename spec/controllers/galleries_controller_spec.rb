@@ -41,6 +41,17 @@ RSpec.describe GalleriesController do
         expect(document).to be_a(Europeana::Blacklight::Document)
       end
     end
+
+    context 'when there are no published galleries' do
+      before do
+        Gallery.published.destroy_all
+      end
+
+      it 'makes no API query' do
+        get :index, locale: 'en'
+        expect(an_api_search_request).not_to have_been_made
+      end
+    end
   end
 
   describe 'GET #show' do

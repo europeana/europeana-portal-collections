@@ -20,6 +20,7 @@ class GalleriesController < ApplicationController
 
   # @return [Array<Europeana::Blacklight::Document>]
   def search_api_for_image_metadata(images)
+    return [] if images.blank?
     search_results(blacklight_api_params_for_images(images)).last
   end
 
