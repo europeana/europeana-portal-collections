@@ -42,6 +42,35 @@ RSpec.describe GalleriesController do
       end
     end
 
+    it 'assigns the selected topic' do
+      get :index, locale: 'en'
+      expect(assigns(:selected_topic)).to be_a(String)
+      expect(assigns(:selected_topic)).to eq('all')
+    end
+
+    context 'when filterd via topic' do
+      let(:fashion_topic) { topics(:fashion_topic) }
+
+      before do
+        galleries(:fashion_dresses).topics
+      end
+
+      it 'assigns the selected topic' do
+        get :index, locale: 'en', theme: 'fashion'
+        expect(assigns(:selected_topic)).to be_a(String)
+        expect(assigns(:selected_topic)).to eq('fashion')
+      end
+
+      it 'assigns published galleries with the applied topic categorization to @galleries' do
+        get :index, locale: 'en', theme: 'fashion'
+        expect(assigns[:galleries]).not_to be_blank
+        assigns[:galleries].each do |gallery|
+          expect(gallery).to be_published
+          expect(gallery.topics).to include(fashion_topic)
+        end
+      end
+    end
+
     context 'when there are no published galleries' do
       before do
         Gallery.published.destroy_all
