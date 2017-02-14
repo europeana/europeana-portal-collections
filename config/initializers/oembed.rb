@@ -8,6 +8,8 @@ sketchfab = OEmbed::Provider.new('https://sketchfab.com/oembed')
 sketchfab << 'https://sketchfab.com/models/*'
 dismarc = OEmbed::Provider.new('http://www.dismarc.org/player/oembed')
 dismarc << 'http://eusounds.ait.co.at/player/*'
+britishlibrary = OEmbed::Provider.new('http://sounds.bl.uk/api/oembed')
+britishlibrary << 'http://sounds.bl.uk/embed/*'
 
 # Europeana provider
 europeana = OEmbed::Provider.new(ENV['EUROPEANA_OEMBED_PROVIDER'] || 'http://oembed.europeana.eu/')
@@ -26,3 +28,4 @@ OEmbed::Providers.register(OEmbed::Providers::Youtube)
 OEmbed::Providers.register(sketchfab)
 OEmbed::Providers.register(dismarc)
 OEmbed::Providers.register(europeana)
+OEmbed::Providers.register(britishlibrary)

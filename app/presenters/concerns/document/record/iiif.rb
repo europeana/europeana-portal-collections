@@ -24,12 +24,19 @@ module Document
                       url: 'http://gallica.bnf.fr/iiif/%{proxies.dcIdentifier}/manifest.json'
 
         # Generic IIIF support in EDM
-        # * test record: /portal/en/record/07931/diglit_baer1877.html
-        # * dataset: /portal/search?q=sv_dcterms_conformsTo%3A*iiif*
+        # * test record: /portal/record/07931/diglit_baer1877.html
+        # * dataset: /portal/search?q=wr_dcterms_isReferencedBy%3A*&qf%5B%5D=wr_svcs_hasservice%3A*&qf%5B%5D=sv_dcterms_conformsTo%3A*iiif*
         manifest_iiif for: { 'aggregations.webResources.svcsHasService' => //,
                              'aggregations.webResources.dctermsIsReferencedBy' => // },
                       url: '%{aggregations.webResources.dctermsIsReferencedBy}',
                       sub: { 'aggregations.webResources.dctermsIsReferencedBy' => ->(value) { value.first } }
+
+        # Generic support for individual IIIF images
+        # * test record: /portal/record/2064116/Museu_ProvidedCHO_Nationalmuseum__Sweden_15897
+        # * dataset: /portal/search?q=NOT%20wr_dcterms_isReferencedBy%3A*&qf%5B%5D=wr_svcs_hasservice%3A*&qf%5B%5D=sv_dcterms_conformsTo%3A*iiif*
+        manifest_iiif for: { 'aggregations.webResources.svcsHasService' => // },
+                      url: '%{aggregations.webResources.svcsHasService}',
+                      sub: { 'aggregations.webResources.svcsHasService' => ->(value) { value.first + '/info.json' } }
       end
 
       class_methods do

@@ -8,8 +8,21 @@ RSpec.describe GalleriesController do
 
     it 'assigns published galleries to @galleries' do
       get :index, locale: 'en'
-      expect(assigns[:galleries]).to eq(Gallery.published)
-      expect(assigns[:galleries]).not_to include(galleries(:draft))
+      expect(assigns[:galleries]).not_to be_blank
+      assigns[:galleries].each do |gallery|
+        expect(gallery).to be_published
+      end
+    end
+
+    it 'paginates galleries' do
+      allow_any_instance_of(Gallery).to receive(:validate_image_source_items) { true }
+      (1..30).each do |gallery_num|
+        urls = (1..6).map { |image_num| "http://www.europeana.eu/portal/record/#{gallery_num}/#{image_num}.html" }.join(' ')
+        Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls: urls).publish!
+      end
+
+      get :index, locale: 'en'
+      expect(assigns[:galleries].length).to eq(24)
     end
 
     it 'searches the API for the gallery image metadata' do
@@ -26,6 +39,46 @@ RSpec.describe GalleriesController do
       expect(assigns(:documents)).to be_a(Array)
       assigns(:documents).each do |document|
         expect(document).to be_a(Europeana::Blacklight::Document)
+      end
+    end
+
+    it 'assigns the selected topic' do
+      get :index, locale: 'en'
+      expect(assigns(:selected_topic)).to be_a(String)
+      expect(assigns(:selected_topic)).to eq('all')
+    end
+
+    context 'when filterd via topic' do
+      let(:fashion_topic) { topics(:fashion_topic) }
+
+      before do
+        galleries(:fashion_dresses).topics
+      end
+
+      it 'assigns the selected topic' do
+        get :index, locale: 'en', theme: 'fashion'
+        expect(assigns(:selected_topic)).to be_a(String)
+        expect(assigns(:selected_topic)).to eq('fashion')
+      end
+
+      it 'assigns published galleries with the applied topic categorization to @galleries' do
+        get :index, locale: 'en', theme: 'fashion'
+        expect(assigns[:galleries]).not_to be_blank
+        assigns[:galleries].each do |gallery|
+          expect(gallery).to be_published
+          expect(gallery.topics).to include(fashion_topic)
+        end
+      end
+    end
+
+    context 'when there are no published galleries' do
+      before do
+        Gallery.published.destroy_all
+      end
+
+      it 'makes no API query' do
+        get :index, locale: 'en'
+        expect(an_api_search_request).not_to have_been_made
       end
     end
   end

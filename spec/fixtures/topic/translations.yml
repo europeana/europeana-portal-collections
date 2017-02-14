@@ -1,0 +1,4 @@
+fashion_translations:
+  locale: en
+  label: 'Fashion'
+  globalized_model: fashion_topic

@@ -20,7 +20,7 @@ RailsAdmin.config do |config|
   config.included_models = %w(
     Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
     Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
-    MediaObject Page Page::Error Page::Landing User
+    MediaObject Page Page::Error Page::Landing Topic User
   )
 
   config.actions do
@@ -189,17 +189,21 @@ RailsAdmin.config do |config|
         filterable true
       end
       field :state
+      field :publisher
+      field :published_at
     end
     show do
       field :title
       field :description
       field :state
+      field :publisher
+      field :published_at
     end
     edit do
       field :title
       field :description, :text
-      field :collections do
-        inline_add false
+      field :topic_ids, :enum do
+        multiple true
       end
       field :image_portal_urls, :text do
         html_attributes rows: 15, cols: 80
@@ -435,6 +439,26 @@ RailsAdmin.config do |config|
         end
       end
       field :banner
+    end
+  end
+
+  config.model 'Topic' do
+    object_label_method :label
+    list do
+      field :label do
+        searchable 'topic_translations.label'
+        queryable true
+        filterable true
+      end
+      field :entity_uri
+    end
+    show do
+      field :label
+      field :entity_uri
+    end
+    edit do
+      field :label
+      field :entity_uri, :string
     end
   end
 

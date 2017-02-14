@@ -48,8 +48,13 @@ class PortalController < ApplicationController
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
-    @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @hierarchy = document_hierarchy(@document)
+    if @hierarchy.nil?
+      @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
+    else
+      @mlt_response = nil
+      @similar = []
+    end
     @annotations = document_annotations(@document)
 
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'

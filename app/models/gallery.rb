@@ -3,10 +3,15 @@ class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..24
 
   include HasPublicationStates
+  include IsCategorisable
 
+  scope :with_topic, ->(topic_slug) do
+    topic_slug == 'all' ? all : joins(:categorisations, :topics).where(topics: { slug: topic_slug }).distinct
+  end
+
+  belongs_to :publisher, foreign_key: 'published_by', class_name: 'User', inverse_of: :galleries
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
-  has_and_belongs_to_many :collections, inverse_of: :galleries
 
   accepts_nested_attributes_for :images, allow_destroy: true
 
@@ -18,8 +23,12 @@ class Gallery < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 60 }
   validates :description, length: { maximum: 280 }
   validates :slug, presence: true
+
   validate :validate_image_portal_urls
   validate :validate_number_of_image_portal_urls
+  # @todo move this into a configurable class method in `IsCategorisable`
+  validate :validate_number_of_categorisations
+  validate :validate_image_source_items
 
   acts_as_url :title, url_attribute: :slug, only_when_blank: true,
                       allow_duplicates: false
@@ -31,10 +40,26 @@ class Gallery < ActiveRecord::Base
 
   attr_writer :image_portal_urls
 
+  ##
+  # Constructs a Search API query for al set of gallery images.
+  #
+  # @param images [Enumerable<GalleryImage>]
+  # @return [String]
+  # @see Europeana::Record.search_api_query_for_record_ids
+  class << self
+    def search_api_query_for_images(images)
+      Europeana::Record.search_api_query_for_record_ids(images.map(&:europeana_record_id))
+    end
+  end
+
   # Double newline separated list of image record URLs for use in a textarea
   # input field in the CMS.
   def image_portal_urls
     @image_portal_urls ||= images.map(&:portal_url).join("\n\n")
+  end
+
+  def search_api_query_for_images
+    self.class.search_api_query_for_images(images)
   end
 
   def to_param
@@ -79,6 +104,46 @@ class Gallery < ActiveRecord::Base
     end
   end
 
+  # This validator will make a Europeana Search API request to check that all
+  # records coming from `image_portal_urls` meet certain minimum criteria:
+  # * is returned by the API
+  # * has an edm:isShownBy
+  # * has type="IMAGE"
+  # Records not meeting these will be invalid.
+  #
+  # While is is not ideal making HTTP requests here in the model, we need
+  # to prevent creation of galleries not having displayable media.
+  #
+  # This validation will exit early if any other problems are observed with
+  # the `image_portal_urls`, leaving this costly validation until the URLs are
+  # otherwise valid.
+  #
+  # @todo these validations and others on image_portal_urls belong in `GalleryImage`
+  def validate_image_source_items
+    return if errors[:image_portal_urls].any?
+
+    record_ids = enumerable_image_portal_urls.each_with_object({}) do |url, map|
+      map[url] = Europeana::Record.id_from_portal_url(url)
+    end
+
+    api_query = Europeana::Record.search_api_query_for_record_ids(record_ids.values)
+    response_items = Europeana::API.record.search(query: api_query, profile: 'rich', rows: 100)['items'] || []
+
+    record_ids.each_pair do |url, record_id|
+      item = response_items.detect { |response_item| response_item['id'] == record_id }
+      if item.blank?
+        errors.add(:image_portal_urls, %(item not found by the API: "#{url}"))
+      else
+        unless item['edmIsShownBy'].present?
+          errors.add(:image_portal_urls, %(item has no edm:isShownBy: "#{url}"))
+        end
+        unless item['type'] == 'IMAGE'
+          errors.add(:image_portal_urls, %(item has type "#{item['type']}", not "IMAGE": "#{url}"))
+        end
+      end
+    end
+  end
+
   def ensure_unique_title
     i = 0
     unique_title = title
@@ -87,5 +152,22 @@ class Gallery < ActiveRecord::Base
       unique_title = "#{title} #{i}"
     end
     self.title = unique_title
+  end
+
+  def validate_number_of_categorisations
+    if categorisations.size > 3
+      errors.add(:categorisations, 'can have at most 3 topics')
+    end
+  end
+
+  # Overriding the after_publish method, to track first publication.
+  def after_publish
+    unless published_at
+      self.published_at = DateTime.now
+      if ::PaperTrail.whodunnit
+        self.publisher = User.find(::PaperTrail.whodunnit)
+      end
+      save
+    end
   end
 end
