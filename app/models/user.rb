@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   delegate :can?, :cannot?, to: :ability
   delegate :role_enum, to: :class
 
-  has_many :galleries, inverse_of: :publisher
+  has_many :galleries, inverse_of: :publisher, foreign_key: :published_by
 
   class << self
     def role_enum
