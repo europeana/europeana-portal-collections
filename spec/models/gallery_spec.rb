@@ -50,7 +50,7 @@ RSpec.describe Gallery do
   end
 
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
-  it { is_expected.to have_and_belong_to_many(:collections).inverse_of(:galleries) }
+  it { is_expected.to have_many(:topics).through(:categorisations) }
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_length_of(:title).is_at_most(60) }
   it { is_expected.to validate_length_of(:description).is_at_most(280) }
@@ -62,7 +62,11 @@ RSpec.describe Gallery do
     expect(described_class).to include(HasPublicationStates)
   end
 
-  context 'publishing' do
+  it 'should be categorisable' do
+    expect(described_class).to include(IsCategorisable)
+  end
+
+ context 'publishing' do
     let(:stubbed_now) { DateTime.now }
     let(:gallery) { galleries(:draft) }
     before do
