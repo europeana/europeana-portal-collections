@@ -106,7 +106,6 @@ RSpec.describe GalleriesController do
         expect(assigns[:gallery]).to eq(gallery)
       end
 
-
       it 'assigns gallery to @gallery' do
         get :show, locale: 'en', slug: gallery.slug
         expect(assigns[:gallery]).to eq(gallery)
