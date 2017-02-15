@@ -8,7 +8,7 @@ module I18nHelper
       el: 'greek',
       en: 'english',
       es: 'spanish',
-      # et: 'estonian',
+      et: 'estonian',
       fi: 'finnish',
       fr: 'french',
       hr: 'croatian',
