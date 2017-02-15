@@ -39,7 +39,10 @@ module Galleries
     end
 
     def body_cache_key
-      'explore/galleries/' + @galleries.map(&:updated_at).max.to_i.to_s
+      @body_cache_key ||= begin
+        last_galleries_edit_int = Gallery.all.order(updated_at: :desc).first.updated_at.to_i
+        "explore/galleries/#{last_galleries_edit_int}/#{@selected_topic}/#{@galleries.limit_value}/#{@galleries.current_page}/"
+      end
     end
 
     private

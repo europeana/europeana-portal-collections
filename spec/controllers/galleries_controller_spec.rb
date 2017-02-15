@@ -1,5 +1,23 @@
 # frozen_string_literal: true
 RSpec.describe GalleriesController do
+  describe 'documents' do
+    let(:images_array) { Gallery.published.map(&:images).flatten }
+
+    it 'searches the API for the gallery image metadata' do
+      subject.instance_variable_set(:@images, images_array)
+      subject.send(:documents)
+      ids = images_array.map(&:europeana_record_id)
+      api_query = %[europeana_id:("#{ids.join('" OR "')}")]
+      expect(an_api_search_request.
+          with(query: hash_including(query: api_query))).
+          to have_been_made.at_least_once
+      expect(assigns(:documents)).to be_a(Array)
+      assigns(:documents).each do |document|
+        expect(document).to be_a(Europeana::Blacklight::Document)
+      end
+    end
+  end
+
   describe 'GET #index' do
     it 'returns http success' do
       get :index, locale: 'en'
@@ -25,20 +43,11 @@ RSpec.describe GalleriesController do
       expect(assigns[:galleries].length).to eq(24)
     end
 
-    it 'searches the API for the gallery image metadata' do
+    it 'assigns all images to @images' do
       get :index, locale: 'en'
-      ids = Gallery.published.map(&:images).flatten.map(&:europeana_record_id)
-      api_query = %[europeana_id:("#{ids.join('" OR "')}")]
-      expect(an_api_search_request.
-        with(query: hash_including(query: api_query))).
-        to have_been_made.at_least_once
-    end
-
-    it 'assigns image metadata to @documents' do
-      get :index, locale: 'en'
-      expect(assigns(:documents)).to be_a(Array)
-      assigns(:documents).each do |document|
-        expect(document).to be_a(Europeana::Blacklight::Document)
+      expect(assigns(:images)).to be_a(Array)
+      assigns(:images).each do |image|
+        expect(image).to be_a(GalleryImage)
       end
     end
 
@@ -97,13 +106,15 @@ RSpec.describe GalleriesController do
         expect(assigns[:gallery]).to eq(gallery)
       end
 
-      it 'searches the API for the gallery image metadata' do
+
+      it 'assigns gallery to @gallery' do
         get :show, locale: 'en', slug: gallery.slug
-        ids = gallery.images.map(&:europeana_record_id)
-        api_query = %[europeana_id:("#{ids.join('" OR "')}")]
-        expect(an_api_search_request.
-          with(query: hash_including(query: api_query))).
-          to have_been_made.at_least_once
+        expect(assigns[:gallery]).to eq(gallery)
+      end
+
+      it 'assigns all images to @images' do
+        get :show, locale: 'en', slug: gallery.slug
+        expect(assigns(:images)).to eq(gallery.images)
       end
     end
   end

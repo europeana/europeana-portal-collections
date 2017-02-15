@@ -22,7 +22,7 @@ module GalleryDisplayingView
   end
 
   def document_for_gallery_image(image)
-    @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
+    documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
   end
 
   def galleries_social
