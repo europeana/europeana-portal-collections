@@ -9,8 +9,8 @@ RSpec.describe GalleriesController do
       ids = images_array.map(&:europeana_record_id)
       api_query = %[europeana_id:("#{ids.join('" OR "')}")]
       expect(an_api_search_request.
-          with(query: hash_including(query: api_query))).
-          to have_been_made.at_least_once
+        with(query: hash_including(query: api_query))).
+        to have_been_made.at_least_once
       expect(assigns(:documents)).to be_a(Array)
       assigns(:documents).each do |document|
         expect(document).to be_a(Europeana::Blacklight::Document)
