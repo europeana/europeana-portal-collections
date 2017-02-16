@@ -55,7 +55,7 @@ module Document
             val: multi ? nil : val,
             vals: multi ? val : nil,
             multi: multi,
-            foldable_link: named_entity_link_field?(field)
+            foldable_link: false#named_entity_link_field?(field)
           }
         end
       end

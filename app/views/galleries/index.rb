@@ -38,13 +38,6 @@ module Galleries
       }.reverse_merge(super)
     end
 
-    def body_cache_key
-      @body_cache_key ||= begin
-        last_galleries_edit_int = Gallery.order(updated_at: :desc).first.updated_at.to_i
-        "explore/galleries/#{last_galleries_edit_int}/#{@selected_topic}/#{@galleries.limit_value}/#{@galleries.current_page}/"
-      end
-    end
-
     private
 
     def navigation_pagination_pages

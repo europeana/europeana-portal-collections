@@ -1,25 +1,33 @@
 # frozen_string_literal: true
 class GalleriesController < ApplicationController
-  helper_method :documents
+  include CacheHelper
+  attr_reader :body_cache_key
 
   def index
     @galleries = Gallery.includes(:images).published.order(published_at: :desc).
                  page(gallery_page).per(gallery_per).with_topic(gallery_topic)
     @selected_topic = gallery_topic
-    @images = gallery_images_for_foyer(@galleries)
+    images = gallery_images_for_foyer(@galleries)
     @hero_image = homepage_hero_image
+
+    @body_cache_key = foyer_body_cache_key(topic: @selected_topic, per: @galleries.limit_value, page: @galleries.current_page)
+    @documents = search_api_for_image_metadata(images) unless body_cached?
   end
 
   def show
     @gallery = Gallery.find_by_slug(params[:slug])
     authorize! :show, @gallery
-    @images = @gallery.images
+    images = @gallery.images
+
+    @body_cache_key = 'explore/' + @gallery.cache_key
+    @documents = search_api_for_image_metadata(images) unless body_cached?
   end
 
   protected
 
-  def documents
-    @documents ||= search_api_for_image_metadata(@images)
+  def foyer_body_cache_key(topic:, per:, page:)
+    last_galleries_edit_int = Gallery.order(updated_at: :desc).first.updated_at.to_i
+    "explore/galleries/#{last_galleries_edit_int}/#{topic}/#{per}/#{page}/"
   end
 
   def gallery_images_for_foyer(galleries)
