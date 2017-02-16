@@ -4,7 +4,6 @@ class Categorisation < ActiveRecord::Base
   belongs_to :topic, inverse_of: :categorisations
 
   validates :topic_id, presence: true
-  validates :categorisable, presence: true
 
   default_scope { includes(:topic) }
 
