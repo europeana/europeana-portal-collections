@@ -106,6 +106,5 @@ module Galleries
         url: gallery_image_thumbnail(image)
       }
     end
-
   end
 end

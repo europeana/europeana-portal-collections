@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class GalleryImage < ActiveRecord::Base
-  belongs_to :gallery, inverse_of: :images
+  belongs_to :gallery, inverse_of: :images, touch: true
 
   validates :gallery, presence: true
   validates :europeana_record_id,
