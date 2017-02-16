@@ -69,7 +69,7 @@ module Galleries
 
     def galleries_topics
       @topics ||= {
-        options: Topic.with_galleries.map do |topic|
+        options: Topic.with_published_galleries.map do |topic|
           {
             label: topic.label,
             value: topic.to_param

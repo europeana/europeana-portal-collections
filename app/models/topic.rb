@@ -13,10 +13,12 @@ class Topic < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
-  scope :with_galleries, -> do
+  scope :with_published_galleries, -> do
     joins(:categorisations).
       joins('INNER JOIN galleries on (categorisations.categorisable_id = galleries.id)').
-      where(categorisations: { categorisable_type: 'Gallery' })
+      where(categorisations: { categorisable_type: 'Gallery' }).
+      where(galleries: { state: 1 })
+
   end
 
   def to_param
