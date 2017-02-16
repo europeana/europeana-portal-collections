@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 RSpec.describe GalleriesController do
-
   describe 'GET #index' do
     it 'returns http success' do
       get :index, locale: 'en'
@@ -119,8 +118,8 @@ RSpec.describe GalleriesController do
         ids = gallery.images.map(&:europeana_record_id)
         api_query = %[europeana_id:("#{ids.join('" OR "')}")]
         expect(an_api_search_request.
-            with(query: hash_including(query: api_query))).
-            to have_been_made.at_least_once
+          with(query: hash_including(query: api_query))).
+          to have_been_made.at_least_once
       end
 
       context 'when the view was already cached' do
