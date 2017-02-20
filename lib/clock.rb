@@ -37,6 +37,12 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     end
   end
 
+  every(1.day, 'facet-link-groups', at: ENV['SCHEDULE_FACET_ENTRY_GROUPS_GENERATOR']) do
+    FacetLinkGroup.all.each do |facet_link_group|
+      FacetLinkGroupGeneratorJob.perform_later facet_link_group
+    end
+  end
+
   every(1.day, 'db.sweeper', at: ENV['SCHEDULE_DB_SWEEPER']) do
     DeleteOldSearchesJob.perform_later
   end

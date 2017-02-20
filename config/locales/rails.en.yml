@@ -29,6 +29,8 @@ en:
       page:
         settings_full_width: Full width?
         settings_layout_type: Layout
+      topic:
+        entity_uri: Entity Collection URI
     models:
       page/error:
         one: Error Page

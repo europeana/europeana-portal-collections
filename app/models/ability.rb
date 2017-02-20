@@ -15,12 +15,14 @@ class Ability
   def guest!
     can :show, Banner.published
     can :show, Collection.published
+    can :show, Gallery.published
     can :show, Page.published
   end
 
   def user!
     can :show, Banner.published
     can :show, Collection.published
+    can :show, Gallery.published
     can :show, Page.published
   end
 
@@ -28,6 +30,6 @@ class Ability
     can :access, :rails_admin
     can :dashboard
     can :manage, [Banner, BrowseEntry, Collection, DataProvider, Gallery,
-                  HeroImage, Link, MediaObject, Page, User]
+                  HeroImage, Link, MediaObject, Page, Topic, User]
   end
 end

@@ -45,4 +45,11 @@ namespace :jobs do
       end
     end
   end
+
+  desc 'Queue FacetLinkGroupGeneratorJob'
+  task facet_link_groups: :environment do
+    FacetLinkGroup.all.each do |facet_link_group|
+      FacetLinkGroupGeneratorJob.perform_later facet_link_group
+    end
+  end
 end

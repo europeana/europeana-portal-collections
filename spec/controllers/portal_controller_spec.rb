@@ -108,6 +108,16 @@ RSpec.describe PortalController do
       expect(assigns(:document)).to eq(assigns(:response).documents.first)
     end
 
+    context 'with edm:dataProvider' do
+      before do
+        get :show, params
+      end
+      let(:params) { { locale: 'en', id: 'with/edm:dataProvider' } }
+      it 'assigns the data provider to @data_provider' do
+        expect(assigns(:data_provider)).to eq(data_providers(:anonymous))
+      end
+    end
+
     it 'assigns similar items to @similar' do
       get :show, params
       expect(assigns(:similar)).to be_a(Array)

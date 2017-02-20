@@ -174,7 +174,8 @@ module Portal
         institution_name: institution_name,
         institution_name_and_link: institution_name_and_link,
         institution_country: field_value('europeanaAggregation.edmCountry'),
-        institution_canned_search: institution_canned_search
+        institution_canned_search: institution_canned_search,
+        institution_logo: data_provider_logo_url
       }
     end
 
@@ -401,6 +402,11 @@ module Portal
     end
 
     protected
+
+    def data_provider_logo_url
+      return nil unless @data_provider.present? && @data_provider.image.present?
+      @data_provider.image.url(:medium)
+    end
 
     def similar_items_item(doc)
       presenter = Document::SearchResultPresenter.new(doc, controller)

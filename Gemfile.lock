@@ -24,8 +24,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: ff680fb6a5221d973f42545156684366ac3a0d94
-  ref: ff680fb
+  revision: 91c8c45e44ed3a1d1546d44260b977a6ee395833
+  ref: 91c8c45
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -173,7 +173,7 @@ GEM
       ffi (>= 1.3.0)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
-    europeana-logging (0.1.1)
+    europeana-logging (0.2.2)
       lograge (~> 0.4)
       logstash-event (~> 1.2)
       logstash-logger (~> 0.19)
@@ -623,7 +623,7 @@ DEPENDENCIES
   europeana-api!
   europeana-blacklight (~> 0.5.0)!
   europeana-feedback-button (= 0.0.4)
-  europeana-logging (~> 0.1.1)
+  europeana-logging (~> 0.2.2)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
@@ -671,4 +671,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.13.7
+   1.13.1

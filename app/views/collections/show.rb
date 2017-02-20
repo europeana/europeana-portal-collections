@@ -140,6 +140,7 @@ module Collections
     def social_media_links
       {
         social_title: t('global.follow-channel', channel: @landing_page.title),
+        style_blue: true,
         twitter: social_media_link_for(:twitter),
         facebook: social_media_link_for(:facebook),
         soundcloud: social_media_link_for(:soundcloud),

@@ -43,11 +43,18 @@ class PortalController < ApplicationController
   # GET /record/:id
   def show
     @response, @document = fetch(doc_id, api_query_params)
+    @data_provider = document_data_provider(@document)
+
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
-    @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     @hierarchy = document_hierarchy(@document)
+    if @hierarchy.nil?
+      @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
+    else
+      @mlt_response = nil
+      @similar = []
+    end
     @annotations = document_annotations(@document)
 
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
@@ -81,6 +88,11 @@ class PortalController < ApplicationController
   end
 
   protected
+
+  def document_data_provider(document)
+    data_provider_name = document.fetch('aggregations.edmDataProvider', []).first
+    DataProvider.find_by_name(data_provider_name)
+  end
 
   def find_landing_page
     Page::Landing.find_or_initialize_by(slug: '').tap do |landing_page|

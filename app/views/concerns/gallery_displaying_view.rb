@@ -10,7 +10,7 @@ module GalleryDisplayingView
     presenter = presenter_for_gallery_image(image)
     return nil if presenter.nil?
     edm_preview = presenter.field_value('edmPreview')
-    record_preview_url(edm_preview)
+    record_preview_url(edm_preview, 400)
   end
 
   def presenter_for_gallery_image(image)
@@ -23,5 +23,32 @@ module GalleryDisplayingView
 
   def document_for_gallery_image(image)
     @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
+  end
+
+  def galleries_social
+    {
+      social_title: t('global.share-galleries'),
+      style_blue: true,
+      facebook: {
+        url: 'https://www.facebook.com/Europeana',
+        text: 'Facebook'
+      },
+      twitter: {
+        url: 'https://twitter.com/Europeanaeu',
+        text: 'Twitter'
+      },
+      pinterest: {
+        url: 'https://uk.pinterest.com/europeana/',
+        text: 'Pinterest'
+      },
+      googleplus: {
+        url: 'https://plus.google.com/+europeana/posts',
+        text: 'Google Plus'
+      },
+      tumblr: {
+        url: 'http://europeanacollections.tumblr.com/',
+        text: 'Tumblr'
+      }
+    }
   end
 end
