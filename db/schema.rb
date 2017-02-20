@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213115802) do
+ActiveRecord::Schema.define(version: 20170220131250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,9 +169,9 @@ ActiveRecord::Schema.define(version: 20170213115802) do
   end
 
   create_table "galleries", force: :cascade do |t|
-    t.integer  "state",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "state",        default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.text     "slug"
     t.datetime "published_at"
     t.integer  "published_by"
@@ -278,15 +278,16 @@ ActiveRecord::Schema.define(version: 20170213115802) do
 
   create_table "pages", force: :cascade do |t|
     t.integer  "hero_image_id"
-    t.string   "slug",          limit: 255
-    t.integer  "state",                     default: 0
-    t.string   "type",          limit: 255
+    t.string   "slug",           limit: 255
+    t.integer  "state",                      default: 0
+    t.string   "type",           limit: 255
     t.integer  "http_code"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "banner_id"
     t.text     "settings"
     t.string   "strapline"
+    t.string   "newsletter_url"
   end
 
   add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree

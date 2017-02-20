@@ -122,14 +122,12 @@ RailsAdmin.config do |config|
       field :state
       field :api_params
       field :settings_default_search_layout, :enum
-      field :newsletter_url
     end
     edit do
       field :key
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
-      field :newsletter_url
     end
   end
 
@@ -414,6 +412,7 @@ RailsAdmin.config do |config|
       field :browse_entries
       field :facet_link_groups
       field :banner
+      field :newsletter_url
     end
     edit do
       field :slug
@@ -439,6 +438,7 @@ RailsAdmin.config do |config|
         end
       end
       field :banner
+      field :newsletter_url
     end
   end
 
