@@ -30,7 +30,9 @@ module EDM
     end
 
     def label
-      I18n.t("advanced-#{i18n_key}", scope: 'global.facet.reusability')
+      label = I18n.t("advanced-#{i18n_key}", scope: 'global.facet.reusability')
+      return label unless label.blank? && (I18n.locale != I18n.default_locale)
+      I18n.t("advanced-#{i18n_key}", scope: 'global.facet.reusability', locale: I18n.default_locale)
     end
   end
 end
