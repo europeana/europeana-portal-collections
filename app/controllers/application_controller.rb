@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_locale
+  before_action :set_locale, :permit_iframing
 
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
     end
 
     I18n.locale = session[:locale]
+  end
+
+  def permit_iframing
+    response.headers.delete('X-Frame-Options') if ENV['DELETE_X_FRAME_OPTIONS_RESPONSE_HEADER']
   end
 
   def extract_locale_from_accept_language_header
