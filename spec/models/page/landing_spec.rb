@@ -10,6 +10,8 @@ RSpec.describe Page::Landing do
   it { is_expected.to accept_nested_attributes_for(:promotions) }
   it { is_expected.to accept_nested_attributes_for(:browse_entries) }
 
+  it { is_expected.to respond_to(:newsletter_url) }
+
   it { is_expected.to delegate_method(:file).to(:hero_image).with_prefix(true) }
 
   it { is_expected.to validate_inclusion_of(:settings_layout_type).in_array(%w(default browse)) }

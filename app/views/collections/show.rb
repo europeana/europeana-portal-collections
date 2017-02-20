@@ -106,10 +106,10 @@ module Collections
     private
 
     def newsletter_content
-      return nil unless @collection.newsletter_url.present?
+      return nil unless @landing_page.newsletter_url.present?
       {
         form: {
-          action: @collection.newsletter_url,
+          action: @landing_page.newsletter_url,
           language_op: false,
           placeholder: t('global.email-address')
         },
