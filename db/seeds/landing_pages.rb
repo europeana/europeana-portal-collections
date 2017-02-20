@@ -274,3 +274,57 @@ unless Page::Landing.find_by_slug('collections/music').present?
     music_landing.publish!
   end
 end
+
+unless Page::Landing.find_by_slug('collections/fashion').present?
+  ActiveRecord::Base.transaction do
+    fashion_landing = Page::Landing.create!(
+        slug: 'collections/fashion',
+        title: 'Europeana Fashion',
+        strapline: 'Discover %{total_item_count} historical dresses, accessories and catwalk photographs from across Europe.',
+        body: '<b>Europeana Fashion</b> brings together more than 30 public and private archives and museums from across Europe in order give public access to high quality digital fashion content, ranging from historical dresses to accessories, catwalk photographs, drawings, sketches, videos, and fashion catalogues. Records ranging from historical dresses to accessoires, catwalk photographs, drawings, sketches, video\'s and fashion catalogues.',
+        credits: [
+            Link::Credit.new(url: 'http://www.europeanafashion.eu/portal/about.html', text: 'About Europeana Fashion')
+        ],
+        social_media: [
+            Link::SocialMedia.new(url: 'http://www.twitter.com/europeanafashion', text: 'Twitter'),
+            Link::SocialMedia.new(url: 'https://www.facebook.com/EuropeanaFashion', text: 'Facebook'),
+            Link::SocialMedia.new(url: 'https://plus.google.com/115879951963722227275/posts', text: 'Google Plus'),
+            Link::SocialMedia.new(url: 'http://instagram.com/europeanafashionofficial', text: 'Instagram'),
+            Link::SocialMedia.new(url: 'hhttp://www.pinterest.com/eurfashion/', text: 'Pinterest'),
+            Link::SocialMedia.new(url: 'http://europeanafashion.tumblr.com/', text: 'Tumblr'),
+            Link::SocialMedia.new(url: 'https://nl.linkedin.com/company/europeana', text: 'Linkedin')
+        ],
+        promotions: [
+            Link::Promotion.new(
+                position: 0,
+                url: 'http://www.europeanafashion.eu/portal/themedetail.html#11',
+                text: 'Prints!',
+                settings_category: 'exhibition',
+                media_object: find_or_download_styleguide_image('sample/thumb-instruments.jpg')
+            ),
+            Link::Promotion.new(
+                position: 1,
+                url: 'http://www.europeanafashion.eu/portal/themedetail.html#26',
+                text: 'Monochromes',
+                settings_category: 'exhibition',
+                media_object: find_or_download_styleguide_image('sample/thumb-wedding.jpg')
+            ),
+            Link::Promotion.new(
+                position: 2,
+                url: 'http://www.europeanafashion.eu/portal/themedetail.html#15',
+                text: 'Recording and playing Machines',
+                settings_category: 'exhibition',
+                media_object: find_or_download_styleguide_image('sample/thumb-machines.jpg')
+            ),
+            Link::Promotion.new(
+                position: 3,
+                url: 'http://www.europeanafashion.eu/portal/themedetail.html#21',
+                text: 'Sportswear',
+                settings_category: 'exhibition',
+                media_object: find_or_download_styleguide_image('sample/thumb-machines.jpg')
+            )
+        ]
+    )
+    fashion_landing.publish!
+  end
+end
