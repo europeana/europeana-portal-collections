@@ -5,11 +5,8 @@ module Europeana
   module AnnotationsApiConsumer
     extend ActiveSupport::Concern
 
-    def document_annotations(document_id)
-      search_response = annotations_search_for_document(document_id)
-      return nil unless search_response.key?('items')
-
-      annotations_from_search_response(search_response).
+    def document_annotations(record_id)
+      annotations_for_record(record_id).
         map { |annotation| annotation_text_to_display(annotation) }.compact
     rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
       # @todo we may not want controller actions to fail if annotations are
@@ -20,8 +17,14 @@ module Europeana
       nil
     end
 
-    def annotations_search_for_document(document_id)
-      Europeana::API.annotation.search(annotations_api_search_params(document_id))
+    def annotations_for_record(record_id, **local_params)
+      search_response = annotations_search_for_document(record_id, local_params)
+      return [] unless search_response.key?('items')
+      annotations_from_search_response(search_response)
+    end
+
+    def annotations_search_for_document(record_id, **local_params)
+      Europeana::API.annotation.search(annotations_api_search_params(record_id, local_params))
     end
 
     def annotations_from_search_response(search_response)
@@ -55,15 +58,19 @@ module Europeana
       end
     end
 
-    def annotations_api_search_params(document_id)
+    def annotations_api_search_params(record_id, **local_params)
       {
         qf: [
           %(generator_name:#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu*'}),
           %(target_uri:"http://data.europeana.eu/item#{document_id}")
-        ],
+        ] + (local_params.delete(:qf) || []),
         query: '*:*',
         pageSize: 100
-      }.reverse_merge(annotations_api_env_params)
+      }.reverse_merge(annotations_api_env_params).merge(local_params)
+    end
+
+    def annotation_target_for_record(record_id)
+      "http://data.europeana.eu/item#{record_id}"
     end
 
     def annotations_api_fetch_params(provider, id)
