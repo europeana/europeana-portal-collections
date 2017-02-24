@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateFeeds < ActiveRecord::Migration
   def change
     create_table :feeds do |t|
@@ -6,6 +7,5 @@ class CreateFeeds < ActiveRecord::Migration
       t.string :url
       t.timestamps null: false
     end
-
   end
 end

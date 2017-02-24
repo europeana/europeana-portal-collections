@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module FeedHelper
   def feed_entries(url)
     feed = cached_feed(url)
@@ -30,11 +31,11 @@ module FeedHelper
 
     paginated_items = Kaminari.paginate_array(items).page(page).per(per_page)
     {
-        title: 'Tumblr',
-        tumblr_url: Cache::FeedJob::URLS[:custom][feed.slug.to_sym].sub('/rss', ''),
-        more_items_load: nil,
-        more_items_total: paginated_items.total_count,
-        items: items
+      title: 'Tumblr',
+      tumblr_url: Cache::FeedJob::URLS[:custom][feed.slug.to_sym].sub('/rss', ''),
+      more_items_load: nil,
+      more_items_total: paginated_items.total_count,
+      items: items
     }
   end
 
@@ -57,17 +58,17 @@ module FeedHelper
 
     feed.entries.map do |item|
       {
-          url: CGI.unescapeHTML(item.url),
-          img: {
-              src: feed_entry_thumbnail_url(item),
-              alt: item.title
-          },
-          title: item.title,
-          date: I18n.l(item.published, format: :short),
-          excerpt: {
-              short: ActionController::Base.helpers.strip_tags(CGI.unescapeHTML(item.summary))
-          },
-          type: detect_feed_type_from_url(url)
+        url: CGI.unescapeHTML(item.url),
+        img: {
+          src: feed_entry_thumbnail_url(item),
+          alt: item.title
+        },
+        title: item.title,
+        date: I18n.l(item.published, format: :short),
+        excerpt: {
+          short: ActionController::Base.helpers.strip_tags(CGI.unescapeHTML(item.summary))
+        },
+        type: detect_feed_type_from_url(url)
       }
     end
   end

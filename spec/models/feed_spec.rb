@@ -5,7 +5,6 @@ RSpec.describe Feed do
   it { is_expected.to validate_uniqueness_of(:url) }
   it { is_expected.to have_and_belong_to_many(:pages) }
 
-
   it 'should set the slug from the name' do
     feed = Feed.create(name: 'Art Tumblr')
     expect(feed.slug).to eq('art-tumblr')

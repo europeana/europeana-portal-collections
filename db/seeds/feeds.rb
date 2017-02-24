@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 unless Feed.find_by_slug('fashion-tumblr').present?
   Feed.create!(
-      name: 'Fashion Tumblr',
-      url: 'http://europeanafashion.tumblr.com/rss'
+    name: 'Fashion Tumblr',
+    url: 'http://europeanafashion.tumblr.com/rss'
   )
 
   # if the landing page is already present we need to add our feed to it here

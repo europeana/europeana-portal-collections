@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateJoinTableFeedPage < ActiveRecord::Migration
   def change
     create_join_table :feeds, :pages do |t|

@@ -5,10 +5,9 @@ class Feed < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :url, presence: true, uniqueness: true
 
-  acts_as_url :name, url_attribute: :slug, only_when_blank: true,
-              allow_duplicates: false
+  acts_as_url :name, url_attribute: :slug, only_when_blank: true, allow_duplicates: false
 
-  scope :tumblr, ->{ where('url LIKE (?)', '%tumblr.com%') }
+  scope :tumblr, -> { where('url LIKE (?)', '%tumblr.com%') }
 
   def to_param
     slug
