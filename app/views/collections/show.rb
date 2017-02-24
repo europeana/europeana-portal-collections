@@ -123,7 +123,7 @@ module Collections
     def carousel_data
       case @landing_page.settings[:layout_type]
         when 'default'
-          helpers.collection_tumblr_feed_content(@collection)
+          helpers.tumblr_feed_content(@landing_page)
         when 'browse'
           helpers.collection_feeds_content(@collection)
       end

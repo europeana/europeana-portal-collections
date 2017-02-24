@@ -32,7 +32,7 @@ namespace :jobs do
       end
     end
 
-    desc 'Queue Cache::Feed jobs (blogs / exhibitions / Tumblr)'
+    desc 'Queue Cache::Feed jobs (blogs / exhibitions / Custom)'
     task feeds: :environment do
       Cache::FeedJob::URLS[:blog].values.each do |url|
         Cache::Feed::BlogJob.perform_later(url)
@@ -40,7 +40,7 @@ namespace :jobs do
       Cache::FeedJob::URLS[:exhibitions].values.each do |url|
         Cache::FeedJob.perform_later(url)
       end
-      Cache::FeedJob::URLS[:tumblr].values.each do |url|
+      Cache::FeedJob::URLS[:custom].values.each do |url|
         Cache::Feed::BlogJob.perform_later(url)
       end
     end

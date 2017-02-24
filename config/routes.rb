@@ -25,9 +25,7 @@ Rails.application.routes.draw do
       ["#{params[:locale]}/collections/art", request.query_string.presence].compact.join('?')
     }
 
-    resources :collections, only: [:show, :index] do
-      get 'tumblr', on: :member
-    end
+    resources :collections, only: [:show, :index]
 
     get 'channels', to: redirect('%{locale}/collections')
     get 'channels/:id', to: redirect('%{locale}/collections/%{id}')

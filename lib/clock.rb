@@ -17,8 +17,8 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     end
   end
 
-  every(1.day, 'cache.feed.tumblr', at: ENV['SCHEDULE_FEED_TUMBLR']) do
-    Cache::FeedJob::URLS[:tumblr].values.each do |url|
+  every(1.day, 'cache.feed.custom', at: ENV['SCHEDULE_FEED_CUSTOM']) do
+    Cache::FeedJob::URLS[:custom].values.each do |url|
       Cache::Feed::BlogJob.perform_later(url)
     end
   end

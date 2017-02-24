@@ -325,6 +325,9 @@ unless Page::Landing.find_by_slug('collections/fashion').present?
           settings_category: 'exhibition',
           media_object: find_or_download_styleguide_image('sample/thumb-machines.jpg')
         )
+      ],
+      feeds: [
+          Feed.find_by_slug('fashion_tumblr')
       ]
     )
     fashion_landing.publish!
