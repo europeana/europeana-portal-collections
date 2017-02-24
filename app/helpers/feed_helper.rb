@@ -17,7 +17,7 @@ module FeedHelper
 
   def tumblr_feed_content(landing_page, options = {})
     page = options[:page] || 1
-    per_page = options[:per_page] || 12
+    per_page = options[:per_page] || 20
 
     puts "landing_page.feeds.tumblr: #{landing_page.feeds.tumblr.inspect}"
     feed = landing_page.feeds.tumblr.first
@@ -32,7 +32,7 @@ module FeedHelper
     {
         title: 'Tumblr',
         tumblr_url: Cache::FeedJob::URLS[:custom][feed.slug.to_sym].sub('/rss', ''),
-        more_items_load: paginated_items.last_page? ? nil : feed_path(feed, format: :json),
+        more_items_load: nil,
         more_items_total: paginated_items.total_count,
         items: items
     }
