@@ -32,7 +32,7 @@ module FeedHelper
     paginated_items = Kaminari.paginate_array(items).page(page).per(per_page)
     {
       title: 'Tumblr',
-      tumblr_url: Cache::FeedJob::URLS[:custom][feed.slug.to_sym].sub('/rss', ''),
+      tumblr_url: feed.url.sub('/rss', ''),
       more_items_load: nil,
       more_items_total: paginated_items.total_count,
       items: items
@@ -46,17 +46,18 @@ module FeedHelper
     if feed.is_a?(String)
       feed_category_key = options[:feed_job_category] || :blog
       key = feed.to_sym
+      url = Cache::FeedJob::URLS[feed_category_key][key]
+      type = feed_category_key.to_s
     elsif feed.is_a?(Feed)
-      feed_category_key = :custom
-      key = feed.slug.to_sym
+      url = feed.url
+      type = detect_feed_type(feed)
     end
 
-    url = Cache::FeedJob::URLS[feed_category_key][key]
-    feed = cached_feed(url)
+    cached_feed = cached_feed(url)
 
-    return [] if feed.blank? || feed.entries.blank?
+    return [] if cached_feed.blank? || cached_feed.entries.blank?
 
-    feed.entries.map do |item|
+    cached_feed.entries.map do |item|
       {
         url: CGI.unescapeHTML(item.url),
         img: {
@@ -66,24 +67,20 @@ module FeedHelper
         title: item.title,
         date: I18n.l(item.published, format: :short),
         excerpt: {
-          short: ActionController::Base.helpers.strip_tags(CGI.unescapeHTML(item.summary))
+          short: strip_tags(CGI.unescapeHTML(item.summary))
         },
-        type: detect_feed_type_from_url(url)
+        type: type
       }
     end
   end
 
-  def detect_feed_type_from_url(feed_url)
-    if url_in_domain?(feed_url, 'blog.europeana.eu')
+  def detect_feed_type(feed)
+    if feed.europeana_blog?
       'blog'
-    elsif url_in_domain?(feed_url, 'tumblr.com')
+    elsif feed.tumblr?
       'tumblr'
     else
       'other'
     end
-  end
-
-  def url_in_domain?(url, domain)
-    !(url =~ %r(://([^/]*.)?#{domain}/)).nil?
   end
 end

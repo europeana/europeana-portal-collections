@@ -18,8 +18,8 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
   end
 
   every(1.day, 'cache.feed.custom', at: ENV['SCHEDULE_FEED_CUSTOM']) do
-    Cache::FeedJob::URLS[:custom].values.each do |url|
-      Cache::Feed::BlogJob.perform_later(url)
+    Feed.all.each do |feed|
+      Cache::Feed::BlogJob.perform_later(feed.url)
     end
   end
 

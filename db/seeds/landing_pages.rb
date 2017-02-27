@@ -327,7 +327,7 @@ unless Page::Landing.find_by_slug('collections/fashion').present?
         )
       ],
       feeds: [
-          Feed.find_by_slug('fashion_tumblr')
+        Feed.find_by_slug('fashion-tumblr')
       ]
     )
     fashion_landing.publish!

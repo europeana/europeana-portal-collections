@@ -7,5 +7,14 @@ class CreateFeeds < ActiveRecord::Migration
       t.string :url
       t.timestamps null: false
     end
+
+    reversible do |change|
+      change.up do
+        Feed.create!(
+            name: 'Fashion Tumblr',
+            url: 'http://europeanafashion.tumblr.com/rss'
+        )
+      end
+    end
   end
 end

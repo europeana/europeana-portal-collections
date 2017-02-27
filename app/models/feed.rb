@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class Feed < ActiveRecord::Base
+  include HasExternalUrls
+
   has_and_belongs_to_many :pages
 
   validates :name, presence: true, uniqueness: true
