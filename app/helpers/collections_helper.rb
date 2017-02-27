@@ -41,10 +41,10 @@ module CollectionsHelper
     end
   end
 
-  def collection_feeds_content(collection, options = {})
+  def collection_feeds_content(collection)
     custom_items = []
     collection.landing_page.feeds.each do |feed|
-      custom_items << feed_items_for(feed, options)
+      custom_items << feed_items_for(feed)
     end
 
     combined_items = custom_items.flatten

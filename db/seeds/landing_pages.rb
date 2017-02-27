@@ -176,7 +176,7 @@ unless Page::Landing.find_by_slug('').present?
         )
       ],
       feeds: [
-          Feed.find_by_slug('all-blog')
+        Feed.find_by_slug('all-blog')
       ]
     )
     home_landing.publish!

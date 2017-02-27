@@ -25,7 +25,7 @@ module FeedHelper
 
     return nil unless feed
 
-    items = feed_items_for(feed, options)
+    items = feed_items_for(feed)
 
     return nil if items.blank?
 
@@ -41,7 +41,7 @@ module FeedHelper
 
   ##
   # Tries to retrieve a cached feed and formats it for display.
-  def feed_items_for(feed, options = {})
+  def feed_items_for(feed)
     cached_feed = cached_feed(feed.url)
 
     return [] if cached_feed.blank? || cached_feed.entries.blank?
