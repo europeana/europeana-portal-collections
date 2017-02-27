@@ -66,6 +66,14 @@ RSpec.describe PortalController do
     let(:params) { { locale: 'en', id: 'abc/123' } }
     let(:record_id) { '/' + params[:id] }
 
+    context 'when record is not found' do
+      it 'returns 404' do
+        allow(controller).to receive(:fetch).and_raise(Europeana::API::Errors::ResourceNotFoundError, 'Not Found')
+        get :show, params
+        expect(response.status).to eq(404)
+      end
+    end
+
     describe 'API requests' do
       before do
         get :show, params
