@@ -50,8 +50,8 @@ module ControllerExceptionHandling
           !ENV['DISABLE_ERROR_LOGGING']
         end
 
-        def process(exception:, **_)
-          Rails.logger.error(message(exception: exception).red.bold)
+        def process(exception:, controller:, **_)
+          controller.logger.error(message(exception: exception).red.bold)
         end
 
         def message(exception:)
@@ -123,7 +123,7 @@ module ControllerExceptionHandling
     status = 500 if failed_in_cms_request? && status != 403
 
     ERROR_HANDLERS.select(&:enabled?).each do |handler|
-      handler.process(exception: exception, status: status, format: format, request: request)
+      handler.process(exception: exception, status: status, format: format, request: request, controller: self)
     end
 
     render_error_response(exception: exception, status: status, format: format)
