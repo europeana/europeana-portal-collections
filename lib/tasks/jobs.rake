@@ -40,7 +40,7 @@ namespace :jobs do
       Cache::FeedJob::URLS[:exhibitions].values.each do |url|
         Cache::FeedJob.perform_later(url)
       end
-     Feed.all.each do |feed|
+      Feed.all.each do |feed|
         Cache::Feed::BlogJob.perform_later(feed.url)
       end
     end

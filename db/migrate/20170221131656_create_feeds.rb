@@ -11,8 +11,8 @@ class CreateFeeds < ActiveRecord::Migration
     reversible do |change|
       change.up do
         Feed.create!(
-            name: 'Fashion Tumblr',
-            url: 'http://europeanafashion.tumblr.com/rss'
+          name: 'Fashion Tumblr',
+          url: 'http://europeanafashion.tumblr.com/rss'
         )
       end
     end
