@@ -42,15 +42,12 @@ module CollectionsHelper
   end
 
   def collection_feeds_content(collection, options = {})
-    options[:feed_job_category] = :blog
-    news_items = feed_items_for(collection.key.to_s, options)
-
     custom_items = []
     collection.landing_page.feeds.each do |feed|
       custom_items << feed_items_for(feed, options)
     end
 
-    combined_items = custom_items.flatten + news_items
+    combined_items = custom_items.flatten
     combined_items.sort_by! { |item| item[:date] }
     combined_items.reverse!
 

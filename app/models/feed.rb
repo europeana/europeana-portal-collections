@@ -10,6 +10,7 @@ class Feed < ActiveRecord::Base
   acts_as_url :name, url_attribute: :slug, only_when_blank: true, allow_duplicates: false
 
   scope :tumblr, -> { where('url LIKE (?)', '%tumblr.com%') }
+  scope :blog, -> { where('url LIKE (?)', '%blog.europeana.eu%') }
 
   def to_param
     slug

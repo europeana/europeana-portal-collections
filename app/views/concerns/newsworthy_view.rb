@@ -28,7 +28,7 @@ module NewsworthyView
     mustache[:blog_news_items] ||= {}
     mustache[:blog_news_items][collection.key] ||= begin
       key = collection.key.underscore.to_sym
-      url = Cache::FeedJob::URLS[:blog][key]
+      url = collection.landing_page.feeds.blog.first.url
       news_items(feed_entries(url))
     end
   end

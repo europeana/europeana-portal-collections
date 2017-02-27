@@ -1,3 +1,19 @@
+all_blog:
+  name: All Blog
+  slug: all-blog
+  url: 'http://blog.europeana.eu/feed/'
+art_blog:
+  name: Art Blog
+  slug: art-blog
+  url: 'http://blog.europeana.eu/tag/art/feed/'
+fashion_blog:
+  name: Music Blog
+  slug: music-blog
+  url: 'http://blog.europeana.eu/tag/music/feed/'
+fashion_blog:
+  name: Fashion Blog
+  slug: fashion-blog
+  url: 'http://blog.europeana.eu/tag/fashion/feed/'
 fashion_tumblr:
   name: Fashion Tumblr
   slug: fashion-tumblr

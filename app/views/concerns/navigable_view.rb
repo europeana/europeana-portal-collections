@@ -131,7 +131,7 @@ module NavigableView
   end
 
   def navigation_global_primary_nav_blog_submenu_items
-    feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6)
+    feed_items = feed_entry_nav_items(Feed.find_by_slug('all-blog').url, 6)
     feed_items << link_item(t('global.navigation.all_blog_posts'), 'http://blog.europeana.eu/',
                             is_morelink: true)
   end

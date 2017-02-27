@@ -2,12 +2,6 @@
 module Cache
   class FeedJob < ApplicationJob
     URLS = {
-      blog: {
-        all: 'http://blog.europeana.eu/feed/',
-        art: 'http://blog.europeana.eu/tag/art/feed/',
-        fashion: 'http://blog.europeana.eu/tag/fashion/feed/',
-        music: 'http://blog.europeana.eu/tag/music/feed/'
-      },
       exhibitions: %i(de en).each_with_object({}) do |locale, hash|
         hash[locale] = (ENV['EXHIBITIONS_HOST'] || 'http://www.europeana.eu') + "/portal/#{locale}/exhibitions/feed.xml"
       end

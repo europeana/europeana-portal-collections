@@ -40,20 +40,9 @@ module FeedHelper
   end
 
   ##
-  # Tries to retrieve a cached feed and formats it for display
-  # feed can be either a Feed, or if it's a standard europeana feed, the collection name as a string.
+  # Tries to retrieve a cached feed and formats it for display.
   def feed_items_for(feed, options = {})
-    if feed.is_a?(String)
-      feed_category_key = options[:feed_job_category] || :blog
-      key = feed.to_sym
-      url = Cache::FeedJob::URLS[feed_category_key][key]
-      type = feed_category_key.to_s
-    elsif feed.is_a?(Feed)
-      url = feed.url
-      type = detect_feed_type(feed)
-    end
-
-    cached_feed = cached_feed(url)
+    cached_feed = cached_feed(feed.url)
 
     return [] if cached_feed.blank? || cached_feed.entries.blank?
 
@@ -69,7 +58,7 @@ module FeedHelper
         excerpt: {
           short: strip_tags(CGI.unescapeHTML(item.summary))
         },
-        type: type
+        type: detect_feed_type(feed)
       }
     end
   end
