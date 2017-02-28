@@ -27,7 +27,7 @@ module NewsworthyView
   def blog_news_items(collection)
     mustache[:blog_news_items] ||= {}
     mustache[:blog_news_items][collection.key] ||= begin
-      key = collection.key.underscore.to_sym
+      return unless collection.landing_page.feeds.blog.first
       url = collection.landing_page.feeds.blog.first.url
       news_items(feed_entries(url))
     end

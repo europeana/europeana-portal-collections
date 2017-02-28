@@ -31,7 +31,7 @@ module Home
           promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
           news: blog_news_items(@collection).blank? ? nil : {
             items: blog_news_items(@collection),
-            blogurl: Cache::FeedJob::URLS[:blog][:all].sub('/feed', '')
+            blogurl: @landing_page.feeds.blog.first.url.sub('/feed', '')
           },
           banner: banner_content(@landing_page.banner_id)
         }.reverse_merge(super)
