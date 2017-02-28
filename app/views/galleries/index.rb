@@ -92,7 +92,8 @@ module Galleries
         images: gallery_images_content(gallery),
         clicktip: {
           tooltip_text: gallery.description
-        }
+        },
+        label: ''#galleries_topics.map{|x|x.label}.join(' | ')
       }
     end
 
