@@ -95,7 +95,6 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:read, Topic.new) }
     it { is_expected.to be_able_to(:read, User.new) }
 
-
     it { is_expected.not_to be_able_to(:create, Banner.new) }
     it { is_expected.to be_able_to(:create, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:create, Collection.new) }
