@@ -38,9 +38,9 @@ module Collections
     def body_class
       'channel_landing'
     end
-   
+
     def collection_title
-   	  @collection.title
+      @collection.title
     end
 
     def globalnav_options
