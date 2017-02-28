@@ -42,7 +42,7 @@ RSpec.describe Cache::FeedJob do
 
   context 'when the download_media argument is passed as true' do
     it 'should queue DownloadRemoteMediaObjectJob' do
-      download_jobs = Proc.new do
+      download_jobs = proc do
         Delayed::Job.where("handler LIKE '%job_class: DownloadRemoteMediaObjectJob%'")
       end
       expect { subject.perform(url, true) }.to change { download_jobs.call.count }.by_at_least(1)
