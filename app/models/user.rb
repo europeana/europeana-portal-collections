@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   class << self
     def role_enum
-      %w(user admin)
+      %w(admin editor user)
     end
   end
 
