@@ -6,6 +6,10 @@ admin:
   email: admin@example.com
   role: admin
 
+editor:
+  email: editor@example.com
+  role: editor
+
 guest:
   email: guest@example.com
   role: guest

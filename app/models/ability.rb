@@ -26,6 +26,16 @@ class Ability
     can :show, Page.published
   end
 
+  def editor!
+    can :access, :rails_admin
+    can :dashboard
+    can :read, [Banner, BrowseEntry, Collection, DataProvider, Gallery,
+                HeroImage, Link, MediaObject, Page, Topic, User]
+    can :create, [BrowseEntry, Gallery]
+    can :update, [BrowseEntry, DataProvider, Gallery,
+                  HeroImage, MediaObject, Page::Landing]
+  end
+
   def admin!
     can :access, :rails_admin
     can :dashboard

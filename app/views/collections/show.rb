@@ -39,9 +39,8 @@ module Collections
       'channel_landing'
     end
 
-    # TODO: configure this in the CMS
-    def logo_class
-      'fashion-logo'
+    def collection_title
+      @collection.title
     end
 
     def globalnav_options

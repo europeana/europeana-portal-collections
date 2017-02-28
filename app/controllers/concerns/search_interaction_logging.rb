@@ -5,7 +5,7 @@ module SearchInteractionLogging
   extend ActiveSupport::Concern
 
   def log_search_interaction(**options)
-    Rails.logger.info(search_interaction_msg(options))
+    logger.info(search_interaction_msg(options))
   end
 
   def search_interaction_msg(**options)

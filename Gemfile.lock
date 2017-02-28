@@ -23,9 +23,20 @@ GIT
       rails (>= 4.2.2, < 5)
 
 GIT
+  remote: git://github.com/europeana/europeana-logging-ruby.git
+  revision: bec1be660cfcfcf5662b79075ea827fe766cdd63
+  branch: develop
+  specs:
+    europeana-logging (0.2.2)
+      lograge (~> 0.4)
+      logstash-event (~> 1.2)
+      logstash-logger (~> 0.19)
+      rails (> 4.2, < 6)
+
+GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 25a15ddb9e5f170483f1df1597fc4e88c3719d77
-  ref: 25a15dd
+  revision: 90a5a948c4766aa7820152cb141aa2c170dfbf9d
+  ref: 90a5a94
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -136,7 +147,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     colorize (0.8.1)
-    concurrent-ruby (1.0.4)
+    concurrent-ruby (1.0.5)
     coveralls (0.8.19)
       json (>= 1.8, < 3)
       simplecov (~> 0.12.0)
@@ -172,11 +183,6 @@ GEM
       ffi (>= 1.3.0)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
-    europeana-logging (0.2.2)
-      lograge (~> 0.4)
-      logstash-event (~> 1.2)
-      logstash-logger (~> 0.19)
-      rails (> 4.2, < 6)
     excon (0.55.0)
     execjs (2.7.0)
     faraday (0.11.0)
@@ -340,7 +346,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.8.0)
+    i18n (0.8.1)
     i18n_data (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -569,7 +575,7 @@ GEM
       libv8 (~> 3.16.14.15)
       ref
     thor (0.19.4)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (2.0.6)
     tins (1.13.2)
     trollop (2.1.2)
@@ -622,7 +628,7 @@ DEPENDENCIES
   europeana-api!
   europeana-blacklight (~> 0.5.0)!
   europeana-feedback-button (= 0.0.4)
-  europeana-logging (~> 0.2.2)
+  europeana-logging (~> 0.2.2)!
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
@@ -670,4 +676,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.13.1
+   1.13.7
