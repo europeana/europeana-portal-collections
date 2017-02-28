@@ -34,7 +34,7 @@ module GalleryDisplayingView
   end
  
   def gallery_social_links
-   	{
+    {
       style_blue: true,
       facebook: {
         url: 'https://www.facebook.com/Europeana',
