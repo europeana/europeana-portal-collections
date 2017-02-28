@@ -21,7 +21,7 @@ module Galleries
           galleries_link: galleries_path,
           items: gallery_items_content,
           hero: gallery_hero_content,
-          social: galleries_social
+          social: gallery_social
         }
       end
     end
