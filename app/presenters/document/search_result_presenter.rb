@@ -5,6 +5,7 @@ module Document
   class SearchResultPresenter < DocumentPresenter
     include ActionView::Helpers::TextHelper
     include ApiHelper
+    include Metadata::Rights
 
     # @param response [Europeana::Blacklight::Response]
     def initialize(document, controller, response = nil, configuration = controller.blacklight_config)
@@ -102,6 +103,10 @@ module Document
       uri.query = query.to_query
 
       uri.to_s
+    end
+
+    def media_rights
+      @media_rights ||= field_value('rights')
     end
 
     protected
