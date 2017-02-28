@@ -20,8 +20,7 @@ module FeedHelper
     page = options[:page] || 1
     per_page = options[:per_page] || 20
 
-    puts "landing_page.feeds.tumblr: #{landing_page.feeds.tumblr.inspect}"
-    feed = landing_page.feeds.tumblr.first
+    feed = landing_page.feeds.detect(&:tumblr?)
 
     return nil unless feed
 
@@ -61,6 +60,21 @@ module FeedHelper
         type: detect_feed_type(feed)
       }
     end
+  end
+
+  # Retrieves and combines all of a Page's Feed content so it can be assigned for display.
+  def page_feeds_content(page)
+    combined_items = page.feeds.map { |feed| feed_items_for(feed) }.flatten
+    combined_items.sort_by! { |item| item[:date] }
+    combined_items.reverse!
+
+    return nil if combined_items.blank?
+    {
+      title: false,
+      more_items_load: nil,
+      more_items_total: combined_items.count,
+      items: combined_items
+    }
   end
 
   def detect_feed_type(feed)

@@ -87,10 +87,7 @@ module Collections
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
           },
-          news: blog_news_items(@collection).blank? ? nil : {
-            items: blog_news_items(@collection),
-            blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
-          },
+          news: blog_news(@landing_page),
           newsletter: newsletter_content,
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
@@ -125,7 +122,7 @@ module Collections
         when 'default'
           helpers.tumblr_feed_content(@landing_page)
         when 'browse'
-          helpers.collection_feeds_content(@collection)
+          helpers.page_feeds_content(@landing_page)
       end
     end
 

@@ -41,26 +41,6 @@ module CollectionsHelper
     end
   end
 
-  def collection_feeds_content(collection)
-    custom_items = []
-    collection.landing_page.feeds.each do |feed|
-      custom_items << feed_items_for(feed)
-    end
-
-    combined_items = custom_items.flatten
-    combined_items.sort_by! { |item| item[:date] }
-    combined_items.reverse!
-
-    return nil if combined_items.blank?
-
-    content = {
-      title: false,
-      more_items_load: nil,
-      more_items_total: combined_items.count,
-      items: combined_items
-    }
-  end
-
   def clicktip
   end
 

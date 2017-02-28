@@ -19,6 +19,7 @@ RSpec.describe Cache::FeedJob do
        <title>Example item</title>
        <link>http://example.com/item</link>
        <description>About the example item...</description>
+       <content:encoded><![CDATA[<img src="http://www.example.com/image.png"/>]]></content:encoded>
     </item>
   </channel>
 </rss>
@@ -37,5 +38,15 @@ RSpec.describe Cache::FeedJob do
     cached = Rails.cache.fetch(cache_key)
     expect(cached).to be_a(Feedjira::Parser::RSS)
     expect(cached.feed_url).to eq(url)
+  end
+
+  context 'when the download_media argument is passed as true' do
+    it 'should queue DownloadRemoteMediaObjectJob' do
+      download_jobs = Proc.new do
+        Delayed::Job.where("handler LIKE '%job_class: DownloadRemoteMediaObjectJob%'")
+      end
+      expect { subject.perform(url, true) }.to change { download_jobs.call.count }.by_at_least(1)
+      expect(download_jobs.call.last.handler).to match(%r{http://www.example.com/image.png})
+    end
   end
 end

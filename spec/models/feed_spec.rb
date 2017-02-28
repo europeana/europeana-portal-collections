@@ -32,4 +32,20 @@ RSpec.describe Feed do
       end
     end
   end
+
+  describe 'html_url' do
+    context 'when the feed is a tumblr feed' do
+      let(:feed) { feeds(:fashion_tumblr)}
+      it 'should remove the "/rss" part from the feed url' do
+        expect(feed.html_url).to eq 'http://europeanafashion.tumblr.com'
+      end
+    end
+
+    context 'when the feed is a europeana blog feed' do
+      let(:feed) { feeds(:all_blog)}
+      it 'should remove the "/feed" part from the feed url' do
+        expect(feed.html_url).to eq 'http://blog.europeana.eu/'
+      end
+    end
+  end
 end

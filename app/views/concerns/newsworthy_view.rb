@@ -24,12 +24,19 @@ module NewsworthyView
     end
   end
 
-  def blog_news_items(collection)
+  def blog_news_items(feed)
     mustache[:blog_news_items] ||= {}
-    mustache[:blog_news_items][collection.key] ||= begin
-      return unless collection.landing_page.feeds.blog.first
-      url = collection.landing_page.feeds.blog.first.url
-      news_items(feed_entries(url))
+    mustache[:blog_news_items][feed.slug] ||= begin
+      news_items(feed_entries(feed.url))
     end
+  end
+
+  def blog_news(landing_page)
+    feed = landing_page.feeds.detect(&:europeana_blog?)
+    return { items: [], blogurl: false } unless feed
+    {
+      items: blog_news_items(feed),
+      blogurl: feed.url.sub('/feed', '')
+    }
   end
 end
