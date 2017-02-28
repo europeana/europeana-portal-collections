@@ -25,9 +25,8 @@ module GalleryDisplayingView
     @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
   end
 
-
   def gallery_social
-  	gallery_social_links.merge(social_title: t('global.share-gallery'))
+    gallery_social_links.merge(social_title: t('global.share-gallery'))
   end
 
   def galleries_social
