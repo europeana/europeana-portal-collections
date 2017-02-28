@@ -23,6 +23,7 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, DataProvider.new) }
+    it { is_expected.not_to be_able_to(:manage, Feed.new) }
     it { is_expected.not_to be_able_to(:manage, Gallery.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, Page.new) }
@@ -54,6 +55,7 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:manage, Collection.new) }
     it { is_expected.not_to be_able_to(:manage, DataProvider.new) }
+    it { is_expected.not_to be_able_to(:manage, Feed.new) }
     it { is_expected.not_to be_able_to(:manage, Gallery.new) }
     it { is_expected.not_to be_able_to(:manage, HeroImage.new) }
     it { is_expected.not_to be_able_to(:manage, Page.new) }
@@ -85,6 +87,7 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:read, BrowseEntry.new) }
     it { is_expected.to be_able_to(:read, Collection.new) }
     it { is_expected.to be_able_to(:read, DataProvider.new) }
+    it { is_expected.to be_able_to(:read, Feed.new) }
     it { is_expected.to be_able_to(:read, Gallery.new) }
     it { is_expected.to be_able_to(:read, HeroImage.new) }
     it { is_expected.to be_able_to(:read, Page.new) }
@@ -99,6 +102,7 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:create, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:create, Collection.new) }
     it { is_expected.not_to be_able_to(:create, DataProvider.new) }
+    it { is_expected.to be_able_to(:create, Feed.new) }
     it { is_expected.to be_able_to(:create, Gallery.new) }
     it { is_expected.not_to be_able_to(:create, HeroImage.new) }
     it { is_expected.not_to be_able_to(:create, Page.new) }
@@ -113,6 +117,7 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:update, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:update, Collection.new) }
     it { is_expected.to be_able_to(:update, DataProvider.new) }
+    it { is_expected.to be_able_to(:update, Feed.new) }
     it { is_expected.to be_able_to(:update, Gallery.new) }
     it { is_expected.to be_able_to(:update, HeroImage.new) }
     it { is_expected.not_to be_able_to(:update, Page.new) }
@@ -143,6 +148,7 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:manage, BrowseEntry.new) }
     it { is_expected.to be_able_to(:manage, Collection.new) }
     it { is_expected.to be_able_to(:manage, DataProvider.new) }
+    it { is_expected.to be_able_to(:manage, Feed.new) }
     it { is_expected.to be_able_to(:manage, Gallery.new) }
     it { is_expected.to be_able_to(:manage, HeroImage.new) }
     it { is_expected.to be_able_to(:manage, Page.new) }
