@@ -100,9 +100,7 @@ module Galleries
         link: gallery_path(gallery),
         count: gallery.images.size,
         images: gallery_images_content(gallery),
-        clicktip: {
-          tooltip_text: gallery.description
-        },
+        info: gallery.description,
         label: gallery_label(gallery)
       }
     end
