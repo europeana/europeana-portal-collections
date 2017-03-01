@@ -33,6 +33,17 @@ RSpec.describe Feed do
     end
   end
 
+  describe 'hooks' do
+    subject { described_class.new(url: 'http://blog.europeana.eu/', name: 'blog') }
+
+    context 'when saving' do
+      it "should queue the retrieval job for the feed data" do
+        expect(subject).to receive(:queue_retrieval) { true }
+        subject.run_callbacks :save
+      end
+    end
+  end
+
   describe 'html_url' do
     context 'when the feed is a tumblr feed' do
       let(:feed) { feeds(:fashion_tumblr) }
@@ -46,6 +57,16 @@ RSpec.describe Feed do
       it 'should remove the "/feed" part from the feed url' do
         expect(feed.html_url).to eq 'http://blog.europeana.eu/'
       end
+    end
+  end
+
+  describe '#queue_retrieval' do
+    subject { described_class.new(url: 'http://blog.europeana.eu/', name: 'blog') }
+    it 'should queue a FeedJob' do
+      feed_jobs = proc do
+        Delayed::Job.where("handler LIKE '%job_class: Cache::FeedJob%'")
+      end
+      expect { subject.send(:queue_retrieval) }.to change { feed_jobs.call.count }.by(1)
     end
   end
 end

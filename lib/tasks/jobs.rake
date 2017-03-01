@@ -38,7 +38,7 @@ namespace :jobs do
         Cache::FeedJob.perform_later(url)
       end
       Feed.all.each do |feed|
-        Cache::Feed::FeedJob.perform_later(feed.url, true)
+        Cache::FeedJob.perform_later(feed.url, true)
       end
     end
   end

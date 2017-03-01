@@ -7,6 +7,8 @@ class Feed < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :url, presence: true, uniqueness: true
 
+  after_save :queue_retrieval
+
   acts_as_url :name, url_attribute: :slug, only_when_blank: true, allow_duplicates: false
 
   def html_url
@@ -22,4 +24,9 @@ class Feed < ActiveRecord::Base
   def to_param
     slug
   end
+
+  private
+    def queue_retrieval
+      Cache::FeedJob.perform_later(url, true)
+    end
 end
