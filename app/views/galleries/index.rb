@@ -15,6 +15,10 @@ module Galleries
       [{ name: 'pageName', value: 'collections/galleries' }]
     end
 
+    def galleries_social
+      gallery_social_links.merge(social_title: t('global.share-galleries'))
+    end
+
     def content
       mustache[:content] ||= begin
         {
