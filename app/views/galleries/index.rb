@@ -16,7 +16,7 @@ module Galleries
     end
 
     def galleries_social
-      gallery_social_links.merge(social_title: t('global.share-galleries'))
+      gallery_social_links.merge(social_title: t('site.galleries.share.other'))
     end
 
     def content
