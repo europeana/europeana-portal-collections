@@ -29,10 +29,7 @@ module Home
           hero_config: hero_config(@landing_page.hero_image),
           strapline: @landing_page.strapline(total_item_count: total_item_count),
           promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
-          news: blog_news_items(@collection).blank? ? nil : {
-            items: blog_news_items(@collection),
-            blogurl: Cache::FeedJob::URLS[:blog][:all].sub('/feed', '')
-          },
+          news: blog_news(@landing_page),
           banner: banner_content(@landing_page.banner_id)
         }.reverse_merge(super)
       end

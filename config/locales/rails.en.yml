@@ -28,6 +28,9 @@ en:
       page:
         settings_full_width: Full width?
         settings_layout_type: Layout
+      page/landing:
+        newsletter_url: Newsletter URL
+        feeds: What's happening Feeds
       topic:
         entity_uri: Entity Collection URI
     models:
@@ -38,3 +41,4 @@ en:
         newsletter_url: Newsletter URL
         one: Landing Page
         other: Landing Pages
+        feeds: What's happening Feeds
