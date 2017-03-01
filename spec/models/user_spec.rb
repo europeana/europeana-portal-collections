@@ -1,6 +1,6 @@
 RSpec.describe User do
   it { is_expected.to delegate_method(:role_enum).to(:class) }
-  it { is_expected.to validate_inclusion_of(:role).in_array(%w(user admin)) }
+  it { is_expected.to validate_inclusion_of(:role).in_array(%w(admin editor user)) }
   it { is_expected.to delegate_method(:can?).to(:ability) }
   it { is_expected.to delegate_method(:cannot?).to(:ability) }
 
@@ -17,7 +17,7 @@ RSpec.describe User do
 
   describe '.role_enum' do
     subject { described_class.role_enum }
-    it { is_expected.to eq(%w(user admin)) }
+    it { is_expected.to eq(%w(admin editor user)) }
   end
 
   describe '#ability' do
