@@ -74,15 +74,19 @@ module Galleries
     end
 
     def gallery_topic_options
+      published_gallery_topic_options.tap do |options|
+        options.unshift(label: t('global.actions.filter-all'), value: 'all')
+        options.unshift(options.detect { |option| option[:value] == @selected_topic })
+        options.uniq!
+      end
+    end
+
+    def published_gallery_topic_options
       Topic.with_published_galleries.map do |topic|
         {
           label: topic.label,
           value: topic.to_param
         }
-      end.tap do |options|
-        options.unshift(label: t('global.actions.filter-all'), value: 'all')
-        options.unshift(options.detect { |option| option[:value] == @selected_topic })
-        options.uniq!
       end
     end
 
