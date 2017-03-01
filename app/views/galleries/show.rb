@@ -15,13 +15,17 @@ module Galleries
       [{ name: 'pageName', value: 'collections/galleries' }]
     end
 
+    def gallery_social
+      gallery_social_links.merge(social_title: t('site.galleries.share.one'))
+    end
+
     def content
       mustache[:content] ||= begin
         {
           galleries_link: galleries_path,
           items: gallery_items_content,
           hero: gallery_hero_content,
-          social: galleries_social
+          social: gallery_social
         }
       end
     end

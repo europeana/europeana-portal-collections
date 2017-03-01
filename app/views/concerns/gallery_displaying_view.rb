@@ -25,9 +25,8 @@ module GalleryDisplayingView
     @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
   end
 
-  def galleries_social
+  def gallery_social_links
     {
-      social_title: t('global.share-galleries'),
       style_blue: true,
       facebook: {
         url: 'https://www.facebook.com/Europeana',
