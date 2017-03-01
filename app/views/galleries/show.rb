@@ -62,7 +62,7 @@ module Galleries
         full_url: presenter.field_value('aggregations.edmIsShownBy'),
         rights: presenter.simple_rights_label_data,
         url_item: image.portal_url,
-        url_collection: search_path({q: "europeana_collectionName:#{presenter.field_value('europeanaCollectionName')}"}),
+        url_collection: search_path(q: "europeana_collectionName:#{presenter.field_value('europeanaCollectionName')}"),
         institution_logo: data_provider_logo_url(image)
       }
     end
