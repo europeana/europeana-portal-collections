@@ -21,7 +21,7 @@ unless Page::Landing.find_by_slug('collections/art').present?
       license: 'public',
       media_object: find_or_download_styleguide_image('sample/channel_hero_art.jpg')
     )
-    art_history_landing = Page::Landing.create!(
+    art_landing = Page::Landing.create!(
       slug: 'collections/art',
       title: 'Europeana Art',
       body: 'From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]',
@@ -105,9 +105,12 @@ unless Page::Landing.find_by_slug('collections/art').present?
           subject_type: :person,
           media_object: find_or_download_styleguide_image('sample/entry-hokusai-square.jpg')
         ),
+      ],
+      feeds: [
+        Feed.find_by_slug('art-blog')
       ]
     )
-    art_history_landing.publish!
+    art_landing.publish!
   end
 end
 
@@ -171,6 +174,9 @@ unless Page::Landing.find_by_slug('').present?
           text: 'Europeana monuments now in Google Field Trip',
           settings_category: 'new'
         )
+      ],
+      feeds: [
+        Feed.find_by_slug('all-blog')
       ]
     )
     home_landing.publish!
@@ -269,6 +275,9 @@ unless Page::Landing.find_by_slug('collections/music').present?
           subject_type: :topic,
           media_object: find_or_download_styleguide_image('sample/entry-harpsichord-square.jpg')
         )
+      ],
+      feeds: [
+        Feed.find_by_slug('music-blog')
       ]
     )
     music_landing.publish!
@@ -325,6 +334,10 @@ unless Page::Landing.find_by_slug('collections/fashion').present?
           settings_category: 'exhibition',
           media_object: find_or_download_styleguide_image('sample/thumb-machines.jpg')
         )
+      ],
+      feeds: [
+        Feed.find_by_slug('fashion-blog'),
+        Feed.find_by_slug('fashion-tumblr')
       ]
     )
     fashion_landing.publish!

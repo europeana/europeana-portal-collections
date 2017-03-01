@@ -29,17 +29,17 @@ class Ability
   def editor!
     can :access, :rails_admin
     can :dashboard
-    can :read, [Banner, BrowseEntry, Collection, DataProvider, Gallery,
+    can :read, [Banner, BrowseEntry, Collection, DataProvider, Feed, Gallery,
                 HeroImage, Link, MediaObject, Page, Topic, User]
-    can :create, [BrowseEntry, Gallery]
-    can :update, [BrowseEntry, DataProvider, Gallery,
+    can :create, [BrowseEntry, Feed, Gallery]
+    can :update, [BrowseEntry, DataProvider, Feed, Gallery,
                   HeroImage, MediaObject, Page::Landing]
   end
 
   def admin!
     can :access, :rails_admin
     can :dashboard
-    can :manage, [Banner, BrowseEntry, Collection, DataProvider, Gallery,
+    can :manage, [Banner, BrowseEntry, Collection, DataProvider, Feed, Gallery,
                   HeroImage, Link, MediaObject, Page, Topic, User]
   end
 end

@@ -19,6 +19,8 @@ home:
   state: 1
   strapline: '%{total_item_count} items'
   type: 'Page::Landing'
+  feeds:
+    - all_blog
 
 music_collection:
   slug: 'collections/music'
@@ -35,6 +37,9 @@ fashion_collection:
   state: 1
   type: 'Page::Landing'
   newsletter_url: 'http://europeanafashion.us5.list-manage.com/subscribe?u=08acbb4918e78ab1b8b1cb158&id=eeaec60e70'
+  feeds:
+    - fashion_blog
+    - fashion_tumblr
 
 grid_layout_collection:
   slug: 'collections/grid_layout'

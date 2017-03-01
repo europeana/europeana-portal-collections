@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220154035) do
+ActiveRecord::Schema.define(version: 20170221135646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,24 @@ ActiveRecord::Schema.define(version: 20170220154035) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "feeds", force: :cascade do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "feeds", ["slug"], name: "index_feeds_on_slug", using: :btree
+
+  create_table "feeds_pages", id: false, force: :cascade do |t|
+    t.integer "feed_id", null: false
+    t.integer "page_id", null: false
+  end
+
+  add_index "feeds_pages", ["feed_id", "page_id"], name: "index_feeds_pages_on_feed_id_and_page_id", using: :btree
+  add_index "feeds_pages", ["page_id", "feed_id"], name: "index_feeds_pages_on_page_id_and_feed_id", using: :btree
 
   create_table "galleries", force: :cascade do |t|
     t.integer  "state",        default: 0

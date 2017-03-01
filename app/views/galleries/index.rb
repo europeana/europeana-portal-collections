@@ -66,22 +66,32 @@ module Galleries
     def hero_content
       {
         url: @hero_image.file.present? ? @hero_image.file.url : nil,
-        title: 'Galleries', # @todo get this from Localeapp
+        title: t('global.galleries'),
         subtitle: ''
       }
     end
 
     def galleries_topics
       @topics ||= {
-        options: Topic.with_published_galleries.map do |topic|
-          {
-            label: topic.label,
-            value: topic.to_param
-          }
-        end.unshift(label: 'All', value: 'all')
+        options: gallery_topic_options
       }
-      @topics[:options].unshift(@topics[:options].select { |topic| topic[:value] == @selected_topic }.first).uniq!
-      @topics
+    end
+
+    def gallery_topic_options
+      published_gallery_topic_options.tap do |options|
+        options.unshift(label: t('global.actions.filter-all'), value: 'all')
+        options.unshift(options.detect { |option| option[:value] == @selected_topic })
+        options.uniq!
+      end
+    end
+
+    def published_gallery_topic_options
+      Topic.with_published_galleries.map do |topic|
+        {
+          label: topic.label,
+          value: topic.to_param
+        }
+      end
     end
 
     def galleries_content
@@ -94,8 +104,13 @@ module Galleries
         link: gallery_path(gallery),
         count: gallery.images.size,
         images: gallery_images_content(gallery),
-        info: gallery.description
+        info: gallery.description,
+        label: gallery_label(gallery)
       }
+    end
+
+    def gallery_label(gallery)
+      gallery.topics.map(&:label).sort.join(' | ')
     end
 
     def gallery_images_content(gallery)
