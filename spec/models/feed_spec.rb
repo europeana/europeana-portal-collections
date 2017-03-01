@@ -37,7 +37,7 @@ RSpec.describe Feed do
     subject { described_class.new(url: 'http://blog.europeana.eu/', name: 'blog') }
 
     context 'when saving' do
-      it "should queue the retrieval job for the feed data" do
+      it 'should queue the retrieval job for the feed data' do
         expect(subject).to receive(:queue_retrieval) { true }
         subject.run_callbacks :save
       end
