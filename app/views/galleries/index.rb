@@ -110,7 +110,7 @@ module Galleries
     end
 
     def gallery_label(gallery)
-      gallery.topics.map(&:label).sort.join(' | ')
+      gallery.topics.map(&:label).sort.join(' | ').presence
     end
 
     def gallery_images_content(gallery)
