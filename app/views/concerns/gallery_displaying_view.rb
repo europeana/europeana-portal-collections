@@ -26,7 +26,7 @@ module GalleryDisplayingView
   end
 
   def gallery_head_meta
-    mustache[:head_meta] ||= begin
+    mustache[:gallery_head_meta] ||= begin
       [
         { meta_property: 'fb:appid', content: '185778248173748' },
         { meta_name: 'twitter:card', content: 'summary' },

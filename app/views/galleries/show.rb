@@ -16,16 +16,17 @@ module Galleries
     end
 
     def head_meta
-      description = @gallery.description
-      description = description.strip! || description
-      head_meta = gallery_head_meta + [
-        { meta_name: 'description', content: description },
-        { meta_property: 'og:description', content: description },
-        { meta_property: 'og:image', content: gallery_items_content.first[:full_url] }
-      ]
-      head_meta << { meta_property: 'og:title', content: @gallery.title } unless @gallery.title.nil?
-      head_meta << { meta_property: 'og:sitename', content: @gallery.title } unless @gallery.title.nil?
-      head_meta
+      mustache[:head_meta] ||= begin
+        description = @gallery.description.strip
+        head_meta = gallery_head_meta + [
+          { meta_name: 'description', content: description },
+          { meta_property: 'og:description', content: description },
+          { meta_property: 'og:image', content: gallery_items_content.first[:full_url] }
+        ]
+        head_meta << { meta_property: 'og:title', content: @gallery.title } unless @gallery.title.nil?
+        head_meta << { meta_property: 'og:sitename', content: @gallery.title } unless @gallery.title.nil?
+        head_meta + super
+      end
     end
 
     def gallery_social
