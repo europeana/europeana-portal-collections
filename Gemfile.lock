@@ -23,17 +23,6 @@ GIT
       rails (>= 4.2.2, < 5)
 
 GIT
-  remote: git://github.com/europeana/europeana-logging-ruby.git
-  revision: bec1be660cfcfcf5662b79075ea827fe766cdd63
-  branch: develop
-  specs:
-    europeana-logging (0.2.2)
-      lograge (~> 0.4)
-      logstash-event (~> 1.2)
-      logstash-logger (~> 0.19)
-      rails (> 4.2, < 6)
-
-GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
   revision: de07d2af8afd3c8af82e7b25728dd2c05fdd01bb
   ref: de07d2a
@@ -183,6 +172,11 @@ GEM
       ffi (>= 1.3.0)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
+    europeana-logging (0.2.3)
+      lograge (~> 0.4)
+      logstash-event (~> 1.2)
+      logstash-logger (~> 0.19)
+      rails (> 4.2, < 6)
     excon (0.55.0)
     execjs (2.7.0)
     faraday (0.11.0)
@@ -628,7 +622,7 @@ DEPENDENCIES
   europeana-api!
   europeana-blacklight (~> 0.5.0)!
   europeana-feedback-button (= 0.0.4)
-  europeana-logging (~> 0.2.2)!
+  europeana-logging (~> 0.2.3)
   europeana-styleguide!
   feedjira (~> 2.0)
   fog (~> 1.33)
@@ -676,4 +670,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
