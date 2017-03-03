@@ -18,8 +18,8 @@ module Galleries
     def head_meta
       mustache[:head_meta] ||= begin
         gallery_head_meta + [
-          { meta_name: 'description', content: page_title },
-          { meta_property: 'og:description', content: page_title },
+          { meta_name: 'description', content: t('site.galleries.description') },
+          { meta_property: 'og:description', content: t('site.galleries.description') },
           { meta_property: 'og:image', content: @hero_image.file.present? ? URI.join(root_url, @hero_image.file.url) : nil },
           { meta_property: 'og:title', content: page_title },
           { meta_property: 'og:sitename', content: page_title }

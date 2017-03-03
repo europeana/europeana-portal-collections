@@ -21,10 +21,10 @@ module Galleries
         head_meta = gallery_head_meta + [
           { meta_name: 'description', content: description },
           { meta_property: 'og:description', content: description },
-          { meta_property: 'og:image', content: gallery_items_content.first[:full_url] }
+          { meta_property: 'og:image', content: gallery_items_content.first[:full_url] },
+          { meta_property: 'og:title', content: @gallery.title },
+          { meta_property: 'og:sitename', content: @gallery.title }
         ]
-        head_meta << { meta_property: 'og:title', content: @gallery.title } unless @gallery.title.nil?
-        head_meta << { meta_property: 'og:sitename', content: @gallery.title } unless @gallery.title.nil?
         head_meta + super
       end
     end
