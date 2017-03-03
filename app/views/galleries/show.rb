@@ -18,7 +18,6 @@ module Galleries
     def head_meta
       description = @gallery.description
       description = description.strip! || description
-
       head_meta = gallery_head_meta + [
         { meta_name: 'description', content: description },
         { meta_property: 'og:description', content: description },
