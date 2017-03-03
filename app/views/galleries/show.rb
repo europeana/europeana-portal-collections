@@ -15,6 +15,20 @@ module Galleries
       [{ name: 'pageName', value: 'collections/galleries' }]
     end
 
+    def head_meta
+      mustache[:head_meta] ||= begin
+        description = @gallery.description.strip
+        head_meta = gallery_head_meta + [
+          { meta_name: 'description', content: description },
+          { meta_property: 'og:description', content: description },
+          { meta_property: 'og:image', content: gallery_items_content.first[:full_url] },
+          { meta_property: 'og:title', content: @gallery.title },
+          { meta_property: 'og:sitename', content: @gallery.title }
+        ]
+        head_meta + super
+      end
+    end
+
     def gallery_social
       gallery_social_links.merge(social_title: t('site.galleries.share.one'))
     end

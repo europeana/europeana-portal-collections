@@ -25,6 +25,17 @@ module GalleryDisplayingView
     @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
   end
 
+  def gallery_head_meta
+    mustache[:gallery_head_meta] ||= begin
+      [
+        { meta_property: 'fb:appid', content: '185778248173748' },
+        { meta_name: 'twitter:card', content: 'summary' },
+        { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+        { meta_property: 'og:url', content: request.original_url }
+      ]
+    end
+  end
+
   def gallery_social_links
     {
       style_blue: true,
