@@ -23,8 +23,8 @@ module Galleries
         { meta_property: 'og:description', content: description },
         { meta_property: 'og:image', content: gallery_items_content.first[:full_url] }
       ]
-      head_meta << { meta_property: 'og:title', content: @gallery.title } unless  @gallery.title.nil?
-      head_meta << { meta_property: 'og:sitename', content: @gallery.title } unless  @gallery.title.nil?
+      head_meta << { meta_property: 'og:title', content: @gallery.title } unless @gallery.title.nil?
+      head_meta << { meta_property: 'og:sitename', content: @gallery.title } unless @gallery.title.nil?
       head_meta
     end
 
