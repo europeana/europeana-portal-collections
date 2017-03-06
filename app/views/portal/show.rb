@@ -249,7 +249,7 @@ module Portal
         more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
       }
     end
-   
+
     def oembed_links
       oembed_html.map do |_url, oembed|
         { rel: 'alternate', type: 'application/json+oembed', href: oembed[:link] }
