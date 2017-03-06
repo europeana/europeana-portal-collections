@@ -3,14 +3,14 @@ RSpec.describe BlogPostsController do
   before do
     stub_request(:get, %r{\Ahttp://pro\.europeana\.eu/json/blogposts(\?|\z)}).
       with(headers: {
-        'Accept' => 'application/vnd.api+json',
-        'Content-Type' => 'application/vnd.api+json'
-      }).
-    to_return(
-      status: 200,
-      body: '{"meta": {"count": 0, "total": 0}, "data":[]}',
-      headers: { 'Content-Type' => 'application/vnd.api+json' }
-    )
+             'Accept' => 'application/vnd.api+json',
+             'Content-Type' => 'application/vnd.api+json'
+           }).
+      to_return(
+        status: 200,
+        body: '{"meta": {"count": 0, "total": 0}, "data":[]}',
+        headers: { 'Content-Type' => 'application/vnd.api+json' }
+      )
   end
 
   describe 'GET #index' do
@@ -29,6 +29,8 @@ RSpec.describe BlogPostsController do
         with(query: hash_including(page: { number: '3', size: '6' }))
       ).to have_been_made.once
     end
+
+    it 'includes related resources'
 
     it 'returns http success' do
       get :index, locale: 'en'

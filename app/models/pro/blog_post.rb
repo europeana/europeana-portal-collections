@@ -3,6 +3,5 @@ module Pro
   ##
   # Blog posts from Pro JSON-API.
   class BlogPost < Base
-
   end
 end
