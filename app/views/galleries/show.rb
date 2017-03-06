@@ -18,6 +18,7 @@ module Galleries
     def head_meta
       mustache[:head_meta] ||= begin
         description = @gallery.description
+        @gallery.description.blank? ? t('site.galleries.description-default') : @gallery.description
         head_meta = gallery_head_meta + [
           { meta_name: 'description', content: description },
           { meta_property: 'og:description', content: description },
