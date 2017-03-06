@@ -17,7 +17,7 @@ module Galleries
 
     def head_meta
       mustache[:head_meta] ||= begin
-        description = @gallery.description.strip
+        description = @gallery.description
         head_meta = gallery_head_meta + [
           { meta_name: 'description', content: description },
           { meta_property: 'og:description', content: description },
