@@ -8,6 +8,7 @@ sketchfab = OEmbed::Provider.new('https://sketchfab.com/oembed')
 sketchfab << 'https://sketchfab.com/models/*'
 dismarc = OEmbed::Provider.new('http://www.dismarc.org/player/oembed')
 dismarc << 'http://eusounds.ait.co.at/player/*'
+dismarc << 'http://www.dismarc.org/player/*'
 britishlibrary = OEmbed::Provider.new('http://sounds.bl.uk/api/oembed')
 britishlibrary << 'http://sounds.bl.uk/embed/*'
 

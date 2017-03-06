@@ -5,21 +5,15 @@ require 'clockwork'
 include Clockwork
 
 unless ENV['DISABLE_SCHEDULED_JOBS']
-  every(1.day, 'cache.feed.blogs', at: ENV['SCHEDULE_FEED_BLOGS']) do
-    Cache::FeedJob::URLS[:blog].values.each do |url|
-      Cache::Feed::BlogJob.perform_later(url)
-    end
-  end
-
   every(1.day, 'cache.feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
     Cache::FeedJob::URLS[:exhibitions].values.each do |url|
       Cache::FeedJob.perform_later(url)
     end
   end
 
-  every(1.day, 'cache.feed.tumblr', at: ENV['SCHEDULE_FEED_TUMBLR']) do
-    Cache::FeedJob::URLS[:tumblr].values.each do |url|
-      Cache::Feed::BlogJob.perform_later(url)
+  every(1.day, 'cache.feed.custom', at: ENV['SCHEDULE_FEED_CUSTOM']) do
+    Feed.all.each do |feed|
+      Cache::Feed::FeedJob.perform_later(feed.url, true)
     end
   end
 

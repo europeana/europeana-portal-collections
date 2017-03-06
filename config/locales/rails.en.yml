@@ -3,7 +3,6 @@ en:
     attributes:
       collection:
         api_params: API parameters
-        newsletter_url: Newsletter URL
         settings_default_search_layout: Default search layout
       data_provider:
         uri: URI
@@ -29,6 +28,9 @@ en:
       page:
         settings_full_width: Full width?
         settings_layout_type: Layout
+      page/landing:
+        newsletter_url: Newsletter URL
+        feeds: What's happening Feeds
       topic:
         entity_uri: Entity Collection URI
     models:
@@ -36,5 +38,7 @@ en:
         one: Error Page
         other: Error Pages
       page/landing:
+        newsletter_url: Newsletter URL
         one: Landing Page
         other: Landing Pages
+        feeds: What's happening Feeds

@@ -10,7 +10,7 @@ module SearchableView
       # Auto-complete is not production ready. Only enable it on dev/test envs.
       if ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE']
         fs[:autocomplete] = {
-          url: entities_suggest_url + '?text=',
+          url: entities_suggest_url(format: 'json', text: ''),
           translations: {
             agents: t('global.navigation.agents', default: 'People'),
             concepts: t('global.navigation.concepts', default: 'Topics'),

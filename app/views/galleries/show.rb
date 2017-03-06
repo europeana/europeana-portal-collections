@@ -15,13 +15,17 @@ module Galleries
       [{ name: 'pageName', value: 'collections/galleries' }]
     end
 
+    def gallery_social
+      gallery_social_links.merge(social_title: t('site.galleries.share.one'))
+    end
+
     def content
       mustache[:content] ||= begin
         {
           galleries_link: galleries_path,
           items: gallery_items_content,
           hero: gallery_hero_content,
-          social: galleries_social
+          social: gallery_social
         }
       end
     end
@@ -40,6 +44,13 @@ module Galleries
       mustache[:gallery_items_content] ||= @gallery.images.map { |image| gallery_item_content(image) }
     end
 
+    def data_provider_logo_url(presenter)
+      data_provider_name = presenter.field_value('dataProvider')
+      provider = DataProvider.find_by_name(data_provider_name)
+      return nil unless provider.present? && provider.image.present?
+      provider.image.url(:medium)
+    end
+
     def gallery_item_content(image)
       presenter = presenter_for_gallery_image(image)
       return nil if presenter.nil?
@@ -47,7 +58,11 @@ module Galleries
         title: presenter.title,
         creator: presenter.field_value('dataProvider'),
         thumb_url: gallery_image_thumbnail(image),
-        full_url: presenter.field_value('aggregations.edmIsShownBy')
+        full_url: presenter.field_value('aggregations.edmIsShownBy'),
+        rights: presenter.simple_rights_label_data,
+        url_item: image.portal_url,
+        url_collection: search_path(q: "europeana_collectionName:#{presenter.field_value('europeanaCollectionName')}"),
+        institution_logo: data_provider_logo_url(presenter)
       }
     end
   end

@@ -39,9 +39,8 @@ module Collections
       'channel_landing'
     end
 
-    # TODO: configure this in the CMS
-    def logo_class
-      'fashion-logo'
+    def collection_title
+      @collection.title
     end
 
     def globalnav_options
@@ -87,10 +86,7 @@ module Collections
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
           },
-          news: blog_news_items(@collection).blank? ? nil : {
-            items: blog_news_items(@collection),
-            blogurl: 'http://blog.europeana.eu/tag/' + @collection.key
-          },
+          news: blog_news(@landing_page),
           newsletter: newsletter_content,
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
@@ -106,10 +102,10 @@ module Collections
     private
 
     def newsletter_content
-      return nil unless @collection.newsletter_url.present?
+      return nil unless @landing_page.newsletter_url.present?
       {
         form: {
-          action: @collection.newsletter_url,
+          action: @landing_page.newsletter_url,
           language_op: false,
           placeholder: t('global.email-address')
         },
@@ -123,9 +119,9 @@ module Collections
     def carousel_data
       case @landing_page.settings[:layout_type]
         when 'default'
-          helpers.collection_tumblr_feed_content(@collection)
+          helpers.tumblr_feed_content(@landing_page)
         when 'browse'
-          helpers.collection_feeds_content(@collection)
+          helpers.page_feeds_content(@landing_page)
       end
     end
 

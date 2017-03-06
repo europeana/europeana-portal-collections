@@ -19,7 +19,7 @@ RailsAdmin.config do |config|
 
   config.included_models = %w(
     Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
-    Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
+    Feed Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
     MediaObject Page Page::Error Page::Landing Topic User
   )
 
@@ -122,14 +122,12 @@ RailsAdmin.config do |config|
       field :state
       field :api_params
       field :settings_default_search_layout, :enum
-      field :newsletter_url
     end
     edit do
       field :key
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
-      field :newsletter_url
     end
   end
 
@@ -178,6 +176,23 @@ RailsAdmin.config do |config|
       field :facet_field, :enum
       field :facet_values_count, :integer
       field :thumbnails, :boolean
+    end
+  end
+
+  config.model 'Feed' do
+    list do
+      field :name
+      field :slug
+      field :url
+    end
+    show do
+      field :name
+      field :slug
+      field :url
+    end
+    edit do
+      field :name
+      field :url
     end
   end
 
@@ -414,6 +429,8 @@ RailsAdmin.config do |config|
       field :browse_entries
       field :facet_link_groups
       field :banner
+      field :newsletter_url
+      field :feeds
     end
     edit do
       field :slug
@@ -439,6 +456,8 @@ RailsAdmin.config do |config|
         end
       end
       field :banner
+      field :newsletter_url
+      field :feeds
     end
   end
 

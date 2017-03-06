@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213115802) do
+ActiveRecord::Schema.define(version: 20170221135646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,14 +113,6 @@ ActiveRecord::Schema.define(version: 20170213115802) do
     t.string   "newsletter_url"
   end
 
-  create_table "collections_galleries", force: :cascade do |t|
-    t.integer "collection_id"
-    t.integer "gallery_id"
-  end
-
-  add_index "collections_galleries", ["collection_id"], name: "index_collections_galleries_on_collection_id", using: :btree
-  add_index "collections_galleries", ["gallery_id"], name: "index_collections_galleries_on_gallery_id", using: :btree
-
   create_table "data_provider_logos", force: :cascade do |t|
     t.integer  "data_provider_id"
     t.datetime "created_at",         null: false
@@ -168,10 +160,28 @@ ActiveRecord::Schema.define(version: 20170213115802) do
     t.datetime "updated_at"
   end
 
+  create_table "feeds", force: :cascade do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "feeds", ["slug"], name: "index_feeds_on_slug", using: :btree
+
+  create_table "feeds_pages", id: false, force: :cascade do |t|
+    t.integer "feed_id", null: false
+    t.integer "page_id", null: false
+  end
+
+  add_index "feeds_pages", ["feed_id", "page_id"], name: "index_feeds_pages_on_feed_id_and_page_id", using: :btree
+  add_index "feeds_pages", ["page_id", "feed_id"], name: "index_feeds_pages_on_page_id_and_feed_id", using: :btree
+
   create_table "galleries", force: :cascade do |t|
-    t.integer  "state",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "state",        default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.text     "slug"
     t.datetime "published_at"
     t.integer  "published_by"
@@ -278,15 +288,16 @@ ActiveRecord::Schema.define(version: 20170213115802) do
 
   create_table "pages", force: :cascade do |t|
     t.integer  "hero_image_id"
-    t.string   "slug",          limit: 255
-    t.integer  "state",                     default: 0
-    t.string   "type",          limit: 255
+    t.string   "slug",           limit: 255
+    t.integer  "state",                      default: 0
+    t.string   "type",           limit: 255
     t.integer  "http_code"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "banner_id"
     t.text     "settings"
     t.string   "strapline"
+    t.string   "newsletter_url"
   end
 
   add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree

@@ -12,6 +12,10 @@ class GalleriesController < ApplicationController
 
     @body_cache_key = foyer_body_cache_key(topic: @selected_topic, per: @galleries.limit_value, page: @galleries.current_page)
     @documents = search_api_for_image_metadata(images) unless body_cached?
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
@@ -21,6 +25,10 @@ class GalleriesController < ApplicationController
 
     @body_cache_key = 'explore/' + @gallery.cache_key
     @documents = search_api_for_image_metadata(images) unless body_cached?
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   protected

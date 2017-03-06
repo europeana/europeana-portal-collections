@@ -96,4 +96,32 @@ RSpec.describe Link::SocialMedia do
       it { is_expected.to be false }
     end
   end
+
+  describe '#europeana_blog?' do
+    context 'when URL is for blog.europeana.eu' do
+      subject { described_class.new(url: 'https://blog.europeana.eu/something').europeana_blog? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal').europeana_blog? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#url_in_domain?' do
+    context 'when URL is "http://www.europeana.eu/"' do
+      let(:url) { 'http://www.europeana.eu/' }
+
+      context 'domain is europeana.eu' do
+        subject { described_class.new(url: url).url_in_domain?('europeana.eu') }
+        it { is_expected.to be true }
+      end
+
+      context 'domain is europeana.com' do
+        subject { described_class.new(url: url).url_in_domain?('europeana.com') }
+        it { is_expected.to be false }
+      end
+    end
+  end
 end
