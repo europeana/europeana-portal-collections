@@ -72,6 +72,7 @@ module Galleries
       {
         title: presenter.title,
         creator: presenter.field_value('dataProvider'),
+        creation_date: presenter.field_value('year'),
         thumb_url: gallery_image_thumbnail(image),
         full_url: presenter.field_value('aggregations.edmIsShownBy'),
         rights: presenter.simple_rights_label_data,
