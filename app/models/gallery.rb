@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class Gallery < ActiveRecord::Base
-  NUMBER_OF_IMAGES = 6..24
+  NUMBER_OF_IMAGES = 6..48
 
   include HasPublicationStates
   include IsCategorisable

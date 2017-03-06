@@ -183,11 +183,11 @@ RSpec.describe Gallery do
     expect(gallery.errors[:image_portal_urls]).not_to be_none
   end
 
-  it 'should require 6-24 images' do
+  it 'should require 6-48 images' do
     gallery = galleries(:empty)
-    (1..30).each do |number|
+    (1..50).each do |number|
       gallery.image_portal_urls = gallery_image_portal_urls(number: number)
-      if number < 6 || number > 24
+      if number < 6 || number > 48
         expect(gallery).not_to be_valid
         expect(gallery.errors[:image_portal_urls]).not_to be_none
       else
