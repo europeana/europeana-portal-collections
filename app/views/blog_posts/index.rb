@@ -11,9 +11,20 @@ module BlogPosts
       mustache[:content] ||= begin
         {
           title: 'Blog posts', # @todo Localeapp
-          text: '<ol>' + @blog_posts.map { |bp| '<li>' + bp.title + '</li>' }.join + '</ol>',
+          text: '<ol>' + @blog_posts.map { |bp| "<li>#{bp.title}#{blog_post_authors(bp)}</li>" }.join + '</ol>',
         }.reverse_merge(super)
       end
+    end
+
+    protected
+
+    def blog_post_authors(blog_post)
+      return nil unless blog_post.respond_to?(:network) && blog_post.network.present?
+
+      author_names = blog_post.network.compact.map do |network|
+        "#{network.first_name} #{network.last_name}"
+      end.join(', ')
+      " (#{author_names})"
     end
   end
 end

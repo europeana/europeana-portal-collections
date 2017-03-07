@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class BlogPostsController < ApplicationController
   def index
-    @blog_posts = Pro::BlogPost.page(blog_posts_page).per(6).all
+    @blog_posts = Pro::BlogPost.includes(:network).page(blog_posts_page).per(6).all
   end
 
   protected

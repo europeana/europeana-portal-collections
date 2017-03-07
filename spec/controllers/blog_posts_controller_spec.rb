@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 RSpec.describe BlogPostsController do
+  JSON_API_URL = %r{\Ahttp://pro\.europeana\.eu/json/blogposts(\?|\z)}
+  JSON_API_CONTENT_TYPE = 'application/vnd.api+json'
+
   before do
-    stub_request(:get, %r{\Ahttp://pro\.europeana\.eu/json/blogposts(\?|\z)}).
+    stub_request(:get, JSON_API_URL).
       with(headers: {
-             'Accept' => 'application/vnd.api+json',
-             'Content-Type' => 'application/vnd.api+json'
+             'Accept' => JSON_API_CONTENT_TYPE,
+             'Content-Type' => JSON_API_CONTENT_TYPE
            }).
       to_return(
         status: 200,
         body: '{"meta": {"count": 0, "total": 0}, "data":[]}',
-        headers: { 'Content-Type' => 'application/vnd.api+json' }
+        headers: { 'Content-Type' => JSON_API_CONTENT_TYPE }
       )
   end
 
@@ -17,7 +20,14 @@ RSpec.describe BlogPostsController do
     it 'queries the Pro JSON-API for 6 posts' do
       get :index, locale: 'en'
       expect(
-        a_request(:get, 'http://pro.europeana.eu/json/blogposts').
+        a_request(:get, JSON_API_URL)
+      ).to have_been_made.once
+    end
+
+    it 'requests 6 blog posts' do
+      get :index, locale: 'en'
+      expect(
+        a_request(:get, JSON_API_URL).
         with(query: hash_including(page: { number: '1', size: '6' }))
       ).to have_been_made.once
     end
@@ -25,12 +35,18 @@ RSpec.describe BlogPostsController do
     it 'requests the page in `page` param' do
       get :index, locale: 'en', page: 3
       expect(
-        a_request(:get, 'http://pro.europeana.eu/json/blogposts').
+        a_request(:get, JSON_API_URL).
         with(query: hash_including(page: { number: '3', size: '6' }))
       ).to have_been_made.once
     end
 
-    it 'includes related resources'
+    it 'includes related resources' do
+      get :index, locale: 'en'
+      expect(
+        a_request(:get, JSON_API_URL).
+        with(query: hash_including(include: 'network'))
+      ).to have_been_made.once
+    end
 
     it 'returns http success' do
       get :index, locale: 'en'
