@@ -79,7 +79,12 @@ RSpec.describe PortalController do
         get :show, params
       end
       it_behaves_like 'a record API request'
-      it_behaves_like 'no more like this API request'
+      it_behaves_like 'a more like this API request'
+
+      context 'with similar=later param' do
+        let(:params) { { locale: 'en', id: 'abc/123', similar: 'later' } }
+        it_behaves_like 'no more like this API request'
+      end
     end
 
     context 'with dcterms:isPartOf' do
