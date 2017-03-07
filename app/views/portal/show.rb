@@ -242,12 +242,14 @@ module Portal
     end
 
     def similar_items
-      return false unless @hierarchy.blank?
-      {
-        title: t('site.object.similar-items'),
-        more_items_load: document_similar_url(document, format: 'json'),
-        more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
-      }
+      mustache[:similar_items] ||= begin
+        return false unless @hierarchy.blank?
+        {
+          title: t('site.object.similar-items'),
+          more_items_load: document_similar_url(document, format: 'json'),
+          more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
+        }
+      end
     end
 
     def oembed_links
