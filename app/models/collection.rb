@@ -4,7 +4,7 @@ class Collection < ActiveRecord::Base
   include HasSettingsAttribute
 
   has_and_belongs_to_many :browse_entries
-  has_one :page_landing, class_name:'Page::Landing', dependent: :destroy
+  has_one :page_landing, class_name: 'Page::Landing', dependent: :destroy
 
   has_paper_trail
 
