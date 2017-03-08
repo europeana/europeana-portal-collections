@@ -11,12 +11,12 @@ module Europeana
 
       annotations_from_search_response(search_response).
         map { |annotation| annotation_text_to_display(annotation) }.compact
-    rescue Europeana::API::Errors::ServerError => server_error
+    rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
       # @todo we may not want controller actions to fail if annotations are
       #   unavailable, but we should return something indicating that there
       #   was a failure and perhaps indicate it to the user, e.g. as
       #   "Annotations could not be retrieved".
-      logger.error(server_error.message)
+      logger.error(error.message)
       nil
     end
 
