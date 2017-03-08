@@ -2,54 +2,54 @@
 # Free re-use / REUSABILITY="open"
 open:
   cc0:
-    pattern: "https?://creativecommons.org/(licenses/)?publicdomain/zero"
+    pattern: "http://creativecommons.org/(licenses/)?publicdomain/zero"
     api_query: "http://creativecommons.org/*publicdomain/zero*"
   cc_by:
-    pattern: "https?://creativecommons.org/licenses/by/"
+    pattern: "http://creativecommons.org/licenses/by/"
   cc_by_sa:
-    pattern: "https?://creativecommons.org/licenses/by-sa"
+    pattern: "http://creativecommons.org/licenses/by-sa"
   pdm:
-    pattern: "https?://creativecommons.org/publicdomain/mark"
+    pattern: "http://creativecommons.org/publicdomain/mark"
     template_license: public
 # Limited re-use / REUSABILITY="restricted"
 restricted:
   cc_by_nc:
-    pattern: "https?://creativecommons.org/licenses/by-nc/"
+    pattern: "http://creativecommons.org/licenses/by-nc/"
   cc_by_nc_nd:
-    pattern: "https?://creativecommons.org/licenses/by-nc-nd"
+    pattern: "http://creativecommons.org/licenses/by-nc-nd"
   cc_by_nc_sa:
-    pattern: "https?://creativecommons.org/licenses/by-nc-sa"
+    pattern: "http://creativecommons.org/licenses/by-nc-sa"
   cc_by_nd:
-    pattern: "https?://creativecommons.org/licenses/by-nd"
+    pattern: "http://creativecommons.org/licenses/by-nd"
   out_of_copyright_non_commercial:
-    pattern: "https?://www.europeana.eu/rights/out-of-copyright-non-commercial"
+    pattern: "http://www.europeana.eu/rights/out-of-copyright-non-commercial"
     template_license: OOC
   rs_inc_edu:
-    pattern: "https?://rightsstatements.org/vocab/InC-EDU/*"
+    pattern: "http://rightsstatements.org/vocab/InC-EDU/*"
   rs_noc_nc:
-    pattern: "https?://rightsstatements.org/vocab/NoC-NC/*"
+    pattern: "http://rightsstatements.org/vocab/NoC-NC/*"
   rs_noc_oklr:
-    pattern: "https?://rightsstatements.org/vocab/NoC-OKLR/*"
+    pattern: "http://rightsstatements.org/vocab/NoC-OKLR/*"
 # No re-use / REUSABILITY="permission"
 permission:
   rrfa:
-    pattern: "https?://www.europeana.eu/rights/rr-f"
+    pattern: "http://www.europeana.eu/rights/rr-f"
     template_license: RR_free
   rrpa:
-    pattern: "https?://www.europeana.eu/rights/rr-p"
+    pattern: "http://www.europeana.eu/rights/rr-p"
     template_license: RR_paid
   rrra:
-    pattern: "https?://www.europeana.eu/rights/rr-r/"
+    pattern: "http://www.europeana.eu/rights/rr-r/"
     template_license: RR_restricted
   ucs:
-    pattern: "https?://www.europeana.eu/rights/unknown"
+    pattern: "http://www.europeana.eu/rights/unknown"
     template_license: unknown
   orphan_work:
-    pattern: "https?://www.europeana.eu/rights/test-orphan"
+    pattern: "http://www.europeana.eu/rights/test-orphan"
     template_license: orphan
   rs_inc:
-    pattern: "https?://rightsstatements.org/vocab/InC/*"
+    pattern: "http://rightsstatements.org/vocab/InC/*"
   rs_inc_ow_eu:
-    pattern: "https?://rightsstatements.org/vocab/InC-OW-EU/*"
+    pattern: "http://rightsstatements.org/vocab/InC-OW-EU/*"
   rs_cne:
-    pattern: "https?://rightsstatements.org/vocab/CNE/*"
+    pattern: "http://rightsstatements.org/vocab/CNE/*"
