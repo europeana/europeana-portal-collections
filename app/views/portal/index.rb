@@ -4,6 +4,7 @@ module Portal
   class Index < ApplicationView
     include SearchableView
     include HeroImageDisplayingView
+    include PaginatedView
 
     def js_vars
       [{ name: 'pageName', value: 'portal/index' }]
@@ -99,9 +100,7 @@ module Portal
     end
 
     def results_range
-      result_number_from = ((@response.current_page - 1) * @response.limit_value) + 1
-      result_number_to   = [result_number_from + @response.limit_value - 1, response.total].min
-      result_number_from.to_s + ' - ' + result_number_to.to_s
+      paginated_set_range(@response.current_page, @response.limit_value, response.total)
     end
 
     def has_results
