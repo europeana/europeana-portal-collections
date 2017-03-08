@@ -25,8 +25,6 @@ RSpec.describe Page::Landing do
   end
 
   describe 'creation' do
-    subject { described_class.new }
-
     context 'when it is the all collection' do
       it 'should set the slug' do
         subject.collection = collections(:all)

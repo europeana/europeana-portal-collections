@@ -22,7 +22,7 @@ class Page::Landing < Page
 
   delegate :settings_layout_type_enum, to: :class
 
-  before_create :set_slug
+  before_create :set_slug if :collection
 
   class << self
     def settings_layout_type_enum
@@ -37,9 +37,7 @@ class Page::Landing < Page
   private
 
   def set_slug
-    if collection
-      new_slug = collection.key == 'all' ? '' : "collections/#{collection.key}"
-      self.slug = new_slug
-    end
+    new_slug = collection.key == 'all' ? '' : "collections/#{collection.key}"
+    self.slug = new_slug
   end
 end

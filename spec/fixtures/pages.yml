@@ -52,6 +52,7 @@ grid_layout_collection:
   type: 'Page::Landing'
 
 draft_landing_page:
+  collection: draft
   state: 0
   type: 'Page::Landing'
 

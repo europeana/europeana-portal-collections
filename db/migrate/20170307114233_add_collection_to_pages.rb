@@ -10,8 +10,10 @@ class AddCollectionToPages < ActiveRecord::Migration
           key = landing_page.slug.split('/').last
           key = key.blank? ? 'all' : key
           collection = Collection.find_by_key(key)
-          landing_page.collection = collection
-          landing_page.save
+          if collection
+            landing_page.collection = collection
+            landing_page.save
+          end
         end
       end
     end

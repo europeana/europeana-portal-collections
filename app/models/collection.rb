@@ -4,7 +4,7 @@ class Collection < ActiveRecord::Base
   include HasSettingsAttribute
 
   has_and_belongs_to_many :browse_entries
-  has_one :page_landing, class_name: 'Page::Landing', dependent: :destroy
+  has_one :landing_page, class_name: 'Page::Landing', dependent: :destroy
 
   has_paper_trail
 
@@ -43,10 +43,6 @@ class Collection < ActiveRecord::Base
 
   def has_landing_page?
     landing_page.present?
-  end
-
-  def landing_page
-    @landing_page ||= page_landing
   end
 
   def landing_page_title
