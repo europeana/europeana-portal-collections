@@ -40,23 +40,23 @@ module GalleryDisplayingView
     {
       style_blue: true,
       facebook: {
-        url: 'https://www.facebook.com/Europeana',
+        url: request.original_url,
         text: 'Facebook'
       },
       twitter: {
-        url: 'https://twitter.com/Europeanaeu',
+        url: root_url(:only_path => false),
         text: 'Twitter'
       },
       pinterest: {
-        url: 'https://uk.pinterest.com/europeana/',
+        url: root_url(:only_path => false),
         text: 'Pinterest'
       },
       googleplus: {
-        url: 'https://plus.google.com/+europeana/posts',
+        url: root_url(:only_path => false),
         text: 'Google Plus'
       },
       tumblr: {
-        url: 'http://europeanacollections.tumblr.com/',
+        url: root_url(:only_path => false),
         text: 'Tumblr'
       }
     }
