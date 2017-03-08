@@ -124,7 +124,11 @@ RailsAdmin.config do |config|
       field :settings_default_search_layout, :enum
     end
     edit do
-      field :key
+      field :key do
+        visible do
+          true unless bindings[:object].persisted?
+        end
+      end
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
@@ -408,12 +412,14 @@ RailsAdmin.config do |config|
   config.model 'Page::Landing' do
     object_label_method :title
     list do
+      field :collection
       field :slug
       field :title
       field :hero_image_file, :paperclip
       field :state
     end
     show do
+      field :collection
       field :slug
       field :title do
         searchable 'page_translations.title'
@@ -433,7 +439,14 @@ RailsAdmin.config do |config|
       field :feeds
     end
     edit do
-      field :slug
+      field :collection do
+        visible do
+          true unless bindings[:object].persisted?
+        end
+        associated_collection_scope do
+          proc { |_scope| Collection.published.includes(:page_landing).where(pages: { collection_id: nil }) }
+        end
+      end
       field :title
       field :settings_layout_type, :enum
       field :body, :text do

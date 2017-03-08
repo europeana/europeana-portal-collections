@@ -29,7 +29,7 @@ RSpec.describe Cache::RecordCountsJob do
     it_behaves_like 'record count caching job'
 
     it 'should touch the landing page' do
-      expect { subject.perform(*args) }.to change { collection.landing_page.reload.updated_at }
+      expect { subject.perform(*args) }.to change { collection.page_landing.reload.updated_at }
     end
   end
 

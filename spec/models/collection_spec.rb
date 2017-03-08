@@ -1,5 +1,6 @@
 RSpec.describe Collection do
   it { is_expected.to have_and_belong_to_many(:browse_entries) }
+  it { is_expected.to have_one(:page_landing).dependent(:destroy) }
   it { is_expected.to validate_presence_of(:key) }
   it { is_expected.to validate_uniqueness_of(:key) }
   it { is_expected.to validate_presence_of(:api_params) }
@@ -23,5 +24,35 @@ RSpec.describe Collection do
   describe '.settings_default_search_layout_enum' do
     subject { described_class.settings_default_search_layout_enum }
     it { is_expected.to eq(%w(list grid)) }
+  end
+
+  describe '#landing_page' do
+    context 'when it is the all collection' do
+      let(:collection) { collections(:all) }
+      it 'should return the corresponding page_landing' do
+        expect(collection.landing_page).to eq collection.page_landing
+      end
+    end
+
+    context 'when it is a thematic collection' do
+      let(:collection) { collections(:music) }
+      it 'should return the corresponding page_landing' do
+        expect(collection.landing_page).to eq collection.page_landing
+      end
+    end
+  end
+
+  describe '#has_landing_page?' do
+    context 'when there is NO landing page' do
+      let(:collection) { collections(:draft) }
+      subject { collection.has_landing_page? }
+      it { is_expected.to eq(false)}
+    end
+
+    context 'when there is a landing page' do
+      let(:collection) { collections(:music) }
+      subject { collection.has_landing_page? }
+      it { is_expected.to eq(true)}
+    end
   end
 end
