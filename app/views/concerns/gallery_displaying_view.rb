@@ -39,24 +39,20 @@ module GalleryDisplayingView
   def gallery_social_links
     {
       style_blue: true,
+      url: request.original_url,
       facebook: {
-        url: request.original_url,
         text: 'Facebook'
       },
       twitter: {
-        url: request.original_url,
         text: 'Twitter'
       },
       pinterest: {
-        url: request.original_url,
         text: 'Pinterest'
       },
       googleplus: {
-        url: request.original_url,
         text: 'Google Plus'
       },
       tumblr: {
-        url: request.original_url,
         text: 'Tumblr'
       }
     }
