@@ -44,19 +44,19 @@ module GalleryDisplayingView
         text: 'Facebook'
       },
       twitter: {
-        url: root_url(:only_path => false),
+        url: request.original_url,
         text: 'Twitter'
       },
       pinterest: {
-        url: root_url(:only_path => false),
+        url: request.original_url,
         text: 'Pinterest'
       },
       googleplus: {
-        url: root_url(:only_path => false),
+        url: request.original_url,
         text: 'Google Plus'
       },
       tumblr: {
-        url: root_url(:only_path => false),
+        url: request.original_url,
         text: 'Tumblr'
       }
     }
