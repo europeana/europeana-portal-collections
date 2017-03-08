@@ -45,7 +45,7 @@ RSpec.describe Page::Landing do
   end
 
   describe '#set_slug' do
-    let(:page) { pages(:music_collection)}
+    let(:page) { pages(:music_collection) }
     context 'when the slug is empty' do
       before do
         page.slug = nil

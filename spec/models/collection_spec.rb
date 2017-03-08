@@ -46,13 +46,13 @@ RSpec.describe Collection do
     context 'when there is NO landing page' do
       let(:collection) { collections(:draft) }
       subject { collection.has_landing_page? }
-      it { is_expected.to eq(false)}
+      it { is_expected.to eq(false) }
     end
 
     context 'when there is a landing page' do
       let(:collection) { collections(:music) }
       subject { collection.has_landing_page? }
-      it { is_expected.to eq(true)}
+      it { is_expected.to eq(true) }
     end
   end
 end
