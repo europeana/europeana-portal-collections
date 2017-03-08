@@ -11,13 +11,14 @@ RSpec.describe EDM::Rights do
         expect(subject.id).to eq(:cc_by_sa)
       end
 
-      context 'with https schema' do
-        let(:rights) { 'https://creativecommons.org/licenses/by-sa/3.0/de/' }
-        it 'should be detected' do
-          expect(subject).to be_a(described_class)
-          expect(subject.id).to eq(:cc_by_sa)
-        end
-      end
+      # Removed https support temporarily
+      # context 'with https schema' do
+      #  let(:rights) { 'https://creativecommons.org/licenses/by-sa/3.0/de/' }
+      #  it 'should be detected' do
+      #    expect(subject).to be_a(described_class)
+      #    expect(subject.id).to eq(:cc_by_sa)
+      #  end
+      # end
     end
 
     context 'when rights are not recognised' do
