@@ -93,34 +93,6 @@ module Portal
       end
     end
 
-    def results_count
-      mustache[:results_count] ||= begin
-        number_with_delimiter(response.total)
-      end
-    end
-
-    def results_range
-      paginated_set_range(@response.current_page, @response.limit_value, response.total)
-    end
-
-    def has_results
-      mustache[:has_results] ||= begin
-        response.total > 0
-      end
-    end
-
-    def has_single_result
-      mustache[:has_single_result] ||= begin
-        response.total == 1
-      end
-    end
-
-    def has_multiple_results
-      mustache[:has_multiple_results] ||= begin
-        response.total > 1
-      end
-    end
-
     def results_menu
       {
         menu_id: 'results_menu',
@@ -134,7 +106,7 @@ module Portal
                   search_path(params_for_search)
                 end
           {
-            is_current: @response.limit_value == pp,
+            is_current: pagination_per_page == pp,
             url: url,
             text: pp
           }
@@ -169,22 +141,8 @@ module Portal
 
     def navigation
       mustache[:navigation] ||= begin
-        pages = pages_of_search_results
         {
-          pagination: {
-            prev_url: previous_page_url,
-            next_url: next_page_url,
-            is_first_page: @response.first_page?,
-            is_last_page: @response.last_page?,
-            pages: pages.collect.each_with_index do |page, i|
-              {
-                url: Kaminari::Helpers::Page.new(self, page: page.number).url,
-                index: number_with_delimiter(page.number),
-                is_current: (@response.current_page == page.number),
-                separator: show_pagination_separator?(i, page.number, pages.size)
-              }
-            end
-          }
+          pagination: pagination_navigation
         }.reverse_merge(super)
       end
     end
@@ -252,6 +210,26 @@ module Portal
 
     private
 
+    def pagination_current_page
+      @response.current_page
+    end
+
+    def pagination_per_page
+      @response.limit_value
+    end
+
+    def pagination_total
+      @response.total
+    end
+
+    def pagination_total_pages
+      @response.total_pages
+    end
+
+    def pagination_page_item_count
+      @response.total
+    end
+
     def facets_selected_items
       return @facets_selected_items unless @facets_selected_items.nil?
 
@@ -262,11 +240,6 @@ module Portal
       end
     end
 
-    def show_pagination_separator?(page_index, page_number, pages_shown)
-      (page_index == 1 && @response.current_page > 2) ||
-        (page_index == (pages_shown - 2) && (page_number + 1) < @response.total_pages)
-    end
-
     def uri?(string)
       uri = URI.parse(string)
       %w(http|https).include?(uri.scheme)
@@ -274,31 +247,6 @@ module Portal
       false
     rescue URI::InvalidURIError
       false
-    end
-
-    def previous_page_url
-      prev_page = Kaminari::Helpers::PrevPage.new(self, current_page: @response.current_page)
-      prev_page.url
-    end
-
-    def next_page_url
-      next_page = Kaminari::Helpers::NextPage.new(self, current_page: @response.current_page)
-      next_page.url
-    end
-
-    def pages_of_search_results
-      opts = {
-        total_pages: @response.total_pages,
-        current_page: @response.current_page,
-        per_page: @response.limit_value,
-        remote: false,
-        window: 3
-      }
-      pages = []
-      Kaminari::Helpers::Paginator.new(self, opts).each_relevant_page do |p|
-        pages << p
-      end
-      pages
     end
 
     def form_search_hidden_field(name, value)
