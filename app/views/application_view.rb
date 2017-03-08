@@ -13,6 +13,15 @@ class ApplicationView < Europeana::Styleguide::View
   include LocalisableView
   include NavigableView
 
+  def head_meta
+    return super unless ENV.key?('GOOGLE_SITE_VERIFICATION')
+    [
+      {
+        meta_name: 'google-site-verification', content: ENV['GOOGLE_SITE_VERIFICATION']
+      }
+    ] + super
+  end
+
   def head_links
     links = [
       { rel: 'search', type: 'application/opensearchdescription+xml',

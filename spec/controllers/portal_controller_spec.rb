@@ -80,6 +80,11 @@ RSpec.describe PortalController do
       end
       it_behaves_like 'a record API request'
       it_behaves_like 'a more like this API request'
+
+      context 'with similar=later param' do
+        let(:params) { { locale: 'en', id: 'abc/123', similar: 'later' } }
+        it_behaves_like 'no more like this API request'
+      end
     end
 
     context 'with dcterms:isPartOf' do
@@ -124,12 +129,6 @@ RSpec.describe PortalController do
       it 'assigns the data provider to @data_provider' do
         expect(assigns(:data_provider)).to eq(data_providers(:anonymous))
       end
-    end
-
-    it 'assigns similar items to @similar' do
-      get :show, params
-      expect(assigns(:similar)).to be_a(Array)
-      expect(assigns(:similar)).to all(be_a(Europeana::Blacklight::Document))
     end
 
     it 'does not request the MIME type from the proxy service' do
