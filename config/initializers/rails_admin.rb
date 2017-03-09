@@ -444,8 +444,8 @@ RailsAdmin.config do |config|
           true unless bindings[:object].persisted?
         end
         associated_collection_scope do
-          proc do |_scope|
-            Collection.published.includes(:landing_page).where(pages: { collection_id: nil })
+          proc do |scope|
+            scope.published.includes(:landing_page).where(pages: { collection_id: nil })
           end
         end
       end
