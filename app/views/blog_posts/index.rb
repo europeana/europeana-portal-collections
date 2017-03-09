@@ -68,15 +68,15 @@ module BlogPosts
     end
 
     def pro_blog_url(path)
-      ENV['EUROPEANA_PRO_URL'] + path
+      Pro.site + path
     end
 
     def blog_item(post)
       {
-        author: blog_item_author(post),
+        authors: blog_item_authors(post),
         title: post.title,
         description: blog_item_description(post),
-        read_time: 'HOW IS READ TIME CALCULATED?',
+        read_time: '??',
         date: blog_item_date(post),
         img: blog_item_image(post),
         tags: blog_item_tags(post),
@@ -122,15 +122,15 @@ module BlogPosts
       post.taxonomy[:blogs].values.first
     end
 
-    # @todo return actual content when template can support multiple authors
-    def blog_item_author(post)
-      return { name: 'TODO PENDING MULTI-AUTHOR SUPPORT IN TEMPLATE' }
+    def blog_item_authors(post)
       return nil unless post.respond_to?(:network) && post.network.present?
 
-      author_names = post.network.compact.map do |network|
-        "#{network.first_name} #{network.last_name}"
-      end.join(', ')
-      " (#{author_names})"
+      post.network.compact.map do |network|
+        {
+          name: "#{network.first_name} #{network.last_name}",
+          url: network.url
+        }
+      end
     end
   end
 end
