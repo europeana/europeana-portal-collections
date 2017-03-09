@@ -11,16 +11,14 @@ module Collections
     def head_meta
       mustache[:head_meta] ||= begin
         title = page_title
-        description = truncate(strip_tags(@landing_page.body), length: 350, separator: ' ')
-        description = description.strip! || description
         hero = hero_config(@landing_page.hero_image)
         head_meta = [
-          { meta_name: 'description', content: description },
+          { meta_name: 'description', content: head_meta_description },
           { meta_property: 'fb:appid', content: '185778248173748' },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
           { meta_property: 'og:sitename', content: title },
-          { meta_property: 'og:description', content: description },
+          { meta_property: 'og:description', content: head_meta_description },
           { meta_property: 'og:url', content: collection_url(@collection.key) }
         ]
         head_meta << { meta_property: 'og:title', content: title } unless title.nil?
@@ -100,6 +98,16 @@ module Collections
     end
 
     private
+
+    def head_meta_description
+      mustache[:head_meta_description] ||= begin
+        if @landing_page.body.blank?
+          nil
+        else
+          truncate(strip_tags(@landing_page.body), length: 350, separator: ' ').strip
+        end
+      end
+    end
 
     def newsletter_content
       return nil unless @landing_page.newsletter_url.present?
