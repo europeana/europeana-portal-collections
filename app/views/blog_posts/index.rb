@@ -76,7 +76,7 @@ module BlogPosts
         authors: blog_item_authors(post),
         title: post.title,
         description: blog_item_description(post),
-        read_time: '??',
+        read_time: nil,
         date: blog_item_date(post),
         img: blog_item_image(post),
         tags: blog_item_tags(post),
