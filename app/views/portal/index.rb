@@ -210,24 +210,8 @@ module Portal
 
     private
 
-    def pagination_current_page
-      @response.current_page
-    end
-
-    def pagination_per_page
-      @response.limit_value
-    end
-
-    def pagination_total
-      @response.total
-    end
-
-    def pagination_total_pages
-      @response.total_pages
-    end
-
-    def pagination_page_item_count
-      @response.total
+    def paginated_set
+      @response
     end
 
     def facets_selected_items

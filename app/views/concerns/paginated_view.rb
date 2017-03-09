@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 ##
-# Including view are expected to implement:
-# * `pagination_current_page`
-# * `pagination_page_item_count`
-# * `pagination_per_page`
-# * `pagination_total`
-# * `pagination_total_pages`
+# Including view are expected to implement `pagination_set`, returning the set
+# of paginated objects to render links for.
 module PaginatedView
   extend ActiveSupport::Concern
 
@@ -41,6 +37,30 @@ module PaginatedView
   alias_method :has_multiple_results, :has_multiple_results?
 
   protected
+
+  def paginated_set
+    fail NotImplementedError, 'Including view class must implement #paginated_set'
+  end
+
+  def pagination_current_page
+    paginated_set.current_page
+  end
+
+  def pagination_per_page
+    paginated_set.limit_value
+  end
+
+  def pagination_total
+    paginated_set.total
+  end
+
+  def pagination_total_pages
+    paginated_set.total_pages
+  end
+
+  def pagination_page_item_count
+    paginated_set.count
+  end
 
   def pagination_first_page?
     pagination_current_page == 1

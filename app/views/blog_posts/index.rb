@@ -30,8 +30,8 @@ module BlogPosts
 
     protected
 
-    def pagination_page_item_count
-      @blog_posts.count
+    def paginated_set
+      @blog_posts
     end
 
     def pagination_current_page
