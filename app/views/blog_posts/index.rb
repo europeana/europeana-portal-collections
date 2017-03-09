@@ -6,7 +6,7 @@ module BlogPosts
 
     def page_title
       mustache[:page_title] ||= begin
-        ['Europeana Blog', site_title].join(' - ') # @todo Localeapp
+        [t('site.blogs.list.page-title'), site_title].join(' - ')
       end
     end
 
