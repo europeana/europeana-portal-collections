@@ -22,7 +22,7 @@ module Galleries
         head_meta = gallery_head_meta + [
           { meta_name: 'description', content: description },
           { meta_property: 'og:description', content: description },
-          { meta_property: 'og:image', content: gallery_items_content.first[:full_url] },
+          { meta_property: 'og:image', content: @hero_image_url },
           { meta_property: 'og:title', content: @gallery.title },
           { meta_property: 'og:sitename', content: @gallery.title }
         ]
@@ -49,7 +49,7 @@ module Galleries
 
     def gallery_hero_content
       {
-        url: gallery_items_content.first[:full_url],
+        url: @hero_image_url,
         title: @gallery.title,
         subtitle: @gallery.description
       }
