@@ -10,6 +10,12 @@ module BlogPosts
       end
     end
 
+    def hero
+      {
+        hero_image: @hero_image.file.present? ? @hero_image.file.url : nil
+      }
+    end
+
     def navigation
       mustache[:navigation] ||= begin
         {
