@@ -19,23 +19,26 @@ module PaginatedView
     number_with_delimiter(pagination_total)
   end
 
-  def has_results
+  def has_results?
     mustache[:has_results] ||= begin
-      pagination_page_item_count > 0
+      pagination_page_item_count.positive?
     end
   end
+  alias_method :has_results, :has_results?
 
-  def has_single_result
+  def has_single_result?
     mustache[:has_single_result] ||= begin
       pagination_page_item_count == 1
     end
   end
+  alias_method :has_single_result, :has_single_result?
 
-  def has_multiple_results
+  def has_multiple_results?
     mustache[:has_multiple_results] ||= begin
       pagination_page_item_count > 1
     end
   end
+  alias_method :has_multiple_results, :has_multiple_results?
 
   protected
 
