@@ -61,7 +61,7 @@ class GalleriesController < ApplicationController
   def set_gallery_hero_image_cache(image)
     image_document = @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
     @hero_image_url = image_document['edmIsShownBy'].first
-    Rails.cache.write(cache_key(@body_cache_key) + '/hero_image_url', @hero_image_url, expires_in: 24.hours)
+    Rails.cache.write(cache_key(@body_cache_key) + '/hero_image_url', @hero_image_url, expires_in: 24.hours + 1.minute)
   end
 
   def blacklight_api_params_for_images(images)

@@ -115,7 +115,7 @@ RSpec.describe GalleriesController do
 
       it 'caches the hero_image_url' do
         expect(Rails.cache).to_not receive(:fetch)
-        expect(Rails.cache).to receive(:write).with(an_instance_of(String), an_instance_of(String), expires_in: 24.hours)
+        expect(Rails.cache).to receive(:write).with(an_instance_of(String), an_instance_of(String), expires_in: 24.hours + 1.minute)
         get :show, locale: 'en', slug: gallery.slug
       end
 
