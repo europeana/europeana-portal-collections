@@ -4,6 +4,7 @@ class Gallery < ActiveRecord::Base
 
   include HasPublicationStates
   include IsCategorisable
+  include IsPermissionable
 
   scope :with_topic, ->(topic_slug) do
     topic_slug == 'all' ? all : joins(:categorisations, :topics).where(topics: { slug: topic_slug }).distinct
@@ -35,6 +36,7 @@ class Gallery < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
+  before_create :set_editor_permissions
   before_save :ensure_unique_title
   after_save :set_images_from_portal_urls
 

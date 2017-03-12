@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe Ability do
   it 'uses CanCan' do
     expect(described_class).to include(CanCan::Ability)
@@ -8,9 +9,13 @@ RSpec.describe Ability do
   let(:draft_collection) { collections(:draft) }
   let(:published_collection) { collections(:music) }
   let(:draft_gallery) { galleries(:draft) }
-  let(:published_gallery) { galleries(:fashion_dresses) }
+  let(:published_gallery) { galleries(:currated_gallery) }
   let(:draft_landing_page) { pages(:draft_landing_page) }
   let(:published_landing_page) { pages(:music_collection) }
+  let(:landing_page_with_editor_permissions) { pages(:fashion_collection) }
+  let(:feed_with_editor_permissions) { feeds(:fashion_tumblr) }
+  let(:gallery_with_editor_permissions) { galleries(:fashion_dresses) }
+  let(:browse_entry_with_editor_permissions) { browse_entries(:paintings_topic) }
 
   context 'without user role (guest)' do
     subject { users(:guest) }
@@ -66,6 +71,11 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, Topic.new) }
     it { is_expected.not_to be_able_to(:manage, User.new) }
 
+    it { is_expected.not_to be_able_to(:update, landing_page_with_editor_permissions) }
+    it { is_expected.not_to be_able_to(:update, feed_with_editor_permissions) }
+    it { is_expected.not_to be_able_to(:update, gallery_with_editor_permissions) }
+    it { is_expected.not_to be_able_to(:update, browse_entry_with_editor_permissions) }
+
     it { is_expected.not_to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }
     it { is_expected.not_to be_able_to(:show, draft_collection) }
@@ -114,19 +124,24 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:create, User.new) }
 
     it { is_expected.not_to be_able_to(:update, Banner.new) }
-    it { is_expected.to be_able_to(:update, BrowseEntry.new) }
+    it { is_expected.not_to be_able_to(:update, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:update, Collection.new) }
     it { is_expected.to be_able_to(:update, DataProvider.new) }
-    it { is_expected.to be_able_to(:update, Feed.new) }
-    it { is_expected.to be_able_to(:update, Gallery.new) }
+    it { is_expected.not_to be_able_to(:update, Feed.new) }
+    it { is_expected.not_to be_able_to(:update, Gallery.new) }
     it { is_expected.to be_able_to(:update, HeroImage.new) }
     it { is_expected.not_to be_able_to(:update, Page.new) }
     it { is_expected.not_to be_able_to(:update, Page::Error.new) }
-    it { is_expected.to be_able_to(:update, Page::Landing.new) }
+    it { is_expected.not_to be_able_to(:update, Page::Landing.new) }
     it { is_expected.not_to be_able_to(:update, Link.new) }
     it { is_expected.to be_able_to(:update, MediaObject.new) }
     it { is_expected.not_to be_able_to(:update, Topic.new) }
     it { is_expected.not_to be_able_to(:update, User.new) }
+
+    it { is_expected.to be_able_to(:update, landing_page_with_editor_permissions) }
+    it { is_expected.to be_able_to(:update, feed_with_editor_permissions) }
+    it { is_expected.to be_able_to(:update, gallery_with_editor_permissions) }
+    it { is_expected.to be_able_to(:update, browse_entry_with_editor_permissions) }
 
     it { is_expected.to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }
@@ -158,6 +173,11 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:manage, MediaObject.new) }
     it { is_expected.to be_able_to(:manage, Topic.new) }
     it { is_expected.to be_able_to(:manage, User.new) }
+
+    it { is_expected.to be_able_to(:manage, landing_page_with_editor_permissions) }
+    it { is_expected.to be_able_to(:manage, feed_with_editor_permissions) }
+    it { is_expected.to be_able_to(:manage, gallery_with_editor_permissions) }
+    it { is_expected.to be_able_to(:manage, browse_entry_with_editor_permissions) }
 
     it { is_expected.to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }

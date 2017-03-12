@@ -96,7 +96,7 @@ RSpec.describe GalleriesController do
 
   describe 'GET #show' do
     context 'when gallery is published' do
-      let(:gallery) { Gallery.published.first }
+      let(:gallery) { galleries(:fashion_dresses) }
 
       it 'returns http success' do
         get :show, locale: 'en', slug: gallery.slug

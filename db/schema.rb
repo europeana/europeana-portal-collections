@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307114233) do
+ActiveRecord::Schema.define(version: 20170310082817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,6 +307,17 @@ ActiveRecord::Schema.define(version: 20170307114233) do
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
   add_index "pages", ["state"], name: "index_pages_on_state", using: :btree
 
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "permissionable_id"
+    t.string   "permissionable_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "permissions", ["permissionable_type", "permissionable_id"], name: "index_permissions_on_permissionable", using: :btree
+  add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
+
   create_table "searches", force: :cascade do |t|
     t.text     "query_params"
     t.integer  "user_id"
@@ -390,4 +401,5 @@ ActiveRecord::Schema.define(version: 20170307114233) do
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
   add_foreign_key "pages", "collections"
+  add_foreign_key "permissions", "users"
 end

@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+require 'models/concerns/is_permissionable_examples'
 RSpec.describe BrowseEntry do
+  it_behaves_like 'permissionable'
+
   it { is_expected.to have_many(:page_elements).dependent(:destroy) }
   it { is_expected.to have_many(:pages).through(:page_elements) }
   it { is_expected.to have_and_belong_to_many(:collections) }

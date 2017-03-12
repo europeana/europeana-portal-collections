@@ -1,0 +1,16 @@
+editor_fashion_landing_permission:
+  permissionable: fashion_collection
+  permissionable_type: 'Page'
+  user: editor
+editor_paintings_topic_permission:
+  permissionable: paintings_topic
+  permissionable_type: 'BrowseEntry'
+  user: editor
+editor_fashion_gallery_permission:
+  permissionable: fashion_dresses
+  permissionable_type: 'Gallery'
+  user: editor
+editor_fashion_feed_permission:
+  permissionable: fashion_tumblr
+  permissionable_type: 'Feed'
+  user: editor
