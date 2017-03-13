@@ -39,9 +39,8 @@ module BlogPosts
         # JsonApiClient::ResultSet#current_page always returns 1 here for some reason
         # @blog_posts.current_page
 
-        # Get it out of the JSON API self link instead
-        current_page_api_query = URI.parse(@blog_posts.links.links['self']).query
-        Rack::Utils.parse_nested_query(current_page_api_query)['page']['number'].to_i
+        # Get it out of the controller-assigned var instead
+        @pagination_page
       end
     end
 
@@ -51,9 +50,8 @@ module BlogPosts
         # here for some reason
         # @blog_posts.per_page
 
-        # Get it out of the JSON API self link instead
-        current_page_api_query = URI.parse(@blog_posts.links.links['self']).query
-        Rack::Utils.parse_nested_query(current_page_api_query)['page']['size'].to_i
+        # Get it out of the controller-assigned var instead
+        @pagination_per
       end
     end
 
@@ -61,7 +59,11 @@ module BlogPosts
       # JsonApiClient::ResultSet#total_count always returns number in this page
       # here for some reason
       # @blog_posts.total_pages
-      @blog_posts.meta.total
+      if @blog_posts.respond_to?(:meta) && @blog_posts.meta.respond_to?(:total)
+        @blog_posts.meta.total
+      else
+        0
+      end
     end
 
     def pagination_total_pages

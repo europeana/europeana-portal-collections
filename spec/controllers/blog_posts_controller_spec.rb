@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 RSpec.describe BlogPostsController do
-  JSON_API_URL = %r{\Ahttp://pro\.europeana\.eu/json/blogposts(\?|\z)}
+  JSON_API_URL = %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogposts(\?|\z)}
   JSON_API_CONTENT_TYPE = 'application/vnd.api+json'
 
   before do
@@ -30,6 +30,8 @@ RSpec.describe BlogPostsController do
         a_request(:get, JSON_API_URL).
         with(query: hash_including(page: { number: '1', size: '6' }))
       ).to have_been_made.once
+      expect(assigns(:pagination_per)).to eq(6)
+      expect(assigns(:pagination_page)).to eq(1)
     end
 
     it 'requests the page in `page` param' do
@@ -38,6 +40,8 @@ RSpec.describe BlogPostsController do
         a_request(:get, JSON_API_URL).
         with(query: hash_including(page: { number: '3', size: '6' }))
       ).to have_been_made.once
+      expect(assigns(:pagination_per)).to eq(6)
+      expect(assigns(:pagination_page)).to eq(3)
     end
 
     it 'includes related resources' do
