@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306134928) do
+ActiveRecord::Schema.define(version: 20170307114233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -297,9 +297,11 @@ ActiveRecord::Schema.define(version: 20170306134928) do
     t.text     "settings"
     t.string   "strapline"
     t.string   "newsletter_url"
+    t.integer  "collection_id"
   end
 
   add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree
+  add_index "pages", ["collection_id"], name: "index_pages_on_collection_id", using: :btree
   add_index "pages", ["hero_image_id"], name: "index_pages_on_hero_image_id", using: :btree
   add_index "pages", ["http_code"], name: "index_pages_on_http_code", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
@@ -387,4 +389,5 @@ ActiveRecord::Schema.define(version: 20170306134928) do
   add_foreign_key "gallery_images", "galleries"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
+  add_foreign_key "pages", "collections"
 end

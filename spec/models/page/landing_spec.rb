@@ -1,5 +1,6 @@
 RSpec.describe Page::Landing do
   it { is_expected.to belong_to(:hero_image) }
+  it { is_expected.to belong_to(:collection) }
   it { is_expected.to have_many(:credits) }
   it { is_expected.to have_many(:social_media) }
   it { is_expected.to have_many(:promotions) }
@@ -15,6 +16,8 @@ RSpec.describe Page::Landing do
   it { is_expected.to delegate_method(:file).to(:hero_image).with_prefix(true) }
 
   it { is_expected.to validate_inclusion_of(:settings_layout_type).in_array(%w(default browse)) }
+  it { is_expected.to validate_presence_of(:collection) }
+  it { is_expected.to validate_uniqueness_of(:collection) }
 
   describe 'modules' do
     subject { described_class }
@@ -24,6 +27,37 @@ RSpec.describe Page::Landing do
   describe '.home' do
     it 'should return the homepage' do
       expect(described_class.home).to eq(pages(:home))
+    end
+  end
+
+  describe 'creation' do
+    context 'when it is the all collection' do
+      it 'should set the slug' do
+        subject.collection = collections(:all)
+        subject.run_callbacks :create
+        expect(subject.slug).to eq('')
+      end
+    end
+
+    context 'when it is a thematic collection' do
+      it 'should set the slug' do
+        subject.collection = collections(:music)
+        subject.run_callbacks :create
+        expect(subject.slug).to eq('collections/music')
+      end
+    end
+  end
+
+  describe '#set_slug' do
+    let(:page) { pages(:music_collection) }
+    context 'when the slug is empty' do
+      before do
+        page.slug = nil
+      end
+      it 'should set the slug' do
+        page.send(:set_slug)
+        expect(page.slug).to eq('collections/music')
+      end
     end
   end
 end

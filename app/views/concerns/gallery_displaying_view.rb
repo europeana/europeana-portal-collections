@@ -39,24 +39,20 @@ module GalleryDisplayingView
   def gallery_social_links
     {
       style_blue: true,
+      url: request.original_url,
       facebook: {
-        url: 'https://www.facebook.com/Europeana',
         text: 'Facebook'
       },
       twitter: {
-        url: 'https://twitter.com/Europeanaeu',
         text: 'Twitter'
       },
       pinterest: {
-        url: 'https://uk.pinterest.com/europeana/',
         text: 'Pinterest'
       },
       googleplus: {
-        url: 'https://plus.google.com/+europeana/posts',
         text: 'Google Plus'
       },
       tumblr: {
-        url: 'http://europeanacollections.tumblr.com/',
         text: 'Tumblr'
       }
     }

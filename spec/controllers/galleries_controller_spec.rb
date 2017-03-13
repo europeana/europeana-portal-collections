@@ -108,9 +108,15 @@ RSpec.describe GalleriesController do
         expect(assigns[:gallery]).to eq(gallery)
       end
 
-      it 'assigns gallery to @gallery' do
+      it 'assigns the edmIsShownBy of the first image to @hero_image_url' do
         get :show, locale: 'en', slug: gallery.slug
-        expect(assigns[:gallery]).to eq(gallery)
+        expect(assigns[:hero_image_url]).to eq('providerurl/sample/record1')
+      end
+
+      it 'caches the hero_image_url' do
+        expect(Rails.cache).to_not receive(:fetch)
+        expect(Rails.cache).to receive(:write).with(an_instance_of(String), an_instance_of(String), expires_in: 24.hours + 1.minute)
+        get :show, locale: 'en', slug: gallery.slug
       end
 
       it 'searches the API for the gallery image metadata' do
@@ -130,6 +136,13 @@ RSpec.describe GalleriesController do
         it 'does NOT searche the API for the gallery image metadata' do
           get :show, locale: 'en', slug: gallery.slug
           expect(an_api_search_request).to_not have_been_made
+        end
+
+        it 'assigns a url from the cache to @hero_image_url' do
+          expect(Rails.cache).to_not receive(:write)
+          expect(Rails.cache).to receive(:fetch) { 'something' }
+          get :show, locale: 'en', slug: gallery.slug
+          expect(assigns[:hero_image_url]).to eq('something')
         end
       end
     end

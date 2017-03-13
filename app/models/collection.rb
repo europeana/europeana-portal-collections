@@ -4,6 +4,7 @@ class Collection < ActiveRecord::Base
   include HasSettingsAttribute
 
   has_and_belongs_to_many :browse_entries
+  has_one :landing_page, class_name: 'Page::Landing', dependent: :destroy
 
   has_paper_trail
 
@@ -42,14 +43,6 @@ class Collection < ActiveRecord::Base
 
   def has_landing_page?
     landing_page.present?
-  end
-
-  def landing_page
-    @landing_page ||= Page::Landing.find_by_slug(landing_page_slug)
-  end
-
-  def landing_page_slug
-    key == 'all' ? '' : "collections/#{key}"
   end
 
   def landing_page_title
