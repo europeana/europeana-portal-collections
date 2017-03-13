@@ -91,12 +91,13 @@ module BlogPosts
     end
 
     def blog_item_tags(post)
-      return nil unless post.respond_to?(:taxonomy)
-      return nil unless post.taxonomy.key?(:tags) && post.taxonomy[:tags].present?
-      { items: blog_item_tags_items(post) }
+      items = blog_item_tags_items(post)
+      items.nil? ? nil : { items: items }
     end
 
     def blog_item_tags_items(post)
+      return nil unless post.respond_to?(:taxonomy)
+      return nil unless post.taxonomy.key?(:tags) && post.taxonomy[:tags].present?
       post.taxonomy[:tags].map do |k, v|
         {
           url: pro_blog_url(k),
