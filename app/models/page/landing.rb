@@ -24,6 +24,10 @@ class Page::Landing < Page
     def settings_layout_type_enum
       %w(default browse)
     end
+
+    def home
+      find_by_slug('')
+    end
   end
 
   def settings_layout_type

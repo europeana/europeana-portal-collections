@@ -20,4 +20,10 @@ RSpec.describe Page::Landing do
     subject { described_class }
     it { is_expected.to include(PaperTrail::Model::InstanceMethods) }
   end
+
+  describe '.home' do
+    it 'should return the homepage' do
+      expect(described_class.home).to eq(pages(:home))
+    end
+  end
 end
