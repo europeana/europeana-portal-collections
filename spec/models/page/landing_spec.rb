@@ -24,6 +24,12 @@ RSpec.describe Page::Landing do
     it { is_expected.to include(PaperTrail::Model::InstanceMethods) }
   end
 
+  describe '.home' do
+    it 'should return the homepage' do
+      expect(described_class.home).to eq(pages(:home))
+    end
+  end
+
   describe 'creation' do
     context 'when it is the all collection' do
       it 'should set the slug' do

@@ -1,3 +1,5 @@
+require 'views/concerns/paginated_view_examples'
+
 RSpec.describe 'portal/index.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
   before do
     assign(:response, response)
@@ -6,6 +8,8 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     allow(view).to receive(:search_state).and_return(search_state)
     allow(controller).to receive(:params).and_return(blacklight_params)
   end
+
+  let(:view_class) { Portal::Index }
 
   let(:api_response) do
     {
@@ -25,6 +29,8 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
   let(:request_params) { { query: 'paris', rows: 12, start: 1 } }
   let(:response) { Europeana::Blacklight::Response.new(api_response, request_params) }
   let(:search_state) { Blacklight::SearchState.new(blacklight_params, blacklight_config) }
+
+  it_behaves_like 'paginated_view'
 
   it 'includes the search terms in the title' do
     render

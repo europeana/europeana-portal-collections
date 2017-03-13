@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class GalleriesController < ApplicationController
   include CacheHelper
+  include HomepageHeroImage
+
   attr_reader :body_cache_key
 
   def index
@@ -70,11 +72,6 @@ class GalleriesController < ApplicationController
 
   def search_api_query_for_images(images)
     'europeana_id:("' + images.map(&:europeana_record_id).join('" OR "') + '")'
-  end
-
-  def homepage_hero_image
-    landing_page = Page::Landing.find_by_slug('')
-    landing_page.nil? ? nil : landing_page.hero_image
   end
 
   def gallery_page

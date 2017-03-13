@@ -4,10 +4,10 @@ module Pro
   # Base class for JSON-API resources consumed from the Europeana Pro Bolt CMS
   # via its json-api extension.
   class Base < JsonApiClient::Resource
-    self.site = ENV['EUROPEANA_PRO_JSON_API_URL'] || 'http://pro.europeana.eu/json/'
+    self.site = Pro.site + '/json/'
 
-    def self.table_name
-      to_s.pluralize.demodulize.downcase
+    def url
+      [Pro.site, self.class.table_name, slug].join('/')
     end
   end
 end
