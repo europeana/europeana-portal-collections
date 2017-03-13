@@ -12,7 +12,7 @@ module BlogPosts
 
     def hero
       {
-        hero_image: (@hero_image.present? && @hero_image.file.present?) ? @hero_image.file.url : nil
+        hero_image: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil
       }
     end
 
