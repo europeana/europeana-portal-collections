@@ -4,7 +4,7 @@ class BlogPostPresenter
 
   attr_reader :blog_post
 
-  delegate :title, :introduction, :body, to: :blog_post
+  delegate :title, :introduction, to: :blog_post
 
   def initialize(blog_post)
     @blog_post = blog_post
@@ -30,6 +30,10 @@ class BlogPostPresenter
 
   def has_image?
     blog_post.respond_to?(:image) && blog_post.image.is_a?(Hash)
+  end
+
+  def body
+    blog_post.body.gsub(%r{(?<=src|href)="/}, %(="#{Pro.site}/))
   end
 
   def image(source_key)
