@@ -36,7 +36,6 @@ class Gallery < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
-  before_create :set_editor_permissions
   before_save :ensure_unique_title
   after_save :set_images_from_portal_urls
 

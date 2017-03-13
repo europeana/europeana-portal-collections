@@ -24,7 +24,6 @@ class BrowseEntry < ActiveRecord::Base
   accepts_nested_attributes_for :translations, allow_destroy: true
   default_scope { includes(:translations) }
 
-  before_create :set_editor_permissions
   after_update :touch_pages
   after_touch :touch_pages
   after_destroy :touch_pages

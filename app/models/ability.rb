@@ -11,6 +11,11 @@ class Ability
     send(meth) if respond_to?(meth, true) # e.g. admin!
   end
 
+  def needs_permission?
+    return true if @user.role == 'editor'
+    false
+  end
+
   protected
 
   def guest!

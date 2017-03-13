@@ -9,7 +9,7 @@ RSpec.describe Ability do
   let(:draft_collection) { collections(:draft) }
   let(:published_collection) { collections(:music) }
   let(:draft_gallery) { galleries(:draft) }
-  let(:published_gallery) { galleries(:currated_gallery) }
+  let(:published_gallery) { galleries(:curated_gallery) }
   let(:draft_landing_page) { pages(:draft_landing_page) }
   let(:published_landing_page) { pages(:music_collection) }
   let(:landing_page_with_editor_permissions) { pages(:fashion_collection) }
@@ -187,5 +187,26 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:show, published_gallery) }
     it { is_expected.to be_able_to(:show, draft_landing_page) }
     it { is_expected.to be_able_to(:show, published_landing_page) }
+  end
+
+  describe '#needs_permission?' do
+    context 'when the user is an editor' do
+      subject { users(:editor) }
+      it 'should be true' do
+        expect(subject.ability.needs_permission?).to eq(true)
+      end
+    end
+    context 'when the user is a user' do
+      subject { users(:user) }
+      it 'should be false' do
+        expect(subject.ability.needs_permission?).to eq(false)
+      end
+    end
+    context 'when the user is an admin' do
+      subject { users(:admin) }
+      it 'should be false' do
+        expect(subject.ability.needs_permission?).to eq(false)
+      end
+    end
   end
 end

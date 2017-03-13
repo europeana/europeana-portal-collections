@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
     end
 
     def permissionable_landing_page_ids_enum
-      puts Page::Landing.all.inspect
       Page::Landing.all.map { |permissionable| [permissionable.title, permissionable.id] }
     end
 
