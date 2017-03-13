@@ -152,16 +152,8 @@ RailsAdmin.config do |config|
       end
     end
     edit do
-      field :uri do
-        read_only do
-          true unless bindings[:view]._current_user.role == 'admin'
-        end
-      end
-      field :name do
-        read_only do
-          true unless bindings[:view]._current_user.role == 'admin'
-        end
-      end
+      field :uri
+      field :name
       field :image, :paperclip do
         help 'transparent & greyscale'
         thumb_method :medium
