@@ -16,7 +16,8 @@ module BlogPosts
         label: presenter.label,
         date: presenter.date,
         introduction: presenter.introduction,
-        blog_image: presenter.image(:url)
+        blog_image: presenter.image(:url),
+        read_time: presenter.read_time
       }
     end
 
