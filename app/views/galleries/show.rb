@@ -71,7 +71,8 @@ module Galleries
       return nil if presenter.nil?
       {
         title: presenter.title,
-        creator: presenter.field_value('dataProvider'),
+        creator: presenter.field_value('dcCreator'),
+        data_provider: presenter.field_value('dataProvider'),
         creation_date: presenter.field_value('year'),
         thumb_url: gallery_image_thumbnail(image),
         full_url: presenter.field_value('aggregations.edmIsShownBy'),
