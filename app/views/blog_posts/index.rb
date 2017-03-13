@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 module BlogPosts
-  # @todo move the blog_item_x methods into a presenter?
   class Index < ApplicationView
-    include BlogPostDisplayingView
     include PaginatedView
 
     def page_title
@@ -26,10 +24,25 @@ module BlogPosts
     end
 
     def blog_items
-      @blog_posts.map { |post| blog_item(post) }
+      mustache[:blog_items] ||= @blog_posts.map { |post| blog_item(post) }
     end
 
     protected
+
+    def blog_item(post)
+      presenter = BlogPostPresenter.new(post)
+      {
+        authors: presenter.authors,
+        title: presenter.title,
+        object_url: blog_post_path(slug: post.slug),
+        description: presenter.excerpt,
+        read_time: presenter.read_time,
+        date: presenter.date,
+        img: presenter.image(:thumbnail),
+        tags: presenter.tags,
+        label: presenter.label
+      }
+    end
 
     def paginated_set
       @blog_posts
@@ -74,33 +87,6 @@ module BlogPosts
         (pagination_total / pagination_per_page) +
           ((pagination_total / pagination_per_page).zero? ? 0 : 1)
       end
-    end
-
-    def blog_item(post)
-      {
-        authors: blog_item_authors(post),
-        title: post.title,
-        object_url: blog_post_path(post),
-        description: blog_item_description(post),
-        read_time: nil,
-        date: blog_item_date(post),
-        img: blog_item_image(post),
-        tags: blog_item_tags(post),
-        label: blog_item_label(post)
-      }
-    end
-
-    def blog_item_image(post)
-      return nil unless post.respond_to?(:image) && post.image.is_a?(Hash)
-      return nil unless post.image.key?(:thumbnail) && post.image[:thumbnail].present?
-      {
-        src: post.image[:thumbnail],
-        alt: post.image[:title]
-      }
-    end
-
-    def blog_item_description(post)
-      truncate(strip_tags(post.body), length: 350, separator: ' ')
     end
   end
 end
