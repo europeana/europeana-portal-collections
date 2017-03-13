@@ -99,18 +99,8 @@ module BlogPosts
       }
     end
 
-    def blog_item_date(post)
-      DateTime.strptime(post.datepublish).strftime('%-d %B, %Y') # @todo Localeapp the date format
-    end
-
     def blog_item_description(post)
       truncate(strip_tags(post.body), length: 350, separator: ' ')
-    end
-
-    def blog_item_label(post)
-      return nil unless post.respond_to?(:taxonomy)
-      return nil unless post.taxonomy.key?(:blogs) && post.taxonomy[:blogs].present?
-      post.taxonomy[:blogs].values.first
     end
   end
 end
