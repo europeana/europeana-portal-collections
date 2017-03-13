@@ -83,6 +83,7 @@ module BlogPosts
       {
         authors: blog_item_authors(post),
         title: post.title,
+        object_url: blog_post_path(post),
         description: blog_item_description(post),
         read_time: nil,
         date: blog_item_date(post),
