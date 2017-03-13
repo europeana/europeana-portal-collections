@@ -2,6 +2,7 @@
 module BlogPosts
   # @todo move the blog_item_x methods into a presenter?
   class Index < ApplicationView
+    include BlogPostDisplayingView
     include PaginatedView
 
     def page_title
@@ -75,10 +76,6 @@ module BlogPosts
       end
     end
 
-    def pro_blog_url(path)
-      Pro.site + path
-    end
-
     def blog_item(post)
       {
         authors: blog_item_authors(post),
@@ -91,22 +88,6 @@ module BlogPosts
         tags: blog_item_tags(post),
         label: blog_item_label(post)
       }
-    end
-
-    def blog_item_tags(post)
-      items = blog_item_tags_items(post)
-      items.nil? ? nil : { items: items }
-    end
-
-    def blog_item_tags_items(post)
-      return nil unless post.respond_to?(:taxonomy)
-      return nil unless post.taxonomy.key?(:tags) && post.taxonomy[:tags].present?
-      post.taxonomy[:tags].map do |pro_path, tag|
-        {
-          url: pro_blog_url(pro_path),
-          text: tag
-        }
-      end
     end
 
     def blog_item_image(post)
@@ -130,17 +111,6 @@ module BlogPosts
       return nil unless post.respond_to?(:taxonomy)
       return nil unless post.taxonomy.key?(:blogs) && post.taxonomy[:blogs].present?
       post.taxonomy[:blogs].values.first
-    end
-
-    def blog_item_authors(post)
-      return nil unless post.respond_to?(:network) && post.network.present?
-
-      post.network.compact.map do |network|
-        {
-          name: "#{network.first_name} #{network.last_name}",
-          url: network.url
-        }
-      end
     end
   end
 end
