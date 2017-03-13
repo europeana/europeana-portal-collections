@@ -110,12 +110,10 @@ module PaginatedView
   end
 
   def pagination_previous_page_url
-    prev_page = Kaminari::Helpers::PrevPage.new(self, current_page: pagination_current_page)
-    prev_page.url
+    Kaminari::Helpers::PrevPage.new(self, current_page: pagination_current_page).url
   end
 
   def pagination_next_page_url
-    next_page = Kaminari::Helpers::NextPage.new(self, current_page: pagination_current_page)
-    next_page.url
+    Kaminari::Helpers::NextPage.new(self, current_page: pagination_current_page).url
   end
 end
