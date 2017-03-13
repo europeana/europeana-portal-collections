@@ -15,11 +15,29 @@ music_collection_translations:
   body: 'About music'
   globalized_model: music_collection
 
+art_collection_translations:
+  locale: en
+  title: 'Europeana Art'
+  body: 'About art'
+  globalized_model: art_collection
+
 fashion_collection_translations:
   locale: en
   title: 'Europeana Fashion'
   body: 'About fashion'
   globalized_model: fashion_collection
+
+grid_layout_collection_translations:
+  locale: en
+  title: 'Europeana Grid Layout'
+  body: 'About Grid Layout'
+  globalized_model: grid_layout_collection
+
+draft_collection_translations:
+  locale: en
+  title: 'Europeana Draft'
+  body: 'About Draft'
+  globalized_model: draft_collection
 
 not_found_translations:
   locale: en

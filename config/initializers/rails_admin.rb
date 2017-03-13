@@ -125,8 +125,8 @@ RailsAdmin.config do |config|
     end
     edit do
       field :key do
-        visible do
-          true unless bindings[:object].persisted?
+        read_only do
+          true if bindings[:object].persisted?
         end
       end
       field :title
@@ -509,6 +509,25 @@ RailsAdmin.config do |config|
       field :password
       field :password_confirmation
       field :role
+      group :permissions do
+        visible do
+          # Checking for persisted here as a new record won't ever have the editor role,
+          # unless it was sent back due to validation errors. This keeps the CMS UI consistent.
+          true if bindings[:object].role == 'editor' && bindings[:object].persisted?
+        end
+        field :permissionable_landing_page_ids, :enum do
+          multiple true
+        end
+        field :permissionable_gallery_ids, :enum do
+          multiple true
+        end
+        field :permissionable_browse_entry_ids, :enum do
+          multiple true
+        end
+        field :permissionable_feed_ids, :enum do
+          multiple true
+        end
+      end
     end
   end
 end

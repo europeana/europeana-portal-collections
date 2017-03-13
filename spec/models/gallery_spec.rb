@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'models/concerns/is_permissionable_examples'
 RSpec.describe Gallery do
   before do
     stub_request(:get, Europeana::API.url + '/v2/search.json').
@@ -48,6 +49,8 @@ RSpec.describe Gallery do
   def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/pic/%{n}.html')
     (1..number).map { |n| format(format, n: n) }.join(' ')
   end
+
+  it_behaves_like 'permissionable'
 
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
   it { is_expected.to have_many(:topics).through(:categorisations) }

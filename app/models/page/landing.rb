@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class Page
   class Landing < Page
+    include IsPermissionable
+
     belongs_to :collection
     has_many :credits, -> { order(:position) }, as: :linkable, class_name: 'Link::Credit', dependent: :destroy
     has_many :social_media, -> { order(:position) }, as: :linkable, class_name: 'Link::SocialMedia', dependent: :destroy

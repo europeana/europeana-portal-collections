@@ -4,6 +4,7 @@ class Gallery < ActiveRecord::Base
 
   include HasPublicationStates
   include IsCategorisable
+  include IsPermissionable
 
   scope :with_topic, ->(topic_slug) do
     topic_slug == 'all' ? all : joins(:categorisations, :topics).where(topics: { slug: topic_slug }).distinct

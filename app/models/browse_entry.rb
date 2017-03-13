@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class BrowseEntry < ActiveRecord::Base
   include HasPublicationStates
+  include IsPermissionable
 
   has_and_belongs_to_many :collections
   has_many :page_elements, dependent: :destroy, as: :positionable

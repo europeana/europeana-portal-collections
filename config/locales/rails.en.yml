@@ -33,6 +33,12 @@ en:
         feeds: What's happening Feeds
       topic:
         entity_uri: Entity Collection URI
+      user:
+        permissionable_browse_entry_ids: Permissions on Browse Entry Points
+        permissionable_feed_ids: Permissions on What's Happening Feeds
+        permissionable_gallery_ids: Permissions on Galleries
+        permissionable_landing_page_ids: Permissions on Landing Pages
+
     models:
       page/error:
         one: Error Page
@@ -42,3 +48,4 @@ en:
         one: Landing Page
         other: Landing Pages
         feeds: What's happening Feeds
+

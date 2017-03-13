@@ -6,6 +6,10 @@ empty:
   state: 1
   slug: empty
 
+curated_gallery:
+  state: 1
+  slug: curated-gallery
+
 fashion_dresses:
   state: 1
   slug: fashion-dresses
