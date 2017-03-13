@@ -3,5 +3,5 @@ module Pro
   class << self
     attr_accessor :site
   end
-  self.site = ENV['EUROPEANA_PRO_URL'] || 'http://pro.europeana.eu'
+  self.site = Rails.application.config.x.europeana[:pro_url]
 end
