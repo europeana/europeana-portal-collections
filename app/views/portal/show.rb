@@ -393,6 +393,10 @@ module Portal
       presenter.media_web_resources.any? { |wr| wr.downloadable? }
     end
 
+    def has_media?
+      presenter.media_web_resources.any?
+    end
+
     def back_url_from_referer
       referer = request.referer
       return unless referer.present?
