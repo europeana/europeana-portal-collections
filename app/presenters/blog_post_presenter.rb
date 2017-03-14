@@ -11,7 +11,7 @@ class BlogPostPresenter
   end
 
   def has_taxonomy?
-    blog_post.respond_to?(:taxonomy)
+    blog_post.respond_to?(:taxonomy) && blog_post.taxonomy.present?
   end
 
   def has_tags?
@@ -20,7 +20,7 @@ class BlogPostPresenter
   end
 
   def has_authors?
-    persons.present? || network.present?
+    has_persons? || has_network?
   end
 
   def has_label?
@@ -78,12 +78,22 @@ class BlogPostPresenter
     end
   end
 
+  def has_network?
+    blog_post.last_result_set.included.has_link?(:network) && blog_post.network.flatten.compact.present?
+  end
+
+  def has_persons?
+    blog_post.last_result_set.included.has_link?(:persons) && blog_post.persons.flatten.compact.present?
+  end
+
   def network
-    blog_post.respond_to?(:network) ? blog_post.network.flatten.compact : nil
+    return nil unless has_network?
+    blog_post.network.flatten.compact
   end
 
   def persons
-    blog_post.respond_to?(:persons) ? blog_post.persons.flatten.compact : nil
+    return nil unless has_persons?
+    blog_post.persons.flatten.compact
   end
 
   def label
