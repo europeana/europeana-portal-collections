@@ -3,6 +3,14 @@ RSpec.describe BlogPostPresenter do
   subject { described_class.new(blog_post) }
 
   let(:blog_post) { double(Pro::BlogPost) }
+  let(:last_result_set) { double(JsonApiClient::ResultSet) }
+  let(:included_data) { double(JsonApiClient::IncludedData) }
+
+  before do
+    allow(last_result_set).to receive(:included) { included_data }
+    allow(blog_post).to receive(:last_result_set) { last_result_set }
+    allow(included_data).to receive(:has_link?) { false }
+  end
 
   context 'without taxonomy' do
     it { is_expected.not_to have_taxonomy }
@@ -12,7 +20,7 @@ RSpec.describe BlogPostPresenter do
 
   context 'with taxonomy' do
     before do
-      allow(blog_post).to receive(:taxonomy) { {} }
+      allow(blog_post).to receive(:taxonomy) { { a: [] } }
     end
     it { is_expected.to have_taxonomy }
     it { is_expected.not_to have_tags }
@@ -36,6 +44,7 @@ RSpec.describe BlogPostPresenter do
   context 'with persons' do
     before do
       allow(blog_post).to receive(:persons) { [double(Pro::Person)] }
+      allow(included_data).to receive(:has_link?).with(:persons) { true }
     end
     it { is_expected.to have_authors }
   end
@@ -43,6 +52,7 @@ RSpec.describe BlogPostPresenter do
   context 'with network' do
     before do
       allow(blog_post).to receive(:network) { [double(Pro::Network)] }
+      allow(included_data).to receive(:has_link?).with(:network) { true }
     end
     it { is_expected.to have_authors }
   end
