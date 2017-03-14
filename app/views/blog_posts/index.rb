@@ -34,6 +34,7 @@ module BlogPosts
     def blog_item(post)
       presenter = BlogPostPresenter.new(post)
       {
+        has_authors: presenter.has_authors?,
         authors: presenter.authors,
         title: presenter.title,
         object_url: blog_post_path(slug: post.slug),

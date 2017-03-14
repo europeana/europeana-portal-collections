@@ -22,7 +22,7 @@ class BlogPostsController < ApplicationController
   protected
 
   def scope
-    Pro::BlogPost.includes(:network)
+    Pro::BlogPost.includes(:network, :persons)
   end
 
   def blog_posts_page

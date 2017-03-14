@@ -20,7 +20,7 @@ class BlogPostPresenter
   end
 
   def has_authors?
-    blog_post.respond_to?(:network) && blog_post.network.present?
+    persons.present? || network.present?
   end
 
   def has_label?
@@ -70,12 +70,20 @@ class BlogPostPresenter
   def authors
     return nil unless has_authors?
 
-    blog_post.network.compact.map do |network|
+    ([persons] + [network]).flatten.compact.map do |author|
       {
-        name: "#{network.first_name} #{network.last_name}",
-        url: network.url
+        name: "#{author.first_name} #{author.last_name}",
+        url: author.url
       }
     end
+  end
+
+  def network
+    blog_post.respond_to?(:network) ? blog_post.network.flatten.compact : nil
+  end
+
+  def persons
+    blog_post.respond_to?(:persons) ? blog_post.persons.flatten.compact : nil
   end
 
   def label
