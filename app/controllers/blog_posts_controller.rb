@@ -11,17 +11,17 @@ class BlogPostsController < ApplicationController
   def index
     @pagination_page = blog_posts_page
     @pagination_per = blog_posts_per
-    @blog_posts = scope.page(@pagination_page).per(@pagination_per).all
+    @blog_posts = pro_blog_posts.page(@pagination_page).per(@pagination_per).all
     @hero_image = homepage_hero_image
   end
 
   def show
-    @blog_post = scope.where(slug: params[:slug]).first
+    @blog_post = pro_blog_posts.where(slug: params[:slug]).first
   end
 
   protected
 
-  def scope
+  def pro_blog_posts
     Pro::BlogPost.includes(:network, :persons)
   end
 
