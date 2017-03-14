@@ -11,7 +11,11 @@ class BlogPostsController < ApplicationController
   def index
     @pagination_page = blog_posts_page
     @pagination_per = blog_posts_per
-    @blog_posts = pro_blog_posts.page(@pagination_page).per(@pagination_per).all
+    @blog_posts = if params.key?(:q)
+                    search_blog_posts
+                  else
+                    pro_blog_posts.page(@pagination_page).per(@pagination_per).all
+                  end
     @hero_image = homepage_hero_image
   end
 
@@ -31,5 +35,17 @@ class BlogPostsController < ApplicationController
 
   def blog_posts_per
     (params[:per_page] || 6).to_i
+  end
+
+  def search_blog_posts
+    # Necessary because custom JSON API endpoints do not support the standard
+    # JSON API DSL
+    Pro::BlogPost.search(
+      q: params[:q],
+      page: {
+        size: @pagination_per,
+        number: @pagination_page
+      }
+    )
   end
 end

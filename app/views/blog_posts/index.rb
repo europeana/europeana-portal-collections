@@ -29,6 +29,19 @@ module BlogPosts
       mustache[:blog_items] ||= @blog_posts.map { |post| blog_item(post) }
     end
 
+    def input_search
+      {
+        title: t('global.search-area.search-button-image-alt'),
+        input_name: 'q',
+        has_original: !params[:q].blank?,
+        input_original: {
+          value:  params[:q].blank? ? nil : params[:q],
+          remove: blog_posts_path
+        },
+        placeholder: t('site.search.placeholder.text')
+      }
+    end
+
     protected
 
     def blog_item(post)

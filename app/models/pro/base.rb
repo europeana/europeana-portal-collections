@@ -6,6 +6,8 @@ module Pro
   class Base < JsonApiClient::Resource
     self.site = Pro.site + '/json/'
 
+    custom_endpoint :search, on: :collection, request_method: :get
+
     def url
       [Pro.site, self.class.table_name, slug].join('/')
     end
