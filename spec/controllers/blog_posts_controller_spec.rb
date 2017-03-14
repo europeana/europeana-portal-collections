@@ -48,7 +48,7 @@ RSpec.describe BlogPostsController do
       get :index, locale: 'en'
       expect(
         a_request(:get, JSON_API_URL).
-        with(query: hash_including(include: 'network'))
+        with(query: hash_including(include: 'network,persons'))
       ).to have_been_made.once
     end
 
@@ -68,5 +68,33 @@ RSpec.describe BlogPostsController do
     end
 
     it 'does not respond to .json format' # or should it, just outputting the JSON-API response?
+  end
+
+  describe 'GET #show' do
+    it 'queries the Pro JSON-API for the post' do
+      get :show, locale: 'en', slug: 'important-news'
+      expect(
+        a_request(:get, JSON_API_URL).
+        with(query: hash_including(filter: { slug: 'important-news' }, page: { number: '1', size: '1' }))
+      ).to have_been_made.once
+    end
+
+    it 'includes related resources' do
+      get :show, locale: 'en', slug: 'important-news'
+      expect(
+        a_request(:get, JSON_API_URL).
+        with(query: hash_including(include: 'network,persons'))
+      ).to have_been_made.once
+    end
+
+    it 'returns http success' do
+      get :show, locale: 'en', slug: 'important-news'
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'defaults to HTML format' do
+      get :show, locale: 'en', slug: 'important-news'
+      expect(response.content_type).to eq('text/html')
+    end
   end
 end

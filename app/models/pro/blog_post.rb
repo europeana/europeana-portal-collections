@@ -6,5 +6,9 @@ module Pro
     def self.table_name
       'blogposts'
     end
+
+    def to_param
+      slug
+    end
   end
 end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 module Pro
   ##
-  # Network partners from Pro JSON-API.
-  class Network < Base
+  # Persons from Pro JSON-API.
+  class Person < Base
     def self.table_name
-      'network'
+      'persons'
     end
   end
 end
