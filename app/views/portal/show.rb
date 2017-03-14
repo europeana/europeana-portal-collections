@@ -362,6 +362,7 @@ module Portal
         {
           required_players: item_players,
           has_downloadable_media: has_downloadable_media?,
+          has_media: has_media?,
           external_media: field_value('aggregations.edmIsShownBy') ||
             field_value('aggregations.edmIsShownAt'),
           single_item: items.size == 1,
