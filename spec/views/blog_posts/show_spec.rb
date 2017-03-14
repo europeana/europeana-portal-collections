@@ -23,4 +23,9 @@ RSpec.describe 'blog_posts/show.html.mustache' do
     render
     expect(rendered).to include(blog_post.body)
   end
+
+  it 'has breadcrumb link to blog index' do
+    render
+    expect(rendered).to have_selector('.breadcrumbs li a[href="/en/blogs"]', text: 'Blog')
+  end
 end

@@ -26,6 +26,15 @@ module BlogPosts
       end
     end
 
+    def navigation
+      mustache[:navigation] ||= begin
+        {
+          back_url: blog_posts_path,
+          back_label: t('site.blogs.list.page-title')
+        }.reverse_merge(super)
+      end
+    end
+
     protected
 
     def presenter
