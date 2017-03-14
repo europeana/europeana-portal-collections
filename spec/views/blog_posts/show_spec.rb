@@ -11,7 +11,7 @@ RSpec.describe 'blog_posts/show.html.mustache' do
 
   before do
     assign(:blog_post, blog_post)
-    assign(:params, { slug: blog_post.slug })
+    assign(:params, slug: blog_post.slug)
   end
 
   it 'has page title with post title' do
