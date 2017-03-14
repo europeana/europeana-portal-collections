@@ -96,20 +96,4 @@ RSpec.describe BlogPostPresenter do
       expect(subject.excerpt).to end_with('word...')
     end
   end
-
-#   describe 'has_tags?' do
-#     context 'without taxonomy' do
-#       let(:blog_post) { double(Pro::BlogPost) }
-#       it { is_expected.not_to have_tags }
-#     end
-
-# #     context 'with taxonomy' do
-# #       let(:blog_post) do
-# #         double(Pro::BlogPost).tap do |post|
-# #           allow(post).to receive(:taxonomy)
-# #         end
-# #       end
-# #       it { is_expected.to have_taxonomy }
-# #     end
-#   end
 end
