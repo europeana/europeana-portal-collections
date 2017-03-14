@@ -10,9 +10,11 @@ module BlogPosts
     end
 
     def hero
-      {
-        hero_image: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil
-      }
+      mustache[:hero] ||= begin
+        {
+          hero_image: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil
+        }
+      end
     end
 
     def navigation
