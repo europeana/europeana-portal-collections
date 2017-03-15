@@ -21,7 +21,7 @@ module EDM
       end
 
       def from_api_query(value)
-        unescaped_value = value.to_s.gsub('?', '').gsub('*', '')
+        unescaped_value = value.to_s.tr('?*', '')
         registry.detect { |rights| Regexp.new(rights.pattern) =~ unescaped_value }
       end
     end
