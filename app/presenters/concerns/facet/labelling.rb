@@ -83,7 +83,7 @@ module Facet
       label_facet 'RIGHTS',
                   title: nil,
                   items: {
-                    with: ->(item) { EDM::Rights.for_api_query(item).label }
+                    with: ->(item) { EDM::Rights.from_api_query(item).label }
                   }
       label_facet 'COUNTRY',
                   i18n: 'providing_country',

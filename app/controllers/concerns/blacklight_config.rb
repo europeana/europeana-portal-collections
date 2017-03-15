@@ -84,7 +84,7 @@ module BlacklightConfig
                              hierarchical: true,
                              parent: 'REUSABILITY',
                              splice: lambda { |parent, child|
-                               rights = EDM::Rights.for_api_query(child.value)
+                               rights = EDM::Rights.from_api_query(child.value)
                                rights.present? ? (parent.value == rights.reusability.to_s) : nil
                              },
                              group: lambda { |item|

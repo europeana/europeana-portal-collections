@@ -17,12 +17,17 @@ module EDM
       end
 
       def for_api_query(value)
-        registry.detect { |rights| rights.api_query == value }
+        registry.detect { |rights| Regexp.new(rights.pattern) =~ value }
+      end
+
+      def from_api_query(value)
+        unescaped_value = value.to_s.gsub('?', '').gsub('*', '')
+        registry.detect { |rights| Regexp.new(rights.pattern) =~ unescaped_value }
       end
     end
 
     def api_query
-      super || pattern + '*'
+      super || pattern.sub(/\(.*\)\?|.\?/, '*') + '*'
     end
 
     def i18n_key
