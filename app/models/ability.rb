@@ -37,12 +37,11 @@ class Ability
     can :dashboard
     can :read, [Banner, BrowseEntry, Collection, DataProvider, Feed, Gallery,
                 HeroImage, Link, MediaObject, Page, Topic, User]
-    can :create, [BrowseEntry, Feed, Gallery]
+    can :create, [BrowseEntry, Gallery]
     can :update, [DataProvider, HeroImage, MediaObject]
     can :update, BrowseEntry.with_permissions_by(@user)
     can :publish, BrowseEntry.with_permissions_by(@user)
     can :unpublish, BrowseEntry.with_permissions_by(@user)
-    can :update, Feed.with_permissions_by(@user)
     can :update, Gallery.with_permissions_by(@user)
     can :publish, Gallery.with_permissions_by(@user)
     can :unpublish, Gallery.with_permissions_by(@user)

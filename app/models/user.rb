@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
                                                                                source_type: 'Page', source: :permissionable
   has_many :permissionable_galleries, class_name: 'Gallery', through: :permissions, source_type: 'Gallery',
                                       source: :permissionable
-  has_many :permissionable_feeds, class_name: 'Feed', through: :permissions, source_type: 'Feed',
-                                  source: :permissionable
   has_many :permissionable_browse_entries, class_name: 'BrowseEntry', through: :permissions, source_type: 'BrowseEntry',
                                            source: :permissionable
 
@@ -45,10 +43,6 @@ class User < ActiveRecord::Base
 
     def permissionable_browse_entry_ids_enum
       BrowseEntry.where(type: nil).map { |permissionable| [permissionable.title, permissionable.id] }
-    end
-
-    def permissionable_feed_ids_enum
-      Feed.all.map { |permissionable| [permissionable.name, permissionable.id] }
     end
   end
 

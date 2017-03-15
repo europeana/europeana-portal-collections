@@ -524,9 +524,6 @@ RailsAdmin.config do |config|
         field :permissionable_browse_entry_ids, :enum do
           multiple true
         end
-        field :permissionable_feed_ids, :enum do
-          multiple true
-        end
       end
     end
   end

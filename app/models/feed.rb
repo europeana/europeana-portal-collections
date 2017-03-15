@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 class Feed < ActiveRecord::Base
   include HasExternalUrls
-  include IsPermissionable
 
   has_and_belongs_to_many :pages
 

@@ -7,7 +7,6 @@ RSpec.describe User do
   it { is_expected.to have_many(:permissions).inverse_of(:user).dependent(:destroy) }
   it { is_expected.to have_many(:permissionable_landing_pages).through(:permissions).class_name('Page') }
   it { is_expected.to have_many(:permissionable_galleries).through(:permissions).class_name('Gallery') }
-  it { is_expected.to have_many(:permissionable_feeds).through(:permissions).class_name('Feed') }
   it { is_expected.to have_many(:permissionable_browse_entries).through(:permissions).class_name('BrowseEntry') }
 
   describe 'included modules' do
@@ -43,12 +42,6 @@ RSpec.describe User do
     let(:permissionable_browse_entries) { BrowseEntry.where(type: nil) }
     subject { described_class.permissionable_browse_entry_ids_enum }
     it { is_expected.to eq(permissionable_browse_entries.map { |entry| [entry.title, entry.id] }) }
-  end
-
-  describe '.permissionable_feed_ids_enum' do
-    let(:permissionable_feeds) { Feed.all }
-    subject { described_class.permissionable_feed_ids_enum }
-    it { is_expected.to eq(permissionable_feeds.map { |feed| [feed.name, feed.id] }) }
   end
 
   describe '#ability' do
