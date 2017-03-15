@@ -40,8 +40,12 @@ class Ability
     can :create, [BrowseEntry, Feed, Gallery]
     can :update, [DataProvider, HeroImage, MediaObject]
     can :update, BrowseEntry.with_permissions_by(@user)
+    can :publish, BrowseEntry.with_permissions_by(@user)
+    can :unpublish, BrowseEntry.with_permissions_by(@user)
     can :update, Feed.with_permissions_by(@user)
     can :update, Gallery.with_permissions_by(@user)
+    can :publish, Gallery.with_permissions_by(@user)
+    can :unpublish, Gallery.with_permissions_by(@user)
     can :update, Page::Landing.with_permissions_by(@user)
   end
 

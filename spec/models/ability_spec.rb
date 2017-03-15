@@ -75,6 +75,10 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:update, feed_with_editor_permissions) }
     it { is_expected.not_to be_able_to(:update, gallery_with_editor_permissions) }
     it { is_expected.not_to be_able_to(:update, browse_entry_with_editor_permissions) }
+    it { is_expected.not_to be_able_to(:publish, gallery_with_editor_permissions) }
+    it { is_expected.not_to be_able_to(:publish, browse_entry_with_editor_permissions) }
+    it { is_expected.not_to be_able_to(:unpublish, gallery_with_editor_permissions) }
+    it { is_expected.not_to be_able_to(:unpublish, browse_entry_with_editor_permissions) }
 
     it { is_expected.not_to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }
@@ -142,6 +146,10 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:update, feed_with_editor_permissions) }
     it { is_expected.to be_able_to(:update, gallery_with_editor_permissions) }
     it { is_expected.to be_able_to(:update, browse_entry_with_editor_permissions) }
+    it { is_expected.to be_able_to(:publish, gallery_with_editor_permissions) }
+    it { is_expected.to be_able_to(:publish, browse_entry_with_editor_permissions) }
+    it { is_expected.to be_able_to(:unpublish, gallery_with_editor_permissions) }
+    it { is_expected.to be_able_to(:unpublish, browse_entry_with_editor_permissions) }
 
     it { is_expected.to be_able_to(:show, draft_banner) }
     it { is_expected.to be_able_to(:show, published_banner) }
