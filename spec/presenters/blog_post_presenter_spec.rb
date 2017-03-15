@@ -46,6 +46,7 @@ RSpec.describe BlogPostPresenter do
       allow(blog_post).to receive(:persons) { [double(Pro::Person)] }
       allow(included_data).to receive(:has_link?).with(:persons) { true }
     end
+    it { is_expected.to have_included(:persons) }
     it { is_expected.to have_authors }
   end
 
@@ -54,6 +55,7 @@ RSpec.describe BlogPostPresenter do
       allow(blog_post).to receive(:network) { [double(Pro::Network)] }
       allow(included_data).to receive(:has_link?).with(:network) { true }
     end
+    it { is_expected.to have_included(:network) }
     it { is_expected.to have_authors }
   end
 

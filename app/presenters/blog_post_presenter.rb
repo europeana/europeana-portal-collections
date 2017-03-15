@@ -20,7 +20,7 @@ class BlogPostPresenter
   end
 
   def has_authors?
-    has_persons? || has_network?
+    has_included?(:network) || has_included?(:persons)
   end
 
   def has_label?
@@ -78,21 +78,19 @@ class BlogPostPresenter
     end
   end
 
-  def has_network?
-    blog_post.last_result_set.included.has_link?(:network) && blog_post.network.flatten.compact.present?
-  end
-
-  def has_persons?
-    blog_post.last_result_set.included.has_link?(:persons) && blog_post.persons.flatten.compact.present?
+  def has_included?(relation)
+    blog_post.last_result_set.included.has_link?(relation) &&
+      blog_post.respond_to?(relation) &&
+      blog_post.send(relation).flatten.compact.present?
   end
 
   def network
-    return nil unless has_network?
+    return nil unless has_included?(:network)
     blog_post.network.flatten.compact
   end
 
   def persons
-    return nil unless has_persons?
+    return nil unless has_included?(:persons)
     blog_post.persons.flatten.compact
   end
 
