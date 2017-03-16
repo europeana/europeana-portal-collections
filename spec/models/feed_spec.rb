@@ -1,8 +1,5 @@
 # frozen_string_literal: true
-require 'models/concerns/is_permissionable_examples'
 RSpec.describe Feed do
-  it_behaves_like 'permissionable'
-
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_uniqueness_of(:name) }
   it { is_expected.to validate_uniqueness_of(:url) }

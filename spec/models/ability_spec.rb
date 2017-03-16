@@ -13,7 +13,6 @@ RSpec.describe Ability do
   let(:draft_landing_page) { pages(:draft_landing_page) }
   let(:published_landing_page) { pages(:music_collection) }
   let(:landing_page_with_editor_permissions) { pages(:fashion_collection) }
-  let(:feed_with_editor_permissions) { feeds(:fashion_tumblr) }
   let(:gallery_with_editor_permissions) { galleries(:fashion_dresses) }
   let(:browse_entry_with_editor_permissions) { browse_entries(:paintings_topic) }
 
@@ -72,7 +71,6 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:manage, User.new) }
 
     it { is_expected.not_to be_able_to(:update, landing_page_with_editor_permissions) }
-    it { is_expected.not_to be_able_to(:update, feed_with_editor_permissions) }
     it { is_expected.not_to be_able_to(:update, gallery_with_editor_permissions) }
     it { is_expected.not_to be_able_to(:update, browse_entry_with_editor_permissions) }
     it { is_expected.not_to be_able_to(:publish, gallery_with_editor_permissions) }
@@ -116,7 +114,7 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:create, BrowseEntry.new) }
     it { is_expected.not_to be_able_to(:create, Collection.new) }
     it { is_expected.not_to be_able_to(:create, DataProvider.new) }
-    it { is_expected.to be_able_to(:create, Feed.new) }
+    it { is_expected.not_to be_able_to(:create, Feed.new) }
     it { is_expected.to be_able_to(:create, Gallery.new) }
     it { is_expected.not_to be_able_to(:create, HeroImage.new) }
     it { is_expected.not_to be_able_to(:create, Page.new) }
@@ -143,7 +141,6 @@ RSpec.describe Ability do
     it { is_expected.not_to be_able_to(:update, User.new) }
 
     it { is_expected.to be_able_to(:update, landing_page_with_editor_permissions) }
-    it { is_expected.to be_able_to(:update, feed_with_editor_permissions) }
     it { is_expected.to be_able_to(:update, gallery_with_editor_permissions) }
     it { is_expected.to be_able_to(:update, browse_entry_with_editor_permissions) }
     it { is_expected.to be_able_to(:publish, gallery_with_editor_permissions) }
@@ -183,7 +180,6 @@ RSpec.describe Ability do
     it { is_expected.to be_able_to(:manage, User.new) }
 
     it { is_expected.to be_able_to(:manage, landing_page_with_editor_permissions) }
-    it { is_expected.to be_able_to(:manage, feed_with_editor_permissions) }
     it { is_expected.to be_able_to(:manage, gallery_with_editor_permissions) }
     it { is_expected.to be_able_to(:manage, browse_entry_with_editor_permissions) }
 
