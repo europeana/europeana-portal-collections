@@ -17,7 +17,7 @@ module EDM
       end
 
       def for_api_query(value)
-        registry.detect { |rights| value.match(rights.pattern)}
+        registry.detect { |rights| value.match(rights.pattern) }
       end
 
       def from_api_query(value)
