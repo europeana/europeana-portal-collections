@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'models/concerns/is_permissionable_examples'
 RSpec.describe Gallery do
   before do
     stub_request(:get, Europeana::API.url + '/v2/search.json').
@@ -48,6 +49,8 @@ RSpec.describe Gallery do
   def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/pic/%{n}.html')
     (1..number).map { |n| format(format, n: n) }.join(' ')
   end
+
+  it_behaves_like 'permissionable'
 
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
   it { is_expected.to have_many(:topics).through(:categorisations) }
@@ -121,7 +124,7 @@ RSpec.describe Gallery do
 
   describe '#image_portal_urls' do
     it 'should return a new line-separated list of gallery image record URLs' do
-      expect(galleries(:fashion_dresses).image_portal_urls).to eq("http://www.europeana.eu/portal/record/dresses/1.html\n\nhttp://www.europeana.eu/portal/record/dresses/2.html")
+      expect(galleries(:fashion_dresses).image_portal_urls).to eq("http://www.europeana.eu/portal/record/sample/record1.html\n\nhttp://www.europeana.eu/portal/record/dresses/2.html")
     end
   end
 
@@ -183,11 +186,11 @@ RSpec.describe Gallery do
     expect(gallery.errors[:image_portal_urls]).not_to be_none
   end
 
-  it 'should require 6-24 images' do
+  it 'should require 6-48 images' do
     gallery = galleries(:empty)
-    (1..30).each do |number|
+    (1..50).each do |number|
       gallery.image_portal_urls = gallery_image_portal_urls(number: number)
-      if number < 6 || number > 24
+      if number < 6 || number > 48
         expect(gallery).not_to be_valid
         expect(gallery.errors[:image_portal_urls]).not_to be_none
       else

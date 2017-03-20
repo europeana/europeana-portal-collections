@@ -15,6 +15,21 @@ module Galleries
       [{ name: 'pageName', value: 'collections/galleries' }]
     end
 
+    def head_meta
+      mustache[:head_meta] ||= begin
+        description = @gallery.description
+        @gallery.description.blank? ? t('site.galleries.description-default') : @gallery.description
+        head_meta = gallery_head_meta + [
+          { meta_name: 'description', content: description },
+          { meta_property: 'og:description', content: description },
+          { meta_property: 'og:image', content: @hero_image_url },
+          { meta_property: 'og:title', content: @gallery.title },
+          { meta_property: 'og:sitename', content: @gallery.title }
+        ]
+        head_meta + super
+      end
+    end
+
     def gallery_social
       gallery_social_links.merge(social_title: t('site.galleries.share.one'))
     end
@@ -34,7 +49,7 @@ module Galleries
 
     def gallery_hero_content
       {
-        url: gallery_items_content.first[:full_url],
+        url: @hero_image_url,
         title: @gallery.title,
         subtitle: @gallery.description
       }
@@ -56,7 +71,9 @@ module Galleries
       return nil if presenter.nil?
       {
         title: presenter.title,
-        creator: presenter.field_value('dataProvider'),
+        creator: presenter.field_value('dcCreator'),
+        data_provider: presenter.field_value('dataProvider'),
+        creation_date: presenter.field_value('year'),
         thumb_url: gallery_image_thumbnail(image),
         full_url: presenter.field_value('aggregations.edmIsShownBy'),
         rights: presenter.simple_rights_label_data,

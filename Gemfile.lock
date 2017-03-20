@@ -24,8 +24,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: de07d2af8afd3c8af82e7b25728dd2c05fdd01bb
-  ref: de07d2a
+  revision: 3dc5b61363c89ee8e4df2c4dd3299536e7527d43
+  ref: 3dc5b61
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -355,6 +355,12 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.6)
+    json_api_client (1.5.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      addressable (~> 2.2)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.9)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -632,6 +638,7 @@ DEPENDENCIES
   htmlcompressor (= 0.3)
   i18n_data
   jbuilder (~> 2.6.0)
+  json_api_client
   localeapp (~> 1.0)
   lograge
   logstash-event

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class GalleriesController < ApplicationController
   include CacheHelper
+  include HomepageHeroImage
+
   attr_reader :body_cache_key
 
   def index
@@ -24,7 +26,13 @@ class GalleriesController < ApplicationController
     images = @gallery.images
 
     @body_cache_key = 'explore/' + @gallery.cache_key
-    @documents = search_api_for_image_metadata(images) unless body_cached?
+
+    if body_cached?
+      @hero_image_url = gallery_hero_image_from_cache
+    else
+      @documents = search_api_for_image_metadata(images)
+      set_gallery_hero_image_cache(images.first)
+    end
 
     respond_to do |format|
       format.html
@@ -48,17 +56,22 @@ class GalleriesController < ApplicationController
     search_results(blacklight_api_params_for_images(images)).last
   end
 
+  def gallery_hero_image_from_cache
+    Rails.cache.fetch(cache_key(@body_cache_key) + '/hero_image_url')
+  end
+
+  def set_gallery_hero_image_cache(image)
+    image_document = @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
+    @hero_image_url = image_document['edmIsShownBy'].first
+    Rails.cache.write(cache_key(@body_cache_key) + '/hero_image_url', @hero_image_url, expires_in: 24.hours + 1.minute)
+  end
+
   def blacklight_api_params_for_images(images)
     { q: Gallery.search_api_query_for_images(images), per_page: 100 }
   end
 
   def search_api_query_for_images(images)
     'europeana_id:("' + images.map(&:europeana_record_id).join('" OR "') + '")'
-  end
-
-  def homepage_hero_image
-    landing_page = Page::Landing.find_by_slug('')
-    landing_page.nil? ? nil : landing_page.hero_image
   end
 
   def gallery_page

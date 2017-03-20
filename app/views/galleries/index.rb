@@ -2,6 +2,7 @@
 module Galleries
   class Index < ApplicationView
     include GalleryDisplayingView
+    include PaginatedView
 
     def bodyclass
       'channel_landing'
@@ -13,6 +14,18 @@ module Galleries
 
     def js_vars
       [{ name: 'pageName', value: 'collections/galleries' }]
+    end
+
+    def head_meta
+      mustache[:head_meta] ||= begin
+        gallery_head_meta + [
+          { meta_name: 'description', content: t('site.galleries.description') },
+          { meta_property: 'og:description', content: t('site.galleries.description') },
+          { meta_property: 'og:image', content: @hero_image.file.present? ? URI.join(root_url, @hero_image.file.url) : nil },
+          { meta_property: 'og:title', content: page_title },
+          { meta_property: 'og:sitename', content: page_title }
+        ] + super
+      end
     end
 
     def galleries_social
@@ -31,36 +44,17 @@ module Galleries
     end
 
     def navigation
-      {
-        pagination: {
-          prev_url: prev_page.url,
-          next_url: next_page.url,
-          is_first_page: @galleries.first_page?,
-          is_last_page: @galleries.last_page?,
-          pages: navigation_pagination_pages
-        }
-      }.reverse_merge(super)
-    end
-
-    private
-
-    def navigation_pagination_pages
-      (1..@galleries.total_pages).map do |number|
-        page = Kaminari::Helpers::Page.new(self, page: number)
+      mustache[:navigation] ||= begin
         {
-          url: page.url,
-          index: number,
-          is_current: number == @galleries.current_page
-        }
+          pagination: pagination_navigation
+        }.reverse_merge(super)
       end
     end
 
-    def prev_page
-      @prev_page ||= Kaminari::Helpers::PrevPage.new(self, current_page: @galleries.current_page)
-    end
+    protected
 
-    def next_page
-      @next_page ||= Kaminari::Helpers::NextPage.new(self, current_page: @galleries.current_page)
+    def paginated_set
+      @galleries
     end
 
     def hero_content

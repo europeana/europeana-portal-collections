@@ -2,7 +2,7 @@
 RSpec.describe GalleryImagesController do
   describe '#show' do
     context 'when gallery is published' do
-      let(:gallery) { Gallery.published.first }
+      let(:gallery) { galleries(:fashion_dresses) }
       let(:image) { gallery.images.first }
       let(:params) { { locale: 'en', gallery_slug: gallery.slug, position: image.position, format: 'json' } }
 

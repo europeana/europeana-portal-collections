@@ -55,6 +55,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :blog_posts, only: [:show, :index], param: :slug, path: 'blogs'
+
     get 'entities/suggest'
 
     get 'debug/exception', to: 'debug#exception'

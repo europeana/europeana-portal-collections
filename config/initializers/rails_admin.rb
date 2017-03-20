@@ -124,7 +124,11 @@ RailsAdmin.config do |config|
       field :settings_default_search_layout, :enum
     end
     edit do
-      field :key
+      field :key do
+        read_only do
+          true if bindings[:object].persisted?
+        end
+      end
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
@@ -408,12 +412,14 @@ RailsAdmin.config do |config|
   config.model 'Page::Landing' do
     object_label_method :title
     list do
+      field :collection
       field :slug
       field :title
       field :hero_image_file, :paperclip
       field :state
     end
     show do
+      field :collection
       field :slug
       field :title do
         searchable 'page_translations.title'
@@ -433,7 +439,16 @@ RailsAdmin.config do |config|
       field :feeds
     end
     edit do
-      field :slug
+      field :collection do
+        visible do
+          true unless bindings[:object].persisted?
+        end
+        associated_collection_scope do
+          proc do |scope|
+            scope.published.includes(:landing_page).where(pages: { collection_id: nil })
+          end
+        end
+      end
       field :title
       field :settings_layout_type, :enum
       field :body, :text do
@@ -494,6 +509,22 @@ RailsAdmin.config do |config|
       field :password
       field :password_confirmation
       field :role
+      group :permissions do
+        visible do
+          # Checking for persisted here as a new record won't ever have the editor role,
+          # unless it was sent back due to validation errors. This keeps the CMS UI consistent.
+          true if bindings[:object].role == 'editor' && bindings[:object].persisted?
+        end
+        field :permissionable_landing_page_ids, :enum do
+          multiple true
+        end
+        field :permissionable_gallery_ids, :enum do
+          multiple true
+        end
+        field :permissionable_browse_entry_ids, :enum do
+          multiple true
+        end
+      end
     end
   end
 end

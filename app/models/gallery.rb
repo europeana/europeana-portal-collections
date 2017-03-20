@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 class Gallery < ActiveRecord::Base
-  NUMBER_OF_IMAGES = 6..24
+  NUMBER_OF_IMAGES = 6..48
 
   include HasPublicationStates
   include IsCategorisable
+  include IsPermissionable
 
   scope :with_topic, ->(topic_slug) do
     topic_slug == 'all' ? all : joins(:categorisations, :topics).where(topics: { slug: topic_slug }).distinct

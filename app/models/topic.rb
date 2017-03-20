@@ -18,7 +18,6 @@ class Topic < ActiveRecord::Base
       joins('INNER JOIN galleries on (categorisations.categorisable_id = galleries.id)').
       where(categorisations: { categorisable_type: 'Gallery' }).
       where(galleries: { state: 1 })
-
   end
 
   def to_param

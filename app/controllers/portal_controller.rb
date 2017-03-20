@@ -49,13 +49,19 @@ class PortalController < ApplicationController
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
     @hierarchy = document_hierarchy(@document)
-    if @hierarchy.nil?
-      @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
-    else
+    @annotations = document_annotations(@document)
+
+    # This param check gives us a way to prevent similar items being loaded
+    # during page generation by the URL param `?similar=later`, so that we
+    # can test in one environment the relative performance of both approaches.
+    # @todo remove conditional when a decision is made as to which is better
+    @similar_items_later = (params[:similar] == 'later')
+    if @hierarchy.present? || @similar_items_later
       @mlt_response = nil
       @similar = []
+    else
+      @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
     end
-    @annotations = document_annotations(@document)
 
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 
