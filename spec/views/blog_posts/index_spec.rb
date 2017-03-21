@@ -13,8 +13,8 @@ RSpec.describe 'blog_posts/index.html.mustache' do
   end
 
   before do
-    assign(:pagination_page, pagination_page)
-    assign(:pagination_per, pagination_per)
+    allow(view).to receive(:pagination_page) { pagination_page }
+    allow(view).to receive(:pagination_per) { pagination_per }
     assign(:blog_posts, blog_posts)
   end
 
