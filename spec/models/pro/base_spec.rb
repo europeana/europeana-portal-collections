@@ -10,9 +10,11 @@ RSpec.describe Pro::Base do
 
   describe '#to_param' do
     before do
-      class Pro::Base::TestSubclass < Pro::Base; end
+      module Pro
+        class TestSubclass < Pro::Base; end
+      end
     end
-    let(:subclass) { Pro::Base::TestSubclass }
+    let(:subclass) { Pro::TestSubclass }
     subject { subclass.new }
 
     context 'when resource has slug attr' do
