@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ##
 # View methods for pages with navigation
 module NavigableView
@@ -120,7 +121,8 @@ module NavigableView
       link_item(t('global.navigation.agents'), explore_people_path(format: 'html'),
                 is_current: current_page?(explore_people_path(format: 'html'))),
       link_item(t('global.navigation.periods'), explore_periods_path(format: 'html'),
-                is_current: current_page?(explore_periods_path(format: 'html')))
+                is_current: current_page?(explore_periods_path(format: 'html'))),
+      navigation_global_primary_nav_galleries
     ]
   end
 
@@ -136,6 +138,23 @@ module NavigableView
     feed_items = feed_entry_nav_items(feed.url, 6)
     feed_items << link_item(t('global.navigation.all_blog_posts'), feed.html_url,
                             is_morelink: true)
+  end
+
+  def navigation_global_primary_nav_galleries
+    {
+      text: t('global.navigation.galleries'),
+      is_current: controller.controller_name == 'galleries',
+      submenu: {
+        items: navigation_global_primary_nav_galleries_submenu_items
+      }
+    }
+  end
+
+  def navigation_global_primary_nav_galleries_submenu_items
+    Gallery.published.order(published_at: :desc).map do |gallery|
+      link_item(gallery.title, gallery_path(gallery),
+                is_current: current_page?(gallery_path(gallery)))
+    end << link_item(t('global.navigation.all_galleries'), galleries_path, is_morelink: true)
   end
 
   def utility_nav_items_submenu_items
