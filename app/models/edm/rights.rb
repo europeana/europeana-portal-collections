@@ -16,13 +16,14 @@ module EDM
         registry.detect { |rights| string.match(rights.pattern) }
       end
 
-      def for_api_query(value)
-        registry.detect { |rights| rights.api_query == value }
+      def from_api_query(value)
+        simple_value = value.to_s.tr('?*', '')
+        registry.detect { |rights| simple_value.match(rights.pattern) }
       end
     end
 
     def api_query
-      super || pattern + '*'
+      pattern.gsub(/\(.*\)\?|.\?/, '*') + '*'
     end
 
     def i18n_key
