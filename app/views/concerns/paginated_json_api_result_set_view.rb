@@ -14,8 +14,8 @@ module PaginatedJsonApiResultSetView
       # JsonApiClient::ResultSet#current_page always returns 1 with
       # `paginated_set.current_page`
 
-      # Get it out of the controller-assigned var instead
-      @pagination_page
+      # Get it out of the controller instead
+      pagination_page
     end
   end
 
@@ -24,8 +24,8 @@ module PaginatedJsonApiResultSetView
       # JsonApiClient::ResultSet#per_page always returns number in *this* page
       # with `paginated_set.per_page`
 
-      # Get it out of the controller-assigned var instead
-      @pagination_per
+      # Get it out of the controller instead
+      pagination_per
     end
   end
 

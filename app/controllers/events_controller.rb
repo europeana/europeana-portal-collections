@@ -4,12 +4,13 @@
 # JSON API.
 #
 # @todo Exception handling when `JsonApiClient` requests fail
-# @todo Extract pagination into a controller concern
 class EventsController < ApplicationController
+  include PaginatedController
+
+  self.pagination_per_default = 6
+
   def index
-    @pagination_page = events_page
-    @pagination_per = events_per
-    @events = pro_events.page(@pagination_page).per(@pagination_per).all
+    @events = pro_events.page(pagination_page).per(pagination_per).all
   end
 
   def show
@@ -20,13 +21,5 @@ class EventsController < ApplicationController
 
   def pro_events
     Pro::Event.includes(:network, :persons)
-  end
-
-  def events_page
-    (params[:page] || 1).to_i
-  end
-
-  def events_per
-    (params[:per_page] || 6).to_i
   end
 end
