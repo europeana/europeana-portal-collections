@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# rubocop:disable all
 module RailsAdmin
   module Config
     module Fields
@@ -28,9 +29,11 @@ module RailsAdmin
               end
             end
             text
+
           end
         end
       end
     end
   end
 end
+# rubocop:enable all
