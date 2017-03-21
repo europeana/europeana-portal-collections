@@ -8,9 +8,8 @@ module Portal
 
     def js_vars
       [
-        { name: 'pageName', value: 'portal/index' },
         { name: 'collectionName', value: within_collection? ? current_collection.key : '' }
-      ]
+      ] + super
     end
 
     def grid_view_active?
