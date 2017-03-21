@@ -151,10 +151,10 @@ module NavigableView
   end
 
   def navigation_global_primary_nav_galleries_submenu_items
-    Gallery.published.order(published_at: :desc).map do |gallery|
+    Gallery.published.order(published_at: :desc).limit(6).map do |gallery|
       link_item(gallery.title, gallery_path(gallery),
                 is_current: current_page?(gallery_path(gallery)))
-    end << link_item(t('global.navigation.all_galleries'), galleries_path, is_morelink: true)
+    end << link_item(t('global.navigation.all_galleries'), galleries_path, is_morelink: true, is_current: current_page?(galleries_path))
   end
 
   def utility_nav_items_submenu_items
