@@ -6,6 +6,10 @@ module Pro
   class Base < JsonApiClient::Resource
     self.site = Pro.site + '/json/'
 
+    def to_param
+      respond_to?(:slug) ? slug : nil
+    end
+
     def url
       [Pro.site, self.class.table_name, slug].join('/')
     end

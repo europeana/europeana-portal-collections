@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 RSpec.describe GalleriesController do
+  describe 'concerns' do
+    subject { described_class }
+    it { is_expected.to include(CacheHelper) }
+    it { is_expected.to include(HomepageHeroImage) }
+    it { is_expected.to include(PaginatedController) }
+  end
+
   describe 'GET #index' do
     it 'returns http success' do
       get :index, locale: 'en'

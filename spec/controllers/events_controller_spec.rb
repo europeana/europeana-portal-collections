@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-RSpec.describe BlogPostsController do
-  let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogposts(\?|\z)} }
+RSpec.describe EventsController do
+  let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events(\?|\z)} }
   let(:json_api_content_type) { 'application/vnd.api+json' }
 
   before do
@@ -18,7 +18,6 @@ RSpec.describe BlogPostsController do
 
   describe 'concerns' do
     subject { described_class }
-    it { is_expected.to include(HomepageHeroImage) }
     it { is_expected.to include(PaginatedController) }
   end
 
@@ -30,7 +29,7 @@ RSpec.describe BlogPostsController do
       ).to have_been_made.once
     end
 
-    it 'requests 6 blog posts' do
+    it 'requests 6 event posts' do
       get :index, locale: 'en'
       expect(
         a_request(:get, json_api_url).
@@ -63,9 +62,9 @@ RSpec.describe BlogPostsController do
       expect(response).to have_http_status(:success)
     end
 
-    it 'assigns result set to @blog_posts' do
+    it 'assigns result set to @events' do
       get :index, locale: 'en'
-      expect(assigns(:blog_posts)).to be_a(JsonApiClient::ResultSet)
+      expect(assigns(:events)).to be_a(JsonApiClient::ResultSet)
     end
 
     it 'defaults to HTML format' do
@@ -78,15 +77,15 @@ RSpec.describe BlogPostsController do
 
   describe 'GET #show' do
     it 'queries the Pro JSON-API for the post' do
-      get :show, locale: 'en', slug: 'important-news'
+      get :show, locale: 'en', slug: 'conference'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(filter: { slug: 'important-news' }, page: { number: '1', size: '1' }))
+        with(query: hash_including(filter: { slug: 'conference' }, page: { number: '1', size: '1' }))
       ).to have_been_made.once
     end
 
     it 'includes related resources' do
-      get :show, locale: 'en', slug: 'important-news'
+      get :show, locale: 'en', slug: 'conference'
       expect(
         a_request(:get, json_api_url).
         with(query: hash_including(include: 'network,persons'))
@@ -94,12 +93,12 @@ RSpec.describe BlogPostsController do
     end
 
     it 'returns http success' do
-      get :show, locale: 'en', slug: 'important-news'
+      get :show, locale: 'en', slug: 'conference'
       expect(response).to have_http_status(:success)
     end
 
     it 'defaults to HTML format' do
-      get :show, locale: 'en', slug: 'important-news'
+      get :show, locale: 'en', slug: 'conference'
       expect(response.content_type).to eq('text/html')
     end
   end
