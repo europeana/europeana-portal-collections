@@ -49,8 +49,14 @@ module PaginatedJsonApiResultSetView
       # `paginated_set.total_pages`
 
       # Calculate it ourselves instead
-      (pagination_total / pagination_per_page) +
-        ((pagination_total / pagination_per_page).zero? ? 0 : 1)
+      if pagination_total.zero?
+        0
+      elsif pagination_total < pagination_per_page
+        1
+      else
+        (pagination_total / pagination_per_page) +
+          ((pagination_total / pagination_per_page).zero? ? 0 : 1)
+      end
     end
   end
 end
