@@ -29,7 +29,24 @@ module BlogPosts
       mustache[:blog_items] ||= @blog_posts.map { |post| blog_item(post) }
     end
 
+    def blogs_filter_options
+      {
+        filter_name: 'theme',
+        options: blogs_filter_options_options
+      }
+    end
+
     protected
+
+    def blogs_filter_options_options
+      [
+        { label: t('global.actions.filter-all'), value: 'all' },
+        { label: Topic.find_by_slug('fashion').label, value: 'fashion' }
+      ].tap do |options|
+        selected_option = options.delete(options.detect { |option| option[:value] == @selected_theme })
+        options.unshift(selected_option) unless selected_option.nil?
+      end
+    end
 
     def blog_item(post)
       presenter = BlogPostPresenter.new(post)
