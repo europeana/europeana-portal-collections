@@ -2,12 +2,15 @@
 class GalleriesController < ApplicationController
   include CacheHelper
   include HomepageHeroImage
+  include PaginatedController
+
+  self.pagination_per_default = 24
 
   attr_reader :body_cache_key
 
   def index
     @galleries = Gallery.includes(:images).published.order(published_at: :desc).
-                 page(gallery_page).per(gallery_per).with_topic(gallery_topic)
+                 page(pagination_page).per(pagination_per).with_topic(gallery_topic)
     @selected_topic = gallery_topic
     images = gallery_images_for_foyer(@galleries)
     @hero_image = homepage_hero_image
@@ -72,14 +75,6 @@ class GalleriesController < ApplicationController
 
   def search_api_query_for_images(images)
     'europeana_id:("' + images.map(&:europeana_record_id).join('" OR "') + '")'
-  end
-
-  def gallery_page
-    (params[:page] || 1).to_i
-  end
-
-  def gallery_per
-    (params[:per_page] || 24).to_i
   end
 
   def gallery_topic
