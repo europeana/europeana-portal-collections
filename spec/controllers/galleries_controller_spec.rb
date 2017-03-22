@@ -101,7 +101,7 @@ RSpec.describe GalleriesController do
     end
 
     context 'when requesting as an atom feed' do
-      let(:format) {'atom'}
+      let(:format) { 'atom' }
 
       it 'returns http success' do
         get :index, locale: 'en', format: format
@@ -113,8 +113,8 @@ RSpec.describe GalleriesController do
         ids = Gallery.published.map(&:images).flatten.map(&:europeana_record_id)
         api_query = %[europeana_id:("#{ids.join('" OR "')}")]
         expect(an_api_search_request.
-            with(query: hash_including(query: api_query))).
-            to have_been_made.at_least_once
+          with(query: hash_including(query: api_query))).
+          to have_been_made.at_least_once
       end
 
       it 'assigns image metadata to @documents' do
