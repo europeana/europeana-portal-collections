@@ -7,7 +7,9 @@ module Portal
     include PaginatedView
 
     def js_vars
-      [{ name: 'pageName', value: 'portal/index' }]
+      super + [
+        { name: 'collectionName', value: within_collection? ? current_collection.key : '' }
+      ]
     end
 
     def grid_view_active?
