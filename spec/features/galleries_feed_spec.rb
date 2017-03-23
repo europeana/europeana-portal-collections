@@ -10,7 +10,7 @@ RSpec.feature 'Galleries atom feed' do
 
       expect(parsed_feed.title).to eq('Europeana - Galleries')
       expect(parsed_feed.url).to eq('http://www.example.com')
-      expect(parsed_feed.entries.count).to  be > 0
+      expect(parsed_feed.entries.count).to be > 0
     end
   end
 
@@ -19,9 +19,9 @@ RSpec.feature 'Galleries atom feed' do
       visit '/en/explore/galleries.atom'
 
       parsed_feed = Feedjira::Feed.parse_with(Feedjira::Parser::Atom, page.body)
-      empty_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:empty).id}")}
-      curated_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:curated_gallery).id}")}
-      fashion_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:fashion_dresses).id}")}
+      empty_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:empty).id}") }
+      curated_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:curated_gallery).id}") }
+      fashion_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:fashion_dresses).id}") }
 
       expect(empty_entry).to_not be(nil)
       expect(empty_entry.summary).to include(galleries(:empty).title)
@@ -39,10 +39,10 @@ RSpec.feature 'Galleries atom feed' do
 
       parsed_feed = Feedjira::Feed.parse_with(Feedjira::Parser::Atom, page.body)
 
-      fashion_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:fashion_dresses).id}")}
-      
+      fashion_entry = parsed_feed.entries.detect { |entry| entry.id.include?("Gallery/#{galleries(:fashion_dresses).id}") }
+
       expect(fashion_entry).to_not be(nil)
-      expect(parsed_feed.entries.count).to  eq(1)
+      expect(parsed_feed.entries.count).to eq(1)
     end
   end
 end
