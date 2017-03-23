@@ -12,15 +12,15 @@ class BlogPostsController < ApplicationController
 
   def index
     @blog_posts = Pro::BlogPost.includes(:network, :persons).
-                    where(blog_post_filters).
-                    page(pagination_page).per(pagination_per).all
+                  where(blog_post_filters).
+                  page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
     @selected_theme = blog_posts_theme
   end
 
   def show
     @blog_post = Pro::BlogPost.includes(:network, :persons).
-                   where(slug: params[:slug]).first
+                 where(slug: params[:slug]).first
   end
 
   protected
