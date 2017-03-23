@@ -6,7 +6,7 @@ module Pro
   class Base < JsonApiClient::Resource
     self.site = Pro.site + '/json/'
 
-    self.connection do |connection|
+    connection do |connection|
       # Log and time JSON API request URLs
       connection.use Faraday::Request::Instrumentation
     end
