@@ -1,9 +1,20 @@
+# frozen_string_literal: true
 def entry_summary(gallery)
   image_count = gallery.images.count
-  document = @documents.detect { |document| document.fetch(:id, nil) == gallery.images.first.europeana_record_id }
-  presenter = Document::SearchResultPresenter.new(document, controller)
-  image_url = presenter.field_value('edmPreview')
-  "<h2>#{gallery.title} <span>(#{image_count} #{t('global.labels.images')})</span></h2><img src=\"#{image_url}\"/><p>#{gallery.description}<p>"
+  unless gallery.images.count.zero?
+    document = @documents.detect { |doc| doc.fetch(:id, nil) == gallery.images.first.europeana_record_id }
+    if document
+      presenter = Document::SearchResultPresenter.new(document, controller)
+      image_url = presenter.field_value('edmPreview')
+    end
+  end
+  image_url ||= @hero_image && @hero_image.file.present? ? @hero_image.file.url : nil
+
+  %[
+    <h2>#{gallery.title} <span>(#{image_count} #{t('global.labels.images')})</span></h2>
+    <img src=\"#{image_url}\"/>
+    <p>#{gallery.description}<p>
+  ]
 end
 
 atom_feed do |feed|

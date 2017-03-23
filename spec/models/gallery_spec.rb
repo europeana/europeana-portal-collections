@@ -124,7 +124,7 @@ RSpec.describe Gallery do
 
   describe '#image_portal_urls' do
     it 'should return a new line-separated list of gallery image record URLs' do
-      expect(galleries(:fashion_dresses).image_portal_urls).to eq("http://www.europeana.eu/portal/record/sample/record1.html\n\nhttp://www.europeana.eu/portal/record/dresses/2.html")
+      expect(galleries(:fashion_dresses).image_portal_urls).to eq("http://www.europeana.eu/portal/record/sample/record1.html\n\nhttp://www.europeana.eu/portal/record/sample/record2.html")
     end
   end
 
