@@ -10,16 +10,12 @@ class EventsController < ApplicationController
   self.pagination_per_default = 6
 
   def index
-    @events = pro_events.page(pagination_page).per(pagination_per).all
+    @events = Pro::Event.includes(:locations, :network, :persons).
+              page(pagination_page).per(pagination_per).all
   end
 
   def show
-    @event = pro_events.where(slug: params[:slug]).first
-  end
-
-  protected
-
-  def pro_events
-    Pro::Event.includes(:network, :persons)
+    @event = Pro::Event.includes(:locations, :network, :persons).
+             where(slug: params[:slug]).first
   end
 end
