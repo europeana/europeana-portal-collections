@@ -49,7 +49,7 @@ module BlogPosts
     end
 
     def blog_item(post)
-      presenter = BlogPostPresenter.new(post)
+      presenter = BlogPostPresenter.new(self, post)
       {
         has_authors: presenter.has_authors?,
         authors: presenter.authors,

@@ -12,28 +12,41 @@ class BlogPostsController < ApplicationController
 
   def index
     @blog_posts = Pro::BlogPost.includes(:network, :persons).
-                  where(blog_post_filters).
+                  where(filters).
                   page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
-    @selected_theme = blog_posts_theme
+    @selected_theme = theme
   end
 
   def show
     @blog_post = Pro::BlogPost.includes(:network, :persons).
+                 where(filters).
                  where(slug: params[:slug]).first
+
+    fail JsonApiClient::Errors::NotFound.new(request.original_url) if @blog_post.nil?
   end
 
   protected
 
-  def blog_post_filters
-    { tags: 'culturelover' }.tap do |filters|
-      if blog_posts_theme == 'fashion'
-        filters[:blogs] = 'Europeana Fashion Blog'
-      end
+  def filters
+    {}.tap do |filters|
+      filters[:blogs] = theme_filters[theme.to_sym]
+      filters[:tags] = tag unless tag.nil?
     end
   end
 
-  def blog_posts_theme
+  def theme
     params[:theme] || 'all'
+  end
+
+  def tag
+    params[:tag]
+  end
+
+  def theme_filters
+    {
+      all: 'europeana-fashion', # comma-separated list of all blogs to include
+      fashion: 'europeana-fashion'
+    }
   end
 end
