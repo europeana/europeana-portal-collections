@@ -11,7 +11,7 @@ RSpec.describe BlogPostsController do
            }).
       to_return(
         status: 200,
-        body: '{"meta": {"count": 0, "total": 0}, "data":[]}',
+        body: '{"meta": {"count": 0, "total": 0}, "data": [ { "id": 1, "type": "blogposts" } ]}',
         headers: { 'Content-Type' => json_api_content_type }
       )
   end
@@ -81,7 +81,7 @@ RSpec.describe BlogPostsController do
       get :show, locale: 'en', slug: 'important-news'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(filter: { slug: 'important-news' }, page: { number: '1', size: '1' }))
+        with(query: hash_including(filter: { blogs: 'europeana-fashion', slug: 'important-news' }, page: { number: '1', size: '1' }))
       ).to have_been_made.once
     end
 
