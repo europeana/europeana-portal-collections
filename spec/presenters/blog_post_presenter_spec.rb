@@ -9,58 +9,8 @@ RSpec.describe BlogPostPresenter do
   before do
     allow(last_result_set).to receive(:included) { included_data }
     allow(blog_post).to receive(:last_result_set) { last_result_set }
+    allow(blog_post).to receive(:has_taxonomy?) { true }
     allow(included_data).to receive(:has_link?) { false }
-  end
-
-  context 'without taxonomy' do
-    it { is_expected.not_to have_taxonomy }
-    it { is_expected.not_to have_tags }
-    it { is_expected.not_to have_label }
-  end
-
-  context 'with taxonomy' do
-    before do
-      allow(blog_post).to receive(:taxonomy) { { a: [] } }
-    end
-    it { is_expected.to have_taxonomy }
-    it { is_expected.not_to have_tags }
-    it { is_expected.not_to have_label }
-
-    context 'with tags' do
-      before do
-        allow(blog_post).to receive(:taxonomy) { { tags: ['a'] } }
-      end
-      it { is_expected.to have_tags }
-    end
-
-    context 'with blogs' do
-      before do
-        allow(blog_post).to receive(:taxonomy) { { blogs: { '/path' => 'interesting blog' } } }
-      end
-      it { is_expected.to have_label }
-    end
-  end
-
-  context 'with persons' do
-    before do
-      allow(blog_post).to receive(:persons) { [double(Pro::Person)] }
-      allow(included_data).to receive(:has_link?).with(:persons) { true }
-    end
-    it { is_expected.to have_included(:persons) }
-    it { is_expected.to have_authors }
-  end
-
-  context 'with network' do
-    before do
-      allow(blog_post).to receive(:network) { [double(Pro::Network)] }
-      allow(included_data).to receive(:has_link?).with(:network) { true }
-    end
-    it { is_expected.to have_included(:network) }
-    it { is_expected.to have_authors }
-  end
-
-  context 'without persons or network' do
-    it { is_expected.not_to have_authors }
   end
 
   describe '#date' do

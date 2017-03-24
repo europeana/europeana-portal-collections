@@ -6,6 +6,18 @@ module Pro
   class Base < JsonApiClient::Resource
     self.site = Pro.site + '/json/'
 
+    def has_taxonomy?(name = nil)
+      return false unless respond_to?(:taxonomy) && taxonomy.present?
+      return true if name.nil?
+      taxonomy.key?(name) && taxonomy[name].present?
+    end
+
+    def includes?(relation)
+      last_result_set.included.has_link?(relation) &&
+        respond_to?(relation) &&
+        send(relation).flatten.compact.present?
+    end
+
     def to_param
       respond_to?(:slug) ? slug : nil
     end

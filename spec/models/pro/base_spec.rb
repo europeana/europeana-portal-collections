@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-RSpec.describe Pro::Base do
+RSpec.describe Pro::Base, :disable_verify_partial_doubles do
   it { is_expected.to be_a(JsonApiClient::Resource) }
 
   describe '.site' do
@@ -9,14 +9,6 @@ RSpec.describe Pro::Base do
   end
 
   describe '#to_param' do
-    before do
-      module Pro
-        class TestSubclass < Pro::Base; end
-      end
-    end
-    let(:subclass) { Pro::TestSubclass }
-    subject { subclass.new }
-
     context 'when resource has slug attr' do
       before do
         subject.attributes['slug'] = 'pellet'
@@ -31,6 +23,26 @@ RSpec.describe Pro::Base do
       it 'is nil' do
         expect(subject.to_param).to be_nil
       end
+    end
+  end
+
+  context 'without taxonomy' do
+    it { is_expected.not_to have_taxonomy }
+    it { is_expected.not_to have_taxonomy(:tags) }
+  end
+
+  context 'with taxonomy' do
+    before do
+      allow(subject).to receive(:taxonomy) { { a: [] } }
+    end
+    it { is_expected.to have_taxonomy }
+    it { is_expected.not_to have_taxonomy(:tags) }
+
+    context 'with tags' do
+      before do
+        allow(subject).to receive(:taxonomy) { { tags: ['a'] } }
+      end
+      it { is_expected.to have_taxonomy(:tags) }
     end
   end
 end
