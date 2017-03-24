@@ -32,13 +32,13 @@ module BlogPosts
     def blogs_filter_options
       {
         filter_name: 'theme',
-        options: blogs_filter_options_options
+        options: filter_options
       }
     end
 
     protected
 
-    def blogs_filter_options_options
+    def filter_options
       [
         { label: t('global.actions.filter-all'), value: 'all' },
         { label: Topic.find_by_slug('fashion').label, value: 'fashion' }
