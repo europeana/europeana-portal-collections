@@ -39,10 +39,7 @@ module BlogPosts
     protected
 
     def filter_options
-      [
-        { label: t('global.actions.filter-all'), value: 'all' },
-        { label: Topic.find_by_slug('fashion').label, value: 'fashion' }
-      ].tap do |options|
+      @theme_filters.map { |key, data| { label: data[:label], value: key } }.tap do |options|
         selected_option = options.delete(options.detect { |option| option[:value] == @selected_theme })
         options.unshift(selected_option) unless selected_option.nil?
       end

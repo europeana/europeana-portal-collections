@@ -15,6 +15,7 @@ class BlogPostsController < ApplicationController
                   where(filters).
                   page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
+    @theme_filters = theme_filters
     @selected_theme = theme
   end
 
@@ -30,7 +31,7 @@ class BlogPostsController < ApplicationController
 
   def filters
     {}.tap do |filters|
-      filters[:blogs] = theme_filters[theme.to_sym]
+      filters[:blogs] = (theme_filters[theme.to_sym] || {})[:filter]
       filters[:tags] = tag unless tag.nil?
     end
   end
@@ -45,8 +46,14 @@ class BlogPostsController < ApplicationController
 
   def theme_filters
     {
-      all: 'europeana-fashion', # comma-separated list of all blogs to include
-      fashion: 'europeana-fashion'
+      all: {
+        filter: 'europeana-fashion', # comma-separated list of all blogs to include
+        label: t('global.actions.filter-all')
+      },
+      fashion: {
+        filter: 'europeana-fashion',
+        label: Topic.find_by_slug('fashion').label
+      }
     }
   end
 end
