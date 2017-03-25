@@ -55,7 +55,7 @@ module PaginatedJsonApiResultSetView
         1
       else
         (pagination_total / pagination_per_page) +
-          ((pagination_total / pagination_per_page).zero? ? 0 : 1)
+          ((pagination_total % pagination_per_page).zero? ? 0 : 1)
       end
     end
   end
