@@ -390,7 +390,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    mustache (1.0.5)
+    mustache (1.0.3)
     nested_form (0.3.2)
     netrc (0.11.0)
     newrelic_rpm (3.18.1.330)
@@ -643,6 +643,7 @@ DEPENDENCIES
   lograge
   logstash-event
   logstash-logger
+  mustache (= 1.0.3)
   newrelic_rpm
   nokogiri
   paper_trail (~> 4.0)
