@@ -11,11 +11,18 @@ RSpec.describe 'blog_posts/index.html.mustache' do
     allow(api_response).to receive(:env) { {} }
     JsonApiClient::Parsers::Parser.parse(Pro::BlogPost, api_response)
   end
+  let(:theme_filters) do
+    {
+      all: { filter: 'all-blog-posts', label: 'All' },
+      fashion: { filter: 'fashion-blog-posts', label: 'Fashion' },
+    }
+  end
 
   before do
     allow(view).to receive(:pagination_page) { pagination_page }
     allow(view).to receive(:pagination_per) { pagination_per }
     assign(:blog_posts, blog_posts)
+    assign(:theme_filters, theme_filters)
   end
 
   it_behaves_like 'paginated_view'
