@@ -29,7 +29,7 @@ gem 'json_api_client'
 gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
-gem 'nokogiri', '~> 1.6.8'
+gem 'nokogiri'
 gem 'redis', '3.3.1' # locked to fix: https://app.assembla.com/spaces/europeana-npc/tickets/1811
 gem 'rest-client', '~> 1.8.0'
 gem 'ruby-oembed', '~> 0.9'
