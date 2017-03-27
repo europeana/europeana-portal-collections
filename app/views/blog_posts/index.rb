@@ -30,6 +30,7 @@ module BlogPosts
     end
 
     def blogs_filter_options
+      return nil unless config.x.enable.blog_posts_theme_filter
       {
         filter_name: 'theme',
         options: filter_options
