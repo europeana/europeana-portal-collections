@@ -42,10 +42,27 @@ RSpec.describe 'blog_posts/index.html.mustache' do
     expect(rendered).to have_selector('.item-preview .category-flag', text: blog_posts.first.taxonomy[:blogs].values.first)
   end
 
-  it 'has theme filter' do
-    render
-    expect(rendered).to have_selector('select#list_filterby')
-    expect(rendered).to have_selector('select#list_filterby > option[value="all"]')
-    expect(rendered).to have_selector('select#list_filterby > option[value="fashion"]')
+  context 'with theme filter enabled' do
+    before do
+      Rails.application.config.x.enable.blog_posts_theme_filter = '1'
+    end
+
+    it 'has theme filter' do
+      render
+      expect(rendered).to have_selector('select#list_filterby')
+      expect(rendered).to have_selector('select#list_filterby > option[value="all"]')
+      expect(rendered).to have_selector('select#list_filterby > option[value="fashion"]')
+    end
+  end
+
+  context 'without theme filter enabled' do
+    before do
+      Rails.application.config.x.enable.blog_posts_theme_filter = nil
+    end
+
+    it 'has no theme filter' do
+      render
+      expect(rendered).not_to have_selector('select#list_filterby')
+    end
   end
 end
