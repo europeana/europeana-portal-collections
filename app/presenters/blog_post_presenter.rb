@@ -73,7 +73,7 @@ class BlogPostPresenter
   end
 
   def date
-    DateTime.strptime(blog_post.datepublish).strftime('%-d %B, %Y') # @todo Localeapp the date format
+    DateTime.parse(blog_post.datepublish).strftime('%-d %B, %Y') # @todo Localeapp the date format
   end
 
   def read_time
