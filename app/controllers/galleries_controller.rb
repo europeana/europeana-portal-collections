@@ -47,7 +47,7 @@ class GalleriesController < ApplicationController
 
   def foyer_body_cache_key(topic:, per:, page:)
     last_galleries_edit_int = Gallery.order(updated_at: :desc).first.updated_at.to_i
-    "explore/galleries.#{request.format}/#{last_galleries_edit_int}/#{topic}/#{per}/#{page}/"
+    "explore/galleries.#{request.format.to_sym}/#{last_galleries_edit_int}/#{topic}/#{per}/#{page}/"
   end
 
   def gallery_images_for_foyer(galleries)

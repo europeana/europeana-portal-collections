@@ -124,6 +124,17 @@ RSpec.describe GalleriesController do
           expect(document).to be_a(Europeana::Blacklight::Document)
         end
       end
+
+      context 'when the view was already cached' do
+        before do
+          allow(subject).to receive(:body_cached?) { true }
+        end
+
+        it 'does NOT searche the API for the gallery image metadata' do
+          get :index, locale: 'en', format: format
+          expect(an_api_search_request).to_not have_been_made
+        end
+      end
     end
   end
 
