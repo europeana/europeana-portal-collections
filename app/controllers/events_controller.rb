@@ -12,6 +12,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Pro::Event.includes(:locations, :network, :persons).
+              order('-start_event').
               page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
   end
