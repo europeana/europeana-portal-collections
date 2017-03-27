@@ -5,12 +5,25 @@ module Events
       mustache[:page_title] ||= [@event.title, site_title].join(' - ')
     end
 
+    def event_title
+      presenter.title
+    end
+
     def content
       mustache[:content] ||= begin
         {
-          title: @event.title,
-          text: @event.introduction + @event.body
-        }.reverse_merge(super)
+          body: presenter.body,
+          has_authors: @event.has_authors?,
+          authors: presenter.authors,
+          has_tags: @event.has_taxonomy?(:tags),
+          tags: presenter.tags,
+          label: presenter.label,
+          event_date: presenter.date_range(:start_event, :end_event),
+          date: presenter.date,
+          introduction: presenter.introduction,
+          blog_image: presenter.image(:url, :teaser_image),
+          read_time: presenter.read_time
+        }
       end
     end
 
@@ -21,6 +34,12 @@ module Events
           back_label: t('site.events.list.page-title')
         }.reverse_merge(super)
       end
+    end
+
+    protected
+
+    def presenter
+      @presenter ||= ProResourcePresenter.new(self, @event)
     end
   end
 end

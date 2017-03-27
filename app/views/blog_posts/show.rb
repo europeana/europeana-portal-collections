@@ -38,7 +38,7 @@ module BlogPosts
     protected
 
     def presenter
-      @presenter ||= BlogPostPresenter.new(self, @blog_post)
+      @presenter ||= ProResourcePresenter.new(self, @blog_post)
     end
   end
 end

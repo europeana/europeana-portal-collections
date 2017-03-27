@@ -6,13 +6,5 @@ module Pro
     def self.table_name
       'blogposts'
     end
-
-    def has_authors?
-      includes?(:network) || includes?(:persons)
-    end
-
-    def has_image?
-      respond_to?(:image) && image.is_a?(Hash)
-    end
   end
 end

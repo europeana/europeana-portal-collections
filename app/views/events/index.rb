@@ -32,65 +32,16 @@ module Events
     protected
 
     def event_item(event)
+      presenter = ProResourcePresenter.new(self, event)
       {
-        title: event.title,
-        description: event.teaser,
-        date: event_date(event),
-        location: event_location(event),
-        img: event_image(event),
+        title: presenter.title,
+        description: presenter.teaser,
+        date: presenter.date_range(:start_event, :end_event),
+        location: presenter.location_name,
+        img: presenter.image(:thumbnail, :teaser_image),
         label: nil,
-        tags: event_tags(event)
+        tags: presenter.tags
       }
-    end
-
-    def event_image(event)
-      return nil unless event.has_teaser_image?
-      return nil unless event.teaser_image.key?(:thumbnail) && event.teaser_image[:thumbnail].present?
-
-      {
-        src: event.teaser_image[:thumbnail]
-      }
-    end
-
-    def event_location(event)
-      event.includes?(:locations) ? event.locations.first.title : nil
-    end
-
-    def event_tags(event)
-      return nil unless event.has_taxonomy?(:tags)
-
-      { items: event_tags_items(event) }
-    end
-
-    def event_tags_items(event)
-      return nil unless event.has_taxonomy?(:tags)
-
-      event.taxonomy[:tags].map do |_pro_path, tag|
-        {
-          # url: events_path(tag: tag),
-          text: tag
-        }
-      end
-    end
-
-    def fmt_datetime_as_date(datetime)
-      return nil if datetime.nil?
-      DateTime.parse(datetime).strftime('%-d %B, %Y') # @todo Localeapp the date format
-    end
-
-    def event_date(event)
-      start_date = fmt_datetime_as_date(event_start_datetime(event))
-      end_date = fmt_datetime_as_date(event_end_datetime(event))
-      return nil if [start_date, end_date].all?(&:blank?)
-      [start_date, end_date].compact.uniq.join(' - ')
-    end
-
-    def event_start_datetime(event)
-      event.respond_to?(:start_event) ? event.start_event : nil
-    end
-
-    def event_end_datetime(event)
-      event.respond_to?(:end_event) ? event.end_event : nil
     end
 
     def paginated_set

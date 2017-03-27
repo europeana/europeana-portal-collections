@@ -11,6 +11,14 @@ module Pro
       connection.use Faraday::Request::Instrumentation
     end
 
+    def has_authors?
+      includes?(:network) || includes?(:persons)
+    end
+
+    def has_image?(attribute = :image)
+      respond_to?(attribute) && send(attribute).is_a?(Hash)
+    end
+
     def has_taxonomy?(name = nil)
       return false unless respond_to?(:taxonomy) && taxonomy.present?
       return true if name.nil?

@@ -47,7 +47,7 @@ module BlogPosts
     end
 
     def blog_item(post)
-      presenter = BlogPostPresenter.new(self, post)
+      presenter = ProResourcePresenter.new(self, post)
       {
         has_authors: post.has_authors?,
         authors: presenter.authors,
