@@ -5,11 +5,14 @@ draft:
 empty:
   state: 1
   slug: empty
+  published_at: '2017-02-15 09:39:40.472309'
 
 curated_gallery:
   state: 1
   slug: curated-gallery
+  published_at:  '2017-03-21 11:01:27.773766'
 
 fashion_dresses:
   state: 1
   slug: fashion-dresses
+  published_at: '2017-02-15 12:58:53.05961'

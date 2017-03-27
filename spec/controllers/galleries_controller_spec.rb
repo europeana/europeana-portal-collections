@@ -101,7 +101,7 @@ RSpec.describe GalleriesController do
     end
 
     context 'when requesting as an atom feed' do
-      let(:format) { 'atom' }
+      let(:format) { 'rss' }
 
       it 'returns http success' do
         get :index, locale: 'en', format: format
