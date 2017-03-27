@@ -62,7 +62,7 @@ class BlogPostPresenter
 
     blog_post.taxonomy[:tags].map do |_pro_path, tag|
       {
-        url: view.blog_posts_path(tag: tag),
+        # url: view.blog_posts_path(tag: tag),
         text: tag
       }
     end
