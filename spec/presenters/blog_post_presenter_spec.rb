@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 RSpec.describe BlogPostPresenter do
-  subject { described_class.new(blog_post) }
+  subject { described_class.new(view, blog_post) }
 
   let(:blog_post) { double(Pro::BlogPost) }
   let(:last_result_set) { double(JsonApiClient::ResultSet) }
   let(:included_data) { double(JsonApiClient::IncludedData) }
+  let(:view) { ApplicationView.new }
 
   before do
     allow(last_result_set).to receive(:included) { included_data }
@@ -74,13 +75,6 @@ RSpec.describe BlogPostPresenter do
     it 'uses the first value of blogs taxonomy' do
       allow(blog_post).to receive(:taxonomy) { { blogs: { '/path' => 'interesting blog' } } }
       expect(subject.label).to eq('interesting blog')
-    end
-  end
-
-  describe '#pro_url' do
-    it 'returns a full URL to Pro resource' do
-      allow(Pro).to receive(:site) { 'http://www.example.com' }
-      expect(subject.pro_url('/path')).to eq('http://www.example.com/path')
     end
   end
 

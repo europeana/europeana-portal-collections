@@ -11,17 +11,49 @@ class BlogPostsController < ApplicationController
   self.pagination_per_default = 6
 
   def index
-    @blog_posts = pro_blog_posts.page(pagination_page).per(pagination_per).all
+    @blog_posts = Pro::BlogPost.includes(:network, :persons).
+                  where(filters).
+                  page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
+    @theme_filters = theme_filters
+    @selected_theme = theme
   end
 
   def show
-    @blog_post = pro_blog_posts.where(slug: params[:slug]).first
+    @blog_post = Pro::BlogPost.includes(:network, :persons).
+                 where(filters).
+                 where(slug: params[:slug]).first
+
+    fail JsonApiClient::Errors::NotFound.new(request.original_url) if @blog_post.nil?
   end
 
   protected
 
-  def pro_blog_posts
-    Pro::BlogPost.includes(:network, :persons)
+  def filters
+    {}.tap do |filters|
+      filters[:blogs] = (theme_filters[theme.to_sym] || {})[:filter]
+      filters[:tags] = tag unless tag.nil?
+    end
+  end
+
+  def theme
+    params[:theme] || 'all'
+  end
+
+  def tag
+    params[:tag]
+  end
+
+  def theme_filters
+    {
+      all: {
+        filter: 'europeana-fashion', # comma-separated list of all blogs to include
+        label: t('global.actions.filter-all')
+      },
+      fashion: {
+        filter: 'europeana-fashion',
+        label: Topic.find_by_slug('fashion').label
+      }
+    }
   end
 end
