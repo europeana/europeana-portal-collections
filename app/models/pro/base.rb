@@ -6,6 +6,11 @@ module Pro
   class Base < JsonApiClient::Resource
     self.site = Pro.site + '/json/'
 
+    connection do |connection|
+      # Log and time JSON API request URLs
+      connection.use Faraday::Request::Instrumentation
+    end
+
     def has_taxonomy?(name = nil)
       return false unless respond_to?(:taxonomy) && taxonomy.present?
       return true if name.nil?

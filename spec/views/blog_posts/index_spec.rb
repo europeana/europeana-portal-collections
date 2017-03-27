@@ -11,11 +11,18 @@ RSpec.describe 'blog_posts/index.html.mustache' do
     allow(api_response).to receive(:env) { {} }
     JsonApiClient::Parsers::Parser.parse(Pro::BlogPost, api_response)
   end
+  let(:theme_filters) do
+    {
+      all: { filter: 'all-blog-posts', label: 'All' },
+      fashion: { filter: 'fashion-blog-posts', label: 'Fashion' },
+    }
+  end
 
   before do
     allow(view).to receive(:pagination_page) { pagination_page }
     allow(view).to receive(:pagination_per) { pagination_per }
     assign(:blog_posts, blog_posts)
+    assign(:theme_filters, theme_filters)
   end
 
   it_behaves_like 'paginated_view'
@@ -33,5 +40,29 @@ RSpec.describe 'blog_posts/index.html.mustache' do
   it 'uses blogs taxonomy for category flag' do
     render
     expect(rendered).to have_selector('.item-preview .category-flag', text: blog_posts.first.taxonomy[:blogs].values.first)
+  end
+
+  context 'with theme filter enabled' do
+    before do
+      Rails.application.config.x.enable.blog_posts_theme_filter = '1'
+    end
+
+    it 'has theme filter' do
+      render
+      expect(rendered).to have_selector('select#list_filterby')
+      expect(rendered).to have_selector('select#list_filterby > option[value="all"]')
+      expect(rendered).to have_selector('select#list_filterby > option[value="fashion"]')
+    end
+  end
+
+  context 'without theme filter enabled' do
+    before do
+      Rails.application.config.x.enable.blog_posts_theme_filter = nil
+    end
+
+    it 'has no theme filter' do
+      render
+      expect(rendered).not_to have_selector('select#list_filterby')
+    end
   end
 end

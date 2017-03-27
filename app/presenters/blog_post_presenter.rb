@@ -2,11 +2,12 @@
 class BlogPostPresenter
   include ActionView::Helpers
 
-  attr_reader :blog_post
+  attr_reader :blog_post, :view
 
   delegate :title, :introduction, to: :blog_post
 
-  def initialize(blog_post)
+  def initialize(view, blog_post)
+    @view = view
     @blog_post = blog_post
   end
 
@@ -37,9 +38,9 @@ class BlogPostPresenter
   def tags_items
     return nil unless blog_post.has_taxonomy?(:tags)
 
-    blog_post.taxonomy[:tags].map do |pro_path, tag|
+    blog_post.taxonomy[:tags].map do |_pro_path, tag|
       {
-        url: pro_url(pro_path),
+        # url: view.blog_posts_path(tag: tag),
         text: tag
       }
     end
@@ -73,10 +74,6 @@ class BlogPostPresenter
 
   def date
     DateTime.strptime(blog_post.datepublish).strftime('%-d %B, %Y') # @todo Localeapp the date format
-  end
-
-  def pro_url(path)
-    Pro.site + path
   end
 
   def read_time

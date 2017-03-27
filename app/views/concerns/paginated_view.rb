@@ -6,9 +6,7 @@ module PaginatedView
   extend ActiveSupport::Concern
 
   def results_range
-    result_number_from = ((pagination_current_page - 1) * pagination_per_page) + 1
-    result_number_to   = [result_number_from + pagination_per_page - 1, pagination_total].min
-    result_number_from.to_s + ' - ' + result_number_to.to_s
+    "#{pagination_current_page_range_from} - #{pagination_current_page_range_to}"
   end
 
   def results_count
@@ -37,6 +35,15 @@ module PaginatedView
   alias_method :has_multiple_results, :has_multiple_results?
 
   protected
+
+  def pagination_current_page_range_from
+    return 0 if pagination_total.zero?
+    ((pagination_current_page - 1) * pagination_per_page) + 1
+  end
+
+  def pagination_current_page_range_to
+    [pagination_current_page_range_from + pagination_per_page - 1, pagination_total].min
+  end
 
   def paginated_set
     fail NotImplementedError, 'Including view class must implement #paginated_set'
