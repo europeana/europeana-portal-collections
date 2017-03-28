@@ -21,7 +21,7 @@ module Events
           event_date: presenter.date_range(:start_event, :end_event),
           date: presenter.date,
           introduction: presenter.introduction,
-          blog_image: presenter.image(:url, :teaser_image),
+          event_image: presenter.image(:url, :teaser_image),
           read_time: presenter.read_time
         }
       end
