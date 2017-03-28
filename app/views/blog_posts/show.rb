@@ -13,9 +13,9 @@ module BlogPosts
       mustache[:content] ||= begin
         {
           body: presenter.body,
-          has_authors: presenter.has_authors?,
+          has_authors: @blog_post.has_authors?,
           authors: presenter.authors,
-          has_tags: presenter.has_tags?,
+          has_tags: @blog_post.has_taxonomy?(:tags),
           tags: presenter.tags,
           label: presenter.label,
           date: presenter.date,
@@ -38,7 +38,7 @@ module BlogPosts
     protected
 
     def presenter
-      @presenter ||= BlogPostPresenter.new(self, @blog_post)
+      @presenter ||= ProResourcePresenter.new(self, @blog_post)
     end
   end
 end

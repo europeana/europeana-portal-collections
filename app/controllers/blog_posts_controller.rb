@@ -11,7 +11,7 @@ class BlogPostsController < ApplicationController
   self.pagination_per_default = 6
 
   def index
-    @blog_posts = Pro::BlogPost.includes(:network, :persons).
+    @blog_posts = Pro::BlogPost.includes(:network).
                   where(filters).
                   page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
@@ -20,7 +20,7 @@ class BlogPostsController < ApplicationController
   end
 
   def show
-    @blog_post = Pro::BlogPost.includes(:network, :persons).
+    @blog_post = Pro::BlogPost.includes(:network).
                  where(filters).
                  where(slug: params[:slug]).first
 

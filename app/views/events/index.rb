@@ -17,16 +17,33 @@ module Events
       end
     end
 
-    def content
-      mustache[:content] ||= begin
+    def hero
+      mustache[:hero] ||= begin
         {
-          title: t('site.events.list.page-title'),
-          text: '<ol>' + @events.map { |event| '<li>' + link_to(event.title, event_path(event)) + '</li>' }.join + '</ol>'
-        }.reverse_merge(super)
+          hero_image: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil
+        }
       end
     end
 
+    def event_items
+      @events.map { |event| event_item(event) }
+    end
+
     protected
+
+    def event_item(event)
+      presenter = ProResourcePresenter.new(self, event)
+      {
+        title: presenter.title,
+        object_url: event_path(slug: event.slug),
+        description: presenter.teaser,
+        date: presenter.date_range(:start_event, :end_event),
+        location: presenter.location_name,
+        img: presenter.image(:thumbnail, :teaser_image),
+        label: nil,
+        tags: presenter.tags
+      }
+    end
 
     def paginated_set
       @events

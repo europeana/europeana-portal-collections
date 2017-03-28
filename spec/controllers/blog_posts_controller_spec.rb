@@ -54,7 +54,7 @@ RSpec.describe BlogPostsController do
       get :index, locale: 'en'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(include: 'network,persons'))
+        with(query: hash_including(include: 'network'))
       ).to have_been_made.once
     end
 
@@ -89,7 +89,7 @@ RSpec.describe BlogPostsController do
       get :show, locale: 'en', slug: 'important-news'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(include: 'network,persons'))
+        with(query: hash_including(include: 'network'))
       ).to have_been_made.once
     end
 

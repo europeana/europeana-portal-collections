@@ -5,21 +5,20 @@
 #
 # @todo Exception handling when `JsonApiClient` requests fail
 class EventsController < ApplicationController
+  include HomepageHeroImage
   include PaginatedController
 
   self.pagination_per_default = 6
 
   def index
-    @events = pro_events.page(pagination_page).per(pagination_per).all
+    @events = Pro::Event.includes(:locations, :network).
+              order('-end_event').
+              page(pagination_page).per(pagination_per).all
+    @hero_image = homepage_hero_image
   end
 
   def show
-    @event = pro_events.where(slug: params[:slug]).first
-  end
-
-  protected
-
-  def pro_events
-    Pro::Event.includes(:network, :persons)
+    @event = Pro::Event.includes(:locations, :network).
+             where(slug: params[:slug]).first
   end
 end
