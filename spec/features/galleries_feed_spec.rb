@@ -25,12 +25,11 @@ RSpec.feature 'Galleries atom feed' do
       fashion_entry = parsed_feed.entries.detect { |entry| entry.url.include?("galleries/#{galleries(:fashion_dresses).slug}") }
 
       expect(empty_entry).to_not be(nil)
-      expect(empty_entry.summary).to include(galleries(:empty).title)
       expect(curated_entry).to_not be(nil)
-      expect(curated_entry.summary).to include('<h2> <span>(0 images)</span></h2>')
+      expect(curated_entry.summary).to be nil
       expect(fashion_entry).to_not be(nil)
-      expect(fashion_entry.summary).to include(galleries(:fashion_dresses).title)
-      expect(fashion_entry.summary).to include('(2 images)')
+      expect(fashion_entry.summary).to include(galleries(:fashion_dresses).description)
+      expect(fashion_entry.categories).to include('Fashion')
     end
   end
 
