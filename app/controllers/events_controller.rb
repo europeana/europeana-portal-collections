@@ -4,6 +4,7 @@
 # JSON API.
 #
 # @todo Exception handling when `JsonApiClient` requests fail
+# @todo Filter for events relevant to the portal
 class EventsController < ApplicationController
   include HomepageHeroImage
   include PaginatedController
