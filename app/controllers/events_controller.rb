@@ -18,9 +18,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Pro::Event.includes(:locations, :network).
-             where(slug: params[:slug]).first
+    result = Pro::Event.includes(:locations, :network).where(slug: params[:slug])
+    @event = result.first
 
-    fail JsonApiClient::Errors::NotFound.new(request.original_url) if @event.nil?
+    fail JsonApiClient::Errors::NotFound.new(result.links.links['self']) if @event.nil?
   end
 end
