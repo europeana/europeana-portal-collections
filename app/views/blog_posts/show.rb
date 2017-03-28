@@ -38,7 +38,7 @@ module BlogPosts
     protected
 
     def presenter
-      @presenter ||= BlogPostPresenter.new(@blog_post)
+      @presenter ||= BlogPostPresenter.new(self, @blog_post)
     end
   end
 end

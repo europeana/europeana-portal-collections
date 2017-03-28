@@ -13,7 +13,8 @@ module ControllerExceptionHandling
       handle_error(exception: exception, status: 500)
     end
 
-    rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError, Europeana::API::Errors::ResourceNotFoundError do |exception|
+    rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError,
+                Europeana::API::Errors::ResourceNotFoundError, JsonApiClient::Errors::NotFound do |exception|
       handle_error(exception: exception, status: 404)
     end
 

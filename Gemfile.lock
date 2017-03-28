@@ -24,8 +24,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 1c10902ff1d6987398ff8f874854f625db7e2413
-  ref: 1c10902
+  revision: 9b01c9fe660afe1583ac877806adbd671a3a1e9f
+  ref: 9b01c9f
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -394,7 +394,7 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     newrelic_rpm (3.18.1.330)
-    nokogiri (1.6.8.1)
+    nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     paper_trail (4.2.0)
@@ -643,8 +643,9 @@ DEPENDENCIES
   lograge
   logstash-event
   logstash-logger
+  mustache (= 1.0.3)
   newrelic_rpm
-  nokogiri (~> 1.6.8)
+  nokogiri
   paper_trail (~> 4.0)
   paperclip (~> 4.3)
   pg

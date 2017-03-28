@@ -105,6 +105,12 @@ module Facet
                     with: ->(item) { item.sub(/\ATechnique: /, '') },
                     titleize: true
                   }
+      label_facet 'proxy_dcterms_medium.en',
+                  i18n: 'fashion.material',
+                  items: {
+                    with: ->(item) { item.sub(/\AMaterial: /, '') },
+                    titleize: true
+                  }
       label_facet 'proxy_dc_type.en',
                   i18n: 'fashion.type',
                   items: {

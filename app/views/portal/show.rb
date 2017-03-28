@@ -241,20 +241,14 @@ module Portal
       named_entity_labels('concepts', 'what', :broader)
     end
 
-    # @todo Remove the @similar_items_later conditional for one or the other
+    # @todo Remove the @similar_items_now conditional for one or the other
     #   when a decision is made as to whether to perform similar items searches
     #   during page generation or by AJAX.
     def similar_items
       mustache[:similar_items] ||= begin
         if @hierarchy.present?
           false
-        elsif @similar_items_later
-          {
-            title: t('site.object.similar-items'),
-            more_items_load: document_similar_url(document, format: 'json'),
-            more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
-          }
-        else
+        elsif @similar_items_now
           {
             title: t('site.object.similar-items'),
             more_items_load: document_similar_url(document, format: 'json'),
@@ -266,6 +260,12 @@ module Portal
               res[:more_items_query] = search_path(params.slice(:api_url).merge(mlt: document.id))
             end
           end
+        else
+          {
+            title: t('site.object.similar-items'),
+            more_items_load: document_similar_url(document, format: 'json'),
+            more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
+          }
         end
       end
     end
