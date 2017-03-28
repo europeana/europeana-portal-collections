@@ -22,6 +22,7 @@ module Events
           date: presenter.date,
           introduction: presenter.introduction,
           event_image: presenter.image(:url, :teaser_image),
+          geolocation: presenter.geolocation,
           read_time: presenter.read_time
         }
       end
