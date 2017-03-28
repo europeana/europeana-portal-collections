@@ -11,6 +11,12 @@ module Galleries
       mustache[:page_title] ||= [@gallery.title, site_title].join(' - ')
     end
 
+    def head_links
+      mustache[:head_links] ||= begin
+        { items: [{ rel: 'alternate', type: 'application/rss+xml', href: galleries_url(format: 'rss') }] + super[:items] }
+      end
+    end
+
     def head_meta
       mustache[:head_meta] ||= begin
         description = @gallery.description

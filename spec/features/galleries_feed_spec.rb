@@ -30,7 +30,7 @@ RSpec.feature 'Galleries atom feed' do
       expect(fashion_entry).to_not be(nil)
       expect(fashion_entry.summary).to include(galleries(:fashion_dresses).description)
       expect(fashion_entry.categories).to include('Fashion')
-      expect(fashion_entry.content).to include('<img src=\"\"/>')
+      expect(fashion_entry.content).to include('<img src="thumbnail_url/sample/record1"/>')
     end
   end
 
