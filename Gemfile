@@ -4,7 +4,12 @@ gem 'rails', '4.2.7.1'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '325108e'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '9b01c9f'
+
+# Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
+# https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
+# @todo report this upstream
+gem 'mustache', '1.0.3'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
