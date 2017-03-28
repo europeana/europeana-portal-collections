@@ -2,6 +2,7 @@
 RSpec.describe BlogPostsController do
   let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogposts(\?|\z)} }
   let(:json_api_content_type) { 'application/vnd.api+json' }
+  let(:response_body) { '{"meta": {"count": 0, "total": 0}, "data": [ { "id": 1, "type": "blogposts" } ]}' }
 
   before do
     stub_request(:get, json_api_url).
@@ -11,7 +12,7 @@ RSpec.describe BlogPostsController do
            }).
       to_return(
         status: 200,
-        body: '{"meta": {"count": 0, "total": 0}, "data": [ { "id": 1, "type": "blogposts" } ]}',
+        body: response_body,
         headers: { 'Content-Type' => json_api_content_type }
       )
   end
@@ -93,9 +94,19 @@ RSpec.describe BlogPostsController do
       ).to have_been_made.once
     end
 
-    it 'returns http success' do
+    context 'when post is found' do
+      it 'returns http success' do
       get :show, locale: 'en', slug: 'important-news'
-      expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'when post is not found' do
+      let(:response_body) { '{"meta": {"count": 0, "total": 0}, "data":[]}' }
+      it 'returns http 404' do
+      get :show, locale: 'en', slug: 'important-news'
+        expect(response).to have_http_status(404)
+      end
     end
 
     it 'defaults to HTML format' do
