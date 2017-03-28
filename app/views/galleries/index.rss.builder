@@ -7,12 +7,13 @@ def gallery_image(gallery)
     image_url = presenter.field_value('edmPreview')
   end
   image_url ||= @hero_image && @hero_image.file.present? ? @hero_image.file.url : nil
+  image_url
 end
 
 # @todo only insert "views/" into our cache keys when it's needed, i.e. in the context of Mustache view classes
 cache(cache_key(@body_cache_key).sub(%r{\Aviews\/}, ''), skip_digest: true) do
   xml.instruct!
-  xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
+  xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom', 'xmlns:content' => 'http://purl.org/rss/1.0/modules/content/') do
     xml.channel do
       xml.title("Europeana - #{t('global.galleries')}")
       xml.description(t('site.galleries.description'))
@@ -30,7 +31,11 @@ cache(cache_key(@body_cache_key).sub(%r{\Aviews\/}, ''), skip_digest: true) do
           gallery.categorisations.each do |categorisation|
             xml.category(categorisation.topic_label)
           end
+          xml.enclosure(url: gallery_image(gallery), length: 0, type: 'image/*')
           xml.description(gallery.description)
+          xml.content(:encoded) do |content|
+            content.cdata!("<img src=\"#{gallery_image(gallery)}\"/>")
+          end
         end
       end
     end
