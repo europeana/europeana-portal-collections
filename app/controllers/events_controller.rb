@@ -14,6 +14,8 @@ class EventsController < ApplicationController
   def index
     @events = Pro::Event.includes(:locations, :network).
               order('-end_event').
+              # Uncomment to restrict to events tagged "culturelover"
+              # where(filters).
               # Uncomment to restrict to current and future events
               # where(end_event: ">=" + Date.today.strftime).
               page(pagination_page).per(pagination_per).all
@@ -21,9 +23,20 @@ class EventsController < ApplicationController
   end
 
   def show
-    result = Pro::Event.includes(:locations, :network).where(slug: params[:slug])
+    result = Pro::Event.includes(:locations, :network).
+             # Uncomment to restrict to events tagged "culturelover"
+             # where(filters).
+             where(slug: params[:slug])
     @event = result.first
 
     fail JsonApiClient::Errors::NotFound.new(result.links.links['self']) if @event.nil?
+  end
+
+  protected
+
+  def filters
+    {
+      tags: 'culturelover'
+    }
   end
 end
