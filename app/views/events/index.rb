@@ -35,6 +35,7 @@ module Events
       presenter = ProResourcePresenter.new(self, event)
       {
         title: presenter.title,
+        object_url: event_path(slug: event.slug),
         description: presenter.teaser,
         date: presenter.date_range(:start_event, :end_event),
         location: presenter.location_name,
