@@ -96,7 +96,7 @@ RSpec.describe BlogPostsController do
 
     context 'when post is found' do
       it 'returns http success' do
-      get :show, locale: 'en', slug: 'important-news'
+        get :show, locale: 'en', slug: 'important-news'
         expect(response).to have_http_status(:success)
       end
     end
@@ -104,7 +104,7 @@ RSpec.describe BlogPostsController do
     context 'when post is not found' do
       let(:response_body) { '{"meta": {"count": 0, "total": 0}, "data":[]}' }
       it 'returns http 404' do
-      get :show, locale: 'en', slug: 'important-news'
+        get :show, locale: 'en', slug: 'important-news'
         expect(response).to have_http_status(404)
       end
     end
