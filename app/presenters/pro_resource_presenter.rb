@@ -32,16 +32,26 @@ class ProResourcePresenter
     truncate(strip_tags(resource.body), length: 350, separator: ' ')
   end
 
+  def has_displayable_tags?
+    return false unless resource.has_taxonomy?(:tags)
+    displayable_tags.present?
+  end
+
+  # We omit from view the "culturelover" internal-use tag
+  def displayable_tags
+    resource.taxonomy[:tags].reject { |_pro_path, tag| tag == 'culturelover' }
+  end
+
   def tags
-    return nil unless resource.has_taxonomy?(:tags)
+    return nil unless has_displayable_tags?
 
     { items: tags_items }
   end
 
   def tags_items
-    return nil unless resource.has_taxonomy?(:tags)
+    return nil unless has_displayable_tags?
 
-    resource.taxonomy[:tags].map do |_pro_path, tag|
+    displayable_tags.map do |_pro_path, tag|
       {
         # url: view.resources_path(tag: tag),
         text: tag
