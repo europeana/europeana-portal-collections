@@ -41,7 +41,7 @@ module BlogPosts
 
     def filter_options
       @theme_filters.map { |key, data| { label: data[:label], value: key } }.tap do |options|
-        selected_option = options.delete(options.detect { |option| option[:value] == @selected_theme.to_sym })
+        selected_option = options.delete(options.detect { |option| option[:value] == @selected_theme })
         options.unshift(selected_option) unless selected_option.nil?
       end
     end
