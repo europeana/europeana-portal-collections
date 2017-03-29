@@ -2,6 +2,7 @@
 RSpec.describe EventsController do
   let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events(\?|\z)} }
   let(:json_api_content_type) { 'application/vnd.api+json' }
+  let(:response_body) { '{"meta": {"count": 1, "total": 1}, "data": [{ "id": "1", "type": "events" }]}' }
 
   before do
     stub_request(:get, json_api_url).
@@ -11,7 +12,7 @@ RSpec.describe EventsController do
            }).
       to_return(
         status: 200,
-        body: '{"meta": {"count": 0, "total": 0}, "data":[]}',
+        body: response_body,
         headers: { 'Content-Type' => json_api_content_type }
       )
   end
@@ -92,9 +93,19 @@ RSpec.describe EventsController do
       ).to have_been_made.once
     end
 
-    it 'returns http success' do
-      get :show, locale: 'en', slug: 'conference'
-      expect(response).to have_http_status(:success)
+    context 'when event is found' do
+      it 'returns http success' do
+        get :show, locale: 'en', slug: 'conference'
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'when event is not found' do
+      let(:response_body) { '{"meta": {"count": 0, "total": 0}, "data":[]}' }
+      it 'returns http 404' do
+        get :show, locale: 'en', slug: 'conference'
+        expect(response).to have_http_status(404)
+      end
     end
 
     it 'defaults to HTML format' do

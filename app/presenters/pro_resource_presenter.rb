@@ -78,6 +78,11 @@ class ProResourcePresenter
     resource.taxonomy[:blogs].values.first
   end
 
+  def geolocation
+    return nil unless resource.includes?(:locations)
+    resource.locations.first.geolocation
+  end
+
   def date
     fmt_datetime_as_date(resource.datepublish)
   end
