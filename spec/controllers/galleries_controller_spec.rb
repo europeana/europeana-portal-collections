@@ -99,6 +99,43 @@ RSpec.describe GalleriesController do
         expect(an_api_search_request).not_to have_been_made
       end
     end
+
+    context 'when requesting as an atom feed' do
+      let(:format) { 'rss' }
+
+      it 'returns http success' do
+        get :index, locale: 'en', format: format
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'searches the API for the gallery image metadata' do
+        get :index, locale: 'en', format: format
+        ids = Gallery.published.map(&:images).flatten.map(&:europeana_record_id)
+        api_query = %[europeana_id:("#{ids.join('" OR "')}")]
+        expect(an_api_search_request.
+          with(query: hash_including(query: api_query))).
+          to have_been_made.at_least_once
+      end
+
+      it 'assigns image metadata to @documents' do
+        get :index, locale: 'en', format: format
+        expect(assigns(:documents)).to be_a(Array)
+        assigns(:documents).each do |document|
+          expect(document).to be_a(Europeana::Blacklight::Document)
+        end
+      end
+
+      context 'when the view was already cached' do
+        before do
+          allow(subject).to receive(:body_cached?) { true }
+        end
+
+        it 'does NOT searche the API for the gallery image metadata' do
+          get :index, locale: 'en', format: format
+          expect(an_api_search_request).to_not have_been_made
+        end
+      end
+    end
   end
 
   describe 'GET #show' do
