@@ -20,10 +20,10 @@ class BlogPostsController < ApplicationController
   end
 
   def show
-    result = Pro::BlogPost.includes(:network).where(filters).where(slug: params[:slug])
-    @blog_post = result.first
+    results = Pro::BlogPost.includes(:network).where(filters).where(slug: params[:slug])
+    @blog_post = results.first
 
-    fail JsonApiClient::Errors::NotFound.new(result.links.links['self']) if @blog_post.nil?
+    fail JsonApiClient::Errors::NotFound.new(results.links.links['self']) if @blog_post.nil?
   end
 
   protected
