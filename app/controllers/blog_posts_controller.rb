@@ -31,13 +31,13 @@ class BlogPostsController < ApplicationController
 
   def filters
     {}.tap do |filters|
-      filters[:blogs] = (theme_filters[theme.to_sym] || {})[:filter]
+      filters[:blogs] = (theme_filters[theme] || {})[:filter]
       filters[:tags] = tag unless tag.nil?
     end
   end
 
   def theme
-    params[:theme] || 'all'
+    (params[:theme] || 'all').to_sym
   end
 
   def tag

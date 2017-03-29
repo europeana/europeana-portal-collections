@@ -54,8 +54,9 @@ class ProResourcePresenter
 
     ([persons] + [network]).flatten.compact.map do |author|
       {
-        name: "#{author.first_name} #{author.last_name}",
-        url: author.url
+        # Uncomment to link to author pages on the Pro site
+        # url: author.url,
+        name: "#{author.first_name} #{author.last_name}"
       }
     end
   end
