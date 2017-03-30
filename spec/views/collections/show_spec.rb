@@ -36,9 +36,4 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     expect(subject).to have_link('Images')
     expect(subject).not_to have_link('3D')
   end
-
-  context 'when collection is fashion' do
-    let(:collection) { collections(:fashion) }
-    it_behaves_like 'beta version view'
-  end
 end
