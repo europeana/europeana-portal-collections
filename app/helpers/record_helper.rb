@@ -62,9 +62,17 @@ module RecordHelper
   # temporary fix until API contains correct image url
   def record_preview_url(edm_preview, size = 200)
     return edm_preview if edm_preview.nil?
-    edm_preview.tap do |preview|
-      preview.sub!('http://europeanastatic.eu/api/image?', api_url + '/v2/thumbnail-by-url.json?')
-      preview.sub!('&size=LARGE', "&size=w#{size}")
-    end
+
+    # From the thumbnails API
+    # edm_preview.tap do |preview|
+    #   preview.sub!('http://europeanastatic.eu/api/image?', api_url + '/v2/thumbnail-by-url.json?')
+    #   preview.sub!('&size=LARGE', "&size=w#{size}")
+    # end
+
+    # From S3
+    uri = CGI.parse(URI.parse(edm_preview).query)['uri'].first
+    resource_size = size == 400 ? 'LARGE' : 'MEDIUM'
+    resource_path = Digest::MD5.hexdigest(uri) + '-' + resource_size
+    resource_url = 'https://europeana-thumbnails-production.s3.amazonaws.com/' + resource_path
   end
 end
