@@ -18,7 +18,7 @@ module NavigableView
           },
           primary_nav: {
             menu_id: 'main-menu',
-            items: navigation_global_primary_nav_items
+            items: cached_navigation_global_primary_nav_items
           }
         },
         home_url: home_url,
@@ -83,36 +83,38 @@ module NavigableView
   end
 
   def navigation_global_primary_nav_items
-    Rails.cache.fetch('global/navigation/primary_nav_items') do
-      [
-        {
-          text: t('global.navigation.collections'),
-          submenu: {
-            items: navigation_global_primary_nav_collections_submenu_items
-          }
-        },
-        {
-          text: t('global.navigation.browse'),
-          submenu: {
-            items: navigation_global_primary_nav_explore_submenu_items
-          }
-        },
-        {
-          url: exhibitions_foyer_path(exhibitions_feed_key),
-          text: t('global.navigation.exhibitions'),
-          submenu: {
-            items: navigation_global_primary_nav_exhibitions_submenu_items
-          }
-        },
-        {
-          url: 'http://blog.europeana.eu/',
-          text: t('global.navigation.blog'),
-          submenu: {
-            items: navigation_global_primary_nav_blog_submenu_items
-          }
+    [
+      {
+        text: t('global.navigation.collections'),
+        submenu: {
+          items: navigation_global_primary_nav_collections_submenu_items
         }
-      ]
-    end.tap do |nav|
+      },
+      {
+        text: t('global.navigation.browse'),
+        submenu: {
+          items: navigation_global_primary_nav_explore_submenu_items
+        }
+      },
+      {
+        url: exhibitions_foyer_path(exhibitions_feed_key),
+        text: t('global.navigation.exhibitions'),
+        submenu: {
+          items: navigation_global_primary_nav_exhibitions_submenu_items
+        }
+      },
+      {
+        url: 'http://blog.europeana.eu/',
+        text: t('global.navigation.blog'),
+        submenu: {
+          items: navigation_global_primary_nav_blog_submenu_items
+        }
+      }
+    ]
+  end
+
+  def cached_navigation_global_primary_nav_items
+    Rails.cache.fetch('global/navigation/primary_nav_items') { navigation_global_primary_nav_items }.tap do |nav|
       nav.each do |section|
         mark_current_page(section)
       end
