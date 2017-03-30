@@ -10,7 +10,7 @@ module GalleryDisplayingView
     presenter = presenter_for_gallery_image(image)
     return nil if presenter.nil?
     edm_preview = presenter.field_value('edmPreview')
-    record_preview_url(edm_preview, 400)
+    record_preview_url(edm_preview, 400, :s3)
   end
 
   def presenter_for_gallery_image(image)

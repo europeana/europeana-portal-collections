@@ -1,7 +1,8 @@
 <%
 items = (0..20).map do |index|
   id = '/sample/record' + index.to_s
-  '{"id":"' + id + '","title":["' + id + '"],"edmIsShownBy":["providerurl' + id + '"],"edmPreview":["thumbnail_url' + id + '"]}'
+  edm_preview = 'http://europeanastatic.eu/api/image?uri=' + CGI.escape("http://www.example.com#{id}") + '&size=LARGE&type=TEXT'
+  '{"id":"' + id + '","title":["' + id + '"],"edmIsShownBy":["providerurl' + id + '"],"edmPreview":["' + edm_preview + '"]}'
 end
 %>
 {
