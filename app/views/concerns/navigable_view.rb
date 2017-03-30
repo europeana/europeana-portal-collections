@@ -21,14 +21,14 @@ module NavigableView
             items: [
               {
                 text: t('global.navigation.collections'),
-                is_current: controller.controller_name == 'collections',
+                is_current: submenu_has_current_page?(navigation_global_primary_nav_collections_submenu_items),
                 submenu: {
                   items: navigation_global_primary_nav_collections_submenu_items
                 }
               },
               {
                 text: t('global.navigation.browse'),
-                is_current: controller.controller_name == 'explore',
+                is_current: submenu_has_current_page?(navigation_global_primary_nav_explore_submenu_items),
                 submenu: {
                   items: navigation_global_primary_nav_explore_submenu_items
                 }
@@ -101,60 +101,72 @@ module NavigableView
     @exhibitions_feed_key ||= Cache::FeedJob::URLS[:exhibitions].key?(I18n.locale) ? I18n.locale : :en
   end
 
+  def submenu_has_current_page?(submenu)
+    submenu.any? do |item|
+      if item[:submenu]
+        submenu_has_current_page?(item[:submenu][:items])
+      else
+        item[:is_current]
+      end
+    end
+  end
+
   def navigation_global_primary_nav_collections_submenu_items
     displayable_collections.sort_by { |c| c.title.to_s }.map do |collection|
-      link_item(collection.title, collection_path(collection),
-                is_current: current_page?(collection_path(collection)))
+      link_item(collection.title, collection_path(collection))
     end
   end
 
   def navigation_global_primary_nav_explore_submenu_items
-    [
-      link_item(t('global.navigation.browse_newcontent'), explore_newcontent_path(format: 'html'),
-                is_current: current_page?(explore_newcontent_path(format: 'html'))),
-      link_item(t('global.navigation.browse_colours'), explore_colours_path(format: 'html'),
-                is_current: current_page?(explore_colours_path(format: 'html'))),
-      link_item(t('global.navigation.browse_sources'), explore_sources_path(format: 'html'),
-                is_current: current_page?(explore_sources_path(format: 'html'))),
-      link_item(t('global.navigation.concepts'), explore_topics_path(format: 'html'),
-                is_current: current_page?(explore_topics_path(format: 'html'))),
-      link_item(t('global.navigation.agents'), explore_people_path(format: 'html'),
-                is_current: current_page?(explore_people_path(format: 'html'))),
-      link_item(t('global.navigation.periods'), explore_periods_path(format: 'html'),
-                is_current: current_page?(explore_periods_path(format: 'html'))),
-      navigation_global_primary_nav_galleries
-    ]
+    mustache[:navigation_global_primary_nav_explore_submenu_items] ||= begin
+      [
+        link_item(t('global.navigation.browse_newcontent'), explore_newcontent_path(format: 'html')),
+        link_item(t('global.navigation.browse_colours'), explore_colours_path(format: 'html')),
+        link_item(t('global.navigation.browse_sources'), explore_sources_path(format: 'html')),
+        link_item(t('global.navigation.concepts'), explore_topics_path(format: 'html')),
+        link_item(t('global.navigation.agents'), explore_people_path(format: 'html')),
+        link_item(t('global.navigation.periods'), explore_periods_path(format: 'html')),
+        navigation_global_primary_nav_galleries
+      ]
+    end
   end
 
   def navigation_global_primary_nav_exhibitions_submenu_items
-    feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][exhibitions_feed_key], 6)
-    feed_items << link_item(t('global.navigation.all_exhibitions'), exhibitions_foyer_path(exhibitions_feed_key),
-                            is_morelink: true)
+    mustache[:navigation_global_primary_nav_exhibitions_submenu_items] ||= begin
+      feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:exhibitions][exhibitions_feed_key], 6)
+      feed_items << link_item(t('global.navigation.all_exhibitions'), exhibitions_foyer_path(exhibitions_feed_key),
+                              is_morelink: true)
+    end
   end
 
   def navigation_global_primary_nav_blog_submenu_items
-    feed = Feed.find_by_slug('all-blog')
-    return [] unless feed
-    feed_items = feed_entry_nav_items(feed.url, 6)
-    feed_items << link_item(t('global.navigation.all_blog_posts'), feed.html_url,
-                            is_morelink: true)
+    mustache[:navigation_global_primary_nav_blog_submenu_items] ||= begin
+      feed = Feed.find_by_slug('all-blog')
+      return [] unless feed
+      feed_items = feed_entry_nav_items(feed.url, 6)
+      feed_items << link_item(t('global.navigation.all_blog_posts'), feed.html_url,
+                              is_morelink: true)
+    end
   end
 
   def navigation_global_primary_nav_galleries
-    {
-      text: t('global.navigation.galleries'),
-      is_current: controller.controller_name == 'galleries',
-      submenu: {
-        items: navigation_global_primary_nav_galleries_submenu_items
+    mustache[:navigation_global_primary_nav_galleries] ||= begin
+      {
+        text: t('global.navigation.galleries'),
+        is_current: submenu_has_current_page?(navigation_global_primary_nav_galleries_submenu_items),
+        submenu: {
+          items: navigation_global_primary_nav_galleries_submenu_items
+        }
       }
-    }
+    end
   end
 
   def navigation_global_primary_nav_galleries_submenu_items
-    Gallery.published.order(published_at: :desc).limit(6).map do |gallery|
-      link_item(gallery.title, gallery_path(gallery),
-                is_current: current_page?(gallery_path(gallery)))
-    end << link_item(t('global.navigation.all_galleries'), galleries_path, is_morelink: true, is_current: current_page?(galleries_path))
+    mustache[:navigation_global_primary_nav_galleries_submenu_items] ||= begin
+      Gallery.published.order(published_at: :desc).limit(6).map do |gallery|
+        link_item(gallery.title, gallery_path(gallery))
+      end << link_item(t('global.navigation.all_galleries'), galleries_path, is_morelink: true)
+    end
   end
 
   def utility_nav_items_submenu_items
@@ -183,6 +195,7 @@ module NavigableView
   end
 
   def link_item(text, url, options = {})
+    options[:is_current] = current_page?(url) unless options.key?(:is_current)
     { text: text, url: url, submenu: false }.merge(options)
   end
 
