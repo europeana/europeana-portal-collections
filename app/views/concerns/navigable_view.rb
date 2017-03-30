@@ -18,36 +18,7 @@ module NavigableView
           },
           primary_nav: {
             menu_id: 'main-menu',
-            items: [
-              {
-                text: t('global.navigation.collections'),
-                is_current: submenu_has_current_page?(navigation_global_primary_nav_collections_submenu_items),
-                submenu: {
-                  items: navigation_global_primary_nav_collections_submenu_items
-                }
-              },
-              {
-                text: t('global.navigation.browse'),
-                is_current: submenu_has_current_page?(navigation_global_primary_nav_explore_submenu_items),
-                submenu: {
-                  items: navigation_global_primary_nav_explore_submenu_items
-                }
-              },
-              {
-                url: exhibitions_foyer_path(exhibitions_feed_key),
-                text: t('global.navigation.exhibitions'),
-                submenu: {
-                  items: navigation_global_primary_nav_exhibitions_submenu_items
-                }
-              },
-              {
-                url: 'http://blog.europeana.eu/',
-                text: t('global.navigation.blog'),
-                submenu: {
-                  items: navigation_global_primary_nav_blog_submenu_items
-                }
-              }
-            ]
+            items: navigation_global_primary_nav_items
           }
         },
         home_url: home_url,
@@ -111,6 +82,54 @@ module NavigableView
     end
   end
 
+  def navigation_global_primary_nav_items
+    Rails.cache.fetch('global/navigation/primary_nav_items') do
+      [
+        {
+          text: t('global.navigation.collections'),
+          submenu: {
+            items: navigation_global_primary_nav_collections_submenu_items
+          }
+        },
+        {
+          text: t('global.navigation.browse'),
+          submenu: {
+            items: navigation_global_primary_nav_explore_submenu_items
+          }
+        },
+        {
+          url: exhibitions_foyer_path(exhibitions_feed_key),
+          text: t('global.navigation.exhibitions'),
+          submenu: {
+            items: navigation_global_primary_nav_exhibitions_submenu_items
+          }
+        },
+        {
+          url: 'http://blog.europeana.eu/',
+          text: t('global.navigation.blog'),
+          submenu: {
+            items: navigation_global_primary_nav_blog_submenu_items
+          }
+        }
+      ]
+    end.tap do |nav|
+      nav.each do |section|
+        mark_current_page(section)
+      end
+    end
+  end
+
+  def mark_current_page(section)
+    section[:submenu][:items].each do |item|
+      if item[:submenu]
+        mark_current_page(item)
+      else
+        item[:is_current] = current_page?(item[:url])
+      end
+    end
+    section[:is_current] = submenu_has_current_page?(section[:submenu][:items])
+  end
+
   def navigation_global_primary_nav_collections_submenu_items
     displayable_collections.sort_by { |c| c.title.to_s }.map do |collection|
       link_item(collection.title, collection_path(collection))
@@ -153,7 +172,6 @@ module NavigableView
     mustache[:navigation_global_primary_nav_galleries] ||= begin
       {
         text: t('global.navigation.galleries'),
-        is_current: submenu_has_current_page?(navigation_global_primary_nav_galleries_submenu_items),
         submenu: {
           items: navigation_global_primary_nav_galleries_submenu_items
         }
@@ -195,7 +213,6 @@ module NavigableView
   end
 
   def link_item(text, url, options = {})
-    options[:is_current] = current_page?(url) unless options.key?(:is_current)
     { text: text, url: url, submenu: false }.merge(options)
   end
 
