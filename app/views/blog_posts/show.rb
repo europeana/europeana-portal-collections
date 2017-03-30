@@ -2,11 +2,15 @@
 module BlogPosts
   class Show < ApplicationView
     def page_title
-      mustache[:page_title] ||= [@blog_post.title, site_title].join(' - ')
+      [blog_title, site_title].join(' - ')
     end
 
     def blog_title
-      presenter.title
+      if body_cached?
+        cached_body_content.match(%r{<div class="title text-centre">(.*?)</div>})[1]
+      else
+        presenter.title
+      end
     end
 
     def content
