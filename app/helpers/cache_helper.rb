@@ -22,8 +22,4 @@ module CacheHelper
   def body_cached?
     cache_body? && Rails.cache.exist?(cache_key(body_cache_key))
   end
-
-  def cached_body_content
-    Rails.cache.fetch(cache_key(body_cache_key))
-  end
 end
