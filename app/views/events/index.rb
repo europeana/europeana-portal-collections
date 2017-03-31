@@ -46,14 +46,14 @@ module Events
     # @todo this selected filter option logic should be abstracted into a concern
     #   or helper method to DRY things up. See also `ThemeFilterableView#theme_filter_options`
     def events_order_options
-      order_options = order_filters.map { |key, data| { label: data[:label], value: key } }.tap do |options|
-        selected_option = options.delete(options.detect { |option| option[:value] == selected_order })
+      selected_past_future_options = past_future_filters.map { |key, data| { label: data[:label], value: key } }.tap do |options|
+        selected_option = options.delete(options.detect { |option| option[:value] == selected_past_future })
         options.unshift(selected_option.merge(selected: true)) unless selected_option.nil?
       end
 
       {
-        filter_name: 'order',
-        options: order_options
+        filter_name: 'sort',
+        options: selected_past_future_options
       }
     end
 
