@@ -39,12 +39,12 @@ class ProResourcePresenter
 
   # We omit from view internal-use tags starting "culturelover"
   def displayable_tags
-    return nil unless resource.has_taxonomy?(:tags) 
+    return nil unless resource.has_taxonomy?(:tags)
     @displayable_tags ||= resource.taxonomy[:tags].reject { |_pro_path, tag| tag.start_with?('culturelover') }
   end
 
   def theme_label_tags
-    return nil unless resource.has_taxonomy?(:tags) 
+    return nil unless resource.has_taxonomy?(:tags)
     @theme_label_tags ||= resource.taxonomy[:tags].select { |_pro_path, tag| tag.start_with?('culturelover-') }
   end
 
