@@ -4,6 +4,14 @@ module Events
     include PaginatedJsonApiResultSetView
     include ThemeFilterableView
 
+    def theme_filters
+      pro_json_api_theme_filters
+    end
+
+    def selected_theme
+      pro_json_api_selected_theme
+    end
+
     def page_title
       mustache[:page_title] ||= begin
         [t('site.events.list.page-title'), site_title].join(' - ')
@@ -33,6 +41,20 @@ module Events
     def events_filter_options
       return nil unless config.x.enable.events_theme_filter
       theme_filter_options
+    end
+
+    # @todo this selected filter option logic should be abstracted into a concern
+    #   or helper method to DRY things up. See also `ThemeFilterableView#theme_filter_options`
+    def events_order_options
+      options = order_filters.map { |key, data| { label: data[:label], value: key } }.tap do |options|
+        selected_option = options.delete(options.detect { |option| option[:value] == selected_order })
+        options.unshift(selected_option) unless selected_option.nil?
+      end
+
+      {
+        filter_name: 'order',
+        options: options
+      }
     end
 
     protected

@@ -4,6 +4,14 @@ module BlogPosts
     include PaginatedJsonApiResultSetView
     include ThemeFilterableView
 
+    def theme_filters
+      pro_json_api_theme_filters
+    end
+
+    def selected_theme
+      pro_json_api_selected_theme
+    end
+
     def page_title
       mustache[:page_title] ||= begin
         [t('site.blogs.list.page-title'), site_title].join(' - ')

@@ -10,14 +10,13 @@ class EventsController < ApplicationController
   include PaginatedController
   include ProJsonApiConsumer
 
+  helper_method :order_filters, :selected_order
+
   self.pagination_per_default = 6
 
   def index
     @events = Pro::Event.includes(:locations, :network).where(pro_json_api_filters).
-              # Uncomment to restrict to current and future events, but only
-              # when UI is in place to switch to past events, and accommodate
-              # that by param in this controller.
-              # where(end_event: ">=" + Date.today.strftime).
+              where(past_future_filter).
               order('-end_event').page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
   end
@@ -28,5 +27,31 @@ class EventsController < ApplicationController
     @event = results.first
 
     fail JsonApiClient::Errors::NotFound.new(results.links.links['self']) if @event.nil?
+  end
+
+  protected
+
+  def past_future_filter
+    {
+      end_event: (order_filters[selected_order] || {})[:filter]
+    }
+  end
+
+  def selected_order
+    (params[:order] || 'future').to_sym
+  end
+
+  def order_filters
+    date = Date.today.strftime
+    {
+      future: {
+        filter: ">=#{date}",
+        label: t('site.events.list.future')
+      },
+      past: {
+        filter: "<#{date}",
+        label: t('site.events.list.past')
+      }
+    }
   end
 end

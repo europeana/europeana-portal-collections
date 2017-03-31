@@ -3,23 +3,18 @@ module ProJsonApiConsumer
   extend ActiveSupport::Concern
 
   included do
-    before_action :assign_pro_json_api_theme_vars, only: :index
+    helper_method :pro_json_api_theme_filters, :pro_json_api_selected_theme
   end
 
   protected
 
-  def assign_pro_json_api_theme_vars
-    @theme_filters = pro_json_api_theme_filters
-    @selected_theme = pro_json_api_theme
-  end
-
   def pro_json_api_filters
     {
-      tags: (pro_json_api_theme_filters[pro_json_api_theme] || {})[:filter]
+      tags: (pro_json_api_theme_filters[pro_json_api_selected_theme] || {})[:filter]
     }
   end
 
-  def pro_json_api_theme
+  def pro_json_api_selected_theme
     (params[:theme] || 'all').to_sym
   end
 
