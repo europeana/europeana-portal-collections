@@ -6,10 +6,14 @@
 # @todo Exception handling when `JsonApiClient` requests fail
 # @todo Filter for events relevant to the portal
 class EventsController < ApplicationController
+  include CacheHelper
   include HomepageHeroImage
   include PaginatedController
 
   self.pagination_per_default = 6
+
+  attr_reader :body_cache_key
+  helper_method :body_cache_key
 
   def index
     @events = Pro::Event.includes(:locations, :network).
@@ -22,16 +26,27 @@ class EventsController < ApplicationController
               # where(end_event: ">=" + Date.today.strftime).
               page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
-    results = Pro::Event.includes(:locations, :network).
-              # Uncomment to restrict to events tagged "culturelover"
-              # where(filters).
-              where(slug: params[:slug])
-    @event = results.first
+    @body_cache_key = "events/#{params[:slug]}.#{request.format.to_sym}"
 
-    fail JsonApiClient::Errors::NotFound.new(results.links.links['self']) if @event.nil?
+    unless body_cached?
+      results = Pro::Event.includes(:locations, :network).
+                # Uncomment to restrict to events tagged "culturelover"
+                # where(filters).
+                where(slug: params[:slug])
+      @event = results.first
+      fail JsonApiClient::Errors::NotFound.new(results.links.links['self']) if @event.nil?
+    end
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   protected
