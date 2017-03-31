@@ -48,7 +48,7 @@ module Events
     def events_order_options
       order_options = order_filters.map { |key, data| { label: data[:label], value: key } }.tap do |options|
         selected_option = options.delete(options.detect { |option| option[:value] == selected_order })
-        options.unshift(selected_option) unless selected_option.nil?
+        options.unshift(selected_option.merge(selected: true)) unless selected_option.nil?
       end
 
       {
