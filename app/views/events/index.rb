@@ -2,6 +2,7 @@
 module Events
   class Index < ApplicationView
     include PaginatedJsonApiResultSetView
+    include ThemeFilterableView
 
     def page_title
       mustache[:page_title] ||= begin
@@ -27,6 +28,11 @@ module Events
 
     def event_items
       @events.map { |event| event_item(event) }
+    end
+
+    def events_filter_options
+      return nil unless config.x.enable.events_theme_filter
+      theme_filter_options
     end
 
     protected
