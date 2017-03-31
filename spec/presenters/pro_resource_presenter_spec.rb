@@ -22,9 +22,9 @@ RSpec.describe ProResourcePresenter do
   end
 
   describe '#label' do
-    it 'uses the first value of blogs taxonomy' do
-      allow(resource).to receive(:taxonomy) { { blogs: { '/path' => 'interesting blog' } } }
-      expect(subject.label).to eq('interesting blog')
+    it 'uses culturelover-theme tags to look up topics' do
+      allow(resource).to receive(:taxonomy) { { tags: { '/path' => 'culturelover-fashion' } } }
+      expect(subject.label).to eq('Fashion')
     end
   end
 

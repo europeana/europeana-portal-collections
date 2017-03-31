@@ -9,6 +9,9 @@ class EventsController < ApplicationController
   include CacheHelper
   include HomepageHeroImage
   include PaginatedController
+  include ProJsonApiConsumer
+
+  helper_method :past_future_filters, :selected_past_future
 
   self.pagination_per_default = 6
 
@@ -16,15 +19,9 @@ class EventsController < ApplicationController
   helper_method :body_cache_key
 
   def index
-    @events = Pro::Event.includes(:locations, :network).
-              order('-end_event').
-              # Uncomment to restrict to events tagged "culturelover"
-              # where(filters).
-              # Uncomment to restrict to current and future events, but only
-              # when UI is in place to switch to past events, and accommodate
-              # that by param in this controller.
-              # where(end_event: ">=" + Date.today.strftime).
-              page(pagination_page).per(pagination_per).all
+    @events = Pro::Event.includes(:locations, :network).where(pro_json_api_filters).
+              where(pro_json_api_past_future_filter).
+              order('-end_event').page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
 
     respond_to do |format|
@@ -36,9 +33,7 @@ class EventsController < ApplicationController
     @body_cache_key = "events/#{params[:slug]}.#{request.format.to_sym}"
 
     unless body_cached?
-      results = Pro::Event.includes(:locations, :network).
-                # Uncomment to restrict to events tagged "culturelover"
-                # where(filters).
+      results = Pro::Event.includes(:locations, :network).where(pro_json_api_filters).
                 where(slug: params[:slug])
       @event = results.first
       fail JsonApiClient::Errors::NotFound.new(results.links.links['self']) if @event.nil?
@@ -51,9 +46,27 @@ class EventsController < ApplicationController
 
   protected
 
-  def filters
+  def pro_json_api_past_future_filter
     {
-      tags: 'culturelover'
+      end_event: (past_future_filters[selected_past_future] || {})[:filter]
+    }
+  end
+
+  def selected_past_future
+    (params[:sort] || 'future').to_sym
+  end
+
+  def past_future_filters
+    date = Date.today.strftime
+    {
+      future: {
+        filter: ">=#{date}",
+        label: t('site.events.list.future')
+      },
+      past: {
+        filter: "<#{date}",
+        label: t('site.events.list.past')
+      }
     }
   end
 end

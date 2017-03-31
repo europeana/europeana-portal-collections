@@ -24,10 +24,18 @@ RSpec.describe BlogPostsController do
   end
 
   describe 'GET #index' do
-    it 'queries the Pro JSON-API for 6 posts' do
+    it 'queries the Pro JSON-API' do
       get :index, locale: 'en'
       expect(
         a_request(:get, json_api_url)
+      ).to have_been_made.once
+    end
+
+    it 'filters by tag "culturelover"' do
+      get :index, locale: 'en'
+      expect(
+        a_request(:get, json_api_url).
+        with(query: hash_including(filter: { tags: 'culturelover' }))
       ).to have_been_made.once
     end
 
@@ -82,7 +90,7 @@ RSpec.describe BlogPostsController do
       get :show, locale: 'en', slug: 'important-news'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(filter: { blogs: 'europeana-fashion', slug: 'important-news' }, page: { number: '1', size: '1' }))
+        with(query: hash_including(filter: { tags: 'culturelover', slug: 'important-news' }, page: { number: '1', size: '1' }))
       ).to have_been_made.once
     end
 
