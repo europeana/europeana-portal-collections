@@ -37,9 +37,15 @@ class ProResourcePresenter
     displayable_tags.present?
   end
 
-  # We omit from view the "culturelover" internal-use tag
+  # We omit from view internal-use tags starting "culturelover"
   def displayable_tags
-    resource.taxonomy[:tags].reject { |_pro_path, tag| tag == 'culturelover' }
+    return nil unless resource.has_taxonomy?(:tags)
+    @displayable_tags ||= resource.taxonomy[:tags].reject { |_pro_path, tag| tag.start_with?('culturelover') }
+  end
+
+  def theme_label_tags
+    return nil unless resource.has_taxonomy?(:tags)
+    @theme_label_tags ||= resource.taxonomy[:tags].select { |_pro_path, tag| tag.start_with?('culturelover-') }
   end
 
   def tags
@@ -81,11 +87,12 @@ class ProResourcePresenter
     resource.persons.flatten.compact
   end
 
-  # @todo this likely needs to be more generic, or moved into a blog presenter
-  #   subclass
   def label
-    return nil unless resource.has_taxonomy?(:blogs)
-    resource.taxonomy[:blogs].values.first
+    return nil unless theme_label_tags.present?
+    topics = theme_label_tags.map do |_pro_path, tag|
+      Topic.find_by_slug(tag.split('-').last)
+    end.compact
+    topics.blank? ? nil : topics.map(&:label).join(' | ')
   end
 
   def geolocation

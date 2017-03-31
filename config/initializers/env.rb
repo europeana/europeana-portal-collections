@@ -30,5 +30,6 @@ end
 # Enable certain features that are disabled by default
 Rails.application.config.x.enable = OpenStruct.new(
   blog_posts_theme_filter: ENV['ENABLE_BLOG_POSTS_THEME_FILTER'],
+  events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
   search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE']
 )

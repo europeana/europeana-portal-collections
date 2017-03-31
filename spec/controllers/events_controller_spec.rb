@@ -30,6 +30,14 @@ RSpec.describe EventsController do
       ).to have_been_made.once
     end
 
+    it 'filters by date and tag "culturelover"' do
+      get :index, locale: 'en'
+      expect(
+        a_request(:get, json_api_url).
+        with(query: hash_including(filter: { end_event: ">=#{Date.today.strftime}", tags: 'culturelover' }))
+      ).to have_been_made.once
+    end
+
     it 'requests 6 event posts' do
       get :index, locale: 'en'
       expect(
@@ -81,7 +89,7 @@ RSpec.describe EventsController do
       get :show, locale: 'en', slug: 'conference'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(filter: { slug: 'conference' }, page: { number: '1', size: '1' }))
+        with(query: hash_including(filter: { tags: 'culturelover', slug: 'conference' }, page: { number: '1', size: '1' }))
       ).to have_been_made.once
     end
 

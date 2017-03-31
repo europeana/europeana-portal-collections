@@ -2,6 +2,15 @@
 module BlogPosts
   class Index < ApplicationView
     include PaginatedJsonApiResultSetView
+    include ThemeFilterableView
+
+    def theme_filters
+      pro_json_api_theme_filters
+    end
+
+    def selected_theme
+      pro_json_api_selected_theme
+    end
 
     def page_title
       mustache[:page_title] ||= begin
@@ -31,20 +40,10 @@ module BlogPosts
 
     def blogs_filter_options
       return nil unless config.x.enable.blog_posts_theme_filter
-      {
-        filter_name: 'theme',
-        options: filter_options
-      }
+      theme_filter_options
     end
 
     protected
-
-    def filter_options
-      @theme_filters.map { |key, data| { label: data[:label], value: key } }.tap do |options|
-        selected_option = options.delete(options.detect { |option| option[:value] == @selected_theme })
-        options.unshift(selected_option) unless selected_option.nil?
-      end
-    end
 
     def blog_item(post)
       presenter = ProResourcePresenter.new(self, post)
