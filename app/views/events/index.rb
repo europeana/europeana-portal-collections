@@ -40,7 +40,7 @@ module Events
         date: presenter.date_range(:start_event, :end_event),
         location: presenter.location_name,
         img: presenter.image(:thumbnail, :teaser_image),
-        label: nil,
+        label: presenter.label,
         tags: presenter.tags
       }
     end
