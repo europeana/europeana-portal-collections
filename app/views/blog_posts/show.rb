@@ -1,17 +1,10 @@
 # frozen_string_literal: true
 module BlogPosts
   class Show < ApplicationView
-    def page_title
-      [blog_title, site_title].join(' - ')
-    end
-
     def blog_title
-      if body_cached?
-        cached_body_content.match(%r{<div class="title text-centre">(.*?)</div>})[1]
-      else
-        presenter.title
-      end
+      body_cached? ? title_from_cached_body : presenter.title
     end
+    alias_method :page_content_heading, :blog_title
 
     def content
       mustache[:content] ||= begin

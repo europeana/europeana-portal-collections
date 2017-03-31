@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 module Events
   class Show < ApplicationView
-    def page_title
-      mustache[:page_title] ||= [@event.title, site_title].join(' - ')
-    end
-
     def event_title
-      presenter.title
+      body_cached? ? title_from_cached_body : presenter.title
     end
+    alias_method :page_content_heading, :event_title
 
     def content
       mustache[:content] ||= begin
