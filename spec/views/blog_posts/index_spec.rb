@@ -13,16 +13,17 @@ RSpec.describe 'blog_posts/index.html.mustache' do
   end
   let(:theme_filters) do
     {
-      all: { filter: 'all-blog-posts', label: 'All' },
-      fashion: { filter: 'fashion-blog-posts', label: 'Fashion' },
+      all: { filter: 'culturelover', label: 'All' },
+      fashion: { filter: 'culturelover-fashion', label: 'Fashion' },
     }
   end
 
   before do
     allow(view).to receive(:pagination_page) { pagination_page }
     allow(view).to receive(:pagination_per) { pagination_per }
+    allow(view).to receive(:pro_json_api_theme_filters) { theme_filters }
+    allow(view).to receive(:pro_json_api_selected_theme) { :all }
     assign(:blog_posts, blog_posts)
-    assign(:theme_filters, theme_filters)
   end
 
   it_behaves_like 'paginated_view'
@@ -37,9 +38,9 @@ RSpec.describe 'blog_posts/index.html.mustache' do
     expect(rendered).to have_selector('h2 a', text: blog_posts.first.title)
   end
 
-  it 'uses blogs taxonomy for category flag' do
+  it 'uses culturelover-theme tag for category flag' do
     render
-    expect(rendered).to have_selector('.item-preview .category-flag', text: blog_posts.first.taxonomy[:blogs].values.first)
+    expect(rendered).to have_selector('.item-preview .category-flag', text: 'Fashion')
   end
 
   context 'with theme filter enabled' do
