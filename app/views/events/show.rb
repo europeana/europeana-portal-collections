@@ -19,7 +19,7 @@ module Events
           tags: presenter.tags,
           label: presenter.label,
           event_date: presenter.date_range(:start_event, :end_event),
-          date: presenter.date_range(:start_event, :end_event),
+          date: presenter.date,
           introduction: presenter.introduction,
           event_image: presenter.image(:url, :teaser_image),
           geolocation: presenter.geolocation,
