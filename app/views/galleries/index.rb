@@ -12,8 +12,10 @@ module Galleries
       mustache[:page_title] ||= [t('global.galleries'), site_title].join(' - ')
     end
 
-    def js_vars
-      [{ name: 'pageName', value: 'collections/galleries' }]
+    def head_links
+      mustache[:head_links] ||= begin
+        { items: [{ rel: 'alternate', type: 'application/rss+xml', href: galleries_url(format: 'rss') }] + super[:items] }
+      end
     end
 
     def head_meta

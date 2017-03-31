@@ -11,10 +11,18 @@ RSpec.describe 'blog_posts/index.html.mustache' do
     allow(api_response).to receive(:env) { {} }
     JsonApiClient::Parsers::Parser.parse(Pro::BlogPost, api_response)
   end
+  let(:theme_filters) do
+    {
+      all: { filter: 'culturelover', label: 'All' },
+      fashion: { filter: 'culturelover-fashion', label: 'Fashion' },
+    }
+  end
 
   before do
-    assign(:pagination_page, pagination_page)
-    assign(:pagination_per, pagination_per)
+    allow(view).to receive(:pagination_page) { pagination_page }
+    allow(view).to receive(:pagination_per) { pagination_per }
+    allow(view).to receive(:pro_json_api_theme_filters) { theme_filters }
+    allow(view).to receive(:pro_json_api_selected_theme) { :all }
     assign(:blog_posts, blog_posts)
   end
 
@@ -30,8 +38,32 @@ RSpec.describe 'blog_posts/index.html.mustache' do
     expect(rendered).to have_selector('h2 a', text: blog_posts.first.title)
   end
 
-  it 'uses blogs taxonomy for category flag' do
+  it 'uses culturelover-theme tag for category flag' do
     render
-    expect(rendered).to have_selector('.item-preview .category-flag', text: blog_posts.first.taxonomy[:blogs].values.first)
+    expect(rendered).to have_selector('.item-preview .category-flag', text: 'Fashion')
+  end
+
+  context 'with theme filter enabled' do
+    before do
+      Rails.application.config.x.enable.blog_posts_theme_filter = '1'
+    end
+
+    it 'has theme filter' do
+      render
+      expect(rendered).to have_selector('select#list_filterby')
+      expect(rendered).to have_selector('select#list_filterby > option[value="all"]')
+      expect(rendered).to have_selector('select#list_filterby > option[value="fashion"]')
+    end
+  end
+
+  context 'without theme filter enabled' do
+    before do
+      Rails.application.config.x.enable.blog_posts_theme_filter = nil
+    end
+
+    it 'has no theme filter' do
+      render
+      expect(rendered).not_to have_selector('select#list_filterby')
+    end
   end
 end

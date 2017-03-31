@@ -91,11 +91,6 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
 
       it_behaves_like 'stable version view'
     end
-
-    context 'when collection is fashion' do
-      let(:collection) { collections(:fashion) }
-      it_behaves_like 'beta version view'
-    end
   end
 
   context 'when searching for similar items' do

@@ -45,6 +45,8 @@ module CollectionsHelper
   end
 
   def beta_collection?(collection)
-    collection.key == 'fashion'
+    # Uncomment this to indicate that a new collection is beta
+    # collection.key == 'new-collection'
+    false
   end
 end

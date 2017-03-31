@@ -13,11 +13,26 @@ class ApplicationView < Europeana::Styleguide::View
   include LocalisableView
   include NavigableView
 
+  def page_title
+    [page_content_heading, site_title].join(' - ')
+  end
+
+  # Override in view subclasses for use in #page_title
+  def page_content_heading
+    ''
+  end
+
+  def js_vars
+    [
+      { name: 'googleAnalyticsKey', value: config.x.google[:analytics_key] }
+    ] + super
+  end
+
   def head_meta
-    return super unless ENV.key?('GOOGLE_SITE_VERIFICATION')
+    return super unless config.x.google.key?(:site_verification)
     [
       {
-        meta_name: 'google-site-verification', content: ENV['GOOGLE_SITE_VERIFICATION']
+        meta_name: 'google-site-verification', content: config.x.google[:site_verification]
       }
     ] + super
   end
@@ -25,7 +40,7 @@ class ApplicationView < Europeana::Styleguide::View
   def head_links
     links = [
       { rel: 'search', type: 'application/opensearchdescription+xml',
-        href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
+        href: config.x.europeana[:opensearch_host] + '/opensearch.xml',
         title: 'Europeana Search' },
       { rel: 'alternate', href: current_url_without_locale, hreflang: 'x-default' }
     ] + alternate_language_links
@@ -84,5 +99,9 @@ class ApplicationView < Europeana::Styleguide::View
 
   def mustache
     @mustache ||= {}
+  end
+
+  def config
+    Rails.application.config
   end
 end

@@ -1,21 +1,18 @@
 # frozen_string_literal: true
 module BlogPosts
   class Show < ApplicationView
-    def page_title
-      mustache[:page_title] ||= [@blog_post.title, site_title].join(' - ')
-    end
-
     def blog_title
-      presenter.title
+      body_cached? ? title_from_cached_body : presenter.title
     end
+    alias_method :page_content_heading, :blog_title
 
     def content
       mustache[:content] ||= begin
         {
           body: presenter.body,
-          has_authors: presenter.has_authors?,
+          has_authors: @blog_post.has_authors?,
           authors: presenter.authors,
-          has_tags: presenter.has_tags?,
+          has_tags: @blog_post.has_taxonomy?(:tags),
           tags: presenter.tags,
           label: presenter.label,
           date: presenter.date,
@@ -38,7 +35,7 @@ module BlogPosts
     protected
 
     def presenter
-      @presenter ||= BlogPostPresenter.new(@blog_post)
+      @presenter ||= ProResourcePresenter.new(self, @blog_post)
     end
   end
 end

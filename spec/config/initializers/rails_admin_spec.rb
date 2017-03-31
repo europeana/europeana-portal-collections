@@ -30,4 +30,8 @@ RSpec.describe RailsAdmin.config do
       end
     end
   end
+
+  it 'adds generic help to text fields' do
+    expect(RailsAdmin::Config::Fields::Types::Text.instance_methods).to include(:generic_help)
+  end
 end

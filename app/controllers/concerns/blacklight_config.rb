@@ -99,6 +99,10 @@ module BlacklightConfig
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
                              limit: 100,
                              only: ->(item) { item.value.start_with?('Technique: ') }
+      config.add_facet_field 'proxy_dcterms_medium.en',
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
+                             limit: 100,
+                             only: ->(item) { item.value.start_with?('Material: ') }
       config.add_facet_field 'proxy_dc_type.en',
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
                              limit: 100,
