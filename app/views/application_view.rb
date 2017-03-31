@@ -13,6 +13,15 @@ class ApplicationView < Europeana::Styleguide::View
   include LocalisableView
   include NavigableView
 
+  def page_title
+    [page_content_heading, site_title].join(' - ')
+  end
+
+  # Override in view subclasses for use in #page_title
+  def page_content_heading
+    ''
+  end
+
   def js_vars
     [
       { name: 'googleAnalyticsKey', value: config.x.google[:analytics_key] }
