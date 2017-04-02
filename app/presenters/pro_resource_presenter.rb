@@ -106,10 +106,10 @@ class ProResourcePresenter
 
   def date_range(from_attribute, to_attribute, format = nil)
     start_datetime = resource.respond_to?(from_attribute) ? resource.send(from_attribute) : nil
-    start_date = fmt_datetime_as_date(start_datetime)
+    start_date = fmt_datetime_as_date(start_datetime, format)
 
     end_datetime = resource.respond_to?(to_attribute) ? resource.send(to_attribute) : nil
-    end_date = fmt_datetime_as_date(end_datetime)
+    end_date = fmt_datetime_as_date(end_datetime, format)
 
     return nil if [start_date, end_date].all?(&:blank?)
     [start_date, end_date].compact.uniq.join(' - ')
@@ -134,7 +134,9 @@ class ProResourcePresenter
 
   def location_address
     if geolocation.nil? || geolocation[:formatted_address].blank?
-      nil
+      if resource.locations.first && !resource.locations.first.title.blank?
+        resource.locations.first.title
+      end
     else
       geolocation[:formatted_address]
     end
