@@ -121,7 +121,9 @@ class ProResourcePresenter
   end
 
   def time_range(from_attribute, to_attribute)
-    date_range(from_attribute, to_attribute, '%H:%M')
+    range = date_range(from_attribute, to_attribute, '%H:%M')
+    return range unless range == '00:00'
+    t('site.events.all_day')
   end
 
   def location_name
@@ -133,12 +135,14 @@ class ProResourcePresenter
   end
 
   def location_address
-    if geolocation.nil? || geolocation[:formatted_address].blank?
-      if resource.locations.first && !resource.locations.first.title.blank?
-        resource.locations.first.title
-      end
-    else
+    unless geolocation.nil? || geolocation[:formatted_address].blank?
       geolocation[:formatted_address]
+    end
+  end
+
+  def location_name
+    unless resource.includes?(:locations) && resource.locations.first.title.blank?
+      resource.locations.first.title
     end
   end
 end
