@@ -139,10 +139,4 @@ class ProResourcePresenter
       geolocation[:formatted_address]
     end
   end
-
-  def location_name
-    unless resource.includes?(:locations) && resource.locations.first.title.blank?
-      resource.locations.first.title
-    end
-  end
 end
