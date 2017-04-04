@@ -11,7 +11,7 @@ module Events
         image = presenter.image(:url)
         image = image[:src] unless image.nil?
         description = truncate(Nokogiri::HTML(presenter.body).text, length: 200)
-        title = presenter.title.to_s.gsub('"', '')
+        title = presenter.title.delete('"')
 
         head_meta = [
           { meta_name: 'description', content: description },
