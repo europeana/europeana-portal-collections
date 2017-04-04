@@ -100,7 +100,7 @@ RSpec.describe GalleriesController do
       end
     end
 
-    context 'when requesting as an atom feed' do
+    context 'when requesting as an rss feed' do
       let(:format) { 'rss' }
 
       it 'returns http success' do
