@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 xml.instruct!
 xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom', 'xmlns:ev' => 'http://purl.org/rss/1.0/modules/event/') do
   xml.channel do
