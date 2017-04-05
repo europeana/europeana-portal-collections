@@ -82,6 +82,11 @@ RSpec.describe BlogPostsController do
       expect(response.content_type).to eq('text/html')
     end
 
+    it 'responds to .rss format' do
+      get :index, locale: 'en', format: 'rss'
+      expect(response).to have_http_status(:success)
+    end
+
     it 'does not respond to .json format' # or should it, just outputting the JSON-API response?
   end
 

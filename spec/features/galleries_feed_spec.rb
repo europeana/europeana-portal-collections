@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.feature 'Galleries atom feed' do
+RSpec.feature 'Galleries rss feed' do
   describe 'galleries rss feed' do
     it 'should be present and valid' do
       visit '/en/explore/galleries.rss'
