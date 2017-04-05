@@ -2,6 +2,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Pro RSS feeds' do
+  # TODO: add fixtures so these feeds can be rendered and be tested
   # let(:json_api_content_type) { 'application/vnd.api+json' }
   #
   # before do
