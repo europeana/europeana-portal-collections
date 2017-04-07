@@ -97,27 +97,33 @@ class ProResourcePresenter
 
   def geolocation
     return nil unless resource.includes?(:locations)
-    resource.locations.first.geolocation
+    @geolocation ||= resource.locations.first.geolocation
   end
 
   def date
     fmt_datetime_as_date(resource.datepublish)
   end
 
-  def date_range(from_attribute, to_attribute)
+  def date_range(from_attribute, to_attribute, format = nil)
     start_datetime = resource.respond_to?(from_attribute) ? resource.send(from_attribute) : nil
-    start_date = fmt_datetime_as_date(start_datetime)
+    start_date = fmt_datetime_as_date(start_datetime, format)
 
     end_datetime = resource.respond_to?(to_attribute) ? resource.send(to_attribute) : nil
-    end_date = fmt_datetime_as_date(end_datetime)
+    end_date = fmt_datetime_as_date(end_datetime, format)
 
     return nil if [start_date, end_date].all?(&:blank?)
     [start_date, end_date].compact.uniq.join(' - ')
   end
 
-  def fmt_datetime_as_date(datetime)
+  def fmt_datetime_as_date(datetime, format = nil)
     return nil if datetime.nil?
-    DateTime.parse(datetime).strftime('%-d %B, %Y') # @todo Localeapp the date format
+    DateTime.parse(datetime).strftime(format || '%-d %B, %Y') # @todo Localeapp the date format
+  end
+
+  def time_range(from_attribute, to_attribute)
+    range = date_range(from_attribute, to_attribute, '%H:%M')
+    return range unless range == '00:00'
+    t('site.events.all_day')
   end
 
   def location_name
@@ -126,5 +132,11 @@ class ProResourcePresenter
 
   def read_time
     # @todo implement
+  end
+
+  def location_address
+    unless geolocation.nil? || geolocation[:formatted_address].blank?
+      geolocation[:formatted_address]
+    end
   end
 end

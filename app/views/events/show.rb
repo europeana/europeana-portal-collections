@@ -20,7 +20,12 @@ module Events
           introduction: presenter.introduction,
           event_image: presenter.image(:url, :teaser_image),
           geolocation: presenter.geolocation,
-          read_time: presenter.read_time
+          read_time: presenter.read_time,
+          location: {
+            institute_name: presenter.location_name,
+            address: presenter.location_address,
+            time: presenter.time_range(:start_event, :end_event)
+          }
         }
       end
     end
