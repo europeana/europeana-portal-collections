@@ -53,7 +53,7 @@ module FeedHelper
           alt: item.title
         },
         title: item.title,
-        date: I18n.l(item.published, format: :short),
+        date: I18n.l(item.published, format: :short).gsub(/\s00:00$/, ''),
         published: item.published,
         excerpt: {
           short: strip_tags(CGI.unescapeHTML(item.summary.to_s))
