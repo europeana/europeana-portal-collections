@@ -17,7 +17,7 @@ xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
         blog_post.taxonomy[:tags].each do |tag|
           xml.category(tag[1])
         end
-        if thumb = blog_post.image && !thumb.blank?
+        if (thumb = blog_post.image) && !blog_post.image.blank?
           xml.enclosure(url: thumb[:url], length: 0, type: 'image/*')
         end
         xml.guid(blog_post_url(blog_post.slug))
