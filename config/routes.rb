@@ -68,6 +68,8 @@ Rails.application.routes.draw do
     mount Europeana::FeedbackButton::Engine, at: '/'
   end
 
+  get 'csrf', to: 'application#csrf'
+
   put 'locale', to: 'locale#update'
   get '*path', to: 'locale#show'
 end
