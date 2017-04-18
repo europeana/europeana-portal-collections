@@ -16,6 +16,17 @@ class ApplicationController < ActionController::Base
 
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
+  def csrf
+    respond_to do |format|
+      format.json do
+        render json: {
+          param: request_forgery_protection_token,
+          token: form_authenticity_token
+        }
+      end
+    end
+  end
+
   def current_user
     super || User.new(guest: true)
   end
