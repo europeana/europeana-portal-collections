@@ -4,6 +4,12 @@ module BlogPosts
     include PaginatedJsonApiResultSetView
     include ThemeFilterableView
 
+    def head_links
+      mustache[:head_links] ||= begin
+        { items: [{ rel: 'alternate', type: 'application/rss+xml', href: blog_posts_url(format: 'rss') }] + super[:items] }
+      end
+    end
+
     def theme_filters
       pro_json_api_theme_filters
     end

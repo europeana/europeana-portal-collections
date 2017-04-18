@@ -22,6 +22,7 @@ class BlogPostsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.rss
     end
   end
 

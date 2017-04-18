@@ -27,16 +27,9 @@ class GalleriesController < ApplicationController
   def show
     @gallery = Gallery.find_by_slug(params[:slug])
     authorize! :show, @gallery
-    images = @gallery.images
 
     @body_cache_key = 'explore/' + @gallery.cache_key
-
-    if body_cached?
-      @hero_image_url = gallery_hero_image_from_cache
-    else
-      @documents = search_api_for_image_metadata(images)
-      set_gallery_hero_image_cache(images.first)
-    end
+    @documents = search_api_for_image_metadata(@gallery.images) unless body_cached?
 
     respond_to do |format|
       format.html
@@ -58,16 +51,6 @@ class GalleriesController < ApplicationController
   def search_api_for_image_metadata(images)
     return [] if images.blank?
     search_results(blacklight_api_params_for_images(images)).last
-  end
-
-  def gallery_hero_image_from_cache
-    Rails.cache.fetch(cache_key(@body_cache_key) + '/hero_image_url')
-  end
-
-  def set_gallery_hero_image_cache(image)
-    image_document = @documents.detect { |document| document.fetch(:id, nil) == image.europeana_record_id }
-    @hero_image_url = image_document['edmIsShownBy'].first
-    Rails.cache.write(cache_key(@body_cache_key) + '/hero_image_url', @hero_image_url, expires_in: 24.hours + 1.minute)
   end
 
   def blacklight_api_params_for_images(images)

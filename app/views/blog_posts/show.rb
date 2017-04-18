@@ -3,7 +3,7 @@
 module BlogPosts
   class Show < ApplicationView
     def blog_title
-      body_cached? ? title_from_cached_body : presenter.title
+      presenter.title
     end
     alias_method :page_content_heading, :blog_title
 
@@ -12,7 +12,7 @@ module BlogPosts
         image = presenter.image(:url)
         image = image[:src] unless image.nil?
         description = truncate(strip_tags(CGI.unescapeHTML(presenter.body)), length: 200)
-        
+
         head_meta = [
           { meta_name: 'description', content: description },
           { meta_property: 'og:description', content: description },

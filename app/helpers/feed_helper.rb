@@ -53,9 +53,10 @@ module FeedHelper
           alt: item.title
         },
         title: item.title,
-        date: I18n.l(item.published, format: :short),
+        date: I18n.l(item.published, format: :short).gsub(/\s00:00$/, ''),
+        published: item.published,
         excerpt: {
-          short: strip_tags(CGI.unescapeHTML(item.summary))
+          short: strip_tags(CGI.unescapeHTML(item.summary.to_s))
         },
         type: detect_feed_type(feed)
       }
@@ -65,7 +66,7 @@ module FeedHelper
   # Retrieves and combines all of a Page's Feed content so it can be assigned for display.
   def page_feeds_content(page)
     combined_items = page.feeds.map { |feed| feed_items_for(feed) }.flatten
-    combined_items.sort_by! { |item| item[:date] }
+    combined_items.sort_by! { |item| item[:published] }
     combined_items.reverse!
 
     return nil if combined_items.blank?
