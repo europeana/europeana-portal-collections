@@ -10,7 +10,7 @@ module Events
       mustache[:head_meta] ||= begin
         image = presenter.image(:url)
         image = image[:src] unless image.nil?
-        description = truncate(Nokogiri::HTML(presenter.body).text, length: 200)
+        description = truncate(strip_tags(CGI.unescapeHTML(presenter.body)), length: 200)
         title = presenter.title.delete('"')
 
         head_meta = [
