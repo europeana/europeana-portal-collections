@@ -7,8 +7,8 @@ module Galleries
       'channel_landing'
     end
 
-    def page_title
-      mustache[:page_title] ||= [@gallery.title, site_title].join(' - ')
+    def page_content_heading
+      @gallery.title
     end
 
     def head_links
@@ -24,7 +24,7 @@ module Galleries
         head_meta = gallery_head_meta + [
           { meta_name: 'description', content: description },
           { meta_property: 'og:description', content: description },
-          { meta_property: 'og:image', content: @hero_image_url },
+          { meta_property: 'og:image', content: hero_image_url },
           { meta_property: 'og:title', content: @gallery.title },
           { meta_property: 'og:sitename', content: @gallery.title }
         ]
@@ -49,9 +49,17 @@ module Galleries
 
     private
 
+    def hero_image_url
+      @hero_image_url ||= hero_image_document['edmIsShownBy'].first
+    end
+
+    def hero_image_document
+      @hero_image_document ||= @documents.detect { |document| document.fetch(:id, nil) == @gallery.images.first.europeana_record_id }
+    end
+
     def gallery_hero_content
       {
-        url: @hero_image_url,
+        url: hero_image_url,
         title: @gallery.title,
         subtitle: @gallery.description
       }
@@ -73,7 +81,8 @@ module Galleries
       return nil if presenter.nil?
       {
         title: presenter.title,
-        creator: presenter.field_value('dcCreator'),
+        creator: presenter.field_value('edmAgentLabelLangAware') ||
+          presenter.field_value('edmAgentLabel') || presenter.field_value('dcCreator'),
         data_provider: presenter.field_value('dataProvider'),
         creation_date: presenter.field_value('year'),
         thumb_url: gallery_image_thumbnail(image),

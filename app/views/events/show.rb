@@ -2,7 +2,7 @@
 module Events
   class Show < ApplicationView
     def event_title
-      body_cached? ? title_from_cached_body : presenter.title
+      presenter.title
     end
     alias_method :page_content_heading, :event_title
 

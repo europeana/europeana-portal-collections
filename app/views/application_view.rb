@@ -24,17 +24,19 @@ class ApplicationView < Europeana::Styleguide::View
 
   def js_vars
     [
-      { name: 'googleAnalyticsKey', value: config.x.google[:analytics_key] }
+      { name: 'googleAnalyticsKey', value: config.x.google[:analytics_key] },
+      { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] }
     ] + super
   end
 
   def head_meta
-    return super unless config.x.google.key?(:site_verification)
+    no_csrf = super.reject { |meta| %w(csrf-param csrf-token).include?(meta[:meta_name]) }
+    return no_csrf unless config.x.google.key?(:site_verification)
     [
       {
         meta_name: 'google-site-verification', content: config.x.google[:site_verification]
       }
-    ] + super
+    ] + no_csrf
   end
 
   def head_links

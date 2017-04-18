@@ -36,6 +36,9 @@ class FeedEntryImage
   protected
 
   def find_url_in_feed_entry
+    # first check for attached images
+    return @feed_entry.image if @feed_entry.image
+
     TAGS_ATTRS.each do |tag_attr|
       url = first_url_attr(tag_attr[:tag], tag_attr[:attr])
       return url unless url.nil?
