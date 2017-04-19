@@ -54,18 +54,22 @@ module Events
 
     def event_social
       {
-        url: request.original_url,
+        social_title: t('global.actions.share'),
         facebook: {
-          text: 'Facebook'
+          text: 'Facebook',
+          url: 'https://www.facebook.com/EuropeanaFashion'
         },
         twitter: {
-          text: 'Twitter'
+          text: 'Twitter',
+          url: 'https://twitter.com/eu_sounds'
         },
         pinterest: {
-          text: 'Pinterest'
+          text: 'Pinterest',
+          url: 'https://uk.pinterest.com/europeana/'
         },
         googleplus: {
-          text: 'Google Plus'
+          text: 'Google Plus',
+          url: 'https://plus.google.com/+europeana/posts'
         }
       }
     end
