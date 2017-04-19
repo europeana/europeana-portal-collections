@@ -40,7 +40,14 @@ module Galleries
           hero: hero_content,
           galleries: galleries_content,
           social: galleries_social,
-          gallery_filter_options: galleries_topics
+          gallery_filter_options: galleries_topics,
+          clicktip: {
+            activator:    '.filterby',
+            direction:    'top',
+            id:           'filter-galleries',
+            persistent:   true,
+            tooltip_text: t('global.tooltips.channels.galleries.filter')
+          }
         }
       end
     end
@@ -91,7 +98,18 @@ module Galleries
     end
 
     def galleries_content
-      @galleries.map { |gallery| gallery_content(gallery) }
+      res = @galleries.map { |gallery| gallery_content(gallery) }
+      if res.length > 2
+        res[1]['info_clicktip'] = {
+          clicktip: {
+            activator:    '.image-set:eq(1) .svg-icon-info',
+            direction:    'top',
+            id:           'gallery-hover-info',
+            persistent:   true,
+            tooltip_text: t('global.tooltips.channels.galleries.info')
+          }
+        }
+      end
     end
 
     def gallery_content(gallery)
