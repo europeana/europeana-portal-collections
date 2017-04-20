@@ -110,6 +110,7 @@ module Galleries
           }
         }
       end
+      res
     end
 
     def gallery_content(gallery)
