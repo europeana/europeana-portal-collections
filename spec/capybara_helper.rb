@@ -22,6 +22,7 @@ else
 
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app,
+      timeout: 20,
       phantomjs_options: [
         '--local-to-remote-url-access=true'
       ],

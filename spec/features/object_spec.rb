@@ -66,7 +66,7 @@ RSpec.feature 'Object page' do
           end
           it 'is present' do
             visit '/en/record/abc/123'
-            sleep 1 if js
+            sleep 20 if js
             expect(page).to have_css('#feedback-form')
           end
         end
