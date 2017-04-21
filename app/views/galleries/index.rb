@@ -97,16 +97,18 @@ module Galleries
       end
     end
 
-    def add_info_clicktip(content)
-      range = (0..galleries_content.length - 1).to_a
-
-      if range.length > 1
-        range[0], range[1] = range[1], range[0]
+    def info_clicktip_target(galleries_content)
+      if galleries_content[1].present? && galleries_content[1][:info].present?
+        galleries_content[1]
+      else
+        galleries_content.detect { |gc| gc[:info].present? }
       end
+    end
 
-      range.each do |location|
-        if content[location][:info].present?
-          content[location][:info_clicktip] = {
+    def add_info_clicktip(galleries_content)
+      info_clicktip_target(galleries_content).tap do |target|
+        unless target.nil?
+          target[:info_clicktip] = {
             clicktip: {
               activator:    '.image-set:eq(1) .svg-icon-info',
               direction:    'top',
@@ -115,10 +117,10 @@ module Galleries
               tooltip_text: t('global.tooltips.channels.galleries.info')
             }
           }
-          break
         end
       end
-      content
+
+      galleries_content
     end
 
     def galleries_content
