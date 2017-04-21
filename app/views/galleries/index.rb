@@ -98,7 +98,7 @@ module Galleries
     end
 
     def add_info_clicktip(content)
-      range = (0..galleries_content.length-1).to_a
+      range = (0..galleries_content.length - 1).to_a
 
       if range.length > 1
         range[0], range[1] = range[1], range[0]
