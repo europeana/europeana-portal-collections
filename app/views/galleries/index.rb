@@ -38,7 +38,7 @@ module Galleries
       mustache[:content] ||= begin
         {
           hero: hero_content,
-          galleries: galleries_content,
+          galleries: add_info_clicktip(galleries_content),
           social: galleries_social,
           gallery_filter_options: galleries_topics,
           clicktip: {
@@ -97,20 +97,32 @@ module Galleries
       end
     end
 
-    def galleries_content
-      res = @galleries.map { |gallery| gallery_content(gallery) }
-      if res.length > 2
-        res[1]['info_clicktip'] = {
-          clicktip: {
-            activator:    '.image-set:eq(1) .svg-icon-info',
-            direction:    'top',
-            id:           'gallery-hover-info',
-            persistent:   true,
-            tooltip_text: t('global.tooltips.channels.galleries.info')
-          }
-        }
+    def add_info_clicktip(content)
+      range = (0..galleries_content.length-1).to_a
+
+      if range.length > 1
+        range[0], range[1] = range[1], range[0]
       end
-      res
+
+      range.each do |location|
+        if content[location][:info].present?
+          content[location][:info_clicktip] = {
+            clicktip: {
+              activator:    '.image-set:eq(1) .svg-icon-info',
+              direction:    'top',
+              id:           'gallery-hover-info',
+              persistent:   true,
+              tooltip_text: t('global.tooltips.channels.galleries.info')
+            }
+          }
+          break
+        end
+      end
+      content
+    end
+
+    def galleries_content
+      @galleries.map { |gallery| gallery_content(gallery) }
     end
 
     def gallery_content(gallery)
