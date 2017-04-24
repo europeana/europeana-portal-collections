@@ -51,18 +51,6 @@ class PortalController < ApplicationController
     @hierarchy = document_hierarchy(@document)
     @annotations = document_annotations(@document)
 
-    # This param check gives us a way to load similar items
-    # during page generation by the URL param `?similar=now`, so that we
-    # can test in one environment the relative performance of both approaches.
-    # @todo remove conditional when a decision is made as to which is better
-    @similar_items_now = (params[:similar] == 'now')
-    if @similar_items_now && @hierarchy.blank?
-      @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
-    else
-      @mlt_response = nil
-      @similar = []
-    end
-
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 
     respond_to do |format|
