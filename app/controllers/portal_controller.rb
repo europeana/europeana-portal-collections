@@ -48,7 +48,16 @@ class PortalController < ApplicationController
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
-    @hierarchy = document_hierarchy(@document)
+    # This param check gives us a way to load hierarchies after page
+    # generation by AJAX with the URL param `?similar=now`, so that we
+    # can test in one environment the relative performance of both approaches.
+    # @todo remove conditional when a decision is made as to which is better
+    if params[:hierarchy] == 'later'
+      @hierarchy = {}
+    else
+      @hierarchy = document_hierarchy(@document)
+    end
+
     @annotations = document_annotations(@document)
 
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
