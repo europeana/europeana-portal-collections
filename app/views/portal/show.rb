@@ -83,7 +83,7 @@ module Portal
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
-          may_have_hierarchy: @may_have_hierarchy,
+          hierarchy_later: @hierarchy_later,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: field_value('europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(super)
