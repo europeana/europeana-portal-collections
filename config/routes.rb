@@ -63,6 +63,10 @@ Rails.application.routes.draw do
     get 'debug/exception', to: 'debug#exception'
 
     # Static pages
+    get 'help/explore', to: redirect('%{locale}/help')
+    get 'help/search', to: redirect('%{locale}/help')
+    get 'help/results', to: redirect('%{locale}/help')
+
     get '*page', to: 'pages#show', as: 'static_page'
 
     mount Europeana::FeedbackButton::Engine, at: '/'
