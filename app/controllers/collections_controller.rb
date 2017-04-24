@@ -46,6 +46,10 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def ugc
+  	
+  end
+  
   protected
 
   def _prefixes

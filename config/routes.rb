@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
     resources :collections, only: [:show, :index]
 
+    get 'ugc', to: 'collections#ugc'
     get 'channels', to: redirect('%{locale}/collections')
     get 'channels/:id', to: redirect('%{locale}/collections/%{id}')
 
