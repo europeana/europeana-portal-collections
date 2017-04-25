@@ -150,7 +150,7 @@ module EuropeanaAPIHelper
     a_request(:get, Europeana::API.url + '/annotations/search').
       with(query: hash_including(
         wskey: ENV['EUROPEANA_API_KEY'],
-        qf: %(target_id:"http://data.europeana.eu/item#{id}")
+        qf: %(target_uri:"http://data.europeana.eu/item#{id}")
       ))
   end
 
