@@ -1,13 +1,41 @@
+{{> atoms/meta/_head}}
+{{> organisms/global/header_v2}}
 
-
-  {{>atoms/meta/_head}}
-  {{#content.layout_default}}
-    {{>templates/Search/Channels-landing}}
-  {{/content.layout_default}}
-  {{#content.layout_browse}}
-      {{>templates/Search/Channels-landing-browse}}
-  {{/content.layout_browse}}
-  {{>atoms/meta/_foot}}
-
-
-<h1>HELLO 14 18</h1>
+<div class="pusher">
+  <div role="main" class="page l-page" style="height:100%;">
+    <section>
+      <div class="object-nav cf">
+        <div class="object-nav-lists">
+          <ul class="breadcrumbs">
+            <li><a href="{{navigation.home_url}}"><span class="svg-icon-home"></span>{{i18n.site.navigation.breadcrumb.return_home}}</a></li>
+            <li><span><a hreh="#">1914 -1 918</a></span></li>
+            <li><span class="lastitem"><strong>Register</strong></span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent" Xclass="lc">
+      <iframe src="http://acceptance.1418.eanadev.org/en/users/register"
+              xscrolling="no"
+              style="border:0; display:block; overflow:hidden; height:900px; width:100%;"></iframe>
+    </section>
+    <section>
+      <br/>
+      <h1>HELLO 14 18</h1>
+      <br/>
+      <p>Parse language code from parent url and set iframe locale using regex</p>
+      <p>PostMessage from iframe content window to here: based on that set the breadcrumbs</p>
+      <ul>
+        <li>http://acceptance.1418.eanadev.org/en/users/register</li>
+        <li>http://acceptance.1418.eanadev.org/en/users/sign-in</li>
+        <li>http://acceptance.1418.eanadev.org/en/contributor</li>
+        <li>http://acceptance.1418.eanadev.org/en/users/account</li>
+        <li>http://acceptance.1418.eanadev.org/en/contributions/new</li>
+      </ul>
+    </section>
+  </div>
+</div>
+{{> organisms/sections/banner }}
+{{> organisms/global/footer_v2 }}
+{{> molecules/forms/feedback }}
+{{> atoms/meta/_foot}}
