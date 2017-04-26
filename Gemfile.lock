@@ -24,8 +24,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 5b36ad0dc62602dbc2d284cfb9533e15994fe9a0
-  ref: 5b36ad0
+  revision: a8e9c3b92498bef5f83880f108e094a70612bfb7
+  ref: a8e9c3b
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -585,7 +585,7 @@ GEM
       railties (>= 3.1)
     typhoeus (1.1.2)
       ethon (>= 0.9.0)
-    tzinfo (1.2.2)
+    tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
