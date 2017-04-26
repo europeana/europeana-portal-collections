@@ -246,7 +246,7 @@ module Portal
       mustache[:similar_items] ||= begin
         if @hierarchy.present?
           false
-       else
+        else
           {
             title: t('site.object.similar-items'),
             more_items_load: document_similar_url(document, format: 'json'),
