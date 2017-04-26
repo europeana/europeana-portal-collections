@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe Link::Promotion do
   it { is_expected.to be_a(Link) }
   it { is_expected.to belong_to(:media_object) }
@@ -9,7 +10,10 @@ RSpec.describe Link::Promotion do
 
   describe '.settings_category_enum' do
     subject { described_class.settings_category_enum }
-    it { is_expected.to eq(%w(collection exhibition new partner featured_site app timeline playlist gallery)) }
+    expected_keys = %w(app apps blog blogs collection collections dataset datasets event events exhibition exhibitions
+                       featured_site featured_sites new partner partners story stories timeline timelines playlist
+                       playlists gallery galleries)
+    it { is_expected.to eq(expected_keys) }
   end
 
   describe '.settings_wide_enum' do
