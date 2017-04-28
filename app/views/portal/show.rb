@@ -83,6 +83,7 @@ module Portal
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
+          hierarchy_later: @hierarchy_later,
           hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: field_value('europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(super)
@@ -241,25 +242,10 @@ module Portal
       named_entity_labels('concepts', 'what', :broader)
     end
 
-    # @todo Remove the @similar_items_now conditional for one or the other
-    #   when a decision is made as to whether to perform similar items searches
-    #   during page generation or by AJAX.
     def similar_items
       mustache[:similar_items] ||= begin
         if @hierarchy.present?
           false
-        elsif @similar_items_now
-          {
-            title: t('site.object.similar-items'),
-            more_items_load: document_similar_url(document, format: 'json'),
-            more_items_total: @mlt_response.present? ? @mlt_response.total : 0,
-            more_items_total_formatted: number_with_delimiter(@mlt_response.present? ? @mlt_response.total : 0),
-            items: @similar.map { |doc| similar_items_item(doc) }
-          }.tap do |res|
-            if res[:more_items_total] > res[:items].length
-              res[:more_items_query] = search_path(params.slice(:api_url).merge(mlt: document.id))
-            end
-          end
         else
           {
             title: t('site.object.similar-items'),
