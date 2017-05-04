@@ -26,6 +26,7 @@ module HasExternalUrls
     url_in_domain?('pinterest.com')
   end
 
+
   def soundcloud?
     url_in_domain?('soundcloud.com')
   end
@@ -40,5 +41,13 @@ module HasExternalUrls
 
   def europeana_blog?
     url_in_domain?('blog.europeana.eu')
+  end
+
+  def pro_blog?
+    !(url =~ %r(://([^/]*.)?europeana.eu/portal/(.*)blogs.rss(.*))).nil?
+  end
+
+  def pro_events?
+    !(url =~ %r(://([^/]*.)?europeana.eu/portal/(.*)events.rss(.*))).nil?
   end
 end

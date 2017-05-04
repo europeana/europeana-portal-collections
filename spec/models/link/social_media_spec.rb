@@ -109,6 +109,30 @@ RSpec.describe Link::SocialMedia do
     end
   end
 
+  describe '#pro_blog?' do
+    context 'when URL is for europeana.eu/portal/.../blogs.rss' do
+      subject { described_class.new(url: 'https://europeana.eu/portal/en/blogs.rss?theme=fahsion').pro_blog? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu/.../events' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal/en/events').pro_blog? }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe '#pro_events?' do
+    context 'when URL is for europeana.eu/portal/.../events.rss' do
+      subject { described_class.new(url: 'https://europeana.eu/portal/en/events.rss?theme=fahsion').pro_events? }
+      it { is_expected.to be true }
+    end
+
+    context 'when URL is for europeana.eu/.../blogs' do
+      subject { described_class.new(url: 'https://www.europeana.eu/portal/en/blogs').pro_events? }
+      it { is_expected.to be false }
+    end
+  end
+
   describe '#url_in_domain?' do
     context 'when URL is "http://www.europeana.eu/"' do
       let(:url) { 'http://www.europeana.eu/' }
