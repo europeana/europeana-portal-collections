@@ -26,7 +26,6 @@ module HasExternalUrls
     url_in_domain?('pinterest.com')
   end
 
-
   def soundcloud?
     url_in_domain?('soundcloud.com')
   end
