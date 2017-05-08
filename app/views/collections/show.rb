@@ -179,7 +179,7 @@ module Collections
 
       @landing_page.facet_entries.map do |facet_entry|
         {
-          preview_search_title: facet_entry.title,
+          preview_search_title: facet_entry_display_value(facet_entry),
           preview_search_type: facet_entry_field_title(facet_entry),
           preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json'),
           preview_search_more_link: browse_entry_url(facet_entry, @landing_page)
@@ -191,6 +191,11 @@ module Collections
       ff = Europeana::Blacklight::Response::Facets::FacetField.new(facet_entry.facet_field, [])
       presenter = FacetPresenter.build(ff, controller)
       presenter.facet_title || facet_entry.facet_field
+    end
+
+    def facet_entry_display_value(facet_entry)
+      presenter = FacetLinkGroupPresenter.new(facet_entry.facet_link_group, controller, blacklight_config)
+      presenter.facet_entry_item(facet_entry)[:label] || facet_entry.title
     end
   end
 end
