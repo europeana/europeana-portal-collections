@@ -79,7 +79,7 @@ module FeedHelper
   end
 
   def detect_feed_type(feed)
-    if feed.europeana_blog?
+    if feed.europeana_blog? || feed.pro_blog?
       'blog'
     elsif feed.tumblr?
       'tumblr'
