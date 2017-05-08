@@ -14,10 +14,9 @@
       </div>
     </section>
     <section id="maincontent">
-      <iframe src="http://acceptance.1418.eanadev.org/en/users/register"
-              xscrolling="no"
-              height="900px"
-              style="border:0; display:block; height:900px; width:100%;"></iframe>
+      {{#content}}
+        <iframe src="{{iframe_page}}" data-base-url="{{base_url}}"></iframe>
+      {{/content}}
     </section>
   </div>
 {{> organisms/sections/banner }}

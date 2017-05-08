@@ -17,3 +17,5 @@ if ENV['EDM_IS_SHOWN_BY_PROXY'] && !ENV['EUROPEANA_MEDIA_PROXY']
   ENV['EUROPEANA_MEDIA_PROXY'] = ENV['EDM_IS_SHOWN_BY_PROXY']
 end
 Rails.application.config.x.europeana_media_proxy = ENV['EUROPEANA_MEDIA_PROXY'] || 'http://proxy.europeana.eu'
+
+Rails.application.config.x.europeana_1914_1918_url = ENV['EUROPEANA_1914_1918_URL'] || 'http://acceptance.1418.eanadev.org'
