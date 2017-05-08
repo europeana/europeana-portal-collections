@@ -12,6 +12,9 @@ module Collections
       [
           {
               name: 'pageName', value: 'e7a_1418'
+          },
+          {
+              name: 'iframe_page', value: Rails.application.config.x.europeana_1914_1918_url
           }
       ]
     end
@@ -23,7 +26,6 @@ module Collections
 
     def content
       {
-        iframe_page: Rails.application.config.x.europeana_1914_1918_url + '/en/contributor',
         base_url: request.domain
       }          
     end
