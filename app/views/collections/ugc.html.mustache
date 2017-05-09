@@ -1,25 +1,3 @@
-{{> atoms/meta/_head}}
-{{> organisms/global/header_v2}}
-
-  <div role="main" class="page l-page">
-    <section>
-      <div class="object-nav cf">
-        <div class="object-nav-lists">
-          <ul class="breadcrumbs">
-            <li><a href="{{navigation.home_url}}"><span class="svg-icon-home"></span>{{i18n.site.navigation.breadcrumb.return_home}}</a></li>
-            <li><span><a hreh="#">1914 - 1918</a></span></li>
-            <li><span class="lastitem"><strong>Register</strong></span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <section id="maincontent">
-      {{#content}}
-        <iframe src="about:blank" data-base-url="{{base_1418_url}}"></iframe>
-      {{/content}}
-    </section>
-  </div>
-{{> organisms/sections/banner }}
-{{> organisms/global/footer_v2 }}
-{{> molecules/forms/feedback }}
-{{> atoms/meta/_foot}}
+{{>atoms/meta/_head}}
+  {{>templates/Search/Search-1418}}
+{{>atoms/meta/_foot}}
