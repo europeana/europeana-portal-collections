@@ -126,10 +126,10 @@ module Collections
 
     def carousel_data
       case @landing_page.settings[:layout_type]
-        when 'default'
-          helpers.tumblr_feed_content(@landing_page)
-        when 'browse'
-          helpers.page_feeds_content(@landing_page)
+      when 'default'
+        helpers.tumblr_feed_content(@landing_page)
+      when 'browse'
+        helpers.page_feeds_content(@landing_page)
       end
     end
 
@@ -172,25 +172,26 @@ module Collections
 
     # @todo refactor to:
     # - make modular have this be a concern
-    # - lookup proper search title & type using labeling from  presenters/concerns/facet/labelling.rb
-    # - refactor facet_entry_field_title to not be called for each facet entry
     def preview_search_data
       return nil if @landing_page.facet_entries.blank?
 
       @landing_page.facet_entries.map do |facet_entry|
+        presenter = facet_entry_presenter(facet_entry)
         {
-          preview_search_title: facet_entry.title,
-          preview_search_type: facet_entry_field_title(facet_entry),
+          preview_search_title: presenter.facet_item_label(facet_entry.facet_value) || facet_entry.title,
+          preview_search_type: presenter.facet_title || facet_entry.facet_field,
           preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json'),
           preview_search_more_link: browse_entry_url(facet_entry, @landing_page)
         }
       end
     end
 
-    def facet_entry_field_title(facet_entry)
-      ff = Europeana::Blacklight::Response::Facets::FacetField.new(facet_entry.facet_field, [])
-      presenter = FacetPresenter.build(ff, controller)
-      presenter.facet_title || facet_entry.facet_field
+    def facet_entry_presenter(facet_entry)
+      @facet_presenters ||= {}
+      @facet_presenters[facet_entry.facet_field] ||= begin
+        ff = Europeana::Blacklight::Response::Facets::FacetField.new(facet_entry.facet_field, [])
+        FacetPresenter.build(ff, controller)
+      end
     end
   end
 end
