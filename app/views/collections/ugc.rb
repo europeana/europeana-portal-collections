@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Collections
   class Ugc < ApplicationView
     include BrowsableView
@@ -5,9 +6,9 @@ module Collections
 
     def js_vars
       [
-          {
-              name: 'pageName', value: 'e7a_1418'
-          }
+        {
+          name: 'pageName', value: 'e7a_1418'
+        }
       ]
     end
 
@@ -15,13 +16,11 @@ module Collections
       'Europeana - First World War'
     end
 
-
     def content
       {
         base_1418_url: config.x.europeana_1914_1918_url,
         portal_url: home_url
       }          
     end
-
   end
 end

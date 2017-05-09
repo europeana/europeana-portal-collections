@@ -47,7 +47,7 @@ class CollectionsController < ApplicationController
   end
 
   def ugc
-    #firstworldwar
+    # firstworldwar
   end
   
   protected
