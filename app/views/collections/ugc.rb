@@ -20,7 +20,7 @@ module Collections
       {
         base_1418_url: config.x.europeana_1914_1918_url,
         portal_url: home_url
-      }          
+      }
     end
   end
 end
