@@ -49,7 +49,7 @@ class CollectionsController < ApplicationController
   def ugc
     # firstworldwar
   end
-  
+
   protected
 
   def _prefixes
