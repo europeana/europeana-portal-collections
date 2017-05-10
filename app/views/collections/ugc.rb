@@ -25,5 +25,16 @@ module Collections
         base_1418_url: config.x.europeana_1914_1918_url,
       }
     end
+
+    def collection_data
+      mustache[:collection_data] ||= begin
+        collection = @collection
+          {
+              label: collection.landing_page.title,
+              url: collection_url(collection)
+          }
+      end
+    end
+    alias_method :channel_data, :collection_data
   end
 end
