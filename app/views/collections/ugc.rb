@@ -12,13 +12,12 @@ module Collections
       ]
     end
 
-
     def page_content_heading
-       if Collection.find_by_key('firstworldwar').present?
-         Collection.find_by_key('firstworldwar').title
-       else
-         'First World War'
-       end
+      if Collection.find_by_key('firstworldwar').present?
+        Collection.find_by_key('firstworldwar').title
+      else
+        'First World War'
+      end
     end
 
     def content
