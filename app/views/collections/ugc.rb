@@ -29,10 +29,10 @@ module Collections
     def collection_data
       mustache[:collection_data] ||= begin
         collection = @collection
-          {
-              label: collection.landing_page.title,
-              url: collection_url(collection)
-          }
+        {
+          label: collection.landing_page.title,
+          url: collection_url(collection)
+        }
       end
     end
     alias_method :channel_data, :collection_data
