@@ -23,7 +23,6 @@ module Collections
     def content
       {
         base_1418_url: config.x.europeana_1914_1918_url,
-        portal_url: home_url
       }
     end
   end
