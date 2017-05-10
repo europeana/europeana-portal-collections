@@ -80,11 +80,6 @@ RSpec.describe PortalController do
       end
       it_behaves_like 'a record API request'
       it_behaves_like 'no more like this API request'
-
-      context 'with similar=now param' do
-        let(:params) { { locale: 'en', id: 'abc/123', similar: 'now' } }
-        it_behaves_like 'a more like this API request'
-      end
     end
 
     context 'with dcterms:isPartOf' do
@@ -101,6 +96,11 @@ RSpec.describe PortalController do
       end
       let(:params) { { locale: 'en', id: 'with/dcterms:hasPart' } }
       it_behaves_like 'a hierarchy API request'
+
+      context 'with hierarchy=later param' do
+        let(:params) { { locale: 'en', id: 'with/dcterms:hasPart', hierarchy: 'later' } }
+        it_behaves_like 'no hierarchy API request'
+      end
     end
 
     context 'without dcterms:isPartOf or dcterms:hasPart' do

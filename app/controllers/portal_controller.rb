@@ -48,20 +48,19 @@ class PortalController < ApplicationController
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
-    @hierarchy = document_hierarchy(@document)
-    @annotations = document_annotations(@document)
-
-    # This param check gives us a way to load similar items
-    # during page generation by the URL param `?similar=now`, so that we
+    # This param check gives us a way to load hierarchies after page
+    # generation by AJAX with the URL param `?hierarchy=now`, so that we
     # can test in one environment the relative performance of both approaches.
     # @todo remove conditional when a decision is made as to which is better
-    @similar_items_now = (params[:similar] == 'now')
-    if @similar_items_now && @hierarchy.blank?
-      @mlt_response, @similar = more_like_this(@document, nil, per_page: 4)
+    if params[:hierarchy] == 'later'
+      @hierarchy = {} # for the sake of @debug
+      @hierarchy_later = may_have_hierarchy?(@document)
     else
-      @mlt_response = nil
-      @similar = []
+      @hierarchy = document_hierarchy(@document)
+      @hierarchy_later = false
     end
+
+    @annotations = document_annotations(@document)
 
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 
@@ -106,8 +105,12 @@ class PortalController < ApplicationController
     end
   end
 
+  def may_have_hierarchy?(document)
+    document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
+  end
+
   def document_hierarchy(document)
-    return nil unless document.fetch('proxies.dctermsIsPartOf', nil).present? || document.fetch('proxies.dctermsHasPart', nil).present?
+    return nil unless may_have_hierarchy?(document)
     Europeana::API.record.ancestor_self_siblings(api_query_params.merge(id: document.id))
   rescue Europeana::API::Errors::ResourceNotFoundError
     nil
