@@ -8,7 +8,7 @@ module PromotionLinkDisplayingView
   def promoted_items(promotions)
     promotions.map do |promo|
       {
-        category_label: t("global.promotions.#{promo.settings_category}"),
+        category_label: promo.settings_category.presence ? t("global.promotions.#{promo.settings_category}") : false,
         featured: promo.position.nil? ? false : promo.position.zero?,
         hide_branding_text: promo.position.nil? ? false : promo.position.zero?,
         url: promo.url,
