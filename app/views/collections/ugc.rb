@@ -13,11 +13,7 @@ module Collections
     end
 
     def page_content_heading
-      if @collection.present?
-        @collection.title
-      else
-        'First World War'
-      end
+      @collection.landing_page.title || 'First World War'
     end
 
     def content
