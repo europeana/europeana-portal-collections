@@ -13,8 +13,8 @@ module Collections
     end
 
     def page_content_heading
-      if Collection.find_by_key('firstworldwar').present?
-        Collection.find_by_key('firstworldwar').title
+      if @collection.present?
+        @collection.title
       else
         'First World War'
       end
@@ -23,15 +23,15 @@ module Collections
     def content
       {
         base_1418_url: config.x.europeana_1914_1918_url,
+        include_1418_nav: true
       }
     end
 
     def collection_data
       mustache[:collection_data] ||= begin
-        collection = @collection
         {
-          label: collection.landing_page.title,
-          url: collection_url(collection)
+          label: @collection.landing_page.title,
+          url: collection_url(@collection)
         }
       end
     end
