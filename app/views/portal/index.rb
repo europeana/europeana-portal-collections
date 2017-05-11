@@ -5,6 +5,7 @@ module Portal
     include SearchableView
     include HeroImageDisplayingView
     include PaginatedView
+    include UgcLinkDisplayingView
 
     def js_vars
       super + [
@@ -189,6 +190,12 @@ module Portal
     def mlt_src
       return nil unless params[:mlt]
       document_path(id: params[:mlt][1..-1], format: 'html')
+    end
+
+    def content
+      mustache[:content] ||= begin
+        super
+      end
     end
 
     def collection_data

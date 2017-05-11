@@ -3,6 +3,7 @@ module Collections
   class Ugc < ApplicationView
     include BrowsableView
     include SearchableView
+    include UgcLinkDisplayingView
 
     def js_vars
       [
@@ -17,10 +18,11 @@ module Collections
     end
 
     def content
-      {
-        base_1418_url: config.x.europeana_1914_1918_url,
-        include_1418_nav: true
-      }
+      mustache[:content] ||= begin
+        {
+          # TODO: Add additional elements here, or just return super
+        }.reverse_merge(super)
+      end
     end
 
     def collection_data
