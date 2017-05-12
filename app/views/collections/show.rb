@@ -2,6 +2,7 @@ module Collections
   class Show < ApplicationView
     include BrowsableView
     include BrowseEntryDisplayingView
+    include CollectionUsingView
     include FacetEntryPointDisplayingView
     include HeroImageDisplayingView
     include NewsworthyView
@@ -97,16 +98,6 @@ module Collections
     def version
       { is_alpha: beta_collection?(@collection) }
     end
-
-    def collection_data
-      mustache[:collection_data] ||= begin
-        {
-          label: @collection.landing_page.title,
-          url: collection_url(@collection)
-        }
-      end
-    end
-    alias_method :channel_data, :collection_data
 
     private
 

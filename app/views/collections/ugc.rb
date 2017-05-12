@@ -2,6 +2,7 @@
 module Collections
   class Ugc < ApplicationView
     include BrowsableView
+    include CollectionUsingView
     include SearchableView
     include UgcLinkDisplayingView
 
@@ -19,20 +20,8 @@ module Collections
 
     def content
       mustache[:content] ||= begin
-        {
-          # TODO: Add additional elements here, or just return super
-        }.reverse_merge(super)
+        super
       end
     end
-
-    def collection_data
-      mustache[:collection_data] ||= begin
-        {
-          label: @collection.landing_page.title,
-          url: collection_url(@collection)
-        }
-      end
-    end
-    alias_method :channel_data, :collection_data
   end
 end
