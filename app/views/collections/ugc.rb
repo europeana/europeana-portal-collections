@@ -4,7 +4,7 @@ module Collections
     include BrowsableView
     include CollectionUsingView
     include SearchableView
-    include UgcLinkDisplayingView
+    include UgcContentDisplayingView
 
     def js_vars
       [
@@ -20,7 +20,9 @@ module Collections
 
     def content
       mustache[:content] ||= begin
-        super
+        {
+          ugc_content: ugc_content
+        }.reverse_merge(super)
       end
     end
   end
