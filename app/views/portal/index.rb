@@ -6,7 +6,7 @@ module Portal
     include SearchableView
     include HeroImageDisplayingView
     include PaginatedView
-    include UgcLinkDisplayingView
+    include UgcContentDisplayingView
 
     def js_vars
       super + [
@@ -195,7 +195,9 @@ module Portal
 
     def content
       mustache[:content] ||= begin
-        super
+        {
+          ugc_content: ugc_content
+        }.reverse_merge(super)
       end
     end
 
