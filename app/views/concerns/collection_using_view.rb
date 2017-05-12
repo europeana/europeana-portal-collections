@@ -8,15 +8,13 @@ module CollectionUsingView
     mustache[:collection_data] ||= begin
       if @collection
         {
-            name: @collection.key,
-            label: @collection.landing_page ? @collection.landing_page.title : @collection.title,
-            url: collection_url(@collection),
-            def_view: @collection.settings['default_search_layout']
+          name: @collection.key,
+          label: @collection.landing_page ? @collection.landing_page.title : @collection.title,
+          url: collection_url(@collection),
+          def_view: @collection.settings['default_search_layout']
         }
       end
     end
   end
   alias_method :channel_data, :collection_data
-
-  protected
 end
