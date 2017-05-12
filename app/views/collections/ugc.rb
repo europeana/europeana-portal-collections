@@ -2,7 +2,9 @@
 module Collections
   class Ugc < ApplicationView
     include BrowsableView
+    include CollectionUsingView
     include SearchableView
+    include UgcLinkDisplayingView
 
     def js_vars
       [
@@ -17,20 +19,9 @@ module Collections
     end
 
     def content
-      {
-        base_1418_url: config.x.europeana_1914_1918_url,
-        include_1418_nav: true
-      }
-    end
-
-    def collection_data
-      mustache[:collection_data] ||= begin
-        {
-          label: @collection.landing_page.title,
-          url: collection_url(@collection)
-        }
+      mustache[:content] ||= begin
+        super
       end
     end
-    alias_method :channel_data, :collection_data
   end
 end

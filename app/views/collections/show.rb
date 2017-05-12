@@ -2,11 +2,13 @@ module Collections
   class Show < ApplicationView
     include BrowsableView
     include BrowseEntryDisplayingView
+    include CollectionUsingView
     include FacetEntryPointDisplayingView
     include HeroImageDisplayingView
     include NewsworthyView
     include PromotionLinkDisplayingView
     include SearchableView
+    include UgcLinkDisplayingView
 
     def head_meta
       mustache[:head_meta] ||= begin

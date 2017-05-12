@@ -2,9 +2,11 @@ module Portal
   ##
   # Portal search results view
   class Index < ApplicationView
+    include CollectionUsingView
     include SearchableView
     include HeroImageDisplayingView
     include PaginatedView
+    include UgcLinkDisplayingView
 
     def js_vars
       super + [
@@ -191,20 +193,11 @@ module Portal
       document_path(id: params[:mlt][1..-1], format: 'html')
     end
 
-    def collection_data
-      mustache[:collection_data] ||= begin
-        if within_collection?
-          collection = current_collection
-          {
-            name: collection.key,
-            label: collection.landing_page.title,
-            url: collection_url(collection),
-            def_view: collection.settings['default_search_layout']
-          }
-        end
+    def content
+      mustache[:content] ||= begin
+        super
       end
     end
-    alias_method :channel_data, :collection_data
 
     def version
       { is_alpha: within_collection? && beta_collection?(current_collection) }
