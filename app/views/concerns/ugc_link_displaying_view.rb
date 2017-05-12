@@ -7,7 +7,6 @@ module UgcLinkDisplayingView
   protected
 
   def content
-    puts "in content"
     if @collection && @collection.key == 'firstworldwar'
       {
         base_1418_url: config.x.europeana_1914_1918_url,
