@@ -15,6 +15,8 @@ gem 'mustache', '1.0.3'
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
 
+gem 'foederati', github: 'europeana/foederati', branch: 'develop'
+
 gem 'aasm', '~> 4.2'
 gem 'blacklight', '~> 6.0.0'
 gem 'acts_as_list', '~> 0.7'

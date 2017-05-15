@@ -2,6 +2,8 @@
 Rails.application.routes.draw do
   root to: 'locale#index'
 
+  mount Foederati::Engine, at: '/search/federated'
+
   scope '/:locale', constraints: { locale: /[a-z]{2}/ } do
     get '', to: 'home#index', as: 'home'
     get 'search', to: 'portal#index'

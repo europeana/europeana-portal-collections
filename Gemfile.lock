@@ -33,6 +33,17 @@ GIT
       stache (~> 1.1.1)
 
 GIT
+  remote: git://github.com/europeana/foederati.git
+  revision: 2c89e32bbfe526b27570d813aac1e61d77a6215b
+  branch: develop
+  specs:
+    foederati (0.1.0)
+      activesupport (>= 4.2, < 6.0)
+      faraday
+      faraday_middleware
+      typhoeus (~> 1)
+
+GIT
   remote: git://github.com/europeana/stache.git
   revision: e5ceff86974620d7d7db28018fc29a2c9c24d1d0
   branch: europeana-styleguide
@@ -631,6 +642,7 @@ DEPENDENCIES
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
   feedjira (~> 2.0)
+  foederati!
   fog (~> 1.33)
   foreman
   globalize (~> 5.0)
@@ -676,3 +688,6 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
+
+BUNDLED WITH
+   1.13.1
