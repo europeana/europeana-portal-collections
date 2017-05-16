@@ -12,20 +12,9 @@ GIT
       typhoeus (~> 1.1)
 
 GIT
-  remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 4892b781f7dfa7db642c88854c143ba26ff2854e
-  branch: develop
-  specs:
-    europeana-blacklight (0.5.0)
-      blacklight (~> 6.0.0)
-      europeana-api (~> 0.5.2)
-      iso-639 (~> 0.2.5)
-      rails (>= 4.2.2, < 5)
-
-GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 04082441e833e9f14337754cbc5629def03676fd
-  ref: 0408244
+  revision: f19f84cad2bef47e3eb64c1fbdff55f3120b397f
+  ref: f19f84c
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -170,6 +159,11 @@ GEM
     erubis (2.7.0)
     ethon (0.10.1)
       ffi (>= 1.3.0)
+    europeana-blacklight (0.5.1)
+      blacklight (~> 6.0.0)
+      europeana-api (~> 0.5.2)
+      iso-639 (~> 0.2.5)
+      rails (>= 4.2.2, < 5)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
     europeana-logging (0.2.3)
@@ -626,7 +620,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api!
-  europeana-blacklight (~> 0.5.0)!
+  europeana-blacklight (~> 0.5.1)
   europeana-feedback-button (= 0.0.4)
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
@@ -678,4 +672,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.12.5
+   1.14.6
