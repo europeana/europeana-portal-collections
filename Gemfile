@@ -34,6 +34,7 @@ gem 'json_api_client'
 gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
+gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
 gem 'nokogiri'
 gem 'redis', '3.3.1' # locked to fix: https://app.assembla.com/spaces/europeana-npc/tickets/1811
 gem 'rest-client', '~> 1.8.0'
