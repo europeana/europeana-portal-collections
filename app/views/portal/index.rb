@@ -14,6 +14,11 @@ module Portal
       ]
     end
 
+    def federated_search_enabled?
+      Rails.application.config.x.enable.federated_search.present?
+    end
+    alias_method :federated_search_enabled, :federated_search_enabled?
+
     def grid_view_active?
       if params[:view] == 'grid'
         true

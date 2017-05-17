@@ -32,5 +32,6 @@ Rails.application.config.x.enable = OpenStruct.new(
   blog_posts_theme_filter: ENV['ENABLE_BLOG_POSTS_THEME_FILTER'],
   csrf_without_ssl: ENV['ENABLE_CSRF_WITHOUT_SSL'],
   events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
+  federated_search: ENV['ENABLE_FEDERATED_SEARCH'],
   search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE']
 )
