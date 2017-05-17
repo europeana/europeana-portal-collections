@@ -57,6 +57,7 @@ module Facet
                     end
                   }
       label_facet 'MEDIA', items: { titleize: true, i18n: true }
+      label_facet 'THUMBNAIL', items: { titleize: true, i18n: true }
       label_facet 'YEAR'
       label_facet 'REUSABILITY',
                   collapsible: {

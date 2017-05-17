@@ -74,6 +74,7 @@ module BlacklightConfig
       config.add_facet_field 'VIDEO_HD', hierarchical: true, parent: %w(TYPE VIDEO)
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
+      config.add_facet_field 'THUMBNAIL', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'YEAR',
                              range: true,
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
