@@ -80,6 +80,7 @@ class FacetLinkGroupGeneratorJob < ApplicationJob
     if @facet_link_group.within_collection?
       params_hash = @facet_link_group.collection.api_params_hash
     end
+    params_hash['thumbnail'] = 'true'
     params_hash['qf'] << "(#{facet_field}:\"#{facet_value}\")"
     search_builder.with_overlay_params(params_hash).rows(20)
   end

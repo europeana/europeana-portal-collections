@@ -8,15 +8,13 @@ class BrowseEntry
 
     belongs_to :facet_link_group
 
-    before_save :set_query
-
     def facet?
       true
     end
 
-    def set_query
-      entry_url = "q=&f[#{facet_field}][]=#{facet_value}"
-      self.query = entry_url
+    # Overriding AR attribute accessor
+    def query
+      "q=&f[#{facet_field}][]=#{facet_value}&f[THUMBNAIL][]=true"
     end
   end
 end

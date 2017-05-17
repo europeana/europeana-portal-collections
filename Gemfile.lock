@@ -12,20 +12,9 @@ GIT
       typhoeus (~> 1.1)
 
 GIT
-  remote: git://github.com/europeana/europeana-blacklight.git
-  revision: 4892b781f7dfa7db642c88854c143ba26ff2854e
-  branch: develop
-  specs:
-    europeana-blacklight (0.5.0)
-      blacklight (~> 6.0.0)
-      europeana-api (~> 0.5.2)
-      iso-639 (~> 0.2.5)
-      rails (>= 4.2.2, < 5)
-
-GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: a8e9c3b92498bef5f83880f108e094a70612bfb7
-  ref: a8e9c3b
+  revision: 453aba4b2d64863c994f1dbe6f1f5fe0530da78f
+  ref: 453aba4
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -170,6 +159,11 @@ GEM
     erubis (2.7.0)
     ethon (0.10.1)
       ffi (>= 1.3.0)
+    europeana-blacklight (0.5.1)
+      blacklight (~> 6.0.0)
+      europeana-api (~> 0.5.2)
+      iso-639 (~> 0.2.5)
+      rails (>= 4.2.2, < 5)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
     europeana-logging (0.2.3)
@@ -381,7 +375,7 @@ GEM
       logstash-event (~> 1.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.4)
+    mail (2.6.6.rc1)
       mime-types (>= 1.16, < 4)
     mime-types (2.99.3)
     mimemagic (0.3.0)
@@ -394,7 +388,7 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     newrelic_rpm (3.18.1.330)
-    nokogiri (1.7.1)
+    nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     paper_trail (4.2.0)
@@ -626,7 +620,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api!
-  europeana-blacklight (~> 0.5.0)!
+  europeana-blacklight (~> 0.5.1)
   europeana-feedback-button (= 0.0.4)
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
@@ -643,6 +637,7 @@ DEPENDENCIES
   lograge
   logstash-event
   logstash-logger
+  mail (= 2.6.6.rc1)
   mustache (= 1.0.3)
   newrelic_rpm
   nokogiri
