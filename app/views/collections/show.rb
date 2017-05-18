@@ -8,7 +8,7 @@ module Collections
     include NewsworthyView
     include PromotionLinkDisplayingView
     include SearchableView
-    include UgcLinkDisplayingView
+    include UgcContentDisplayingView
 
     def head_meta
       mustache[:head_meta] ||= begin
@@ -90,7 +90,8 @@ module Collections
           newsletter: newsletter_content,
           social: @landing_page.social_media.blank? ? nil : social_media_links,
           banner: banner_content(@landing_page.banner_id),
-          carousel: carousel_data
+          carousel: carousel_data,
+          ugc_content: ugc_content
         }.reverse_merge(super)
       end
     end

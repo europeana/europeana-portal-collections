@@ -6,7 +6,7 @@ module Portal
     include SearchableView
     include HeroImageDisplayingView
     include PaginatedView
-    include UgcLinkDisplayingView
+    include UgcContentDisplayingView
 
     def js_vars
       super + [
@@ -29,6 +29,7 @@ module Portal
       grid_view_active? ? 'display-grid' : nil
     end
 
+    # TODO: move page title to localeapp
     def page_title
       mustache[:page_title] ||= begin
         [params[:q], 'Europeana - Search results'].compact.join(' - ')
@@ -195,7 +196,9 @@ module Portal
 
     def content
       mustache[:content] ||= begin
-        super
+        {
+          ugc_content: ugc_content
+        }.reverse_merge(super)
       end
     end
 
