@@ -80,33 +80,6 @@ RSpec.describe PortalController do
       end
       it_behaves_like 'a record API request'
       it_behaves_like 'no more like this API request'
-    end
-
-    context 'with dcterms:isPartOf' do
-      before do
-        get :show, params
-      end
-      let(:params) { { locale: 'en', id: 'with/dcterms:isPartOf' } }
-      it_behaves_like 'a hierarchy API request'
-    end
-
-    context 'with dcterms:hasPart' do
-      before do
-        get :show, params
-      end
-      let(:params) { { locale: 'en', id: 'with/dcterms:hasPart' } }
-      it_behaves_like 'a hierarchy API request'
-
-      context 'with hierarchy=later param' do
-        let(:params) { { locale: 'en', id: 'with/dcterms:hasPart', hierarchy: 'later' } }
-        it_behaves_like 'no hierarchy API request'
-      end
-    end
-
-    context 'without dcterms:isPartOf or dcterms:hasPart' do
-      before do
-        get :show, params
-      end
       it_behaves_like 'no hierarchy API request'
     end
 
@@ -165,7 +138,7 @@ RSpec.describe PortalController do
         let(:params) { { locale: 'en', id: 'abc/123', format: 'html', debug: 'json' } }
         it 'assigns pretty JSON document to @debug' do
           get :show, params
-          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json.merge(hierarchy: assigns(:hierarchy).as_json)))
+          expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json))
         end
       end
 

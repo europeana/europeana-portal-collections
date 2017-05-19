@@ -38,7 +38,7 @@ class HierarchyController < ApplicationController
   protected
 
   def hierarchy_for(method)
-    hierarchy_api_response(method).with_indifferent_access.except(:apikey).merge(garnish)
+    hierarchy_api_response(method).with_indifferent_access.except(:apikey).reverse_merge!(garnish)
   end
 
   def hierarchy_api_response(method)
