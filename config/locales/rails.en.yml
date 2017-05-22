@@ -4,6 +4,7 @@ en:
       collection:
         api_params: API parameters
         settings_default_search_layout: Default search layout
+        settings_federated_providers: Federated Providers
       data_provider:
         uri: URI
       gallery:

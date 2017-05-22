@@ -11,6 +11,7 @@ class Collection < ActiveRecord::Base
   validates :key, presence: true, uniqueness: true
   validates :api_params, presence: true
 
+
   after_save :touch_landing_page
 
   translates :title, fallbacks_for_empty_translations: true
@@ -18,12 +19,18 @@ class Collection < ActiveRecord::Base
   default_scope { includes(:translations) }
 
   has_settings :default_search_layout
+  has_settings :federated_providers
 
   delegate :settings_default_search_layout_enum, to: :class
+  delegate :settings_federated_providers_enum, to: :class
 
   class << self
     def settings_default_search_layout_enum
       %w(list grid)
+    end
+
+    def settings_federated_providers_enum
+      Foederati::Providers.registry.keys
     end
   end
 

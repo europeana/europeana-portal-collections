@@ -125,6 +125,7 @@ RailsAdmin.config do |config|
       field :state
       field :api_params
       field :settings_default_search_layout, :enum
+      field :settings_federated_providers, :enum
     end
     edit do
       field :key do
@@ -135,6 +136,9 @@ RailsAdmin.config do |config|
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
+      field :settings_federated_providers, :enum do
+        multiple true
+      end
     end
   end
 
