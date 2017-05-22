@@ -185,6 +185,11 @@ GEM
     ffi (1.9.17)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
+    foederati (0.1.0)
+      activesupport (>= 4.2.2, < 6.0)
+      faraday (~> 0)
+      faraday_middleware (~> 0)
+      typhoeus (~> 1)
     fog (1.38.0)
       fog-aliyun (>= 0.1.0)
       fog-atmos
@@ -625,6 +630,7 @@ DEPENDENCIES
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
   feedjira (~> 2.0)
+  foederati
   fog (~> 1.33)
   foreman
   globalize (~> 5.0)
@@ -673,4 +679,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.13.7
+   1.14.6
