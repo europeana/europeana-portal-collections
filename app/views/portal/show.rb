@@ -83,8 +83,6 @@ module Portal
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
-          hierarchy_later: @hierarchy_later,
-          hierarchy: @hierarchy.blank? ? nil : record_hierarchy(@hierarchy),
           thumbnail: field_value('europeanaAggregation.edmPreview', tag: false)
         }.reverse_merge(super)
       end
@@ -244,15 +242,11 @@ module Portal
 
     def similar_items
       mustache[:similar_items] ||= begin
-        if @hierarchy.present?
-          false
-        else
-          {
-            title: t('site.object.similar-items'),
-            more_items_load: document_similar_url(document, format: 'json'),
-            more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
-          }
-        end
+        {
+          title: t('site.object.similar-items'),
+          more_items_load: document_similar_url(document, format: 'json'),
+          more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
+        }
       end
     end
 

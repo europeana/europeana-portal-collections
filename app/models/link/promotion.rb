@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Link::Promotion < Link
   include HasSettingsAttribute
 
@@ -13,7 +14,8 @@ class Link::Promotion < Link
 
   class << self
     def settings_category_enum
-      %w(collection exhibition new partner featured_site app timeline playlist gallery)
+      %w(app apps blog blogs collection collections dataset datasets event events exhibition exhibitions featured_site
+         featured_sites new partner partners story stories timeline timelines playlist playlists gallery galleries)
     end
 
     def settings_wide_enum

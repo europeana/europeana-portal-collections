@@ -3,7 +3,7 @@ module HasExternalUrls
   extend ActiveSupport::Concern
 
   def url_in_domain?(domain)
-    !(url =~ %r(://([^/]*.)?#{domain}/)).nil?
+    !(url =~ %r(://([^/]+\.)?#{domain}/)).nil?
   end
 
   def facebook?
@@ -40,5 +40,13 @@ module HasExternalUrls
 
   def europeana_blog?
     url_in_domain?('blog.europeana.eu')
+  end
+
+  def pro_blog?
+    !(url =~ %r(://([^/]+\.)?europeana.eu/portal/([a-z]{2}/)?blogs\.rss)).nil?
+  end
+
+  def pro_events?
+    !(url =~ %r(://([^/]+\.)?europeana.eu/portal/([a-z]{2}/)?events\.rss)).nil?
   end
 end

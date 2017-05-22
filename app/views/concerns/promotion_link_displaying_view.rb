@@ -7,8 +7,8 @@ module PromotionLinkDisplayingView
 
   def promoted_items(promotions)
     promotions.map do |promo|
-      cat_flag = promo.settings_category.blank? ? {} : { :"is_#{promo.settings_category}" => true }
       {
+        category_label: promo.settings_category.presence ? t("global.promotions.#{promo.settings_category}") : false,
         featured: promo.position.nil? ? false : promo.position.zero?,
         hide_branding_text: promo.position.nil? ? false : promo.position.zero?,
         url: promo.url,
@@ -17,7 +17,7 @@ module PromotionLinkDisplayingView
         custom_class: promo.settings_class,
         wide: normalise_wide(promo.settings_wide),
         bg_image: promo.file.nil? ? nil : promo.file.url
-      }.merge(cat_flag)
+      }
     end
   end
 

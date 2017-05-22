@@ -46,6 +46,11 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def ugc
+    # firstworldwar
+    @collection = authorize! :show, Collection.find_by_key!('firstworldwar')
+  end
+
   protected
 
   def _prefixes
