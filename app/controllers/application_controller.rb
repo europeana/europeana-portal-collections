@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_locale, :permit_iframing
+  before_action :set_locale, :permit_iframing, :log_request_headers
 
   layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
 
@@ -32,6 +32,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def log_request_headers
+    request.headers.each do |k, v|
+      logger.info("Request header #{k}: #{v}")
+    end
+  end
 
   def set_locale
     session[:locale] = params[:locale] if params.key?(:locale)
