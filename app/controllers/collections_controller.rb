@@ -46,6 +46,30 @@ class CollectionsController < ApplicationController
     end
   end
 
+  # The federated action which is used to retrieve federated results via the foederati gem.
+  # As federated content is initially only to be present for firstworldwar searches this is implemented here.
+  # TODO: this should be extracted to it's own controller so it's available on non-thematic collection searches too.
+  def federated
+    @collection = find_collection
+    provider = params[:provider]
+    @query = params[:query]
+    if @collection.settings_federated_providers && @collection.settings_federated_providers.detect(provider.to_sym)
+      foederati_provider = Foederati::Providers.get(provider.to_sym)
+      @federated_results = Foederati.search(provider.to_sym, { query: @query })[provider.to_sym]
+      @federated_results.merge!({
+        more_results_label: "View more at #{provider}",
+        more_results_url: foederati_provider.urls.site
+      })
+
+      @federated_results[:search_results] = @federated_results.delete(:results)
+      @federated_results[:search_results].each do |result|
+        result[:img] = { src: result.delete(:thumbnail) }
+        result[:object_url] = result.delete(:url)
+      end
+    end
+    render json: @federated_results
+  end
+
   def ugc
     # firstworldwar
     @collection = authorize! :show, Collection.find_by_key!('firstworldwar')
