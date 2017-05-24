@@ -193,13 +193,15 @@ module Portal
     def federated_search_conf
       mustache[:federated_search_conf] ||= begin
         {
+          thumbnail_server: 'http://www.europeana.eu/api/v2/thumbnail-by-url.json', # TODO: look this up properly
           tab_items: @collection.settings_federated_providers.map do |provider|
             foederati_provider = Foederati::Providers.get(provider.to_sym)
             if foederati_provider
               {
 
                 tab_title: provider,
-                url: "#{@collection.key}/federated.json?provider=#{provider}&query=#{params[:q]}"
+                url: "#{@collection.key}/federated.json?provider=#{provider}&query=#{params[:q]}",
+                url_logo: 'logo.jpg'  # TODO: look this up properly
               }
             end
           end.reject(&:blank?) # Reject blank because RailsAdmin is putting an empty string into the array when saving
