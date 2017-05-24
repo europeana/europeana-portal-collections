@@ -3,6 +3,23 @@
 module HeroImageDisplayingView
   extend ActiveSupport::Concern
 
+  LICENSES_URL = {
+    'public' => 'https://creativecommons.org/publicdomain/mark/1.0/',
+    'CC0' => 'https://creativecommons.org/publicdomain/zero/1.0/',
+    'CC_BY' => 'https://creativecommons.org/licenses/by/1.0',
+    'CC_BY_SA' => 'https://creativecommons.org/licenses/by-sa/1.0',
+    'CC_BY_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
+    'CC_BY_NC' => 'https://creativecommons.org/licenses/by-nc/1.0',
+    'CC_BY_NC_SA' => 'https://creativecommons.org/licenses/by-nc-sa/1.0',
+    'CC_BY_NC_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
+    'RS_INC_EDU' => 'http://rightsstatements.org/vocab/InC-EDU/1.0/',
+    'RS_NOC_OKLR' => 'http://rightsstatements.org/vocab/NoC-OKLR/1.0/',
+    'RS_INC' => 'http://rightsstatements.org/vocab/InC/1.0/',
+    'RS_NOC_NC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
+    'RS_INC_OW_EU' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
+    'RS_CNE' => 'http://rightsstatements.org/vocab/CNE/1.0/'
+  }
+
   protected
 
   def hero_config(hero_image)
@@ -25,7 +42,14 @@ module HeroImageDisplayingView
   end
 
   def hero_license(hero_image)
-    hero_image.license.blank? ? {} : { hero_license_template_var_name(hero_image.license) => true }
+    if hero_image.license.blank?
+      {}
+    else
+      {
+        hero_license_template_var_name(hero_image.license) => true,
+        license_url: LICENSES_URL[hero_image.license]
+      }
+    end
   end
 
   def hero_license_template_var_name(license)
