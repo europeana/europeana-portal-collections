@@ -18,7 +18,7 @@ RSpec.describe HeroImage do
 
   describe '.license_enum' do
     subject { described_class.license_enum }
-    it { is_expected.to eq(%w(CC0 CC_BY CC_BY_SA CC_BY_ND CC_BY_NC CC_BY_NC_SA CC_BY_NC_ND OOC PD_NC public RR_free RR_paid RR_restricted unknown orphan)) }
+    it { is_expected.to eq(%w(public CC0 CC_BY CC_BY_SA CC_BY_ND CC_BY_NC CC_BY_NC_SA CC_BY_NC_ND RS_INC_EDU RS_NOC_OKLR RS_INC RS_NOC_NC RS_INC_OW_EU RS_CNE)) }
   end
 
   describe '.settings_brand_opacity_enum' do
