@@ -1,34 +1,44 @@
 ---
 # Free re-use / REUSABILITY="open"
 open:
+  public:
+    pattern: "https?://creativecommons.org/publicdomain/mark"
+    url: "https://creativecommons.org/publicdomain/mark/1.0/"
   cc0:
     pattern: "https?://creativecommons.org/(licenses/)?publicdomain/zero"
+    url: "https://creativecommons.org/publicdomain/zero/1.0/"
   cc_by:
     pattern: "https?://creativecommons.org/licenses/by/"
+    url: "https://creativecommons.org/licenses/by/1.0"
   cc_by_sa:
     pattern: "https?://creativecommons.org/licenses/by-sa"
-  pdm:
-    pattern: "https?://creativecommons.org/publicdomain/mark"
-    template_license: public
+    url: "https://creativecommons.org/licenses/by-sa/1.0"
 # Limited re-use / REUSABILITY="restricted"
 restricted:
   cc_by_nc:
     pattern: "https?://creativecommons.org/licenses/by-nc/"
+    url: "https://creativecommons.org/licenses/by-nc/1.0"
   cc_by_nc_nd:
     pattern: "https?://creativecommons.org/licenses/by-nc-nd"
+    url: "https://creativecommons.org/licenses/by-nc-nd/1.0"
   cc_by_nc_sa:
     pattern: "https?://creativecommons.org/licenses/by-nc-sa"
+    url: "https://creativecommons.org/licenses/by-nc-sa/1.0"
   cc_by_nd:
     pattern: "https?://creativecommons.org/licenses/by-nd"
+    url: "http://creativecommons.org/licenses/by-nd/4.0/'"
   out_of_copyright_non_commercial:
     pattern: "https?://www.europeana.eu/rights/out-of-copyright-non-commercial"
     template_license: OOC
   rs_inc_edu:
     pattern: "https?://rightsstatements.org/vocab/InC-EDU/*"
+    url: "http://rightsstatements.org/vocab/InC-EDU/1.0/"
   rs_noc_nc:
     pattern: "https?://rightsstatements.org/vocab/NoC-NC/*"
+    url: "http://rightsstatements.org/vocab/NoC-NC/1.0/"
   rs_noc_oklr:
     pattern: "https?://rightsstatements.org/vocab/NoC-OKLR/*"
+    url: "http://rightsstatements.org/vocab/NoC-OKLR/1.0/"
 # No re-use / REUSABILITY="permission"
 permission:
   rrfa:
@@ -48,7 +58,10 @@ permission:
     template_license: orphan
   rs_inc:
     pattern: "https?://rightsstatements.org/vocab/InC/*"
+    url: "http://rightsstatements.org/vocab/InC/1.0/"
   rs_inc_ow_eu:
     pattern: "https?://rightsstatements.org/vocab/InC-OW-EU/*"
+    url: "http://rightsstatements.org/vocab/InC-OW-EU/1.0/"
   rs_cne:
     pattern: "https?://rightsstatements.org/vocab/CNE/*"
+    url: "http://rightsstatements.org/vocab/CNE/1.0/"
