@@ -243,7 +243,6 @@ RailsAdmin.config do |config|
       field :file, :paperclip do
         thumb_method :medium
       end
-      field :license
       group :brand do
         field :settings_brand_opacity, :enum do
           enum do
@@ -264,7 +263,13 @@ RailsAdmin.config do |config|
     end
     edit do
       field :file, :paperclip
-      field :license
+      field :license, :enum do
+        enum do
+          HeroImage.license_enum.map do |hero_license|
+            [HeroImage.edm_rights(hero_license).label, hero_license]
+          end
+        end
+      end
       group :brand do
         field :settings_brand_opacity, :enum do
           enum do

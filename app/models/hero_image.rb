@@ -22,7 +22,10 @@ class HeroImage < ActiveRecord::Base
 
   class << self
     def license_enum
-      %w(CC0 CC_BY CC_BY_SA CC_BY_ND CC_BY_NC CC_BY_NC_SA CC_BY_NC_ND OOC PD_NC public RR_free RR_paid RR_restricted unknown orphan)
+      @license_enum ||= begin
+        rights_with_url = EDM::Rights.registry.select { |license| license.url.present? }
+        rights_with_url.map(&:id).map(&:to_s).map { |license| license == 'public' ? license : license.upcase }
+      end
     end
 
     def settings_brand_opacity_enum
@@ -40,6 +43,10 @@ class HeroImage < ActiveRecord::Base
     def settings_ripple_width_enum
       %w(thin medium thick)
     end
+
+    def edm_rights(license)
+      EDM::Rights.registry.detect { |rights| rights.id.to_s == license.downcase }
+    end
   end
 
   def file=(*args)
@@ -50,5 +57,13 @@ class HeroImage < ActiveRecord::Base
 
   def touch_page
     page.touch if page.present?
+  end
+
+  def license_url
+    edm_rights.url
+  end
+
+  def edm_rights
+    @edm_rights ||= self.class.edm_rights(license)
   end
 end
