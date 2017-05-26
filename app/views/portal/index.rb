@@ -191,13 +191,18 @@ module Portal
     end
 
     def federated_search_conf
+      display_names = {
+        digitalnz: 'Digital NZ',
+        dpla: 'DPLA',
+        trove: 'Trove'
+      }
       mustache[:federated_search_conf] ||= begin
         {
           tab_items: @collection.settings_federated_providers.map do |provider|
             foederati_provider = Foederati::Providers.get(provider.to_sym)
             if foederati_provider
               {
-                tab_title: provider,
+                tab_title: display_names[provider.to_sym],
                 url: "#{@collection.key}/federated.json?provider=#{provider}&query=#{params[:q]}",
                 url_logo: 'logo.jpg'  # TODO: look this up properly
               }
