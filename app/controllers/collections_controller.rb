@@ -63,7 +63,7 @@ class CollectionsController < ApplicationController
 
       @federated_results[:search_results] = @federated_results.delete(:results)
       @federated_results[:search_results].each do |result|
-        result[:img] = { src: result.delete(:thumbnail) }
+        result[:img] = { src: result.delete(:thumbnail) } if result[:thumbnail]
         result[:object_url] = result.delete(:url)
       end
     end
