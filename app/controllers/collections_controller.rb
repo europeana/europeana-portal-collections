@@ -57,7 +57,7 @@ class CollectionsController < ApplicationController
       foederati_provider = Foederati::Providers.get(provider.to_sym)
       @federated_results = Foederati.search(provider.to_sym, { query: @query })[provider.to_sym]
       @federated_results.merge!({
-        more_results_label: "View more at #{provider}",
+        more_results_label: "View more at #{foederati_provider.display_name}",
         more_results_url: foederati_provider.urls.site
       })
 
