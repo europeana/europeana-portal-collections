@@ -58,7 +58,8 @@ class CollectionsController < ApplicationController
       @federated_results = Foederati.search(provider.to_sym, { query: @query })[provider.to_sym]
       @federated_results.merge!({
         more_results_label: "View more at #{foederati_provider.display_name}",
-        more_results_url: foederati_provider.urls.site
+        more_results_url: format(foederati_provider.urls.site, { query: @query } ),
+        tab_subtitle: "#{@federated_results[:total]} Results"
       })
 
       @federated_results[:search_results] = @federated_results.delete(:results)
