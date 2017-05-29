@@ -9,24 +9,24 @@ open:
     url: "https://creativecommons.org/publicdomain/zero/1.0/"
   cc_by:
     pattern: "https?://creativecommons.org/licenses/by/"
-    url: "https://creativecommons.org/licenses/by/1.0"
+    url: "https://creativecommons.org/licenses/by/4.0"
   cc_by_sa:
     pattern: "https?://creativecommons.org/licenses/by-sa"
-    url: "https://creativecommons.org/licenses/by-sa/1.0"
+    url: "https://creativecommons.org/licenses/by-sa/4.0"
 # Limited re-use / REUSABILITY="restricted"
 restricted:
   cc_by_nc:
     pattern: "https?://creativecommons.org/licenses/by-nc/"
-    url: "https://creativecommons.org/licenses/by-nc/1.0"
+    url: "https://creativecommons.org/licenses/by-nc/4.0"
   cc_by_nc_nd:
     pattern: "https?://creativecommons.org/licenses/by-nc-nd"
-    url: "https://creativecommons.org/licenses/by-nc-nd/1.0"
+    url: "https://creativecommons.org/licenses/by-nc-nd/4.0"
   cc_by_nc_sa:
     pattern: "https?://creativecommons.org/licenses/by-nc-sa"
-    url: "https://creativecommons.org/licenses/by-nc-sa/1.0"
+    url: "https://creativecommons.org/licenses/by-nc-sa/4.0"
   cc_by_nd:
     pattern: "https?://creativecommons.org/licenses/by-nd"
-    url: "http://creativecommons.org/licenses/by-nd/4.0/'"
+    url: "http://creativecommons.org/licenses/by-nd/4.0/"
   out_of_copyright_non_commercial:
     pattern: "https?://www.europeana.eu/rights/out-of-copyright-non-commercial"
     template_license: OOC
