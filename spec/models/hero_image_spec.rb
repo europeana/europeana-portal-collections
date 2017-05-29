@@ -17,8 +17,8 @@ RSpec.describe HeroImage do
   end
 
   describe '.license_enum' do
-    subject { described_class.license_enum }
-    it { is_expected.to eq(%w(public CC0 CC_BY CC_BY_SA CC_BY_ND CC_BY_NC CC_BY_NC_SA CC_BY_NC_ND RS_INC_EDU RS_NOC_OKLR RS_INC RS_NOC_NC RS_INC_OW_EU RS_CNE)) }
+    subject { described_class.license_enum.sort }
+    it { is_expected.to eq(%w(public CC0 CC_BY CC_BY_SA CC_BY_ND CC_BY_NC CC_BY_NC_SA CC_BY_NC_ND RS_INC_EDU RS_NOC_OKLR RS_INC RS_NOC_NC RS_INC_OW_EU RS_CNE).sort) }
   end
 
   describe '.settings_brand_opacity_enum' do
@@ -64,6 +64,13 @@ RSpec.describe HeroImage do
           end
         end
       end
+    end
+  end
+
+  describe '#license_url' do
+    it 'is looked up from EDM::Rights' do
+      hero = described_class.new(license: 'public')
+      expect(hero.license_url).to eq('https://creativecommons.org/publicdomain/mark/1.0/')
     end
   end
 end
