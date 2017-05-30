@@ -11,7 +11,6 @@ class Collection < ActiveRecord::Base
   validates :key, presence: true, uniqueness: true
   validates :api_params, presence: true
 
-
   after_save :touch_landing_page
 
   translates :title, fallbacks_for_empty_translations: true

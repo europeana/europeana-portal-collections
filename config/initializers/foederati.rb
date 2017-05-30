@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # config/initializers/foederati.rb
 Foederati.configure do
   api_keys.dpla = ENV['FEDERATED_SEARCH_API_KEYS_DPLA']
