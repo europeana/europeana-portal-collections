@@ -198,7 +198,7 @@ module Portal
             next unless foederati_provider
             {
               tab_title: foederati_provider.display_name,
-              url: "#{@collection.key}/federated.json?provider=#{provider}&query=#{params[:q]}",
+              url: federation_path(provider, format: :json, query: params[:q], collection: @collection),
               url_logo: foederati_provider.urls.logo
             }
           end.reject(&:blank?) # Reject blank because RailsAdmin is putting an empty string into the array when saving
