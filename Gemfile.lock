@@ -13,24 +13,13 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 883977fb4b544a936f2e1f7993138c7e0ff902dc
-  ref: 883977f
+  revision: a9c451832fa6c5f62413ace6e15fbc606e12af0c
+  ref: a9c4518
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
-
-GIT
-  remote: git://github.com/europeana/foederati.git
-  revision: 018872c08e0a8917b276f863d192277fcdb8cac3
-  branch: develop
-  specs:
-    foederati (0.1.0)
-      activesupport (>= 4.2.2, < 6.0)
-      faraday (~> 0)
-      faraday_middleware (~> 0)
-      typhoeus (~> 1)
 
 GIT
   remote: git://github.com/europeana/stache.git
@@ -636,7 +625,6 @@ DEPENDENCIES
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
   feedjira (~> 2.0)
-  foederati!
   fog (~> 1.33)
   foreman
   globalize (~> 5.0)

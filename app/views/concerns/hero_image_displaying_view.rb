@@ -25,7 +25,14 @@ module HeroImageDisplayingView
   end
 
   def hero_license(hero_image)
-    hero_image.license.blank? ? {} : { hero_license_template_var_name(hero_image.license) => true }
+    if hero_image.license.blank?
+      {}
+    else
+      {
+        hero_license_template_var_name(hero_image.license) => true,
+        license_url: hero_image.license_url
+      }
+    end
   end
 
   def hero_license_template_var_name(license)
