@@ -185,20 +185,19 @@ module Portal
       end
     end
 
-    # TODO: make this more specific/avoid counting federated providers
     def federated_search_enabled
-      @collection && @collection.settings_federated_providers && @collection.settings_federated_providers.count > 1
+      @collection && @collection.federation_configs.count > 0
     end
 
     def federated_search_conf
       mustache[:federated_search_conf] ||= begin
         {
-          tab_items: @collection.settings_federated_providers.map do |provider|
-            foederati_provider = Foederati::Providers.get(provider.to_sym)
+          tab_items: @collection.federation_configs.map do |config|
+            foederati_provider = Foederati::Providers.get(config.provider)
             next unless foederati_provider
             {
               tab_title: foederati_provider.display_name,
-              url: federation_path(provider, format: :json, query: params[:q], collection: @collection),
+              url: federation_path(config.provider, format: :json, query: params[:q], collection: @collection),
               url_logo: foederati_provider.urls.logo
             }
           end.reject(&:blank?) # Reject blank because RailsAdmin is putting an empty string into the array when saving

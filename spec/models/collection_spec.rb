@@ -53,10 +53,4 @@ RSpec.describe Collection do
       it { is_expected.to be false }
     end
   end
-
-  describe 'settings_federated_providers_enum' do
-    let(:collection) { collections(:firstworldwar) }
-    subject { collection.settings_federated_providers_enum }
-    it { is_expected.to eq(Foederati::Providers.registry.keys) }
-  end
 end

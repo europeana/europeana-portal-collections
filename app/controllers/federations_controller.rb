@@ -6,8 +6,9 @@ class FederationsController < ApplicationController
   def show
     @collection = find_collection
     provider = params[:id]
-    @query = params[:query]
-    if @collection.settings_federated_providers && @collection.settings_federated_providers.detect(provider.to_sym)
+    federation_config =  @collection.federation_configs.where(provider: provider).first
+    @query = "#{params[:query]} #{federation_config.context_query}"
+    if @collection.federation_configs && federation_config
       foederati_provider = Foederati::Providers.get(provider.to_sym)
       @federated_results = Foederati.search(provider.to_sym, query: @query)[provider.to_sym]
       @federated_results[:more_results_label] = t('global.actions.view-more-at') + foederati_provider.display_name
