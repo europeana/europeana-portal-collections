@@ -25,10 +25,11 @@ Rails.application.routes.draw do
       ["#{params[:locale]}/collections/art", request.query_string.presence].compact.join('?')
     }
 
-    resources :collections, only: [:show, :index]
+    resources :collections, only: [:show, :index] do
+      get 'ugc', on: :member, path: 'contribute'
+    end
 
     resources :federations, only: :show, constraints: { format: 'json' }
-    get 'collections/firstworldwar/contribute', to: 'collections#ugc'
     get 'channels', to: redirect('%{locale}/collections')
     get 'channels/:id', to: redirect('%{locale}/collections/%{id}')
 

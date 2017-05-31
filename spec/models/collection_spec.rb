@@ -30,13 +30,27 @@ RSpec.describe Collection do
     context 'when there is NO landing page' do
       let(:collection) { collections(:internal) }
       subject { collection.has_landing_page? }
-      it { is_expected.to eq(false) }
+      it { is_expected.to be false }
     end
 
     context 'when there is a landing page' do
       let(:collection) { collections(:music) }
       subject { collection.has_landing_page? }
-      it { is_expected.to eq(true) }
+      it { is_expected.to be true }
+    end
+  end
+
+  describe '#accepts_ugc?' do
+    subject { described_class.new(key: key).accepts_ugc? }
+
+    context 'when key is "world-war-I"' do
+      let(:key) { 'world-war-I' }
+      it { is_expected.to be true }
+    end
+
+    context 'when key is not "world-war-I"' do
+      let(:key) { 'world-war-II' }
+      it { is_expected.to be false }
     end
   end
 
