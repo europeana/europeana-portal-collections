@@ -60,4 +60,9 @@ class Collection < ActiveRecord::Base
   def trigger_record_counts_job
     Cache::RecordCountsJob.perform_later(id, types: true)
   end
+
+  # TODO: do not hardcode this; make a db-stored attribute of the model?
+  def accepts_ugc?
+    key == 'world-war-I'
+  end
 end
