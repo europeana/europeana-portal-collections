@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 ##
-# Provides Blacklight search and browse, within a content Collection
+# Provides Federated content via JSON, to be displayed within a content Collection
 class FederationsController < ApplicationController
   # The federated action which is used to retrieve federated results via the foederati gem.
   def show
@@ -10,9 +10,9 @@ class FederationsController < ApplicationController
     if @collection.settings_federated_providers && @collection.settings_federated_providers.detect(provider.to_sym)
       foederati_provider = Foederati::Providers.get(provider.to_sym)
       @federated_results = Foederati.search(provider.to_sym, query: @query)[provider.to_sym]
-      @federated_results[:more_results_label] = "View more at #{foederati_provider.display_name}"
+      @federated_results[:more_results_label] = t('global.actions.view-more-at') + foederati_provider.display_name
       @federated_results[:more_results_url] = format(foederati_provider.urls.site, query: @query)
-      @federated_results[:tab_subtitle] = "#{@federated_results[:total]} Results"
+      @federated_results[:tab_subtitle] = [@federated_results[:total], t('site.results.results')].join(' ')
 
       @federated_results[:search_results] = @federated_results.delete(:results)
       @federated_results[:search_results].each do |result|
@@ -21,6 +21,8 @@ class FederationsController < ApplicationController
       end
     end
     render json: @federated_results
+  rescue
+    render json: { tab_subtitle: t('global.error.unavailable'), search_results: [] }
   end
 
   def find_collection
