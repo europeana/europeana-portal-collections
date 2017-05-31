@@ -4,6 +4,7 @@ open:
   public:
     pattern: "https?://creativecommons.org/publicdomain/mark"
     url: "https://creativecommons.org/publicdomain/mark/1.0/"
+    template_license: public
   cc0:
     pattern: "https?://creativecommons.org/(licenses/)?publicdomain/zero"
     url: "https://creativecommons.org/publicdomain/zero/1.0/"
