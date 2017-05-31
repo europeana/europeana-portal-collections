@@ -47,8 +47,8 @@ class CollectionsController < ApplicationController
   end
 
   def ugc
-    # firstworldwar
-    @collection = authorize! :show, Collection.find_by_key!('firstworldwar')
+    @collection = find_collection
+    fail ActiveRecord::RecordNotFound unless @collection.accepts_ugc?
   end
 
   protected
