@@ -12,5 +12,5 @@ class FederationConfig < ActiveRecord::Base
 
   validates_presence_of [:provider, :collection]
   validates :provider, uniqueness: { scope: :collection }
-  validates :provider, :inclusion => {:in => provider_enum}
+  validates :provider, :inclusion => { in: provider_enum }
 end

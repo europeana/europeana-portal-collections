@@ -6,7 +6,7 @@ class FederationsController < ApplicationController
   def show
     @collection = find_collection
     provider = params[:id]
-    federation_config =  @collection.federation_configs.where(provider: provider).first
+    federation_config = @collection.federation_configs.where(provider: provider).first
     @query = "#{params[:query]} #{federation_config.context_query}"
     if @collection.federation_configs && federation_config
       foederati_provider = Foederati::Providers.get(provider.to_sym)

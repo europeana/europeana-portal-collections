@@ -186,7 +186,8 @@ module Portal
     end
 
     def federated_search_enabled
-      @collection && @collection.federation_configs.count > 0
+      puts "in here and @collection: #{@collection.inspect}"
+      @collection && @collection.federation_configs.count.positive?
     end
 
     def federated_search_conf
