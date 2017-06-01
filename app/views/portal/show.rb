@@ -85,7 +85,7 @@ module Portal
           named_entities: named_entities,
           thumbnail: field_value('europeanaAggregation.edmPreview', tag: false),
           ugc_content: {
-            base_1418_url: 'http://ec2-54-154-38-184.eu-west-1.compute.amazonaws.com',
+            base_1418_url: config.x.europeana_1914_1918_url,
             include_1418_nav: true
           }
         }.reverse_merge(super)
