@@ -186,7 +186,6 @@ module Portal
     end
 
     def federated_search_enabled
-      puts "in here and @collection: #{@collection.inspect}"
       @collection && @collection.federation_configs.count.positive?
     end
 
@@ -201,7 +200,7 @@ module Portal
               url: federation_path(config.provider, format: :json, query: params[:q], collection: @collection),
               url_logo: foederati_provider.urls.logo
             }
-          end.reject(&:blank?) # Reject blank because RailsAdmin is putting an empty string into the array when saving
+          end.reject(&:blank?) # Reject blank for if ever a provider is removed(from Foederati) but still configured
         }
       end
     end
