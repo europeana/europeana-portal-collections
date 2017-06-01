@@ -51,8 +51,8 @@ gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'stringex', '~> 2.6'
 gem 'therubyracer'
-gem 'i18n_data'
 gem 'foederati', github: 'europeana/foederati', branch: 'develop'
+gem 'i18n_data'
 
 group :production do
   gem 'europeana-logging', '~> 0.2.3'#, github: 'europeana/europeana-logging-ruby', branch: 'develop'
