@@ -83,7 +83,11 @@ module Portal
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
-          thumbnail: field_value('europeanaAggregation.edmPreview', tag: false)
+          thumbnail: field_value('europeanaAggregation.edmPreview', tag: false),
+          ugc_content: {
+            base_1418_url: 'http://ec2-54-154-38-184.eu-west-1.compute.amazonaws.com',
+            include_1418_nav: true
+          }
         }.reverse_merge(super)
       end
     end
