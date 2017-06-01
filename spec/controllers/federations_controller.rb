@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FederationsController do
   describe '#show' do
     context 'when within the all collection' do
