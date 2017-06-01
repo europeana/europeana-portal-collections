@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Provides Federated content via JSON, to be displayed within a content Collection
 class FederationsController < ApplicationController

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateFederationConfig < ActiveRecord::Migration
   def self.up
     create_table :federation_configs do |t|
@@ -8,7 +9,7 @@ class CreateFederationConfig < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :federation_configs, [:collection_id, :provider]
+    add_index :federation_configs, %i{collection_id provider}
     add_foreign_key :federation_configs, :collections
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FederationConfig do
   it { is_expected.to belong_to(:collection) }
   it { is_expected.to validate_presence_of(:provider) }

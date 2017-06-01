@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class FederationConfig < ActiveRecord::Base
   belongs_to :collection
 
@@ -10,7 +11,7 @@ class FederationConfig < ActiveRecord::Base
     end
   end
 
-  validates_presence_of [:provider, :collection]
+  validates_presence_of %i{collection_id provider}
   validates :provider, uniqueness: { scope: :collection }
   validates :provider, inclusion: { in: provider_enum }
 end
