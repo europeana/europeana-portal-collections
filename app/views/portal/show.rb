@@ -4,6 +4,7 @@ module Portal
     include SearchableView
     include Document::Field::Labelling
     include Document::Field::Entities
+    include UgcContentDisplayingView
 
     attr_accessor :document, :debug
 
@@ -84,10 +85,7 @@ module Portal
           similar: similar_items,
           named_entities: named_entities,
           thumbnail: field_value('europeanaAggregation.edmPreview', tag: false),
-          ugc_content: {
-            base_1418_url: config.x.europeana_1914_1918_url,
-            include_1418_nav: true
-          }
+          ugc_content: ugc_content(true),
         }.reverse_merge(super)
       end
     end
