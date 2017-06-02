@@ -9,7 +9,7 @@ RSpec.describe FederationConfig do
 
   describe '#provider_enum' do
     it 'should be derived from all the Foederati Providers' do
-      expect(subject.provider_enum).to eq(Foederati::Providers.registry.keys  - ['europeana'])
+      expect(subject.provider_enum).to eq(Foederati::Providers.registry.keys - ['europeana'])
     end
   end
 end
