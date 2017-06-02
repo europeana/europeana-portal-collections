@@ -61,8 +61,12 @@ class Collection < ActiveRecord::Base
     Cache::RecordCountsJob.perform_later(id, types: true)
   end
 
-  # TODO: do not hardcode this; make a db-stored attribute of the model?
   def accepts_ugc?
-    key == 'world-war-I'
+    self.class.ugc_acceptor_keys.include?(key)
+  end
+
+  # TODO: do not hardcode this; make a db-stored attribute of the model?
+  def self.ugc_acceptor_keys
+    %w(world-war-I)
   end
 end
