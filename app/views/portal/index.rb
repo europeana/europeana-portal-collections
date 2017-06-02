@@ -186,21 +186,24 @@ module Portal
     end
 
     def federated_search_enabled
-      @collection && @collection.federation_configs.count.positive?
+      @collection && @collection.federation_configs.present?
     end
 
     def federated_search_conf
       mustache[:federated_search_conf] ||= begin
         {
-          tab_items: @collection.federation_configs.map do |config|
-            foederati_provider = Foederati::Providers.get(config.provider)
-            next unless foederati_provider
-            {
-              tab_title: foederati_provider.display_name,
-              url: federation_path(config.provider, format: :json, query: params[:q], collection: @collection),
-              url_logo: foederati_provider.urls.logo
-            }
-          end.reject(&:blank?) # Reject blank for if ever a provider is removed(from Foederati) but still configured
+          tab_items: federated_tab_items
+        }
+      end
+    end
+
+    def federated_tab_items
+      @collection.federation_configs.select { |config| Foederati::Providers.get(config.provider).present? }.map do |config|
+        foederati_provider = Foederati::Providers.get(config.provider)
+        {
+          tab_title: foederati_provider.display_name,
+          url: federation_path(config.provider, format: :json, query: params[:q], collection: @collection),
+          url_logo: foederati_provider.urls.logo
         }
       end
     end

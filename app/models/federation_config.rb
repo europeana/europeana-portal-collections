@@ -7,11 +7,11 @@ class FederationConfig < ActiveRecord::Base
 
   class << self
     def provider_enum
-      Foederati::Providers.registry.keys
+      Foederati::Providers.registry.keys - ['europeana']
     end
   end
 
-  validates_presence_of %i{collection_id provider}
+  validates :collection, :provider, presence: true
   validates :provider, uniqueness: { scope: :collection }
   validates :provider, inclusion: { in: provider_enum }
 end

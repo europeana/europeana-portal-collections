@@ -8,21 +8,11 @@ class FederationsController < ApplicationController
     @collection = find_collection
     provider = params[:id]
     federation_config = @collection.federation_configs.where(provider: provider).first
-    @query = "#{params[:query]} #{federation_config.context_query}"
+    @query = [params[:query], federation_config.context_query].reject(&:blank?).join(' AND ')
     if @collection.federation_configs && federation_config
-      foederati_provider = Foederati::Providers.get(provider.to_sym)
+      @foederati_provider = Foederati::Providers.get(provider.to_sym)
       @federated_results = Foederati.search(provider.to_sym, query: @query)[provider.to_sym]
-      @federated_results[:more_results_label] = t('global.actions.view-more-at') + foederati_provider.display_name
-      @federated_results[:more_results_url] = format(foederati_provider.urls.site, query: @query)
-      @federated_results[:tab_subtitle] = [@federated_results[:total], t('site.results.results')].join(' ')
-
-      @federated_results[:search_results] = @federated_results.delete(:results)
-      @federated_results[:search_results].each do |result|
-        result[:img] = { src: result.delete(:thumbnail) } if result[:thumbnail]
-        result[:object_url] = result.delete(:url)
-      end
     end
-    render json: @federated_results
   rescue
     render json: { tab_subtitle: t('global.error.unavailable'), search_results: [] }
   end
