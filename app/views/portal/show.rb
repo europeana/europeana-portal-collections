@@ -4,6 +4,7 @@ module Portal
     include SearchableView
     include Document::Field::Labelling
     include Document::Field::Entities
+    include UgcContentDisplayingView
 
     attr_accessor :document, :debug
 
@@ -83,7 +84,8 @@ module Portal
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
-          thumbnail: field_value('europeanaAggregation.edmPreview', tag: false)
+          thumbnail: field_value('europeanaAggregation.edmPreview', tag: false),
+          ugc_content: ugc_content(true),
         }.reverse_merge(super)
       end
     end
