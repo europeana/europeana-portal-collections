@@ -18,6 +18,11 @@ fashion_translations:
   title: 'Fashion'
   globalized_model: fashion
 
+firstworldwar_translations:
+  locale: en
+  title: 'First World War'
+  globalized_model: firstworldwar
+
 draft_translations:
   locale: en
   title: 'Draft'

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get 'ugc', on: :member, path: 'contribute'
     end
 
+    resources :federations, only: :show, constraints: { format: 'json' }
     get 'channels', to: redirect('%{locale}/collections')
     get 'channels/:id', to: redirect('%{locale}/collections/%{id}')
 

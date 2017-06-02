@@ -27,6 +27,7 @@ gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', branch: 'dev
 gem 'europeana-blacklight', '~> 0.5.1'
 gem 'europeana-feedback-button', '0.0.4'
 gem 'feedjira', '~> 2.0'
+gem 'foederati', github: 'europeana/foederati', branch: 'develop'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'

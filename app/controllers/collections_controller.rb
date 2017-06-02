@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ##
 # Provides Blacklight search and browse, within a content Collection
 class CollectionsController < ApplicationController

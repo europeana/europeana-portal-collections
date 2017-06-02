@@ -5,6 +5,9 @@ class Collection < ActiveRecord::Base
 
   has_and_belongs_to_many :browse_entries
   has_one :landing_page, class_name: 'Page::Landing', dependent: :destroy
+  has_many :federation_configs, dependent: :destroy
+
+  accepts_nested_attributes_for :federation_configs
 
   has_paper_trail
 
@@ -18,9 +21,9 @@ class Collection < ActiveRecord::Base
   default_scope { includes(:translations) }
 
   has_settings :default_search_layout
+  has_settings :federated_providers
 
   delegate :settings_default_search_layout_enum, to: :class
-
   class << self
     def settings_default_search_layout_enum
       %w(list grid)

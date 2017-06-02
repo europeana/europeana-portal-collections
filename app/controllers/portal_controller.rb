@@ -21,6 +21,7 @@ class PortalController < ApplicationController
   # GET /search
   def index
     @landing_page = find_landing_page
+    @collection = Collection.find_by_key('all')
     (@response, @document_list) = search_results(params)
 
     log_search_interaction(
