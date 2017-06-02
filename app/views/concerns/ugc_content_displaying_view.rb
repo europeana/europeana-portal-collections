@@ -7,7 +7,7 @@ module UgcContentDisplayingView
 
   protected
 
-  def ugc_content(force)
+  def ugc_content(force = false)
     if force || (@collection && @collection.accepts_ugc?)
       {
         base_1418_url: config.x.europeana_1914_1918_url,
