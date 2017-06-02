@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/europeana/foederati.git
-  revision: 2898c328305685d064a9c86302d0ee5834770bdf
+  revision: 82573d170cc3926e082480e0d48db98bed91657a
   branch: develop
   specs:
     foederati (0.1.0)

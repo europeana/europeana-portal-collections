@@ -1,12 +1,11 @@
+# frozen_string_literal: true
 
-@federated_results[:more_results_label] = t('global.actions.view-more-at') + @foederati_provider.display_name
-@federated_results[:more_results_url] = format(@foederati_provider.urls.site, query: @query)
-@federated_results[:tab_subtitle] = [number_with_delimiter(@federated_results[:total]), t('site.results.results')].join(' ')
-
-@federated_results[:search_results] = @federated_results.delete(:results)
-@federated_results[:search_results].each do |result|
-  result[:img] = { src: result.delete(:thumbnail) } if result[:thumbnail]
-  result[:object_url] = result.delete(:url)
+json.total @federated_results[:total]
+json.more_results_label t('global.actions.view-more-at') + @foederati_provider.display_name
+json.more_results_url format(@foederati_provider.urls.site, query: @query)
+json.tab_subtitle [number_with_delimiter(@federated_results[:total]), t('site.results.results')].join(' ')
+json.search_results @federated_results[:results] do |result|
+  json.title result[:title]
+  json.img {  json.src result[:thumbnail] } if result[:thumbnail]
+  json.object_url result[:url]
 end
-
-json.( @federated_results, :total, :more_results_label, :more_results_url, :tab_subtitle, :search_results)
