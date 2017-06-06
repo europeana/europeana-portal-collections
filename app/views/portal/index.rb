@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Portal
   ##
   # Portal search results view
@@ -46,7 +48,7 @@ module Portal
       mustache[:filters] ||= begin
         (simple_filters + advanced_filters).select do |facet|
           (facet[:boolean] && !facet[:title] == 'MEDIA') || facet[:date] || facet[:items].present?
-        end.each_with_index.map do |facet,index|
+        end.each_with_index.map do |facet, index|
           # First 3 facets are always open
           facet[:filter_open] = true if index < 3
           # Add the media facet under type
@@ -92,7 +94,7 @@ module Portal
                 FacetPresenter.build(facet, controller).display
               end.compact
             },
-            advanced: advanced_count > 0
+            advanced: advanced_count.positive?
           }
         ]
       end
@@ -120,14 +122,14 @@ module Portal
     end
 
     def hero
-      if !@landing_page.nil?
+      unless @landing_page.nil?
         hero_config(@landing_page.hero_image)
       end
     end
 
     def query_terms
       mustache[:query_terms] ||= begin
-        query_terms = [(params[:q] || [])].flatten.collect do |query_term|
+        query_terms = [(params[:q] || [])].flatten.map do |query_term|
           content_tag(:strong, query_term)
         end
         safe_join(query_terms, ' AND ')
@@ -198,7 +200,7 @@ module Portal
     end
 
     def federated_tab_items
-      @collection.federation_configs.select { |config| Foederati::Providers.get(config.provider).present? }.map do |config|
+      formated_items = @collection.federation_configs.select { |config| Foederati::Providers.get(config.provider).present? }.map do |config|
         foederati_provider = Foederati::Providers.get(config.provider)
         {
           tab_title: foederati_provider.display_name,
@@ -206,6 +208,7 @@ module Portal
           url_logo: foederati_provider.urls.logo
         }
       end
+      formated_items.sort_by { |item| item[:tab_title].downcase }
     end
 
     def active_filter_count
