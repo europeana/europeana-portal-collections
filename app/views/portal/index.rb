@@ -200,7 +200,7 @@ module Portal
     end
 
     def federated_tab_items
-      formated_items = @collection.federation_configs.select { |config| Foederati::Providers.get(config.provider).present? }.map do |config|
+      formatted_items = @collection.federation_configs.select { |config| Foederati::Providers.get(config.provider).present? }.map do |config|
         foederati_provider = Foederati::Providers.get(config.provider)
         {
           tab_title: foederati_provider.display_name,
@@ -208,7 +208,7 @@ module Portal
           url_logo: foederati_provider.urls.logo
         }
       end
-      formated_items.sort_by { |item| item[:tab_title].downcase }
+      formatted_items.sort_by { |item| item[:tab_title].downcase }
     end
 
     def active_filter_count
