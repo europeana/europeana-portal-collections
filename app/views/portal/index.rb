@@ -203,7 +203,7 @@ module Portal
       formatted_items = @collection.federation_configs.select { |config| Foederati::Providers.get(config.provider).present? }.map do |config|
         foederati_provider = Foederati::Providers.get(config.provider)
         {
-          tab_title: foederati_provider.display_name,
+          tab_title: foederati_provider.name,
           url: federation_path(config.provider, format: :json, query: params[:q], collection: @collection),
           url_logo: foederati_provider.urls.logo
         }
