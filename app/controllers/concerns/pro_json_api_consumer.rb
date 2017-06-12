@@ -23,11 +23,16 @@ module ProJsonApiConsumer
       all: {
         filter: 'culturelover',
         label: t('global.actions.filter-all')
-      },
-      fashion: {
-        filter: 'culturelover-fashion',
-        label: Topic.find_by_slug('fashion').label
       }
-    }
+    }.merge(pro_json_api_theme_filters_from_topics)
+  end
+
+  def pro_json_api_theme_filters_from_topics
+    Topic.all.sort_by { |topic| topic.label }.each_with_object({}) do |topic, filters|
+      filters[topic.slug.to_sym] = {
+        filter: "culturelover-#{topic.slug}",
+        label: topic.label
+      }
+    end
   end
 end
