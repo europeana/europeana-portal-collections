@@ -28,8 +28,15 @@ module ProJsonApiConsumer
     }.merge(pro_json_api_theme_filters_from_topics)
   end
 
+  def pro_json_api_whitelisted_topics
+    Topic.where(slug: %w(
+      archaeology architecture art fashion food-and-drink history literature
+      maps-and-cartography migration music natural-history photography world-war-i
+    ))
+  end
+
   def pro_json_api_theme_filters_from_topics
-    Topic.all.sort_by(&:label).each_with_object({}) do |topic, filters|
+    pro_json_api_whitelisted_topics.sort_by(&:label).each_with_object({}) do |topic, filters|
       filters[topic.slug.to_sym] = {
         filter: "culturelover-#{topic.slug}",
         label: topic.label
