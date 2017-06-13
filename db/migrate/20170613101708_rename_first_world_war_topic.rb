@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class RenameFirstWorldWarTopic < ActiveRecord::Migration
   def up
     if topic = Topic.find_by_slug('first-world-war')

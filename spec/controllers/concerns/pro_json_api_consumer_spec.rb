@@ -22,7 +22,7 @@ RSpec.describe ProJsonApiConsumer do
     it 'includes all topics' do
       Topic.all.each do |topic|
         expect(subject).to have_key(topic.slug.to_sym)
-        expect(subject[topic.slug.to_sym]).to eq( { filter: "culturelover-#{topic.slug}", label: topic.label } )
+        expect(subject[topic.slug.to_sym]).to eq(filter: "culturelover-#{topic.slug}", label: topic.label)
       end
     end
   end
