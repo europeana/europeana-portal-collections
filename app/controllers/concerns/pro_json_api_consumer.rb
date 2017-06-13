@@ -29,9 +29,10 @@ module ProJsonApiConsumer
   end
 
   def pro_json_api_whitelisted_topics
-    Topic.where(slug: %w(archaeology architecture art fashion food-and-drink
-                         history literature maps-and-cartography migration music
-                         natural-history photography world-war-i))
+    Topic.where(slug: %w(1989 archaeology architecture art events exhibitions
+                         general fashion food-and-drink history literature
+                         maps-and-cartography migration music natural-history
+                         photography pop reuse sports world-war-i))
   end
 
   def pro_json_api_theme_filters_from_topics
