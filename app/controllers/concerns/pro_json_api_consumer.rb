@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module ProJsonApiConsumer
   extend ActiveSupport::Concern
 
@@ -23,11 +24,22 @@ module ProJsonApiConsumer
       all: {
         filter: 'culturelover',
         label: t('global.actions.filter-all')
-      },
-      fashion: {
-        filter: 'culturelover-fashion',
-        label: Topic.find_by_slug('fashion').label
       }
-    }
+    }.merge(pro_json_api_theme_filters_from_topics)
+  end
+
+  def pro_json_api_whitelisted_topics
+    Topic.where(slug: %w(archaeology architecture art fashion food-and-drink
+                         history literature maps-and-cartography migration music
+                         natural-history photography world-war-i))
+  end
+
+  def pro_json_api_theme_filters_from_topics
+    pro_json_api_whitelisted_topics.sort_by(&:label).each_with_object({}) do |topic, filters|
+      filters[topic.slug.to_sym] = {
+        filter: "culturelover-#{topic.slug}",
+        label: topic.label
+      }
+    end
   end
 end
