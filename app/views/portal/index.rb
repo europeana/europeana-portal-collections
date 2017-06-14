@@ -47,18 +47,12 @@ module Portal
     def filters
       mustache[:filters] ||= begin
         (simple_filters + advanced_filters).select do |facet|
-          (facet[:boolean] && !facet[:title] == 'MEDIA') || facet[:date] || facet[:items].present?
+          # TODO: make display or not (as a filter) of each facet field
+          #   configurable in the blacklight config, vs hard-coding these
+          (facet[:boolean] && %w(MEDIA edm_UGC).include?(facet[:name])) || facet[:date] || facet[:items].present?
         end.each_with_index.map do |facet, index|
           # First 3 facets are always open
           facet[:filter_open] = true if index < 3
-          # Add the media facet under type
-          if facet[:name] == 'TYPE'
-            merged_facet = FacetPresenter.build(facet_by_field_name('MEDIA'), controller).display
-            if merged_facet
-              facet[:items] << { is_separator: true }
-              facet[:items] << merged_facet
-            end
-          end
           # Order collection names alphabetically
           if facet[:name] == 'COLLECTION'
             facet[:items].sort_by! { |hsh| hsh[:text].to_s }
