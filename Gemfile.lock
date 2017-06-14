@@ -13,24 +13,13 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 30e8fbd0888efd4846ca367748c66bed9501c368
-  ref: 30e8fbd
+  revision: 371cd8a11b3de593a2a6b265483ea1c2fb8be573
+  ref: 371cd8a
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
-
-GIT
-  remote: git://github.com/europeana/foederati.git
-  revision: c91367f80a5ff931d22e1d30c700e981aebd74fb
-  branch: develop
-  specs:
-    foederati (0.1.0)
-      activesupport (>= 4.2.2, < 6.0)
-      faraday (~> 0)
-      faraday_middleware (~> 0)
-      typhoeus (~> 1)
 
 GIT
   remote: git://github.com/europeana/stache.git
@@ -196,6 +185,11 @@ GEM
     ffi (1.9.18)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
+    foederati (0.2.0)
+      activesupport (>= 4.2.2, < 6.0)
+      faraday (~> 0)
+      faraday_middleware (~> 0)
+      typhoeus (~> 1)
     fog (1.38.0)
       fog-aliyun (>= 0.1.0)
       fog-atmos
@@ -636,7 +630,7 @@ DEPENDENCIES
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
   feedjira (~> 2.0)
-  foederati!
+  foederati (~> 0.2.0)
   fog (~> 1.33)
   foreman
   globalize (~> 5.0)
@@ -685,4 +679,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.13.1
+   1.14.6
