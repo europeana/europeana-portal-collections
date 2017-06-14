@@ -1,13 +1,15 @@
 ---
+- :label: 1989
 - :label: Archaeology
   :entity_uri: http://data.europeana.eu/concept/base/80
 - :label: Architecture
   :entity_uri: http://data.europeana.eu/concept/base/94
 - :label: Art
   :entity_uri: http://data.europeana.eu/concept/base/190
+- :label: Events
+- :label: Exhibitions
 - :label: Fashion
-- :label: World War I
-  :entity_uri: http://data.europeana.eu/concept/base/83
+- :label: General
 - :label: Food and Drink
   :entity_uri: http://data.europeana.eu/concept/base/124
 - :label: History
@@ -26,3 +28,8 @@
   :entity_uri: http://data.europeana.eu/concept/base/156
 - :label: Performing Arts
 - :label: Photography
+- :label: Pop
+- :label: Reuse
+- :label: Sports
+- :label: World War I
+  :entity_uri: http://data.europeana.eu/concept/base/83
