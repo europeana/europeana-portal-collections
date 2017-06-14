@@ -7,7 +7,7 @@ class Collection < ActiveRecord::Base
   has_one :landing_page, class_name: 'Page::Landing', dependent: :destroy
   has_many :federation_configs, dependent: :destroy
 
-  accepts_nested_attributes_for :federation_configs
+  accepts_nested_attributes_for :federation_configs, allow_destroy: true
 
   has_paper_trail
 
