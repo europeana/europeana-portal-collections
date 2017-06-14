@@ -205,7 +205,7 @@ module Portal
         {
           tab_title: foederati_provider.name,
           url: federation_path(config.provider, format: :json, query: params[:q], collection: @collection),
-          url_logo: foederati_provider.urls.logo
+          key: config.provider
         }
       end
       formatted_items.sort_by { |item| item[:tab_title].downcase }
