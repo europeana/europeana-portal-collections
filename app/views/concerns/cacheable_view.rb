@@ -18,4 +18,15 @@ module CacheableView
   def body_cache_key
     fail NotImplementedError
   end
+
+  def cacheable?
+    return false unless cache_body?
+
+    begin
+      body_cache_key
+      true
+    rescue NotImplementedError
+      false
+    end
+  end
 end
