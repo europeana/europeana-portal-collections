@@ -31,7 +31,7 @@ module SearchableView
         value:  params[:q].blank? ? nil : params[:q],
         remove: search_action_url(remove_q_param(params))
       },
-      input_values: cache_body? ? nil : input_search_values(*search_param_keys),
+      input_values: cacheable? ? nil : input_search_values(*search_param_keys),
       placeholder: t('site.search.placeholder.text')
     }
   end
