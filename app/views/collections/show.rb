@@ -179,7 +179,6 @@ module Collections
       return nil if @landing_page.facet_entries.blank?
 
       @landing_page.facet_entries.map do |facet_entry|
-
         presenter = facet_entry_presenter(facet_entry)
         title = presenter.facet_item_label(facet_entry.facet_value) || facet_entry.title
         {
