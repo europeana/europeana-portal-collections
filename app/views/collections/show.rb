@@ -179,9 +179,11 @@ module Collections
       return nil if @landing_page.facet_entries.blank?
 
       @landing_page.facet_entries.map do |facet_entry|
+
         presenter = facet_entry_presenter(facet_entry)
+        title = presenter.facet_item_label(facet_entry.facet_value) || facet_entry.title
         {
-          preview_search_title: presenter.facet_item_label(facet_entry.facet_value) || facet_entry.title,
+          preview_search_title: t('site.collections.labels.sneak-peek-collection', preview_title: title, collection: @landing_page.title),
           preview_search_type: presenter.facet_title || facet_entry.facet_field,
           preview_search_url: browse_entry_url(facet_entry, @landing_page, format: 'json'),
           preview_search_more_link: browse_entry_url(facet_entry, @landing_page)
