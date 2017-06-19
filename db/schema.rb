@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310082817) do
+ActiveRecord::Schema.define(version: 20170613101708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,16 @@ ActiveRecord::Schema.define(version: 20170310082817) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "federation_configs", force: :cascade do |t|
+    t.integer  "collection_id", null: false
+    t.string   "provider",      null: false
+    t.string   "context_query"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "federation_configs", ["collection_id", "provider"], name: "index_federation_configs_on_collection_id_and_provider", using: :btree
 
   create_table "feeds", force: :cascade do |t|
     t.string   "name"
@@ -396,6 +406,7 @@ ActiveRecord::Schema.define(version: 20170310082817) do
   add_foreign_key "browse_entries_collections", "collections"
   add_foreign_key "categorisations", "topics"
   add_foreign_key "facet_link_groups", "pages"
+  add_foreign_key "federation_configs", "collections"
   add_foreign_key "galleries", "users", column: "published_by"
   add_foreign_key "gallery_images", "galleries"
   add_foreign_key "page_elements", "pages"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Portal
   ##
   # Portal search results view
@@ -45,18 +47,12 @@ module Portal
     def filters
       mustache[:filters] ||= begin
         (simple_filters + advanced_filters).select do |facet|
-          (facet[:boolean] && !facet[:title] == 'MEDIA') || facet[:date] || facet[:items].present?
-        end.each_with_index.map do |facet,index|
+          # TODO: make display or not (as a filter) of each facet field
+          #   configurable in the blacklight config, vs hard-coding these
+          (facet[:boolean] && %w(MEDIA edm_UGC).include?(facet[:name])) || facet[:date] || facet[:items].present?
+        end.each_with_index.map do |facet, index|
           # First 3 facets are always open
           facet[:filter_open] = true if index < 3
-          # Add the media facet under type
-          if facet[:name] == 'TYPE'
-            merged_facet = FacetPresenter.build(facet_by_field_name('MEDIA'), controller).display
-            if merged_facet
-              facet[:items] << { is_separator: true }
-              facet[:items] << merged_facet
-            end
-          end
           # Order collection names alphabetically
           if facet[:name] == 'COLLECTION'
             facet[:items].sort_by! { |hsh| hsh[:text].to_s }
@@ -92,7 +88,7 @@ module Portal
                 FacetPresenter.build(facet, controller).display
               end.compact
             },
-            advanced: advanced_count > 0
+            advanced: advanced_count.positive?
           }
         ]
       end
@@ -105,7 +101,7 @@ module Portal
         button_title: search_state.params[:per_page] || 12,
         items: blacklight_config.per_page.map do |pp|
           params_for_search = search_state.params_for_search(per_page: pp)
-          url = if @collection.present?
+          url = if within_collection?
                   collection_path(@collection, params_for_search)
                 else
                   search_path(params_for_search)
@@ -120,14 +116,14 @@ module Portal
     end
 
     def hero
-      if !@landing_page.nil?
+      unless @landing_page.nil?
         hero_config(@landing_page.hero_image)
       end
     end
 
     def query_terms
       mustache[:query_terms] ||= begin
-        query_terms = [(params[:q] || [])].flatten.collect do |query_term|
+        query_terms = [(params[:q] || [])].flatten.map do |query_term|
           content_tag(:strong, query_term)
         end
         safe_join(query_terms, ' AND ')
@@ -183,6 +179,30 @@ module Portal
       mustache[:facets_selected] ||= begin
         facets_selected_items.blank? ? nil : { items: facets_selected_items }
       end
+    end
+
+    def federated_search_enabled
+      @collection && @collection.federation_configs.present?
+    end
+
+    def federated_search_conf
+      mustache[:federated_search_conf] ||= begin
+        {
+          tab_items: federated_tab_items
+        }
+      end
+    end
+
+    def federated_tab_items
+      formatted_items = @collection.federation_configs.select { |config| Foederati::Providers.get(config.provider).present? }.map do |config|
+        foederati_provider = Foederati::Providers.get(config.provider)
+        {
+          tab_title: foederati_provider.name,
+          url: federation_path(config.provider, format: :json, query: params[:q], collection: @collection),
+          key: config.provider
+        }
+      end
+      formatted_items.sort_by { |item| item[:tab_title].downcase }
     end
 
     def active_filter_count

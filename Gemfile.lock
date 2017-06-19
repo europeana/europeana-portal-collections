@@ -13,8 +13,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: bd0bffedbb8e09ce4f9bb2d3fa9365f20b3a0af6
-  ref: bd0bffe
+  revision: a31b2cb0d30518363f6fbc3073a982cadcad4115
+  ref: a31b2cb
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -173,7 +173,7 @@ GEM
       rails (> 4.2, < 6)
     excon (0.55.0)
     execjs (2.7.0)
-    faraday (0.11.0)
+    faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.11.0.1)
       faraday (>= 0.7.4, < 1.0)
@@ -182,9 +182,14 @@ GEM
       faraday_middleware (>= 0.9)
       loofah (>= 2.0)
       sax-machine (>= 1.0)
-    ffi (1.9.17)
+    ffi (1.9.18)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
+    foederati (0.2.0)
+      activesupport (>= 4.2.2, < 6.0)
+      faraday (~> 0)
+      faraday_middleware (~> 0)
+      typhoeus (~> 1)
     fog (1.38.0)
       fog-aliyun (>= 0.1.0)
       fog-atmos
@@ -334,7 +339,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.8.1)
+    i18n (0.8.4)
     i18n_data (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -380,7 +385,7 @@ GEM
     mime-types (2.99.3)
     mimemagic (0.3.0)
     mini_portile2 (2.1.0)
-    minitest (5.10.1)
+    minitest (5.10.2)
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -625,6 +630,7 @@ DEPENDENCIES
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
   feedjira (~> 2.0)
+  foederati (~> 0.2.0)
   fog (~> 1.33)
   foreman
   globalize (~> 5.0)
@@ -671,6 +677,3 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
-
-BUNDLED WITH
-   1.14.6

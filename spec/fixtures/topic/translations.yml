@@ -2,3 +2,8 @@ fashion_translations:
   locale: en
   label: 'Fashion'
   globalized_model: fashion_topic
+
+history_translations:
+  locale: en
+  label: 'History'
+  globalized_model: history_topic

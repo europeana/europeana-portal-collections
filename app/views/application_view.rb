@@ -25,7 +25,8 @@ class ApplicationView < Europeana::Styleguide::View
   def js_vars
     [
       { name: 'googleAnalyticsKey', value: config.x.google[:analytics_key] },
-      { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] }
+      { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
+      { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true }
     ] + super
   end
 
@@ -84,6 +85,10 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   protected
+
+  def ugc_enabled_collections_js_var_value
+    '[' + Collection.ugc_acceptor_keys.map { |key| "'#{key}'" }.join(',') + ']'
+  end
 
   def site_title
     'Europeana Collections'

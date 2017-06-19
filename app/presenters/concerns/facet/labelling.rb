@@ -58,6 +58,7 @@ module Facet
                   }
       label_facet 'MEDIA', items: { titleize: true, i18n: true }
       label_facet 'THUMBNAIL', items: { titleize: true, i18n: true }
+      label_facet 'edm_UGC', i18n: 'ugc', items: { titleize: true, i18n: 'global.facet.ugc' }
       label_facet 'YEAR'
       label_facet 'REUSABILITY',
                   collapsible: {

@@ -75,6 +75,9 @@ module BlacklightConfig
       config.add_facet_field 'MIME_TYPE', parent: 'TYPE'
       config.add_facet_field 'MEDIA', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'THUMBNAIL', boolean: { on: 'true', off: nil, default: :off }
+      config.add_facet_field 'edm_UGC',
+                             boolean: { on: 'true', off: nil, default: :off },
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'world-war-I' }
       config.add_facet_field 'YEAR',
                              range: true,
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },

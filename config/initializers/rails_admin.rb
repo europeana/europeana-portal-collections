@@ -22,8 +22,8 @@ RailsAdmin.config do |config|
 
   config.included_models = %w(
     Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
-    Feed Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia
-    MediaObject Page Page::Error Page::Landing Topic User
+    FederationConfig Feed Gallery HeroImage Link Link::Promotion Link::Credit
+    Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User
   )
 
   config.actions do
@@ -135,6 +135,7 @@ RailsAdmin.config do |config|
       field :title
       field :api_params
       field :settings_default_search_layout, :enum
+      field :federation_configs
     end
   end
 
@@ -183,6 +184,15 @@ RailsAdmin.config do |config|
       field :facet_field, :enum
       field :facet_values_count, :integer
       field :thumbnails, :boolean
+    end
+  end
+
+  config.model 'FederationConfig' do
+    object_label_method :provider
+    visible false
+    edit do
+      field :provider, :enum
+      field :context_query
     end
   end
 

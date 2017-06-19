@@ -5,7 +5,7 @@ gem 'rails', '4.2.7.1'
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
 
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'bd0bffe'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'a31b2cb'
 
 # Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
 # https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
@@ -27,6 +27,7 @@ gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', branch: 'dev
 gem 'europeana-blacklight', '~> 0.5.1'
 gem 'europeana-feedback-button', '0.0.4'
 gem 'feedjira', '~> 2.0'
+gem 'foederati', '~> 0.2.0'
 gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'

@@ -5,6 +5,9 @@ class Collection < ActiveRecord::Base
 
   has_and_belongs_to_many :browse_entries
   has_one :landing_page, class_name: 'Page::Landing', dependent: :destroy
+  has_many :federation_configs, dependent: :destroy
+
+  accepts_nested_attributes_for :federation_configs, allow_destroy: true
 
   has_paper_trail
 
@@ -18,9 +21,9 @@ class Collection < ActiveRecord::Base
   default_scope { includes(:translations) }
 
   has_settings :default_search_layout
+  has_settings :federated_providers
 
   delegate :settings_default_search_layout_enum, to: :class
-
   class << self
     def settings_default_search_layout_enum
       %w(list grid)
@@ -59,5 +62,14 @@ class Collection < ActiveRecord::Base
 
   def trigger_record_counts_job
     Cache::RecordCountsJob.perform_later(id, types: true)
+  end
+
+  def accepts_ugc?
+    self.class.ugc_acceptor_keys.include?(key)
+  end
+
+  # TODO: do not hardcode this; make a db-stored attribute of the model?
+  def self.ugc_acceptor_keys
+    %w(world-war-I)
   end
 end

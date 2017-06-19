@@ -90,7 +90,7 @@ class ProResourcePresenter
   def label
     return nil unless theme_label_tags.present?
     topics = theme_label_tags.map do |_pro_path, tag|
-      Topic.find_by_slug(tag.split('-').last)
+      Topic.find_by_slug(tag.split('-')[1..-1].join('-'))
     end.compact
     topics.blank? ? nil : topics.map(&:label).join(' | ')
   end
