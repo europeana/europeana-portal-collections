@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 YAML.load_file(File.expand_path('../data_providers.yml', __FILE__)).each do |data_provider|
   puts 'Seeding data provider "' + data_provider[:name].bold + '": '
-  if DataProvider.find_by_name(data_provider[:name]).present?
+  if DataProvider.find_by_uri(data_provider[:uri]).present?
     puts "  data provider name exists; skipping".yellow
   else
+    provider = DataProvider.new(data_provider)
+
     ActiveRecord::Base.transaction do
-      DataProvider.create!(data_provider)
+      provider.save
     end
-    puts "  data_provider created OK".green
+
+    if provider.new_record?
+      puts "  data_provider failed to save; continuing".red
+    else
+      puts "  data_provider created OK".green
+    end
   end
 end
