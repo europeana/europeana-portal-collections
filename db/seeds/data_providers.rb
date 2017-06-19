@@ -2,7 +2,7 @@
 YAML.load_file(File.expand_path('../data_providers.yml', __FILE__)).each do |data_provider|
   puts 'Seeding data provider "' + data_provider[:name].bold + '": '
   if DataProvider.find_by_uri(data_provider[:uri]).present?
-    puts "  data provider name exists; skipping".yellow
+    puts '  data provider name exists; skipping'.yellow
   else
     provider = DataProvider.new(data_provider)
 
@@ -11,9 +11,9 @@ YAML.load_file(File.expand_path('../data_providers.yml', __FILE__)).each do |dat
     end
 
     if provider.new_record?
-      puts "  data_provider failed to save; continuing".red
+      puts '  data_provider failed to save; continuing'.red
     else
-      puts "  data_provider created OK".green
+      puts '  data_provider created OK'.green
     end
   end
 end
