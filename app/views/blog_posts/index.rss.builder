@@ -2,7 +2,7 @@
 xml.instruct!
 xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
   xml.channel do
-    xml.title("Europeana - Blogs")
+    xml.title('Europeana - Blogs')
     xml.description(t('site.blogs.description'))
     xml.link(blog_posts_url)
     xml.language(locale.to_s)
