@@ -47,8 +47,11 @@ time:
     fields:
     - proxies.dctermsIssued
   - title: temporal
-    fields:
-    - proxies.dctermsTemporal
+    entity_name: timespans
+    entity_proxy_field: dctermsTemporal
+    entity_extra:
+    - field: begin
+    - field: end
   - title: place-time
     fields:
     - proxies.dcCoverage
@@ -63,9 +66,8 @@ location:
   title: location
   sections:
   - title: location
-    fields:
-    - places.prefLabel
-    - proxies.dctermsSpatial
+    entity_name: places
+    entity_proxy_field: dctermsSpatial
   - title: place-time
     fields:
     - proxies.dcCoverage
