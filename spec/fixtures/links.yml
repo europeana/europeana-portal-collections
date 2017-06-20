@@ -1,3 +1,10 @@
 default_banner_link:
   url: 'http://www.example.com/'
   linkable: default_banner (Banner)
+
+fashion_promo_link:
+  url: 'http://europeanafashion.tumblr.com/'
+  linkable: fashion_collection (Page)
+  type: 'Link::Promotion'
+  position: 0
+  media_object: fake_file

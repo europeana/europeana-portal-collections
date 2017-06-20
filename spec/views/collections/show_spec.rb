@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'collections/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
   include ActionView::Helpers::TextHelper
 
@@ -5,7 +7,7 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     Rails.cache.write('record/counts/collections/music/type/image', 10)
     assign(:collection, collection)
     assign(:landing_page, landing_page)
-    assign(:params, { id: collection.id })
+    assign(:params, id: collection.id)
     allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:has_search_parameters?).and_return(false)
@@ -35,5 +37,15 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     expect(subject).to have_link('All')
     expect(subject).to have_link('Images')
     expect(subject).not_to have_link('3D')
+  end
+
+  context 'when the page is using the browse layout' do
+    let(:collection) { Collection.find_by_key('fashion') }
+    let(:landing_page) { Page::Landing.find_by_slug('collections/fashion') }
+
+    it 'should set the og image to the image of the promo with a position of Zero' do
+      expected_og_url = landing_page.promotions.find_by(position: 0).file.url
+      expect(subject).to have_selector("meta[property=\"og:image\"][content=\"#{expected_og_url}\"]", visible: false)
+    end
   end
 end
