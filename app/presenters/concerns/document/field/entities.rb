@@ -20,12 +20,12 @@ module Document
 
       # @param (see #entities)
       def entities_for(type, proxy_field = nil)
-        entities = document.fetch(type, [])
+        document_entities = document.fetch(type, [])
         unless proxy_field.nil?
           proxy_fields = document.fetch("proxies.#{proxy_field}", [])
-          entities.select! { |entity| proxy_fields.include?(entity[:about]) }
+          document_entities.select! { |entity| proxy_fields.include?(entity[:about]) }
         end
-        entities || []
+        document_entities || []
       end
 
       # @param (see #entities)
