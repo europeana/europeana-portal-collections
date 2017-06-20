@@ -1,28 +1,61 @@
 # frozen_string_literal: true
+
 module Document
   module Field
     ##
     # Methods for presenting entities (agents, concepts, etc)
     module Entities
-      def entities(entity_name, proxy_field = nil)
+      ##
+      # Retrieves the document's entities
+      #
+      # @param type [String,Symbol] name of entity group, e.g. "timespans"
+      # @param proxy_field [String,Symbol] name of field in proxies entities
+      #   are to be retrieved for, e.g. "dctermsTemporal"
+      # @return [Array] document's entities
+      def entities(type, proxy_field = nil)
         @entities ||= {}
-        @entities[entity_name] ||= {}
-        @entities[entity_name][proxy_field] ||= begin
-          entities = document.fetch(entity_name, [])
-          unless proxy_field.nil?
-            proxy_fields = document.fetch("proxies.#{proxy_field}", [])
-            entities.select! { |entity| proxy_fields.include?(entity[:about]) }
-          end
-          entities || []
+        @entities[type] ||= {}
+        @entities[type][proxy_field] ||= entities_for(type, proxy_field)
+      end
+
+      # @param (see #entities)
+      def entities_for(type, proxy_field = nil)
+        entities = document.fetch(type, [])
+        unless proxy_field.nil?
+          proxy_fields = document.fetch("proxies.#{proxy_field}", [])
+          entities.select! { |entity| proxy_fields.include?(entity[:about]) }
+        end
+        entities || []
+      end
+
+      # @param (see #entities)
+      # @return [Array]
+      def entity_fields(type, proxy_field = nil)
+        entities(type, proxy_field).map do |entity|
+          [entity_label(entity, type)].flatten
         end
       end
 
-      def entity_fields(entity_name, proxy_field = nil)
-        entities(entity_name, proxy_field).map { |entity| entity_label(entity) }
+      def entity_label(entity, type)
+        entity_pref_label(entity) ||
+          entity_foaf_name(entity) ||
+          entity_timespan_begin_end(entity, type) ||
+          entity[:about]
       end
 
-      def entity_label(entity)
-        [entity.fetch('prefLabel', entity.fetch('foafName', entity[:about]))].flatten
+      def entity_timespan_begin_end(entity, type)
+        return nil unless type == 'timespans'
+
+        begin_and_end = [entity.fetch('begin', nil), entity.fetch('end', nil)].compact
+        begin_and_end.blank? ? nil : [begin_and_end.join('–')]
+      end
+
+      def entity_pref_label(entity)
+        entity.fetch('prefLabel', nil)
+      end
+
+      def entity_foaf_name(entity)
+        entity.fetch('foafName', nil)
       end
 
       def named_entity_labels(edm, i18n, *args)
@@ -66,7 +99,7 @@ module Document
       end
 
       def named_entity_link_field?(field)
-        [:about, :broader].include?(field)
+        %i(about broader).include?(field)
       end
 
       def normalise_named_entity(named_entity, foldable_link = false)

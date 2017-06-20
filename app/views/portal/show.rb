@@ -120,12 +120,23 @@ module Portal
     private
 
     def named_entities
-      data = [collect_concept_labels, collect_agent_labels, collect_time_labels, collect_place_labels].compact
+      return if named_entities_data.blank?
       {
         title: t('site.object.named-entities.title'),
-        data: data,
+        data: named_entities_data,
         inline: true,
-      } unless data.empty?
+      }
+    end
+
+    def named_entities_data
+      mustache[:named_entities_data] ||= begin
+        [
+          named_entity_labels('concepts', 'what', :broader),
+          named_entity_labels('agents', 'who'),
+          named_entity_labels('timespans', 'when', :begin, :end),
+          named_entity_labels('places', 'where', :latitude, :longitude)
+        ].compact
+      end
     end
 
     def institution_name_and_link
@@ -224,22 +235,6 @@ module Portal
           }
         }
       }
-    end
-
-    def collect_agent_labels
-      named_entity_labels('agents', 'who')
-    end
-
-    def collect_place_labels
-      named_entity_labels('places', 'where', :latitude, :longitude)
-    end
-
-    def collect_time_labels
-      named_entity_labels('timespans', 'when', :begin, :end)
-    end
-
-    def collect_concept_labels
-      named_entity_labels('concepts', 'what', :broader)
     end
 
     def similar_items
