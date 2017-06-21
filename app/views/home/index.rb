@@ -51,7 +51,7 @@ module Home
           { meta_property: 'og:url', content: root_url }
         ]
         head_meta << { meta_property: 'og:title', content: title } unless title.nil?
-        head_meta << { meta_property: 'og:image', content: URI.join(root_url, hero[:hero_image]) } unless hero.nil?
+        head_meta << { meta_property: 'og:image', content: hero[:hero_image] } unless hero.nil?
         head_meta + super
       end
     end

@@ -115,7 +115,7 @@ module Collections
 
     def og_image_from_hero
       hero_conf = hero_config(@landing_page.hero_image)
-      URI.join(root_url, hero_conf[:hero_image]) unless hero_conf.nil? || hero_conf[:hero_image].blank?
+      hero_conf[:hero_image] unless hero_conf.nil? || hero_conf[:hero_image].blank?
     end
 
     def head_meta_description
