@@ -59,4 +59,8 @@ module PaginatedJsonApiResultSetView
       end
     end
   end
+
+  def pagination_page_item_count
+    paginated_set.count
+  end
 end
