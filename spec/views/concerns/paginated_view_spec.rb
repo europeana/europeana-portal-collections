@@ -66,5 +66,4 @@ RSpec.describe PaginatedView do
       it { is_expected.to have_multiple_results }
     end
   end
-
 end
