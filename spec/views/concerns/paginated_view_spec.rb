@@ -15,7 +15,7 @@ RSpec.describe PaginatedView do
 
   context 'when paginated set is empty' do
     before do
-      allow(subject).to receive(:paginated_set) { { 'items' => [] } }
+      allow(subject).to receive(:paginated_set) { [] }
     end
 
     it { is_expected.not_to have_results }
@@ -24,7 +24,7 @@ RSpec.describe PaginatedView do
   end
 
   context 'when paginated set has one member' do
-    let(:paginated_set) { { 'items' => [4] } }
+    let(:paginated_set) { [4] }
 
     it { is_expected.to have_results }
     it { is_expected.to have_single_result }
@@ -32,38 +32,10 @@ RSpec.describe PaginatedView do
   end
 
   context 'when paginated set has multiple members' do
-    let(:paginated_set) { { 'items' => [1, 2] } }
+    let(:paginated_set) { [1, 2] }
 
     it { is_expected.to have_results }
     it { is_expected.not_to have_single_result }
     it { is_expected.to have_multiple_results }
-  end
-
-  context 'when itemsCount is explicitly set in the paginated set' do
-    context 'when paginated set is empty' do
-      before do
-        allow(subject).to receive(:paginated_set) { { 'itemsCount' => 0 } }
-      end
-
-      it { is_expected.not_to have_results }
-      it { is_expected.not_to have_single_result }
-      it { is_expected.not_to have_multiple_results }
-    end
-
-    context 'when paginated set has one member' do
-      let(:paginated_set) { { 'itemsCount' => 1, 'items' => [4] } }
-
-      it { is_expected.to have_results }
-      it { is_expected.to have_single_result }
-      it { is_expected.not_to have_multiple_results }
-    end
-
-    context 'when paginated set has multiple members' do
-      let(:paginated_set) { { 'itemsCount' => 2, 'items' => [1, 2] } }
-
-      it { is_expected.to have_results }
-      it { is_expected.not_to have_single_result }
-      it { is_expected.to have_multiple_results }
-    end
   end
 end
