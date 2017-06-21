@@ -66,7 +66,7 @@ module PaginatedView
   end
 
   def pagination_page_item_count
-    return paginated_set['itemsCount'] unless paginated_set['itemsCount'] == nil
+    return paginated_set['itemsCount'] unless paginated_set['itemsCount'].nil?
     paginated_set['items'] ? paginated_set['items'].count : 0
   end
 
