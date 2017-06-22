@@ -10,8 +10,8 @@ module CacheHelper
     end
   end
 
-  def cache_key(body_cache_key)
-    keys = ['views', cache_version, I18n.locale.to_s, current_user.role || 'guest', body_cache_key]
+  def cache_key(body_cache_key, locale: I18n.locale.to_s, user_role: current_user.role || 'guest')
+    keys = ['views', cache_version, locale, user_role, body_cache_key]
     keys.compact.join('/')
   end
 
@@ -21,5 +21,13 @@ module CacheHelper
 
   def body_cached?
     cache_body? && Rails.cache.exist?(cache_key(body_cache_key))
+  end
+
+  def expire_cache(body_cache_key)
+    I18n.available_locales.each do |locale|
+      (User.role_enum + %w(guest)).each do |user_role|
+        Rails.cache.delete(cache_key(body_cache_key, locale: locale, user_role: user_role))
+      end
+    end
   end
 end

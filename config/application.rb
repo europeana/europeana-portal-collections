@@ -79,6 +79,9 @@ module Europeana
       rescue RuntimeError
         {}
       end
+
+      # ActiveRecord observers
+      config.active_record.observers = %i(nav_cache_invalidation_observer)
     end
   end
 end
