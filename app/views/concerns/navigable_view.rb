@@ -114,7 +114,8 @@ module NavigableView
   end
 
   def cached_navigation_global_primary_nav_items
-    Rails.cache.fetch('global/navigation/primary_nav_items') { navigation_global_primary_nav_items }.tap do |nav|
+    nav_cache_key = "global/navigation/primary_nav_items/#{I18n.locale}"
+    Rails.cache.fetch(nav_cache_key) { navigation_global_primary_nav_items }.tap do |nav|
       nav.each do |section|
         mark_current_page(section)
       end
