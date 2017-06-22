@@ -43,7 +43,7 @@ class Page
     end
 
     def og_image
-      og_image_from_promo || og_image_from_hero
+      @og_image ||= og_image_from_promo || og_image_from_hero
     end
 
     private
