@@ -35,6 +35,7 @@ gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
 gem 'nokogiri'
+gem 'rails-observers'
 gem 'redis', '3.3.1' # locked to fix: https://app.assembla.com/spaces/europeana-npc/tickets/1811
 gem 'rest-client', '~> 1.8.0'
 gem 'ruby-oembed', '~> 0.9'
