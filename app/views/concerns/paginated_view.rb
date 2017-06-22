@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 ##
-# Including view are expected to implement `pagination_set`, returning the set
+# Including view are expected to implement `paginated_set`, returning the set
 # of paginated objects to render links for.
 module PaginatedView
   extend ActiveSupport::Concern

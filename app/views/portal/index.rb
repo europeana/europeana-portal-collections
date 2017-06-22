@@ -232,6 +232,10 @@ module Portal
       @response
     end
 
+    def pagination_page_item_count
+      paginated_set.docs.count
+    end
+
     def facets_selected_items
       return @facets_selected_items unless @facets_selected_items.nil?
 
