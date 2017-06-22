@@ -42,7 +42,21 @@ class Page
       settings[:layout_type] ? settings[:layout_type] : 'default'
     end
 
+    def og_image
+      @og_image ||= og_image_from_promo || og_image_from_hero
+    end
+
     private
+
+    def og_image_from_promo
+      return unless settings_layout_type == 'browse'
+      promo = promotions.find_by(position: 0)
+      promo && promo.file.present? ? promo.file.url : nil
+    end
+
+    def og_image_from_hero
+      hero_image && hero_image.file.present? ? hero_image.file.url : nil
+    end
 
     def set_slug
       new_slug = collection.key == 'all' ? '' : "collections/#{collection.key}"

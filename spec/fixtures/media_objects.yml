@@ -1,0 +1,5 @@
+fake_file:
+  file_file_name: 'fake-file.jpg'
+  file_content_type: 'image/jpeg'
+  file_file_size: 452799
+  file_fingerprint: 'ea6a8d814b7d3df608d3f83f8423096c'

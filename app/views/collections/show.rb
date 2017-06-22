@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Collections
   class Show < ApplicationView
     include BrowsableView
@@ -13,7 +15,6 @@ module Collections
     def head_meta
       mustache[:head_meta] ||= begin
         title = page_title
-        hero = hero_config(@landing_page.hero_image)
         head_meta = [
           { meta_name: 'description', content: head_meta_description },
           { meta_property: 'fb:appid', content: '185778248173748' },
@@ -24,7 +25,7 @@ module Collections
           { meta_property: 'og:url', content: collection_url(@collection.key) }
         ]
         head_meta << { meta_property: 'og:title', content: title } unless title.nil?
-        head_meta << { meta_property: 'og:image', content: URI.join(root_url, hero[:hero_image]) } unless hero.nil?
+        head_meta << { meta_property: 'og:image', content: @landing_page.og_image } unless @landing_page.og_image.blank?
         head_meta + super
       end
     end
