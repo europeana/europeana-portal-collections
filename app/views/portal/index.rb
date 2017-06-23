@@ -53,10 +53,6 @@ module Portal
         end.each_with_index.map do |facet, index|
           # First 3 facets are always open
           facet[:filter_open] = true if index < 3
-          # Order collection names alphabetically
-          if facet[:name] == 'COLLECTION'
-            facet[:items].sort_by! { |hsh| hsh[:text].to_s }
-          end
           facet
         end
       end
