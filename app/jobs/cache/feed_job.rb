@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Cache
   class FeedJob < ApplicationJob
     URLS = {
@@ -10,12 +11,16 @@ module Cache
     queue_as :default
 
     def perform(url, download_media = false)
+      @url = url
+
       @feed = begin
         benchmark("[Feedjira] #{url}", level: :info) do
           Feedjira::Feed.fetch_and_parse(url)
         end
       end
+
       Rails.cache.write("feed/#{url}", @feed)
+
       if download_media
         @feed.entries.each do |entry|
           img_url = FeedEntryImage.new(entry).media_object_url
@@ -23,5 +28,11 @@ module Cache
         end
       end
     end
+  end
+
+  # Global nav uses some feeds, and is cached so needs to be expired when those
+  # feeds are updated.
+  def after_perform
+    Cache::Expire::GlobalNavJob.perform_later if NavigableView.feeds_included_in_nav_urls.include?(@url)
   end
 end

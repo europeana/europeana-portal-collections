@@ -6,6 +6,15 @@ module NavigableView
 
   extend ActiveSupport::Concern
 
+  # URLs of feeds used to populate the global nav
+  def self.feeds_included_in_nav_urls
+    @feeds_included_in_nav_urls ||= begin
+      all_blog_feed = Feed.find_by_slug('all-blog')
+      all_blog_url = all_blog_feed.present? ? all_blog_feed.url : nil
+      (Cache::FeedJob::URLS[:exhibitions].values + [all_blog_url]).compact
+    end
+  end
+
   def navigation
     mustache[:navigation] ||= begin
       {
