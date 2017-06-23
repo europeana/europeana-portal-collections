@@ -16,7 +16,7 @@ module CacheHelper
   end
 
   def cache_body?
-    !request.format.json? && !ENV['DISABLE_VIEW_CACHING']
+    !request.format.json? && !config.x.disable.view_caching
   end
 
   def body_cached?
