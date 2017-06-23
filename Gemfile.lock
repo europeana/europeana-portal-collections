@@ -13,16 +13,16 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 186a307c021951b2a169d075e3952b18b8e9e379
-  ref: 186a307
+  revision: 82c23891c53e9d99a4ffe9177c7884250a055c9a
+  ref: 82c2389
   specs:
     europeana-i18n (0.0.1)
       rails (>= 4.0, < 6.0)
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: dd7abdf8f3da9975ef6236dc1edafa7a2817b404
-  ref: dd7abdf
+  revision: 51e8fa7c600dec5b9b444e1b7c76e93814469f34
+  ref: 51e8fa7
   specs:
     europeana-styleguide (0.3.0)
       activesupport (~> 4.0)
