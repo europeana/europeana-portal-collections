@@ -125,11 +125,15 @@ module NavigableView
   end
 
   def cached_navigation_global_primary_nav_items
-    nav_cache_key = cache_key(GLOBAL_PRIMARY_NAV_ITEMS_CACHE_KEY)
-    Rails.cache.fetch(nav_cache_key) { navigation_global_primary_nav_items }.tap do |nav|
-      nav.each do |section|
-        mark_current_page(section)
-      end
+    nav_items = if config.x.disable.view_caching
+                  navigation_global_primary_nav_items
+                else
+                  nav_cache_key = cache_key(GLOBAL_PRIMARY_NAV_ITEMS_CACHE_KEY)
+                  Rails.cache.fetch(nav_cache_key) { navigation_global_primary_nav_items }
+                end
+
+    nav_items.each do |section|
+      mark_current_page(section)
     end
   end
 
