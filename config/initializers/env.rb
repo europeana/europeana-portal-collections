@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-# @todo Move all uses of env vars out of app/ logic and into this initializer,
+
+# TODO: Move all uses of env vars out of app/ logic and into this initializer,
 #   with app logic instead inspecting `Rails.application.config.x`
 
 # Europeana-centric configuration, e.g. APIs and other sites
@@ -16,9 +17,10 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
 end
 
 # Google-centric configuration
-Rails.application.config.x.google = {}.tap do |google|
-  google[:analytics_key] = ENV['GOOGLE_ANALYTICS_KEY']
-  google[:site_verification] = ENV['GOOGLE_SITE_VERIFICATION']
+Rails.application.config.x.google = OpenStruct.new(
+  analytics_key: ENV['GOOGLE_ANALYTICS_KEY'],
+  optimize_container_id: ENV['GOOGLE_OPTIMIZE_CONTAINER_ID'],
+  site_verification: ENV['GOOGLE_SITE_VERIFICATION']
 end
 
 # Disable certain features that are enabled by default
