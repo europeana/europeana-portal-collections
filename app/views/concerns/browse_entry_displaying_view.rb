@@ -14,47 +14,55 @@ module BrowseEntryDisplayingView
     }
   end
 
-  ##
-  # @param page [Page]
   def browse_entry_items(browse_entries, page = nil)
     browse_entries.map do |entry|
       browse_entry_item(entry, page)
     end
   end
 
-  ##
-  # @param page [Page]
   def browse_entry_items_grouped(browse_entries, page = nil)
-    grouped_items, type1, type2, type3 = [], [], [], []
+    browse_entries_grouped = browse_entries.group_by(&:subject_type)
 
-    more_links = [explore_people_path(theme: collection.key), explore_topics_path(theme: collection.key), explore_periods_path(theme: collection.key)]
-    more_link_texts = [t('global.navigation.more.agents'), t('global.navigation.more.topics'), t('global.navigation.more.periods')]
+    ordered_items = [
+      browse_entry_item_group('person', browse_entries_grouped['person'], page),
+      browse_entry_item_group('topic', browse_entries_grouped['topic'], page),
+      browse_entry_item_group('period', browse_entries_grouped['period'], page)
+    ].compact
 
-    browse_entries.each do |entry|
-      case entry.subject_type
-      when 'person'
-        type1 << browse_entry_item(entry, page)
-      when 'topic'
-        type2 << browse_entry_item(entry, page)
-      when 'period'
-        type3 << browse_entry_item(entry, page)
-      end
-    end
-
-    no_of_item_types = 0
-    [type1, type2, type3].each_with_index do |type, index|
-      next unless type.count.positive?
-      grouped_items << {
-        more_link: more_links[index],
-        more_text: more_link_texts[index],
-        items: type
-      }
-      no_of_item_types += 1
-    end
-
-    return {
-      grouped_items: grouped_items,
-      is_single_type: no_of_item_types == 1
+    {
+      grouped_items: ordered_items,
+      is_single_type: browse_entries_grouped.count == 1
     }
+  end
+
+  def browse_entry_item_group(subject_type, entries, page = nil)
+    return unless entries.present?
+    {
+      more_link: browse_entry_more_link_path(subject_type),
+      more_text: browse_entry_more_link_text(subject_type),
+      items: entries.map { |entry| browse_entry_item(entry, page) }
+    }
+  end
+
+  def browse_entry_more_link_path(subject_type)
+    case subject_type
+    when 'person'
+      explore_people_path(theme: collection.key)
+    when 'topic'
+      explore_topics_path(theme: collection.key)
+    when 'period'
+      explore_periods_path(theme: collection.key)
+    end
+  end
+
+  def browse_entry_more_link_text(subject_type)
+    case subject_type
+    when 'person'
+      t('global.navigation.more.agents')
+    when 'topic'
+      t('global.navigation.more.topics')
+    when 'period'
+      t('global.navigation.more.periods')
+    end
   end
 end
