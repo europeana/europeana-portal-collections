@@ -24,7 +24,8 @@ class ApplicationView < Europeana::Styleguide::View
 
   def js_vars
     [
-      { name: 'googleAnalyticsKey', value: config.x.google[:analytics_key] },
+      { name: 'googleAnalyticsKey', value: config.x.google.analytics_key },
+      { name: 'googleOptimizeContainerID', value: config.x.google.optimize_container_id },
       { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
       { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true }
     ] + super
@@ -32,10 +33,10 @@ class ApplicationView < Europeana::Styleguide::View
 
   def head_meta
     no_csrf = super.reject { |meta| %w(csrf-param csrf-token).include?(meta[:meta_name]) }
-    return no_csrf unless config.x.google.key?(:site_verification)
+    return no_csrf unless config.x.google.site_verification.present?
     [
       {
-        meta_name: 'google-site-verification', content: config.x.google[:site_verification]
+        meta_name: 'google-site-verification', content: config.x.google.site_verification
       }
     ] + no_csrf
   end
