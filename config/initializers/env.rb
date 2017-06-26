@@ -22,10 +22,9 @@ Rails.application.config.x.google = {}.tap do |google|
 end
 
 # Disable certain features that are enabled by default
-# [PLACEHOLDER]
-# Rails.application.config.x.disable = OpenStruct.new(
-#   feature_on_by_default: ENV['DISABLE_FEATURE_ON_BY_DEFAULT']
-# )
+Rails.application.config.x.disable = OpenStruct.new(
+  view_caching: ENV['DISABLE_VIEW_CACHING']
+)
 
 # Enable certain features that are disabled by default
 Rails.application.config.x.enable = OpenStruct.new(

@@ -452,6 +452,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-observers (0.1.4)
+      activemodel (>= 4.0)
     rails_admin (0.8.1)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
@@ -665,6 +667,7 @@ DEPENDENCIES
   puma (~> 2.13)
   rack-rewrite
   rails (= 4.2.7.1)
+  rails-observers
   rails_admin (~> 0.8.0)
   rails_serve_static_assets
   rails_with_relative_url_root (~> 0.1)
