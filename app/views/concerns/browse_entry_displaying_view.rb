@@ -45,24 +45,10 @@ module BrowseEntryDisplayingView
   end
 
   def browse_entry_more_link_path(subject_type)
-    case subject_type
-    when 'person'
-      explore_people_path(theme: collection.key)
-    when 'topic'
-      explore_topics_path(theme: collection.key)
-    when 'period'
-      explore_periods_path(theme: collection.key)
-    end
+    send(:"explore_#{subject_type.pluralize}_path", theme: collection.key)
   end
 
   def browse_entry_more_link_text(subject_type)
-    case subject_type
-    when 'person'
-      t('global.navigation.more.agents')
-    when 'topic'
-      t('global.navigation.more.topics')
-    when 'period'
-      t('global.navigation.more.periods')
-    end
+    t(subject_type.pluralize, scope: 'global.navigation.more')
   end
 end
