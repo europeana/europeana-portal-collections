@@ -21,7 +21,7 @@ Rails.application.config.x.google = OpenStruct.new(
   analytics_key: ENV['GOOGLE_ANALYTICS_KEY'],
   optimize_container_id: ENV['GOOGLE_OPTIMIZE_CONTAINER_ID'],
   site_verification: ENV['GOOGLE_SITE_VERIFICATION']
-end
+)
 
 # Disable certain features that are enabled by default
 Rails.application.config.x.disable = OpenStruct.new(
