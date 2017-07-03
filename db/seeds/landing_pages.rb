@@ -22,6 +22,7 @@ unless Page::Landing.find_by_slug('collections/art').present?
       media_object: find_or_download_styleguide_image('sample/channel_hero_art.jpg')
     )
     art_landing = Page::Landing.create!(
+      collection: Collection.find_by_key('art'),
       slug: 'collections/art',
       title: 'Europeana Art',
       body: 'From the Renaissance to the surrealists, and from ancient Roman sculpture to contemporary art, the Europeana Art and Art History Collection introduces you to artists and artworks from across the whole of Europe. [Something about interactive element]',
@@ -127,6 +128,7 @@ unless Page::Landing.find_by_slug('').present?
       media_object: find_or_download_styleguide_image('sample/search_hero_1.jpg')
     )
     home_landing = Page::Landing.create!(
+      collection: Collection.find_by_key('all'),
       slug: '',
       title: 'Home',
       strapline: 'Explore %{total_item_count} artworks, artefacts, books, videos and sounds from across Europe.',
@@ -194,6 +196,7 @@ unless Page::Landing.find_by_slug('collections/music').present?
       media_object: find_or_download_styleguide_image('sample/channel_hero_music.jpg')
     )
     music_landing = Page::Landing.create!(
+      collection: Collection.find_by_key('music'),
       slug: 'collections/music',
       title: 'Europeana Music',
       strapline: 'Explore %{total_item_count} artworks, artefacts, books, videos and sounds from across Europe.',
@@ -287,6 +290,7 @@ end
 unless Page::Landing.find_by_slug('collections/fashion').present?
   ActiveRecord::Base.transaction do
     fashion_landing = Page::Landing.create!(
+      collection: Collection.find_by_key('fashion'),
       slug: 'collections/fashion',
       title: 'Europeana Fashion',
       settings_layout_type: 'browse',
