@@ -56,17 +56,6 @@ module Home
       end
     end
 
-    def primary_nav_clicktip
-      {
-        clicktip: {
-          tooltip_text: t('global.tooltips.channels.home.new-galleries'),
-          direction: 'top',
-          id: 'explore-menu-tooltip',
-          persistent: true
-        }
-      }
-    end
-
     private
 
     def body_cache_key
