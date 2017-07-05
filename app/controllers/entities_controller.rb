@@ -5,6 +5,7 @@ class EntitiesController < ApplicationController
   end
 
   def show
+    # TODO
     @entity = { type: params[:type], id: params[:id] }
   end
 

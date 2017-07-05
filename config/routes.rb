@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  resources :blbs
   root to: 'locale#index'
 
   scope '/:locale', constraints: { locale: /[a-z]{2}/ } do
