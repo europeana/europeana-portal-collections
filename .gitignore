@@ -85,3 +85,6 @@
 # Ignore generated documentation
 /.yardoc
 /yardoc
+
+# Ignore media objects cache
+/media_objects
