@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  resources :blbs
   root to: 'locale#index'
 
   scope '/:locale', constraints: { locale: /[a-z]{2}/ } do
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
     resources :events, only: [:show, :index], param: :slug
 
     get 'entities/suggest'
+    get 'entities/:type/base/:id', to: 'entities#show'
 
     get 'debug/exception', to: 'debug#exception'
 

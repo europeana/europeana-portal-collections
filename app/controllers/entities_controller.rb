@@ -4,6 +4,10 @@ class EntitiesController < ApplicationController
     render json: Europeana::API.entity.suggest(entity_api_params(text: params[:text]))
   end
 
+  def show
+    @entity = { type: params[:type], id: params[:id] }
+  end
+
   protected
 
   def entity_api_params(query = {})
