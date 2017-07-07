@@ -62,7 +62,8 @@ Rails.application.routes.draw do
     resources :events, only: [:show, :index], param: :slug
 
     get 'entities/suggest'
-    get 'entities/fetch/:type/:namespace/:identifier', constraints: { type: /agent|place|concept|timespan/, namespace: /base/, identifier: /\d+/}, to: 'entities#fetch'
+    get 'entities/fetch/:type/:namespace/:identifier',
+      constraints: { type: /agent|place|concept|timespan/, namespace: /base/, identifier: /\d+/}, to: 'entities#fetch'
 
     get 'debug/exception', to: 'debug#exception'
 

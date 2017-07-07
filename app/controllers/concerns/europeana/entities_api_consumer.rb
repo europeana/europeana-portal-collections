@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Europeana
   ##
   # Methods for working with the Europeana Entities API

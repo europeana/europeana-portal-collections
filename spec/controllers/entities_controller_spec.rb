@@ -37,6 +37,5 @@ RSpec.describe EntitiesController do
       get :fetch, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
       expect(response).to have_http_status(:success)
     end
-
   end
 end
