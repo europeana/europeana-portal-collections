@@ -83,7 +83,7 @@ module Collections
           entry_points: @landing_page.settings_layout_type == 'browse' ? facet_entry_items_grouped(@landing_page) : [],
           preview_search_data: preview_search_data,
           preview_search_data_present: preview_search_data.present?,
-          channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
+          channel_entry: browse_entry_items_grouped(@landing_page),
           promoted: @landing_page.promotions.blank? ? nil : {
             items: promoted_items(@landing_page.promotions)
           },

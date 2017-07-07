@@ -1,146 +1,70 @@
+# frozen_string_literal: true
+
 RSpec.describe Page do
   it { is_expected.to belong_to(:banner).inverse_of(:pages) }
   it { is_expected.to belong_to(:hero_image).inverse_of(:page) }
-  it { is_expected.to have_many(:browse_entries).through(:elements) }
-  it { is_expected.to have_many(:elements).inverse_of(:page) }
+  it { is_expected.to have_many(:element_groups).inverse_of(:page).dependent(:destroy) }
+  it { is_expected.to have_many(:elements).through(:element_groups).inverse_of(:page) }
+  it { is_expected.to have_many(:browse_entry_groups).dependent(:destroy) }
+  it { is_expected.to have_many(:browse_entries).through(:browse_entry_groups) }
   it { is_expected.to validate_uniqueness_of(:slug) }
 
   it { is_expected.to accept_nested_attributes_for(:hero_image) }
+  it { is_expected.to accept_nested_attributes_for(:element_groups) }
+  it { is_expected.to accept_nested_attributes_for(:browse_entry_groups) }
 
-  describe 'browse_entry validation' do
-    subject { pages(:about) }
-    context 'when there are no browse entries' do
-      it 'should be valid' do
-       expect(subject).to be_valid
-      end
+  describe 'browse entry group size validation' do
+    subject { pages(:about).tap { |page| page.browse_entry_groups = browse_entry_groups } }
+
+    let(:topic_group_of_3) do
+      BrowseEntryGroup.new(title: 'topic', browse_entries: [
+        browse_entries(:cinema_topic), browse_entries(:music_topic), browse_entries(:harp_topic)
+      ])
     end
-    context 'when there are 3 topic browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:music_topic))
-      end
-      it 'should be valid' do
-        expect(subject).to be_valid
-      end
+    let(:topic_group_of_6) do
+      BrowseEntryGroup.new(title: 'topic', browse_entries: topic_group_of_3.browse_entries + [
+        browse_entries(:manuscripts_topic), browse_entries(:books_topic), browse_entries(:paintings_topic)
+      ])
     end
-    context 'when there are 6 topic browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:music_topic))
-        subject.browse_entries.append(browse_entries(:harp_topic))
-        subject.browse_entries.append(browse_entries(:manuscripts_topic))
-        subject.browse_entries.append(browse_entries(:books_topic))
-      end
-      it 'should be valid' do
-        expect(subject).to be_valid
-      end
+    let(:period_group_of_3) do
+      BrowseEntryGroup.new(title: 'period', browse_entries: [
+        browse_entries(:century_16_period), browse_entries(:century_17_period), browse_entries(:century_18_period)
+      ])
     end
-    context 'when there are 3 topic and 3 person browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:music_topic))
-        subject.browse_entries.append(browse_entries(:van_gogh_person))
-        subject.browse_entries.append(browse_entries(:hokusai_person))
-        subject.browse_entries.append(browse_entries(:sandro_botticelli_person))
-      end
-      it 'should be valid' do
-        expect(subject).to be_valid
-      end
+    let(:period_group_of_6) do
+      BrowseEntryGroup.new(title: 'period', browse_entries: period_group_of_3.browse_entries + [
+        browse_entries(:century_19_period), browse_entries(:century_20_period), browse_entries(:century_21_period)
+      ])
     end
-    context 'when there are 3 topic and 3 person browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:music_topic))
-        subject.browse_entries.append(browse_entries(:van_gogh_person))
-        subject.browse_entries.append(browse_entries(:hokusai_person))
-        subject.browse_entries.append(browse_entries(:sandro_botticelli_person))
-      end
-      it 'should be valid' do
-        expect(subject).to be_valid
-      end
+    let(:person_group_of_3) do
+      BrowseEntryGroup.new(title: 'person', browse_entries: [
+        browse_entries(:van_gogh_person), browse_entries(:hokusai_person), browse_entries(:sandro_botticelli_person)
+      ])
     end
-    context 'when there are 7 topic browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:music_topic))
-        subject.browse_entries.append(browse_entries(:harp_topic))
-        subject.browse_entries.append(browse_entries(:manuscripts_topic))
-        subject.browse_entries.append(browse_entries(:books_topic))
-        subject.browse_entries.append(browse_entries(:paintings_topic))
-      end
-      it 'should not be valid' do
-        expect(subject).to_not be_valid
-      end
+
+    context 'when there are no browse entry groups' do
+      let(:browse_entry_groups) { [] }
+      it { is_expected.to be_valid }
     end
-    context 'when there are 3 topic and 2 person browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:music_topic))
-        subject.browse_entries.append(browse_entries(:van_gogh_person))
-        subject.browse_entries.append(browse_entries(:hokusai_person))
-      end
-      it 'should not be valid' do
-        expect(subject).to_not be_valid
-      end
+    context 'when there is 1 group of 3 browse entries' do
+      let(:browse_entry_groups) { [ topic_group_of_3 ] }
+      it { is_expected.to be_valid }
     end
-    context 'when there are 2 topic and 1 person browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:van_gogh_person))
-      end
-      it 'should not be valid' do
-        expect(subject).to_not be_valid
-      end
+    context 'when there are 2 groups of 3 browse entries' do
+      let(:browse_entry_groups) { [ topic_group_of_3, person_group_of_3 ] }
+      it { is_expected.to be_valid }
     end
-    context 'when there are 3 period browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:century_16_period))
-        subject.browse_entries.append(browse_entries(:century_17_period))
-        subject.browse_entries.append(browse_entries(:century_18_period))
-      end
-      it 'should be valid' do
-        expect(subject).to be_valid
-      end
+    context 'when there are 3 groups of 3 browse entries' do
+      let(:browse_entry_groups) { [ topic_group_of_3, person_group_of_3, period_group_of_3 ] }
+      it { is_expected.not_to be_valid }
     end
-    context 'when there are 2 period browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:century_16_period))
-        subject.browse_entries.append(browse_entries(:century_17_period))
-      end
-      it 'should not be valid' do
-        expect(subject).to_not be_valid
-      end
+    context 'when there is 1 group of 6 browse entries' do
+      let(:browse_entry_groups) { [ topic_group_of_6 ] }
+      it { is_expected.to be_valid }
     end
-    context 'when there are 3 period, 3 topic and 3 person browse entries' do
-      before do
-        subject.browse_entries.append(browse_entries(:century_16_period))
-        subject.browse_entries.append(browse_entries(:century_17_period))
-        subject.browse_entries.append(browse_entries(:century_18_period))
-        subject.browse_entries.append(browse_entries(:opera_topic))
-        subject.browse_entries.append(browse_entries(:cinema_topic))
-        subject.browse_entries.append(browse_entries(:music_topic))
-        subject.browse_entries.append(browse_entries(:van_gogh_person))
-        subject.browse_entries.append(browse_entries(:hokusai_person))
-        subject.browse_entries.append(browse_entries(:sandro_botticelli_person))
-      end
-      it 'should not be valid' do
-        expect(subject).to_not be_valid
-      end
-    end
-    context 'when there is 1 topic browse entry' do
-      before do
-        subject.browse_entries.append(browse_entries(:opera_topic))
-      end
-      it 'should not be valid' do
-        expect(subject).to_not be_valid
-      end
+    context 'when there are 2 groups of 6 browse entries' do
+      let(:browse_entry_groups) { [ topic_group_of_6, period_group_of_6 ] }
+      it { is_expected.not_to be_valid }
     end
   end
 

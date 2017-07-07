@@ -21,9 +21,10 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
-    FederationConfig Feed Gallery HeroImage Link Link::Promotion Link::Credit
-    Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User
+    Banner BrowseEntry BrowseEntryGroup Collection DataProvider DataProviderLogo
+    FacetLinkGroup FederationConfig Feed Gallery HeroImage Link Link::Promotion
+    Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing
+    Topic User
   )
 
   config.actions do
@@ -103,6 +104,26 @@ RailsAdmin.config do |config|
       field :subject_type
       field :collections do
         inline_add false
+      end
+    end
+  end
+
+  config.model 'BrowseEntryGroup' do
+    object_label_method :title
+    visible false
+    show do
+      field :title
+      field :browse_entries
+    end
+    edit do
+      field :title, :enum
+      field :browse_entries do
+        orderable true
+        nested_form false
+        inline_add false
+        associated_collection_scope do
+          proc { |_scope| BrowseEntry.search.published }
+        end
       end
     end
   end
@@ -450,8 +471,8 @@ RailsAdmin.config do |config|
       field :credits
       field :social_media
       field :promotions
-      field :browse_entries
       field :facet_link_groups
+      field :browse_entry_groups
       field :banner
       field :newsletter_url
       field :feeds
@@ -480,13 +501,9 @@ RailsAdmin.config do |config|
       field :social_media
       field :promotions
       field :facet_link_groups
-      field :browse_entries do
+      field :browse_entry_groups do
         orderable true
-        nested_form false
-        inline_add false
-        associated_collection_scope do
-          proc { |_scope| BrowseEntry.search.published }
-        end
+        inline_add true
       end
       field :banner
       field :newsletter_url

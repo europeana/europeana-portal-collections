@@ -9,14 +9,14 @@ cinema_topic:
   subject_type: 0
 
 music_topic:
-    query: "what:music"
-    state: 1
-    subject_type: 0
+  query: "what:music"
+  state: 1
+  subject_type: 0
 
 harp_topic:
-    query: "what:harp"
-    state: 1
-    subject_type: 0
+  query: "what:harp"
+  state: 1
+  subject_type: 0
 
 manuscripts_topic:
   query: "what:manuscripts"
@@ -60,5 +60,20 @@ century_17_period:
 
 century_18_period:
   query: "when:18??"
+  state: 1
+  subject_type: 2
+
+century_19_period:
+  query: "when:19??"
+  state: 1
+  subject_type: 2
+
+century_20_period:
+  query: "when:20??"
+  state: 1
+  subject_type: 2
+
+century_21_period:
+  query: "when:21??"
   state: 1
   subject_type: 2

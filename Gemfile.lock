@@ -556,6 +556,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    shoulda-callback-matchers (1.1.4)
+      activesupport (>= 3)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     simplecov (0.12.0)
@@ -680,6 +682,7 @@ DEPENDENCIES
   ruby-oembed (~> 0.9)
   sass-rails
   selenium-webdriver (~> 2.47)
+  shoulda-callback-matchers
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)

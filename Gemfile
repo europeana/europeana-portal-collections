@@ -88,6 +88,7 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver', '~> 2.47'
+  gem 'shoulda-callback-matchers'
   gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'simplecov', require: false
   gem 'webmock', '~> 1.22'

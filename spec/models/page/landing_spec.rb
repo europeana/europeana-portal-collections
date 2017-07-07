@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 require 'models/concerns/is_permissionable_examples'
+
 RSpec.describe Page::Landing do
   it_behaves_like 'permissionable'
 
@@ -13,7 +15,6 @@ RSpec.describe Page::Landing do
   it { is_expected.to accept_nested_attributes_for(:credits) }
   it { is_expected.to accept_nested_attributes_for(:social_media) }
   it { is_expected.to accept_nested_attributes_for(:promotions) }
-  it { is_expected.to accept_nested_attributes_for(:browse_entries) }
 
   it { is_expected.to respond_to(:newsletter_url) }
 

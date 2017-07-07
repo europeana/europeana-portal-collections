@@ -1,11 +1,11 @@
 # frozen_string_literal: true
+
 class BrowseEntry < ActiveRecord::Base
   include HasPublicationStates
+  include IsPageElementPositionable
   include IsPermissionable
 
   has_and_belongs_to_many :collections
-  has_many :page_elements, dependent: :destroy, as: :positionable
-  has_many :pages, through: :page_elements
   belongs_to :media_object, dependent: :destroy
 
   delegate :file, to: :media_object, allow_nil: true
@@ -24,18 +24,8 @@ class BrowseEntry < ActiveRecord::Base
   accepts_nested_attributes_for :translations, allow_destroy: true
   default_scope { includes(:translations) }
 
-  after_update :touch_pages
-  after_touch :touch_pages
-  after_destroy :touch_pages
-
   def facet?
     false
-  end
-
-  ##
-  # Touch associated pages to invalidate cache
-  def touch_pages
-    pages.find_each(&:touch)
   end
 
   def file=(*args)

@@ -68,3 +68,23 @@ internal_server_error:
   state: 1
   type: 'Page::Error'
   http_code: 500
+
+three_topics_browse_entry_page:
+  slug: 'three_topics_browse_entry_page'
+  state: 0
+
+six_topics_browse_entry_page:
+  slug: 'six_topics_browse_entry_page'
+  state: 0
+
+three_people_browse_entry_page:
+  slug: 'three_people_browse_entry_page'
+  state: 0
+
+three_periods_browse_entry_page:
+  slug: 'three_periods_browse_entry_page'
+  state: 0
+
+six_periods_browse_entry_page:
+  slug: 'six_periods_browse_entry_page'
+  state: 0

@@ -1,5 +1,7 @@
 ##
 # For views needing to display `BrowseEntry` objects
+#
+# TODO: refactor into a browse entry presenter
 module BrowseEntryDisplayingView
   extend ActiveSupport::Concern
 
@@ -20,27 +22,25 @@ module BrowseEntryDisplayingView
     end
   end
 
-  def browse_entry_items_grouped(browse_entries, page = nil)
-    browse_entries_grouped = browse_entries.group_by(&:subject_type)
-
-    ordered_items = [
-      browse_entry_item_group('person', browse_entries_grouped['person'], page),
-      browse_entry_item_group('topic', browse_entries_grouped['topic'], page),
-      browse_entry_item_group('period', browse_entries_grouped['period'], page)
-    ].compact
+  def browse_entry_items_grouped(page)
+    return nil if page.browse_entry_groups.blank?
 
     {
-      grouped_items: ordered_items,
-      is_single_type: browse_entries_grouped.count == 1
+      grouped_items: page.browse_entry_groups.map { |group| browse_entry_item_group(group, page) },
+      is_single_type: page.browse_entry_groups.count == 1
     }
   end
 
-  def browse_entry_item_group(subject_type, entries, page = nil)
-    return unless entries.present?
+  # @param group [PageElementGroup] group of browse entries as page elements
+  # @param page [Page] page the elements are to be displayed on
+  def browse_entry_item_group(group, page = nil)
+    return unless group.browse_entries.present?
+
+    subject_type = group.browse_entries.first.subject_type
     {
       more_link: browse_entry_more_link_path(subject_type),
       more_text: browse_entry_more_link_text(subject_type),
-      items: entries.map { |entry| browse_entry_item(entry, page) }
+      items: group.browse_entries.map { |entry| browse_entry_item(entry, page) }
     }
   end
 

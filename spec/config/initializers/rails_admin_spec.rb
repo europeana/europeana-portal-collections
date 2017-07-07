@@ -1,11 +1,14 @@
 # frozen_string_literal: true
+
 RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }
-    it 'should represent all the models' do
-      is_expected.to eq(%w(Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup FederationConfig
-                           Feed Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page
-                           Page::Error Page::Landing Topic User))
+    it 'should include relevant models' do
+      is_expected.to eq(%w(Banner BrowseEntry BrowseEntryGroup Collection DataProvider
+                           DataProviderLogo FacetLinkGroup FederationConfig Feed
+                           Gallery HeroImage Link Link::Promotion Link::Credit
+                           Link::SocialMedia MediaObject Page Page::Error
+                           Page::Landing Topic User))
     end
   end
 
@@ -21,7 +24,7 @@ RSpec.describe RailsAdmin.config do
       end
     end
 
-    %w(HeroImage Link MediaObject).each do |model_name|
+    %w(BrowseEntryGroup FacetLinkGroup HeroImage Link MediaObject).each do |model_name|
       context "when model is #{model_name}" do
         let(:model_name) { model_name }
         it 'should not be visible' do
