@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 RSpec.describe EntitiesController do
+  describe 'concerns' do
+    subject { described_class }
+    it { is_expected.to include(Europeana::EntitiesApiConsumer) }
+  end
+
   describe 'GET #suggest' do
     before do
       stub_request(:get, Europeana::API.url + '/entities/suggest').
@@ -20,5 +25,18 @@ RSpec.describe EntitiesController do
         with(query: hash_including(text: 'van', scope: 'europeana'))
       ).to have_been_made.once
     end
+  end
+
+  describe 'GET #fetch' do
+    before do
+      stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=apidemo').
+        to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
+    end
+
+    it 'returns http success' do
+      get :fetch, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
+      expect(response).to have_http_status(:success)
+    end
+
   end
 end

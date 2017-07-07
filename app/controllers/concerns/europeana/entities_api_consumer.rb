@@ -7,7 +7,8 @@ module Europeana
 
     def entities_api_suggest_params(text)
       {
-        text: text
+        text: text,
+        scope: 'europeana'
       }.reverse_merge(entities_api_env_params)
     end
 
