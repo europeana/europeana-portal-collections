@@ -64,9 +64,9 @@ Rails.application.routes.draw do
     get 'entities/suggest'
 
     constraints type: /agent|place|concept|timespan/, namespace: /base/, identifier: /\d+/ do
-      get 'entities/*type/*namespace/*identifier', as: 'entities_fetch', to: 'entities#show'
       get 'entities/*type/*namespace/*identifier/items_by', as: 'entities_fetch_items_by', to: 'entities#items_by'
       get 'entities/*type/*namespace/*identifier/items_about', as: 'entities_fetch_items_about', to: 'entities#items_about'
+      get 'entities/*type/*namespace/*identifier', as: 'entities_fetch', to: 'entities#show'
     end
 
     get 'debug/exception', to: 'debug#exception'
