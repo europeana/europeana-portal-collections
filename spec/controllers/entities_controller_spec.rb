@@ -27,15 +27,16 @@ RSpec.describe EntitiesController do
     end
   end
 
-  # describe 'GET #fetch' do
-  #   before do
-  #     stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=apidemo').
-  #       to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
-  #   end
-  #
-  #   it 'returns http success' do
-  #     get :fetch, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  describe 'GET #fetch' do
+    before do
+      stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=apidemo').
+        to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
+    end
+
+    it 'returns http success' do
+      get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
+
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
