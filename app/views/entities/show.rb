@@ -112,7 +112,7 @@ module Entities
     end
 
     def get_entity_birth_date
-      @entity[:dateOfBirth][0]
+      @entity[:dateOfBirth] ? @entity[:dateOfBirth][0] : nil
     end
 
     def get_entity_birth_place
@@ -124,7 +124,7 @@ module Entities
     end
 
     def get_entity_death_date
-      @entity[:dateOfDeath][0]
+      @entity[:dateOfDeath] ? @entity[:dateOfDeath][0] : nil
     end
 
     def get_entity_death_place
