@@ -4,9 +4,8 @@
 module EntityDisplayingView
   extend ActiveSupport::Concern
 
-  protected
-
   # TODO
+  # protected
 
   # def entity_head_meta
   #   mustache[:entity_head_meta] ||= begin
@@ -18,5 +17,4 @@ module EntityDisplayingView
   #     ]
   #   end
   # end
-
 end

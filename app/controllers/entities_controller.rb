@@ -11,7 +11,6 @@ class EntitiesController < ApplicationController
               entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier])).
               merge(__params__: { type: params[:type], namespace: params[:namespace], identifier: params[:identifier] })
 
-
     respond_to do |format|
       format.html
       format.json { render json: @entity }
@@ -19,10 +18,9 @@ class EntitiesController < ApplicationController
   end
 
   def items_by
-
     items = [
       {
-        title: 'The Lighthouse, Glasgow (Glasgow Herald Building) - Exterior, stonework over entrance | Mackintosh, Charles Rennie and Charles Rennie Mackintosh',
+        title: 'The Lighthouse, Glasgow (Glasgow Herald Building) - Exterior, stonework over entrance | Mackintosh, Charles Rennie',
         is_image: true,
         img: {
           src: '/images/search/search-result-thumb-1.jpg',

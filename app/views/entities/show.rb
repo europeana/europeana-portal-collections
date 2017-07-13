@@ -83,30 +83,30 @@ module Entities
     end
 
     def get_entity_title
-      @entity[:prefLabel][:en] || 'No title'
+      @entity[:prefLabel][:en] || '[No title]'
     end
 
     def get_entity_name
-      @entity[:prefLabel][:en] || 'No name'
+      @entity[:prefLabel][:en] || '[No name]'
     end
 
     def get_entity_description
-      description = 'No description'
-      biographicalInformation = @entity[:biographicalInformation]
-      if entity_valid_hash_array?(biographicalInformation, %w{@language @value})
-        item = biographicalInformation.find {|item| item['@language'] == page_locale}
-        item ||= biographicalInformation[0]
+      description = '[No description]'
+      bio = @entity[:biographicalInformation]
+      if entity_valid_hash_array?(bio, %w{@language @value})
+        item = bio.detect { |b| b['@language'] == page_locale }
+        item ||= bio[0]
         description = item['@value']
       end
       description
     end
 
     def get_entity_occupation
-      result = ['No occupation']
+      result = ['[No occupation]']
       poc = @entity[:professionOrOccupation]
-      if entity_valid_hash_array?(poc, ['@id'] )
-        poc.map! { |p| p.key?('@id') ? p[:@id].match(/[^\/]*$/)[0] : nil }
-        result = poc.select { |p| ! p.nil? }
+      if entity_valid_hash_array?(poc, ['@id'])
+        poc.map! { |p| p.key?('@id') ? p[:@id].match(%r{^[\/]*$})[0] : nil }
+        result = poc.reject(&:nil?)
       end
       result
     end
@@ -136,10 +136,10 @@ module Entities
     end
 
     def get_entity_place(place)
-      result = 'No place'
-      if entity_valid_hash_array?(place, ['@id'] )
-        place.map! { |p| p.key?('@id') ? p[:@id].match(/[^\/]*$/)[0] : nil }
-        place.select! { |p| ! p.nil? }
+      result = '[No place]'
+      if entity_valid_hash_array?(place, ['@id'])
+        place.map! { |p| p.key?('@id') ? p[:@id].match(%r{[^\/]*$})[0] : nil }
+        place.reject!(&:nil?)
         result = place.join(', ')
       end
       result
@@ -149,8 +149,8 @@ module Entities
       results = []
       date = date.to_s
       place = place.to_s
-      results.push(date.length ? date : 'No date')
-      results.push(place.length ? place : 'No place')
+      results.push(date.length ? date : '[No date]')
+      results.push(place.length ? place : '[No place]')
     end
 
     def get_entity_thumbnail
@@ -158,7 +158,7 @@ module Entities
       # d = 'http://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel_Wikimedia_Commons.jpg'
       src = 'http://junkee.com/wp-content/uploads/2014/09/fry-the-simpsons-and-futurama-set-for-crossover-in-november.jpeg'
       if d
-        m = d.match(/^.*\/Special:FilePath\/(.*)$/i)
+        m = d.match(%r{^.*\/Special:FilePath\/(.*)$}i)
         if m
           image = m[1]
           md5 = Digest::MD5.hexdigest image
@@ -178,4 +178,3 @@ module Entities
     end
   end
 end
-
