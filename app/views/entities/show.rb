@@ -83,40 +83,79 @@ module Entities
     end
 
     def get_entity_title
-      @entity[:prefLabel][:en] || '[No title]'
+      get_entity_pref_label('[No title]')
     end
 
     def get_entity_name
-      @entity[:prefLabel][:en] || '[No name]'
+      get_entity_pref_label('[No name]')
+    end
+
+    def get_entity_pref_label(default_label)
+      pl = @entity[:prefLabel]
+      pl && pl.is_a?(Hash) && pl.size ? pl[page_locale] || pl[:en] : default_label
     end
 
     def get_entity_description
+      # biographicalInformation: [
+      #   {
+      #     @language: "en",
+      #     @value: "..."
+      #   },
+      #   ...
+      # ]
       description = '[No description]'
-      bio = @entity[:biographicalInformation]
-      if entity_valid_hash_array?(bio, %w{@language @value})
-        item = bio.detect { |b| b['@language'] == page_locale }
-        item ||= bio[0]
-        description = item['@value']
+      list = @entity[:biographicalInformation]
+      # Ensure that list is a valid array
+      list = [list] if list.is_a?(Hash)
+      if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
+        item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
+        description = item['@value'] if item && item.key?('@value')
       end
       description
     end
 
     def get_entity_occupation
+      #
+      # For multiple items the format is just an array of hash items
+      #
+      # professionOrOccupation: [
+      #   {
+      #     @id: "http://dbpedia.org/resource/Pianist",
+      #   },
+      #   -or-
+      #   {
+      #     @language: "en",
+      #     @value: "occupation1, occupation2, ..."
+      #   },
+      #   ...
+      # ]
+      #
+      # where for single items the format is just a hash
+      #
+      # professionOrOccupation:{
+      # }
       result = ['[No occupation]']
-      poc = @entity[:professionOrOccupation]
-      if entity_valid_hash_array?(poc, ['@id'])
-        poc.map! { |p| p.key?('@id') ? p[:@id].match(%r{^[\/]*$})[0] : nil }
-        result = poc.reject(&:nil?)
+      list = @entity[:professionOrOccupation]
+      # Ensure that list is a valid array
+      list = [list] if list.is_a?(Hash)
+      if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
+        item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
+        if item && item.key?('@value')
+          result = item['@value'].split(',').map(&:strip).map(&:capitalize)
+        else
+          list.map! { |l| l.key?('@id') ? l[:@id].match(%r{[^\/]+$})[0] : nil }
+          result = list.reject(&:nil?)
+        end
       end
       result
     end
 
     def get_entity_birth_date
-      @entity[:dateOfBirth] ? @entity[:dateOfBirth][0] : nil
+      get_entity_date(@entity[:dateOfBirth])
     end
 
     def get_entity_birth_place
-      get_entity_place @entity[:placeOfBirth]
+      get_entity_place(@entity[:placeOfBirth])
     end
 
     def get_entity_birth
@@ -124,7 +163,7 @@ module Entities
     end
 
     def get_entity_death_date
-      @entity[:dateOfDeath] ? @entity[:dateOfDeath][0] : nil
+      get_entity_date(@entity[:dateOfDeath])
     end
 
     def get_entity_death_place
@@ -135,22 +174,29 @@ module Entities
       get_entity_date_and_place(get_entity_death_date, get_entity_death_place)
     end
 
+    def get_entity_date(date)
+      # Just grab the first date in the array if present.
+      date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date.first : '[No date]'
+    end
+
     def get_entity_place(place)
       result = '[No place]'
-      if entity_valid_hash_array?(place, ['@id'])
-        place.map! { |p| p.key?('@id') ? p[:@id].match(%r{[^\/]*$})[0] : nil }
-        place.reject!(&:nil?)
-        result = place.join(', ') if place.length
+      list = place
+      list = [list] if list.is_a?(Hash)
+      if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
+        item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
+        if item && item.key?('@value')
+          result = item['@value']
+        else
+          list.map! { |l| l.key?('@id') ? l[:@id].match(%r{[^\/]+$})[0] : nil }
+          result = list.reject(&:nil?)
+        end
       end
       result
     end
 
     def get_entity_date_and_place(date, place)
-      results = []
-      date = date.to_s
-      place = place.to_s
-      results.push(date.length ? date : '[No date]')
-      results.push(place.length ? place : '[No place]')
+      [date, place]
     end
 
     def get_entity_thumbnail
@@ -159,22 +205,15 @@ module Entities
       if full
         m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
         if m
-          image = m[1]
-          md5 = Digest::MD5.hexdigest image
-          # https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/200px-Tour_Eiffel_Wikimedia_Commons.jpg
-          src = "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{image}/400px-#{image}"
+          src = entity_build_src(m[1], 400)
         end
       end
       { src: src, full: full, alt: 'thumbnail alt text here' }
-
     end
 
-    def entity_valid_hash_array?(arr, keys)
-      return false unless arr && arr.is_a?(Array) && arr.length && arr.first.is_a?(Hash)
-      keys.each do |key|
-        return false unless arr.first.key? key
-      end
-      true
+    def entity_build_src(image, size)
+      md5 = Digest::MD5.hexdigest image
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{image}/#{size}px-#{image}"
     end
   end
 end
