@@ -190,10 +190,10 @@ module Entities
       if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
         item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
         if item && item.key?('@value')
-          result = item['@value']
+          result = item['@value'].capitalize
         else
           list.map! { |l| l.key?('@id') ? l[:@id].match(%r{[^\/]+$})[0] : nil }
-          result = list.reject(&:nil?)
+          result = list.reject(&:nil?).join(', ')
         end
       end
       result
