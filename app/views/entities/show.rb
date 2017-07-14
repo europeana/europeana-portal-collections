@@ -140,7 +140,7 @@ module Entities
       if entity_valid_hash_array?(place, ['@id'])
         place.map! { |p| p.key?('@id') ? p[:@id].match(%r{[^\/]*$})[0] : nil }
         place.reject!(&:nil?)
-        result = place.join(', ')
+        result = place.join(', ') if place.length
       end
       result
     end
@@ -154,19 +154,19 @@ module Entities
     end
 
     def get_entity_thumbnail
-      d = @entity[:depiction]
-      # d = 'http://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel_Wikimedia_Commons.jpg'
+      full = @entity[:depiction]
       src = 'http://junkee.com/wp-content/uploads/2014/09/fry-the-simpsons-and-futurama-set-for-crossover-in-november.jpeg'
-      if d
-        m = d.match(%r{^.*\/Special:FilePath\/(.*)$}i)
+      if full
+        m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
         if m
           image = m[1]
           md5 = Digest::MD5.hexdigest image
           # https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/200px-Tour_Eiffel_Wikimedia_Commons.jpg
-          src = "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{image}/200px-#{image}"
+          src = "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{image}/400px-#{image}"
         end
       end
-      { src: src }
+      { src: src, full: full, alt: 'thumbnail alt text here' }
+
     end
 
     def entity_valid_hash_array?(arr, keys)
