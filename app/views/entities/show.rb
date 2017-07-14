@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'digest'
+require 'uri'
 
 module Entities
   class Show < ApplicationView
@@ -99,59 +100,60 @@ module Entities
       pl && pl.is_a?(Hash) && pl.size ? pl[page_locale] || pl[:en] : default_label
     end
 
+    # biographicalInformation: [
+    #   {
+    #     @language: "en",
+    #     @value: "..."
+    #   },
+    #   ...
+    # ]
     def get_entity_description
-      # biographicalInformation: [
-      #   {
-      #     @language: "en",
-      #     @value: "..."
-      #   },
-      #   ...
-      # ]
-      description = '[No description]'
-      list = @entity[:biographicalInformation]
-      # Ensure that list is a valid array
-      list = [list] if list.is_a?(Hash)
-      if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
-        item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
-        description = item['@value'] if item && item.key?('@value')
-      end
-      description
+      get_entity_property_by_language(@entity[:biographicalInformation]) || '[No description]'
     end
 
-    def get_entity_occupation
-      #
-      # For multiple items the format is just an array of hash items
-      #
-      # professionOrOccupation: [
-      #   {
-      #     @id: "http://dbpedia.org/resource/Pianist",
-      #   },
-      #   -or-
-      #   {
-      #     @language: "en",
-      #     @value: "occupation1, occupation2, ..."
-      #   },
-      #   ...
-      # ]
-      #
-      # where for single items the format is just a hash
-      #
-      # professionOrOccupation:{
-      # }
-      result = ['[No occupation]']
-      list = @entity[:professionOrOccupation]
+    def get_entity_property_by_language(list)
+      return nil unless list
+      result = nil
       # Ensure that list is a valid array
       list = [list] if list.is_a?(Hash)
       if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
         item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
-        if item && item.key?('@value')
-          result = item['@value'].split(',').map(&:strip).map(&:capitalize)
-        else
-          list.map! { |l| l.key?('@id') ? l[:@id].match(%r{[^\/]+$})[0] : nil }
-          result = list.reject(&:nil?)
-        end
+        result = item['@value'] if item && item.key?('@value')
       end
       result
+    end
+
+    #
+    # For multiple items the format is just an array of hash items
+    #
+    # professionOrOccupation: [
+    #   {
+    #     @id: "http://dbpedia.org/resource/Pianist",
+    #   },
+    #   -or-
+    #   {
+    #     @language: "en",
+    #     @value: "occupation1, occupation2, ..."
+    #   },
+    #   ...
+    # ]
+    #
+    # where for single items the format is just a hash
+    #
+    # professionOrOccupation:{
+    # }
+    # Returns array
+    def get_entity_occupation
+      list = @entity[:professionOrOccupation]
+      result = get_entity_property_by_language(list)
+      if result
+        result = result.split(',').map(&:strip).map(&:capitalize)
+      elsif list
+        list = [list] if list.is_a?(Hash)
+        list.map! { |l| l.key?('@id') ? l[:@id].match(%r{[^\/]+$})[0] : nil }
+        result = list.reject(&:nil?).map(&:capitalize).map{ |s| URI.unescape(s) }.map{ |s| s.tr('_', ' ') }
+      end
+      result || ['[No occupation]']
     end
 
     def get_entity_birth_date
