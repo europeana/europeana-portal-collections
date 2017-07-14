@@ -108,19 +108,40 @@ module Entities
     #   ...
     # ]
     def get_entity_description
-      get_entity_property_by_language(@entity[:biographicalInformation]) || '[No description]'
+      get_entity_value_by_locale(@entity[:biographicalInformation]) || '[No description]'
     end
 
-    def get_entity_property_by_language(list)
-      return nil unless list
-      result = nil
-      # Ensure that list is a valid array
-      list = [list] if list.is_a?(Hash)
-      if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
-        item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
-        result = item['@value'] if item && item.key?('@value')
+    # Returns a single string
+    def get_entity_value_by_locale(list)
+      value = nil
+      if list
+        # Ensure that list is a valid array
+        list = [list] if list.is_a?(Hash)
+        if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
+          item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
+          value = item['@value'] if item && item.key?('@value')
+        end
       end
-      result
+      value
+    end
+
+    # Returns an array of strings
+    def get_entity_values_by_id(list)
+      values = nil
+      if list
+        # Ensure that list is a valid array
+        list = [list] if list.is_a?(Hash)
+        if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
+          values = list.map { |l| l['@id'] }
+          values.reject!(&:nil?)
+        end
+      end
+      values
+    end
+
+    # Returns either a string or an array of strings
+    def get_entity_value(list)
+      get_entity_value_by_locale(list) || get_entity_values_by_id(list)
     end
 
     #
@@ -144,14 +165,24 @@ module Entities
     # }
     # Returns array
     def get_entity_occupation
-      list = @entity[:professionOrOccupation]
-      result = get_entity_property_by_language(list)
-      if result
-        result = result.split(',').map(&:strip).map(&:capitalize)
-      elsif list
-        list = [list] if list.is_a?(Hash)
-        list.map! { |l| l.key?('@id') ? l[:@id].match(%r{[^\/]+$})[0] : nil }
-        result = list.reject(&:nil?).map(&:capitalize).map{ |s| URI.unescape(s) }.map{ |s| s.tr('_', ' ') }
+      result = get_entity_value(@entity[:professionOrOccupation])
+      if result.is_a?(String)
+        # TODO: make DRY
+        result = result.
+                 split(',').
+                 map(&:strip).
+                 map(&:capitalize)
+      elsif result.is_a?(Array)
+        result = result.
+                 map { |l| l.match(%r{[^\/]+$}) }.
+                 reject(&:nil?).
+                 map { |s| s[0] }.
+                 map { |s| URI.unescape(s) }.
+                 map(&:strip).
+                 map { |s| s.sub(/^_/, '') }.
+                 map { |s| s.sub(/_$/, '') }.
+                 map { |s| s.tr('_', ' ') }.
+                 map(&:capitalize)
       end
       result || ['[No occupation]']
     end
@@ -185,20 +216,28 @@ module Entities
       date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date.first : '[No date]'
     end
 
+    # Returns a string
     def get_entity_place(place)
-      result = '[No place]'
-      list = place
-      list = [list] if list.is_a?(Hash)
-      if list && list.is_a?(Array) && list.length && list.first.is_a?(Hash)
-        item = list.detect { |l| l['@language'] == page_locale } || list.detect { |l| l['@language'] == 'en' }
-        if item && item.key?('@value')
-          result = item['@value'].capitalize
-        else
-          list.map! { |l| l.key?('@id') ? l[:@id].match(%r{[^\/]+$})[0] : nil }
-          result = list.reject(&:nil?).join(', ')
-        end
+      result = get_entity_value(place)
+      # TODO: make DRY
+      if result.is_a?(String)
+        result = result.
+                 strip.
+                 capitalize
+      elsif result.is_a?(Array)
+        result = result.
+                 map { |l| l.match(%r{[^\/]+$}) }.
+                 reject(&:nil?).
+                 map { |s| s[0] }.
+                 map { |s| URI.unescape(s) }.
+                 map(&:strip).
+                 map { |s| s.sub(/^_/, '') }.
+                 map { |s| s.sub(/_$/, '') }.
+                 map { |s| s.tr('_', ' ') }.
+                 map(&:capitalize).
+                 join(', ')
       end
-      result
+      result || '[No place]'
     end
 
     def get_entity_date_and_place(date, place)
