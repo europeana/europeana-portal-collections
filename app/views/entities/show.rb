@@ -15,6 +15,10 @@ module Entities
       get_entity_title
     end
 
+    def include_nav_searchbar
+      true
+    end
+
     # # TODO
     # def head_meta
     #   mustache[:head_meta] ||= begin
