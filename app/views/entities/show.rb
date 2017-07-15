@@ -20,7 +20,6 @@ module Entities
       true
     end
 
-    # # TODO
     # def head_meta
     #   mustache[:head_meta] ||= begin
     #     head_meta = entity_head_meta + [
@@ -139,7 +138,8 @@ module Entities
       values
     end
 
-    # Returns either a string or an array of strings
+    # Returns either a string or an array of strings, depending on whether
+    # a single @language value has been found or a list of @ids.
     def get_entity_value(list)
       get_entity_value_by_locale(list) || get_entity_values_by_id(list)
     end
@@ -151,7 +151,7 @@ module Entities
     #   {
     #     @id: "http://dbpedia.org/resource/Pianist",
     #   },
-    #   -or-
+    #   -and/or-
     #   {
     #     @language: "en",
     #     @value: "occupation1, occupation2, ..."
@@ -159,30 +159,19 @@ module Entities
     #   ...
     # ]
     #
-    # where for single items the format is just a hash
+    # where for single items we can remove the brackets and the format is
+    # just a hash:
     #
     # professionOrOccupation:{
     # }
+    #
     # Returns array
     def get_entity_occupation
       result = get_entity_value(@entity[:professionOrOccupation])
       if result.is_a?(String)
-        # TODO: make DRY
-        result = result.
-                 split(',').
-                 map(&:strip).
-                 map(&:capitalize)
+        result = result.split(',').map(&:strip).map(&:capitalize)
       elsif result.is_a?(Array)
-        result = result.
-                 map { |l| l.match(%r{[^\/]+$}) }.
-                 reject(&:nil?).
-                 map { |s| s[0] }.
-                 map { |s| URI.unescape(s) }.
-                 map(&:strip).
-                 map { |s| s.sub(/^_/, '') }.
-                 map { |s| s.sub(/_$/, '') }.
-                 map { |s| s.tr('_', ' ') }.
-                 map(&:capitalize)
+        result = format_entity_resource_urls(result)
       end
       result || ['[No occupation]']
     end
@@ -219,23 +208,11 @@ module Entities
     # Returns a string
     def get_entity_place(place)
       result = get_entity_value(place)
-      # TODO: make DRY
       if result.is_a?(String)
-        result = result.
-                 strip.
-                 capitalize
+        result = result.strip.capitalize
       elsif result.is_a?(Array)
-        result = result.
-                 map { |l| l.match(%r{[^\/]+$}) }.
-                 reject(&:nil?).
-                 map { |s| s[0] }.
-                 map { |s| URI.unescape(s) }.
-                 map(&:strip).
-                 map { |s| s.sub(/^_/, '') }.
-                 map { |s| s.sub(/_$/, '') }.
-                 map { |s| s.tr('_', ' ') }.
-                 map(&:capitalize).
-                 join(', ')
+        result = format_entity_resource_urls(result)
+        result = result.join(', ')
       end
       result || '[No place]'
     end
@@ -259,6 +236,19 @@ module Entities
     def entity_build_src(image, size)
       md5 = Digest::MD5.hexdigest image
       "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{image}/#{size}px-#{image}"
+    end
+
+    def format_entity_resource_urls(results)
+      results.
+        map { |l| l.match(%r{[^\/]+$}) }.
+        reject(&:nil?).
+        map { |s| s[0] }.
+        map { |s| URI.unescape(s) }.
+        map(&:strip).
+        map { |s| s.sub(/^_/, '') }.
+        map { |s| s.sub(/_$/, '') }.
+        map { |s| s.tr('_', ' ') }.
+        map(&:capitalize)
     end
   end
 end
