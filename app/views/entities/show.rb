@@ -287,7 +287,7 @@ module Entities
     end
 
     # Capitalize all words in sentence
-    def capitalize_words (sentence)
+    def capitalize_words(sentence)
       sentence.split.map(&:capitalize).join(' ')
     end
   end
