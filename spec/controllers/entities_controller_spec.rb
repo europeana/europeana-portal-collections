@@ -29,7 +29,8 @@ RSpec.describe EntitiesController do
 
   describe 'GET #fetch' do
     before do
-      stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=apidemo').
+      stub_request(:get, Europeana::API.url + '/entities/agent/base/1234').
+        with(query: hash_including(wskey: ENV['EUROPEANA_ENTITIES_API_KEY'])).
         to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
     end
 
