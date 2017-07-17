@@ -20,15 +20,21 @@ module Entities
       true
     end
 
+    # TODO
     # def head_meta
     #   mustache[:head_meta] ||= begin
-    #     head_meta = entity_head_meta + [
-    #       { meta_name: 'description', content: get_entity_description },
-    #       { meta_property: 'og:description', content: get_entity_description },
-    #       { meta_property: 'og:image', content: get_entity_image_url },
-    #       { meta_property: 'og:title', content: get_entity_title },
-    #       { meta_property: 'og:sitename', content: get_entity_title }
+    #     title = page_title
+    #     head_meta = [
+    #       { meta_name: 'description', content: head_meta_description },
+    #       { meta_property: 'fb:appid', content: '185778248173748' },
+    #       { meta_name: 'twitter:card', content: 'summary' },
+    #       { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+    #       { meta_property: 'og:sitename', content: title },
+    #       { meta_property: 'og:description', content: head_meta_description },
+    #       { meta_property: 'og:url', content: collection_url(@collection.key) }
     #     ]
+    #     head_meta << { meta_property: 'og:title', content: title } unless title.nil?
+    #     head_meta << { meta_property: 'og:image', content: @landing_page.og_image } unless @landing_page.og_image.blank?
     #     head_meta + super
     #   end
     # end
@@ -106,11 +112,13 @@ module Entities
     #   },
     #   ...
     # ]
+    #
+    # Returns a string
     def get_entity_description
       get_entity_value_by_locale(@entity[:biographicalInformation]) || '[No description]'
     end
 
-    # Returns a single string
+    # Returns a string
     def get_entity_value_by_locale(list)
       value = nil
       if list
@@ -163,9 +171,10 @@ module Entities
     # just a hash:
     #
     # professionOrOccupation:{
+    #   ...
     # }
     #
-    # Returns array
+    # Returns an array of strings
     def get_entity_occupation
       result = get_entity_value(@entity[:professionOrOccupation])
       if result.is_a?(String)
@@ -241,6 +250,7 @@ module Entities
     # The fourth part is the file name: /[image]
     # The last part is the desired thumbnail width, and the file name again: /200px-[image]
     #
+    # Returns a string
     def entity_build_src(image, size)
       md5 = Digest::MD5.hexdigest image
       "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{image}/#{size}px-#{image}"
@@ -259,6 +269,7 @@ module Entities
     #   "Opera singer",
     #   "Composer" ]
     #
+    # Returns an array of strings
     def format_entity_resource_urls(results)
       results.
         map { |l| l.match(%r{[^\/]+$}) }.
