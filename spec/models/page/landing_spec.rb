@@ -64,4 +64,30 @@ RSpec.describe Page::Landing do
       end
     end
   end
+
+  describe '#og_image' do
+    it 'should return an image from either the first promo tile or the hero image' do
+      expect(subject).to receive(:og_image_from_promo) { false }
+      expect(subject).to receive(:og_image_from_hero) { 'the hero image' }
+      expect(subject.og_image).to eq('the hero image')
+    end
+  end
+
+  describe '#og_image_from_promo' do
+    context 'when the page uses the default layout' do
+      let(:page) { pages(:music_collection) }
+
+      it 'should always be nil' do
+        expect(page.send(:og_image_from_promo)).to be_nil
+      end
+    end
+
+    context 'when the page uses the browse layout' do
+      let(:page) { pages(:fashion_collection) }
+
+      it 'should return the image from the promo tile with position 0' do
+        expect(page.send(:og_image_from_promo)).to eq(media_objects(:fake_file).file.url)
+      end
+    end
+  end
 end
