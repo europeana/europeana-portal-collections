@@ -178,7 +178,8 @@ module Entities
     def get_entity_occupation
       result = get_entity_value(@entity[:professionOrOccupation])
       if result.is_a?(String)
-        result = result.split(',').map(&:strip).map(&:capitalize)
+        result = capitalize_words(result)
+        result = result.split(',').map(&:strip)
       elsif result.is_a?(Array)
         result = format_entity_resource_urls(result)
       end
@@ -218,10 +219,10 @@ module Entities
     def get_entity_place(place)
       result = get_entity_value(place)
       if result.is_a?(String)
-        result = result.strip.capitalize
+        result = capitalize_words(result.strip)
       elsif result.is_a?(Array)
         result = format_entity_resource_urls(result)
-        result = result.join(', ')
+        result = capitalize_words(result.join(', '))
       end
       result || '[No place]'
     end
@@ -242,10 +243,12 @@ module Entities
       { src: src, full: full, alt: 'thumbnail alt text here' }
     end
 
-    # The logic for going from: http://commons.wikimedia.org/wiki/Special:FilePath/[image] to https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/[image]/200px-[image] is the following:
+    # The logic for going from: http://commons.wikimedia.org/wiki/Special:FilePath/[image] to
+    # https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/[image]/200px-[image] is the following:
     #
     # The first part is always the same: https://upload.wikimedia.org/wikipedia/commons/thumb
-    # The second part is the first character of the MD5 hash of the file name. In this case, the MD5 hash of Tour_Eiffel_Wikimedia_Commons.jpg is a85d416ee427dfaee44b9248229a9cdd, so we get /a.
+    # The second part is the first character of the MD5 hash of the file name. In this case, the MD5 hash
+    # of Tour_Eiffel_Wikimedia_Commons.jpg is a85d416ee427dfaee44b9248229a9cdd, so we get /a.
     # The third part is the first two characters of the MD5 hash from above: /a8.
     # The fourth part is the file name: /[image]
     # The last part is the desired thumbnail width, and the file name again: /200px-[image]
@@ -280,7 +283,12 @@ module Entities
         map { |s| s.sub(/^_/, '') }.
         map { |s| s.sub(/_$/, '') }.
         map { |s| s.tr('_', ' ') }.
-        map(&:capitalize)
+        map { |s| capitalize_words(s) }
+    end
+
+    # Capitalize all words in sentence
+    def capitalize_words (sentence)
+      sentence.split.map(&:capitalize).join(' ')
     end
   end
 end
