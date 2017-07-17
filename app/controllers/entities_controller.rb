@@ -37,7 +37,10 @@ class EntitiesController < ApplicationController
       }
     ]
 
-    render json: { items: items }
+    render json: { items: items,
+      content_items_total_formatted: items.size,
+      content_items_total: items.size,
+    }
   end
 
   def items_about
