@@ -17,7 +17,15 @@ class EntitiesController < ApplicationController
     end
   end
 
+  # here is an example of the search "from the Person":
+  # https://www.europeana.eu/api/v2/search.json?wskey=api2demo&query=proxy_dc_creator:"http://data.europeana.eu/agent/base/146741"+OR+proxy_dc_contributor:"http://data.europeana.eu/agent/base/146741"
+  #
+  # and the "template" is this one: https://www.europeana.eu/api/v2/search.json?wskey=api2demo&query=proxy_dc_creator:"URI"+OR+proxy_dc_contributor:"URI"
+  #
+  # replace the URI with the URI of the person
+
   def items_by
+
     items = [
       {
         title: 'The Lighthouse, Glasgow (Glasgow Herald Building) - Exterior, stonework over entrance | Mackintosh, Charles Rennie',
