@@ -14,7 +14,7 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
                                 else
                                   ''
                                 end
-  europeana[:entities_api_key] = ENV['EUROPEANA_ENTITIES_API_KEY'] || 'apikey'
+  europeana[:entities_api_key] = ENV['EUROPEANA_ENTITIES_API_KEY'] || Europeana::API.key
 end
 
 # Google-centric configuration

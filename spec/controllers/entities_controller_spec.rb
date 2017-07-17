@@ -29,8 +29,8 @@ RSpec.describe EntitiesController do
 
   describe 'GET #fetch' do
     before do
-      apikey = Rails.application.config.x.europeana[:entities_api_key]
-      stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=' + apikey).
+      Rails.application.config.x.europeana[:entities_api_key] = 'apikey'
+      stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=apikey').
         to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
     end
 

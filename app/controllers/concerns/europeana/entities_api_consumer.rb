@@ -23,7 +23,7 @@ module Europeana
 
     def entities_api_env_params
       {
-        wskey: ENV['EUROPEANA_ENTITIES_API_KEY'] || Europeana::API.key,
+        wskey: Rails.application.config.x.europeana[:entities_api_key],
         api_url: ENV['EUROPEANA_ENTITIES_API_URL'] || Europeana::API.url,
       }
     end
