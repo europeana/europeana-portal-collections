@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 1be1961524ccf7e6cb5d29c9fa56e1fface04958
+  revision: 6dde17b36f91fa6eb22951b929c8f6e6a7c8509e
   branch: develop
   specs:
     europeana-i18n (0.0.1)
@@ -21,8 +21,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 77782c5544d6356cfd3abb51bfc3fb2b77b33e67
-  ref: 77782c5
+  revision: 4f61c4f70d436472ae4a1adfbf4272290c5b08c6
+  ref: 4f61c4f
   specs:
     europeana-styleguide (0.3.0)
       activesupport (~> 4.0)
@@ -330,8 +330,8 @@ GEM
       thor (~> 0.19.1)
     formatador (0.2.5)
     gli (2.15.0)
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     globalize (5.0.1)
       activemodel (>= 4.2.0, < 4.3)
       activerecord (>= 4.2.0, < 4.3)
@@ -348,7 +348,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.8.4)
+    i18n (0.8.6)
     i18n_data (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -393,7 +393,7 @@ GEM
       mime-types (>= 1.16, < 4)
     mime-types (2.99.3)
     mimemagic (0.3.0)
-    mini_portile2 (2.1.0)
+    mini_portile2 (2.2.0)
     minitest (5.10.2)
     multi_json (1.12.1)
     multi_xml (0.6.0)
@@ -402,8 +402,8 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     newrelic_rpm (3.18.1.330)
-    nokogiri (1.7.2)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
     orm_adapter (0.5.0)
     paper_trail (4.2.0)
       activerecord (>= 3.0, < 6.0)
@@ -426,7 +426,7 @@ GEM
     powerpack (0.1.1)
     public_suffix (2.0.5)
     puma (2.16.0)
-    rack (1.6.5)
+    rack (1.6.8)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)

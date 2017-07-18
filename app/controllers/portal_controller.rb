@@ -35,7 +35,8 @@ class PortalController < ApplicationController
         render json: {
           search_results: @document_list.map do |doc|
             Document::SearchResultPresenter.new(doc, self, @response).content
-          end
+          end,
+          total: @response.total
         }
       end
     end
