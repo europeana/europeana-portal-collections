@@ -17,6 +17,25 @@ module EntityDisplayingView
     end
   end
 
+  def entity_anagraphical
+    result = [
+      {
+        label: t('site.entities.anagraphic.birth'),
+        value: get_entity_birth
+      },
+      {
+        label: t('site.entities.anagraphic.death'),
+        value: get_entity_death
+      },
+      {
+        label: t('site.entities.anagraphic.occupation'),
+        value: get_entity_occupation
+      }
+    ].reject { |item| item[:value].nil? }
+
+    result.size.zero? ? nil : result
+  end
+
   def entity_social_share
     {
       url: 'this page url for share links',
@@ -28,21 +47,16 @@ module EntityDisplayingView
     }
   end
 
-  def get_entity_params
+  def entity_params
     @entity[:__params__] || {}
   end
 
-  def get_entity_title
+  def entity_title
     get_entity_pref_label('[No title]')
   end
 
-  def get_entity_name
+  def entity_name
     get_entity_pref_label('[No name]')
-  end
-
-  def get_entity_pref_label(default_label)
-    pl = @entity[:prefLabel]
-    pl && pl.is_a?(Hash) && pl.size ? pl[page_locale] || pl[:en] : default_label
   end
 
   # biographicalInformation: [
@@ -54,19 +68,22 @@ module EntityDisplayingView
   # ]
   #
   # Returns a string
-  def get_entity_description
-    get_entity_value_by_locale(@entity[:biographicalInformation]) || nil
+  def entity_description
+    get_entity_value_by_locale(@entity[:biographicalInformation])
   end
 
-  def get_entity_external_link
+  # TODO
+  def entity_external_link
     {
       text: [
-          'Topmost text goes here',
-          'Remaining text goes here and is a little bit longer'
+        'Topmost text goes here',
+        'Remaining text goes here and is a little bit longer'
       ],
       href: 'javscript:alert("Go to the external page")'
     }
   end
+
+  private
 
   # Returns a string
   def get_entity_value_by_locale(list)
@@ -99,70 +116,7 @@ module EntityDisplayingView
   # Returns either a string or an array of strings, depending on whether
   # a single @language value has been found or a list of @ids.
   def get_entity_value(list)
-    get_entity_value_by_locale(list) || get_entity_values_by_id(list)
-  end
-
-  #
-  # For multiple items the format is just an array of hash items
-  #
-  # professionOrOccupation: [
-  #   {
-  #     @id: "http://dbpedia.org/resource/Pianist",
-  #   },
-  #   -and/or-
-  #   {
-  #     @language: "en",
-  #     @value: "occupation1, occupation2, ..."
-  #   },
-  #   ...
-  # ]
-  #
-  # where for single items we can remove the brackets and the format is
-  # just a hash:
-  #
-  # professionOrOccupation:{
-  #   ...
-  # }
-  #
-  # Returns an array of strings
-  def get_entity_occupation
-    result = get_entity_value(@entity[:professionOrOccupation])
-    if result.is_a?(String)
-      result = capitalize_words(result)
-      result = result.split(',').map(&:strip)
-    elsif result.is_a?(Array)
-      result = format_entity_resource_urls(result)
-    end
-    result || ['[No occupation]']
-  end
-
-  def get_entity_birth_date
-    get_entity_date(@entity[:dateOfBirth])
-  end
-
-  def get_entity_birth_place
-    get_entity_place(@entity[:placeOfBirth])
-  end
-
-  def get_entity_birth
-    get_entity_date_and_place(get_entity_birth_date, get_entity_birth_place)
-  end
-
-  def get_entity_death_date
-    get_entity_date(@entity[:dateOfDeath])
-  end
-
-  def get_entity_death_place
-    get_entity_place @entity[:placeOfDeath]
-  end
-
-  def get_entity_death
-    get_entity_date_and_place(get_entity_death_date, get_entity_death_place)
-  end
-
-  def get_entity_date(date)
-    # Just grab the first date in the array if present.
-    date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date.first : '[No date]'
+    get_entity_value_by_locale(list) || get_entity_values_by_id(list) || nil
   end
 
   # Returns a string
@@ -174,14 +128,15 @@ module EntityDisplayingView
       result = format_entity_resource_urls(result)
       result = capitalize_words(result.join(', '))
     end
-    result || '[No place]'
+    result
   end
 
   def get_entity_date_and_place(date, place)
-    [date, place]
+    result = [date, place].reject(&:nil?)
+    result.size.zero? ? nil : result
   end
 
-  def get_entity_thumbnail
+  def entity_thumbnail
     result = nil
     full = @entity[:depiction]
     if full
@@ -235,5 +190,72 @@ module EntityDisplayingView
       map { |s| s.sub(/_$/, '') }.
       map { |s| s.tr('_', ' ') }.
       map { |s| capitalize_words(s) }
+  end
+
+  def get_entity_pref_label(default_label)
+    pl = @entity[:prefLabel]
+    pl && pl.is_a?(Hash) && pl.size ? pl[page_locale] || pl[:en] : default_label
+  end
+
+  def get_entity_birth_date
+    get_entity_date(@entity[:dateOfBirth])
+  end
+
+  def get_entity_birth_place
+    get_entity_place(@entity[:placeOfBirth])
+  end
+
+  def get_entity_birth
+    get_entity_date_and_place(get_entity_birth_date, get_entity_birth_place)
+  end
+
+  def get_entity_death_date
+    get_entity_date(@entity[:dateOfDeath])
+  end
+
+  def get_entity_death_place
+    get_entity_place @entity[:placeOfDeath]
+  end
+
+  def get_entity_death
+    get_entity_date_and_place(get_entity_death_date, get_entity_death_place)
+  end
+
+  def get_entity_date(date)
+    # Just grab the first date in the array if present.
+    date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date.first : nil
+  end
+
+  # For multiple items the format is just an array of hash items
+  #
+  # professionOrOccupation: [
+  #   {
+  #     @id: "http://dbpedia.org/resource/Pianist",
+  #   },
+  #   -and/or-
+  #   {
+  #     @language: "en",
+  #     @value: "occupation1, occupation2, ..."
+  #   },
+  #   ...
+  # ]
+  #
+  # where for single items we can remove the brackets and the format is
+  # just a hash:
+  #
+  # professionOrOccupation:{
+  #   ...
+  # }
+  #
+  # Returns an array of strings
+  def get_entity_occupation
+    result = get_entity_value(@entity[:professionOrOccupation])
+    if result.is_a?(String)
+      result = capitalize_words(result)
+      result = result.split(',').map(&:strip)
+    elsif result.is_a?(Array)
+      result = format_entity_resource_urls(result)
+    end
+    result
   end
 end
