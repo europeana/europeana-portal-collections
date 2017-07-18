@@ -55,14 +55,14 @@ module EntityDisplayingView
   #
   # Returns a string
   def get_entity_description
-    get_entity_value_by_locale(@entity[:biographicalInformation]) || '[No description]'
+    get_entity_value_by_locale(@entity[:biographicalInformation]) || nil
   end
 
   def get_entity_external_link
     {
       text: [
-          'Gabrielle "Coco" Chanel, 1920',
-          'Hal Vaughan, Sleeping with the enemy: Coco Chanel\'s Secret War.  Random House (2011), p20'
+          'Topmost text goes here',
+          'Remaining text goes here and is a little bit longer'
       ],
       href: 'javscript:alert("Go to the external page")'
     }
@@ -182,15 +182,16 @@ module EntityDisplayingView
   end
 
   def get_entity_thumbnail
+    result = nil
     full = @entity[:depiction]
-    src = 'http://junkee.com/wp-content/uploads/2014/09/fry-the-simpsons-and-futurama-set-for-crossover-in-november.jpeg'
     if full
       m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
       if m
         src = entity_build_src(m[1], 400)
+        result = { src: src, full: full, alt: m[1] }
       end
     end
-    { src: src, full: full, alt: 'thumbnail alt text here' }
+    result
   end
 
   # The logic for going from: http://commons.wikimedia.org/wiki/Special:FilePath/[image] to

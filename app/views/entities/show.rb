@@ -20,11 +20,11 @@ module Entities
       {
         breadcrumbs: [
           {
-            label: 'Explore',
+            label: 'Link#2',
             url: 'javascript:alert("Follow breadcrumb link 1")'
           },
           {
-            label: 'Topics',
+            label: 'Link#2',
             url: 'javascript:alert("Follow breadcrumb link 2")'
           },
           {
@@ -60,7 +60,7 @@ module Entities
     def content
       params = get_entity_params
       mustache[:content] ||= begin
-        {
+        content = {
           tab_items: [
             {
               tab_title: t('site.entities.tab_items.items_by', name: get_entity_name),
@@ -88,12 +88,19 @@ module Entities
               label: t('site.entities.anagraphic.occupation'),
               value: get_entity_occupation
             }
-          ],
-          entity_title: get_entity_name,
-          entity_thumbnail: get_entity_thumbnail,
-          entity_external_link: get_entity_external_link,
-          entity_description: get_entity_description
+          ]
         }
+
+        entity_thumbnail = get_entity_thumbnail
+        entity_external_link = get_entity_external_link
+        entity_description = get_entity_description
+        entity_title = get_entity_name
+
+        content[:entity_title] = entity_title if entity_title
+        content[:entity_thumbnail] = entity_thumbnail if entity_thumbnail
+        content[:entity_external_link] = entity_external_link if entity_external_link
+        content[:entity_description] = entity_description if entity_description
+        content
       end
     end
   end
