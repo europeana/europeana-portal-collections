@@ -46,7 +46,8 @@ module Entities
           tab_items: [
             {
               tab_title: "Items by #{get_entity_name}",
-              url: entities_fetch_items_by_path(params[:type], params[:namespace], params[:identifier])
+              url: entities_fetch_items_by_path(params[:type], params[:namespace], params[:identifier]),
+              search_url: '/search?q='
             },
             {
               tab_title: "Items about #{get_entity_name}",

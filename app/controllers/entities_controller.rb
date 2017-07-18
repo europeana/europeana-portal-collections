@@ -17,42 +17,27 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # here is an example of the search "from the Person":
-  # https://www.europeana.eu/api/v2/search.json?wskey=api2demo&query=proxy_dc_creator:"http://data.europeana.eu/agent/base/146741"+OR+proxy_dc_contributor:"http://data.europeana.eu/agent/base/146741"
-  #
-  # and the "template" is this one: https://www.europeana.eu/api/v2/search.json?wskey=api2demo&query=proxy_dc_creator:"URI"+OR+proxy_dc_contributor:"URI"
-  #
-  # replace the URI with the URI of the person
-
   def items_by
-
-    items = [
-      {
-        title: 'The Lighthouse, Glasgow (Glasgow Herald Building) - Exterior, stonework over entrance | Mackintosh, Charles Rennie',
-        is_image: true,
-        img: {
-          src: '/images/search/search-result-thumb-1.jpg',
-          alt: 'Rectangle'
-        }
-      },
-      {
-        title: 'Glasgow School of Art - Exterior, Renfrew Street metalwork | Mackintosh, Charles Rennie',
-        is_image: true,
-        img: {
-          src: '/images/search/search-result-thumb-lincoln.jpg',
-          alt: 'Rectangle'
-        }
-      }
-    ]
+    query = build_query_items_by(params)
+    search = Europeana::API.record.search(query: query)
 
     render json: {
-      items: items,
-      content_items_total_formatted: items.size,
-      content_items_total: items.size,
+      items: search[:items],
+      content_items_total_formatted: search[:totalResults],
+      content_items_total: search[:totalResults]
     }
   end
 
   def items_about
     render json: []
+  end
+
+  private
+
+  def build_query_items_by(params)
+    url_suffix = params[:type] + '/' + params[:namespace] + '/' + params[:identifier]
+    creator = 'proxy_dc_creator:"http://data.europeana.eu/' + url_suffix + '"'
+    contributor = 'proxy_dc_contributor:"http://data.europeana.eu/' + url_suffix + '"'
+    creator + '+OR+' + contributor
   end
 end
