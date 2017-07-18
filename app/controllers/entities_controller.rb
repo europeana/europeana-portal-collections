@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class EntitiesController < ApplicationController
+  include Europeana::Entities
   include Europeana::EntitiesApiConsumer
 
   def suggest
@@ -22,25 +23,5 @@ class EntitiesController < ApplicationController
   # TODO
   def items_about
     render json: []
-  end
-
-  private
-
-  # def build_query_items_by(params)
-  #   url_suffix = params[:type] + '/' + params[:namespace] + '/' + params[:identifier]
-  #   creator = 'proxy_dc_creator:"http://data.europeana.eu/' + url_suffix + '"'
-  #   contributor = 'proxy_dc_contributor:"http://data.europeana.eu/' + url_suffix + '"'
-  #   creator + ' OR ' + contributor
-  # end
-
-  def build_query_items_by(params)
-    suffix = "#{params[:type]}/#{params[:namespace]}/#{params[:identifier]}"
-    creator = build_proxy_dc('creator', "http://data.europeana.eu", suffix)
-    contributor = build_proxy_dc('contributor', "http://data.europeana.eu", suffix)
-    "#{creator} OR #{contributor}"
-  end
-
-  def build_proxy_dc(name, url, suffix)
-    "proxy_dc_#{name}:\"#{url}/#{suffix}\""
   end
 end

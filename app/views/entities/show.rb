@@ -17,22 +17,21 @@ module Entities
     end
 
     def navigation
-    {
-      breadcrumbs: [
-        {
-          label: 'Explore',
-          url: 'javascript:alert("Follow breadcrumb link 1")'
-        },
-        {
-          label: 'Topics',
-          url: 'javascript:alert("Follow breadcrumb link 2")'
-        },
-        {
-          label: get_entity_title
-        }
-      ]
-    }.merge(super)
-
+      {
+        breadcrumbs: [
+          {
+            label: 'Explore',
+            url: 'javascript:alert("Follow breadcrumb link 1")'
+          },
+          {
+            label: 'Topics',
+            url: 'javascript:alert("Follow breadcrumb link 2")'
+          },
+          {
+            label: get_entity_title
+          }
+        ]
+      }.merge(super)
     end
 
     def include_nav_searchbar
@@ -70,7 +69,6 @@ module Entities
             },
             {
               tab_title: t('site.entities.tab_items.items_about', name: get_entity_name),
-              tab_title: "Items about #{get_entity_name}",
               # TODO
               url: entities_fetch_items_about_path(params[:type], params[:namespace], params[:identifier])
             }

@@ -6,17 +6,16 @@ module EntityDisplayingView
 
   protected
 
-  # TODO
-  # def entity_head_meta
-  #   mustache[:entity_head_meta] ||= begin
-  #     [
-  #         { meta_property: 'fb:appid', content: '185778248173748' },
-  #         { meta_name: 'twitter:card', content: 'summary' },
-  #         { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-  #         { meta_property: 'og:url', content: request.original_url }
-  #     ]
-  #   end
-  # end
+  def entity_head_meta
+    mustache[:entity_head_meta] ||= begin
+      [
+        { meta_property: 'fb:appid', content: '185778248173748' },
+        { meta_name: 'twitter:card', content: 'summary' },
+        { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+        { meta_property: 'og:url', content: request.original_url }
+      ]
+    end
+  end
 
   def entity_social_share
     {
@@ -216,20 +215,14 @@ module EntityDisplayingView
   # Returns an array of strings
   def format_entity_resource_urls(results)
     results.
-        map { |l| l.match(%r{[^\/]+$}) }.
-        reject(&:nil?).
-        map { |s| s[0] }.
-        map { |s| URI.unescape(s) }.
-        map(&:strip).
-        map { |s| s.sub(/^_/, '') }.
-        map { |s| s.sub(/_$/, '') }.
-        map { |s| s.tr('_', ' ') }.
-        map { |s| capitalize_words(s) }
+      map { |l| l.match(%r{[^\/]+$}) }.
+      reject(&:nil?).
+      map { |s| s[0] }.
+      map { |s| URI.unescape(s) }.
+      map(&:strip).
+      map { |s| s.sub(/^_/, '') }.
+      map { |s| s.sub(/_$/, '') }.
+      map { |s| s.tr('_', ' ') }.
+      map { |s| capitalize_words(s) }
   end
-
-  # Capitalize all words in sentence
-  def capitalize_words(sentence)
-    sentence.split.map(&:capitalize).join(' ')
-  end
-
 end
