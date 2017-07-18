@@ -10,7 +10,7 @@ class EntitiesController < ApplicationController
     @entity = Europeana::API.
               entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier])).
               merge(__params__: { type: params[:type], namespace: params[:namespace], identifier: params[:identifier] })
-
+    @items_by_query = build_query_items_by(params)
     respond_to do |format|
       format.html
       format.json { render json: @entity }
@@ -18,8 +18,21 @@ class EntitiesController < ApplicationController
   end
 
   def items_by
+    # page=n || 0
+    # per_page=n || 12
     query = build_query_items_by(params)
-    search = Europeana::API.record.search(query: query)
+    search = Europeana::API.record.search(query: query, profile: 'portal')
+
+    # {
+    #      "title": "Glasgow School of Art - Exterior, Renfrew Street metalwork | Mackintosh, Charles Rennie",
+    #      "is_image": true,
+    #      "img": {
+    #        "src": "/images/search/search-result-thumb-lincoln.jpg",
+    #        "alt": "Rectangle"
+    #      }
+    # },
+
+    # items = search.items.map{ |item| { title: item.title, is_image: item.is_image, img: { src: } } }
 
     render json: {
       items: search[:items],
@@ -38,6 +51,7 @@ class EntitiesController < ApplicationController
     url_suffix = params[:type] + '/' + params[:namespace] + '/' + params[:identifier]
     creator = 'proxy_dc_creator:"http://data.europeana.eu/' + url_suffix + '"'
     contributor = 'proxy_dc_contributor:"http://data.europeana.eu/' + url_suffix + '"'
-    creator + '+OR+' + contributor
+    creator + ' OR ' + contributor
+
   end
 end
