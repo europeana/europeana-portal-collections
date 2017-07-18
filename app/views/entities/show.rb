@@ -91,6 +91,7 @@ module Entities
           ],
           entity_title: get_entity_name,
           entity_thumbnail: get_entity_thumbnail,
+          entity_external_link: get_entity_external_link,
           entity_description: get_entity_description
         }
       end

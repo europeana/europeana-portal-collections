@@ -58,6 +58,16 @@ module EntityDisplayingView
     get_entity_value_by_locale(@entity[:biographicalInformation]) || '[No description]'
   end
 
+  def get_entity_external_link
+    {
+      text: [
+          'Gabrielle "Coco" Chanel, 1920',
+          'Hal Vaughan, Sleeping with the enemy: Coco Chanel\'s Secret War.  Random House (2011), p20'
+      ],
+      href: 'javscript:alert("Go to the external page")'
+    }
+  end
+
   # Returns a string
   def get_entity_value_by_locale(list)
     value = nil
