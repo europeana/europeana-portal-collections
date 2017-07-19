@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController do
@@ -10,7 +11,7 @@ RSpec.describe PortalController do
     context 'when the format is html' do
       context 'without q param' do
         it 'redirects to root' do
-          get :index, { locale: 'en' }
+          get :index, locale: 'en'
           expect(response).to redirect_to(home_url(locale: 'en'))
         end
       end
