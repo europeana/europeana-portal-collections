@@ -21,19 +21,32 @@ module EntityDisplayingView
     result = [
       {
         label: t('site.entities.anagraphic.birth'),
-        value: get_entity_birth
+        value: entity_birth
       },
       {
         label: t('site.entities.anagraphic.death'),
-        value: get_entity_death
+        value: entity_death
       },
       {
         label: t('site.entities.anagraphic.occupation'),
-        value: get_entity_occupation
+        value: entity_occupation
       }
     ].reject { |item| item[:value].nil? }
 
     result.size.zero? ? nil : result
+  end
+
+  def entity_thumbnail
+    result = nil
+    full = @entity[:depiction]
+    if full
+      m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
+      if m
+        src = entity_build_src(m[1], 400)
+        result = { src: src, full: full, alt: m[1] }
+      end
+    end
+    result
   end
 
   def entity_social_share
@@ -52,11 +65,11 @@ module EntityDisplayingView
   end
 
   def entity_title
-    get_entity_pref_label('[No title]')
+    entity_pref_label('[No title]')
   end
 
   def entity_name
-    get_entity_pref_label('[No name]')
+    entity_pref_label('[No name]')
   end
 
   # biographicalInformation: [
@@ -69,7 +82,7 @@ module EntityDisplayingView
   #
   # Returns a string
   def entity_description
-    get_entity_value_by_locale(@entity[:biographicalInformation])
+    entity_value_by_locale(@entity[:biographicalInformation])
   end
 
   # TODO
@@ -86,7 +99,7 @@ module EntityDisplayingView
   private
 
   # Returns a string
-  def get_entity_value_by_locale(list)
+  def entity_value_by_locale(list)
     value = nil
     if list
       # Ensure that list is a valid array
@@ -100,7 +113,7 @@ module EntityDisplayingView
   end
 
   # Returns an array of strings
-  def get_entity_values_by_id(list)
+  def entity_values_by_id(list)
     values = nil
     if list
       # Ensure that list is a valid array
@@ -115,13 +128,13 @@ module EntityDisplayingView
 
   # Returns either a string or an array of strings, depending on whether
   # a single @language value has been found or a list of @ids.
-  def get_entity_value(list)
-    get_entity_value_by_locale(list) || get_entity_values_by_id(list) || nil
+  def entity_value(list)
+    entity_value_by_locale(list) || entity_values_by_id(list) || nil
   end
 
   # Returns a string
-  def get_entity_place(place)
-    result = get_entity_value(place)
+  def entity_place(place)
+    result = entity_value(place)
     if result.is_a?(String)
       result = capitalize_words(result.strip)
     elsif result.is_a?(Array)
@@ -131,22 +144,9 @@ module EntityDisplayingView
     result
   end
 
-  def get_entity_date_and_place(date, place)
+  def entity_date_and_place(date, place)
     result = [date, place].reject(&:nil?)
     result.size.zero? ? nil : result
-  end
-
-  def entity_thumbnail
-    result = nil
-    full = @entity[:depiction]
-    if full
-      m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
-      if m
-        src = entity_build_src(m[1], 400)
-        result = { src: src, full: full, alt: m[1] }
-      end
-    end
-    result
   end
 
   # The logic for going from: http://commons.wikimedia.org/wiki/Special:FilePath/[image] to
@@ -192,36 +192,36 @@ module EntityDisplayingView
       map { |s| capitalize_words(s) }
   end
 
-  def get_entity_pref_label(default_label)
+  def entity_pref_label(default_label)
     pl = @entity[:prefLabel]
     pl && pl.is_a?(Hash) && pl.size ? pl[page_locale] || pl[:en] : default_label
   end
 
-  def get_entity_birth_date
-    get_entity_date(@entity[:dateOfBirth])
+  def entity_birth_date
+    entity_date(@entity[:dateOfBirth])
   end
 
-  def get_entity_birth_place
-    get_entity_place(@entity[:placeOfBirth])
+  def entity_birth_place
+    entity_place(@entity[:placeOfBirth])
   end
 
-  def get_entity_birth
-    get_entity_date_and_place(get_entity_birth_date, get_entity_birth_place)
+  def entity_birth
+    entity_date_and_place(entity_birth_date, entity_birth_place)
   end
 
-  def get_entity_death_date
-    get_entity_date(@entity[:dateOfDeath])
+  def entity_death_date
+    entity_date(@entity[:dateOfDeath])
   end
 
-  def get_entity_death_place
-    get_entity_place @entity[:placeOfDeath]
+  def entity_death_place
+    entity_place @entity[:placeOfDeath]
   end
 
-  def get_entity_death
-    get_entity_date_and_place(get_entity_death_date, get_entity_death_place)
+  def entity_death
+    entity_date_and_place(entity_death_date, entity_death_place)
   end
 
-  def get_entity_date(date)
+  def entity_date(date)
     # Just grab the first date in the array if present.
     date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date.first : nil
   end
@@ -248,8 +248,8 @@ module EntityDisplayingView
   # }
   #
   # Returns an array of strings
-  def get_entity_occupation
-    result = get_entity_value(@entity[:professionOrOccupation])
+  def entity_occupation
+    result = entity_value(@entity[:professionOrOccupation])
     if result.is_a?(String)
       result = capitalize_words(result)
       result = result.split(',').map(&:strip)
