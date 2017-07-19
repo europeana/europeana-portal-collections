@@ -60,10 +60,6 @@ module EntityDisplayingView
     }
   end
 
-  def entity_params
-    @entity[:__params__] || {}
-  end
-
   def entity_title
     entity_pref_label('[No title]')
   end

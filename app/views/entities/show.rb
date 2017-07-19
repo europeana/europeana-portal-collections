@@ -58,7 +58,6 @@ module Entities
     # end
 
     def content
-      params = entity_params
       mustache[:content] ||= begin
         {
           tab_items: [
@@ -68,10 +67,8 @@ module Entities
               search_url: search_path(q: @items_by_query)
             },
             {
-              tab_title: t('site.entities.tab_items.items_about', name: entity_name),
               # TODO
-              # url: xxx,
-              # search_url: xxx
+              tab_title: t('site.entities.tab_items.items_about', name: entity_name),
             }
           ],
           input_search: input_search,

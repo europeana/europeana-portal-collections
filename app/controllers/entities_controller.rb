@@ -9,8 +9,7 @@ class EntitiesController < ApplicationController
 
   def show
     @entity = Europeana::API.
-              entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier])).
-              merge(__params__: { type: params[:type], namespace: params[:namespace], identifier: params[:identifier] })
+              entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier]))
 
     @items_by_query = build_query_items_by(params)
 
@@ -18,10 +17,5 @@ class EntitiesController < ApplicationController
       format.html
       format.json { render json: @entity }
     end
-  end
-
-  # TODO
-  def items_about
-    render json: []
   end
 end
