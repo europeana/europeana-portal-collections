@@ -3,7 +3,6 @@
 module Europeana
   module Entities
     extend ActiveSupport::Concern
-    include EntitiesHelper
 
     protected
 

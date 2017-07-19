@@ -70,7 +70,8 @@ module Entities
             {
               tab_title: t('site.entities.tab_items.items_about', name: entity_name),
               # TODO
-              url: entities_fetch_items_about_path(params[:type], params[:namespace], params[:identifier])
+              # url: xxx,
+              # search_url: xxx
             }
           ],
           input_search: input_search,
