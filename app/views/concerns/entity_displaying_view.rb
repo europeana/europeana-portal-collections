@@ -135,11 +135,9 @@ module EntityDisplayingView
   # Returns a string
   def entity_place(place)
     result = entity_value(place)
-    if result.is_a?(String)
-      result = capitalize_words(result.strip)
-    elsif result.is_a?(Array)
+    if result.is_a?(Array)
       result = format_entity_resource_urls(result)
-      result = capitalize_words(result.join(', '))
+      result = result.join(', ')
     end
     result
   end
@@ -185,11 +183,9 @@ module EntityDisplayingView
       reject(&:nil?).
       map { |s| s[0] }.
       map { |s| URI.unescape(s) }.
-      map(&:strip).
       map { |s| s.sub(/^_/, '') }.
       map { |s| s.sub(/_$/, '') }.
-      map { |s| s.tr('_', ' ') }.
-      map { |s| capitalize_words(s) }
+      map { |s| s.tr('_', ' ') }
   end
 
   def entity_pref_label(default_label)
@@ -251,8 +247,7 @@ module EntityDisplayingView
   def entity_occupation
     result = entity_value(@entity[:professionOrOccupation])
     if result.is_a?(String)
-      result = capitalize_words(result)
-      result = result.split(',').map(&:strip)
+      result = result.split(',')
     elsif result.is_a?(Array)
       result = format_entity_resource_urls(result)
     end
