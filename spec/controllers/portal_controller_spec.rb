@@ -77,7 +77,11 @@ RSpec.describe PortalController do
           expect { json = JSON.parse(response.body).with_indifferent_access }.not_to raise_exception
           expect(json).to match(
             search_results: be_kind_of(Array),
-            total: be_kind_of(Integer)
+            total: be_kind_of(Hash)
+          )
+          expect(json[:total]).to match(
+            value: be_kind_of(Integer),
+            formatted: be_kind_of(String)
           )
         end
       end
