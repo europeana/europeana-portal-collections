@@ -27,7 +27,7 @@ RSpec.describe EntitiesController do
     end
   end
 
-  describe 'GET #fetch' do
+  describe 'GET #show' do
     before do
       Rails.application.config.x.europeana[:entities_api_key] = 'apikey'
       stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=apikey').
