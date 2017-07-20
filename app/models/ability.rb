@@ -35,6 +35,7 @@ class Ability
   def editor!
     can :access, :rails_admin
     can :dashboard
+    can :show, :entity
     can :read, [Banner, BrowseEntry, Collection, DataProvider, Feed, Gallery,
                 HeroImage, Link, MediaObject, Page, Topic, User]
     can :create, [BrowseEntry, Gallery]
@@ -51,6 +52,7 @@ class Ability
   def admin!
     can :access, :rails_admin
     can :dashboard
+    can :show, :entity
     can :manage, [Banner, BrowseEntry, Collection, DataProvider, Feed, Gallery,
                   HeroImage, Link, MediaObject, Page, Topic, User]
   end

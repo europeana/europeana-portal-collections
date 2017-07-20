@@ -7,6 +7,7 @@ class EntitiesController < ApplicationController
   end
 
   def show
+    authorize! :show, :entity
     @entity = Europeana::API.
               entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier]))
 
