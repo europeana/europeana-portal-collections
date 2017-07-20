@@ -84,12 +84,12 @@ module Entities
 
     def entity_external_link
       thumb = entity_thumbnail
-      href = 'https://commons.wikimedia.org/wiki/File:' + thumb[:src].split('/').pop unless thumb.nil?
+      return nil if thumb.nil? || thumb[:src].nil?
       {
         text: [
           t('site.entities.wiki_link_text')
         ],
-        href: href
+        href: 'https://commons.wikimedia.org/wiki/File:' + thumb[:src].split('/').pop
       }
     end
 
