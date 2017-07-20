@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController do
@@ -7,57 +8,82 @@ RSpec.describe PortalController do
   it { expect(subject.class.ancestors.include?(Europeana::AnnotationsApiConsumer)).to eq(true) }
 
   describe 'GET index' do
-    context 'without q param' do
-      it 'redirects to root' do
-        get :index, { locale: 'en' }
-        expect(response).to redirect_to(home_url(locale: 'en'))
+    context 'when the format is html' do
+      context 'without q param' do
+        it 'redirects to root' do
+          get :index, locale: 'en'
+          expect(response).to redirect_to(home_url(locale: 'en'))
+        end
+      end
+
+      context 'with q param' do
+        before do
+          get :index, params
+        end
+
+        context 'when q param empty' do
+          let(:params) { { locale: 'en', q: '' } }
+
+          it 'searches the API' do
+            expect(an_api_search_request.
+              with(query: hash_including(query: '*:*'))).to have_been_made.at_least_once
+          end
+
+          it 'renders the search results Mustache template' do
+            expect(response.status).to eq(200)
+            expect(response).to render_template('portal/index')
+          end
+        end
+
+        context 'when q param non-empty' do
+          let(:params) { { locale: 'en', q: 'paris' } }
+
+          it 'searches the API' do
+            expect(an_api_search_request.
+              with(query: hash_including(query: 'paris'))).to have_been_made.at_least_once
+          end
+
+          it 'renders the search results Mustache template' do
+            expect(response.status).to eq(200)
+            expect(response).to render_template('portal/index')
+          end
+
+          it 'assigns the default landing page to @landing_page' do
+            expect(assigns(:landing_page)).to be_a(Page::Landing)
+          end
+        end
+
+        context 'with mlt param' do
+          let(:params) { { locale: 'en', mlt: '/abc/123' } }
+          let(:record_id) { params[:mlt] }
+          it_behaves_like 'a record API request'
+          it_behaves_like 'a more like this API request'
+          it_behaves_like 'no hierarchy API request'
+        end
       end
     end
 
-    context 'with q param' do
+    context 'when the format is json' do
       before do
         get :index, params
       end
 
-      context 'when q param empty' do
-        let(:params) { { locale: 'en', q: '' } }
+      context 'with q param' do
+        let(:params) { { locale: 'en', q: 'paris', format: 'json' } }
 
-        it 'searches the API' do
-          expect(an_api_search_request.
-            with(query: hash_including(query: '*:*'))).to have_been_made.at_least_once
-        end
-
-        it 'renders the search results Mustache template' do
+        it 'total is present in results' do
           expect(response.status).to eq(200)
-          expect(response).to render_template('portal/index')
+          json = nil
+          expect { json = JSON.parse(response.body).with_indifferent_access }.not_to raise_exception
+          expect(json).to match(
+            search_results: be_kind_of(Array),
+            total: be_kind_of(Hash)
+          )
+          expect(json[:total]).to match(
+            value: be_kind_of(Integer),
+            formatted: be_kind_of(String)
+          )
         end
-      end
-
-      context 'when q param non-empty' do
-        let(:params) { { locale: 'en', q: 'paris' } }
-
-        it 'searches the API' do
-          expect(an_api_search_request.
-            with(query: hash_including(query: 'paris'))).to have_been_made.at_least_once
-        end
-
-        it 'renders the search results Mustache template' do
-          expect(response.status).to eq(200)
-          expect(response).to render_template('portal/index')
-        end
-
-        it 'assigns the default landing page to @landing_page' do
-          get :index, params
-          expect(assigns(:landing_page)).to be_a(Page::Landing)
-        end
-      end
-
-      context 'with mlt param' do
-        let(:params) { { locale: 'en', mlt: '/abc/123' } }
-        let(:record_id) { params[:mlt] }
-        it_behaves_like 'a record API request'
-        it_behaves_like 'a more like this API request'
-        it_behaves_like 'no hierarchy API request'
       end
     end
   end

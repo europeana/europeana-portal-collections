@@ -1,14 +1,34 @@
 # frozen_string_literal: true
 class EntitiesController < ApplicationController
+  include Europeana::EntitiesApiConsumer
+
   def suggest
-    render json: Europeana::API.entity.suggest(entity_api_params(text: params[:text]))
+    render json: Europeana::API.entity.suggest(entities_api_suggest_params(params[:text]))
   end
 
-  protected
+  def show
+    authorize! :show, :entity
+    @entity = Europeana::API.
+              entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier]))
 
-  def entity_api_params(query = {})
-    query.merge(scope: 'europeana').tap do |api_params|
-      api_params[:wskey] = ENV['EUROPEANA_ENTITIES_API_KEY'] if ENV['EUROPEANA_ENTITIES_API_KEY']
+    @items_by_query = build_query_items_by(params)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @entity }
     end
+  end
+
+  private
+
+  def build_query_items_by(params)
+    suffix = "#{params[:type]}/#{params[:namespace]}/#{params[:identifier]}"
+    creator = build_proxy_dc('creator', 'http://data.europeana.eu', suffix)
+    contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', suffix)
+    "#{creator} OR #{contributor}"
+  end
+
+  def build_proxy_dc(name, url, suffix)
+    "proxy_dc_#{name}:\"#{url}/#{suffix}\""
   end
 end

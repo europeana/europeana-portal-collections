@@ -8,6 +8,7 @@ class PortalController < ApplicationController
   include Europeana::UrlConversions
   include OembedRetriever
   include SearchInteractionLogging
+  include ActionView::Helpers::NumberHelper
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
   before_action :log_show_search_interaction, only: :show
@@ -35,7 +36,11 @@ class PortalController < ApplicationController
         render json: {
           search_results: @document_list.map do |doc|
             Document::SearchResultPresenter.new(doc, self, @response).content
-          end
+          end,
+          total: {
+            value: @response.total,
+            formatted: number_with_delimiter(@response.total)
+          }
         }
       end
     end
