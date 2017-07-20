@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 57d39d9903d79fd4cc8b30656d9deb41204cefa2
+  revision: 9b8243440b0899ea28289c466319f11ab6ccc5a8
   branch: develop
   specs:
     europeana-i18n (0.0.1)
@@ -21,8 +21,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 94e7a8d3ae586b555dc4c1e86e81a09c26d6f1c3
-  ref: 94e7a8d
+  revision: 317ba2af1ad63e1f3a2d60d558b586f8bb00c800
+  ref: 317ba2a
   specs:
     europeana-styleguide (0.3.0)
       activesupport (~> 4.0)
@@ -690,6 +690,3 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
-
-BUNDLED WITH
-   1.14.6

@@ -81,5 +81,17 @@ module Entities
         }.compact
       end
     end
+
+    def entity_external_link
+      thumb = entity_thumbnail
+      href = 'https://commons.wikimedia.org/wiki/File:' + thumb[:src].split('/').pop unless thumb.nil?
+      {
+        text: [
+          t('site.entities.wiki_link_text')
+        ],
+        href: href
+      }
+    end
+
   end
 end
