@@ -81,15 +81,16 @@ module EntityDisplayingView
     entity_value_by_locale(@entity[:biographicalInformation])
   end
 
-  # TODO
   def entity_external_link
-    {
-      text: [
-        'Topmost text goes here',
-        'Remaining text goes here and is a little bit longer'
-      ],
-      href: 'javscript:alert("Go to the external page")'
-    }
+    # TODO
+    # {
+    #   text: [
+    #     'Gabrielle "Coco" Chanel, 1920',
+    #     'Hal Vaughan, Sleeping with the enemy: Coco Chanel\'s Secret War.  Random House (2011), p20'
+    #   ],
+    #   href: 'javscript:alert("Not yet implemented.")'
+    # }
+    nil
   end
 
   private
