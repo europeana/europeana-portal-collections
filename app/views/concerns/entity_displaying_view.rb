@@ -1,11 +1,9 @@
 # frozen_string_literal: true
+
 ##
 # For views needing to display entities
 module EntityDisplayingView
   extend ActiveSupport::Concern
-
-  protected
-
   # TODO
   # def entity_head_meta
   #   mustache[:entity_head_meta] ||= begin
