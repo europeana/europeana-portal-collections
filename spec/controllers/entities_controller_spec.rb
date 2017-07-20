@@ -35,6 +35,7 @@ RSpec.describe EntitiesController do
     end
 
     it 'returns http success' do
+      allow(subject).to receive(:authorize!) { true }
       get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
 
       expect(response).to have_http_status(:success)
