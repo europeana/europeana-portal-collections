@@ -12,6 +12,9 @@ require 'paper_trail/frameworks/rspec'
 require 'shoulda/matchers'
 require 'webmock_helper'
 
+require 'devise'
+require_relative 'support/controller_macros'
+
 # Local requires
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -70,6 +73,8 @@ RSpec.configure do |config|
     Europeana::Portal::Application.config.relative_url_root = nil
     Rails.cache.clear
   end
+
+  config.extend ControllerMacros, type: :controller
 end
 
 Shoulda::Matchers.configure do |config|
