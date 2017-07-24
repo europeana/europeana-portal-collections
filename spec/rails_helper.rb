@@ -74,7 +74,7 @@ RSpec.configure do |config|
     Rails.cache.clear
   end
 
-  config.extend ControllerMacros, :type => :controller
+  config.extend ControllerMacros, type: :controller
 end
 
 Shoulda::Matchers.configure do |config|
