@@ -38,6 +38,11 @@ module Entities
       true
     end
 
+    # Overriding CacheableView
+    def body_cache_key
+      @body_cache_key
+    end
+
     # TODO
     # def head_meta
     #   mustache[:head_meta] ||= begin

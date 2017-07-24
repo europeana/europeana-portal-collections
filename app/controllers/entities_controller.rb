@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class EntitiesController < ApplicationController
+  include CacheHelper
   include Europeana::EntitiesApiConsumer
 
   def suggest
@@ -8,10 +9,12 @@ class EntitiesController < ApplicationController
 
   def show
     authorize! :show, :entity
-    @entity = Europeana::API.
-              entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier]))
-
-    @items_by_query = build_query_items_by(params)
+    @body_cache_key = body_cache_key
+    unless body_cached?
+      @entity = Europeana::API.
+                entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier]))
+      @items_by_query = build_query_items_by(params)
+    end
 
     respond_to do |format|
       format.html
@@ -20,6 +23,10 @@ class EntitiesController < ApplicationController
   end
 
   private
+
+  def body_cache_key
+    ['entities', @entity_type, @entity_namespace, @entity_id].join('/')
+  end
 
   def build_query_items_by(params)
     suffix = "#{params[:type]}/#{params[:namespace]}/#{params[:identifier]}"
