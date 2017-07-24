@@ -35,6 +35,8 @@ RSpec.describe EntitiesController do
     end
 
     context 'login as guest' do
+      login_guest
+
       it 'returns http success' do
         allow(subject).to receive(:authorize!) { true }
         get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
@@ -44,8 +46,9 @@ RSpec.describe EntitiesController do
     end
 
     context 'login as admin' do
+      login_admin
+
       it 'returns http success' do
-        sign_in users(:admin)
         get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
 
         expect(response).to have_http_status(:success)

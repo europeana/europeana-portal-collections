@@ -13,6 +13,7 @@ require 'shoulda/matchers'
 require 'webmock_helper'
 
 require 'devise'
+require_relative 'support/controller_macros'
 
 # Local requires
 
@@ -63,8 +64,6 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Devise::TestHelpers, type: :controller
-
-  config.include Devise::TestHelpers, type: :controller
   config.include ApiResponseFixtures
   config.include CiEnvHelper
   config.include EuropeanaAPIHelper
@@ -74,6 +73,8 @@ RSpec.configure do |config|
     Europeana::Portal::Application.config.relative_url_root = nil
     Rails.cache.clear
   end
+
+  config.extend ControllerMacros, :type => :controller
 end
 
 Shoulda::Matchers.configure do |config|
