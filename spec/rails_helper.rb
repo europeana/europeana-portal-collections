@@ -12,6 +12,8 @@ require 'paper_trail/frameworks/rspec'
 require 'shoulda/matchers'
 require 'webmock_helper'
 
+require 'devise'
+
 # Local requires
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -59,6 +61,8 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.include Devise::TestHelpers, type: :controller
 
   config.include Devise::TestHelpers, type: :controller
   config.include ApiResponseFixtures
