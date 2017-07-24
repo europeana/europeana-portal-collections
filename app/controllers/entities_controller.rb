@@ -3,6 +3,8 @@ class EntitiesController < ApplicationController
   include CacheHelper
   include Europeana::EntitiesApiConsumer
 
+  attr_reader :body_cache_key
+
   def suggest
     render json: Europeana::API.entity.suggest(entities_api_suggest_params(params[:text]))
   end
@@ -25,7 +27,7 @@ class EntitiesController < ApplicationController
   private
 
   def body_cache_key
-    ['entities', @entity_type, @entity_namespace, @entity_id].join('/')
+    ['entities', params[:type], params[:namespace], params[:identifier]].join('/')
   end
 
   def build_query_items_by(params)

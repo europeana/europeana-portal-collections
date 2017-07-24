@@ -55,4 +55,15 @@ RSpec.describe EntitiesController do
       end
     end
   end
+
+  describe '#body_cache_key' do
+    before do
+      subject.params[:type] = 'agent'
+      subject.params[:namespace] = 'base'
+      subject.params[:identifier] = '123456'
+    end
+    it 'should return the body cache key' do
+      expect(subject.send(:body_cache_key)).to eq('entities/agent/base/123456')
+    end
+  end
 end
