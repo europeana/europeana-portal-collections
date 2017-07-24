@@ -133,7 +133,7 @@ module Document
           if section[:entity_extra].present?
             possible_entities = entities(section[:entity_name], section[:entity_proxy_field])
             salient_entity = possible_entities.detect do |entity|
-              entity_label(entity, section[:entity_name]).any? { |label| label == val }
+              [entity_label(entity, section[:entity_name])].any? { |label| label == val }
             end
             unless salient_entity.nil?
               item[:extra_info] = section_nested_hash(section[:entity_extra], salient_entity)
