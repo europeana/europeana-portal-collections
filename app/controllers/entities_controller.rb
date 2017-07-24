@@ -16,6 +16,11 @@ class EntitiesController < ApplicationController
       @entity = Europeana::API.
                 entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier]))
       @items_by_query = build_query_items_by(params)
+      @entity_params = {
+        type: params[:type],
+        namespace: params[:namespace],
+        identifier: params[:identifier]
+      }
     end
 
     respond_to do |format|

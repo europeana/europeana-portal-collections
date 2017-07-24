@@ -18,6 +18,7 @@ module Entities
 
     def navigation
       {
+        # TODO
         breadcrumbs: [
           {
             label: 'Explore',
@@ -38,24 +39,28 @@ module Entities
       true
     end
 
-    # TODO
-    # def head_meta
-    #   mustache[:head_meta] ||= begin
-    #     title = page_title
-    #     head_meta = [
-    #       { meta_name: 'description', content: head_meta_description },
-    #       { meta_property: 'fb:appid', content: '185778248173748' },
-    #       { meta_name: 'twitter:card', content: 'summary' },
-    #       { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-    #       { meta_property: 'og:sitename', content: title },
-    #       { meta_property: 'og:description', content: head_meta_description },
-    #       { meta_property: 'og:url', content: collection_url(@collection.key) }
-    #     ]
-    #     head_meta << { meta_property: 'og:title', content: title } unless title.nil?
-    #     head_meta << { meta_property: 'og:image', content: @landing_page.og_image } unless @landing_page.og_image.blank?
-    #     head_meta + super
-    #   end
-    # end
+    def head_meta
+      mustache[:head_meta] ||= begin
+        title = page_title
+        description = truncate(entity_description, length: 350, separator: ' ')
+        description = description.strip! || description
+        thumbnail = entity_thumbnail
+        image = entity[:src] || entity[:full] || nil
+        url = entities_fetch_url(@entity_params)
+        head_meta = [
+          { meta_name: 'description', content: description },
+          { meta_property: 'fb:appid', content: '185778248173748' },
+          { meta_name: 'twitter:card', content: 'summary' },
+          { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+          { meta_property: 'og:sitename', content: title },
+          { meta_property: 'og:description', content: description },
+          { meta_property: 'og:url', content: url }
+        ]
+        head_meta << { meta_property: 'og:title', content: title } unless title.nil?
+        head_meta << { meta_property: 'og:image', content: image } unless image.nil?
+        head_meta + super
+      end
+    end
 
     def content
       mustache[:content] ||= begin
