@@ -34,11 +34,25 @@ RSpec.describe EntitiesController do
         to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
     end
 
-    it 'returns http success' do
-      allow(subject).to receive(:authorize!) { true }
-      get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
+    context 'when logged in as guest' do
+      login_guest
 
-      expect(response).to have_http_status(:success)
+      it 'returns http success' do
+        allow(subject).to receive(:authorize!) { true }
+        get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
+
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'when logged in as admin' do
+      login_admin
+
+      it 'returns http success' do
+        get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
+
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 end
