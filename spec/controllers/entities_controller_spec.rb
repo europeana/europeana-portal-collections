@@ -34,7 +34,7 @@ RSpec.describe EntitiesController do
         to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
     end
 
-    context 'login as guest' do
+    context 'when logged in as guest' do
       login_guest
 
       it 'returns http success' do
@@ -45,7 +45,7 @@ RSpec.describe EntitiesController do
       end
     end
 
-    context 'login as admin' do
+    context 'when logged in as admin' do
       login_admin
 
       it 'returns http success' do
