@@ -45,7 +45,7 @@ module Entities
         description = truncate(entity_description, length: 350, separator: ' ')
         description = description.strip! || description
         thumbnail = entity_thumbnail
-        image = entity[:src] || entity[:full] || nil
+        image = thumbnail ? (thumbnail[:src] || thumbnail[:full] || nil) : nil
         url = entities_fetch_url(@entity_params)
         head_meta = [
           { meta_name: 'description', content: description },
@@ -97,6 +97,5 @@ module Entities
         href: 'https://commons.wikimedia.org/wiki/File:' + thumb[:src].split('/').pop
       }
     end
-
   end
 end
