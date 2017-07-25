@@ -20,14 +20,6 @@ module Entities
       {
         breadcrumbs: [
           {
-            label: 'Explore',
-            url: 'javascript:alert("Not yet implemented")'
-          },
-          {
-            label: 'People',
-            url: 'javascript:alert("Not yet implemented")'
-          },
-          {
             label: entity_title
           }
         ]
