@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'search', to: 'portal#index'
 
     constraints id: %r{[^/]+/[^/]+} do
+      get 'record/*id/annotations', to: 'portal#annotations', as: 'document_annotations'
       get 'record/*id/media', to: 'portal#media', as: 'document_media'
       get 'record/*id/similar', to: 'portal#similar', as: 'document_similar'
 
