@@ -61,7 +61,8 @@ module Portal
       mustache[:content] ||= begin
         {
           object: {
-            annotations: @annotations.blank? ? nil : record_annotations,
+            annotations_later: @annotations_later,
+            annotations: @annotations.blank? ? nil : record_annotations(@annotations),
             creator: creator_title,
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
@@ -88,19 +89,6 @@ module Portal
           ugc_content: ugc_content(true),
         }.reverse_merge(super)
       end
-    end
-
-    def record_annotations
-      {
-        title: t('annotations', scope: 'site.object.meta-label'),
-        info: static_page_path('annotations', format: 'html'),
-        sections: [
-          {
-            items: @annotations.map { |anno| { url: anno, text: anno } },
-            title: t('site.object.meta-label.relations')
-          }
-        ]
-      }
     end
 
     def labels
