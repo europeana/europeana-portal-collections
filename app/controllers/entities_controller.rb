@@ -10,7 +10,9 @@ class EntitiesController < ApplicationController
   end
 
   def show
-    authorize! :show, :entity
+    # Generate 404 unless entity feature is enabled.
+    raise ActiveRecord::RecordNotFound unless Rails.application.config.x.enable.enable_entity_page
+
     @body_cache_key = body_cache_key
     unless body_cached?
       @entity = Europeana::API.

@@ -34,19 +34,22 @@ RSpec.describe EntitiesController do
         to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
     end
 
-    context 'when logged in as guest' do
-      login_guest
+    context 'when entity feature flag is disabled' do
+      before do
+        Rails.application.config.x.enable.enable_entity_page = false
+      end
 
       it 'returns http success' do
-        allow(subject).to receive(:authorize!) { true }
         get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
 
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
-    context 'when logged in as admin' do
-      login_admin
+    context 'when entity feature flag is enabled' do
+      before do
+        Rails.application.config.x.enable.enable_entity_page = true
+      end
 
       it 'returns http success' do
         get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
