@@ -19,7 +19,11 @@ module Cache
         end
       end
 
-      Rails.cache.write("feed/#{url}", @feed)
+      cached_feed = Rails.cache.fetch("feed/#{url}")
+      if cached_feed.blank? || cached_feed.last_modified != @feed.last_modified
+        Rails.cache.write("feed/#{url}", @feed)
+        @updated = true
+      end
 
       if download_media
         @feed.entries.each do |entry|
@@ -32,7 +36,13 @@ module Cache
 
   # Global nav uses some feeds, and is cached so needs to be expired when those
   # feeds are updated.
+  # Cached pages need to be expired should they be using the updated feed.
   def after_perform
-    Cache::Expire::GlobalNavJob.perform_later if NavigableView.feeds_included_in_nav_urls.include?(@url)
+    if @updated
+      Cache::Expire::GlobalNavJob.perform_later if NavigableView.feeds_included_in_nav_urls.include?(@url)
+      Page.joins(:feeds).where('feed.url' => @url).each do |page|
+        Cache::Expire::PageJob.perform_later(page)
+      end
+    end
   end
 end
