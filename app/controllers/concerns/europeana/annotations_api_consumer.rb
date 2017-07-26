@@ -21,13 +21,13 @@ module Europeana
     end
 
     def document_about(document)
+      result = nil
       doc_as_json = document.as_json
       if doc_as_json && doc_as_json['agents']
         agents = doc_as_json['agents']
-        agents.is_a?(Array) && agents.length && agents[0]['about'] ? agents[0]['about'] : nil
-      else
-        nil
+        result = agents.is_a?(Array) && agents.length && agents[0]['about'] ? agents[0]['about'] : nil
       end
+      result
     end
 
     # @todo remove target_id fallback when target_uri field name change deployed
