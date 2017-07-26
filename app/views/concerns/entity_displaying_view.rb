@@ -50,7 +50,7 @@ module EntityDisplayingView
 
   def entity_social_share
     {
-      url: 'this page url for share links',
+      url: 'Images from ' + entity_name + ' on Europeana Collections',
       twitter: true,
       facebook: true,
       pinterest: true,
