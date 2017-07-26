@@ -59,10 +59,12 @@ module EntityDisplayingView
     }
   end
 
+  # TODO: fallback should not be hard-coded here
   def entity_title
     entity_pref_label('[No title]')
   end
 
+  # TODO: fallback should not be hard-coded here
   def entity_name
     entity_pref_label('[No name]')
   end
@@ -177,9 +179,16 @@ module EntityDisplayingView
       map { |s| s.tr('_', ' ') }
   end
 
+  # @param default_label [String] fallback if no localised prefLabel available
+  # @return [String] localised prefLabel or fallback
   def entity_pref_label(default_label)
     pl = @entity[:prefLabel]
-    pl && pl.is_a?(Hash) && pl.size ? pl[page_locale] || pl[:en] : default_label
+    if pl && pl.is_a?(Hash) && pl.present?
+      localised_pl = pl[page_locale] || pl[:en]
+      [localised_pl].flatten.first
+    else
+      default_label
+    end
   end
 
   def entity_birth_date
