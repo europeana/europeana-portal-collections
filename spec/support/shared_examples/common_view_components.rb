@@ -40,6 +40,16 @@ RSpec.shared_examples 'common view components', :common_view_components do
     end
   end
 
+  it 'should have JS vars' do
+    I18n.locale = 'fr'
+
+    render
+    expect(rendered).to have_selector('script', text: 'var i18nDefaultLocale = "en";', visible: false)
+    expect(rendered).to have_selector('script', text: 'var i18nLocale = "fr";', visible: false)
+
+    I18n.locale = I18n.default_locale
+  end
+
   it 'should have language menu links to all locales' do
     class AvailableLocales
       include I18nHelper

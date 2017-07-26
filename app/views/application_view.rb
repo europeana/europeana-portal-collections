@@ -24,9 +24,11 @@ class ApplicationView < Europeana::Styleguide::View
 
   def js_vars
     [
+      { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
       { name: 'googleAnalyticsKey', value: config.x.google.analytics_key },
       { name: 'googleOptimizeContainerID', value: config.x.google.optimize_container_id },
-      { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
+      { name: 'i18nLocale', value: I18n.locale },
+      { name: 'i18nDefaultLocale', value: I18n.default_locale },
       { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true }
     ] + super
   end
