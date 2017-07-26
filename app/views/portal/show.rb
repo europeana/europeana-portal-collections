@@ -415,12 +415,11 @@ module Portal
 
     def dc_creator_links(group, about)
       # There should be only one dcCreator, otherwise ignore.
-      dc_creator = group[:sections].select { |section| section[:proxy_field] == 'dcCreator' }
-      if dc_creator.size == 1 && dc_creator.first[:items] && dc_creator.first[:items].length == 1
-        # about => http://data.europeana.eu/:type/:namespace/:identifier
-        # where :type must be 'agent'
+      dcc = group[:sections].select { |section| section[:proxy_field] == 'dcCreator' }
+      if dcc.size == 1 && dcc.first[:items] && dcc.first[:items].is_a?(Array) && dcc.first[:items].length == 1
+        # about => http://data.europeana.eu/:type/:namespace/:identifier, where :type MUST be 'agent'
         type, namespace, identifier = about.scan(%r{/([^/]+)/([^/]+)/([^/]+)$}).flatten
-        dc_creator.first[:items].first[:url] = entities_fetch_path(type, namespace, identifier) if type == 'agent'
+        dcc.first[:items].first[:url] = entities_fetch_path(type, namespace, identifier) if type == 'agent'
       end
       group
     end
