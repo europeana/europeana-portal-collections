@@ -120,6 +120,12 @@ RSpec.describe PortalController do
       expect(assigns(:document)).to eq(assigns(:response).documents.first)
     end
 
+    it 'assigns the about to @about' do
+      get :show, params
+      expect(assigns(:about)).to be_a(String)
+      expect(assigns(:about)).to match(%r{/[^/]+/[^/]+/[^/]+$})
+    end
+
     context 'with edm:dataProvider' do
       before do
         get :show, params

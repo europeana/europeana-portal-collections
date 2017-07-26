@@ -416,13 +416,19 @@ module Portal
     def dc_creator_links(group, about)
       # Ignore unless entity feature is enabled.
       return group unless Rails.application.config.x.enable.enable_entity_page
+
       # There should be only one dcCreator, otherwise ignore.
       dcc = group[:sections].select { |section| section[:proxy_field] == 'dcCreator' }
+
       if dcc.size == 1 && dcc.first[:items] && dcc.first[:items].is_a?(Array) && dcc.first[:items].length == 1
         # about => http://data.europeana.eu/:type/:namespace/:identifier, where :type MUST be 'agent'
         type, namespace, identifier = about.scan(%r{/([^/]+)/([^/]+)/([^/]+)$}).flatten
-        dcc.first[:items].first[:url] = entities_fetch_path(type, namespace, identifier) if type == 'agent'
+
+        if type == 'agent' && namespace && identifier
+          dcc.first[:items].first[:url] = entities_fetch_path(type, namespace, identifier)
+        end
       end
+
       group
     end
   end
