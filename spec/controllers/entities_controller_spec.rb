@@ -25,6 +25,17 @@ RSpec.describe EntitiesController do
         with(query: hash_including(text: 'van', scope: 'europeana'))
       ).to have_been_made.once
     end
+
+    context 'when language param is present' do
+      it 'is sent to the entity API' do
+        get :suggest, locale: 'en', text: 'van', language: 'en,de'
+
+        expect(
+          a_request(:get, Europeana::API.url + '/entities/suggest').
+          with(query: hash_including(text: 'van', scope: 'europeana', language: 'en,de'))
+        ).to have_been_made.once
+      end
+    end
   end
 
   describe 'GET #show' do

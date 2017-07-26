@@ -6,11 +6,10 @@ module Europeana
   module EntitiesApiConsumer
     extend ActiveSupport::Concern
 
-    def entities_api_suggest_params(text)
+    def entities_api_suggest_params(local_params)
       {
-        text: text,
         scope: 'europeana'
-      }.reverse_merge(entities_api_env_params)
+      }.merge(entities_api_env_params).merge(local_params)
     end
 
     def entities_api_fetch_params(type, namespace, identifier)
@@ -18,7 +17,7 @@ module Europeana
         type: type,
         namespace: namespace,
         identifier: identifier,
-      }.reverse_merge(entities_api_env_params)
+      }.merge(entities_api_env_params)
     end
 
     def entities_api_env_params
