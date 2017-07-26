@@ -3,7 +3,7 @@
 RSpec.describe Cache::Expiry::PageJob do
   include CacheHelper
 
-  let(:page) {pages(:music_collection)}
+  let(:page) { pages(:music_collection) }
   context 'when the page is cached' do
     let(:page_cache_key) do
       cache_key(page.cache_key, locale: 'en', user_role: 'guest')
