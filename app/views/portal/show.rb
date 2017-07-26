@@ -72,7 +72,7 @@ module Portal
             media: media_items,
             meta_additional: meta_additional,
             origin: origin,
-            people: presenter.field_group(:people),
+            people: dc_creator_links(presenter.field_group(:people), @about),
             provenance: presenter.field_group(:provenance),
             properties: presenter.field_group(:properties),
             rights: simple_rights_label_data,
@@ -411,6 +411,18 @@ module Portal
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
+    end
+
+    def dc_creator_links(group, about)
+      # There should be only one dcCreator, otherwise ignore.
+      dc_creator = group[:sections].select { |section| section[:proxy_field] == 'dcCreator' }
+      if dc_creator.size == 1 && dc_creator.first[:items] && dc_creator.first[:items].length == 1
+        # about => http://data.europeana.eu/:type/:namespace/:identifier
+        # where :type must be 'agent'
+        type, namespace, identifier = about.scan(%r{/([^/]+)/([^/]+)/([^/]+)$}).flatten
+        dc_creator.first[:items].first[:url] = entities_fetch_path(type, namespace, identifier) if type == 'agent'
+      end
+      group
     end
   end
 end

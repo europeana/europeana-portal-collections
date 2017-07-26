@@ -25,7 +25,8 @@ module Document
         {
           title: section[:title].nil? ? false : t(section[:title], scope: 'site.object.meta-label'),
           items: section_field_subsection(section),
-          is_desc: id.to_s == 'description'
+          is_desc: id.to_s == 'description',
+          proxy_field: section[:entity_proxy_field]
         }
       end
 
