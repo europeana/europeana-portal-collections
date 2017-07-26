@@ -78,6 +78,5 @@ RSpec.describe Cache::FeedJob do
         expect(subject.instance_variable_get(:@updated)).to eq(true)
       end
     end
-
   end
 end
