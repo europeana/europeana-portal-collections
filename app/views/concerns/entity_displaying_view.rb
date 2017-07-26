@@ -137,14 +137,19 @@ module EntityDisplayingView
   # The first part is always the same: https://upload.wikimedia.org/wikipedia/commons/thumb
   # The second part is the first character of the MD5 hash of the file name. In this case, the MD5 hash
   # of Tour_Eiffel_Wikimedia_Commons.jpg is a85d416ee427dfaee44b9248229a9cdd, so we get /a.
+  # NB: File names will first have space characters " " replaced with underscores "_".
   # The third part is the first two characters of the MD5 hash from above: /a8.
   # The fourth part is the file name: /[image]
   # The last part is the desired thumbnail width, and the file name again: /200px-[image]
   #
-  # Returns a string
+  # @param image [String] the image file name extracted from the URL path
+  # @param size [Fixnum] size of the image required
+  # @return [String]
+  # @see https://meta.wikimedia.org/wiki/Thumbnails#Dynamic_image_resizing_via_URL
   def entity_build_src(image, size)
-    md5 = Digest::MD5.hexdigest image
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{image}/#{size}px-#{image}"
+    underscored_image = URI.unescape(image).tr(' ', '_')
+    md5 = Digest::MD5.hexdigest(underscored_image)
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{underscored_image}/#{size}px-#{underscored_image}"
   end
 
   # Takes an array of results of the form:
