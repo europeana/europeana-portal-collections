@@ -1,17 +1,4 @@
 GIT
-  remote: git://github.com/europeana/europeana-api-client-ruby.git
-  revision: 31d3aed09b33496941ff9fe0382bf5a7866c7df9
-  branch: develop
-  specs:
-    europeana-api (0.5.2)
-      activesupport (>= 4.2, < 6.0)
-      faraday (~> 0.9)
-      faraday_middleware
-      multi_json (~> 1.0)
-      rack (> 1.6.2)
-      typhoeus (~> 1.1)
-
-GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
   revision: 1be1961524ccf7e6cb5d29c9fa56e1fface04958
   branch: develop
@@ -168,9 +155,16 @@ GEM
     erubis (2.7.0)
     ethon (0.10.1)
       ffi (>= 1.3.0)
-    europeana-blacklight (0.5.2)
+    europeana-api (1.0.0)
+      activesupport (>= 4.2, < 6.0)
+      faraday (~> 0.9, < 0.12.2)
+      faraday_middleware
+      multi_json (~> 1.0)
+      rack (> 1.6.2)
+      typhoeus (~> 1.1)
+    europeana-blacklight (1.0.0)
       blacklight (~> 6.0.0)
-      europeana-api (~> 0.5.2)
+      europeana-api (~> 1.0.0)
       iso-639 (~> 0.2.5)
       rails (>= 4.2.2, < 5)
     europeana-feedback-button (0.0.4)
@@ -635,8 +629,8 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.1)
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
-  europeana-api!
-  europeana-blacklight (~> 0.5.2)
+  europeana-api (~> 1.0.0)
+  europeana-blacklight (~> 1.0.0)
   europeana-feedback-button (= 0.0.4)
   europeana-i18n!
   europeana-logging (~> 0.2.3)
