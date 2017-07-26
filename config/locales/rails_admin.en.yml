@@ -13,8 +13,15 @@ en:
         link: "Unpublish '%{object_label}'"
         menu: "Unpublish"
         title: "Unpublish %{model_label} '%{object_label}'"
+      requeue:
+        breadcrumb: "Requeue"
+        done: "requeued"
+        link: "Requeue '%{object_label}'"
+        menu: "Requeue"
+        title: "Requeue %{model_label} '%{object_label}'"
     form:
       are_you_sure_you_want_to_publish_the_object: "Are you sure you want to publish this %{model_name}?"
+      are_you_sure_you_want_to_requeue_the_object: "Are you sure you want to requeue this %{model_name}?"
       are_you_sure_you_want_to_unpublish_the_object: "Are you sure you want to unpublish this %{model_name}?"
     help:
       browse_entry:

@@ -25,6 +25,10 @@ class Feed < ActiveRecord::Base
     slug
   end
 
+  def requeue
+    queue_retrieval
+  end
+
   private
 
   def queue_retrieval
