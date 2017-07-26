@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Cache::FeedJob do
   before(:each) do
     stub_request(:get, url).
@@ -32,8 +34,6 @@ RSpec.describe Cache::FeedJob do
     subject.perform(url)
     expect(a_request(:get, url)).to have_been_made.at_least_once
   end
-
-
 
   it 'should cache the feed' do
     cache_key = "feed/#{url}"

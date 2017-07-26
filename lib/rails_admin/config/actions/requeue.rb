@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_admin/config/actions'
 require 'rails_admin/config/actions/base'
 module RailsAdmin
@@ -15,7 +17,7 @@ module RailsAdmin
         end
 
         register_instance_option :http_methods do
-          [:get, :put]
+          %i(get put)
         end
 
         register_instance_option :authorization_key do
