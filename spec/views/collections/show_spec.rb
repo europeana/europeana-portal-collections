@@ -39,7 +39,7 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     expect(subject).not_to have_link('3D')
   end
 
-  it 'should have a title Collection name - Europeana Collections' do
+  it 'should have a title "Collection name - Europeana Collections"' do
     expect(subject).to have_selector("title:contains('Music - Europeana Collections')")
   end
 
