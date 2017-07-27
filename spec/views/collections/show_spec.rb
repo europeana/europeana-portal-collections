@@ -40,7 +40,7 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
   end
 
   it 'should have a title "Collection name - Europeana Collections"' do
-    expect(subject).to have_title('Music - Europeana Collections')
+    expect(subject).to have_title('Music - ' + t('site.name', default: 'Europeana Collections'))
   end
 
   context 'when the page is using the browse layout' do
