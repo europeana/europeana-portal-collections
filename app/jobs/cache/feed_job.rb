@@ -46,6 +46,4 @@ module Cache
       end
     end
   end
-
-
 end
