@@ -39,7 +39,7 @@ RSpec.describe EntitiesController do
         Rails.application.config.x.enable.enable_entity_page = false
       end
 
-      it 'returns http success' do
+      it 'returns http 404 not found' do
         get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
 
         expect(response).to have_http_status(:not_found)
