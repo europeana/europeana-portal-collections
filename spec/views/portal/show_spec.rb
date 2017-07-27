@@ -80,15 +80,16 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
   end
 
   context 'when record is an entity agent' do
+    let(:api_response) { JSON.parse(api_responses(:record_with_entity_agent, id: 'abc/123', identifier: '1234'))['object'] }
+    let (:document) { Europeana::Blacklight::Document.new(api_response.with_indifferent_access) }
     it 'should have person link pointing to entity page' do
-      expect(true).to be_truthy
-      # api_response = JSON.parse(api_responses(:record_with_entity_agent, id: 'abc/123', identifier: '1234'))['object']
-      # document = Europeana::Blacklight::Document.new(api_response.with_indifferent_access)
-      # doc_as_json = document.as_json
-      # agents = doc_as_json['agents']
-      # controller.instance_variable_set(:@about, agents[0]['about'])
-      # render
-      # expect(rendered).to have_selector('a[href="/portal/en/entities/agent/base/1234"]')
+      # TODO: is there a better way to do this?
+      # See views/portal/show#dc_creator_links(group, about)
+      doc_as_json = document.as_json
+      agents = doc_as_json['agents']
+      controller.instance_variable_set(:@about, agents[0]['about'])
+      render
+      expect(rendered).to have_selector('a[href="/en/entities/agent/base/1234"]')
     end
   end
 end
