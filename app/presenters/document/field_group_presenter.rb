@@ -95,9 +95,10 @@ module Document
     end
 
     def section_field_subsection(section)
-      field_values = section_field_values(section)
+      field_values = section_field_values(section).compact
+      field_values = field_values.slice(0, section[:max]) if section[:max].present?
 
-      field_values.compact.map do |val|
+      field_values.map do |val|
         {}.tap do |item|
           item[:text] = val
           if !val.nil? && section[:capitalised]
