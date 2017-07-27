@@ -15,7 +15,7 @@ RSpec.describe Cache::Expiry::PageJob do
     end
 
     it 'expires the cache entry' do
-      expect { subject.perform(page) }.to change { Rails.cache.fetch(page_cache_key) }.from(page_cache_content).to(nil)
+      expect { subject.perform(page.id) }.to change { Rails.cache.fetch(page_cache_key) }.from(page_cache_content).to(nil)
     end
   end
 end

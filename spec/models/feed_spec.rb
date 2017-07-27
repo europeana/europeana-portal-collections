@@ -69,4 +69,11 @@ RSpec.describe Feed do
       expect { subject.send(:queue_retrieval) }.to change { feed_jobs.call.count }.by(1)
     end
   end
+  
+  describe '#cache_key' do
+    let(:feed) { feeds(:fashion_tumblr) }
+    it 'should append "feed/" to the url' do
+      expect(feed.cache_key).to eq "feed/#{feed.url}"
+    end
+  end
 end

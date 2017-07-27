@@ -6,7 +6,7 @@ xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
     xml.description(t('site.blogs.description'))
     xml.link(blog_posts_url)
     xml.language(locale.to_s)
-    xml.lastBuildDate(Date.parse(@blog_posts.first.datepublish).rfc2822)
+    xml.lastBuildDate(DateTime.parse(@blog_posts.first.datepublish).rfc2822)
     xml.tag!('atom:link', rel: 'self', type: 'application/rss+xml', href: blog_posts_url(format: 'rss'))
 
     @blog_posts.each do |blog_post|
@@ -22,7 +22,7 @@ xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
           xml.enclosure(url: thumb[:url], length: 0, type: 'image/*')
         end
         xml.guid(blog_post_url(blog_post.slug))
-        xml.pubDate(Date.parse(blog_post.datepublish).rfc2822)
+        xml.pubDate(DateTime.parse(blog_post.datepublish).rfc2822)
       end
     end
   end

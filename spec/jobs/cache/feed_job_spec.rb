@@ -8,7 +8,7 @@ RSpec.describe Cache::FeedJob do
                 headers: { 'Content-Type' => 'application/rss+xml' })
   end
 
-  let(:url) { 'http://www.example.com/feed/' }
+  let(:url) { feeds(:all_blog).url }
   let(:rss_body) do
     <<-END
 <?xml version="1.0"?>

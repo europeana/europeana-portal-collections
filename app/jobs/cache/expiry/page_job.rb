@@ -9,7 +9,7 @@ module Cache
 
       queue_as :cache
 
-      def perform(page_id = nil)
+      def perform(page_id)
         expire_cache(Page.find(page_id).cache_key)
       end
     end

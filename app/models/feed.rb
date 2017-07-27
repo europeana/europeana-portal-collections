@@ -29,6 +29,10 @@ class Feed < ActiveRecord::Base
     queue_retrieval
   end
 
+  def cache_key
+    "feed/#{url}"
+  end
+
   private
 
   def queue_retrieval

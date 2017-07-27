@@ -8,7 +8,7 @@ module Cache
       end
     }
 
-    queue_as :default
+    queue_as :cache
 
     def perform(url, download_media = false)
       @url = url
@@ -19,9 +19,10 @@ module Cache
         end
       end
 
-      cached_feed = Rails.cache.fetch("feed/#{url}")
+      feed_cache_key = Feed.find_by_url(url).cache_key
+      cached_feed = Rails.cache.fetch(feed_cache_key)
       if cached_feed.blank? || cached_feed.last_modified != @feed.last_modified
-        Rails.cache.write("feed/#{url}", @feed)
+        Rails.cache.write(feed_cache_key, @feed)
         @updated = true
       end
 
@@ -41,8 +42,10 @@ module Cache
     if @updated
       Cache::Expire::GlobalNavJob.perform_later if NavigableView.feeds_included_in_nav_urls.include?(@url)
       Page.joins(:feeds).where('feed.url' => @url).each do |page|
-        Cache::Expire::PageJob.perform_later(page)
+        Cache::Expire::PageJob.perform_later(page.id)
       end
     end
   end
+
+
 end
