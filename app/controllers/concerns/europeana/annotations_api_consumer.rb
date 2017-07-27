@@ -20,16 +20,6 @@ module Europeana
       nil
     end
 
-    def document_about(document)
-      result = nil
-      doc_as_json = document.as_json
-      if doc_as_json && doc_as_json['agents']
-        agents = doc_as_json['agents']
-        result = agents.is_a?(Array) && agents.length && agents[0]['about'] ? agents[0]['about'] : nil
-      end
-      result
-    end
-
     # @todo remove target_id fallback when target_uri field name change deployed
     #   to production Annotations API
     def annotations_search_for_document(document)

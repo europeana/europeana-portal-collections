@@ -54,7 +54,6 @@ class PortalController < ApplicationController
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
     @annotations = document_annotations(@document)
-    @about = document_about(@document)
 
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 

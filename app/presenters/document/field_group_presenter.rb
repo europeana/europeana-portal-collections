@@ -107,22 +107,15 @@ module Document
           if section[:url]
             item[:url] = field_value(section[:url])
           elsif section[:search_field]
-            item[:url] = section_field_search_path(val, section[:search_field], section[:quoted])
+            item[:url] = if entity_section?(section) && Rails.application.config.x.enable.enable_entity_page
+                           entity_url(item[:url])
+                         else
+                           section_field_search_path(val, section[:search_field], section[:quoted])
+                         end
           end
 
           # text manipulation
           item[:text] = format_date(item[:text], section[:format_date])
-
-          if section[:overrides] && item[:text] == section[:override_val]
-            section[:overrides].map do |override|
-              if override[:field_title]
-                item[:text] = override[:field_title]
-              end
-              if override[:field_url]
-                item[:url] = override[:field_url]
-              end
-            end
-          end
 
           item[:url] = val if linkable_value?(val)
 
@@ -169,6 +162,26 @@ module Document
           context[last] = format_date(val, mapping[:format_date])
         end
       end
+    end
+
+    private
+
+    def entity_section?(section)
+      section[:entity_name] == 'agents' && section[:entity_proxy_field] == 'dcCreator'
+    end
+
+    def entity_url(default_url)
+      result = default_url
+      about = @document.fetch('agents.about')
+      if about
+        # about => http://data.europeana.eu/:type/:namespace/:identifier, where :type MUST be 'agent'
+        type, namespace, identifier = about.first.scan(%r{/([^/]+)/([^/]+)/([^/]+)$}).flatten
+
+        if type == 'agent' && namespace && identifier
+          result = entities_fetch_path(type, namespace, identifier)
+        end
+      end
+      result
     end
   end
 end
