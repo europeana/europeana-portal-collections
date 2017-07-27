@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
   let(:blacklight_document_source) do
     # @todo Move to factory / fixture
@@ -34,12 +36,12 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
 
   it 'should have meta description' do
     render
-    expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="description"]', visible: false)
   end
 
   it 'should have meta HandheldFriendly' do
     render
-    expect(rendered).to have_selector("meta[name=\"HandheldFriendly\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="HandheldFriendly"]', visible: false)
   end
 
   context 'with @debug' do
@@ -80,16 +82,17 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
   end
 
   context 'when record is an entity agent' do
-    let(:api_response) { JSON.parse(api_responses(:record_with_entity_agent, id: 'abc/123', identifier: '1234'))['object'] }
-    let(:document) { Europeana::Blacklight::Document.new(api_response.with_indifferent_access) }
+    let(:identifier) { '1234' }
+    let(:api_response) { api_responses(:record_with_entity_agent, id: '/abc/123', identifier: identifier) }
+    let(:blacklight_document_source) { JSON.parse(api_response)['object'] }
+
+    before(:each) do
+      Rails.application.config.x.enable.enable_entity_page = true
+    end
+
     it 'should have person link pointing to entity page' do
-      # TODO: is there a better way to do this?
-      # See views/portal/show#dc_creator_links(group, about)
-      doc_as_json = document.as_json
-      agents = doc_as_json['agents']
-      controller.instance_variable_set(:@about, agents[0]['about'])
       render
-      expect(rendered).to have_selector('a[href="/en/entities/agent/base/1234"]')
+      expect(rendered).to have_selector('a[href="/en/entities/agent/base/' + identifier + '"]')
     end
   end
 end

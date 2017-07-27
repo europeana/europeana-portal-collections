@@ -54,7 +54,7 @@ module Portal
     end
 
     def include_nav_searchbar
-     true
+      true
     end
 
     def content
@@ -72,7 +72,7 @@ module Portal
             media: media_items,
             meta_additional: meta_additional,
             origin: origin,
-            people: dc_creator_links(presenter.field_group(:people), @about),
+            people: presenter.field_group(:people),
             provenance: presenter.field_group(:provenance),
             properties: presenter.field_group(:properties),
             rights: simple_rights_label_data,
@@ -220,7 +220,7 @@ module Portal
           latitude: '"' + (field_value('places.latitude') || '') + '"',
           longitude: '"' + (field_value('places.longitude') || '') + '"',
           long_and_lat: long_and_lat?,
-          #placeName: document.fetch('places.prefLabel', []).first,
+          # placeName: document.fetch('places.prefLabel', []).first,
           placeName: pref_label(document, 'places.prefLabel'),
           labels: {
             longitude: t('site.object.meta-label.longitude') + ':',
