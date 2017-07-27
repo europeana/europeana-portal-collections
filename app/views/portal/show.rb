@@ -36,11 +36,8 @@ module Portal
       end
     end
 
-    def page_title
-      mustache[:page_title] ||= begin
-        title = [display_title, creator_title]
-        CGI.unescapeHTML(title.compact.join(' | ')) + ' - Europeana'
-      end
+    def page_content_heading
+      t('site.search.page-title', default: 'Search Results')
     end
 
     def navigation

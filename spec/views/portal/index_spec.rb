@@ -32,9 +32,12 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
 
   it_behaves_like 'paginated_view'
 
-  it 'includes the search terms in the title' do
+  it 'should have a title "Search query - Search Results - Europeana Collections"' do
     render
-    expect(rendered).to have_selector('title', text: /#{blacklight_params[:q]}/, visible: false)
+    expect(rendered).to have_title(
+      params[:q] + ' - ' +
+      t('site.search.page-title', default: 'Search Results') + ' - ' +
+      t('site.name', default: 'Europeana Collections'))
   end
 
   it 'displays the search terms' do
