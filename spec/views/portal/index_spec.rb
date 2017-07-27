@@ -37,7 +37,8 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     expect(rendered).to have_title(
       params[:q] + ' - ' +
       t('site.search.page-title', default: 'Search Results') + ' - ' +
-      t('site.name', default: 'Europeana Collections'))
+      t('site.name', default: 'Europeana Collections')
+    )
   end
 
   it 'displays the search terms' do

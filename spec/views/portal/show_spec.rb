@@ -82,7 +82,8 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
       render
       expect(rendered).to have_title(
         t('site.search.page-title', default: 'Search Results') + ' - ' +
-        t('site.name', default: 'Europeana Collections'))
+        t('site.name', default: 'Europeana Collections')
+      )
     end
   end
 end
