@@ -72,7 +72,7 @@ RSpec.describe Feed do
 
   describe '#cache_key' do
     let(:feed) { feeds(:fashion_tumblr) }
-    it 'should append "feed/" to the url' do
+    it 'should prepend "feed/" to the url' do
       expect(feed.cache_key).to eq "feed/#{feed.url}"
     end
   end

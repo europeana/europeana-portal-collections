@@ -29,6 +29,7 @@ RSpec.describe Cache::FeedJob do
 </rss>
     END
   end
+  let(:cache_key) { "feed/#{url}" }
 
   it 'should fetch an HTTP feed' do
     subject.perform(url)
@@ -45,17 +46,33 @@ RSpec.describe Cache::FeedJob do
   end
 
   context 'when the download_media argument is passed as true' do
-    it 'should queue DownloadRemoteMediaObjectJob' do
-      download_jobs = proc do
-        Delayed::Job.where("handler LIKE '%job_class: DownloadRemoteMediaObjectJob%'")
+    context 'when the feed was updated' do
+      before do
+        Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body.gsub('Mon, 22 May 2017', 'Tue, 23 May 2017')))
       end
-      expect { subject.perform(url, true) }.to change { download_jobs.call.count }.by_at_least(1)
-      expect(download_jobs.call.last.handler).to match(%r{http://www.example.com/image.png})
+      it 'should queue DownloadRemoteMediaObjectJob' do
+        download_jobs = proc do
+          Delayed::Job.where("handler LIKE '%job_class: DownloadRemoteMediaObjectJob%'")
+        end
+        expect { subject.perform(url, true) }.to change { download_jobs.call.count }.by_at_least(1)
+        expect(download_jobs.call.last.handler).to match(%r{http://www.example.com/image.png})
+      end
+    end
+
+    context 'when the feed was NOT updated' do
+      before do
+        Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body))
+      end
+      it 'should queue DownloadRemoteMediaObjectJob' do
+        download_jobs = proc do
+          Delayed::Job.where("handler LIKE '%job_class: DownloadRemoteMediaObjectJob%'")
+        end
+        expect { subject.perform(url, true) }.to_not change { download_jobs.call.count }
+      end
     end
   end
 
   context 'when the feed was previously cached' do
-    let(:cache_key) { "feed/#{url}" }
     before do
       Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body))
     end
@@ -73,9 +90,9 @@ RSpec.describe Cache::FeedJob do
         Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body.gsub('Mon, 22 May 2017', 'Tue, 23 May 2017')))
       end
 
-      it 'should update the cache and @updated should be true' do
+      it 'should update the cache and run the after_perform method' do
+        expect(subject).to receive(:after_perform)
         expect { subject.perform(url) }.to change { Rails.cache.fetch(cache_key) }
-        expect(subject.instance_variable_get(:@updated)).to eq(true)
       end
     end
   end
