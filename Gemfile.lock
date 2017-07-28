@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 9b8243440b0899ea28289c466319f11ab6ccc5a8
+  revision: 17d3e55bd4007584bd7d9fbb9af73bb5b9dfe13c
   branch: develop
   specs:
     europeana-i18n (0.0.1)
@@ -8,8 +8,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 9aed9263c52066ae76df87472ebc549b45ce6fe2
-  ref: 9aed926
+  revision: c7a7a9601b4803f2b6496e7a9d840441f10c439b
+  ref: c7a7a96
   specs:
     europeana-styleguide (0.3.0)
       activesupport (~> 4.0)
@@ -388,7 +388,7 @@ GEM
     mime-types (2.99.3)
     mimemagic (0.3.0)
     mini_portile2 (2.2.0)
-    minitest (5.10.2)
+    minitest (5.10.3)
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -684,3 +684,6 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
+
+BUNDLED WITH
+   1.12.5
