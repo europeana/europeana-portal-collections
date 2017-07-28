@@ -24,7 +24,7 @@ RSpec.describe ProResourcePresenter do
   describe '#label' do
     it 'uses culturelover-theme tags to look up topics' do
       allow(resource).to receive(:taxonomy) { { tags: { '/path' => 'culturelover-fashion' } } }
-      expect(subject.label).to eq('Fashion')
+      expect(subject.label).to eq('Europeana Fashion')
     end
   end
 
