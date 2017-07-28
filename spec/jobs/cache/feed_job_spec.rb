@@ -37,9 +37,8 @@ RSpec.describe Cache::FeedJob do
   end
 
   it 'should cache the feed' do
-    cache_key = "feed/#{url}"
     Rails.cache.delete(cache_key)
-    subject.perform(url)
+    described_class.perform_now(url)
     cached = Rails.cache.fetch(cache_key)
     expect(cached).to be_a(Feedjira::Parser::RSS)
     expect(cached.feed_url).to eq(url)
@@ -54,7 +53,7 @@ RSpec.describe Cache::FeedJob do
         download_jobs = proc do
           Delayed::Job.where("handler LIKE '%job_class: DownloadRemoteMediaObjectJob%'")
         end
-        expect { subject.perform(url, true) }.to change { download_jobs.call.count }.by_at_least(1)
+        expect { described_class.perform_now(url, true) }.to change { download_jobs.call.count }.by_at_least(1)
         expect(download_jobs.call.last.handler).to match(%r{http://www.example.com/image.png})
       end
     end
@@ -67,7 +66,7 @@ RSpec.describe Cache::FeedJob do
         download_jobs = proc do
           Delayed::Job.where("handler LIKE '%job_class: DownloadRemoteMediaObjectJob%'")
         end
-        expect { subject.perform(url, true) }.to_not change { download_jobs.call.count }
+        expect { described_class.perform_now(url, true) }.to_not change { download_jobs.call.count }
       end
     end
   end
@@ -90,9 +89,9 @@ RSpec.describe Cache::FeedJob do
         Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body.gsub('Mon, 22 May 2017', 'Tue, 23 May 2017')))
       end
 
-      it 'should update the cache and run the after_perform method' do
-        expect(subject).to receive(:after_perform)
+      it 'should update the cache and @updated should be true' do
         expect { subject.perform(url) }.to change { Rails.cache.fetch(cache_key) }
+        expect(subject.instance_variable_get(:@updated)).to eq(true)
       end
     end
   end
