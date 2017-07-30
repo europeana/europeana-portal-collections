@@ -11,11 +11,7 @@ module SearchableView
       if config.x.enable.search_form_autocomplete
         fs[:autocomplete] = {
           url: entities_suggest_url(format: 'json', text: ''),
-          translations: {
-            agents: t('global.navigation.agents', default: 'People'),
-            concepts: t('global.navigation.concepts', default: 'Topics'),
-            places: t('global.navigation.places', default: 'Places')
-          }
+          min_chars: 4
         }
       end
     end
