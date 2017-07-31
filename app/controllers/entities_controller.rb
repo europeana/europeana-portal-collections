@@ -11,10 +11,20 @@ class EntitiesController < ApplicationController
 
   def show
     authorize! :show, :entity
+
     @body_cache_key = body_cache_key
+    # TODO: having a cached body should not prevent the URL slug enforcement redirect
     unless body_cached?
+      @api_type = entities_api_type(params[:type])
       @entity = Europeana::API.
-                entity.fetch(entities_api_fetch_params(params[:type], params[:namespace], params[:identifier]))
+                entity.fetch(entities_api_fetch_params(@api_type, 'base', params[:id]))
+
+      expected_slug = entity_url_slug(@entity)
+      unless expected_slug == params[:slug]
+        redirect_to url_for(slug: expected_slug, format: params[:format])
+        return
+      end
+
       @items_by_query = build_query_items_by(params)
     end
 
@@ -27,17 +37,17 @@ class EntitiesController < ApplicationController
   private
 
   def body_cache_key
-    ['entities', params[:type], params[:namespace], params[:identifier]].join('/')
+    ['entities', params[:type], params[:id]].join('/')
   end
 
   def build_query_items_by(params)
-    suffix = "#{params[:type]}/#{params[:namespace]}/#{params[:identifier]}"
+    suffix = "#{@api_type}/base/#{params[:id]}"
     creator = build_proxy_dc('creator', 'http://data.europeana.eu', suffix)
     contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', suffix)
     "#{creator} OR #{contributor}"
   end
 
   def build_proxy_dc(name, url, suffix)
-    "proxy_dc_#{name}:\"#{url}/#{suffix}\""
+    %(proxy_dc_#{name}:"#{url}/#{suffix}")
   end
 end

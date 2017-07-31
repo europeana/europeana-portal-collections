@@ -1,5 +1,12 @@
 # frozen_string_literal: true
+
 RSpec.describe EntitiesController do
+  let(:entities_api_key) { 'apikey' }
+
+  before do
+    Rails.application.config.x.europeana[:entities].api_key = entities_api_key
+  end
+
   describe 'concerns' do
     subject { described_class }
     it { is_expected.to include(Europeana::EntitiesApiConsumer) }
@@ -29,41 +36,62 @@ RSpec.describe EntitiesController do
 
   describe 'GET #show' do
     before do
-      Rails.application.config.x.europeana[:entities_api_key] = 'apikey'
-      stub_request(:get, Europeana::API.url + '/entities/agent/base/1234?wskey=apikey').
-        to_return(status: 200, body: '{}', headers: { 'Content-Type' => 'application/ld+json' })
-    end
-
-    context 'when logged in as guest' do
-      login_guest
-
-      it 'returns http success' do
-        allow(subject).to receive(:authorize!) { true }
-        get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
-
-        expect(response).to have_http_status(:success)
-      end
+      stub_request(:get, Europeana::API.url + "/entities/agent/base/1234?wskey=#{entities_api_key}").
+        to_return(status: 200, body: api_responses(:entities_fetch), headers: { 'Content-Type' => 'application/ld+json' })
     end
 
     context 'when logged in as admin' do
       login_admin
 
-      it 'returns http success' do
-        get :show, locale: 'en', type: 'agent', namespace: 'base', identifier: '1234'
+      context 'without slug in URL' do
+        it 'redirects to URL with slug' do
+          allow(subject).to receive(:authorize!) { true }
+          get :show, locale: 'en', type: 'people', id: '1234'
 
-        expect(response).to have_http_status(:success)
+          expect(response).to redirect_to('/en/explore/people/1234-david-hume')
+        end
+      end
+
+      context 'with wrong slug in URL' do
+        it 'redirects to URL with slug' do
+          allow(subject).to receive(:authorize!) { true }
+          get :show, locale: 'en', type: 'people', id: '1234', slug: 'david'
+
+          expect(response).to redirect_to('/en/explore/people/1234-david-hume')
+        end
+      end
+
+      context 'with slug in URL' do
+        let(:params) { { locale: 'en', type: 'people', id: '1234', slug: 'david-hume' } }
+
+        it 'returns http success' do
+          allow(subject).to receive(:authorize!) { true }
+          get :show, params
+
+          expect(response).to have_http_status(:success)
+        end
+
+        it 'queries the entity API' do
+          allow(subject).to receive(:authorize!) { true }
+          get :show, params
+
+          expect(
+            a_request(:get, Europeana::API.url + '/entities/agent/base/1234').
+            with(query: hash_including(wskey: entities_api_key))
+          ).to have_been_made.once
+        end
       end
     end
   end
 
   describe '#body_cache_key' do
     before do
-      subject.params[:type] = 'agent'
-      subject.params[:namespace] = 'base'
-      subject.params[:identifier] = '123456'
+      subject.params[:type] = 'people'
+      subject.params[:id] = '123456'
     end
+
     it 'should return the body cache key' do
-      expect(subject.send(:body_cache_key)).to eq('entities/agent/base/123456')
+      expect(subject.send(:body_cache_key)).to eq('entities/people/123456')
     end
   end
 end
