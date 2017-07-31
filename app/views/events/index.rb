@@ -45,7 +45,6 @@ module Events
     end
 
     def events_filter_options
-      return nil unless config.x.enable.events_theme_filter
       theme_filter_options
     end
 
