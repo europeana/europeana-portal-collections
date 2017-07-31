@@ -36,7 +36,7 @@ RSpec.describe EntitiesController do
 
     context 'when entity feature flag is disabled' do
       before do
-        Rails.application.config.x.enable.enable_entity_page = false
+        Rails.application.config.x.enable.entity_page = false
       end
 
       it 'returns http 404 not found' do
@@ -48,7 +48,7 @@ RSpec.describe EntitiesController do
 
     context 'when entity feature flag is enabled' do
       before do
-        Rails.application.config.x.enable.enable_entity_page = true
+        Rails.application.config.x.enable.entity_page = true
       end
 
       it 'returns http success' do

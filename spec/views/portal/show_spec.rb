@@ -87,7 +87,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     let(:blacklight_document_source) { JSON.parse(api_response)['object'] }
 
     before(:each) do
-      Rails.application.config.x.enable.enable_entity_page = true
+      Rails.application.config.x.enable.entity_page = true
     end
 
     it 'should have person link pointing to entity page' do

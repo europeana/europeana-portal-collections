@@ -25,8 +25,7 @@ module Document
         {
           title: section[:title].nil? ? false : t(section[:title], scope: 'site.object.meta-label'),
           items: section_field_subsection(section),
-          is_desc: id.to_s == 'description',
-          proxy_field: section[:entity_proxy_field]
+          is_desc: id.to_s == 'description'
         }
       end
 
@@ -107,11 +106,11 @@ module Document
           if section[:url]
             item[:url] = field_value(section[:url])
           elsif section[:search_field]
-            item[:url] = if entity_section?(section) && Rails.application.config.x.enable.enable_entity_page
-                           entity_url(item[:url])
-                         else
-                           section_field_search_path(val, section[:search_field], section[:quoted])
-                         end
+            item[:url] = nil
+            if linkable_entity_section?(section)
+              item[:url] = build_entity_link
+            end
+            item[:url] ||= section_field_search_path(val, section[:search_field], section[:quoted])
           end
 
           # text manipulation
@@ -166,22 +165,42 @@ module Document
 
     private
 
-    def entity_section?(section)
-      section[:entity_name] == 'agents' && section[:entity_proxy_field] == 'dcCreator'
+    def linkable_entity_section?(section)
+      Rails.application.config.x.enable.entity_page &&
+        section[:entity_name] == 'agents' &&
+        section[:entity_proxy_field] == 'dcCreator'
     end
 
-    def entity_url(default_url)
-      result = default_url
+    def build_entity_link
       about = @document.fetch('agents.about')
-      if about
-        # about => http://data.europeana.eu/:type/:namespace/:identifier, where :type MUST be 'agent'
-        type, namespace, identifier = about.first.scan(%r{/([^/]+)/([^/]+)/([^/]+)$}).flatten
+      return nil unless about
 
-        if type == 'agent' && namespace && identifier
-          result = entities_fetch_path(type, namespace, identifier)
-        end
-      end
-      result
+      # about => http://data.europeana.eu/:type/:namespace/:identifier,
+      #   where hostname MUST be 'data.europeana.eu' AND
+      #         :type MUST be 'agent'
+      hostname, path = about.first.scan(%r{https?://([^/]+)/(.*)$}).flatten
+      return nil unless hostname && hostname.casecmp('data.europeana.eu') && path
+
+      split_path = path.split('/')
+      return nil unless split_path.length > 2
+
+      type, namespace, identifier = split_path[-3..-1]
+
+      return nil unless type.casecmp('agent') && namespace && identifier
+
+      entities_fetch_path(type, namespace, identifier)
+
+      # uri = URI.parse(about.first)
+      # return nil unless uri && uri.hostname.casecmp('data.europeana.eu')
+      #
+      # split_path = uri.path.split('/')
+      # return nil unless split_path.length > 2
+      #
+      # type, namespace, identifier = split_path[-3..-1]
+      #
+      # return nil unless type.casecmp('agent') && namespace && identifier
+      #
+      # entities_fetch_path(type, namespace, identifier)
     end
   end
 end

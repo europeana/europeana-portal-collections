@@ -11,7 +11,7 @@ class EntitiesController < ApplicationController
 
   def show
     # Generate 404 unless entity feature is enabled.
-    raise ActiveRecord::RecordNotFound unless Rails.application.config.x.enable.enable_entity_page
+    raise ActiveRecord::RecordNotFound unless Rails.application.config.x.enable.entity_page
 
     @body_cache_key = body_cache_key
     unless body_cached?
