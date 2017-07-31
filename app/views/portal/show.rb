@@ -36,10 +36,6 @@ module Portal
       end
     end
 
-    def page_content_heading
-      t('site.search.page-title', default: 'Search Results')
-    end
-
     def navigation
       mustache[:navigation] ||= begin
         {

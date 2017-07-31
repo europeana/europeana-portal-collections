@@ -77,13 +77,5 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
       render
       expect(rendered).not_to have_selector('link[rel="alternate"][hreflang="x-default"][href*="q=paris"]', visible: false)
     end
-
-    it 'should have a title "Search Results - Europeana Collections"' do
-      render
-      expect(rendered).to have_title(
-        t('site.search.page-title', default: 'Search Results') + ' - ' +
-        t('site.name', default: 'Europeana Collections')
-      )
-    end
   end
 end
