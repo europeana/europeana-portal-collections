@@ -27,6 +27,12 @@ fashion_collection_translations:
   body: 'About fashion'
   globalized_model: fashion_collection
 
+firstworldwar_collection_translations:
+  locale: en
+  title: 'Europeana 1914-1918'
+  body: 'About WWI'
+  globalized_model: firstworldwar_collection
+
 grid_layout_collection_translations:
   locale: en
   title: 'Europeana Grid Layout'

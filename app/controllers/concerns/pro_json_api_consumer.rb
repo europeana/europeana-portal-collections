@@ -29,7 +29,7 @@ module ProJsonApiConsumer
   end
 
   def pro_json_api_whitelisted_collections
-    Collection.where(key: %w(fashion world-war-I))
+    displayable_collections
   end
 
   def pro_json_api_theme_filters_from_collections
