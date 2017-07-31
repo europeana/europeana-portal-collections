@@ -11,7 +11,7 @@ module SearchableView
       if config.x.enable.search_form_autocomplete
         fs[:autocomplete] = {
           url: entities_suggest_url(format: 'json', text: ''),
-          min_chars: 4
+          min_chars: 2
         }
       end
     end
