@@ -78,4 +78,12 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
       expect(rendered).not_to have_selector('link[rel="alternate"][hreflang="x-default"][href*="q=paris"]', visible: false)
     end
   end
+
+  context 'without q param' do
+    let(:params) { { id: 'abc/123' } }
+    it 'should have a title "display_title | creator_title - Europeana Collections"' do
+      render
+      expect(rendered).to have_title(/(.*) | (.*) - #{t('site.name', default: 'Europeana Collections')}/)
+    end
+  end
 end
