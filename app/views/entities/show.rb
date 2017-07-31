@@ -58,7 +58,9 @@ module Entities
     end
 
     def head_meta_description
-      truncate(entity_description, length: 350, separator: ' ')
+      mustache[:head_meta_description] ||= begin
+        truncate(entity_description, length: 350, separator: ' ')
+      end
     end
 
     def og_image
