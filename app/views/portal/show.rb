@@ -36,6 +36,13 @@ module Portal
       end
     end
 
+    def page_title
+      mustache[:page_title] ||= begin
+        title = [display_title, creator_title]
+        CGI.unescapeHTML(title.compact.join(' | ')) + ' - Europeana'
+      end
+    end
+
     def navigation
       mustache[:navigation] ||= begin
         {

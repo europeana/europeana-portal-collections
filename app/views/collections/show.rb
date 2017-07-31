@@ -31,9 +31,7 @@ module Collections
     end
 
     def page_content_heading
-      mustache[:page_content_heading] ||= begin
-        (@landing_page_title ? @landing_page_title + ' - ' : '') + @collection.title
-      end
+      @collection.title
     end
 
     def body_class
