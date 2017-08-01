@@ -89,10 +89,11 @@ class ProResourcePresenter
 
   def label
     return nil unless theme_label_tags.present?
-    topics = theme_label_tags.map do |_pro_path, tag|
-      Topic.find_by_slug(tag.split('-')[1..-1].join('-'))
+    collections = theme_label_tags.map do |_pro_path, tag|
+      key = tag.split('-')[1..-1].join('-')
+      Collection.find_by('key ILIKE ?', key)
     end.compact
-    topics.blank? ? nil : topics.map(&:label).join(' | ')
+    collections.blank? ? nil : collections.map { |collection| collection.landing_page.title }.join(' | ')
   end
 
   def geolocation

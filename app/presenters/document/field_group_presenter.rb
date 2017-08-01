@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Document
   ##
   # Presenter for a group of document fields
@@ -95,7 +96,9 @@ module Document
     end
 
     def section_field_subsection(section)
-      section_field_values(section).compact.map do |val|
+      field_values = section_field_values(section).compact
+      field_values = field_values.slice(0, section[:max]) if section[:max].present?
+      field_values.map do |val|
         section_field_subsection_item(section, val)
       end
     end

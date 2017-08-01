@@ -19,6 +19,20 @@ shared_examples 'no hierarchy API request' do
   end
 end
 
+shared_examples 'an annotations API request' do
+  it 'queries the API for the record annotations' do
+    expect(an_annotations_api_search_request_for(record_id)).
+      to have_been_made
+  end
+end
+
+shared_examples 'no annotations API request' do
+  it 'does not query the API for the record annotations' do
+    expect(an_annotations_api_search_request_for(record_id)).
+      not_to have_been_made
+  end
+end
+
 shared_examples 'a more like this API request' do
   it 'queries the API for MLT records' do
     expect(an_api_search_request.

@@ -19,7 +19,7 @@ fashion:
   state: 1
 
 firstworldwar:
-  key: 'firstworldwar'
+  key: 'world-war-I'
   api_params: 'qf=what:worldwarone'
   state: 1
   settings: "'--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ndefault_search_layout: ''\nfederated_providers:\n- trove\n- dpla\n- digitalnz\n'"

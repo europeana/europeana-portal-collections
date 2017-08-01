@@ -35,6 +35,12 @@ art_collection:
   type: 'Page::Landing'
   collection: art
 
+firstworldwar_collection:
+  slug: 'collections/world-war-I'
+  state: 1
+  type: 'Page::Landing'
+  collection: firstworldwar
+
 fashion_collection:
   slug: 'collections/fashion'
   collection: fashion

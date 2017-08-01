@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'rails_admin/config/actions/publish'
 require 'rails_admin/config/actions/unpublish'
+require 'rails_admin/config/actions/requeue'
 require 'rails_admin/config/fields/extensions/generic_help'
 
 RailsAdmin::Config::Fields::Types::Text.send(:include, RailsAdmin::Config::Fields::Extensions::GenericHelp)
@@ -40,6 +41,7 @@ RailsAdmin.config do |config|
     history_show
     publish
     unpublish
+    requeue
   end
 
   config.model 'Banner' do
