@@ -36,10 +36,10 @@ module Portal
       end
     end
 
-    def page_title
-      mustache[:page_title] ||= begin
+    def page_content_heading
+      mustache[:page_content_heading] ||= begin
         title = [display_title, creator_title]
-        CGI.unescapeHTML(title.compact.join(' | ')) + ' - ' + t('site.name', default: 'Europeana Collections')
+        CGI.unescapeHTML(title.compact.join(' | '))
       end
     end
 
