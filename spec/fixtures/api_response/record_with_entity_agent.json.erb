@@ -6,7 +6,7 @@
     "proxies": [
       {
         "dcCreator": {
-          "def": ["Mister Smith"]
+          "def": ["http://data.europeana.eu/agent/base/<%= identifier %>"]
         }
       }
     ],
@@ -17,7 +17,12 @@
     ],
     "agents": [
       {
-        "about": "http://data.europeana.eu/agent/base/<%= identifier %>"
+        "about": "http://data.europeana.eu/agent/base/<%= identifier %>",
+        "prefLabel": {
+          "def": [
+            "Mister Smith"
+          ]
+        }
       }
     ]
   }
