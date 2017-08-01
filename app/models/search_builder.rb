@@ -1,5 +1,5 @@
 class SearchBuilder < Europeana::Blacklight::SearchBuilder
-  self.default_processor_chain << :add_entity_query_to_api
+  self.default_processor_chain += %i(add_entity_query_to_api)
 
   def salient_facets_for_api_facet_qf
     super.tap do |salient_facets|
