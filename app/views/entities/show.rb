@@ -51,7 +51,7 @@ module Entities
           { meta_property: 'og:description', content: head_meta_description },
           { meta_property: 'og:url', content: request.original_url }
         ]
-        head_meta << { meta_property: 'og:title', content: title } unless title.nil?
+        head_meta << { meta_property: 'og:title', content: title }
         head_meta << { meta_property: 'og:image', content: og_image } unless og_image.nil?
         head_meta + super
       end
