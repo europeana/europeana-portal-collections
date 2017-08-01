@@ -217,7 +217,18 @@ module EntityDisplayingView
 
   def entity_date(date)
     # Just grab the first date in the array if present.
-    date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date.first : nil
+    date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? entity_formatted_date(date.first) : nil
+  end
+
+  def entity_formatted_date(date)
+    # if date.starts_with?('-')
+    #   date.slice(0) + 'BC'
+    # elsif date.starts_with?('+')
+    #   date.slice(0) + 'AD'
+    # else
+    #   date
+    # end
+    date
   end
 
   # For multiple items the format is just an array of hash items
