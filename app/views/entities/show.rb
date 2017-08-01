@@ -64,8 +64,10 @@ module Entities
     end
 
     def og_image
-      thumbnail = entity_thumbnail
-      thumbnail ? thumbnail[:src] : nil
+      mustache[:og_image] ||= begin
+        thumbnail = entity_thumbnail
+        thumbnail ? thumbnail[:src] : nil
+      end
     end
 
     def content
