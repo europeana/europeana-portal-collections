@@ -20,8 +20,8 @@ class EventsController < ApplicationController
 
   def index
     @events = Pro::Event.includes(:locations, :network).where(pro_json_api_filters).
-              where(pro_json_api_past_future_filter).
-              order('-end_event').page(pagination_page).per(pagination_per).all
+              where(pro_json_api_past_future_filter).order(end_event: :desc).
+              page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
 
     respond_to do |format|
