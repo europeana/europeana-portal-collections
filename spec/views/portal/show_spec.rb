@@ -34,12 +34,12 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
 
   it 'should have meta description' do
     render
-    expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="description"]', visible: false)
   end
 
   it 'should have meta HandheldFriendly' do
     render
-    expect(rendered).to have_selector("meta[name=\"HandheldFriendly\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="HandheldFriendly"]', visible: false)
   end
 
   context 'with @debug' do
@@ -76,6 +76,14 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     it 'should not have alternate links with q param' do
       render
       expect(rendered).not_to have_selector('link[rel="alternate"][hreflang="x-default"][href*="q=paris"]', visible: false)
+    end
+  end
+
+  context 'without q param' do
+    let(:params) { { id: 'abc/123' } }
+    it 'should have a title "display_title | creator_title - Europeana Collections"' do
+      render
+      expect(rendered).to have_title(/(.*) | (.*) - #{t('site.name', default: 'Europeana Collections')}/)
     end
   end
 end

@@ -32,11 +32,6 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
 
   it_behaves_like 'paginated_view'
 
-  it 'includes the search terms in the title' do
-    render
-    expect(rendered).to have_selector('title', text: /#{blacklight_params[:q]}/, visible: false)
-  end
-
   it 'displays the search terms' do
     render
     expect(rendered).to have_selector('li.search-tag', text: /#{blacklight_params[:q]}/)
@@ -104,6 +99,26 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     it 'shows the item in the breadcrumb' do
       render
       expect(rendered).to have_selector('.breadcrumbs li a[href="/en/record/abc/123.html"]')
+    end
+  end
+
+  it 'should have a title "Search query - Search Results - Europeana Collections"' do
+    render
+    expect(rendered).to have_title(
+      params[:q] + ' - ' +
+      t('site.search.page-title', default: 'Search Results') + ' - ' +
+      t('site.name', default: 'Europeana Collections')
+    )
+  end
+
+  context 'when there is no query' do
+    let(:blacklight_params) { {} }
+    it 'should have a title "Search Results - Europeana Collections"' do
+      render
+      expect(rendered).to have_title(
+        t('site.search.page-title', default: 'Search Results') + ' - ' +
+        t('site.name', default: 'Europeana Collections')
+      )
     end
   end
 end

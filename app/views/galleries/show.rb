@@ -8,7 +8,9 @@ module Galleries
     end
 
     def page_content_heading
-      @gallery.title
+      mustache[:page_content_heading] ||= begin
+        (@gallery.title ? @gallery.title + ' - ' : '') + t('global.galleries')
+      end
     end
 
     def head_links
