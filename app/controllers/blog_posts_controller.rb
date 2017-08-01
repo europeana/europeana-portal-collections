@@ -17,6 +17,7 @@ class BlogPostsController < ApplicationController
 
   def index
     @blog_posts = Pro::BlogPost.includes(:network).where(pro_json_api_filters).
+                  order(datepublish: :desc).
                   page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
 
