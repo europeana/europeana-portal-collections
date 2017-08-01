@@ -127,4 +127,18 @@ RSpec.describe BlogPostsController do
       expect(response.content_type).to eq('text/html')
     end
   end
+
+  describe '#pro_json_api_theme_filters_from_collections' do
+    let(:whitelisted_keys) { %w(fashion world-war-I) }
+    subject { described_class.new.send(:pro_json_api_theme_filters_from_collections) }
+
+    it 'includes whitelisted collections' do
+      expect(subject.count).to eq(whitelisted_keys.size)
+      Collection.where(key: whitelisted_keys).each do |collection|
+        key = collection.key.downcase
+        expect(subject).to have_key(key.to_sym)
+        expect(subject[key.to_sym]).to eq(filter: "culturelover-#{key}", label: collection.landing_page.title)
+      end
+    end
+  end
 end

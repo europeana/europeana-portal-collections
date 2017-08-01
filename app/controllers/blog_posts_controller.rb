@@ -40,4 +40,10 @@ class BlogPostsController < ApplicationController
       format.html
     end
   end
+
+  protected
+
+  def pro_json_api_whitelisted_collections
+    Collection.where(key: %w(fashion world-war-I))
+  end
 end
