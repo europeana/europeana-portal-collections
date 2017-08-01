@@ -1,7 +1,5 @@
 # frozen_string_literal: true
-
 RSpec.describe 'entities/show.html.mustache' do
-
   let(:body_cache_key) { '/en/entities/agent/base/1234' }
 
   before(:each) do
