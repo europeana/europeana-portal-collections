@@ -40,23 +40,23 @@ module SearchableView
     return [] if keys.blank?
 
     keys.map do |param_key|
-      input_search_value_one_param(param_key)
+      input_search_value_from_param(param_key)
     end.flatten.compact
   end
 
-  def input_search_value_one_param(local_key, local_params = params, params_key = local_key)
+  def input_search_value_from_param(local_key, local_params = params, params_key = local_key)
     if local_params[local_key].is_a?(Hash)
       local_params[local_key].map do |param_sub_key, _param_sub_value|
-        input_search_value_one_param(param_sub_key, local_params[local_key], params_key)
+        input_search_value_from_param(param_sub_key, local_params[local_key], params_key)
       end
     else
       [local_params[local_key]].flatten.compact.reject(&:blank?).map do |local_value|
-        input_search_value_one_param_field(local_key, local_value, params_key)
+        input_search_value_from_param_field(local_key, local_value, params_key)
       end
     end
   end
 
-  def input_search_value_one_param_field(local_key, local_value, params_key = local_key)
+  def input_search_value_from_param_field(local_key, local_value, params_key = local_key)
     remove_params = remove_search_param(params_key, local_value, params)
     remove_params[:q] = '' if (params_key.to_s == 'mlt') && !remove_params.key?(:q)
 
