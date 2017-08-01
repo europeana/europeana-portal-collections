@@ -31,6 +31,14 @@ RSpec.describe BlogPostsController do
       ).to have_been_made.once
     end
 
+    it 'sorts by -datepublish' do
+      get :index, locale: 'en'
+      expect(
+        a_request(:get, json_api_url).
+        with(query: hash_including(sort: '-datepublish'))
+      ).to have_been_made.once
+    end
+
     it 'filters by tag "culturelover"' do
       get :index, locale: 'en'
       expect(
