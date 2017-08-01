@@ -51,18 +51,18 @@ module SearchableView
       end
     else
       [local_params[local_key]].flatten.compact.reject(&:blank?).map do |local_value|
-        input_search_value_one_param_field(local_key, local_value, local_params, params_key)
+        input_search_value_one_param_field(local_key, local_value, params_key)
       end
     end
   end
 
-  def input_search_value_one_param_field(local_key, local_value, local_params = params, params_key = local_key)
+  def input_search_value_one_param_field(local_key, local_value, params_key = local_key)
     remove_params = remove_search_param(params_key, local_value, params)
     remove_params[:q] = '' if (params_key.to_s == 'mlt') && !remove_params.key?(:q)
 
     param_name = case params[params_key]
                  when Array
-                  "#{params_key}[]"
+                   "#{params_key}[]"
                  when Hash
                    "#{params_key}[#{local_key}]"
                  else
@@ -82,6 +82,6 @@ module SearchableView
   #
   # @return [Array<Symbol>]
   def search_param_keys
-    [:qf, :mlt, :qe]
+    %i(qf mlt qe)
   end
 end

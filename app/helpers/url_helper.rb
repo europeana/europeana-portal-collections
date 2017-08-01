@@ -41,13 +41,13 @@ module UrlHelper
     Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |search_params|
       search_params.delete(:locale)
 
-      if search_params[:qf].blank?
-        search_params[:q] = ''
-      elsif search_params[:qf].is_a?(Array)
-        search_params[:q] = search_params[:qf].shift
-      else
-        search_params[:q] = search_params.delete(:qf)
-      end
+      search_params[:q] = if search_params[:qf].blank?
+                            ''
+                          elsif search_params[:qf].is_a?(Array)
+                            search_params[:qf].shift
+                          else
+                            search_params.delete(:qf)
+                          end
     end
   end
 

@@ -109,8 +109,8 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
 
   context 'when searching for entities' do
     let(:blacklight_params) do
-      { qe:
-        {
+      {
+        qe: {
           'agent/base/60166' => 'Miles Davis', 'agent/base/62483' => 'Horace Silver', 'agent/base/59876' => 'Bing Crosby'
         }
       }
