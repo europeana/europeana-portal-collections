@@ -37,7 +37,7 @@ module I18nHelper
 
   def date_eras_gregorian(date)
     return date unless date.is_a?(String)
-    m = date.match(/^\s*(\+|\-)\s*0*(.*)$/)
+    m = date.match(/^\s*(\+|\-)\s*0*(\d[\d\-]*)$/)
     if m
       year = m[2].strip
       key = 'global.date.eras.gregorian.' + (m[1] == '+' ? 'current' : 'before')

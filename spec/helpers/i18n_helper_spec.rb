@@ -5,8 +5,7 @@ RSpec.describe I18nHelper do
     context 'BCE' do
       it 'converts gregorian BCE to correct format' do
         ['-1234', ' -1234', '-1234 ', ' -1234 ', '- 1234', ' - 1234', '- 1234 ', ' - 1234 '].each do |date|
-          formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq('1234 BCE')
+          expect(helper.date_eras_gregorian(date)).to eq('1234 BCE')
         end
       end
 
@@ -22,8 +21,7 @@ RSpec.describe I18nHelper do
     context 'CE' do
       it 'converts gregorian CE to correct format' do
         ['+12', ' +12', '+12 ', ' +12 ', '+ 12', ' + 12', '+ 12 ', ' + 12 '].each do |date|
-          formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq('12 CE')
+          expect(helper.date_eras_gregorian(date)).to eq('12 CE')
         end
       end
 
@@ -41,15 +39,13 @@ RSpec.describe I18nHelper do
     context 'normal dates' do
       it 'leaves normal dates untouched' do
         ['1066', ' 1066', '1066 ', ' 1066 '].each do |date|
-          formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq('1066')
+          expect(helper.date_eras_gregorian(date)).to eq('1066')
         end
       end
 
       it 'leaves non-strings untouched' do
         [{}, [], nil, true].each do |date|
-          formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq(date)
+          expect(helper.date_eras_gregorian(date)).to eq(date)
         end
       end
     end
@@ -57,8 +53,7 @@ RSpec.describe I18nHelper do
     context 'malformed dates' do
       it 'leaves them untouched' do
         %w(--05-03 +0unknown).each do |date|
-          formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq(date)
+          expect(helper.date_eras_gregorian(date)).to eq(date)
         end
       end
     end
