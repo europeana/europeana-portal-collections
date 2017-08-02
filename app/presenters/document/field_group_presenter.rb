@@ -16,7 +16,12 @@ module Document
     end
 
     def self.load_definitions
-      YAML::load_file(File.join(Rails.root, 'config', 'record_field_groups.yml')).with_indifferent_access
+      YAML::load_file(File.join(Rails.root, 'config', 'record_field_groups.yml')).with_indifferent_access.freeze
+    end
+
+    def initialize(*args)
+      super
+      @entity_fallbacks_used = []
     end
 
     def display(id)
@@ -77,7 +82,7 @@ module Document
       if section[:entity_fallback]
         return fields if fields.present?
         fields = section_field_values(fields: section[:entity_fallback])
-        section[:entity_fallback_used] = true
+        @entity_fallbacks_used << entity_section_memo_key(section)
       end
 
       return fields if entity_section?(section)
@@ -152,7 +157,7 @@ module Document
     def entity_for(section, val)
       return nil unless entity_section?(section)
 
-      memo_key = [section[:entity_name], section[:entity_proxy_field]].join('/')
+      memo_key = entity_section_memo_key(section)
 
       @section_entities ||= {}
       @section_entities[memo_key] ||= entities(section[:entity_name], section[:entity_proxy_field])
@@ -164,6 +169,10 @@ module Document
           entity_label(entity, section[:entity_name]).any? { |label| label == val }
         end
       end
+    end
+
+    def entity_section_memo_key(section)
+      [section[:entity_name], section[:entity_proxy_field]].join('/')
     end
 
     def section_field_subsection_item_text(section, val)
@@ -209,7 +218,7 @@ module Document
     def linkable_entity_section?(section)
       Rails.application.config.x.enable.entity_page &&
         entity_section?(section) &&
-        !section[:entity_fallback_used] &&
+        !@entity_fallbacks_used.include?(entity_section_memo_key(section)) &&
         section[:entity_name] == 'agents' # while only agent entity pages are implemented
     end
   end

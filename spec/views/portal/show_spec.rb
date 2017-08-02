@@ -92,7 +92,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
 
     it 'should have person link pointing to entity page' do
       render
-      expect(rendered).to have_selector('a[href="/en/entities/agent/base/' + identifier + '"]')
+      expect(rendered).to have_selector(%(a[href="/en/entities/agent/base/#{identifier}"]))
     end
   end
 end
