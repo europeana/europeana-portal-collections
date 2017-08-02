@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module I18nHelper
   def language_map
     {
@@ -31,5 +33,18 @@ module I18nHelper
     localised = language_map.map { |k, v| [t("global.language-#{v}", locale: k), k.to_s] }
     localised.sort_by!(&:first)
     options_for_select(localised, I18n.locale.to_s)
+  end
+
+  def date_eras_gregorian(date)
+    return date unless date.is_a?(String)
+    m = date.match(/^\s*(\+|\-)\s*0*(.*)$/)
+    if m
+      year = m[2].strip
+      key = 'global.date.eras.gregorian.' + (m[1] == '+' ? 'current' : 'before')
+      default = m[2] + ' ' + (m[1] == '+' ? 'CE' : 'BCE')
+      t(key, year: year, default: default)
+    else
+      date.strip
+    end
   end
 end

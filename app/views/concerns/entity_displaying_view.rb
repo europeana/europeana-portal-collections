@@ -4,17 +4,6 @@
 # For views needing to display entities
 module EntityDisplayingView
   extend ActiveSupport::Concern
-  # TODO
-  # def entity_head_meta
-  #   mustache[:entity_head_meta] ||= begin
-  #     [
-  #       { meta_property: 'fb:appid', content: '185778248173748' },
-  #       { meta_name: 'twitter:card', content: 'summary' },
-  #       { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-  #       { meta_property: 'og:url', content: request.original_url }
-  #     ]
-  #   end
-  # end
 
   def entity_anagraphical
     result = [
@@ -217,18 +206,7 @@ module EntityDisplayingView
 
   def entity_date(date)
     # Just grab the first date in the array if present.
-    date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? entity_formatted_date(date.first) : nil
-  end
-
-  def entity_formatted_date(date)
-    # if date.starts_with?('-')
-    #   date.slice(0) + 'BC'
-    # elsif date.starts_with?('+')
-    #   date.slice(0) + 'AD'
-    # else
-    #   date
-    # end
-    date
+    date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date_eras_gregorian(date.first) : nil
   end
 
   # For multiple items the format is just an array of hash items
