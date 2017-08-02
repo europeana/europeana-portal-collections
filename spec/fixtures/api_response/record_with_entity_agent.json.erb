@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "object": {
+    "about": "<%= id %>",
+    "title": ["<%= id %>"],
+    "proxies": [
+      {
+        "dcCreator": {
+          "def": ["http://data.europeana.eu/agent/base/<%= identifier %>"]
+        }
+      }
+    ],
+    "aggregations": [
+      {
+        "edmIsShownBy": "http://provider.example.com/<%= id %>"
+      }
+    ],
+    "agents": [
+      {
+        "about": "http://data.europeana.eu/agent/base/<%= identifier %>",
+        "prefLabel": {
+          "def": [
+            "Mister Smith"
+          ]
+        }
+      }
+    ]
+  }
+}

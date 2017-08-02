@@ -54,7 +54,7 @@ module Portal
     end
 
     def include_nav_searchbar
-     true
+      true
     end
 
     def content
@@ -208,7 +208,7 @@ module Portal
           latitude: '"' + (field_value('places.latitude') || '') + '"',
           longitude: '"' + (field_value('places.longitude') || '') + '"',
           long_and_lat: long_and_lat?,
-          #placeName: document.fetch('places.prefLabel', []).first,
+          # placeName: document.fetch('places.prefLabel', []).first,
           placeName: pref_label(document, 'places.prefLabel'),
           labels: {
             longitude: t('site.object.meta-label.longitude') + ':',

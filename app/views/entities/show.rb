@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'digest'
-require 'uri'
-
 module Entities
   class Show < ApplicationView
     include EntityDisplayingView
