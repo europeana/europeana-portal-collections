@@ -69,6 +69,22 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
       assign(:collection, collection)
     end
 
+    context 'with "all" collection' do
+      let(:collection) { collections(:all) }
+      it 'excludes link to "all" collection from breadcrumbs' do
+        render
+        expect(rendered).not_to have_selector('.breadcrumbs li a[href$="/collections/all"]')
+      end
+    end
+
+    context 'with non-"all" collection' do
+      let(:collection) { collections(:art) }
+      it 'includes link to collection in breadcrumbs' do
+        render
+        expect(rendered).to have_selector('.breadcrumbs li a[href$="/collections/art"]')
+      end
+    end
+
     context 'with a default layout' do
       let(:collection) { collections(:grid_layout) }
       it 'sets that default layout' do
