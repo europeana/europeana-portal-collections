@@ -41,7 +41,7 @@ module I18nHelper
     if m
       year = m[2].strip
       key = 'global.date.eras.gregorian.' + (m[1] == '+' ? 'current' : 'before')
-      default = m[2] + ' ' + (m[1] == '+' ? 'CE' : 'BCE')
+      default = year + ' ' + (m[1] == '+' ? 'CE' : 'BCE')
       t(key, year: year, default: default)
     else
       date.strip
