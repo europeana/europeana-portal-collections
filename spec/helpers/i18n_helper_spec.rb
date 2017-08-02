@@ -21,7 +21,7 @@ RSpec.describe I18nHelper do
 
     context 'after christ' do
       it 'converts gregorian after christ to correct format' do
-        ['+12', ' +12', '+12 ', ' +12 ', '+ 12', ' + 12', '+ 12 ', ' + 12 '].each do |date|
+        ['+12', ' +12', '+12 ', ' +12 ', '+ 12', ' + 12', '+ 12 ', ' + 12 ', '12'].each do |date|
           formatted_date = helper.date_eras_gregorian(date)
           expect(formatted_date).to eq('12 CE'), "date = '#{date}' has failed"
         end
@@ -32,7 +32,9 @@ RSpec.describe I18nHelper do
       end
 
       it 'strips off leading zeroes' do
-        expect(helper.date_eras_gregorian('+066')).to eq('66 CE')
+        %w(+066 066).each do |date|
+          expect(helper.date_eras_gregorian(date)).to eq('66 CE')
+        end
       end
     end
 
@@ -46,6 +48,15 @@ RSpec.describe I18nHelper do
 
       it 'leaves non-strings untouched' do
         [{}, [], nil, true].each do |date|
+          formatted_date = helper.date_eras_gregorian(date)
+          expect(formatted_date).to eq(date)
+        end
+      end
+    end
+
+    context 'malformed dates' do
+      it 'leaves them untouched' do
+        %w(--05-03 +0unknown).each do |date|
           formatted_date = helper.date_eras_gregorian(date)
           expect(formatted_date).to eq(date)
         end
