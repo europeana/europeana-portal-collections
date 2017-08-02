@@ -2,15 +2,15 @@
 
 RSpec.describe I18nHelper do
   describe '#date_eras_gregorian' do
-    context 'before christ' do
-      it 'converts gregorian before christ to correct format' do
+    context 'BCE' do
+      it 'converts gregorian BCE to correct format' do
         ['-1234', ' -1234', '-1234 ', ' -1234 ', '- 1234', ' - 1234', '- 1234 ', ' - 1234 '].each do |date|
           formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq('1234 BCE'), "date = '#{date}' has failed"
+          expect(formatted_date).to eq('1234 BCE')
         end
       end
 
-      it 'converts gregorian before christ yyyy-mm-dd to correct format' do
+      it 'converts gregorian BCE yyyy-mm-dd to correct format' do
         expect(helper.date_eras_gregorian('-1033-02-15')).to eq('1033-02-15 BCE')
       end
 
@@ -19,15 +19,15 @@ RSpec.describe I18nHelper do
       end
     end
 
-    context 'after christ' do
-      it 'converts gregorian after christ to correct format' do
+    context 'CE' do
+      it 'converts gregorian CE to correct format' do
         ['+12', ' +12', '+12 ', ' +12 ', '+ 12', ' + 12', '+ 12 ', ' + 12 '].each do |date|
           formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq('12 CE'), "date = '#{date}' has failed"
+          expect(formatted_date).to eq('12 CE')
         end
       end
 
-      it 'converts gregorian after christ yyyy-mm-dd to correct format' do
+      it 'converts gregorian CE yyyy-mm-dd to correct format' do
         expect(helper.date_eras_gregorian('+56-01-01')).to eq('56-01-01 CE')
       end
 
@@ -40,7 +40,7 @@ RSpec.describe I18nHelper do
       it 'leaves normal dates untouched' do
         ['1066', ' 1066', '1066 ', ' 1066 '].each do |date|
           formatted_date = helper.date_eras_gregorian(date)
-          expect(formatted_date).to eq('1066'), "date = '#{date}' has failed"
+          expect(formatted_date).to eq('1066')
         end
       end
 
