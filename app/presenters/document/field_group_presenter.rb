@@ -16,7 +16,8 @@ module Document
     end
 
     def self.load_definitions
-      YAML::load_file(File.join(Rails.root, 'config', 'record_field_groups.yml')).with_indifferent_access.freeze
+      file_path = File.join(Rails.root, 'config', 'record_field_groups.yml')
+      YAML.load_file(file_path).with_indifferent_access.freeze
     end
 
     def initialize(*args)
