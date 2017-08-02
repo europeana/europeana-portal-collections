@@ -77,6 +77,7 @@ module Document
       if section[:entity_fallback]
         return fields if fields.present?
         fields = section_field_values(fields: section[:entity_fallback])
+        section[:entity_fallback_used] = true
       end
 
       return fields if entity_section?(section)
@@ -124,13 +125,13 @@ module Document
         return field_value(section[:url])
       end
 
-      if section[:search_field] && !entity_section?(section)
-        return section_field_search_path(val, section[:search_field], section[:quoted])
-      end
-
       if linkable_entity_section?(section)
         entity_url = entity_url_for(section, val)
         return entity_url unless entity_url.nil?
+      end
+
+      if section[:search_field]
+        return section_field_search_path(val, section[:search_field], section[:quoted])
       end
 
       linkable_value?(val) ? val : nil
@@ -208,6 +209,7 @@ module Document
     def linkable_entity_section?(section)
       Rails.application.config.x.enable.entity_page &&
         entity_section?(section) &&
+        !section[:entity_fallback_used] &&
         section[:entity_name] == 'agents' # while only agent entity pages are implemented
     end
   end
