@@ -17,6 +17,7 @@ class BlogPostsController < ApplicationController
 
   def index
     @blog_posts = Pro::BlogPost.includes(:network).where(pro_json_api_filters).
+                  order(datepublish: :desc).
                   page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
 
@@ -39,5 +40,11 @@ class BlogPostsController < ApplicationController
     respond_to do |format|
       format.html
     end
+  end
+
+  protected
+
+  def pro_json_api_whitelisted_collections
+    Collection.where(key: %w(fashion world-war-I))
   end
 end

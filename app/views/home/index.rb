@@ -7,7 +7,7 @@ module Home
     include SearchableView
 
     def page_title
-      'Europeana Collections'
+      site_title
     end
 
     def js_slsb_ld

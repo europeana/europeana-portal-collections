@@ -5,15 +5,16 @@ class EntitiesController < ApplicationController
 
   attr_reader :body_cache_key
 
+  before_action :ensure_entity_page_enabled, only: :show
   before_action :enforce_slug, only: :show
 
   def suggest
-    render json: Europeana::API.entity.suggest(entities_api_suggest_params(params[:text]))
+    api_params = entities_api_suggest_params(params.slice(:text, :language))
+    api_response = Europeana::API.entity.suggest(api_params)
+    render json: api_response
   end
 
   def show
-    authorize! :show, :entity
-
     @body_cache_key = body_cache_key
     unless body_cached?
       @entity = entity
@@ -27,6 +28,11 @@ class EntitiesController < ApplicationController
   end
 
   private
+
+  # Generate 404 unless entity feature is enabled.
+  def ensure_entity_page_enabled
+    raise ActiveRecord::RecordNotFound unless Rails.application.config.x.enable.entity_page
+  end
 
   def enforce_slug
     redirect_to url_for(slug: slug, format: params[:format]) unless params[:slug] == slug

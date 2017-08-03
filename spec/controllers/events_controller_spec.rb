@@ -30,6 +30,14 @@ RSpec.describe EventsController do
       ).to have_been_made.once
     end
 
+    it 'sorts by -end_event' do
+      get :index, locale: 'en'
+      expect(
+        a_request(:get, json_api_url).
+        with(query: hash_including(sort: '-end_event'))
+      ).to have_been_made.once
+    end
+
     it 'filters by date and tag "culturelover"' do
       get :index, locale: 'en'
       expect(

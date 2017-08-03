@@ -30,10 +30,8 @@ module Collections
       end
     end
 
-    def page_title
-      mustache[:page_title] ||= begin
-        @landing_page.title || @collection.title
-      end
+    def page_content_heading
+      @collection.title
     end
 
     def body_class

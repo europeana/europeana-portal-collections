@@ -32,6 +32,17 @@ RSpec.describe EntitiesController do
         with(query: hash_including(text: 'van', scope: 'europeana'))
       ).to have_been_made.once
     end
+
+    context 'when language param is present' do
+      it 'is sent to the entity API' do
+        get :suggest, locale: 'en', text: 'van', language: 'en,de'
+
+        expect(
+          a_request(:get, Europeana::API.url + '/entities/suggest').
+          with(query: hash_including(text: 'van', scope: 'europeana', language: 'en,de'))
+        ).to have_been_made.once
+      end
+    end
   end
 
   describe 'GET #show' do
@@ -40,8 +51,22 @@ RSpec.describe EntitiesController do
         to_return(status: 200, body: api_responses(:entities_fetch), headers: { 'Content-Type' => 'application/ld+json' })
     end
 
-    context 'when logged in as admin' do
-      login_admin
+    context 'when entity feature flag is disabled' do
+      before do
+        Rails.application.config.x.enable.entity_page = false
+      end
+
+      it 'returns http 404 not found' do
+        get :show, locale: 'en', type: 'people', id: '1234'
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when entity feature flag is enabled' do
+      before do
+        Rails.application.config.x.enable.entity_page = true
+      end
 
       context 'without slug in URL' do
         it 'redirects to URL with slug' do

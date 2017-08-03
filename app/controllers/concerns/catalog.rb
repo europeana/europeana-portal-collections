@@ -70,6 +70,10 @@ module Catalog
     end
   end
 
+  def has_search_parameters?
+    super || params.key?(:qe)
+  end
+
   protected
 
   def search_facet_url(options = {})
