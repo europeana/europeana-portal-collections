@@ -25,13 +25,29 @@ RSpec.describe I18nHelper do
         end
       end
 
+      it 'converts years < 1000 to correct gregorian CE format' do
+        %w(6 66 666).each do |date|
+          expect(helper.date_eras_gregorian(date)).to eq(date + ' CE')
+        end
+      end
+
       it 'converts gregorian CE yyyy-mm-dd to correct format' do
         expect(helper.date_eras_gregorian('+56-01-01')).to eq('56-01-01 CE')
       end
 
-      it 'strips off leading zeroes' do
+      it 'converts gregorian CE yyyy/mm/dd to correct format' do
+        expect(helper.date_eras_gregorian('+56/01/01')).to eq('56/01/01 CE')
+      end
+
+      it 'strips off leading zero' do
         %w(+066 066).each do |date|
           expect(helper.date_eras_gregorian(date)).to eq('66 CE')
+        end
+      end
+
+      it 'strips off leading zeroes' do
+        %w(+006 006).each do |date|
+          expect(helper.date_eras_gregorian(date)).to eq('6 CE')
         end
       end
     end
