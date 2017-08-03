@@ -137,4 +137,20 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
       )
     end
   end
+  context 'when searching for entities' do
+    let(:blacklight_params) do
+      {
+        qe: {
+          'agent/base/60166' => 'Miles Davis', 'agent/base/62483' => 'Horace Silver', 'agent/base/59876' => 'Bing Crosby'
+        }
+      }
+    end
+
+    it 'shows entity search filters' do
+      render
+      expect(rendered).to have_selector('.search-tags li.search-tag', text: 'Miles Davis')
+      expect(rendered).to have_selector('.search-tags li.search-tag', text: 'Horace Silver')
+      expect(rendered).to have_selector('.search-tags li.search-tag', text: 'Bing Crosby')
+    end
+  end
 end

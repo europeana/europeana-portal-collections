@@ -11,19 +11,25 @@ module UrlHelper
   delegate :search_action_path, :search_action_url, to: :controller
 
   ##
-  # Remove one value from an Array of params
+  # Remove one value from an Array or Hash of params
   #
   # @param key [Symbol, String] Key of parameter to remove
   # @param value Value to remove from params
   # @param source_params [Hash] params to remove from
   # @return [Hash] a copy of params with the passed value removed
   def remove_search_param(key, value, source_params = params)
-    p = Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params)
-    p.delete(:locale)
-    p[key] = ([p[key]].flatten || []).dup
-    p[key] = p[key] - [value]
-    p.delete(key) if p[key].empty?
-    p
+    Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |search_params|
+      search_params.delete(:locale)
+
+      if search_params[key].is_a?(Hash)
+        key_for_value = search_params[key].key(value)
+        search_params[key].delete(key_for_value)
+      else
+        search_params[key] = ([search_params[key]].flatten || []).dup
+        search_params[key] = search_params[key] - [value]
+      end
+      search_params.delete(key) if search_params[key].blank?
+    end
   end
 
   ##
@@ -32,15 +38,16 @@ module UrlHelper
   # @param source_params [Hash] params to operate on
   # @return [Hash] modified params
   def remove_q_param(source_params = params)
-    Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |p|
-      p.delete(:locale)
-      if p[:qf].blank?
-        p[:q] = ''
-      elsif p[:qf].is_a?(Array)
-        p[:q] = p[:qf].shift
-      else
-        p[:q] = p.delete(:qf)
-      end
+    Blacklight::SearchState.new(source_params, blacklight_config).send(:reset_search_params).tap do |search_params|
+      search_params.delete(:locale)
+
+      search_params[:q] = if search_params[:qf].blank?
+                            ''
+                          elsif search_params[:qf].is_a?(Array)
+                            search_params[:qf].shift
+                          else
+                            search_params.delete(:qf)
+                          end
     end
   end
 

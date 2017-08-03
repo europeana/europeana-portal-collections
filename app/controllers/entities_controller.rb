@@ -6,7 +6,9 @@ class EntitiesController < ApplicationController
   attr_reader :body_cache_key
 
   def suggest
-    render json: Europeana::API.entity.suggest(entities_api_suggest_params(params[:text]))
+    api_params = entities_api_suggest_params(params.slice(:text, :language))
+    api_response = Europeana::API.entity.suggest(api_params)
+    render json: api_response
   end
 
   def show

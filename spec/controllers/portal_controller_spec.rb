@@ -61,6 +61,18 @@ RSpec.describe PortalController do
           it_behaves_like 'no hierarchy API request'
         end
       end
+
+      context 'with qe param' do
+        let(:params) { { locale: 'en', qe: { 'agent/base/60166' => 'Miles Davis' } } }
+
+        it 'searches the API for entities' do
+          get :index, params
+
+          expect(an_api_search_request.
+            with(query: hash_including(qf: 'who:"http://data.europeana.eu/agent/base/60166"'))).
+            to have_been_made
+        end
+      end
     end
 
     context 'when the format is json' do
