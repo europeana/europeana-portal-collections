@@ -5,6 +5,7 @@ RSpec.describe EntityDisplayingView do
     Class.new do
       include EntityDisplayingView
       include I18nHelper
+      delegate :t, to: :I18n
     end
   end
 

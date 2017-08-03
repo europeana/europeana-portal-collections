@@ -46,6 +46,12 @@ module I18nHelper
     m = date.match(%r{^\s*(\+|\-)\s*(\d[\d\-\/]*)\s*$})
     return build_date(m[2], m[1]) if m
 
+    # Match abnormal dates, e.g. with format 'c. AD 46' etc.
+    ['a. de C.', 'c. AD'].each do |abbrev|
+      m = date.match(%r{^\s*#{abbrev}\s*(\d[\d\-\/])\s*$})
+      return build_date(m[1], '+') if m
+    end
+
     # Otherwise do nothing.
     date.strip
   end

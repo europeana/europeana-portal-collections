@@ -66,6 +66,14 @@ RSpec.describe I18nHelper do
       end
     end
 
+    context 'abnormal dates' do
+      it 'handles abnormal formats correctly' do
+        ['c. AD 46', 'a. de C. 46'].each do |date|
+          expect(helper.date_eras_gregorian(date)).to eq('46 CE')
+        end
+      end
+    end
+
     context 'malformed dates' do
       it 'leaves them untouched' do
         %w(--05-03 +0unknown).each do |date|
