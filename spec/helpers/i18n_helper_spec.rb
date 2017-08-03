@@ -33,16 +33,12 @@ RSpec.describe I18nHelper do
 
       it 'omits CE from years > 1000' do
         ['1066', ' 1066', '1066 ', ' 1066 ', '1066 AD', 'c. 1066', 'c.1066', 'c. 1066 AD'].each do |date|
-          expect(helper.date_eras_gregorian(date)).to eq('1066')
+          expect(helper.date_eras_gregorian(date)).to eq('1066'), "'#{date}'"
         end
       end
 
       it 'converts gregorian CE yyyy-mm-dd to correct format' do
         expect(helper.date_eras_gregorian('+56-01-01')).to eq('56-01-01 CE')
-      end
-
-      it 'converts gregorian CE yyyy/mm/dd to correct format' do
-        expect(helper.date_eras_gregorian('+56/01/01')).to eq('56/01/01 CE')
       end
 
       it 'strips off leading zero' do

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 17d3e55bd4007584bd7d9fbb9af73bb5b9dfe13c
+  revision: d7cc69bd91ad629fbd30dc3784107e7f58ac2d7e
   branch: develop
   specs:
     europeana-i18n (0.0.1)
@@ -686,4 +686,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.12.5
+   1.14.6

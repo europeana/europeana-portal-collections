@@ -43,16 +43,32 @@ module I18nHelper
     return build_date(m[0], '+') if m && strip_leading_zeroes(m[0]).length < 4
 
     # Match on '+' or '-' followed by date where date starts with digit followed by one or more digits or hyphens
-    m = date.match(%r{^\s*(\+|\-)\s*(\d[\d\-\/]*)\s*$})
-    return build_date(m[2], m[1]) if m
+    # If the matched date contains hyphens, then it must have the format 'yyyy-dd-dd'
+    m = date.match(/^\s*(\+|\-)\s*(\d[\d\-]*)\s*$/i)
+    if m
+      year = m[2]
+      return build_date(year, m[1]) unless year.include?('-') && !year.match(/^\d{1,4}\-\d{1,2}\-\d{1,2}$/)
+    end
 
-    # Match abnormal dates, e.g. with format 'c. AD 46' etc.
-    ['a. de C.', 'c. AD'].each do |abbrev|
-      m = date.match(%r{^\s*#{abbrev}\s*(\d[\d\-\/])\s*$})
+    # 0mit CE from years > 999', e.g. 'c. 1066', 'c.1066', '1066 AD' or 'c. 1066 AD' => '1066'
+    m = date.match(/^\s*(?:c\.)?\s*(\d{4})\s*(?:AD|CE)?\s*$/i)
+    return m[1] if m
+
+    # Match abnormal CE dates.
+    # 'c. AD 46', 'a. de C. 46', 'c. 46', 'c.46', 'c.46 AD' or 'circa 46' => '46 CE'
+    ['c. AD', 'a. de C.', 'c.', 'circa'].each do |abbrev|
+      m = date.match(/^\s*#{abbrev}\s*(\d[\d\-]*)\s*(?:AD)?\s*$/i)
       return build_date(m[1], '+') if m
     end
 
-    # Otherwise do nothing.
+    # Match abnormal BCE dates.
+    # 'About 470 BC', 'About 470 BCE', 'c.470 BCE' or 'circa 470 BCE' => '470 BCE'
+    %w{About c. circa}.each do |abbrev|
+      m = date.match(/^\s*#{abbrev}\s*(\d[\d\-]*)\s*(?:BCE?)?\s*$/i)
+      return build_date(m[1], '-') if m
+    end
+
+    # Otherwise just strip.
     date.strip
   end
 
@@ -60,9 +76,8 @@ module I18nHelper
 
   def build_date(year, prefix)
     year = strip_leading_zeroes(year)
-    key = 'global.date.eras.gregorian.' + (prefix == '+' ? 'current' : 'before')
-    default = year + ' ' + (prefix == '+' ? 'CE' : 'BCE')
-    t(key, year: year, default: default)
+    key = prefix == '+' ? 'current' : 'before'
+    t(key, scope: 'global.date.eras.gregorian', years: year)
   end
 
   def strip_leading_zeroes(s)
