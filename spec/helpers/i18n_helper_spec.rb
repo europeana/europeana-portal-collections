@@ -31,6 +31,12 @@ RSpec.describe I18nHelper do
         end
       end
 
+      it 'omits CE from years > 1000' do
+        ['1066', ' 1066', '1066 ', ' 1066 ', '1066 AD', 'c. 1066', 'c.1066', 'c. 1066 AD'].each do |date|
+          expect(helper.date_eras_gregorian(date)).to eq('1066')
+        end
+      end
+
       it 'converts gregorian CE yyyy-mm-dd to correct format' do
         expect(helper.date_eras_gregorian('+56-01-01')).to eq('56-01-01 CE')
       end
@@ -53,12 +59,6 @@ RSpec.describe I18nHelper do
     end
 
     context 'normal dates' do
-      it 'leaves normal dates untouched' do
-        ['1066', ' 1066', '1066 ', ' 1066 '].each do |date|
-          expect(helper.date_eras_gregorian(date)).to eq('1066')
-        end
-      end
-
       it 'leaves non-strings untouched' do
         [{}, [], nil, true].each do |date|
           expect(helper.date_eras_gregorian(date)).to eq(date)
@@ -66,17 +66,28 @@ RSpec.describe I18nHelper do
       end
     end
 
+    context 'dates in other eras' do
+      it 'leaves them untouched' do
+        ['AH 1014'].each do |date|
+          expect(helper.date_eras_gregorian(date)).to eq(date)
+        end
+      end
+    end
+
     context 'abnormal dates' do
       it 'handles abnormal formats correctly' do
-        ['c. AD 46', 'a. de C. 46'].each do |date|
+        ['c. AD 46', 'a. de C. 46', 'c. 46', 'c.46', 'c.46 AD', 'circa 46'].each do |date|
           expect(helper.date_eras_gregorian(date)).to eq('46 CE')
+        end
+        ['About 470 BC', 'About 470 BCE', 'c.470 BCE', 'circa 470 BCE'].each do |date|
+          expect(helper.date_eras_gregorian(date)).to eq('470 BCE')
         end
       end
     end
 
     context 'malformed dates' do
       it 'leaves them untouched' do
-        %w(--05-03 +0unknown).each do |date|
+        ['--05-03', '+0unknown', 'Amsterdam, Netherlands', '-10-1500-04'].each do |date|
           expect(helper.date_eras_gregorian(date)).to eq(date)
         end
       end
