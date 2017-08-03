@@ -59,7 +59,7 @@ Rails.application.routes.draw do
       end
 
       constraints type: /people|periods|places|topics/, id: /\d+/ do
-        get ':type/:id(-:slug)', as: 'entity', to: 'entities#show'
+        get ':type/:id(-(:slug))', as: 'entity', to: 'entities#show'
       end
     end
 
