@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'digest'
-require 'uri'
-
 module Entities
   class Show < ApplicationView
     include EntityDisplayingView
@@ -18,6 +15,7 @@ module Entities
 
     def navigation
       {
+        # TODO
         breadcrumbs: [
           {
             label: entity_title
@@ -30,24 +28,36 @@ module Entities
       true
     end
 
-    # TODO
-    # def head_meta
-    #   mustache[:head_meta] ||= begin
-    #     title = page_title
-    #     head_meta = [
-    #       { meta_name: 'description', content: head_meta_description },
-    #       { meta_property: 'fb:appid', content: '185778248173748' },
-    #       { meta_name: 'twitter:card', content: 'summary' },
-    #       { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-    #       { meta_property: 'og:sitename', content: title },
-    #       { meta_property: 'og:description', content: head_meta_description },
-    #       { meta_property: 'og:url', content: collection_url(@collection.key) }
-    #     ]
-    #     head_meta << { meta_property: 'og:title', content: title } unless title.nil?
-    #     head_meta << { meta_property: 'og:image', content: @landing_page.og_image } unless @landing_page.og_image.blank?
-    #     head_meta + super
-    #   end
-    # end
+    def head_meta
+      mustache[:head_meta] ||= begin
+        title = page_title
+        head_meta = [
+          { meta_name: 'description', content: head_meta_description },
+          { meta_property: 'fb:appid', content: '185778248173748' },
+          { meta_name: 'twitter:card', content: 'summary' },
+          { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+          { meta_property: 'og:sitename', content: title },
+          { meta_property: 'og:description', content: head_meta_description },
+          { meta_property: 'og:url', content: request.original_url }
+        ]
+        head_meta << { meta_property: 'og:title', content: title }
+        head_meta << { meta_property: 'og:image', content: og_image } unless og_image.nil?
+        head_meta + super
+      end
+    end
+
+    def head_meta_description
+      mustache[:head_meta_description] ||= begin
+        truncate(entity_description, length: 350, separator: ' ')
+      end
+    end
+
+    def og_image
+      mustache[:og_image] ||= begin
+        thumbnail = entity_thumbnail
+        thumbnail ? thumbnail[:src] : nil
+      end
+    end
 
     def content
       mustache[:content] ||= begin
@@ -84,6 +94,5 @@ module Entities
         href: 'https://commons.wikimedia.org/wiki/File:' + thumb[:src].split('/').pop
       }
     end
-
   end
 end

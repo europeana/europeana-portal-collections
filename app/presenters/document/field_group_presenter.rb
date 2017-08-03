@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Document
   ##
   # Presenter for a group of document fields
@@ -15,7 +16,13 @@ module Document
     end
 
     def self.load_definitions
-      YAML::load_file(File.join(Rails.root, 'config', 'record_field_groups.yml')).with_indifferent_access
+      file_path = File.join(Rails.root, 'config', 'record_field_groups.yml')
+      YAML.load_file(file_path).with_indifferent_access.freeze
+    end
+
+    def initialize(*args)
+      super
+      @entity_fallbacks_used = []
     end
 
     def display(id)
@@ -57,7 +64,7 @@ module Document
     end
 
     def section_field_values(section)
-      fields = if section[:entity_name] && section[:entity_proxy_field]
+      fields = if entity_section?(section)
                  entity_fields(section[:entity_name], section[:entity_proxy_field])
                elsif section[:fields]
                  [section[:fields]].flatten.map do |field|
@@ -76,9 +83,10 @@ module Document
       if section[:entity_fallback]
         return fields if fields.present?
         fields = section_field_values(fields: section[:entity_fallback])
+        @entity_fallbacks_used << entity_section_memo_key(section)
       end
 
-      return fields if section[:entity_name] && section[:entity_proxy_field]
+      return fields if entity_section?(section)
 
       entity_uris = document.fetch('agents.about', []) || []
       fields.reject { |field| entity_uris.include?(field) }
@@ -97,51 +105,82 @@ module Document
     def section_field_subsection(section)
       field_values = section_field_values(section).compact
       field_values = field_values.slice(0, section[:max]) if section[:max].present?
-
       field_values.map do |val|
-        {}.tap do |item|
-          item[:text] = val
-          if !val.nil? && section[:capitalised]
-            item[:text] = val.titleize
-          end
-          if section[:url]
-            item[:url] = field_value(section[:url])
-          elsif section[:search_field]
-            item[:url] = section_field_search_path(val, section[:search_field], section[:quoted])
-          end
+        section_field_subsection_item(section, val)
+      end
+    end
 
-          # text manipulation
-          item[:text] = format_date(item[:text], section[:format_date])
+    def section_field_subsection_item(section, val)
+      {
+        text: section_field_subsection_item_text(section, val),
+        url: section_field_subsection_item_url(section, val),
+        ga_data: section[:ga_data],
+        extra_info: section_field_subsection_item_extra_info(section, val)
+      }
+    end
 
-          if section[:overrides] && item[:text] == section[:override_val]
-            section[:overrides].map do |override|
-              if override[:field_title]
-                item[:text] = override[:field_title]
-              end
-              if override[:field_url]
-                item[:url] = override[:field_url]
-              end
-            end
-          end
+    def section_field_subsection_item_extra_info(section, val)
+      return nil unless entity_section?(section) && section[:entity_extra].present?
+      entity = entity_for(section, val)
+      return nil unless entity.present?
+      section_nested_hash(section[:entity_extra], entity)
+    end
 
-          item[:url] = val if linkable_value?(val)
+    def section_field_subsection_item_url(section, val)
+      if section[:url]
+        return field_value(section[:url])
+      end
 
-          if section[:ga_data]
-            item[:ga_data] = section[:ga_data]
-          end
+      if linkable_entity_section?(section)
+        entity_url = entity_url_for(section, val)
+        return entity_url unless entity_url.nil?
+      end
 
-          # extra entity info
-          if section[:entity_extra].present?
-            possible_entities = entities(section[:entity_name], section[:entity_proxy_field])
-            salient_entity = possible_entities.detect do |entity|
-              [entity_label(entity, section[:entity_name])].flatten.any? { |label| label == val }
-            end
-            unless salient_entity.nil?
-              item[:extra_info] = section_nested_hash(section[:entity_extra], salient_entity)
-            end
-          end
+      if section[:search_field]
+        return section_field_search_path(val, section[:search_field], section[:quoted])
+      end
+
+      linkable_value?(val) ? val : nil
+    end
+
+    def entity_url_for(section, val)
+      entity = entity_for(section, val)
+      return nil unless entity.present?
+
+      entity_uri = URI.parse(entity.fetch('about'))
+      return nil unless entity_uri.host == 'data.europeana.eu'
+
+      type, namespace, id = entity_uri.path.split('/').slice(1..-1)
+
+      entities_fetch_path(type, namespace, id)
+    end
+
+    def entity_for(section, val)
+      return nil unless entity_section?(section)
+
+      memo_key = entity_section_memo_key(section)
+
+      @section_entities ||= {}
+      @section_entities[memo_key] ||= entities(section[:entity_name], section[:entity_proxy_field])
+
+      @field_entities ||= {}
+      @field_entities[memo_key] ||= {}
+      @field_entities[memo_key][val] ||= begin
+        @section_entities[memo_key].detect do |entity|
+          entity_label(entity, section[:entity_name]).any? { |label| label == val }
         end
       end
+    end
+
+    def entity_section_memo_key(section)
+      [section[:entity_name], section[:entity_proxy_field]].join('/')
+    end
+
+    def section_field_subsection_item_text(section, val)
+      text = val
+      text = text.titleize if text.present? && section[:capitalised]
+      text = format_date(text, section[:format_date]) if section[:format_date]
+      text
     end
 
     def linkable_value?(value)
@@ -169,6 +208,19 @@ module Document
           context[last] = format_date(val, mapping[:format_date])
         end
       end
+    end
+
+    private
+
+    def entity_section?(section)
+      section[:entity_name] && section[:entity_proxy_field]
+    end
+
+    def linkable_entity_section?(section)
+      Rails.application.config.x.enable.entity_page &&
+        entity_section?(section) &&
+        !@entity_fallbacks_used.include?(entity_section_memo_key(section)) &&
+        section[:entity_name] == 'agents' # while only agent entity pages are implemented
     end
   end
 end

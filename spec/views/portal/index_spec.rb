@@ -32,11 +32,6 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
 
   it_behaves_like 'paginated_view'
 
-  it 'includes the search terms in the title' do
-    render
-    expect(rendered).to have_selector('title', text: /#{blacklight_params[:q]}/, visible: false)
-  end
-
   it 'displays the search terms' do
     render
     expect(rendered).to have_selector('li.search-tag', text: /#{blacklight_params[:q]}/)
@@ -74,6 +69,22 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
       assign(:collection, collection)
     end
 
+    context 'with "all" collection' do
+      let(:collection) { collections(:all) }
+      it 'excludes link to "all" collection from breadcrumbs' do
+        render
+        expect(rendered).not_to have_selector('.breadcrumbs li a[href$="/collections/all"]')
+      end
+    end
+
+    context 'with non-"all" collection' do
+      let(:collection) { collections(:art) }
+      it 'includes link to collection in breadcrumbs' do
+        render
+        expect(rendered).to have_selector('.breadcrumbs li a[href$="/collections/art"]')
+      end
+    end
+
     context 'with a default layout' do
       let(:collection) { collections(:grid_layout) }
       it 'sets that default layout' do
@@ -107,6 +118,25 @@ RSpec.describe 'portal/index.html.mustache', :common_view_components, :blackligh
     end
   end
 
+  it 'should have a title "Search query - Search Results - Europeana Collections"' do
+    render
+    expect(rendered).to have_title(
+      params[:q] + ' - ' +
+      t('site.search.page-title', default: 'Search Results') + ' - ' +
+      t('site.name', default: 'Europeana Collections')
+    )
+  end
+
+  context 'when there is no query' do
+    let(:blacklight_params) { {} }
+    it 'should have a title "Search Results - Europeana Collections"' do
+      render
+      expect(rendered).to have_title(
+        t('site.search.page-title', default: 'Search Results') + ' - ' +
+        t('site.name', default: 'Europeana Collections')
+      )
+    end
+  end
   context 'when searching for entities' do
     let(:blacklight_params) do
       {

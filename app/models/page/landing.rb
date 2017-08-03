@@ -59,7 +59,7 @@ class Page
     end
 
     def set_slug
-      new_slug = collection.key == 'all' ? '' : "collections/#{collection.key}"
+      new_slug = collection.for_all? ? '' : "collections/#{collection.key}"
       self.slug = new_slug
     end
   end

@@ -68,6 +68,10 @@ class Collection < ActiveRecord::Base
     self.class.ugc_acceptor_keys.include?(key)
   end
 
+  def for_all?
+    key == 'all'
+  end
+
   # TODO: do not hardcode this; make a db-stored attribute of the model?
   def self.ugc_acceptor_keys
     %w(world-war-I)
