@@ -5,6 +5,8 @@ class EntitiesController < ApplicationController
 
   attr_reader :body_cache_key
 
+  before_action :enforce_slug, only: :show
+
   def suggest
     render json: Europeana::API.entity.suggest(entities_api_suggest_params(params[:text]))
   end
@@ -13,18 +15,8 @@ class EntitiesController < ApplicationController
     authorize! :show, :entity
 
     @body_cache_key = body_cache_key
-    # TODO: having a cached body should not prevent the URL slug enforcement redirect
     unless body_cached?
-      @api_type = entities_api_type(params[:type])
-      @entity = Europeana::API.
-                entity.fetch(entities_api_fetch_params(@api_type, 'base', params[:id]))
-
-      expected_slug = entity_url_slug(@entity)
-      unless expected_slug == params[:slug]
-        redirect_to url_for(slug: expected_slug, format: params[:format])
-        return
-      end
-
+      @entity = entity
       @items_by_query = build_query_items_by(params)
     end
 
@@ -36,18 +28,48 @@ class EntitiesController < ApplicationController
 
   private
 
+  def enforce_slug
+    redirect_to url_for(slug: slug, format: params[:format]) unless params[:slug] == slug
+  end
+
+  def entity
+    @entity ||= begin
+      api_params = entities_api_fetch_params(api_type, api_namespace, params[:id])
+      Europeana::API.entity.fetch(api_params)
+    end
+  end
+
+  def slug
+    @slug ||= Rails.cache.fetch(slug_cache_key) { entity_url_slug(entity) }
+  end
+
+  def slug_cache_key
+    "entities/#{api_path}/slug"
+  end
+
+  def api_path
+    @api_path ||= "#{api_type}/#{api_namespace}/#{params[:id]}"
+  end
+
   def body_cache_key
     ['entities', params[:type], params[:id]].join('/')
   end
 
+  def api_type
+    @api_type ||= entities_api_type(params[:type])
+  end
+
+  def api_namespace
+    'base'
+  end
+
   def build_query_items_by(params)
-    suffix = "#{@api_type}/base/#{params[:id]}"
-    creator = build_proxy_dc('creator', 'http://data.europeana.eu', suffix)
-    contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', suffix)
+    creator = build_proxy_dc('creator', 'http://data.europeana.eu', api_path)
+    contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', api_path)
     "#{creator} OR #{contributor}"
   end
 
-  def build_proxy_dc(name, url, suffix)
-    %(proxy_dc_#{name}:"#{url}/#{suffix}")
+  def build_proxy_dc(name, url, path)
+    %(proxy_dc_#{name}:"#{url}/#{path}")
   end
 end
