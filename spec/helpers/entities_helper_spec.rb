@@ -1,17 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Europeana::EntitiesApiConsumer do
-  before do
-    class FakeController < ApplicationController
-      include Europeana::EntitiesApiConsumer
-    end
-  end
-
-  after { Object.send :remove_const, :FakeController }
-  let(:object) { FakeController.new }
-
+RSpec.describe EntitiesHelper do
   describe '#entities_api_type' do
-    subject { object.entities_api_type(human_type) }
+    subject { helper.entities_api_type(human_type) }
 
     context 'when human type is "people"' do
       let(:human_type) { 'people' }
@@ -34,8 +25,32 @@ RSpec.describe Europeana::EntitiesApiConsumer do
     end
   end
 
+  describe '#entities_human_type' do
+    subject { helper.entities_human_type(api_type) }
+
+    context 'when API type is "agent"' do
+      let(:api_type) { 'agent' }
+      it { is_expected.to eq('people') }
+    end
+
+    context 'when API type is "timespan"' do
+      let(:api_type) { 'timespan' }
+      it { is_expected.to eq('periods') }
+    end
+
+    context 'when API type is "place"' do
+      let(:api_type) { 'place' }
+      it { is_expected.to eq('places') }
+    end
+
+    context 'when API type is "concept"' do
+      let(:api_type) { 'concept' }
+      it { is_expected.to eq('topics') }
+    end
+  end
+
   describe '#entity_url_slug' do
-    subject { object.entity_url_slug(entity) }
+    subject { helper.entity_url_slug(entity) }
 
     context 'when entity has no English prefLabel' do
       let(:entity) { { prefLabel: { fr: 'Paris' } } }
