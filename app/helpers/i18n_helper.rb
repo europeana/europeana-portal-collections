@@ -37,14 +37,29 @@ module I18nHelper
 
   def date_eras_gregorian(date)
     return date unless date.is_a?(String)
-    m = date.match(/^\s*(\+|\-)\s*0*(\d[\d\-]*)$/)
-    if m
-      year = m[2].strip
-      key = 'global.date.eras.gregorian.' + (m[1] == '+' ? 'current' : 'before')
-      default = year + ' ' + (m[1] == '+' ? 'CE' : 'BCE')
-      t(key, year: year, default: default)
-    else
-      date.strip
-    end
+
+    # Match on digits+ only, strip starting '0's and if date' length 1-3 then build "date' + CE"
+    m = date.match(/^\d+$/)
+    return build_date(m[0], '+') if m && strip_leading_zeroes(m[0]).length < 4
+
+    # Match on '+' or '-' followed by date where date starts with digit followed by one or more digits or hyphens
+    m = date.match(%r{^\s*(\+|\-)\s*(\d[\d\-\/]*)\s*$})
+    return build_date(m[2], m[1]) if m
+
+    # Otherwise do nothing.
+    date.strip
+  end
+
+  private
+
+  def build_date(year, prefix)
+    year = strip_leading_zeroes(year)
+    key = 'global.date.eras.gregorian.' + (prefix == '+' ? 'current' : 'before')
+    default = year + ' ' + (prefix == '+' ? 'CE' : 'BCE')
+    t(key, year: year, default: default)
+  end
+
+  def strip_leading_zeroes(s)
+    s.strip.sub(/^0+/, '')
   end
 end
