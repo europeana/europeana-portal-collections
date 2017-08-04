@@ -210,7 +210,7 @@ RSpec.describe PortalController do
         get :similar, params
       end
       let(:params) { { locale: 'en', id: 'abc/123', format: 'json', mlt_query: mlt_query } }
-      let(:mlt_query) {'(what: ("Object Type\: print")^0.8 OR who: ("somebody")^0.5 NOT europeana_id:"/abc/123"'}
+      let(:mlt_query) { '(what: ("Object Type\: print")^0.8 OR who: ("somebody")^0.5 NOT europeana_id:"/abc/123"' }
       let(:record_id) { '/' + params[:id] }
       it_behaves_like 'no record API request'
       it_behaves_like 'a more like this API request'
