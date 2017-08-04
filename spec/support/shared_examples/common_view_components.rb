@@ -18,6 +18,11 @@ RSpec.shared_examples 'common view components', :common_view_components do
     expect(rendered).to have_selector('meta[name="referrer"][content="always"]', visible: false)
   end
 
+  it 'should have meta og:site_name tag' do
+    render
+    expect(rendered).to have_selector('meta[property="og:site_name"][content="Europeana Collections"]', visible: false)
+  end
+
   it 'should have top nav links to explore pages' do
     render
     expect(rendered).to have_selector('#main-menu a', text: 'Explore')

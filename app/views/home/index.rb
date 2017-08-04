@@ -46,7 +46,6 @@ module Home
           { meta_property: 'fb:appid', content: '185778248173748' },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          { meta_property: 'og:sitename', content: title },
           { meta_property: 'og:description', content: description },
           { meta_property: 'og:url', content: root_url }
         ]
