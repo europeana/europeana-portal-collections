@@ -32,13 +32,15 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def head_meta
-    no_csrf = super.reject { |meta| %w(csrf-param csrf-token).include?(meta[:meta_name]) }
-    return no_csrf unless config.x.google.site_verification.present?
-    [
-      {
-        meta_name: 'google-site-verification', content: config.x.google.site_verification
-      }
-    ] + no_csrf
+    super.tap do |head_meta|
+      # Remove CSRF meta tags which intefere with caching
+      head_meta.reject! { |meta| %w(csrf-param csrf-token).include?(meta[:meta_name]) }
+      head_meta << { meta_property: 'og:site_name', content: site_title }
+
+      if config.x.google.site_verification.present?
+        head_meta << { meta_name: 'google-site-verification', content: config.x.google.site_verification }
+      end
+    end
   end
 
   def head_links

@@ -25,7 +25,6 @@ module Portal
           { meta_name: 'description', content: meta_description },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          { meta_property: 'og:sitename', content: 'Europeana Collections' },
           { meta_property: 'og:title', content: og_title },
           { meta_property: 'og:description', content: og_description },
           { meta_property: 'fb:appid', content: '185778248173748' }
