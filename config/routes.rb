@@ -57,16 +57,16 @@ Rails.application.routes.draw do
       resources :galleries, only: [:show, :index], param: :slug do
         resources :gallery_images, only: :show, path: 'images', as: 'images', param: :position
       end
+
+      constraints type: /people|periods|places|topics/, id: /\d+/ do
+        get ':type/:id(-(:slug))', as: 'entity', to: 'entities#show'
+      end
     end
 
     resources :blog_posts, only: [:show, :index], param: :slug, path: 'blogs'
     resources :events, only: [:show, :index], param: :slug
 
     get 'entities/suggest'
-
-    constraints type: /agent|place|concept|timespan/, namespace: /base/, identifier: /\d+/ do
-      get 'entities/*type/*namespace/*identifier', as: 'entities_fetch', to: 'entities#show'
-    end
 
     get 'debug/exception', to: 'debug#exception'
 

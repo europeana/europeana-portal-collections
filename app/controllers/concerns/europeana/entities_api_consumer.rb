@@ -6,6 +6,8 @@ module Europeana
   module EntitiesApiConsumer
     extend ActiveSupport::Concern
 
+    include EntitiesHelper
+
     def entities_api_suggest_params(local_params)
       {
         scope: 'europeana'
@@ -22,9 +24,12 @@ module Europeana
 
     def entities_api_env_params
       {
-        wskey: Rails.application.config.x.europeana[:entities_api_key],
-        api_url: ENV['EUROPEANA_ENTITIES_API_URL'] || Europeana::API.url,
-      }
+        wskey: Rails.application.config.x.europeana[:entities].api_key,
+      }.tap do |env_params|
+        unless Rails.application.config.x.europeana[:entities].api_url.blank?
+          env_params[:api_url] = Rails.application.config.x.europeana[:entities].api_url
+        end
+      end
     end
   end
 end

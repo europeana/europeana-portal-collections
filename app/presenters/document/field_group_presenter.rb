@@ -6,6 +6,7 @@ module Document
   class FieldGroupPresenter < DocumentPresenter
     include Field::Entities
     include Field::Labelling
+    include EntitiesHelper
     include UrlHelper
 
     ##
@@ -150,9 +151,9 @@ module Document
       entity_uri = URI.parse(entity.fetch('about'))
       return nil unless entity_uri.host == 'data.europeana.eu'
 
-      type, namespace, id = entity_uri.path.split('/').slice(1..-1)
+      type, _namespace, id = entity_uri.path.split('/').slice(1..-1)
 
-      entities_fetch_path(type, namespace, id)
+      entity_path(type: entities_human_type(type), id: id, slug: entity_url_slug(entity), format: 'html')
     end
 
     def entity_for(section, val)
