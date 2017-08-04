@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Europeana portal controller
 #
@@ -66,6 +68,8 @@ class PortalController < ApplicationController
       @annotations_later = false
     end
 
+    @mlt_query = @document.more_like_this_query
+
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
@@ -76,8 +80,8 @@ class PortalController < ApplicationController
 
   # GET /record/:id/similar
   def similar
-    _response, document = fetch(doc_id)
-    @response, @similar = more_like_this(document, params[:mltf], per_page: params[:per_page] || 4)
+    extra_controller_params = params.slice(:per_page, :page, :api_url).reverse_merge(per_page: 4)
+    @response, @similar = more_like_this(params[:mlt_query], extra_controller_params)
     respond_to do |format|
       format.json { render :similar, layout: false }
     end

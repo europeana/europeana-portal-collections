@@ -209,9 +209,10 @@ RSpec.describe PortalController do
       before do
         get :similar, params
       end
-      let(:params) { { locale: 'en', id: 'abc/123', format: 'json' } }
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'json', mlt_query: mlt_query } }
+      let(:mlt_query) {'(what: ("Object Type\: print")^0.8 OR who: ("somebody")^0.5 NOT europeana_id:"/abc/123"'}
       let(:record_id) { '/' + params[:id] }
-      it_behaves_like 'a record API request'
+      it_behaves_like 'no record API request'
       it_behaves_like 'a more like this API request'
       it_behaves_like 'no hierarchy API request'
       it 'responds with JSON' do
@@ -224,7 +225,7 @@ RSpec.describe PortalController do
         expect(response).to render_template('portal/similar')
       end
       context 'with page param' do
-        let(:params) { { locale: 'en', id: 'abc/123', format: 'json', page: 2 } }
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'json', mlt_query: mlt_query, page: 2 } }
         it 'paginates' do
           expect(an_api_search_request.with(query: hash_including(start: '5'))).
             to have_been_made
@@ -234,22 +235,11 @@ RSpec.describe PortalController do
             to have_been_made
         end
       end
-      context 'without field limiting param' do
-        it 'gets MLT items for all fields' do
-          expect(an_api_search_request.with(query: hash_including(query: /title:/))).
-            to have_been_made
-          expect(an_api_search_request.with(query: hash_including(query: /who:/))).
-            to have_been_made
-        end
-      end
-      context 'with field limiting param' do
-        let(:params) { { locale: 'en', id: 'abc/123', format: 'json', mltf: 'title' } }
-        it 'limits MLT items to that field' do
-          expect(an_api_search_request.with(query: hash_including(query: /title:/))).
-            to have_been_made
-          expect(an_api_search_request.with(query: hash_including(query: /who:/))).
-            not_to have_been_made
-        end
+      it 'queries for the supplied mlt_query' do
+        expect(an_api_search_request.with(query: hash_including(query: /what:/))).
+          to have_been_made
+        expect(an_api_search_request.with(query: hash_including(query: /who:/))).
+          to have_been_made
       end
     end
 
