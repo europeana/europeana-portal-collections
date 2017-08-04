@@ -38,7 +38,7 @@ RSpec.describe I18nHelper do
       end
 
       it 'converts gregorian CE yyyy-mm-dd to correct format' do
-        expect(helper.date_eras_gregorian('+56-01-01')).to eq('56-01-01 CE')
+        expect(helper.date_eras_gregorian('+1956-01-01')).to eq('1956-01-01 CE')
       end
 
       it 'strips off leading zero' do
