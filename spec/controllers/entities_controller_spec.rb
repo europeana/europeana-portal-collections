@@ -71,7 +71,6 @@ RSpec.describe EntitiesController do
 
       context 'without slug in URL' do
         it 'redirects to URL with slug' do
-          allow(subject).to receive(:authorize!) { true }
           get :show, locale: 'en', type: 'people', id: '1234'
 
           expect(response).to redirect_to('/en/explore/people/1234-david-hume')
@@ -80,7 +79,6 @@ RSpec.describe EntitiesController do
 
       context 'with wrong slug in URL' do
         it 'redirects to URL with slug' do
-          allow(subject).to receive(:authorize!) { true }
           get :show, locale: 'en', type: 'people', id: '1234', slug: 'david'
 
           expect(response).to redirect_to('/en/explore/people/1234-david-hume')
@@ -91,14 +89,12 @@ RSpec.describe EntitiesController do
         let(:params) { { locale: 'en', type: 'people', id: '1234', slug: 'david-hume' } }
 
         it 'returns http success' do
-          allow(subject).to receive(:authorize!) { true }
           get :show, params
 
           expect(response).to have_http_status(:success)
         end
 
         it 'queries the entity API' do
-          allow(subject).to receive(:authorize!) { true }
           get :show, params
 
           expect(
