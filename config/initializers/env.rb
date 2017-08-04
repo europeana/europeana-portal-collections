@@ -16,8 +16,8 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
                                 end
 
   europeana[:entities] = OpenStruct.new(
-    api_key: ENV['EUROPEANA_ENTITIES_API_KEY'] || Europeana::API.key,
-    api_url: ENV['EUROPEANA_ENTITIES_API_URL'] || Europeana::API.url
+    api_key: ENV['EUROPEANA_ENTITIES_API_KEY'],
+    api_url: ENV['EUROPEANA_ENTITIES_API_URL']
   )
 end
 
