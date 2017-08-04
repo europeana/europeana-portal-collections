@@ -55,17 +55,17 @@ RSpec.describe I18nHelper do
     end
 
     context 'normal dates' do
-      it 'leaves non-strings untouched' do
+      it 'returns nil' do
         [{}, [], nil, true].each do |date|
-          expect(helper.date_eras_gregorian(date)).to eq(date)
+          expect(helper.date_eras_gregorian(date)).to be_nil
         end
       end
     end
 
     context 'dates in other eras' do
-      it 'leaves them untouched' do
+      it 'returns nil' do
         ['AH 1014'].each do |date|
-          expect(helper.date_eras_gregorian(date)).to eq(date)
+          expect(helper.date_eras_gregorian(date)).to be_nil
         end
       end
     end
@@ -82,9 +82,9 @@ RSpec.describe I18nHelper do
     end
 
     context 'malformed dates' do
-      it 'leaves them untouched' do
+      it 'returns nil' do
         ['--05-03', '+0unknown', 'Amsterdam, Netherlands', '-10-1500-04'].each do |date|
-          expect(helper.date_eras_gregorian(date)).to eq(date)
+          expect(helper.date_eras_gregorian(date)).to be_nil
         end
       end
     end

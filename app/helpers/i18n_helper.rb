@@ -36,7 +36,7 @@ module I18nHelper
   end
 
   def date_eras_gregorian(date)
-    return date unless date.is_a?(String)
+    return nil unless date.is_a?(String)
 
     # Try various format handlers.
     %i(digits_only plus_minus_prefix second_century_ce abnormal_ce abnormal_bce).each do |meth|
@@ -44,8 +44,7 @@ module I18nHelper
       return gregorian unless gregorian.nil?
     end
 
-    # Otherwise just strip.
-    date.strip
+    nil
   end
 
   private

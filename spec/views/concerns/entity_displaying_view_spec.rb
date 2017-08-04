@@ -16,10 +16,17 @@ RSpec.describe EntityDisplayingView do
   end
 
   describe '#entity_date' do
-    context 'when date has integer value second' do
-      let(:date) { ['c. AD 46', '0046'] }
-      it 'uses and formats integer value' do
+    context 'when date has unformattable value first' do
+      let(:date) { ['not a date', '0046'] }
+      it 'uses and formats known value' do
         expect(subject.send(:entity_date, date)).to eq('46 CE')
+      end
+    end
+
+    context 'when date has no formattable value' do
+      let(:date) { [' unknown 1 ', ' unknown 2 '] }
+      it 'strips and returns first value' do
+        expect(subject.send(:entity_date, date)).to eq('unknown 1')
       end
     end
   end

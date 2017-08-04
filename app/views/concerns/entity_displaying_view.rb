@@ -204,9 +204,15 @@ module EntityDisplayingView
     entity_date_and_place(entity_death_date, entity_death_place)
   end
 
-  def entity_date(date)
-    # Just grab the first date in the array if present.
-    date && date.is_a?(Array) && date.length && date.first.is_a?(String) ? date_eras_gregorian(date.first) : nil
+  def entity_date(dates)
+    return nil unless dates.present? && dates.is_a?(Array)
+
+    dates.each do |date|
+      gregorian = date_eras_gregorian(date)
+      return gregorian unless gregorian.nil?
+    end
+
+    dates.first.strip
   end
 
   # For multiple items the format is just an array of hash items
