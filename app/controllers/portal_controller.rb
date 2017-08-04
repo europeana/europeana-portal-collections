@@ -80,8 +80,9 @@ class PortalController < ApplicationController
 
   # GET /record/:id/similar
   def similar
+    mlt_query = params[:mlt_query] || fetch(doc_id)[1].more_like_this_query
     extra_controller_params = params.slice(:per_page, :page, :api_url).reverse_merge(per_page: 4)
-    @response, @similar = more_like_this(params[:mlt_query], extra_controller_params)
+    @response, @similar = more_like_this(mlt_query, extra_controller_params)
     respond_to do |format|
       format.json { render :similar, layout: false }
     end
