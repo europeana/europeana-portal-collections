@@ -83,5 +83,10 @@ Rails.application.routes.draw do
   get 'csrf', to: 'application#csrf'
 
   put 'locale', to: 'locale#update'
+
+  # CORS pre-flight requests
+  match '*path', via: [:options],
+                 to: lambda { |_| [204, {'Content-Type' => 'text/plain'}, []] }
+
   get '*path', to: 'locale#show'
 end
