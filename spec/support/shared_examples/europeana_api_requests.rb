@@ -5,6 +5,13 @@ shared_examples 'a record API request' do
   end
 end
 
+shared_examples 'no record API request' do
+  it 'does NOT query the API for the named record' do
+    expect(an_api_record_request_for(record_id)).
+      not_to have_been_made
+  end
+end
+
 shared_examples 'a hierarchy API request' do
   it 'queries the API for the record hierarchy' do
     expect(an_api_hierarchy_request_for(record_id)).
