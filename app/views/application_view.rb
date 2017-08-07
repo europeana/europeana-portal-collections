@@ -96,7 +96,7 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def site_title
-    t('site.name')
+    t('global.sitename')
   end
 
   def alternate_language_links
