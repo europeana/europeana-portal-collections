@@ -86,7 +86,7 @@ Rails.application.routes.draw do
 
   # CORS pre-flight requests
   match '*path', via: [:options],
-                 to: lambda { |_| [204, {'Content-Type' => 'text/plain'}, []] }
+                 to: ->(_) { [204, { 'Content-Type' => 'text/plain' }, []] }
 
   get '*path', to: 'locale#show'
 end
