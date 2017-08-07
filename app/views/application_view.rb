@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # A custom class for this project's Mustache templates
 #
@@ -14,7 +16,7 @@ class ApplicationView < Europeana::Styleguide::View
   include NavigableView
 
   def page_title
-    [page_content_heading, site_title].join(' - ')
+    [page_content_heading, site_title].reject(&:nil?).flatten.join(' - ')
   end
 
   # Override in view subclasses for use in #page_title
