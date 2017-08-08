@@ -2,7 +2,7 @@
 module Events
   class Show < ApplicationView
     def event_title
-      presenter.title
+      [presenter.title, t('site.events.list.page-title')]
     end
     alias_method :page_content_heading, :event_title
 
