@@ -16,7 +16,7 @@ class ApplicationView < Europeana::Styleguide::View
   include NavigableView
 
   def page_title
-    [page_content_heading, site_title].reject(&:nil?).flatten.join(' - ')
+    [page_content_heading, site_title].flatten.reject(&:nil?).join(' - ')
   end
 
   # Override in view subclasses for use in #page_title
