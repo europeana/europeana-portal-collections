@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'views/concerns/paginated_view_examples'
 
 RSpec.describe 'blog_posts/index.html.mustache', :common_view_components, :stable_version_view do

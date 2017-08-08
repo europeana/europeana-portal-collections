@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe 'blog_posts/show.html.mustache', :common_view_components, :stable_version_view do
   let(:view_class) { BlogPosts::Show }
 
