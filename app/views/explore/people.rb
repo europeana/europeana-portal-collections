@@ -3,10 +3,8 @@ module Explore
     include CollectionFilterableView
     include BrowseEntryDisplayingView
 
-    def page_title
-      mustache[:page_title] ||= begin
-        [t('site.browse.people.title'), site_title].join(' - ')
-      end
+    def page_content_heading
+      t('site.browse.people.title')
     end
 
     def content
