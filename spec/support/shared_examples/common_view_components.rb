@@ -3,6 +3,12 @@ RSpec.shared_examples 'common view components', :common_view_components do
     [:bg, :ca, :da, :de, :el, :en, :es, :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl, :pl, :pt, :ro, :ru, :sv]
   end
 
+  it 'should have site name in <title>' do
+    site_name = I18n.t('site.name')
+    render
+    expect(rendered).to have_selector('title', text: /#{site_name}/, visible: false)
+  end
+
   it 'should have no top nav link to home' do
     render
     expect(rendered).not_to have_selector('#main-menu a[href$="/"]', text: pages(:home).title)

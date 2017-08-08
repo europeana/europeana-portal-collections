@@ -96,7 +96,7 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def site_title
-    'Europeana Collections'
+    t('site.name')
   end
 
   def alternate_language_links
