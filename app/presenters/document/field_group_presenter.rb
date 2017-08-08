@@ -168,7 +168,7 @@ module Document
       @field_entities[memo_key] ||= {}
       @field_entities[memo_key][val] ||= begin
         @section_entities[memo_key].detect do |entity|
-          entity_label(entity, section[:entity_name]).any? { |label| label == val }
+          [entity_label(entity, section[:entity_name])].flatten.any? { |label| label == val }
         end
       end
     end
