@@ -21,7 +21,7 @@ class ApplicationView < Europeana::Styleguide::View
 
   # Override in view subclasses for use in #page_title
   def page_content_heading
-    ''
+    nil
   end
 
   def js_vars

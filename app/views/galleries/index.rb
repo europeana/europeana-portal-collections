@@ -8,8 +8,8 @@ module Galleries
       'channel_landing'
     end
 
-    def page_title
-      mustache[:page_title] ||= [t('global.galleries'), site_title].join(' - ')
+    def page_content_heading
+      t('global.galleries')
     end
 
     def head_links
