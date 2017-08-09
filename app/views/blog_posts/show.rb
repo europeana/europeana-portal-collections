@@ -3,7 +3,7 @@
 module BlogPosts
   class Show < ApplicationView
     def blog_title
-      presenter.title
+      [presenter.title, t('site.blogs.list.page-title')]
     end
     alias_method :page_content_heading, :blog_title
 
