@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.feature 'Page titles' do
   describe 'home page' do
     it 'has title "Europeana Collections"' do
