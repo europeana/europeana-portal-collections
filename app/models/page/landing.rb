@@ -55,7 +55,7 @@ class Page
     end
 
     def og_image_from_hero
-      hero_image && hero_image.file.present? ? hero_image.file.url : nil
+      hero_image.present? && hero_image.file.present? ? hero_image.file.url : nil
     end
 
     def set_slug

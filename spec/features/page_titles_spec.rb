@@ -29,7 +29,10 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'galleries page' do
-    it 'has title "Galleries - Europeana Collections"'
+    it 'has title "Galleries - Europeana Collections"' do
+      visit galleries_path(:en)
+      expect(page).to have_title('Galleries - Europeana Collections', exact: true)
+    end
     it 'has title "Gallery name - Galleries - Europeana Collections"' do
       visit gallery_path(:en, 'fashion-dresses')
       expect(page).to have_title('Fashion: dresses - Galleries - Europeana Collections', exact: true)
@@ -50,13 +53,17 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'events page' do
-    it 'has title "Events - Europeana Collections"'
-    it 'has title "Title - Events - Europeana Collections"'
+    it 'has title "Events - Europeana Collections"' do
+      # visit events_path(:en)
+      # expect(page).to have_title('Events - Europeana Collections', exact: true)
+    end
+
+    it 'has title "Event name - Events - Europeana Collections"'
   end
 
   describe 'blog page' do
     it 'has title "Blog - Europeana Collections"'
-    it 'has title "Title - Blog - Europeana Collections"'
+    it 'has title "Blog name - Blog - Europeana Collections"'
   end
 
   describe 'static page' do
