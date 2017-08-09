@@ -506,7 +506,7 @@ GEM
       json (>= 1.8)
       nokogiri (~> 1.5)
       trollop (~> 2.1)
-    redis (3.3.1)
+    redis (3.3.3)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
@@ -699,7 +699,7 @@ DEPENDENCIES
   rails_admin (~> 0.8.0)
   rails_serve_static_assets
   rails_with_relative_url_root (~> 0.1)
-  redis (= 3.3.1)
+  redis (~> 3.3.3)
   redis-rails (~> 4.0)
   redis-rails-instrumentation
   rest-client (~> 1.8.0)

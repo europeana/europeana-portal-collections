@@ -42,7 +42,7 @@ gem 'logstash-logger'
 gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
 gem 'nokogiri'
 gem 'rails-observers'
-gem 'redis', '3.3.1' # locked to fix: https://app.assembla.com/spaces/europeana-npc/tickets/1811
+gem 'redis', '~> 3.3.3'
 gem 'rest-client', '~> 1.8.0'
 gem 'ruby-oembed', '~> 0.9'
 gem 'pg'
