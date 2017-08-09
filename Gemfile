@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '4.2.9'
 
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
@@ -8,11 +8,6 @@ gem 'rails', '4.2.7.1'
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '03fc544'
 
 gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'develop'
-
-# Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
-# https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
-# @todo report this upstream
-gem 'mustache', '1.0.3'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
@@ -39,6 +34,7 @@ gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
 gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
+gem 'mustache', '~> 1.0.5'
 gem 'nokogiri'
 gem 'rails-observers'
 gem 'redis', '3.3.1' # locked to fix: https://app.assembla.com/spaces/europeana-npc/tickets/1811
@@ -68,7 +64,7 @@ group :development, :profiling, :production do
   gem 'clockwork', '~> 1.2'
   gem 'htmlcompressor', '0.3'
   gem 'newrelic_rpm'
-  gem 'puma', '~> 2.13'
+  gem 'puma', '~> 3.9.1'
 end
 
 group :development, :profiling, :test do
