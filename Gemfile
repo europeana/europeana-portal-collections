@@ -39,7 +39,7 @@ gem 'json_api_client'
 gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
-gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
+gem 'mail', '~> 2.6.6'
 gem 'nokogiri'
 gem 'rails-observers'
 gem 'redis', '~> 3.3.3'

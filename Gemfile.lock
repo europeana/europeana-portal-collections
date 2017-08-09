@@ -404,7 +404,7 @@ GEM
       logstash-event (~> 1.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.6.rc1)
+    mail (2.6.6)
       mime-types (>= 1.16, < 4)
     mime-types (2.99.3)
     mimemagic (0.3.0)
@@ -682,7 +682,7 @@ DEPENDENCIES
   lograge
   logstash-event
   logstash-logger
-  mail (= 2.6.6.rc1)
+  mail (~> 2.6.6)
   mustache (= 1.0.3)
   newrelic_rpm
   nokogiri
