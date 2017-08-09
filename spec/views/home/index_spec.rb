@@ -31,4 +31,9 @@ RSpec.describe 'home/index.html.mustache', :common_view_components, :stable_vers
     render
     expect(rendered).to have_selector("meta[name=\"HandheldFriendly\"]", visible: false)
   end
+
+  it 'should have a title "Europeana Collections"' do
+    render
+    expect(rendered).to have_title(t('site.name', default: 'Europeana Collections'))
+  end
 end

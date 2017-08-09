@@ -22,7 +22,7 @@ class CollectionsController < ApplicationController
     if has_search_parameters?
       (@response, @document_list) = search_results(params)
       log_search_interaction(
-        search: params.slice(:q, :f, :mlt, :range).inspect,
+        search: params.slice(:q, :qe, :qf, :f, :mlt, :range).inspect,
         total: @response.total
       )
     end

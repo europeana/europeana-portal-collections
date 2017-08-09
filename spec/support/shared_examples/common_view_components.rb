@@ -3,6 +3,12 @@ RSpec.shared_examples 'common view components', :common_view_components do
     [:bg, :ca, :da, :de, :el, :en, :es, :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl, :pl, :pt, :ro, :ru, :sv]
   end
 
+  it 'should have site name in <title>' do
+    site_name = I18n.t('site.name')
+    render
+    expect(rendered).to have_selector('title', text: /#{site_name}/, visible: false)
+  end
+
   it 'should have no top nav link to home' do
     render
     expect(rendered).not_to have_selector('#main-menu a[href$="/"]', text: pages(:home).title)
@@ -16,6 +22,11 @@ RSpec.shared_examples 'common view components', :common_view_components do
   it 'should have meta referrer tag' do
     render
     expect(rendered).to have_selector('meta[name="referrer"][content="always"]', visible: false)
+  end
+
+  it 'should have meta og:site_name tag' do
+    render
+    expect(rendered).to have_selector('meta[property="og:site_name"][content="Europeana Collections"]', visible: false)
   end
 
   it 'should have top nav links to explore pages' do
@@ -38,6 +49,16 @@ RSpec.shared_examples 'common view components', :common_view_components do
     available_locales.each do |locale|
       expect(rendered).to have_selector("link[rel=\"alternate\"][hreflang=\"#{locale}\"]", visible: false)
     end
+  end
+
+  it 'should have JS vars' do
+    I18n.locale = 'fr'
+
+    render
+    expect(rendered).to have_selector('script', text: 'var i18nDefaultLocale = "en";', visible: false)
+    expect(rendered).to have_selector('script', text: 'var i18nLocale = "fr";', visible: false)
+
+    I18n.locale = I18n.default_locale
   end
 
   it 'should have language menu links to all locales' do

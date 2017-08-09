@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Europeana portal controller
 #
@@ -8,6 +10,7 @@ class PortalController < ApplicationController
   include Europeana::UrlConversions
   include OembedRetriever
   include SearchInteractionLogging
+  include ActionView::Helpers::NumberHelper
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
   before_action :log_show_search_interaction, only: :show
@@ -25,7 +28,7 @@ class PortalController < ApplicationController
     (@response, @document_list) = search_results(params)
 
     log_search_interaction(
-      search: params.slice(:q, :f, :mlt, :range).inspect,
+      search: params.slice(:q, :qe, :qf, :f, :mlt, :range).inspect,
       total: @response.total
     )
 
@@ -35,7 +38,11 @@ class PortalController < ApplicationController
         render json: {
           search_results: @document_list.map do |doc|
             Document::SearchResultPresenter.new(doc, self, @response).content
-          end
+          end,
+          total: {
+            value: @response.total,
+            formatted: number_with_delimiter(@response.total)
+          }
         }
       end
     end
@@ -48,7 +55,20 @@ class PortalController < ApplicationController
 
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
-    @annotations = document_annotations(@document)
+
+    # This param check gives us a way to load annotations after page
+    # generation by AJAX with the URL param `?annotations=later`, so that we
+    # can test in one environment the relative performance of both approaches.
+    # @todo remove conditional when a decision is made as to which is better
+    if params[:annotations] == 'later'
+      @annotations = false
+      @annotations_later = true
+    else
+      @annotations = document_annotations(@document.id)
+      @annotations_later = false
+    end
+
+    @mlt_query = @document.more_like_this_query
 
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
@@ -60,8 +80,9 @@ class PortalController < ApplicationController
 
   # GET /record/:id/similar
   def similar
-    _response, document = fetch(doc_id)
-    @response, @similar = more_like_this(document, params[:mltf], per_page: params[:per_page] || 4)
+    mlt_query = params[:mlt_query] || fetch(doc_id)[1].more_like_this_query
+    extra_controller_params = params.slice(:per_page, :page, :api_url).reverse_merge(per_page: 4)
+    @response, @similar = more_like_this(mlt_query, extra_controller_params)
     respond_to do |format|
       format.json { render :similar, layout: false }
     end
@@ -77,6 +98,14 @@ class PortalController < ApplicationController
 
     respond_to do |format|
       format.json { render :media, layout: false }
+    end
+  end
+
+  # GET /record/:id/annotations
+  def annotations
+    @annotations = document_annotations(doc_id)
+    respond_to do |format|
+      format.json { render :annotations, layout: false }
     end
   end
 

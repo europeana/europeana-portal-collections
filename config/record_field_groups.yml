@@ -213,6 +213,7 @@ refs_rels:
   - title: consists-of
     fields:
     - proxies.dctermsHasPart
+    max: 10
   - title: version
     fields:
     - proxies.dctermsHasVersion

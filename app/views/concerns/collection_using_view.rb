@@ -1,12 +1,13 @@
 # frozen_string_literal: true
-# ##
+
+##
 # For views needing to display information related to a specific collection.
 module CollectionUsingView
   extend ActiveSupport::Concern
 
   def collection_data
     mustache[:collection_data] ||= begin
-      if @collection
+      if @collection && !@collection.for_all?
         {
           name: @collection.key,
           label: @collection.landing_page ? @collection.landing_page.title : @collection.title,

@@ -31,6 +31,14 @@ RSpec.describe BlogPostsController do
       ).to have_been_made.once
     end
 
+    it 'sorts by -datepublish' do
+      get :index, locale: 'en'
+      expect(
+        a_request(:get, json_api_url).
+        with(query: hash_including(sort: '-datepublish'))
+      ).to have_been_made.once
+    end
+
     it 'filters by tag "culturelover"' do
       get :index, locale: 'en'
       expect(
@@ -125,6 +133,20 @@ RSpec.describe BlogPostsController do
     it 'defaults to HTML format' do
       get :show, locale: 'en', slug: 'important-news'
       expect(response.content_type).to eq('text/html')
+    end
+  end
+
+  describe '#pro_json_api_theme_filters_from_collections' do
+    let(:whitelisted_keys) { %w(fashion world-war-I) }
+    subject { described_class.new.send(:pro_json_api_theme_filters_from_collections) }
+
+    it 'includes whitelisted collections' do
+      expect(subject.count).to eq(whitelisted_keys.size)
+      Collection.where(key: whitelisted_keys).each do |collection|
+        key = collection.key.downcase
+        expect(subject).to have_key(key.to_sym)
+        expect(subject[key.to_sym]).to eq(filter: "culturelover-#{key}", label: collection.landing_page.title)
+      end
     end
   end
 end

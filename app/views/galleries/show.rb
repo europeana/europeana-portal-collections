@@ -8,7 +8,9 @@ module Galleries
     end
 
     def page_content_heading
-      @gallery.title
+      mustache[:page_content_heading] ||= begin
+        (@gallery.title ? @gallery.title + ' - ' : '') + t('global.galleries')
+      end
     end
 
     def head_links
@@ -25,8 +27,7 @@ module Galleries
           { meta_name: 'description', content: description },
           { meta_property: 'og:description', content: description },
           { meta_property: 'og:image', content: hero_image_url },
-          { meta_property: 'og:title', content: @gallery.title },
-          { meta_property: 'og:sitename', content: @gallery.title }
+          { meta_property: 'og:title', content: @gallery.title }
         ]
         head_meta + super
       end

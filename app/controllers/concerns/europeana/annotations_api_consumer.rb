@@ -5,8 +5,8 @@ module Europeana
   module AnnotationsApiConsumer
     extend ActiveSupport::Concern
 
-    def document_annotations(document)
-      search_response = annotations_search_for_document(document)
+    def document_annotations(document_id)
+      search_response = annotations_search_for_document(document_id)
       return nil unless search_response.key?('items')
 
       annotations_from_search_response(search_response).
@@ -20,16 +20,8 @@ module Europeana
       nil
     end
 
-    # @todo remove target_id fallback when target_uri field name change deployed
-    #   to production Annotations API
-    def annotations_search_for_document(document)
-      Europeana::API.annotation.search(annotations_api_search_params(document))
-    rescue Europeana::API::Errors::ServerError => error
-      if error.message == 'An unexpected server exception occured! undefined field target_uri'
-        Europeana::API.annotation.search(annotations_api_search_params(document, target_field_name: 'target_id'))
-      else
-        raise
-      end
+    def annotations_search_for_document(document_id)
+      Europeana::API.annotation.search(annotations_api_search_params(document_id))
     end
 
     def annotations_from_search_response(search_response)
@@ -63,11 +55,11 @@ module Europeana
       end
     end
 
-    def annotations_api_search_params(document, target_field_name: 'target_uri')
+    def annotations_api_search_params(document_id)
       {
         qf: [
           %(generator_name:#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu*'}),
-          %(#{target_field_name}:"http://data.europeana.eu/item#{document.id}")
+          %(target_uri:"http://data.europeana.eu/item#{document_id}")
         ],
         query: '*:*',
         pageSize: 100

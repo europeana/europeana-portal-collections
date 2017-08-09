@@ -5,7 +5,7 @@ gem 'rails', '4.2.7.1'
 # NB: this *must* be by Git ref; else will break asset versioning in
 #     config/initializers/assets.rb, preventing app startup
 
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '66b1a52'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '03fc544'
 
 gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'develop'
 
@@ -25,8 +25,8 @@ gem 'cancancan', '~> 1.12'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise', '~> 3.5.4'
-gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', branch: 'develop'
-gem 'europeana-blacklight', '~> 0.5.2'
+gem 'europeana-api', '~> 1.0.0'
+gem 'europeana-blacklight', '~> 1.0.0'
 gem 'europeana-feedback-button', '0.0.4'
 gem 'feedjira', '~> 2.0'
 gem 'foederati', '~> 0.2.0'
@@ -48,6 +48,7 @@ gem 'pg'
 gem 'paperclip', '~> 4.3'
 gem 'paper_trail', '~> 4.0'
 gem 'rails_with_relative_url_root', '~> 0.1'
+gem 'rack-cors'
 gem 'rack-rewrite'
 gem 'rails_admin', '~> 0.8.0'
 gem 'redis-rails', '~> 4.0'

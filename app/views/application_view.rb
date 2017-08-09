@@ -24,21 +24,25 @@ class ApplicationView < Europeana::Styleguide::View
 
   def js_vars
     [
+      { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
       { name: 'googleAnalyticsKey', value: config.x.google.analytics_key },
       { name: 'googleOptimizeContainerID', value: config.x.google.optimize_container_id },
-      { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
+      { name: 'i18nLocale', value: I18n.locale },
+      { name: 'i18nDefaultLocale', value: I18n.default_locale },
       { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true }
     ] + super
   end
 
   def head_meta
-    no_csrf = super.reject { |meta| %w(csrf-param csrf-token).include?(meta[:meta_name]) }
-    return no_csrf unless config.x.google.site_verification.present?
-    [
-      {
-        meta_name: 'google-site-verification', content: config.x.google.site_verification
-      }
-    ] + no_csrf
+    super.tap do |head_meta|
+      # Remove CSRF meta tags which intefere with caching
+      head_meta.reject! { |meta| %w(csrf-param csrf-token).include?(meta[:meta_name]) }
+      head_meta << { meta_property: 'og:site_name', content: site_title }
+
+      if config.x.google.site_verification.present?
+        head_meta << { meta_name: 'google-site-verification', content: config.x.google.site_verification }
+      end
+    end
   end
 
   def head_links
@@ -92,7 +96,7 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def site_title
-    'Europeana Collections'
+    t('site.name')
   end
 
   def alternate_language_links
