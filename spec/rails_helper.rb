@@ -67,6 +67,7 @@ RSpec.configure do |config|
   config.include ApiResponseFixtures
   config.include CiEnvHelper
   config.include EuropeanaAPIHelper
+  config.include RequestHelper, type: :request
   config.include ViewTestHelper, type: :view
 
   config.before(:each) do

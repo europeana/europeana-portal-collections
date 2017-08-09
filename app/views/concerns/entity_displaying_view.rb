@@ -39,7 +39,7 @@ module EntityDisplayingView
 
   def entity_social_share
     {
-      url: 'this page url for share links',
+      url: request.original_url,
       twitter: true,
       facebook: true,
       pinterest: true,

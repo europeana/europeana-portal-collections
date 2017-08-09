@@ -1,5 +1,6 @@
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
+  feat/2340-refactor-page-title
   revision: 400ad7ec082850d44fba2c6752ff19f726e562d7
   branch: develop
   specs:
@@ -421,6 +422,7 @@ GEM
     public_suffix (2.0.5)
     puma (2.16.0)
     rack (1.6.8)
+    rack-cors (1.0.1)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)
@@ -659,6 +661,7 @@ DEPENDENCIES
   phantomjs
   poltergeist
   puma (~> 2.13)
+  rack-cors
   rack-rewrite
   rails (= 4.2.7.1)
   rails-observers
