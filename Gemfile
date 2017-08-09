@@ -92,14 +92,14 @@ group :profiling do
 end
 
 group :test do
-  gem 'capybara', '~> 2.5'
+  gem 'capybara'
   gem 'coveralls', require: false
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'selenium-webdriver', '~> 2.47'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'simplecov', require: false
-  gem 'webmock', '~> 1.22'
+  gem 'webmock'
 end
 
 group :doc do

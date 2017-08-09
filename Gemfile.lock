@@ -578,10 +578,9 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sax-machine (1.3.2)
-    selenium-webdriver (2.53.4)
+    selenium-webdriver (3.4.4)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
-      websocket (~> 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simplecov (0.14.1)
@@ -633,11 +632,10 @@ GEM
     unicode-display_width (1.3.0)
     warden (1.2.7)
       rack (>= 1.0)
-    webmock (1.24.6)
+    webmock (3.0.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    websocket (1.2.4)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -655,7 +653,7 @@ DEPENDENCIES
   acts_as_list (~> 0.7)
   blacklight (~> 6.0.0)
   cancancan (~> 1.12)
-  capybara (~> 2.5)
+  capybara
   clockwork (~> 1.2)
   colorize
   coveralls
@@ -707,7 +705,7 @@ DEPENDENCIES
   rubocop (= 0.39.0)
   ruby-oembed (~> 0.9)
   sass-rails
-  selenium-webdriver (~> 2.47)
+  selenium-webdriver
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)
@@ -717,7 +715,7 @@ DEPENDENCIES
   stringex (~> 2.6)
   therubyracer
   uglifier (~> 2.7.2)
-  webmock (~> 1.22)
+  webmock
   yard
 
 BUNDLED WITH
