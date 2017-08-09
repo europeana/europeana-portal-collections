@@ -2,9 +2,12 @@
 module Events
   class Show < ApplicationView
     def event_title
+      presenter.title
+    end
+
+    def page_content_heading
       [presenter.title, t('site.events.list.page-title')]
     end
-    alias_method :page_content_heading, :event_title
 
     def head_meta
       mustache[:head_meta] ||= begin

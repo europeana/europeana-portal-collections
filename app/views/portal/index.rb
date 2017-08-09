@@ -32,9 +32,7 @@ module Portal
     end
 
     def page_content_heading
-      pq = params[:q]
-      qs = pq.nil? || pq.empty? || pq.strip.empty? ? nil : pq.truncate(25, separator: ' ')
-      [qs, t('site.search.page-title', default: 'Search Results')]
+      [params[:q].blank? ? '' : params[:q].truncate(25, separator: ' '), t('site.search.page-title')]
     end
 
     def form_search

@@ -16,12 +16,12 @@ class ApplicationView < Europeana::Styleguide::View
   include NavigableView
 
   def page_title
-    [page_content_heading, site_title].flatten.reject(&:nil?).join(' - ')
+    [page_content_heading, site_title].flatten.reject(&:blank?).join(' - ')
   end
 
   # Override in view subclasses for use in #page_title
   def page_content_heading
-    nil
+    ''
   end
 
   def js_vars

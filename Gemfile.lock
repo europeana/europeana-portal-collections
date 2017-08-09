@@ -1,6 +1,5 @@
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  feat/2340-refactor-page-title
   revision: 400ad7ec082850d44fba2c6752ff19f726e562d7
   branch: develop
   specs:
