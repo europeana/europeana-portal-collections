@@ -9,6 +9,12 @@ gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 
 
 gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'develop'
 
+# Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
+# https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
+# on the item display page (i.e. Portal#Show) where compiled Mustache template is
+# huge.
+gem 'mustache', '1.0.3'
+
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
@@ -34,7 +40,6 @@ gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
 gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
-gem 'mustache', '~> 1.0.5'
 gem 'nokogiri'
 gem 'rails-observers'
 gem 'redis', '3.3.1' # locked to fix: https://app.assembla.com/spaces/europeana-npc/tickets/1811
