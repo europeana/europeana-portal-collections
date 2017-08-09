@@ -64,23 +64,30 @@ group :production do
   gem 'uglifier', '~> 2.7.2'
 end
 
-group :development, :production do
+group :development, :profiling, :production do
   gem 'clockwork', '~> 1.2'
   gem 'htmlcompressor', '0.3'
   gem 'newrelic_rpm'
   gem 'puma', '~> 2.13'
 end
 
-group :development, :test do
+group :development, :profiling, :test do
   gem 'dotenv-rails', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '0.39.0', require: false # only update when Hound does
 end
 
-group :development do
+group :development, :profiling do
   gem 'foreman'
   gem 'redis-rails-instrumentation' # WARNING: may break with logstash, i.e. europeana-logging
+end
+
+group :development do
   gem 'spring', '~> 1.6'
+end
+
+group :profiling do
+  gem 'stackprof'
 end
 
 group :test do
