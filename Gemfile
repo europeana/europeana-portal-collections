@@ -12,7 +12,7 @@ gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'develop'
 # Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
 # https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
 # on the item display page (i.e. Portal#Show) where compiled Mustache template is
-# huge.
+# huge (> 60 MB). Due to stache gem?
 gem 'mustache', '1.0.3'
 
 # Use a forked version of stache with downstream changes, until merged upstream
