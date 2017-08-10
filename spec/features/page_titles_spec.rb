@@ -53,9 +53,18 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'events page' do
+    let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events(\?|\z)} }
+    let(:mime_type) { 'application/vnd.api+json' }
+
+    before do
+      stub_request(:get, json_api_url).
+        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+        to_return(status: 200, body: '', headers: { 'Content-Type' => mime_type })
+    end
+
     it 'has title "Events - Europeana Collections"' do
-      # visit events_path(:en)
-      # expect(page).to have_title('Events - Europeana Collections', exact: true)
+      visit events_path(:en)
+      expect(page).to have_title('Events - Europeana Collections', exact: true)
     end
 
     it 'has title "Event name - Events - Europeana Collections"'
