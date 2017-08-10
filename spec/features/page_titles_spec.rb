@@ -76,7 +76,7 @@ RSpec.feature 'Page titles' do
             "@id": "http://dbpedia.org/resource/Vienna"
           },
           "prefLabel": {
-            "en": "Ludwig van Beethoven",
+            "en": "Ludwig van Beethoven"
           },
           "sameAs": [
             "http://uz.dbpedia.org/resource/Ludwig_van_Beethoven"
