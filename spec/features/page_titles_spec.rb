@@ -110,19 +110,18 @@ RSpec.feature 'Page titles' do
     let(:body_blogs) { '' }
     it 'has title "Blog - Europeana Collections"' do
       stub_request(:get, json_api_url_blogs).
-          with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
-          to_return(status: 200, body: body_blogs, headers: { 'Content-Type' => mime_type })
+        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+        to_return(status: 200, body: body_blogs, headers: { 'Content-Type' => mime_type })
       visit blog_posts_path(:en)
       expect(page).to have_title('Blog - Europeana Collections', exact: true)
     end
 
     it 'has title "Blog name - Blog - Europeana Collections"' do
       stub_request(:get, json_api_url_blog).
-          with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
-          to_return(status: 200, body: body_blog, headers: { 'Content-Type' => mime_type })
+        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+        to_return(status: 200, body: body_blog, headers: { 'Content-Type' => mime_type })
       visit blog_post_path(:en, 'blog-name')
       expect(page).to have_title('Blog name - Blog - Europeana Collections', exact: true)
-
     end
   end
 
