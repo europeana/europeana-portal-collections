@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.feature 'Page titles' do
+  let(:mime_type) { 'application/vnd.api+json' }
+
   describe 'home page' do
     it 'has title "Europeana Collections"' do
       visit home_path(:en)
@@ -49,7 +51,54 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'entity page' do
-    it 'has title "Entity Name - Europeana Collections"'
+    let(:json_api_url) { ENV['EUROPEANA_API_URL'] }
+    let(:entity_id) { '1234' }
+    let(:json_api_url_entity) { %r{\A#{json_api_url}/entities/agent/base/#{entity_id}} }
+    # let(:json_api_url_entity) { /\Ahttps:\/\/www.europeana.eu\/api\/entities\/agent\/base\/1234/ }
+    let(:body_entity) do
+      <<~EOM
+        {
+          "biographicalInformation": [
+            {
+              "@language": "en",
+              "@value": "..."
+            }
+          ],
+          "dateOfBirth": [ "1770-12-16" ],
+          "dateOfDeath": [ "1827-03-26" ],
+          "end": [ "1827-03-26" ],
+          "id": "http://data.europeana.eu/agent/base/146880",
+          "placeOfBirth": [
+            {
+              "@id": "http://dbpedia.org/resource/Electorate_of_Cologne"
+            },
+            {
+              "@id": "http://dbpedia.org/resource/Bonn"
+            }
+          ],
+          "placeOfDeath": {
+            "@id": "http://dbpedia.org/resource/Vienna"
+          },
+          "prefLabel": {
+            "en": "Ludwig van Beethoven",
+          },
+          "sameAs": [
+            "http://uz.dbpedia.org/resource/Ludwig_van_Beethoven"
+          ],
+          "type": "Agent"
+        }
+      EOM
+    end
+    it 'has title "Entity Name - Europeana Collections"' do
+      # stub_request(:get, json_api_url_entity).
+      #   with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+      #   to_return(status: 200, body: body_entity, headers: { 'Content-Type' => mime_type })
+      stub_request(:get, "https://www.europeana.eu/api/entities/agent/base/1234?wskey=apidemo").
+          with(:headers => {'Expect'=>'', 'User-Agent'=>'Faraday v0.12.1'}).
+          to_return(:status => 200, :body => body_entity, :headers => {})
+      visit entity_path(:en, 'people', '1234')
+      expect(page).to have_title('Entity name - Europeana Collections', exact: true)
+    end
   end
 
   describe 'events page' do
