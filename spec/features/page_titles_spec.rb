@@ -53,21 +53,40 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'events page' do
-    let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events(\?|\z)} }
     let(:mime_type) { 'application/vnd.api+json' }
-
-    before do
-      stub_request(:get, json_api_url).
-        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
-        to_return(status: 200, body: '', headers: { 'Content-Type' => mime_type })
+    let(:json_api_url_events) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events} }
+    let(:json_api_url_event) { /\A#{json_api_url_events}\?filter%5Bslug%5D=balenciaga-shaping-fashion/ }
+    let(:body_event) do
+      <<~EOM
+        {
+          "data": {
+            "attributes": {
+              "title": "Balenciaga Shaping Fashion",
+              "datepublish": "2017-06-18T11:24:01+00:00",
+              "introduction": "",
+              "body": ""
+            }
+          }
+        }
+      EOM
     end
+    let(:body_events) { '' }
 
     it 'has title "Events - Europeana Collections"' do
+      stub_request(:get, json_api_url_events).
+        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+        to_return(status: 200, body: body_events, headers: { 'Content-Type' => mime_type })
       visit events_path(:en)
       expect(page).to have_title('Events - Europeana Collections', exact: true)
     end
 
-    it 'has title "Event name - Events - Europeana Collections"'
+    it 'has title "Event name - Events - Europeana Collections"' do
+      stub_request(:get, json_api_url_event).
+        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+        to_return(status: 200, body: body_event, headers: { 'Content-Type' => mime_type })
+      visit event_path(:en, 'balenciaga-shaping-fashion')
+      expect(page).to have_title('Balenciaga Shaping Fashion - Events - Europeana Collections', exact: true)
+    end
   end
 
   describe 'blog page' do
