@@ -55,13 +55,13 @@ RSpec.feature 'Page titles' do
   describe 'events page' do
     let(:mime_type) { 'application/vnd.api+json' }
     let(:json_api_url_events) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events} }
-    let(:json_api_url_event) { /\A#{json_api_url_events}\?filter%5Bslug%5D=balenciaga-shaping-fashion/ }
+    let(:json_api_url_event) { /\A#{json_api_url_events}\?filter%5Bslug%5D=event-name/ }
     let(:body_event) do
       <<~EOM
         {
           "data": {
             "attributes": {
-              "title": "Balenciaga Shaping Fashion",
+              "title": "Event name",
               "datepublish": "2017-06-18T11:24:01+00:00",
               "introduction": "",
               "body": ""
@@ -84,14 +84,46 @@ RSpec.feature 'Page titles' do
       stub_request(:get, json_api_url_event).
         with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
         to_return(status: 200, body: body_event, headers: { 'Content-Type' => mime_type })
-      visit event_path(:en, 'balenciaga-shaping-fashion')
-      expect(page).to have_title('Balenciaga Shaping Fashion - Events - Europeana Collections', exact: true)
+      visit event_path(:en, 'event-name')
+      expect(page).to have_title('Event name - Events - Europeana Collections', exact: true)
     end
   end
 
   describe 'blog page' do
-    it 'has title "Blog - Europeana Collections"'
-    it 'has title "Blog name - Blog - Europeana Collections"'
+    let(:mime_type) { 'application/vnd.api+json' }
+    let(:json_api_url_blogs) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogposts} }
+    let(:json_api_url_blog) { /\A#{json_api_url_blogs}\?filter%5Bslug%5D=blog-name/ }
+    let(:body_blog) do
+      <<~EOM
+        {
+          "data": {
+            "attributes": {
+              "title": "Blog name",
+              "datepublish": "2017-06-18T11:24:01+00:00",
+              "introduction": "",
+              "body": ""
+            }
+          }
+        }
+      EOM
+    end
+    let(:body_blogs) { '' }
+    it 'has title "Blog - Europeana Collections"' do
+      stub_request(:get, json_api_url_blogs).
+          with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+          to_return(status: 200, body: body_blogs, headers: { 'Content-Type' => mime_type })
+      visit blog_posts_path(:en)
+      expect(page).to have_title('Blog - Europeana Collections', exact: true)
+    end
+
+    it 'has title "Blog name - Blog - Europeana Collections"' do
+      stub_request(:get, json_api_url_blog).
+          with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
+          to_return(status: 200, body: body_blog, headers: { 'Content-Type' => mime_type })
+      visit blog_post_path(:en, 'blog-name')
+      expect(page).to have_title('Blog name - Blog - Europeana Collections', exact: true)
+
+    end
   end
 
   describe 'static page' do
