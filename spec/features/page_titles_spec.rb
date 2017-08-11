@@ -2,6 +2,8 @@
 
 RSpec.feature 'Page titles' do
   let(:mime_type) { 'application/vnd.api+json' }
+  let(:headers_req) { { 'Accept' => mime_type, 'Content-Type' => mime_type } }
+  let(:headers_resp) { { 'Accept' => mime_type, 'Content-Type' => mime_type } }
 
   describe 'home page' do
     it 'has title "Europeana Collections"' do
@@ -86,15 +88,16 @@ RSpec.feature 'Page titles' do
       EOM
     end
     it 'has title "Entity Name - Europeana Collections"' do
-      # stub_request(:get, "https://www.europeana.eu/api/entities/agent/base/1234?wskey=apidemo").
-      #   to_return(status: 200, body: body_entity, headers: {})
-      # visit entity_path(:en, 'people', '1234')
-      # expect(page).to have_title('Entity name - Europeana Collections', exact: true)
+      stub_request(:get, 'https://www.europeana.eu/api/entities/agent/base/1234?wskey=apidemo').
+        to_return(status: 200, body: body_entity, headers: {})
+      visit entity_path(:en, 'people', '1234')
+      # TODO: Internal Server Error undefined method `key?' for #<String:0x0000000914dd78>
+      #       @entity is a string and not a hash.
+      # expect(page).to have_title('Ludwig van Beethoven - Europeana Collections', exact: true)
     end
   end
 
   describe 'events page' do
-    let(:mime_type) { 'application/vnd.api+json' }
     let(:json_api_url_events) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events} }
     let(:json_api_url_event) { /\A#{json_api_url_events}\?filter%5Bslug%5D=event-name/ }
     let(:body_event) do
@@ -115,23 +118,22 @@ RSpec.feature 'Page titles' do
 
     it 'has title "Events - Europeana Collections"' do
       stub_request(:get, json_api_url_events).
-        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
-        to_return(status: 200, body: body_events, headers: { 'Content-Type' => mime_type })
+        with(headers: headers_req).
+        to_return(status: 200, body: body_events, headers: headers_resp)
       visit events_path(:en)
       expect(page).to have_title('Events - Europeana Collections', exact: true)
     end
 
     it 'has title "Event name - Events - Europeana Collections"' do
       stub_request(:get, json_api_url_event).
-        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
-        to_return(status: 200, body: body_event, headers: { 'Content-Type' => mime_type })
+        with(headers: headers_req).
+        to_return(status: 200, body: body_event, headers: headers_resp)
       visit event_path(:en, 'event-name')
       expect(page).to have_title('Event name - Events - Europeana Collections', exact: true)
     end
   end
 
   describe 'blog page' do
-    let(:mime_type) { 'application/vnd.api+json' }
     let(:json_api_url_blogs) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogposts} }
     let(:json_api_url_blog) { /\A#{json_api_url_blogs}\?filter%5Bslug%5D=blog-name/ }
     let(:body_blog) do
@@ -151,16 +153,16 @@ RSpec.feature 'Page titles' do
     let(:body_blogs) { '' }
     it 'has title "Blog - Europeana Collections"' do
       stub_request(:get, json_api_url_blogs).
-        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
-        to_return(status: 200, body: body_blogs, headers: { 'Content-Type' => mime_type })
+        with(headers: headers_req).
+        to_return(status: 200, body: body_blogs, headers: headers_resp)
       visit blog_posts_path(:en)
       expect(page).to have_title('Blog - Europeana Collections', exact: true)
     end
 
     it 'has title "Blog name - Blog - Europeana Collections"' do
       stub_request(:get, json_api_url_blog).
-        with(headers: { 'Accept' => mime_type, 'Content-Type' => mime_type }).
-        to_return(status: 200, body: body_blog, headers: { 'Content-Type' => mime_type })
+        with(headers: headers_req).
+        to_return(status: 200, body: body_blog, headers: headers_resp)
       visit blog_post_path(:en, 'blog-name')
       expect(page).to have_title('Blog name - Blog - Europeana Collections', exact: true)
     end
