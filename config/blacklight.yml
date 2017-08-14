@@ -6,3 +6,5 @@ test:
   <<: *default
 production:
   <<: *default
+profiling:
+  <<: *default

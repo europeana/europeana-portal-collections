@@ -29,9 +29,9 @@ RSpec.describe 'blog_posts/index.html.mustache', :common_view_components, :stabl
 
   it_behaves_like 'paginated_view'
 
-  it 'has page title "Europeana Blog"' do
+  it 'has page title containing "Blog"' do
     render
-    expect(rendered).to have_selector('title', text: /Europeana Blog/, visible: false)
+    expect(rendered).to have_selector('title', text: /Blog/, visible: false)
   end
 
   it 'has h2 with post title' do

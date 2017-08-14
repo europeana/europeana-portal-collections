@@ -16,9 +16,16 @@ module EDM
         registry.detect { |rights| string.match(rights.pattern) }
       end
 
+      def api_query_map
+        @api_query_map ||= {}
+      end
+
       def from_api_query(value)
-        simple_value = value.to_s.tr('?*', '')
-        registry.detect { |rights| simple_value.match(rights.pattern) }
+        return nil if value.blank?
+        api_query_map[value] ||= begin
+          simple_value = value.to_s.tr('?*', '')
+          registry.detect { |rights| simple_value.match(rights.pattern) }
+        end
       end
     end
 
