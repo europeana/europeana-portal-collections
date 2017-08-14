@@ -56,7 +56,8 @@ RSpec.feature 'Page titles' do
     let(:type) { 'agent' }
     let(:namespace) { 'base' }
     let(:id) { '1234' }
-    let(:url) { Europeana::API.url + "/entities/#{type}/#{namespace}/#{id}?wskey=apidemo" }
+    let(:wskey) { Rails.application.config.x.europeana[:entities].api_key }
+    let(:url) { Europeana::API.url + "/entities/#{type}/#{namespace}/#{id}?wskey=#{wskey}" }
     it 'has title "Entity Name - Europeana Collections"' do
       stub_request(:get, url).
         to_return(status: 200, body: api_responses(:entities_fetch), headers: { 'Content-Type' => 'application/ld+json' })
