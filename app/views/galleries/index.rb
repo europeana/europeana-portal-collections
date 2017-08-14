@@ -8,8 +8,8 @@ module Galleries
       'channel_landing'
     end
 
-    def page_title
-      mustache[:page_title] ||= [t('global.galleries'), site_title].join(' - ')
+    def page_content_heading
+      t('global.galleries')
     end
 
     def head_links
@@ -23,7 +23,7 @@ module Galleries
         gallery_head_meta + [
           { meta_name: 'description', content: t('site.galleries.description') },
           { meta_property: 'og:description', content: t('site.galleries.description') },
-          { meta_property: 'og:image', content: @hero_image.file.present? ? @hero_image.file.url : nil },
+          { meta_property: 'og:image', content: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil },
           { meta_property: 'og:title', content: page_title }
         ] + super
       end
@@ -60,7 +60,7 @@ module Galleries
 
     def hero_content
       {
-        url: @hero_image.file.present? ? @hero_image.file.url : nil,
+        url: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil,
         title: t('global.galleries'),
         subtitle: ''
       }

@@ -6,10 +6,6 @@ module Home
     include PromotionLinkDisplayingView
     include SearchableView
 
-    def page_title
-      site_title
-    end
-
     def js_slsb_ld
       {
         context: 'http://schema.org',
