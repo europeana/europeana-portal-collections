@@ -94,6 +94,11 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
       render
       expect(rendered).to have_selector(%(a[href="/en/explore/people/#{identifier}-mister-smith.html"]))
     end
+
+    it 'should have search link searching for the name of the entity' do
+      render
+      expect(rendered).to have_selector(%(a[href="/en/search?q=who%3A%28Mister+Smith%29"]))
+    end
   end
 
   context 'without q param' do

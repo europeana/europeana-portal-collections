@@ -24,6 +24,7 @@ module Document
     def initialize(*args)
       super
       @entity_fallbacks_used = []
+      @entity_search_link_prefered = []
     end
 
     def display(id)
@@ -81,10 +82,17 @@ module Document
 
       fields = map_field_values(fields, section[:map_values]) if section[:map_values]
 
+      memo_key = entity_section_memo_key(section)
+
+      if fields.present? && linkable_entity_section?(section)
+        fields.concat(fields) # we'll be showing this field twice, once as a search link and once as an entity-page link
+        @entity_search_link_prefered << memo_key
+      end
+
       if section[:entity_fallback]
         return fields if fields.present?
         fields = section_field_values(fields: section[:entity_fallback])
-        @entity_fallbacks_used << entity_section_memo_key(section)
+        @entity_fallbacks_used << memo_key
       end
 
       return fields if entity_section?(section)
@@ -112,12 +120,15 @@ module Document
     end
 
     def section_field_subsection_item(section, val)
-      {
+      subsection_item = {
         text: section_field_subsection_item_text(section, val),
         url: section_field_subsection_item_url(section, val),
         ga_data: section[:ga_data],
         extra_info: section_field_subsection_item_extra_info(section, val)
       }
+      memo_key = entity_section_memo_key(section)
+      @entity_search_link_prefered.delete(memo_key) if @entity_search_link_prefered.include?(memo_key)
+      subsection_item
     end
 
     def section_field_subsection_item_extra_info(section, val)
@@ -181,6 +192,7 @@ module Document
       text = val
       text = text.titleize if text.present? && section[:capitalised]
       text = format_date(text, section[:format_date]) if section[:format_date]
+      text = [t('site.entities.labels.learn_more'), text].join(' ') if linkable_entity_section?(section)
       text
     end
 
@@ -218,9 +230,11 @@ module Document
     end
 
     def linkable_entity_section?(section)
+      memo_key = entity_section_memo_key(section)
       Rails.application.config.x.enable.entity_page &&
         entity_section?(section) &&
-        !@entity_fallbacks_used.include?(entity_section_memo_key(section)) &&
+        !@entity_fallbacks_used.include?(memo_key) &&
+        !@entity_search_link_prefered.include?(memo_key) &&
         section[:entity_name] == 'agents' # while only agent entity pages are implemented
     end
   end
