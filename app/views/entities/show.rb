@@ -59,19 +59,20 @@ module Entities
     end
 
     def content
+      tab_items = [
+        {
+          tab_title: t('site.entities.tab_items.items_by', name: entity_name),
+          url: search_path(q: @items_by_query, format: 'json'),
+          search_url: search_path(q: @items_by_query)
+        }
+      ]
+      if api_type == 'agent'
+        # TODO
+        tab_items.push(tab_title: t('site.entities.tab_items.items_about', name: entity_name))
+      end
       mustache[:content] ||= begin
         {
-          tab_items: [
-            {
-              tab_title: t('site.entities.tab_items.items_by', name: entity_name),
-              url: search_path(q: @items_by_query, format: 'json'),
-              search_url: search_path(q: @items_by_query)
-            },
-            {
-              # TODO
-              tab_title: t('site.entities.tab_items.items_about', name: entity_name),
-            }
-          ],
+          tab_items: tab_items,
           input_search: input_search,
           social_share: entity_social_share,
           entity_anagraphical: entity_anagraphical,
