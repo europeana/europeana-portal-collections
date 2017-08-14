@@ -53,47 +53,15 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'entity page' do
-    let(:body_entity) do
-      <<~EOM
-        {
-          "biographicalInformation": [
-            {
-              "@language": "en",
-              "@value": "..."
-            }
-          ],
-          "dateOfBirth": [ "1770-12-16" ],
-          "dateOfDeath": [ "1827-03-26" ],
-          "end": [ "1827-03-26" ],
-          "id": "http://data.europeana.eu/agent/base/146880",
-          "placeOfBirth": [
-            {
-              "@id": "http://dbpedia.org/resource/Electorate_of_Cologne"
-            },
-            {
-              "@id": "http://dbpedia.org/resource/Bonn"
-            }
-          ],
-          "placeOfDeath": {
-            "@id": "http://dbpedia.org/resource/Vienna"
-          },
-          "prefLabel": {
-            "en": "Ludwig van Beethoven"
-          },
-          "sameAs": [
-            "http://uz.dbpedia.org/resource/Ludwig_van_Beethoven"
-          ],
-          "type": "Agent"
-        }
-      EOM
-    end
+    let(:type) { 'agent' }
+    let(:namespace) { 'base' }
+    let(:id) { '1234' }
+    let(:url) { Europeana::API.url + "/entities/#{type}/#{namespace}/#{id}?wskey=apidemo" }
     it 'has title "Entity Name - Europeana Collections"' do
-      stub_request(:get, 'https://www.europeana.eu/api/entities/agent/base/1234?wskey=apidemo').
-        to_return(status: 200, body: body_entity, headers: {})
-      visit entity_path(:en, 'people', '1234')
-      # TODO: Internal Server Error undefined method `key?' for #<String:0x0000000914dd78>
-      #       @entity is a string and not a hash.
-      # expect(page).to have_title('Ludwig van Beethoven - Europeana Collections', exact: true)
+      stub_request(:get, url).
+        to_return(status: 200, body: api_responses(:entities_fetch), headers: { 'Content-Type' => 'application/ld+json' })
+      visit entity_path(:en, 'people', id)
+      expect(page).to have_title('David Hume - Europeana Collections', exact: true)
     end
   end
 
