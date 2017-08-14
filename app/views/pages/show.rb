@@ -2,10 +2,8 @@ module Pages
   class Show < ApplicationView
     include BrowseEntryDisplayingView
 
-    def page_title
-      mustache[:page_title] ||= begin
-        [@page.title, site_title].join(' - ')
-      end
+    def page_content_heading
+      @page.title
     end
 
     def head_meta

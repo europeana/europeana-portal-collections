@@ -18,10 +18,8 @@ module Events
       pro_json_api_selected_theme
     end
 
-    def page_title
-      mustache[:page_title] ||= begin
-        [t('site.events.list.page-title'), site_title].join(' - ')
-      end
+    def page_content_heading
+      t('site.events.list.page-title')
     end
 
     def navigation
