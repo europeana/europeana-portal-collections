@@ -59,20 +59,9 @@ module Entities
     end
 
     def content
-      tab_items = [
-        {
-          tab_title: t('site.entities.tab_items.items_by', name: entity_name),
-          url: search_path(q: @items_by_query, format: 'json'),
-          search_url: search_path(q: @items_by_query)
-        }
-      ]
-      if api_type == 'agent'
-        # TODO
-        tab_items.push(tab_title: t('site.entities.tab_items.items_about', name: entity_name))
-      end
       mustache[:content] ||= begin
         {
-          tab_items: tab_items,
+          tab_items: entity_tab_items,
           input_search: input_search,
           social_share: entity_social_share,
           entity_anagraphical: entity_anagraphical,
@@ -81,6 +70,31 @@ module Entities
           entity_description: entity_description,
           entity_title: entity_name
         }.compact
+      end
+    end
+
+    def entity_tab_items
+      case api_type
+      when 'agent'
+        [
+          {
+            tab_title: t('site.entities.tab_items.items_by', name: entity_name),
+            url: search_path(q: @items_by_query, format: 'json'),
+            search_url: search_path(q: @items_by_query)
+          },
+          {
+            # TODO
+            tab_title: t('site.entities.tab_items.items_about', name: entity_name)
+          }
+        ]
+      when 'concept'
+        [
+          {
+            tab_title: t('site.entities.tab_items.items_about', name: entity_name),
+            url: search_path(q: @items_by_query, format: 'json'),
+            search_url: search_path(q: @items_by_query)
+          }
+        ]
       end
     end
 
