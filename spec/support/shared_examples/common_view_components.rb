@@ -1,6 +1,6 @@
 RSpec.shared_examples 'common view components', :common_view_components do
   let(:available_locales) do
-    [:bg, :ca, :da, :de, :el, :en, :es, :fi, :fr, :hr, :hu, :it, :lt, :lv, :nl, :pl, :pt, :ro, :ru, :sv]
+    I18n.available_locales
   end
 
   it 'should have site name in <title>' do
@@ -62,14 +62,9 @@ RSpec.shared_examples 'common view components', :common_view_components do
   end
 
   it 'should have language menu links to all locales' do
-    class AvailableLocales
-      include I18nHelper
-    end
-    language_map = AvailableLocales.new.language_map
-
     render
     available_locales.each do |locale|
-      label = I18n.t("global.language-#{language_map[locale]}", locale: locale)
+      label = I18n.t(locale, scope: 'global.languages', locale: locale)
       expect(rendered).to have_selector('#settings-menu a', text: label)
     end
   end
