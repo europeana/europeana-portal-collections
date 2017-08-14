@@ -229,7 +229,7 @@ module Portal
         {
           title: t('site.object.similar-items'),
           more_items_load: document_similar_url(document, format: 'json', mlt_query: @mlt_query),
-          more_items_query: search_path({ q: @mlt_query, format: 'json' }.merge(params.slice(:api_url)))
+          more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
         }
       end
     end
