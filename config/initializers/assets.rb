@@ -1,9 +1,21 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
-styleguide_source = Bundler.environment.dependencies.detect { |d| d.name == 'europeana-styleguide' }.source
-if styleguide_source.respond_to?(:ref)
-  # Version of your assets, change this if you want to expire all your assets.
-  Rails.application.config.assets.version = styleguide_source.ref
+# Builds a gem version string like ":gem_name-:gem_version(@:gem_git_ref)", e.g.
+# "europeana-styleguide-0.3.0@3398ae7"
+gem_version = lambda do |gem_name|
+  gem_spec = Bundler.environment.dependencies.detect { |d| d.name == gem_name }.to_spec
+  version_string = "#{gem_name}-#{gem_spec.version}"
+  gem_spec.git_version.blank? ? version_string : "#{version_string}@#{gem_spec.git_version.strip}"
+end
+
+# Changes to certain gems need to invalidate cached assets
+%w(europeana-i18n europeana-styleguide).each do |gem_name|
+  if Rails.application.config.assets.version.present?
+    Rails.application.config.assets.version = Rails.application.config.assets.version + '/'
+  end
+  Rails.application.config.assets.version = Rails.application.config.assets.version + gem_version.call(gem_name)
 end
 
 # Add additional assets to the asset load path
