@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Builds a gem version string like ":gem_name-:gem_version(@:gem_git_ref)", e.g.
 # "europeana-styleguide-0.3.0@3398ae7"
 gem_version = lambda do |gem_name|
   gem_spec = Bundler.environment.dependencies.detect { |d| d.name == gem_name }.to_spec
-  "#{gem_name}-#{gem_spec.version}".tap do |gem_version|
-    gem_version << "@#{gem_spec.git_version.strip}" unless gem_spec.git_version.blank?
+  "#{gem_name}-#{gem_spec.version}".tap do |version_string|
+    version_string << "@#{gem_spec.git_version.strip}" unless gem_spec.git_version.blank?
   end
 end
 
