@@ -80,12 +80,12 @@ module EntityDisplayingView
 
   # Returns a string: locale, english or nil
   def entity_note(note)
-    return nil unless note && note.is_a?(Hash) && note.length.positive?
-    note.each do |key, value|
-      return value[0] if key.to_s == page_locale
+    return nil unless note.present? && note.is_a?(Hash)
+    if note.key?(page_locale.to_sym)
+      note[page_locale.to_sym].first
+    elsif note.key?(:en)
+      note[:en].first
     end
-    return note[:en][0] if note.key?(:en)
-    nil
   end
 
   # Returns a string
