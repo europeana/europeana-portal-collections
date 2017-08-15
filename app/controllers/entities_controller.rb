@@ -16,10 +16,7 @@ class EntitiesController < ApplicationController
 
   def show
     @body_cache_key = body_cache_key
-    unless body_cached?
-      @entity = entity
-      @items_by_query = build_query_items_by(params)
-    end
+    @entity = entity unless body_cached?
 
     respond_to do |format|
       format.html
@@ -67,20 +64,5 @@ class EntitiesController < ApplicationController
 
   def api_namespace
     'base'
-  end
-
-  def build_query_items_by(params)
-    case api_type
-    when 'agent'
-      creator = build_proxy_dc('creator', 'http://data.europeana.eu', api_path)
-      contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', api_path)
-      "#{creator} OR #{contributor}"
-    when 'concept'
-      %(what:"http://data.europeana.eu/concept/base/#{params[:id]}")
-    end
-  end
-
-  def build_proxy_dc(name, url, path)
-    %(proxy_dc_#{name}:"#{url}/#{path}")
   end
 end

@@ -15,7 +15,7 @@ RSpec.feature 'Entity page' do
       let(:name) { 'David Hume' }
       let(:description) { 'A famous philosopher' }
 
-      it "has title \"#{name} - Europeana Collections\"" do
+      it 'has title "David Hume - Europeana Collections"' do
         stub_request(:get, url).
           to_return(status: 200, body: api_responses(:entities_fetch_agent, name: name, description: description),
                     headers: headers)
@@ -32,7 +32,7 @@ RSpec.feature 'Entity page' do
       let(:name) { 'Photography' }
       let(:description) { 'The art of taking pictures' }
 
-      it "has title \"#{name} - Europeana Collections\"" do
+      it 'has title "Photography - Europeana Collections"' do
         stub_request(:get, url).
           to_return(status: 200, body: api_responses(:entities_fetch_topic, name: name, description: description),
                     headers: headers)

@@ -79,8 +79,8 @@ module Entities
         [
           {
             tab_title: t('site.entities.tab_items.items_by', name: entity_name),
-            url: search_path(q: @items_by_query, format: 'json'),
-            search_url: search_path(q: @items_by_query)
+            url: search_path(q: entity_query_items_by, format: 'json'),
+            search_url: search_path(q: entity_query_items_by)
           },
           {
             # TODO
@@ -91,8 +91,8 @@ module Entities
         [
           {
             tab_title: t('site.entities.tab_items.items_about', name: entity_name),
-            url: search_path(q: @items_by_query, format: 'json'),
-            search_url: search_path(q: @items_by_query)
+            url: search_path(q: entity_query_items_by, format: 'json'),
+            search_url: search_path(q: entity_query_items_by)
           }
         ]
       end
@@ -107,6 +107,23 @@ module Entities
         ],
         href: 'https://commons.wikimedia.org/wiki/File:' + thumb[:src].split('/').pop
       }
+    end
+
+    def entity_query_items_by
+      @query ||= begin
+        case api_type
+          when 'agent'
+            creator = build_proxy_dc('creator', 'http://data.europeana.eu', api_path)
+            contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', api_path)
+            "#{creator} OR #{contributor}"
+          when 'concept'
+            %(what:"http://data.europeana.eu/concept/base/#{params[:id]}")
+        end
+      end
+    end
+
+    def build_proxy_dc(name, url, path)
+      %(proxy_dc_#{name}:"#{url}/#{path}")
     end
   end
 end
