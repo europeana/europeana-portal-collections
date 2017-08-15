@@ -70,9 +70,14 @@ class EntitiesController < ApplicationController
   end
 
   def build_query_items_by(params)
-    creator = build_proxy_dc('creator', 'http://data.europeana.eu', api_path)
-    contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', api_path)
-    "#{creator} OR #{contributor}"
+    case api_type
+    when 'agent'
+      creator = build_proxy_dc('creator', 'http://data.europeana.eu', api_path)
+      contributor = build_proxy_dc('contributor', 'http://data.europeana.eu', api_path)
+      "#{creator} OR #{contributor}"
+    when 'concept'
+      %(what:"http://data.europeana.eu/concept/base/#{params[:id]}")
+    end
   end
 
   def build_proxy_dc(name, url, path)

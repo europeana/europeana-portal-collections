@@ -78,7 +78,7 @@ module EntityDisplayingView
 
   private
 
-  # Returns a string: locale, english or first
+  # Returns a string: locale, english or nil
   def entity_note(note)
     return nil unless note && note.is_a?(Hash) && note.length.positive?
     note.each do |key, value|
