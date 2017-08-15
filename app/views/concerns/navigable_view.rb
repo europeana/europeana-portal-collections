@@ -206,8 +206,8 @@ module NavigableView
   end
 
   def utility_nav_items_submenu_items
-    language_map.map do |locale, i18n|
-      label = t("global.language-#{i18n}", locale: locale)
+    I18n.available_locales.map do |locale|
+      label = t(locale, scope: 'global.languages', locale: locale)
       link_item(label, current_url_for_locale(locale),
                 is_current: (locale.to_s == I18n.locale.to_s))
     end

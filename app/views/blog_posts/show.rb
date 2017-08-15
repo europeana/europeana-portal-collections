@@ -5,7 +5,10 @@ module BlogPosts
     def blog_title
       presenter.title
     end
-    alias_method :page_content_heading, :blog_title
+
+    def page_content_heading
+      [presenter.title, t('site.blogs.list.page-title')]
+    end
 
     def head_meta
       mustache[:head_meta] ||= begin
@@ -18,7 +21,6 @@ module BlogPosts
           { meta_property: 'og:description', content: description },
           { meta_property: 'og:image', content: image },
           { meta_property: 'og:title', content: blog_title },
-          { meta_property: 'og:sitename', content: blog_title },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' }
         ]

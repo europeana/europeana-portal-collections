@@ -11,11 +11,7 @@ module SearchableView
       if config.x.enable.search_form_autocomplete
         fs[:autocomplete] = {
           url: entities_suggest_url(format: 'json', text: ''),
-          translations: {
-            agents: t('global.navigation.agents', default: 'People'),
-            concepts: t('global.navigation.concepts', default: 'Topics'),
-            places: t('global.navigation.places', default: 'Places')
-          }
+          min_chars: 2
         }
       end
     end
@@ -43,35 +39,42 @@ module SearchableView
   def input_search_values(*keys)
     return [] if keys.blank?
 
-    keys.map do |k|
-      [params[k]].flatten.compact.reject(&:blank?).map do |v|
-        remove_params = remove_search_param(k, v, params)
-        remove_params[:q] = '' if (k.to_s == 'mlt') && !remove_params.key?(:q)
-        {
-          name: params[k].is_a?(Array) ? "#{k}[]" : k.to_s,
-          is_mlt: k.to_s == 'mlt',
-          value: k.to_s == 'mlt' ? params[:mlt] : input_search_param_value(k, v),
-          remove: search_action_path(remove_params)
-        }
-      end
+    keys.map do |param_key|
+      input_search_value_from_param(param_key)
     end.flatten.compact
   end
 
-  ##
-  # Returns text to display on-screen for an active search param
-  #
-  # @param key [Symbol] parameter key
-  # @param value value of the parameter
-  # @return [String] text to display
-  def input_search_param_value(key, value)
-    case key
-    when :mlt
-      response, doc = controller.fetch(value)
-      item = render_index_field_value(doc, ['dcTitleLangAware', 'title'])
-      t('site.search.similar.prefix', mlt_item: item)
+  def input_search_value_from_param(local_key, local_params = params, params_key = local_key)
+    if local_params[local_key].is_a?(Hash)
+      local_params[local_key].map do |param_sub_key, _param_sub_value|
+        input_search_value_from_param(param_sub_key, local_params[local_key], params_key)
+      end
     else
-      value.to_s
+      [local_params[local_key]].flatten.compact.reject(&:blank?).map do |local_value|
+        input_search_value_from_param_field(local_key, local_value, params_key)
+      end
     end
+  end
+
+  def input_search_value_from_param_field(local_key, local_value, params_key = local_key)
+    remove_params = remove_search_param(params_key, local_value, params)
+    remove_params[:q] = '' if (params_key.to_s == 'mlt') && !remove_params.key?(:q)
+
+    param_name = case params[params_key]
+                 when Array
+                   "#{params_key}[]"
+                 when Hash
+                   "#{params_key}[#{local_key}]"
+                 else
+                   params_key.to_s
+                 end
+
+    {
+      name: param_name,
+      is_mlt: local_key.to_s == 'mlt',
+      value: local_value,
+      remove: search_action_path(remove_params)
+    }
   end
 
   ##
@@ -79,6 +82,6 @@ module SearchableView
   #
   # @return [Array<Symbol>]
   def search_param_keys
-    [:qf, :mlt]
+    %i(qf mlt qe)
   end
 end

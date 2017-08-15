@@ -25,21 +25,18 @@ module ProJsonApiConsumer
         filter: 'culturelover',
         label: t('global.actions.filter-all')
       }
-    }.merge(pro_json_api_theme_filters_from_topics)
+    }.merge(pro_json_api_theme_filters_from_collections)
   end
 
-  def pro_json_api_whitelisted_topics
-    Topic.where(slug: %w(1989 archaeology architecture art events exhibitions
-                         general fashion food-and-drink history literature
-                         maps-and-cartography migration music natural-history
-                         photography pop reuse sports world-war-i))
+  def pro_json_api_whitelisted_collections
+    displayable_collections
   end
 
-  def pro_json_api_theme_filters_from_topics
-    pro_json_api_whitelisted_topics.sort_by(&:label).each_with_object({}) do |topic, filters|
-      filters[topic.slug.to_sym] = {
-        filter: "culturelover-#{topic.slug}",
-        label: topic.label
+  def pro_json_api_theme_filters_from_collections
+    pro_json_api_whitelisted_collections.sort_by { |collection| collection.landing_page.title }.each_with_object({}) do |collection, filters|
+      filters[collection.key.downcase.to_sym] = {
+        filter: "culturelover-#{collection.key.downcase}",
+        label: collection.landing_page.title
       }
     end
   end

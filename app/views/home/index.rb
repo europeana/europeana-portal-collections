@@ -6,10 +6,6 @@ module Home
     include PromotionLinkDisplayingView
     include SearchableView
 
-    def page_title
-      'Europeana Collections'
-    end
-
     def js_slsb_ld
       {
         context: 'http://schema.org',
@@ -46,7 +42,6 @@ module Home
           { meta_property: 'fb:appid', content: '185778248173748' },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          { meta_property: 'og:sitename', content: title },
           { meta_property: 'og:description', content: description },
           { meta_property: 'og:url', content: root_url }
         ]
@@ -54,17 +49,6 @@ module Home
         head_meta << { meta_property: 'og:image', content: hero[:hero_image] } unless hero.nil?
         head_meta + super
       end
-    end
-
-    def primary_nav_clicktip
-      {
-        clicktip: {
-          tooltip_text: t('global.tooltips.channels.home.new-galleries'),
-          direction: 'top',
-          id: 'explore-menu-tooltip',
-          persistent: true
-        }
-      }
     end
 
     private

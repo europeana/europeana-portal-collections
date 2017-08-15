@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-# @todo Move all uses of env vars out of app/ logic and into this initializer,
+
+# TODO: Move all uses of env vars out of app/ logic and into this initializer,
 #   with app logic instead inspecting `Rails.application.config.x`
 
 # Europeana-centric configuration, e.g. APIs and other sites
@@ -13,13 +14,19 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
                                 else
                                   ''
                                 end
+
+  europeana[:entities] = OpenStruct.new(
+    api_key: ENV['EUROPEANA_ENTITIES_API_KEY'],
+    api_url: ENV['EUROPEANA_ENTITIES_API_URL']
+  )
 end
 
 # Google-centric configuration
-Rails.application.config.x.google = {}.tap do |google|
-  google[:analytics_key] = ENV['GOOGLE_ANALYTICS_KEY']
-  google[:site_verification] = ENV['GOOGLE_SITE_VERIFICATION']
-end
+Rails.application.config.x.google = OpenStruct.new(
+  analytics_key: ENV['GOOGLE_ANALYTICS_KEY'],
+  optimize_container_id: ENV['GOOGLE_OPTIMIZE_CONTAINER_ID'],
+  site_verification: ENV['GOOGLE_SITE_VERIFICATION']
+)
 
 # Disable certain features that are enabled by default
 Rails.application.config.x.disable = OpenStruct.new(
@@ -28,8 +35,8 @@ Rails.application.config.x.disable = OpenStruct.new(
 
 # Enable certain features that are disabled by default
 Rails.application.config.x.enable = OpenStruct.new(
-  blog_posts_theme_filter: ENV['ENABLE_BLOG_POSTS_THEME_FILTER'],
   csrf_without_ssl: ENV['ENABLE_CSRF_WITHOUT_SSL'],
   events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
-  search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE']
+  search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
+  entity_page: ENV['ENABLE_ENTITY_PAGE']
 )

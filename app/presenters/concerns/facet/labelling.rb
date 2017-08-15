@@ -146,15 +146,13 @@ module Facet
       # Makes use of both I18nData (https://github.com/grosser/i18n_data) and localeapp via I18n translations
       #
       # @return [String]
-      def language_facet_item_label(item)
-        language_code = item.dup
+      def language_facet_item_label(language_code)
         locale = I18n.locale == :no ? 'NN' : I18n.locale # The norwegian language file is named 'NN' not 'NO'
         i18ndata_label = I18nData.languages(locale)[language_code.upcase]
-        if i18ndata_label.blank?
-          I18n.t(language_code.to_sym, scope: 'global.facet.language', default: language_code.upcase)
-        else
-          i18ndata_label
-        end
+
+        return i18ndata_label unless i18ndata_label.blank?
+
+        I18n.t(language_code.to_sym, scope: 'global.languages', default: language_code.upcase)
       end
 
       ##

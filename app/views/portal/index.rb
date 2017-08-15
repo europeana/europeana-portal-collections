@@ -31,11 +31,8 @@ module Portal
       grid_view_active? ? 'display-grid' : nil
     end
 
-    # TODO: move page title to localeapp
-    def page_title
-      mustache[:page_title] ||= begin
-        [params[:q], 'Europeana - Search results'].compact.join(' - ')
-      end
+    def page_content_heading
+      [params[:q].blank? ? '' : params[:q].truncate(25, separator: ' '), t('site.search.page-title')]
     end
 
     def form_search

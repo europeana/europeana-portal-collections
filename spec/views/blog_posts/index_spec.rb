@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 require 'views/concerns/paginated_view_examples'
 
-RSpec.describe 'blog_posts/index.html.mustache' do
+RSpec.describe 'blog_posts/index.html.mustache', :common_view_components, :stable_version_view do
   let(:view_class) { BlogPosts::Index }
   let(:pagination_per) { 6 }
   let(:pagination_page) { 1 }
@@ -28,9 +29,9 @@ RSpec.describe 'blog_posts/index.html.mustache' do
 
   it_behaves_like 'paginated_view'
 
-  it 'has page title "Europeana Blog"' do
+  it 'has page title containing "Blog"' do
     render
-    expect(rendered).to have_selector('title', text: /Europeana Blog/, visible: false)
+    expect(rendered).to have_selector('title', text: /Blog/, visible: false)
   end
 
   it 'has h2 with post title' do
@@ -43,27 +44,10 @@ RSpec.describe 'blog_posts/index.html.mustache' do
     expect(rendered).to have_selector('.item-preview .category-flag', text: 'Fashion')
   end
 
-  context 'with theme filter enabled' do
-    before do
-      Rails.application.config.x.enable.blog_posts_theme_filter = '1'
-    end
-
-    it 'has theme filter' do
-      render
-      expect(rendered).to have_selector('select#list_filterby')
-      expect(rendered).to have_selector('select#list_filterby > option[value="all"]')
-      expect(rendered).to have_selector('select#list_filterby > option[value="fashion"]')
-    end
-  end
-
-  context 'without theme filter enabled' do
-    before do
-      Rails.application.config.x.enable.blog_posts_theme_filter = nil
-    end
-
-    it 'has no theme filter' do
-      render
-      expect(rendered).not_to have_selector('select#list_filterby')
-    end
+  it 'has theme filter' do
+    render
+    expect(rendered).to have_selector('select#list_filterby')
+    expect(rendered).to have_selector('select#list_filterby > option[value="all"]')
+    expect(rendered).to have_selector('select#list_filterby > option[value="fashion"]')
   end
 end

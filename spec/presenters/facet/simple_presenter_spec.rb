@@ -24,7 +24,7 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
         end
 
         it 'should use the I18nData translation' do
-          expect(I18n).to_not receive(:t).with(:nl, scope: 'global.facet.language', default: 'XY')
+          expect(I18n).to_not receive(:t).with(:nl, scope: 'global.languages', default: 'XY')
           expect(subject[:items].first[:text]).to eq 'Dutch; Flemish'
         end
       end
@@ -37,7 +37,7 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
         context 'when the value is in localeapp' do
           before do
             allow(I18n).to receive(:t) { 'default translation' }
-            allow(I18n).to receive(:t).with(:xy, scope: 'global.facet.language', default: 'XY') { 'Localeapp Dutch' }
+            allow(I18n).to receive(:t).with(:xy, scope: 'global.languages', default: 'XY') { 'Localeapp Dutch' }
           end
           it 'should use the localeapp translation' do
             expect(subject[:items].first[:text]).to eq 'Localeapp Dutch'

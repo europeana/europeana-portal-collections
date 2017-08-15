@@ -21,10 +21,8 @@ module Catalog
     @doc_id ||= '/' + params[:id]
   end
 
-  def more_like_this(document, field = nil, extra_controller_params = {})
-    mlt_params = params.dup.slice(:page, :per_page, :api_url)
-    mlt_params.merge!(mlt: document, mltf: field)
-    mlt_params.merge!(extra_controller_params)
+  def more_like_this(mlt_query, extra_controller_params = {})
+    mlt_params = extra_controller_params.merge(q: mlt_query)
     search_results(mlt_params)
   rescue Net::HTTPBadResponse, Europeana::API::Errors::RequestError,
          Europeana::API::Errors::ResponseError
@@ -68,6 +66,10 @@ module Catalog
     else
       search_url(options.except(:controller, :action))
     end
+  end
+
+  def has_search_parameters?
+    super || params.key?(:qe)
   end
 
   protected

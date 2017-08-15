@@ -8,8 +8,8 @@ module Galleries
       'channel_landing'
     end
 
-    def page_title
-      mustache[:page_title] ||= [t('global.galleries'), site_title].join(' - ')
+    def page_content_heading
+      t('global.galleries')
     end
 
     def head_links
@@ -23,9 +23,8 @@ module Galleries
         gallery_head_meta + [
           { meta_name: 'description', content: t('site.galleries.description') },
           { meta_property: 'og:description', content: t('site.galleries.description') },
-          { meta_property: 'og:image', content: @hero_image.file.present? ? @hero_image.file.url : nil },
-          { meta_property: 'og:title', content: page_title },
-          { meta_property: 'og:sitename', content: page_title }
+          { meta_property: 'og:image', content: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil },
+          { meta_property: 'og:title', content: page_title }
         ] + super
       end
     end
@@ -38,16 +37,9 @@ module Galleries
       mustache[:content] ||= begin
         {
           hero: hero_content,
-          galleries: add_info_clicktip(galleries_content),
+          galleries: galleries_content,
           social: galleries_social,
-          gallery_filter_options: galleries_topics,
-          clicktip: {
-            activator:    '.filterby',
-            direction:    'top',
-            id:           'filter-galleries',
-            persistent:   true,
-            tooltip_text: t('global.tooltips.channels.galleries.filter')
-          }
+          gallery_filter_options: galleries_topics
         }
       end
     end
@@ -68,7 +60,7 @@ module Galleries
 
     def hero_content
       {
-        url: @hero_image.file.present? ? @hero_image.file.url : nil,
+        url: @hero_image.present? && @hero_image.file.present? ? @hero_image.file.url : nil,
         title: t('global.galleries'),
         subtitle: ''
       }
@@ -95,32 +87,6 @@ module Galleries
           value: topic.to_param
         }
       end
-    end
-
-    def info_clicktip_target(galleries_content)
-      if galleries_content[1].present? && galleries_content[1][:info].present?
-        galleries_content[1]
-      else
-        galleries_content.detect { |gc| gc[:info].present? }
-      end
-    end
-
-    def add_info_clicktip(galleries_content)
-      info_clicktip_target(galleries_content).tap do |target|
-        unless target.nil?
-          target[:info_clicktip] = {
-            clicktip: {
-              activator:    '.image-set:eq(1) .svg-icon-info',
-              direction:    'top',
-              id:           'gallery-hover-info',
-              persistent:   true,
-              tooltip_text: t('global.tooltips.channels.galleries.info')
-            }
-          }
-        end
-      end
-
-      galleries_content
     end
 
     def galleries_content
