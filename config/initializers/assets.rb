@@ -6,15 +6,16 @@
 # "europeana-styleguide-0.3.0@3398ae7"
 gem_version = lambda do |gem_name|
   gem_spec = Bundler.environment.dependencies.detect { |d| d.name == gem_name }.to_spec
-  "#{gem_name}-#{gem_spec.version}".tap do |version_string|
-    version_string << "@#{gem_spec.git_version.strip}" unless gem_spec.git_version.blank?
-  end
+  version_string = "#{gem_name}-#{gem_spec.version}"
+  gem_spec.git_version.blank? ? version_string : "#{version_string}@#{gem_spec.git_version.strip}"
 end
 
 # Changes to certain gems need to invalidate cached assets
 %w(europeana-i18n europeana-styleguide).each do |gem_name|
-  Rails.application.config.assets.version << '/' if Rails.application.config.assets.version.present?
-  Rails.application.config.assets.version << gem_version.call(gem_name)
+  if Rails.application.config.assets.version.present?
+    Rails.application.config.assets.version = Rails.application.config.assets.version + '/'
+  end
+  Rails.application.config.assets.version = Rails.application.config.assets.version + gem_version.call(gem_name)
 end
 
 # Add additional assets to the asset load path
