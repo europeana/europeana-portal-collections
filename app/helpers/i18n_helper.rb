@@ -1,36 +1,10 @@
 # frozen_string_literal: true
 
 module I18nHelper
-  def language_map
-    {
-      bg: 'bulgarian',
-      ca: 'catalan',
-      da: 'danish',
-      de: 'german',
-      el: 'greek',
-      en: 'english',
-      es: 'spanish',
-      et: 'estonian',
-      fi: 'finnish',
-      fr: 'french',
-      hr: 'croatian',
-      hu: 'hungarian',
-      it: 'italian',
-      lt: 'lithuanian',
-      lv: 'latvian',
-      mt: 'maltese',
-      no: 'norwegian',
-      nl: 'dutch',
-      pl: 'polish',
-      pt: 'portuguese',
-      ro: 'romanian',
-      ru: 'russian',
-      sv: 'swedish'
-    }
-  end
-
   def language_options_for_select
-    localised = language_map.map { |k, v| [t("global.language-#{v}", locale: k), k.to_s] }
+    localised = I18n.available_locales.map do |locale|
+      [t(locale, scope: 'global.languages', locale: locale), locale.to_s]
+    end
     localised.sort_by!(&:first)
     options_for_select(localised, I18n.locale.to_s)
   end
