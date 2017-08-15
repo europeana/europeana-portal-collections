@@ -27,7 +27,7 @@ RSpec.describe 'I18n available locales initializer' do
       Rails.application.config.i18n.available_locales = @available_locales_was
     end
 
-    it 'adds locales to I18n' do |example|
+    it 'adds locales to I18n' do
       read_initializer
       expect(subject).to include(:cs)
     end
