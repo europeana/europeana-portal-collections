@@ -40,11 +40,3 @@ Rails.application.config.x.enable = OpenStruct.new(
   search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
   entity_page: ENV['ENABLE_ENTITY_PAGE']
 )
-
-# Add locales to available locales
-if ENV['I18N_ADDITIONAL_LOCALES']
-  ENV['I18N_ADDITIONAL_LOCALES'].split(',').each do |locale|
-    Rails.application.config.i18n.available_locales << locale.to_sym
-  end
-  Rails.application.config.i18n.available_locales.sort!
-end
