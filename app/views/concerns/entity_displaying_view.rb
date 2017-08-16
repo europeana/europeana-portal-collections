@@ -205,14 +205,7 @@ module EntityDisplayingView
   end
 
   def entity_date(dates)
-    return nil unless dates.present? && dates.is_a?(Array)
-
-    dates.each do |date|
-      gregorian = date_eras_gregorian(date)
-      return gregorian unless gregorian.nil?
-    end
-
-    dates.first.strip
+    date_most_accurate(dates)
   end
 
   # For multiple items the format is just an array of hash items
