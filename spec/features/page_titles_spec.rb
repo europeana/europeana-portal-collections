@@ -53,16 +53,36 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'entity page' do
-    let(:type) { 'agent' }
     let(:namespace) { 'base' }
     let(:id) { '1234' }
     let(:wskey) { Rails.application.config.x.europeana[:entities].api_key }
     let(:url) { Europeana::API.url + "/entities/#{type}/#{namespace}/#{id}?wskey=#{wskey}" }
-    it 'has title "Entity Name - Europeana Collections"' do
-      stub_request(:get, url).
-        to_return(status: 200, body: api_responses(:entities_fetch), headers: { 'Content-Type' => 'application/ld+json' })
-      visit entity_path(:en, 'people', id)
-      expect(page).to have_title('David Hume - Europeana Collections', exact: true)
+    let(:headers) { { 'Content-Type' => 'application/ld+json' } }
+
+    context 'agent' do
+      let(:type) { 'agent' }
+      let(:name) { 'David Hume' }
+      let(:description) { 'A famous philosopher' }
+      it "has title \"#{name} - Europeana Collections\"" do
+        stub_request(:get, url).
+          to_return(status: 200, body: api_responses(:entities_fetch_agent, name: name, description: description),
+                    headers: headers)
+        visit entity_path(:en, 'people', id)
+        expect(page).to have_title("#{name} - Europeana Collections", exact: true)
+      end
+    end
+
+    context 'concept' do
+      let(:type) { 'concept' }
+      let(:name) { 'Photography' }
+      let(:description) { 'The art of taking pictures' }
+      it "has title \"#{name} - Europeana Collections\"" do
+        stub_request(:get, url).
+          to_return(status: 200, body: api_responses(:entities_fetch_topic, name: name, description: description),
+                    headers: headers)
+        visit entity_path(:en, 'topics', id)
+        expect(page).to have_title("#{name} - Europeana Collections", exact: true)
+      end
     end
   end
 

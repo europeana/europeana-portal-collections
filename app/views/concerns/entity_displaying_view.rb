@@ -6,6 +6,7 @@ module EntityDisplayingView
   extend ActiveSupport::Concern
 
   def entity_anagraphical
+    return nil unless api_type == 'agent'
     result = [
       {
         label: t('site.entities.anagraphic.birth'),
@@ -58,7 +59,7 @@ module EntityDisplayingView
     entity_pref_label('[No name]')
   end
 
-  # biographicalInformation: [
+  # agent => biographicalInformation: [
   #   {
   #     @language: "en",
   #     @value: "..."
@@ -66,12 +67,26 @@ module EntityDisplayingView
   #   ...
   # ]
   #
+  # concept => note: {
+  #   en: ["..."],
+  # }
+  #
   # Returns a string
   def entity_description
-    entity_value_by_locale(@entity[:biographicalInformation])
+    api_type == 'agent' ? entity_value_by_locale(@entity[:biographicalInformation]) : entity_note(@entity[:note])
   end
 
   private
+
+  # Returns a string: locale, english or nil
+  def entity_note(note)
+    return nil unless note.present? && note.is_a?(Hash)
+    if note.key?(page_locale.to_sym)
+      note[page_locale.to_sym].first
+    elsif note.key?(:en)
+      note[:en].first
+    end
+  end
 
   # Returns a string
   def entity_value_by_locale(list)
