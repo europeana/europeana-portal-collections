@@ -5,6 +5,15 @@ module Entities
     include EntityDisplayingView
     include SearchableView
 
+    ENTITY_SEARCH_QUERY_FIELDS = {
+      agent: {
+        by: %w(proxy_dc_creator proxy_dc_contributor)
+      },
+      concept: {
+        about: 'what'
+      }
+    }.freeze
+
     def bodyclass
       'channel_entity'
     end
@@ -72,15 +81,6 @@ module Entities
         }.compact
       end
     end
-
-    ENTITY_SEARCH_QUERY_FIELDS = {
-      agent: {
-        by: %w(proxy_dc_creator proxy_dc_contributor)
-      },
-      concept: {
-        about: 'what'
-      }
-    }.freeze
 
     def entity_tab_items
       ENTITY_SEARCH_QUERY_FIELDS[api_type.to_sym].keys.map do |relation|
