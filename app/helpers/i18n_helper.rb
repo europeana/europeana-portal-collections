@@ -53,7 +53,7 @@ module I18nHelper
     dates = [dates] if dates.is_a?(String)
     most_accurate = nil
     max_score = 0
-    dates.map { |date| date_eras_gregorian(date) || date }.each_with_index do |date, index|
+    dates.map { |date| date_eras_gregorian(date) || date.strip }.each_with_index do |date, index|
       if index.zero?
         max_score = date_score(date)
         most_accurate = date
