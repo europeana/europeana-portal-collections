@@ -118,7 +118,7 @@ module EntityDisplayingView
   end
 
   def entity_date_and_place(date, place)
-    result = [date, place].reject(&:nil?)
+    result = [date, place].compact
     result.size.zero? ? nil : result
   end
 
@@ -205,7 +205,9 @@ module EntityDisplayingView
   end
 
   def entity_date(dates)
-    date_most_accurate(dates)
+    return dates if dates.is_a?(String)
+    return nil unless dates.present? && dates.is_a?(Array)
+    (date_most_accurate(dates) || dates.first).strip
   end
 
   # For multiple items the format is just an array of hash items
