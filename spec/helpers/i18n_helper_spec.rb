@@ -89,4 +89,38 @@ RSpec.describe I18nHelper do
       end
     end
   end
+
+  describe '#date_score' do
+    [
+      { date: nil, score: 0 },
+      { date: '', score: 0 },
+      { date: 'Hello there', score: 0 },
+      { date: '1', score: 1 },
+      { date: '9 BCE', score: 2 },
+      { date: '1957', score: 1 },
+      { date: '1957 CE', score: 2 },
+      { date: '10 BC', score: 1 },
+      { date: '905 BCE', score: 2 },
+      { date: '1957-10', score: 2 },
+      { date: '1957-10 CE', score: 3 },
+      { date: '1957-10 BCE', score: 3 },
+      { date: '1957-10-11', score: 3 },
+      { date: '1957-10-11 CE', score: 4 }
+    ].each do |h|
+      it "returns a score of \"#{h[:score]}\" for date #{h[:date].inspect}" do
+        expect(helper.date_score(h[:date])).to eq(h[:score])
+      end
+    end
+  end
+
+  describe '#date_most_accurate' do
+    it 'returns nil for nil or empty array' do
+      expect(helper.date_most_accurate(nil)).to be_nil
+      expect(helper.date_most_accurate([])).to be_nil
+    end
+
+    it 'returns first value for array of one' do
+      expect(helper.date_most_accurate(['1945-10-11'])).to eq('1945-10-11')
+    end
+  end
 end

@@ -47,6 +47,39 @@ module I18nHelper
     nil
   end
 
+  # Return the most accurate date from an array of dates using scoring algorithm below
+  def date_most_accurate(dates)
+    return nil unless dates.present? && dates.is_a?(Array)
+    most_accurate = nil
+    max_score = 0
+    dates.map { |date| date_eras_gregorian(date) || date }.each_with_index do |date, index|
+      if index.zero?
+        max_score = date_score(date)
+        most_accurate = date
+      else
+        score = date_score(date)
+        if score > max_score
+          max_score = score
+          most_accurate = date
+        end
+      end
+    end
+    most_accurate
+  end
+
+  # Give the date a score based on the possible date formats:
+  # '1957' => 1 point
+  # '1957-10' => 2 points
+  # '1957-10-11' => 3 points
+  # 'CE' or 'BCE' => 1 point extra
+  # otherwise => 0
+  def date_score(date)
+    return 0 unless date.present?
+    m = date.match(/\d(?:\d{1,3})?(\-\d\d?)?(\-\d\d?)?/)
+    return 0 unless m
+    m.to_a.compact.length + (date =~ /B?CE/ ? 1 : 0)
+  end
+
   private
 
   # Match on digits+ only, strip starting '0's and if date' length 1-3 then build "date' + CE"
