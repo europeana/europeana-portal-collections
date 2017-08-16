@@ -49,7 +49,8 @@ module I18nHelper
 
   # Return the most accurate date from an array of dates using scoring algorithm below
   def date_most_accurate(dates)
-    return nil unless dates.present? && dates.is_a?(Array)
+    return nil unless dates.present? && (dates.is_a?(Array) || dates.is_a?(String))
+    dates = [dates] if dates.is_a?(String)
     most_accurate = nil
     max_score = 0
     dates.map { |date| date_eras_gregorian(date) || date }.each_with_index do |date, index|

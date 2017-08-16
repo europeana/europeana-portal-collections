@@ -119,8 +119,33 @@ RSpec.describe I18nHelper do
       expect(helper.date_most_accurate([])).to be_nil
     end
 
+    it 'returns date if passed in as a string' do
+      expect(helper.date_most_accurate('1957-10-11')).to eq('1957-10-11')
+    end
+
     it 'returns first value for array of one' do
       expect(helper.date_most_accurate(['1945-10-11'])).to eq('1945-10-11')
+    end
+
+    [
+      { dates: %w{dummy 1957-10-11}, winner: 1 },
+      { dates: %w{1957-10-11 dummy}, winner: 0 },
+      { dates: %w{1957 1957-10}, winner: 1 },
+      { dates: %w{1957-10 1957}, winner: 0 },
+      { dates: %w{1957-10 1957-10-11}, winner: 1 },
+      { dates: %w{1957-10-11 1957-10}, winner: 0 },
+      { dates: %w{1957-10 1957-10-11}, winner: 1 },
+      { dates: %w{1957-10-11 1957-10}, winner: 0 },
+      { dates: %w{1957-10-11 1957-10-11\ CE}, winner: 1 },
+      { dates: %w{1957-10-11\ CE 1957-10-11}, winner: 0 },
+      { dates: %w{1957 1957-10 1957-10-11 1957-10-11\ CE}, winner: 3 },
+      { dates: %w{1957-10 1957-10-11 1957-10-11\ CE 1957}, winner: 2 },
+      { dates: %w{1957-10-11 1957-10-11\ CE 1957 1957-10}, winner: 1 },
+      { dates: %w{1957-10-11\ CE 1957 1957-10 1957-10-11}, winner: 0 }
+    ].each_with_index do |h, index|
+      it "returns most accurate date from an array of dates ##{index}" do
+        expect(helper.date_most_accurate(h[:dates])).to eq(h[:dates][h[:winner]])
+      end
     end
   end
 end
