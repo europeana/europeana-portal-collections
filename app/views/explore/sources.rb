@@ -2,10 +2,8 @@ module Explore
   class Sources < ApplicationView
     include CollectionFilterableView
 
-    def page_title
-      mustache[:page_title] ||= begin
-        [t('site.browse.sources.title'), site_title].join(' - ')
-      end
+    def page_content_heading
+      t('site.browse.sources.title')
     end
 
     def content

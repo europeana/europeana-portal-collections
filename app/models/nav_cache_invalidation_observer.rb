@@ -6,10 +6,10 @@ class NavCacheInvalidationObserver < ActiveRecord::Observer
   observe :collection, :gallery
 
   def after_save(_)
-    Cache::Expire::GlobalNavJob.perform_later
+    Cache::Expiry::GlobalNavJob.perform_later
   end
 
   def after_destroy(_)
-    Cache::Expire::GlobalNavJob.perform_later
+    Cache::Expiry::GlobalNavJob.perform_later
   end
 end

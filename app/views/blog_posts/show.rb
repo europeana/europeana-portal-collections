@@ -5,7 +5,10 @@ module BlogPosts
     def blog_title
       presenter.title
     end
-    alias_method :page_content_heading, :blog_title
+
+    def page_content_heading
+      [presenter.title, t('site.blogs.list.page-title')]
+    end
 
     def head_meta
       mustache[:head_meta] ||= begin
