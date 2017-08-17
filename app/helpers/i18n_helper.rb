@@ -51,10 +51,10 @@ module I18nHelper
   def date_most_accurate(dates)
     return nil unless dates.present?
     return dates if dates.is_a?(String)
-    return dates[0] if dates.length == 1
     date_eras = dates.map { |date| date_eras_gregorian(date) || date }.compact
-    most_accurate = date_eras.shift
-    max_score = date_score(most_accurate)
+    return date_eras[0] if date_eras.length == 1
+    max_score = -1
+    most_accurate = nil
     date_eras.each do |date|
       score = date_score(date)
       if score > max_score

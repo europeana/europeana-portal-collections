@@ -205,8 +205,7 @@ module EntityDisplayingView
   end
 
   def entity_date(dates)
-    return dates if dates.is_a?(String)
-    return nil unless dates.present? && dates.is_a?(Array)
+    return nil unless dates.present?
     (date_most_accurate(dates) || dates.first).strip
   end
 
