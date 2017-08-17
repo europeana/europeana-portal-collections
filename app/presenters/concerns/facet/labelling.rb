@@ -150,7 +150,7 @@ module Facet
         locale = I18n.locale == :no ? 'NN' : I18n.locale # The norwegian language file is named 'NN' not 'NO'
         i18ndata_label = I18nData.languages(locale)[language_code.upcase]
 
-        return i18ndata_label unless i18ndata_label.blank?
+        return i18ndata_label.capitalize unless i18ndata_label.blank?
 
         I18n.t(language_code.to_sym, scope: 'global.languages', default: language_code.upcase)
       end
