@@ -55,16 +55,8 @@ module I18nHelper
     end
     date_eras = dates.map { |date| date_eras_gregorian(date) || date }.compact
     return date_eras[0] if date_eras.length == 1
-    max_score = -1
-    most_accurate = nil
-    date_eras.each do |date|
-      score = date_score(date)
-      if score > max_score
-        max_score = score
-        most_accurate = date
-      end
-    end
-    most_accurate
+    date_scores = date_eras.each_with_object({}) { |date, memo| memo[date] = date_score(date) }
+    date_scores.key(date_scores.values.max)
   end
 
   # Give the date a score based on the possible date formats:
