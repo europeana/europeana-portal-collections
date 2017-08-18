@@ -65,11 +65,20 @@ module I18nHelper
   # '1957-10-11' => 3 points
   # 'CE' or 'BCE' => 1 point extra
   # otherwise => 0
+  #
+  # Valid date combinations of year=y, month=m and day=d:
+  # y, yy, yyy, yyyy, y-m, yy-m, yyy-m, yyyy-m, y-mm, yy-mm, yyy-mm, yyyy-mm
+  # y-m-d, yy-m-d, yyy-m-d, yyyy-m-d, y-mm-d, yy-mm-d, yyy-mm-d, yyyy-mm-d
+  # y-m-dd, yy-m-dd, yyy-m-dd, yyyy-m-dd, y-mm-dd, yy-mm-dd, yyy-mm-dd, yyyy-mm-dd
+  #
+  # $` = string before match (if non-empty and not ending in space, score => 0)
+  # $' = string after match (if non-empty and not ' BCE' or ' CE', score => 0)
+  # m[0] = matching string, m[1-3] = matching substring
   def date_score(date)
     return 0 unless date.present?
-    m = date.match(/\d(?:\d{1,3})?(\-\d\d?)?(\-\d\d?)?/)
-    return 0 unless m
-    m.to_a.compact.length + (date =~ /B?CE/ ? 1 : 0)
+    m = date.match(/(\d(?:\d{1,3})?)(\-\d\d?)?(\-\d\d?)?/)
+    return 0 if m.nil? || $`.length.positive? && $` !~ / $/ || $'.length.positive? && $' !~ /^ B?CE/
+    m.to_a.compact.length - 1 + (date =~ /B?CE/ ? 1 : 0)
   end
 
   private

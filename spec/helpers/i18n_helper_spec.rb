@@ -99,13 +99,17 @@ RSpec.describe I18nHelper do
       { date: '9 BCE', score: 2 },
       { date: '1957', score: 1 },
       { date: '1957 CE', score: 2 },
-      { date: '10 BC', score: 1 },
+      { date: '10 BC', score: 0 },
+      { date: '10 BCE', score: 2 },
       { date: '905 BCE', score: 2 },
       { date: '1957-10', score: 2 },
       { date: '1957-10 CE', score: 3 },
       { date: '1957-10 BCE', score: 3 },
       { date: '1957-10-11', score: 3 },
-      { date: '1957-10-11 CE', score: 4 }
+      { date: '1957-10-11 CE', score: 4 },
+      { date: '1-2 cups a day', score: 0 },
+      { date: '--01-02', score: 0 },
+      { date: '1-2-3-4', score: 0 }
     ].each do |h|
       it "returns a score of \"#{h[:score]}\" for date #{h[:date].inspect}" do
         expect(helper.date_score(h[:date])).to eq(h[:score])
