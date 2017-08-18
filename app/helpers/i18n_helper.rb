@@ -50,7 +50,9 @@ module I18nHelper
   # Return the most accurate date from an array of dates using scoring algorithm below
   def date_most_accurate(dates)
     return nil unless dates.present?
-    return dates if dates.is_a?(String)
+    if dates.is_a?(String)
+      return date_eras_gregorian(dates) || dates.strip
+    end
     date_eras = dates.map { |date| date_eras_gregorian(date) || date }.compact
     return date_eras[0] if date_eras.length == 1
     max_score = -1
