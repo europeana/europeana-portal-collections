@@ -22,9 +22,9 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
-    FederationConfig Feed Gallery HeroImage Link Link::Promotion Link::Credit
-    Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User
+    Banner BrowseEntry Collection DataProvider DataProviderLogo ElementGroup::BrowseEntryGroup
+    ElementGroup::FacetEntryGroup FederationConfig Feed Gallery HeroImage Link Link::Promotion
+    Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User
   )
 
   config.actions do
@@ -109,6 +109,23 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'BrowseEntryGroup' do
+    visible false
+    show do
+      field :title
+      field :position
+    end
+    edit do
+      field :title
+      field :position
+      field :browse_entries do
+        orderable true
+        nested_form false
+        inline_add false
+      end
+    end
+  end
+
   config.model 'Collection' do
     object_label_method :key
     list do
@@ -174,15 +191,22 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'ElementGroup' do
+    visible false
+    field :type
+  end
+
   config.model 'FacetLinkGroup' do
     object_label_method :facet_field
     visible false
     show do
+      field :position
       field :facet_field
       field :facet_values_count
       field :thumbnails
     end
     edit do
+      field :position
       field :facet_field, :enum
       field :facet_values_count, :integer
       field :thumbnails, :boolean
@@ -454,6 +478,7 @@ RailsAdmin.config do |config|
       field :promotions
       field :browse_entries
       field :facet_link_groups
+      field :browse_entry_groups
       field :banner
       field :newsletter_url
       field :feeds

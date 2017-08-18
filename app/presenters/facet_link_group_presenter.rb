@@ -22,7 +22,8 @@ class FacetLinkGroupPresenter
   def display
     {
       title: facet_title,
-      items: facet_entry_items
+      items: facet_entry_items,
+      position: @facet_link_group.position
     }
   end
 
@@ -40,7 +41,7 @@ class FacetLinkGroupPresenter
     facet_link_group.browse_entry_facet_entries.map do |entry_point|
       thumb_url = Rails.cache.fetch("facet_link_groups/#{facet_link_group.id}/#{entry_point.id}/thumbnail_url")
       facet_entry_item(entry_point, thumb_url)
-    end
+    end.order_by(position)
   end
 
   def facet_entry_item(entry, thumb_url = nil)
@@ -49,7 +50,8 @@ class FacetLinkGroupPresenter
       label: facet_item_label(entry.facet_value),
       value: entry.facet_value,
       image_url: thumb_url,
-      image_alt: nil
+      image_alt: nil,
+      position: entry.position
     }
   end
 

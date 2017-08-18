@@ -35,6 +35,12 @@ module BrowseEntryDisplayingView
     }
   end
 
+  def custom_browse_entry_items_grouped(page)
+    page.browse_entry_groups.map do |browse_entry_group|
+      BrowseEntryGroupPresenter.new(browse_entry_group, controller, page).display
+    end
+  end
+
   def browse_entry_item_group(subject_type, entries, page = nil)
     return unless entries.present?
     {

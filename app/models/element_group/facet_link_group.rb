@@ -1,9 +1,8 @@
 # frozen_string_literal: true
-class FacetLinkGroup < ActiveRecord::Base
+class FacetLinkGroup < ElementGroup
   include Blacklight::RequestBuilders
 
-  belongs_to :page_landing, class_name: 'Page::Landing', foreign_key: :page_id
-  has_many :browse_entry_facet_entries, class_name: 'BrowseEntry::FacetEntry', dependent: :destroy
+  has_many :browse_entry_facet_entries, through: :elements, source: :positionable, source_type: 'BrowseEntry::FacetEntry', dependent: :destroy
 
   validates :facet_field, presence: true
   validates :facet_field, inclusion: { in: :facet_field_enum_values }
