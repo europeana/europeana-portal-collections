@@ -71,9 +71,6 @@ module I18nHelper
   # y-m-d, yy-m-d, yyy-m-d, yyyy-m-d, y-mm-d, yy-mm-d, yyy-mm-d, yyyy-mm-d
   # y-m-dd, yy-m-dd, yyy-m-dd, yyyy-m-dd, y-mm-dd, yy-mm-dd, yyy-mm-dd, yyyy-mm-dd
   #
-  # $` = string before match (if non-empty and not ending in space, score => 0)
-  # $' = string after match (if non-empty and not ' BCE' or ' CE', score => 0)
-  # m[0] = matching string, m[1-3] = matching substring
   def date_score(date)
     return 0 unless date.present?
 
