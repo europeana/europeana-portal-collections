@@ -21,6 +21,37 @@ module I18nHelper
     nil
   end
 
+  # Return the most accurate date from an array of dates using scoring algorithm below, if a single
+  # date string is passed, then that value is returned immediately.
+  def date_most_accurate(dates)
+    return nil if dates.blank?
+    return date_eras_gregorian(dates) || dates.strip if dates.is_a?(String)
+    date_eras = dates.map { |date| date_eras_gregorian(date) || date }.compact
+    return date_eras[0] if date_eras.length == 1
+    date_scores = date_eras.each_with_object({}) { |date, memo| memo[date] = date_score(date) }
+    date_scores.key(date_scores.values.max)
+  end
+
+  # Give the date a score based on the possible date formats:
+  # '1957' => 1 point
+  # '1957-10' => 2 points
+  # '1957-10-11' => 3 points
+  # 'CE' or 'BCE' => 1 point extra
+  # otherwise => 0
+  #
+  # Valid date combinations of year=y, month=m and day=d:
+  # y, yy, yyy, yyyy, y-m, yy-m, yyy-m, yyyy-m, y-mm, yy-mm, yyy-mm, yyyy-mm
+  # y-m-d, yy-m-d, yyy-m-d, yyyy-m-d, y-mm-d, yy-mm-d, yyy-mm-d, yyyy-mm-d
+  # y-m-dd, yy-m-dd, yyy-m-dd, yyyy-m-dd, y-mm-dd, yy-mm-dd, yyy-mm-dd, yyyy-mm-dd
+  #
+  def date_score(date)
+    return 0 unless date.present?
+
+    m = date.strip.match(/^(\d{1,4})(-\d{1,2})?(-\d{1,2})?( B?CE)?$/)
+
+    m.nil? ? 0 : m.to_a.compact.length - 1
+  end
+
   private
 
   # Match on digits+ only, strip starting '0's and if date' length 1-3 then build "date' + CE"

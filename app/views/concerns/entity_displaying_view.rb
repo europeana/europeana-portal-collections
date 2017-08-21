@@ -133,7 +133,7 @@ module EntityDisplayingView
   end
 
   def entity_date_and_place(date, place)
-    result = [date, place].reject(&:nil?)
+    result = [date, place].compact
     result.size.zero? ? nil : result
   end
 
@@ -220,14 +220,8 @@ module EntityDisplayingView
   end
 
   def entity_date(dates)
-    return nil unless dates.present? && dates.is_a?(Array)
-
-    dates.each do |date|
-      gregorian = date_eras_gregorian(date)
-      return gregorian unless gregorian.nil?
-    end
-
-    dates.first.strip
+    return nil unless dates.present?
+    (date_most_accurate(dates) || dates.first).strip
   end
 
   # For multiple items the format is just an array of hash items
