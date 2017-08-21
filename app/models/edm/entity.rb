@@ -1,20 +1,70 @@
 module EDM
   class Entity < Base
     def self.build(params)
-      case params[:type]
+      type = params.delete(:type)
+      case type
         when 'people'
-          Entity::Person.new(params[:id])
+          Entities::Person.new(params)
         when 'periods'
-          Entity::Period.new(params[:id])
+          Entities::Period.new(params)
         when 'topics'
-          Entity::Topic.new(params[:id])
+          Entities::Topic.new(params)
         when 'places'
-          Entity::Place.new(params[:id])
+          Entities::Place.new(params)
+      end
+    end
+  end
+
+  # class Entity < Base
+  #   def initialize(params)
+  #     @id = params[:id]
+  #   end
+  #
+  #   def whoami
+  #     raise 'The method `whoami` not implemented in entity sub-class'
+  #   end
+  # end
+
+  module Entities
+    class Person
+      def initialize(*args)
+        @id = args[0][:id]
+      end
+
+      def whoami
+        "I am a person entity with id=#{@id}"
       end
     end
 
-    def whoami
-      raise 'The method `to_s` not implemented in entity sub-class'
+    class Period
+      def initialize(*args)
+        @id = args[0][:id]
+      end
+
+      def whoami
+        "I am a period entity with id=#{@id}"
+      end
+    end
+
+
+    class Place
+      def initialize(*args)
+        @id = args[0][:id]
+      end
+
+      def whoami
+        "I am a place entity with id=#{@id}"
+      end
+    end
+
+    class Topic
+      def initialize(*args)
+        @id = args[0][:id]
+      end
+
+      def whoami
+        "I am a topic entity with id=#{@id}"
+      end
     end
   end
 end
