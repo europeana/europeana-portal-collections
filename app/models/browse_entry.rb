@@ -7,8 +7,8 @@ class BrowseEntry < ActiveRecord::Base
   has_many :page_elements, dependent: :destroy, as: :positionable
   has_many :pages, through: :page_elements
   has_many :group_elements, dependent: :destroy, as: :positionable
-  has_many :element_groups, through: :group_elements
-  has_many :pages, through: :element_groups
+  has_many :element_groups, through: :group_elements, as: :positionable
+  has_many :element_group_pages, through: :element_groups, class_name: 'Page::Landing'
   belongs_to :media_object, dependent: :destroy
 
   delegate :file, to: :media_object, allow_nil: true
@@ -39,6 +39,7 @@ class BrowseEntry < ActiveRecord::Base
   # Touch associated pages to invalidate cache
   def touch_pages
     pages.find_each(&:touch)
+    element_group_pages.find_each(&:touch)
   end
 
   def file=(*args)
