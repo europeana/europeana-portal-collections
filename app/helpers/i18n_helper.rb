@@ -76,9 +76,10 @@ module I18nHelper
   # m[0] = matching string, m[1-3] = matching substring
   def date_score(date)
     return 0 unless date.present?
-    m = date.match(/(\d(?:\d{1,3})?)(\-\d\d?)?(\-\d\d?)?/)
-    return 0 if m.nil? || $`.length.positive? && $` !~ / $/ || $'.length.positive? && $' !~ /^ B?CE/
-    m.to_a.compact.length - 1 + (date =~ /B?CE/ ? 1 : 0)
+
+    m = date.strip.match(/^(\d{1,4})(-\d{1,2})?(-\d{1,2})?( B?CE)?$/)
+
+    m.nil? ? 0 : m.to_a.compact.length - 1
   end
 
   private
