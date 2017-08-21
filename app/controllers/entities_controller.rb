@@ -17,6 +17,7 @@ class EntitiesController < ApplicationController
   def show
     @body_cache_key = body_cache_key
     @entity = entity unless body_cached?
+    e = new Entity(api_type, api_namespace, params[:id])
 
     respond_to do |format|
       format.html
