@@ -50,10 +50,8 @@ module I18nHelper
   # Return the most accurate date from an array of dates using scoring algorithm below, if a single
   # date string is passed, then that value is returned immediately.
   def date_most_accurate(dates)
-    return nil unless dates.present?
-    if dates.is_a?(String)
-      return date_eras_gregorian(dates) || dates.strip
-    end
+    return nil if dates.blank?
+    return date_eras_gregorian(dates) || dates.strip if dates.is_a?(String)
     date_eras = dates.map { |date| date_eras_gregorian(date) || date }.compact
     return date_eras[0] if date_eras.length == 1
     date_scores = date_eras.each_with_object({}) { |date, memo| memo[date] = date_score(date) }
