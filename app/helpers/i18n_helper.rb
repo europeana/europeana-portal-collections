@@ -47,7 +47,8 @@ module I18nHelper
     nil
   end
 
-  # Return the most accurate date from an array of dates using scoring algorithm below
+  # Return the most accurate date from an array of dates using scoring algorithm below, if a single
+  # date string is passed, then that value is returned immediately.
   def date_most_accurate(dates)
     return nil unless dates.present?
     if dates.is_a?(String)
