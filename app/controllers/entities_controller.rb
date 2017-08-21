@@ -17,7 +17,7 @@ class EntitiesController < ApplicationController
   def show
     @body_cache_key = body_cache_key
     @entity = entity unless body_cached?
-    e = EDM::Entity.build_from_params(entity_params)
+    e = EDM::Entity.build(entity_params)
 
     respond_to do |format|
       format.html
