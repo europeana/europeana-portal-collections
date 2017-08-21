@@ -8,10 +8,12 @@ class Page
     has_many :social_media, -> { order(:position) }, as: :linkable, class_name: 'Link::SocialMedia', dependent: :destroy
     has_many :promotions, -> { order(:position) }, as: :linkable, class_name: 'Link::Promotion', dependent: :destroy
     has_many :facet_entries, through: :facet_link_groups, source: :browse_entry_facet_entries
-    has_many :facet_link_groups, -> { order(:position) }, as: :element_group, class_name: 'ElementGroup::FacetLinkGroup', foreign_key: :page_id, dependent: :destroy
-    has_many :custom_browse_entries, through: :browse_entry_groups, class_name: 'BrowseEntry', source: :positionable,
-      source_type: 'BrowseEntry'
-    has_many :browse_entry_groups, -> { order(:position) }, as: :element_group, class_name: 'ElementGroup::BrowseEntryGroup', foreign_key: :page_id, dependent: :destroy
+    has_many :facet_link_groups, class_name: 'FacetLinkGroup', foreign_key: :page_id, dependent: :destroy
+
+    has_many :facet_link_element_groups, through: :elements, source: :positionable,
+             source_type: 'ElementGroup::FacetLinkGroup', dependent: :destroy
+    has_many :browse_entry_element_groups, through: :elements, source: :positionable,
+             source_type: 'ElementGroup::BrowseEntryGroup', dependent: :destroy
 
     accepts_nested_attributes_for :facet_link_groups, allow_destroy: true
     accepts_nested_attributes_for :credits, allow_destroy: true

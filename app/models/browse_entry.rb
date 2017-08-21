@@ -6,8 +6,8 @@ class BrowseEntry < ActiveRecord::Base
   has_and_belongs_to_many :collections
   has_many :page_elements, dependent: :destroy, as: :positionable
   has_many :pages, through: :page_elements
-  has_many :group_elements, dependent: :destroy, as: :positionable
-  has_many :element_groups, through: :group_elements, as: :positionable
+  has_many :group_elements, dependent: :destroy, as: :groupable
+  has_many :element_groups, through: :group_elements, as: :positionable, class_name: 'ElementGroup::BrowseEntryGroup'
   has_many :element_group_pages, through: :element_groups, class_name: 'Page::Landing'
   belongs_to :media_object, dependent: :destroy
 

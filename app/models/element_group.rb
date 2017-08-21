@@ -10,8 +10,9 @@
 class ElementGroup < ActiveRecord::Base
   has_one :page_element, dependent: :destroy, as: :positionable
   belongs_to :page, through: :page_element
+
   has_many :elements, -> { order(:position) },
-           class_name: 'GroupElement', inverse_of: :element_group, dependent: :destroy
+           class_name: 'GroupElement', dependent: :destroy, inverse_of: :element_group
 
   validates :page, presence: true
 

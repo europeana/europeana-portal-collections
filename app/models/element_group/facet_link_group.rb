@@ -3,7 +3,10 @@
 class FacetLinkGroup < ElementGroup
   include Blacklight::RequestBuilders
 
-  has_many :browse_entry_facet_entries, through: :elements, source: :positionable, source_type: 'BrowseEntry::FacetEntry', dependent: :destroy
+  has_many :facet_link_elements, -> { order(:position) }, as: :groupable, class_name: 'BrowseEntry::FacetEntry',
+           through: :facet_link_element_groups, dependent: :destroy
+  has_many :facet_entries, through: :facet_link_elements, source: :groupable,
+           source_type: 'BrowseEntry::FacetEntry'
 
   validates :facet_field, presence: true
   validates :facet_field, inclusion: { in: :facet_field_enum_values }
