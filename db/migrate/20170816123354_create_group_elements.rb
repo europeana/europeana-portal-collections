@@ -13,17 +13,10 @@ class CreateGroupElements < ActiveRecord::Migration
       t.integer :position
       t.index [:element_group_type, :element_group_id, :positionable_type, :positionable_id, :position], unique: true,
               name: :index_groups_on_groupable
+      t.timestamps null: false
     end
 
     add_foreign_key :group_elements, :element_groups
-    add_index :group_elements, [:positionable_id, :positionable_type]
-    add_index :group_elements, :position
-
-    BrowseEntry::FacetEntry.each do |facet_entry|
-      GroupElement.create(group_id: facet_entry.facet_link_group_id, positionable_id: facet_entry.id, positionable_type: 'BrowseEntry::FacetEntry', position: facet_entry.position)
-    end
-    remove_foreign_key :browse_entries, :facet_link_groups
-    remove_column :browse_entries, :facet_link_group_id
   end
 
   def down

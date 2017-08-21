@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Display logic for browse entry point groups.
 #

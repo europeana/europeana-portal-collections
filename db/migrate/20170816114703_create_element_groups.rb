@@ -10,9 +10,11 @@ class CreateElementGroups < ActiveRecord::Migration
       t.string :type
       t.timestamps null: false
     end
+    ElementGroup.create_translation_table! title: :string
   end
 
   def down
+    ElementGroup.drop_translation_table! migrate_data: true
     delete_table :element_groups
   end
 end
