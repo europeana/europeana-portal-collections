@@ -26,16 +26,17 @@ module EntityDisplayingView
   end
 
   def entity_thumbnail
-    result = nil
-    full = @entity[:depiction]
-    if full
-      m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
-      if m
-        src = entity_build_src(m[1], 400)
-        result = { src: src, full: full, alt: m[1] }
-      end
-    end
-    result
+    return nil unless @entity.key?(:depiction) &&
+                      @entity[:depiction].is_a?(Hash) &&
+                      @entity[:depiction].key?(:id)
+
+    full = @entity[:depiction][:id]
+
+    m = full.match(%r{^.*/Special:FilePath/(.*)$}i)
+    return nil if m.nil?
+
+    src = entity_build_src(m[1], 400)
+    { src: src, full: full, alt: m[1] }
   end
 
   def entity_social_share
