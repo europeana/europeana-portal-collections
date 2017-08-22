@@ -23,21 +23,21 @@ module EDM
         @human_type = human_type
       end
     end
-
-    class Agent < Entity
-      has_human_type 'person'
-    end
-
-    class Concept < Entity
-      has_human_type 'topic'
-    end
-
-    class Place < Entity
-      has_human_type 'place'
-    end
-
-    class Timespan < Entity
-      has_human_type 'period'
-    end
+    #
+    # class Agent < Entity
+    #   has_human_type 'person'
+    # end
+    #
+    # class Concept < Entity
+    #   has_human_type 'topic'
+    # end
+    #
+    # class Place < Entity
+    #   has_human_type 'place'
+    # end
+    #
+    # class Timespan < Entity
+    #   has_human_type 'period'
+    # end
   end
 end
