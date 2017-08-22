@@ -23,33 +23,25 @@ module EDM
         @id = params[:id]
       end
 
+      def entity_type
+        self.class.name.sub('EDM::Entities::','').downcase
+      end
+
       def whoami
-        raise 'Method `whoami` must be overriden in entity sub-class'
+        "I am a `#{entity_type}` entity with id=#{id}"
       end
     end
 
     class Person < Base
-      def whoami
-        "I am a person entity with id=#{id}"
-      end
     end
 
-    class Period
-      def whoami
-        "I am a period entity with id=#{@id}"
-      end
+    class Period < Base
     end
 
-    class Place
-      def whoami
-        "I am a place entity with id=#{@id}"
-      end
+    class Place < Base
     end
 
-    class Topic
-      def whoami
-        "I am a topic entity with id=#{@id}"
-      end
+    class Topic < Base
     end
   end
 end
