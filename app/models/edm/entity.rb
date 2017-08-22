@@ -15,53 +15,38 @@ module EDM
     end
   end
 
-  # class Entity < Base
-  #   def initialize(params)
-  #     @id = params[:id]
-  #   end
-  #
-  #   def whoami
-  #     raise 'The method `whoami` not implemented in entity sub-class'
-  #   end
-  # end
-
   module Entities
-    class Person
-      def initialize(*args)
-        @id = args[0][:id]
+    class Base
+      attr_reader :id
+
+      def initialize(params)
+        @id = params[:id]
       end
 
       def whoami
-        "I am a person entity with id=#{@id}"
+        raise 'Method `whoami` must be overriden in entity sub-class'
+      end
+    end
+
+    class Person < Base
+      def whoami
+        "I am a person entity with id=#{id}"
       end
     end
 
     class Period
-      def initialize(*args)
-        @id = args[0][:id]
-      end
-
       def whoami
         "I am a period entity with id=#{@id}"
       end
     end
 
-
     class Place
-      def initialize(*args)
-        @id = args[0][:id]
-      end
-
       def whoami
         "I am a place entity with id=#{@id}"
       end
     end
 
     class Topic
-      def initialize(*args)
-        @id = args[0][:id]
-      end
-
       def whoami
         "I am a topic entity with id=#{@id}"
       end
