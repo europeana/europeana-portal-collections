@@ -26,12 +26,20 @@ module EntityDisplayingView
 
   def entity_thumbnail
     result = nil
-    full = @entity[:depiction]
-    if full
-      m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
-      if m
-        src = entity_build_src(m[1], 400)
-        result = { src: src, full: full, alt: m[1] }
+    depiction = @entity[:depiction]
+    if depiction
+      full =
+        if depiction.is_a?(String)
+          depiction
+        elsif depiction.is_a?(Hash)
+          depiction[:id]
+        end
+      if full
+        m = full.match(%r{^.*\/Special:FilePath\/(.*)$}i)
+        if m
+          src = entity_build_src(m[1], 400)
+          result = { src: src, full: full, alt: m[1] }
+        end
       end
     end
     result
