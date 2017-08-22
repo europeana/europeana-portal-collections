@@ -26,8 +26,8 @@ module EntityDisplayingView
 
   def entity_thumbnail
     return nil unless @entity.key?(:depiction) &&
-      @entity[:depiction].is_a?(Hash) &&
-      @entity[:depiction].key?(:id)
+                      @entity[:depiction].is_a?(Hash) &&
+                      @entity[:depiction].key?(:id)
 
     full = @entity[:depiction][:id]
 
