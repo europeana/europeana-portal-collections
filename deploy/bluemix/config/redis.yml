@@ -1,0 +1,11 @@
+<%
+if ENV.key?('VCAP_SERVICES')
+  services = JSON.parse(ENV['VCAP_SERVICES'])
+  redis_config = services['compose-for-redis']
+end
+fail 'No Redis service found in environment.' if redis_config.nil?
+service_config = redis_config.first
+redis_url = "#{service_config['credentials']['uri']}/0/cache"
+%>
+production:
+  url: "<%= redis_url %>"
