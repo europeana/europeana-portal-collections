@@ -39,6 +39,10 @@ module EntityDisplayingView
     { src: src, full: full, alt: m[1] }
   end
 
+  def entity_thumbnail_source
+    @entity.key?(:depiction) ? @entity[:depiction][:source] : nil
+  end
+
   def entity_social_share
     {
       url: request.original_url,
