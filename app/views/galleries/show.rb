@@ -9,7 +9,7 @@ module Galleries
 
     def page_content_heading
       mustache[:page_content_heading] ||= begin
-        (@gallery.title ? @gallery.title + ' - ' : '') + t('global.galleries')
+        [@gallery.title, t('global.galleries')]
       end
     end
 

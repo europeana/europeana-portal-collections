@@ -46,9 +46,7 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  # Log less in production because errors are handled through controller concern
-  # `ControllerExceptionHandling`
-  config.log_level = :info
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -76,9 +74,11 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
-
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Profiling
+  config.middleware.use(StackProf::Middleware,
+                        mode: ENV['STACKPROF_MODE'] ? ENV['STACKPROF_MODE'].to_sym : :wall,
+                        enabled: true, save_every: 5)
 end

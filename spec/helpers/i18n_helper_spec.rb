@@ -89,4 +89,69 @@ RSpec.describe I18nHelper do
       end
     end
   end
+
+  describe '#date_score' do
+    [
+      { date: nil, score: 0 },
+      { date: '', score: 0 },
+      { date: 'Hello there', score: 0 },
+      { date: '1', score: 1 },
+      { date: '9 BCE', score: 2 },
+      { date: '1957', score: 1 },
+      { date: '1957 CE', score: 2 },
+      { date: '10 BC', score: 0 },
+      { date: '10 BCE', score: 2 },
+      { date: '905 BCE', score: 2 },
+      { date: '1957-10', score: 2 },
+      { date: '1957-10 CE', score: 3 },
+      { date: '1957-10 BCE', score: 3 },
+      { date: '1957-10-11', score: 3 },
+      { date: '1957-10-11 CE', score: 4 },
+      { date: '1-2 cups a day', score: 0 },
+      { date: '--01-02', score: 0 },
+      { date: '1-2-3-4', score: 0 }
+    ].each do |h|
+      it "returns a score of \"#{h[:score]}\" for date #{h[:date].inspect}" do
+        expect(helper.date_score(h[:date])).to eq(h[:score])
+      end
+    end
+  end
+
+  describe '#date_most_accurate' do
+    it 'returns nil for nil or empty array' do
+      expect(helper.date_most_accurate(nil)).to be_nil
+      expect(helper.date_most_accurate([])).to be_nil
+    end
+
+    it 'returns date if passed in as a string' do
+      expect(helper.date_most_accurate('1957-10-11')).to eq('1957-10-11')
+    end
+
+    it 'returns first value for array of one' do
+      expect(helper.date_most_accurate(['1945-10-11'])).to eq('1945-10-11')
+    end
+
+    [
+      { dates: %w{dummy 1957-10-11}, winner: 1 },
+      { dates: %w{1957-10-11 dummy}, winner: 0 },
+      { dates: %w{1957 1957-10}, winner: 1 },
+      { dates: %w{1957-10 1957}, winner: 0 },
+      { dates: %w{1957-10 1957-10-11}, winner: 1 },
+      { dates: %w{1957-10-11 1957-10}, winner: 0 },
+      { dates: %w{1957-10 1957-10-11}, winner: 1 },
+      { dates: %w{1957-10-11 1957-10}, winner: 0 },
+      { dates: %w{1957-10-11 1957-10-11\ CE}, winner: 1 },
+      { dates: %w{1957-10-11\ CE 1957-10-11}, winner: 0 },
+      { dates: %w{1957 1957-10 1957-10-11 1957-10-11\ CE}, winner: 3 },
+      { dates: %w{1957-10 1957-10-11 1957-10-11\ CE 1957}, winner: 2 },
+      { dates: %w{1957-10-11 1957-10-11\ CE 1957 1957-10}, winner: 1 },
+      { dates: %w{1957-10-11\ CE 1957 1957-10 1957-10-11}, winner: 0 }
+    ].each do |h|
+      dates = h[:dates]
+      winner = h[:dates][h[:winner]]
+      it "returns '#{winner}' from '#{dates}'" do
+        expect(helper.date_most_accurate(dates)).to eq(winner)
+      end
+    end
+  end
 end

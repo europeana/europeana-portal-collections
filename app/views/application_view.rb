@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # A custom class for this project's Mustache templates
 #
@@ -14,7 +16,7 @@ class ApplicationView < Europeana::Styleguide::View
   include NavigableView
 
   def page_title
-    [page_content_heading, site_title].join(' - ')
+    [page_content_heading, site_title].flatten.reject(&:blank?).join(' - ')
   end
 
   # Override in view subclasses for use in #page_title
@@ -100,7 +102,7 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def alternate_language_links
-    language_map.keys.map do |locale|
+    I18n.available_locales.map do |locale|
       { rel: 'alternate', hreflang: locale, href: current_url_for_locale(locale) }
     end
   end

@@ -5,6 +5,15 @@ module Entities
     include EntityDisplayingView
     include SearchableView
 
+    ENTITY_SEARCH_QUERY_FIELDS = {
+      agent: {
+        by: %w(proxy_dc_creator proxy_dc_contributor)
+      },
+      concept: {
+        about: 'what'
+      }
+    }.freeze
+
     def bodyclass
       'channel_entity'
     end
@@ -61,17 +70,7 @@ module Entities
     def content
       mustache[:content] ||= begin
         {
-          tab_items: [
-            {
-              tab_title: t('site.entities.tab_items.items_by', name: entity_name),
-              url: search_path(q: @items_by_query, format: 'json'),
-              search_url: search_path(q: @items_by_query)
-            },
-            {
-              # TODO
-              tab_title: t('site.entities.tab_items.items_about', name: entity_name),
-            }
-          ],
+          tab_items: entity_tab_items,
           input_search: input_search,
           social_share: entity_social_share,
           entity_anagraphical: entity_anagraphical,
@@ -83,15 +82,39 @@ module Entities
       end
     end
 
+    def entity_tab_items
+      ENTITY_SEARCH_QUERY_FIELDS[api_type.to_sym].keys.map do |relation|
+        entity_tab_items_one_tab(api_type, relation)
+      end
+    end
+
+    def entity_tab_items_one_tab(api_type, relation)
+      search_query = entity_search_query(api_type, relation)
+      {
+        tab_title: t("site.entities.tab_items.items_#{relation}", name: entity_name),
+        url: search_path(q: search_query, format: 'json'),
+        search_url: search_path(q: search_query)
+      }
+    end
+
+    def entity_search_query(api_type, relation)
+      fields = ENTITY_SEARCH_QUERY_FIELDS[api_type.to_sym][relation.to_sym]
+      [fields].flatten.map do |field|
+        %(#{field}: "http://data.europeana.eu/#{api_path}")
+      end.join(' OR ')
+    end
+
     def entity_external_link
       source = entity_thumbnail_source
       return nil if source.nil?
       {
-        text: [
-          t('site.entities.wiki_link_text')
-        ],
-        href: source
+        text: [t('site.entities.wiki_link_text')],
+        href: 'https://commons.wikimedia.org/wiki/File:' + thumb[:src].split('/').pop
       }
+    end
+
+    def build_proxy_dc(name, url, path)
+      %(proxy_dc_#{name}:"#{url}/#{path}")
     end
   end
 end
