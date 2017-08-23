@@ -1,3 +1,7 @@
-class Timespan < Entity
-  has_human_type 'period'
+module EDM
+  class Entity
+    class Timespan
+      has_human_type 'period'
+    end
+  end
 end

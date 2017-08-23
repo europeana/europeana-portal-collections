@@ -1,4 +1,7 @@
-class Agent < Entity
-  has_human_type 'person'
+module EDM
+  class Entity
+    class Agent
+      has_human_type 'person'
+    end
+  end
 end
-

@@ -1,4 +1,8 @@
-class Place < Entity
-  has_human_type 'place'
+module EDM
+  class Entity
+    class Place
+      has_human_type 'place'
+    end
+  end
 end
 
