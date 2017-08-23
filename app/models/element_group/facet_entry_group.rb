@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class FacetLinkGroup < ElementGroup
+class ElementGroup::FacetEntryGroup < ElementGroup
   include Blacklight::RequestBuilders
 
-  has_many :facet_link_elements, -> { order(:position) }, as: :groupable, class_name: 'BrowseEntry::FacetEntry',
-           through: :facet_link_element_groups, dependent: :destroy
-  has_many :facet_entries, through: :facet_link_elements, source: :groupable,
+  has_many :facet_entry_elements, -> { order(:position) }, as: :groupable, class_name: 'GroupElement',
+           dependent: :destroy
+  has_many :facet_entries, through: :facet_entry_elements, source: :groupable,
            source_type: 'BrowseEntry::FacetEntry'
 
   validates :facet_field, presence: true

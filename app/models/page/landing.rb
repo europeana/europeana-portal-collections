@@ -11,7 +11,7 @@ class Page
     has_many :facet_link_groups, class_name: 'FacetLinkGroup', foreign_key: :page_id, dependent: :destroy
 
     has_many :facet_link_element_groups, through: :elements, source: :positionable,
-             source_type: 'ElementGroup::FacetLinkGroup', dependent: :destroy
+             source_type: 'ElementGroup::FacetEntryGroup', dependent: :destroy
     has_many :browse_entry_element_groups, through: :elements, source: :positionable,
              source_type: 'ElementGroup::BrowseEntryGroup', dependent: :destroy
 

@@ -2,11 +2,12 @@
 class BrowseEntry
   class FacetEntry < BrowseEntry
     validates :facet_value, presence: true
-    validates :facet_link_group_id, presence: true
 
     delegate :facet_field, to: :facet_link_group
 
     belongs_to :facet_link_group
+
+    has_many :facet_entry_groups
 
     def facet?
       true
