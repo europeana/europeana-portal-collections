@@ -17,6 +17,7 @@ class EntitiesController < ApplicationController
   def show
     @body_cache_key = body_cache_key
     @entity = entity unless body_cached?
+    e = EDM::Entity.build_from_params(entity_params)
 
     respond_to do |format|
       format.html
@@ -40,6 +41,10 @@ class EntitiesController < ApplicationController
       api_params = entities_api_fetch_params(api_type, api_namespace, params[:id])
       Europeana::API.entity.fetch(api_params)
     end
+  end
+
+  def entity_params
+    params.permit(:type, :id).merge(entity: entity)
   end
 
   def slug

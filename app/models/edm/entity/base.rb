@@ -5,7 +5,7 @@ module EDM
     class Base
       include ActiveModel::Model
 
-      attr_accessor :id
+      attr_accessor :id, :entity
 
       class << self
         attr_reader :human_type
