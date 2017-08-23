@@ -19,6 +19,7 @@ class CreateGroupElements < ActiveRecord::Migration
   end
 
   def down
+    remove_foreign_key :group_elements, :element_groups
     drop_table :group_elements
   end
 end

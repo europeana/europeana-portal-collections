@@ -105,7 +105,7 @@ module Collections
         grouped_entry_points = []
         grouped_entry_points << facet_entry_items_grouped(@landing_page)
         grouped_entry_points << custom_browse_entry_items_grouped(@landing_page)
-        grouped_entry_points.sort_by { |group| group.position }
+        grouped_entry_points.sort_by(&:position)
       end
     end
 
