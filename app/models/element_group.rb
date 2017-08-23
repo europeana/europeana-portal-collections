@@ -11,8 +11,7 @@ class ElementGroup < ActiveRecord::Base
   has_many :page_elements, dependent: :destroy, as: :positionable
   has_many :pages, through: :page_elements
 
-  has_many :elements, -> { order(:position) },
-           class_name: 'GroupElement', dependent: :destroy, inverse_of: :element_group
+  has_many :group_elements, -> { order(:position) }, dependent: :destroy, inverse_of: :element_group
 
   validates :pages, length: { minimum: 1, maximum: 1 }
 
@@ -22,7 +21,5 @@ class ElementGroup < ActiveRecord::Base
   accepts_nested_attributes_for :pages
   default_scope { includes(:translations) }
 
-  accepts_nested_attributes_for :elements, allow_destroy: true
-
-  acts_as_list scope: :page
+  accepts_nested_attributes_for :group_elements, allow_destroy: true
 end

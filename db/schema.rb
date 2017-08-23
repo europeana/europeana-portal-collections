@@ -11,10 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613101708) do
+ActiveRecord::Schema.define(version: 20170821115220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+  enable_extension "pg_stat_statements"
+  enable_extension "unaccent"
 
   create_table "banner_translations", force: :cascade do |t|
     t.integer  "banner_id",              null: false
@@ -150,6 +153,28 @@ ActiveRecord::Schema.define(version: 20170613101708) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "element_group_translations", force: :cascade do |t|
+    t.integer  "element_group_id", null: false
+    t.string   "locale",           null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "title"
+  end
+
+  add_index "element_group_translations", ["element_group_id"], name: "index_element_group_translations_on_element_group_id", using: :btree
+  add_index "element_group_translations", ["locale"], name: "index_element_group_translations_on_locale", using: :btree
+
+  create_table "element_groups", force: :cascade do |t|
+    t.string   "facet_field"
+    t.integer  "facet_values_count"
+    t.boolean  "thumbnails"
+    t.string   "type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "element_groups", ["id"], name: "index_element_groups_on_id", using: :btree
+
   create_table "facet_link_groups", force: :cascade do |t|
     t.string   "facet_field"
     t.integer  "facet_values_count"
@@ -221,6 +246,21 @@ ActiveRecord::Schema.define(version: 20170613101708) do
 
   add_index "gallery_translations", ["gallery_id"], name: "index_gallery_translations_on_gallery_id", using: :btree
   add_index "gallery_translations", ["locale"], name: "index_gallery_translations_on_locale", using: :btree
+
+  create_table "group_elements", force: :cascade do |t|
+    t.integer  "element_group_id"
+    t.string   "element_group_type"
+    t.integer  "groupable_id"
+    t.string   "groupable_type"
+    t.integer  "position"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "group_elements", ["element_group_type", "element_group_id"], name: "index_groups_on_groups", using: :btree
+  add_index "group_elements", ["groupable_type", "groupable_id", "groupable_type", "groupable_id", "position"], name: "index_groupables_on_group_position", unique: true, using: :btree
+  add_index "group_elements", ["groupable_type", "groupable_id"], name: "index_groupables_on_groupable", using: :btree
+  add_index "group_elements", ["id"], name: "index_group_elements_on_id", using: :btree
 
   create_table "hero_images", force: :cascade do |t|
     t.integer  "media_object_id"
@@ -409,6 +449,7 @@ ActiveRecord::Schema.define(version: 20170613101708) do
   add_foreign_key "federation_configs", "collections"
   add_foreign_key "galleries", "users", column: "published_by"
   add_foreign_key "gallery_images", "galleries"
+  add_foreign_key "group_elements", "element_groups"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
   add_foreign_key "pages", "collections"

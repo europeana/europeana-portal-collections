@@ -11,6 +11,9 @@ class ElementGroup::FacetEntryGroup < ElementGroup
   validates :facet_field, presence: true
   validates :facet_field, inclusion: { in: :facet_field_enum_values }
 
+  accepts_nested_attributes_for :facet_entry_elements
+  accepts_nested_attributes_for :facet_entries
+
   after_save :set_facet_entries
 
   delegate :facet_field_enum, :facet_field_enum_values, to: :class

@@ -11,12 +11,11 @@ class CreateElementGroups < ActiveRecord::Migration
     end
     add_index :element_groups, :id
     ElementGroup.create_translation_table! title: :string
-    add
   end
 
   def down
     ElementGroup.drop_translation_table! migrate_data: true
-    remove_index :element_groups, :id
-    delete_table :element_groups
+    drop_table :element_groups
+    execute "DELETE from page_elements where positionable_type = 'ElementGroup'"
   end
 end

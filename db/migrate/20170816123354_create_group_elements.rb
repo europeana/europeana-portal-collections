@@ -5,24 +5,20 @@ class CreateGroupElements < ActiveRecord::Migration
     create_table :group_elements do |t|
       t.integer :element_group_id
       t.string :element_group_type
-      t.integer :positionable_id
-      t.string :positionable_type
+      t.integer :groupable_id
+      t.string :groupable_type
       t.integer :position
       t.timestamps null: false
     end
     add_index :group_elements, :id
-    add_index :group_elements, [:element_group_type, :element_group_id], name: :index_groups_on_groupable
-    add_index :group_elements, [:positionable_type, :positionable_id], name: :index_positionables_on_positionable
-    add_index :group_elements, [:element_group_type, :element_group_id, :positionable_type, :positionable_id, :position],
-            name: :index_groups_on_groupable_position, unique: true
+    add_index :group_elements, [:element_group_type, :element_group_id], name: :index_groups_on_groups
+    add_index :group_elements, [:groupable_type, :groupable_id], name: :index_groupables_on_groupable
+    add_index :group_elements, [:groupable_type, :groupable_id, :groupable_type, :groupable_id, :position],
+                               name: :index_groupables_on_group_position, unique: true
     add_foreign_key :group_elements, :element_groups
   end
 
   def down
-    remove_index :group_elements, :id
-    remove_index :group_elements, :index_groups_on_groupable
-    remove_index :group_elements, :index_positionables_on_positionable
-    remove_index :group_elements, :index_groups_on_groupable_position
-    delete_table :group_elements
+    drop_table :group_elements
   end
 end

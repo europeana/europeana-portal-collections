@@ -10,11 +10,12 @@ class Page < ActiveRecord::Base
   has_many :browse_entries, through: :elements, source: :positionable,
                             source_type: 'BrowseEntry'
   has_many :element_groups, through: :elements, source: :positionable,
-           source_type: 'ElementGroup'
+                            source_type: 'ElementGroup'
 
   has_and_belongs_to_many :feeds
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries
+  accepts_nested_attributes_for :element_groups
 
   has_settings :full_width
 
