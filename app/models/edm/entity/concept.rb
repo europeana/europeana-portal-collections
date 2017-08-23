@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module EDM
-  class Entity
-    class Concept
+  module Entity
+    class Concept < Base
       has_human_type 'topic'
     end
   end
