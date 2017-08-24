@@ -3,9 +3,9 @@ RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }
     it 'should represent all the models' do
-      is_expected.to eq(%w(Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup FederationConfig
-                           Feed Gallery HeroImage Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page
-                           Page::Error Page::Landing Topic User))
+      is_expected.to eq(%w(Banner BrowseEntry Collection DataProvider DataProviderLogo ElementGroup::BrowseEntryGroup
+                           ElementGroup::FacetEntryGroup FederationConfig Feed Gallery HeroImage Link Link::Promotion
+                           Link::Credit Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User))
     end
   end
 

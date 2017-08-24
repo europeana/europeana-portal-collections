@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class FacetLinkGroupGeneratorJob < ApplicationJob
+class FacetEntryGroupGeneratorJob < ApplicationJob
   include ApiQueryingJob
 
   queue_as :default
 
-  def perform(facet_link_group_id)
-    @facet_link_group = FacetLinkGroup.find_by_id(facet_link_group_id)
+  def perform(facet_entry_group_id)
+    @facet_entry_group = FacetEntryGroup.find_by_id(facet_entry_group_id)
     set_facet_entries
   end
 
@@ -23,15 +23,18 @@ class FacetLinkGroupGeneratorJob < ApplicationJob
   def set_facet_entries
     facets = displayable_facet_values.first(facet_values_limit)
     BrowseEntry::FacetEntry.transaction do
-      @facet_link_group.browse_entry_facet_entries.where.not(facet_value: facets.map(&:value)).destroy_all
+      @facet_entry_group.facet_entries.where.not(facet_value: facets.map(&:value)).destroy_all
+      position = 0
       facets.each do |facet|
-        facet_entry = @facet_link_group.browse_entry_facet_entries.where(facet_value: facet.value).first
+        position += 1
         facet_value = facet.value
+        facet_entry = @facet_entry_group.facet_entries.where(facet_value: facet_value).first
 
-        thumbnail = @facet_link_group.thumbnails? ? thumbnail_url_for(facet_value) : nil
+        thumbnail = @facet_entry_group.thumbnails? ? thumbnail_url_for(facet_value) : nil
 
         if facet_entry
-          Rails.cache.write("facet_link_groups/#{@facet_link_group.id}/#{facet_entry.id}/thumbnail_url", thumbnail)
+          set_facet_entry_position(facet_entry, position)
+          Rails.cache.write("facet_entry_groups/#{@facet_entry_group.id}/#{facet_entry.id}/thumbnail_url", thumbnail)
           next
         end
 
@@ -40,10 +43,19 @@ class FacetLinkGroupGeneratorJob < ApplicationJob
           title: facet_value,
           file: thumbnail
         }
-        new_entry = @facet_link_group.browse_entry_facet_entries.create!(params)
-        Rails.cache.write("facet_link_groups/#{@facet_link_group.id}/#{new_entry.id}/thumbnail_url", thumbnail)
+        new_entry = @facet_entry_group.facet_entries.create!(params)
+        set_facet_entry_position(new_facet_entry, position)
+        Rails.cache.write("facet_entry_groups/#{@facet_entry_group.id}/#{new_entry.id}/thumbnail_url", thumbnail)
       end
     end
+  end
+
+  def set_facet_entry_position(facet_entry, position)
+    group_element = GroupElement.detect do |e|
+      (e.groupable_type == ('BrowseEntry::FacetEntry')) && (e.groupable_id == facet_entry.id)
+    end
+    group_element.remove_from_list
+    group_element.insert_at(position)
   end
 
   def facet_values_limit

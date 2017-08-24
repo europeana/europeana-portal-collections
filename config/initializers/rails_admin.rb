@@ -196,23 +196,6 @@ RailsAdmin.config do |config|
     field :type
   end
 
-  config.model 'FacetLinkGroup' do
-    object_label_method :facet_field
-    visible false
-    show do
-      field :position
-      field :facet_field
-      field :facet_values_count
-      field :thumbnails
-    end
-    edit do
-      field :position
-      field :facet_field, :enum
-      field :facet_values_count, :integer
-      field :thumbnails, :boolean
-    end
-  end
-
   config.model 'FederationConfig' do
     object_label_method :provider
     visible false

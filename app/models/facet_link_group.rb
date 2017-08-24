@@ -32,7 +32,7 @@ class FacetLinkGroup < ActiveRecord::Base
 
   # After create/save Job to retrieve all the facet-values
   def set_facet_entries
-    FacetLinkGroupGeneratorJob.perform_later(id)
+    #FacetLinkGroupGeneratorJob.perform_later(id)
   end
 
   # for determining the collection of the landing page

@@ -31,9 +31,9 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     end
   end
 
-  every(1.day, 'facet-link-groups', at: ENV['SCHEDULE_FACET_ENTRY_GROUPS_GENERATOR']) do
-    FacetLinkGroup.all.each do |facet_link_group|
-      FacetLinkGroupGeneratorJob.perform_later facet_link_group
+  every(1.day, 'facet-entry-groups', at: ENV['SCHEDULE_FACET_ENTRY_GROUPS_GENERATOR']) do
+    FacetEntryGroup.all.each do |facet_entry_group|
+      FacetEntryGroupGeneratorJob.perform_later facet_entry_group
     end
   end
 
