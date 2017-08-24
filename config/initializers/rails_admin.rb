@@ -409,6 +409,10 @@ RailsAdmin.config do |config|
         orderable true
         nested_form false
       end
+      field :element_groups do
+        orderable true
+        nested_form true
+      end
       field :banner
       field :settings_full_width, :boolean
     end

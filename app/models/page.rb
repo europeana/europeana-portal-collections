@@ -76,6 +76,16 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def element_group_ids=(ids)
+    super
+    puts "element_group_ids=(ids): #{ids.inspect}"
+    ids.reject(&:blank?).each_with_index do |id, index|
+      element = elements.detect { |e| (e.positionable_type.starts_with?('ElementGroup')) && (e.positionable_id == id.to_i) }
+      element.remove_from_list
+      element.insert_at(index + 1)
+    end
+  end
+
   def browse_entries_validation
     topic_count = 0
     person_count = 0

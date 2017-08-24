@@ -249,16 +249,14 @@ ActiveRecord::Schema.define(version: 20170821115220) do
 
   create_table "group_elements", force: :cascade do |t|
     t.integer  "element_group_id"
-    t.string   "element_group_type"
     t.integer  "groupable_id"
     t.string   "groupable_type"
     t.integer  "position"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "group_elements", ["element_group_type", "element_group_id"], name: "index_groups_on_groups", using: :btree
-  add_index "group_elements", ["groupable_type", "groupable_id", "groupable_type", "groupable_id", "position"], name: "index_groupables_on_group_position", unique: true, using: :btree
+  add_index "group_elements", ["groupable_type", "groupable_id", "element_group_id", "position"], name: "index_groupables_on_group_position", unique: true, using: :btree
   add_index "group_elements", ["groupable_type", "groupable_id"], name: "index_groupables_on_groupable", using: :btree
   add_index "group_elements", ["id"], name: "index_group_elements_on_id", using: :btree
 

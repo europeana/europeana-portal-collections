@@ -11,9 +11,10 @@ class ElementGroup < ActiveRecord::Base
   has_many :page_elements, dependent: :destroy, as: :positionable
   has_many :pages, through: :page_elements
 
-  has_many :group_elements, -> { order(:position) }, dependent: :destroy, inverse_of: :element_group
+  has_many :group_elements, -> { order(:position) },
+           class_name: 'GroupElement', dependent: :destroy, inverse_of: :element_group
 
-  validates :pages, length: { minimum: 1, maximum: 1 }
+  #validates :pages, length: { minimum: 1, maximum: 1 }
 
   translates :title, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
