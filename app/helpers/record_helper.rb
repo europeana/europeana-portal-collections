@@ -60,6 +60,7 @@ module RecordHelper
   end
 
   def record_annotations(annotations)
+    return nil if annotations.blank?
     {
       title: t('annotations', scope: 'site.object.meta-label'),
       info: static_page_path('annotations', format: 'html'),
