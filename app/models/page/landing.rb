@@ -10,9 +10,9 @@ class Page
     has_many :facet_entries, through: :facet_link_groups, source: :browse_entry_facet_entries
     has_many :facet_link_groups, class_name: 'FacetLinkGroup', foreign_key: :page_id, dependent: :destroy
 
-    has_many :facet_link_element_groups, through: :elements, source: :positionable,
+    has_many :facet_entry_groups, through: :elements, source: :positionable,
                                          source_type: 'ElementGroup::FacetEntryGroup', dependent: :destroy
-    has_many :browse_entry_element_groups, through: :elements, source: :positionable,
+    has_many :browse_entry_groups, through: :elements, source: :positionable,
                                          source_type: 'ElementGroup::BrowseEntryGroup', dependent: :destroy
 
     accepts_nested_attributes_for :facet_link_groups, allow_destroy: true

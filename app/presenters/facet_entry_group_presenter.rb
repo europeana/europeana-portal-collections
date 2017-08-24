@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 ##
-# Display logic for facet link groups(facet entry points).
+# Display logic for facet entry groups(facet entry points).
 #
 # Responsible for generating data hashes for the Mustache templates from
 # [Europeana's styleguide](https://github.com/europeana/europeana-styleguide-ruby)
 # to display facet entry points on browse based landing pages.
-class FacetLinkGroupPresenter
+class FacetEntryGroupPresenter
   include Facet::Labelling
   include UrlHelper
   delegate :t, to: I18n
 
-  attr_reader :controller, :blacklight_config, :facet_link_group
+  attr_reader :controller, :blacklight_config, :facet_entry_group
 
-  def initialize(facet_link_group, controller, blacklight_config, page = nil)
-    @facet_link_group = facet_link_group
+  def initialize(facet_entry_group, controller, blacklight_config, page = nil)
+    @facet_entry_group = facet_entry_group
     @controller = controller
     @blacklight_config = blacklight_config
     @page = page
@@ -23,25 +23,24 @@ class FacetLinkGroupPresenter
     {
       title: facet_title,
       items: facet_entry_items,
-      position: @facet_link_group.position
     }
   end
 
   def facet_name
-    @facet_name ||= @facet_link_group.facet_field
+    @facet_name ||= facet_entry_group.facet_field
   end
 
   def facet_title
     facet_config = blacklight_config.facet_fields[facet_name]
     title = facet_config.respond_to?(:title) ? facet_config.title : facet_label
-    title || @facet_link_group.facet_field
+    title || facet_entry_group.facet_field
   end
 
   def facet_entry_items
-    facet_link_group.browse_entry_facet_entries.map do |entry_point|
-      thumb_url = Rails.cache.fetch("facet_link_groups/#{facet_link_group.id}/#{entry_point.id}/thumbnail_url")
+    facet_entry_group.facet_entries.map do |entry_point|
+      thumb_url = Rails.cache.fetch("facet_entry_groups/#{facet_entry_group.id}/#{entry_point.id}/thumbnail_url")
       facet_entry_item(entry_point, thumb_url)
-    end.order_by(position)
+    end
   end
 
   def facet_entry_item(entry, thumb_url = nil)
@@ -50,8 +49,7 @@ class FacetLinkGroupPresenter
       label: facet_item_label(entry.facet_value),
       value: entry.facet_value,
       image_url: thumb_url,
-      image_alt: nil,
-      position: entry.position
+      image_alt: nil
     }
   end
 

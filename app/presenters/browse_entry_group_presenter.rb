@@ -21,15 +21,14 @@ class BrowseEntryGroupPresenter
   def display
     {
       title: @browse_entry_group.title,
-      items: custom_browse_entry_items,
-      position: @browse_entry_group.position
+      items: browse_entry_items,
     }
   end
 
-  def custom_browse_entry_items
-    @browse_entry_group.browse_entry_entries.map do |entry_point|
+  def browse_entry_items
+    @browse_entry_group.browse_entries.map do |entry_point|
       custom_browse_entry_item(entry_point)
-    end.order_by(position)
+    end
   end
 
   def custom_browse_entry_item(entry, page = nil)
@@ -39,7 +38,6 @@ class BrowseEntryGroupPresenter
       value: entry.query,
       image: entry.file.nil? ? nil : entry.file.url,
       image_alt: nil,
-      position: entry.position
     }
   end
 

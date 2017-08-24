@@ -5,7 +5,7 @@ module Collections
     include BrowsableView
     include BrowseEntryDisplayingView
     include CollectionUsingView
-    include FacetEntryPointDisplayingView
+    include ElementGroupDisplayingView
     include HeroImageDisplayingView
     include NewsworthyView
     include PromotionLinkDisplayingView
@@ -77,7 +77,7 @@ module Collections
           "layout_#{@landing_page.settings_layout_type}".to_sym => true,
           strapline: strapline,
           hero_config: hero_config(@landing_page.hero_image),
-          entry_points: @landing_page.settings_layout_type == 'browse' ? entry_points : [],
+          entry_points: @landing_page.settings_layout_type == 'browse' ? grouped_entry_points : [],
           preview_search_data: preview_search_data,
           preview_search_data_present: preview_search_data.present?,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
@@ -100,12 +100,9 @@ module Collections
 
     private
 
-    def entry_points
-      @entry_points ||= begin
-        grouped_entry_points = []
-        grouped_entry_points << facet_entry_items_grouped(@landing_page)
-        grouped_entry_points << custom_browse_entry_items_grouped(@landing_page)
-        grouped_entry_points.sort_by(&:position)
+    def grouped_entry_points
+      @grouped_entry_points ||= begin
+        grouped_elements_grouped(@landing_page)
       end
     end
 
