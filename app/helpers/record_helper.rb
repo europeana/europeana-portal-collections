@@ -1,4 +1,6 @@
 module RecordHelper
+  include ThumbnailHelper
+
   def more_like_this(similar)
     similar.map do |doc|
       {
@@ -8,7 +10,7 @@ module RecordHelper
           alt: presenter(doc).field_value(%w(dcTitleLangAware title)),
           # temporary fix until API contains correct image url
           # src: render_document_show_field_value(doc, 'edmPreview'),
-          src: record_preview_url(presenter(doc).field_value('edmPreview'), 400)
+          src: thumbnail_url_for_edm_preview(presenter(doc).field_value('edmPreview'), size: 400)
         }
       }
     end
@@ -70,22 +72,5 @@ module RecordHelper
         }
       ]
     }
-  end
-
-  # temporary fix until API contains correct image url
-  def record_preview_url(edm_preview, size = 200, source = :api)
-    return edm_preview if edm_preview.nil?
-
-    if source == :s3
-      uri = CGI.parse(URI.parse(edm_preview).query)['uri'].first
-      resource_size = size == 400 ? 'LARGE' : 'MEDIUM'
-      resource_path = Digest::MD5.hexdigest(uri) + '-' + resource_size
-      'https://europeana-thumbnails-production.s3.amazonaws.com/' + resource_path
-    else
-      edm_preview.tap do |preview|
-        preview.sub!('http://europeanastatic.eu/api/image?', api_url + '/v2/thumbnail-by-url.json?')
-        preview.sub!('&size=LARGE', "&size=w#{size}")
-      end
-    end
   end
 end

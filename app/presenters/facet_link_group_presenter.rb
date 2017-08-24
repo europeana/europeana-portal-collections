@@ -7,6 +7,7 @@
 # to display facet entry points on browse based landing pages.
 class FacetLinkGroupPresenter
   include Facet::Labelling
+  include ThumbnailHelper
   include UrlHelper
   delegate :t, to: I18n
 
@@ -39,7 +40,7 @@ class FacetLinkGroupPresenter
   def facet_entry_items
     facet_link_group.browse_entry_facet_entries.map do |entry_point|
       thumb_url = Rails.cache.fetch("facet_link_groups/#{facet_link_group.id}/#{entry_point.id}/thumbnail_url")
-      facet_entry_item(entry_point, thumb_url)
+      facet_entry_item(entry_point, thumbnail_url_for_edm_preview(thumb_url))
     end
   end
 

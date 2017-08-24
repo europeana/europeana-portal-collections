@@ -19,7 +19,7 @@ module Portal
     def head_meta
       mustache[:head_meta] ||= begin
         landing = field_value('europeanaAggregation.edmLandingPage')
-        preview = record_preview_url(field_value('europeanaAggregation.edmPreview', unescape: true))
+        preview = helpers.thumbnail_url_for_edm_preview(field_value('europeanaAggregation.edmPreview', unescape: true))
 
         head_meta = [
           { meta_name: 'description', content: meta_description },
@@ -84,7 +84,8 @@ module Portal
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
-          thumbnail: field_value('europeanaAggregation.edmPreview', tag: false),
+          # TODO: is content.object.thumbnail used in the template?
+          # thumbnail: field_value('europeanaAggregation.edmPreview', tag: false),
           ugc_content: ugc_content(true),
         }.reverse_merge(super)
       end
@@ -384,17 +385,18 @@ module Portal
       @data_provider.image.url(:medium)
     end
 
-    def similar_items_item(doc)
-      presenter = Document::SearchResultPresenter.new(doc, controller)
-      {
-        url: document_path(doc, format: 'html'),
-        title: presenter.field_value(%w(dcTitleLangAware title)),
-        img: {
-          alt: presenter.field_value(%w(dcTitleLangAware title)),
-          src: presenter.thumbnail_url(generic: true)
-        }
-      }
-    end
+    # TODO: is this ever used?
+#     def similar_items_item(doc)
+#       presenter = Document::SearchResultPresenter.new(doc, controller)
+#       {
+#         url: document_path(doc, format: 'html'),
+#         title: presenter.field_value(%w(dcTitleLangAware title)),
+#         img: {
+#           alt: presenter.field_value(%w(dcTitleLangAware title)),
+#           src: presenter.thumbnail_url(generic: true)
+#         }
+#       }
+#     end
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
