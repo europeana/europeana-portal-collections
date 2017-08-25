@@ -21,7 +21,7 @@ class ElementGroup
       super
 
       ids.reject(&:blank?).each_with_index do |id, index|
-        element = group_elements.detect { |e| (e.groupable_type == 'BrowseEntry::FacetEntry') && (e.groupable_id == id.to_i) }
+        element = group_elements.detect { |e| (e.groupable_type == 'BrowseEntry') && (e.groupable_id == id.to_i) }
         element.remove_from_list
         element.insert_at(index + 1)
       end
@@ -66,6 +66,12 @@ class ElementGroup
     # for determining whether or not the landing page is for a collection
     def within_collection?
       page_landing.slug.starts_with?('collections/')
+    end
+
+    def page_landing
+      @page_landing ||= begin
+        pages.where(type == 'Page::Landing').first
+      end
     end
   end
 end

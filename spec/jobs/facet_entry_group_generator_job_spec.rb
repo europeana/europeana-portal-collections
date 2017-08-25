@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 RSpec.describe FacetEntryGroupGeneratorJob do
-  let(:facet_entry_group) { facet_entry_groups(:fashion_designer) }
+  let(:facet_entry_group) { element_groups(:fashion_designer_facet_group) }
 
   before do
     subject.instance_variable_set(:@facet_entry_group, facet_entry_group)
