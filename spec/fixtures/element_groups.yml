@@ -1,0 +1,4 @@
+fashion_designer_facet_group:
+  type: 'ElementGroup::FacetEntryGroup'
+  facet_field: 'CREATOR'
+  thumbnails: true

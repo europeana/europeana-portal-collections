@@ -1,0 +1,5 @@
+fashion_facet_link_group:
+  positionable: fashion_designer_facet_group
+  positionable_type: 'ElementGroup'
+  page: fashion_collection
+  position: 1
