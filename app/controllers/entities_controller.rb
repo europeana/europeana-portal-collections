@@ -16,8 +16,7 @@ class EntitiesController < ApplicationController
 
   def show
     @body_cache_key = body_cache_key
-    @entity = entity unless body_cached?
-    e = EDM::Entity.build_from_params(entity_params)
+    @entity = EDM::Entity.build_from_params(entity_params) unless body_cached?
 
     respond_to do |format|
       format.html
@@ -44,7 +43,7 @@ class EntitiesController < ApplicationController
   end
 
   def entity_params
-    params.permit(:type, :id).merge(entity: entity)
+    params.permit(:locale, :type, :id).merge(m: entity)
   end
 
   def slug
