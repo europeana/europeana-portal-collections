@@ -51,8 +51,20 @@ module Entities
 
     def content
       mustache[:content] ||= begin
-        @entity.content
+        @entity.content.merge(input_search: input_search, social_share: social_share)
       end
     end
+
+    def social_share
+      {
+          url: request.original_url,
+          twitter: true,
+          facebook: true,
+          pinterest: true,
+          googleplus: true,
+          tumblr: true
+      }
+    end
+
   end
 end

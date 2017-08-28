@@ -3,17 +3,12 @@ module EDM
   module Entity
     class Base
       include ActiveModel::Model
+      include Rails.application.routes.url_helpers
+      include Rails.application.helpers.i18n_helper
+
+      delegate :t, to: I18n
 
       attr_accessor :id, :locale, :m
-
-      ENTITY_SEARCH_QUERY_FIELDS = {
-        agent: {
-          by: %w(proxy_dc_creator proxy_dc_contributor)
-        },
-        concept: {
-          about: 'what'
-        }
-      }.freeze
 
       class << self
         attr_reader :human_type
@@ -61,8 +56,6 @@ module EDM
       def content
         {
           tab_items: tab_items,
-          input_search: input_search,
-          social_share: social_share,
           entity_anagraphical: anagraphical,
           entity_thumbnail: thumbnail,
           entity_external_link: external_link,
@@ -72,29 +65,11 @@ module EDM
       end
 
       def tab_items
-        ENTITY_SEARCH_QUERY_FIELDS[api_type.to_sym].keys.map do |relation|
-          entity_tab_items_one_tab(api_type, relation)
-        end
-      end
-
-      def entity_tab_items_one_tab(api_type, relation)
-        search_query = entity_search_query(api_type, relation)
-        {
-            tab_title: t("site.entities.tab_items.items_#{relation}", name: name),
-            url: search_path(q: search_query, format: 'json'),
-            search_url: search_path(q: search_query)
-        }
-      end
-
-      def entity_search_query(api_type, relation)
-        fields = ENTITY_SEARCH_QUERY_FIELDS[api_type.to_sym][relation.to_sym]
-        [fields].flatten.map do |field|
-          %(#{field}: "http://data.europeana.eu/#{api_path}")
-        end.join(' OR ')
+        raise_error("tab_items")
       end
 
       def external_link
-        source = thumbnail_source
+        source = m.key?(:depiction) ? m[:depiction][:source] : nil
         return nil if source.nil?
         {
           text: [
@@ -104,28 +79,8 @@ module EDM
         }
       end
 
-      def build_proxy_dc(name, url, path)
-        %(proxy_dc_#{name}:"#{url}/#{path}")
-      end
-
       def anagraphical
-        return nil unless api_type == 'agent'
-        result = [
-          {
-            label: t('site.entities.anagraphic.birth'),
-            value: entity_birth
-          },
-          {
-            label: t('site.entities.anagraphic.death'),
-            value: entity_death
-          },
-          {
-            label: t('site.entities.anagraphic.occupation'),
-            value: entity_occupation
-          }
-        ].reject { |item| item[:value].nil? }
-
-        result.size.zero? ? nil : result
+        raise_error("anagraphical")
       end
 
       def thumbnail
@@ -140,21 +95,6 @@ module EDM
 
         src = entity_build_src(m[1], 400)
         { src: src, full: full, alt: m[1] }
-      end
-
-      def thumbnail_source
-        m.key?(:depiction) ? m[:depiction][:source] : nil
-      end
-
-      def social_share
-        {
-            url: request.original_url,
-            twitter: true,
-            facebook: true,
-            pinterest: true,
-            googleplus: true,
-            tumblr: true
-        }
       end
 
       # TODO: fallback should not be hard-coded here
@@ -181,7 +121,11 @@ module EDM
       #
       # Returns a string
       def description
-        raise "Need to implement description method for #{@entity.class.human_type} entity"
+        raise_error("description")
+      end
+
+      def raise_error (method)
+        raise "Need to implement `#{method}` method for #{@entity.class.human_type} entity"
       end
 
       private

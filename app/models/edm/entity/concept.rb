@@ -15,15 +15,30 @@ module EDM
         end
       end
 
-      def search_query_fields
-        {
-          agent: {
-            by: %w(proxy_dc_creator proxy_dc_contributor)
-          },
-          concept: {
-            about: 'what'
+      def tab_items
+        [
+          {
+            tab_title: t("site.entities.tab_items.items_about", name: name),
+            url: search_path(locale: locale, q: search_query, format: 'json'),
+            search_url: search_path(q: search_query)
           }
-        }
+        ]
+      end
+
+      def anagraphical
+        nil
+      end
+
+      private
+
+      def query_fields
+        %w(what)
+      end
+
+      def search_query
+        @q ||= query_fields.each do |field|
+          %(#{field}: 'http://data.europeana.eu/concept')
+        end.join(' OR ')
       end
     end
   end
