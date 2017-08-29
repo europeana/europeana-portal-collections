@@ -25,7 +25,6 @@ module Portal
           { meta_name: 'description', content: meta_description },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          { meta_property: 'og:sitename', content: 'Europeana Collections' },
           { meta_property: 'og:title', content: og_title },
           { meta_property: 'og:description', content: og_description },
           { meta_property: 'fb:appid', content: '185778248173748' }
@@ -36,10 +35,10 @@ module Portal
       end
     end
 
-    def page_title
-      mustache[:page_title] ||= begin
+    def page_content_heading
+      mustache[:page_content_heading] ||= begin
         title = [display_title, creator_title]
-        CGI.unescapeHTML(title.compact.join(' | ')) + ' - Europeana'
+        CGI.unescapeHTML(title.compact.join(' | '))
       end
     end
 
@@ -54,14 +53,15 @@ module Portal
     end
 
     def include_nav_searchbar
-     true
+      true
     end
 
     def content
       mustache[:content] ||= begin
         {
           object: {
-            annotations: @annotations.blank? ? nil : record_annotations,
+            annotations_later: @annotations_later,
+            annotations: @annotations.blank? ? nil : record_annotations(@annotations),
             creator: creator_title,
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
@@ -88,19 +88,6 @@ module Portal
           ugc_content: ugc_content(true),
         }.reverse_merge(super)
       end
-    end
-
-    def record_annotations
-      {
-        title: t('annotations', scope: 'site.object.meta-label'),
-        info: static_page_path('annotations', format: 'html'),
-        sections: [
-          {
-            items: @annotations.map { |anno| { url: anno, text: anno } },
-            title: t('site.object.meta-label.relations')
-          }
-        ]
-      }
     end
 
     def labels
@@ -220,7 +207,7 @@ module Portal
           latitude: '"' + (field_value('places.latitude') || '') + '"',
           longitude: '"' + (field_value('places.longitude') || '') + '"',
           long_and_lat: long_and_lat?,
-          #placeName: document.fetch('places.prefLabel', []).first,
+          # placeName: document.fetch('places.prefLabel', []).first,
           placeName: pref_label(document, 'places.prefLabel'),
           labels: {
             longitude: t('site.object.meta-label.longitude') + ':',
@@ -241,7 +228,7 @@ module Portal
       mustache[:similar_items] ||= begin
         {
           title: t('site.object.similar-items'),
-          more_items_load: document_similar_url(document, format: 'json'),
+          more_items_load: document_similar_url(document, format: 'json', mlt_query: @mlt_query),
           more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
         }
       end

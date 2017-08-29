@@ -39,6 +39,10 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     expect(subject).not_to have_link('3D')
   end
 
+  it 'should have a title "Collection name - Europeana Collections"' do
+    expect(subject).to have_title('Music - ' + t('site.name', default: 'Europeana Collections'))
+  end
+
   context 'when the page is using the browse layout' do
     let(:collection) { Collection.find_by_key('fashion') }
     let(:landing_page) { Page::Landing.find_by_slug('collections/fashion') }

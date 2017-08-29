@@ -20,7 +20,6 @@ module Collections
           { meta_property: 'fb:appid', content: '185778248173748' },
           { meta_name: 'twitter:card', content: 'summary' },
           { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-          { meta_property: 'og:sitename', content: title },
           { meta_property: 'og:description', content: head_meta_description },
           { meta_property: 'og:url', content: collection_url(@collection.key) }
         ]
@@ -30,10 +29,8 @@ module Collections
       end
     end
 
-    def page_title
-      mustache[:page_title] ||= begin
-        @landing_page.title || @collection.title
-      end
+    def page_content_heading
+      @collection.title
     end
 
     def body_class

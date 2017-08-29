@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'search', to: 'portal#index'
 
     constraints id: %r{[^/]+/[^/]+} do
+      get 'record/*id/annotations', to: 'portal#annotations', as: 'document_annotations'
       get 'record/*id/media', to: 'portal#media', as: 'document_media'
       get 'record/*id/similar', to: 'portal#similar', as: 'document_similar'
 
@@ -56,6 +57,10 @@ Rails.application.routes.draw do
       resources :galleries, only: [:show, :index], param: :slug do
         resources :gallery_images, only: :show, path: 'images', as: 'images', param: :position
       end
+
+      constraints type: /people|periods|places|topics/, id: /\d+/ do
+        get ':type/:id(-(:slug))', as: 'entity', to: 'entities#show'
+      end
     end
 
     resources :blog_posts, only: [:show, :index], param: :slug, path: 'blogs'
@@ -78,5 +83,10 @@ Rails.application.routes.draw do
   get 'csrf', to: 'application#csrf'
 
   put 'locale', to: 'locale#update'
+
+  # CORS pre-flight requests
+  match '*path', via: [:options],
+                 to: ->(_) { [204, { 'Content-Type' => 'text/plain' }, []] }
+
   get '*path', to: 'locale#show'
 end

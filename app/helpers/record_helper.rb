@@ -59,6 +59,20 @@ module RecordHelper
     Document::RecordPresenter.new(record, controller).media_web_resources(options).map(&:media_item)
   end
 
+  def record_annotations(annotations)
+    return nil if annotations.blank?
+    {
+      title: t('annotations', scope: 'site.object.meta-label'),
+      info: static_page_path('annotations', format: 'html'),
+      sections: [
+        {
+          items: annotations.map { |anno| { url: anno, text: anno } },
+          title: t('site.object.meta-label.relations')
+        }
+      ]
+    }
+  end
+
   # temporary fix until API contains correct image url
   def record_preview_url(edm_preview, size = 200, source = :api)
     return edm_preview if edm_preview.nil?

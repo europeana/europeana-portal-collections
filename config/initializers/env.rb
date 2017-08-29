@@ -14,6 +14,11 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
                                 else
                                   ''
                                 end
+
+  europeana[:entities] = OpenStruct.new(
+    api_key: ENV['EUROPEANA_ENTITIES_API_KEY'],
+    api_url: ENV['EUROPEANA_ENTITIES_API_URL']
+  )
 end
 
 # Google-centric configuration
@@ -30,8 +35,8 @@ Rails.application.config.x.disable = OpenStruct.new(
 
 # Enable certain features that are disabled by default
 Rails.application.config.x.enable = OpenStruct.new(
-  blog_posts_theme_filter: ENV['ENABLE_BLOG_POSTS_THEME_FILTER'],
   csrf_without_ssl: ENV['ENABLE_CSRF_WITHOUT_SSL'],
   events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
-  search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE']
+  search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
+  entity_page: ENV['ENABLE_ENTITY_PAGE']
 )

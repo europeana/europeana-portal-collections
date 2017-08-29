@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 1be1961524ccf7e6cb5d29c9fa56e1fface04958
+  revision: c97ef134285b7ff6a0dd55fc40673320fec8dfbc
   branch: develop
   specs:
     europeana-i18n (0.0.1)
@@ -8,8 +8,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 66b1a52c47fe6ba4ce9d710d5a9ae4de1734c3a0
-  ref: 66b1a52
+  revision: 03fc544609bb6ae73398698eaf25c202c089e32f
+  ref: 03fc544
   specs:
     europeana-styleguide (0.3.0)
       activesupport (~> 4.0)
@@ -324,8 +324,8 @@ GEM
       thor (~> 0.19.1)
     formatador (0.2.5)
     gli (2.15.0)
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     globalize (5.0.1)
       activemodel (>= 4.2.0, < 4.3)
       activerecord (>= 4.2.0, < 4.3)
@@ -342,7 +342,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.8.4)
+    i18n (0.8.6)
     i18n_data (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -387,8 +387,8 @@ GEM
       mime-types (>= 1.16, < 4)
     mime-types (2.99.3)
     mimemagic (0.3.0)
-    mini_portile2 (2.1.0)
-    minitest (5.10.2)
+    mini_portile2 (2.2.0)
+    minitest (5.10.3)
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -396,8 +396,8 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     newrelic_rpm (3.18.1.330)
-    nokogiri (1.7.2)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
     orm_adapter (0.5.0)
     paper_trail (4.2.0)
       activerecord (>= 3.0, < 6.0)
@@ -420,7 +420,8 @@ GEM
     powerpack (0.1.1)
     public_suffix (2.0.5)
     puma (2.16.0)
-    rack (1.6.5)
+    rack (1.6.8)
+    rack-cors (1.0.1)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)
@@ -659,6 +660,7 @@ DEPENDENCIES
   phantomjs
   poltergeist
   puma (~> 2.13)
+  rack-cors
   rack-rewrite
   rails (= 4.2.7.1)
   rails-observers
@@ -684,3 +686,6 @@ DEPENDENCIES
   uglifier (~> 2.7.2)
   webmock (~> 1.22)
   yard
+
+BUNDLED WITH
+   1.14.6
