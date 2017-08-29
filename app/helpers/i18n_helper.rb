@@ -5,6 +5,7 @@ module I18nHelper
     {
       bg: 'bulgarian',
       ca: 'catalan',
+      cs: 'czech',
       da: 'danish',
       de: 'german',
       el: 'greek',
@@ -13,6 +14,7 @@ module I18nHelper
       et: 'estonian',
       fi: 'finnish',
       fr: 'french',
+      ga: 'gaelic',
       hr: 'croatian',
       hu: 'hungarian',
       it: 'italian',
@@ -25,6 +27,8 @@ module I18nHelper
       pt: 'portuguese',
       ro: 'romanian',
       ru: 'russian',
+      sl: 'slovenian',
+      sk: 'slovakian',
       sv: 'swedish'
     }
   end
