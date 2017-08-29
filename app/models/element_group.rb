@@ -12,7 +12,7 @@ class ElementGroup < ActiveRecord::Base
   has_many :pages, through: :page_elements
 
   has_many :group_elements, -> { order(:position) },
-           class_name: 'GroupElement', dependent: :destroy, inverse_of: :element_group
+           dependent: :destroy, as: :groupable
 
   #validates :pages, length: { minimum: 1, maximum: 1 }
 

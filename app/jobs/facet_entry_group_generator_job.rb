@@ -51,7 +51,7 @@ class FacetEntryGroupGeneratorJob < ApplicationJob
   end
 
   def set_facet_entry_position(facet_entry, position)
-    group_element = facet_entry.group_elements.detect do |e|
+    group_element = @facet_entry_group.group_elements.detect do |e|
       (e.groupable_type == ('BrowseEntry::FacetEntry')) && (e.groupable_id == facet_entry.id)
     end
     group_element.remove_from_list
