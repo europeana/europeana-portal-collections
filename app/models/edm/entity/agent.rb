@@ -3,7 +3,16 @@
 module EDM
   module Entity
     class Agent < EDM::Entity::Base
-      has_human_type 'person'
+      has_human_type? 'person'
+
+      ENTITY_SEARCH_QUERY_FIELDS = {
+        agent: {
+          by: %w(proxy_dc_creator proxy_dc_contributor)
+        },
+        concept: {
+          about: 'what'
+        }
+      }.freeze
 
       def description
         entity_value_by_locale(m[:biographicalInformation])
@@ -12,7 +21,7 @@ module EDM
       def tab_items
         [
           {
-            tab_title: t("site.entities.tab_items.items_by", name: name),
+            tab_title: t('site.entities.tab_items.items_by', name: name),
             url: search_path(locale: locale, q: search_query, format: 'json'),
             search_url: search_path(locale: locale, q: search_query)
           }
@@ -40,14 +49,12 @@ module EDM
 
       private
 
-      def query_fields
-        %w(proxy_dc_creator proxy_dc_contributor)
+      def search_query
+        @q ||= "proxy_dc_creator: \"#{build_url(id)}\" OR proxy_dc_contributor: \"#{build_url(id)}\""
       end
 
-      def search_query
-        @q ||= query_fields.each do |field|
-          %(#{field}: 'http://data.europeana.eu/agent')
-        end.join(' OR ')
+      def build_url(id)
+        "http://data.europeana.eu/agent/base/#{id}"
       end
     end
   end

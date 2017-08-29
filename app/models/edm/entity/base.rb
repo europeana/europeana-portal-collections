@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 
 module EDM
   module Entity
     class Base
       include ActiveModel::Model
       include Rails.application.routes.url_helpers
-      include Rails.application.helpers.i18n_helper
+      include I18nHelper
 
       delegate :t, to: I18n
 
@@ -30,7 +31,7 @@ module EDM
 
         protected
 
-        def has_human_type(human_type)
+        def has_human_type?(human_type)
           @human_type = human_type
         end
       end
@@ -65,7 +66,7 @@ module EDM
       end
 
       def tab_items
-        raise_error("tab_items")
+        raise_error('tab_items')
       end
 
       def external_link
@@ -80,13 +81,13 @@ module EDM
       end
 
       def anagraphical
-        raise_error("anagraphical")
+        raise_error('anagraphical')
       end
 
       def thumbnail
         return nil unless m.key?(:depiction) &&
-            m[:depiction].is_a?(Hash) &&
-            m[:depiction].key?(:id)
+                          m[:depiction].is_a?(Hash) &&
+                          m[:depiction].key?(:id)
 
         full = m[:depiction][:id]
 
@@ -121,10 +122,10 @@ module EDM
       #
       # Returns a string
       def description
-        raise_error("description")
+        raise_error('description')
       end
 
-      def raise_error (method)
+      def raise_error(method)
         raise "Need to implement `#{method}` method for #{@entity.class.human_type} entity"
       end
 
@@ -216,13 +217,13 @@ module EDM
       # Returns an array of strings
       def format_entity_resource_urls(results)
         results.
-            map { |l| l.match(%r{[^\/]+$}) }.
-            reject(&:nil?).
-            map { |s| s[0] }.
-            map { |s| URI.unescape(s) }.
-            map { |s| s.sub(/^_/, '') }.
-            map { |s| s.sub(/_$/, '') }.
-            map { |s| s.tr('_', ' ') }
+          map { |l| l.match(%r{[^\/]+$}) }.
+          reject(&:nil?).
+          map { |s| s[0] }.
+          map { |s| URI.unescape(s) }.
+          map { |s| s.sub(/^_/, '') }.
+          map { |s| s.sub(/_$/, '') }.
+          map { |s| s.tr('_', ' ') }
       end
 
       # @param default_label [String] fallback if no localised prefLabel available

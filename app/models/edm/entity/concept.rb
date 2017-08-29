@@ -3,7 +3,7 @@
 module EDM
   module Entity
     class Concept < Base
-      has_human_type 'topic'
+      has_human_type? 'topic'
 
       def description
         note = m[:note]
@@ -18,7 +18,7 @@ module EDM
       def tab_items
         [
           {
-            tab_title: t("site.entities.tab_items.items_about", name: name),
+            tab_title: t('site.entities.tab_items.items_about', name: name),
             url: search_path(locale: locale, q: search_query, format: 'json'),
             search_url: search_path(q: search_query)
           }
@@ -31,14 +31,8 @@ module EDM
 
       private
 
-      def query_fields
-        %w(what)
-      end
-
       def search_query
-        @q ||= query_fields.each do |field|
-          %(#{field}: 'http://data.europeana.eu/concept')
-        end.join(' OR ')
+        @q ||= "what: \"http://data.europeana.eu/agent/base/#{id}\""
       end
     end
   end
