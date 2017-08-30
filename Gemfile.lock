@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 55070350be08944c9084fbc0e1dd71356328283c
+  revision: ec86668514beb9a6c63e46e568d7092cb1285ff2
   branch: hotfix/2404-irish-translations
   specs:
     europeana-i18n (0.0.1)
