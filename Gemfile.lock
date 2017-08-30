@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 535a1e0f4156e239f8faf4e4d48c94a63a05fb18
-  branch: develop
+  revision: 7e217d3ea07c404bebf3c4a22e52e4f6320d28f1
+  branch: hotfix/2399-gaeilge
   specs:
     europeana-i18n (0.0.1)
       rails (>= 4.0, < 6.0)
