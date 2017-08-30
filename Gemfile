@@ -7,7 +7,7 @@ gem 'rails', '4.2.7.1'
 
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '03fc544'
 
-gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'hotfix/2399-gaeilge'
+gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'hotfix/2404-irish-translations'
 
 # Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
 # https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
