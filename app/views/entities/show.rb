@@ -22,17 +22,17 @@ module Entities
 
     def head_meta
       mustache[:head_meta] ||= begin
-      head_meta = [
-        { meta_name: 'description', content: head_meta_description },
-        { meta_property: 'fb:appid', content: '185778248173748' },
-        { meta_name: 'twitter:card', content: 'summary' },
-        { meta_name: 'twitter:site', content: '@EuropeanaEU' },
-        { meta_property: 'og:description', content: head_meta_description },
-        { meta_property: 'og:url', content: request.original_url },
-        { meta_property: 'og:title', content: page_title }
-      ]
-      head_meta << { meta_property: 'og:image', content: og_image } unless og_image.nil?
-      head_meta + super
+        head_meta = [
+          { meta_name: 'description', content: head_meta_description },
+          { meta_property: 'fb:appid', content: '185778248173748' },
+          { meta_name: 'twitter:card', content: 'summary' },
+          { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+          { meta_property: 'og:description', content: head_meta_description },
+          { meta_property: 'og:url', content: request.original_url },
+          { meta_property: 'og:title', content: page_title }
+        ]
+        head_meta << { meta_property: 'og:image', content: og_image } unless og_image.nil?
+        head_meta + super
       end
     end
 
@@ -57,14 +57,13 @@ module Entities
 
     def social_share
       {
-          url: request.original_url,
-          twitter: true,
-          facebook: true,
-          pinterest: true,
-          googleplus: true,
-          tumblr: true
+        url: request.original_url,
+        twitter: true,
+        facebook: true,
+        pinterest: true,
+        googleplus: true,
+        tumblr: true
       }
     end
-
   end
 end
