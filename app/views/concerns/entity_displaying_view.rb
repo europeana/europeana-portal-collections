@@ -81,6 +81,10 @@ module EntityDisplayingView
     api_type == 'agent' ? entity_value_by_locale(@entity[:biographicalInformation]) : entity_note(@entity[:note])
   end
 
+  def entity_description_title
+    api_type == 'agent' ? t('i18n.site.entities.labels.bio') : t('i18n.site.entities.labels.description')
+  end
+
   private
 
   # Returns a string: locale, english or nil
