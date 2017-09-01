@@ -87,7 +87,7 @@ module EntityDisplayingView
   # @return [String]
   def entity_description_title
     i18n_key = api_type == 'agent' ? 'bio' : 'description'
-     t(i18n_key, scope: 'site.entities.labels')
+    t(i18n_key, scope: 'site.entities.labels')
   end
 
   private
