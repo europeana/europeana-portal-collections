@@ -4,7 +4,10 @@ module Events
     def event_title
       presenter.title
     end
-    alias_method :page_content_heading, :event_title
+
+    def page_content_heading
+      [presenter.title, t('site.events.list.page-title')]
+    end
 
     def head_meta
       mustache[:head_meta] ||= begin

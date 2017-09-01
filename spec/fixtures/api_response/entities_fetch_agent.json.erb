@@ -1,0 +1,42 @@
+{
+  "@context": "http://www.europeana.eu/schemas/context/entity.jsonld",
+  "altLabel": {
+    "en": "<%= name %>"
+  },
+  "biographicalInformation": [
+    {
+      "@language": "en", "@value": "<%= description %>"
+    }
+  ],
+  "dateOfBirth": [
+    "1770-12-16"
+  ],
+  "dateOfDeath": [
+    "1827-03-26"
+  ],
+  "end": [
+    "1827-03-26"
+  ],
+  "placeOfBirth": [
+    {
+      "@id": "http://dbpedia.org/resource/Electorate_of_Cologne"
+    },
+    {
+      "@id": "http://dbpedia.org/resource/Bonn"
+    }
+  ],
+  "placeOfDeath": {
+    "@id": "http://dbpedia.org/resource/Vienna"
+  },
+  "prefLabel": {
+    "en": "<%= name %>"
+  },
+  "depiction": {
+    "id": "http://commons.wikimedia.org/wiki/Special:FilePath/<%= URI.encode(name) %>.jpg",
+    "source": "http://commons.wikimedia.org/wiki/File:<%= URI.encode(name) %>.jpg"
+  },
+  "sameAs": [
+    "http://uz.dbpedia.org/resource/Name_of_Person"
+  ],
+  "type": "Agent"
+}

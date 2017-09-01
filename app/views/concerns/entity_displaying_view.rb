@@ -6,6 +6,7 @@ module EntityDisplayingView
   extend ActiveSupport::Concern
 
   def entity_anagraphical
+    return nil unless api_type == 'agent'
     result = [
       {
         label: t('site.entities.anagraphic.birth'),
@@ -63,7 +64,7 @@ module EntityDisplayingView
     entity_pref_label('[No name]')
   end
 
-  # biographicalInformation: [
+  # agent => biographicalInformation: [
   #   {
   #     @language: "en",
   #     @value: "..."
@@ -71,12 +72,35 @@ module EntityDisplayingView
   #   ...
   # ]
   #
+  # concept => note: {
+  #   en: ["..."],
+  # }
+  #
   # Returns a string
   def entity_description
-    entity_value_by_locale(@entity[:biographicalInformation])
+    api_type == 'agent' ? entity_value_by_locale(@entity[:biographicalInformation]) : entity_note(@entity[:note])
+  end
+
+  ##
+  # Translated label for the entity description, e.g. "Biography" for agents
+  #
+  # @return [String]
+  def entity_description_title
+    i18n_key = api_type == 'agent' ? 'bio' : 'description'
+    t(i18n_key, scope: 'site.entities.labels')
   end
 
   private
+
+  # Returns a string: locale, english or nil
+  def entity_note(note)
+    return nil unless note.present? && note.is_a?(Hash)
+    if note.key?(page_locale.to_sym)
+      note[page_locale.to_sym].first
+    elsif note.key?(:en)
+      note[:en].first
+    end
+  end
 
   # Returns a string
   def entity_value_by_locale(list)
@@ -123,7 +147,7 @@ module EntityDisplayingView
   end
 
   def entity_date_and_place(date, place)
-    result = [date, place].reject(&:nil?)
+    result = [date, place].compact
     result.size.zero? ? nil : result
   end
 
@@ -210,14 +234,8 @@ module EntityDisplayingView
   end
 
   def entity_date(dates)
-    return nil unless dates.present? && dates.is_a?(Array)
-
-    dates.each do |date|
-      gregorian = date_eras_gregorian(date)
-      return gregorian unless gregorian.nil?
-    end
-
-    dates.first.strip
+    return nil unless dates.present?
+    (date_most_accurate(dates) || dates.first).strip
   end
 
   # For multiple items the format is just an array of hash items

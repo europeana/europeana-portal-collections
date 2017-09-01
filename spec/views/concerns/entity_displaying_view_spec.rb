@@ -9,14 +9,19 @@ RSpec.describe EntityDisplayingView do
     end
   end
 
-  subject { view_class.new }
+  let(:view_instance) { view_class.new }
+
+  subject { view_instance }
 
   before do
-    allow(subject).to receive(:mustache) { {} }
+    allow(view_instance).to receive(:mustache) { {} }
   end
 
   describe '#entity_thumbnail_source' do
-    let(:entity) { JSON.parse(api_responses(:entities_fetch)).with_indifferent_access }
+    let(:entity) do
+      JSON.parse(api_responses(:entities_fetch_agent, name: 'Entity Name', description: 'Entity Description')).
+        with_indifferent_access
+    end
 
     context 'with depiction' do
       before do
@@ -52,6 +57,24 @@ RSpec.describe EntityDisplayingView do
       it 'strips and returns first value' do
         expect(subject.send(:entity_date, date)).to eq('unknown 1')
       end
+    end
+  end
+
+  describe '#entity_description_title' do
+    subject { view_instance.entity_description_title }
+
+    before do
+      allow(view_instance).to receive(:api_type) { entity_type }
+    end
+
+    context 'when entity type is agent' do
+      let(:entity_type) { 'agent' }
+      it { is_expected.to eq('Biography') }
+    end
+
+    context 'when entity type is concept' do
+      let(:entity_type) { 'concept' }
+      it { is_expected.to eq('Description') }
     end
   end
 end

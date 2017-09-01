@@ -1,0 +1,20 @@
+{
+  "@context": "http://www.europeana.eu/schemas/context/entity.jsonld",
+  "altLabel": {
+    "en": "<%= name %>"
+  },
+  "note": {
+    "en": ["<%= description %>"]
+  },
+  "prefLabel": {
+    "en": "<%= name %>"
+  },
+  "depiction": {
+    "id": "http://commons.wikimedia.org/wiki/Special:FilePath/<%= URI.encode(name) %>.jpg",
+    "source": "http://commons.wikimedia.org/wiki/File:<%= URI.encode(name) %>.jpg"
+  },
+  "related": [
+    "http://uz.dbpedia.org/resource/Name_of_Person"
+  ],
+  "type": "Concept"
+}
