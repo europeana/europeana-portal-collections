@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/europeana/europeana-i18n-ruby.git
+  remote: https://github.com/europeana/europeana-i18n-ruby.git
   revision: 68fdc3196db53794ecc65d636f9fdf1313aa4cf1
   branch: develop
   specs:
@@ -7,7 +7,7 @@ GIT
       rails (>= 4.0, < 6.0)
 
 GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
   revision: 9da6eb6756acd48a155b8b5594b55731f60b44a3
   branch: develop
   specs:
@@ -18,14 +18,14 @@ GIT
       stache (~> 1.1.1)
 
 GIT
-  remote: git://github.com/europeana/stache.git
+  remote: https://github.com/europeana/stache.git
   revision: e5ceff86974620d7d7db28018fc29a2c9c24d1d0
   branch: europeana-styleguide
   specs:
     stache (1.1.1)
 
 GIT
-  remote: git://github.com/globalize/globalize-versioning.git
+  remote: https://github.com/globalize/globalize-versioning.git
   revision: 8b8234b7cc3bc4c49d0dc87677811e20951e3f0e
   specs:
     globalize-versioning (0.2.0)
