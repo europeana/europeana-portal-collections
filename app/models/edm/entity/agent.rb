@@ -6,17 +6,13 @@ module EDM
       has_human_type? 'person'
 
       def description
-        entity_value_by_locale(m[:biographicalInformation])
+        entity_value_by_locale(entity_response[:biographicalInformation])
       end
 
-      def tab_items
-        [
-          {
-            tab_title: t('site.entities.tab_items.items_by', name: name),
-            url: search_path(locale: locale, q: search_query, format: 'json'),
-            search_url: search_path(locale: locale, q: search_query)
-          }
-        ]
+      def tabs
+        {
+          items_by: search_path(locale: locale, q: search_query)
+        }
       end
 
       def anagraphical

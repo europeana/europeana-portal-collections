@@ -6,7 +6,7 @@ module EDM
       has_human_type? 'topic'
 
       def description
-        note = m[:note]
+        note = entity_response[:note]
         return nil unless note.present? && note.is_a?(Hash)
         if note.key?(locale.to_sym)
           note[locale.to_sym].first
@@ -15,14 +15,10 @@ module EDM
         end
       end
 
-      def tab_items
-        [
-          {
-            tab_title: t('site.entities.tab_items.items_about', name: name),
-            url: search_path(locale: locale, q: search_query, format: 'json'),
-            search_url: search_path(q: search_query)
-          }
-        ]
+      def tabs
+        {
+            items_about: search_path(locale: locale, q: search_query)
+        }
       end
 
       def anagraphical

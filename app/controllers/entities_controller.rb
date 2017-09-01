@@ -43,7 +43,7 @@ class EntitiesController < ApplicationController
   end
 
   def entity_params
-    params.permit(:locale, :type, :id).merge(m: entity)
+    params.permit(:locale, :type, :id).merge(entity_response: entity)
   end
 
   def slug

@@ -49,9 +49,46 @@ module Entities
       end
     end
 
+    def bodyclass
+      'channel_entity'
+    end
+
+    def page_content_heading
+      @entity.title
+    end
+
+    def navigation
+      {
+        breadcrumbs: [
+          {
+            label: @entity.title
+          }
+        ]
+      }
+    end
+
     def content
       mustache[:content] ||= begin
-        @entity.content.merge(input_search: input_search, social_share: social_share)
+        {
+          tab_items: tab_items,
+          entity_anagraphical: @entity.anagraphical,
+          entity_thumbnail: @entity.thumbnail,
+          entity_external_link: @entity.external_link,
+          entity_description: @entity.description,
+          entity_title: @entity.name,
+          input_search: input_search,
+          social_share: social_share
+        }
+      end
+    end
+
+    def tab_items
+      @entity.tabs.map do |key, search_url|
+        {
+          tab_title: t("site.entities.tab_items.#{key.to_s}", name: @entity.name),
+          url: search_url + '&format=json',
+          search_url: search_url
+        }
       end
     end
 

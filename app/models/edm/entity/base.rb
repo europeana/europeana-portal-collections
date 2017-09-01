@@ -9,7 +9,7 @@ module EDM
 
       delegate :t, to: I18n
 
-      attr_accessor :id, :locale, :m
+      attr_accessor :id, :locale, :entity_response
 
       class << self
         attr_reader :human_type
@@ -36,41 +36,8 @@ module EDM
         end
       end
 
-      def bodyclass
-        'channel_entity'
-      end
-
-      def page_content_heading
-        title
-      end
-
-      def navigation
-        {
-          breadcrumbs: [
-            {
-              label: title
-            }
-          ]
-        }
-      end
-
-      def content
-        {
-          tab_items: tab_items,
-          entity_anagraphical: anagraphical,
-          entity_thumbnail: thumbnail,
-          entity_external_link: external_link,
-          entity_description: description,
-          entity_title: name
-        }
-      end
-
-      def tab_items
-        raise_error('tab_items')
-      end
-
       def external_link
-        source = m.key?(:depiction) ? m[:depiction][:source] : nil
+        source = entity_response.key?(:depiction) ? entity_response[:depiction][:source] : nil
         return nil if source.nil?
         {
           text: [
@@ -85,17 +52,17 @@ module EDM
       end
 
       def thumbnail
-        return nil unless m.key?(:depiction) &&
-                          m[:depiction].is_a?(Hash) &&
-                          m[:depiction].key?(:id)
+        return nil unless entity_response.key?(:depiction) &&
+                          entity_response[:depiction].is_a?(Hash) &&
+                          entity_response[:depiction].key?(:id)
 
-        full = m[:depiction][:id]
+        full = entity_response[:depiction][:id]
 
-        m = full.match(%r{^.*/Special:FilePath/(.*)$}i)
-        return nil if m.nil?
+        thumbnail_urls = full.match(%r{^.*/Special:FilePath/(.*)$}i)
+        return nil if thumbnail_urls.nil?
 
-        src = entity_build_src(m[1], 400)
-        { src: src, full: full, alt: m[1] }
+        src = entity_build_src(thumbnail_urls[1], 400)
+        { src: src, full: full, alt: thumbnail_urls[1] }
       end
 
       # TODO: fallback should not be hard-coded here
@@ -229,7 +196,7 @@ module EDM
       # @param default_label [String] fallback if no localised prefLabel available
       # @return [String] localised prefLabel or fallback
       def entity_pref_label(default_label)
-        pl = m[:prefLabel]
+        pl = entity_response[:prefLabel]
         if pl && pl.is_a?(Hash) && pl.present?
           localised_pl = pl[locale] || pl[:en]
           [localised_pl].flatten.first
@@ -239,11 +206,11 @@ module EDM
       end
 
       def entity_birth_date
-        entity_date(m[:dateOfBirth])
+        entity_date(entity_response[:dateOfBirth])
       end
 
       def entity_birth_place
-        entity_place(m[:placeOfBirth])
+        entity_place(entity_response[:placeOfBirth])
       end
 
       def entity_birth
@@ -251,11 +218,11 @@ module EDM
       end
 
       def entity_death_date
-        entity_date(m[:dateOfDeath])
+        entity_date(entity_response[:dateOfDeath])
       end
 
       def entity_death_place
-        entity_place m[:placeOfDeath]
+        entity_place entity_response[:placeOfDeath]
       end
 
       def entity_death
@@ -290,7 +257,7 @@ module EDM
       #
       # Returns an array of strings
       def entity_occupation
-        result = entity_value(m[:professionOrOccupation])
+        result = entity_value(entity_response[:professionOrOccupation])
         if result.is_a?(String)
           result = result.split(',')
         elsif result.is_a?(Array)
