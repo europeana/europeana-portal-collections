@@ -87,7 +87,7 @@ module Galleries
         data_provider: presenter.field_value('dataProvider'),
         creation_date: presenter.field_value('year'),
         thumb_url: gallery_image_thumbnail(image),
-        full_url: presenter.field_value('aggregations.edmIsShownBy'),
+        full_url: gallery_image_full(image),
         rights: presenter.simple_rights_label_data,
         url_item: image.portal_url,
         url_collection: search_path(q: "europeana_collectionName:#{presenter.field_value('europeanaCollectionName')}"),

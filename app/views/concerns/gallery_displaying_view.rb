@@ -13,6 +13,28 @@ module GalleryDisplayingView
     record_preview_url(edm_preview, 400, :s3)
   end
 
+  def gallery_image_full(image)
+    presenter = presenter_for_gallery_image(image)
+    return nil if presenter.nil?
+    edm_is_shown_by = presenter.field_value('aggregations.edmIsShownBy')
+    full_urls(image, edm_is_shown_by)
+  end
+
+  def use_media_proxy?
+    Rails.application.config.x.europeana_media_proxy
+  end
+
+  def full_urls(image, edm_is_shown_by)
+    @full_urls ||= {}
+    @full_urls[image.id] ||= begin
+      if use_media_proxy?
+        Rails.application.config.x.europeana_media_proxy + image.europeana_record_id + '?view=' + CGI.escape(edm_is_shown_by)
+      else
+        edm_is_shown_by
+      end
+    end
+  end
+
   def presenter_for_gallery_image(image)
     @presenters ||= {}
     @presenters[image.id] ||= begin
