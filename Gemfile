@@ -28,7 +28,6 @@ gem 'europeana-blacklight', '~> 1.0.0'
 gem 'europeana-feedback-button', '0.0.4'
 gem 'feedjira', '~> 2.0'
 gem 'foederati', '~> 0.2.0'
-gem 'fog', '~> 1.33'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', github: 'globalize/globalize-versioning'
 gem 'jbuilder', '~> 2.6.0'
@@ -58,6 +57,7 @@ gem 'i18n_data'
 
 group :production do
   gem 'europeana-logging', '~> 0.2.3'#, github: 'europeana/europeana-logging-ruby', branch: 'develop'
+  gem 'fog-aws', '~> 1.4.1'
   gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end
