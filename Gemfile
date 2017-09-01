@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.9'
 
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', branch: 'develop'
+gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
 
-gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'develop'
+gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git', branch: 'develop'
 
 # Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
 # https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
@@ -14,7 +14,7 @@ gem 'mustache', '1.0.3'
 
 # Use a forked version of stache with downstream changes, until merged upstream
 # @see https://github.com/agoragames/stache/pulls/rwd
-gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide'
+gem 'stache', git: 'https://github.com/europeana/stache.git', branch: 'europeana-styleguide'
 
 gem 'aasm', '~> 4.2'
 gem 'blacklight', '~> 6.0.0'
@@ -28,9 +28,9 @@ gem 'europeana-blacklight', '~> 1.0.0'
 gem 'europeana-feedback-button', '0.0.4'
 gem 'feedjira', '~> 2.0'
 gem 'foederati', '~> 0.2.0'
-gem 'fog', '~> 1.33'
+gem 'fog-aws', '~> 1.4.1'
 gem 'globalize', '~> 5.0'
-gem 'globalize-versioning', github: 'globalize/globalize-versioning'
+gem 'globalize-versioning', git: 'https://github.com/globalize/globalize-versioning.git'
 gem 'jbuilder', '~> 2.6.0'
 gem 'json_api_client'
 gem 'lograge'
