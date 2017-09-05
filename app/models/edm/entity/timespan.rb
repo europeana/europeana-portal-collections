@@ -3,7 +3,7 @@
 module EDM
   module Entity
     class Timespan < Base
-      has_human_type? 'period'
+      has_human_type 'period'
     end
   end
 end

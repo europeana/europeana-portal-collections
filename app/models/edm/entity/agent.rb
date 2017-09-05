@@ -3,7 +3,7 @@
 module EDM
   module Entity
     class Agent < EDM::Entity::Base
-      has_human_type? 'person'
+      has_human_type 'person'
 
       def description
         entity_value_by_locale(entity_response[:biographicalInformation])

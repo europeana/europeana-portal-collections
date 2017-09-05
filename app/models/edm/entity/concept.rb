@@ -3,7 +3,7 @@
 module EDM
   module Entity
     class Concept < Base
-      has_human_type? 'topic'
+      has_human_type 'topic'
 
       def description
         note = entity_response[:note]

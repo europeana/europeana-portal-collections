@@ -31,7 +31,7 @@ module EDM
 
         protected
 
-        def has_human_type?(human_type)
+        def has_human_type(human_type)
           @human_type = human_type
         end
       end
