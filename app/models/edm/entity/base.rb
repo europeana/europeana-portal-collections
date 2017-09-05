@@ -9,7 +9,7 @@ module EDM
 
       delegate :t, to: I18n
 
-      attr_accessor :id, :locale, :entity_response
+      attr_accessor :id, :locale, :api_response
 
       class << self
         attr_reader :human_type
@@ -37,7 +37,7 @@ module EDM
       end
 
       def external_link
-        source = entity_response.key?(:depiction) ? entity_response[:depiction][:source] : nil
+        source = api_response.key?(:depiction) ? api_response[:depiction][:source] : nil
         return nil if source.nil?
         {
           text: [
@@ -52,27 +52,27 @@ module EDM
       end
 
       def thumbnail
-        return nil unless entity_response.key?(:depiction) &&
-                          entity_response[:depiction].is_a?(Hash) &&
-                          entity_response[:depiction].key?(:id)
+        return nil unless api_response.key?(:depiction) &&
+                          api_response[:depiction].is_a?(Hash) &&
+                          api_response[:depiction].key?(:id)
 
-        full = entity_response[:depiction][:id]
+        full = api_response[:depiction][:id]
 
         thumbnail_urls = full.match(%r{^.*/Special:FilePath/(.*)$}i)
         return nil if thumbnail_urls.nil?
 
-        src = entity_build_src(thumbnail_urls[1], 400)
+        src = build_src(thumbnail_urls[1], 400)
         { src: src, full: full, alt: thumbnail_urls[1] }
       end
 
       # TODO: fallback should not be hard-coded here
       def title
-        entity_pref_label('[No title]')
+        pref_label('[No title]')
       end
 
       # TODO: fallback should not be hard-coded here
       def name
-        entity_pref_label('[No name]')
+        pref_label('[No name]')
       end
 
       # agent => biographicalInformation: [
@@ -99,7 +99,7 @@ module EDM
       private
 
       # Returns a string
-      def entity_value_by_locale(list)
+      def value_by_locale(list)
         value = nil
         if list
           # Ensure that list is a valid array
@@ -113,7 +113,7 @@ module EDM
       end
 
       # Returns an array of strings
-      def entity_values_by_id(list)
+      def values_by_id(list)
         values = nil
         if list
           # Ensure that list is a valid array
@@ -128,21 +128,21 @@ module EDM
 
       # Returns either a string or an array of strings, depending on whether
       # a single @language value has been found or a list of @ids.
-      def entity_value(list)
-        entity_value_by_locale(list) || entity_values_by_id(list) || nil
+      def value(list)
+        value_by_locale(list) || values_by_id(list) || nil
       end
 
       # Returns a string
-      def entity_place(place)
-        result = entity_value(place)
+      def place(place)
+        result = value(place)
         if result.is_a?(Array)
-          result = format_entity_resource_urls(result)
+          result = format_resource_urls(result)
           result = result.join(', ')
         end
         result
       end
 
-      def entity_date_and_place(date, place)
+      def date_and_place(date, place)
         result = [date, place].compact
         result.size.zero? ? nil : result
       end
@@ -162,7 +162,7 @@ module EDM
       # @param size [Fixnum] size of the image required
       # @return [String]
       # @see https://meta.wikimedia.org/wiki/Thumbnails#Dynamic_image_resizing_via_URL
-      def entity_build_src(image, size)
+      def build_src(image, size)
         underscored_image = URI.unescape(image).tr(' ', '_')
         md5 = Digest::MD5.hexdigest(underscored_image)
         "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{underscored_image}/#{size}px-#{underscored_image}"
@@ -182,7 +182,7 @@ module EDM
       #   "Composer" ]
       #
       # Returns an array of strings
-      def format_entity_resource_urls(results)
+      def format_resource_urls(results)
         results.
           map { |l| l.match(%r{[^\/]+$}) }.
           reject(&:nil?).
@@ -195,8 +195,8 @@ module EDM
 
       # @param default_label [String] fallback if no localised prefLabel available
       # @return [String] localised prefLabel or fallback
-      def entity_pref_label(default_label)
-        pl = entity_response[:prefLabel]
+      def pref_label(default_label)
+        pl = api_response[:prefLabel]
         if pl && pl.is_a?(Hash) && pl.present?
           localised_pl = pl[locale] || pl[:en]
           [localised_pl].flatten.first
@@ -205,31 +205,31 @@ module EDM
         end
       end
 
-      def entity_birth_date
-        entity_date(entity_response[:dateOfBirth])
+      def birth_date
+        date(api_response[:dateOfBirth])
       end
 
-      def entity_birth_place
-        entity_place(entity_response[:placeOfBirth])
+      def birth_place
+        place(api_response[:placeOfBirth])
       end
 
-      def entity_birth
-        entity_date_and_place(entity_birth_date, entity_birth_place)
+      def birth
+        date_and_place(birth_date, birth_place)
       end
 
-      def entity_death_date
-        entity_date(entity_response[:dateOfDeath])
+      def death_date
+        date(api_response[:dateOfDeath])
       end
 
-      def entity_death_place
-        entity_place entity_response[:placeOfDeath]
+      def death_place
+        place api_response[:placeOfDeath]
       end
 
-      def entity_death
-        entity_date_and_place(entity_death_date, entity_death_place)
+      def death
+        date_and_place(death_date, death_place)
       end
 
-      def entity_date(dates)
+      def date(dates)
         return nil unless dates.present?
         (date_most_accurate(dates) || dates.first).strip
       end
@@ -256,12 +256,12 @@ module EDM
       # }
       #
       # Returns an array of strings
-      def entity_occupation
-        result = entity_value(entity_response[:professionOrOccupation])
+      def occupation
+        result = value(api_response[:professionOrOccupation])
         if result.is_a?(String)
           result = result.split(',')
         elsif result.is_a?(Array)
-          result = format_entity_resource_urls(result)
+          result = format_resource_urls(result)
         end
         result
       end
