@@ -5,15 +5,11 @@ module Entities
     include SearchableView
 
     def bodyclass
-      @entity.bodyclass
+      'channel_entity'
     end
 
     def page_content_heading
-      @entity.page_content_heading
-    end
-
-    def navigation
-      @entity.navigation.merge(super)
+      @entity.pref_label
     end
 
     def include_nav_searchbar
@@ -45,50 +41,53 @@ module Entities
     def og_image
       mustache[:og_image] ||= begin
         tn = @entity.thumbnail
-        tn ? tn[:src] : nil
+        tn.present? ? tn[:src] : nil
       end
-    end
-
-    def bodyclass
-      'channel_entity'
-    end
-
-    def page_content_heading
-      @entity.title
     end
 
     def navigation
       {
         breadcrumbs: [
           {
-            label: @entity.title
+            label: @entity.pref_label
           }
         ]
-      }
+      }.merge(super)
     end
 
     def content
       mustache[:content] ||= begin
         {
           tab_items: tab_items,
-          entity_anagraphical: @entity.anagraphical,
+          entity_anagraphical: anagraphical,
           entity_thumbnail: @entity.thumbnail,
-          entity_external_link: @entity.external_link,
+          entity_external_link: external_link,
           entity_description: @entity.description,
-          entity_title: @entity.name,
+          entity_title: @entity.pref_label,
           input_search: input_search,
           social_share: social_share
         }
       end
     end
 
+    protected
+
     def tab_items
-      @entity.tabs.map do |key, search_url|
+      tabs.map do |key|
         {
-          tab_title: t("site.entities.tab_items.#{key.to_s}", name: @entity.name),
-          url: search_url + '&format=json',
-          search_url: search_url
+          tab_title: t("site.entities.tab_items.#{key.to_s}", name: @entity.pref_label),
+          url: search_path(q: @entity.search_query, format: 'json'),
+          search_url: search_path(q: @entity.search_query)
         }
+      end
+    end
+
+    def tabs
+      case @entity
+      when EDM::Entity::Agent
+        %i(items_by)
+      when EDM::Entity::Concept
+        %i(items_about)
       end
     end
 
@@ -100,6 +99,37 @@ module Entities
         pinterest: true,
         googleplus: true,
         tumblr: true
+      }
+    end
+
+    def anagraphical
+      return nil unless @entity.is_a?(EDM::Entity::Agent)
+
+      result = [
+        {
+          label: t('site.entities.anagraphic.birth'),
+          value: @entity.birth
+        },
+        {
+          label: t('site.entities.anagraphic.death'),
+          value: @entity.death
+        },
+        {
+          label: t('site.entities.anagraphic.occupation'),
+          value: @entity.occupation
+        }
+      ].reject { |item| item[:value].nil? }
+
+      result.blank? ? nil : result
+    end
+
+    def external_link
+      return nil if @entity.depiction_source.nil?
+      {
+        text: [
+          t('site.entities.wiki_link_text')
+        ],
+        href: @entity.depiction_source
       }
     end
   end
