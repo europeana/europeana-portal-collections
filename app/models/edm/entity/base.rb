@@ -4,6 +4,7 @@ module EDM
   module Entity
     class Base
       include ActiveModel::Model
+      include Depiction
       include I18nHelper
 
       attr_accessor :id, :locale, :api_response
@@ -31,28 +32,6 @@ module EDM
         def has_human_type(human_type)
           @human_type = human_type
         end
-      end
-
-      def depiction_source
-        api_response.key?(:depiction) ? api_response[:depiction][:source] : nil
-      end
-
-      def has_depiction?
-        api_response.key?(:depiction) &&
-          api_response[:depiction].is_a?(Hash) &&
-          api_response[:depiction].key?(:id)
-      end
-
-      def thumbnail
-        return nil unless has_depiction?
-
-        full = api_response[:depiction][:id]
-
-        thumbnail_urls = full.match(%r{^.*/Special:FilePath/(.*)$}i)
-        return nil if thumbnail_urls.nil?
-
-        src = build_src(thumbnail_urls[1], 400)
-        { src: src, full: full, alt: thumbnail_urls[1] }
       end
 
       def description
@@ -110,27 +89,6 @@ module EDM
       def date_and_place(date, place)
         result = [date, place].compact
         result.blank? ? nil : result
-      end
-
-      # The logic for going from: http://commons.wikimedia.org/wiki/Special:FilePath/[image] to
-      # https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/[image]/200px-[image] is the following:
-      #
-      # The first part is always the same: https://upload.wikimedia.org/wikipedia/commons/thumb
-      # The second part is the first character of the MD5 hash of the file name. In this case, the MD5 hash
-      # of Tour_Eiffel_Wikimedia_Commons.jpg is a85d416ee427dfaee44b9248229a9cdd, so we get /a.
-      # NB: File names will first have space characters " " replaced with underscores "_".
-      # The third part is the first two characters of the MD5 hash from above: /a8.
-      # The fourth part is the file name: /[image]
-      # The last part is the desired thumbnail width, and the file name again: /200px-[image]
-      #
-      # @param image [String] the image file name extracted from the URL path
-      # @param size [Fixnum] size of the image required
-      # @return [String]
-      # @see https://meta.wikimedia.org/wiki/Thumbnails#Dynamic_image_resizing_via_URL
-      def build_src(image, size)
-        underscored_image = URI.unescape(image).tr(' ', '_')
-        md5 = Digest::MD5.hexdigest(underscored_image)
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{underscored_image}/#{size}px-#{underscored_image}"
       end
 
       # Takes an array of results of the form:

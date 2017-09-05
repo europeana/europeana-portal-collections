@@ -39,10 +39,8 @@ module Entities
     end
 
     def og_image
-      mustache[:og_image] ||= begin
-        tn = @entity.thumbnail
-        tn.present? ? tn[:src] : nil
-      end
+      return mustache[:og_image] if mustache.key?(:og_image)
+      mustache[:og_image] = thumbnail.present? ? thumbnail[:src] : nil
     end
 
     def navigation
@@ -60,7 +58,7 @@ module Entities
         {
           tab_items: tab_items,
           entity_anagraphical: anagraphical,
-          entity_thumbnail: @entity.thumbnail,
+          entity_thumbnail: thumbnail,
           entity_external_link: external_link,
           entity_description: @entity.description,
           entity_title: @entity.pref_label,
@@ -71,6 +69,18 @@ module Entities
     end
 
     protected
+
+    def thumbnail
+      return mustache[:thumbnail] if mustache.key?(:thumbnail)
+
+      mustache[:thumbnail] = begin
+        if @entity.has_depiction? && @entity.thumbnail_filename.present?
+          { src: @entity.thumbnail_src, full: @entity.thumbnail_full, alt: @entity.thumbnail_filename }
+        else
+          nil
+        end
+      end
+    end
 
     def tab_items
       tabs.map do |key|
