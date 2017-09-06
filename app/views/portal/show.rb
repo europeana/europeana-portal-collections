@@ -68,7 +68,6 @@ module Portal
             creation_date: field_value('proxies.dctermsCreated'),
             dates: presenter.field_group(:time),
             description: presenter.field_group(:description),
-            # download: content_object_download,
             media: media_items,
             meta_additional: meta_additional,
             origin: origin,
@@ -84,8 +83,6 @@ module Portal
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
           named_entities: named_entities,
-          # TODO: is content.object.thumbnail used in the template?
-          # thumbnail: field_value('europeanaAggregation.edmPreview', tag: false),
           ugc_content: ugc_content(true),
         }.reverse_merge(super)
       end
@@ -384,19 +381,6 @@ module Portal
       return nil unless @data_provider.present? && @data_provider.image.present?
       @data_provider.image.url(:medium)
     end
-
-    # TODO: is this ever used?
-#     def similar_items_item(doc)
-#       presenter = Document::SearchResultPresenter.new(doc, controller)
-#       {
-#         url: document_path(doc, format: 'html'),
-#         title: presenter.field_value(%w(dcTitleLangAware title)),
-#         img: {
-#           alt: presenter.field_value(%w(dcTitleLangAware title)),
-#           src: presenter.thumbnail_url(generic: true)
-#         }
-#       }
-#     end
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
