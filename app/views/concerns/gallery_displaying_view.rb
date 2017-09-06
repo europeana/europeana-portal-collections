@@ -4,6 +4,8 @@
 module GalleryDisplayingView
   extend ActiveSupport::Concern
 
+  include MediaProxyHelper
+
   protected
 
   def gallery_image_thumbnail(image)
@@ -17,22 +19,15 @@ module GalleryDisplayingView
     presenter = presenter_for_gallery_image(image)
     return nil if presenter.nil?
     edm_is_shown_by = presenter.field_value('aggregations.edmIsShownBy')
-    full_urls(image, edm_is_shown_by)
+    full_url(image, edm_is_shown_by)
   end
 
-  def use_media_proxy?
-    Rails.application.config.x.europeana_media_proxy
+  def full_url(image, edm_is_shown_by)
+    full_urls[image.id] ||= media_proxy_url(image.europeana_record_id, edm_is_shown_by)
   end
 
-  def full_urls(image, edm_is_shown_by)
+  def full_urls
     @full_urls ||= {}
-    @full_urls[image.id] ||= begin
-      if use_media_proxy?
-        Rails.application.config.x.europeana_media_proxy + image.europeana_record_id + '?view=' + CGI.escape(edm_is_shown_by)
-      else
-        edm_is_shown_by
-      end
-    end
   end
 
   def presenter_for_gallery_image(image)

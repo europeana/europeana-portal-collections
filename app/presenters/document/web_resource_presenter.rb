@@ -3,8 +3,9 @@ module Document
   # Blacklight document presenter for a Europeana web resource
   class WebResourcePresenter < DocumentPresenter
     include ActionView::Helpers::NumberHelper
-    include Metadata::Rights
     include ApiHelper
+    include MediaProxyHelper
+    include Metadata::Rights
 
     delegate :params, to: :controller
 
@@ -135,18 +136,8 @@ module Document
       end
     end
 
-    def use_media_proxy?
-      Rails.application.config.x.europeana_media_proxy && mime_type.present?
-    end
-
     def download_url
-      @download_url ||= begin
-        if use_media_proxy?
-          Rails.application.config.x.europeana_media_proxy + @record.fetch('about', '/') + '?view=' + CGI.escape(url)
-        else
-          url
-        end
-      end
+      @download_url ||= mime_type.present? ? media_proxy_url(@record.fetch('about', '/'), url) : url
     end
 
     def media_metadata
