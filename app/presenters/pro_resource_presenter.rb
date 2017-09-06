@@ -68,18 +68,13 @@ class ProResourcePresenter
   def authors
     return nil unless resource.has_authors?
 
-    ([persons] + [network]).flatten.compact.map do |author|
+    [persons].flatten.compact.map do |author|
       {
         # Uncomment to link to author pages on the Pro site
         # url: author.url,
         name: "#{author.first_name} #{author.last_name}"
       }
     end
-  end
-
-  def network
-    return nil unless resource.includes?(:network)
-    resource.network.flatten.compact
   end
 
   def persons

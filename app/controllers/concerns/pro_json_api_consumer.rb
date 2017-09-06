@@ -22,7 +22,6 @@ module ProJsonApiConsumer
   def pro_json_api_theme_filters
     {
       all: {
-        filter: 'culturelover',
         label: t('global.actions.filter-all')
       }
     }.merge(pro_json_api_theme_filters_from_collections)

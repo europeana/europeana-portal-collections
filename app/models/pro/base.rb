@@ -12,7 +12,7 @@ module Pro
     end
 
     def has_authors?
-      includes?(:network) || includes?(:persons)
+      includes?(:persons)
     end
 
     def has_image?(attribute = :image)
