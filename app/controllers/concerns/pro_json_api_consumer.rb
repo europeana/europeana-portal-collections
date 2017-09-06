@@ -10,8 +10,11 @@ module ProJsonApiConsumer
   protected
 
   def pro_json_api_filters
+    selected_theme_filter = pro_json_api_theme_filters[pro_json_api_selected_theme]
+    return {} if selected_theme_filter.nil? || selected_theme_filter[:filter].nil?
+
     {
-      tags: (pro_json_api_theme_filters[pro_json_api_selected_theme] || {})[:filter]
+      tags: selected_theme_filter[:filter]
     }
   end
 
@@ -20,11 +23,13 @@ module ProJsonApiConsumer
   end
 
   def pro_json_api_theme_filters
-    {
-      all: {
-        label: t('global.actions.filter-all')
-      }
-    }.merge(pro_json_api_theme_filters_from_collections)
+    @pro_json_api_theme_filters ||= begin
+      {
+        all: {
+          label: t('global.actions.filter-all')
+        }
+      }.merge(pro_json_api_theme_filters_from_collections)
+    end
   end
 
   def pro_json_api_whitelisted_collections

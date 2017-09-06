@@ -34,7 +34,7 @@ class EventsController < ApplicationController
     @body_cache_key = "events/#{params[:slug]}.#{request.format.to_sym}"
 
     unless body_cached?
-      results = Pro::Event.includes(:persons).where(pro_json_api_filters).
+      results = Pro::BlogEvent.includes(:persons).where(pro_json_api_filters).
                 where(slug: params[:slug])
       @event = results.first
       fail JsonApiClient::Errors::NotFound.new(results.links.links['self']) if @event.nil?
