@@ -53,6 +53,10 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'entity page' do
+    before do
+      Rails.application.config.x.europeana[:entities].api_key = 'ENTITY_API_KEY'
+    end
+
     let(:namespace) { 'base' }
     let(:id) { '1234' }
     let(:wskey) { Rails.application.config.x.europeana[:entities].api_key }
@@ -87,7 +91,7 @@ RSpec.feature 'Page titles' do
   end
 
   describe 'events page' do
-    let(:json_api_url_events) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events} }
+    let(:json_api_url_events) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogevents} }
     let(:json_api_url_event) { /\A#{json_api_url_events}\?filter%5Bslug%5D=event-name/ }
     let(:body_event) do
       <<~EOM
