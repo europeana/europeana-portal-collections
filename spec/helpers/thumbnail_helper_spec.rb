@@ -4,15 +4,53 @@ RSpec.describe ThumbnailHelper do
   let(:api_url) { 'http://api.example.com' }
   let(:api_path) { '/v2/thumbnail-by-url.json' }
 
+  let(:cgi_escaped_uri) { 'http%3A%2F%2Fbodley30.bodley.ox.ac.uk%3A8081%2FMediaManager%2Fsrvr%3Fmediafile%3D%2FSize4%2FODLodl-1-NA%2F1020%2Fbodl_Mex.d.1_roll113_frame32.jpg%26userid%3D1%26username%3Dinsight%26resolution%3D1%26servertype%3DJVA%26cid%3D1%26iid%3DODLodl%26vcid%3DNA%26usergroup%3DARTstor%26profileid%3D4' }
+  let(:edm_preview) { "http://europeanastatic.eu/image?uri=#{cgi_escaped_uri}&type=TEXT" }
+
   before do
     allow(helper).to receive(:api_url) { api_url }
   end
 
-  describe '#thumbnail_url_for_edm_preview'
+  describe '#thumbnail_url_for_edm_preview' do
+    subject { helper.thumbnail_url_for_edm_preview(edm_preview, options) }
+
+    context 'with source :s3' do
+      let(:options) { { source: :s3 } }
+      it 'builds an s3 URL' do
+        expect(helper).to receive(:s3_thumbnail_url_for_edm_preview).with(edm_preview, {})
+        subject
+      end
+    end
+
+    context 'without source' do
+      let(:options) { {} }
+      it 'builds a thumbnail API URL' do
+        expect(helper).to receive(:api_thumbnail_url_for_edm_preview).with(edm_preview, {})
+        subject
+      end
+    end
+
+    context 'without edm:preview' do
+      let(:edm_preview) { nil }
+
+      context 'with generic enabled' do
+        let(:options) { { generic: true } }
+        it 'makes a generic URL' do
+          expect(helper).to receive(:api_thumbnail_url_for_edm_preview)
+          subject
+        end
+      end
+
+      context 'with generic disabled' do
+        let(:options) { { generic: false } }
+        it { is_expected.to be_nil }
+      end
+    end
+  end
 
   describe '#api_thumbnail_url_for_edm_preview' do
     subject { helper.api_thumbnail_url_for_edm_preview(edm_preview, options) }
-    let(:options) { { } }
+    let(:options) { {} }
 
     context 'without edm:preview' do
       let(:edm_preview) { nil }
@@ -24,10 +62,6 @@ RSpec.describe ThumbnailHelper do
     end
 
     context 'with edm:preview' do
-      let(:cgi_escaped_uri) { 'http%3A%2F%2Fbodley30.bodley.ox.ac.uk%3A8081%2FMediaManager%2Fsrvr%3Fmediafile%3D%2FSize4%2FODLodl-1-NA%2F1020%2Fbodl_Mex.d.1_roll113_frame32.jpg%26userid%3D1%26username%3Dinsight%26resolution%3D1%26servertype%3DJVA%26cid%3D1%26iid%3DODLodl%26vcid%3DNA%26usergroup%3DARTstor%26profileid%3D4' }
-
-      let(:edm_preview) { "http://europeanastatic.eu/image?uri=#{cgi_escaped_uri}&type=TEXT" }
-
       it 'uses the thumbnail API' do
         expect(subject).to match(/^#{api_url}#{api_path}\?/)
       end
@@ -49,7 +83,7 @@ RSpec.describe ThumbnailHelper do
           expect(subject).to match(/[?&]size=w200(&|$)/)
         end
       end
-      
+
       context 'with legacy textual size param "LARGE"' do
         let(:edm_preview) { "http://europeanastatic.eu/image?uri=#{cgi_escaped_uri}&size=LARGE" }
         it 'converts it to "w400"' do
@@ -57,7 +91,6 @@ RSpec.describe ThumbnailHelper do
         end
       end
     end
-
   end
 
   describe '#api_thumbnail_url' do
@@ -70,7 +103,45 @@ RSpec.describe ThumbnailHelper do
     end
   end
 
-  describe '#s3_thumbnail_url_for_edm_preview'
+  describe '#s3_thumbnail_url_for_edm_preview' do
+    subject { helper.s3_thumbnail_url_for_edm_preview(edm_preview, options) }
+
+    let(:options) { {} }
+
+    context 'with edm:preview' do
+      it 'constructs URL from MD5 digest of unescaped edm:preview uri' do
+        hex_digest = '6c557464310d38396c09055e8e575743'
+        expect(subject).to include(hex_digest)
+      end
+
+      context 'with size 200' do
+        let(:options) { { size: 200 } }
+        it 'appends "-MEDIUM"' do
+          expect(subject).to end_with('-MEDIUM')
+        end
+      end
+
+      context 'with size 400' do
+        let(:options) { { size: 400 } }
+        it 'appends "-LARGE"' do
+          expect(subject).to end_with('-LARGE')
+        end
+      end
+
+      it 'uses production S3 bucket' do
+        expect(subject).to include('://europeana-thumbnails-production.s3.amazonaws.com/')
+      end
+
+      it 'uses SSL' do
+        expect(subject).to start_with('https://')
+      end
+    end
+
+    context 'without edm:preview' do
+      let(:edm_preview) { nil }
+      it { is_expected.to be_nil }
+    end
+  end
 
   describe '#thumbnail_url_options_with_size' do
     subject { helper.thumbnail_url_options_with_size(options)[:size] }
