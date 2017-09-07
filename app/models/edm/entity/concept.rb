@@ -3,7 +3,7 @@
 module EDM
   module Entity
     class Concept < Base
-      has_human_type 'topic'
+      humanized_as 'topic'
 
       # concept => note: {
       #   en: ["..."],

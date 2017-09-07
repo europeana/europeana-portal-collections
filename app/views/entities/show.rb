@@ -76,8 +76,6 @@ module Entities
       mustache[:thumbnail] = begin
         if @entity.has_depiction? && @entity.thumbnail_filename.present?
           { src: @entity.thumbnail_src, full: @entity.thumbnail_full, alt: @entity.thumbnail_filename }
-        else
-          nil
         end
       end
     end
@@ -85,7 +83,7 @@ module Entities
     def tab_items
       tabs.map do |key|
         {
-          tab_title: t("site.entities.tab_items.#{key.to_s}", name: @entity.pref_label),
+          tab_title: t(key, scope: 'site.entities.tab_items', name: @entity.pref_label),
           url: search_path(q: @entity.search_query, format: 'json'),
           search_url: search_path(q: @entity.search_query)
         }

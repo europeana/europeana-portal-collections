@@ -3,7 +3,7 @@
 module EDM
   module Entity
     class Agent < EDM::Entity::Base
-      has_human_type 'person'
+      humanized_as 'person'
 
       # agent => biographicalInformation: [
       #   {

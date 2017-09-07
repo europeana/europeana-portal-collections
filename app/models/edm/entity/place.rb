@@ -3,7 +3,7 @@
 module EDM
   module Entity
     class Place < Base
-      has_human_type 'place'
+      humanized_as 'place'
     end
   end
 end
