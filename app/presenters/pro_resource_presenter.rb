@@ -118,11 +118,11 @@ class ProResourcePresenter
   end
 
   def geolocation
-    @geolocation ||= resource.geolocation
+    @geolocation ||= resource.respond_to?(:geolocation) ? resource.geolocation : nil
   end
 
   def location_name
-    resource.location_name
+    resource.respond_to?(:location_name) ? resource.location_name : nil
   end
 
   def location_address
