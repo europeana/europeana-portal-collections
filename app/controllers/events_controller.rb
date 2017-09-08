@@ -1,10 +1,9 @@
 # frozen_string_literal: true
+
 ##
 # Handles listing and display of events retrieved from Europeana Pro via
 # JSON API.
 #
-# @todo Exception handling when `JsonApiClient` requests fail
-# @todo Filter for events relevant to the portal
 class EventsController < ApplicationController
   include CacheHelper
   include HomepageHeroImage
