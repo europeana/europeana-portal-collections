@@ -91,11 +91,6 @@ class ProResourcePresenter
     collections.blank? ? nil : collections.map { |collection| collection.landing_page.title }.join(' | ')
   end
 
-  def geolocation
-    return nil unless resource.includes?(:locations)
-    @geolocation ||= resource.locations.first.geolocation
-  end
-
   def date
     fmt_datetime_as_date(resource.datepublish)
   end
@@ -122,12 +117,12 @@ class ProResourcePresenter
     t('site.events.all_day')
   end
 
-  def location_name
-    resource.includes?(:locations) ? resource.locations.first.title : nil
+  def geolocation
+    @geolocation ||= resource.geolocation
   end
 
-  def read_time
-    # @todo implement
+  def location_name
+    resource.location_name
   end
 
   def location_address
