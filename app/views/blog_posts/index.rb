@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module BlogPosts
   class Index < ApplicationView
     include PaginatedJsonApiResultSetView
@@ -56,7 +57,6 @@ module BlogPosts
         title: presenter.title,
         object_url: blog_post_path(slug: post.slug),
         description: presenter.excerpt,
-        read_time: presenter.read_time,
         date: presenter.date,
         img: presenter.image(:thumbnail),
         tags: presenter.tags,

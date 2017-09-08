@@ -1,9 +1,12 @@
 # frozen_string_literal: true
+
+require 'openssl'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
 ##
 # Handles listing and display of blog posts retrieved from Europeana Pro via
 # JSON API.
 #
-# @todo Exception handling when `JsonApiClient` requests fail
 class BlogPostsController < ApplicationController
   include CacheHelper
   include HomepageHeroImage
