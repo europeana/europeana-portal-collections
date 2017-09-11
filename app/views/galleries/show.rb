@@ -51,11 +51,7 @@ module Galleries
     private
 
     def hero_image_url
-      @hero_image_url ||= hero_image_document['edmIsShownBy'].first
-    end
-
-    def hero_image_document
-      @hero_image_document ||= @documents.detect { |document| document.fetch(:id, nil) == @gallery.images.first.europeana_record_id }
+      @hero_image_url ||= gallery_image_full(@gallery.images.first)
     end
 
     def gallery_hero_content
