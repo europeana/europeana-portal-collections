@@ -11,6 +11,8 @@ dismarc << 'http://eusounds.ait.co.at/player/*'
 dismarc << 'http://www.dismarc.org/player/*'
 britishlibrary = OEmbed::Provider.new('http://sounds.bl.uk/api/oembed')
 britishlibrary << 'http://sounds.bl.uk/embed/*'
+euscreen = OEmbed::Provider.new('http://oembed.euscreen.eu/services/oembed')
+euscreen << 'http://www.euscreen.eu/item.html*'
 
 # Europeana provider
 europeana = OEmbed::Provider.new(ENV['EUROPEANA_OEMBED_PROVIDER'] || 'http://oembed.europeana.eu/')
@@ -30,3 +32,4 @@ OEmbed::Providers.register(sketchfab)
 OEmbed::Providers.register(dismarc)
 OEmbed::Providers.register(europeana)
 OEmbed::Providers.register(britishlibrary)
+OEmbed::Providers.register(euscreen)
