@@ -4,6 +4,7 @@
 module GalleryDisplayingView
   extend ActiveSupport::Concern
 
+  include MediaProxyHelper
   include ThumbnailHelper
 
   protected
@@ -13,6 +14,21 @@ module GalleryDisplayingView
     return nil if presenter.nil?
     edm_preview = presenter.field_value('edmPreview')
     thumbnail_url_for_edm_preview(edm_preview, size: 400, source: :s3)
+  end
+
+  def gallery_image_full(image)
+    presenter = presenter_for_gallery_image(image)
+    return nil if presenter.nil?
+    edm_is_shown_by = presenter.field_value('aggregations.edmIsShownBy')
+    full_url(image, edm_is_shown_by)
+  end
+
+  def full_url(image, edm_is_shown_by)
+    full_urls[image.id] ||= media_proxy_url(image.europeana_record_id, edm_is_shown_by)
+  end
+
+  def full_urls
+    @full_urls ||= {}
   end
 
   def presenter_for_gallery_image(image)
