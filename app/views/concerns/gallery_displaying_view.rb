@@ -4,13 +4,15 @@
 module GalleryDisplayingView
   extend ActiveSupport::Concern
 
+  include ThumbnailHelper
+
   protected
 
   def gallery_image_thumbnail(image)
     presenter = presenter_for_gallery_image(image)
     return nil if presenter.nil?
     edm_preview = presenter.field_value('edmPreview')
-    record_preview_url(edm_preview, 400, :s3)
+    thumbnail_url_for_edm_preview(edm_preview, size: 400, source: :s3)
   end
 
   def presenter_for_gallery_image(image)

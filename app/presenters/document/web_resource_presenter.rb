@@ -5,6 +5,7 @@ module Document
     include ActionView::Helpers::NumberHelper
     include Metadata::Rights
     include ApiHelper
+    include ThumbnailHelper
 
     delegate :params, to: :controller
 
@@ -277,7 +278,7 @@ module Document
 
     def api_thumbnail(use_small)
       width = use_small ? '200' : '400'
-      api_url + '/v2/thumbnail-by-url.json?size=w' + width + '&uri=' + CGI.escape(url) + '&type=' + edm_media_type
+      api_thumbnail_url(uri: url, size: width, type: edm_media_type)
     end
 
     def player
