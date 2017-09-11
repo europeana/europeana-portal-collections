@@ -6,6 +6,7 @@ module Document
     include ActionView::Helpers::TextHelper
     include ApiHelper
     include Metadata::Rights
+    include ThumbnailHelper
 
     # @param response [Europeana::Blacklight::Response]
     def initialize(document, controller, response = nil, configuration = controller.blacklight_config)
@@ -86,23 +87,7 @@ module Document
     end
 
     def thumbnail_url(generic: false)
-      uri = URI.parse(api_url)
-      query = {}
-
-      edm_preview = field_value('edmPreview')
-      return nil if edm_preview.blank? && !generic
-      unless edm_preview.blank?
-        edm_preview_uri = URI.parse(edm_preview)
-        query = Rack::Utils.parse_query(edm_preview_uri.query)
-      end
-
-      query['size'] = 'w400'
-      query['type'] ||= doc_type
-
-      uri.path = uri.path + '/v2/thumbnail-by-url.json'
-      uri.query = query.to_query
-
-      uri.to_s
+      thumbnail_url_for_edm_preview(field_value('edmPreview'), generic: generic, type: doc_type)
     end
 
     def media_rights

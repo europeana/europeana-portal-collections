@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/europeana/europeana-i18n-ruby.git
-  revision: 8b8e69ea60c72018787d35c332dc8780f5fcc9d5
+  remote: https://github.com/europeana/europeana-i18n-ruby.git
+  revision: 68fdc3196db53794ecc65d636f9fdf1313aa4cf1
   branch: develop
   specs:
     europeana-i18n (0.0.1)
       rails (>= 4.0, < 6.0)
 
 GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 9d4c7b31d885034756f60b5e316428e5b7d1c2e4
-  ref: 9d4c7b3
+  remote: https://github.com/europeana/europeana-styleguide-ruby.git
+  revision: 9da6eb6756acd48a155b8b5594b55731f60b44a3
+  branch: develop
   specs:
     europeana-styleguide (0.3.0)
       activesupport (~> 4.0)
@@ -18,14 +18,14 @@ GIT
       stache (~> 1.1.1)
 
 GIT
-  remote: git://github.com/europeana/stache.git
+  remote: https://github.com/europeana/stache.git
   revision: e5ceff86974620d7d7db28018fc29a2c9c24d1d0
   branch: europeana-styleguide
   specs:
     stache (1.1.1)
 
 GIT
-  remote: git://github.com/globalize/globalize-versioning.git
+  remote: https://github.com/globalize/globalize-versioning.git
   revision: 8b8234b7cc3bc4c49d0dc87677811e20951e3f0e
   specs:
     globalize-versioning (0.2.0)
@@ -37,7 +37,6 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.3.5)
     aasm (4.12.2)
       concurrent-ruby (~> 1.0)
     actionmailer (4.2.9)
@@ -186,66 +185,13 @@ GEM
       loofah (>= 2.0)
       sax-machine (>= 1.0)
     ffi (1.9.18)
-    fission (0.5.0)
-      CFPropertyList (~> 2.2)
     foederati (0.2.0)
       activesupport (>= 4.2.2, < 6.0)
       faraday (~> 0)
       faraday_middleware (~> 0)
       typhoeus (~> 1)
-    fog (1.41.0)
-      fog-aliyun (>= 0.1.0)
-      fog-atmos
-      fog-aws (>= 0.6.0)
-      fog-brightbox (~> 0.4)
-      fog-cloudatcost (~> 0.1.0)
-      fog-core (~> 1.45)
-      fog-digitalocean (>= 0.3.0)
-      fog-dnsimple (~> 1.0)
-      fog-dynect (~> 0.0.2)
-      fog-ecloud (~> 0.1)
-      fog-google (<= 0.1.0)
-      fog-internet-archive
-      fog-joyent
-      fog-json
-      fog-local
-      fog-openstack
-      fog-powerdns (>= 0.1.1)
-      fog-profitbricks
-      fog-rackspace
-      fog-radosgw (>= 0.0.2)
-      fog-riakcs
-      fog-sakuracloud (>= 0.0.4)
-      fog-serverlove
-      fog-softlayer
-      fog-storm_on_demand
-      fog-terremark
-      fog-vmfusion
-      fog-voxel
-      fog-vsphere (>= 0.4.0)
-      fog-xenserver
-      fog-xml (~> 0.1.1)
-      ipaddress (~> 0.5)
-      json (>= 1.8, < 2.0)
-    fog-aliyun (0.2.0)
-      fog-core (~> 1.27)
-      fog-json (~> 1.0)
-      ipaddress (~> 0.8)
-      xml-simple (~> 1.1)
-    fog-atmos (0.1.0)
-      fog-core
-      fog-xml
-    fog-aws (1.4.0)
+    fog-aws (1.4.1)
       fog-core (~> 1.38)
-      fog-json (~> 1.0)
-      fog-xml (~> 0.1)
-      ipaddress (~> 0.8)
-    fog-brightbox (0.13.0)
-      fog-core (~> 1.22)
-      fog-json
-      inflecto (~> 0.0.2)
-    fog-cloudatcost (0.1.2)
-      fog-core (~> 1.36)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
       ipaddress (~> 0.8)
@@ -253,88 +199,9 @@ GEM
       builder
       excon (~> 0.58)
       formatador (~> 0.2)
-    fog-digitalocean (0.3.0)
-      fog-core (~> 1.42)
-      fog-json (>= 1.0)
-      fog-xml (>= 0.1)
-      ipaddress (>= 0.5)
-    fog-dnsimple (1.0.0)
-      fog-core (~> 1.38)
-      fog-json (~> 1.0)
-    fog-dynect (0.0.3)
-      fog-core
-      fog-json
-      fog-xml
-    fog-ecloud (0.3.0)
-      fog-core
-      fog-xml
-    fog-google (0.1.0)
-      fog-core
-      fog-json
-      fog-xml
-    fog-internet-archive (0.0.1)
-      fog-core
-      fog-json
-      fog-xml
-    fog-joyent (0.0.1)
-      fog-core (~> 1.42)
-      fog-json (>= 1.0)
     fog-json (1.0.2)
       fog-core (~> 1.0)
       multi_json (~> 1.10)
-    fog-local (0.3.1)
-      fog-core (~> 1.27)
-    fog-openstack (0.1.21)
-      fog-core (>= 1.40)
-      fog-json (>= 1.0)
-      ipaddress (>= 0.8)
-    fog-powerdns (0.1.1)
-      fog-core (~> 1.27)
-      fog-json (~> 1.0)
-      fog-xml (~> 0.1)
-    fog-profitbricks (3.0.0)
-      fog-core (~> 1.42)
-      fog-json (~> 1.0)
-    fog-rackspace (0.1.5)
-      fog-core (>= 1.35)
-      fog-json (>= 1.0)
-      fog-xml (>= 0.1)
-      ipaddress (>= 0.8)
-    fog-radosgw (0.0.5)
-      fog-core (>= 1.21.0)
-      fog-json
-      fog-xml (>= 0.0.1)
-    fog-riakcs (0.1.0)
-      fog-core
-      fog-json
-      fog-xml
-    fog-sakuracloud (1.7.5)
-      fog-core
-      fog-json
-    fog-serverlove (0.1.2)
-      fog-core
-      fog-json
-    fog-softlayer (1.1.4)
-      fog-core
-      fog-json
-    fog-storm_on_demand (0.1.1)
-      fog-core
-      fog-json
-    fog-terremark (0.1.0)
-      fog-core
-      fog-xml
-    fog-vmfusion (0.1.0)
-      fission
-      fog-core
-    fog-voxel (0.1.0)
-      fog-core
-      fog-xml
-    fog-vsphere (1.11.3)
-      fog-core
-      rbvmomi (~> 1.9)
-    fog-xenserver (0.3.0)
-      fog-core
-      fog-xml
     fog-xml (0.1.3)
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
@@ -364,7 +231,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.8.6)
     i18n_data (0.8.0)
-    inflecto (0.0.2)
     ipaddress (0.8.3)
     iso-639 (0.2.8)
     jbuilder (2.6.4)
@@ -501,11 +367,6 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    rbvmomi (1.11.3)
-      builder (~> 3.0)
-      json (>= 1.8)
-      nokogiri (~> 1.5)
-      trollop (~> 2.1)
     redis (3.3.3)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
@@ -614,7 +475,6 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     tins (1.15.0)
-    trollop (2.1.2)
     twitter-typeahead-rails (0.11.1)
       actionpack (>= 3.1)
       jquery-rails
@@ -639,7 +499,6 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    xml-simple (1.1.5)
     xpath (2.1.0)
       nokogiri (~> 1.3)
     ya2yaml (0.31)
@@ -668,7 +527,7 @@ DEPENDENCIES
   europeana-styleguide!
   feedjira (~> 2.0)
   foederati (~> 0.2.0)
-  fog (~> 1.33)
+  fog-aws (~> 1.4.1)
   foreman
   globalize (~> 5.0)
   globalize-versioning!
