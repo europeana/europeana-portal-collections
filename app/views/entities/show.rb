@@ -50,6 +50,7 @@ module Entities
           { meta_property: 'og:title', content: title }
         ]
         head_meta << { meta_property: 'og:image', content: og_image } unless og_image.nil?
+        head_meta << { meta_property: 'robots', content: 'noindex' } if @entity.unreferenced?
         head_meta + super
       end
     end
