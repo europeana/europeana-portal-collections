@@ -13,8 +13,8 @@ module EDM
 
         return nil unless note.present? && note.is_a?(Hash)
 
-        if note.key?(locale.to_sym)
-          note[locale.to_sym].first
+        if note.key?(I18n.locale.to_sym)
+          note[I18n.locale.to_sym].first
         elsif note.key?(:en)
           note[:en].first
         end

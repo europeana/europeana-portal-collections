@@ -28,12 +28,12 @@ RSpec.describe EDM::Entity do
   describe '#entity_thumbnail_source' do
     let(:id) { '123' }
     let(:type) { 'person' }
-    let(:entity) do
+    let(:api_response) do
       JSON.parse(api_responses(:entities_fetch_agent, name: 'Entity Name', description: 'Entity Description')).
         with_indifferent_access
     end
 
-    subject { described_class.build_from_params(type: type, id: id, m: entity) }
+    subject { described_class.build_from_params(type: type, id: id, api_response: api_response) }
 
     context 'with depiction' do
       it 'returns depiction source'

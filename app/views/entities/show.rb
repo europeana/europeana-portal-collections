@@ -4,6 +4,10 @@ module Entities
   class Show < ApplicationView
     include SearchableView
 
+    def body_cache_key
+      @body_cache_key
+    end
+
     def bodyclass
       'channel_entity'
     end
@@ -66,6 +70,15 @@ module Entities
           social_share: social_share
         }
       end
+    end
+
+    ##
+    # Translated label for the entity description, e.g. "Biography" for agents
+    #
+    # @return [String]
+    def entity_description_title
+      i18n_key = @entity.class.human_type == 'person' ? 'bio' : 'description'
+      t(i18n_key, scope: 'site.entities.labels')
     end
 
     protected
