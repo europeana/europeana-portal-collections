@@ -26,14 +26,6 @@ RSpec.describe Pro::BlogPost, :disable_verify_partial_doubles do
     it { is_expected.to have_authors }
   end
 
-  context 'with network' do
-    before do
-      allow(subject).to receive(:network) { [double(Pro::Network)] }
-      allow(included_data).to receive(:has_link?).with(:network) { true }
-    end
-    it { is_expected.to have_authors }
-  end
-
   context 'without persons or network' do
     it { is_expected.not_to have_authors }
   end

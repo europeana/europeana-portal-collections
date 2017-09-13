@@ -1,10 +1,9 @@
 # frozen_string_literal: true
+
 ##
 # Handles listing and display of events retrieved from Europeana Pro via
 # JSON API.
 #
-# @todo Exception handling when `JsonApiClient` requests fail
-# @todo Filter for events relevant to the portal
 class EventsController < ApplicationController
   include CacheHelper
   include HomepageHeroImage
@@ -19,7 +18,7 @@ class EventsController < ApplicationController
   helper_method :body_cache_key
 
   def index
-    @events = Pro::Event.includes(:locations, :network).where(pro_json_api_filters).
+    @events = Pro::BlogEvent.includes(:persons).where(pro_json_api_filters).
               where(pro_json_api_past_future_filter).order(end_event: :desc).
               page(pagination_page).per(pagination_per).all
     @hero_image = homepage_hero_image
@@ -34,7 +33,7 @@ class EventsController < ApplicationController
     @body_cache_key = "events/#{params[:slug]}.#{request.format.to_sym}"
 
     unless body_cached?
-      results = Pro::Event.includes(:locations, :network).where(pro_json_api_filters).
+      results = Pro::BlogEvent.includes(:persons).where(pro_json_api_filters).
                 where(slug: params[:slug])
       @event = results.first
       fail JsonApiClient::Errors::NotFound.new(results.links.links['self']) if @event.nil?
