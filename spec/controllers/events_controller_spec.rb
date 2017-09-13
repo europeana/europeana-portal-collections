@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 RSpec.describe EventsController do
-  let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events(\?|\z)} }
+  let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogevents(\?|\z)} }
   let(:json_api_content_type) { 'application/vnd.api+json' }
-  let(:response_body) { '{"meta": {"count": 1, "total": 1}, "data": [{ "id": "1", "type": "events" }]}' }
+  let(:response_body) { '{"meta": {"count": 1, "total": 1}, "data": [{ "id": "1", "type": "blogevents" }]}' }
 
   before do
     stub_request(:get, json_api_url).
@@ -38,11 +38,11 @@ RSpec.describe EventsController do
       ).to have_been_made.once
     end
 
-    it 'filters by date and tag "culturelover"' do
+    it 'filters by date' do
       get :index, locale: 'en'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(filter: { end_event: ">=#{Date.today.strftime}", tags: 'culturelover' }))
+        with(query: hash_including(filter: { end_event: ">=#{Date.today.strftime}" }))
       ).to have_been_made.once
     end
 
@@ -70,7 +70,7 @@ RSpec.describe EventsController do
       get :index, locale: 'en'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(include: 'locations,network'))
+        with(query: hash_including(include: 'persons'))
       ).to have_been_made.once
     end
 
@@ -102,7 +102,7 @@ RSpec.describe EventsController do
       get :show, locale: 'en', slug: 'conference'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(filter: { tags: 'culturelover', slug: 'conference' }, page: { number: '1', size: '1' }))
+        with(query: hash_including(filter: { slug: 'conference' }, page: { number: '1', size: '1' }))
       ).to have_been_made.once
     end
 
@@ -110,7 +110,7 @@ RSpec.describe EventsController do
       get :show, locale: 'en', slug: 'conference'
       expect(
         a_request(:get, json_api_url).
-        with(query: hash_including(include: 'locations,network'))
+        with(query: hash_including(include: 'persons'))
       ).to have_been_made.once
     end
 

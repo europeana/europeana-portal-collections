@@ -40,7 +40,6 @@ module BlogPosts
           date: presenter.date,
           introduction: presenter.introduction,
           blog_image: presenter.image(:url),
-          read_time: presenter.read_time,
           social: blog_social
         }
       end

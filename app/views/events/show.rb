@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Events
   class Show < ApplicationView
     def event_title
@@ -43,7 +44,6 @@ module Events
           introduction: presenter.introduction,
           event_image: presenter.image(:url, :teaser_image),
           geolocation: presenter.geolocation,
-          read_time: presenter.read_time,
           social: event_social,
           location: {
             institute_name: presenter.location_name,

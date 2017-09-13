@@ -1,6 +1,6 @@
 {
     "links": {
-        "self": "http:\/\/pro.example.com\/json\/blogposts?page[number]=1&page[size]=6&include=network"
+        "self": "http:\/\/pro.example.com\/json\/blogposts?page[number]=1&page[size]=6&include=persons"
     },
     "meta": {
         "count": 1,
@@ -31,17 +31,17 @@
                 }
             },
             "relationships": {
-                "network": {
+                "persons": {
                     "links": {
-                        "related": "http:\/\/pro.example.com\/json\/blogposts\/1\/network"
+                        "related": "http:\/\/pro.example.com\/json\/blogposts\/1\/persons"
                     },
                     "data": [
                         {
-                            "type": "network",
+                            "type": "persons",
                             "id": "2"
                         },
                         {
-                            "type": "network",
+                            "type": "persons",
                             "id": "3"
                         }
                     ]
@@ -52,19 +52,19 @@
     "included": [
         {
             "id": "2",
-            "type": "network",
+            "type": "persons",
             "attributes": {
                 "first_name": "Joe",
                 "last_name": "Bloggs",
                 "slug": "joe-bloggs"
             },
             "links": {
-                "self": "http:\/\/pro.example.com\/json\/network\/2"
+                "self": "http:\/\/pro.example.com\/json\/persons\/2"
             },
             "relationships": {
                 "blogposts": {
                     "links": {
-                        "related": "http:\/\/pro.example.com\/json\/network\/2\/blogposts"
+                        "related": "http:\/\/pro.example.com\/json\/persons\/2\/blogposts"
                     },
                     "data": [
                         {
@@ -77,19 +77,19 @@
         },
         {
             "id": "3",
-            "type": "network",
+            "type": "persons",
             "attributes": {
                 "first_name": "Jane",
                 "last_name": "Bloggs",
                 "slug": "jane-bloggs"
             },
             "links": {
-                "self": "http:\/\/pro.example.com\/json\/network\/3"
+                "self": "http:\/\/pro.example.com\/json\/persons\/3"
             },
             "relationships": {
                 "blogposts": {
                     "links": {
-                        "related": "http:\/\/pro.example.com\/json\/network\/3\/blogposts"
+                        "related": "http:\/\/pro.example.com\/json\/persons\/3\/blogposts"
                     },
                     "data": [
                         {
