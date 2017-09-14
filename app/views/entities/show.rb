@@ -4,10 +4,6 @@ module Entities
   class Show < ApplicationView
     include SearchableView
 
-    def body_cache_key
-      @body_cache_key
-    end
-
     def bodyclass
       'channel_entity'
     end

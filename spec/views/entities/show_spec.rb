@@ -5,8 +5,8 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
 
   before(:each) do
     assign(:entity, entity)
-    assign(:body_cache_key,  ['entities', type, id].join('/'))
-    assign(:params, {type: human_type, id: id, locale: 'en'} )
+    assign(:params, type: human_type, id: id, locale: 'en')
+    allow_any_instance_of(Entities::Show).to receive(:body_cache_key).and_return(['entities', type, id].join('/'))
     render
   end
 
@@ -44,7 +44,7 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
           with_indifferent_access
       end
       it 'should use Description as a label for the description' do
-      #  expect(subject).to have_content('Description')
+        expect(subject).to have_content('Description')
       end
     end
   end
