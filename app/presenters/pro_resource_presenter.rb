@@ -68,18 +68,13 @@ class ProResourcePresenter
   def authors
     return nil unless resource.has_authors?
 
-    ([persons] + [network]).flatten.compact.map do |author|
+    [persons].flatten.compact.map do |author|
       {
         # Uncomment to link to author pages on the Pro site
         # url: author.url,
         name: "#{author.first_name} #{author.last_name}"
       }
     end
-  end
-
-  def network
-    return nil unless resource.includes?(:network)
-    resource.network.flatten.compact
   end
 
   def persons
@@ -94,11 +89,6 @@ class ProResourcePresenter
       Collection.find_by('key ILIKE ?', key)
     end.compact
     collections.blank? ? nil : collections.map { |collection| collection.landing_page.title }.join(' | ')
-  end
-
-  def geolocation
-    return nil unless resource.includes?(:locations)
-    @geolocation ||= resource.locations.first.geolocation
   end
 
   def date
@@ -127,12 +117,12 @@ class ProResourcePresenter
     t('site.events.all_day')
   end
 
-  def location_name
-    resource.includes?(:locations) ? resource.locations.first.title : nil
+  def geolocation
+    @geolocation ||= resource.respond_to?(:geolocation) ? resource.geolocation : nil
   end
 
-  def read_time
-    # @todo implement
+  def location_name
+    resource.respond_to?(:location_name) ? resource.location_name : nil
   end
 
   def location_address
