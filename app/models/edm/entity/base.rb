@@ -5,6 +5,7 @@ module EDM
     class Base
       include ActiveModel::Model
       include Depiction
+      include ReferencedRecords
       include I18nHelper
       include Blacklight::RequestBuilders
       include ActionView::Helpers::NumberHelper
@@ -47,45 +48,6 @@ module EDM
           localised_pl = pl[locale] || pl[I18n.default_locale]
           [localised_pl].flatten.first
         end
-      end
-
-      def unreferenced?
-        referenced_records[:total][:value] == 0
-      end
-
-      def referenced_records
-        @refereneced_records ||= begin
-          return { search_results: [], total: { value: 0, formatted: '0' } } unless self.respond_to?(:search_query)
-          @response = repository.search(query: search_query)
-          {
-            search_results: @response[:items],
-            total: {
-              value: @response["totalResults"],
-              formatted: number_with_delimiter(@response["totalResults"])
-            }
-          }
-        end
-      end
-
-      def blacklight_config
-        @blacklight_config ||= begin
-          portal_controller.blacklight_config
-        end
-      end
-
-      def portal_controller
-        @portal_controller ||= begin
-          PortalController.new
-        end
-      end
-
-
-      def repository
-        @repository ||= repository_class.new(blacklight_config)
-      end
-
-      def repository_class
-        blacklight_config.repository_class
       end
 
       private
