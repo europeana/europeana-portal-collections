@@ -64,7 +64,6 @@ module Entities
           entity_description: @entity.description,
           entity_title: @entity.pref_label,
           input_search: input_search,
-          referenced_records: @entity.referenced_records,
           social_share: social_share
         }
       end
@@ -96,18 +95,14 @@ module Entities
         {
           tab_title: t(key, scope: 'site.entities.tab_items', name: @entity.pref_label),
           url: search_path(q: @entity.search_query, format: 'json'),
-          search_url: search_path(q: @entity.search_query)
+          search_url: search_path(q: @entity.search_query),
+          referenced_records: @entity.referenced_records[key],
         }
       end
     end
 
     def tabs
-      case @entity
-      when EDM::Entity::Agent
-        %i(items_by)
-      when EDM::Entity::Concept
-        %i(items_about)
-      end
+      @entity.search_keys
     end
 
     def social_share

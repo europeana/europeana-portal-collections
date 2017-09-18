@@ -20,6 +20,10 @@ module EDM
         end
       end
 
+      def search_keys
+        %i(items_about)
+      end
+
       def search_query
         @q ||= "what: \"http://data.europeana.eu/agent/base/#{id}\""
       end
