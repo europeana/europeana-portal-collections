@@ -3,7 +3,9 @@
 RSpec.describe 'entities/show.html.mustache', :common_view_components do
   include ActionView::Helpers::TextHelper
 
-  before(:each) do
+  before do
+    entity_unreferenced
+    allow(entity).to receive(:unreferenced?) { entity_unreferenced }
     assign(:entity, entity)
     assign(:params, type: human_type, id: id, locale: 'en')
     allow_any_instance_of(Entities::Show).to receive(:body_cache_key).and_return(['entities', type, id].join('/'))
@@ -19,6 +21,7 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
   end
 
   let(:entity) { EDM::Entity.build_from_params(type: type, id: id, api_response: api_response) }
+  let(:entity_unreferenced) { entity.unreferenced? }
 
   subject { rendered }
 
@@ -27,8 +30,15 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
   end
 
   it 'should have meta description'
-  it 'should have meta HandheldFriendly'
+  it 'should have meta HandheldFriendly' do
+    expect(subject).to have_selector('meta[name="HandheldFriendly"]', visible: false)
+  end
+
   it 'should have meta social media share links'
+
+  it 'should have a title' do
+    expect(subject).to have_selector("meta[property=\"og:title\"][content=\"#{entity.pref_label} - Europeana Collections\"]", visible: false)
+  end
 
   describe '#entity_description_title' do
     context 'when entity type is agent' do
@@ -45,6 +55,21 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
       end
       it 'should use Description as a label for the description' do
         expect(subject).to have_content('Description')
+      end
+    end
+  end
+
+  describe 'noindex header tag' do
+    context 'when the entity has no records relating to itself' do
+      let(:entity_unreferenced) { true }
+      it 'should be present' do
+        expect(subject).to have_selector("meta[property=\"robots\"][content=\"noindex\"]", visible: false)
+      end
+    end
+
+    context 'when the entity has no records relating to itself' do
+      it 'should not be present' do
+        expect(subject).to_not have_selector("meta[property=\"robots\"][content=\"noindex\"]", visible: false)
       end
     end
   end
