@@ -14,7 +14,7 @@ module EDM
         @refereneced_records ||= {}
         search_keys.each do |key|
           @refereneced_records[key] ||= begin
-            return { search_results: [], total: { value: 0, formatted: '0' } } unless self.respond_to?(:search_query)
+            return { search_results: [], total: { value: 0, formatted: '0' } } unless respond_to?(:search_query)
             @response = Europeana::Blacklight::Response.new(repository.search(query: search_query), controller.params)
             {
               search_results: @response.documents.map { |doc| document_presenter(doc).content },
@@ -33,7 +33,7 @@ module EDM
       end
 
       def controller
-        @controller ||= OpenStruct.new({ params: { q: search_query } })
+        @controller ||= OpenStruct.new(params: { q: search_query })
       end
     end
   end
