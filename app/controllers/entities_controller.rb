@@ -3,7 +3,7 @@ class EntitiesController < ApplicationController
   include CacheHelper
   include Europeana::EntitiesApiConsumer
 
-  attr_reader :body_cache_key
+  attr_reader :body_cache_key, :entity_caching_enabled
 
   before_action :ensure_entity_page_enabled, only: :show
   before_action :enforce_slug, only: :show
@@ -15,8 +15,8 @@ class EntitiesController < ApplicationController
   end
 
   def show
-    @body_cache_key = body_cache_key
-    @entity = EDM::Entity.build_from_params(entity_params) unless body_cached?
+    @body_cache_key = body_cache_key if entity_caching_enabled
+    @entity = EDM::Entity.build_from_params(entity_params) unless body_cached? && entity_caching_enabled
 
     respond_to do |format|
       format.html
@@ -40,6 +40,10 @@ class EntitiesController < ApplicationController
       api_params = entities_api_fetch_params(api_type, api_namespace, params[:id])
       Europeana::API.entity.fetch(api_params)
     end
+  end
+
+  def entity_caching_enabled
+    @entity_caching_enabled ||= Rails.application.config.x.enable.entity_page_caching && !Rails.application.config.x.disable.view_caching
   end
 
   def entity_params

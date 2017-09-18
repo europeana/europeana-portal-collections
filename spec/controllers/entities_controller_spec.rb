@@ -122,4 +122,26 @@ RSpec.describe EntitiesController do
       expect(subject.send(:body_cache_key)).to eq('entities/people/123456')
     end
   end
+
+  describe '#entity_caching_enabled' do
+    context 'when entity caching is enabled' do
+      before do
+        Rails.application.config.x.enable.entity_page_caching = true
+      end
+
+      it 'should set entity_caching_enabled to true' do
+        expect(subject.send(:entity_caching_enabled)).to eq(true)
+      end
+    end
+
+    context 'when entity caching is NOT enabled' do
+      before do
+        Rails.application.config.x.enable.entity_page_caching = false
+      end
+
+      it 'should set entity_caching_enabled to false' do
+        expect(subject.send(:entity_caching_enabled)).to eq(false)
+      end
+    end
+  end
 end
