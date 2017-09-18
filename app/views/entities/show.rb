@@ -64,6 +64,7 @@ module Entities
           entity_description: @entity.description,
           entity_title: @entity.pref_label,
           input_search: input_search,
+          referenced_records: @entity.referenced_records,
           social_share: social_share
         }
       end

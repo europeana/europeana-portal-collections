@@ -13,15 +13,23 @@ module EDM
       def referenced_records
         @refereneced_records ||= begin
           return { search_results: [], total: { value: 0, formatted: '0' } } unless self.respond_to?(:search_query)
-          @response = repository.search(query: search_query)
+          @response = Europeana::Blacklight::Response.new(repository.search(query: search_query), controller.params)
           {
-            search_results: @response[:items],
+            search_results: @response.documents.map { |doc| document_presenter(doc).content },
             total: {
-              value: @response["totalResults"],
-              formatted: number_with_delimiter(@response["totalResults"])
+              value: @response.total,
+              formatted: number_with_delimiter(@response.total)
             }
           }
         end
+      end
+
+      def document_presenter(doc)
+        Document::SearchResultPresenter.new(doc, controller, @response, blacklight_config)
+      end
+
+      def controller
+        @controller ||= OpenStruct.new({ params: { q: search_query } })
       end
     end
   end
