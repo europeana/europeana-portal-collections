@@ -7,11 +7,13 @@ module SearchableView
     {
       action: search_action_path(only_path: true)
     }.tap do |fs|
+
       # Auto-complete is not production ready. Only enable it on dev/test envs.
       if config.x.enable.search_form_autocomplete
         fs[:autocomplete] = {
           url: entities_suggest_url(format: 'json', text: ''),
-          min_chars: 2
+          min_chars: 2,
+          extended_info: config.x.enable.search_form_autocomplete_extended_info
         }
       end
     end
