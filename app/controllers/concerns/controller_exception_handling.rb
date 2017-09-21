@@ -172,7 +172,7 @@ module ControllerExceptionHandling
   ##
   # Render a simple JSON error response
   def render_json_error_response(exception:, status:)
-    msg = Rack::Utils::HTTP_STATUS_CODES[status]
+    msg = Rack::Utils::HTTP_STATUS_CODES[status].dup
     msg << ": #{exception.message}" unless exception.message.blank?
     render json: { success: false, error: msg }, status: status
   end
