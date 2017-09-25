@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 class EntitiesController < ApplicationController
   include CacheHelper
+  include RepositoryHelper
   include Europeana::EntitiesApiConsumer
+  include ActionView::Helpers::NumberHelper
 
   attr_reader :body_cache_key
 
@@ -16,8 +18,10 @@ class EntitiesController < ApplicationController
 
   def show
     @body_cache_key = body_cache_key if entity_caching_enabled?
-    @entity = EDM::Entity.build_from_params(entity_params) unless body_cached? && entity_caching_enabled?
-
+    unless body_cached? && entity_caching_enabled?
+      @entity = EDM::Entity.build_from_params(entity_params)
+      referenced_records
+    end
     respond_to do |format|
       format.html
       format.json { render json: @entity }
@@ -48,6 +52,28 @@ class EntitiesController < ApplicationController
 
   def entity_params
     params.permit(:locale, :type, :id).merge(api_response: entity)
+  end
+
+  def referenced_records
+    @referenced_records ||= {}
+    @entity.search_keys.each do |key|
+      @referenced_records[key] ||= begin
+        return { search_results: [], total: { value: 0, formatted: '0' } } unless @entity.respond_to?(:search_query)
+        @response = Europeana::Blacklight::Response.new(repository.search(query: @entity.search_query), params)
+        {
+          search_results: @response.documents.map { |doc| document_presenter(doc).content },
+          total: {
+            value: @response.total,
+            formatted: number_with_delimiter(@response.total)
+          }
+        }
+      end
+    end
+    @referenced_records
+  end
+
+  def document_presenter(doc)
+    Document::SearchResultPresenter.new(doc, self, @response, blacklight_config)
   end
 
   def slug

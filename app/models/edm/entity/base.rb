@@ -5,10 +5,8 @@ module EDM
     class Base
       include ActiveModel::Model
       include Depiction
-      include ReferencedRecords
       include I18nHelper
       include Blacklight::RequestBuilders
-      include ActionView::Helpers::NumberHelper
 
       attr_accessor :id, :locale, :api_response
 

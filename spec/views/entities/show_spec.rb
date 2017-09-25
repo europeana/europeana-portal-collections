@@ -4,11 +4,10 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
   include ActionView::Helpers::TextHelper
 
   before do
-    entity_unreferenced
-    allow(entity).to receive(:unreferenced?) { entity_unreferenced }
     assign(:entity, entity)
     assign(:params, type: human_type, id: id, locale: 'en')
     allow_any_instance_of(Entities::Show).to receive(:body_cache_key).and_return(['entities', type, id].join('/'))
+    allow_any_instance_of(Entities::Show).to receive(:referenced_records).and_return({})
     render
   end
 
@@ -21,7 +20,6 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
   end
 
   let(:entity) { EDM::Entity.build_from_params(type: type, id: id, api_response: api_response) }
-  let(:entity_unreferenced) { entity.unreferenced? }
 
   subject { rendered }
 
@@ -61,7 +59,9 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
 
   describe 'noindex header tag' do
     context 'when the entity has no records relating to itself' do
-      let(:entity_unreferenced) { true }
+      before do
+        allow_any_instance_of(Entities::Show).to receive(:unreferenced?).and_return(true)
+      end
       it 'should be present' do
         expect(subject).to have_selector('meta[property="robots"][content="noindex"]', visible: false)
       end

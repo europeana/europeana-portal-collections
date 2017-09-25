@@ -28,7 +28,7 @@ module Entities
           { meta_property: 'og:title', content: page_title }
         ]
         head_meta << { meta_property: 'og:image', content: og_image } unless og_image.nil?
-        head_meta << { meta_property: 'robots', content: 'noindex' } if @entity.unreferenced?
+        head_meta << { meta_property: 'robots', content: 'noindex' } if unreferenced?
         head_meta + super
       end
     end
@@ -90,13 +90,17 @@ module Entities
       end
     end
 
+    def unreferenced?
+      !referenced_records.detect { |_key, records| records[:total][:value] != 0 }
+    end
+
     def tab_items
       tabs.map do |key|
         {
           tab_title: t(key, scope: 'site.entities.tab_items', name: @entity.pref_label),
           url: search_path(q: @entity.search_query, format: 'json'),
           search_url: search_path(q: @entity.search_query),
-          referenced_records: @entity.referenced_records[key],
+          referenced_records: referenced_records[key],
         }
       end
     end
