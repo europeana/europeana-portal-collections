@@ -38,5 +38,7 @@ Rails.application.config.x.enable = OpenStruct.new(
   csrf_without_ssl: ENV['ENABLE_CSRF_WITHOUT_SSL'],
   events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
   search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
-  entity_page: ENV['ENABLE_ENTITY_PAGE']
+  search_form_autocomplete_extended_info: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE_EXTENDED_INFO'],
+  entity_page: ENV['ENABLE_ENTITY_PAGE'],
+  entity_page_caching: ENV['ENABLE_ENTITY_PAGE_CACHING']
 )
