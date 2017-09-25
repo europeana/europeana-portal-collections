@@ -60,7 +60,7 @@ module ControllerExceptionHandling
         def message(exception:)
           message = "\n#{exception.class} (#{exception.message}):\n"
           message = "#{message}#{exception.annoted_source_code}" if exception.respond_to?(:annoted_source_code)
-          "#{message} #{trace(exception: exception).join("\n  ")}"
+          "#{message}  #{trace(exception: exception).join("\n  ")}"
         end
 
         def trace(exception:)
