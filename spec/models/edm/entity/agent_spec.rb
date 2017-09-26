@@ -7,7 +7,7 @@ RSpec.describe EDM::Entity::Agent do
   end
 
   describe '#search_query' do
-    subject { described_class.new.search_query }
+    subject { described_class.new.search_query(:items_by) }
     it { is_expected.to match %r{/agent/} }
   end
 end

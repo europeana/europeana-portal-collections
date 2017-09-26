@@ -7,7 +7,7 @@ RSpec.describe EDM::Entity::Concept do
   end
 
   describe '#search_query' do
-    subject { described_class.new.search_query }
+    subject { described_class.new.search_query(:items_about) }
     it { is_expected.to match %r{/concept/} }
   end
 end
