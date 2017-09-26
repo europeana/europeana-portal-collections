@@ -24,8 +24,11 @@ module EDM
         %i(items_about)
       end
 
-      def search_query
-        @q ||= "what: \"http://data.europeana.eu/agent/base/#{id}\""
+      def search_query(search_key)
+        case search_key
+        when :items_about
+          @q ||= "what: \"http://data.europeana.eu/topic/base/#{id}\""
+        end
       end
     end
   end

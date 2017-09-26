@@ -76,8 +76,11 @@ module EDM
         %i(items_by)
       end
 
-      def search_query
-        @q ||= "proxy_dc_creator: \"#{build_url(id)}\" OR proxy_dc_contributor: \"#{build_url(id)}\""
+      def search_query(search_key)
+        case search_key
+        when :items_by
+          @q ||= "proxy_dc_creator: \"#{build_url(id)}\" OR proxy_dc_contributor: \"#{build_url(id)}\""
+        end
       end
 
       private

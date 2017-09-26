@@ -94,12 +94,34 @@ module Entities
       !referenced_records.detect { |_key, records| records[:total][:value] != 0 }
     end
 
+    def referenced_records
+      @referenced_records ||= {}
+      @entity.search_keys.each do |key|
+        @referenced_records[key] ||= begin
+          return { search_results: [], total: { value: 0, formatted: '0' } } unless @entity.respond_to?(:search_query)
+          @response = search_results(key)
+          {
+            search_results: @response.documents.map { |doc| document_presenter(doc).content },
+            total: {
+              value: @response.total,
+              formatted: number_with_delimiter(@response.total)
+            }
+          }
+        end
+      end
+      @referenced_records
+    end
+
+    def document_presenter(doc)
+      Document::SearchResultPresenter.new(doc, self, @response, blacklight_config)
+    end
+
     def tab_items
       tabs.map do |key|
         {
           tab_title: t(key, scope: 'site.entities.tab_items', name: @entity.pref_label),
-          url: search_path(q: @entity.search_query, format: 'json'),
-          search_url: search_path(q: @entity.search_query),
+          url: search_path(q: @entity.search_query(key), format: 'json'),
+          search_url: search_path(q: @entity.search_query(key)),
           referenced_records: referenced_records[key],
         }
       end

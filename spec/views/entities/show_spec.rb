@@ -7,19 +7,10 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
     assign(:entity, entity)
     assign(:params, type: human_type, id: id, locale: 'en')
     allow_any_instance_of(Entities::Show).to receive(:body_cache_key).and_return(['entities', type, id].join('/'))
-    allow_any_instance_of(Entities::Show).to receive(:referenced_records).and_return(items_by: items_by_results)
+    allow_any_instance_of(Entities::Show).to receive(:search_results).with(an_instance_of(Symbol)).and_return(blacklight_response)
     render
   end
 
-  let(:items_by_results) do
-    {
-      search_reuslts: search_api_response[:items],
-      total: {
-        value: search_api_response[:totalResults],
-        formatted: number_with_delimiter(search_api_response[:totalResults])
-      }
-    }
-  end
   let(:id) { '123' }
   let(:type) { 'person' }
   let(:human_type) { 'people' }
@@ -27,7 +18,8 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
     JSON.parse(api_responses(:entities_fetch_agent, name: 'Entity Name', description: 'Entity Description')).
       with_indifferent_access
   end
-  let(:search_api_response) { JSON.parse(api_responses(:search)).with_indifferent_access }
+
+  let(:blacklight_response) { Europeana::Blacklight::Response.new(JSON.parse(api_responses(:search)).with_indifferent_access, {}) }
 
   let(:entity) { EDM::Entity.build_from_params(type: type, id: id, api_response: api_response) }
 
@@ -69,7 +61,7 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
 
   describe 'noindex header tag' do
     context 'when the entity has no records relating to itself' do
-      let(:items_by_results) { { search_results: [], total: { value: 0, formatted: '0' } } }
+      let(:blacklight_response) { Europeana::Blacklight::Response.new({ success: true, itemsCount: 0, totalResults: 0, items: [] }, {}) }
       it 'should be present' do
         expect(subject).to have_selector('meta[property="robots"][content="noindex"]', visible: false)
       end
