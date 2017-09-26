@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Controller exception handling
 #
@@ -57,8 +59,8 @@ module ControllerExceptionHandling
 
         def message(exception:)
           message = "\n#{exception.class} (#{exception.message}):\n"
-          message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
-          message << '  ' << trace(exception: exception).join("\n  ")
+          message = "#{message}#{exception.annoted_source_code}" if exception.respond_to?(:annoted_source_code)
+          "#{message}  #{trace(exception: exception).join("\n  ")}"
         end
 
         def trace(exception:)
@@ -173,7 +175,7 @@ module ControllerExceptionHandling
   # Render a simple JSON error response
   def render_json_error_response(exception:, status:)
     msg = Rack::Utils::HTTP_STATUS_CODES[status]
-    msg << ": #{exception.message}" unless exception.message.blank?
+    msg = [msg, exception.message].reject(&:blank?).join(': ')
     render json: { success: false, error: msg }, status: status
   end
 

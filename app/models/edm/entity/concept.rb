@@ -27,7 +27,7 @@ module EDM
       def search_query(search_key)
         case search_key
         when :items_about
-          @q ||= "what: \"http://data.europeana.eu/topic/base/#{id}\""
+          @q ||= "what: \"http://data.europeana.eu/concept/base/#{id}\""
         end
       end
     end
