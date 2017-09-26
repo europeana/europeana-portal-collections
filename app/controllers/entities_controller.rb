@@ -7,8 +7,6 @@ class EntitiesController < ApplicationController
 
   attr_reader :body_cache_key
 
-  helper_method :search_results
-
   before_action :ensure_entity_page_enabled, only: :show
   before_action :enforce_slug, only: :show
 
@@ -20,7 +18,10 @@ class EntitiesController < ApplicationController
 
   def show
     @body_cache_key = body_cache_key if entity_caching_enabled?
-    @entity = EDM::Entity.build_from_params(entity_params) unless body_cached? && entity_caching_enabled?
+    unless body_cached? && entity_caching_enabled?
+      @entity = EDM::Entity.build_from_params(entity_params)
+      @entity.search_keys.each { |search_key| search_results(search_key) }
+    end
     respond_to do |format|
       format.html
       format.json { render json: @entity }
@@ -28,7 +29,8 @@ class EntitiesController < ApplicationController
   end
 
   def search_results(key)
-    Europeana::Blacklight::Response.new(repository.search(query: @entity.search_query(key)), {})
+    @search_results ||= {}
+    @search_results[key] ||= Europeana::Blacklight::Response.new(repository.search(query: @entity.search_query(key)), {})
   end
 
   private

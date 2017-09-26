@@ -7,7 +7,7 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
     assign(:entity, entity)
     assign(:params, type: human_type, id: id, locale: 'en')
     allow_any_instance_of(Entities::Show).to receive(:body_cache_key).and_return(['entities', type, id].join('/'))
-    allow_any_instance_of(Entities::Show).to receive(:search_results).with(an_instance_of(Symbol)).and_return(blacklight_response)
+    assign(:search_results, entity.search_keys.first => blacklight_response)
     render
   end
 

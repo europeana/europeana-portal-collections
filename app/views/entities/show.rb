@@ -99,7 +99,7 @@ module Entities
       @entity.search_keys.each do |key|
         @referenced_records[key] ||= begin
           return { search_results: [], total: { value: 0, formatted: '0' } } unless @entity.respond_to?(:search_query)
-          @response = search_results(key)
+          @response = @search_results[key]
           {
             search_results: @response.documents.map { |doc| document_presenter(doc).content },
             total: {
