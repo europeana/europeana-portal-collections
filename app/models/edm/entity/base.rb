@@ -6,7 +6,6 @@ module EDM
       include ActiveModel::Model
       include Depiction
       include I18nHelper
-      include Blacklight::RequestBuilders
 
       attr_accessor :id, :locale, :api_response
 
