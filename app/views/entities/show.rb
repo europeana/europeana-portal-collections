@@ -99,12 +99,12 @@ module Entities
       @entity.search_keys.each do |key|
         @referenced_records[key] ||= begin
           return { search_results: [], total: { value: 0, formatted: '0' } } unless @entity.respond_to?(:search_query)
-          @response = @search_results[key]
+          response = @search_keys_search_results[key]
           {
-            search_results: @response.documents.map { |doc| document_presenter(doc).content },
+            search_results: response.documents.map { |doc| document_presenter(doc, response).content },
             total: {
-              value: @response.total,
-              formatted: number_with_delimiter(@response.total)
+              value: response.total,
+              formatted: number_with_delimiter(response.total)
             }
           }
         end
@@ -112,8 +112,8 @@ module Entities
       @referenced_records
     end
 
-    def document_presenter(doc)
-      Document::SearchResultPresenter.new(doc, self, @response, blacklight_config)
+    def document_presenter(doc, response)
+      Document::SearchResultPresenter.new(doc, self, response, blacklight_config)
     end
 
     def tab_items
