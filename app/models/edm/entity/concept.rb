@@ -21,7 +21,7 @@ module EDM
       end
 
       def search_query
-        @q ||= "what: \"http://data.europeana.eu/agent/base/#{id}\""
+        @q ||= "what: \"http://data.europeana.eu/concept/base/#{id}\""
       end
     end
   end
