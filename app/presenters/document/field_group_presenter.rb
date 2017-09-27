@@ -15,7 +15,7 @@ module Document
 
     def self.load_definitions
       file_path = File.join(Rails.root, 'config', 'record_field_groups.yml')
-      definitions = YAML.load_file(file_path).with_indifferent_access.freeze
+      YAML.load_file(file_path).with_indifferent_access.freeze
     end
 
     # @param document [Europeana::Blacklight::Document]
@@ -31,7 +31,9 @@ module Document
     end
 
     def display
-      display_sections.blank? ? nil : {
+      return nil if display_sections.blank?
+
+      {
         title: display_title,
         sections: display_sections
       }
@@ -48,9 +50,7 @@ module Document
     end
 
     def display_sections
-      @display_sections ||= begin
-        sections.map(&:display).reject { |section| section[:items].blank? }
-      end
+      @display_sections ||= sections.map(&:display).reject { |section| section[:items].blank? }
     end
   end
 end

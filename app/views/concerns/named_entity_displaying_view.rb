@@ -14,7 +14,7 @@ module NamedEntityDisplayingView
 
   def named_entity_fields(edm, i18n, *args)
     document.fetch(edm, []).map do |entity|
-      properties = [:about, :prefLabel] + (args || [])
+      properties = %i(about prefLabel) + (args || [])
       properties.map do |f|
         named_entity_field_label(entity, f, i18n)
       end

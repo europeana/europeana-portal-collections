@@ -120,7 +120,7 @@ module Document
         end
 
         def format_date(text, format)
-          return text if format.nil? || !(text =~ /^.+-/)
+          return text if format.nil? || (text !~ /^.+-/)
           Time.parse(text).strftime(format)
         rescue ArgumentError
           text

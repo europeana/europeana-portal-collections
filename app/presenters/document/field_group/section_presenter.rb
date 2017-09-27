@@ -70,7 +70,7 @@ module Document
           !value.for_entity? && presenters.detect do |other_value|
             value != other_value &&
               other_value.for_entity? &&
-              (entity_potential_labels(other_value.entity).include?(value.text))
+              entity_potential_labels(other_value.entity).include?(value.text)
           end
         end
       end
