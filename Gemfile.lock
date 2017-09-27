@@ -1,4 +1,15 @@
 GIT
+  remote: https://github.com/europeana/europeana-blacklight.git
+  revision: 7137e1caf375735777ff9f2bee5e9b9818daa1ac
+  branch: disable-lang-map-value-dereferencing
+  specs:
+    europeana-blacklight (1.0.0)
+      blacklight (~> 6.0.0)
+      europeana-api (~> 1.0.0)
+      iso-639 (~> 0.2.5)
+      rails (>= 4.2.2, < 5)
+
+GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
   revision: 68fdc3196db53794ecc65d636f9fdf1313aa4cf1
   branch: develop
@@ -161,11 +172,6 @@ GEM
       multi_json (~> 1.0)
       rack (> 1.6.2)
       typhoeus (~> 1.1)
-    europeana-blacklight (1.0.0)
-      blacklight (~> 6.0.0)
-      europeana-api (~> 1.0.0)
-      iso-639 (~> 0.2.5)
-      rails (>= 4.2.2, < 5)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
     europeana-logging (0.2.3)
@@ -520,7 +526,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 1.0.0)
-  europeana-blacklight (~> 1.0.0)
+  europeana-blacklight (~> 1.0.0)!
   europeana-feedback-button (= 0.0.4)
   europeana-i18n!
   europeana-logging (~> 0.2.3)
@@ -578,4 +584,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
