@@ -28,7 +28,7 @@ RSpec.describe MediaProxyHelper do
     context 'when media proxy is configured' do
       let(:europeana_media_proxy) { 'http://proxy.example.com' }
       it 'should use media proxy' do
-        expect(subject).to eq('http://proxy.example.com/abc/123?view=http%3A%2F%2Fwww.example.com%2Fimage.jpg')
+        expect(subject).to eq('http://proxy.example.com/abc/123?api_url=' + CGI.escape(api_url) + '&view=http%3A%2F%2Fwww.example.com%2Fimage.jpg')
       end
     end
 
