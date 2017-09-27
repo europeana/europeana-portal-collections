@@ -78,8 +78,7 @@ module Document
     end
 
     def field_group(id)
-      @field_group_presenter ||= Document::FieldGroupPresenter.new(document, controller)
-      @field_group_presenter.display(id)
+      Document::FieldGroupPresenter.new(document, controller, id).display
     end
   end
 end

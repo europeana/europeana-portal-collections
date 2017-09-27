@@ -3,17 +3,23 @@ concepts:
   title: concepts
   sections:
   - title: type
+    entity:
+      name: concepts
+      fallback: true
     fields:
     - proxies.dcType
-    search_field: what
+    search_field: type
     quoted: true
   - title: subject
-    search_field: what
+    entity:
+      name: concepts
+      fallback: true
     fields:
-      - proxies.dcSubject
+    - proxies.dcSubject
+    search_field: what
     quoted: true
   - title: has-type
-    search_field: what
+    search_field: type
     fields:
     - proxies.edmHasType
   - title: medium
@@ -47,11 +53,13 @@ time:
     fields:
     - proxies.dctermsIssued
   - title: temporal
-    entity_name: timespans
-    entity_proxy_field: dctermsTemporal
-    entity_extra:
-    - field: begin
-    - field: end
+    entity:
+      name: timespans
+      extra:
+      - field: begin
+      - field: end
+    fields:
+    - proxies.dctermsTemporal
   - title: place-time
     fields:
     - proxies.dcCoverage
@@ -66,8 +74,10 @@ location:
   title: location
   sections:
   - title: location
-    entity_name: places
-    entity_proxy_field: dctermsSpatial
+    entity:
+      name: places
+    fields:
+    - proxies.dctermsSpatial
   - title: place-time
     fields:
     - proxies.dcCoverage
@@ -78,40 +88,50 @@ people:
   title: people
   sections:
   - title: creator
-    entity_name: agents
-    entity_proxy_field: dcCreator
-    entity_extra:
-    - field: rdaGr2DateOfBirth
-      map_to: life.from.short
-      format_date: "%Y-%m-%d"
-    - field: rdaGr2DateOfDeath
-      map_to: life.to.short
-      format_date: "%Y-%m-%d"
-    entity_fallback: proxies.dcCreator
+    entity:
+      name: agents
+      fallback: true
+      extra:
+      - field: rdaGr2DateOfBirth
+        map_to: life.from.short
+        format_date: "%Y-%m-%d"
+      - field: rdaGr2DateOfDeath
+        map_to: life.to.short
+        format_date: "%Y-%m-%d"
+    fields:
+    - proxies.dcCreator
     search_field: who
   - title: contributor
-    entity_name: agents
-    entity_proxy_field: dcContributor
-    entity_extra:
-    - field: rdaGr2DateOfBirth
-      map_to: life.from.short
-      format_date: "%Y-%m-%d"
-    - field: rdaGr2DateOfDeath
-      map_to: life.to.short
-      format_date: "%Y-%m-%d"
-    entity_fallback: proxies.dcContributor
+    entity:
+      name: agents
+      fallback: true
+      extra:
+      - field: rdaGr2DateOfBirth
+        map_to: life.from.short
+        format_date: "%Y-%m-%d"
+      - field: rdaGr2DateOfDeath
+        map_to: life.to.short
+        format_date: "%Y-%m-%d"
+    fields:
+    - proxies.dcContributor
     search_field: who
   - title: subject
-    entity_name: agents
-    entity_proxy_field: dcSubject
+    entity:
+      name: agents
+    fields:
+    - proxies.dcSubject
     search_field: who
   - title: publisher
-    entity_name: agents
-    entity_proxy_field: dcPublisher
+    entity:
+      name: agents
+    fields:
+    - proxies.dcPublisher
     search_field: who
   - title: rights
-    entity_name: agents
-    entity_proxy_field: dcRights
+    entity:
+      name: agents
+    fields:
+    - proxies.dcRights
     search_field: who
 provenance:
   title: provenance
@@ -120,8 +140,9 @@ provenance:
     fields:
     - aggregations.edmUgc
     map_values:
-      'true': site.object.meta-label.ugc
-      'false': ~
+      "true": site.object.meta-label.ugc
+    exclude_vals:
+    - "false"
   - title: provenance
     fields:
     - proxies.dctermsProvenance
@@ -185,6 +206,9 @@ properties:
   - title: format
     fields:
     - proxies.dcFormat
+    entity:
+      name: concepts
+      fallback: true
     search_field: proxy_dc_format
     quoted: true
   - title: language
