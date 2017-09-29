@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 9da6eb6756acd48a155b8b5594b55731f60b44a3
+  revision: e288ad1dcf451a36b6c6f39e6636f8f6a4e3261c
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -281,7 +281,7 @@ GEM
     mime-types (2.99.3)
     mimemagic (0.3.0)
     mini_mime (0.1.3)
-    mini_portile2 (2.2.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_json (1.12.1)
     multi_xml (0.6.0)
@@ -290,8 +290,8 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     newrelic_rpm (4.3.0.335)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     paper_trail (4.2.0)
       activerecord (>= 3.0, < 6.0)
@@ -303,6 +303,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    parallel (1.12.0)
     parser (2.4.0.0)
       ast (~> 2.2)
     pg (0.21.0)
@@ -423,14 +424,15 @@ GEM
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
-    rubocop (0.39.0)
-      parser (>= 2.3.0.7, < 3.0)
+    rubocop (0.50.0)
+      parallel (~> 1.10)
+      parser (>= 2.3.3.1, < 3.0)
       powerpack (~> 0.1)
-      rainbow (>= 1.99.1, < 3.0)
+      rainbow (>= 2.2.2, < 3.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-oembed (0.12.0)
-    ruby-progressbar (1.8.1)
+    ruby-progressbar (1.8.3)
     rubyzip (1.2.1)
     safe_yaml (1.0.4)
     sass (3.5.1)
@@ -567,7 +569,7 @@ DEPENDENCIES
   redis-rails-instrumentation
   rest-client (~> 1.8.0)
   rspec-rails (~> 3.0)
-  rubocop (= 0.39.0)
+  rubocop (~> 0.50.0)
   ruby-oembed (~> 0.9)
   sass-rails
   selenium-webdriver

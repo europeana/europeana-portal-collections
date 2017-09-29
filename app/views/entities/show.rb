@@ -28,6 +28,7 @@ module Entities
           { meta_property: 'og:title', content: page_title }
         ]
         head_meta << { meta_property: 'og:image', content: og_image } unless og_image.nil?
+        head_meta << { meta_property: 'robots', content: 'noindex' } if unreferenced?
         head_meta + super
       end
     end
@@ -89,23 +90,45 @@ module Entities
       end
     end
 
+    def unreferenced?
+      !referenced_records.detect { |_key, records| records[:total][:value] != 0 }
+    end
+
+    def referenced_records
+      @referenced_records ||= {}
+      @entity.search_keys.each do |key|
+        @referenced_records[key] ||= begin
+          return { search_results: [], total: { value: 0, formatted: '0' } } unless @entity.respond_to?(:search_query)
+          response = @search_keys_search_results[key]
+          {
+            search_results: response.documents.map { |doc| document_presenter(doc, response).content },
+            total: {
+              value: response.total,
+              formatted: number_with_delimiter(response.total)
+            }
+          }
+        end
+      end
+      @referenced_records
+    end
+
+    def document_presenter(doc, response)
+      Document::SearchResultPresenter.new(doc, self, response, blacklight_config)
+    end
+
     def tab_items
       tabs.map do |key|
         {
           tab_title: t(key, scope: 'site.entities.tab_items', name: @entity.pref_label),
-          url: search_path(q: @entity.search_query, format: 'json'),
-          search_url: search_path(q: @entity.search_query)
+          url: search_path(q: @entity.search_query(key), format: 'json'),
+          search_url: search_path(q: @entity.search_query(key)),
+          referenced_records: referenced_records[key],
         }
       end
     end
 
     def tabs
-      case @entity
-      when EDM::Entity::Agent
-        %i(items_by)
-      when EDM::Entity::Concept
-        %i(items_about)
-      end
+      @entity.search_keys
     end
 
     def social_share
