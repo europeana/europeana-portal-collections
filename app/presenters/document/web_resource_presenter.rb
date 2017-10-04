@@ -206,17 +206,17 @@ module Document
     def displayable_tests
       [
         # TRUE if for edm:object and no other web resources are displayable
-        lambda { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p == self }.none?(&:displayable?) ? true : nil },
+        -> { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p == self }.none?(&:displayable?) ? true : nil },
         # FALSE if for edm:object but edm:object is just a thumbnail of edm:isShownBy (which will be shown instead)
-        lambda { for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by? ? false : nil },
+        -> { for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by? ? false : nil },
         # TRUE if for edm:isShownBy
-        lambda { for_edm_is_shown_by? ? true : nil },
+        -> { for_edm_is_shown_by? ? true : nil },
         # TRUE if for a hasView and MIME type is known
-        lambda { for_has_view? && mime_type.present? ? true : nil },
+        -> { for_has_view? && mime_type.present? ? true : nil },
         # TRUE if for an oEmbed
-        lambda { media_type == 'oembed' ? true : nil },
+        -> { media_type == 'oembed' ? true : nil },
         # FALSE otherwise
-        lambda { false }
+        -> { false }
       ]
     end
 
