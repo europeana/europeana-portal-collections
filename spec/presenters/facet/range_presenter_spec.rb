@@ -65,7 +65,7 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
     subject { presenter.filter_open? }
     context 'when the facet is in the search params' do
       before do
-        allow(presenter).to receive(:range_in_params?) {true}
+        allow(presenter).to receive(:range_in_params?) { true }
       end
       it 'returns true' do
         expect(subject).to eq(true)
@@ -74,7 +74,7 @@ RSpec.describe Facet::RangePresenter, presenter: :facet do
 
     context 'when the facet is not the search params' do
       before do
-        allow(presenter).to receive(:range_in_params?) {false}
+        allow(presenter).to receive(:range_in_params?) { false }
       end
       it 'returns false' do
         expect(subject).to eq(false)

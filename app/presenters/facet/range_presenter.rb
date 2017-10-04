@@ -30,7 +30,6 @@ module Facet
       range_in_params?
     end
 
-
     def items_in_params
       fail NotImplementedError
     end
@@ -240,7 +239,7 @@ module Facet
       @search_state_param ||= begin
         params_for_search = range_in_params? ? search_state.params_for_search[:range][facet_name] : nil
         if params_for_search && apply_format_value_as_to_items?
-          params_for_search.each { |k,v| params_for_search[k] = facet_config.format_value_as.call(v) }
+          params_for_search.each { |k, v| params_for_search[k] = facet_config.format_value_as.call(v) }
         end
       end
     end

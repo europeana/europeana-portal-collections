@@ -83,7 +83,7 @@ module BlacklightConfig
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
                              limit: 2_000,
                              only: ->(item) { item.value =~ /\A-?\d{1,4}\z/ },
-                             format_value_as: ->(value) {  value.to_i }
+                             format_value_as: ->(value) { value.to_i }
       config.add_facet_field 'REUSABILITY',
                              hierarchical: true,
                              only: ->(item) { item.value != 'uncategorized' }
