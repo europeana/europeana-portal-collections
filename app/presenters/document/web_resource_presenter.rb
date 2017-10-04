@@ -267,10 +267,6 @@ module Document
       url == @record_presenter.edm_object
     end
 
-    def for_edm_is_shown_at?
-      url == @record_presenter.edm_is_shown_at
-    end
-
     def for_edm_is_shown_by?
       url == @record_presenter.edm_is_shown_by
     end
