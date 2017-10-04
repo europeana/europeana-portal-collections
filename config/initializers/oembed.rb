@@ -12,7 +12,7 @@ dismarc << 'http://www.dismarc.org/player/*'
 britishlibrary = OEmbed::Provider.new('http://sounds.bl.uk/api/oembed')
 britishlibrary << 'http://sounds.bl.uk/embed/*'
 if ENV['ENABLE_EUSCREEN_OEMBED']
-  euscreen = OEmbed::Provider.new('http://oembed.euscreen.eu/services/oembed')
+  euscreen = OEmbed::Provider.new('https://oembed.euscreen.eu/services/oembed')
   euscreen << 'http://www.euscreen.eu/item.html*'
 end
 
