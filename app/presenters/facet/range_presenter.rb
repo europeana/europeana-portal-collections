@@ -10,6 +10,7 @@ module Facet
       {
         date: true,
         title: facet_label,
+        filter_open: filter_open?,
         form: display_form,
         range: display_range,
         data: display_data,
@@ -24,6 +25,11 @@ module Facet
     def filter_item(_)
       fail NotImplementedError
     end
+
+    def filter_open?
+      range_in_params?
+    end
+
 
     def items_in_params
       fail NotImplementedError
@@ -174,7 +180,6 @@ module Facet
     def padded_items(items)
       @padded_items ||= begin
         items = items.dup.sort_by(&:value)
-
         (displayable_begin_value(items)..displayable_end_value(items)).map do |item_value|
           items.detect { |i| i.value == item_value } ||
             Europeana::Blacklight::Response::Facets::FacetItem.new(value: item_value, hits: 0)
@@ -233,7 +238,10 @@ module Facet
 
     def search_state_param
       @search_state_param ||= begin
-        range_in_params? ? search_state.params_for_search[:range][facet_name] : nil
+        params_for_search = range_in_params? ? search_state.params_for_search[:range][facet_name] : nil
+        if params_for_search && apply_format_value_as_to_items?
+          params_for_search.each { |k,v| params_for_search[k] = facet_config.format_value_as.call(v) }
+        end
       end
     end
 
