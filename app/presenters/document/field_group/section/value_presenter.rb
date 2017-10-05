@@ -85,7 +85,7 @@ module Document
         def search_path
           return nil if to_search.nil?
 
-          controller.search_path(controller.default_url_options.merge(q: "#{section.search_field}:#{to_search}"))
+          controller.search_path(q: "#{section.search_field}:#{to_search}")
         end
 
         def to_search
