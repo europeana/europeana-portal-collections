@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe 'config/record_field_groups.yml' do
-  FIELD_GROUPS = %w(concepts copyright time description location people provenance properties refs_rels)
-  FIELD_GROUP_KEYS = %w(title sections)
-  SECTION_KEYS = %w(title entity fields search_field quoted ga_data exclude_vals map_values capitalised format_date max)
-  ENTITY_KEYS = %w(name fallback extra)
+  FIELD_GROUPS = %w(concepts copyright time description location people provenance properties refs_rels).freeze
+  FIELD_GROUP_KEYS = %w(title sections).freeze
+  SECTION_KEYS = %w(title entity fields search_field quoted ga_data exclude_vals map_values capitalised format_date max).freeze
+  ENTITY_KEYS = %w(name fallback extra).freeze
 
   let(:file_path) { File.join(Rails.root, 'config', 'record_field_groups.yml') }
   let(:config) { YAML.load_file(file_path).with_indifferent_access.freeze }
@@ -20,7 +20,7 @@ RSpec.describe 'config/record_field_groups.yml' do
       subject { config[group] }
 
       it 'has valid keys' do
-        subject.keys.each do |key|
+        subject.each_key do |key|
           expect(FIELD_GROUP_KEYS).to include(key)
         end
       end
@@ -30,7 +30,7 @@ RSpec.describe 'config/record_field_groups.yml' do
 
         it 'have valid keys' do
           subject.each do |section|
-            section.keys.each do |key|
+            section.each_key do |key|
               expect(SECTION_KEYS).to include(key)
             end
           end
@@ -45,10 +45,9 @@ RSpec.describe 'config/record_field_groups.yml' do
         describe 'entities' do
           it 'must have valid keys' do
             subject.each do |section|
-              if section.key?(:entity)
-                section[:entity].keys.each do |key|
-                  expect(ENTITY_KEYS).to include(key)
-                end
+              next unless section.key?(:entity)
+              section[:entity].each_key do |key|
+                expect(ENTITY_KEYS).to include(key)
               end
             end
           end
