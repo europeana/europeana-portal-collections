@@ -41,6 +41,30 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
     end
 
     describe 'sections' do
+      describe 'title' do
+        let(:field_definition) do
+          {
+            sections: [
+              {
+                title: 'subject',
+                fields: %w(proxies.dcSubject)
+              }
+            ]
+          }
+        end
+        let(:api_response) do
+          basic_api_response.tap do |record|
+            record['object']['proxies'].first['dcSubject'] = {
+              def: %w(history music)
+            }
+          end
+        end
+
+        it 'is looked up from locales' do
+          expect(subject[:sections].first[:title]).to eq(I18n.t('subject', scope: 'site.object.meta-label'))
+        end
+      end
+
       describe 'fields' do
         let(:field_definition) do
           {
