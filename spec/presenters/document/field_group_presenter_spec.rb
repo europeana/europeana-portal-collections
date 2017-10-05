@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
   let(:controller) { CatalogController.new }
   let(:bl_response) { Europeana::Blacklight::Response.new(api_response, {}) }
@@ -26,18 +24,25 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           ]
         }
       end
+      let(:api_response) do
+        JSON.parse(api_responses(:record, id: 'abc/123')).tap do |record|
+          record['object']['aggregations'].first['edmUgc'] = field_value
+        end
+      end
 
       context 'when the value maps to another value' do
-        let(:api_response) { JSON.parse(api_responses(:record_with_edmugc, id: 'abc/123')) }
-        it 'map and translate the value' do
+        let(:field_value) { 'true' }
+
+        it 'maps and translate the value' do
           expect(subject[:sections].first[:items].first[:text]).to eq(I18n.t('site.object.meta-label.ugc'))
         end
       end
 
-      context 'when the value maps to nil' do
-        let(:api_response) { JSON.parse(api_responses(:record_with_edmugc_false, id: 'abc/123')) }
-        it 'should not map it' do
-          expect(subject[:sections].first[:items].first[:text]).to eq('false')
+      context 'when the value is not mapped' do
+        let(:field_value) { 'false' }
+
+        it 'should be untouched' do
+          expect(subject[:sections].first[:items].first[:text]).to eq(field_value)
         end
       end
     end
