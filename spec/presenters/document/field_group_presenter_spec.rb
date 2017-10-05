@@ -117,6 +117,40 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
       end
     end
 
+    describe 'capitalised' do
+      let(:field_definition) do
+        {
+          sections: [
+            {
+              capitalised: capitalised,
+              fields: 'proxies.dcLanguage'
+            }
+          ]
+        }
+      end
+      let(:api_response) do
+        basic_api_response.tap do |record|
+          record['object']['proxies'].first['dcLanguage'] = {
+            def: %w(english)
+          }
+        end
+      end
+
+      context 'when true' do
+        let(:capitalised) { true }
+        it 'capitalises field value' do
+          expect(subject[:sections].first[:items].first[:text]).to eq('English')
+        end
+      end
+
+      context 'when false' do
+        let(:capitalised) { false }
+        it 'does not touch field value' do
+          expect(subject[:sections].first[:items].first[:text]).to eq('english')
+        end
+      end
+    end
+
     describe 'entity' do
       let(:entity_id) { '1234' }
       let(:field_definition) do
