@@ -81,9 +81,9 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     end
   end
 
-  context 'when record is an entity agent' do
+  context 'when record has an entity agent' do
     let(:identifier) { '1234' }
-    let(:api_response) { api_responses(:record_with_entity_agent, id: '/abc/123', identifier: identifier) }
+    let(:api_response) { api_responses(:record_with_entity_agent, id: '/abc/123', identifier: identifier, proxy_field: 'dcCreator') }
     let(:blacklight_document_source) { JSON.parse(api_response)['object'] }
 
     before(:each) do
@@ -92,7 +92,22 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
 
     it 'should have person link pointing to entity page' do
       render
-      expect(rendered).to have_selector(%(a[href="/en/explore/people/#{identifier}-mister-smith.html"]))
+      expect(rendered).to have_selector(%(a[href^="/en/explore/people/#{identifier}-"]))
+    end
+  end
+
+  context 'when record has an entity concept' do
+    let(:identifier) { '1234' }
+    let(:api_response) { api_responses(:record_with_entity_concept, id: '/abc/123', identifier: identifier, proxy_field: 'dcFormat') }
+    let(:blacklight_document_source) { JSON.parse(api_response)['object'] }
+
+    before(:each) do
+      Rails.application.config.x.enable.entity_page = true
+    end
+
+    it 'should have topic link pointing to entity page' do
+      render
+      expect(rendered).to have_selector(%(a[href^="/en/explore/topics/#{identifier}-"]))
     end
   end
 
