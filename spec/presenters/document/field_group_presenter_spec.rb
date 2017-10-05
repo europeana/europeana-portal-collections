@@ -217,6 +217,34 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
       end
     end
 
+    describe 'fields'
+    
+    describe 'title'
+    
+    describe 'max' do
+      let(:field_definition) do
+        {
+          sections: [
+            {
+              max: 1,
+              fields: 'proxies.dcSubject'
+            }
+          ]
+        }
+      end
+      let(:api_response) do
+        basic_api_response.tap do |record|
+          record['object']['proxies'].first['dcSubject'] = {
+            def: %w(this that)
+          }
+        end
+      end
+
+      it 'limits the maximum number of field values' do
+        expect(subject[:sections].first[:items].size).to eq(1)
+      end
+    end
+
     describe 'entity' do
       let(:entity_id) { '1234' }
       let(:field_definition) do

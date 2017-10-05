@@ -82,7 +82,7 @@ module Document
       end
 
       def enforce_max_value_presenters!(presenters)
-        presenters = presenters.slice(0, max) if max.present?
+        presenters.slice!(0, max) if max.present?
         presenters
       end
 
