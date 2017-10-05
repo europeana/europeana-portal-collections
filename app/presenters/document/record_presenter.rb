@@ -5,8 +5,12 @@ module Document
     include Record::IIIF
     include Metadata::Rights
 
+    def edm_is_shown_at
+      @edm_is_shown_at ||= aggregation.fetch('edmIsShownAt', nil)
+    end
+
     def edm_is_shown_by
-      @edm_is_shown_by ||= field_value('aggregations.edmIsShownBy')
+      @edm_is_shown_by ||= aggregation.fetch('edmIsShownBy', nil)
     end
 
     def edm_object
@@ -18,7 +22,7 @@ module Document
     end
 
     def is_shown_by_or_at
-      aggregation.fetch('edmIsShownBy', nil) || aggregation.fetch('edmIsShownAt', nil)
+      edm_is_shown_by || edm_is_shown_at
     end
 
     def has_views
@@ -65,7 +69,7 @@ module Document
     end
 
     def displayable_media_web_resource_presenters
-      media_web_resource_presenters.select(&:displayable?)
+      @displayable_media_web_resource_presenters ||= media_web_resource_presenters.select(&:displayable?)
     end
 
     def media_web_resources(options = {})

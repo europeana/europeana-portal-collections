@@ -195,16 +195,42 @@ module Document
          application/x-troff-msvideo audio/aiff audio/avi).include?(mime_type)
     end
 
+    ##
+    # Tests for displayability of this web resource
+    #
+    # Each of these tests should be run *in order* until one returns a non-nil
+    # value which may be either true or false, indicating whether or not this
+    # web resource is displayable.
+    #
+    # @return [Array<Proc>] lambdas to test displayability
+    def displayable_tests
+      [
+        # TRUE if for edm:object and no other web resources are displayable
+        -> { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p == self }.none?(&:displayable?) ? true : nil },
+        # FALSE if for edm:object but edm:object is just a thumbnail of edm:isShownBy (which will be shown instead)
+        -> { for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by? ? false : nil },
+        # TRUE if for edm:isShownBy
+        -> { for_edm_is_shown_by? ? true : nil },
+        # TRUE if for a hasView and MIME type is known
+        -> { for_has_view? && mime_type.present? ? true : nil },
+        # TRUE if for an oEmbed
+        -> { media_type == 'oembed' ? true : nil },
+        # FALSE otherwise
+        -> { false }
+      ]
+    end
+
     def displayable?
-      if for_edm_object?
-        return false if @record_presenter.edm_object_thumbnails_edm_is_shown_by? # || !@record_presenter.edm_object_thumbnails_has_view?
+      return @displayable if defined?(@displayable)
+
+      displayable_tests.each do |test|
+        unless defined?(@displayable)
+          test_result = test.call
+          @displayable = test_result unless test_result.nil?
+        end
       end
 
-      (@record_presenter.edm_object.present? && for_edm_object?) ||
-        (@record_presenter.edm_object.blank? && for_edm_is_shown_by?) ||
-        (@record_presenter.edm_object_thumbnails_edm_is_shown_by? && for_edm_is_shown_by?) ||
-        (@record_presenter.has_views.include?(url) && mime_type.present?) ||
-        media_type == 'oembed'
+      @displayable
     end
 
     def playable?
@@ -233,16 +259,20 @@ module Document
           (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
-        @record_presenter.has_views.include?(url) || for_edm_is_shown_by?
+        for_has_view? || for_edm_is_shown_by?
       end
     end
 
     def for_edm_object?
-      @record_presenter.edm_object == url
+      url == @record_presenter.edm_object
     end
 
     def for_edm_is_shown_by?
       url == @record_presenter.edm_is_shown_by
+    end
+
+    def for_has_view?
+      @record_presenter.has_views.include?(url)
     end
 
     def download_disabled?
