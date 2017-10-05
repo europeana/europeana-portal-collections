@@ -135,7 +135,9 @@ RailsAdmin.config do |config|
         end
       end
       field :title
-      field :api_params
+      field :api_params, :text do
+        html_attributes rows: 15, style: "width: 100%;"
+      end
       field :settings_default_search_layout, :enum
       field :federation_configs
     end
