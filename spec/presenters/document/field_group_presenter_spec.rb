@@ -41,6 +41,32 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
     end
 
     describe 'sections' do
+      describe 'fields' do
+        let(:field_definition) do
+          {
+            sections: [
+              {
+                fields: %w(proxies.dcSubject proxies.dcType)
+              }
+            ]
+          }
+        end
+        let(:api_response) do
+          basic_api_response.tap do |record|
+            record['object']['proxies'].first['dcSubject'] = {
+              def: %w(history music)
+            }
+            record['object']['proxies'].first['dcType'] = {
+              def: %w(image)
+            }
+          end
+        end
+
+        it 'includes values from all fields' do
+          expect(subject[:sections].first[:items].size).to eq(3)
+        end
+      end
+
       describe 'map_values' do
         let(:field_definition) do
           {
