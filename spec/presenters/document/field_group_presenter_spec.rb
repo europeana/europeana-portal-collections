@@ -183,6 +183,40 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
       end
     end
 
+    describe 'ga_data' do
+      let(:field_definition) do
+        {
+          sections: [
+            {
+              ga_data: ga_data,
+              fields: 'proxies.dcRights'
+            }
+          ]
+        }
+      end
+      let(:api_response) do
+        basic_api_response.tap do |record|
+          record['object']['proxies'].first['dcRights'] = {
+            def: %w(CC BY 4.0)
+          }
+        end
+      end
+
+      context 'when present' do
+        let(:ga_data) { 'dimension1' }
+        it 'is presented' do
+          expect(subject[:sections].first[:items].first[:ga_data]).to eq('dimension1')
+        end
+      end
+
+      context 'when blank' do
+        let(:ga_data) { nil }
+        it 'is not presented' do
+          expect(subject[:sections].first[:items].first[:ga_data]).to be_nil
+        end
+      end
+    end
+
     describe 'entity' do
       let(:entity_id) { '1234' }
       let(:field_definition) do
