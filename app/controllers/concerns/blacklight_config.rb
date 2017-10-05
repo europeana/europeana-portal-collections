@@ -80,7 +80,11 @@ module BlacklightConfig
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'world-war-I' }
       config.add_facet_field 'YEAR',
                              range: true,
-                             when: ->(context) { context.within_collection? && context.current_collection.key == 'fashion' },
+                             when:  lambda { |context|
+                               year_facet_collections = Rails.application.config.x.blacklight.extra_year_facet_collections.dup
+                               year_facet_collections << 'fashion'
+                               context.within_collection? && year_facet_collections.include?(context.current_collection.key)
+                             },
                              limit: 2_000,
                              only: ->(item) { item.value =~ /\A-?\d{1,4}\z/ },
                              format_value_as: ->(value) { value.to_i }
