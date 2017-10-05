@@ -2,7 +2,7 @@
 #       `Europeana::Blacklight::Response#force_encoding`.
 
 RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
-  let(:controller) { CatalogController.new }
+  let(:controller) { ActionView::TestCase::TestController.new }
   let(:bl_response) { Europeana::Blacklight::Response.new(api_response, {}) }
   let(:document) { bl_response.documents.first }
   let(:basic_api_response) { JSON.parse(api_responses(:record, id: 'abc/123')) }
@@ -21,7 +21,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         {
           sections: [
             {
-              fields: %(aggregations.edmUgc),
+              fields: 'aggregations.edmUgc',
               map_values: {
                 'true' => 'site.object.meta-label.ugc'
               }
@@ -78,6 +78,42 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
 
       it 'leaves other values' do
         expect(subject[:sections].first[:items].size).to eq(2)
+      end
+    end
+
+    context 'with search field' do
+      let(:search_field) { 'what' }
+      let(:field_definition) do
+        {
+          sections: [
+            {
+              search_field: search_field,
+              quoted: quoted,
+              fields: 'proxies.dcSubject'
+            }
+          ]
+        }
+      end
+      let(:api_response) do
+        basic_api_response.tap do |record|
+          record['object']['proxies'].first['dcSubject'] = {
+            def: %w(Photography)
+          }
+        end
+      end
+
+      context 'when quoted' do
+        let(:quoted) { true }
+        it 'links to a search for the quoted field value' do
+          expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:"Photography"')
+        end
+      end
+
+      context 'when not quoted' do
+        let(:quoted) { false }
+        it 'links to a search for the parenthesised field value' do
+          expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:(Photography)')
+        end
       end
     end
 
