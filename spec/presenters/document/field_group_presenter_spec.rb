@@ -16,7 +16,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
   describe '#display' do
     subject { described_class.new(document, controller, field_group_id).display }
 
-    context 'when mapping values' do
+    describe 'map_values' do
       let(:field_definition) do
         {
           sections: [
@@ -52,7 +52,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
       end
     end
 
-    context 'with excluded values' do
+    describe 'exclude_vals' do
       let(:excluded_values) { %w(history art) }
       let(:field_definition) do
         {
@@ -81,7 +81,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
       end
     end
 
-    context 'with search field' do
+    describe 'search_field' do
       let(:search_field) { 'what' }
       let(:field_definition) do
         {
@@ -102,14 +102,14 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         end
       end
 
-      context 'when quoted' do
+      context 'with quoted' do
         let(:quoted) { true }
         it 'links to a search for the quoted field value' do
           expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:"Photography"')
         end
       end
 
-      context 'when not quoted' do
+      context 'without quoted' do
         let(:quoted) { false }
         it 'links to a search for the parenthesised field value' do
           expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:(Photography)')
@@ -117,7 +117,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
       end
     end
 
-    context 'with entities' do
+    describe 'entity' do
       let(:entity_id) { '1234' }
       let(:field_definition) do
         {
