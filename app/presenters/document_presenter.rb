@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 ##
 # Base class for Blacklight document presenters
 class DocumentPresenter < Europeana::Blacklight::DocumentPresenter
   delegate :t, to: I18n
 
   attr_reader :document, :controller
-
-  include DefaultUrlOptions
-  include Rails.application.routes.url_helpers
 
   ##
   # Override to prevent HTML escaping, handled by {Mustache}

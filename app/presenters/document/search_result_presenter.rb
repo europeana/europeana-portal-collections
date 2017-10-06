@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Document
   ##
   # Presenter for a search result

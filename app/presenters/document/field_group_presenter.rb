@@ -3,8 +3,8 @@
 module Document
   ##
   # Presenter for a group of document fields
-  class FieldGroupPresenter < DocumentPresenter
-    attr_reader :id, :definition, :sections
+  class FieldGroupPresenter < ApplicationPresenter
+    attr_reader :document, :controller, :id, :definition, :sections
 
     ##
     # Load the field group definition from the config file
@@ -22,7 +22,8 @@ module Document
     # @param controller [ActionController::Base]
     # @param id [String,Symbol]
     def initialize(document, controller, id)
-      super(document, controller)
+      @document = document
+      @controller = controller
       @id = id
       @definition = self.class.definition(id)
       @sections = @definition[:sections].map do |section_definition|

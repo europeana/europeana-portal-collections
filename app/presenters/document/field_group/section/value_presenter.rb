@@ -8,11 +8,11 @@ module Document
       #
       # TODO: should this be sub-classed? e.g. for single string values, language
       #   maps, entity-linked values
-      class ValuePresenter < DocumentPresenter
+      class ValuePresenter < ApplicationPresenter
         include EntitiesHelper
         include UrlHelper
 
-        attr_reader :section, :content, :field, :entity
+        attr_reader :document, :controller, :section, :content, :field, :entity
         delegate :blank?, :nil?, :present?, :empty?, to: :text
 
         # @param document [Europeana::Blacklight::Document]
@@ -22,7 +22,8 @@ module Document
         # @param content [String]
         # @param entity [Europeana::Blacklight::Document]
         def initialize(document, controller, section, field, content, entity = nil)
-          super(document, controller)
+          @document = document
+          @controller = controller
           @section = section
           @field = field
           @content = content
@@ -79,7 +80,7 @@ module Document
           type, namespace, id = entity_uri.path.split('/')[1..-1]
           return nil unless namespace == 'base'
 
-          entity_path(type: entities_human_type(type), id: id, slug: entity_url_slug(entity), format: 'html')
+          controller.entity_path(type: entities_human_type(type), id: id, slug: entity_url_slug(entity), format: 'html')
         end
 
         def search_path

@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 ##
 # Display logic for facets.
 #
 # Responsible for generating data hashes for the Mustache templates from
 # [Europeana's styleguide](https://github.com/europeana/europeana-styleguide-ruby)
 # to display search result facet data.
-class FacetPresenter
+class FacetPresenter < ApplicationPresenter
   include Facet::Labelling
   include FacetsHelper
   include UrlHelper
   include ActionView::Helpers::NumberHelper
-  delegate :t, to: I18n
 
   attr_writer :facet_name
   attr_reader :controller

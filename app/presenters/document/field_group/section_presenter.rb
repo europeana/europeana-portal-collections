@@ -5,10 +5,8 @@ module Document
   # Presenter for a record metadata "section", which may gather data from multiple
   # source fields
   module FieldGroup
-    class SectionPresenter < DocumentPresenter
-      include Document::Field::Entities
-
-      attr_reader :definition, :group
+    class SectionPresenter < ApplicationPresenter
+      attr_reader :document, :controller, :group, :definition
 
       delegate :search_field, :entity, :fields, :exclude_vals, :max, :title,
                :ga_data, :map_values, :format_date, to: :definition
@@ -22,7 +20,8 @@ module Document
           fail ArgumentError, "Field group definition requires fields, none present: #{definition.inspect}"
         end
 
-        super(document, controller)
+        @document = document
+        @controller = controller
         @group = group
         @definition = definition
       end
@@ -70,7 +69,7 @@ module Document
           !value.for_entity? && presenters.detect do |other_value|
             value != other_value &&
               other_value.for_entity? &&
-              entity_potential_labels(other_value.entity).include?(value.text)
+              entity_presenter(other_value.entity).potential_labels.include?(value.text)
           end
         end
       end
@@ -111,13 +110,42 @@ module Document
           field_entity = field_entities.detect { |fe| fe[:about] == content }
 
           if field_entity.present?
-            [entity_label(field_entity)].flatten.map do |label|
+            field_entity_presenter = entity_presenter(field_entity)
+            [field_entity_presenter.label].flatten.map do |label|
               value_presenter(field, label, field_entity)
             end
           elsif entity_fallback?
             value_presenter(field, content)
           end
         end
+      end
+
+      def entity_presenter(entity)
+        @entity_presenters ||= {}
+        @entity_presenters[entity[:about]] ||= Document::EntityPresenter.new(entity)
+      end
+
+      ##
+      # Retrieves the document's entities
+      #
+      # @param type [String,Symbol] name of entity group, e.g. "timespans"
+      # @param field [String,Symbol] name of field in the document entities
+      #   are to be retrieved for, e.g. "proxies.dctermsTemporal"
+      # @return [Array] document's entities
+      def document_entities(type, field = nil)
+        @document_entities ||= {}
+        @document_entities[type] ||= {}
+        @document_entities[type][field] ||= document_entities_for_type(type, field)
+      end
+
+      # @param (see #document_entities)
+      def document_entities_for_type(type, field = nil)
+        typed_entities = document.fetch(type, [])
+        unless field.nil?
+          doc_field_values = document.fetch(field, [])
+          typed_entities.select! { |entity| doc_field_values.include?(entity[:about]) }
+        end
+        typed_entities || []
       end
 
       def value_presenter(field, content, entity = nil)

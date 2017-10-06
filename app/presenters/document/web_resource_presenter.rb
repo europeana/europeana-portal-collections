@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Document
   ##
   # Blacklight document presenter for a Europeana web resource
