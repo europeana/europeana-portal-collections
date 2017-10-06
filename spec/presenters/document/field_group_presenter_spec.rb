@@ -1,6 +1,5 @@
 # TODO: establish why "# frozen_string_literal: true" here fails in
 #       `Europeana::Blacklight::Response#force_encoding`.
-
 RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
   let(:controller) { ActionView::TestCase::TestController.new }
   let(:bl_response) { Europeana::Blacklight::Response.new(api_response, {}) }
@@ -361,6 +360,47 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
 
           it 'links to the entity page' do
             expect(subject[:sections].first[:items].first[:url]).to eq('/en/explore/topics/1234-entity-label.html')
+          end
+        end
+
+        describe 'fallback' do
+          let(:entity_name) { 'concepts' }
+          context 'without Europeana entity' do
+            let(:field_definition) do
+              {
+                sections: [
+                  {
+                    entity: {
+                      name: 'concepts',
+                      fallback: entity_fallback
+                    },
+                    fields: %(proxies.dcSubject)
+                  }
+                ]
+              }
+            end
+            let(:api_response) do
+              basic_api_response.tap do |record|
+                record['object']['proxies'].first['dcSubject'] = {
+                  def: ['Dancing']
+                }
+              end
+            end
+
+            context 'when true' do
+              let(:entity_fallback) { true }
+              it 'displays other values' do
+                expect(subject[:sections].first[:items]).not_to be_blank
+                expect(subject[:sections].first[:items].first[:text]).to eq('Dancing')
+              end
+            end
+
+            context 'when false' do
+              let(:entity_fallback) { false }
+              it 'displays nothing' do
+                expect(subject).to be_blank
+              end
+            end
           end
         end
       end
