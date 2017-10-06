@@ -21,12 +21,12 @@ module Document
 
       # @param (see #document_entities)
       def document_entities_for_type(type, field = nil)
-        document_entities = document.fetch(type, [])
+        typed_entities = document.fetch(type, [])
         unless field.nil?
           doc_field_values = document.fetch(field, [])
-          document_entities.select! { |entity| doc_field_values.include?(entity[:about]) }
+          typed_entities.select! { |entity| doc_field_values.include?(entity[:about]) }
         end
-        document_entities || []
+        typed_entities || []
       end
 
       def entity_label(entity)
