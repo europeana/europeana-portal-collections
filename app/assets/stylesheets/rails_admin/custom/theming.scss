@@ -1,3 +1,7 @@
 .navbar-nav > li > form {
   padding: 15px;
 }
+
+body.rails_admin .form-horizontal textarea[name="collection[api_params]"] {
+  width: 100%;
+}
