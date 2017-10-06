@@ -3,9 +3,17 @@
 module Document
   ##
   # Blacklight document presenter for a Europeana record
-  class RecordPresenter < DocumentPresenter
+  class RecordPresenter < ApplicationPresenter
+    include BlacklightDocumentPresenter
     include Record::IIIF
     include Metadata::Rights
+
+    attr_reader :document, :controller
+
+    def initialize(document, controller)
+      @document = document
+      @controller = controller
+    end
 
     def edm_is_shown_at
       @edm_is_shown_at ||= aggregation.fetch('edmIsShownAt', nil)

@@ -3,15 +3,19 @@
 module Document
   ##
   # Presenter for a search result
-  class SearchResultPresenter < DocumentPresenter
+  class SearchResultPresenter < ApplicationPresenter
     include ActionView::Helpers::TextHelper
     include ApiHelper
+    include BlacklightDocumentPresenter
     include Metadata::Rights
     include ThumbnailHelper
 
+    attr_reader :document, :controller
+
     # @param response [Europeana::Blacklight::Response]
     def initialize(document, controller, response = nil, configuration = controller.blacklight_config)
-      super(document, controller, configuration)
+      @document = document
+      @controller = controller
       @response = response
     end
 
@@ -21,7 +25,7 @@ module Document
     # @return [Hash]
     def content
       {
-        object_url: document_path(@document, format: 'html', q: params[:q], l: params_to_log),
+        object_url: controller.document_path(@document, format: 'html', q: params[:q], l: params_to_log),
         title: title,
         text: text,
         year: year,

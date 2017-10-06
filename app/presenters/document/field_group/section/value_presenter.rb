@@ -9,6 +9,7 @@ module Document
       # TODO: should this be sub-classed? e.g. for single string values, language
       #   maps, entity-linked values
       class ValuePresenter < ApplicationPresenter
+        include BlacklightDocumentPresenter
         include EntitiesHelper
         include UrlHelper
 
