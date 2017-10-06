@@ -348,6 +348,10 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           let(:entity_name) { 'agents' }
           let(:proxy_field) { 'dcCreator' }
 
+          it 'uses the entity label for text' do
+            expect(subject[:sections].first[:items].first[:text]).to eq('Entity label')
+          end
+
           it 'links to the entity page' do
             expect(subject[:sections].first[:items].first[:url]).to eq('/en/explore/people/1234-entity-label.html')
           end
@@ -357,6 +361,10 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           let(:entity_type) { 'concept' }
           let(:entity_name) { 'concepts' }
           let(:proxy_field) { 'dcFormat' }
+
+          it 'uses the entity label for text' do
+            expect(subject[:sections].first[:items].first[:text]).to eq('Entity label')
+          end
 
           it 'links to the entity page' do
             expect(subject[:sections].first[:items].first[:url]).to eq('/en/explore/topics/1234-entity-label.html')
