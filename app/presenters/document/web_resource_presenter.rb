@@ -29,7 +29,7 @@ module Document
         play_html: play_html,
         technical_metadata: media_metadata,
         download: {
-          url: downloadable? ? download_url : false,
+          url: downloadable? ? download_url : nil,
           text: t('site.object.actions.download')
         },
         external_media: external_media_url
