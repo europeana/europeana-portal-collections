@@ -67,8 +67,7 @@ module Document
         end
 
         def linkable_for_entity?
-          Rails.application.config.x.enable.entity_page &&
-            for_entity? &&
+          for_entity? &&
             %w(agents concepts).include?(section.entity_name) # while only agent & concept entity pages are implemented
         end
 
