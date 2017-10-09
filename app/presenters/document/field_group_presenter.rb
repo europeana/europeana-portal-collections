@@ -4,7 +4,7 @@ module Document
   ##
   # Presenter for a group of document fields
   class FieldGroupPresenter < ApplicationPresenter
-    attr_reader :document, :controller, :id, :definition, :sections
+    attr_reader :document, :controller, :id, :definition
 
     ##
     # Load the field group definition from the config file
@@ -26,9 +26,6 @@ module Document
       @controller = controller
       @id = id
       @definition = self.class.definition(id)
-      @sections = @definition[:sections].map do |section_definition|
-        Document::FieldGroup::SectionPresenter.new(document, controller, self, OpenStruct.new(section_definition).freeze)
-      end
     end
 
     def display
@@ -51,7 +48,13 @@ module Document
     end
 
     def display_sections
-      @display_sections ||= sections.map(&:display).reject { |section| section[:items].blank? }
+      @display_sections ||= section_presenters.map(&:display).reject { |section| section[:items].blank? }
+    end
+
+    def section_presenters
+      @section_presenters ||= definition[:sections].map do |section_definition|
+        Document::FieldGroup::SectionPresenter.new(document, controller, self, OpenStruct.new(section_definition).freeze)
+      end
     end
   end
 end
