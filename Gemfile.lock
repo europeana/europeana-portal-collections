@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-blacklight.git
-  revision: 7137e1caf375735777ff9f2bee5e9b9818daa1ac
+  revision: 382ff70acdc2e22c107448a1b869fb7c76d3ad7b
   branch: disable-lang-map-value-dereferencing
   specs:
     europeana-blacklight (1.0.0)

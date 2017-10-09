@@ -1,5 +1,5 @@
-# TODO: establish why "# frozen_string_literal: true" here fails in
-#       `Europeana::Blacklight::Response#force_encoding`.
+# frozen_string_literal: true
+
 RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
   let(:controller) { ActionView::TestCase::TestController.new }
   let(:bl_response) { Europeana::Blacklight::Response.new(api_response, {}) }
