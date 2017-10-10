@@ -13,7 +13,7 @@ module Document
     attr_reader :document, :controller
 
     # @param response [Europeana::Blacklight::Response]
-    def initialize(document, controller, response = nil, configuration = controller.blacklight_config)
+    def initialize(document, controller, response = nil)
       @document = document
       @controller = controller
       @response = response

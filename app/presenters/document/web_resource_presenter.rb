@@ -15,7 +15,7 @@ module Document
 
     attr_reader :document, :controller
 
-    def initialize(document, controller, configuration = controller.blacklight_config, record = nil, record_presenter = nil)
+    def initialize(document, controller, record = nil, record_presenter = nil)
       @document = document
       @controller = controller
       @record = record
