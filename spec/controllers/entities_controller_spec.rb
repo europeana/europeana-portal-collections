@@ -58,56 +58,38 @@ RSpec.describe EntitiesController do
               headers)
     end
 
-    context 'when entity feature flag is disabled' do
-      before do
-        Rails.application.config.x.enable.entity_page = false
-      end
-
-      it 'returns http 404 not found' do
+    context 'without slug in URL' do
+      it 'redirects to URL with slug' do
         get :show, locale: 'en', type: 'people', id: id
 
-        expect(response).to have_http_status(:not_found)
+        expect(response).to redirect_to("/en/explore/people/#{id}-#{slug_name}")
       end
     end
 
-    context 'when entity feature flag is enabled' do
-      before do
-        Rails.application.config.x.enable.entity_page = true
+    context 'with wrong slug in URL' do
+      it 'redirects to URL with slug' do
+        get :show, locale: 'en', type: 'people', id: id, slug: 'david'
+
+        expect(response).to redirect_to("/en/explore/people/#{id}-#{slug_name}")
+      end
+    end
+
+    context 'with slug in URL' do
+      let(:params) { { locale: 'en', type: 'people', id: id, slug: slug_name } }
+
+      it 'returns http success' do
+        get :show, params
+
+        expect(response).to have_http_status(:success)
       end
 
-      context 'without slug in URL' do
-        it 'redirects to URL with slug' do
-          get :show, locale: 'en', type: 'people', id: id
+      it 'queries the entity API' do
+        get :show, params
 
-          expect(response).to redirect_to("/en/explore/people/#{id}-#{slug_name}")
-        end
-      end
-
-      context 'with wrong slug in URL' do
-        it 'redirects to URL with slug' do
-          get :show, locale: 'en', type: 'people', id: id, slug: 'david'
-
-          expect(response).to redirect_to("/en/explore/people/#{id}-#{slug_name}")
-        end
-      end
-
-      context 'with slug in URL' do
-        let(:params) { { locale: 'en', type: 'people', id: id, slug: slug_name } }
-
-        it 'returns http success' do
-          get :show, params
-
-          expect(response).to have_http_status(:success)
-        end
-
-        it 'queries the entity API' do
-          get :show, params
-
-          expect(
-            a_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
-            with(query: hash_including(wskey: entities_api_key))
-          ).to have_been_made.once
-        end
+        expect(
+          a_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
+          with(query: hash_including(wskey: entities_api_key))
+        ).to have_been_made.once
       end
     end
   end
@@ -124,6 +106,10 @@ RSpec.describe EntitiesController do
   end
 
   describe '#entity_caching_enabled' do
+    before do
+      Rails.application.config.x.disable.view_caching = false
+    end
+
     context 'when entity caching is enabled' do
       before do
         Rails.application.config.x.enable.entity_page_caching = true

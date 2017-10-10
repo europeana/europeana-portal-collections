@@ -162,7 +162,7 @@ GEM
       multi_json (~> 1.0)
       rack (> 1.6.2)
       typhoeus (~> 1.1)
-    europeana-blacklight (1.0.0)
+    europeana-blacklight (1.1.0)
       blacklight (~> 6.0.0)
       europeana-api (~> 1.0.0)
       iso-639 (~> 0.2.5)
@@ -524,7 +524,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 1.0.0)
-  europeana-blacklight (~> 1.0.0)
+  europeana-blacklight (~> 1.1.0)
   europeana-feedback-button (= 0.0.4)
   europeana-i18n!
   europeana-logging (~> 0.2.3)
@@ -582,4 +582,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
