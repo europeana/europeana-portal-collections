@@ -205,7 +205,7 @@ class FacetPresenter
 
   def items_to_display(**options)
     items = facet_items.dup
-    %i{only order splice split}.each do |mod|
+    %i{only order splice split format_value_as}.each do |mod|
       items = send(:"apply_#{mod}_to_items", items, options) if send(:"apply_#{mod}_to_items?")
     end
     items
@@ -230,6 +230,10 @@ class FacetPresenter
     facet_config.split
   end
 
+  def apply_format_value_as_to_items?
+    facet_config.format_value_as.present?
+  end
+
   def apply_only_to_items(items, **_)
     items.select { |item| facet_config.only.call(item) }
   end
@@ -240,6 +244,13 @@ class FacetPresenter
 
   def apply_splice_to_items(items, **_)
     items.select { |item| facet_config.splice.call(@parent, item) } if facet_config.splice.present?
+  end
+
+  def apply_format_value_as_to_items(items, **_)
+    items.map! do |item|
+      item.value = facet_config.format_value_as.call(item.value)
+      item
+    end
   end
 
   ##

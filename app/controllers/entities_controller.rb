@@ -16,8 +16,10 @@ class EntitiesController < ApplicationController
 
   def show
     @body_cache_key = body_cache_key if entity_caching_enabled?
-    @entity = EDM::Entity.build_from_params(entity_params) unless body_cached? && entity_caching_enabled?
-
+    unless body_cached? && entity_caching_enabled?
+      @entity = EDM::Entity.build_from_params(entity_params)
+      @search_keys_search_results = search_keys_search_results
+    end
     respond_to do |format|
       format.html
       format.json { render json: @entity }
@@ -48,6 +50,14 @@ class EntitiesController < ApplicationController
 
   def entity_params
     params.permit(:locale, :type, :id).merge(api_response: entity)
+  end
+
+  def search_keys_search_results
+    @entity.search_keys.each_with_object({}) do |search_key, results|
+      entity_search_params = { q: @entity.search_query(search_key) }
+      (response, _documents) = search_results(entity_search_params)
+      results[search_key] = response
+    end
   end
 
   def slug
