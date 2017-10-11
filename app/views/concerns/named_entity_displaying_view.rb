@@ -46,7 +46,7 @@ module NamedEntityDisplayingView
   def foldable_link?(field, val)
     return false unless named_entity_link_field?(field)
     return false unless val.is_a?(String)
-    return val =~  /\A#{URI::regexp(['http', 'https'])}\z/
+    val =~ /\A#{URI.regexp(%w(http https))}\z/
   end
 
   def named_entity_link_field?(field)
