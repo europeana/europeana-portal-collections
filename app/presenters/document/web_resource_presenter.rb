@@ -73,7 +73,7 @@ module Document
 
     def url
       @url ||= begin
-        url = field_value('about', unescape: true)
+        url = document.fetch('about', nil)
         @controller.url_conversions[url] || url
       end
     end
