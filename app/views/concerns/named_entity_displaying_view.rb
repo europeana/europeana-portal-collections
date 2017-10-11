@@ -22,7 +22,7 @@ module NamedEntityDisplayingView
   end
 
   def named_entity_field_label(entity, field, i18n)
-    val = normalise_named_entity(entity[field.to_sym], named_entity_link_field?(field))
+    val = normalise_named_entity(entity[field.to_sym])
 
     if val.present?
       val = val.first if val.is_a?(Array) && val.size == 1
@@ -33,7 +33,7 @@ module NamedEntityDisplayingView
         val: multi ? nil : val,
         vals: multi ? val : nil,
         multi: multi,
-        foldable_link: named_entity_link_field?(field)
+        foldable_link: foldable_link?(field, val)
       }
     end
   end
@@ -43,20 +43,26 @@ module NamedEntityDisplayingView
     map.key?(field) ? map[field] : field
   end
 
+  def foldable_link?(field, val)
+    return false unless named_entity_link_field?(field)
+    return false unless val.is_a?(String)
+    return val =~  /\A#{URI::regexp(['http', 'https'])}\z/
+  end
+
   def named_entity_link_field?(field)
     %i(about broader).include?(field)
   end
 
-  def normalise_named_entity(named_entity, foldable_link = false)
+  def normalise_named_entity(named_entity)
     return [] if named_entity.nil?
     return named_entity unless named_entity.is_a?(Hash)
     return named_entity[:def] if named_entity.key?(:def) && named_entity.size == 1
 
     named_entity.map do |key, val|
       if key && val.nil?
-        { val: key, key: nil, foldable_link: foldable_link }
+        { val: key, key: nil, foldable_link: false }
       else
-        { key: key, val: val, foldable_link: foldable_link }
+        { key: key, val: val, foldable_link: foldable_link?(key, val) }
       end
     end
   end
