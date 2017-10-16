@@ -13,27 +13,26 @@ module NamedEntityDisplayingView
   end
 
   def named_entity_fields(edm, i18n, *args)
+    properties = %i(about prefLabel) + (args || [])
     document.fetch(edm, []).map do |entity|
-      properties = %i(about prefLabel) + (args || [])
       properties.map do |f|
-        named_entity_field_label(entity, f, i18n)
+        named_entity_field_content(entity, f, i18n)
       end
     end.flatten.compact
   end
 
-  def named_entity_field_label(entity, field, i18n)
+  def named_entity_field_content(entity, field, i18n)
     val = normalise_named_entity(entity[field.to_sym])
 
     if val.present?
       val = val.first if val.is_a?(Array) && val.size == 1
       multi = (val.is_a?(Hash) || val.is_a?(Array)) && (val.size > 1)
-
       {
         key: t(named_entity_field_label_i18n_key(field), scope: "site.object.named-entities.#{i18n}"),
         val: multi ? nil : val,
         vals: multi ? val : nil,
         multi: multi,
-        foldable_link: foldable_link?(field, val)
+        foldable_link: linkable_named_entity_value?(field, val)
       }
     end
   end
@@ -43,10 +42,10 @@ module NamedEntityDisplayingView
     map.key?(field) ? map[field] : field
   end
 
-  def foldable_link?(field, val)
+  def linkable_named_entity_value?(field, val)
     return false unless named_entity_link_field?(field)
     return false unless val.is_a?(String)
-    val =~ /\A#{URI.regexp(%w(http https))}\z/
+    !!(val =~ /\A#{URI.regexp(%w(http https))}\z/)
   end
 
   def named_entity_link_field?(field)
@@ -56,13 +55,17 @@ module NamedEntityDisplayingView
   def normalise_named_entity(named_entity)
     return [] if named_entity.nil?
     return named_entity unless named_entity.is_a?(Hash)
-    return named_entity[:def] if named_entity.key?(:def) && named_entity.size == 1
+
+    if named_entity.key?(:def) && named_entity.size == 1 && named_entity[:def].size == 1
+      return named_entity[:def]
+    end
 
     named_entity.map do |key, val|
       if key && val.nil?
-        { val: key, key: nil, foldable_link: false }
+        # TODO: What is the use case for this?
+        { val: key, key: nil }
       else
-        { key: key, val: val, foldable_link: foldable_link?(key, val) }
+        { key: key, val: val }
       end
     end
   end
