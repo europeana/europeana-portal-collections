@@ -58,15 +58,9 @@ RSpec.describe NamedEntityDisplayingView do
         it 'should normalise all' do
           expect(subject).to be_a(Array)
           expect(subject.size).to eq(2)
-          expect(subject.all? { |element| element.is_a?(Hash) }).to be true
 
-          english = subject.detect { |element| element[:key] == :en }
-          expect(english).not_to be_nil
-          expect(english[:val]).to eq(value[:en])
-
-          french = subject.detect { |element| element[:key] == :fr }
-          expect(french).not_to be_nil
-          expect(french[:val]).to eq(value[:fr])
+          expect(subject).to include({ key: :en, val: value[:en] })
+          expect(subject).to include({ key: :fr, val: value[:fr] })
         end
       end
 
@@ -83,11 +77,7 @@ RSpec.describe NamedEntityDisplayingView do
           let(:value) { { def: ['Value 1', 'Value 2'] } }
 
           it 'should be normalised' do
-            expect(subject).to be_a(Array)
-            expect(subject.size).to eq(1)
-            expect(subject.first).to be_a(Hash)
-            expect(subject.first[:key]).to eq(:def)
-            expect(subject.first[:val]).to eq(value[:def])
+            expect(subject).to eq([{ key: :def, val: value[:def] }])
           end
         end
       end
