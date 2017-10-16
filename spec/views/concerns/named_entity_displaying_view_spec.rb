@@ -59,8 +59,8 @@ RSpec.describe NamedEntityDisplayingView do
           expect(subject).to be_a(Array)
           expect(subject.size).to eq(2)
 
-          expect(subject).to include({ key: :en, val: value[:en] })
-          expect(subject).to include({ key: :fr, val: value[:fr] })
+          expect(subject).to include(key: :en, val: value[:en])
+          expect(subject).to include(key: :fr, val: value[:fr])
         end
       end
 
