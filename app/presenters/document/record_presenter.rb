@@ -1,9 +1,19 @@
+# frozen_string_literal: true
+
 module Document
   ##
   # Blacklight document presenter for a Europeana record
-  class RecordPresenter < DocumentPresenter
+  class RecordPresenter < ApplicationPresenter
+    include BlacklightDocumentPresenter
     include Record::IIIF
     include Metadata::Rights
+
+    attr_reader :document, :controller
+
+    def initialize(document, controller)
+      @document = document
+      @controller = controller
+    end
 
     def edm_is_shown_at
       @edm_is_shown_at ||= aggregation.fetch('edmIsShownAt', nil)
@@ -62,7 +72,7 @@ module Document
           end
         end
         presenters = salient_web_resources.map do |web_resource|
-          Document::WebResourcePresenter.new(web_resource, @controller, @configuration, @document, self)
+          Document::WebResourcePresenter.new(web_resource, controller, document, self)
         end
         presenters.uniq(&:url)
       end
@@ -82,8 +92,7 @@ module Document
     end
 
     def field_group(id)
-      @field_group_presenter ||= Document::FieldGroupPresenter.new(document, controller)
-      @field_group_presenter.display(id)
+      Document::FieldGroupPresenter.new(document, controller, id).display
     end
   end
 end

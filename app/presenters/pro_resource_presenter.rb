@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 ##
 # Presenter for resources from Pro via JSON API
-class ProResourcePresenter
+class ProResourcePresenter < ApplicationPresenter
   include ActionView::Helpers
 
   attr_reader :resource, :view

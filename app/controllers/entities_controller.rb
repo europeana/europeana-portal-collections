@@ -5,7 +5,6 @@ class EntitiesController < ApplicationController
 
   attr_reader :body_cache_key
 
-  before_action :ensure_entity_page_enabled, only: :show
   before_action :enforce_slug, only: :show
 
   def suggest
@@ -27,11 +26,6 @@ class EntitiesController < ApplicationController
   end
 
   private
-
-  # Generate 404 unless entity feature is enabled.
-  def ensure_entity_page_enabled
-    raise ActiveRecord::RecordNotFound unless Rails.application.config.x.enable.entity_page
-  end
 
   def enforce_slug
     redirect_to url_for(slug: slug, format: params[:format]) unless params[:slug] == slug

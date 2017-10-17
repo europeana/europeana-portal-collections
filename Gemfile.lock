@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 560dd90cfb7111fb03946019ae27c80886314344
+  revision: 4c9ee15657303c9ff38b117f6ae13cba696254c2
   branch: develop
   specs:
     europeana-i18n (0.0.1)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: ff6a100acb6fdb0550a9863fdbe5f1cf1f98d12e
+  revision: 2e65938751c5ec385129af0e860c29c080d06b2c
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -172,7 +172,7 @@ GEM
       multi_json (~> 1.0)
       rack (> 1.6.2)
       typhoeus (~> 1.1)
-    europeana-blacklight (1.0.0)
+    europeana-blacklight (1.1.0)
       blacklight (~> 6.0.0)
       europeana-api (~> 1.0.0)
       iso-639 (~> 0.2.5)
@@ -240,8 +240,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
-    i18n (0.9.0)
-      concurrent-ruby (~> 1.0)
+    i18n (0.8.6)
     i18n_data (0.8.0)
     ipaddress (0.8.3)
     iso-639 (0.2.8)
@@ -535,7 +534,7 @@ DEPENDENCIES
   devise (~> 3.5.4)
   dotenv-rails (~> 2.0)
   europeana-api (~> 1.0.0)
-  europeana-blacklight (~> 1.0.0)
+  europeana-blacklight (~> 1.1.0)
   europeana-feed-jobs!
   europeana-feedback-button (= 0.0.4)
   europeana-i18n!

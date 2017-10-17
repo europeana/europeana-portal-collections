@@ -39,6 +39,10 @@ Rails.application.config.x.enable = OpenStruct.new(
   events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
   search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
   search_form_autocomplete_extended_info: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE_EXTENDED_INFO'],
-  entity_page: ENV['ENABLE_ENTITY_PAGE'],
   entity_page_caching: ENV['ENABLE_ENTITY_PAGE_CACHING']
+)
+
+# Environment specific blacklight settings
+Rails.application.config.x.blacklight = OpenStruct.new(
+  extra_year_facet_collections: ENV['EXTRA_YEAR_FACET_COLLECTIONS'].to_s.split
 )
