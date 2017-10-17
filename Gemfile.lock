@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/europeana/europeana-feed-jobs
+  revision: 746098581071e40c476bfc4b8fe6dbccd933c3a7
+  branch: develop
+  specs:
+    europeana-feed-jobs (0.0.1)
+      dotenv-rails (~> 2.1)
+      feedjira (~> 2.0)
+      rails (~> 4.2.9)
+
+GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
   revision: 560dd90cfb7111fb03946019ae27c80886314344
   branch: develop
@@ -230,7 +240,8 @@ GEM
       domain_name (~> 0.5)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
-    i18n (0.8.6)
+    i18n (0.9.0)
+      concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     ipaddress (0.8.3)
     iso-639 (0.2.8)
@@ -525,6 +536,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.0)
   europeana-api (~> 1.0.0)
   europeana-blacklight (~> 1.0.0)
+  europeana-feed-jobs!
   europeana-feedback-button (= 0.0.4)
   europeana-i18n!
   europeana-logging (~> 0.2.3)
