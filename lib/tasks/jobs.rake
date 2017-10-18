@@ -34,10 +34,7 @@ namespace :jobs do
 
     desc 'Queue Cache::Feed jobs (blogs / exhibitions / Custom)'
     task feeds: :environment do
-      exhibitions_urls = %i(de en).each_with_object({}) do |locale, hash|
-         hash[locale] = (ENV['EXHIBITIONS_HOST'] || 'http://www.europeana.eu') + "/portal/#{locale}/exhibitions/feed.xml"
-       end
-      exhibitions_urls.values.each do |url|
+      Feed.exhibitions_urls.values.each do |url|
         Europeana::FeedJobs::FeedJob.perform_later(url)
       end
       Feed.all.each do |feed|

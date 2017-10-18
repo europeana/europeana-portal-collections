@@ -11,6 +11,12 @@ class Feed < ActiveRecord::Base
 
   acts_as_url :name, url_attribute: :slug, only_when_blank: true, allow_duplicates: false
 
+  def self.exhibitions_urls
+    %i(de en).each_with_object({}) do |locale, hash|
+      hash[locale] = (ENV['EXHIBITIONS_HOST'] || 'http://www.europeana.eu') + "/portal/#{locale}/exhibitions/feed.xml"
+    end
+  end
+
   def html_url
     if tumblr?
       url.sub('/rss', '')

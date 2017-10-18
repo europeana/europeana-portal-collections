@@ -11,13 +11,7 @@ module NavigableView
     @feeds_included_in_nav_urls ||= begin
       all_blog_feed = Feed.find_by_slug('all-blog')
       all_blog_url = all_blog_feed.present? ? all_blog_feed.url : nil
-      (exhibitions_urls.values + [all_blog_url]).compact
-    end
-  end
-
-  def exhibitions_urls
-    @exhibitions_urls ||= %i(de en).each_with_object({}) do |locale, hash|
-      hash[locale] = (ENV['EXHIBITIONS_HOST'] || 'http://www.europeana.eu') + "/portal/#{locale}/exhibitions/feed.xml"
+      (Feed.exhibitions_urls.values + [all_blog_url]).compact
     end
   end
 
@@ -86,7 +80,7 @@ module NavigableView
   protected
 
   def exhibitions_feed_key
-    @exhibitions_feed_key ||= exhibitions_urls.key?(I18n.locale) ? I18n.locale : :en
+    @exhibitions_feed_key ||= Feed.exhibitions_urls.key?(I18n.locale) ? I18n.locale : :en
   end
 
   def submenu_has_current_page?(submenu)
@@ -176,7 +170,7 @@ module NavigableView
 
   def navigation_global_primary_nav_exhibitions_submenu_items
     mustache[:navigation_global_primary_nav_exhibitions_submenu_items] ||= begin
-      feed_items = feed_entry_nav_items(exhibitions_urls[exhibitions_feed_key], 6)
+      feed_items = feed_entry_nav_items(Feed.exhibitions_urls[exhibitions_feed_key], 6)
       feed_items << link_item(t('global.navigation.all_exhibitions'), exhibitions_foyer_path(exhibitions_feed_key),
                               is_morelink: true)
     end
