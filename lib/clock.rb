@@ -6,7 +6,7 @@ include Clockwork
 
 unless ENV['DISABLE_SCHEDULED_JOBS']
   every(1.day, 'cache.feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
-   Feed.exhibitions_urls.values.each do |url|
+    Feed.exhibitions_urls.values.each do |url|
       Europeana::FeedJobs::FeedJob.perform_later(url)
     end
   end
