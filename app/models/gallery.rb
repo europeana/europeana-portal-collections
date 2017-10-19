@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..48
 
@@ -76,7 +77,8 @@ class Gallery < ActiveRecord::Base
     transaction do
       enumerable_image_portal_urls.map { |url| Europeana::Record.id_from_portal_url(url) }.tap do |record_ids|
         record_ids.each_with_index do |record_id, i|
-          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id).tap do |image|
+          edm_is_shown_by = response_items.detect { |record| record['id'] == record_id }['edmIsShownBy']
+          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id, edm_is_shown_by: edm_is_shown_by).tap do |image|
             image.update_attributes(position: i + 1)
           end
         end
@@ -123,14 +125,7 @@ class Gallery < ActiveRecord::Base
   def validate_image_source_items
     return if errors[:image_portal_urls].any?
 
-    record_ids = enumerable_image_portal_urls.each_with_object({}) do |url, map|
-      map[url] = Europeana::Record.id_from_portal_url(url)
-    end
-
-    api_query = Europeana::Record.search_api_query_for_record_ids(record_ids.values)
-    response_items = Europeana::API.record.search(query: api_query, profile: 'rich', rows: 100)['items'] || []
-
-    record_ids.each_pair do |url, record_id|
+    record_id_url_pairs.each_pair do |url, record_id|
       item = response_items.detect { |response_item| response_item['id'] == record_id }
       if item.blank?
         errors.add(:image_portal_urls, %(item not found by the API: "#{url}"))
@@ -141,6 +136,21 @@ class Gallery < ActiveRecord::Base
         unless item['type'] == 'IMAGE'
           errors.add(:image_portal_urls, %(item has type "#{item['type']}", not "IMAGE": "#{url}"))
         end
+      end
+    end
+  end
+
+  def response_items
+    @response_items ||= begin
+      api_query = Europeana::Record.search_api_query_for_record_ids(record_id_url_pairs.values)
+      Europeana::API.record.search(query: api_query, profile: 'rich', rows: 100)['items'] || []
+    end
+  end
+
+  def record_id_url_pairs
+    @record_id_url_pairs ||= begin
+      enumerable_image_portal_urls.each_with_object({}) do |url, map|
+        map[url] = Europeana::Record.id_from_portal_url(url)
       end
     end
   end
