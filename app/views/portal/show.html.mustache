@@ -1,3 +1,8 @@
 {{>atoms/meta/_head}}
-{{>templates/Search/Search-object}}
+{{#channel_object}}
+  {{> templates/Search/Channels-object}}
+{{/channel_object}}
+{{^channel_object}}
+  {{> templates/Search/Search-object}}
+{{/channel_object}}
 {{>atoms/meta/_foot}}

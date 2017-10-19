@@ -9,6 +9,14 @@ module Portal
 
     delegate :field_value, to: :presenter
 
+    def bodyclass
+      params[:new_item_page].to_s == 'true' ? 'channels-item' : ''
+    end
+
+    def channel_object
+      params[:new_item_page].to_s == 'true'
+    end
+
     def head_links
       mustache[:head_links] ||= begin
         { items: oembed_links + super[:items] }

@@ -14,6 +14,9 @@ module AssettedView
 
   def js_vars
     page_name = (params[:controller] || '') + '/' + (params[:action] || '')
+    if(params[:new_item_page].to_s == 'true')
+      page_name = page_name.sub('portal/show', 'portal/show-new')
+    end
     [
       {
         name: 'pageName', value: page_name
