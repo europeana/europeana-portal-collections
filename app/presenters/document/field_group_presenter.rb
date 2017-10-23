@@ -34,7 +34,7 @@ module Document
       {
         title: display_title,
         sections: display_sections,
-        section_id: @id
+        id: @id
       }
     end
 
