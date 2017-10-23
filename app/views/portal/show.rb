@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
@@ -9,13 +10,26 @@ module Portal
 
     delegate :field_value, to: :presenter
 
+    # TODO: remove when new design is default
     def bodyclass
-      params[:new_item_page].to_s == 'true' ? 'channels-item' : ''
+      new_design? ? 'channels-item' : ''
     end
 
-    def channel_object
-      params[:new_item_page].to_s == 'true'
+    # TODO: remove when new design is default
+    def js_vars
+      return super unless new_design?
+      super.tap do |vars|
+        page_name_var = vars.detect { |var| var[:name] == 'pageName' }
+        page_name_var[:value] = page_name_var[:value] + '-new'
+      end
     end
+
+    # Are we rendering the new design?
+    # TODO: remove when new design is default
+    def new_design?
+      @new_design
+    end
+    alias_method :new_design, :new_design?
 
     def head_links
       mustache[:head_links] ||= begin
