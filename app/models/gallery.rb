@@ -113,7 +113,7 @@ class Gallery < ActiveRecord::Base
   # records coming from `image_portal_urls` meet certain minimum criteria:
   # * is returned by the API
   # * has an edm:isShownBy
-  # * has type="IMAGE"
+  # * has type="IMAGE" or "TEXT"
   # Records not meeting these will be invalid.
   #
   # While is is not ideal making HTTP requests here in the model, we need
@@ -127,6 +127,7 @@ class Gallery < ActiveRecord::Base
   def validate_image_source_items
     return if errors[:image_portal_urls].any?
 
+    allowed_types = %w(IMAGE TEXT)
     record_id_url_pairs.each_pair do |url, record_id|
       item = response_items.detect { |response_item| response_item['id'] == record_id }
       if item.blank?
@@ -135,8 +136,8 @@ class Gallery < ActiveRecord::Base
         unless item['edmIsShownBy'].present?
           errors.add(:image_portal_urls, %(item has no edm:isShownBy: "#{url}"))
         end
-        unless item['type'] == 'IMAGE'
-          errors.add(:image_portal_urls, %(item has type "#{item['type']}", not "IMAGE": "#{url}"))
+        unless allowed_types.include?(item['type'])
+          errors.add(:image_portal_urls, %(item has type "#{item['type']}", not #{allowed_types.join(' or ')}: "#{url}"))
         end
       end
     end

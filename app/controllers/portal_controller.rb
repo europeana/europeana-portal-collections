@@ -70,6 +70,9 @@ class PortalController < ApplicationController
 
     @mlt_query = @document.more_like_this_query
 
+    # TODO: remove when new design is default
+    @new_design = params[:design] == 'new'
+
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|

@@ -228,14 +228,24 @@ RSpec.describe Gallery do
         end
       end
 
-      context 'when items in API response are not type="IMAGE"' do
+      context 'when items in API response are type="TEXT"' do
+        let(:gallery_image_search_api_response_options) { { type: 'TEXT' } }
+        it 'is valid' do
+          gallery = galleries(:empty)
+          gallery.image_portal_urls = gallery_image_portal_urls
+          expect(gallery).to be_valid
+          expect(gallery.errors[:image_portal_urls]).to be_none
+        end
+      end
+
+      context 'when items in API response are type="SOUND"' do
         let(:gallery_image_search_api_response_options) { { type: 'SOUND' } }
         it 'is invalid' do
           gallery = galleries(:empty)
           gallery.image_portal_urls = gallery_image_portal_urls
           expect(gallery).not_to be_valid
           expect(gallery.errors[:image_portal_urls]).not_to be_none
-          expect(gallery.errors[:image_portal_urls]).to include(match('item has type "SOUND", not "IMAGE"'))
+          expect(gallery.errors[:image_portal_urls]).to include(match('item has type "SOUND", not'))
         end
       end
 

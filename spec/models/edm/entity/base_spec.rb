@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require 'helpers/i18n_helper_examples'
+
 RSpec.describe EDM::Entity::Base do
+  it_behaves_like 'i18n_helper'
+
   describe '.subclass_for_human_type' do
     subject { described_class.subclass_for_human_type(human_type) }
 
