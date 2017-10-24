@@ -1,11 +1,11 @@
 # frozen_string_literal: true
+
 require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController do
-  # workaround for https://github.com/jnicklas/capybara/issues/1396
-  include RSpec::Matchers.clone
-
-  it { expect(subject.class.ancestors.include?(Europeana::AnnotationsApiConsumer)).to eq(true) }
+  it 'is an Annotations API consumer' do
+    expect(subject.class.ancestors).to include(Europeana::AnnotationsApiConsumer)
+  end
 
   describe 'GET index' do
     context 'when the format is html' do
@@ -206,6 +206,24 @@ RSpec.describe PortalController do
               expect(assigns[:url_conversions]).to have_key('http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/abc/123')
             end
           end
+        end
+      end
+    end
+
+    describe 'URL param `design`' do
+      context 'when "new"' do
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'html', design: 'new' } }
+        it 'sets @new_design to true' do
+          get :show, params
+          expect(assigns(:new_design)).to be true
+        end
+      end
+
+      context 'when absent' do
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+        it 'sets @new_design to false' do
+          get :show, params
+          expect(assigns(:new_design)).to be false
         end
       end
     end
