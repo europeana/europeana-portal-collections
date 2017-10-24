@@ -59,7 +59,7 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def fb_campaigns_on
-    true
+    true unless Rails.env.test?
   end
 
   def page_config

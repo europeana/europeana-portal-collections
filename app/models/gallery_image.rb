@@ -6,7 +6,7 @@ class GalleryImage < ActiveRecord::Base
   validates :gallery, presence: true
   validates :europeana_record_id,
             presence: true, format: { with: Europeana::Record::ID_PATTERN }
-  validates :edm_is_shown_by, presence: true
+  validates :image_url, presence: true
 
   ##
   # Gets the URL of the item on the portal that this gallery image represents

@@ -46,7 +46,7 @@ RSpec.describe Gallery do
     end
   end
 
-  def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/pic/%{n}.html')
+  def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/sample/record%{n}.html')
     (1..number).map { |n| format(format, n: n) }.join(' ')
   end
 
@@ -137,15 +137,15 @@ RSpec.describe Gallery do
         expect(gallery.images.count).to eq(10)
         gallery.images.reload
         (1..10).each do |number|
-          expect(gallery.images.detect { |image| image.europeana_record_id == "/pic/#{number}" }).not_to be_blank
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/sample/record#{number}" }).not_to be_blank
         end
       end
 
       it 'should set image position' do
         gallery.save
         gallery.images.reload
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/1' }.position).to eq(1)
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/2' }.position).to eq(2)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.position).to eq(1)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.position).to eq(2)
       end
     end
 
@@ -157,23 +157,23 @@ RSpec.describe Gallery do
         gallery.save
         gallery.images.reload
         (1..20).each do |number|
-          expect(gallery.images.detect { |image| image.europeana_record_id == "/pic/#{number}" }).not_to be_blank
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/sample/record#{number}" }).not_to be_blank
         end
       end
 
       it 'should set image position' do
-        gallery.images.find_by_europeana_record_id('/pic/1').update_attributes(position: 2)
-        gallery.images.find_by_europeana_record_id('/pic/2').update_attributes(position: 1)
+        gallery.images.find_by_europeana_record_id('/sample/record1').update_attributes(position: 2)
+        gallery.images.find_by_europeana_record_id('/sample/record2').update_attributes(position: 1)
         gallery.image_portal_urls = gallery_image_portal_urls(number: 20)
         gallery.save
         gallery.images.reload
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/1' }.position).to eq(1)
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/2' }.position).to eq(2)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.position).to eq(1)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.position).to eq(2)
       end
 
       it 'should delete images for absent URLs' do
         gallery.image_portal_urls = gallery_image_portal_urls(number: 8)
-        gallery.save
+        gallery.save!
         expect(gallery.images.reload.count).to eq(8)
       end
     end

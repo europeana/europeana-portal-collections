@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 20171018122656) do
     t.integer  "position"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.text     "edm_is_shown_by",     null: false
+    t.text     "image_url",           null: false
   end
 
   add_index "gallery_images", ["position"], name: "index_gallery_images_on_position", using: :btree

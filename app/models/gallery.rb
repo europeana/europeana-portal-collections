@@ -37,7 +37,7 @@ class Gallery < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
-  before_save :ensure_unique_title
+  before_save :ensure_unique_title, :clear_api_responses
   after_save :set_images_from_portal_urls
 
   attr_writer :image_portal_urls
@@ -76,13 +76,15 @@ class Gallery < ActiveRecord::Base
   def set_images_from_portal_urls
     transaction do
       enumerable_image_portal_urls.map { |url| Europeana::Record.id_from_portal_url(url) }.tap do |record_ids|
+        matched_ids = []
         record_ids.each_with_index do |record_id, i|
-          edm_is_shown_by = response_items.detect { |record| record['id'] == record_id }['edmIsShownBy']
-          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id, edm_is_shown_by: edm_is_shown_by).tap do |image|
+          image_url = response_items.detect { |record| record['id'] == record_id }['edmIsShownBy'].first
+          GalleryImage.find_or_create_by!(gallery: self, europeana_record_id: record_id, image_url: image_url).tap do |image|
             image.update_attributes(position: i + 1)
+            matched_ids << image.id
           end
         end
-        images.where.not(europeana_record_id: record_ids).destroy_all
+        images.where.not(id: matched_ids).delete_all
       end
     end
   end
@@ -163,6 +165,11 @@ class Gallery < ActiveRecord::Base
       unique_title = "#{title} #{i}"
     end
     self.title = unique_title
+  end
+
+  def clear_api_responses
+    @record_id_url_pairs = nil
+    @response_items = nil
   end
 
   def validate_number_of_categorisations
