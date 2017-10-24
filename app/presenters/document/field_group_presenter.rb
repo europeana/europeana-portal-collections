@@ -33,7 +33,8 @@ module Document
 
       {
         title: display_title,
-        sections: display_sections
+        sections: display_sections,
+        id: @id
       }
     end
 
