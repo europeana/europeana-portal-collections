@@ -8,3 +8,4 @@ class GalleryValidationMailer < ApplicationMailer
     mail(to: Rails.application.config.x.gallery_validation_mail_to, subject: 'Automated Gallery Validation')
   end
 end
+

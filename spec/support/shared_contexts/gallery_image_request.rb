@@ -22,7 +22,6 @@ RSpec.shared_context 'Gallery Image request', :gallery_image_request do
 
   let(:gallery_image_search_api_response_options) { {} }
 
-
   def gallery_image_search_api_response(ids, **options)
     options.reverse_merge!(item: true, edm_is_shown_by: true, type: 'IMAGE')
     {
