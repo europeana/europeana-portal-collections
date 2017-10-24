@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..48
 
@@ -38,6 +39,9 @@ class Gallery < ActiveRecord::Base
 
   before_save :ensure_unique_title
   after_save :set_images_from_portal_urls
+
+  after_save :store_annotations
+  around_destroy :destroy_annotations
 
   attr_writer :image_portal_urls
 
@@ -171,5 +175,21 @@ class Gallery < ActiveRecord::Base
       end
       save
     end
+  end
+
+  private
+
+  def store_annotations
+    if published?
+      StoreGalleryAnnotationsJob.perform_later(id)
+    else
+      StoreGalleryAnnotationsJob.perform_later(to_param)
+    end
+  end
+
+  def destroy_annotations
+    gallery_param = to_param
+    yield
+    StoreGalleryAnnotationsJob.perform_later(gallery_param)
   end
 end

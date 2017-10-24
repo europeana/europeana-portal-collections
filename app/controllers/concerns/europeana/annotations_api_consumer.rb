@@ -2,6 +2,8 @@
 module Europeana
   ##
   # Methods for working with the Europeana Annotations API
+  #
+  # TODO: should this be a helper, as it's included by `StoreGalleryAnnotationsJob`?
   module AnnotationsApiConsumer
     extend ActiveSupport::Concern
 
@@ -24,6 +26,11 @@ module Europeana
     end
 
     def annotations_search_for_document(record_id, **local_params)
+      local_params[:qf] ||= []
+      local_params[:qf] += [
+        %(generator_name:#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu*'}),
+        %(target_uri:"http://data.europeana.eu/item#{record_id}")
+      ]
       Europeana::API.annotation.search(annotations_api_search_params(record_id, local_params))
     end
 
@@ -58,12 +65,8 @@ module Europeana
       end
     end
 
-    def annotations_api_search_params(record_id, **local_params)
+    def annotations_api_search_params(**local_params)
       {
-        qf: [
-          %(generator_name:#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu*'}),
-          %(target_uri:"http://data.europeana.eu/item#{document_id}")
-        ] + (local_params.delete(:qf) || []),
         query: '*:*',
         pageSize: 100
       }.reverse_merge(annotations_api_env_params).merge(local_params)
