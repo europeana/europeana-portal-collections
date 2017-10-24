@@ -9,6 +9,8 @@ module EDM
 
       attr_accessor :id, :locale, :api_response
 
+      delegate :t, to: I18n
+
       class << self
         attr_reader :human_type
 
