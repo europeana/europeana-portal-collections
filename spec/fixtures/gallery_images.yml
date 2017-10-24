@@ -2,10 +2,10 @@ fashion_dresses_image1:
   gallery: fashion_dresses
   europeana_record_id: /sample/record1
   position: 1
-  image_url: https://provider-site.eu/sample1.jpg
+  image_url: http://www.example.com/media/sample/record1
 
 fashion_dresses_image2:
   gallery: fashion_dresses
   europeana_record_id: /sample/record2
   position: 2
-  image_url: https://provider-site.eu/sample2.jpg
+  image_url: http://www.example.com/media/sample/record2

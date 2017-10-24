@@ -22,9 +22,8 @@ class GalleryValidationJob < ApplicationJob
     europeana_id = gallery_image.europeana_record_id
     stored_image_url = gallery_image.image_url
     api_document = api_search_response.detect { |record| record['id'] == europeana_id }
-
     if api_document
-      unless api_document['edmIsShownBy']&.first == stored_image_url
+      unless api_document['edmIsShownBy'] == stored_image_url
         errors << "edm:isShownBy for image '#{europeana_id}' has changed"
       end
       unless retrievable_image?(stored_image_url)
@@ -47,7 +46,8 @@ class GalleryValidationJob < ApplicationJob
     response = download_response(is_shown_by)
     return false unless response
     content_type = response.headers[:content_type]
-    false unless content_type&.start_with?('image')
+    return false unless content_type&.start_with?('image')
+    true
   end
 
   def download_response(url)
