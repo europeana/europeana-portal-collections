@@ -40,8 +40,9 @@ class Gallery < ActiveRecord::Base
   before_save :ensure_unique_title
   after_save :set_images_from_portal_urls
 
-  after_save :store_annotations
-  around_destroy :destroy_annotations
+  after_save :store_annotations, if: :store_annotations_after_save?
+  after_save :destroy_annotations, if: :destroy_annotations_after_save?
+  after_destroy :destroy_annotations, if: :annotate_records?
 
   attr_writer :image_portal_urls
 
@@ -179,17 +180,28 @@ class Gallery < ActiveRecord::Base
 
   private
 
+  # Should we write annotations to the Europeana Annotations API linking records
+  # to the galleries they are included in?
+  #
+  # @return [Boolean]
+  def annotate_records?
+    Rails.application.config.x.europeana[:annotations].api_user_token_gallery.present? &&
+      Rails.application.config.x.enable.gallery_annotations
+  end
+
   def store_annotations
-    if published?
-      StoreGalleryAnnotationsJob.perform_later(id)
-    else
-      StoreGalleryAnnotationsJob.perform_later(to_param)
-    end
+    StoreGalleryAnnotationsJob.perform_later(id)
   end
 
   def destroy_annotations
-    gallery_param = to_param
-    yield
-    StoreGalleryAnnotationsJob.perform_later(gallery_param)
+    StoreGalleryAnnotationsJob.perform_later(to_param)
+  end
+
+  def store_annotations_after_save?
+    published? && annotate_records?
+  end
+
+  def destroy_annotations_after_save?
+    !published? && annotate_records?
   end
 end

@@ -28,7 +28,7 @@ module Europeana
     def annotations_search_for_document(record_id, **local_params)
       local_params[:qf] ||= []
       local_params[:qf] += [
-        %(generator_name:#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu*'}),
+        %(generator_name:#{Rails.application.config.x.europeana[:annotations].api_generator_name'] || 'Europeana.eu*'}),
         %(target_uri:"http://data.europeana.eu/item#{record_id}")
       ]
       Europeana::API.annotation.search(annotations_api_search_params(record_id, local_params))
@@ -85,8 +85,8 @@ module Europeana
 
     def annotations_api_env_params
       {
-        wskey: ENV['EUROPEANA_ANNOTATIONS_API_KEY'] || Europeana::API.key,
-        api_url: ENV['EUROPEANA_ANNOTATIONS_API_URL'] || Europeana::API.url,
+        wskey: Rails.application.config.x.europeana[:annotations].api_key || Europeana::API.key,
+        api_url: Rails.application.config.x.europeana[:annotations].api_url || Europeana::API.url,
       }
     end
   end

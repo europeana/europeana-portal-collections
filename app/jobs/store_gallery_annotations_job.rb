@@ -4,9 +4,10 @@
 # Creates and deletes annotations via the Annotations API representing the
 # inclusion in a gallery of Europeana items.
 #
-# TODO: remove debug logging once code reviewed
 # TODO: write specs
 # TODO: do any of these methods belong in `AnnotationsApiConsumer`?
+# TODO: ideally this job should be deferred from execution if any other instances
+#       of the job are already running for the same value of gallery_id_or_param
 class StoreGalleryAnnotationsJob < ActiveJob::Base
   include Europeana::AnnotationsApiConsumer
 
@@ -81,9 +82,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
       unless annotation_targets.include?(target)
         logger.info("Creating annotation linking #{target} to #{gallery_url}".green.bold)
         body = annotation_body(target)
-        logger.debug("Annotation body: #{body.inspect}".blue.bold)
         response = Europeana::API.annotation.create(user_authenticated_params.merge(body: body.to_json))
-        logger.debug("API response: #{response.inspect}".yellow.bold)
       end
     end
   end
@@ -92,7 +91,6 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
   def delete_annotations
     @api_annotations.each do |anno|
       unless gallery_annotation_targets.include?(anno['target'])
-        logger.info("Deleting annotation #{anno.inspect}".red.bold)
         logger.info("Deleting annotation #{anno['id']}".red.bold)
         split_anno_id = anno['id'].split('/')
 
@@ -102,7 +100,6 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
         }.reverse_merge(user_authenticated_params)
 
         response = Europeana::API.annotation.delete(anno_delete_params)
-        logger.debug("API response: #{response.inspect}".yellow.bold)
       end
     end
   end
@@ -123,7 +120,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
 
   def user_authenticated_params
     {
-      userToken: ENV['EUROPEANA_ANNOTATIONS_API_USER_TOKEN'] || ''
+      userToken: Rails.application.config.x.europeana[:annotations].api_user_token_gallery || ''
     }.reverse_merge(annotations_api_env_params)
   end
 
