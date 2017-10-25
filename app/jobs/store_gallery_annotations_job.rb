@@ -17,6 +17,8 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
   # @param gallery_id_or_param [String] `Gallery#to_param` value of the gallery
   #   to delete annotations for
   def perform(gallery_id_or_param)
+    fail "Gallery annotations functionality is not configured." unless Gallery.annotate_records?
+
     case gallery_id_or_param
     when Integer
       @gallery = Gallery.find(gallery_id_or_param)
