@@ -79,7 +79,7 @@ class Gallery < ActiveRecord::Base
         matched_ids = []
         record_ids.each_with_index do |record_id, i|
           image_url = response_items.detect { |record| record['id'] == record_id }['edmIsShownBy'].first
-          GalleryImage.find_or_create_by!(gallery: self, europeana_record_id: record_id, image_url: image_url).tap do |image|
+          GalleryImage.find_or_create_by!(gallery: self, europeana_record_id: record_id, url: image_url).tap do |image|
             image.update_attributes(position: i + 1)
             matched_ids << image.id
           end

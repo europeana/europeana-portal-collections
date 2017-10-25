@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class AddImageUrlToGalleryImages < ActiveRecord::Migration
+class AddUrlToGalleryImages < ActiveRecord::Migration
   class GalleryImage < ActiveRecord::Base
     validates :gallery_id, presence: true
     validates :europeana_record_id,
               presence: true, format: { with: Europeana::Record::ID_PATTERN }
-    validates :image_url, presence: true
+    validates :url, presence: true
   end
 
   def up
-    add_column :gallery_images, :image_url, :text
+    add_column :gallery_images, :url, :text
 
     GalleryImage.find_in_batches(batch_size: 100) do |batch|
       record_ids = batch.map(&:europeana_record_id)
@@ -18,15 +18,19 @@ class AddImageUrlToGalleryImages < ActiveRecord::Migration
 
       batch.each do |image|
         response_item = response['items'].detect { |item| item['id'] == image.europeana_record_id }
-        image.image_url = response_item.nil? ? 'UNKNOWN' : response_item['edmIsShownBy'].first
+        if response_item && response_item['edmIsShownBy']&.first
+          image.url = response_item['edmIsShownBy'].first
+        else
+          image.url = 'UNKNOWN'
+        end
         image.save
       end
     end
 
-    change_column :gallery_images, :image_url, :text, null: false
+    change_column :gallery_images, :url, :text, null: false
   end
 
   def down
-    remove_column :gallery_images, :image_url
+    remove_column :gallery_images, :url
   end
 end

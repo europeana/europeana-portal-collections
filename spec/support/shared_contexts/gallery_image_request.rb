@@ -39,7 +39,7 @@ RSpec.shared_context 'Gallery Image request', :gallery_image_request do
       ids.map do |id|
         {
           id: id,
-          edmIsShownBy: options[:edm_is_shown_by] ? "http://www.example.com/media#{id}" : nil,
+          edmIsShownBy: options[:edm_is_shown_by] ? ["http://www.example.com/media#{id}"] : nil,
           type: options[:type]
         }
       end

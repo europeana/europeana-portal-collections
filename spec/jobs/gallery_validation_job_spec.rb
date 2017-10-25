@@ -7,13 +7,17 @@ RSpec.describe GalleryValidationJob do
     Delayed::Job.where("handler LIKE '%job_class: ActionMailer::DeliveryJob%'")
   end
 
-  let(:url1) { gallery_images(:fashion_dresses_image1).image_url }
-  let(:url2) { gallery_images(:fashion_dresses_image2).image_url }
+  let(:url1) { gallery_images(:fashion_dresses_image1).url }
+  let(:url2) { gallery_images(:fashion_dresses_image2).url }
 
   def provider_response(**options)
     content_type = options[:content_type] || 'image/jpeg'
     code = options[:code] || 200
     double('provider_response', code: code, headers: { content_type: content_type })
+  end
+
+  before do
+    Rails.application.config.x.gallery_validation_mail_to = 'example@europeana.eu'
   end
 
   context 'when everything is valid' do
