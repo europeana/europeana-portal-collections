@@ -38,7 +38,7 @@ class Gallery < ActiveRecord::Base
   default_scope { includes(:translations) }
 
   before_save :ensure_unique_title, :clear_api_responses
-  after_save :set_images_from_portal_urls
+  after_save :set_images_from_portal_urls, :enqueue_gallery_validation_job
 
   attr_writer :image_portal_urls
 
@@ -79,7 +79,7 @@ class Gallery < ActiveRecord::Base
         matched_ids = []
         record_ids.each_with_index do |record_id, i|
           image_url = response_items.detect { |record| record['id'] == record_id }['edmIsShownBy'].first
-          GalleryImage.find_or_create_by!(gallery: self, europeana_record_id: record_id, url: image_url).tap do |image|
+          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id, url: image_url).tap do |image|
             image.update_attributes(position: i + 1)
             matched_ids << image.id
           end
@@ -87,6 +87,10 @@ class Gallery < ActiveRecord::Base
         images.where.not(id: matched_ids).delete_all
       end
     end
+  end
+
+  def enqueue_gallery_validation_job
+    GalleryValidationJob.perform_later(id)
   end
 
   def enumerable_image_portal_urls
