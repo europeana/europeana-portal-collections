@@ -39,7 +39,7 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
     end
   end
 
-  ENV['SCHEDULE_GALLERY_VALIDATION'].split(' ').each do |gallery_validation_time|
+  ENV['SCHEDULE_GALLERY_VALIDATION']&.split(' ')&.each do |gallery_validation_time|
     every(1.day, 'gallery-validation', at: gallery_validation_time) do
       Gallery.published.each do |gallery|
         GalleryValidationJobJob.perform_later(gallery.id)
