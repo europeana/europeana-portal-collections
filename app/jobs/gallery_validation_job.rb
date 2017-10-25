@@ -54,6 +54,8 @@ class GalleryValidationJob < ApplicationJob
     response = RestClient.get(url)
     return false unless response.code == 200
     response
+  rescue ::RestClient::ResourceNotFound
+    false
   end
 
   def notify

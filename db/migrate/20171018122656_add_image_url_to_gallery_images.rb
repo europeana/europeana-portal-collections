@@ -18,7 +18,7 @@ class AddImageUrlToGalleryImages < ActiveRecord::Migration
 
       batch.each do |image|
         response_item = response['items'].detect { |item| item['id'] == image.europeana_record_id }
-        image.image_url = response_item.nil? ? 'UNKNOWN' : item['edmIsShownBy'].first
+        image.image_url = response_item.nil? ? 'UNKNOWN' : response_item['edmIsShownBy'].first
         image.save
       end
     end
