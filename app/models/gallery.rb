@@ -3,6 +3,7 @@
 class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..48
 
+  include Gallery::Annotations
   include HasPublicationStates
   include IsCategorisable
   include IsPermissionable
@@ -192,11 +193,11 @@ class Gallery < ActiveRecord::Base
   private
 
   def store_annotations
-    StoreGalleryAnnotationsJob.perform_later(id)
+    StoreGalleryAnnotationsJob.perform_later(slug)
   end
 
   def destroy_annotations
-    StoreGalleryAnnotationsJob.perform_later(to_param)
+    StoreGalleryAnnotationsJob.perform_later(slug, delete_all: true)
   end
 
   def store_annotations_after_save?

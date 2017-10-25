@@ -21,20 +21,20 @@ module Europeana
 
     def annotations_for_record(record_id, **local_params)
       search_response = annotations_search_for_document(record_id, local_params)
-      return [] unless search_response.key?('items')
       annotations_from_search_response(search_response)
     end
 
     def annotations_search_for_document(record_id, **local_params)
       local_params[:qf] ||= []
       local_params[:qf] += [
-        %(generator_name:#{Rails.application.config.x.europeana[:annotations].api_generator_name'] || 'Europeana.eu*'}),
+        %(generator_name:#{Rails.application.config.x.europeana[:annotations].api_generator_name || 'Europeana.eu*'}),
         %(target_uri:"http://data.europeana.eu/item#{record_id}")
       ]
       Europeana::API.annotation.search(annotations_api_search_params(record_id, local_params))
     end
 
     def annotations_from_search_response(search_response)
+      return [] unless search_response.key?('items')
       if annotations_search_profile_minimal?(search_response)
         annotations_from_uris(search_response['items'])
       else
@@ -72,8 +72,13 @@ module Europeana
       }.reverse_merge(annotations_api_env_params).merge(local_params)
     end
 
-    def annotation_target_for_record(record_id)
-      "http://data.europeana.eu/item#{record_id}"
+    def annotations_api_delete_params(annotation)
+      split_anno_id = annotation['id'].split('/')
+
+      {
+        provider: split_anno_id[-2],
+        id: split_anno_id[-1],
+      }.merge(annotations_api_env_params_with_token)
     end
 
     def annotations_api_fetch_params(provider, id)
@@ -88,6 +93,12 @@ module Europeana
         wskey: Rails.application.config.x.europeana[:annotations].api_key || Europeana::API.key,
         api_url: Rails.application.config.x.europeana[:annotations].api_url || Europeana::API.url,
       }
+    end
+
+    def annotations_api_env_params_with_token
+      {
+        userToken: Rails.application.config.x.europeana[:annotations].api_user_token_gallery || ''
+      }.merge(annotations_api_env_params)
     end
   end
 end

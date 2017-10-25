@@ -11,4 +11,24 @@ class GalleryImage < ActiveRecord::Base
   def portal_url
     @portal_url ||= Europeana::Record.portal_url_from_id(europeana_record_id)
   end
+
+  def annotation_target
+    @annotation_target ||= Europeana::Record.annotation_target(europeana_record_id)
+  end
+
+  def annotation_body
+    @annotation_body ||= begin
+      {
+        motivation: 'linking',
+        body: {
+          '@graph' => {
+            '@context' => 'http://www.europeana.eu/schemas/context/edm.jsonld',
+            isGatheredInto: gallery.annotation_link_resource_uri,
+            id: annotation_target
+          }
+        },
+        target: annotation_target
+      }
+    end
+  end
 end

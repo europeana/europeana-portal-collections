@@ -45,6 +45,10 @@ module Europeana
       def search_api_query_for_record_ids(record_ids)
         'europeana_id:("' + record_ids.join('" OR "') + '")'
       end
+
+      def annotation_target(id)
+        "http://data.europeana.eu/item#{id}"
+      end
     end
   end
 end
