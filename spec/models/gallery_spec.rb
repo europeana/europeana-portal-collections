@@ -99,6 +99,13 @@ RSpec.describe Gallery do
         expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.position).to eq(1)
         expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.position).to eq(2)
       end
+
+      it 'should set the url for the images' do
+        gallery.save
+        gallery.images.reload
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.url).to eq('http://www.example.com/media/sample/record1')
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.url).to eq('http://www.example.com/media/sample/record2')
+      end
     end
 
     context '(on update)' do
@@ -127,6 +134,16 @@ RSpec.describe Gallery do
         gallery.image_portal_urls = gallery_image_portal_urls(number: 8)
         gallery.save!
         expect(gallery.images.reload.count).to eq(8)
+      end
+
+      it 'should set the url for the images' do
+        gallery.images.find_by_europeana_record_id('/sample/record1').update_attributes(url: 'old_url')
+        gallery.images.find_by_europeana_record_id('/sample/record2').update_attributes(url: 'UNKNOWN')
+        gallery.image_portal_urls = gallery_image_portal_urls(number: 8)
+        gallery.save!
+        gallery.images.reload
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.url).to eq('http://www.example.com/media/sample/record1')
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.url).to eq('http://www.example.com/media/sample/record2')
       end
     end
   end
