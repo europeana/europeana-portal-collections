@@ -53,7 +53,7 @@ namespace :jobs do
   desc 'Queue GalleryValidationJob'
   task gallery_validation: :enironment do
     Gallery.published.each do |gallery|
-      GalleryValidationJobJob.perform_later(gallery.id)
+      GalleryValidationJob.perform_later(gallery.id)
     end
   end
 end
