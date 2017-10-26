@@ -1,17 +1,23 @@
+# frozen_string_literal: true
+
 module Document
   ##
   # Blacklight document presenter for a Europeana web resource
-  class WebResourcePresenter < DocumentPresenter
+  class WebResourcePresenter < ApplicationPresenter
     include ActionView::Helpers::NumberHelper
     include ApiHelper
+    include BlacklightDocumentPresenter
     include MediaProxyHelper
     include Metadata::Rights
     include ThumbnailHelper
 
     delegate :params, to: :controller
 
-    def initialize(document, controller, configuration = controller.blacklight_config, record = nil, record_presenter = nil)
-      super(document, controller, configuration)
+    attr_reader :document, :controller
+
+    def initialize(document, controller, record = nil, record_presenter = nil)
+      @document = document
+      @controller = controller
       @record = record
       @record_presenter = record_presenter || (record.nil? ? nil : RecordPresenter.new(record, controller))
     end
@@ -29,7 +35,7 @@ module Document
         play_html: play_html,
         technical_metadata: media_metadata,
         download: {
-          url: downloadable? ? download_url : false,
+          url: downloadable? ? download_url : nil,
           text: t('site.object.actions.download')
         },
         external_media: external_media_url
@@ -67,7 +73,7 @@ module Document
 
     def url
       @url ||= begin
-        url = field_value('about')
+        url = document.fetch('about', nil)
         @controller.url_conversions[url] || url
       end
     end
@@ -174,7 +180,7 @@ module Document
 
     def colour_search_url(colour)
       query_params = { f: { 'COLOURPALETTE' => [colour], 'TYPE' => ['IMAGE'] } }
-      search_path(query_params)
+      controller.search_path(query_params)
     end
 
     def colour_palette_data

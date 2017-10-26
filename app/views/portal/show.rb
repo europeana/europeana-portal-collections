@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 module Portal
   class Show < ApplicationView
+    include NamedEntityDisplayingView
     include SearchableView
-    include Document::Field::Labelling
-    include Document::Field::Entities
     include UgcContentDisplayingView
 
     attr_accessor :document, :debug
@@ -198,15 +197,15 @@ module Portal
     end
 
     def meta_additional
+      places = presenter.field_group(:location)
       {
         present: meta_additional_present?,
-        places: presenter.field_group(:location),
+        places: places,
         geo: {
           latitude: '"' + (field_value('places.latitude') || '') + '"',
           longitude: '"' + (field_value('places.longitude') || '') + '"',
           long_and_lat: long_and_lat?,
-          # placeName: document.fetch('places.prefLabel', []).first,
-          placeName: pref_label(document, 'places.prefLabel'),
+          placeName: places.present? ? places[:sections].first[:items].first[:text] : nil,
           labels: {
             longitude: t('site.object.meta-label.longitude') + ':',
             latitude: t('site.object.meta-label.latitude') + ':',

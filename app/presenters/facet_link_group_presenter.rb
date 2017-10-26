@@ -1,15 +1,15 @@
 # frozen_string_literal: true
+
 ##
 # Display logic for facet link groups(facet entry points).
 #
 # Responsible for generating data hashes for the Mustache templates from
 # [Europeana's styleguide](https://github.com/europeana/europeana-styleguide-ruby)
 # to display facet entry points on browse based landing pages.
-class FacetLinkGroupPresenter
+class FacetLinkGroupPresenter < ApplicationPresenter
   include Facet::Labelling
   include ThumbnailHelper
   include UrlHelper
-  delegate :t, to: I18n
 
   attr_reader :controller, :blacklight_config, :facet_link_group
 
