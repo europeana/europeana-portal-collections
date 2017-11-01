@@ -155,7 +155,7 @@ module Portal
       data_provider_or_provider = data_provider || provider
 
       if at_or_by && data_provider_or_provider
-        '<a class="cap" target="_blank" href="' +
+        '<a target="_blank" href="' +
           at_or_by + '">' + data_provider_or_provider +
           ' <svg class="icon icon-linkout"><use xlink:href="#icon-linkout"/></svg></a>'
       else
