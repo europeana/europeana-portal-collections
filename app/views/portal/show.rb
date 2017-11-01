@@ -157,7 +157,7 @@ module Portal
       if at_or_by && data_provider_or_provider
         '<a target="_blank" href="' +
           at_or_by + '">' + data_provider_or_provider +
-          ' <svg class="icon icon-linkout"><use xlink:href="#icon-linkout"/></svg></a>'
+        '</a>'
       else
         false
       end
