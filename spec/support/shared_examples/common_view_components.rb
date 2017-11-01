@@ -77,7 +77,7 @@ RSpec.shared_examples 'common view components', :common_view_components do
 
       context 'when some are configured' do
         let(:google_analytics_linked_domains) { %w(site1.example.com site2.example.com) }
-          it 'is a JS array including them' do
+        it 'is a JS array including them' do
           render
           expect(rendered).to have_selector('script', text: "var googleAnalyticsLinkedDomains = ['site1.example.com','site2.example.com'];", visible: false)
         end
