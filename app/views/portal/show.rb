@@ -147,20 +147,12 @@ module Portal
 
     def institution_name_and_link
       is_shown_at = field_value('aggregations.edmIsShownAt')
-      is_shown_by = nil # field_value('aggregations.edmIsShownBy')
-      at_or_by = is_shown_at || is_shown_by
 
-      provider = field_value('aggregations.edmProvider')
-      data_provider = field_value('aggregations.edmDataProvider')
-      data_provider_or_provider = data_provider || provider
+      data_provider_or_provider = field_value('aggregations.edmDataProvider')
+      data_provider_or_provider ||= field_value('aggregations.edmProvider')
 
-      if at_or_by && data_provider_or_provider
-        '<a target="_blank" href="' +
-          at_or_by + '">' + data_provider_or_provider +
-        '</a>'
-      else
-        false
-      end
+      return false unless is_shown_at.present? && data_provider_or_provider.present?
+      link_to(data_provider_or_provider, is_shown_at, target: '_blank')
     end
 
     def simple_rights_label_data
