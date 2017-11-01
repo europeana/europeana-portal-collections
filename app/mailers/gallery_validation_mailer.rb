@@ -6,6 +6,6 @@ class GalleryValidationMailer < ApplicationMailer
     @gallery = gallery
     @validation_errors = validation_errors
 
-    mail(to: Rails.application.config.x.gallery_validation_mail_to, subject: 'Gallery Validation')
+    mail(to: Rails.application.config.x.gallery_validation_mail_to, subject: 'Gallery validation')
   end
 end

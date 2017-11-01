@@ -1,9 +1,14 @@
-Automated Gallery Validation for Europeana Gallery: <%= gallery_url(:en, @gallery) %>
-<% @validation_errors.each_pair do |key, errors| %>
-  Validation error(s) for the image '<%= document_url(:en, key.sub('/', '')) %>':
-  <% errors.each do |error| %>
-    <%= error %>
-  <% end %>
-<% end %>
+Automated gallery validation for Europeana gallery: <%= @gallery.title %>
 
-CMS link for this gallery: <%= rails_admin_url(:en) + "/gallery/#{@gallery.id}/edit" %>
+URL: <%= gallery_url(:en, @gallery) %>
+
+Validation error(s) follow.
+
+<% @validation_errors.each_pair do |key, errors| %>
+  <%= document_url(:en, key.sub('/', '')) %>
+  <% errors.each do |error| %>
+    * <%= error %>
+  <% end %>
+
+<% end %>
+CMS link: <%= rails_admin.edit_url(locale: :en, model_name: 'gallery', id: @gallery.id) %>
