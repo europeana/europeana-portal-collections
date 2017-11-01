@@ -7,13 +7,15 @@ class GalleryValidationJob < ApplicationJob
   queue_as :default
 
   def perform(gallery_id)
-    raise 'No gallery validation email set.' unless Rails.application.config.x.gallery_validation_mail_to
+    fail 'No gallery validation email set.' unless Rails.application.config.x.gallery_validation_mail_to
+
     @gallery = Gallery.find(gallery_id)
     @validation_errors = {}
     @gallery.images.each do |gallery_image|
       validate_gallery_image(gallery_image)
     end
-    notify if @validation_errors.count.positive?
+
+    notify if @validation_errors.present?
   end
 
   private
@@ -25,13 +27,13 @@ class GalleryValidationJob < ApplicationJob
     api_document = api_search_response.detect { |record| record['id'] == europeana_id }
     if api_document
       unless api_document['edmIsShownBy']&.first == stored_image_url
-        errors << "edm:isShownBy for image '#{europeana_id}' has changed"
+        errors << 'edm:isShownBy has changed'
       end
       unless retrievable_image?(stored_image_url)
-        errors << "The image for '#{europeana_id}' can not be retrieved at '#{stored_image_url}'."
+        errors << "can not retrieve #{stored_image_url}"
       end
     else
-      errors << "Record '#{europeana_id}' wasn't found. It may have been deleted."
+      errors << 'record not found on API; it may have been deleted'
     end
     @validation_errors[europeana_id] = errors if errors.present?
   end
