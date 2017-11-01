@@ -9,6 +9,6 @@ Validation error(s) follow.
   <% errors.each do |error| %>
     * <%= error %>
   <% end %>
-<% end %>
 
-CMS link: <%= rails_admin.edit_path(locale: :en, model_name: 'gallery', id: @gallery.id) %>
+<% end %>
+CMS link: <%= rails_admin.edit_url(locale: :en, model_name: 'gallery', id: @gallery.id) %>
