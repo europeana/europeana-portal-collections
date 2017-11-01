@@ -52,7 +52,7 @@ RSpec.describe GalleriesController do
     it 'paginates galleries' do
       allow_any_instance_of(Gallery).to receive(:validate_image_source_items) { true }
       (1..30).each do |gallery_num|
-        urls = (1..6).map { |image_num| "http://www.europeana.eu/portal/record/#{gallery_num}/#{image_num}.html" }.join(' ')
+        urls = (1..6).map { |image_num| "http://www.europeana.eu/portal/record/sample/record#{image_num}.html" }.join(' ')
         Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls: urls).publish!
       end
 

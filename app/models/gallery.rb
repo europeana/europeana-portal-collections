@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..48
 
@@ -36,8 +37,8 @@ class Gallery < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
-  before_save :ensure_unique_title
-  after_save :set_images_from_portal_urls
+  before_save :ensure_unique_title, :clear_api_responses
+  after_save :set_images_from_portal_urls, :enqueue_gallery_validation_job
 
   attr_writer :image_portal_urls
 
@@ -75,14 +76,21 @@ class Gallery < ActiveRecord::Base
   def set_images_from_portal_urls
     transaction do
       enumerable_image_portal_urls.map { |url| Europeana::Record.id_from_portal_url(url) }.tap do |record_ids|
+        matched_ids = []
         record_ids.each_with_index do |record_id, i|
-          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id).tap do |image|
+          image_url = response_items.detect { |record| record['id'] == record_id }['edmIsShownBy'].first
+          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id, url: image_url).tap do |image|
             image.update_attributes(position: i + 1)
+            matched_ids << image.id
           end
         end
-        images.where.not(europeana_record_id: record_ids).destroy_all
+        images.where.not(id: matched_ids).delete_all
       end
     end
+  end
+
+  def enqueue_gallery_validation_job
+    GalleryValidationJob.perform_later(id)
   end
 
   def enumerable_image_portal_urls
@@ -123,15 +131,8 @@ class Gallery < ActiveRecord::Base
   def validate_image_source_items
     return if errors[:image_portal_urls].any?
 
-    record_ids = enumerable_image_portal_urls.each_with_object({}) do |url, map|
-      map[url] = Europeana::Record.id_from_portal_url(url)
-    end
-
-    api_query = Europeana::Record.search_api_query_for_record_ids(record_ids.values)
-    response_items = Europeana::API.record.search(query: api_query, profile: 'rich', rows: 100)['items'] || []
-
     allowed_types = %w(IMAGE TEXT)
-    record_ids.each_pair do |url, record_id|
+    record_id_url_pairs.each_pair do |url, record_id|
       item = response_items.detect { |response_item| response_item['id'] == record_id }
       if item.blank?
         errors.add(:image_portal_urls, %(item not found by the API: "#{url}"))
@@ -146,6 +147,21 @@ class Gallery < ActiveRecord::Base
     end
   end
 
+  def response_items
+    @response_items ||= begin
+      api_query = Europeana::Record.search_api_query_for_record_ids(record_id_url_pairs.values)
+      Europeana::API.record.search(query: api_query, profile: 'rich', rows: 100)['items'] || []
+    end
+  end
+
+  def record_id_url_pairs
+    @record_id_url_pairs ||= begin
+      enumerable_image_portal_urls.each_with_object({}) do |url, map|
+        map[url] = Europeana::Record.id_from_portal_url(url)
+      end
+    end
+  end
+
   def ensure_unique_title
     i = 0
     unique_title = title
@@ -154,6 +170,11 @@ class Gallery < ActiveRecord::Base
       unique_title = "#{title} #{i}"
     end
     self.title = unique_title
+  end
+
+  def clear_api_responses
+    @record_id_url_pairs = nil
+    @response_items = nil
   end
 
   def validate_number_of_categorisations

@@ -49,4 +49,11 @@ namespace :jobs do
       FacetLinkGroupGeneratorJob.perform_later facet_link_group
     end
   end
+
+  desc 'Queue GalleryValidationJob'
+  task gallery_validation: :enironment do
+    Gallery.published.each do |gallery|
+      GalleryValidationJob.perform_later(gallery.id)
+    end
+  end
 end
