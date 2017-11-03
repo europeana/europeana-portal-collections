@@ -17,7 +17,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
   # @param gallery_slug [String] slug of the gallery
   # @param delete_all [TrueClass,FalseClass] if true, just delete all gallery annotations
   def perform(gallery_slug, delete_all: false)
-    fail "Gallery annotations functionality is not configured." unless Gallery.annotate_records?
+    fail 'Gallery annotations functionality is not configured.' unless Gallery.annotate_records?
     validate_args_to_perform!(gallery_slug, delete_all: delete_all)
 
     @delete_all = delete_all
