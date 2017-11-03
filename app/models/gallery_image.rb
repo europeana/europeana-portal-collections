@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class GalleryImage < ActiveRecord::Base
   belongs_to :gallery, inverse_of: :images, touch: true
 
@@ -6,14 +7,10 @@ class GalleryImage < ActiveRecord::Base
   validates :europeana_record_id,
             presence: true, format: { with: Europeana::Record::ID_PATTERN }
 
-  ##
-  # Gets the URL of the item on the portal that this gallery image represents
-  def portal_url
-    @portal_url ||= Europeana::Record.portal_url_from_id(europeana_record_id)
-  end
+  delegate :annotation_target_uri, :portal_url, to: :europeana_record
 
-  def annotation_target
-    @annotation_target ||= Europeana::Record.annotation_target(europeana_record_id)
+  def europeana_record
+    @europeana_record ||= Europeana::Record.new(europeana_record_id)
   end
 
   def annotation_body
@@ -24,10 +21,10 @@ class GalleryImage < ActiveRecord::Base
           '@graph' => {
             '@context' => 'http://www.europeana.eu/schemas/context/edm.jsonld',
             isGatheredInto: gallery.annotation_link_resource_uri,
-            id: annotation_target
+            id: annotation_target_uri
           }
         },
-        target: annotation_target
+        target: annotation_target_uri
       }
     end
   end

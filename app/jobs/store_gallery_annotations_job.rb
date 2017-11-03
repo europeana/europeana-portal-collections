@@ -6,12 +6,10 @@
 #
 # TODO: write specs
 # TODO: ideally this job should be deferred from execution if any other instances
-#       of the job are already running for the same value of gallery_id_or_param
+#       of the job are already running for the same value of gallery_slug
 # TODO: create a job and rake task to queue storing/deleting annotations for all
 #       existing galleries
 class StoreGalleryAnnotationsJob < ActiveJob::Base
-  include Europeana::AnnotationsApiConsumer
-
   queue_as :annotations
 
   attr_reader :gallery
@@ -40,45 +38,30 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
     end
   end
 
-  # TODO: handle pagination if more than 100 items (if possible in `Gallery`)
-  def api_annotations
-    @api_annotations ||= annotations_from_search_response(find_annotations)
-  end
-
-  def find_annotations
-    search_params = annotations_api_search_params.merge(gallery.annotation_search_params)
-    Europeana::API.annotation.search(search_params)
-  end
-
   # TODO move to separate job?
   def create_annotations
     gallery.images.each do |image|
-      unless api_annotation_targets.include?(image.annotation_target)
-        logger.info("Creating annotation linking #{image.annotation_target} to #{gallery.annotation_link_resource_uri}".green.bold)
-        Europeana::API.annotation.create(create_annotation_api_params(image))
+      unless existing_annotation_targets.include?(image.annotation_target_uri)
+        logger.info("Creating annotation linking #{image.annotation_target_uri} to #{gallery.annotation_link_resource_uri}".green.bold)
+        Europeana::Annotation.create(image.annotation_body)
       end
     end
   end
 
-  def create_annotation_api_params(image)
-    body = image.annotation_body
-    annotations_api_env_params_with_token.merge(body: body.to_json)
-  end
-
   # TODO move to separate job?
   def delete_annotations
-    api_annotations.each do |annotation|
+    gallery.annotations.each do |annotation|
       next unless delete_annotation?(annotation)
       logger.info("Deleting annotation #{annotation['id']}".red.bold)
-      Europeana::API.annotation.delete(annotations_api_delete_params(annotation))
+      annotation.delete
     end
   end
 
   def delete_annotation?(annotation)
-    @delete_all || !gallery.image_annotation_targets.include?(annotation['target'])
+    @delete_all || !gallery.image_annotation_targets.include?(annotation.target)
   end
 
-  def api_annotation_targets
-    api_annotations.map { |anno| anno[:target] }
+  def existing_annotation_targets
+    existing_annotation_targets ||= gallery.annotations.map(&:target)
   end
 end
