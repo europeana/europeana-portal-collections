@@ -38,7 +38,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
     end
   end
 
-  # TODO move to separate job?
+  # TODO: move to separate job?
   def create_annotations
     gallery.images.each do |image|
       unless existing_annotation_targets.include?(image.annotation_target_uri)
@@ -48,7 +48,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
     end
   end
 
-  # TODO move to separate job?
+  # TODO: move to separate job?
   def delete_annotations
     gallery.annotations.each do |annotation|
       next unless delete_annotation?(annotation)
@@ -62,6 +62,6 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
   end
 
   def existing_annotation_targets
-    existing_annotation_targets ||= gallery.annotations.map(&:target)
+    gallery.annotations.map(&:target)
   end
 end

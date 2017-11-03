@@ -21,17 +21,15 @@ module Europeana
     end
 
     def save
-      # fail NotImplementedError
-      Europeana::API.annotation.create(self.class::API.create_params(self.instance_values))
+      Europeana::API.annotation.create(self.class::API.create_params(instance_values))
     end
 
     def delete
-      # fail NotImplementedError
       Europeana::API.annotation.delete(self.class::API.delete_params(id))
     end
 
     def to_s
-      if body.is_a?(String) && body =~ URI.regexp
+      if body.is_a?(String) && body =~ URI::DEFAULT_PARSER.make_regexp
         body
       elsif body.is_a?(Hash) && body['@graph']
         %w(sameAs isShownAt isShownBy).each do |graph_field|
