@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'Annotations API', :annotations_api do
   let(:annotations_api_url) { 'https://www.example.com/api' }
   let(:annotations_api_create_method_url) { %r{\A#{annotations_api_url}/annotations/(\?|\z)} }

@@ -41,12 +41,11 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
   # TODO: move to separate job?
   def create_annotations
     gallery.images.each do |image|
-      unless existing_annotation_targets.include?(image.annotation_target_uri)
-        logger.info("Creating annotation linking #{image.annotation_target_uri} to #{gallery.annotation_link_resource_uri}".green.bold)
-        image.annotation.tap do |annotation|
-          annotation.api_user_token = gallery.annotation_api_user_token
-          annotation.save
-        end
+      next if existing_annotation_targets.include?(image.annotation_target_uri)
+      logger.info("Creating annotation linking #{image.annotation_target_uri} to #{gallery.annotation_link_resource_uri}".green.bold)
+      image.annotation.tap do |annotation|
+        annotation.api_user_token = gallery.annotation_api_user_token
+        annotation.save
       end
     end
   end

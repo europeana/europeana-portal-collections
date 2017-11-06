@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController, :annotations_api do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EuropeanaAPIHelper
   def record_id_from_request_uri(request)
     request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
