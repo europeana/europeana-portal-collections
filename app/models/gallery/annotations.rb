@@ -28,5 +28,9 @@ class Gallery
     def image_annotation_targets
       @image_annotation_targets ||= images.map(&:annotation_target_uri)
     end
+
+    def annotation_api_user_token
+      Rails.application.config.x.europeana[:annotations].api_user_token_gallery || ''
+    end
   end
 end

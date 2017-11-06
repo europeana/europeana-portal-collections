@@ -8,8 +8,8 @@ module Europeana
   class Annotation
     include ActiveModel::Model
 
-    attr_accessor :body, :bodyValue, :created, :creator, :generated, :generator,
-                  :id, :motivation, :target, :type
+    attr_accessor :api_user_token, :body, :bodyValue, :created, :creator,
+                  :generated, :generator, :id, :motivation, :target, :type
 
     class << self
       def find(**params)
@@ -25,11 +25,19 @@ module Europeana
     end
 
     def save
-      Europeana::API.annotation.create(self.class::API.create_params(instance_values))
+      Europeana::API.annotation.create(
+        self.class::API.create_params(
+          body: body_params, user_token: api_user_token
+        )
+      )
     end
 
     def delete
-      Europeana::API.annotation.delete(self.class::API.delete_params(id))
+      Europeana::API.annotation.delete(
+        self.class::API.delete_params(
+          id: id, user_token: api_user_token
+        )
+      )
     end
 
     def to_s
@@ -38,6 +46,12 @@ module Europeana
       elsif body_has_graph?
         to_s_from_graph
       end
+    end
+
+    protected
+
+    def body_params
+      instance_values.symbolize_keys.except(:api_user_token)
     end
 
     def body_is_uri?
@@ -52,6 +66,7 @@ module Europeana
       %w(sameAs isShownAt isShownBy).each do |graph_field|
         return body['@graph'][graph_field] if body['@graph'][graph_field].present?
       end
+      nil
     end
   end
 end

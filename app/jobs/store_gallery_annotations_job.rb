@@ -43,7 +43,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
     gallery.images.each do |image|
       unless existing_annotation_targets.include?(image.annotation_target_uri)
         logger.info("Creating annotation linking #{image.annotation_target_uri} to #{gallery.annotation_link_resource_uri}".green.bold)
-        Europeana::Annotation.create(image.annotation_body)
+        Europeana::Annotation.create(image.annotation_body.merge(api_user_token: gallery.annotation_api_user_token))
       end
     end
   end
@@ -53,6 +53,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
     gallery.annotations.each do |annotation|
       next unless delete_annotation?(annotation)
       logger.info("Deleting annotation #{annotation['id']}".red.bold)
+      annotation.api_user_token = gallery.annotation_api_user_token
       annotation.delete
     end
   end
