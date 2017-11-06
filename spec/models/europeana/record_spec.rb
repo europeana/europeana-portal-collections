@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Europeana::Record do
+  it 'includes Annotations' do
+    expect(described_class).to include(Europeana::Record::Annotations)
+  end
+
   describe '.id_from_portal_url' do
     %w(
       http://www.europeana.eu/portal/record/abc/123.html
