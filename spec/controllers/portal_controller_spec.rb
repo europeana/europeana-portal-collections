@@ -3,9 +3,6 @@
 require 'support/shared_examples/europeana_api_requests'
 
 RSpec.describe PortalController, :annotations_api do
-  # workaround for https://github.com/jnicklas/capybara/issues/1396
-  include RSpec::Matchers.clone
-
   describe 'GET index' do
     context 'when the format is html' do
       context 'without q param' do
@@ -205,6 +202,24 @@ RSpec.describe PortalController, :annotations_api do
               expect(assigns[:url_conversions]).to have_key('http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/abc/123')
             end
           end
+        end
+      end
+    end
+
+    describe 'URL param `design`' do
+      context 'when "new"' do
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'html', design: 'new' } }
+        it 'sets @new_design to true' do
+          get :show, params
+          expect(assigns(:new_design)).to be true
+        end
+      end
+
+      context 'when absent' do
+        let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+        it 'sets @new_design to false' do
+          get :show, params
+          expect(assigns(:new_design)).to be false
         end
       end
     end

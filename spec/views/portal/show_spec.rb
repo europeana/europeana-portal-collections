@@ -19,7 +19,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     }
   end
   let(:blacklight_document) { Europeana::Blacklight::Document.new(blacklight_document_source.with_indifferent_access) }
-  let(:params) { { id: 'abc/123' } }
+  let(:params) { { controller: 'portal', action: 'show', id: 'abc/123' } }
 
   before(:each) do
     allow(view).to receive(:current_search_session).and_return nil
@@ -42,6 +42,52 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
   it 'should have meta HandheldFriendly' do
     render
     expect(rendered).to have_selector('meta[name="HandheldFriendly"]', visible: false)
+  end
+
+  describe '@new_design' do
+    context 'when true' do
+      before do
+        assign(:new_design, true)
+      end
+
+      it 'renders templates/Search/Channels-object' do
+        render
+        expect(rendered).to have_selector('div.channel-object-overview')
+        expect(rendered).not_to have_selector('div.object-overview')
+      end
+
+      it 'sets pageName JS var to "portal/show-new"' do
+        render
+        expect(rendered).to include('var pageName = "portal/show-new";')
+      end
+
+      it 'sets body class to "channels-item"' do
+        render
+        expect(rendered).to have_selector('body.channels-item')
+      end
+    end
+
+    context 'when false' do
+      before do
+        assign(:new_design, false)
+      end
+
+      it 'renders templates/Search/Search-object' do
+        render
+        expect(rendered).to have_selector('div.object-overview')
+        expect(rendered).not_to have_selector('div.channel-object-overview')
+      end
+
+      it 'sets pageName JS var to "portal/show"' do
+        render
+        expect(rendered).to include('var pageName = "portal/show";')
+      end
+
+      it 'does not set body class to "channels-item"' do
+        render
+        expect(rendered).not_to have_selector('body.channels-item')
+      end
+    end
   end
 
   context 'with @debug' do

@@ -8,7 +8,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+/tmp/
 
 # Ignore db config files.
 /config/database.yml
@@ -24,13 +24,19 @@
 .DS_Store
 
 # Ignore uploaded files
-/public/system
+/public/system/
 
 # Ignore Redis snapshot
 /dump.rdb
 
 # Ignore bundled gems
-/vendor/bundle
+/vendor/bundle/
 
 # Ignore Bundler config
 /.bundle
+
+# Ignore specs
+/spec/
+
+# Ignore deployment files
+/deploy/

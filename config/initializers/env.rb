@@ -28,6 +28,8 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
   )
 end
 
+Rails.application.config.x.gallery_validation_mail_to = ENV['GALLERY_VALIDATION_MAIL_TO']
+
 # Google-centric configuration
 Rails.application.config.x.google = OpenStruct.new(
   analytics_key: ENV['GOOGLE_ANALYTICS_KEY'],

@@ -3,58 +3,11 @@
 require 'models/concerns/is_permissionable_examples'
 
 RSpec.describe Gallery do
-  before do
-    stub_request(:get, Europeana::API.url + '/v2/search.json').
-      with(query: hash_including(
-        wskey: ENV['EUROPEANA_API_KEY'],
-        query: /\Aeuropeana_id:\(.*\)\z/,
-        rows: '100',
-        profile: 'rich'
-      )).
-      to_return do |request|
-        query_param = Rack::Utils.parse_nested_query(request.uri.query)['query']
-        ids = query_param.scan(/"([^"]+)"/).flatten
-        {
-          body: gallery_image_search_api_response(ids, gallery_image_search_api_response_options).to_json,
-          status: 200,
-          headers: { 'Content-Type' => 'application/json' }
-        }
-      end
-  end
-
-  let(:gallery_image_search_api_response_options) { {} }
-
-  def gallery_image_search_api_response(ids, **options)
-    options.reverse_merge!(item: true, edm_is_shown_by: true, type: 'IMAGE')
-    {
-      success: true,
-      itemsCount: ids.size,
-      totalResults: ids.size,
-      items: gallery_image_search_api_response_items(ids, **options)
-    }
-  end
-
-  def gallery_image_search_api_response_items(ids, **options)
-    if !options[:item]
-      nil
-    else
-      ids.map do |id|
-        {
-          id: id,
-          edmIsShownBy: options[:edm_is_shown_by] ? ["http://www.example.com/media#{id}"] : nil,
-          type: options[:type]
-        }
-      end
-    end
-  end
-
-  def gallery_image_portal_urls(number: 10, format: 'https://www.europeana.eu/portal/record/pic/%{n}.html')
-    (1..number).map { |n| format(format, n: n) }.join(' ')
-  end
-
   it 'includes Annotations' do
     expect(described_class).to include(Gallery::Annotations)
   end
+
+  include_context 'Gallery Image request'
 
   it_behaves_like 'permissionable'
 
@@ -143,15 +96,22 @@ RSpec.describe Gallery do
         expect(gallery.images.count).to eq(10)
         gallery.images.reload
         (1..10).each do |number|
-          expect(gallery.images.detect { |image| image.europeana_record_id == "/pic/#{number}" }).not_to be_blank
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/sample/record#{number}" }).not_to be_blank
         end
       end
 
       it 'should set image position' do
         gallery.save
         gallery.images.reload
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/1' }.position).to eq(1)
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/2' }.position).to eq(2)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.position).to eq(1)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.position).to eq(2)
+      end
+
+      it 'should set the url for the images' do
+        gallery.save
+        gallery.images.reload
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.url).to eq('http://www.example.com/media/sample/record1')
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.url).to eq('http://www.example.com/media/sample/record2')
       end
     end
 
@@ -163,24 +123,34 @@ RSpec.describe Gallery do
         gallery.save
         gallery.images.reload
         (1..20).each do |number|
-          expect(gallery.images.detect { |image| image.europeana_record_id == "/pic/#{number}" }).not_to be_blank
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/sample/record#{number}" }).not_to be_blank
         end
       end
 
       it 'should set image position' do
-        gallery.images.find_by_europeana_record_id('/pic/1').update_attributes(position: 2)
-        gallery.images.find_by_europeana_record_id('/pic/2').update_attributes(position: 1)
+        gallery.images.find_by_europeana_record_id('/sample/record1').update_attributes(position: 2)
+        gallery.images.find_by_europeana_record_id('/sample/record2').update_attributes(position: 1)
         gallery.image_portal_urls = gallery_image_portal_urls(number: 20)
         gallery.save
         gallery.images.reload
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/1' }.position).to eq(1)
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/pic/2' }.position).to eq(2)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.position).to eq(1)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.position).to eq(2)
       end
 
       it 'should delete images for absent URLs' do
         gallery.image_portal_urls = gallery_image_portal_urls(number: 8)
-        gallery.save
+        gallery.save!
         expect(gallery.images.reload.count).to eq(8)
+      end
+
+      it 'should set the url for the images' do
+        gallery.images.find_by_europeana_record_id('/sample/record1').update_attributes(url: 'old_url')
+        gallery.images.find_by_europeana_record_id('/sample/record2').update_attributes(url: 'UNKNOWN')
+        gallery.image_portal_urls = gallery_image_portal_urls(number: 8)
+        gallery.save!
+        gallery.images.reload
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.url).to eq('http://www.example.com/media/sample/record1')
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.url).to eq('http://www.example.com/media/sample/record2')
       end
     end
   end

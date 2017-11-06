@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
@@ -8,6 +9,27 @@ module Portal
     attr_accessor :document, :debug
 
     delegate :field_value, to: :presenter
+
+    # TODO: remove when new design is default
+    def bodyclass
+      new_design? ? 'channels-item' : ''
+    end
+
+    # TODO: remove when new design is default
+    def js_vars
+      return super unless new_design?
+      super.tap do |vars|
+        page_name_var = vars.detect { |var| var[:name] == 'pageName' }
+        page_name_var[:value] = page_name_var[:value] + '-new'
+      end
+    end
+
+    # Are we rendering the new design?
+    # TODO: remove when new design is default
+    def new_design?
+      @new_design
+    end
+    alias_method :new_design, :new_design?
 
     def head_links
       mustache[:head_links] ||= begin
@@ -125,20 +147,12 @@ module Portal
 
     def institution_name_and_link
       is_shown_at = field_value('aggregations.edmIsShownAt')
-      is_shown_by = nil # field_value('aggregations.edmIsShownBy')
-      at_or_by = is_shown_at || is_shown_by
 
-      provider = field_value('aggregations.edmProvider')
-      data_provider = field_value('aggregations.edmDataProvider')
-      data_provider_or_provider = data_provider || provider
+      data_provider_or_provider = field_value('aggregations.edmDataProvider')
+      data_provider_or_provider ||= field_value('aggregations.edmProvider')
 
-      if at_or_by && data_provider_or_provider
-        '<a class="cap" target="_blank" href="' +
-          at_or_by + '">' + data_provider_or_provider +
-          ' <svg class="icon icon-linkout"><use xlink:href="#icon-linkout"/></svg></a>'
-      else
-        false
-      end
+      return false unless is_shown_at.present? && data_provider_or_provider.present?
+      link_to(data_provider_or_provider, is_shown_at, target: '_blank')
     end
 
     def simple_rights_label_data

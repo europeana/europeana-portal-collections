@@ -6,6 +6,7 @@ class GalleryImage < ActiveRecord::Base
   validates :gallery, presence: true
   validates :europeana_record_id,
             presence: true, format: { with: Europeana::Record::ID_PATTERN }
+  validates :url, presence: true
 
   delegate :annotation_target_uri, :portal_url, to: :europeana_record
 
