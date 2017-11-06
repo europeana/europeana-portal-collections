@@ -1,57 +1,41 @@
 # frozen_string_literal: true
 
-RSpec.describe Europeana::Annotation do
-  let(:api_url) { 'https://www.example.com/api' }
-  let(:api_key) { 'annotations_api_key' }
-  let(:api_user_token) { 'annotations_api_user_token' }
-
+RSpec.describe Europeana::Annotation, :annotations_api do
   let(:instance) { described_class.new(attributes) }
-  let(:attributes) { { api_user_token: api_user_token } }
-
-  before do
-    Rails.application.config.x.europeana[:annotations].api_url = api_url
-    Rails.application.config.x.europeana[:annotations].api_key = api_key
-  end
+  let(:attributes) { { api_user_token: annotations_api_user_token } }
 
   it 'includes ActiveModel::Model' do
     expect(described_class).to include(ActiveModel::Model)
   end
 
   describe '.find' do
-    let(:api_method_url) { %(#{api_url}/annotations/search) }
     let(:params) { { query: 'fish' } }
-
-    before do
-      stub_request(:get, api_method_url).
-        with(query: hash_including(wskey: api_key)).
-        to_return(status: 200, body: '{"@context": "http://www.w3.org/ns/anno.jsonld","items":[]}', headers: { 'Content-Type' => 'application/ld+json' })
-    end
 
     it 'queries the API for annotations' do
       described_class.find(params)
 
-      expect(a_request(:get, api_method_url).
-        with(query: { wskey: api_key, profile: 'standard', pageSize: 100 }.merge(params))).
+      expect(a_request(:get, annotations_api_search_method_url).
+        with(query: { wskey: annotations_api_key, profile: 'standard', pageSize: 100 }.merge(params))).
         to have_been_made.once
     end
   end
 
   describe '.create' do
-    let(:api_method_url) { %(#{api_url}/annotations/) }
-    let(:attributes) { { api_user_token: api_user_token, motivation: 'tagging', bodyValue: 'tag', target: 'http://data.europeana.eu/item/abc/123' } }
-
-    before do
-      stub_request(:post, api_method_url).
-        with(query: hash_including(userToken: api_user_token, wskey: api_key)).
-        to_return(status: 200)
+    let(:attributes) do
+      {
+        api_user_token: annotations_api_user_token,
+        motivation: 'tagging',
+        bodyValue: 'tag',
+        target: 'http://data.europeana.eu/item/abc/123'
+      }
     end
 
     it 'creates the annotation via the API' do
       described_class.create(attributes)
 
-      expect(a_request(:post, api_method_url).
+      expect(a_request(:post, annotations_api_create_method_url).
         with(
-          query: hash_including(userToken: api_user_token, wskey: api_key),
+          query: hash_including(userToken: annotations_api_user_token, wskey: annotations_api_key),
           body: attributes.except(:api_user_token).to_json
         )).
         to have_been_made.once
@@ -61,21 +45,14 @@ RSpec.describe Europeana::Annotation do
   describe '#delete' do
     let(:provider) { 'test' }
     let(:id) { '1234' }
-    let(:api_method_url) { %(#{api_url}/annotations/#{provider}/#{id}) }
 
-    let(:attributes) { { id: %(http://data.europeana.eu/annotation/#{provider}/#{id}), api_user_token: api_user_token } }
-
-    before do
-      stub_request(:delete, api_method_url).
-        with(query: hash_including(userToken: api_user_token, wskey: api_key)).
-        to_return(status: 204)
-    end
+    let(:attributes) { { id: %(http://data.europeana.eu/annotation/#{provider}/#{id}), api_user_token: annotations_api_user_token } }
 
     it 'deletes annotation from the API' do
       instance.delete
 
-      expect(a_request(:delete, api_method_url).
-        with(query: hash_including(userToken: api_user_token, wskey: api_key))).
+      expect(a_request(:delete, %(#{annotations_api_url}/annotations/#{provider}/#{id})).
+        with(query: hash_including(userToken: annotations_api_user_token, wskey: annotations_api_key))).
         to have_been_made.once
     end
   end
