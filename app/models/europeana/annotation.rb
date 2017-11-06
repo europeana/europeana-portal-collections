@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module Europeana
+  ##
+  # Models annotations stored and exposed via the Europeana Annotations API
+  #
+  # @see https://pro.europeana.eu/resources/apis/annotations-api
   class Annotation
     include ActiveModel::Model
 
@@ -29,12 +33,24 @@ module Europeana
     end
 
     def to_s
-      if body.is_a?(String) && body =~ URI::DEFAULT_PARSER.make_regexp
+      if body_is_uri?
         body
-      elsif body.is_a?(Hash) && body['@graph']
-        %w(sameAs isShownAt isShownBy).each do |graph_field|
-          return body['@graph'][graph_field] if body['@graph'][graph_field]
-        end
+      elsif body_has_graph?
+        to_s_from_graph
+      end
+    end
+
+    def body_is_uri?
+      body.is_a?(String) && body =~ URI::DEFAULT_PARSER.make_regexp
+    end
+
+    def body_has_graph?
+      body.is_a?(Hash) && body['@graph'].present?
+    end
+
+    def to_s_from_graph
+      %w(sameAs isShownAt isShownBy).each do |graph_field|
+        return body['@graph'][graph_field] if body['@graph'][graph_field].present?
       end
     end
   end
