@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 require 'models/concerns/is_permissionable_examples'
+
 RSpec.describe Gallery do
   before do
     stub_request(:get, Europeana::API.url + '/v2/search.json').
@@ -46,8 +48,12 @@ RSpec.describe Gallery do
     end
   end
 
-  def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/pic/%{n}.html')
+  def gallery_image_portal_urls(number: 10, format: 'https://www.europeana.eu/portal/record/pic/%{n}.html')
     (1..number).map { |n| format(format, n: n) }.join(' ')
+  end
+
+  it 'includes Annotations' do
+    expect(described_class).to include(Gallery::Annotations)
   end
 
   it_behaves_like 'permissionable'
@@ -124,7 +130,7 @@ RSpec.describe Gallery do
 
   describe '#image_portal_urls' do
     it 'should return a new line-separated list of gallery image record URLs' do
-      expect(galleries(:fashion_dresses).image_portal_urls).to eq("http://www.europeana.eu/portal/record/sample/record1.html\n\nhttp://www.europeana.eu/portal/record/sample/record2.html")
+      expect(galleries(:fashion_dresses).image_portal_urls).to eq("https://www.europeana.eu/portal/record/sample/record1.html\n\nhttps://www.europeana.eu/portal/record/sample/record2.html")
     end
   end
 
