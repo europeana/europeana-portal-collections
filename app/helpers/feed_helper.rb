@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module FeedHelper
-  include Europeana::FeedJobs::FeedHelper
+  include Europeana::Feeds::FeedHelper
 
   def tumblr_feed_content(landing_page, options = {})
     page = options[:page] || 1
@@ -25,28 +25,23 @@ module FeedHelper
   end
 
   ##
-  # Tries to retrieve a cached feed and formats it for display.
-  def feed_items_for(feed)
-    cached_feed = cached_feed(feed.url)
-
-    return [] if cached_feed.blank? || cached_feed.entries.blank?
-
-    cached_feed.entries.map do |item|
-      {
-        url: CGI.unescapeHTML(item.url),
+  # Tries to retrieve a cached feed and formats it for display including the
+  # associated image from the media object.
+  def feed_items_with_image_for(url)
+    items = feed_items_for(url)
+    items.each do |item|
+      item << {
         img: {
-          src: feed_entry_thumbnail_url(item),
-          alt: item.title
-        },
-        title: item.title,
-        date: I18n.l(item.published, format: :short).gsub(/\s00:00$/, ''),
-        published: item.published,
-        excerpt: {
-          short: strip_tags(CGI.unescapeHTML(item.summary.to_s))
-        },
-        type: detect_feed_type(feed)
+          src: feed_entry_thumbnail_url(item[:url]),
+          alt: item[:title]
+        }
       }
     end
+  end
+
+  # entry [Feedjira::Parser::RSSEntry]
+  def feed_entry_thumbnail_url(entry)
+    FeedEntryImage.new(entry).thumbnail_url
   end
 
   # Retrieves and combines all of a Page's Feed content so it can be assigned for display.

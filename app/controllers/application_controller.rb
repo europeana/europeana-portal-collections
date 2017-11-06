@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include Catalog
   include DefaultUrlOptions
 
-  helper Europeana::FeedJobs::Engine.helpers
+  helper Europeana::Feeds::Engine.helpers
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

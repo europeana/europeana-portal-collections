@@ -42,6 +42,6 @@ class Feed < ActiveRecord::Base
   private
 
   def queue_retrieval
-    Europeana::FeedJobs::FeedJob.perform_later(url, true)
+    FeedJob.perform_later(url, true)
   end
 end

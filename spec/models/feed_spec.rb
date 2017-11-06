@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Feed do
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_uniqueness_of(:name) }
@@ -64,7 +65,7 @@ RSpec.describe Feed do
     subject { described_class.new(url: 'http://blog.europeana.eu/', name: 'blog') }
     it 'should queue a FeedJob' do
       feed_jobs = proc do
-        Delayed::Job.where("handler LIKE '%job_class: Europeana::FeedJobs::FeedJob%'")
+        Delayed::Job.where("handler LIKE '%job_class: FeedJob%'")
       end
       expect { subject.send(:queue_retrieval) }.to change { feed_jobs.call.count }.by(1)
     end

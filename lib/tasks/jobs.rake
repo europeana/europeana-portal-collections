@@ -35,10 +35,10 @@ namespace :jobs do
     desc 'Queue Cache::Feed jobs (blogs / exhibitions / Custom)'
     task feeds: :environment do
       Feed.exhibitions_urls.values.each do |url|
-        Europeana::FeedJobs::FeedJob.perform_later(url)
+        FeedJob.perform_later(url)
       end
       Feed.all.each do |feed|
-        Europeana::FeedJobs::FeedJob.perform_later(feed.url, true)
+        FeedJob.perform_later(feed.url, true)
       end
     end
   end
