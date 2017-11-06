@@ -4,7 +4,7 @@
 # Represents (but does not store) a Europeana record as exposed over the Record
 # API.
 #
-# @see http://labs.europeana.eu/api/record
+# @see https://pro.europeana.eu/resources/apis/europeana-rest-api#record
 module Europeana
   class Record
     include Europeana::Record::Annotations
@@ -53,7 +53,7 @@ module Europeana
     #
     # @return [String]
     def portal_url
-      "http://www.europeana.eu/portal/record#{id}.html"
+      "https://www.europeana.eu/portal/record#{id}.html"
     end
   end
 end

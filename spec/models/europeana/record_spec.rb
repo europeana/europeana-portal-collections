@@ -1,11 +1,6 @@
 # frozen_string_literal: true
-RSpec.describe Europeana::Record do
-  describe '.portal_url_from_id' do
-    it 'should construct portal URL from Europeana ID' do
-      expect(described_class.portal_url_from_id('/abc/123')).to eq('http://www.europeana.eu/portal/record/abc/123.html')
-    end
-  end
 
+RSpec.describe Europeana::Record do
   describe '.id_from_portal_url' do
     %w(
       http://www.europeana.eu/portal/record/abc/123.html
@@ -20,6 +15,12 @@ RSpec.describe Europeana::Record do
           expect(described_class.id_from_portal_url(url)).to eq('/abc/123')
         end
       end
+    end
+  end
+
+  describe '#portal_url' do
+    it 'should construct portal URL from Europeana ID' do
+      expect(described_class.new('/abc/123').portal_url).to eq('https://www.europeana.eu/portal/record/abc/123.html')
     end
   end
 end
