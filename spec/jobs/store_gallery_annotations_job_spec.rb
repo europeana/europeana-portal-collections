@@ -2,10 +2,6 @@
 RSpec.describe StoreGalleryAnnotationsJob, :annotations_api do
   let(:gallery) { Gallery.published.first }
 
-  before do
-    ActiveJob::Base.queue_adapter = :test
-  end
-
   it 'should be in the "annotations" queue' do
     expect { described_class.perform_later(gallery.slug) }.
       to have_enqueued_job.on_queue('annotations')

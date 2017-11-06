@@ -129,14 +129,6 @@ module EuropeanaAPIHelper
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
   end
 
-  def an_annotations_api_search_request_for(id)
-    a_request(:get, Europeana::API.url + '/annotations/search').
-      with(query: hash_including(
-        wskey: ENV['EUROPEANA_API_KEY'],
-        qf: %(target_uri:"http://data.europeana.eu/item#{id}")
-      ))
-  end
-
   def a_media_proxy_request_for(id)
     a_request(:head, Rails.application.config.x.europeana_media_proxy + id)
   end

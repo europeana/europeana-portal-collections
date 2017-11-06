@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 require 'support/shared_examples/europeana_api_requests'
 
-RSpec.describe PortalController do
+RSpec.describe PortalController, :annotations_api do
   # workaround for https://github.com/jnicklas/capybara/issues/1396
   include RSpec::Matchers.clone
-
-  it { expect(subject.class.ancestors.include?(Europeana::AnnotationsApiConsumer)).to eq(true) }
 
   describe 'GET index' do
     context 'when the format is html' do

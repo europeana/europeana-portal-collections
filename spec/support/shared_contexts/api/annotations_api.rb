@@ -21,4 +21,12 @@ RSpec.shared_context 'Annotations API', :annotations_api do
     stub_request(:delete, annotations_api_delete_method_url).
       to_return(status: 204)
   end
+
+  def an_annotations_api_search_request_for(id)
+    a_request(:get, annotations_api_search_method_url).
+      with(query: hash_including(
+        wskey: annotations_api_key,
+        qf: %(target_uri:"http://data.europeana.eu/item#{id}")
+      ))
+  end
 end

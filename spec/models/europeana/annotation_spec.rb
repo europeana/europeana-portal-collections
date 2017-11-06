@@ -15,7 +15,7 @@ RSpec.describe Europeana::Annotation, :annotations_api do
       described_class.find(params)
 
       expect(a_request(:get, annotations_api_search_method_url).
-        with(query: { wskey: annotations_api_key, profile: 'standard', pageSize: 100 }.merge(params))).
+        with(query: { wskey: annotations_api_key, profile: 'standard', pageSize: '100' }.merge(params))).
         to have_been_made.once
     end
   end
@@ -24,9 +24,9 @@ RSpec.describe Europeana::Annotation, :annotations_api do
     let(:attributes) do
       {
         api_user_token: annotations_api_user_token,
+        target: 'http://data.europeana.eu/item/abc/123',
         motivation: 'tagging',
-        bodyValue: 'tag',
-        target: 'http://data.europeana.eu/item/abc/123'
+        bodyValue: 'tag'
       }
     end
 

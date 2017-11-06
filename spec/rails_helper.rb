@@ -70,6 +70,10 @@ RSpec.configure do |config|
   config.include RequestHelper, type: :request
   config.include ViewTestHelper, type: :view
 
+  config.before(:suite) do
+    ActiveJob::Base.queue_adapter = :test
+  end
+
   config.before(:each) do
     Europeana::Portal::Application.config.relative_url_root = nil
     Rails.cache.clear
