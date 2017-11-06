@@ -23,7 +23,7 @@ class GalleryImage < ActiveRecord::Base
       body: {
         '@graph' => {
           '@context' => 'http://www.europeana.eu/schemas/context/edm.jsonld',
-          isGatheredInto: gallery.annotation_link_resource_uri,
+          isGatheredInto: gallery&.annotation_link_resource_uri,
           id: annotation_target_uri
         }
       },
