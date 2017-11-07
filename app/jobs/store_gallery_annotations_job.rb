@@ -4,7 +4,6 @@
 # Creates and deletes annotations via the Annotations API representing the
 # inclusion in a gallery of Europeana items.
 #
-# TODO: write specs
 # TODO: ideally this job should be deferred from execution if any other instances
 #       of the job are already running for the same value of gallery_slug
 # TODO: create a job and rake task to queue storing/deleting annotations for all
@@ -38,7 +37,6 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
     end
   end
 
-  # TODO: move to separate job?
   def create_annotations
     gallery.images.each do |image|
       next if existing_annotation_targets.include?(image.annotation_target_uri)
@@ -50,7 +48,6 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
     end
   end
 
-  # TODO: move to separate job?
   def delete_annotations
     gallery.annotations.each do |annotation|
       next unless delete_annotation?(annotation)
