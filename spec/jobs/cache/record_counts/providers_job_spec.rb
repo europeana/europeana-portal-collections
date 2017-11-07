@@ -15,10 +15,7 @@ shared_examples 'provider record count caching job' do
   end
 
   it 'should queue data provider jobs' do
-    data_providers_job_count = Proc.new do
-      Delayed::Job.where("handler LIKE '%job_class: Cache::RecordCounts::DataProvidersJob%'").count
-    end
-    expect { subject.perform(*args) }.to change { data_providers_job_count.call }.by_at_least(1)
+    expect { subject.perform(*args) }.to have_enqueued_job(Cache::RecordCounts::DataProvidersJob).at_least(:once)
   end
 end
 

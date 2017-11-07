@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples 'a record API request' do
   it 'queries the API for the named record' do
     expect(an_api_record_request_for(record_id)).

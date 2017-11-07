@@ -1,7 +1,14 @@
 # frozen_string_literal: true
+
 require 'models/concerns/is_permissionable_examples'
+
 RSpec.describe Gallery do
+  it 'includes Annotations' do
+    expect(described_class).to include(Gallery::Annotations)
+  end
+
   include_context 'Gallery Image request'
+
   it_behaves_like 'permissionable'
 
   it { is_expected.to have_many(:images).inverse_of(:gallery).dependent(:destroy) }
@@ -76,7 +83,7 @@ RSpec.describe Gallery do
 
   describe '#image_portal_urls' do
     it 'should return a new line-separated list of gallery image record URLs' do
-      expect(galleries(:fashion_dresses).image_portal_urls).to eq("http://www.europeana.eu/portal/record/sample/record1.html\n\nhttp://www.europeana.eu/portal/record/sample/record2.html")
+      expect(galleries(:fashion_dresses).image_portal_urls).to eq("https://www.europeana.eu/portal/record/sample/record1.html\n\nhttps://www.europeana.eu/portal/record/sample/record2.html")
     end
   end
 
