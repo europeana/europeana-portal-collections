@@ -19,10 +19,12 @@ class Gallery
       }
     end
 
-    # TODO: do not hard-code, but use deployment's URL, without locale? or make
-    #       configurable in env var?
     def annotation_link_resource_uri
-      @annotation_link_resource_uri ||= "https://www.europeana.eu/portal/explore/galleries/#{slug}"
+      @annotation_link_resource_uri ||= "https://#{annotation_link_resource_host}/portal/explore/galleries/#{slug}"
+    end
+
+    def annotation_link_resource_host
+      ENV['HTTP_HOST'] || 'www.europeana.eu'
     end
 
     def image_annotation_targets
