@@ -82,7 +82,7 @@ module BlacklightConfig
                              range: true,
                              when:  lambda { |context|
                                year_facet_collections = Rails.application.config.x.blacklight.extra_year_facet_collections.dup
-                               year_facet_collections << 'fashion'
+                               year_facet_collections += %w(fashion migration)
                                context.within_collection? && year_facet_collections.include?(context.current_collection.key)
                              },
                              limit: 2_000,
