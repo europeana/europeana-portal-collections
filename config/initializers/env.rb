@@ -15,6 +15,13 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
                                   ''
                                 end
 
+  europeana[:annotations] = OpenStruct.new(
+    api_generator_name: ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'],
+    api_key: ENV['EUROPEANA_ANNOTATIONS_API_KEY'],
+    api_url: ENV['EUROPEANA_ANNOTATIONS_API_URL'],
+    api_user_token_gallery: ENV['EUROPEANA_ANNOTATIONS_API_USER_TOKEN_GALLERY']
+  )
+
   europeana[:entities] = OpenStruct.new(
     api_key: ENV['EUROPEANA_ENTITIES_API_KEY'],
     api_url: ENV['EUROPEANA_ENTITIES_API_URL']
@@ -38,10 +45,11 @@ Rails.application.config.x.disable = OpenStruct.new(
 # Enable certain features that are disabled by default
 Rails.application.config.x.enable = OpenStruct.new(
   csrf_without_ssl: ENV['ENABLE_CSRF_WITHOUT_SSL'],
+  entity_page_caching: ENV['ENABLE_ENTITY_PAGE_CACHING'],
   events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
+  gallery_annotations: ENV['ENABLE_GALLERY_ANNOTATIONS'],
   search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
-  search_form_autocomplete_extended_info: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE_EXTENDED_INFO'],
-  entity_page_caching: ENV['ENABLE_ENTITY_PAGE_CACHING']
+  search_form_autocomplete_extended_info: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE_EXTENDED_INFO']
 )
 
 # Environment specific blacklight settings

@@ -1,4 +1,6 @@
-RSpec.feature 'Object page' do
+# frozen_string_literal: true
+
+RSpec.feature 'Object page', :annotations_api do
   describe 'navigation' do
     context 'with JS', js: true do
       # No HTML next/previous links when action caching is in use

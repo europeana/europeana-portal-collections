@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EuropeanaAPIHelper
   def record_id_from_request_uri(request)
     request.uri.path.match(%r{/record(/[^/]+/[^/]+).json})[1]
@@ -99,23 +101,6 @@ module EuropeanaAPIHelper
                   status: 200,
                   headers: { 'Content-Type' => 'application/json' })
 
-      # Annotations API
-      stub_request(:get, %r{#{Europeana::API.url}/annotations/search}).
-        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
-        to_return(body: api_responses(:annotations_search),
-                  status: 200,
-                  headers: { 'Content-Type' => 'application/ld+json' })
-
-      stub_request(:get, %r{#{Europeana::API.url}/annotations/[^/]+/[^/]+}).
-        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
-        to_return do |request|
-          {
-            body: api_responses(:annotations_fetch, id: request.uri.path.split('/')[-2..-1].join('/')),
-            status: 200,
-            headers: { 'Content-Type' => 'application/ld+json' }
-          }
-        end
-
       # Media proxy
       stub_request(:head, %r{#{Rails.application.config.x.europeana_media_proxy}/[^/]+/[^/]+}).
         to_return(status: 200,
@@ -144,14 +129,6 @@ module EuropeanaAPIHelper
   def an_api_hierarchy_request_for(id)
     a_request(:get, %r{#{Europeana::API.url}/v2/record#{id}/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
-  end
-
-  def an_annotations_api_search_request_for(id)
-    a_request(:get, Europeana::API.url + '/annotations/search').
-      with(query: hash_including(
-        wskey: ENV['EUROPEANA_API_KEY'],
-        qf: %(target_uri:"http://data.europeana.eu/item#{id}")
-      ))
   end
 
   def a_media_proxy_request_for(id)

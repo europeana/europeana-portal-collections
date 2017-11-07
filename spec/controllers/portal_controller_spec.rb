@@ -2,11 +2,7 @@
 
 require 'support/shared_examples/europeana_api_requests'
 
-RSpec.describe PortalController do
-  it 'is an Annotations API consumer' do
-    expect(subject.class.ancestors).to include(Europeana::AnnotationsApiConsumer)
-  end
-
+RSpec.describe PortalController, :annotations_api do
   describe 'GET index' do
     context 'when the format is html' do
       context 'without q param' do

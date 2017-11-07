@@ -1,12 +1,17 @@
 # frozen_string_literal: true
+
 ##
 # Represents (but does not store) a Europeana record as exposed over the Record
 # API.
 #
-# @see http://labs.europeana.eu/api/record
+# @see https://pro.europeana.eu/resources/apis/europeana-rest-api#record
 module Europeana
   class Record
+    include Europeana::Record::Annotations
+
     ID_PATTERN = %r{\A/[^/]+/[^/]+\z}
+
+    attr_accessor :id
 
     class << self
       ##
@@ -25,14 +30,6 @@ module Europeana
       end
 
       ##
-      # Returns the language-agnostic portal URL for Europeana record ID
-      #
-      # @return [String]
-      def portal_url_from_id(id)
-        "http://www.europeana.eu/portal/record#{id}.html"
-      end
-
-      ##
       # Constructs a Search API query for all of the passed IDS.
       #
       # This only returns what would need to go in the `query` parameter sent to
@@ -45,6 +42,18 @@ module Europeana
       def search_api_query_for_record_ids(record_ids)
         'europeana_id:("' + record_ids.join('" OR "') + '")'
       end
+    end
+
+    def initialize(id)
+      self.id = id
+    end
+
+    ##
+    # Returns the language-agnostic portal URL for this Europeana record
+    #
+    # @return [String]
+    def portal_url
+      "https://www.europeana.eu/portal/record#{id}.html"
     end
   end
 end

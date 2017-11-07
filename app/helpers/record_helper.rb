@@ -68,7 +68,7 @@ module RecordHelper
       info: static_page_path('annotations', format: 'html'),
       sections: [
         {
-          items: annotations.map { |anno| { url: anno, text: anno } },
+          items: annotations.map(&:to_s).map { |anno| { url: anno, text: anno } },
           title: t('site.object.meta-label.relations')
         }
       ]
