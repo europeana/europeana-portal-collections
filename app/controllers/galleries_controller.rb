@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class GalleriesController < ApplicationController
   include CacheHelper
   include HomepageHeroImage
@@ -16,7 +17,6 @@ class GalleriesController < ApplicationController
     @hero_image = homepage_hero_image
 
     @body_cache_key = foyer_body_cache_key(topic: @selected_topic, per: @galleries.limit_value, page: @galleries.current_page)
-    @documents = search_api_for_image_metadata(images) unless body_cached?
 
     respond_to do |format|
       format.html

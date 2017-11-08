@@ -112,6 +112,16 @@ class PortalController < ApplicationController
     end
   end
 
+  def gallery
+    @gallery = Gallery.published.joins(:images).
+                 where(gallery_images: { europeana_record_id: doc_id }).
+                 order(published_at: :desc).first
+
+    respond_to do |format|
+      format.json { render :gallery, layout: false }
+    end
+  end
+
   protected
 
   def document_annotations(id)
