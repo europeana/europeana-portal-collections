@@ -14,7 +14,7 @@ RSpec.describe GalleriesController do
       expect(response).to have_http_status(:success)
     end
 
-    it 'searches the API for the gallery image metadata' do
+    it 'does not search the API for the gallery image metadata' do
       get :index, locale: 'en'
       expect(an_api_search_request).not_to have_been_made
     end
@@ -24,7 +24,7 @@ RSpec.describe GalleriesController do
         allow(subject).to receive(:body_cached?) { true }
       end
 
-      it 'does NOT searche the API for the gallery image metadata' do
+      it 'does NOT search the API for the gallery image metadata' do
         get :index, locale: 'en'
         expect(an_api_search_request).not_to have_been_made
       end
