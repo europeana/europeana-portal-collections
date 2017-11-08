@@ -51,14 +51,38 @@ RSpec.shared_examples 'common view components', :common_view_components do
     end
   end
 
-  it 'should have JS vars' do
-    I18n.locale = 'fr'
+  describe 'JS vars' do
+    it 'should indicate I18n locales' do
+      I18n.locale = 'fr'
 
-    render
-    expect(rendered).to have_selector('script', text: 'var i18nDefaultLocale = "en";', visible: false)
-    expect(rendered).to have_selector('script', text: 'var i18nLocale = "fr";', visible: false)
+      render
+      expect(rendered).to have_selector('script', text: 'var i18nDefaultLocale = "en";', visible: false)
+      expect(rendered).to have_selector('script', text: 'var i18nLocale = "fr";', visible: false)
 
-    I18n.locale = I18n.default_locale
+      I18n.locale = I18n.default_locale
+    end
+
+    describe 'googleAnalyticsLinkedDomains' do
+      before do
+        Rails.application.config.x.google.analytics_linked_domains = google_analytics_linked_domains
+      end
+
+      context 'when none are configured' do
+        let(:google_analytics_linked_domains) { [] }
+        it 'is a blank JS array' do
+          render
+          expect(rendered).to have_selector('script', text: 'var googleAnalyticsLinkedDomains = [];', visible: false)
+        end
+      end
+
+      context 'when some are configured' do
+        let(:google_analytics_linked_domains) { %w(site1.example.com site2.example.com) }
+        it 'is a JS array including them' do
+          render
+          expect(rendered).to have_selector('script', text: "var googleAnalyticsLinkedDomains = ['site1.example.com','site2.example.com'];", visible: false)
+        end
+      end
+    end
   end
 
   it 'should have language menu links to all locales' do

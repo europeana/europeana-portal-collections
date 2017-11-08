@@ -26,6 +26,7 @@ else
         '--local-to-remote-url-access=true'
       ],
       js_errors: true,
+      phantomjs_logger: File.new(File.join(Rails.root, 'log', 'phantomjs.log'), 'w'),
       debug: false
     )
   end
