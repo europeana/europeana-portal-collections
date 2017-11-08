@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-feed-jobs
-  revision: bd80004efd262433365ef33d9fcb2219a2ccd2bd
+  revision: 24a291d419982773c7992dd8d2d0eecd4e4eebed
   branch: develop
   specs:
     europeana-feeds (0.0.1)
