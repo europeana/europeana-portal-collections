@@ -14,7 +14,7 @@ RSpec.describe FeedEntryImage do
   describe '#thumbnail_url' do
     context 'when there is a media object' do
       before do
-        allow(subject).to receive(:media_object) {media_object}
+        allow(subject).to receive(:media_object) { media_object }
       end
 
       it 'returns the computed url' do
