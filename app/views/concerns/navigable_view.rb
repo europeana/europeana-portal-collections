@@ -9,9 +9,9 @@ module NavigableView
   # URLs of feeds used to populate the global nav
   def self.feeds_included_in_nav_urls
     @feeds_included_in_nav_urls ||= begin
-      all_blog_feed = Feed.find_by_slug('all-blog')
-      all_blog_url = all_blog_feed.present? ? all_blog_feed.url : nil
-      (Feed.exhibitions_urls.values + [all_blog_url]).compact
+      %w(all-blog exhibitions-de exhibitions-en).map do |slug|
+        Feed.find_by_slug(slug)&.url
+      end.compact
     end
   end
 
@@ -79,8 +79,9 @@ module NavigableView
 
   protected
 
-  def exhibitions_feed_key
-    @exhibitions_feed_key ||= Feed.exhibitions_urls.key?(I18n.locale) ? I18n.locale : :en
+  # TODO: do not hard-code the available Exhibitions locales
+  def exhibitions_locale
+    @exhibitions_locale ||= %i(de en).include?(I18n.locale) ? I18n.locale : :en
   end
 
   def submenu_has_current_page?(submenu)
@@ -108,7 +109,7 @@ module NavigableView
         }
       },
       {
-        url: exhibitions_foyer_path(exhibitions_feed_key),
+        url: exhibitions_foyer_path(exhibitions_locale),
         text: t('global.navigation.exhibitions'),
         submenu: {
           items: navigation_global_primary_nav_exhibitions_submenu_items
@@ -169,20 +170,22 @@ module NavigableView
   end
 
   def navigation_global_primary_nav_exhibitions_submenu_items
-    mustache[:navigation_global_primary_nav_exhibitions_submenu_items] ||= begin
-      feed_items = feed_entry_nav_items(Feed.exhibitions_urls[exhibitions_feed_key], 6)
-      feed_items << link_item(t('global.navigation.all_exhibitions'), exhibitions_foyer_path(exhibitions_feed_key),
-                              is_morelink: true)
-    end
+    navigation_global_primary_nav_feed_submenu(feed_slug: "exhibitions-#{exhibitions_locale}",
+                                               i18n_key: 'all_exhibitions',
+                                               link_href: exhibitions_foyer_path(exhibitions_locale))
   end
 
   def navigation_global_primary_nav_blog_submenu_items
-    mustache[:navigation_global_primary_nav_blog_submenu_items] ||= begin
-      feed = Feed.find_by_slug('all-blog')
-      return [] unless feed
-      feed_items = feed_entry_nav_items(feed.url, 6)
-      feed_items << link_item(t('global.navigation.all_blog_posts'), feed.html_url,
-                              is_morelink: true)
+    navigation_global_primary_nav_feed_submenu(feed_slug: 'all-blog',
+                                               i18n_key: 'all_blog_posts')
+  end
+
+  def navigation_global_primary_nav_feed_submenu(feed_slug:, i18n_key:, link_href: nil)
+    memo_key = "navigation_global_primary_nav_#{i18n_key}_submenu_items"
+    mustache[memo_key] ||= begin
+      feed = Feed.find_by_slug(feed_slug)
+      feed_items = feed.nil? ? [] : feed_entry_nav_items(feed.url, 6)
+      feed_items << link_item(t(i18n_key, scope: 'global.navigation'), link_href || feed.html_url, is_morelink: true)
     end
   end
 

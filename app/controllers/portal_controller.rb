@@ -6,7 +6,6 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
-  include Europeana::AnnotationsApiConsumer
   include Europeana::UrlConversions
   include OembedRetriever
   include SearchInteractionLogging
@@ -70,6 +69,9 @@ class PortalController < ApplicationController
 
     @mlt_query = @document.more_like_this_query
 
+    # TODO: remove when new design is default
+    @new_design = params[:design] == 'new'
+
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
@@ -104,12 +106,24 @@ class PortalController < ApplicationController
   # GET /record/:id/annotations
   def annotations
     @annotations = document_annotations(doc_id)
+
     respond_to do |format|
       format.json { render :annotations, layout: false }
     end
   end
 
   protected
+
+  def document_annotations(id)
+    Europeana::Record.new(id).annotations
+  rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
+    # TODO: we may not want controller actions to fail if annotations are
+    #   unavailable, but we should return something indicating that there
+    #   was a failure and perhaps indicate it to the user, e.g. as
+    #   "Annotations could not be retrieved".
+    logger.error(error.message)
+    nil
+  end
 
   def document_data_provider(document)
     data_provider_name = document.fetch('aggregations.edmDataProvider', []).first

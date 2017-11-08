@@ -5,7 +5,18 @@
         "id": "http://annotations.europeana.eu/annotation/search?&qf=target_id:%22http://data.europeana.eu/item/abc/123%22&query=*:*&wskey=XXX",
         "total": 2
     },
-    "items": ["http://data.europeana.eu/abc/123", "http://data.europeana.eu/def/456"],
+    "items": [
+        {
+            "@context":"http://www.w3.org/ns/anno.jsonld",
+            "id":"http://data.europeana.eu/annotation/abc/123",
+            "target":"http://data.europeana.eu/item/abc/123"
+        },
+        {
+            "@context":"http://www.w3.org/ns/anno.jsonld",
+            "id":"http://data.europeana.eu/annotation/def/456",
+            "target":"http://data.europeana.eu/item/abc/123"
+        }
+    ],
     "total": 2,
     "type": "AnnotationPage"
 }
