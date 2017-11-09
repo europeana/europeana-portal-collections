@@ -51,7 +51,7 @@ namespace :jobs do
   end
 
   desc 'Queue GalleryValidationJob'
-  task gallery_validation: :enironment do
+  task gallery_validation: :environment do
     Gallery.published.each do |gallery|
       GalleryValidationJob.perform_later(gallery.id)
     end
