@@ -11,4 +11,4 @@ Validation error(s) follow.
   <% end %>
 
 <% end %>
-CMS link: <%= rails_admin.edit_url(locale: :en, model_name: 'gallery', id: @gallery.id) %>
+CMS link: <%= "#{root_url}#{rails_admin.edit_path(locale: :en, model_name: 'gallery', id: @gallery.id).sub('/','')}" %>
