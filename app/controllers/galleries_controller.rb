@@ -13,7 +13,6 @@ class GalleriesController < ApplicationController
     @galleries = Gallery.includes(:images).published.order(published_at: :desc).
                  page(pagination_page).per(pagination_per).with_topic(gallery_topic)
     @selected_topic = gallery_topic
-    images = gallery_images_for_foyer(@galleries)
     @hero_image = homepage_hero_image
 
     @body_cache_key = foyer_body_cache_key(topic: @selected_topic, per: @galleries.limit_value, page: @galleries.current_page)
@@ -41,10 +40,6 @@ class GalleriesController < ApplicationController
   def foyer_body_cache_key(topic:, per:, page:)
     last_galleries_edit_int = Gallery.order(updated_at: :desc).first.updated_at.to_i
     "explore/galleries.#{request.format.to_sym}/#{last_galleries_edit_int}/#{topic}/#{per}/#{page}/"
-  end
-
-  def gallery_images_for_foyer(galleries)
-    galleries.map { |gallery| gallery.images.first(3) }.flatten
   end
 
   # @return [Array<Europeana::Blacklight::Document>]
