@@ -7,11 +7,9 @@ module Cache
     # Cached pages need to be expired should they be using the updated feed.
     after_perform do
       if @updated
-        if @download_media
-          @feed.entries.each do |entry|
-            img_url = FeedEntryImage.new(entry).url
-            DownloadRemoteMediaObjectJob.perform_later(img_url) unless img_url.nil?
-          end
+        @feed.entries.each do |entry|
+          img_url = FeedEntryImage.new(entry).url
+          DownloadRemoteMediaObjectJob.perform_later(img_url) unless img_url.nil?
         end
         Cache::Expiry::FeedAssociatedJob.perform_later(@url)
       end
