@@ -55,18 +55,6 @@ class PortalController < ApplicationController
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
-    # This param check gives us a way to load annotations after page
-    # generation by AJAX with the URL param `?annotations=later`, so that we
-    # can test in one environment the relative performance of both approaches.
-    # @todo remove conditional when a decision is made as to which is better
-    if params[:annotations] == 'later'
-      @annotations = false
-      @annotations_later = true
-    else
-      @annotations = document_annotations(@document.id)
-      @annotations_later = false
-    end
-
     @mlt_query = @document.more_like_this_query
 
     # TODO: remove when new design is default
