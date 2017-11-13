@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/europeana/europeana-feeds
-  revision: c6fb2b2c3231e0c231b0bcc399cc5b317534c4ab
-  branch: develop
-  specs:
-    europeana-feeds (0.0.1)
-      feedjira (~> 2.0)
-      rails (~> 4.2)
-
-GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
   revision: 4c9ee15657303c9ff38b117f6ae13cba696254c2
   branch: develop
@@ -178,6 +169,9 @@ GEM
       rails (>= 4.2.2, < 5)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
+    europeana-feeds (0.0.1)
+      feedjira (~> 2.0)
+      rails (~> 4.2)
     europeana-logging (0.2.3)
       lograge (~> 0.4)
       logstash-event (~> 1.2)
@@ -535,7 +529,7 @@ DEPENDENCIES
   europeana-api (~> 1.0.0)
   europeana-blacklight (~> 1.1.0)
   europeana-feedback-button (= 0.0.4)
-  europeana-feeds!
+  europeana-feeds
   europeana-i18n!
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
@@ -592,4 +586,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.15.3
+   1.16.0
