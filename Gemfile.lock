@@ -169,6 +169,9 @@ GEM
       rails (>= 4.2.2, < 5)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
+    europeana-feeds (0.0.1)
+      feedjira (~> 2.0)
+      rails (~> 4.2)
     europeana-logging (0.2.3)
       lograge (~> 0.4)
       logstash-event (~> 1.2)
@@ -526,6 +529,7 @@ DEPENDENCIES
   europeana-api (~> 1.0.0)
   europeana-blacklight (~> 1.1.0)
   europeana-feedback-button (= 0.0.4)
+  europeana-feeds
   europeana-i18n!
   europeana-logging (~> 0.2.3)
   europeana-styleguide!
@@ -582,4 +586,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.15.4
+   1.16.0

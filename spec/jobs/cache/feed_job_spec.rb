@@ -44,23 +44,21 @@ RSpec.describe Cache::FeedJob do
     expect(cached.feed_url).to eq(url)
   end
 
-  context 'when the download_media argument is passed as true' do
-    context 'when the feed was updated' do
-      before do
-        Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body.gsub('Mon, 22 May 2017', 'Tue, 23 May 2017')))
-      end
-      it 'should queue DownloadRemoteMediaObjectJob' do
-        expect { described_class.perform_now(url, true) }.to have_enqueued_job(DownloadRemoteMediaObjectJob).with('http://www.example.com/image.png').at_least(:once)
-      end
+  context 'when the feed was updated' do
+    before do
+      Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body.gsub('Mon, 22 May 2017', 'Tue, 23 May 2017')))
     end
+    it 'should queue DownloadRemoteMediaObjectJob' do
+      expect { described_class.perform_now(url) }.to have_enqueued_job(DownloadRemoteMediaObjectJob).with('http://www.example.com/image.png').at_least(:once)
+    end
+  end
 
-    context 'when the feed was NOT updated' do
-      before do
-        Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body))
-      end
-      it 'should not queue DownloadRemoteMediaObjectJob' do
-        expect { described_class.perform_now(url, true) }.not_to have_enqueued_job(DownloadRemoteMediaObjectJob)
-      end
+  context 'when the feed was NOT updated' do
+    before do
+      Rails.cache.write(cache_key, Feedjira::Feed.parse(rss_body))
+    end
+    it 'should not queue DownloadRemoteMediaObjectJob' do
+      expect { described_class.perform_now(url) }.not_to have_enqueued_job(DownloadRemoteMediaObjectJob)
     end
   end
 
