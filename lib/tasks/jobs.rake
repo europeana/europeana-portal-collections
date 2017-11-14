@@ -35,7 +35,7 @@ namespace :jobs do
     desc 'Queue Cache::Feed jobs (blogs / exhibitions / Custom)'
     task feeds: :environment do
       Feed.all.each do |feed|
-        Cache::FeedJob.perform_later(feed.url, true)
+        Cache::FeedJob.perform_later(feed.url)
       end
     end
   end
