@@ -9,7 +9,10 @@ class CollectionsController < ApplicationController
   before_action :redirect_to_home, only: :show, if: proc { params[:id] == 'all' }
 
   def index
-    redirect_to_home
+    respond_to do |format|
+      format.html { redirect_to_home }
+      format.rss { render 'collections/index', layout: false }
+    end
   end
 
   def show
