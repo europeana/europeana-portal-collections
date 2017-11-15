@@ -1,7 +1,7 @@
 RSpec.describe CollectionsController do
   describe 'GET index' do
     before do
-      get :index, { locale: 'en', format: format }
+      get :index, locale: 'en', format: format
     end
 
     context 'when requesting as html' do
