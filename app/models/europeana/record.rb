@@ -42,10 +42,51 @@ module Europeana
       def search_api_query_for_record_ids(record_ids)
         'europeana_id:("' + record_ids.join('" OR "') + '")'
       end
+
+      def find(id)
+        # Construct URL and make request here til API client supports .jsonld
+        uri = URI.parse(Europeana::API.url)
+        uri.path = uri.path + "/v2/record#{id}.jsonld"
+        uri.query="wskey=#{Europeana::API.key}"
+        Spira.repository = RDF::Repository.load(uri)
+        new(id)
+      end
     end
 
     def initialize(id)
       self.id = id
+    end
+
+    def agents
+      Agent.all
+    end
+
+    def aggregations
+      Aggregation.all
+    end
+
+    def concepts
+      Concept.all
+    end
+
+    def places
+      Place.all
+    end
+
+    def provided_cho
+      ProvidedCHO.all
+    end
+
+    def proxies
+      Proxy.all
+    end
+
+    def time_spans
+      TimeSpan.all
+    end
+
+    def web_resources
+      WebResource.all
     end
 
     ##

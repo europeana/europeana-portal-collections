@@ -222,6 +222,8 @@ GEM
       activerecord (>= 4.2.0, < 4.3)
     haml (4.0.7)
       tilt
+    hamster (3.0.0)
+      concurrent-ruby (~> 1.0)
     hashdiff (0.3.5)
     hashie (3.5.6)
     htmlcompressor (0.3.0)
@@ -247,6 +249,9 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.6)
+    json-ld (2.1.5)
+      multi_json (~> 1.12)
+      rdf (~> 2.2)
     json_api_client (1.5.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -257,6 +262,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     libv8 (3.16.14.19)
+    link_header (0.0.8)
     localeapp (1.0.2)
       gli
       i18n
@@ -312,6 +318,7 @@ GEM
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
+    promise (0.3.1)
     public_suffix (2.0.5)
     puma (3.9.1)
     rack (1.6.8)
@@ -373,6 +380,13 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    rdf (2.2.12)
+      hamster (~> 3.0)
+      link_header (~> 0.0, >= 0.0.8)
+    rdf-isomorphic (2.0.0)
+      rdf (~> 2.0)
+    rdf-vocab (2.2.8)
+      rdf (~> 2.2)
     redis (3.3.3)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
@@ -459,6 +473,12 @@ GEM
     soundcloud (0.3.4)
       hashie
       httmultiparty (~> 0.3.0)
+    spira (2.0.0)
+      activemodel (> 4)
+      activesupport (> 4)
+      promise (~> 0.3.0)
+      rdf (~> 2.0)
+      rdf-isomorphic (~> 2.0)
     spring (1.7.2)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
@@ -542,6 +562,7 @@ DEPENDENCIES
   htmlcompressor (= 0.3)
   i18n_data
   jbuilder (~> 2.6.0)
+  json-ld
   json_api_client
   localeapp (~> 1.0)
   lograge
@@ -564,6 +585,8 @@ DEPENDENCIES
   rails_admin (~> 0.8.0)
   rails_serve_static_assets
   rails_with_relative_url_root (~> 0.1)
+  rdf
+  rdf-vocab
   redis (~> 3.3.3)
   redis-rails (~> 4.0)
   redis-rails-instrumentation
@@ -576,6 +599,7 @@ DEPENDENCIES
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)
+  spira
   spring (~> 1.6)
   stache!
   stackprof
