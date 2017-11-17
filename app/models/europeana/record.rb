@@ -58,35 +58,35 @@ module Europeana
     end
 
     def agents
-      Agent.all
+      @agents ||= Agent.all
     end
 
     def aggregations
-      Aggregation.all
+      @aggregations ||= Aggregation.all
     end
 
     def concepts
-      Concept.all
+      @concepts ||= Concept.all
     end
 
     def places
-      Place.all
+      @places ||= Place.all
     end
 
     def provided_cho
-      ProvidedCHO.all
+      @provided_cho ||= ProvidedCHO.all
     end
 
     def proxies
-      Proxy.all
+      @proxies ||= Proxy.all
     end
 
     def time_spans
-      TimeSpan.all
+      @time_spans ||= TimeSpan.all
     end
 
     def web_resources
-      WebResource.all
+      @web_resources ||= WebResource.all
     end
 
     ##
