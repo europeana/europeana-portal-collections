@@ -7,7 +7,6 @@ class HomeController < ApplicationController
   def index
     @collection = find_collection
     @landing_page = find_landing_page
-    @europeana_item_count = cached_record_count # populated by {Cache::RecordCountsJob}
 
     respond_to do |format|
       format.html

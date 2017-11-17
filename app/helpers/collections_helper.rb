@@ -22,6 +22,17 @@ module CollectionsHelper
   end
 
   ##
+  # Builds a collection's strapline from the associated landing page strapline.
+  #
+  # @param collection [Collection] The collection for which to retrieve the strapline
+  # @return [String]
+  def collection_strapline(collection)
+    return unless collection&.landing_page&.strapline.present?
+    total_item_count = cached_record_count(collection: collection.for_all? ? nil : collection)
+    collection.landing_page.strapline(total_item_count: number_with_delimiter(total_item_count))
+  end
+
+  ##
   # Returns the current collection being viewed by the user
   #
   # @return [Collection]

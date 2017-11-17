@@ -23,7 +23,7 @@ module Home
       mustache[:content] ||= begin
         {
           hero_config: hero_config(@landing_page.hero_image),
-          strapline: @landing_page.strapline(total_item_count: total_item_count),
+          strapline: collection_strapline(@collection),
           promoted: @landing_page.promotions.blank? ? nil : promoted_items(@landing_page.promotions),
           news: blog_news(@landing_page),
           banner: banner_content(@landing_page.banner_id)
@@ -34,7 +34,7 @@ module Home
     def head_meta
       mustache[:head_meta] ||= begin
         title = page_title
-        description = truncate(@landing_page.strapline(total_item_count: @europeana_item_count), length: 350, separator: ' ')
+        description = truncate(collection_strapline(@collection), length: 350, separator: ' ')
         description = description.strip! || description
         hero = hero_config(@landing_page.hero_image)
         head_meta = [
@@ -55,10 +55,6 @@ module Home
 
     def body_cache_key
       @landing_page.cache_key
-    end
-
-    def total_item_count
-      @europeana_item_count ? number_with_delimiter(@europeana_item_count) : nil
     end
   end
 end

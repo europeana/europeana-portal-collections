@@ -1,15 +1,25 @@
 RSpec.describe CollectionsController do
   describe 'GET index' do
     before do
-      get :index, { locale: 'en' }
+      get :index, locale: 'en', format: format
     end
 
-    it 'does not query API' do
-      expect(an_api_search_request).not_to have_been_made
+    context 'when requesting as html' do
+      let(:format) { 'html' }
+      it 'does not query API' do
+        expect(an_api_search_request).not_to have_been_made
+      end
+
+      it 'redirects to home' do
+        expect(response).to redirect_to(home_url)
+      end
     end
 
-    it 'redirects to home' do
-      expect(response).to redirect_to(home_url)
+    context 'when requesting as an rss feed' do
+      let(:format) { 'rss' }
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
