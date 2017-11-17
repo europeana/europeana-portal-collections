@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+# Helper method for the collections description
+# derived from the associated landing page strapline.
+def strapline(collection)
+  if collection.landing_page.strapline.present?
+    total_item_count = Rails.cache.fetch("record/counts/collections/#{collection.key}")
+    collection.landing_page.strapline(total_item_count: number_with_delimiter(total_item_count))
+  end
+end
+
 xml.instruct!
 xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
   xml.channel do
@@ -14,9 +23,8 @@ xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
       xml.item do
         xml.title(collection.title)
         xml.link(collection_url(collection))
-        xml.pubDate(collection.updated_at.rfc2822)
         xml.guid(collection_url(collection))
-        xml.description(collection.landing_page.strapline)
+        xml.description(strapline(collection))
       end
     end
   end
