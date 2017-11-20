@@ -97,7 +97,7 @@ module Portal
             rights: simple_rights_label_data,
             social_share: social_share,
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
-            title: [display_title, creator_title].compact.join(' | '),
+            title: page_content_heading,
             type: field_value('proxies.dcType')
           },
           refs_rels: presenter.field_group(:refs_rels),
