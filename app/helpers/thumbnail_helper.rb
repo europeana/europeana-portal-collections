@@ -4,17 +4,12 @@ module ThumbnailHelper
   include ApiHelper
 
   def thumbnail_url_for_edm_preview(edm_preview, **options)
-    options.reverse_merge!(generic: false, source: :api)
-    url_options = options.except(:generic, :source)
+    options.reverse_merge!(generic: false)
+    url_options = options.except(:generic)
 
     return nil if edm_preview.blank? && !options[:generic]
 
-    case options[:source]
-    when :s3
-      s3_thumbnail_url_for_edm_preview(edm_preview, **url_options)
-    else
-      api_thumbnail_url_for_edm_preview(edm_preview, **url_options)
-    end
+    api_thumbnail_url_for_edm_preview(edm_preview, **url_options)
   end
 
   def api_thumbnail_url_for_edm_preview(edm_preview, **options)
@@ -39,18 +34,6 @@ module ThumbnailHelper
 
     uri.query = query.to_query
     uri.to_s
-  end
-
-  # TODO: remove this when thumbnail API performs well enough for good galleries UX
-  def s3_thumbnail_url_for_edm_preview(edm_preview, **options)
-    return nil if edm_preview.blank?
-
-    options = thumbnail_url_options_with_size(options)
-
-    uri = CGI.parse(URI.parse(edm_preview).query)['uri'].first
-    resource_size = options[:size] == 400 ? 'LARGE' : 'MEDIUM'
-    resource_path = Digest::MD5.hexdigest(uri) + '-' + resource_size
-    'https://europeana-thumbnails-production.s3.amazonaws.com/' + resource_path
   end
 
   def thumbnail_url_options_with_size(options)

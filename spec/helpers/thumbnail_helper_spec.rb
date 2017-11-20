@@ -14,14 +14,6 @@ RSpec.describe ThumbnailHelper do
   describe '#thumbnail_url_for_edm_preview' do
     subject { helper.thumbnail_url_for_edm_preview(edm_preview, options) }
 
-    context 'with source :s3' do
-      let(:options) { { source: :s3 } }
-      it 'builds an s3 URL' do
-        expect(helper).to receive(:s3_thumbnail_url_for_edm_preview).with(edm_preview, {})
-        subject
-      end
-    end
-
     context 'without source' do
       let(:options) { {} }
       it 'builds a thumbnail API URL' do
@@ -100,46 +92,6 @@ RSpec.describe ThumbnailHelper do
 
     it 'uses options as query parameters' do
       expect(subject).to eq(api_url + api_path + '?size=w200&type=AUDIO&uri=http%3A%2F%2Fwww.example.com%2Fmusic.mp3')
-    end
-  end
-
-  describe '#s3_thumbnail_url_for_edm_preview' do
-    subject { helper.s3_thumbnail_url_for_edm_preview(edm_preview, options) }
-
-    let(:options) { {} }
-
-    context 'with edm:preview' do
-      it 'constructs URL from MD5 digest of unescaped edm:preview uri' do
-        hex_digest = '6c557464310d38396c09055e8e575743'
-        expect(subject).to include(hex_digest)
-      end
-
-      context 'with size 200' do
-        let(:options) { { size: 200 } }
-        it 'appends "-MEDIUM"' do
-          expect(subject).to end_with('-MEDIUM')
-        end
-      end
-
-      context 'with size 400' do
-        let(:options) { { size: 400 } }
-        it 'appends "-LARGE"' do
-          expect(subject).to end_with('-LARGE')
-        end
-      end
-
-      it 'uses production S3 bucket' do
-        expect(subject).to include('://europeana-thumbnails-production.s3.amazonaws.com/')
-      end
-
-      it 'uses SSL' do
-        expect(subject).to start_with('https://')
-      end
-    end
-
-    context 'without edm:preview' do
-      let(:edm_preview) { nil }
-      it { is_expected.to be_nil }
     end
   end
 

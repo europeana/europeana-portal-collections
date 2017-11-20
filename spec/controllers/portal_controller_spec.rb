@@ -318,4 +318,41 @@ RSpec.describe PortalController, :annotations_api do
       end
     end
   end
+
+  describe 'GET galleries' do
+    context 'when format is JSON' do
+      before do
+        get :galleries, params
+      end
+
+      let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
+      let(:record_id) { galleries(:fashion_dresses).images.first.europeana_record_id }
+
+      it 'responds with JSON' do
+        expect(response.content_type).to eq('application/json')
+      end
+
+      it 'has 200 status code' do
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders JSON ERB template' do
+        expect(response).to render_template('portal/galleries')
+      end
+
+      it 'assigns @galleries' do
+        expect(assigns[:galleries]).to include(galleries(:fashion_dresses))
+      end
+    end
+
+    context 'when format is HTML' do
+      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+
+      it 'renders an error page' do
+        get :galleries, params
+        expect(response.status).to eq(404)
+        expect(response).to render_template('pages/custom/errors/not_found')
+      end
+    end
+  end
 end

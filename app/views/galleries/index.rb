@@ -92,31 +92,5 @@ module Galleries
     def galleries_content
       @galleries.map { |gallery| gallery_content(gallery) }
     end
-
-    def gallery_content(gallery)
-      {
-        title: gallery.title,
-        link: gallery_path(gallery),
-        count: gallery.images.size,
-        images: gallery_images_content(gallery),
-        info: gallery.description,
-        label: gallery_label(gallery)
-      }
-    end
-
-    def gallery_label(gallery)
-      gallery.topics.map(&:label).sort.join(' | ').presence
-    end
-
-    def gallery_images_content(gallery)
-      gallery.images.first(3).map { |image| gallery_image_content(image) }
-    end
-
-    def gallery_image_content(image)
-      {
-        index: image.position,
-        url: gallery_image_thumbnail(image)
-      }
-    end
   end
 end
