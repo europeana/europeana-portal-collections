@@ -86,15 +86,19 @@ RSpec.describe CollectionsController do
       end
 
       context 'with search params' do
-        let(:params) { { locale: 'en', id: collection.key, q: 'search' } }
+        %w(html json).each do |format|
+          context "when format is #{format}" do
+            let(:params) { { locale: 'en', id: collection.key, q: 'search', format: format } }
 
-        it 'queries API' do
-          expect(an_api_search_request).to have_been_made.at_least_once
-        end
+            it 'queries API' do
+              expect(an_api_search_request).to have_been_made.at_least_once
+            end
 
-        it 'renders search results template' do
-          expect(response.status).to eq(200)
-          expect(response).to render_template('portal/index')
+            it 'renders search results template' do
+              expect(response.status).to eq(200)
+              expect(response).to render_template('portal/index')
+            end
+          end
         end
       end
     end
