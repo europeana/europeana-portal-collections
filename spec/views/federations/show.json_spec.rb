@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'federations/show.json.jbuilder' do
   let(:json) { JSON.parse(rendered).with_indifferent_access }
 

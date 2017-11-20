@@ -41,7 +41,7 @@ RSpec.describe 'portal/index.json.jbuilder', :blacklight_config do
     expect(json[:search_results]).to be_kind_of(Array)
     expect(json[:search_results].size).to eq(api_response_items.size)
     api_response_items.each do |item|
-      expect(json[:search_results].detect { |result| result[:object_url].include?(item[:id])}).not_to be_nil
+      expect(json[:search_results].detect { |result| result[:object_url].include?(item[:id]) }).not_to be_nil
     end
   end
 end
