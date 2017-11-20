@@ -12,7 +12,7 @@ class PortalController < ApplicationController
   include ActionView::Helpers::NumberHelper
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
-  before_action :log_show_search_interaction, only: :show
+  before_action :log_search_interaction_on_show, only: :show
 
   attr_reader :url_conversions, :oembed_html
 
@@ -26,24 +26,11 @@ class PortalController < ApplicationController
     @collection = Collection.find_by_key('all')
     (@response, @document_list) = search_results(params)
 
-    log_search_interaction(
-      search: params.slice(:q, :qe, :qf, :f, :mlt, :range).inspect,
-      total: @response.total
-    )
+    log_search_interaction_on_search(@response)
 
     respond_to do |format|
       format.html
-      format.json do
-        render json: {
-          search_results: @document_list.map do |doc|
-            Document::SearchResultPresenter.new(doc, self, @response).content
-          end,
-          total: {
-            value: @response.total,
-            formatted: number_with_delimiter(@response.total)
-          }
-        }
-      end
+      format.json { render layout: false }
     end
   end
 
@@ -126,17 +113,6 @@ class PortalController < ApplicationController
 
   def api_query_params
     params.slice(:api_url)
-  end
-
-  def log_show_search_interaction
-    return unless referer_was_search_request? && params.key?(:l)
-    log_search_interaction(
-      record: params[:id],
-      search: params[:l][:p].inspect,
-      total: params[:l][:t],
-      rank: params[:l][:r]
-    )
-    redirect_to url_for(params.except(:l))
   end
 
   def redirect_to_home

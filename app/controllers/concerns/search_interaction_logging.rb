@@ -8,6 +8,26 @@ module SearchInteractionLogging
     logger.info(search_interaction_msg(options))
   end
 
+  def log_search_interaction_on_search(search_response)
+    log_search_interaction(
+      search: params.slice(:q, :qe, :qf, :f, :mlt, :range).inspect,
+      total: search_response.total
+    )
+  end
+
+  def log_search_interaction_on_show
+    return unless referer_was_search_request? && params.key?(:l)
+
+    log_search_interaction(
+      record: params[:id],
+      search: params[:l][:p].inspect,
+      total: params[:l][:t],
+      rank: params[:l][:r]
+    )
+
+    redirect_to url_for(params.except(:l))
+  end
+
   def search_interaction_msg(**options)
     msg = ['Search interaction:']
     msg << "* Record: /#{options[:record]}" if options.key?(:record)
