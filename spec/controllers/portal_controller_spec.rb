@@ -329,10 +329,10 @@ RSpec.describe PortalController, :annotations_api do
     end
   end
 
-  describe 'GET gallery' do
+  describe 'GET galleries' do
     context 'when format is JSON' do
       before do
-        get :gallery, params
+        get :galleries, params
       end
 
       let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
@@ -347,18 +347,19 @@ RSpec.describe PortalController, :annotations_api do
       end
 
       it 'renders JSON ERB template' do
-        expect(response).to render_template('portal/gallery')
+        expect(response).to render_template('portal/galleries')
       end
 
-      it 'assigns @gallery' do
-        expect(assigns[:gallery]).to eq(galleries(:fashion_dresses))
+      it 'assigns @galleries' do
+        expect(assigns[:galleries]).to include(galleries(:fashion_dresses))
       end
     end
 
     context 'when format is HTML' do
       let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+
       it 'renders an error page' do
-        get :gallery, params
+        get :galleries, params
         expect(response.status).to eq(404)
         expect(response).to render_template('pages/custom/errors/not_found')
       end

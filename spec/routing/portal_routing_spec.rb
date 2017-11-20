@@ -19,8 +19,8 @@ RSpec.describe 'routes for the portal controller' do
     expect(get('/en/record/abc/123/media')).to route_to('portal#media', locale: 'en', id: 'abc/123')
   end
 
-  it 'routes GET /en/record/:id/gallery to portal#gallery' do
-    expect(get('/en/record/abc/123/gallery')).to route_to('portal#gallery', locale: 'en', id: 'abc/123')
+  it 'routes GET /en/record/:id/galleries to portal#galleries' do
+    expect(get('/en/record/abc/123/galleries')).to route_to('portal#galleries', locale: 'en', id: 'abc/123')
   end
 
   it 'routes GET /en/record/:id/annotations to portal#annotations' do
