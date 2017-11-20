@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'portal/index.json.jbuilder', :blacklight_config do
   before do
     assign(:response, response)
