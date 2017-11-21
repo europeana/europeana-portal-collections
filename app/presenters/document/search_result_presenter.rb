@@ -73,7 +73,7 @@ module Document
 
     def origin
       {
-        text: field_value('dataProvider'),
+        text: document.fetch('dataProvider', []).first,
         url: field_value('edmIsShownAt')
       }
     end
