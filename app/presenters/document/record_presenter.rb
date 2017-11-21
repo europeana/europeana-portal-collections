@@ -15,6 +15,23 @@ module Document
       @controller = controller
     end
 
+    def title
+      @title ||= [display_title, creator_title].compact.join(' | ')
+    end
+
+    def display_title
+      field_value('proxies.dcTitle') ||
+        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ')
+    end
+
+    def creator_title
+      @creator_title ||= begin
+        document.fetch('agents.prefLabel', []).first ||
+          field_value('dcCreator') ||
+          field_value('proxies.dcCreator')
+      end
+    end
+
     def edm_is_shown_at
       @edm_is_shown_at ||= aggregation.fetch('edmIsShownAt', nil)
     end

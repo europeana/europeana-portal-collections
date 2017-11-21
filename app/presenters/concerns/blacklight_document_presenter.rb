@@ -8,18 +8,20 @@ module BlacklightDocumentPresenter
   end
 
   def blacklight_document_presenter
-    @blacklight_document_presenter ||= Europeana::Blacklight::DocumentPresenter.new(document, controller)
+    @blacklight_document_presenter ||= NoEscapePresenter.new(document, controller)
   end
 
-  ##
-  # Override to prevent HTML escaping, handled by {Mustache}
-  #
-  # @see Blacklight::DocumentPresenter#render_values
-  def render_values(values, field_config = nil)
-    options = {}
-    options = field_config.separator_options if field_config && field_config.separator_options
+  class NoEscapePresenter < Europeana::Blacklight::DocumentPresenter
+    ##
+    # Override to prevent HTML escaping, handled by {Mustache}
+    #
+    # @see Blacklight::DocumentPresenter#render_values
+    def render_values(values, field_config = nil)
+      options = {}
+      options = field_config.separator_options if field_config && field_config.separator_options
 
-    values.to_sentence(options)
+      values.to_sentence(options)
+    end
   end
 
   def field_value(fields, **options)
