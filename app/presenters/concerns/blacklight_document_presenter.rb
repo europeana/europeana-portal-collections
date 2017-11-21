@@ -25,12 +25,10 @@ module BlacklightDocumentPresenter
   end
 
   def field_value(fields, **options)
-    unescape = options[:unescape]
     method = options[:context] == :index ? :render_index_field_value : :render_document_show_field_value
 
     [fields].flatten.each do |field|
-      value = blacklight_document_presenter.send(method, field, options.except(:context, :unescape))
-      value = CGI.unescapeHTML(value.to_str) if unescape
+      value = blacklight_document_presenter.send(method, field, options.except(:context))
       return value unless value.blank?
     end
 
