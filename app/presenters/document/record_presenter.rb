@@ -4,6 +4,7 @@ module Document
   ##
   # Blacklight document presenter for a Europeana record
   class RecordPresenter < ApplicationPresenter
+    include ActionView::Helpers::TextHelper
     include BlacklightDocumentPresenter
     include Record::IIIF
     include Metadata::Rights
