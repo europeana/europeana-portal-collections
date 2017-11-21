@@ -26,7 +26,7 @@ class CollectionsController < ApplicationController
     else
       @collection_stats = collection_stats
       @recent_additions = recent_additions
-      @total_item_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}")
+      @total_item_count = cached_record_count(collection: @collection)
     end
 
     respond_to do |format|
