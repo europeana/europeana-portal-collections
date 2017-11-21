@@ -7,15 +7,9 @@ require 'clockwork'
 include Clockwork
 
 unless ENV['DISABLE_SCHEDULED_JOBS']
-  every(1.day, 'cache.feed.exhibitions', at: ENV['SCHEDULE_FEED_EXHIBITIONS']) do
-    Cache::FeedJob::URLS[:exhibitions].values.each do |url|
-      Cache::FeedJob.perform_later(url)
-    end
-  end
-
   every(1.hour, 'cache.feed.custom') do
     Feed.all.each do |feed|
-      Cache::FeedJob.perform_later(feed.url, true)
+      Cache::FeedJob.perform_later(feed.url)
     end
   end
 

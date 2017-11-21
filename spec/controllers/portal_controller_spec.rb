@@ -2,11 +2,7 @@
 
 require 'support/shared_examples/europeana_api_requests'
 
-RSpec.describe PortalController do
-  it 'is an Annotations API consumer' do
-    expect(subject.class.ancestors).to include(Europeana::AnnotationsApiConsumer)
-  end
-
+RSpec.describe PortalController, :annotations_api do
   describe 'GET index' do
     context 'when the format is html' do
       context 'without q param' do
@@ -119,12 +115,7 @@ RSpec.describe PortalController do
       it_behaves_like 'a record API request'
       it_behaves_like 'no more like this API request'
       it_behaves_like 'no hierarchy API request'
-      it_behaves_like 'an annotations API request'
-
-      context 'when annotations=later is present' do
-        let(:params) { { locale: 'en', id: 'abc/123', annotations: 'later' } }
-        it_behaves_like 'no annotations API request'
-      end
+      it_behaves_like 'no annotations API request'
     end
 
     it 'assigns the response to @response' do
@@ -157,11 +148,6 @@ RSpec.describe PortalController do
     it 'does not make a request to the service if record has no edm:isshownby'
     it 'checks that the edm:isShownBy value is sane, i.e. http:// or https://'
     it 'caches the mime-type response'
-
-    it 'requests annotations from the API' do
-      get :show, params
-      expect(an_annotations_api_search_request_for(record_id)).to have_been_made
-    end
 
     context 'when format is HTML' do
       let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }

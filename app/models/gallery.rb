@@ -3,6 +3,7 @@
 class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..48
 
+  include Gallery::Annotations
   include HasPublicationStates
   include IsCategorisable
   include IsPermissionable
@@ -40,7 +41,13 @@ class Gallery < ActiveRecord::Base
   before_save :ensure_unique_title, :clear_api_responses
   after_save :set_images_from_portal_urls, :enqueue_gallery_validation_job
 
+  after_save :store_annotations, if: :store_annotations_after_save?
+  after_save :destroy_annotations, if: :destroy_annotations_after_save?
+  after_destroy :destroy_annotations, if: :annotate_records?
+
   attr_writer :image_portal_urls
+
+  delegate :annotate_records?, to: :class
 
   ##
   # Constructs a Search API query for al set of gallery images.
@@ -51,6 +58,15 @@ class Gallery < ActiveRecord::Base
   class << self
     def search_api_query_for_images(images)
       Europeana::Record.search_api_query_for_record_ids(images.map(&:europeana_record_id))
+    end
+
+    # Should we write annotations to the Europeana Annotations API linking records
+    # to the galleries they are included in?
+    #
+    # @return [Boolean]
+    def annotate_records?
+      Rails.application.config.x.europeana[:annotations].api_user_token_gallery.present? &&
+        Rails.application.config.x.enable.gallery_annotations.present?
     end
   end
 
@@ -192,5 +208,23 @@ class Gallery < ActiveRecord::Base
       end
       save
     end
+  end
+
+  private
+
+  def store_annotations
+    StoreGalleryAnnotationsJob.perform_later(slug)
+  end
+
+  def destroy_annotations
+    StoreGalleryAnnotationsJob.perform_later(slug, delete_all: true)
+  end
+
+  def store_annotations_after_save?
+    published? && annotate_records?
+  end
+
+  def destroy_annotations_after_save?
+    !published? && annotate_records?
   end
 end

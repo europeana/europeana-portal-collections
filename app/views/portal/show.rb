@@ -81,8 +81,7 @@ module Portal
       mustache[:content] ||= begin
         {
           object: {
-            annotations_later: @annotations_later,
-            annotations: @annotations.blank? ? nil : record_annotations(@annotations),
+            annotations_later: true, # TODO: remove when styleguide assumes this
             creator: creator_title,
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),

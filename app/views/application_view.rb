@@ -31,7 +31,8 @@ class ApplicationView < Europeana::Styleguide::View
       { name: 'googleOptimizeContainerID', value: config.x.google.optimize_container_id },
       { name: 'i18nLocale', value: I18n.locale },
       { name: 'i18nDefaultLocale', value: I18n.default_locale },
-      { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true }
+      { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true },
+      { name: 'googleAnalyticsLinkedDomains', value: google_analytics_linked_domains_js_var_value, unquoted: true }
     ] + super
   end
 
@@ -94,7 +95,15 @@ class ApplicationView < Europeana::Styleguide::View
   protected
 
   def ugc_enabled_collections_js_var_value
-    '[' + Collection.ugc_acceptor_keys.map { |key| "'#{key}'" }.join(',') + ']'
+    js_array(Collection.ugc_acceptor_keys)
+  end
+
+  def google_analytics_linked_domains_js_var_value
+    js_array(config.x.google.analytics_linked_domains)
+  end
+
+  def js_array(array)
+    '[' + array.map { |value| "'#{value}'" }.join(',') + ']'
   end
 
   def site_title

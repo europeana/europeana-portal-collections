@@ -6,7 +6,6 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
-  include Europeana::AnnotationsApiConsumer
   include Europeana::UrlConversions
   include OembedRetriever
   include SearchInteractionLogging
@@ -56,18 +55,6 @@ class PortalController < ApplicationController
     @url_conversions = perform_url_conversions(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
-    # This param check gives us a way to load annotations after page
-    # generation by AJAX with the URL param `?annotations=later`, so that we
-    # can test in one environment the relative performance of both approaches.
-    # @todo remove conditional when a decision is made as to which is better
-    if params[:annotations] == 'later'
-      @annotations = false
-      @annotations_later = true
-    else
-      @annotations = document_annotations(@document.id)
-      @annotations_later = false
-    end
-
     @mlt_query = @document.more_like_this_query
 
     # TODO: remove when new design is default
@@ -107,12 +94,24 @@ class PortalController < ApplicationController
   # GET /record/:id/annotations
   def annotations
     @annotations = document_annotations(doc_id)
+
     respond_to do |format|
       format.json { render :annotations, layout: false }
     end
   end
 
   protected
+
+  def document_annotations(id)
+    Europeana::Record.new(id).annotations
+  rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
+    # TODO: we may not want controller actions to fail if annotations are
+    #   unavailable, but we should return something indicating that there
+    #   was a failure and perhaps indicate it to the user, e.g. as
+    #   "Annotations could not be retrieved".
+    logger.error(error.message)
+    nil
+  end
 
   def document_data_provider(document)
     data_provider_name = document.fetch('aggregations.edmDataProvider', []).first

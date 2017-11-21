@@ -17,7 +17,7 @@ RSpec.describe Collection do
   describe '#publish' do
     subject { collections(:draft).publish }
     it 'should enqueue a record counts job' do
-      expect { subject }.to change { Delayed::Job.where("handler LIKE '%Cache::RecordCountsJob%'").count }.by(1)
+      expect { subject }.to have_enqueued_job(Cache::RecordCountsJob)
     end
   end
 
