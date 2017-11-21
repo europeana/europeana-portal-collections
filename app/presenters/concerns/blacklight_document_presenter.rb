@@ -17,8 +17,7 @@ module BlacklightDocumentPresenter
     #
     # @see Blacklight::DocumentPresenter#render_values
     def render_values(values, field_config = nil)
-      options = {}
-      options = field_config.separator_options if field_config && field_config.separator_options
+      options = field_config&.separator_options || {}
 
       values.to_sentence(options)
     end
