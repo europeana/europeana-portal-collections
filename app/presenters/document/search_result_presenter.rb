@@ -50,7 +50,7 @@ module Document
     end
 
     def title
-      truncate(field_value(%w(dcTitleLangAware title), unescape: true),
+      truncate(field_value(%w(dcTitleLangAware title)),
                length: 225,
                separator: ' ',
                escape: false)
@@ -58,7 +58,7 @@ module Document
 
     def text
       {
-        medium: truncate(field_value(%w(dcDescriptionLangAware dcDescription), unescape: true),
+        medium: truncate(field_value(%w(dcDescriptionLangAware dcDescription)),
                          length: 277,
                          separator: ' ',
                          escape: false)

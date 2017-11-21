@@ -40,7 +40,7 @@ module Portal
     def head_meta
       mustache[:head_meta] ||= begin
         landing = field_value('europeanaAggregation.edmLandingPage')
-        preview = helpers.thumbnail_url_for_edm_preview(field_value('europeanaAggregation.edmPreview', unescape: true))
+        preview = helpers.thumbnail_url_for_edm_preview(field_value('europeanaAggregation.edmPreview'))
 
         head_meta = [
           { meta_name: 'description', content: meta_description },
@@ -57,10 +57,7 @@ module Portal
     end
 
     def page_content_heading
-      mustache[:page_content_heading] ||= begin
-        title = [display_title, creator_title]
-        CGI.unescapeHTML(title.compact.join(' | '))
-      end
+      presenter.title
     end
 
     def navigation
@@ -82,7 +79,7 @@ module Portal
         {
           object: {
             annotations_later: true, # TODO: remove when styleguide assumes this
-            creator: creator_title,
+            creator: presenter.creator_title,
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
             creation_date: field_value('proxies.dctermsCreated'),
@@ -97,7 +94,7 @@ module Portal
             rights: simple_rights_label_data,
             social_share: social_share,
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
-            title: page_content_heading,
+            title: presenter.title,
             type: field_value('proxies.dcType')
           },
           refs_rels: presenter.field_group(:refs_rels),
@@ -259,7 +256,7 @@ module Portal
 
     def og_description
       mustache[:og_description] ||= begin
-        description = field_value('proxies.dcDescription', unescape: true)
+        description = field_value('proxies.dcDescription')
         if description.present?
           truncate(description.split('.').first(3).join('.'), length: 200)
         else
@@ -270,7 +267,7 @@ module Portal
 
     def og_title
       mustache[:og_title] ||= begin
-        field_value('proxies.dcTitle', unescape: true) ||
+        field_value('proxies.dcTitle') ||
           field_value('proxies.dctermsAlternative') ||
           field_value('proxies.dcDescription') ||
           field_value('proxies.dcIdentifier')
@@ -308,19 +305,6 @@ module Portal
         field_value('proxies.dcTitle')
       else
         title.first
-      end
-    end
-
-    def display_title
-      field_value('proxies.dcTitle') ||
-        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ')
-    end
-
-    def creator_title
-      @creator_title ||= begin
-        document.fetch('agents.prefLabel', []).first ||
-          field_value('dcCreator') ||
-          field_value('proxies.dcCreator')
       end
     end
 
