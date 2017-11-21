@@ -12,6 +12,11 @@ RSpec.describe FederationsController do
         get :show, params
         expect(response).to have_http_status(:success)
       end
+
+      it 'renders template' do
+        get :show, params
+        expect(response).to render_template('federations/show')
+      end
     end
   end
 end

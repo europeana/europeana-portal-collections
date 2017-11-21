@@ -79,18 +79,12 @@ RSpec.describe PortalController, :annotations_api do
       context 'with q param' do
         let(:params) { { locale: 'en', q: 'paris', format: 'json' } }
 
-        it 'total is present in results' do
+        it 'succeeds' do
           expect(response.status).to eq(200)
-          json = nil
-          expect { json = JSON.parse(response.body).with_indifferent_access }.not_to raise_exception
-          expect(json).to match(
-            search_results: be_kind_of(Array),
-            total: be_kind_of(Hash)
-          )
-          expect(json[:total]).to match(
-            value: be_kind_of(Integer),
-            formatted: be_kind_of(String)
-          )
+        end
+
+        it 'renders template' do
+          expect(response).to render_template('portal/index')
         end
       end
     end
