@@ -9,7 +9,12 @@ gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git
 # Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
 # https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
 # on the item display page (i.e. Portal#Show) where compiled Mustache template is
-# huge (> 60 MB). Due to stache gem?
+# huge (> 60 MB).
+#
+# Seems to be caused by deep nesting of Mustache tags in a single template.
+# Moving the contents of the {{#meta_additional}} block in templates/Search/Search-object.mustache
+# to a separate template alleviates this issue.
+# https://github.com/europeana/Europeana-Patternlab/blob/v0.3.8/source/_patterns/templates/Search/Search-object.mustache#L285-L343
 gem 'mustache', '1.0.3'
 
 # Use a forked version of stache with downstream changes, until merged upstream
