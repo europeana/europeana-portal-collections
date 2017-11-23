@@ -22,6 +22,7 @@ gem 'mustache', '1.0.3'
 gem 'stache', git: 'https://github.com/europeana/stache.git', branch: 'europeana-styleguide'
 
 gem 'aasm', '~> 4.2'
+gem 'activerecord-session_store'
 gem 'blacklight', '~> 6.0.0'
 gem 'acts_as_list', '~> 0.7'
 gem 'cancancan', '~> 1.12'
