@@ -149,10 +149,10 @@ module Facet
     #
     def aggregated_items(items)
       grouped_items(items).map do |group|
-        group_item_values = group.map { |item| padded_item?(item) ? item : item.value }
+        group_item_values = group.map { |item| padding_item?(item) ? item : item.value }
         group_item_values_min = group_item_values.min
         group_item_values_max = group_item_values.max
-        group_hits = group.map { |item| padded_item?(item) ? 0 : item.hits }.sum
+        group_hits = group.map { |item| padding_item?(item) ? 0 : item.hits }.sum
 
         {
           hits: group_hits,
@@ -200,25 +200,48 @@ module Facet
     def padded_items(items)
       @padded_items ||= begin
         items = items.sort_by(&:value)
-        padded = []
-
-        items.each_with_index do |item, i|
-          padded << item
-          next if item == items.last
-
-          next_item = items[i + 1]
-
-          (item.value..next_item.value).each do |value|
-            next if [item.value, next_item.value].include?(value)
-            padded << value
-          end
-        end
-
+        padded = pad_items(items)
+        padded = pre_pad_items(padded, items)
+        padded = post_pad_items(padded, items)
         padded
       end
     end
 
-    def padded_item?(item)
+    def pad_items(items)
+      padded = []
+
+      items.each_with_index do |item, i|
+        padded << item
+        next if item == items.last
+
+        next_item = items[i + 1]
+
+        (item.value..next_item.value).each do |value|
+          next if [item.value, next_item.value].include?(value)
+          padded << value
+        end
+      end
+
+      padded
+    end
+
+    def pre_pad_items(padded, items)
+      padded_begin_value = padding_item?(padded.first) ? padded.first : padded.first.value
+      (displayable_begin_value(items)..padded_begin_value).each do |pre_pad|
+        padded.unshift(pre_pad) unless pre_pad == padded_begin_value
+      end
+      padded
+    end
+
+    def post_pad_items(padded, items)
+      padded_end_value = padding_item?(padded.last) ? padded.last : padded.last.value
+      (padded_end_value..displayable_end_value(items)).each do |post_pad|
+        padded.push(post_pad) unless post_pad == padded_end_value
+      end
+      padded
+    end
+
+    def padding_item?(item)
       !item.is_a?(Europeana::Blacklight::Response::Facets::FacetItem)
     end
 
