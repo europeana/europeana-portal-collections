@@ -204,13 +204,13 @@ module Facet
 
         items.each_with_index do |item, i|
           padded << item
+          next if item == items.last
 
-          unless item == items.last
-            next_item = items[i + 1]
-            (item.value..next_item.value).each do |value|
-              next if value == item.value || value == next_item.value
-              padded << value
-            end
+          next_item = items[i + 1]
+
+          (item.value..next_item.value).each do |value|
+            next if [item.value, next_item.value].include?(value)
+            padded << value
           end
         end
 
