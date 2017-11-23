@@ -43,46 +43,45 @@ module Document
       end
 
       def value_presenters
-        prune_value_presenters!(all_value_presenters)
+        presenters = all_value_presenters
+        presenters = pruned_value_presenters(presenters)
+        presenters
       end
 
       def all_value_presenters
         [fields].flatten.map { |field| value_presenters_for_field(field) }.flatten
       end
 
-      def prune_value_presenters!(presenters)
-        presenters.reject!(&:blank?)
-        reject_entity_label_duplicating_value_presenters!(presenters)
-        presenters.uniq!(&:text)
-        presenters.reject!(&:excluded?)
-        reject_agent_uri_value_presenters!(presenters)
-        enforce_max_value_presenters!(presenters)
-        presenters
+      def pruned_value_presenters(presenters)
+        pruned = []
+        presenters.each do |presenter|
+          next if presenter.blank?
+          next if entity_label_duplicating_value_presenter?(presenter, pruned)
+          next if pruned.map(&:text).include?(presenter.text)
+          next if presenter.excluded?
+          next if agent_uri_value_presenter?(presenter)
+          pruned << presenter
+          break if max.present? && pruned.size == max
+        end
+        pruned
       end
 
       # Where multiple values have same text, favour those for entities,
       # e.g. "Art" dc:type on /portal/record/08533/artifact_aspx_id_1063.html
       # Also omit any other labels of known entities, e.g. altLabel "Bowie, David"
       # dc:creator on /portal/record/2059218/data_sounds_IT_DDS0000072541000000.html
-      def reject_entity_label_duplicating_value_presenters!(presenters)
-        presenters.reject! do |value|
-          !value.for_entity? && presenters.detect do |other_value|
-            value != other_value &&
-              other_value.for_entity? &&
-              entity_presenter(other_value.entity).potential_labels.include?(value.text)
-          end
-        end
+      def entity_label_duplicating_value_presenter?(value, presenters)
+        !value.for_entity? && presenters.detect do |other_value|
+          value != other_value &&
+            other_value.for_entity? &&
+            entity_presenter(other_value.entity).potential_labels.include?(value.text)
+        end.present?
       end
 
       # TODO: confirm if this is still useful
-      def reject_agent_uri_value_presenters!(presenters)
+      def agent_uri_value_presenter?(presenter)
         entity_uris = document.fetch('agents.about', []) || []
-        presenters.reject! { |v| entity_uris.include?(v.text) }
-      end
-
-      def enforce_max_value_presenters!(presenters)
-        presenters.slice!(0, max) if max.present?
-        presenters
+        entity_uris.include?(presenter.text)
       end
 
       def document_field_contents(field)
