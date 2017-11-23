@@ -199,11 +199,12 @@ module Facet
     # type-detected and imply a hit count of 0.
     def padded_items(items)
       @padded_items ||= begin
-        items = items.sort_by(&:value)
-        padded = pad_items(items)
-        padded = pre_pad_items(padded, items)
-        padded = post_pad_items(padded, items)
-        padded
+        if items.blank?
+          (displayable_begin_value(items)..displayable_end_value(items)).to_a
+        else
+          items = items.sort_by(&:value)
+          pre_pad_items(items) + pad_items(items) + post_pad_items(items)
+        end
       end
     end
 
@@ -225,20 +226,16 @@ module Facet
       padded
     end
 
-    def pre_pad_items(padded, items)
-      padded_begin_value = padding_item?(padded.first) ? padded.first : padded.first.value
-      (displayable_begin_value(items)..padded_begin_value).each do |pre_pad|
-        padded.unshift(pre_pad) unless pre_pad == padded_begin_value
-      end
-      padded
+    def pre_pad_items(items)
+      padding = (displayable_begin_value(items)..items.first.value).to_a
+      padding.pop
+      padding
     end
 
-    def post_pad_items(padded, items)
-      padded_end_value = padding_item?(padded.last) ? padded.last : padded.last.value
-      (padded_end_value..displayable_end_value(items)).each do |post_pad|
-        padded.push(post_pad) unless post_pad == padded_end_value
-      end
-      padded
+    def post_pad_items(items)
+      padding = (items.last.value..displayable_end_value(items)).to_a
+      padding.shift
+      padding
     end
 
     def padding_item?(item)
