@@ -296,7 +296,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           {
             sections: [
               {
-                max: 1,
+                max: 5,
                 fields: 'proxies.dcSubject'
               }
             ]
@@ -305,13 +305,13 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         let(:api_response) do
           basic_api_response.tap do |record|
             record['object']['proxies'].first['dcSubject'] = {
-              def: %w(this that)
+              def: %w(a b c d e f g h i j)
             }
           end
         end
 
         it 'limits the maximum number of field values' do
-          expect(subject[:sections].first[:items].size).to eq(1)
+          expect(subject[:sections].first[:items].size).to eq(5)
         end
       end
 
