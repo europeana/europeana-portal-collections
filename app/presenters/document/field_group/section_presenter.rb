@@ -56,7 +56,7 @@ module Document
         pruned = []
         presenters.each do |presenter|
           next if presenter.blank?
-          next if entity_label_duplicating_value_presenter?(presenter, pruned)
+          next if entity_label_duplicating_value_presenter?(presenter, presenters)
           next if pruned.map(&:text).include?(presenter.text)
           next if presenter.excluded?
           next if agent_uri_value_presenter?(presenter)
@@ -70,11 +70,11 @@ module Document
       # e.g. "Art" dc:type on /portal/record/08533/artifact_aspx_id_1063.html
       # Also omit any other labels of known entities, e.g. altLabel "Bowie, David"
       # dc:creator on /portal/record/2059218/data_sounds_IT_DDS0000072541000000.html
-      def entity_label_duplicating_value_presenter?(value, presenters)
-        !value.for_entity? && presenters.detect do |other_value|
-          value != other_value &&
-            other_value.for_entity? &&
-            entity_presenter(other_value.entity).potential_labels.include?(value.text)
+      def entity_label_duplicating_value_presenter?(presenter, presenters)
+        !presenter.for_entity? && presenters.detect do |other_presenter|
+          presenter != other_presenter &&
+            other_presenter.for_entity? &&
+            entity_presenter(other_presenter.entity).potential_labels.include?(presenter.text)
         end.present?
       end
 
