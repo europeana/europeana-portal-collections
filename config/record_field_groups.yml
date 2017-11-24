@@ -37,6 +37,9 @@ time:
   title: time
   sections:
   - title: date
+    entity:
+      name: timespans
+      fallback: true
     fields:
     - proxies.dcDate
   - title: creation-date
