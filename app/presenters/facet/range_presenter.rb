@@ -2,10 +2,6 @@ module Facet
   class RangePresenter < FacetPresenter
     include Blacklight::HashAsHiddenFieldsHelperBehavior
 
-    class DisplayableRangeItem < Struct.new(:percent_of_max, :value, :min_value, :max_value, :hits, :url)
-      def initialize(percent_of_max = 0, value = nil, min_value = nil, max_value = nil, hits = 0, url = false); super end
-    end
-
     def display(**_)
       {
         date: true,
@@ -63,7 +59,7 @@ module Facet
     #
     # @return [Fixnum]
     def hits_max
-      @hits_max ||= items_to_display.map(&:hits).max
+      @hits_max ||= items_to_display.map { |item| item[:hits] }.max
     end
 
     ##
@@ -71,7 +67,13 @@ module Facet
     #
     # @return [Object]
     def range_min
-      @range_min ||= search_state_has_begin? ? search_state_param[:begin] : items_to_display.map(&:min_value).min
+      @range_min ||= begin
+        if search_state_has_begin?
+          search_state_param[:begin]
+        else
+          items_to_display.map { |item| item[:min_value] }.min
+        end
+      end
     end
 
     ##
@@ -79,11 +81,13 @@ module Facet
     #
     # @return [Object]
     def range_max
-      @range_max ||= search_state_has_end? ? search_state_param[:end] : items_to_display.map(&:max_value).max
-    end
-
-    def range_values
-      @range_values ||= items_to_display.map(&:value)
+      @range_max ||= begin
+        if search_state_has_end?
+          search_state_param[:end]
+        else
+          items_to_display.map { |item| item[:max_value] }.max
+        end
+      end
     end
 
     def range_middle
@@ -103,29 +107,38 @@ module Facet
     protected
 
     def items_to_display(*_)
-      @items_to_display ||= aggregated_items(limited_items(padded_items(super)))
+      @items_to_display ||= begin
+        items = super
+        items = limited_items(items)
+        items = padded_items(items)
+        items = aggregated_items(items)
+        items
+      end
     end
 
     ##
     # Loops through the available facets and generates the facet links and display values for each item in the range.
     #
     def display_data
-      @display_data ||= items_to_display.map do |item|
+      @display_data ||= begin
         p = search_state.params_for_search.deep_dup
         p[:range] ||= {}
         p[:range][facet_name] ||= {}
-        p[:range][facet_name][:begin] = item.min_value
-        p[:range][facet_name][:end] = item.max_value
 
-        display_value = item.min_value == item.max_value ? item.value : "#{item.min_value} - #{item.max_value}"
-        tooltip_text = "#{display_value} (#{item.hits})"
+        items_to_display.map do |item|
+          p[:range][facet_name][:begin] = item[:min_value]
+          p[:range][facet_name][:end] = item[:max_value]
 
-        {
-          percent_of_max: percent_of_max(item.hits),
-          value: tooltip_text,
-          hits: item.hits,
-          url: search_action_url(p)
-        }
+          display_value = item[:min_value] == item[:max_value] ? item[:value] : "#{item[:min_value]} - #{item[:max_value]}"
+          tooltip_text = "#{display_value} (#{item[:hits]})"
+
+          {
+            percent_of_max: percent_of_max(item[:hits]),
+            value: tooltip_text,
+            hits: item[:hits],
+            url: search_action_url(p)
+          }
+        end
       end
     end
 
@@ -136,12 +149,17 @@ module Facet
     #
     def aggregated_items(items)
       grouped_items(items).map do |group|
-        DisplayableRangeItem.new.tap do |item|
-          item.hits = group.map(&:hits).sum
-          item.min_value = group.map(&:value).min
-          item.max_value = group.map(&:value).max
-          item.value = item.min_value == item.max_value ? item.min_value : item.min_value..item.max_value
-        end
+        group_item_values = group.map { |item| padding_item?(item) ? item : item.value }
+        group_item_values_min = group_item_values.min
+        group_item_values_max = group_item_values.max
+        group_hits = group.map { |item| padding_item?(item) ? 0 : item.hits }.sum
+
+        {
+          hits: group_hits,
+          min_value: group_item_values_min,
+          max_value: group_item_values_max,
+          value: group_item_values_min == group_item_values_max ? group_item_values_min : group_item_values_min..group_item_values_max
+        }
       end
     end
 
@@ -176,14 +194,52 @@ module Facet
     ##
     # Fills in gaps in the facet range values with empty values.
     #
+    # These will not be instances of `Europeana::Blacklight::Response::Facets::FacetItem`,
+    # but just scalar values representing the missing value, which need to be
+    # type-detected and imply a hit count of 0.
     def padded_items(items)
       @padded_items ||= begin
-        items = items.dup.sort_by(&:value)
-        (displayable_begin_value(items)..displayable_end_value(items)).map do |item_value|
-          items.detect { |i| i.value == item_value } ||
-            Europeana::Blacklight::Response::Facets::FacetItem.new(value: item_value, hits: 0)
+        if items.blank?
+          (displayable_begin_value(items)..displayable_end_value(items)).to_a
+        else
+          items = items.sort_by(&:value)
+          pre_pad_items(items) + pad_items(items) + post_pad_items(items)
         end
       end
+    end
+
+    def pad_items(items)
+      padded = []
+
+      items.each_with_index do |item, i|
+        padded << item
+        next if item == items.last
+
+        next_item = items[i + 1]
+
+        (item.value..next_item.value).each do |value|
+          next if [item.value, next_item.value].include?(value)
+          padded << value
+        end
+      end
+
+      padded
+    end
+
+    def pre_pad_items(items)
+      padding = (displayable_begin_value(items)..items.first.value).to_a
+      padding.pop
+      padding
+    end
+
+    def post_pad_items(items)
+      padding = (items.last.value..displayable_end_value(items)).to_a
+      padding.shift
+      padding
+    end
+
+    def padding_item?(item)
+      !item.is_a?(Europeana::Blacklight::Response::Facets::FacetItem)
     end
 
     def max_intervals
