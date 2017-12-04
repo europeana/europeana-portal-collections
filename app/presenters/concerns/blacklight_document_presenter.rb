@@ -16,10 +16,8 @@ module BlacklightDocumentPresenter
     # Override to prevent HTML escaping, handled by {Mustache}
     #
     # @see Blacklight::DocumentPresenter#render_values
-    def render_values(values, field_config = nil)
-      options = field_config&.separator_options || {}
-
-      values.to_sentence(options)
+    def render_values(values, _field_config = nil)
+      values.join('; ')
     end
   end
 
