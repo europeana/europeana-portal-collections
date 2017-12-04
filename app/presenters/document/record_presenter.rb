@@ -4,6 +4,7 @@ module Document
   ##
   # Blacklight document presenter for a Europeana record
   class RecordPresenter < ApplicationPresenter
+    include ActionView::Helpers::TextHelper
     include BlacklightDocumentPresenter
     include Record::IIIF
     include Metadata::Rights
@@ -13,6 +14,23 @@ module Document
     def initialize(document, controller)
       @document = document
       @controller = controller
+    end
+
+    def title
+      @title ||= [display_title, creator_title].compact.join(' | ')
+    end
+
+    def display_title
+      field_value('proxies.dcTitle') ||
+        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ')
+    end
+
+    def creator_title
+      @creator_title ||= begin
+        document.fetch('agents.prefLabel', []).first ||
+          field_value('dcCreator') ||
+          field_value('proxies.dcCreator')
+      end
     end
 
     def edm_is_shown_at

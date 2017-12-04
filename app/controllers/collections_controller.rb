@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Provides Blacklight search and browse, within a content Collection
 class CollectionsController < ApplicationController
@@ -9,41 +10,33 @@ class CollectionsController < ApplicationController
   before_action :redirect_to_home, only: :show, if: proc { params[:id] == 'all' }
 
   def index
-    redirect_to_home
+    respond_to do |format|
+      format.html { redirect_to_home }
+      format.rss { render 'collections/index', layout: false }
+    end
   end
 
   def show
     @collection = find_collection
     @landing_page = find_landing_page
-    @collection_stats = collection_stats
-    @recent_additions = recent_additions
-    @total_item_count = Rails.cache.fetch("record/counts/collections/#{@collection.key}")
 
     if has_search_parameters?
       (@response, @document_list) = search_results(params)
-      log_search_interaction(
-        search: params.slice(:q, :qe, :qf, :f, :mlt, :range).inspect,
-        total: @response.total
-      )
+      log_search_interaction_on_search(@response)
+    else
+      @collection_stats = collection_stats
+      @recent_additions = recent_additions
+      @total_item_count = cached_record_count(collection: @collection)
     end
 
     respond_to do |format|
       format.html do
-        render has_search_parameters? ? { template: '/portal/index' } : { action: 'show' }
+        render has_search_parameters? ? { template: 'portal/index' } : { action: 'show' }
       end
-      format.rss { render 'catalog/index', layout: false }
-      format.atom { render 'catalog/index', layout: false }
       format.json do
         fail ActionController::UnknownFormat unless has_search_parameters?
-        render json: {
-          search_results: @document_list.map do |doc|
-            Document::SearchResultPresenter.new(doc, self, @response).content
-          end
-        }
+        render template: 'portal/index', layout: false
       end
-
-      additional_response_formats(format)
-      document_export_formats(format)
     end
   end
 
@@ -53,14 +46,6 @@ class CollectionsController < ApplicationController
   end
 
   protected
-
-  def _prefixes
-    @_prefixes_with_partials ||= super | %w(catalog)
-  end
-
-  def start_new_search_session?
-    has_search_parameters?
-  end
 
   def find_collection
     Collection.find_by_key!(params[:id]).tap do |collection|

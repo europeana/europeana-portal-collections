@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'routes for the portal controller' do
   it 'routes GET /en/search to portal#index' do
     expect(get('/en/search')).to route_to('portal#index', locale: 'en')
@@ -19,5 +17,13 @@ RSpec.describe 'routes for the portal controller' do
 
   it 'routes GET /en/record/:id/media to portal#media' do
     expect(get('/en/record/abc/123/media')).to route_to('portal#media', locale: 'en', id: 'abc/123')
+  end
+
+  it 'routes GET /en/record/:id/galleries to portal#galleries' do
+    expect(get('/en/record/abc/123/galleries')).to route_to('portal#galleries', locale: 'en', id: 'abc/123')
+  end
+
+  it 'routes GET /en/record/:id/annotations to portal#annotations' do
+    expect(get('/en/record/abc/123/annotations')).to route_to('portal#annotations', locale: 'en', id: 'abc/123')
   end
 end

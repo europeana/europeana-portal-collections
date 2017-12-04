@@ -1,15 +1,25 @@
 RSpec.describe CollectionsController do
   describe 'GET index' do
     before do
-      get :index, { locale: 'en' }
+      get :index, locale: 'en', format: format
     end
 
-    it 'does not query API' do
-      expect(an_api_search_request).not_to have_been_made
+    context 'when requesting as html' do
+      let(:format) { 'html' }
+      it 'does not query API' do
+        expect(an_api_search_request).not_to have_been_made
+      end
+
+      it 'redirects to home' do
+        expect(response).to redirect_to(home_url)
+      end
     end
 
-    it 'redirects to home' do
-      expect(response).to redirect_to(home_url)
+    context 'when requesting as an rss feed' do
+      let(:format) { 'rss' }
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
@@ -76,15 +86,19 @@ RSpec.describe CollectionsController do
       end
 
       context 'with search params' do
-        let(:params) { { locale: 'en', id: collection.key, q: 'search' } }
+        %w(html json).each do |format|
+          context "when format is #{format}" do
+            let(:params) { { locale: 'en', id: collection.key, q: 'search', format: format } }
 
-        it 'queries API' do
-          expect(an_api_search_request).to have_been_made.at_least_once
-        end
+            it 'queries API' do
+              expect(an_api_search_request).to have_been_made.at_least_once
+            end
 
-        it 'renders search results template' do
-          expect(response.status).to eq(200)
-          expect(response).to render_template('portal/index')
+            it 'renders search results template' do
+              expect(response.status).to eq(200)
+              expect(response).to render_template('portal/index')
+            end
+          end
         end
       end
     end

@@ -75,7 +75,7 @@ module Collections
             }
           },
           "layout_#{@landing_page.settings_layout_type}".to_sym => true,
-          strapline: strapline,
+          strapline: collection_strapline(@collection),
           hero_config: hero_config(@landing_page.hero_image),
           entry_points: @landing_page.settings_layout_type == 'browse' ? facet_entry_items_grouped(@landing_page) : [],
           preview_search_data: preview_search_data,
@@ -132,10 +132,6 @@ module Collections
       when 'browse'
         helpers.page_feeds_content(@landing_page)
       end
-    end
-
-    def strapline
-      @landing_page.strapline.present? ? @landing_page.strapline(total_item_count: number_with_delimiter(@total_item_count)) : nil
     end
 
     def body_cache_key
