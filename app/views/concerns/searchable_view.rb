@@ -82,7 +82,7 @@ module SearchableView
 
   def input_search_value_from_param_field_text(local_key, local_value, params_key = local_key)
     if params_key == :qe
-      entity_type = local_key.split('/').reject(&:blank?).first
+      entity_type = local_key.split('/').first
       t('global.punctuation.term-list', term: t(entity_type, scope: 'site.entities.types'), items: local_value)
     else
       local_value
