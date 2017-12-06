@@ -5,7 +5,6 @@ module BlacklightDocumentPresenter
 
   included do
     delegate :render_field_value, to: :blacklight_document_presenter
-    #delegate :t, to: I18n
   end
 
   def blacklight_document_presenter
@@ -13,6 +12,8 @@ module BlacklightDocumentPresenter
   end
 
   class NoEscapePresenter < Europeana::Blacklight::DocumentPresenter
+    delegate :t, to: I18n
+
     ##
     # Override to prevent HTML escaping, handled by {Mustache}
     #
