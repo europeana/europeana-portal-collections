@@ -5,6 +5,7 @@ module BlacklightDocumentPresenter
 
   included do
     delegate :render_field_value, to: :blacklight_document_presenter
+    #delegate :t, to: I18n
   end
 
   def blacklight_document_presenter
@@ -17,7 +18,7 @@ module BlacklightDocumentPresenter
     #
     # @see Blacklight::DocumentPresenter#render_values
     def render_values(values, _field_config = nil)
-      values.join('; ')
+      values.join(t('global.punctuation.list-item-separator'))
     end
   end
 
