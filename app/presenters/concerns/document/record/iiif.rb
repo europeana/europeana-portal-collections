@@ -8,8 +8,7 @@ module Document
         # * test record: /portal/record/9200173/9B976C77421CE43F3BDA72EF47BCCC08AF94A238.html
         # * dataset: /portal/search?q=europeana_collectionName%3A9200173*
         manifest_iiif for: { 'europeanaCollectionName' => /\A9200173/,
-                             'proxies.dcIdentifier' => /\Allgc-id:/
-                           },
+                             'proxies.dcIdentifier' => /\Allgc-id:/ },
                       sub: { 'proxies.dcIdentifier' => lambda { |values|
                         values.detect { |value| value.starts_with?('llgc-id:') }.sub('llgc-id:', '')
                       } },
@@ -20,8 +19,7 @@ module Document
         # * dataset: /portal/search?f%5BTYPE%5D%5B%5D=TEXT&f%5BTYPE%5D%5B%5D=IMAGE&q=DATA_PROVIDER%3A"National+Library+of+France"
         manifest_iiif for: { 'aggregations.edmDataProvider' => 'National Library of France',
                              'type' => /IMAGE|TEXT/,
-                             'proxies.dcIdentifier' => %r{\Ahttp://gallica.bnf.fr/}
-                           },
+                             'proxies.dcIdentifier' => %r{\Ahttp://gallica.bnf.fr/} },
                       sub: { 'proxies.dcIdentifier' => lambda { |values|
                         values.detect { |value| value.starts_with?('http://gallica.bnf.fr/') }.sub('http://gallica.bnf.fr/', '')
                       } },
