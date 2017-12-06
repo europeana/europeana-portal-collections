@@ -3,10 +3,8 @@
 require File.expand_path('../../config/boot', __FILE__)
 require File.expand_path('../../config/environment', __FILE__)
 require 'clockwork'
-require 'rake'
 
 include Clockwork
-Rails.application.load_tasks
 
 unless ENV['DISABLE_SCHEDULED_JOBS']
   every(1.hour, 'cache.feed.custom') do
@@ -44,7 +42,6 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
   end
 
   every(1.day, 'db.sweeper', at: ENV['SCHEDULE_DB_SWEEPER']) do
-    Rake::Task['db:sessions:trim'].invoke # from activerecord-session_store
     DeleteOldSearchesJob.perform_later
   end
 end
