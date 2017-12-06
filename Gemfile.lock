@@ -68,12 +68,6 @@ GEM
       activemodel (= 4.2.9)
       activesupport (= 4.2.9)
       arel (~> 6.0)
-    activerecord-session_store (1.1.0)
-      actionpack (>= 4.0, < 5.2)
-      activerecord (>= 4.0, < 5.2)
-      multi_json (~> 1.11, >= 1.11.2)
-      rack (>= 1.5.2, < 3)
-      railties (>= 4.0, < 5.2)
     activesupport (4.2.9)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -522,7 +516,6 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.2)
-  activerecord-session_store
   acts_as_list (~> 0.7)
   blacklight (~> 6.0.0)
   cancancan (~> 1.12)
