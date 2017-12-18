@@ -12,14 +12,14 @@ module BlacklightDocumentPresenter
   end
 
   class NoEscapePresenter < Europeana::Blacklight::DocumentPresenter
+    delegate :t, to: I18n
+
     ##
     # Override to prevent HTML escaping, handled by {Mustache}
     #
     # @see Blacklight::DocumentPresenter#render_values
-    def render_values(values, field_config = nil)
-      options = field_config&.separator_options || {}
-
-      values.to_sentence(options)
+    def render_values(values, _field_config = nil)
+      values.join(t('global.punctuation.list-item-separator'))
     end
   end
 

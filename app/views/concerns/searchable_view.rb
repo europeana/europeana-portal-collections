@@ -75,8 +75,18 @@ module SearchableView
       name: param_name,
       is_mlt: local_key.to_s == 'mlt',
       value: local_value,
+      text: input_search_value_from_param_field_text(local_key, local_value, params_key),
       remove: search_action_path(remove_params)
     }
+  end
+
+  def input_search_value_from_param_field_text(local_key, local_value, params_key = local_key)
+    if params_key == :qe
+      entity_type = local_key.split('/').first
+      t('global.punctuation.term-list', term: t(entity_type, scope: 'site.entities.types'), items: local_value)
+    else
+      local_value
+    end
   end
 
   ##

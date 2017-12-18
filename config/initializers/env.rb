@@ -10,7 +10,7 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
   europeana[:opensearch_host] = if ENV['EUROPEANA_OPENSEARCH_HOST']
                                   ENV['EUROPEANA_OPENSEARCH_HOST']
                                 elsif ENV['HTTP_HOST']
-                                  'http://' + ENV['HTTP_HOST']
+                                  'https://' + ENV['HTTP_HOST']
                                 else
                                   ''
                                 end
