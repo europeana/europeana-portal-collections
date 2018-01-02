@@ -95,6 +95,7 @@ module Portal
             social_share: social_share,
             subtitle: document.fetch('proxies.dctermsAlternative', []).first || document.fetch(:title, [])[1],
             title: presenter.title,
+            display_title: presenter.display_title,
             type: field_value('proxies.dcType')
           },
           refs_rels: presenter.field_group(:refs_rels),
