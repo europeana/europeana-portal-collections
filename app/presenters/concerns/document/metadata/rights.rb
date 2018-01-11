@@ -31,8 +31,9 @@ module Document
           }
         else
           license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase
-
           {
+            license_brief: rights.reusability ? t('global.facet.reusability.' + rights.reusability + '-brief') : false,
+            license_info: rights.reusability ? t('global.facet.reusability.' + rights.reusability + '-info') : false,
             license_human: t(rights.reusability, scope: 'global.facet.reusability'),
             license_name: rights.label,
             license_url: media_rights,
