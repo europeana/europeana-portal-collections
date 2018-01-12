@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: c3b0556f84bbda0cb3b27de8ecd09041c19af501
+  revision: 25fa297ebffd7a2869d0864641d33c676431535d
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
