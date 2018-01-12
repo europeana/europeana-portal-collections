@@ -37,6 +37,7 @@ module Document
 
       def simple_rights_content(rights, license_flag_key)
         {
+          license_restricted: rights.reusability ? rights.reusability.eql?('permission') : false,
           license_brief: t(rights.reusability + '-brief', scope: 'global.facet.reusability'),
           license_info: t(rights.reusability + '-info', scope: 'global.facet.reusability'),
           license_human: t(rights.reusability, scope: 'global.facet.reusability'),
