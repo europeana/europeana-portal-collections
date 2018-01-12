@@ -31,16 +31,20 @@ module Document
           }
         else
           license_flag_key = rights.template_license.present? ? rights.template_license : rights.id.to_s.upcase
-          {
-            license_brief: rights.reusability ? t('global.facet.reusability.' + rights.reusability + '-brief') : false,
-            license_info: rights.reusability ? t('global.facet.reusability.' + rights.reusability + '-info') : false,
-            license_human: t(rights.reusability, scope: 'global.facet.reusability'),
-            license_name: rights.label,
-            license_url: media_rights,
-            :"license_#{license_flag_key}" => true,
-            expiry: rights_label_expiry(rights)
-          }
+          simple_rights_content(rights, license_flag_key)
         end
+      end
+
+      def simple_rights_content(rights, license_flag_key)
+        {
+          license_brief: t(rights.reusability + '-brief', scope: 'global.facet.reusability'),
+          license_info: t(rights.reusability + '-info', scope: 'global.facet.reusability'),
+          license_human: t(rights.reusability, scope: 'global.facet.reusability'),
+          license_name: rights.label,
+          license_url: media_rights,
+          :"license_#{license_flag_key}" => true,
+          expiry: rights_label_expiry(rights)
+        }
       end
     end
   end
