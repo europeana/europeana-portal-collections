@@ -95,21 +95,24 @@ module Entities
     end
 
     def referenced_records
-      @referenced_records ||= {}
-      @entity.search_keys.each do |key|
-        @referenced_records[key] ||= begin
-          return { search_results: [], total: { value: 0, formatted: '0' } } unless @entity.respond_to?(:search_query)
-          response = @search_keys_search_results[key]
-          {
-            search_results: response.documents.map { |doc| document_presenter(doc, response).content },
-            total: {
-              value: response.total,
-              formatted: number_with_delimiter(response.total)
-            }
-          }
+      @referenced_records ||= begin
+        @entity.search_keys.each_with_object({}) do |key, memo|
+          memo[key] ||= begin
+            if @entity.respond_to?(:search_query)
+              response = @search_keys_search_results[key]
+              {
+                search_results: response.documents.map { |doc| document_presenter(doc, response).content },
+                total: {
+                  value: response.total,
+                  formatted: number_with_delimiter(response.total)
+                }
+              }
+            else
+              { search_results: [], total: { value: 0, formatted: '0' } }
+            end
+          end
         end
       end
-      @referenced_records
     end
 
     def document_presenter(doc, response)
