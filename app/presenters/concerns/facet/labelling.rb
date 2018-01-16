@@ -65,7 +65,7 @@ module Facet
                     show: 'global.facet.license.show-specific',
                     hide: 'global.facet.license.hide-specific'
                   },
-                  items: { i18n: true },
+                  items: { i18n: true, with: ->(item) { item.to_s + '.label' } },
                   icon_link: lambda { |controller|
                     {
                       icon: 'icon-help',
