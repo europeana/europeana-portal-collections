@@ -38,7 +38,7 @@ restricted:
     pattern: "https?://rightsstatements.org/vocab/NoC-NC/*"
     url: "http://rightsstatements.org/vocab/NoC-NC/1.0/"
   rs_noc_oklr:
-    pattern: "https?://rightsstatements.org/vocab/NoC-OKLR/*"
+    pattern: "https?://rightsstatements.org/(vocab|page)/NoC-OKLR/*"
     url: "http://rightsstatements.org/vocab/NoC-OKLR/1.0/"
 # No re-use / REUSABILITY="permission"
 permission:
