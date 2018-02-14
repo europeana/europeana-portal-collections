@@ -167,7 +167,7 @@ GEM
       europeana-api (~> 1.0.0)
       iso-639 (~> 0.2.5)
       rails (>= 4.2.2, < 5)
-    europeana-feedback-button (0.0.4)
+    europeana-feedback-button (0.0.5)
       rails (~> 4.2, >= 4.2.7.1)
     europeana-feeds (0.0.1)
       feedjira (~> 2.0)
@@ -529,7 +529,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.0)
   europeana-api (~> 1.0.0)
   europeana-blacklight (~> 1.1.0)
-  europeana-feedback-button (= 0.0.4)
+  europeana-feedback-button (= 0.0.5)
   europeana-feeds
   europeana-i18n!
   europeana-logging (~> 0.2.3)
