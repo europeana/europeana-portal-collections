@@ -23,7 +23,7 @@ module EDM
       def from_api_query(value)
         return nil if value.blank?
         api_query_map[value] ||= begin
-          simple_value = value.to_s.tr('?*', '')
+          simple_value = value.to_s.tr('?*', '').sub('(vocab|page)', 'vocab')
           registry.detect { |rights| simple_value.match(rights.pattern) }
         end
       end
