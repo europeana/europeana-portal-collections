@@ -11,9 +11,13 @@ module EDM
         end
       end
 
+      def normalised
+        @normalised ||= {}
+      end
+
       def normalise(string)
         return nil unless string.is_a?(String)
-        registry.detect { |rights| string.match(rights.pattern) }
+        normalised[string] ||= registry.detect { |rights| string.match(rights.pattern) }
       end
 
       def api_query_map
@@ -23,18 +27,17 @@ module EDM
       def from_api_query(value)
         return nil if value.blank?
         api_query_map[value] ||= begin
-          simple_value = value.to_s.tr('?*', '')
-          registry.detect { |rights| simple_value.match(rights.pattern) }
+          registry.detect { |rights| rights.api_query == value }
         end
       end
     end
 
     def api_query
-      pattern.gsub(/\(.*\)\?|.\?/, '*') + '*'
+      @api_query ||= pattern.gsub(/\(.*\)\?|.\?/, '*') + '*'
     end
 
     def i18n_key
-      id.to_s.tr('_', '-')
+      @i18n_key ||= id.to_s.tr('_', '-')
     end
 
     def label
