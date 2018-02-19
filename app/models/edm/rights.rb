@@ -33,7 +33,11 @@ module EDM
     end
 
     def api_query
-      @api_query ||= pattern.gsub(/\(.*\)\?|.\?/, '*') + '*'
+      # TODO: instead of blanket replacing all parenthesised parts of patterns
+      #   with "*", for /(this|that)/ patterns we should be constructing an
+      #   OR query for the API, *but* that does not work with the RIGHTS field
+      #   on the API at present. (It should.) Hence this for now.
+      @api_query ||= (pattern.gsub(/\(.*\)\??|.\?/, '*') + '*').gsub('**', '*')
     end
 
     def i18n_key
