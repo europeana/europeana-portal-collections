@@ -8,7 +8,7 @@ concepts:
       fallback: true
     fields:
     - proxies.dcType
-    search_field: type
+    search_field: what
     quoted: true
   - title: subject
     entity:
