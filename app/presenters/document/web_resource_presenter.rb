@@ -148,8 +148,8 @@ module Document
     end
 
     def media_metadata
-      width = field_value('ebucoreWidth') || @controller.mime_type_lookups.key?(url) ? true : nil
-      height = field_value('ebucoreHeight') || @controller.mime_type_lookups.key?(url) ? true : nil
+      width = field_value('ebucoreWidth') || @controller.mime_type_lookups.key?(url) && media_type == 'image' ? true : nil
+      height = field_value('ebucoreHeight') || @controller.mime_type_lookups.key?(url) && media_type == 'image' ? true : nil
 
       file_size = number_to_human_size(field_value('ebucoreFileByteSize')) || ''
       {
