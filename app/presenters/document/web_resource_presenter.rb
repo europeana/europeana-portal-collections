@@ -86,7 +86,7 @@ module Document
     end
 
     def mime_type
-      @mime_type ||= field_value('ebucoreHasMimeType')
+      @mime_type ||= field_value('ebucoreHasMimeType') || @controller.mime_type_lookups[url]
     end
 
     def record_type
@@ -148,8 +148,8 @@ module Document
     end
 
     def media_metadata
-      width = field_value('ebucoreWidth')
-      height = field_value('ebucoreHeight')
+      width = field_value('ebucoreWidth') || @controller.mime_type_lookups.key?(url) ? true : nil
+      height = field_value('ebucoreHeight') || @controller.mime_type_lookups.key?(url) ? true : nil
 
       file_size = number_to_human_size(field_value('ebucoreFileByteSize')) || ''
       {
