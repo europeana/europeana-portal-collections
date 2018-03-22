@@ -148,12 +148,17 @@ module Document
     end
 
     def permit_unknown_image_size?
-      @controller.mime_type_lookups.key?(url) && media_type == 'image'
+      @controller.mime_type_lookups.key?(url)
+    end
+
+    def unknown_image_size
+      return false unless media_type == 'image'
+      permit_unknown_image_size? ? -1 : false
     end
 
     def media_metadata
-      width = field_value('ebucoreWidth') || (permit_unknown_image_size? ? 'true' : false)
-      height = field_value('ebucoreHeight') || (permit_unknown_image_size? ? 'true' : false)
+      width = field_value('ebucoreWidth') || unknown_image_size
+      height = field_value('ebucoreHeight') || unknown_image_size
 
       file_size = number_to_human_size(field_value('ebucoreFileByteSize')) || ''
       {
@@ -164,7 +169,7 @@ module Document
         codec: field_value('edmCodecName'),
         width: width,
         height: height,
-        width_or_height: !(width.blank? && height.blank?),
+        width_or_height: [width, height].any?(&:present?),
         size_unit: 'pixels',
         runtime: field_value('ebucoreDuration'),
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
