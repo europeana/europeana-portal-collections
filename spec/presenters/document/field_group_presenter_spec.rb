@@ -181,6 +181,20 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           it 'links to a search for the quoted field value' do
             expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:"Photography"')
           end
+
+          context 'with parentheses in the defenition' do
+            let(:api_response) do
+              basic_api_response.tap do |record|
+                record['object']['proxies'].first['dcSubject'] = {
+                  def: ['With parentheses(in the string)[ok]']
+                }
+              end
+            end
+
+            it 'links to a search for the quoted field value' do
+              expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:"With parentheses(in the string)[ok]"')
+            end
+          end
         end
 
         context 'without quoted' do
