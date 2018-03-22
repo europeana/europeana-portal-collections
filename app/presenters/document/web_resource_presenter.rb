@@ -147,9 +147,13 @@ module Document
       @download_url ||= mime_type.present? ? media_proxy_url(@record.fetch('about', '/'), url) : url
     end
 
+    def permit_unknown_image_size?
+      @controller.mime_type_lookups.key?(url) && media_type == 'image'
+    end
+
     def media_metadata
-      width = field_value('ebucoreWidth') || @controller.mime_type_lookups.key?(url) && media_type == 'image' ? true : nil
-      height = field_value('ebucoreHeight') || @controller.mime_type_lookups.key?(url) && media_type == 'image' ? true : nil
+      width = field_value('ebucoreWidth') || (permit_unknown_image_size? ? 'true' : false)
+      height = field_value('ebucoreHeight') || (permit_unknown_image_size? ? 'true' : false)
 
       file_size = number_to_human_size(field_value('ebucoreFileByteSize')) || ''
       {
