@@ -94,8 +94,12 @@ module Document
           return nil unless content.is_a?(String)
 
           @search ||= begin
-            search = content.gsub(/[()\[\]<>]/, '')
-            section.quoted? ? enquote_and_escape(search) : parenthesise_and_escape(search)
+            if section.quoted?
+              enquote_and_escape(content)
+            else
+              search = content.gsub(/[()\[\]<>]/, '')
+              parenthesise_and_escape(search)
+            end
           end
         end
 
