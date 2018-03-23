@@ -291,6 +291,29 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         end
       end
 
+      describe 'html_line_breaks' do
+        let(:field_definition) do
+          {
+            sections: [
+              {
+                html_line_breaks: true,
+                fields: 'proxies.dcDescription'
+              }
+            ]
+          }
+        end
+        let(:api_response) do
+          basic_api_response.tap do |record|
+            record['object']['proxies'].first['dcDescription'] = {
+              en: ["Line 1\n\nLine 2 & so on"]
+            }
+          end
+        end
+        it 'replaces new lines with HTML line breaks' do
+          expect(subject[:sections].first[:items].first[:text]).to eq('Line 1<br/><br/>Line 2 &amp; so on')
+        end
+      end
+
       describe 'max' do
         let(:field_definition) do
           {
