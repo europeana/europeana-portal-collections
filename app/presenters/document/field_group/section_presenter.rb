@@ -184,7 +184,7 @@ module Document
       end
 
       def html_line_breaks?
-        !!html_line_breaks
+        html_line_breaks.present?
       end
 
       def translate_values?
