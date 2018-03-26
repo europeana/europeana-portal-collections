@@ -1,11 +1,10 @@
 # frozen_string_literal: true
+
 require 'soundcloud'
 
 module Europeana
-  module UrlConversions
+  module URIMappers
     class SoundCloudUrnResolver < Base
-      include ActiveSupport::Benchmarkable
-
       def uris
         edm_is_shown_by
       end
@@ -25,10 +24,6 @@ module Europeana
       end
 
       protected
-
-      def logger
-        Rails.logger
-      end
 
       def soundcloud_urn_match(uri)
         uri.match(/\Aurn:soundcloud:(.*)\z/)

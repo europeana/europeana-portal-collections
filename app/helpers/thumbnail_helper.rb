@@ -26,6 +26,10 @@ module ThumbnailHelper
   def api_thumbnail_url(**options)
     options = thumbnail_url_options_with_size(options)
 
+    if europeana_contribute_uri?(options[:uri])
+      return "#{options[:uri]}/w#{options[:size]}".sub('http://', 'https://')
+    end
+
     uri = URI.parse(api_url)
     uri.path = uri.path + '/v2/thumbnail-by-url.json'
 
@@ -34,6 +38,11 @@ module ThumbnailHelper
 
     uri.query = query.to_query
     uri.to_s
+  end
+
+  def europeana_contribute_uri?(web_resource_uri)
+    return false unless web_resource_uri.present?
+    URI.parse(web_resource_uri).host == URI.parse(Rails.application.config.x.europeana[:contribute_url]).host
   end
 
   def thumbnail_url_options_with_size(options)

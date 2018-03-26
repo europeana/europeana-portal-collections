@@ -86,7 +86,7 @@ module Document
     end
 
     def mime_type
-      @mime_type ||= field_value('ebucoreHasMimeType')
+      @mime_type ||= field_value('ebucoreHasMimeType') || media_http_headers['Content-Type']
     end
 
     def record_type
@@ -147,20 +147,38 @@ module Document
       @download_url ||= mime_type.present? ? media_proxy_url(@record.fetch('about', '/'), url) : url
     end
 
-    def media_metadata
-      width = field_value('ebucoreWidth')
-      height = field_value('ebucoreHeight')
+    def permit_unknown_image_size?
+      @controller.mime_type_lookups.key?(url)
+    end
 
+    def unknown_image_size
+      return false unless media_type == 'image'
+      permit_unknown_image_size? ? -1 : false
+    end
+
+    def media_width
+      @media_width ||= field_value('ebucoreWidth') || media_http_headers['X-Amz-Meta-Image-Width']
+    end
+
+    def media_height
+      @media_height ||= field_value('ebucoreHeight') || media_http_headers['X-Amz-Meta-Image-Height']
+    end
+
+    def media_http_headers
+      @media_http_headers ||= @controller.media_headers[url] || {}
+    end
+
+    def media_metadata
       file_size = number_to_human_size(field_value('ebucoreFileByteSize')) || ''
       {
         mime_type: mime_type,
-        format: field_value('ebucoreHasMimeType'),
+        format: mime_type,
         file_size: file_size.split(' ').first,
         file_unit: file_size.split(' ').last,
         codec: field_value('edmCodecName'),
-        width: width,
-        height: height,
-        width_or_height: !(width.blank? && height.blank?),
+        width: media_width,
+        height: media_height,
+        width_or_height: [media_width, media_height].any?(&:present?),
         size_unit: 'pixels',
         runtime: field_value('ebucoreDuration'),
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
