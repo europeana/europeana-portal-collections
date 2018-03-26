@@ -14,7 +14,7 @@ class PortalController < ApplicationController
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
   before_action :log_search_interaction_on_show, only: :show
 
-  attr_reader :url_conversions, :oembed_html, :mime_type_lookups
+  attr_reader :url_conversions, :oembed_html, :media_headers
 
   rescue_from URI::InvalidURIError do |exception|
     handle_error(exception: exception, status: 404, format: 'html')
@@ -40,7 +40,7 @@ class PortalController < ApplicationController
     @data_provider = document_data_provider(@document)
 
     @url_conversions = perform_url_conversions(@document)
-    @mime_type_lookups = perform_mime_type_lookups(@document)
+    @media_headers = perform_media_header_requests(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
 
     @mlt_query = @document.more_like_this_query
@@ -70,7 +70,7 @@ class PortalController < ApplicationController
   def media
     @response, @document = fetch(doc_id)
     @url_conversions = perform_url_conversions(@document)
-    @mime_type_lookups = perform_mime_type_lookups(@document)
+    @media_headers = perform_media_header_requests(@document)
     @oembed_html = oembed_for_urls(@document, @url_conversions)
     @page = params[:page] || 1
     @per_page = params[:per_page] || 4

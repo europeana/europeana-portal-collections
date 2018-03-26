@@ -4,8 +4,12 @@ module Europeana
     class Base
       include ActiveSupport::Benchmarkable
 
-      def initialize(doc, controller)
-        @doc = doc
+      attr_reader :controller, :document
+
+      # @param document [Europeana::Blacklight::Document] Blacklight document for the record
+      # @param controller [ApplicationController] controller handling the request
+      def initialize(document, controller)
+        @document = document
         @controller = controller
       end
 
@@ -24,11 +28,15 @@ module Europeana
       end
 
       def edm_is_shown_by
-        @doc.fetch('aggregations.edmIsShownBy', []) || []
+        document.fetch('aggregations.edmIsShownBy', []) || []
       end
 
       def web_resources_about
-        @doc.fetch('aggregations.webResources.about', []) || []
+        document.fetch('aggregations.webResources.about', []) || []
+      end
+
+      def web_resource_for(uri)
+        document.fetch('aggregations.webResources').detect { |web_resource| web_resource['about'] == uri }
       end
     end
   end

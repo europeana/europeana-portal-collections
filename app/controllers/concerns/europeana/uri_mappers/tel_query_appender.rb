@@ -4,7 +4,7 @@ module Europeana
   module URIMappers
     class TelQueryAppender < Base
       def map_one_uri(uri)
-        uri + '?query=' + CGI.escape(@controller.params[:q])
+        uri + '?query=' + CGI.escape(controller.params[:q])
       end
 
       def uri_mappable?(uri)
@@ -12,7 +12,7 @@ module Europeana
       end
 
       def runnable?
-        @controller.params.key?(:q)
+        controller.params.key?(:q)
       end
     end
   end
