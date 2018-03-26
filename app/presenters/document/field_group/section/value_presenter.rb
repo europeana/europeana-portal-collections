@@ -36,7 +36,8 @@ module Document
             text: text,
             url: url,
             ga_data: section.ga_data,
-            extra_info: extra_info
+            extra_info: extra_info,
+            raw: section.html_line_breaks?
           }
         end
 
@@ -93,8 +94,12 @@ module Document
           return nil unless content.is_a?(String)
 
           @search ||= begin
-            search = content.gsub(/[()\[\]<>]/, '')
-            section.quoted? ? enquote_and_escape(search) : parenthesise_and_escape(search)
+            if section.quoted?
+              enquote_and_escape(content)
+            else
+              search = content.gsub(/[()\[\]<>]/, '')
+              parenthesise_and_escape(search)
+            end
           end
         end
 
@@ -132,7 +137,12 @@ module Document
           text = section.translate_value(text)
           text = text.titleize if text.present? && section.capitalised?
           text = format_date(text, section.format_date) if section.format_date?
+          text = htmlify_line_breaks(text) if section.html_line_breaks?
           text
+        end
+
+        def htmlify_line_breaks(text)
+          CGI.escapeHTML(text).gsub(/(\r\n|\r|\n)/, '<br/>').html_safe
         end
 
         def excluded?

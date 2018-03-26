@@ -9,7 +9,7 @@ module Document
       attr_reader :document, :controller, :group, :definition
 
       delegate :search_field, :entity, :fields, :exclude_vals, :max, :title,
-               :ga_data, :map_values, :format_date, to: :definition
+               :ga_data, :map_values, :format_date, :html_line_breaks, to: :definition
 
       # @param document [Europeana::Blacklight::Document]
       # @param controller [ActionController::Base]
@@ -181,6 +181,10 @@ module Document
 
       def format_date?
         format_date.present?
+      end
+
+      def html_line_breaks?
+        html_line_breaks.present?
       end
 
       def translate_values?
