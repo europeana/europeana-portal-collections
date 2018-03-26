@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Europeana
   module URIMappers
     class Base
