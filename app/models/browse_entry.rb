@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class BrowseEntry < ActiveRecord::Base
   include HasPublicationStates
   include IsPermissionable
@@ -18,7 +19,7 @@ class BrowseEntry < ActiveRecord::Base
 
   # Do not re-order these elements!
   # @see http://api.rubyonrails.org/classes/ActiveRecord/Enum.html
-  enum subject_type: [:topic, :person, :period]
+  enum subject_type: %i(topic person period)
 
   translates :title, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module IsPermissionable
   extend ActiveSupport::Concern
 
@@ -27,7 +28,7 @@ module IsPermissionable
   def set_permissions
     if ::PaperTrail.whodunnit
       creator = User.find(::PaperTrail.whodunnit)
-      if creator && creator.ability.needs_permission?
+      if creator&.ability&.needs_permission?
         self.permissions <<= self.permissions.build(user: creator)
       end
     end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'models/concerns/is_permissionable_examples'
 RSpec.describe Page::Landing do
   it_behaves_like 'permissionable'

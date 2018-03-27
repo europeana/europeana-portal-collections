@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe PaginatedView do
   let(:view_class) do
     Class.new do

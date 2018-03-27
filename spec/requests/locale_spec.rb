@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'redirects for locale handling' do
   context 'no locale indicated' do
     it 'redirects GET / to /en' do

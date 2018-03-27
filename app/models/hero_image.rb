@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HeroImage < ActiveRecord::Base
   include HasSettingsAttribute
 

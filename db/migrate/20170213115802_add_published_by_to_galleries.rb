@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddPublishedByToGalleries < ActiveRecord::Migration
   def up
     add_column :galleries, :published_by, :integer

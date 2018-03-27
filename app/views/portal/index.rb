@@ -175,7 +175,7 @@ module Portal
     end
 
     def federated_search_enabled
-      @collection && @collection.federation_configs.present?
+      @collection&.federation_configs.present?
     end
 
     def federated_search_conf

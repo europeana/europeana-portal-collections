@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStraplineToPages < ActiveRecord::Migration
   def up
     add_column :pages, :strapline, :string

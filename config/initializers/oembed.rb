@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Configure ruby-oembed
 # @see https://github.com/judofyr/ruby-oembed
 

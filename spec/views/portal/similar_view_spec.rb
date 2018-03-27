@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'portal/similar.json.erb' do
   before do
     response = instance_double('Europeana::Blacklight::Response')

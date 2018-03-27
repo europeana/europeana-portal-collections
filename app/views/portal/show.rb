@@ -275,7 +275,7 @@ module Portal
       end
     end
 
-    def collect_values(fields, doc = document)
+    def collect_values(fields, _doc = document)
       fields.map do |field|
         field_value(field)
       end.compact.uniq
@@ -288,7 +288,7 @@ module Portal
     def long_and_lat?
       latitude = field_value('places.latitude')
       longitude = field_value('places.longitude')
-      !latitude.nil? && latitude.size > 0 && !longitude.nil? && longitude.size > 0
+      !latitude.nil? && !latitude.empty? && !longitude.nil? && !longitude.empty?
     end
 
     def session_tracking_path_opts(counter)
@@ -339,7 +339,7 @@ module Portal
     def item_players
       @item_players ||= begin
         web_resources = presenter.media_web_resources
-        players = [:audio, :iiif, :image, :pdf, :video, :midi, :oembed].select do |player|
+        players = %i(audio iiif image pdf video midi oembed).select do |player|
           web_resources.any? { |wr| wr.player == player }
         end
         players.map do |player|
@@ -349,7 +349,7 @@ module Portal
     end
 
     def has_downloadable_media?
-      presenter.media_web_resources.any? { |wr| wr.downloadable? }
+      presenter.media_web_resources.any?(&:downloadable?)
     end
 
     def back_url_from_referer

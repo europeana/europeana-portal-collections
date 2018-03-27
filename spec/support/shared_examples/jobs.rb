@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 shared_examples 'a caching job' do
-  let(:cached) { Proc.new { Rails.cache.fetch(cache_key) } }
+  let(:cached) { proc { Rails.cache.fetch(cache_key) } }
 
   it 'writes to the cache' do
     Rails.cache.delete(cache_key)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/shared_examples/jobs'
 
 shared_examples 'recent additions record count caching job' do

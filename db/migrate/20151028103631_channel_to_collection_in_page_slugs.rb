@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChannelToCollectionInPageSlugs < ActiveRecord::Migration
   def up
     Page.find_each do |page|

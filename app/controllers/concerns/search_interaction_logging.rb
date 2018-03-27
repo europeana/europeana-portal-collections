@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Logs search interactions
 module SearchInteractionLogging

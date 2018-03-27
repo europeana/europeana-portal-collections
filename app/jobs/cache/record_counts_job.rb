@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Cache
   class RecordCountsJob < ApplicationJob
     include ApiQueryingJob
@@ -15,7 +16,7 @@ module Cache
         EDM::Type.registry.each { |type| perform_for(collection: collection, type: type) }
       end
 
-      collection.touch_landing_page unless collection.nil? # Expire landing page cache to show new counts
+      collection&.touch_landing_page # Expire landing page cache to show new counts
     end
 
     protected

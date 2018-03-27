@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class BrowseEntry
   class FacetEntry < BrowseEntry
     validates :facet_value, presence: true

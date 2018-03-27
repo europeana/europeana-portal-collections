@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Search requests' do
   context 'without query params' do
     it 'redirects /en/search to /en/' do

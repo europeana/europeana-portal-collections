@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe CollectionsController do
   describe 'GET index' do
     before do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 error_pages = [
   { title: 'Error', body: "We're sorry! The portal has encountered an error. A report has been automatically sent to the Europeana team to notify us. You can try to reload the page or do another search.", http_code: 500, slug: 'errors/internal_server_error' },
   { title: 'Forbidden', body: 'You do not have permission to access this resource.', http_code: 403, slug: 'errors/forbidden' },
@@ -7,10 +9,9 @@ error_pages = [
   { title: 'Page limit exceeded', body: 'You cannot navigate beyond the first 1000 items. Try to narrow your search by adding keywords to your query or adding filters to your search.', http_code: 400, slug: 'exceptions/europeana/api/errors/request/pagination_error' }
 ]
 error_pages.each do |attrs|
-  unless Page::Error.find_by_slug(attrs[:slug]).present?
-    ActiveRecord::Base.transaction do
-      page = Page::Error.create(attrs)
-      page.publish!
-    end
+  next if Page::Error.find_by_slug(attrs[:slug]).present?
+  ActiveRecord::Base.transaction do
+    page = Page::Error.create(attrs)
+    page.publish!
   end
 end

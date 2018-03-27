@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'explore/people.html.mustache', :common_view_components, :stable_version_view do
   before do
     assign(:people, BrowseEntry.person.published)

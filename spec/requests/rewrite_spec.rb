@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'rewritten search requests' do
   let(:relative_url_root) { Europeana::Portal::Application.config.relative_url_root || '' }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe CollectionsHelper do
   describe '#available_collections' do
     subject { helper.available_collections }

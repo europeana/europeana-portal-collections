@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AllCollectionLinkedToHomepage < ActiveRecord::Migration
   def up
     all = Collection.find_or_initialize_by(key: 'home')

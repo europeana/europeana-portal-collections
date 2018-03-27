@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe PagesController do
   describe 'GET show' do
     before do

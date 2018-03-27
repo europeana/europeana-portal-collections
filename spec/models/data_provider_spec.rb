@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe DataProvider do
   it { should have_one(:logo) }
   it { is_expected.to validate_presence_of(:name) }

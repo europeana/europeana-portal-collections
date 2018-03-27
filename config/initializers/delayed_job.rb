@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Delayed Job configuration
 #
 # @see https://github.com/collectiveidea/delayed_job

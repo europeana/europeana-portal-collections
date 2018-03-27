@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Facet::ColourPresenter, presenter: :facet do
   let(:field_name) { 'COLOUR_FIELD' }
   let(:field_options) { { colour: true } }

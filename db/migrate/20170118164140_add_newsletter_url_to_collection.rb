@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddNewsletterUrlToCollection < ActiveRecord::Migration
   def change
     add_column :collections, :newsletter_url, :string

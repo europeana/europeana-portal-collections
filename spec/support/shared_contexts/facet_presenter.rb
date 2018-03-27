@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'facet presenter', presenter: :facet do
   def facet_items(count)
     (1..count).map do |n|

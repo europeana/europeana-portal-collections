@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'routes for the collections controller' do
   it 'routes GET /en/collections to collections#index' do
     expect(get('/en/collections')).to route_to('collections#index', locale: 'en')

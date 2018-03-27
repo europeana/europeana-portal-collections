@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Page::Error < Page
-  HTTP_ERROR_STATUS_CODES = Rack::Utils::HTTP_STATUS_CODES.keys.select { |code| (400..599).include?(code) }
+  HTTP_ERROR_STATUS_CODES = Rack::Utils::HTTP_STATUS_CODES.keys.select { |code| (400..599).cover?(code) }
 
   validates :http_code, presence: true, inclusion: { in: HTTP_ERROR_STATUS_CODES }
   validates :http_code, uniqueness: true, unless: :exception?

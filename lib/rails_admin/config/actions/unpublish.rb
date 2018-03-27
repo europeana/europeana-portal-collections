@@ -60,7 +60,7 @@ module RailsAdmin
               @object.unpublish
               changes = @object.changes
               if @object.save
-                @auditing_adapter && @auditing_adapter.unpublish_object(@object, @abstract_model, _current_user, changes)
+                @auditing_adapter&.unpublish_object(@object, @abstract_model, _current_user, changes)
                 respond_to do |format|
                   format.html { redirect_to_on_success }
                   format.js { render json: { id: @object.id.to_s, label: @model_config.with(object: @object).object_label } }

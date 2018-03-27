@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 class TranslateLinks < ActiveRecord::Migration
   def self.up
     Link.create_translation_table!({
-      text: :text
-    }, {
-      migrate_data: true
-    })
+                                     text: :text
+                                   },
+                                   migrate_data: true)
     remove_column :links, :text
   end
 

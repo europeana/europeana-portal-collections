@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/shared_examples/jobs'
 
 shared_examples 'record count caching job' do
@@ -7,7 +9,7 @@ shared_examples 'record count caching job' do
   it 'should write record counts to cache' do
     subject.perform(*args)
     cached = Rails.cache.fetch(cache_key)
-    expect(cached).to be_a(Fixnum)
+    expect(cached).to be_a(Integer)
   end
 end
 

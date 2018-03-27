@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PrependQEqualsToBrowseEntryQuery < ActiveRecord::Migration
   def up
     BrowseEntry.find_each do |be|

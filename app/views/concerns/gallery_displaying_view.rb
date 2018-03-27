@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # For views needing to display galleries and their images
 module GalleryDisplayingView

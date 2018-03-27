@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Various ways of browsing/exploring the Europeana portal
 class ExploreController < ApplicationController
