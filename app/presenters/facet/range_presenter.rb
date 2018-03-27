@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Facet
   class RangePresenter < FacetPresenter
     include Blacklight::HashAsHiddenFieldsHelperBehavior
@@ -92,7 +94,7 @@ module Facet
 
     def range_middle
       @range_middle ||= begin
-        if !range_min.is_a?(Fixnum) || !range_max.is_a?(Fixnum)
+        if !range_min.is_a?(Integer) || !range_max.is_a?(Integer)
           nil
         else
           (range_min + range_max) / 2

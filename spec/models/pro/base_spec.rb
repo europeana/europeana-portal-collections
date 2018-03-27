@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Pro::Base, :disable_verify_partial_doubles do
   it { is_expected.to be_a(JsonApiClient::Resource) }
 

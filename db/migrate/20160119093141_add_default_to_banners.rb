@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDefaultToBanners < ActiveRecord::Migration
   class Banner < ActiveRecord::Base; end
 

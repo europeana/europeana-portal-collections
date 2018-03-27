@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe GalleryImagesController do
   describe '#show' do
     context 'when gallery is published' do

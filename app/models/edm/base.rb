@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EDM
   class Base < OpenStruct
     class << self

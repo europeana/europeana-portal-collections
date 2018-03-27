@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module HasPublicationStates
   extend ActiveSupport::Concern
 
   included do
     include AASM
 
-    enum state: [:draft, :published]
+    enum state: %i(draft published)
 
     aasm column: :state, enum: true, no_direct_assignment: true do
       state :draft, initial: true
@@ -22,6 +24,5 @@ module HasPublicationStates
 
   ##
   # Override this per-model if required
-  def after_publish
-  end
+  def after_publish; end
 end

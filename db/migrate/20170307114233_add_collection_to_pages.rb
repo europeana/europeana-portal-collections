@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddCollectionToPages < ActiveRecord::Migration
   def change
     add_reference :pages, :collection, index: true

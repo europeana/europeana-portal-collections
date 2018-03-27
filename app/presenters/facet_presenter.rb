@@ -36,18 +36,17 @@ class FacetPresenter < ApplicationPresenter
   #   for the facet field
   # @return [Class] subclass of {FacetPresenter} for use with the given facet
   def self.class_for_facet(facet_config)
-    case
-    when facet_config.hierarchical && !facet_config.parent
+    if facet_config.hierarchical && !facet_config.parent
       Facet::HierarchicalPresenter
-    when facet_config.boolean
+    elsif facet_config.boolean
       Facet::BooleanPresenter
-    when facet_config.colour
+    elsif facet_config.colour
       Facet::ColourPresenter
-    when facet_config.range
+    elsif facet_config.range
       Facet::RangePresenter
-    when facet_config.key == 'COLLECTION'
+    elsif facet_config.key == 'COLLECTION'
       Facet::CollectionPresenter
-    when facet_config.aliases
+    elsif facet_config.aliases
       Facet::AliasPresenter
     else
       Facet::SimplePresenter
@@ -275,9 +274,7 @@ class FacetPresenter < ApplicationPresenter
         unhidden_items << hidden_items.delete(selected_item)
       end
     end
-    while (unhidden_items.size < options[:count]) && hidden_items.present?
-      unhidden_items.push(hidden_items.shift)
-    end
+    unhidden_items.push(hidden_items.shift) while (unhidden_items.size < options[:count]) && hidden_items.present?
     [unhidden_items, hidden_items]
   end
 
@@ -290,9 +287,9 @@ class FacetPresenter < ApplicationPresenter
   end
 
   def filter_open?
-    facet_items.select{ |item| item.value.present?}.map { |item|
+    facet_items.select { |item| item.value.present? }.map do |item|
       facet_item(item)
-    }.select{|item| item[:is_checked]}.count > 0
+    end.select { |item| item[:is_checked] }.count > 0
   end
 
   ##

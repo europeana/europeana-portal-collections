@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pro
   ##
   # Base class for JSON-API resources consumed from the Europeana Pro Bolt CMS

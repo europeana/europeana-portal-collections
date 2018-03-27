@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 shared_examples_for 'permissionable' do
   it { is_expected.to have_many(:permissions).dependent(:destroy) }
   it { is_expected.to have_many(:users).through(:permissions) }

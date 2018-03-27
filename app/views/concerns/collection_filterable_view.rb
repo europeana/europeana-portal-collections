@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Methods for views that need to filter by collection
 module CollectionFilterableView
@@ -12,10 +14,10 @@ module CollectionFilterableView
       }
     end
     {
-      options: ops.unshift({
+      options: ops.unshift(
         value: '*',
         label: t('global.actions.filter-all')
-      })
+      )
     }
   end
 end

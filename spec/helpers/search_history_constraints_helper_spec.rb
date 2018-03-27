@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe SearchHistoryConstraintsHelper do
   it { is_expected.to include(Blacklight::SearchHistoryConstraintsHelperBehavior) }
 

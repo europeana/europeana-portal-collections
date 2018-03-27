@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Collections
   class Ugc < ApplicationView
     include BrowsableView

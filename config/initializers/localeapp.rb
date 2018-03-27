@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if ENV['LOCALEAPP_API_KEY']
   require 'localeapp/rails'
 

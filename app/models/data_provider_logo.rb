@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DataProviderLogo < ActiveRecord::Base
   MIN_WIDTH = 0
 

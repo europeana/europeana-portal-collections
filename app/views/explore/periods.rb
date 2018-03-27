@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Explore
   class Periods < ApplicationView
     include CollectionFilterableView

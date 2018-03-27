@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Pages with styleguide assets (CSS, JS, images)
 module AssettedView

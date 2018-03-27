@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Main application controller
 class ApplicationController < ActionController::Base
@@ -16,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale, :permit_iframing
 
-  layout proc { kind_of?(Europeana::Styleguide) ? false : 'application' }
+  layout proc { is_a?(Europeana::Styleguide) ? false : 'application' }
 
   def csrf
     respond_to do |format|
@@ -59,6 +61,6 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_home
     redirect_to home_url
-    return false
+    false
   end
 end

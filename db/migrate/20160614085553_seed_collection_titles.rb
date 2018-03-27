@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SeedCollectionTitles < ActiveRecord::Migration
   def up
     Collection.find_each do |collection|

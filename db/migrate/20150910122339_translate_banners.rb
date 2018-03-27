@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 class TranslateBanners < ActiveRecord::Migration
   def self.up
     Banner.create_translation_table!({
-      title: :string,
-      body: :text
-    }, {
-      migrate_data: true
-    })
+                                       title: :string,
+                                       body: :text
+                                     },
+                                     migrate_data: true)
     remove_column :banners, :title
     remove_column :banners, :body
   end

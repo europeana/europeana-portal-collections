@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class EntitiesController < ApplicationController
   include CacheHelper
   include Europeana::EntitiesApiConsumer

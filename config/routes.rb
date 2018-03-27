@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Rails.application.routes.draw do
   root to: 'locale#index'
 
@@ -23,11 +24,11 @@ Rails.application.routes.draw do
       get 'record/*id', to: 'portal#show', as: 'document'
     end
 
-    get 'collections/art-history', to: redirect{ |params, request|
+    get 'collections/art-history', to: redirect { |params, request|
       ["#{params[:locale]}/collections/art", request.query_string.presence].compact.join('?')
     }
 
-    resources :collections, only: [:show, :index] do
+    resources :collections, only: %i(show index) do
       get 'ugc', on: :member, path: 'contribute'
     end
 
@@ -55,7 +56,7 @@ Rails.application.routes.draw do
     get 'explore/periods', to: 'explore#periods'
 
     scope 'explore' do
-      resources :galleries, only: [:show, :index], param: :slug do
+      resources :galleries, only: %i(show index), param: :slug do
         resources :gallery_images, only: :show, path: 'images', as: 'images', param: :position
       end
 
@@ -64,8 +65,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :blog_posts, only: [:show, :index], param: :slug, path: 'blogs'
-    resources :events, only: [:show, :index], param: :slug
+    resources :blog_posts, only: %i(show index), param: :slug, path: 'blogs'
+    resources :events, only: %i(show index), param: :slug
 
     get 'entities/suggest'
 

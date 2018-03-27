@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'Search page' do
@@ -17,7 +19,7 @@ RSpec.feature 'Search page' do
 
           sleep 2 if js
 
-          expect(page.all('.results-list').size).to be > (0)
+          expect(page.all('.results-list').size).to be > 0
 
           expect(page.all('.results-list ol.result-items li').size).to be_between(1, 24)
         end

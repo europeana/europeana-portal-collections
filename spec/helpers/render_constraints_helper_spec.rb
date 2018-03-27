@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 RSpec.describe RenderConstraintsHelper do
   it { is_expected.to include(Blacklight::RenderConstraintsHelperBehavior) }
 
-  describe '#query_has_constraints?' do 
+  describe '#query_has_constraints?' do
     subject { helper.query_has_constraints?(params) }
     context 'params has f' do
       let(:params) { { f: { 'YEAR': [1950] } } }
@@ -48,13 +50,11 @@ RSpec.describe RenderConstraintsHelper do
 
     context 'with qf params' do
       before do
-        def helper.search_action_path(*_)
-        end
+        def helper.search_action_path(*_); end
 
-        def helper.remove_search_param(*_)
-        end
+        def helper.remove_search_param(*_); end
       end
-      let(:params) { { q: 'hat', qf: ['scarf', 'glasses'] } }
+      let(:params) { { q: 'hat', qf: %w(scarf glasses) } }
       it { is_expected.not_to eq('') }
     end
   end

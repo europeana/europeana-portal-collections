@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddNewsletterUrlToPage < ActiveRecord::Migration
   def change
     add_column :pages, :newsletter_url, :string

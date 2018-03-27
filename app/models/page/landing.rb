@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Page
   class Landing < Page
     include IsPermissionable
@@ -51,7 +52,7 @@ class Page
     def og_image_from_promo
       return unless settings_layout_type == 'browse'
       promo = promotions.find_by(position: 0)
-      promo && promo.file.present? ? promo.file.url : nil
+      promo&.file.present? ? promo.file.url : nil
     end
 
     def og_image_from_hero

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.feature 'Top navigation' do
   [false, true].each do |js|
     context (js ? 'with JS' : 'without JS'), js: js do

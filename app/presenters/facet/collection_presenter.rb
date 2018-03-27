@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Facet
   class CollectionPresenter < SimplePresenter
     def add_facet_params(item)

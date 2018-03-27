@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module CacheHelper
   def cache_version
     @cache_version ||= begin

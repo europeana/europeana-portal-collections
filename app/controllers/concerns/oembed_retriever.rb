@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'oembed'
 
 module OembedRetriever
@@ -13,16 +15,15 @@ module OembedRetriever
 
     urls.uniq.each_with_object({}) do |url, map|
       provider = OEmbed::Providers.find(url)
-      unless provider.nil?
-        benchmark("[OEmbed] #{url}", level: :info) do
-          begin
-            map[url] = {
-              html: provider.get(url).html,
-              link: provider.build(url)
-            }
-          rescue OEmbed::Error
-            # no oEmbed HTML available (for a number of possible reasons)
-          end
+      next if provider.nil?
+      benchmark("[OEmbed] #{url}", level: :info) do
+        begin
+          map[url] = {
+            html: provider.get(url).html,
+            link: provider.build(url)
+          }
+        rescue OEmbed::Error
+          # no oEmbed HTML available (for a number of possible reasons)
         end
       end
     end

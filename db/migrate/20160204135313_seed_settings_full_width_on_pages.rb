@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SeedSettingsFullWidthOnPages < ActiveRecord::Migration
   def change
     Page.find_each do |page|

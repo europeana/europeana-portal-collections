@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Home
   class Index < ApplicationView
     include BrowsableView

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Methods for caching rendered view content
 module CacheableView

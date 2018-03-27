@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Localisation view methods
 module LocalisableView

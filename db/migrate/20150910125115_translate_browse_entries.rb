@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 class TranslateBrowseEntries < ActiveRecord::Migration
   def self.up
     BrowseEntry.create_translation_table!({
-      title: :string
-    }, {
-      migrate_data: true
-    })
+                                            title: :string
+                                          },
+                                          migrate_data: true)
     remove_column :browse_entries, :title
   end
 

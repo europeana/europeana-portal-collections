@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddBannerIdToPages < ActiveRecord::Migration
   def change
     add_column :pages, :banner_id, :integer
