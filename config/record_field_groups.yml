@@ -73,6 +73,7 @@ description:
     - proxies.dctermsTOC
   - fields:
     - proxies.dcDescription
+    html_line_breaks: true
 location:
   title: location
   sections:

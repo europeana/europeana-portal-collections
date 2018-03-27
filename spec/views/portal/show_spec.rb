@@ -28,6 +28,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     allow(view).to receive(:oembed_html).and_return({})
     allow(controller).to receive(:url_conversions).and_return({})
     allow(controller).to receive(:oembed_html).and_return({})
+    allow(controller).to receive(:media_headers).and_return({})
 
     assign(:params, params)
     assign(:document, blacklight_document)

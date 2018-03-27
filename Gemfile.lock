@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 6762c5fde170d18bb42ad88027eb88fd9b7cc0cf
+  revision: d98f7febe1869aae995df70dac51d4c3476c9a0b
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -273,7 +273,7 @@ GEM
     logstash-event (1.2.02)
     logstash-logger (0.25.1)
       logstash-event (~> 1.2)
-    loofah (2.1.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.6)
@@ -340,8 +340,8 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     rails-observers (0.1.5)
       activemodel (>= 4.0)
     rails_admin (0.8.1)
