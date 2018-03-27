@@ -96,7 +96,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'coveralls', require: false
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver'

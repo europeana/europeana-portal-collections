@@ -21,6 +21,10 @@ before_script:
   - "psql -c 'create database europeana_channels_blacklight_test;' -U postgres"
   - "cp -r ./deploy/travis/. ."
   - "bundle exec rake db:test:prepare"
+script:
+  - bundle exec rspec
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 env:
   - RAILS_ENV=test
 services:
