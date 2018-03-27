@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.9'
+gem 'rails', '4.2.10'
 
 gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
 
@@ -41,7 +41,7 @@ gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', git: 'https://github.com/globalize/globalize-versioning.git'
 gem 'i18n_data'
 gem 'jbuilder', '~> 2.6.0'
-gem 'json_api_client'
+gem 'json_api_client', '< 1.5.3' # 1.5.3 breaks JSON API pagination params
 gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
@@ -49,7 +49,7 @@ gem 'mail', '~> 2.6.6'
 gem 'nokogiri'
 gem 'paper_trail', '~> 4.0'
 gem 'paperclip', '~> 5.2'
-gem 'pg'
+gem 'pg', '< 1.0.0' # 1.0.0 is not supported by Rails 4.2.10
 gem 'rack-cors'
 gem 'rack-rewrite'
 gem 'rails-observers'
@@ -65,7 +65,7 @@ gem 'stringex', '~> 2.6'
 gem 'therubyracer'
 
 group :production do
-  gem 'europeana-logging', '~> 0.2.3' # , github: 'europeana/europeana-logging-ruby', branch: 'develop'
+  gem 'europeana-logging', '~> 0.2.3'
   gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end
