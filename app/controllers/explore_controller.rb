@@ -92,8 +92,8 @@ class ExploreController < ApplicationController
   # @param provider [String] provider name
   def data_providers_cache_key(provider)
     cache_key = 'browse/sources/providers'
-    cache_key << ('/' + @collection.key) unless @collection.nil?
-    cache_key << ('/' + provider)
+    cache_key += ('/' + @collection.key) unless @collection.nil?
+    cache_key += ('/' + provider)
   end
 
   def find_collection
