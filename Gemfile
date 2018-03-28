@@ -49,7 +49,7 @@ gem 'mail', '~> 2.6.6'
 gem 'nokogiri'
 gem 'paper_trail', '~> 4.0'
 gem 'paperclip', '~> 5.2'
-gem 'pg'
+gem 'pg', '< 1.0.0' # 1.0.0 is not supported by Rails 4.2.x
 gem 'rack-cors'
 gem 'rack-rewrite'
 gem 'rails-observers'

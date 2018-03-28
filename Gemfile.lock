@@ -542,7 +542,7 @@ DEPENDENCIES
   nokogiri
   paper_trail (~> 4.0)
   paperclip (~> 5.2)
-  pg
+  pg (< 1.0.0)
   phantomjs
   poltergeist
   puma (~> 3.9.1)
