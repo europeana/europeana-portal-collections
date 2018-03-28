@@ -43,6 +43,8 @@ module ThumbnailHelper
   def europeana_contribute_uri?(web_resource_uri)
     return false unless web_resource_uri.present?
     URI.parse(web_resource_uri).host == URI.parse(Rails.application.config.x.europeana[:contribute_url]).host
+  rescue URI::InvalidURIError
+    false
   end
 
   def thumbnail_url_options_with_size(options)
