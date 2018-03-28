@@ -31,4 +31,8 @@ module AssettedView
       }
     ]
   end
+
+  def site_notice
+    t('site.notice.outage-expected')
+  end
 end
