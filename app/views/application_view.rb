@@ -60,7 +60,7 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def fb_campaigns_on
-    true
+    false
   end
 
   def page_config
