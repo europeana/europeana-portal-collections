@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Facet
   class HierarchicalPresenter < FacetPresenter
     def display(**options)

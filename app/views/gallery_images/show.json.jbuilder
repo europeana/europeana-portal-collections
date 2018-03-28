@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 presenter = Document::RecordPresenter.new(@document, controller)
 
 json.description presenter.field_value('proxies.dcDescription')

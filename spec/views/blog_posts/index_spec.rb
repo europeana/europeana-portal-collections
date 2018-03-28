@@ -15,7 +15,7 @@ RSpec.describe 'blog_posts/index.html.mustache', :common_view_components, :stabl
   let(:theme_filters) do
     {
       all: { filter: 'culturelover', label: 'All' },
-      fashion: { filter: 'culturelover-fashion', label: 'Fashion' },
+      fashion: { filter: 'culturelover-fashion', label: 'Fashion' }
     }
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocaleController < ApplicationController
   def index
     redirect_to_home
@@ -15,7 +17,7 @@ class LocaleController < ApplicationController
 
   def local_redirect
     @local_redirect ||= begin
-      if params[:redirect] && params[:redirect].is_a?(String) && params[:redirect] =~ %r{\A/}
+      if params[:redirect]&.is_a?(String) && params[:redirect] =~ %r{\A/}
         params[:redirect]
       end
     end

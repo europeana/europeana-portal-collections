@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddSlugToGallery < ActiveRecord::Migration
   def change
     add_column :galleries, :slug, :text

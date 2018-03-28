@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe CatalogHelper do
   it { is_expected.to include(Blacklight::CatalogHelperBehavior) }
 
@@ -8,7 +10,7 @@ RSpec.describe CatalogHelper do
       it 'returns nil' do
         (1..3).each do |start|
           (1..5).each do |idx|
-            allow(response).to receive(:params).and_return({ start: start })
+            allow(response).to receive(:params).and_return(start: start)
             allow(helper).to receive(:render_grouped_response?) { true }
             assign(:response, response)
             expect(helper.document_counter_with_offset(idx)).to be_nil
@@ -21,7 +23,7 @@ RSpec.describe CatalogHelper do
       it 'adds start param from response to index arg' do
         (1..3).each do |start|
           (1..5).each do |idx|
-            allow(response).to receive(:params).and_return({ start: start })
+            allow(response).to receive(:params).and_return(start: start)
             allow(helper).to receive(:render_grouped_response?) { false }
             assign(:response, response)
             expect(helper.document_counter_with_offset(idx)).to eq(idx + start)

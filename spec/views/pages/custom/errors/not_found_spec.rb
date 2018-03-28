@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 RSpec.describe 'pages/custom/errors/not_found.html.mustache', :blacklight_config, :common_view_components do
   before(:each) do
     assign(:page, page)
-    assign(:params, { page: page.slug })
+    assign(:params, page: page.slug)
     controller.request.path_parameters.merge!(controller: 'pages', action: 'show')
   end
 

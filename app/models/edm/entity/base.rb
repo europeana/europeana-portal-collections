@@ -43,7 +43,7 @@ module EDM
       # @return [String] localised prefLabel
       def pref_label
         pl = api_response[:prefLabel]
-        if pl && pl.is_a?(Hash) && pl.present?
+        if pl&.is_a?(Hash) && pl.present?
           localised_pl = pl[locale] || pl[I18n.default_locale]
           [localised_pl].flatten.first
         end

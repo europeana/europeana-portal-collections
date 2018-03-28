@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe BlogPostsController do
   let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogposts(\?|\z)} }
   let(:json_api_content_type) { 'application/vnd.api+json' }

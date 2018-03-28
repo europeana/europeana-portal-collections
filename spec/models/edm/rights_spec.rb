@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe EDM::Rights do
   describe '.normalise' do
     subject { described_class.normalise(rights) }

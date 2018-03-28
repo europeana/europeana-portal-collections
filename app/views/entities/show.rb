@@ -125,7 +125,7 @@ module Entities
           tab_title: t(key, scope: 'site.entities.tab_items', name: @entity.pref_label),
           url: search_path(q: @entity.search_query(key), format: 'json'),
           search_url: search_path(q: @entity.search_query(key)),
-          referenced_records: referenced_records[key],
+          referenced_records: referenced_records[key]
         }
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe FacetPresenter, presenter: :facet do
   let(:field_name) { 'GENERIC_FIELD' }
 

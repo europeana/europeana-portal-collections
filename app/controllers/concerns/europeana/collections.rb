@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Europeana
   module Collections
     extend ActiveSupport::Concern

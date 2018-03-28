@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'views/concerns/paginated_view_examples'
 
 RSpec.describe 'galleries/index.html.mustache' do

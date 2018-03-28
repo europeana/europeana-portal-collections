@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Page do
   it { is_expected.to belong_to(:banner).inverse_of(:pages) }
   it { is_expected.to belong_to(:hero_image).inverse_of(:page) }
@@ -11,7 +13,7 @@ RSpec.describe Page do
     subject { pages(:about) }
     context 'when there are no browse entries' do
       it 'should be valid' do
-       expect(subject).to be_valid
+        expect(subject).to be_valid
       end
     end
     context 'when there are 3 topic browse entries' do

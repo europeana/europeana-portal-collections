@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFacetLinkGroups < ActiveRecord::Migration
   def up
     create_table :facet_link_groups do |t|

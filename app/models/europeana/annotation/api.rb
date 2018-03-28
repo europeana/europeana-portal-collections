@@ -28,14 +28,14 @@ module Europeana
           {
             userToken: user_token,
             provider: split_id[-2],
-            id: split_id[-1],
+            id: split_id[-1]
           }.merge(env_params)
         end
 
         def env_params
           {
             wskey: Rails.application.config.x.europeana[:annotations].api_key || Europeana::API.key,
-            api_url: Rails.application.config.x.europeana[:annotations].api_url || Europeana::API.url,
+            api_url: Rails.application.config.x.europeana[:annotations].api_url || Europeana::API.url
           }
         end
       end

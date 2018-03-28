@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'assets initializer' do
   subject { Rails.application.config.assets }
 

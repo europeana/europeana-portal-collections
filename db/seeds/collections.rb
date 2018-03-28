@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 unless Collection.find_by_key('all').present?
   ActiveRecord::Base.transaction do
     Collection.create!(

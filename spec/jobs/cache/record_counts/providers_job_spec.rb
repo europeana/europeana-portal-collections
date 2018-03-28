@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/shared_examples/jobs'
 
 shared_examples 'provider record count caching job' do

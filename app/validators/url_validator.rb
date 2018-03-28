@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UrlValidator < ActiveModel::EachValidator
   # @todo move error message into locales
   def validate_each(record, attribute, value)

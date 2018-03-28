@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Topic do
   it { is_expected.to validate_presence_of(:label) }
   it { is_expected.to validate_uniqueness_of(:label) }

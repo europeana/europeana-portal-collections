@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_admin/config/actions/publish'
 require 'rails_admin/config/actions/unpublish'
 require 'rails_admin/config/actions/requeue'

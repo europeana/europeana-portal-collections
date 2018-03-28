@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'explore/sources.html.mustache', :common_view_components, :stable_version_view do
   let(:providers) do
     [
@@ -5,8 +7,7 @@ RSpec.describe 'explore/sources.html.mustache', :common_view_components, :stable
         data_providers: [
           { text: 'A Data Provider', count: 100 },
           { text: 'Another Data Provider', count: 200 }
-        ]
-      },
+        ] },
       { text: 'Another Provider', count: 2000 },
       { text: 'A Different Provider', count: 500 }
     ]

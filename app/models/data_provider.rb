@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class DataProvider < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :uri, presence: true, uniqueness: true, format:
     { with: %r{\Ahttp://data.europeana.eu/organization/\d{6}\z} }
 
   has_one :logo, class_name: 'DataProviderLogo', dependent: :destroy,
-    inverse_of: :data_provider
+                 inverse_of: :data_provider
 
   delegate :image, to: :logo, allow_nil: true
 

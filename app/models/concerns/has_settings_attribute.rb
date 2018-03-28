@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @todo Migrate to {ActiveRecord::Store}
 #   http://api.rubyonrails.org/classes/ActiveRecord/Store.html
 module HasSettingsAttribute

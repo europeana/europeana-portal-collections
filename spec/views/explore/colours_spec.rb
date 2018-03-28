@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 RSpec.describe 'explore/colours.html.mustache', :common_view_components, :stable_version_view do
   let(:colours) do
     [
-      Europeana::Blacklight::Response::Facets::FacetItem.new(value: '#DC143C', hits: 16376),
+      Europeana::Blacklight::Response::Facets::FacetItem.new(value: '#DC143C', hits: 16_376),
       Europeana::Blacklight::Response::Facets::FacetItem.new(value: '#F08080', hits: 7555),
       Europeana::Blacklight::Response::Facets::FacetItem.new(value: '#00CED1', hits: 499)
     ]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveFacetFieldFromBrowseEntries < ActiveRecord::Migration
   def up
     remove_column :browse_entries, :facet_field

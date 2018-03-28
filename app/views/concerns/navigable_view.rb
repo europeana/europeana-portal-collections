@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # View methods for pages with navigation
 module NavigableView
@@ -222,7 +223,7 @@ module NavigableView
       link_item(t('site.footer.menu.roadmap'), static_page_path('roadmap', format: 'html')),
       link_item(t('site.footer.menu.data-providers'), explore_sources_path(format: 'html')),
       link_item(t('site.footer.menu.become-a-provider'), 'http://pro.europeana.eu/share-your-data/'),
-      link_item(t('site.footer.menu.contact-us'), static_page_path('contact', format: 'html')),
+      link_item(t('site.footer.menu.contact-us'), static_page_path('contact', format: 'html'))
     ]
   end
 

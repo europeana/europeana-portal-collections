@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pro
   ##
   # Persons from Pro JSON-API.

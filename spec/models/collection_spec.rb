@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Collection do
   it { is_expected.to have_and_belong_to_many(:browse_entries) }
   it { is_expected.to have_one(:landing_page).dependent(:destroy) }

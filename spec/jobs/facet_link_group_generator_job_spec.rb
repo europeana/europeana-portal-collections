@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FacetLinkGroupGeneratorJob do
   let(:facet_link_group) { facet_link_groups(:fashion_designer) }
 
