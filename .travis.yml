@@ -21,6 +21,9 @@ before_script:
   - "psql -c 'create database europeana_channels_blacklight_test;' -U postgres"
   - "cp -r ./deploy/travis/. ."
   - "bundle exec rake db:test:prepare"
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - bundle exec rspec
 after_script:
