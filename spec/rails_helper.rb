@@ -63,9 +63,9 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.include Devise::TestHelpers, type: :controller
   config.include ApiResponseFixtures
   config.include CiEnvHelper
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include EuropeanaAPIHelper
   config.include RequestHelper, type: :request
   config.include ViewTestHelper, type: :view
