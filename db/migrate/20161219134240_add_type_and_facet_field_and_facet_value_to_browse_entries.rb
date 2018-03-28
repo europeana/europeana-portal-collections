@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddTypeAndFacetFieldAndFacetValueToBrowseEntries < ActiveRecord::Migration
   def up
     add_column :browse_entries, :type, :string

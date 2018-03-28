@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'redirects for the /browse path' do
   it 'redirects GET /en/browse/agents to /en/explore/people' do
     get('/en/browse/agents')

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe User do
   it { is_expected.to delegate_method(:role_enum).to(:class) }
   it { is_expected.to validate_inclusion_of(:role).in_array(%w(admin editor user)) }

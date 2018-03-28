@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.9'
+gem 'rails', '4.2.10'
 
 gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
 
@@ -22,12 +24,12 @@ gem 'mustache', '1.0.3'
 gem 'stache', git: 'https://github.com/europeana/stache.git', branch: 'europeana-styleguide'
 
 gem 'aasm', '~> 4.2'
-gem 'blacklight', '~> 6.0.0'
 gem 'acts_as_list', '~> 0.7'
+gem 'blacklight', '~> 6.0.0'
 gem 'cancancan', '~> 1.12'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
-gem 'devise', '~> 3.5.4'
+gem 'devise'
 gem 'europeana-api', '~> 1.0.0'
 gem 'europeana-blacklight', '~> 1.1.0'
 gem 'europeana-feedback-button', '0.0.5'
@@ -37,6 +39,7 @@ gem 'foederati', '~> 0.2.0'
 gem 'fog-aws', '~> 1.4.1'
 gem 'globalize', '~> 5.0'
 gem 'globalize-versioning', git: 'https://github.com/globalize/globalize-versioning.git'
+gem 'i18n_data'
 gem 'jbuilder', '~> 2.6.0'
 gem 'json_api_client'
 gem 'lograge'
@@ -44,26 +47,25 @@ gem 'logstash-event'
 gem 'logstash-logger'
 gem 'mail', '~> 2.6.6'
 gem 'nokogiri'
-gem 'rails-observers'
-gem 'redis', '~> 3.3.3'
-gem 'rest-client', '~> 1.8.0'
-gem 'ruby-oembed', '~> 0.9'
-gem 'pg'
-gem 'paperclip', '~> 5.2'
 gem 'paper_trail', '~> 4.0'
-gem 'rails_with_relative_url_root', '~> 0.1'
+gem 'paperclip', '~> 5.2'
+gem 'pg', '< 1.0.0' # 1.0.0 is not supported by Rails 4.2.x
 gem 'rack-cors'
 gem 'rack-rewrite'
+gem 'rails-observers'
 gem 'rails_admin', '~> 0.8.0'
+gem 'rails_with_relative_url_root', '~> 0.1'
+gem 'redis', '~> 3.3.3'
 gem 'redis-rails'
+gem 'rest-client', '~> 1.8.0'
+gem 'ruby-oembed', '~> 0.9'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'stringex', '~> 2.6'
 gem 'therubyracer'
-gem 'i18n_data'
 
 group :production do
-  gem 'europeana-logging', '~> 0.2.3'#, github: 'europeana/europeana-logging-ruby', branch: 'develop'
+  gem 'europeana-logging', '~> 0.2.3' # , github: 'europeana/europeana-logging-ruby', branch: 'develop'
   gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end
@@ -78,7 +80,7 @@ end
 group :development, :profiling, :test do
   gem 'dotenv-rails', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'
-  gem 'rubocop', '~> 0.50.0', require: false
+  gem 'rubocop', '~> 0.52.1', require: false
 end
 
 group :development, :profiling do
@@ -96,7 +98,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'coveralls', require: false
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'selenium-webdriver'

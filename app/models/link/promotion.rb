@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Link::Promotion < Link
   include HasSettingsAttribute
 
@@ -19,7 +20,7 @@ class Link::Promotion < Link
     end
 
     def settings_wide_enum
-      ['0', '1']
+      %w(0 1)
     end
   end
 

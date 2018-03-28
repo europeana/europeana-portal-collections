@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class GalleryImagesController < ApplicationController
   def show
     @gallery = Gallery.find_by_slug(params[:gallery_slug])

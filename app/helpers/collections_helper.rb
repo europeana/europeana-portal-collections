@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Collections helpers
 module CollectionsHelper
@@ -52,10 +54,9 @@ module CollectionsHelper
     end
   end
 
-  def clicktip
-  end
+  def clicktip; end
 
-  def beta_collection?(collection)
+  def beta_collection?(_collection)
     # Uncomment this to indicate that a new collection is beta
     # collection.key == 'new-collection'
     false

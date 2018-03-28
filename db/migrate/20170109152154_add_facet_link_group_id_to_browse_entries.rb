@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFacetLinkGroupIdToBrowseEntries < ActiveRecord::Migration
   def up
     add_column :browse_entries, :facet_link_group_id, :integer

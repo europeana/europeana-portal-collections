@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # View methods for pages with navigation
 module NavigableView

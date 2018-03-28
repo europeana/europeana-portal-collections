@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe DeleteOldSearchesJob do
   it 'deletes searches older than one day' do
     expired_time = 2.days.ago

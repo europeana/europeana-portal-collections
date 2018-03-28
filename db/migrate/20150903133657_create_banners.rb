@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBanners < ActiveRecord::Migration
   def change
     create_table :banners do |t|

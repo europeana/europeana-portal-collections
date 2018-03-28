@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe ProResourcePresenter do
   subject { described_class.new(view, resource) }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateArtHistoryPage < ActiveRecord::Migration
   def up
     Page.connection.execute("UPDATE pages SET slug = 'collections/art' WHERE slug='collections/art-history'")

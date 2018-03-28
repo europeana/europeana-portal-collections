@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Cache
   class ColourFacetsJob < ApplicationJob
     include ApiQueryingJob

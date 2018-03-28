@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ViewTestHelper
   RSpec.configure do |config|
     config.before(:each, type: :view) do

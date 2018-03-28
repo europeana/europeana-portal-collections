@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'Blacklight config', :blacklight_config do
   let(:blacklight_config) do
     Blacklight::Configuration.new do |config|

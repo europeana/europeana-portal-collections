@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBrowseEntriesCollections < ActiveRecord::Migration
   def change
     create_table :browse_entries_collections do |t|

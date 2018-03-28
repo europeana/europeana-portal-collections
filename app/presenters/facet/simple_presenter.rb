@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Facet
   class SimplePresenter < FacetPresenter
     def display(**options)

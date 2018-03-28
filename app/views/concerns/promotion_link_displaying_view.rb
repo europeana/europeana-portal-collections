@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # For views needing to display `Link::Promotion` objects
 module PromotionLinkDisplayingView

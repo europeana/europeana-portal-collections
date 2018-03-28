@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'collection aware' do
   context 'when theme param is present' do
     let(:params) { { locale: 'en', format: 'html', theme: collections(:music).key } }

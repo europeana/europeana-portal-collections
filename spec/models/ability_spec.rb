@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Ability do
   it 'uses CanCan' do
     expect(described_class).to include(CanCan::Ability)

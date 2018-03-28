@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pro
   class << self
     attr_accessor :site

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe StoreGalleryAnnotationsJob, :annotations_api do
   let(:gallery) { Gallery.published.first }
 

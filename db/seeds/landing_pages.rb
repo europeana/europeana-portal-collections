@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @return [MediaObject]
 def find_or_download_styleguide_image(path)
   url = "http://styleguide.europeana.eu/images/#{path}"

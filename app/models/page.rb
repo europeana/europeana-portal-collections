@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Page < ActiveRecord::Base
   include HasPublicationStates
   include HasSettingsAttribute

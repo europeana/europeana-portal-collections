@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Base class job background jobs
 class ApplicationJob < ActiveJob::Base

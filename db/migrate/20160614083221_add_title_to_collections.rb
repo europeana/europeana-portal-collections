@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTitleToCollections < ActiveRecord::Migration
   def up
     add_column :collections, :title, :string

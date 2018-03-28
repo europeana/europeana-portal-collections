@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'requests for the /en/channels path' do
   it 'redirects GET /en/channels to /en/collections' do
     get('/en/channels')

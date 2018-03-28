@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 
 ##
@@ -41,8 +43,7 @@ module Catalog
   ##
   # Override {Blacklight::SearchContext#find_or_initialize_search_session_from_params}
   # to prevent searches from being logged.
-  def find_or_initialize_search_session_from_params(_params)
-  end
+  def find_or_initialize_search_session_from_params(_params); end
 
   # Overrides {Blacklight::SearchHelper} method to detect Collections searches
   def get_previous_and_next_documents_for_search(*_args)
@@ -58,10 +59,9 @@ module Catalog
   end
 
   def search_action_url(options = {})
-    case
-    when options[:controller]
+    if options[:controller]
       url_for(options.except(:page))
-    when params[:controller] == 'collections'
+    elsif params[:controller] == 'collections'
       url_for(options.merge(controller: 'collections', action: params[:action]))
     else
       search_url(options.except(:controller, :action))

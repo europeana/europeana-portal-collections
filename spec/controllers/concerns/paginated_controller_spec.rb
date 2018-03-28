@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe PaginatedController do
   let(:controller_class) do
     Class.new(ApplicationController) do

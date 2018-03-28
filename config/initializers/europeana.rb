@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Configure Europeana API
 if ENV['EUROPEANA_API_URL']
   require 'europeana/api'

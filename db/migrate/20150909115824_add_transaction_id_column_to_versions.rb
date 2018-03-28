@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTransactionIdColumnToVersions < ActiveRecord::Migration
   def self.up
     add_column :versions, :transaction_id, :integer

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'ExploreController routes' do
   it 'routes GET /en/explore/newcontent to explore#new_content' do
     expect(get('/en/explore/newcontent')).to route_to('explore#new_content', locale: 'en')

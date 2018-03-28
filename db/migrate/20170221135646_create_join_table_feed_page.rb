@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 class CreateJoinTableFeedPage < ActiveRecord::Migration
   def change
     create_join_table :feeds, :pages do |t|
-      t.index [:feed_id, :page_id]
-      t.index [:page_id, :feed_id]
+      t.index %i(feed_id page_id)
+      t.index %i(page_id feed_id)
     end
     reversible do |change|
       change.up do

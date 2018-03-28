@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Relative URL root interpolation used in filesystem URL paths
 # @see /deploy/development/config/paperclip.yml
 Paperclip.interpolates :rails_relative_url_root do |_attachment, _style|
