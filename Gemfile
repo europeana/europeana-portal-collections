@@ -80,7 +80,7 @@ end
 group :development, :profiling, :test do
   gem 'dotenv-rails', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'
-  gem 'rubocop', '~> 0.50.0', require: false
+  gem 'rubocop', '~> 0.53', require: false
 end
 
 group :development, :profiling do
