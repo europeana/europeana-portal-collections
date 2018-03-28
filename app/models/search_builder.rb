@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchBuilder < Europeana::Blacklight::SearchBuilder
   self.default_processor_chain += %i(add_entity_query_to_api)
 

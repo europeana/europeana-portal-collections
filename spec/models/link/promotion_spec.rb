@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Link::Promotion do
   it { is_expected.to be_a(Link) }
   it { is_expected.to belong_to(:media_object) }
@@ -18,6 +19,6 @@ RSpec.describe Link::Promotion do
 
   describe '.settings_wide_enum' do
     subject { described_class.settings_wide_enum }
-    it { is_expected.to eq(['0', '1']) }
+    it { is_expected.to eq(%w(0 1)) }
   end
 end

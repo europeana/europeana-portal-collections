@@ -18,13 +18,13 @@ module Europeana
       {
         type: type,
         namespace: namespace,
-        identifier: identifier,
+        identifier: identifier
       }.merge(entities_api_env_params)
     end
 
     def entities_api_env_params
       {
-        wskey: Rails.application.config.x.europeana[:entities].api_key,
+        wskey: Rails.application.config.x.europeana[:entities].api_key
       }.tap do |env_params|
         unless Rails.application.config.x.europeana[:entities].api_url.blank?
           env_params[:api_url] = Rails.application.config.x.europeana[:entities].api_url

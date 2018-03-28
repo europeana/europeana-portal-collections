@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe 'routes for the events controller' do
   it 'routes GET /en/events to events#index' do
     expect(get('/en/events')).to route_to('events#index', locale: 'en')

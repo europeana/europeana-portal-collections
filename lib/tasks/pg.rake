@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Rake tasks to backup/restore Rails PostgreSQL db to/from Fog storage
 #
@@ -12,20 +14,20 @@ namespace :pg do
   task backup: :environment do
     check_configuration!
 
-    puts "Backing up the PostgreSQL database to Fog storage...".green
+    puts 'Backing up the PostgreSQL database to Fog storage...'.green
 
     dump_to_tmp_file do |tmp_file|
       save_dump_to_fog(tmp_file)
     end
 
-    puts "Done!".green.bold
+    puts 'Done!'.green.bold
   end
 
   desc 'Restores the PostgreSQL database from Fog storage'
   task restore: :environment do
     check_configuration!
 
-    puts "Restoring the PostgreSQL database from Fog storage...".green
+    puts 'Restoring the PostgreSQL database from Fog storage...'.green
 
     exit_with_error!('Specify the backup to restore in DUMP') unless ENV['DUMP']
 
@@ -33,17 +35,17 @@ namespace :pg do
       restore_dump_to_pg(tmp_file)
     end
 
-    puts "Done!".green.bold
+    puts 'Done!'.green.bold
   end
 
   desc 'Lists the available PostgreSQL backups in Fog storage'
   task list: :environment do
     check_configuration!
 
-    puts "Listing the available PostgreSQL backups in Fog storage...".green
+    puts 'Listing the available PostgreSQL backups in Fog storage...'.green
 
     fog_storage_dir.files.each do |file|
-      puts "* #{file.key}" if file.key =~ /\.psql\z/
+      puts "* #{file.key}" if file.key.match?(/\.psql\z/)
     end
   end
 
@@ -119,7 +121,7 @@ namespace :pg do
   end
 
   def ensure_db_adapter_is_pg!
-    unless ActiveRecord::Base.connection_config[:adapter] =~ /^postgres/
+    unless ActiveRecord::Base.connection_config[:adapter].match?(/^postgres/)
       exit_with_error!('Database adapter is not PostgreSQL. Aborting.')
     end
   end
@@ -132,13 +134,13 @@ namespace :pg do
     Rails.application.config_for(:fog)
     true
   rescue StandardError => e
-    raise e unless e.message =~ /Could not load configuration\./
+    raise e unless e.message.match?(/Could not load configuration\./)
     false
   end
 
   def check_dump_exists!(file_name)
     if fog_storage_dir.files.head(file_name).nil?
-      exit_with_error!('Dump file not found in backups directory.') 
+      exit_with_error!('Dump file not found in backups directory.')
     end
   end
 

@@ -99,10 +99,9 @@ module Document
     end
 
     def media_type_special_case
-      case
-      when @record_presenter.iiif_manifest
+      if @record_presenter.iiif_manifest
         'iiif'
-      when @controller.oembed_html.key?(url)
+      elsif @controller.oembed_html.key?(url)
         'oembed'
       end
     end
@@ -259,11 +258,11 @@ module Document
 
     def playable?
       if url.blank? ||
-          (mime_type.blank? && !playable_without_mime_type?) ||
-          (mime_type == 'video/mpeg') ||
-          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
-          is_avi?
+         (mime_type.blank? && !playable_without_mime_type?) ||
+         (mime_type == 'video/mpeg') ||
+         (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+         (media_type == 'video' && mime_type == 'text/plain; charset=utf-8') ||
+         is_avi?
         false
       else
         true
@@ -276,11 +275,11 @@ module Document
 
     def downloadable?
       if url.blank? ||
-          download_disabled? ||
-          media_type == 'iiif' ||
-          media_type == 'oembed' ||
-          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
-          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
+         download_disabled? ||
+         media_type == 'iiif' ||
+         media_type == 'oembed' ||
+         (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
+         (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
         false
       else
         for_has_view? || for_edm_is_shown_by?
@@ -330,7 +329,7 @@ module Document
       @player ||= begin
         case media_type
         when 'text'
-          (mime_type =~ /\/pdf$/) ? :pdf : :text
+          mime_type.match?(/\/pdf$/) ? :pdf : :text
         else
           media_type.to_sym
         end

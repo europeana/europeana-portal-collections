@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Pagination of JSON API result sets
 #

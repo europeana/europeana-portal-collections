@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveForeignKeys < ActiveRecord::Migration
   def change
     remove_foreign_key 'browse_entries', 'landing_pages'

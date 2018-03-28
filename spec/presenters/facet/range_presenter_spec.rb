@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @todo spec this better when it's actually in use
 RSpec.describe Facet::RangePresenter, presenter: :facet do
   let(:field_name) { 'RANGE_FIELD' }

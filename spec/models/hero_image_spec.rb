@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe HeroImage do
   subject { hero_images(:imageless) }
 
@@ -45,7 +47,7 @@ RSpec.describe HeroImage do
   describe 'dynamic methods' do
     {
       attribution: %w(title creator institution url text),
-      brand: %w(opacity position colour),
+      brand: %w(opacity position colour)
     }.each_pair do |attr, attr_meths|
       attr_meths.each do |meth|
         reader_meth = "settings_#{attr}_#{meth}"

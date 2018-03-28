@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe StoreGalleryAnnotationsJob, :annotations_api do
   let(:gallery) { Gallery.published.first }
 
@@ -25,7 +26,7 @@ RSpec.describe StoreGalleryAnnotationsJob, :annotations_api do
         %(qf=link_resource_uri:"https://www.europeana.eu/portal/explore/galleries/#{gallery.slug}"),
         'qf=motivation:linking',
         'query=*:*',
-        "wskey=#{annotations_api_key}",
+        "wskey=#{annotations_api_key}"
       ].join('&')
 
       expect(a_request(:get, annotations_api_search_method_url).

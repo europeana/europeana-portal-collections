@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # View methods for searching
 module SearchableView

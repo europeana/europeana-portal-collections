@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Facet
   ##
   # Handles facet field and facet item labelling
@@ -219,7 +221,7 @@ module Facet
     #
     # @return [Hash]
     def facet_icon_link
-      labeller[:icon_link].call(@controller) if labeller[:icon_link]
+      labeller[:icon_link]&.call(@controller)
     end
 
     ##

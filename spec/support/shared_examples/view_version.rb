@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'alpha version view', :alpha_version_view do
   it 'should show the alpha flag' do
     render

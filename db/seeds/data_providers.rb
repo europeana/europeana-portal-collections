@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-YAML.load_file(File.expand_path('../data_providers.yml', __FILE__)).each do |data_provider|
+
+YAML.load_file(File.expand_path('data_providers.yml', __dir__)).each do |data_provider|
   puts 'Seeding data provider "' + data_provider[:name].bold + '": '
   if DataProvider.find_by_uri(data_provider[:uri]).present?
     puts '  data provider URI exists; skipping'.yellow

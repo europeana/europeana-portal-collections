@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'explore/new_content.html.mustache', :common_view_components, :stable_version_view do
   let(:providers) do
     time_now = Time.zone.now
@@ -15,7 +17,7 @@ RSpec.describe 'explore/new_content.html.mustache', :common_view_components, :st
 
   it 'should have meta description' do
     render
-    expect(rendered).to have_selector("meta[name=\"description\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="description"]', visible: false)
   end
 
   it 'should display a list of data providers' do

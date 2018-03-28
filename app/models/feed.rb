@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Feed < ActiveRecord::Base
   include HasExternalUrls
 

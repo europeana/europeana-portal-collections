@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLandingPages < ActiveRecord::Migration
   def change
     create_table :landing_pages do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Facet::SimplePresenter, presenter: :facet do
   let(:field_name) { 'SIMPLE_FIELD' }
   let(:field_options) { {} }

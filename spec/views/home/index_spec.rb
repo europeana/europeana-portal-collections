@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'home/index.html.mustache', :common_view_components, :stable_version_view do
   include CollectionsHelper
   include RecordCountsHelper
@@ -29,7 +31,7 @@ RSpec.describe 'home/index.html.mustache', :common_view_components, :stable_vers
 
   it 'should have meta HandheldFriendly' do
     render
-    expect(rendered).to have_selector("meta[name=\"HandheldFriendly\"]", visible: false)
+    expect(rendered).to have_selector('meta[name="HandheldFriendly"]', visible: false)
   end
 
   it 'should have a title "Europeana Collections"' do

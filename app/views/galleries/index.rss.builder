@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 self.class.send(:include, GalleryDisplayingView)
 
 def normalised_gallery_thumbnail(gallery)

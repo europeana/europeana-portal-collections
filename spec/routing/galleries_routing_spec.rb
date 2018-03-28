@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe 'routes for the galleries controller' do
   it 'routes GET /en/explore/galleries to galleries#index' do
     expect(get('/en/explore/galleries')).to route_to('galleries#index', locale: 'en')

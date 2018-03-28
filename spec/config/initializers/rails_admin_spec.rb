@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe RailsAdmin.config do
   describe '#included_models' do
     subject { RailsAdmin.config.included_models }

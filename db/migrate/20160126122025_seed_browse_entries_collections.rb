@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SeedBrowseEntriesCollections < ActiveRecord::Migration
   def up
     execute "INSERT INTO browse_entries_collections (browse_entry_id, collection_id)

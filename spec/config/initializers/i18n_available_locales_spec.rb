@@ -4,7 +4,7 @@ RSpec.describe 'I18n available locales initializer' do
   subject { Rails.application.config.i18n.available_locales }
 
   def read_initializer
-    @file_path ||= File.expand_path('../../../../config/initializers/i18n_available_locales.rb', __FILE__)
+    @file_path ||= File.expand_path('../../../config/initializers/i18n_available_locales.rb', __dir__)
     eval(File.open(File.expand_path(@file_path)).read)
   end
 

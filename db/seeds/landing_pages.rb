@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @return [MediaObject]
 def find_or_download_styleguide_image(path)
   url = "http://styleguide.europeana.eu/images/#{path}"
@@ -105,7 +107,7 @@ unless Page::Landing.find_by_slug('collections/art').present?
           query: 'who:hokusai',
           subject_type: :person,
           media_object: find_or_download_styleguide_image('sample/entry-hokusai-square.jpg')
-        ),
+        )
       ],
       feeds: [
         Feed.find_by_slug('art-blog')

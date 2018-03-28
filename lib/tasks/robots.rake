@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :robots do
   desc 'Disallow robots from crawling this site'
   task disallow: :environment do
@@ -7,7 +9,7 @@ namespace :robots do
 
   desc 'Allow robots to crawl this site'
   task allow: :environment do
-    File.delete(robots_txt_path) if File.exists?(robots_txt_path)
+    File.delete(robots_txt_path) if File.exist?(robots_txt_path)
     puts 'robots.txt deleted to ' + 'allow'.bold + ' crawling.'
   end
 end

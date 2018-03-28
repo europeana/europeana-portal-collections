@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PrefixLandingPageTitlesWithEuropeana < ActiveRecord::Migration
   def up
     Page::Landing.where("slug IS NOT NULL AND slug <> ''").find_each do |page|

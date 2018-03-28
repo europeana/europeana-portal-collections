@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Explore
   class Periods < ApplicationView
     include CollectionFilterableView
@@ -15,7 +16,7 @@ module Explore
           description: t('site.browse.periods.description'),
           browse_entries: @periods.blank? ? nil : {
             items: browse_entry_items(@periods)
-          },
+          }
         }
       end
     end
