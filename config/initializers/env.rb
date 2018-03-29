@@ -39,20 +39,19 @@ Rails.application.config.x.google = OpenStruct.new(
   site_verification: ENV['GOOGLE_SITE_VERIFICATION']
 )
 
-# Disable certain features that are enabled by default
-Rails.application.config.x.disable = OpenStruct.new(
-  view_caching: ENV['DISABLE_VIEW_CACHING']
-)
-
-# Enable certain features that are disabled by default
-Rails.application.config.x.enable = OpenStruct.new(
-  csrf_without_ssl: ENV['ENABLE_CSRF_WITHOUT_SSL'],
-  entity_page_caching: ENV['ENABLE_ENTITY_PAGE_CACHING'],
-  events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
-  gallery_annotations: ENV['ENABLE_GALLERY_ANNOTATIONS'],
-  search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
-  search_form_autocomplete_extended_info: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE_EXTENDED_INFO']
-)
+# Feature toggle to enable/disable certain features
+#
+# Detects any env vars with name starting "ENABLE_" or "DISABLE_", e.g
+# * +ENABLE_THIS=1+ => +Rails.config.x.enable.this+
+# * +DISABLE_THAT=1+ => +Rails.config.x.disable.that+
+%i(disable enable).each do |switch|
+  env_prefix = switch.to_s.upcase + '_'
+  feature_env_vars = ENV.select { |k, v| k.start_with?(env_prefix) }
+  feature_toggles = feature_env_vars.each_with_object({}) do |(k, v), memo|
+                      memo[k.sub(env_prefix, '').downcase.to_sym] = v
+                    end
+  Rails.application.config.x.send("#{switch}=", OpenStruct.new(feature_toggles))
+end
 
 # Environment specific blacklight settings
 Rails.application.config.x.blacklight = OpenStruct.new(

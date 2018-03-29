@@ -92,6 +92,10 @@ class ApplicationView < Europeana::Styleguide::View
     }
   end
 
+  def site_notice
+    config.x.enable.site_notice ? t('site.notice.outage-expected') : false
+  end
+
   protected
 
   def ugc_enabled_collections_js_var_value
