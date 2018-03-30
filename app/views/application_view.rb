@@ -32,7 +32,8 @@ class ApplicationView < Europeana::Styleguide::View
       { name: 'i18nLocale', value: I18n.locale },
       { name: 'i18nDefaultLocale', value: I18n.default_locale },
       { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true },
-      { name: 'googleAnalyticsLinkedDomains', value: google_analytics_linked_domains_js_var_value, unquoted: true }
+      { name: 'googleAnalyticsLinkedDomains', value: google_analytics_linked_domains_js_var_value, unquoted: true },
+      { name: 'siteNotice', value: site_notice }
     ] + super
   end
 
