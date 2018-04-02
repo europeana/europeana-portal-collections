@@ -100,7 +100,7 @@ class ApplicationView < Europeana::Styleguide::View
   protected
 
   def display_site_notice?
-    return false unless %w(1 on true yes).include?(config.x.enable.site_notice)
+    return false unless site_notice_enabled?
     unless site_notice_begin.nil?
       return false unless Time.zone.now >= site_notice_begin
     end
@@ -108,6 +108,10 @@ class ApplicationView < Europeana::Styleguide::View
       return false unless Time.zone.now < site_notice_end
     end
     true
+  end
+
+  def site_notice_enabled?
+    %w(1 on true yes).include?(config.x.enable.site_notice)
   end
 
   def site_notice_begin

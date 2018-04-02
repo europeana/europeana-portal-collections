@@ -35,10 +35,10 @@ module CacheableView
 
   def cache_ttl
     time_now = Time.zone.now
-    if !site_notice_begin.nil? && time_now < site_notice_begin
+    if site_notice_enabled? && !site_notice_begin.nil? && time_now < site_notice_begin
       # Cache until site notice start time
       site_notice_begin.to_i - time_now.to_i
-    elsif !site_notice_end.nil? && time_now < site_notice_end
+    elsif site_notice_enabled? && !site_notice_end.nil? && time_now < site_notice_end
       # Cache until site notice end time
       site_notice_end.to_i - time_now.to_i
     else
