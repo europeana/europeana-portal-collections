@@ -102,11 +102,11 @@ class ApplicationView < Europeana::Styleguide::View
   def display_site_notice?
     return false unless %w(1 on true yes).include?(config.x.enable.site_notice)
     if config.x.schedule.site_notice_begin.present?
-      site_notice_begin = DateTime.parse(config.x.schedule.site_notice_begin)
+      site_notice_begin = Time.zone.parse(config.x.schedule.site_notice_begin)
       return false unless Time.zone.now >= site_notice_begin
     end
     if config.x.schedule.site_notice_end.present?
-      site_notice_end = DateTime.parse(config.x.schedule.site_notice_end)
+      site_notice_end = Time.zone.parse(config.x.schedule.site_notice_end)
       return false unless Time.zone.now < site_notice_end
     end
     true
