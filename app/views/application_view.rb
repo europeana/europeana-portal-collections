@@ -116,12 +116,12 @@ class ApplicationView < Europeana::Styleguide::View
 
   def site_notice_begin
     return nil unless config.x.schedule.site_notice_begin.present?
-    @site_notice_begin ||= DateTime.parse(config.x.schedule.site_notice_begin)
+    @site_notice_begin ||= Time.zone.parse(config.x.schedule.site_notice_begin)
   end
 
   def site_notice_end
     return nil unless config.x.schedule.site_notice_end.present?
-    @site_notice_end ||= DateTime.parse(config.x.schedule.site_notice_end)
+    @site_notice_end ||= Time.zone.parse(config.x.schedule.site_notice_end)
   end
 
   def ugc_enabled_collections_js_var_value
