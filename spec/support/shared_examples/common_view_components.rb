@@ -92,4 +92,26 @@ RSpec.shared_examples 'common view components', :common_view_components do
       expect(rendered).to have_selector('#settings-menu a', text: label)
     end
   end
+
+  describe 'site notice' do
+    context 'when enabled' do
+      before(:each) do
+        Rails.application.config.x.enable.site_notice = '1'
+      end
+      it 'is shown' do
+        render
+        expect(rendered).to have_selector('body > .site-notice .msg', text: I18n.t('site.notice.outage-expected'))
+      end
+    end
+
+    context 'when not enabled' do
+      before(:each) do
+        Rails.application.config.x.enable.site_notice = nil
+      end
+      it 'is not shown' do
+        render
+        expect(rendered).not_to have_selector('.site-notice')
+      end
+    end
+  end
 end
