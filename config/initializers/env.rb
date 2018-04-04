@@ -39,20 +39,28 @@ Rails.application.config.x.google = OpenStruct.new(
   site_verification: ENV['GOOGLE_SITE_VERIFICATION']
 )
 
-# Disable certain features that are enabled by default
-Rails.application.config.x.disable = OpenStruct.new(
-  view_caching: ENV['DISABLE_VIEW_CACHING']
-)
-
-# Enable certain features that are disabled by default
-Rails.application.config.x.enable = OpenStruct.new(
-  csrf_without_ssl: ENV['ENABLE_CSRF_WITHOUT_SSL'],
-  entity_page_caching: ENV['ENABLE_ENTITY_PAGE_CACHING'],
-  events_theme_filter: ENV['ENABLE_EVENTS_THEME_FILTER'],
-  gallery_annotations: ENV['ENABLE_GALLERY_ANNOTATIONS'],
-  search_form_autocomplete: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE'],
-  search_form_autocomplete_extended_info: ENV['ENABLE_SEARCH_FORM_AUTOCOMPLETE_EXTENDED_INFO']
-)
+# Grouped configuration settings
+#
+# Detects env vars with common prefixes and groups them into structured config
+# settings.
+#
+# Prefixes:
+# * "DISABLE_": toggles for features enabled by default
+# * "ENABLE_": toggles for features disabled by default
+# * "SCHEDULE_": scheduling configuration
+#
+# Examples:
+# * +DISABLE_THAT=1+ => +Rails.config.x.disable.that+
+# * +ENABLE_THIS=1+ => +Rails.config.x.enable.this+
+# * +SCHEDULE_TASK="18:00"+ => +Rails.config.x.schedule.task+
+%i(disable enable schedule).each do |group|
+  env_prefix = group.to_s.upcase + '_'
+  group_env_vars = ENV.select { |k, v| k.start_with?(env_prefix) }
+  group_settings = group_env_vars.each_with_object({}) do |(k, v), memo|
+                     memo[k.sub(env_prefix, '').downcase.to_sym] = v
+                   end
+  Rails.application.config.x.send("#{group}=", OpenStruct.new(group_settings))
+end
 
 # Environment specific blacklight settings
 Rails.application.config.x.blacklight = OpenStruct.new(
