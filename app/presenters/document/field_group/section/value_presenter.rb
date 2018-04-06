@@ -142,7 +142,15 @@ module Document
         end
 
         def htmlify_line_breaks(text)
-          CGI.escapeHTML(text).gsub(/(\r\n|\r|\n)/, '<br/>').html_safe
+          if text.is_a?(HashWithIndifferentAccess)
+            text.each_with_object({}) do |(k, v), hash|
+              hash[k] = htmlify_line_breaks(v)
+            end
+          elsif text.is_a?(Array)
+            text.map { |v| htmlify_line_breaks(v) }
+          else
+            CGI.escapeHTML(text).gsub(/(\r\n|\r|\n)/, '<br/>').html_safe
+          end
         end
 
         def excluded?
