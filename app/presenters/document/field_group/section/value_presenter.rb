@@ -133,7 +133,7 @@ module Document
         end
 
         def text
-          text = content.dup
+          text = content.dup.to_s
           text = section.translate_value(text)
           text = text.titleize if text.present? && section.capitalised?
           text = format_date(text, section.format_date) if section.format_date?
@@ -142,15 +142,7 @@ module Document
         end
 
         def htmlify_line_breaks(text)
-          if text.is_a?(HashWithIndifferentAccess)
-            text.each_with_object({}) do |(k, v), hash|
-              hash[k] = htmlify_line_breaks(v)
-            end
-          elsif text.is_a?(Array)
-            text.map { |v| htmlify_line_breaks(v) }
-          else
-            CGI.escapeHTML(text).gsub(/(\r\n|\r|\n)/, '<br/>').html_safe
-          end
+          CGI.escapeHTML(text).gsub(/(\r\n|\r|\n)/, '<br/>').html_safe
         end
 
         def excluded?
