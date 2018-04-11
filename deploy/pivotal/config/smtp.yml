@@ -1,6 +1,0 @@
-production:
-  address: <%= ENV['SMTP_HOST'] %>
-  port: <%= ENV['SMTP_PORT'] %>
-  user_name: <%= ENV['SMTP_USER'] %>
-  password: <%= ENV['SMTP_PASS'] %>
-  enable_starttls_auto: <%= ENV['SMTP_TLS'] %>
