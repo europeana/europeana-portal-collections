@@ -236,8 +236,8 @@ module Document
         -> { for_edm_is_shown_by? ? true : nil },
         # TRUE if for a hasView and MIME type is known
         -> { for_has_view? && mime_type.present? ? true : nil },
-        # TRUE if for an oEmbed
-        -> { media_type == 'oembed' ? true : nil },
+        # TRUE if playable without mime TYPE, e.g. oEmbed or IIIF
+        -> { playable_without_mime_type? ? true : nil },
         # FALSE otherwise
         -> { false }
       ]
