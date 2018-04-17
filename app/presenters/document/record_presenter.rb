@@ -106,7 +106,14 @@ module Document
     end
 
     def media_rights
-      @media_rights ||= field_value('aggregations.edmRights')
+      @media_rights ||= begin
+        dc_rights = field_value('proxies.dcRights')
+        if dc_rights.is_a?(String) && dc_rights.start_with?('http://rightsstatements.org/page/')
+          dc_rights
+        else
+          field_value('aggregations.edmRights')
+        end
+      end
     end
 
     def field_group(id)
