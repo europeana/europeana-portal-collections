@@ -7,8 +7,8 @@ class DataProviderLogo < ActiveRecord::Base
 
   has_attached_file :image,
                     styles: { medium: "#{MIN_WIDTH}>" },
-                    path: ':path_prefix/:class/:data_provider_org_id.:style.:extension',
-                    url: ':url_prefix/:class/:data_provider_org_id.:style.:extension'
+                    path: ':path_prefix:class/:data_provider_org_id.:style.:extension',
+                    url: ':url_prefix:class/:data_provider_org_id.:style.:extension'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
   attr_accessor :delete_image
