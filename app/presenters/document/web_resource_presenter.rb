@@ -329,7 +329,7 @@ module Document
       @player ||= begin
         case media_type
         when 'text'
-          mime_type.match?(/\/pdf$/) ? :pdf : :text
+          mime_type&.match?(/\/pdf$/) ? :pdf : :text
         else
           media_type.to_sym
         end
