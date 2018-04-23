@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePageElements < ActiveRecord::Migration
   def change
     create_table :page_elements do |t|
@@ -8,7 +10,7 @@ class CreatePageElements < ActiveRecord::Migration
     end
 
     add_foreign_key :page_elements, :pages
-    add_index :page_elements, [:positionable_id, :positionable_type]
+    add_index :page_elements, %i(positionable_id positionable_type)
     add_index :page_elements, :position
 
     reversible do |dir|

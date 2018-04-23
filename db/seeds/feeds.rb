@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 unless Feed.find_by_slug('all-blog').present?
   Feed.create!(
     name: 'All Blog',

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 xml.instruct!
 xml.rss(version: '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom') do
   xml.channel do

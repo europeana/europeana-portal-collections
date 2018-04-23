@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # For views needing to display `BrowseEntry` objects
 module BrowseEntryDisplayingView
@@ -25,7 +27,10 @@ module BrowseEntryDisplayingView
   ##
   # @param page [Page]
   def browse_entry_items_grouped(browse_entries, page = nil)
-    grouped_items, type1, type2, type3 = [], [], [], []
+    grouped_items = []
+    type1 = []
+    type2 = []
+    type3 = []
 
     more_links = [explore_people_path(theme: collection.key), explore_topics_path(theme: collection.key), explore_periods_path(theme: collection.key)]
     more_link_texts = [t('global.navigation.more.agents'), t('global.navigation.more.topics'), t('global.navigation.more.periods')]
@@ -52,7 +57,7 @@ module BrowseEntryDisplayingView
       no_of_item_types += 1
     end
 
-    return {
+    {
       grouped_items: grouped_items,
       is_single_type: no_of_item_types == 1
     }

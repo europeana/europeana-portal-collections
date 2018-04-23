@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Banner do
   it { is_expected.to have_one(:link).dependent(:destroy) }
   it { is_expected.to have_many(:pages).dependent(:nullify).inverse_of(:banner) }

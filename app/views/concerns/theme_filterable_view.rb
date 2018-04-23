@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Filtering by theme
 module ThemeFilterableView

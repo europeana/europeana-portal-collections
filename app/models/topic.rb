@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Topic < ActiveRecord::Base
   has_many :categorisations, inverse_of: :topic, dependent: :destroy
 

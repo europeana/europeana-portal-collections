@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AssociateGalleryWithCollection < ActiveRecord::Migration
   def change
     create_table :collections_galleries do |t|

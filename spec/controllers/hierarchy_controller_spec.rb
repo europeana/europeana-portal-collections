@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe HierarchyController do
   %w(self parent children preceding_siblings following_siblings ancestor_self_siblings).each do |action|
     context 'when format is JSON' do

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Document
   module Metadata
     module Rights

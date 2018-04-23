@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PopulateHomeLandingPageStrapline < ActiveRecord::Migration
   def up
     home = Page::Landing.find_by_slug('')

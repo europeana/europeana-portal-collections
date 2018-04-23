@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'views/concerns/paginated_view_examples'
 
 RSpec.describe 'portal/index.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do

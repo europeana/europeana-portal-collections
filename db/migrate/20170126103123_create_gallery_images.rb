@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateGalleryImages < ActiveRecord::Migration
   def change
     create_table :gallery_images do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Just dumps out the response from the REST API hierarchy methods
 class HierarchyController < ApplicationController

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 ##
 # Views with news from feeds
 module NewsworthyView
-
   protected
 
   def news_items(items)

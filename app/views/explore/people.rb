@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Explore
   class People < ApplicationView
     include CollectionFilterableView
@@ -14,7 +16,7 @@ module Explore
           description: t('site.browse.people.description'),
           browse_entries: @people.blank? ? nil : {
             items: browse_entry_items(@people)
-          },
+          }
         }
       end
     end

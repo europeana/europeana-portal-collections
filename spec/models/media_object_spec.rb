@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe MediaObject do
   it 'has Paperclip attachment' do
     expect(Paperclip::AttachmentRegistry.instance.names_for(described_class)).

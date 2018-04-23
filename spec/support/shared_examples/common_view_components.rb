@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'common view components', :common_view_components do
   let(:available_locales) do
     I18n.available_locales

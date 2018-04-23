@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ##
 # Controller methods for redirecting to HTML format if none specified
 #

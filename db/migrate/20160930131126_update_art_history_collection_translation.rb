@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateArtHistoryCollectionTranslation < ActiveRecord::Migration
   def up
     Collection.connection.execute("UPDATE collection_translations SET title = 'Art' WHERE title ='Art History'")

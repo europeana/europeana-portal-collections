@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDataProviderLogos < ActiveRecord::Migration
   def change
     create_table :data_provider_logos do |t|

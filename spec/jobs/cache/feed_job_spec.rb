@@ -10,23 +10,23 @@ RSpec.describe Cache::FeedJob do
 
   let(:url) { feeds(:all_blog).url }
   let(:rss_body) do
-    <<-END
-<?xml version="1.0"?>
-<rss version="2.0">
-  <channel>
-    <title>Example Channel</title>
-    <link>http://example.com/</link>
-    <description>My example channel</description>
-    <lastBuildDate>Mon, 22 May 2017 00:00:00 +0000</lastBuildDate>
-    <item>
-       <title>Example item</title>
-       <link>http://example.com/item</link>
-       <description>About the example item...</description>
-       <content:encoded><![CDATA[<img src="http://www.example.com/image.png"/>]]></content:encoded>
-       <pubDate>Mon, 22 May 2017 00:00:00 +0000</pubDate>
-    </item>
-  </channel>
-</rss>
+    <<~END
+      <?xml version="1.0"?>
+      <rss version="2.0">
+        <channel>
+          <title>Example Channel</title>
+          <link>http://example.com/</link>
+          <description>My example channel</description>
+          <lastBuildDate>Mon, 22 May 2017 00:00:00 +0000</lastBuildDate>
+          <item>
+             <title>Example item</title>
+             <link>http://example.com/item</link>
+             <description>About the example item...</description>
+             <content:encoded><![CDATA[<img src="http://www.example.com/image.png"/>]]></content:encoded>
+             <pubDate>Mon, 22 May 2017 00:00:00 +0000</pubDate>
+          </item>
+        </channel>
+      </rss>
     END
   end
   let(:cache_key) { "feed/#{url}" }

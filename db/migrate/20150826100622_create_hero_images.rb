@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHeroImages < ActiveRecord::Migration
   def change
     create_table :hero_images do |t|

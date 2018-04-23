@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Pro::BlogPost, :disable_verify_partial_doubles do
   it { is_expected.to be_a(Pro::Base) }
 

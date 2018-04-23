@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 shared_examples_for 'paginated_view' do
   describe 'view class' do
     subject { view_class }

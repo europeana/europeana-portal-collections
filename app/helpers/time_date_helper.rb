@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TimeDateHelper
   def unix_time_to_local(unix_time)
     utc_date_time = Time.at(unix_time / 1000).utc.to_datetime

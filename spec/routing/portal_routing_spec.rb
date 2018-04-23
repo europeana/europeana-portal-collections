@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'routes for the portal controller' do
   it 'routes GET /en/search to portal#index' do
     expect(get('/en/search')).to route_to('portal#index', locale: 'en')

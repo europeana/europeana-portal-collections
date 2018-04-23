@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pro
   ##
   # "Blog events" from Pro JSON API.

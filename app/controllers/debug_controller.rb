@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DebugController < ApplicationController
   ##
   # Triggers an exception for testing error reporting environments
