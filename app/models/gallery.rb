@@ -29,7 +29,7 @@ class Gallery < ActiveRecord::Base
 
   validate :validate_image_portal_urls
   validate :validate_number_of_image_portal_urls
-  # @todo move this into a configurable class method in `IsCategorisable`
+  # TODO: move this into a configurable class method in `IsCategorisable`
   validate :validate_number_of_categorisations
   validate :validate_image_source_items
 
@@ -142,22 +142,15 @@ class Gallery < ActiveRecord::Base
   # This validation will exit early if any other problems are observed with
   # the `image_portal_urls`, leaving this costly validation until the URLs are
   # otherwise valid.
-  #
-  # @todo these validations and others on image_portal_urls belong in `GalleryImage`
   def validate_image_source_items
     return if errors[:image_portal_urls].any?
 
-    allowed_types = %w(IMAGE TEXT)
     record_id_url_pairs.each_pair do |url, record_id|
       item = response_items.detect { |response_item| response_item['id'] == record_id }
-      if item.blank?
-        errors.add(:image_portal_urls, %(item not found by the API: "#{url}"))
-      else
-        unless item['edmIsShownBy'].present?
-          errors.add(:image_portal_urls, %(item has no edm:isShownBy: "#{url}"))
-        end
-        unless allowed_types.include?(item['type'])
-          errors.add(:image_portal_urls, %(item has type "#{item['type']}", not #{allowed_types.join(' or ')}: "#{url}"))
+      GalleryImage.new(url: url, europeana_record_id: record_id, source: item).tap do |image|
+        image.validate_source
+        image.errors[:source].each do |source_error|
+          errors.add(:image_portal_urls, source_error)
         end
       end
     end
