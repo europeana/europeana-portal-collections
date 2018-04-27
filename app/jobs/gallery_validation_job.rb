@@ -11,52 +11,29 @@ class GalleryValidationJob < ApplicationJob
 
     @gallery = Gallery.find(gallery_id)
     @validation_errors = {}
-    @gallery.images.each do |gallery_image|
-      validate_gallery_image(gallery_image)
-    end
 
-    notify if @validation_errors.present?
+    validate_gallery_image_portal_urls
+
+    if @validation_errors.present?
+      # TODO: record errors on @gallery
+      notify
+    else
+      @gallery.set_images_from_portal_urls if @gallery.image_portal_urls?
+      # TODO: annotations...?
+    end
   end
 
   private
 
-  def validate_gallery_image(gallery_image)
-    errors = []
-    europeana_id = gallery_image.europeana_record_id
-    stored_image_url = gallery_image.url
-    api_document = api_search_response.detect { |record| record['id'] == europeana_id }
-    if api_document
-      unless api_document['edmIsShownBy']&.first == stored_image_url
-        errors << 'edm:isShownBy has changed'
+  def validate_gallery_image_portal_urls
+    @gallery.enumerable_image_portal_urls.each do |url|
+      image = GalleryImage.from_portal_url(url)
+      image.gallery = @gallery
+      image.validating_with(:http_response, :europeana_record_api) do
+        image.validate
+        @validation_errors[url] = image.errors.messages.values.flatten if image.errors.present?
       end
-      unless retrievable_image?(stored_image_url)
-        errors << "can not retrieve #{stored_image_url}"
-      end
-    else
-      errors << 'record not found on API; it may have been deleted'
     end
-    @validation_errors[europeana_id] = errors if errors.present?
-  end
-
-  def api_search_response
-    @api_search_response ||= begin
-      api_query = Europeana::Record.search_api_query_for_record_ids(@gallery.images.map(&:europeana_record_id))
-      Europeana::API.record.search(query: api_query, profile: 'rich', rows: 100)['items'] || []
-    end
-  end
-
-  def retrievable_image?(is_shown_by)
-    response = download_response(is_shown_by)
-    return false unless response
-    content_type = response.headers[:content_type]
-    return false unless content_type&.start_with?('image')
-    true
-  end
-
-  def download_response(url)
-    RestClient.get(url)
-  rescue ::RestClient::ExceptionWithResponse
-    false
   end
 
   def notify

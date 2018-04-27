@@ -4,6 +4,7 @@ class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..48
 
   include Gallery::Annotations
+  # TODO: prevent publishing unless images are present
   include HasPublicationStates
   include IsCategorisable
   include IsPermissionable
@@ -31,23 +32,14 @@ class Gallery < ActiveRecord::Base
   validate :validate_number_of_image_portal_urls
   # TODO: move this into a configurable class method in `IsCategorisable`
   validate :validate_number_of_categorisations
-  validate :validate_image_source_items
 
   acts_as_url :title, url_attribute: :slug, only_when_blank: true,
                       allow_duplicates: false
 
   default_scope { includes(:translations) }
 
-  before_save :ensure_unique_title, :clear_api_responses
-  after_save :set_images_from_portal_urls, :enqueue_gallery_validation_job
-
-  after_save :store_annotations, if: :store_annotations_after_save?
-  after_save :destroy_annotations, if: :destroy_annotations_after_save?
-  after_destroy :destroy_annotations, if: :annotate_records?
-
-  attr_writer :image_portal_urls
-
-  delegate :annotate_records?, to: :class
+  before_save :ensure_unique_title
+  after_save :enqueue_gallery_validation_job
 
   ##
   # Constructs a Search API query for al set of gallery images.
@@ -56,24 +48,16 @@ class Gallery < ActiveRecord::Base
   # @return [String]
   # @see Europeana::Record.search_api_query_for_record_ids
   class << self
+    # TODO: consider how this is affected by hasView support...
     def search_api_query_for_images(images)
       Europeana::Record.search_api_query_for_record_ids(images.map(&:europeana_record_id))
-    end
-
-    # Should we write annotations to the Europeana Annotations API linking records
-    # to the galleries they are included in?
-    #
-    # @return [Boolean]
-    def annotate_records?
-      Rails.application.config.x.europeana[:annotations].api_user_token_gallery.present? &&
-        Rails.application.config.x.enable.gallery_annotations.present?
     end
   end
 
   # Double newline separated list of image record URLs for use in a textarea
   # input field in the CMS.
   def image_portal_urls
-    @image_portal_urls ||= images.map(&:portal_url).join("\n\n")
+    super || images.map(&:portal_url).join("\n\n")
   end
 
   def search_api_query_for_images
@@ -84,33 +68,32 @@ class Gallery < ActiveRecord::Base
     slug
   end
 
+  def enumerable_image_portal_urls
+    image_portal_urls.strip.split(/\s+/).compact
+  end
+
   protected
 
-  # Create/update/delete images from a newline separated list of record URLs,
-  # to set images and their positioning from a space-separated list of URLs,
-  # as would come from a textarea input field in the CMS.
+  # Create/update/delete images from portal URLs in +image_portal_urls+.
+  #
+  # This is *not* called during +Gallery+ persistence, as thorough validation
+  # needs first to be performed in the background, via +
   def set_images_from_portal_urls
     transaction do
-      enumerable_image_portal_urls.map { |url| Europeana::Record.id_from_portal_url(url) }.tap do |record_ids|
-        matched_ids = []
-        record_ids.each_with_index do |record_id, i|
-          image_url = response_items.detect { |record| record['id'] == record_id }['edmIsShownBy'].first
-          GalleryImage.find_or_create_by(gallery: self, europeana_record_id: record_id, url: image_url).tap do |image|
-            image.update_attributes(position: i + 1)
-            matched_ids << image.id
-          end
+      associated_image_ids = []
+      enumerable_image_portal_urls.each_with_index do |portal_url, i|
+        GalleryImage.find_or_create_from_portal_url(portal_url, gallery: self).tap do |image|
+          image.update_attributes(position: i + 1)
+          associated_image_ids << image.id
         end
-        images.where.not(id: matched_ids).delete_all
       end
+      images.where.not(id: associated_image_ids).delete_all
+      update_attribute(image_portal_urls: nil)
     end
   end
 
   def enqueue_gallery_validation_job
     GalleryValidationJob.perform_later(id)
-  end
-
-  def enumerable_image_portal_urls
-    image_portal_urls.strip.split(/\s+/).compact
   end
 
   def validate_image_portal_urls
@@ -129,48 +112,6 @@ class Gallery < ActiveRecord::Base
     end
   end
 
-  # This validator will make a Europeana Search API request to check that all
-  # records coming from `image_portal_urls` meet certain minimum criteria:
-  # * is returned by the API
-  # * has an edm:isShownBy
-  # * has type="IMAGE" or "TEXT"
-  # Records not meeting these will be invalid.
-  #
-  # While is is not ideal making HTTP requests here in the model, we need
-  # to prevent creation of galleries not having displayable media.
-  #
-  # This validation will exit early if any other problems are observed with
-  # the `image_portal_urls`, leaving this costly validation until the URLs are
-  # otherwise valid.
-  def validate_image_source_items
-    return if errors[:image_portal_urls].any?
-
-    record_id_url_pairs.each_pair do |url, record_id|
-      item = response_items.detect { |response_item| response_item['id'] == record_id }
-      GalleryImage.new(url: url, europeana_record_id: record_id, source: item).tap do |image|
-        image.validate_source
-        image.errors[:source].each do |source_error|
-          errors.add(:image_portal_urls, source_error)
-        end
-      end
-    end
-  end
-
-  def response_items
-    @response_items ||= begin
-      api_query = Europeana::Record.search_api_query_for_record_ids(record_id_url_pairs.values)
-      Europeana::API.record.search(query: api_query, profile: 'rich', rows: 100)['items'] || []
-    end
-  end
-
-  def record_id_url_pairs
-    @record_id_url_pairs ||= begin
-      enumerable_image_portal_urls.each_with_object({}) do |url, map|
-        map[url] = Europeana::Record.id_from_portal_url(url)
-      end
-    end
-  end
-
   def ensure_unique_title
     i = 0
     unique_title = title
@@ -179,11 +120,6 @@ class Gallery < ActiveRecord::Base
       unique_title = "#{title} #{i}"
     end
     self.title = unique_title
-  end
-
-  def clear_api_responses
-    @record_id_url_pairs = nil
-    @response_items = nil
   end
 
   def validate_number_of_categorisations
@@ -201,23 +137,5 @@ class Gallery < ActiveRecord::Base
       end
       save
     end
-  end
-
-  private
-
-  def store_annotations
-    StoreGalleryAnnotationsJob.perform_later(slug)
-  end
-
-  def destroy_annotations
-    StoreGalleryAnnotationsJob.perform_later(slug, delete_all: true)
-  end
-
-  def store_annotations_after_save?
-    published? && annotate_records?
-  end
-
-  def destroy_annotations_after_save?
-    !published? && annotate_records?
   end
 end

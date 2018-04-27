@@ -175,45 +175,45 @@ RSpec.describe Gallery do
     end
   end
 
-  describe 'per-image API response validation' do
-    context 'when image_portal_urls has other errors' do
-      it 'is skipped' do
-        gallery = Gallery.new
-        gallery.valid?
-        expect(gallery.errors[:image_portal_urls]).not_to be_none
-        expect(an_api_search_request).not_to have_been_made
-      end
-    end
+#   describe 'per-image API response validation' do
+#     context 'when image_portal_urls has other errors' do
+#       it 'is skipped' do
+#         gallery = Gallery.new
+#         gallery.valid?
+#         expect(gallery.errors[:image_portal_urls]).not_to be_none
+#         expect(an_api_search_request).not_to have_been_made
+#       end
+#     end
 
-    context 'when image_portal_urls has no other errors' do
-      it 'is performed' do
-        gallery = galleries(:empty)
-        gallery.image_portal_urls = gallery_image_portal_urls
-        expect(gallery).to be_valid
-        expect(an_api_search_request).to have_been_made.once
-      end
+#     context 'when image_portal_urls has no other errors' do
+#       it 'is performed' do
+#         gallery = galleries(:empty)
+#         gallery.image_portal_urls = gallery_image_portal_urls
+#         expect(gallery).to be_valid
+#         expect(an_api_search_request).to have_been_made.once
+#       end
 
-      context 'when images have no item in API response' do
-        let(:gallery_image_search_api_response_options) { { item: false } }
-        it 'is invalid' do
-          gallery = galleries(:empty)
-          gallery.image_portal_urls = gallery_image_portal_urls
-          expect(gallery).not_to be_valid
-          expect(gallery.errors[:image_portal_urls]).not_to be_none
-          expect(gallery.errors[:image_portal_urls]).to include(match('item not found by the API'))
-        end
-      end
+#       context 'when images have no item in API response' do
+#         let(:gallery_image_search_api_response_options) { { item: false } }
+#         it 'is invalid' do
+#           gallery = galleries(:empty)
+#           gallery.image_portal_urls = gallery_image_portal_urls
+#           expect(gallery).not_to be_valid
+#           expect(gallery.errors[:image_portal_urls]).not_to be_none
+#           expect(gallery.errors[:image_portal_urls]).to include(match('item not found by the API'))
+#         end
+#       end
 
-      context 'when items in API response have no edm:isShownBy' do
-        let(:gallery_image_search_api_response_options) { { edm_is_shown_by: false } }
-        it 'is invalid' do
-          gallery = galleries(:empty)
-          gallery.image_portal_urls = gallery_image_portal_urls
-          expect(gallery).not_to be_valid
-          expect(gallery.errors[:image_portal_urls]).not_to be_none
-          expect(gallery.errors[:image_portal_urls]).to include(match('item has no edm:isShownBy'))
-        end
-      end
-    end
-  end
+#       context 'when items in API response have no edm:isShownBy' do
+#         let(:gallery_image_search_api_response_options) { { edm_is_shown_by: false } }
+#         it 'is invalid' do
+#           gallery = galleries(:empty)
+#           gallery.image_portal_urls = gallery_image_portal_urls
+#           expect(gallery).not_to be_valid
+#           expect(gallery.errors[:image_portal_urls]).not_to be_none
+#           expect(gallery.errors[:image_portal_urls]).to include(match('item has no edm:isShownBy'))
+#         end
+#       end
+#     end
+#   end
 end
