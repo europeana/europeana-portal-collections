@@ -39,7 +39,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
 
   def create_annotations
     gallery.images.each do |image|
-      next if existing_annotation_targets.include?(image.annotation_target_uri)
+      next if existing_annotation_targets.include?(image.annotation_target)
       logger.info("Creating annotation linking #{image.annotation_target_uri} to #{gallery.annotation_link_resource_uri}".green.bold)
       image.annotation.tap do |annotation|
         annotation.api_user_token = gallery.annotation_api_user_token

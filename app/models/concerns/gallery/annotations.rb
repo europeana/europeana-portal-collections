@@ -6,10 +6,10 @@ class Gallery
     extend ActiveSupport::Concern
 
     included do
-      after_save :store_annotations, if: :store_annotations_after_save?
-      after_save :destroy_annotations, if: :destroy_annotations_after_save?
-
       after_destroy :destroy_annotations, if: :annotate_records?
+
+      set_callback :set_images, :after, :store_annotations, if: :store_annotations_after_set_images?
+      set_callback :set_images, :after, :destroy_annotations, if: :destroy_annotations_after_set_images?
 
       delegate :annotate_records?, to: :class
     end
@@ -56,8 +56,6 @@ class Gallery
       Rails.application.config.x.europeana[:annotations].api_user_token_gallery || ''
     end
 
-    private
-
     def store_annotations
       StoreGalleryAnnotationsJob.perform_later(slug)
     end
@@ -66,11 +64,11 @@ class Gallery
       StoreGalleryAnnotationsJob.perform_later(slug, delete_all: true)
     end
 
-    def store_annotations_after_save?
+    def store_annotations_after_set_images?
       published? && annotate_records?
     end
 
-    def destroy_annotations_after_save?
+    def destroy_annotations_after_set_images?
       !published? && annotate_records?
     end
   end

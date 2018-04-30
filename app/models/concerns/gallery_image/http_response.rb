@@ -4,6 +4,7 @@ class GalleryImage
   module HTTPResponse
     extend ActiveSupport::Concern
 
+    include MediaProxyHelper
     include MayValidateMayNot
 
     included do
@@ -31,23 +32,13 @@ class GalleryImage
     #
     # @param force Force re-requesting the HTTP response.
     # @return [RestClient::Response] The HTTP response, or nil if not retrievable.
-    #
-    # TODO: use the media proxy?
     def http_response(force: false)
       return @http_response unless force || !instance_variable_defined?(:@http_response)
 
-      method = :head
-      begin
-        @http_response = RestClient.send(method, url)
-      rescue ::RestClient::ExceptionWithResponse
-        if method == :get
-          @http_response = nil
-        else
-          method = :get
-          retry
-        end
-      end
+      http_url = media_proxy_url(europeana_record_id, url)
 
+      @http_response = Faraday.head(http_url)
+      @http_response = Faraday.get(http_url) unless @http_response.success?
       @http_response
     end
   end

@@ -10,16 +10,17 @@ class GalleryValidationJob < ApplicationJob
     fail 'No gallery validation email set.' unless Rails.application.config.x.gallery_validation_mail_to
 
     @gallery = Gallery.find(gallery_id)
+    @images = []
     @validation_errors = {}
 
     validate_gallery_image_portal_urls
 
     if @validation_errors.present?
-      # TODO: record errors on @gallery
+      @gallery.update_attribute(:image_errors, @validation_errors)
       notify
     else
-      @gallery.set_images_from_portal_urls if @gallery.image_portal_urls?
-      # TODO: annotations...?
+      @gallery.set_images(@images)
+      @gallery.update_attribute(:image_errors, nil)
     end
   end
 
@@ -33,6 +34,7 @@ class GalleryValidationJob < ApplicationJob
         image.validate
         @validation_errors[url] = image.errors.messages.values.flatten if image.errors.present?
       end
+      @images.push(image)
     end
   end
 

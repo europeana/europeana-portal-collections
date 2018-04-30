@@ -14,7 +14,7 @@ module Europeana
         {
           qf: [
             %(generator_name:#{annotations_api_generator_name}),
-            %(target_uri:"#{annotation_target_uri}")
+            %(target_record_id:"#{id}")
           ]
         }
       end

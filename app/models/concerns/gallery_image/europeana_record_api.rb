@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class GalleryImage
-  # TODO: does any of this belong in the API gem instead? e.g. +#europeana_record_rdf+
+  # TODO: does any of this belong in the API gem instead? e.g. +#europeana_record_rdf+,
+  #       +europeana_record_api_json_ld_uri+
   module EuropeanaRecordAPI
     extend ActiveSupport::Concern
 
@@ -22,13 +23,14 @@ class GalleryImage
       def from_portal_url(portal_url)
         europeana_record_id = Europeana::Record.id_from_portal_url(portal_url)
         portal_url_query = Rack::Utils.parse_query(URI.parse(portal_url).query)
-        url = portal_url_query.nil? ? nil : portal_url_query['view']
+        url = portal_url_query.nil? || portal_url_query['view'].nil? ? nil : CGI.unescape(portal_url_query['view'])
         new(europeana_record_id: europeana_record_id, url: url)
       end
 
       def find_or_create_from_portal_url(portal_url, **options)
         tmp_image = from_portal_url(portal_url)
-        options.merge!(europeana_record_id: tmp_image.europeana_record_id, url: tmp_image.url)
+        options[:europeana_record_id] = tmp_image.europeana_record_id
+        options[:url] = tmp_image.url
         find_or_create_by(options)
       end
     end
@@ -68,9 +70,6 @@ class GalleryImage
     # URI to query the Record API for the record's JSON-LD
     #
     # @return [URI]
-    #
-    # TODO: does this need to observe +api_url+ overriden in the request parameters?
-    # TODO: use API gem, updated for JSON-LD support?
     def europeana_record_api_json_ld_uri
       URI.parse(Europeana::API.url).tap do |uri|
         uri.path = "/api/v2/record#{europeana_record_id}.json-ld"
@@ -78,19 +77,26 @@ class GalleryImage
       end
     end
 
-    # Web resource URIs from the Europeana record
+    # edm:isShownBy URI from the Europeana record
+    #
+    # @return [RDF::URI]
+    def europeana_record_edm_is_shown_by_uri
+      europeana_record_rdf&.query(predicate: RDF::Vocab::EDM.isShownBy)&.first&.object
+    end
+
+    # edm:hasView URIs from the Europeana record
     #
     # @return [Array<RDF::URI>]
-    def europeana_record_web_resource_uris
-      europeana_record_rdf&.query(predicate: RDF.type, object: RDF::Vocab::EDM.WebResource)&.map(&:subject)
+    def europeana_record_edm_has_view_uris
+      europeana_record_rdf&.query(predicate: RDF::Vocab::EDM.hasView)&.map(&:object)
     end
 
     # Validates that the +url+ is equivalent to one of the web resource URIs in
-    # the Record API's response for 
+    # the Record API's response for
     def validate_europeana_record_web_resource
-      return if europeana_record_web_resource_uris.blank?
-      unless europeana_record_web_resource_uris.include?(rdf_uri)
-        errors.add(:url, %(Record "#{europeana_record_id}" has no web resource "#{url}"))
+      unless rdf_uri == europeana_record_edm_is_shown_by_uri ||
+             europeana_record_edm_has_view_uris.include?(rdf_uri)
+        errors.add(:url, %(Record "#{europeana_record_id}" has no edm:isShownBy or edm:hasView with URI "#{url}"))
       end
     end
 

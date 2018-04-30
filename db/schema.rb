@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427125141) do
+ActiveRecord::Schema.define(version: 20180430075313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(version: 20180427125141) do
     t.datetime "published_at"
     t.integer  "published_by"
     t.text     "image_portal_urls"
+    t.json     "image_errors"
   end
 
   add_index "galleries", ["published_by"], name: "index_galleries_on_published_by", using: :btree

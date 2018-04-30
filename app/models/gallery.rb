@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# TODO: prevent running of Cache::Expiry::GlobalNavJob til after set_images
 class Gallery < ActiveRecord::Base
   NUMBER_OF_IMAGES = 6..48
+
+  define_callbacks :set_images
 
   include Gallery::Annotations
   # TODO: prevent publishing unless images are present
@@ -39,7 +42,15 @@ class Gallery < ActiveRecord::Base
   default_scope { includes(:translations) }
 
   before_save :ensure_unique_title
-  after_save :enqueue_gallery_validation_job
+  after_save :enqueue_gallery_validation_job, if: :image_portal_urls_changed?
+
+  after_initialize do
+    if image_errors.present?
+      image_errors.values.flatten.each do |err|
+        errors.add(:image_portal_urls, err)
+      end
+    end
+  end
 
   ##
   # Constructs a Search API query for al set of gallery images.
@@ -48,16 +59,9 @@ class Gallery < ActiveRecord::Base
   # @return [String]
   # @see Europeana::Record.search_api_query_for_record_ids
   class << self
-    # TODO: consider how this is affected by hasView support...
     def search_api_query_for_images(images)
       Europeana::Record.search_api_query_for_record_ids(images.map(&:europeana_record_id))
     end
-  end
-
-  # Double newline separated list of image record URLs for use in a textarea
-  # input field in the CMS.
-  def image_portal_urls
-    super || images.map(&:portal_url).join("\n\n")
   end
 
   def search_api_query_for_images
@@ -72,25 +76,28 @@ class Gallery < ActiveRecord::Base
     image_portal_urls.strip.split(/\s+/).compact
   end
 
-  protected
-
-  # Create/update/delete images from portal URLs in +image_portal_urls+.
+  # Create/update/delete images
   #
   # This is *not* called during +Gallery+ persistence, as thorough validation
-  # needs first to be performed in the background, via +
-  def set_images_from_portal_urls
-    transaction do
-      associated_image_ids = []
-      enumerable_image_portal_urls.each_with_index do |portal_url, i|
-        GalleryImage.find_or_create_from_portal_url(portal_url, gallery: self).tap do |image|
-          image.update_attributes(position: i + 1)
-          associated_image_ids << image.id
+  # needs first to be performed in the background, via +GalleryValidationJob+.
+  #
+  # @param gallery_images [Array<GalleryImage>]
+  def set_images(gallery_images)
+    run_callbacks :set_images do
+      transaction do
+        associated_image_ids = []
+        gallery_images.each_with_index do |gallery_image, i|
+          GalleryImage.find_or_create_from_portal_url(gallery_image.portal_url, gallery: self).tap do |image|
+            image.update_attributes(position: i + 1)
+            associated_image_ids << image.id
+          end
         end
+        images.where.not(id: associated_image_ids).delete_all
       end
-      images.where.not(id: associated_image_ids).delete_all
-      update_attribute(image_portal_urls: nil)
     end
   end
+
+  protected
 
   def enqueue_gallery_validation_job
     GalleryValidationJob.perform_later(id)
