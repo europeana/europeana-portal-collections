@@ -25,7 +25,7 @@ class GalleryValidationJob < ApplicationJob
   private
 
   def validate_gallery_image_portal_urls
-    @gallery.enumerable_image_portal_urls.each do |url|
+    @gallery.image_portal_urls.each do |url|
       image = GalleryImage.from_portal_url(url)
       image.gallery = @gallery
       image.validating_with(:http_response, :europeana_record_api) do

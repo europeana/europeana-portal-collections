@@ -242,7 +242,7 @@ RailsAdmin.config do |config|
       field :topic_ids, :enum do
         multiple true
       end
-      field :image_portal_urls, :text do
+      field :image_portal_urls_text, :text do
         html_attributes rows: 15, cols: 80
       end
     end

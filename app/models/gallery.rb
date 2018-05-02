@@ -20,6 +20,8 @@ class Gallery < ActiveRecord::Base
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
 
+  attr_writer :image_portal_urls_text
+
   accepts_nested_attributes_for :images, allow_destroy: true
 
   translates :title, :description, fallbacks_for_empty_translations: true
@@ -51,8 +53,14 @@ class Gallery < ActiveRecord::Base
   after_initialize do
     if image_errors.present?
       image_errors.values.flatten.each do |err|
-        errors.add(:image_portal_urls, err)
+        errors.add(:image_portal_urls_text, err)
       end
+    end
+  end
+
+  before_validation do
+    unless image_portal_urls_text.blank?
+      self.image_portal_urls = image_portal_urls_text.strip.split(/\s+/).compact
     end
   end
 
@@ -76,13 +84,8 @@ class Gallery < ActiveRecord::Base
     slug
   end
 
-  def image_portal_urls
-    super || images.map(&:portal_url).join("\n\n")
-  end
-
-  def enumerable_image_portal_urls
-    return [] if image_portal_urls.nil?
-    image_portal_urls.strip.split(/\s+/).compact
+  def image_portal_urls_text
+    @image_portal_urls_text ||= image_portal_urls&.join("\n\n") || images.map(&:portal_url).join("\n\n")
   end
 
   # Create/update/delete images
@@ -91,7 +94,7 @@ class Gallery < ActiveRecord::Base
   # needs first to be performed in the background, via +GalleryValidationJob+.
   #
   # @param portal_urls [Array<String>]
-  def set_images(portal_urls = enumerable_image_portal_urls)
+  def set_images(portal_urls = image_portal_urls)
     run_callbacks :set_images do
       transaction do
         associated_image_ids = []
@@ -114,17 +117,17 @@ class Gallery < ActiveRecord::Base
 
   def validate_image_portal_urls
     return unless image_portal_urls.present?
-    enumerable_image_portal_urls.each do |url|
+    image_portal_urls.each do |url|
       if Europeana::Record.id_from_portal_url(url).nil?
-        errors.add(:image_portal_urls, %(not a Europeana record URL: "#{url}"))
+        errors.add(:image_portal_urls_text, %(not a Europeana record URL: "#{url}"))
       end
     end
   end
 
   def validate_number_of_image_portal_urls
-    incoming_urls = enumerable_image_portal_urls.size
+    incoming_urls = image_portal_urls.size
     unless NUMBER_OF_IMAGES.cover?(incoming_urls)
-      errors.add(:image_portal_urls, "must include #{NUMBER_OF_IMAGES.first}-#{NUMBER_OF_IMAGES.last} URLs, not #{incoming_urls}")
+      errors.add(:image_portal_urls_text, "must include #{NUMBER_OF_IMAGES.first}-#{NUMBER_OF_IMAGES.last} URLs, not #{incoming_urls}")
     end
   end
 

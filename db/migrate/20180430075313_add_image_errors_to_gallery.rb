@@ -1,5 +1,5 @@
 class AddImageErrorsToGallery < ActiveRecord::Migration
   def change
-    add_column :galleries, :image_errors, :json
+    add_column :galleries, :image_errors, :jsonb
   end
 end

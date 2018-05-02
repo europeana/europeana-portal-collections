@@ -197,8 +197,8 @@ ActiveRecord::Schema.define(version: 20180430075313) do
     t.text     "slug"
     t.datetime "published_at"
     t.integer  "published_by"
-    t.text     "image_portal_urls"
-    t.json     "image_errors"
+    t.string   "image_portal_urls",                          array: true
+    t.jsonb    "image_errors"
   end
 
   add_index "galleries", ["published_by"], name: "index_galleries_on_published_by", using: :btree
