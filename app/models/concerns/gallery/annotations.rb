@@ -49,7 +49,7 @@ class Gallery
     end
 
     def image_annotation_targets
-      @image_annotation_targets ||= images.map(&:annotation_target_uri)
+      @image_annotation_targets ||= images.map(&:annotation_target)
     end
 
     def annotation_api_user_token
