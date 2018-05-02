@@ -95,7 +95,7 @@ module Europeana
     #
     # @return [Array<RDF::URI>]
     def edm_has_view_uris
-      rdf&.query(predicate: RDF::Vocab::EDM.hasView)&.map(&:object)
+      rdf&.query(predicate: RDF::Vocab::EDM.hasView)&.map(&:object) || []
     end
   end
 end

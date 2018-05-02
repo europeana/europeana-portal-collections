@@ -1,56 +1,77 @@
 # frozen_string_literal: true
 
 RSpec.describe GalleryValidationJob do
-  include_context 'Gallery Image request'
-
-  let(:url1) { gallery_images(:fashion_dresses_image1).url }
-  let(:url2) { gallery_images(:fashion_dresses_image2).url }
-
-  def provider_response(**options)
-    content_type = options[:content_type] || 'image/jpeg'
-    code = options[:code] || 200
-    double('provider_response', code: code, headers: { content_type: content_type })
-  end
+  let(:gallery) { galleries(:fashion_dresses) }
 
   before do
-    Rails.application.config.x.gallery_validation_mail_to = 'example@europeana.eu'
+    Rails.application.config.x.gallery.validation_mail_to = 'example@europeana.eu'
+    allow(Gallery).to receive(:find).with(gallery.id) { gallery }
+    allow(Gallery).to receive(:find).with(gallery.id.to_s) { gallery }
+    gallery.images.each do |image|
+      allow(GalleryImage).to receive(:from_portal_url).with(image.portal_url) { image }
+    end
+  end
+
+  it 'runs http validation' do
+    gallery.images.each do |image|
+      expect(image).to receive(:validate_http_image)
+    end
+    subject.perform(gallery.id)
+  end
+
+  it 'runs API validation' do
+    gallery.images.each do |image|
+      expect(image).to receive(:validate_found_europeana_record_id)
+      expect(image).to receive(:validate_europeana_record_web_resource)
+    end
+    subject.perform(gallery.id)
   end
 
   context 'when everything is valid' do
-    it 'loads all the images for the gallery and makes sure they are valid' do
-      expect(RestClient).to receive(:get).with(url1).once.and_return(provider_response)
-      expect(RestClient).to receive(:get).with(url2).once.and_return(provider_response)
-      expect { subject.perform(galleries(:fashion_dresses).id) }.not_to have_enqueued_job(ActionMailer::DeliveryJob)
-      expect(an_api_search_request).to have_been_made.at_least_once
+    before do
+      gallery.images.each do |image|
+        allow(image).to receive(:errors) { ActiveModel::Errors.new(image) }
+      end
+    end
+
+    it 'sets gallery images' do
+      expect(gallery).to receive(:set_images).with(gallery.images.map(&:portal_url))
+      subject.perform(gallery.id)
+    end
+
+    it 'stores no errors on the gallery' do
+      subject.perform(gallery.id)
+      expect(gallery.reload.image_errors).to be_nil
+    end
+
+    it 'sends no email' do
+      expect { subject.perform(gallery.id) }.not_to have_enqueued_job(ActionMailer::DeliveryJob)
     end
   end
 
-  context 'when a record can NOT be found' do
-    let(:gallery_image_search_api_response_options) { { item: false } }
-    it 'sends an email saying the record may have been deleted' do
-      expect(RestClient).to_not receive(:get).with(url1)
-      expect(RestClient).to_not receive(:get).with(url2)
-      expect { subject.perform(galleries(:fashion_dresses).id) }.to have_enqueued_job(ActionMailer::DeliveryJob)
-      expect(an_api_search_request).to have_been_made.at_least_once
+  context 'when images have errors' do
+    before do
+      gallery.images.each do |image|
+        allow(image).to receive(:errors) {
+          ActiveModel::Errors.new(image).tap do |am_errors|
+            am_errors.add(:url, 'Invalid')
+          end
+        }
+      end
     end
-  end
 
-  context 'when an image can NOT be found' do
-    let(:gallery_image_search_api_response_options) { { edm_is_shown_by: false } }
-    it 'sends an email saying the image is not valid' do
-      expect(RestClient).to receive(:get).with(url1).once.and_return(provider_response)
-      expect(RestClient).to receive(:get).with(url2).once.and_return(provider_response(code: 500))
-      expect { subject.perform(galleries(:fashion_dresses).id) }.to have_enqueued_job(ActionMailer::DeliveryJob)
-      expect(an_api_search_request).to have_been_made.at_least_once
+    it 'does not set gallery images' do
+      expect(gallery).not_to receive(:set_images).with(gallery.images.map(&:portal_url))
+      subject.perform(gallery.id)
     end
-  end
 
-  context 'when an image is NOT a valid image' do
-    it 'sends an email saying the image is not valid' do
-      expect(RestClient).to receive(:get).with(url1).once.and_return(provider_response)
-      expect(RestClient).to receive(:get).with(url2).once.and_return(provider_response(content_type: 'application/pdf'))
-      expect { subject.perform(galleries(:fashion_dresses).id) }.to have_enqueued_job(ActionMailer::DeliveryJob)
-      expect(an_api_search_request).to have_been_made.at_least_once
+    it 'stores the errors on the gallery' do
+      subject.perform(gallery.id)
+      expect(gallery.reload.image_errors).not_to be_nil
+    end
+
+    it 'sends an email' do
+      expect { subject.perform(gallery.id) }.to have_enqueued_job(ActionMailer::DeliveryJob)
     end
   end
 end

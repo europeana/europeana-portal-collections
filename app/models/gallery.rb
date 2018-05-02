@@ -76,6 +76,10 @@ class Gallery < ActiveRecord::Base
     slug
   end
 
+  def image_portal_urls
+    super || images.map(&:portal_url).join("\n\n")
+  end
+
   def enumerable_image_portal_urls
     return [] if image_portal_urls.nil?
     image_portal_urls.strip.split(/\s+/).compact

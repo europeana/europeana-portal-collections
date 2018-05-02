@@ -121,8 +121,8 @@ module EuropeanaAPIHelper
       ))
   end
 
-  def an_api_record_request_for(id)
-    a_request(:get, Europeana::API.url + "/v2/record#{id}.json").
+  def an_api_record_request_for(id, format: 'json')
+    a_request(:get, Europeana::API.url + "/v2/record#{id}.#{format}").
       with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))
   end
 
