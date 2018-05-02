@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GalleryImage
-  # TODO: does any of this belong in the API gem instead? e.g. +#europeana_record_rdf+,
-  #       +europeana_record_api_json_ld_uri+
   module EuropeanaRecordAPI
     extend ActiveSupport::Concern
 
@@ -35,6 +33,13 @@ class GalleryImage
       end
     end
 
+    # Europeana record for +europeana_record_id+
+    #
+    # @return [Europeana::Record]
+    def europeana_record
+      @europeana_record ||= Europeana::Record.new(europeana_record_id)
+    end
+
     # RDF URI for +url+
     #
     # @return [RDF::URI]
@@ -46,63 +51,21 @@ class GalleryImage
     #
     # @return [String]
     def url_from_europeana_record_edm_is_shown_by
-      europeana_record_rdf.query(predicate: RDF::Vocab::EDM.isShownBy).first&.object&.to_s
-    end
-
-    # RDF from which this image is derived.
-    #
-    # This is the full RDF graph response from the Record API for +europeana_record_id+
-    #
-    # @param force Force re-requesting the HTTP response.
-    # @return [RDF::Graph] RDF graph for the Europeana record, or nil if not available.
-    def europeana_record_rdf(force: false)
-      return @europeana_record_rdf unless force || !instance_variable_defined?(:@europeana_record_rdf)
-
-      begin
-        @europeana_record_rdf = RDF::Graph.load(europeana_record_api_json_ld_uri)
-      rescue StandardError
-        @europeana_record_rdf = nil
-      end
-
-      @europeana_record_rdf
-    end
-
-    # URI to query the Record API for the record's JSON-LD
-    #
-    # @return [URI]
-    def europeana_record_api_json_ld_uri
-      URI.parse(Europeana::API.url).tap do |uri|
-        uri.path = "/api/v2/record#{europeana_record_id}.json-ld"
-        uri.query = "wskey=#{Europeana::API.key}"
-      end
-    end
-
-    # edm:isShownBy URI from the Europeana record
-    #
-    # @return [RDF::URI]
-    def europeana_record_edm_is_shown_by_uri
-      europeana_record_rdf&.query(predicate: RDF::Vocab::EDM.isShownBy)&.first&.object
-    end
-
-    # edm:hasView URIs from the Europeana record
-    #
-    # @return [Array<RDF::URI>]
-    def europeana_record_edm_has_view_uris
-      europeana_record_rdf&.query(predicate: RDF::Vocab::EDM.hasView)&.map(&:object)
+      europeana_record.edm_is_shown_by_uri&.to_s
     end
 
     # Validates that the +url+ is equivalent to one of the web resource URIs in
     # the Record API's response for
     def validate_europeana_record_web_resource
-      unless rdf_uri == europeana_record_edm_is_shown_by_uri ||
-             europeana_record_edm_has_view_uris.include?(rdf_uri)
+      unless rdf_uri == europeana_record.edm_is_shown_by_uri ||
+             europeana_record.edm_has_view_uris.include?(rdf_uri)
         errors.add(:url, %(Record "#{europeana_record_id}" has no edm:isShownBy or edm:hasView with URI "#{url}"))
       end
     end
 
     # Validates that +europeana_record_id+ exists on the API.
     def validate_found_europeana_record_id
-      if europeana_record_rdf.nil?
+      if europeana_record.rdf.nil?
         errors.add(:europeana_record_id, %(Record not found by the API: "#{europeana_record_id}"))
       end
     end

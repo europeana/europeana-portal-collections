@@ -41,6 +41,10 @@ class Gallery < ActiveRecord::Base
 
   default_scope { includes(:translations) }
 
+  before_save if: :image_portal_urls_changed? do
+    self.image_errors = nil
+  end
+
   before_save :ensure_unique_title
   after_save :enqueue_gallery_validation_job, if: :image_portal_urls_changed?
 
