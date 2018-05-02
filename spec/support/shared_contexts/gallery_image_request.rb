@@ -46,7 +46,7 @@ RSpec.shared_context 'Gallery Image request', :gallery_image_request do
     end
   end
 
-  def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/sample/record%{n}.html')
+  def gallery_image_portal_urls(number: 10, format: 'http://www.europeana.eu/portal/record/sample/record%{n}.html?view=http://media.example.com/%{n}.jpg')
     (1..number).map { |n| format(format, n: n) }.join(' ')
   end
 end

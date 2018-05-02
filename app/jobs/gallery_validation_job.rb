@@ -8,7 +8,7 @@ class GalleryValidationJob < ApplicationJob
 
   def perform(gallery_id)
     @gallery = Gallery.find(gallery_id)
-    @images = []
+    @portal_urls = []
     @validation_errors = {}
 
     validate_gallery_image_portal_urls
@@ -17,7 +17,7 @@ class GalleryValidationJob < ApplicationJob
       @gallery.update_attribute(:image_errors, @validation_errors)
       notify
     else
-      @gallery.set_images(@images)
+      @gallery.set_images(@portal_urls)
       @gallery.update_attribute(:image_errors, nil)
     end
   end
@@ -32,7 +32,7 @@ class GalleryValidationJob < ApplicationJob
         image.validate
         @validation_errors[url] = image.errors.messages.values.flatten if image.errors.present?
       end
-      @images.push(image)
+      @portal_urls.push(image.portal_url)
     end
   end
 

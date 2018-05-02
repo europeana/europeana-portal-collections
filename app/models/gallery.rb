@@ -77,6 +77,7 @@ class Gallery < ActiveRecord::Base
   end
 
   def enumerable_image_portal_urls
+    return [] if image_portal_urls.nil?
     image_portal_urls.strip.split(/\s+/).compact
   end
 
@@ -85,13 +86,13 @@ class Gallery < ActiveRecord::Base
   # This is *not* called during +Gallery+ persistence, as thorough validation
   # needs first to be performed in the background, via +GalleryValidationJob+.
   #
-  # @param gallery_images [Array<GalleryImage>]
-  def set_images(gallery_images)
+  # @param portal_urls [Array<String>]
+  def set_images(portal_urls = enumerable_image_portal_urls)
     run_callbacks :set_images do
       transaction do
         associated_image_ids = []
-        gallery_images.each_with_index do |gallery_image, i|
-          GalleryImage.find_or_create_from_portal_url(gallery_image.portal_url, gallery: self).tap do |image|
+        portal_urls.each_with_index do |portal_url, i|
+          GalleryImage.find_or_create_from_portal_url(portal_url, gallery: self).tap do |image|
             image.update_attributes(position: i + 1)
             associated_image_ids << image.id
           end
@@ -108,7 +109,7 @@ class Gallery < ActiveRecord::Base
   end
 
   def validate_image_portal_urls
-    return unless @image_portal_urls.present?
+    return unless image_portal_urls.present?
     enumerable_image_portal_urls.each do |url|
       if Europeana::Record.id_from_portal_url(url).nil?
         errors.add(:image_portal_urls, %(not a Europeana record URL: "#{url}"))
