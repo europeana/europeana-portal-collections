@@ -58,7 +58,7 @@ module MayValidateMayNot
 
     result = yield
 
-    @validating_with = @validating_with - switches
+    @validating_with -= switches
 
     result
   end
