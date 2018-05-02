@@ -11,6 +11,7 @@ module ApiResponseFixtures
     def self.render(template_content, **locals)
       b = empty_binding
       locals.each { |k, v| b.local_variable_set(k, v) }
+      b.local_variable_set(:local_assigns, locals)
       ERB.new(template_content).result(b)
     end
   end

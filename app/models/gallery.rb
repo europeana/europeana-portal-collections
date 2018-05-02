@@ -20,8 +20,6 @@ class Gallery < ActiveRecord::Base
   has_many :images, -> { order(:position) },
            class_name: 'GalleryImage', dependent: :destroy, inverse_of: :gallery
 
-  attr_writer :image_portal_urls_text
-
   accepts_nested_attributes_for :images, allow_destroy: true
 
   translates :title, :description, fallbacks_for_empty_translations: true
@@ -58,12 +56,6 @@ class Gallery < ActiveRecord::Base
     end
   end
 
-  before_validation do
-    unless image_portal_urls_text.blank?
-      self.image_portal_urls = image_portal_urls_text.strip.split(/\s+/).compact
-    end
-  end
-
   ##
   # Constructs a Search API query for al set of gallery images.
   #
@@ -84,8 +76,19 @@ class Gallery < ActiveRecord::Base
     slug
   end
 
+  attr :image_portal_urls_text
+
   def image_portal_urls_text
     @image_portal_urls_text ||= image_portal_urls&.join("\n\n") || images.map(&:portal_url).join("\n\n")
+  end
+
+  def image_portal_urls_text=(value)
+    self.image_portal_urls = value&.strip&.split(/\s+/)&.compact || []
+    @image_portal_urls_text = value
+  end
+
+  def image_portal_urls
+    super || images.map(&:portal_url)
   end
 
   # Create/update/delete images
@@ -125,7 +128,7 @@ class Gallery < ActiveRecord::Base
   end
 
   def validate_number_of_image_portal_urls
-    incoming_urls = image_portal_urls.size
+    incoming_urls = image_portal_urls&.size || 0
     unless NUMBER_OF_IMAGES.cover?(incoming_urls)
       errors.add(:image_portal_urls_text, "must include #{NUMBER_OF_IMAGES.first}-#{NUMBER_OF_IMAGES.last} URLs, not #{incoming_urls}")
     end
