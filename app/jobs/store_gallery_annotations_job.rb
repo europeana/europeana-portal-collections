@@ -39,7 +39,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
 
   def create_annotations
     gallery.images.each do |image|
-      next if annotation_target_included?(image.annotation_target, existing_annotation_targets)
+      next if gallery.has_annotation_for_target?(image.annotation_target)
       logger.info("Creating annotation linking #{image.annotation_target_uri} to #{gallery.annotation_link_resource_uri}".green.bold)
       image.annotation.tap do |annotation|
         annotation.api_user_token = gallery.annotation_api_user_token
@@ -58,22 +58,6 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
   end
 
   def delete_annotation?(annotation)
-    return true if @delete_all
-    !annotation_target_included?(annotation.target.with_indifferent_access, needed_annotation_targets)
-  end
-
-  def annotation_target_included?(target, collection)
-    collection.any? do |existing|
-      existing[:source] == target[:source] &&
-        existing[:scope] == target[:scope]
-    end
-  end
-
-  def needed_annotation_targets
-    @needed_annotation_targets ||= gallery.image_annotation_targets
-  end
-
-  def existing_annotation_targets
-    @existing_annotation_targets ||= gallery.annotations.map(&:target).map(&:with_indifferent_access)
+    @delete_all || !gallery.needs_annotation?(annotation)
   end
 end

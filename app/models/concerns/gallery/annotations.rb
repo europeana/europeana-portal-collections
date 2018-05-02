@@ -45,11 +45,36 @@ class Gallery
     end
 
     def annotation_link_resource_host
-      ENV['HTTP_HOST'] || 'www.europeana.eu'
+      Rails.application.config.x.gallery.annotation_link_resource_host ||
+        ENV['HTTP_HOST'] ||
+        'www.europeana.eu'
     end
 
-    def image_annotation_targets
-      @image_annotation_targets ||= images.map(&:annotation_target)
+    def needed_annotation_targets
+      @needed_annotation_targets ||= images.map(&:annotation_target)
+    end
+
+    def needs_annotation_for_target?(target)
+      annotation_target_included?(target, needed_annotation_targets)
+    end
+
+    def needs_annotation?(annotation)
+      needs_annotation_for_target?(annotation.target.with_indifferent_access)
+    end
+
+    def existing_annotation_targets
+      @existing_annotation_targets ||= annotations.map(&:target).map(&:with_indifferent_access)
+    end
+
+    def has_annotation_for_target?(target)
+      annotation_target_included?(target, existing_annotation_targets)
+    end
+
+    def annotation_target_included?(target, collection)
+      collection.any? do |existing|
+        existing[:source] == target[:source] &&
+          existing[:scope] == target[:scope]
+      end
     end
 
     def annotation_api_user_token

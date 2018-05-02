@@ -7,8 +7,6 @@ class GalleryValidationJob < ApplicationJob
   queue_as :default
 
   def perform(gallery_id)
-    fail 'No gallery validation email set.' unless Rails.application.config.x.gallery_validation_mail_to
-
     @gallery = Gallery.find(gallery_id)
     @images = []
     @validation_errors = {}
@@ -39,6 +37,7 @@ class GalleryValidationJob < ApplicationJob
   end
 
   def notify
+    return unless Rails.application.config.x.gallery.validation_mail_to.present?
     GalleryValidationMailer.post(gallery: @gallery, validation_errors: @validation_errors).deliver_later
   end
 end
