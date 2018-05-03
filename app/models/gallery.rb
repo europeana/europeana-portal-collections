@@ -76,8 +76,6 @@ class Gallery < ActiveRecord::Base
     slug
   end
 
-  attr :image_portal_urls_text
-
   def image_portal_urls_text
     @image_portal_urls_text ||= image_portal_urls&.join("\n\n") || images.map(&:portal_url).join("\n\n")
   end
