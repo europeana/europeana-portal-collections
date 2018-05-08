@@ -23,8 +23,7 @@ RSpec.describe 'home/index.html.mustache', :common_view_components, :stable_vers
   end
 
   it 'should have meta description' do
-    meta_content = collection_strapline(collection)
-    meta_content = meta_content.strip! || meta_content
+    meta_content = collection_strapline(collection)&.strip
     render
     expect(rendered).to have_selector("meta[name=\"description\"][content=\"#{meta_content}\"]", visible: false)
   end
