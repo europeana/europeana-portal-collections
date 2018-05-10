@@ -38,7 +38,7 @@ class GalleryDisplayabilityJob < ApplicationJob
     image.validating_with(:http_response, :europeana_record_api) do
       image.validate
       if image.errors.present?
-        @validation_errors[url] = image.errors.messages.values.flatten
+        @validation_errors[image.portal_url] = image.errors.messages.values.flatten
       else
         @portal_urls.push(image.portal_url)
       end
