@@ -6,8 +6,6 @@
 #
 # TODO: ideally this job should be deferred from execution if any other instances
 #       of the job are already running for the same value of gallery_slug
-# TODO: create a job and rake task to queue storing/deleting annotations for all
-#       existing galleries
 class StoreGalleryAnnotationsJob < ActiveJob::Base
   queue_as :annotations
 

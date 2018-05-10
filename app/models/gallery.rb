@@ -118,11 +118,11 @@ class Gallery < ActiveRecord::Base
     self.class.valid_image_count?(images.size)
   end
 
-  protected
-
   def enqueue_gallery_displayability_job
     GalleryDisplayabilityJob.perform_later(id)
   end
+
+  protected
 
   def validate_image_portal_urls
     return unless image_portal_urls.present?

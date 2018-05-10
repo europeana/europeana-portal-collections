@@ -49,10 +49,27 @@ namespace :jobs do
     end
   end
 
-  desc 'Queue GalleryDisplayabilityJob'
   task gallery_validation: :environment do
-    Gallery.published.each do |gallery|
-      GalleryDisplayabilityJob.perform_later(gallery.id)
+    ActiveSupport::Deprecation.warn('jobs:gallery_validation is deprecated; use jobs:galleries:displayability')
+    Rake::Task['jobs:galleries:displayability'].invoke
+  end
+
+  namespace :galleries do
+    desc 'Queue image displayability verification for all published galleries'
+    task displayability: :environment do
+      Gallery.published.each(&:enqueue_gallery_displayability_job)
+    end
+
+    namespace :annotations do
+      desc 'Queue creation of annotations for all published galleries'
+      task create: :environment do
+        Gallery.published.each(&:store_annotations)
+      end
+
+      desc 'Queue deletion of annotations for all published galleries'
+      task delete: :environment do
+        Gallery.published.each(&:destroy_annotations)
+      end
     end
   end
 end
