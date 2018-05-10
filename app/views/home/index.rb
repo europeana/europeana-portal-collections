@@ -36,8 +36,7 @@ module Home
     def head_meta
       mustache[:head_meta] ||= begin
         title = page_title
-        description = truncate(collection_strapline(@collection), length: 350, separator: ' ')
-        description = description.strip! || description
+        description = truncate(collection_strapline(@collection), length: 350, separator: ' ')&.strip
         hero = hero_config(@landing_page.hero_image)
         head_meta = [
           { meta_name: 'description', content: description },
