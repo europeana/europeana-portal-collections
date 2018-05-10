@@ -226,6 +226,16 @@ RailsAdmin.config do |config|
         filterable true
       end
       field :state
+      field :image_errors do
+        formatted_value do
+          if value.present?
+            bindings[:view].tag(:i, class: 'icon-warning-sign') +
+              bindings[:view].tag(:span, style: 'display:none') << 'This gallery has image errors!'
+          else
+            ''
+          end
+        end
+      end
       field :publisher
       field :published_at
     end
