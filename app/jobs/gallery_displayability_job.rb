@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-# Validate that a gallery has only displayable images
+# Ensure that a gallery has only displayable images
 #
 # All, and only, displayable images will be stored on the gallery.
 #
 # Any non-displayable images will be reported to editors by email.
-class GalleryValidationJob < ApplicationJob
+class GalleryDisplayabilityJob < ApplicationJob
   queue_as :default
 
   def perform(gallery_id)

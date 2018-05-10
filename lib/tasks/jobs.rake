@@ -49,10 +49,10 @@ namespace :jobs do
     end
   end
 
-  desc 'Queue GalleryValidationJob'
+  desc 'Queue GalleryDisplayabilityJob'
   task gallery_validation: :environment do
     Gallery.published.each do |gallery|
-      GalleryValidationJob.perform_later(gallery.id)
+      GalleryDisplayabilityJob.perform_later(gallery.id)
     end
   end
 end

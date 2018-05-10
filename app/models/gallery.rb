@@ -46,7 +46,7 @@ class Gallery < ActiveRecord::Base
   end
 
   before_save :ensure_unique_title
-  after_save :enqueue_gallery_validation_job, if: :image_portal_urls_changed?
+  after_save :enqueue_gallery_displayability_job, if: :image_portal_urls_changed?
 
   after_initialize do
     if image_errors.present?
@@ -96,7 +96,7 @@ class Gallery < ActiveRecord::Base
   # Create/update/delete images
   #
   # This is *not* called during +Gallery+ persistence, as thorough validation
-  # needs first to be performed in the background, via +GalleryValidationJob+.
+  # needs first to be performed in the background, via +GalleryDisplayabilityJob+.
   #
   # @param portal_urls [Array<String>]
   def set_images(portal_urls = image_portal_urls)
@@ -120,8 +120,8 @@ class Gallery < ActiveRecord::Base
 
   protected
 
-  def enqueue_gallery_validation_job
-    GalleryValidationJob.perform_later(id)
+  def enqueue_gallery_displayability_job
+    GalleryDisplayabilityJob.perform_later(id)
   end
 
   def validate_image_portal_urls

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe GalleryValidationJob do
+RSpec.describe GalleryDisplayabilityJob do
   let(:gallery) { galleries(:fashion_dresses) }
 
   before do
