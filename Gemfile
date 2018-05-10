@@ -53,7 +53,7 @@ gem 'pg' # 1.0.0 is not supported by Rails 4.2.x
 gem 'rack-cors'
 gem 'rack-rewrite'
 gem 'rails-observers'
-gem 'rails_admin', '~> 0.8.0'
+gem 'rails_admin'
 gem 'rails_with_relative_url_root', '~> 0.1'
 gem 'redis', '~> 3.3.3'
 gem 'redis-rails'
