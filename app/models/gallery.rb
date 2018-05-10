@@ -66,6 +66,10 @@ class Gallery < ActiveRecord::Base
     def search_api_query_for_images(images)
       Europeana::Record.search_api_query_for_record_ids(images.map(&:europeana_record_id))
     end
+
+    def valid_image_count?(count)
+      NUMBER_OF_IMAGES.cover?(count)
+    end
   end
 
   def search_api_query_for_images
@@ -110,6 +114,10 @@ class Gallery < ActiveRecord::Base
     end
   end
 
+  def publishable?
+    self.class.valid_image_count?(images.size)
+  end
+
   protected
 
   def enqueue_gallery_validation_job
@@ -126,9 +134,9 @@ class Gallery < ActiveRecord::Base
   end
 
   def validate_number_of_image_portal_urls
-    incoming_urls = image_portal_urls&.size || 0
-    unless NUMBER_OF_IMAGES.cover?(incoming_urls)
-      errors.add(:image_portal_urls_text, "must include #{NUMBER_OF_IMAGES.first}-#{NUMBER_OF_IMAGES.last} URLs, not #{incoming_urls}")
+    incoming_url_count = image_portal_urls&.size || 0
+    unless self.class.valid_image_count?(incoming_url_count)
+      errors.add(:image_portal_urls_text, "must include #{NUMBER_OF_IMAGES.first}-#{NUMBER_OF_IMAGES.last} URLs, not #{incoming_url_count}")
     end
   end
 

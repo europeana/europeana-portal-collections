@@ -40,21 +40,36 @@ RSpec.describe Gallery do
       allow(::PaperTrail).to receive(:whodunnit) { users(:user) }
     end
 
-    it 'should set the publisher and published_at date when first publishing' do
-      expect(gallery).to be_valid
-      gallery.publish!
-      expect(gallery.published_at).to eq(stubbed_now)
-      expect(gallery.publisher).to eq(users(:user))
+    context 'without enough images' do
+      it 'should fail' do
+        expect { gallery.publish! }.to raise_exception(AASM::InvalidTransition)
+        expect(gallery).not_to be_published
+      end
     end
 
-    it 'should NOT modify the publisher and published_at date when un and re-publishing' do
-      gallery.publish!
-      gallery.unpublish!
-      allow(DateTime).to receive(:now) { stubbed_now + 1.hour }
-      allow(::PaperTrail).to receive(:whodunnit) { users(:admin) }
-      gallery.publish!
-      expect(gallery.published_at).to eq(stubbed_now)
-      expect(gallery.publisher).to eq(users(:user))
+    context 'with enough images' do
+      before do
+        6.times do
+          gallery.images.push(gallery_images(:fashion_dresses_image1).dup)
+        end
+      end
+
+      it 'should set the publisher and published_at date when first publishing' do
+        expect(gallery).to be_valid
+        gallery.publish!
+        expect(gallery.published_at).to eq(stubbed_now)
+        expect(gallery.publisher).to eq(users(:user))
+      end
+
+      it 'should NOT modify the publisher and published_at date when un and re-publishing' do
+        gallery.publish!
+        gallery.unpublish!
+        allow(DateTime).to receive(:now) { stubbed_now + 1.hour }
+        allow(::PaperTrail).to receive(:whodunnit) { users(:admin) }
+        gallery.publish!
+        expect(gallery.published_at).to eq(stubbed_now)
+        expect(gallery.publisher).to eq(users(:user))
+      end
     end
   end
 
