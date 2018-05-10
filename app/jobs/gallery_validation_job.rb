@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-##
-# Validate that a gallery has only properly displaying images
-# Should an issue be discovered an email is sent to notify editors.
+# Validate that a gallery has only displayable images
+#
+# All, and only, displayable images will be stored on the gallery.
+#
+# Any non-displayable images will be reported to editors by email.
 class GalleryValidationJob < ApplicationJob
   queue_as :default
 
@@ -12,12 +14,12 @@ class GalleryValidationJob < ApplicationJob
     @validation_errors = {}
 
     validate_gallery_image_portal_urls
+    @gallery.set_images(@portal_urls)
 
     if @validation_errors.present?
       @gallery.update_attribute(:image_errors, @validation_errors)
       notify
     else
-      @gallery.set_images(@portal_urls)
       @gallery.update_attribute(:image_errors, nil)
     end
   end
@@ -28,11 +30,18 @@ class GalleryValidationJob < ApplicationJob
     @gallery.image_portal_urls.each do |url|
       image = GalleryImage.from_portal_url(url)
       image.gallery = @gallery
-      image.validating_with(:http_response, :europeana_record_api) do
-        image.validate
-        @validation_errors[url] = image.errors.messages.values.flatten if image.errors.present?
+      validate_gallery_image(image)
+    end
+  end
+
+  def validate_gallery_image(image)
+    image.validating_with(:http_response, :europeana_record_api) do
+      image.validate
+      if image.errors.present?
+        @validation_errors[url] = image.errors.messages.values.flatten
+      else
+        @portal_urls.push(image.portal_url)
       end
-      @portal_urls.push(image.portal_url)
     end
   end
 
