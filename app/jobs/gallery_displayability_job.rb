@@ -11,13 +11,13 @@ class GalleryDisplayabilityJob < ApplicationJob
   def perform(gallery_id)
     @gallery = Gallery.find(gallery_id)
     @portal_urls = []
-    @validation_errors = {}
+    @image_errors = {}
 
     validate_gallery_image_portal_urls
     @gallery.set_images(@portal_urls)
 
-    if @validation_errors.present?
-      @gallery.update_attribute(:image_errors, @validation_errors)
+    if @image_errors.present?
+      @gallery.update_attribute(:image_errors, @image_errors)
       notify
     else
       @gallery.update_attribute(:image_errors, nil)
@@ -38,7 +38,7 @@ class GalleryDisplayabilityJob < ApplicationJob
     image.validating_with(:http_response, :europeana_record_api) do
       image.validate
       if image.errors.present?
-        @validation_errors[image.portal_url] = image.errors.messages.values.flatten
+        @image_errors[image.portal_url] = image.errors.messages.values.flatten
       else
         @portal_urls.push(image.portal_url)
       end
@@ -47,6 +47,6 @@ class GalleryDisplayabilityJob < ApplicationJob
 
   def notify
     return unless Rails.application.config.x.gallery.validation_mail_to.present?
-    GalleryValidationMailer.post(gallery: @gallery, validation_errors: @validation_errors).deliver_later
+    GalleryDisplayabilityMailer.post(gallery: @gallery, image_errors: @image_errors).deliver_later
   end
 end
