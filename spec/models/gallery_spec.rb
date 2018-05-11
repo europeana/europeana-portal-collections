@@ -2,12 +2,10 @@
 
 require 'models/concerns/is_permissionable_examples'
 
-RSpec.describe Gallery do
+RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
   it 'includes Annotations' do
     expect(described_class).to include(Gallery::Annotations)
   end
-
-  include_context 'Gallery Image request'
 
   it_behaves_like 'permissionable'
 

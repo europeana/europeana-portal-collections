@@ -2,7 +2,9 @@
 
 class GalleryDisplayabilityMailer < ApplicationMailer
   def post(gallery:, image_errors:)
-    fail 'No gallery displayability report email recipient set.' unless Rails.application.config.x.gallery.validation_mail_to
+    unless Rails.application.config.x.gallery.validation_mail_to.present?
+      fail ApplicationMailer::Errors::NoRecipient, 'No gallery displayability report email recipient set.'
+    end
 
     @gallery = gallery
     @image_errors = image_errors
