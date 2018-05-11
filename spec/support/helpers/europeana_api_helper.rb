@@ -105,9 +105,7 @@ module EuropeanaAPIHelper
       stub_request(:head, %r{#{Rails.application.config.x.europeana_media_proxy}/[^/]+/[^/]+}).
         to_return(status: 200,
                   headers: { 'Content-Type' => 'application/pdf' })
-      stub_request(:get, %r{#{Rails.application.config.x.europeana_media_proxy}/[^/]+/[^/]+}).
-        to_return(status: 200,
-                  headers: { 'Content-Type' => 'application/pdf' })    end
+    end
   end
 
   def an_api_search_request
