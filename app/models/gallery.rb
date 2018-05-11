@@ -81,7 +81,7 @@ class Gallery < ActiveRecord::Base
   end
 
   def image_portal_urls_text
-    @image_portal_urls_text ||= image_portal_urls&.join("\n\n") || images.map(&:portal_url).join("\n\n")
+    @image_portal_urls_text ||= image_portal_urls&.join("\n\n")
   end
 
   def image_portal_urls_text=(value)
