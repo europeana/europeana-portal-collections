@@ -15,6 +15,28 @@ RSpec.describe GalleryImage::EuropeanaRecordAPI do
          to_return(status: api_response_status, headers: api_response_headers, body: api_response_body)
   end
 
+  describe '#url_from_europeana_record_edm_is_shown_by' do
+    context 'without explicit url' do
+      let(:url) { nil }
+
+      context 'when validating with europeana_record_api' do
+        it 'sets to edm:isShownBy before validation' do
+          subject.validating_with(:europeana_record_api) do
+            subject.validate
+          end
+          expect(subject.url).not_to be_nil
+        end
+      end
+
+      context 'when validating without europeana_record_api' do
+        it 'does not set it' do
+          subject.validate
+          expect(subject.url).to be_nil
+        end
+      end
+    end
+  end
+
   describe '#validate_found_europeana_record_id' do
     it_behaves_like 'may validate may not', :europeana_record_api, :validate_found_europeana_record_id
 
