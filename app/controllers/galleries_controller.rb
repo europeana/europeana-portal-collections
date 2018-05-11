@@ -52,10 +52,6 @@ class GalleriesController < ApplicationController
     { q: Gallery.search_api_query_for_images(images), per_page: 100 }
   end
 
-  def search_api_query_for_images(images)
-    'europeana_id:("' + images.map(&:europeana_record_id).join('" OR "') + '")'
-  end
-
   def gallery_topic
     params[:theme] || 'all'
   end
