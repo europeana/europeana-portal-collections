@@ -93,6 +93,7 @@ end
 
 group :development do
   gem 'brakeman'
+  gem 'bundler-audit'
   gem 'spring', '~> 1.6'
 end
 
