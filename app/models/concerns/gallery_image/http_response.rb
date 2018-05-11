@@ -22,7 +22,7 @@ class GalleryImage
     #
     # Inspects the Content-Type header to see if it starts with "image".
     def http_image_content_type?
-      return false if http_response.nil?
+      return false unless http_response&.success?
       http_response.headers[:content_type]&.start_with?('image')
     end
 
