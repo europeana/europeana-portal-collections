@@ -92,6 +92,7 @@ group :development, :profiling do
 end
 
 group :development do
+  gem 'brakeman'
   gem 'spring', '~> 1.6'
 end
 

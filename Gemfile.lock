@@ -94,6 +94,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    brakeman (4.3.0)
     builder (3.2.3)
     cancancan (1.17.0)
     capybara (2.15.1)
@@ -521,6 +522,7 @@ DEPENDENCIES
   aasm (~> 4.2)
   acts_as_list (~> 0.7)
   blacklight (~> 6.0.0)
+  brakeman
   cancancan (~> 1.12)
   capybara
   clockwork (~> 1.2)
