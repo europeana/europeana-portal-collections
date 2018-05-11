@@ -22,7 +22,7 @@
 require 'simplecov'
 
 # Generate Simplecov report
-SimpleCov.start
+SimpleCov.start 'rails'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
