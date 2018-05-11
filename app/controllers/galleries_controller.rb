@@ -28,7 +28,7 @@ class GalleriesController < ApplicationController
     authorize! :show, @gallery
 
     @body_cache_key = 'explore/' + @gallery.cache_key
-    @documents = search_api_for_image_metadata(@gallery.images) unless body_cached?
+    @documents = search_api_for_image_metadata unless body_cached?
 
     respond_to do |format|
       format.html
@@ -43,13 +43,13 @@ class GalleriesController < ApplicationController
   end
 
   # @return [Array<Europeana::Blacklight::Document>]
-  def search_api_for_image_metadata(images)
-    return [] if images.blank?
-    search_results(blacklight_api_params_for_images(images)).last
+  def search_api_for_image_metadata
+    return [] if @gallery.images.blank?
+    search_results(blacklight_api_params_for_images).last
   end
 
-  def blacklight_api_params_for_images(images)
-    { q: Gallery.search_api_query_for_images(images), per_page: 100 }
+  def blacklight_api_params_for_images
+    { q: @gallery.search_api_query_for_images, per_page: 100 }
   end
 
   def gallery_topic
