@@ -35,7 +35,7 @@ module Catalog
 
   def search_results(user_params)
     response, documents = super
-    response.max_pages_per(960 / response.limit_value)
+    response.max_pages(960 / response.limit_value)
     add_collection_facet(response)
     [response, documents]
   end
