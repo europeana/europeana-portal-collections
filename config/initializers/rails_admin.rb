@@ -6,6 +6,7 @@ require 'rails_admin/config/actions/requeue'
 require 'rails_admin/config/fields/extensions/generic_help'
 
 RailsAdmin::Config::Fields::Types::Text.send(:include, RailsAdmin::Config::Fields::Extensions::GenericHelp)
+RailsAdmin::ApplicationHelper.send(:include, ::I18nHelper)
 
 RailsAdmin.config do |config|
   config.main_app_name = ['Europeana Collections']
