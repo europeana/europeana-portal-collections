@@ -80,6 +80,7 @@ location:
   - title: location
     entity:
       name: places
+      fallback: true
     fields:
     - proxies.dctermsSpatial
   - title: place-time
