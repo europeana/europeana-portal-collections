@@ -7,7 +7,6 @@ class Gallery < ActiveRecord::Base
   define_callbacks :set_images
 
   include Gallery::Annotations
-  # TODO: prevent publishing unless images are present
   include HasPublicationStates
   include IsCategorisable
   include IsPermissionable
