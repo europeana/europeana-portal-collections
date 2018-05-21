@@ -228,7 +228,7 @@ RailsAdmin.config do |config|
       end
       field :state
       field :image_errors do
-        formatted_value do
+        pretty_value do
           if value.present?
             bindings[:view].tag(:i, class: 'icon-warning-sign') +
               bindings[:view].tag(:span, style: 'display:none') << 'This gallery has image errors!'
