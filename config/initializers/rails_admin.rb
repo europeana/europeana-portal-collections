@@ -230,8 +230,7 @@ RailsAdmin.config do |config|
       field :image_errors do
         pretty_value do
           if value.present?
-            bindings[:view].tag(:i, class: 'icon-warning-sign') +
-              bindings[:view].tag(:span, style: 'display:none') << 'This gallery has image errors!'
+            bindings[:view].tag(:span, class: 'icon-warning-sign', title: 'This gallery has image errors!')
           else
             ''
           end
