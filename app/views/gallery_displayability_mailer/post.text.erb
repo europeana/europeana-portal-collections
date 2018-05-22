@@ -1,11 +1,11 @@
-Automated gallery validation for Europeana gallery: <%= @gallery.title %>
+Automated gallery displayability report for Europeana gallery: <%= @gallery.title %>
 
 URL: <%= gallery_url(:en, @gallery) %>
 
-Validation error(s) follow.
+Image error(s) follow.
 
-<% @validation_errors.each_pair do |key, errors| %>
-  <%= document_url(:en, key.sub('/', '')) %>
+<% @image_errors.each_pair do |portal_url, errors| %>
+  <%= portal_url %>
   <% errors.each do |error| %>
     * <%= error %>
   <% end %>

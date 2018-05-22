@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "ore": "http://www.openarchives.org/ore/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "edm": "http://www.europeana.eu/schemas/edm/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "@graph": [
+    {
+      "@id": "http://data.europeana.eu/aggregation/europeana<%= id %>",
+      "@type": "edm:EuropeanaAggregation",
+      "edm:aggregatedCHO": {
+        "@id": "http://data.europeana.eu/item<%= id %>"
+      },
+      "edm:landingPage": {
+        "@id": "http://europeana.eu/portal/record<%= id %>.html"
+      }
+    },
+    {
+      "@id": "http://data.europeana.eu/aggregation/provider<%= id %>",
+      "@type": "ore:Aggregation",
+      "edm:aggregatedCHO": {
+        "@id": "http://data.europeana.eu/item<%= id %>"
+      },
+      "edm:isShownBy": {
+        "@id": "https://media.example.org/isShownBy<%= id %>.jpg"
+      },
+      "edm:hasView": [
+        {
+          "@id": "https://media.example.org/hasView<%= id %>.jpg"
+        }
+      ]
+    },
+    {
+      "@id": "https://media.example.org/isShownBy<%= id %>.jpg",
+      "@type": "edm:WebResource"
+    },
+    {
+      "@id": "https://media.example.org/hasView<%= id %>.jpg",
+      "@type": "edm:WebResource"
+    },
+    {
+      "@id": "https://media.example.org/webResource<%= id %>.jpg",
+      "@type": "edm:WebResource"
+    }
+  ]
+}

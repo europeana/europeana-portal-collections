@@ -48,8 +48,8 @@ RSpec.describe Europeana::Record::Annotations do
         expect(subject).to include('generator_name:Generator')
       end
 
-      it 'includes target_uri filter' do
-        expect(subject).to include(%(target_uri:"http://data.europeana.eu/item#{instance_id}"))
+      it 'includes target_record_id filter' do
+        expect(subject).to include(%(target_record_id:"#{instance_id}"))
       end
     end
   end

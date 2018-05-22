@@ -11,10 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206084927) do
+ActiveRecord::Schema.define(version: 20180430075313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+  enable_extension "pg_stat_statements"
+  enable_extension "unaccent"
 
   create_table "banner_translations", force: :cascade do |t|
     t.integer  "banner_id",              null: false
@@ -188,12 +191,14 @@ ActiveRecord::Schema.define(version: 20171206084927) do
   add_index "feeds_pages", ["page_id", "feed_id"], name: "index_feeds_pages_on_page_id_and_feed_id", using: :btree
 
   create_table "galleries", force: :cascade do |t|
-    t.integer  "state",        default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "state",             default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.text     "slug"
     t.datetime "published_at"
     t.integer  "published_by"
+    t.string   "image_portal_urls",                          array: true
+    t.jsonb    "image_errors"
   end
 
   add_index "galleries", ["published_by"], name: "index_galleries_on_published_by", using: :btree

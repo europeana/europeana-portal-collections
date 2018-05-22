@@ -9,6 +9,8 @@ cache:
   bundler: true
   directories:
     - "travis_phantomjs"
+addons:
+  postgresql: "9.4"
 before_install:
   - gem update --system
   - gem install bundler

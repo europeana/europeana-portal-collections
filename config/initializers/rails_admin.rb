@@ -227,6 +227,15 @@ RailsAdmin.config do |config|
         filterable true
       end
       field :state
+      field :image_errors do
+        pretty_value do
+          if value.present?
+            bindings[:view].tag(:span, class: 'icon-warning-sign', title: 'This gallery has image errors!')
+          else
+            ''
+          end
+        end
+      end
       field :publisher
       field :published_at
     end
@@ -243,7 +252,7 @@ RailsAdmin.config do |config|
       field :topic_ids, :enum do
         multiple true
       end
-      field :image_portal_urls, :text do
+      field :image_portal_urls_text, :text do
         html_attributes rows: 15, cols: 80
       end
     end

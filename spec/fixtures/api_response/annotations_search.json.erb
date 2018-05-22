@@ -9,12 +9,26 @@
         {
             "@context":"http://www.w3.org/ns/anno.jsonld",
             "id":"http://data.europeana.eu/annotation/abc/123",
-            "target":"http://data.europeana.eu/item/abc/123"
+            <% if local_assigns[:target] == :hash %>
+              "target": {
+                "scope": "http://data.europeana.eu/item/abc/123",
+                "source": "http://media.example.com/item/123"
+              }
+            <% else %>
+              "target":"http://data.europeana.eu/item/abc/123"
+            <% end %>
         },
         {
             "@context":"http://www.w3.org/ns/anno.jsonld",
             "id":"http://data.europeana.eu/annotation/def/456",
-            "target":"http://data.europeana.eu/item/abc/123"
+            <% if local_assigns[:target] == :hash %>
+              "target": {
+                "scope": "http://data.europeana.eu/item/abc/456",
+                "source": "http://media.example.com/item/456"
+              }
+            <% else %>
+              "target":"http://data.europeana.eu/item/abc/456"
+            <% end %>
         }
     ],
     "total": 2,

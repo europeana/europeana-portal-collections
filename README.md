@@ -17,7 +17,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 * ImageMagick
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
-* PostgreSQL
+* PostgreSQL 9.4+
 
 ## Installation
 
