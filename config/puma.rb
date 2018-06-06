@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+workers Integer(ENV['WEB_CONCURRENCY'] || 2) unless RUBY_ENGINE == 'jruby'
 threads_count = Integer(ENV['MAX_THREADS'] || 5)
 threads threads_count, threads_count
 
