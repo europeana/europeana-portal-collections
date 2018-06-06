@@ -50,7 +50,8 @@ gem 'mail', '~> 2.6.6'
 gem 'nokogiri'
 gem 'paper_trail', '~> 4.0'
 gem 'paperclip', '~> 5.2'
-gem 'pg', '< 1.0' # 1.0.0 is not supported by Rails 4.2.x
+gem 'pg', '< 1.0', platforms: :ruby # 1.0.0 is not supported by Rails 4.2.x
+gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
 gem 'rack-cors'
 gem 'rack-rewrite'
 gem 'rails-observers'
@@ -65,7 +66,7 @@ gem 'ruby-oembed', '~> 0.9'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'stringex', '~> 2.6'
-gem 'therubyracer'
+gem 'therubyracer', platforms: :ruby
 
 group :production do
   gem 'europeana-logging', '~> 0.2.3'
@@ -98,7 +99,7 @@ group :development do
 end
 
 group :profiling do
-  gem 'stackprof'
+  gem 'stackprof', platforms: :ruby
 end
 
 group :test do
