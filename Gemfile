@@ -24,6 +24,7 @@ gem 'mustache', '1.0.3'
 gem 'stache', git: 'https://github.com/europeana/stache.git', branch: 'europeana-styleguide'
 
 gem 'aasm', '~> 4.2'
+gem 'activerecord-jdbcpostgresql-adapter', '< 50', platforms: :jruby # 50.x is for AR 5.x
 gem 'acts_as_list', '~> 0.7'
 gem 'blacklight', '~> 6.0.0'
 gem 'cancancan', '~> 1.12'
@@ -51,7 +52,6 @@ gem 'nokogiri'
 gem 'paper_trail', '~> 4.0'
 gem 'paperclip', '~> 5.2'
 gem 'pg', '< 1.0', platforms: :ruby # 1.0.0 is not supported by Rails 4.2.x
-gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
 gem 'rack-cors'
 gem 'rack-rewrite'
 gem 'rails-observers'

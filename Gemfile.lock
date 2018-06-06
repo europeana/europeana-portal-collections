@@ -68,11 +68,11 @@ GEM
       activemodel (= 4.2.10)
       activesupport (= 4.2.10)
       arel (~> 6.0)
-    activerecord-jdbc-adapter (50.0)
-      activerecord (>= 2.2)
-    activerecord-jdbcpostgresql-adapter (50.0)
-      activerecord-jdbc-adapter (~> 50.0)
-      jdbc-postgres (>= 9.4, < 43)
+    activerecord-jdbc-adapter (1.3.24)
+      activerecord (>= 2.2, < 5.0)
+    activerecord-jdbcpostgresql-adapter (1.3.24)
+      activerecord-jdbc-adapter (~> 1.3.24)
+      jdbc-postgres (~> 9.1, <= 9.4.1206)
     activesupport (4.2.10)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -250,7 +250,7 @@ GEM
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
-    jdbc-postgres (42.1.4)
+    jdbc-postgres (9.4.1206)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -551,7 +551,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 4.2)
-  activerecord-jdbcpostgresql-adapter
+  activerecord-jdbcpostgresql-adapter (< 50)
   acts_as_list (~> 0.7)
   blacklight (~> 6.0.0)
   brakeman
