@@ -8,6 +8,14 @@ require 'rails_admin/config/fields/extensions/generic_help'
 RailsAdmin::Config::Fields::Types::Text.send(:include, RailsAdmin::Config::Fields::Extensions::GenericHelp)
 RailsAdmin::ApplicationHelper.send(:include, ::I18nHelper)
 
+# Workaround for https://github.com/sferik/rails_admin/issues/2502
+RailsAdmin::Config::Fields::Types::Json.inspect # Load before override.
+class RailsAdmin::Config::Fields::Types::Json
+  def queryable?
+    false
+  end
+end
+
 RailsAdmin.config do |config|
   config.main_app_name = ['Europeana Collections']
 
