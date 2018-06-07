@@ -170,7 +170,7 @@ class FacetPresenter < ApplicationPresenter
     if facet_in_params?(facet_name, item)
       search_action_url(remove_facet_params(item))
     else
-      search_action_url(add_facet_params(item))
+      add_facet_url(item)
     end
   end
 
@@ -183,16 +183,32 @@ class FacetPresenter < ApplicationPresenter
     search_state.remove_facet_params(facet_name, item).except(:locale, :api_url)
   end
 
-  def add_facet_params(item)
-    facet_params = search_state.add_facet_params_and_redirect(facet_name, item)
+  def add_facet_base_query
+    @add_facet_base_query ||= params.slice(:q, :f, :per_page, :view).to_query
+  end
+
+  def add_facet_parent_query
+    return @add_facet_parent_query if instance_variable_defined?(:@add_facet_parent_query)
+
+    @add_facet_parent_query = nil
+
     if @parent && facet_config.parent
       parent_facet = facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
       unless facet_in_params?(parent_facet, @parent)
-        tmp_search_state = Blacklight::SearchState.new(ActionController::Parameters.new(facet_params), @blacklight_config)
-        facet_params = tmp_search_state.add_facet_params(parent_facet, @parent)
+        @add_facet_parent_query = facet_cgi_query(parent_facet, @parent.value)
       end
     end
-    facet_params.except(:locale, :api_url)
+
+    @add_facet_parent_query
+  end
+
+  def add_facet_url(item)
+    item_query = facet_cgi_query(facet_name, item.value)
+    search_action_url + '?' + [add_facet_base_query, add_facet_parent_query, item_query].compact.join('&')
+  end
+
+  def facet_cgi_query(name, value)
+    [CGI.escape("f[#{name}][]"), CGI.escape(value)].join('=')
   end
 
   ##

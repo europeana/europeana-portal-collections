@@ -2,14 +2,11 @@
 
 module Facet
   class CollectionPresenter < SimplePresenter
-    def add_facet_params(item)
+    def add_facet_url(item)
       value = facet_value_for_facet_item(item)
 
-      if default_facet_value?(value)
-        params.except(:id).merge(controller: :portal, action: :index)
-      else
-        params.merge(controller: :collections, action: :show, id: value)
-      end
+      base_url = default_facet_value?(value) ? search_url : collection_url(value)
+      [base_url, add_facet_base_query].join('?')
     end
 
     ##
