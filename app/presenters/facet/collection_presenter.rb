@@ -4,21 +4,14 @@ module Facet
   class CollectionPresenter < SimplePresenter
     def add_facet_url(item)
       value = facet_value_for_facet_item(item)
-
       base_url = default_facet_value?(value) ? search_url : collection_url(value)
-      [base_url, add_facet_base_query].join('?')
+      [base_url, facet_item_url_base_query].join('?')
     end
 
-    ##
-    # Removing the collection facet only works when in a collection,
-    # as it redirects to the standard search.
-    # The only reason it takes a facet_item as a param is because
-    # this overrides {FacetPresenter}
-    #
-    # @param see {#facet_item}
-    # @return [Hash] Request parameters without the collection
-    def remove_facet_params(_item)
-      params.except(:id).merge(controller: :portal, action: :index)
+    # TODO: is this useful behaviour when the collection facet is presented
+    #       like a radio button where one is always selected?
+    def remove_facet_url(_item)
+      [search_url, facet_item_url_base_query].reject(&:blank?).join('?')
     end
 
     def filter_items

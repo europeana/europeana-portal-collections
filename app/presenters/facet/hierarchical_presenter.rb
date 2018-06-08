@@ -44,14 +44,12 @@ module Facet
     end
 
     ##
-    # Removes all child facets from params
-    def remove_facet_params(item)
-      super.tap do |p|
-        if p.key?(:f)
-          item_children(item).each do |child|
-            p[:f].delete(child.name)
-          end
-          p.delete(:f) if p[:f].empty?
+    # Removes all child facets from query string
+    def remove_facet_query(item)
+      super.tap do |query|
+        item_children(item).each do |child|
+          child_query = CGI.escape("f[#{child.name}][]")
+          query.gsub!(/#{child_query}=[^&]+&?/, '')
         end
       end
     end

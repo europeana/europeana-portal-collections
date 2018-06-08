@@ -167,24 +167,24 @@ class FacetPresenter < ApplicationPresenter
   # @param see {#facet_item}
   # @return [String] URL to add/remove the facet item from the search
   def facet_item_url(item)
-    if facet_in_params?(facet_name, item)
-      search_action_url(remove_facet_params(item))
-    else
-      add_facet_url(item)
-    end
+    facet_in_params?(facet_name, item) ? remove_facet_url(item) : add_facet_url(item)
+  end
+
+  def remove_facet_url(item)
+    [search_action_url, remove_facet_query(item)].reject(&:blank?).join('?')
   end
 
   ##
-  # Removes a facet item from request's parameters
+  # Removes a facet item from request's query string
   #
-  # @param see {#facet_item}
-  # @return [Hash] Request parameters without the given facet item
-  def remove_facet_params(item)
-    search_state.remove_facet_params(facet_name, item).except(:locale, :api_url)
+  # @return [String] Request query string without the given facet item
+  def remove_facet_query(item)
+    item_query = facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item)
+    facet_item_url_base_query.dup.sub(/#{item_query}&?/, '')
   end
 
-  def add_facet_base_query
-    @add_facet_base_query ||= params.slice(:q, :f, :per_page, :view).to_query
+  def facet_item_url_base_query
+    @facet_item_url_base_query ||= params.slice(:q, :f, :per_page, :view, :range).to_query
   end
 
   def add_facet_parent_query
@@ -203,8 +203,13 @@ class FacetPresenter < ApplicationPresenter
   end
 
   def add_facet_url(item)
-    item_query = facet_cgi_query(facet_name, item.value)
-    search_action_url + '?' + [add_facet_base_query, add_facet_parent_query, item_query].compact.join('&')
+    [search_action_url, add_facet_query(item)].reject(&:blank?).join('?')
+  end
+
+  # @return [String] Request query string with the given facet item added
+  def add_facet_query(item)
+    item_query = facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item)
+    [facet_item_url_base_query, add_facet_parent_query, item_query].reject(&:blank?).join('&')
   end
 
   def facet_cgi_query(name, value)
