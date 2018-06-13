@@ -16,6 +16,8 @@ class RailsAdmin::Config::Fields::Types::Json
   end
 end
 
+RailsAdmin::Config.parent_controller = 'ApplicationController'
+
 RailsAdmin.config do |config|
   config.main_app_name = ['Europeana Collections']
 
