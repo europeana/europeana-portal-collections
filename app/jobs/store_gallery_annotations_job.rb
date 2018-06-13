@@ -6,8 +6,6 @@
 #
 # TODO: ideally this job should be deferred from execution if any other instances
 #       of the job are already running for the same value of gallery_slug
-# TODO: create a job and rake task to queue storing/deleting annotations for all
-#       existing galleries
 class StoreGalleryAnnotationsJob < ActiveJob::Base
   queue_as :annotations
 
@@ -39,7 +37,7 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
 
   def create_annotations
     gallery.images.each do |image|
-      next if existing_annotation_targets.include?(image.annotation_target_uri)
+      next if gallery.has_annotation_for_target?(image.annotation_target)
       logger.info("Creating annotation linking #{image.annotation_target_uri} to #{gallery.annotation_link_resource_uri}".green.bold)
       image.annotation.tap do |annotation|
         annotation.api_user_token = gallery.annotation_api_user_token
@@ -58,10 +56,6 @@ class StoreGalleryAnnotationsJob < ActiveJob::Base
   end
 
   def delete_annotation?(annotation)
-    @delete_all || !gallery.image_annotation_targets.include?(annotation.target)
-  end
-
-  def existing_annotation_targets
-    gallery.annotations.map(&:target)
+    @delete_all || !gallery.needs_annotation?(annotation)
   end
 end

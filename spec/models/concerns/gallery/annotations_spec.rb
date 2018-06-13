@@ -1,22 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Gallery::Annotations do
-  let(:including_class) do
-    Class.new do
-      include Gallery::Annotations
-      attr_accessor :slug
-    end
-  end
-
-  let(:instance) do
-    including_class.new.tap do |instance|
-      instance.slug = gallery_slug
-    end
-  end
-
-  let(:gallery_slug) { 'nice-pictures' }
-
   subject { instance }
+  let(:instance) { Gallery.new(slug: gallery_slug) }
+  let(:gallery_slug) { 'nice-pictures' }
 
   describe '#annotations' do
     subject { instance.annotations }

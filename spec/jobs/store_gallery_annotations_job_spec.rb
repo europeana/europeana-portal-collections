@@ -3,6 +3,14 @@
 RSpec.describe StoreGalleryAnnotationsJob, :annotations_api do
   let(:gallery) { Gallery.published.first }
 
+  before do
+    # Override Annotations API shared context request stub for Hash targets
+    stub_request(:get, annotations_api_search_method_url).
+    to_return(status: 200,
+              body: api_responses(:annotations_search, target: :hash),
+              headers: { 'Content-Type' => 'application/ld+json' })
+  end
+
   it 'should be in the "annotations" queue' do
     expect { described_class.perform_later(gallery.slug) }.
       to have_enqueued_job.on_queue('annotations')

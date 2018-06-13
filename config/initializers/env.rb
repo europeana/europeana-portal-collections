@@ -29,7 +29,11 @@ Rails.application.config.x.europeana = {}.tap do |europeana|
   )
 end
 
-Rails.application.config.x.gallery_validation_mail_to = ENV['GALLERY_VALIDATION_MAIL_TO']
+Rails.application.config.x.gallery = OpenStruct.new(
+  annotation_link_resource_host: ENV['GALLERY_ANNOTATION_LINK_RESOURCE_HOST'],
+  validation_mail_to: ENV['GALLERY_VALIDATION_MAIL_TO']
+)
+
 
 # Google-centric configuration
 Rails.application.config.x.google = OpenStruct.new(

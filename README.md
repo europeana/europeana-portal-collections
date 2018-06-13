@@ -1,6 +1,6 @@
 # Europeana Portal with Collections
 
-[![Build Status](https://travis-ci.org/europeana/europeana-portal-collections.svg?branch=develop)](https://travis-ci.org/europeana/europeana-portal-collections) [![Security](https://hakiri.io/github/europeana/europeana-portal-collections/develop.svg)](https://hakiri.io/github/europeana/europeana-portal-collections/develop) [![Dependency Status](https://gemnasium.com/europeana/europeana-portal-collections.svg)](https://gemnasium.com/europeana/europeana-portal-collections) [![Maintainability](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/maintainability)](https://codeclimate.com/github/europeana/europeana-portal-collections/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/test_coverage)](https://codeclimate.com/github/europeana/europeana-portal-collections/test_coverage)
+[![Build Status](https://travis-ci.org/europeana/europeana-portal-collections.svg?branch=develop)](https://travis-ci.org/europeana/europeana-portal-collections) [![Security](https://hakiri.io/github/europeana/europeana-portal-collections/develop.svg)](https://hakiri.io/github/europeana/europeana-portal-collections/develop) [![Maintainability](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/maintainability)](https://codeclimate.com/github/europeana/europeana-portal-collections/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/test_coverage)](https://codeclimate.com/github/europeana/europeana-portal-collections/test_coverage)
 
 Europeana Portal with Collections as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
@@ -17,7 +17,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 * ImageMagick
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
-* PostgreSQL
+* PostgreSQL 9.4+
 
 ## Installation
 

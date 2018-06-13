@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-##
-# Annotations support for records
 module Europeana
   class Record
+    # Annotations support for records
     module Annotations
       # TODO: handle pagination if more than 100 items
       def annotations
@@ -14,7 +13,7 @@ module Europeana
         {
           qf: [
             %(generator_name:#{annotations_api_generator_name}),
-            %(target_uri:"#{annotation_target_uri}")
+            %(target_record_id:"#{id}")
           ]
         }
       end

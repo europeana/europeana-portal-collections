@@ -6,6 +6,15 @@ require 'rails_admin/config/actions/requeue'
 require 'rails_admin/config/fields/extensions/generic_help'
 
 RailsAdmin::Config::Fields::Types::Text.send(:include, RailsAdmin::Config::Fields::Extensions::GenericHelp)
+RailsAdmin::ApplicationHelper.send(:include, ::I18nHelper)
+
+# Workaround for https://github.com/sferik/rails_admin/issues/2502
+RailsAdmin::Config::Fields::Types::Json.inspect # Load before override.
+class RailsAdmin::Config::Fields::Types::Json
+  def queryable?
+    false
+  end
+end
 
 RailsAdmin.config do |config|
   config.main_app_name = ['Europeana Collections']
@@ -226,6 +235,15 @@ RailsAdmin.config do |config|
         filterable true
       end
       field :state
+      field :image_errors do
+        pretty_value do
+          if value.present?
+            bindings[:view].tag(:span, class: 'icon-warning-sign', title: 'This gallery has image errors!')
+          else
+            ''
+          end
+        end
+      end
       field :publisher
       field :published_at
     end
@@ -242,7 +260,7 @@ RailsAdmin.config do |config|
       field :topic_ids, :enum do
         multiple true
       end
-      field :image_portal_urls, :text do
+      field :image_portal_urls_text, :text do
         html_attributes rows: 15, cols: 80
       end
     end

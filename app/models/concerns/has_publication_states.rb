@@ -12,7 +12,7 @@ module HasPublicationStates
       state :draft, initial: true
       state :published
 
-      event :publish, after: :after_publish do
+      event :publish, after: :after_publish, guard: :publishable? do
         transitions from: :draft, to: :published
       end
 
@@ -22,7 +22,15 @@ module HasPublicationStates
     end
   end
 
-  ##
-  # Override this per-model if required
+  # Callback to run after the publish event has run
+  #
+  # Override per-model if required
   def after_publish; end
+
+  # Guard for the publish event
+  #
+  # Override per-model if required
+  def publishable?
+    true
+  end
 end

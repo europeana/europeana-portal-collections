@@ -11,6 +11,7 @@ module ApiResponseFixtures
     def self.render(template_content, **locals)
       b = empty_binding
       locals.each { |k, v| b.local_variable_set(k, v) }
+      b.local_variable_set(:local_assigns, locals)
       ERB.new(template_content).result(b)
     end
   end
@@ -24,7 +25,8 @@ module ApiResponseFixtures
   # @param locals [Hash] Local variables to pass to the ERB template
   # @return [String] JSON string for an API response to use in a stubbed request
   def api_responses(name, **locals)
-    path = File.expand_path("../../../fixtures/api_response/#{name}.json.erb", __FILE__)
+    format = locals.delete(:format) || 'json'
+    path = File.expand_path("../../../fixtures/api_response/#{name}.#{format}.erb", __FILE__)
     Fixture.render(File.read(path), **locals)
   end
 end

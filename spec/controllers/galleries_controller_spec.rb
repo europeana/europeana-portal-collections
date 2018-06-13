@@ -39,10 +39,13 @@ RSpec.describe GalleriesController do
     end
 
     it 'paginates galleries' do
-      allow_any_instance_of(Gallery).to receive(:validate_image_source_items) { true }
       (1..30).each do |gallery_num|
-        urls = (1..6).map { |image_num| "http://www.europeana.eu/portal/record/sample/record#{image_num}.html" }.join(' ')
-        Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls: urls).publish!
+        urls = (1..6).map do |image_num|
+          "http://www.europeana.eu/portal/record/sample/record#{image_num}.html?view=http://www.example.org/media/#{image_num}.jpg"
+        end.join(' ')
+        gallery = Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls_text: urls)
+        gallery.set_images
+        gallery.publish!
       end
 
       get :index, locale: 'en'
@@ -55,7 +58,7 @@ RSpec.describe GalleriesController do
       expect(assigns(:selected_topic)).to eq('all')
     end
 
-    context 'when filterd via topic' do
+    context 'when filtered via topic' do
       let(:fashion_topic) { topics(:fashion_topic) }
 
       before do
