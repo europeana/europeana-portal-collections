@@ -179,7 +179,7 @@ class FacetPresenter < ApplicationPresenter
   #
   # @return [String] Request query string without the given facet item
   def remove_facet_query(item)
-    item_query = facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item)
+    item_query = Regexp.escape(facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item))
     facet_item_url_base_query.dup.sub(/#{item_query}&?/, '')
   end
 

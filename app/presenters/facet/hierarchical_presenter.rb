@@ -48,8 +48,8 @@ module Facet
     def remove_facet_query(item)
       super.tap do |query|
         item_children(item).each do |child|
-          child_query = CGI.escape("f[#{child.name}][]")
-          query.gsub!(/#{child_query}=[^&]+&?/, '')
+          child_query_key = Regexp.escape(CGI.escape("f[#{child.name}][]"))
+          query.gsub!(/#{child_query_key}=[^&]+&?/, '')
         end
       end
     end
