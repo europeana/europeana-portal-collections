@@ -17,10 +17,13 @@ module Facet
     end
 
     def facet_item(item)
-      subfilters = item_children(item).map do |child|
-        FacetPresenter.build(child, @controller, @blacklight_config, item).display
+      subfilters = []
+      if facet_config.expandable || facet_in_params?(facet_name, item)
+        subfilters = item_children(item).map do |child|
+          FacetPresenter.build(child, @controller, @blacklight_config, item).display
+        end
+        subfilters.reject! { |sf| sf[:items].blank? }
       end
-      subfilters.reject! { |sf| sf[:items].blank? }
 
       {
         has_subfilters: subfilters.present?,
