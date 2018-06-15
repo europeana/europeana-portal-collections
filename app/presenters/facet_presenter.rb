@@ -193,14 +193,13 @@ class FacetPresenter < ApplicationPresenter
   end
 
   def build_add_facet_parent_query
-    if @parent && facet_config.parent
-      parent_facet = facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
-      unless facet_in_params?(parent_facet, @parent)
-        return facet_cgi_query(parent_facet, @parent.value)
-      end
-    end
+    return nil unless parent_facet.present?
 
-    nil
+    facet_in_params?(parent_facet, @parent) ? nil : facet_cgi_query(parent_facet, @parent.value)
+  end
+
+  def parent_facet
+    @parent_facet ||= facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
   end
 
   def add_facet_url(item)
