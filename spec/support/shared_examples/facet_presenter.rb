@@ -59,7 +59,7 @@ shared_examples 'a facet presenter' do
     end
 
     it 'should include URL to remove facet' do
-      expect(subject[:remove]).not_to match(facet.name)
+      expect(subject[:remove]).not_to include(facet.name)
     end
 
     it 'should include facet URL param name' do
