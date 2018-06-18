@@ -21,7 +21,7 @@ class GalleryImage
       def from_portal_url(portal_url)
         europeana_record_id = Europeana::Record.id_from_portal_url(portal_url)
         portal_url_query = Rack::Utils.parse_query(URI.parse(portal_url).query)
-        url = portal_url_query.nil? || portal_url_query['view'].nil? ? nil : CGI.unescape(portal_url_query['view'])
+        url = portal_url_query.nil? || portal_url_query['view'].nil? ? nil : portal_url_query['view']
         new(europeana_record_id: europeana_record_id, url: url)
       end
 
