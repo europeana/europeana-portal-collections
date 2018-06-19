@@ -14,19 +14,19 @@ module Facet
     end
 
     def facet_url
-      if boolean_facet_in_params?(@facet.name)
-        search_action_url(remove_facet_params(facet_params(@facet.name).first))
+      if boolean_facet_in_params?(facet_name)
+        remove_facet_url(facet_params(facet_name).first)
       elsif facet_checked?
-        search_action_url(search_state.add_facet_params_and_redirect(@facet.name, facet_config.boolean[:off]))
+        add_facet_url(facet_config.boolean[:off])
       else
-        search_action_url(search_state.add_facet_params_and_redirect(@facet.name, facet_config.boolean[:on]))
+        add_facet_url(facet_config.boolean[:on])
       end
     end
 
     def facet_checked?
-      if facet_config.boolean[:on].nil? && !boolean_facet_in_params?(@facet.name)
+      if facet_config.boolean[:on].nil? && !boolean_facet_in_params?(facet_name)
         true
-      elsif !facet_config.boolean[:on].nil? && facet_in_params?(@facet.name, facet_config.boolean[:on])
+      elsif !facet_config.boolean[:on].nil? && facet_in_params?(facet_name, facet_config.boolean[:on])
         true
       else
         facet_config.boolean[:default] == :on
