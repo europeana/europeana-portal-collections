@@ -8,8 +8,6 @@ module Facet
       [base_url, facet_item_url_base_query].join('?')
     end
 
-    # TODO: is this useful behaviour when the collection facet is presented
-    #       like a radio button where one is always selected?
     def remove_facet_url(_item)
       [search_url, facet_item_url_base_query].reject(&:blank?).join('?')
     end
@@ -34,14 +32,6 @@ module Facet
 
     def facet_params(_field)
       params[:controller] == 'collections' ? params[:id] : default_facet_value
-    end
-
-    def ordered(*)
-      super.tap do |items|
-        if all = items.detect { |item| default_facet_value?(facet_value_for_facet_item(item)) }
-          items.unshift(items.delete(all))
-        end
-      end
     end
   end
 end
