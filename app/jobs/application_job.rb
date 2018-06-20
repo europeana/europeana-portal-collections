@@ -11,8 +11,7 @@ class ApplicationJob < ActiveJob::Base
         exception: { class: exception.class.to_s, message: exception.message, backtrace: exception.backtrace },
         job: { class: self.class.to_s, arguments: arguments.inspect }
       ).deliver_later
-
-      raise exception
     end
+    raise exception
   end
 end
