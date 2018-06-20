@@ -13,6 +13,6 @@ class GalleryImage < ActiveRecord::Base
   validates :url, presence: true
 
   def portal_url
-    europeana_record.portal_url + '?view=' + CGI.escape(url)
+    url.nil? ? europeana_record.portal_url : europeana_record.portal_url + '?view=' + CGI.escape(url)
   end
 end

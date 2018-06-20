@@ -29,7 +29,7 @@ class GalleryImage
         tmp_image = from_portal_url(portal_url)
         options[:europeana_record_id] = tmp_image.europeana_record_id
         options[:url] = tmp_image.url
-        find_or_create_by(options)
+        find_or_create_by!(options)
       end
     end
 
