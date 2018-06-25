@@ -74,3 +74,8 @@ internal_server_error:
   state: 1
   type: 'Page::Error'
   http_code: 500
+
+newspapers_a_to_z_browse:
+  slug: 'collections/newspapers/a-z'
+  state: 1
+  type: 'Page::Browse::RecordGroups'

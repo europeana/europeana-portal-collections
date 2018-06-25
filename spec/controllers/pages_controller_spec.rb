@@ -36,5 +36,15 @@ RSpec.describe PagesController do
     end
 
     it 'should prevent access by unauthorized users' # e.g. only admins can see drafts
+
+    context 'when type is Page::Browse::RecordGroup' do
+      let(:page) { pages(:newspapers_a_to_z_browse) }
+      let(:params) { { locale: 'en', format: 'html', page: page.slug } }
+
+      it 'renders browse page template' do
+        expect(response.status).to eq(200)
+        expect(response).to render_template('pages/browse')
+      end
+    end
   end
 end
