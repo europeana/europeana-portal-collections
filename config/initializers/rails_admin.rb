@@ -36,7 +36,8 @@ RailsAdmin.config do |config|
   config.included_models = %w(
     Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
     FederationConfig Feed Gallery HeroImage Link Link::Promotion Link::Credit
-    Link::SocialMedia MediaObject Page Page::Error Page::Landing Topic User
+    Link::SocialMedia MediaObject Page Page::Browse::RecordGroups Page::Error
+    Page::Landing Topic User
   )
 
   config.actions do
@@ -410,6 +411,32 @@ RailsAdmin.config do |config|
       end
       field :banner
       field :settings_full_width, :boolean
+    end
+  end
+
+  config.model 'Page::Browse::RecordGroups' do
+    object_label_method :title
+    list do
+      field :slug
+      field :title do
+        searchable 'page_translations.title'
+        queryable true
+        filterable true
+      end
+      field :state
+    end
+    show do
+      field :slug
+      field :title
+      field :body
+      field :state
+    end
+    edit do
+      field :slug
+      field :title
+      field :body, :text do
+        html_attributes rows: 15, cols: 80
+      end
     end
   end
 
