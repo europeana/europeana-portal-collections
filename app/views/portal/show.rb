@@ -16,12 +16,8 @@ module Portal
     end
 
     # TODO: remove when new design is default
-    def js_vars
-      return super unless new_design?
-      super.tap do |vars|
-        page_name_var = vars.detect { |var| var[:name] == 'pageName' }
-        page_name_var[:value] = page_name_var[:value] + '-new'
-      end
+    def js_var_page_name
+      new_design? ? super + '-new' : super
     end
 
     # Are we rendering the new design?
