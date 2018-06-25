@@ -2,7 +2,7 @@
 
 class Page
   module Browse
-    class RecordGroups < Page
+    class RecordSets < Page
     
     end
   end

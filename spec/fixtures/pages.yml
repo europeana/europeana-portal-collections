@@ -78,4 +78,4 @@ internal_server_error:
 newspapers_a_to_z_browse:
   slug: 'collections/newspapers/a-z'
   state: 1
-  type: 'Page::Browse::RecordGroups'
+  type: 'Page::Browse::RecordSets'

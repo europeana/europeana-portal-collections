@@ -37,7 +37,7 @@ RSpec.describe PagesController do
 
     it 'should prevent access by unauthorized users' # e.g. only admins can see drafts
 
-    context 'when type is Page::Browse::RecordGroup' do
+    context 'when type is Page::Browse::RecordSets' do
       let(:page) { pages(:newspapers_a_to_z_browse) }
       let(:params) { { locale: 'en', format: 'html', page: page.slug } }
 

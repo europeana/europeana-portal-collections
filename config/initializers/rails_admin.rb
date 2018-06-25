@@ -36,7 +36,7 @@ RailsAdmin.config do |config|
   config.included_models = %w(
     Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
     FederationConfig Feed Gallery HeroImage Link Link::Promotion Link::Credit
-    Link::SocialMedia MediaObject Page Page::Browse::RecordGroups Page::Error
+    Link::SocialMedia MediaObject Page Page::Browse::RecordSets Page::Error
     Page::Landing Topic User
   )
 
@@ -414,7 +414,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'Page::Browse::RecordGroups' do
+  config.model 'Page::Browse::RecordSets' do
     object_label_method :title
     list do
       field :slug

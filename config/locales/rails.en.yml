@@ -39,9 +39,9 @@ en:
         permissionable_gallery_ids: Permissions on Galleries
         permissionable_landing_page_ids: Permissions on Landing Pages
     models:
-      page/browse/record_groups:
-        one: Record Group Browse Page
-        other: Record Group Browse Pages
+      page/browse/record_sets:
+        one: Record Sets Browse Page
+        other: Record Sets Browse Pages
       page/error:
         one: Error Page
         other: Error Pages
