@@ -11,13 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430075313) do
+ActiveRecord::Schema.define(version: 20180625102705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
-  enable_extension "pg_stat_statements"
-  enable_extension "unaccent"
 
   create_table "banner_translations", force: :cascade do |t|
     t.integer  "banner_id",              null: false
@@ -278,13 +275,50 @@ ActiveRecord::Schema.define(version: 20180430075313) do
 
   add_index "media_objects", ["source_url_hash"], name: "index_media_objects_on_source_url_hash", using: :btree
 
+  create_table "page_element_group_translations", force: :cascade do |t|
+    t.integer  "page_element_group_id", null: false
+    t.string   "locale",                null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "title"
+  end
+
+  add_index "page_element_group_translations", ["locale"], name: "index_page_element_group_translations_on_locale", using: :btree
+  add_index "page_element_group_translations", ["page_element_group_id"], name: "index_page_element_group_translations_on_page_element_group_id", using: :btree
+
+  create_table "page_element_groups", force: :cascade do |t|
+    t.integer  "page_id"
+    t.integer  "position"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "page_element_groups", ["page_id"], name: "index_page_element_groups_on_page_id", using: :btree
+  add_index "page_element_groups", ["position"], name: "index_page_element_groups_on_position", using: :btree
+  add_index "page_element_groups", ["type"], name: "index_page_element_groups_on_type", using: :btree
+
+  create_table "page_element_record_sets", force: :cascade do |t|
+    t.integer  "page_id",       null: false
+    t.string   "title",         null: false
+    t.string   "europeana_ids", null: false, array: true
+    t.string   "string",        null: false, array: true
+    t.string   "settings"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "page_element_record_sets", ["page_id"], name: "index_page_element_record_sets_on_page_id", using: :btree
+
   create_table "page_elements", force: :cascade do |t|
     t.integer "page_id"
     t.integer "positionable_id"
     t.string  "positionable_type"
     t.integer "position"
+    t.integer "page_element_group_id"
   end
 
+  add_index "page_elements", ["page_element_group_id"], name: "index_page_elements_on_page_element_group_id", using: :btree
   add_index "page_elements", ["position"], name: "index_page_elements_on_position", using: :btree
   add_index "page_elements", ["positionable_id", "positionable_type"], name: "index_page_elements_on_positionable_id_and_positionable_type", using: :btree
 
@@ -415,6 +449,9 @@ ActiveRecord::Schema.define(version: 20180430075313) do
   add_foreign_key "federation_configs", "collections"
   add_foreign_key "galleries", "users", column: "published_by"
   add_foreign_key "gallery_images", "galleries"
+  add_foreign_key "page_element_groups", "pages"
+  add_foreign_key "page_element_record_sets", "pages"
+  add_foreign_key "page_elements", "page_element_groups"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
   add_foreign_key "pages", "collections"
