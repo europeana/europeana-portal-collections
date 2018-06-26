@@ -28,11 +28,16 @@ module Pages
           foot: {
             link: {
               text: "More records like #{set.title}",
-              url: search_path(q: set.title)
+              url: content_browse_list_foot_link_url(set)
             }
           },
           items: set.europeana_ids&.map { |id| content_browse_list_item(id) }
         }
+      end
+
+      def content_browse_list_foot_link_url(set)
+        set_query = format(page.settings_set_query, set_query_value: CGI.escape(set.title))
+        search_url_with_query([page.settings_base_query, set_query].compact.join('&'))
       end
 
       def content_browse_list_item(id)

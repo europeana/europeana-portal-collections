@@ -24,6 +24,9 @@ en:
       page:
         settings_full_width: Full width?
         settings_layout_type: Layout
+      page/browse/record_sets:
+        settings_base_query: Base query
+        settings_set_query: Set query
       page/landing:
         newsletter_url: Newsletter URL
         feeds: What's happening Feeds

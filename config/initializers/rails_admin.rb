@@ -440,15 +440,13 @@ RailsAdmin.config do |config|
     show do
       field :slug
       field :title
-      field :body
       field :state
     end
     edit do
       field :slug
       field :title
-      field :body, :text do
-        html_attributes rows: 15, cols: 80
-      end
+      field :settings_base_query
+      field :settings_set_query
       field :sets
     end
   end
