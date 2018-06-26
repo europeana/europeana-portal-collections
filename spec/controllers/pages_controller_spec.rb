@@ -43,7 +43,13 @@ RSpec.describe PagesController do
 
       it 'renders browse page template' do
         expect(response.status).to eq(200)
-        expect(response).to render_template('pages/browse')
+        expect(response).to render_template('pages/browse/record_sets')
+      end
+
+      it 'queries API for documents'
+
+      it 'stores documents in @documents' do
+        expect(assigns[:document]).to be_present
       end
     end
   end
