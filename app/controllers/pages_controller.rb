@@ -22,7 +22,7 @@ class PagesController < ApplicationController
   protected
 
   def find_page!
-    @page = Page.find_by_slug!(params[:page])
+    @page = Page.includes(:elements).find_by_slug!(params[:page])
   end
 
   # Ascertain which template to render for the requested page
