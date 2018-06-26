@@ -51,20 +51,28 @@ module UrlHelper
     end
   end
 
-  # @param browse_entry [BrowseEntry]
-  # @param page [Page]
-  # @return [String] url
-  def browse_entry_url(browse_entry, page = nil, options = {})
-    browse_entry_query = Rack::Utils.parse_nested_query(browse_entry.query)
-    if page.present? && (slug_match = page.slug.match(/\Acollections\/(.*)\Z/))
-      collection = Collection.find_by_key(slug_match[1])
-      return collection_url(collection.key, browse_entry_query.reverse_merge(options)) unless collection.nil?
-    end
-    search_url(browse_entry_query.reverse_merge(options))
+  def browse_entry_url(browse_entry, page = nil, **options)
+    search_url_with_query(browse_entry.query, page, options)
   end
 
   def browse_entry_path(browse_entry, page = nil, options = {})
     browse_entry_url(browse_entry, page, options.merge(only_path: true))
+  end
+
+  # @param browse_entry [BrowseEntry]
+  # @param page [Page]
+  # @return [String] url
+  def search_url_with_query(query, page = nil, **options)
+    parsed_query = Rack::Utils.parse_nested_query(query)
+    url_options = parsed_query.reverse_merge(options)
+    url_options['q'] ||= ''
+
+    if page.present? && (slug_match = page.slug.match(/\Acollections\/(.*)\Z/))
+      collection = Collection.find_by_key(slug_match[1])
+      return collection_url(collection.key, url_options) unless collection.nil?
+    end
+
+    search_url(url_options)
   end
 
   def enquote_and_escape(val)
