@@ -4,6 +4,8 @@ en:
       collection:
         api_params: API parameters
         settings_default_search_layout: Default search layout
+      europeana/record/set:
+        settings_query_term: Query term
       gallery:
         image_portal_urls:
           Item URLs on the portal

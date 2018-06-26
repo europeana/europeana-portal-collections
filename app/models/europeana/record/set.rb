@@ -8,6 +8,8 @@ module Europeana
     # TODO: move portal URLs handling into model concern?
     # TODO: validate portal URLs / Europeana IDs
     class Set < ActiveRecord::Base
+      include HasSettingsAttribute
+
       self.table_name = 'europeana_record_sets'
 
       has_one :page_element, dependent: :destroy, as: :positionable
@@ -17,6 +19,8 @@ module Europeana
       # TODO: validate uniqueness in scope of page with custom validation method
       #       because ActiveRecord's scope option does not work on `has_one through`
       validates :title, presence: true
+
+      has_settings :query_term
 
       def portal_urls
         europeana_ids&.map { |id| Europeana::Record.portal_url(id) }
@@ -32,6 +36,10 @@ module Europeana
 
       def portal_urls_text=(value)
         self.portal_urls = value&.split(/\s+/)
+      end
+
+      def query_term
+        settings_query_term.present? ? settings_query_term : title
       end
     end
   end

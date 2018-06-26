@@ -36,7 +36,7 @@ module Pages
       end
 
       def content_browse_list_foot_link_url(set)
-        set_query = format(page.settings_set_query, set_query_value: CGI.escape(set.title))
+        set_query = format(page.settings_set_query, set_query_term: CGI.escape(set.query_term))
         search_url_with_query([page.settings_base_query, set_query].compact.join('&'))
       end
 

@@ -196,8 +196,10 @@ RailsAdmin.config do |config|
     edit do
       field :title
       field :portal_urls_text, :text do
+        required true
         html_attributes rows: 15, cols: 80
       end
+      field :settings_query_term
     end
   end
 
