@@ -150,6 +150,14 @@ ActiveRecord::Schema.define(version: 20180625102705) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "europeana_record_sets", force: :cascade do |t|
+    t.string   "title",         null: false
+    t.string   "europeana_ids", null: false, array: true
+    t.string   "settings"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "facet_link_groups", force: :cascade do |t|
     t.string   "facet_field"
     t.integer  "facet_values_count"
@@ -274,18 +282,6 @@ ActiveRecord::Schema.define(version: 20180625102705) do
   end
 
   add_index "media_objects", ["source_url_hash"], name: "index_media_objects_on_source_url_hash", using: :btree
-
-  create_table "page_element_record_sets", force: :cascade do |t|
-    t.integer  "page_id",       null: false
-    t.string   "title",         null: false
-    t.string   "europeana_ids", null: false, array: true
-    t.string   "string",        null: false, array: true
-    t.string   "settings"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "page_element_record_sets", ["page_id"], name: "index_page_element_record_sets_on_page_id", using: :btree
 
   create_table "page_elements", force: :cascade do |t|
     t.integer "page_id"
@@ -424,7 +420,6 @@ ActiveRecord::Schema.define(version: 20180625102705) do
   add_foreign_key "federation_configs", "collections"
   add_foreign_key "galleries", "users", column: "published_by"
   add_foreign_key "gallery_images", "galleries"
-  add_foreign_key "page_element_record_sets", "pages"
   add_foreign_key "page_elements", "pages"
   add_foreign_key "pages", "banners"
   add_foreign_key "pages", "collections"

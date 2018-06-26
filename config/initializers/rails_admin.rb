@@ -34,10 +34,10 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.included_models = %w(
-    Banner BrowseEntry Collection DataProvider DataProviderLogo FacetLinkGroup
-    FederationConfig Feed Gallery HeroImage Link Link::Promotion Link::Credit
-    Link::SocialMedia MediaObject Page Page::Browse::RecordSets Page::Error
-    Page::Landing Topic User
+    Banner BrowseEntry Collection DataProvider DataProviderLogo
+    Europeana::Record::Set FacetLinkGroup FederationConfig Feed Gallery HeroImage
+    Link Link::Promotion Link::Credit Link::SocialMedia MediaObject Page
+    Page::Browse::RecordSets Page::Error Page::Landing Topic User
   )
 
   config.actions do
@@ -186,6 +186,18 @@ RailsAdmin.config do |config|
     visible false
     field :image do
       thumb_method :medium
+    end
+  end
+
+  config.model 'Europeana::Record::Set' do
+    object_label_method :title
+    visible false
+
+    edit do
+      field :title
+      field :portal_urls_text, :text do
+        html_attributes rows: 15, cols: 80
+      end
     end
   end
 
@@ -437,6 +449,7 @@ RailsAdmin.config do |config|
       field :body, :text do
         html_attributes rows: 15, cols: 80
       end
+      field :sets
     end
   end
 

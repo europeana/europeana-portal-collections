@@ -4,8 +4,6 @@ en:
       collection:
         api_params: API parameters
         settings_default_search_layout: Default search layout
-      data_provider:
-        uri: URI
       gallery:
         image_portal_urls:
           Item URLs on the portal
@@ -19,8 +17,6 @@ en:
         settings_attribution_institution: Attribution institution
         settings_attribution_url: Attribution URL
         settings_attribution_text: Attribution text
-      link:
-        url: URL
       link/promotion:
         settings_category: Category
         settings_class: CSS class
@@ -50,4 +46,7 @@ en:
         one: Landing Page
         other: Landing Pages
         feeds: What's happening Feeds
-
+  attributes:
+    portal_urls_text: Portal URLs
+    uri: URI
+    url: URL

@@ -42,18 +42,24 @@ module Europeana
       def search_api_query_for_record_ids(record_ids)
         'europeana_id:("' + record_ids.join('" OR "') + '")'
       end
+
+      ##
+      # Returns the language-agnostic portal URL for a Europeana record
+      #
+      # @param id [String] record ID
+      # @return [String]
+      def portal_url(id)
+        "https://www.europeana.eu/portal/record#{id}.html"
+      end
     end
 
     def initialize(id)
       self.id = id
     end
 
-    ##
-    # Returns the language-agnostic portal URL for this Europeana record
-    #
-    # @return [String]
+    # @see Europeana::Record.portal_url
     def portal_url
-      "https://www.europeana.eu/portal/record#{id}.html"
+      self.class.portal_url(id)
     end
 
     # RDF for this record.

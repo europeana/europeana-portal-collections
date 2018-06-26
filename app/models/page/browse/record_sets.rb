@@ -3,8 +3,12 @@
 class Page
   module Browse
     class RecordSets < Page
-      has_many :sets, class_name: 'PageElement::RecordSet', inverse_of: :page,
-                      dependent: :destroy
+      has_many :sets, through: :elements, source: :positionable,
+                      source_type: 'Europeana::Record::Set'
+
+      validates :title, presence: true
+
+      accepts_nested_attributes_for :sets, allow_destroy: true
     end
   end
 end
