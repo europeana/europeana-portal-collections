@@ -9,6 +9,7 @@ class PagesController < ApplicationController
 
   include CacheHelper
   include EnforceDefaultFormat
+  include Europeana::SearchByRecordIds
 
   attr_reader :body_cache_key
 
@@ -35,10 +36,9 @@ class PagesController < ApplicationController
   # Populates instance variables for the page based on its type
   def populate_content_for_page
     return if body_cached?
+
     if @page.is_a?(Page::Browse::RecordSets)
-      @documents = search_api_for_record_metadata.each_with_object({}) do |document, memo|
-        memo[document.id] = document
-      end
+      @documents = search_results_for_europeana_ids(@page.europeana_ids)
     end
   end
 
@@ -61,16 +61,5 @@ class PagesController < ApplicationController
 
   def custom_page_template
     @custom_page_template ||= "pages/custom/#{@page.slug}"
-  end
-
-  # @return [Array<Europeana::Blacklight::Document>]
-  # TODO: skip facets and use minimal profile
-  # TODO: make multiple requests when IDs > 100
-  def search_api_for_record_metadata
-    search_results(blacklight_api_params_for_records).last
-  end
-
-  def blacklight_api_params_for_records
-    { q: @page.search_api_query_for_records, per_page: 100 }
   end
 end

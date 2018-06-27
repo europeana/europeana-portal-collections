@@ -41,6 +41,7 @@ module Pages
       end
 
       def content_browse_list_item(id)
+        return {} if documents[id].blank?
         presenter = Document::SearchResultPresenter.new(documents[id], controller)
 
         {

@@ -55,24 +55,14 @@ class Gallery < ActiveRecord::Base
     end
   end
 
-  ##
-  # Constructs a Search API query for al set of gallery images.
-  #
-  # @param images [Enumerable<GalleryImage>]
-  # @return [String]
-  # @see Europeana::Record.search_api_query_for_record_ids
   class << self
-    def search_api_query_for_images(images)
-      Europeana::Record.search_api_query_for_record_ids(images.map(&:europeana_record_id))
-    end
-
     def valid_image_count?(count)
       NUMBER_OF_IMAGES.cover?(count)
     end
   end
 
-  def search_api_query_for_images
-    self.class.search_api_query_for_images(images)
+  def europeana_record_ids
+    images.map(&:europeana_record_id)
   end
 
   def to_param
