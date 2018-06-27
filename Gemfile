@@ -81,6 +81,8 @@ group :development, :profiling, :production do
 end
 
 group :development, :profiling, :test do
+  gem 'binding_of_caller'
+  gem 'byebug', platforms: %i(mri mingw x64_mingw)
   gem 'dotenv-rails', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '~> 0.53', require: false
@@ -92,6 +94,7 @@ group :development, :profiling do
 end
 
 group :development do
+  gem 'better_errors'
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'spring', '~> 1.6'
