@@ -38,7 +38,7 @@ class PagesController < ApplicationController
     return if body_cached?
 
     if @page.is_a?(Page::Browse::RecordSets)
-      @documents = search_results_for_europeana_ids(@page.europeana_ids)
+      @items = search_results_for_europeana_ids(@page.europeana_ids, profile: 'minimal')
     end
   end
 

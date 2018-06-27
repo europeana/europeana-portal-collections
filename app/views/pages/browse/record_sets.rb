@@ -41,14 +41,15 @@ module Pages
       end
 
       def content_browse_list_item(id)
-        return {} if documents[id].blank?
-        presenter = Document::SearchResultPresenter.new(documents[id], controller)
+        return {} if items[id].blank?
+
+        texts = [items[id]['title']&.first, items[id]['year']&.first].compact
 
         {
-          img_url: presenter.thumbnail_url,
+          img_url: items[id]['edmPreview']&.first,
           url: document_path(id: id[1..-1], format: 'html'),
-          has_text: true,
-          texts: [presenter.title, presenter.field_value(:year)]
+          has_text: texts.present?,
+          texts: texts
         }
       end
     end

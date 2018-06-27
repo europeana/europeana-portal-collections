@@ -5,8 +5,6 @@ module Europeana
     # A set of Europeana records
     #
     # TODO: store on the Sets API once implemented?
-    # TODO: move portal URLs handling into model concern?
-    # TODO: validate portal URLs / Europeana IDs
     class Set < ActiveRecord::Base
       include HasSettingsAttribute
 
@@ -16,8 +14,6 @@ module Europeana
       has_one :page, through: :page_element
 
       validates :europeana_ids, presence: true
-      # TODO: validate uniqueness in scope of page with custom validation method
-      #       because ActiveRecord's scope option does not work on `has_one through`
       validates :title, presence: true
 
       has_settings :query_term
