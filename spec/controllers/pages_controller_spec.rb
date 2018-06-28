@@ -48,9 +48,7 @@ RSpec.describe PagesController do
 
       it 'queries API for documents'
 
-      it 'stores documents in @documents' do
-        expect(assigns[:document]).to be_present
-      end
+      it 'stores documents in @items'
     end
   end
 end

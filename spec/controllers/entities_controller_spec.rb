@@ -10,7 +10,7 @@ RSpec.describe EntitiesController do
 
   describe 'concerns' do
     subject { described_class }
-    it { is_expected.to include(Europeana::EntitiesApiConsumer) }
+    it { is_expected.to include(Europeana::EntitiesAPIConsumer) }
   end
 
   describe 'GET #suggest' do

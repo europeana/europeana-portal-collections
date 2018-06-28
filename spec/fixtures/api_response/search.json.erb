@@ -1,6 +1,6 @@
 <%
 items = (0..20).map do |index|
-  id = '/sample/record' + index.to_s
+  id = '/123/record' + index.to_s
   edm_preview = 'http://europeanastatic.eu/api/image?uri=' + CGI.escape("http://www.example.com#{id}") + '&size=LARGE&type=TEXT'
   '{"id":"' + id + '","title":["' + id + '"],"edmIsShownBy":["providerurl' + id + '"],"edmPreview":["' + edm_preview + '"]}'
 end
