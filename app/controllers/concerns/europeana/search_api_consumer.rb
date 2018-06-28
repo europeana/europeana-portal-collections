@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Europeana
-  module SearchByRecordIds
+  module SearchAPIConsumer
     extend ActiveSupport::Concern
 
     include ApiHelper

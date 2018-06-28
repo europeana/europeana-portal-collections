@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 
   include CacheHelper
   include EnforceDefaultFormat
-  include Europeana::SearchByRecordIds
+  include Europeana::SearchAPIConsumer
 
   attr_reader :body_cache_key
 

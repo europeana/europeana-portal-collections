@@ -2,7 +2,7 @@
 
 class GalleriesController < ApplicationController
   include CacheHelper
-  include Europeana::SearchByRecordIds
+  include Europeana::SearchAPIConsumer
   include HomepageHeroImage
   include PaginatedController
 
