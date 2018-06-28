@@ -20,6 +20,7 @@ module Europeana
     #   or +Blacklight+
     # @return [Hash{String => Hash},Hash{String => Europeana::Blacklight::Document}]
     #   Search results keyed by Europeana record ID
+    # TODO: make multiple requests in parallel?
     def search_results_for_europeana_ids(europeana_ids, blacklight: false, **options)
       id_count = europeana_ids.count
       return {} if id_count.zero?

@@ -447,6 +447,7 @@ RailsAdmin.config do |config|
     edit do
       field :slug
       field :title
+      field :settings_link_text
       field :settings_base_query
       field :settings_set_query
       field :sets

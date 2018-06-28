@@ -20,6 +20,12 @@ module Pages
 
       private
 
+      def content_browse_list_foot_link_text
+        @content_browse_list_foot_link_text ||= begin
+          page.settings_link_text.present? ? page.settings_link_text : t('site.pages.browse.record_sets.link_text')
+        end
+      end
+
       def content_browse_list(set)
         {
           head: {
@@ -27,7 +33,7 @@ module Pages
           },
           foot: {
             link: {
-              text: "More records like #{set.title}",
+              text: format(content_browse_list_foot_link_text, set_title: set.title),
               url: content_browse_list_foot_link_url(set)
             }
           },
@@ -40,13 +46,15 @@ module Pages
         search_url_with_query([page.settings_base_query, set_query].compact.join('&'))
       end
 
+      # TODO: favour lang aware title, and truncate, per +SearchResultPresenter#title+
       def content_browse_list_item(id)
         return {} if items[id].blank?
 
+        img_url = thumbnail_url_for_edm_preview(items[id]['edmPreview']&.first)
         texts = [items[id]['title']&.first, items[id]['year']&.first].compact
 
         {
-          img_url: items[id]['edmPreview']&.first,
+          img_url: img_url,
           url: document_path(id: id[1..-1], format: 'html'),
           has_text: texts.present?,
           texts: texts

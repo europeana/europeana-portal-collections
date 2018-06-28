@@ -28,6 +28,7 @@ en:
         settings_layout_type: Layout
       page/browse/record_sets:
         settings_base_query: Base query
+        settings_link_text: Link text
         settings_set_query: Set query
       page/landing:
         newsletter_url: Newsletter URL
