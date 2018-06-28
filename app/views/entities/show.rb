@@ -116,7 +116,7 @@ module Entities
     end
 
     def document_presenter(doc, response)
-      Document::SearchResultPresenter.new(doc, self, response)
+      Document::BlacklightSearchResultPresenter.new(doc, self, response)
     end
 
     def tab_items

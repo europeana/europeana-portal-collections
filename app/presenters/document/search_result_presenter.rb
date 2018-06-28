@@ -6,13 +6,12 @@ module Document
   class SearchResultPresenter < ApplicationPresenter
     include ActionView::Helpers::TextHelper
     include ApiHelper
-    include BlacklightDocumentPresenter
+    include LangMapDisplayingPresenter
     include Metadata::Rights
     include ThumbnailHelper
 
-    attr_reader :document, :controller
+    attr_reader :document, :controller, :response
 
-    # @param response [Europeana::Blacklight::Response]
     def initialize(document, controller, response = nil)
       @document = document
       @controller = controller
@@ -25,7 +24,7 @@ module Document
     # @return [Hash]
     def content
       {
-        object_url: controller.document_path(@document, format: 'html', q: params[:q], l: params_to_log),
+        object_url: controller.document_path(id: record_id, format: 'html', q: params[:q], l: params_to_log),
         title: title,
         text: text,
         year: year,
@@ -42,15 +41,11 @@ module Document
     end
 
     def doc_type
-      @doc_type ||= @document.fetch(:type, nil)
-    end
-
-    def field_value(fields, **options)
-      super(fields, options.merge(context: :index))
+      @doc_type ||= document.fetch(:type, nil)
     end
 
     def title
-      truncate(field_value(%w(dcTitleLangAware title)),
+      truncate(fv(%w(dcTitleLangAware title)),
                length: 225,
                separator: ' ',
                escape: false)
@@ -58,7 +53,7 @@ module Document
 
     def text
       {
-        medium: truncate(field_value(%w(dcDescriptionLangAware dcDescription)),
+        medium: truncate(fv(%w(dcDescriptionLangAware dcDescription)),
                          length: 277,
                          separator: ' ',
                          escape: false)
@@ -67,14 +62,14 @@ module Document
 
     def year
       {
-        long: field_value(:year)
+        long: fv(:year)
       }
     end
 
     def origin
       {
-        text: field_value('dataProvider'),
-        url: field_value('edmIsShownAt')
+        text: fv('dataProvider'),
+        url: fv('edmIsShownAt')
       }
     end
 
@@ -92,21 +87,25 @@ module Document
     end
 
     def thumbnail_url(generic: false)
-      thumbnail_url_for_edm_preview(field_value('edmPreview'), generic: generic, type: doc_type)
+      thumbnail_url_for_edm_preview(fv('edmPreview'), generic: generic, type: doc_type)
     end
 
     def media_rights
-      @media_rights ||= field_value('rights')
+      @media_rights ||= fv('rights')
     end
 
     protected
 
+    def record_id
+      document['id']
+    end
+
     def agent_label
-      field_value('edmAgentLabelLangAware') || field_value('edmAgentLabel') || field_value('dcCreator')
+      fv('edmAgentLabelLangAware') || fv('edmAgentLabel') || fv('dcCreator')
     end
 
     def concept_labels
-      labels = @document.fetch('edmConceptPrefLabelLangAware', []) || []
+      labels = document.fetch('edmConceptPrefLabelLangAware', []) || []
       return nil if labels.is_a?(Hash)
       {
         items: labels[0..3].map { |c| { text: c } }
@@ -117,11 +116,15 @@ module Document
       controller.params
     end
 
+    def rank
+      nil
+    end
+
     def params_to_log
       {
         p: params.slice(:q, :f, :mlt, :range),
-        r: @document.rank,
-        t: @response.nil? ? nil : @response.total
+        r: rank,
+        t: response.nil? ? nil : response.total
       }
     end
   end

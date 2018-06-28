@@ -29,7 +29,7 @@ class GalleriesController < ApplicationController
     authorize! :show, @gallery
 
     @body_cache_key = 'explore/' + @gallery.cache_key
-    @documents = search_results_for_europeana_ids(@gallery.europeana_record_ids, blacklight: true).values unless body_cached?
+    @documents = search_results_for_europeana_ids(@gallery.europeana_record_ids).values unless body_cached?
 
     respond_to do |format|
       format.html
