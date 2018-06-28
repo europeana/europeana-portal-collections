@@ -24,7 +24,7 @@ module Document
     # @return [Hash]
     def content
       {
-        object_url: controller.document_path(id: record_id, format: 'html', q: params[:q], l: params_to_log),
+        object_url: controller.document_path(id: record_id[1..-1], format: 'html', q: params[:q], l: params_to_log),
         title: title,
         text: text,
         year: year,
