@@ -4,9 +4,10 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.10'
 
-gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
-
+# TODO: europeana-api here temporarily until a new release is pushed to rubygems.org
+gem 'europeana-api', git: 'https://github.com/europeana/europeana-api-client-ruby.git', ref: 'b9b75d452f07d770b36c14ca9642c12ddee387b2'
 gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git', branch: 'develop'
+gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
 
 # Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
 # https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
@@ -30,7 +31,7 @@ gem 'cancancan', '~> 1.12'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise'
-gem 'europeana-api', '~> 1.0.0'
+# gem 'europeana-api', '~> 1.0.0'
 gem 'europeana-blacklight', '~> 1.2.0'
 gem 'europeana-feedback-button', '0.0.5'
 gem 'europeana-feeds'
