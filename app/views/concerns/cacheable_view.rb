@@ -7,7 +7,7 @@ module CacheableView
 
   def cached_body
     lambda do |text|
-      if cache_body?
+      if cacheable?
         Rails.cache.fetch(cache_key(body_cache_key), expires_in: cache_ttl) { render(text) }
       else
         render(text)
