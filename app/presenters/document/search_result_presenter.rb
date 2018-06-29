@@ -102,11 +102,22 @@ module Document
     protected
 
     def agent_label
-      field_value('edmAgentLabelLangAware') || field_value('edmAgentLabel') || field_value('dcCreator')
+      if has_displayable_agents
+        field_value('edmAgentLabelLangAware') || field_value('edmAgentLabel') || field_value('dcCreator') || field_value('dcContributor')
+      else
+        field_value('dcCreator') || field_value('dcContributor')
+      end
+    end
+
+    def has_displayable_agents
+      displayable_agent_field_values = []
+      displayable_agent_field_values.push(*@document.fetch('dcCreator', []))
+      displayable_agent_field_values.push(*@document.fetch('dcContributor', []))
+      @document.fetch('edmAgent', []).any? { |agent| displayable_agent_field_values.include?(agent) }
     end
 
     def concept_labels
-      labels = @document.fetch('edmConceptPrefLabelLangAware', []) || []
+      labels = @document.fetch('edmConceptPrefLabelLangAware', [])
       return nil if labels.is_a?(Hash)
       {
         items: labels[0..3].map { |c| { text: c } }
