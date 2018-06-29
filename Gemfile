@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.10'
 
 # TODO: europeana-api here temporarily until a new release is pushed to rubygems.org
-gem 'europeana-api', git: 'https://github.com/europeana/europeana-api-client-ruby.git', ref: 'b9b75d452f07d770b36c14ca9642c12ddee387b2'
+gem 'europeana-api', git: 'https://github.com/europeana/europeana-api-client-ruby.git', ref: '71e4e6f7f61cf58cc1f7b88904599d8c808685d8'
 gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git', branch: 'develop'
 gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
 
