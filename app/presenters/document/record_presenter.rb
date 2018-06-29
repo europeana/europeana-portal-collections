@@ -37,22 +37,29 @@ module Document
     # Looks up dc:Creators, if they are europeana entity agents returns them paired with
     # the respective urls for retrieving thumbnails via JS.
     #
-    # @return [Hash]
+    # @return [Hash<Array<Hash>>,<Bool>>]
     def creators_info
       creator_entities = agents_for('proxies.dcCreator').select do |entity|
-        URI.parse(entity['about']).host == 'data.europeana.eu'
+        begin
+          URI.parse(entity['about']).host == 'data.europeana.eu'
+        rescue URI::Error
+          false
+        end
       end
 
+      info = {}
       if !creator_entities&.any?
-        { title: field_value(['proxies.dcCreator']), europeana_entities: false }
+        info = { creators: [{ title: field_value('proxies.dcCreator')}], europeana_entities: false }
       else
-        creator_entities.map do |agent|
+        info[:creators] = creator_entities.map do |agent|
           {
-            title: document.localize_lang_map(agent['prefLabel']),
+            title: document.localize_lang_map(agent['prefLabel']).first,
             url: agent['about']
           }
-        end << { europeana_entities: true }
+        end
+        info[:europeana_entities] = true
       end
+      info
     end
 
     ##
