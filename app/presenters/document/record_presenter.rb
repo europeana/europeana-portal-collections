@@ -30,7 +30,7 @@ module Document
         agent_label_for('proxies.dcCreator') ||
           field_value('dcCreator') ||
           field_value('proxies.dcCreator') ||
-          agent_label_for('proxies.dcContirbutor') ||
+          agent_label_for('proxies.dcContributor') ||
           field_value('dcContributor') ||
           field_value('proxies.dcContributor')
       end
