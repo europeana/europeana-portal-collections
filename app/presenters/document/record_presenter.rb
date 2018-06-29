@@ -33,6 +33,39 @@ module Document
       end
     end
 
+    ##
+    # Looks up dc:Creators, if they are europeana entity agents returns them paired with
+    # the respective urls for retrieving thumbnails via JS.
+    #
+    # @return [Hash]
+    def creators_info
+      creator_entities = agents_for('proxies.dcCreator').select! do |entity|
+        URI.parse(entity['about']).host == 'data.europeana.eu'
+      end
+
+      if !creator_entities&.any?
+        { title: field_value(['proxies.dcCreator']), europeana_entities: false }
+      else
+        creator_entities.map do |agent|
+          {
+            title: document.localize_lang_map(agent['prefLabel']),
+            url: agent['about']
+          }
+        end << { europeana_entities: true }
+      end
+    end
+
+    ##
+    # Looks up an agent entity for the field passed as a param.
+    #
+    # @param field [#string] The field in the document to find an agent for
+    # @return [Array<Hash>]
+    def agents_for(field)
+      document.fetch(field.to_s, []).each_with_object([]) do |field_value, memo|
+        memo.push(*document.fetch('agents', []).select { |agent| agent[:about] == field_value })
+      end
+    end
+
     def edm_is_shown_at
       @edm_is_shown_at ||= aggregation.fetch('edmIsShownAt', nil)
     end
