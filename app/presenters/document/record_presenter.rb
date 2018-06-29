@@ -27,10 +27,27 @@ module Document
 
     def creator_title
       @creator_title ||= begin
-        document.fetch('agents.prefLabel', []).first ||
+        agent_label_for('proxies.dcCreator') ||
           field_value('dcCreator') ||
-          field_value('proxies.dcCreator')
+          field_value('proxies.dcCreator') ||
+          agent_label_for('proxies.dcContirbutor') ||
+          field_value('dcContributor') ||
+          field_value('proxies.dcContributor')
       end
+    end
+
+    ##
+    # Looks up an agent entity for the field passed as a param.
+    # Then returns the localized skos:prefLabel
+    #
+    # @param field [#string] The field in the document to find an agent for
+    # @return [String, nil]
+    def agent_label_for(field)
+      document.fetch(field.to_s, []).each do |field_value|
+        entity = document.fetch('agents', []).select { |agent| agent[:about] == field_value }.first
+        return document.localize_lang_map(entity['prefLabel']) if entity
+      end
+      nil
     end
 
     def edm_is_shown_at
