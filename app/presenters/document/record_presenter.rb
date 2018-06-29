@@ -39,7 +39,7 @@ module Document
     #
     # @return [Hash]
     def creators_info
-      creator_entities = agents_for('proxies.dcCreator').select! do |entity|
+      creator_entities = agents_for('proxies.dcCreator').select do |entity|
         URI.parse(entity['about']).host == 'data.europeana.eu'
       end
 
