@@ -47,19 +47,20 @@ module Document
         end
       end
 
-      info = {}
-      if !creator_entities&.any?
-        info = { creators: [{ title: field_value('proxies.dcCreator')}], europeana_entities: false }
-      else
-        info[:creators] = creator_entities.map do |agent|
-          {
-            title: document.localize_lang_map(agent['prefLabel']).first,
-            url: agent['about']
-          }
+      {}.tap do |info|
+        if creator_entities.blank?
+          info[:creators] = [{ title: field_value('proxies.dcCreator') }]
+          info[:europeana_entities] = false
+        else
+          info[:creators] = creator_entities.map do |agent|
+            {
+              title: document.localize_lang_map(agent['prefLabel']).first,
+              url: agent['about']
+            }
+          end
+          info[:europeana_entities] = true
         end
-        info[:europeana_entities] = true
       end
-      info
     end
 
     ##
