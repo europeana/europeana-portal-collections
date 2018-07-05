@@ -112,12 +112,6 @@ class ProResourcePresenter < ApplicationPresenter
     DateTime.parse(datetime).strftime(format || '%-d %B, %Y') # @todo Localeapp the date format
   end
 
-  def time_range(from_attribute, to_attribute)
-    range = date_range(from_attribute, to_attribute, '%H:%M')
-    return range unless range == '00:00'
-    t('site.events.all_day')
-  end
-
   def geolocation
     @geolocation ||= resource.respond_to?(:geolocation) ? resource.geolocation : nil
   end

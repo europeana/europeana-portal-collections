@@ -36,21 +36,4 @@ RSpec.feature 'Pro RSS feeds' do
   #     end
   #   end
   # end
-  #
-  # context 'events' do
-  #   let(:json_api_url) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/events(\?|\z)} }
-  #   let(:response_body) { '{"meta": {"count": 1, "total": 1}, "data": [{ "id": "1", "type": "events" }]}' }
-  #
-  #   describe 'events rss feed' do
-  #     it 'should be present and valid' do
-  #       visit '/en/events.rss'
-  #
-  #       parsed_feed = Feedjira::Feed.parse_with(Feedjira::Parser::RSS, page.body)
-  #
-  #       expect(parsed_feed.title).to eq('Europeana - Events')
-  #       expect(parsed_feed.url).to eq('http://www.example.com/en/blogs')
-  #       expect(parsed_feed.entries.count).to be > 0
-  #     end
-  #   end
-  # end
 end
