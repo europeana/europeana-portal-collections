@@ -6,6 +6,7 @@ module Document
   class RecordPresenter < ApplicationPresenter
     include ActionView::Helpers::TextHelper
     include BlacklightDocumentPresenter
+    include Entities
     include Record::IIIF
     include Metadata::Rights
 
@@ -39,7 +40,7 @@ module Document
     #
     # @return [Hash<Array<Hash>>,<Bool>>]
     def creators_info
-      creator_entities = agents_for('proxies.dcCreator').select do |entity|
+      creator_entities = document_entities('agents', 'proxies.dcCreator').select do |entity|
         begin
           URI.parse(entity['about']).host == 'data.europeana.eu'
         rescue URI::Error
@@ -60,17 +61,6 @@ module Document
           end
           info[:europeana_entities] = true
         end
-      end
-    end
-
-    ##
-    # Looks up an agent entity for the field passed as a param.
-    #
-    # @param field [#string] The field in the document to find an agent for
-    # @return [Array<Hash>]
-    def agents_for(field)
-      document.fetch(field.to_s, []).each_with_object([]) do |field_value, memo|
-        memo.push(*document.fetch('agents', []).select { |agent| agent[:about] == field_value })
       end
     end
 
