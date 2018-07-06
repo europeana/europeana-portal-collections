@@ -167,32 +167,53 @@ class FacetPresenter < ApplicationPresenter
   # @param see {#facet_item}
   # @return [String] URL to add/remove the facet item from the search
   def facet_item_url(item)
-    if facet_in_params?(facet_name, item)
-      search_action_url(remove_facet_params(item))
-    else
-      search_action_url(add_facet_params(item))
-    end
+    facet_in_params?(facet_name, item) ? remove_facet_url(item) : add_facet_url(item)
+  end
+
+  def remove_facet_url(item)
+    [search_action_url, remove_facet_query(item)].reject(&:blank?).join('?')
   end
 
   ##
-  # Removes a facet item from request's parameters
+  # Removes a facet item from request's query string
   #
-  # @param see {#facet_item}
-  # @return [Hash] Request parameters without the given facet item
-  def remove_facet_params(item)
-    search_state.remove_facet_params(facet_name, item).except(:locale, :api_url)
+  # @return [String] Request query string without the given facet item
+  def remove_facet_query(item)
+    item_query = Regexp.escape(facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item))
+    facet_item_url_base_query.dup.sub(/#{item_query}&?/, '')
   end
 
-  def add_facet_params(item)
-    facet_params = search_state.add_facet_params_and_redirect(facet_name, item)
-    if @parent && facet_config.parent
-      parent_facet = facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
-      unless facet_in_params?(parent_facet, @parent)
-        tmp_search_state = Blacklight::SearchState.new(ActionController::Parameters.new(facet_params), @blacklight_config)
-        facet_params = tmp_search_state.add_facet_params(parent_facet, @parent)
-      end
-    end
-    facet_params.except(:locale, :api_url)
+  def facet_item_url_base_query
+    @facet_item_url_base_query ||= params.slice(:q, :f, :per_page, :view, :range).to_query
+  end
+
+  def add_facet_parent_query
+    return @add_facet_parent_query if instance_variable_defined?(:@add_facet_parent_query)
+    @add_facet_parent_query = build_add_facet_parent_query
+  end
+
+  def build_add_facet_parent_query
+    return nil unless parent_facet.present?
+
+    facet_in_params?(parent_facet, @parent) ? nil : facet_cgi_query(parent_facet, @parent.value)
+  end
+
+  def parent_facet
+    @parent_facet ||= facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
+  end
+
+  def add_facet_url(item)
+    [search_action_url, add_facet_query(item)].reject(&:blank?).join('?')
+  end
+
+  # @return [String] Request query string with the given facet item added
+  def add_facet_query(item)
+    item_query = facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item)
+    [facet_item_url_base_query, add_facet_parent_query, item_query].reject(&:blank?).join('&')
+  end
+
+  def facet_cgi_query(name, value)
+    [CGI.escape("f[#{name}][]"), CGI.escape(value)].join('=')
   end
 
   ##

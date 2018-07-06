@@ -90,6 +90,7 @@ module BlacklightConfig
                              format_value_as: ->(value) { value.to_i }
       config.add_facet_field 'REUSABILITY',
                              hierarchical: true,
+                             expandable: true,
                              only: ->(item) { item.value != 'uncategorized' }
       config.add_facet_field 'RIGHTS',
                              hierarchical: true,

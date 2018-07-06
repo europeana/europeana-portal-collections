@@ -142,19 +142,36 @@ module Facet
         labellers[field] = options
       end
 
+      def language_facet_item_labels
+        @language_facet_item_labels ||= {}
+      end
+
       ##
       # Special label for the Language facet items
       #
       # Makes use of both I18nData (https://github.com/grosser/i18n_data) and localeapp via I18n translations
       #
+      # Memoized due to expensive I18nData lookups.
+      #
       # @return [String]
-      def language_facet_item_label(language_code)
-        locale = I18n.locale == :no ? 'NN' : I18n.locale # The norwegian language file is named 'NN' not 'NO'
-        i18ndata_label = I18nData.languages(locale)[language_code.upcase]
+      def language_facet_item_label(item)
+        locale = i18n_locale
+        language_code = item.upcase
 
-        return i18ndata_label.titleize unless i18ndata_label.blank?
+        language_facet_item_labels[locale] ||= {}
+        language_facet_item_labels[locale][language_code] ||= begin
+          i18ndata_label = I18nData.languages(locale)[language_code]
 
-        I18n.t(language_code.to_sym, scope: 'global.languages', default: language_code.upcase)
+          if i18ndata_label.blank?
+            I18n.t(item.to_sym, scope: 'global.languages', default: language_code)
+          else
+            i18ndata_label.titleize
+          end
+        end
+      end
+
+      def country_facet_item_labels
+        @country_facet_item_labels ||= {}
       end
 
       ##
@@ -162,16 +179,26 @@ module Facet
       #
       # Makes use of both I18nData (https://github.com/grosser/i18n_data) and localeapp via I18n translations
       #
+      # Memoized due to expensive I18nData lookups.
+      #
       # @return [String]
       def country_facet_item_label(item)
         country_name = item.dup
-        locale = I18n.locale == :no ? 'NN' : I18n.locale # The norwegian language file is named 'NN' not 'NO'
-        i18ndata_label = I18nData.countries(locale)[I18nData.country_code(country_name.titleize)]
-        if i18ndata_label.blank?
-          I18n.t(country_name.gsub(/\s+/, '').to_sym, scope: 'global.facet.country', default: country_name.titleize)
-        else
-          i18ndata_label
+        locale = i18n_locale
+
+        country_facet_item_labels[locale] ||= {}
+        country_facet_item_labels[locale][country_name] ||= begin
+          i18ndata_label = I18nData.countries(locale)[I18nData.country_code(country_name.titleize)]
+          if i18ndata_label.blank?
+            I18n.t(country_name.gsub(/\s+/, '').to_sym, scope: 'global.facet.country', default: country_name.titleize)
+          else
+            i18ndata_label
+          end
         end
+      end
+
+      def i18n_locale
+        I18n.locale == :no ? 'NN' : I18n.locale # The norwegian language file is named 'NN' not 'NO'
       end
     end
 

@@ -32,12 +32,9 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
       end
 
       context 'when the value is NOT in the I18nData gem' do
-        before do
-          allow(items.first).to receive(:value) { 'xy' }
-        end
-
         context 'when the value is in localeapp' do
           before do
+            allow(items.first).to receive(:value) { 'xy' }
             allow(I18n).to receive(:t) { 'default translation' }
             allow(I18n).to receive(:t).with(:xy, scope: 'global.languages', default: 'XY') { 'Localeapp Dutch' }
           end
@@ -47,14 +44,17 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
         end
 
         context 'when the value is not in localeapp' do
-          it 'should use the formated literal value' do
-            expect(subject[:items].first[:text]).to eq 'XY'
+          before do
+            allow(items.first).to receive(:value) { 'xyz' }
+          end
+          it 'should use the formatted literal value' do
+            expect(subject[:items].first[:text]).to eq 'XYZ'
           end
         end
       end
     end
 
-    describe 'the Country facet' do
+    describe 'the country facet' do
       let(:field_name) { 'COUNTRY' }
       let(:items) { facet_items(1) }
 
@@ -70,12 +70,9 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
       end
 
       context 'when the value is NOT in the I18nData gem' do
-        before do
-          allow(items.first).to receive(:value) { 'narnia' }
-        end
-
         context 'when the value is in localeapp' do
           before do
+            allow(items.first).to receive(:value) { 'narnia' }
             allow(I18n).to receive(:t) { 'default translation' }
             allow(I18n).to receive(:t).with(:narnia, scope: 'global.facet.country', default: 'Narnia') { 'Localeapp Narnia' }
           end
@@ -85,8 +82,11 @@ RSpec.describe Facet::SimplePresenter, presenter: :facet do
         end
 
         context 'when the value is not in localeapp' do
-          it 'should use the formated literal value' do
-            expect(subject[:items].first[:text]).to eq 'Narnia'
+          before do
+            allow(items.first).to receive(:value) { 'hades' }
+          end
+          it 'should use the formatted literal value' do
+            expect(subject[:items].first[:text]).to eq 'Hades'
           end
         end
       end

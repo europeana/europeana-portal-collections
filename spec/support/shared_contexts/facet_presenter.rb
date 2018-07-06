@@ -6,7 +6,7 @@ RSpec.shared_context 'facet presenter', presenter: :facet do
       hits = (count + 1 - n) * 100
       value = case item_type
               when :text
-                "Item#{n}"
+                "Item #{n}"
               when :number
                 n
               else

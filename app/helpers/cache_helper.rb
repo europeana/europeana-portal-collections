@@ -17,7 +17,7 @@ module CacheHelper
   end
 
   def cache_body?
-    !request.format.json? && !Rails.application.config.x.disable.view_caching
+    !request.format.json? && response.successful? && !Rails.application.config.x.disable.view_caching
   end
 
   def body_cached?
