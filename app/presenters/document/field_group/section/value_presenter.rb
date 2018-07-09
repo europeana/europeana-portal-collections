@@ -74,18 +74,7 @@ module Document
 
         def entity_url
           return nil unless entity.present?
-
-          begin
-            entity_uri = URI.parse(entity.fetch('about'))
-            return nil unless entity_uri.host == 'data.europeana.eu'
-          rescue URI::Error
-            return nil
-          end
-
-          type, namespace, id = entity_uri.path.split('/')[1..-1]
-          return nil unless namespace == 'base'
-
-          controller.entity_path(type: entities_human_type(type), id: id, slug: entity_url_slug(entity), format: 'html')
+          portal_entity_path(entity.fetch('about'), slug: entity_url_slug(entity))
         end
 
         def search_path

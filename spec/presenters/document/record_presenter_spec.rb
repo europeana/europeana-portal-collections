@@ -63,10 +63,60 @@ RSpec.describe Document::RecordPresenter do
       end
 
       it 'has europeana_entites set to true and sets the label and url' do
-        expect(subject).to eq(creators: [{ title: 'English Label', url: 'http://data.europeana.eu/agent/base/157024' }],
+        expect(subject).to eq(creators: [{ title: 'English Label', data_path: '/en/explore/people/157024.json',
+                                           human_path: '/en/explore/people/157024.html' }],
                               europeana_entities: true)
       end
     end
+
+    context 'when the creator is a NON europeana entity' do
+      let(:dc_creator) { 'http://wikidata.org/people/157024' }
+      let(:api_response) do
+        basic_api_response.tap do |record|
+          record['object']['proxies'].first['dcCreator'] = {
+            def: [dc_creator]
+          }
+          record['object']['agents'] = [{
+                                          about: dc_creator,
+                                          prefLabel: { en: 'English Label', fr: 'Label Français', de: 'Deutsches Label' }
+                                        }]
+        end
+      end
+
+      it 'has europeana_entites set to false and sets the label' do
+        expect(subject).to eq(creators: [{ title: 'English Label' }],
+                              europeana_entities: false)
+      end
+    end
+
+    context 'when the creator is a europeana entity AND a NON europeana entity AND a string literal' do
+      let(:dc_creator1) { 'http://data.europeana.eu/agent/base/157024' }
+      let(:dc_creator2) { 'http://wikidata.org/people/157024' }
+      let(:dc_creator3) { 'A string literal' }
+      let(:api_response) do
+        basic_api_response.tap do |record|
+          record['object']['proxies'].first['dcCreator'] = {
+            def: [dc_creator1, dc_creator2, dc_creator3]
+          }
+          record['object']['agents'] = [{
+                                          about: dc_creator1,
+                                          prefLabel: { en: 'English Label ONE', fr: 'Label Français UN', de: 'Deutsches Label EINS' }
+                                        },
+                                        {
+                                          about: dc_creator2,
+                                          prefLabel: { en: 'English Label TWO', fr: 'Label Français DEUX', de: 'Deutsches Label ZWEI' }
+                                        }]
+
+        end
+      end
+
+      it 'has europeana_entites set to true and sets the label and url' do
+        expect(subject).to eq(creators: [{ title: 'English Label ONE', data_path: '/en/explore/people/157024.json',
+                                           human_path: '/en/explore/people/157024.html' }],
+                              europeana_entities: true)
+      end
+    end
+
 
     context 'when the creator is a string literal' do
       let(:dc_creator) { 'String Literal' }

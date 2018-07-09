@@ -7,6 +7,7 @@ module Document
     include ActionView::Helpers::TextHelper
     include BlacklightDocumentPresenter
     include Entities
+    include EntitiesHelper
     include Record::IIIF
     include Metadata::Rights
 
@@ -50,13 +51,15 @@ module Document
 
       {}.tap do |info|
         if creator_entities.blank?
-          info[:creators] = [{ title: field_value('proxies.dcCreator') }]
+          creators = field_group('creators') ? field_group('creators')[:sections].first[:items] : [{ text: nil }]
+          info[:creators] = creators.map { |creator_item| { title: creator_item[:text] } }
           info[:europeana_entities] = false
         else
           info[:creators] = creator_entities.map do |agent|
             {
               title: document.localize_lang_map(agent['prefLabel']).first,
-              url: agent['about']
+              human_path: portal_entity_path(agent['about']),
+              data_path: portal_entity_path(agent['about'], format: 'json')
             }
           end
           info[:europeana_entities] = true
