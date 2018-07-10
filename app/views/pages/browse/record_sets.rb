@@ -50,12 +50,14 @@ module Pages
         return {} if items[id].blank?
 
         presenter = Document::SearchResultPresenter.new(items[id], controller)
-        texts = [presenter.title, presenter.fv('year')].compact
+        link_text = presenter.title
+        texts = [presenter.fv('year')].compact
 
         {
           img_url: presenter.thumbnail_url,
           url: document_path(id: id[1..-1], format: 'html'),
-          has_text: texts.present?,
+          has_text: link_text.present? || texts.present?,
+          link_text: link_text,
           texts: texts
         }
       end
