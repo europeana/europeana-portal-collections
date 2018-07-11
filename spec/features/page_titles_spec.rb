@@ -90,42 +90,6 @@ RSpec.feature 'Page titles' do
     end
   end
 
-  describe 'events page' do
-    let(:json_api_url_events) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogevents} }
-    let(:json_api_url_event) { /\A#{json_api_url_events}\?filter%5Bslug%5D=event-name/ }
-    let(:body_event) do
-      <<~EOM
-        {
-          "data": {
-            "attributes": {
-              "title": "Event name",
-              "datepublish": "2017-06-18T11:24:01+00:00",
-              "introduction": "",
-              "body": ""
-            }
-          }
-        }
-      EOM
-    end
-    let(:body_events) { '' }
-
-    it 'has title "Events - Europeana Collections"' do
-      stub_request(:get, json_api_url_events).
-        with(headers: headers_req).
-        to_return(status: 200, body: body_events, headers: headers_resp)
-      visit events_path(:en)
-      expect(page).to have_title('Events - Europeana Collections', exact: true)
-    end
-
-    it 'has title "Event name - Events - Europeana Collections"' do
-      stub_request(:get, json_api_url_event).
-        with(headers: headers_req).
-        to_return(status: 200, body: body_event, headers: headers_resp)
-      visit event_path(:en, 'event-name')
-      expect(page).to have_title('Event name - Events - Europeana Collections', exact: true)
-    end
-  end
-
   describe 'blog page' do
     let(:json_api_url_blogs) { %r{\A#{Rails.application.config.x.europeana[:pro_url]}/json/blogposts} }
     let(:json_api_url_blog) { /\A#{json_api_url_blogs}\?filter%5Bslug%5D=blog-name/ }

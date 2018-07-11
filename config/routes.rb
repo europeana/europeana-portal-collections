@@ -66,7 +66,6 @@ Rails.application.routes.draw do
     end
 
     resources :blog_posts, only: %i(show index), param: :slug, path: 'blogs'
-    resources :events, only: %i(show index), param: :slug
 
     get 'entities/suggest'
 
