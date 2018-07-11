@@ -29,7 +29,7 @@ en:
       europeana/record/set:
         settings_query_term: 'Optional. Search query term for this set. If omitted, title will be used.'
       page/browse/record_sets:
-        settings_base_query: 'Optional. Portal search query for all record sets on this page, used for "more records" links, combined with set query, e.g. "qf[]=TYPE:IMAGE".'
+        settings_base_query: 'Optional. Portal search query for all record sets on this page, used for "more records" links, combined with set query, e.g. "f[TYPE][]=IMAGE".'
         settings_link_text: 'Optional. Customise the link text shown to search for more records in each set. Include "%%{set_title}" where the set title should go, e.g. "More records like %%{set_title}...".'
         settings_set_query: 'Optional. Portal search query for each record set on this page, used for "more records" links. Include "%%{set_query_term}" where the set-specific query term should go, e.g. "q=proxy_dc_title:%%{set_query_term}*".'
       page/landing:
