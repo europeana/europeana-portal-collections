@@ -59,13 +59,14 @@ module UrlHelper
     browse_entry_url(browse_entry, page, options.merge(only_path: true))
   end
 
-  # @param browse_entry [BrowseEntry]
-  # @param page [Page]
-  # @return [String] url
+  # Construct a URL for a search page with the specified query
+  #
+  # @param query [String] URL query string from the Portal for a search
+  # @param page [Page] If a Collection landing page, search in this collection
+  # @param options [Hash] Any additional options are passed on to Rails' URL generators
+  # @return [String] URL for the search page
   def search_url_with_query(query, page = nil, **options)
-    parsed_query = Rack::Utils.parse_nested_query(query)
-    url_options = parsed_query.reverse_merge(options)
-    url_options['q'] ||= ''
+    url_options = search_url_with_query_url_options(query, **options)
 
     if page.present? && (slug_match = page.slug.match(/\Acollections\/(.*)\Z/))
       collection = Collection.find_by_key(slug_match[1])
@@ -73,6 +74,17 @@ module UrlHelper
     end
 
     search_url(url_options)
+  end
+
+  # URL options for +#search_url_with_query+
+  #
+  # @param query [String] URL query string from the Portal for a search
+  # @param options [Hash] Any additional options are passed on to Rails' URL generators
+  def search_url_with_query_url_options(query, **options)
+    parsed_query = Rack::Utils.parse_nested_query(query)
+    parsed_query.reverse_merge(options).tap do |url_options|
+      url_options['q'] ||= ''
+    end
   end
 
   def enquote_and_escape(val)
