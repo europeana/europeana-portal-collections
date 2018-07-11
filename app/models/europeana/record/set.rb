@@ -14,7 +14,7 @@ module Europeana
       has_one :page, through: :page_element
 
       after_save do
-        page.touch
+        page_element&.touch
       end
 
       validates :europeana_ids, presence: true
