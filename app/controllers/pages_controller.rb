@@ -45,7 +45,7 @@ class PagesController < ApplicationController
   # Ascertain which template to render for the requested page
   #
   # 1. If a custom page template exists named `"pages/custom/#{page.slug}"`, use it
-  # 2. If the page type is +Page::Browse::RecordSets+, use pages/browse
+  # 2. If the page type is +Page::Browse::RecordSets+, use pages/browse/record_sets
   # 3. Otherwise, use pages/show
   #
   # @return [String] template path
