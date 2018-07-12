@@ -24,9 +24,5 @@ module Document
       end
       typed_entities || []
     end
-
-    def entity_labels_with_field_value_fallback(field)
-
-    end
   end
 end

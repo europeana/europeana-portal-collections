@@ -35,38 +35,6 @@ module Document
       end
     end
 
-    ##
-    # Looks up dc:Creators, if they are europeana entity agents returns them paired with
-    # the respective urls for retrieving thumbnails via JS.
-    #
-    # @return [Hash<Array<Hash>>,<Bool>>]
-    def creators_info
-      creator_entities = document_entities('agents', 'proxies.dcCreator').select do |entity|
-        begin
-          URI.parse(entity['about']).host == 'data.europeana.eu'
-        rescue URI::Error
-          false
-        end
-      end
-
-      {}.tap do |info|
-        if creator_entities.blank?
-          creators = field_group('creators') ? field_group('creators')[:sections].first[:items] : [{ text: nil }]
-          info[:creators] = creators.map { |creator_item| { title: creator_item[:text] } }
-          info[:europeana_entities] = false
-        else
-          info[:creators] = creator_entities.map do |agent|
-            {
-              title: document.localize_lang_map(agent['prefLabel']).first,
-              human_path: portal_entity_path(agent['about']),
-              data_path: portal_entity_path(agent['about'], format: 'json')
-            }
-          end
-          info[:europeana_entities] = true
-        end
-      end
-    end
-
     def edm_is_shown_at
       @edm_is_shown_at ||= aggregation.fetch('edmIsShownAt', nil)
     end

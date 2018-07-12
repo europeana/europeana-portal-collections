@@ -43,16 +43,12 @@ module EntitiesHelper
   end
 
   def portal_entity_path(entity_url, slug: nil, format: 'html')
-    begin
-      entity_uri = URI.parse(entity_url)
-      return nil unless entity_uri.host == 'data.europeana.eu'
-    rescue URI::Error
-      return nil
-    end
+    return nil unless europeana_entity_url?(entity_url)
+    entity_uri_parts = URI.parse(entity_url).path.split('/')[1..-1]
+    controller.entity_path(type: entities_human_type(entity_uri_parts[0]), id: entity_uri_parts.last, slug: slug, format: format)
+  end
 
-    type, namespace, id = entity_uri.path.split('/')[1..-1]
-    return nil unless namespace == 'base'
-
-    controller.entity_path(type: entities_human_type(type), id: id, slug: slug, format: format)
+  def europeana_entity_url?(entity_url)
+    %r(https?://data.europeana.eu/[a-z]+/(base/)?\d+).match?(entity_url)
   end
 end

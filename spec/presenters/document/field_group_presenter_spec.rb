@@ -354,6 +354,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
 
       describe 'entity' do
         let(:entity_id) { '1234' }
+        let(:entity_url) { "http://data.europeana.eu/#{entity_type}/base/#{entity_id}" }
         let(:field_definition) do
           {
             sections: [
@@ -369,11 +370,11 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         let(:api_response) do
           basic_api_response.tap do |record|
             record['object']['proxies'].first[proxy_field] = {
-              def: ["http://data.europeana.eu/#{entity_type}/base/#{entity_id}"]
+              def: [entity_url]
             }
             record['object'][entity_name] = [
               {
-                about: "http://data.europeana.eu/#{entity_type}/base/#{entity_id}",
+                about: entity_url,
                 prefLabel: { en: ['Entity label'] }
               }
             ]
@@ -392,6 +393,45 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           it 'links to the entity page' do
             expect(subject[:sections].first[:items].first[:url]).to eq('/en/explore/people/1234-entity-label.html')
           end
+
+          it 'links to the entity json page' do
+            expect(subject[:sections].first[:items].first[:json_url]).to eq('/en/explore/people/1234-entity-label.json')
+          end
+
+          it 'sets a entity flag to true' do
+            expect(subject[:sections].first[:items].first[:entity]).to eq(true)
+          end
+
+          it 'sets a europeana_entity flag to true' do
+            expect(subject[:sections].first[:items].first[:europeana_entity]).to eq(true)
+          end
+        end
+
+        context 'when entity is a Europeana agent without the "base" namespace"' do
+          let(:entity_type) { 'agent' }
+          let(:entity_name) { 'agents' }
+          let(:proxy_field) { 'dcCreator' }
+          let(:entity_url) { "http://data.europeana.eu/#{entity_type}/#{entity_id}" }
+
+          it 'uses the entity label for text' do
+            expect(subject[:sections].first[:items].first[:text]).to eq('Entity label')
+          end
+
+          it 'links to the entity page' do
+            expect(subject[:sections].first[:items].first[:url]).to eq('/en/explore/people/1234-entity-label.html')
+          end
+
+          it 'links to the entity json page' do
+            expect(subject[:sections].first[:items].first[:json_url]).to eq('/en/explore/people/1234-entity-label.json')
+          end
+
+          it 'sets a europeana_entity flag to true' do
+            expect(subject[:sections].first[:items].first[:europeana_entity]).to eq(true)
+          end
+
+          it 'sets a entity flag to true' do
+            expect(subject[:sections].first[:items].first[:entity]).to eq(true)
+          end
         end
 
         context 'when entity is a Europeana concept' do
@@ -405,6 +445,45 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
 
           it 'links to the entity page' do
             expect(subject[:sections].first[:items].first[:url]).to eq('/en/explore/topics/1234-entity-label.html')
+          end
+
+          it 'links to the entity json page' do
+            expect(subject[:sections].first[:items].first[:json_url]).to eq('/en/explore/topics/1234-entity-label.json')
+          end
+
+          it 'sets a europeana_entity flag to true' do
+            expect(subject[:sections].first[:items].first[:europeana_entity]).to eq(true)
+          end
+
+          it 'sets a entity flag to true' do
+            expect(subject[:sections].first[:items].first[:entity]).to eq(true)
+          end
+        end
+
+        context 'when entity is a NON europeana entity' do
+          let(:entity_type) { 'concept' }
+          let(:entity_name) { 'concepts' }
+          let(:proxy_field) { 'dcFormat' }
+          let(:entity_url) { "http://wikidata.org/concepts#{entity_id}" }
+
+          it 'uses the entity label for text' do
+            expect(subject[:sections].first[:items].first[:text]).to eq('Entity label')
+          end
+
+          it 'doe' do
+            expect(subject[:sections].first[:items].first[:url]).to eq(nil)
+          end
+
+          it 'does NOT link to the entity json page' do
+            expect(subject[:sections].first[:items].first[:json_url]).to eq(nil)
+          end
+
+          it 'sets a entity flag to true' do
+            expect(subject[:sections].first[:items].first[:entity]).to eq(true)
+          end
+
+          it 'sets a europeana_entity flag to false' do
+            expect(subject[:sections].first[:items].first[:europeana_entity]).to eq(false)
           end
         end
 
