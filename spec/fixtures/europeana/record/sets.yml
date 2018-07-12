@@ -1,0 +1,13 @@
+newspaper_titles_a:
+  title: A
+  europeana_ids:
+  - "/123/a1"
+  - "/123/a2"
+  - "/123/a3"
+
+newspaper_titles_b:
+  title: B
+  europeana_ids:
+  - "/123/b1"
+  - "/123/b2"
+  - "/123/b3"
