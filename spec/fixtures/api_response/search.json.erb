@@ -1,6 +1,6 @@
 <%
-items = (0..20).map do |index|
-  id = '/123/record' + index.to_s
+local_assigns[:ids] ||= (0..20).map { |index| '/123/record' + index.to_s }
+items = local_assigns[:ids].map do |id|
   edm_preview = 'http://europeanastatic.eu/api/image?uri=' + CGI.escape("http://www.example.com#{id}") + '&size=LARGE&type=TEXT'
   '{"id":"' + id + '","title":["' + id + '"],"edmIsShownBy":["providerurl' + id + '"],"edmPreview":["' + edm_preview + '"]}'
 end

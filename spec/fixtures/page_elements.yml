@@ -1,7 +1,11 @@
 newspaper_titles_a_element:
   page: newspapers_a_to_z_browse
   positionable: newspaper_titles_a
+  positionable_type: Europeana::Record::Set
+  position: 1
 
 newspaper_titles_b_element:
   page: newspapers_a_to_z_browse
   positionable: newspaper_titles_b
+  positionable_type: Europeana::Record::Set
+  position: 2
