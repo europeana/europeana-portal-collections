@@ -3,10 +3,18 @@
 class CreateEuropeanaRecordSets < ActiveRecord::Migration
   def change
     create_table :europeana_record_sets do |t|
-      t.string :title, null: false
       t.string :europeana_ids, array: true, null: false
       t.string :settings
       t.timestamps null: false
+    end
+
+    reversible do |dir|
+      dir.up do
+        Europeana::Record::Set.create_translation_table!(title: :string)
+      end
+      dir.down do
+        Europeana::Record::Set.drop_translation_table!
+      end
     end
   end
 end

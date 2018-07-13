@@ -150,8 +150,18 @@ ActiveRecord::Schema.define(version: 20180628102730) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "europeana_record_set_translations", force: :cascade do |t|
+    t.integer  "europeana_record_set_id", null: false
+    t.string   "locale",                  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "title"
+  end
+
+  add_index "europeana_record_set_translations", ["europeana_record_set_id"], name: "index_4bd7ec28ca1ffda8471d95bf20197ac81b52dffa", using: :btree
+  add_index "europeana_record_set_translations", ["locale"], name: "index_europeana_record_set_translations_on_locale", using: :btree
+
   create_table "europeana_record_sets", force: :cascade do |t|
-    t.string   "title",         null: false
     t.string   "europeana_ids", null: false, array: true
     t.string   "settings"
     t.datetime "created_at",    null: false

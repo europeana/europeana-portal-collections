@@ -17,6 +17,10 @@ module Europeana
         page_element&.touch
       end
 
+      translates :title, fallbacks_for_empty_translations: true
+      accepts_nested_attributes_for :translations, allow_destroy: true
+      default_scope { includes(:translations) }
+
       validates :europeana_ids, presence: true
       validates :title, presence: true
       validate :validate_portal_urls_presence, :validate_portal_urls_format
