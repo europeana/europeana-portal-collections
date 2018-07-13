@@ -40,6 +40,8 @@ class GalleryImage
       @http_response = Faraday.head(http_url)
       @http_response = Faraday.get(http_url) unless @http_response.success?
       @http_response
+    rescue Faraday::ClientError
+      nil
     end
   end
 end
