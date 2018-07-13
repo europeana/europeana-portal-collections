@@ -461,7 +461,6 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         end
 
         context 'when entity is a NON europeana entity' do
-          let(:entity_type) { 'concept' }
           let(:entity_name) { 'concepts' }
           let(:proxy_field) { 'dcFormat' }
           let(:entity_url) { "http://wikidata.org/concepts#{entity_id}" }
