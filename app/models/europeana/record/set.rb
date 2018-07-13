@@ -54,6 +54,40 @@ module Europeana
         settings_query_term.present? ? settings_query_term : title
       end
 
+      # Construct a full search query, with the page's base query
+      #
+      # Will call and return from +#default_set_query+ if query would otherwise
+      # be blank.
+      #
+      # @return [String,Nil] portal search query string, or nil if
+      #   +settings_set_query+ is blank
+      def full_query
+        query = [page.settings_base_query, formatted_query].compact.join('&')
+        query.blank? ? default_query : query
+      end
+
+      # Construct a default set query
+      #
+      # A default set query simply includes the set's query term in the `q` URL
+      # parameter.
+      #
+      # @return [String]
+      def default_query
+        'q=' + CGI.escape(query_term)
+      end
+
+      # Construct a per-set query, without the page's base query
+      #
+      # @return [String,Nil] portal search query string, or nil if
+      #   +page.settings_set_query+ is blank
+      def formatted_query
+        if page.settings_set_query.present?
+          format(page.settings_set_query, set_query_term: CGI.escape(query_term))
+        else
+          nil
+        end
+      end
+
       protected
 
       def validate_portal_urls_presence
