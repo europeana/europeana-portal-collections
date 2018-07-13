@@ -62,8 +62,21 @@ module Europeana
       # @return [String,Nil] portal search query string, or nil if
       #   +settings_set_query+ is blank
       def full_query
-        query = [page.settings_base_query, formatted_query].compact.join('&')
-        query.blank? ? default_query : query
+        [page.settings_base_query, formatted_query].compact.join('&')
+      end
+
+      # Construct a per-set query, without the page's base query
+      #
+      # The per-set query is constructed by interpolating +#query_term+ into
+      # +page.settings_set_query+ if present, else falls back to +#default_query+.
+      #
+      # @return [String] portal search query string for the set
+      def formatted_query
+        if page.settings_set_query.present?
+          format(page.settings_set_query, set_query_term: CGI.escape(query_term))
+        else
+          default_query
+        end
       end
 
       # Construct a default set query
@@ -74,18 +87,6 @@ module Europeana
       # @return [String]
       def default_query
         'q=' + CGI.escape(query_term)
-      end
-
-      # Construct a per-set query, without the page's base query
-      #
-      # @return [String,Nil] portal search query string, or nil if
-      #   +page.settings_set_query+ is blank
-      def formatted_query
-        if page.settings_set_query.present?
-          format(page.settings_set_query, set_query_term: CGI.escape(query_term))
-        else
-          nil
-        end
       end
 
       protected

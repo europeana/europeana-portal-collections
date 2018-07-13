@@ -80,6 +80,81 @@ RSpec.describe Europeana::Record::Set do
     end
   end
 
+  describe '#full_query' do
+    before do
+      page.settings_base_query = base_query
+      page.settings_set_query = set_query
+    end
+
+    context 'with page base query' do
+      let(:base_query) { 'qf[TYPE][]=IMAGE' }
+
+      context 'with per-set query' do
+        let(:set_query) { 'q=%{set_query_term}*' }
+
+        it 'combines both' do
+          expect(subject.full_query).to eq('qf[TYPE][]=IMAGE&q=C*')
+        end
+      end
+
+      context 'without per-set query' do
+        let(:set_query) { nil }
+
+        it 'combines base query and default query' do
+          expect(subject.full_query).to eq('qf[TYPE][]=IMAGE&q=C')
+        end
+      end
+    end
+    
+    context 'without page base query' do
+      let(:base_query) { nil }
+
+      context 'with per-set query' do
+        let(:set_query) { 'q=%{set_query_term}*' }
+
+        it 'uses it' do
+          expect(subject.full_query).to eq('q=C*')
+        end
+      end
+
+      context 'without per-set query' do
+        let(:set_query) { nil }
+
+        it 'uses default query' do
+          expect(subject.full_query).to eq('q=C')
+        end
+      end
+    end
+  end
+
+  describe '#formatted_query' do
+    before do
+      page.settings_set_query = set_query
+    end
+
+    context 'when page has per-set query' do
+      let(:set_query) { 'q=%{set_query_term}*' }
+
+      it 'inerpolates query_term into it' do
+        expect(subject.formatted_query).to eq('q=C*')
+      end
+    end
+
+    context 'when page has no per-set query' do
+      let(:set_query) { nil }
+
+      it 'uses default_query' do
+        expect(subject.formatted_query).to eq('q=C')
+      end
+    end
+  end
+
+  describe '#default_query' do
+    it 'is "q=" + query_term' do
+      expect(subject.default_query).to eq('q=C')
+    end
+  end
+
   describe '#validate_portal_urls_format' do
     before do
       subject.portal_urls = valid_portal_urls + [invalid_portal_url]
