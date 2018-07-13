@@ -76,12 +76,13 @@ module Document
         end
 
         def entity_url(format = 'html')
-          return nil unless  europeana_entity?
+          return nil unless europeana_entity?
           portal_entity_path(entity.fetch('about'), slug: entity_url_slug(entity), format: format)
         end
 
         def europeana_entity?
-          @europeana_entity ||= for_entity? && europeana_entity_url?(entity.fetch('about'))
+          return @europeana_entity if instance_variable_defined?(:@europeana_entity)
+          @europeana_entity = for_entity? && europeana_entity_url?(entity.fetch('about'))
         end
 
         def search_path

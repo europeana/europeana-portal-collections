@@ -49,6 +49,6 @@ module EntitiesHelper
   end
 
   def europeana_entity_url?(entity_url)
-    %r(https?://data.europeana.eu/[a-z]+/(base/)?\d+).match?(entity_url)
+    %r(\Ahttps?://data.europeana.eu/[a-z]+/(base/)?\d+\z).match?(entity_url)
   end
 end
