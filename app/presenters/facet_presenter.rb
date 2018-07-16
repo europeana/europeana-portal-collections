@@ -93,9 +93,7 @@ class FacetPresenter < ApplicationPresenter
       filter_open: filter_open?,
       select_one: facet_config.single,
       items: unhidden_items.map { |item| facet_item(item) },
-      extra_items: hidden_items.blank? ? nil : {
-        items: hidden_items.map { |item| facet_item(item) }
-      },
+      extra_items: hidden_items.blank? ? nil : { items: hidden_items.map { |item| facet_item(item) } },
       tooltip: facet_tooltip,
       icon_link: facet_icon_link
     }
