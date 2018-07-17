@@ -27,8 +27,7 @@ module Europeana
       paged_ids = europeana_ids.each_slice(per_page).to_a
 
       {}.tap do |results|
-        page = 0
-        while page < pages
+        (0...pages).each do |page|
           page_of_ids = paged_ids[page]
           id_query = Europeana::Record.search_api_query_for_record_ids(page_of_ids)
           response = Europeana::API.record.search(options.merge(api_url: api_url, rows: per_page, query: id_query))
@@ -36,7 +35,6 @@ module Europeana
           response[:items].each do |item|
             results[item['id']] = item
           end
-          page += 1
         end
       end
     end
