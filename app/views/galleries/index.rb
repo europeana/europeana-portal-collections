@@ -82,7 +82,7 @@ module Galleries
     end
 
     def published_gallery_topic_options
-      Topic.with_published_galleries.map do |topic|
+      Topic.with_published_galleries.order(:label).map do |topic|
         {
           label: topic.label,
           value: topic.to_param
