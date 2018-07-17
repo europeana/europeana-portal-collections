@@ -23,6 +23,9 @@ concepts:
     fields:
     - proxies.edmHasType
   - title: medium
+    entity:
+      name: concepts
+      fallback: true
     search_field: proxy_dcterms_medium
     quoted: true
     fields: proxies.dctermsMedium
