@@ -5,7 +5,7 @@ class Page
     HTTP_ERROR_STATUS_CODES = Rack::Utils::HTTP_STATUS_CODES.keys.select { |code| (400..599).cover?(code) }
 
     validates :http_code, presence: true, inclusion: { in: HTTP_ERROR_STATUS_CODES }
-    validates :http_code, uniqueness: true, unless: :exception?
+    validates_uniqueness_of :http_code, unless: :exception?, conditions: -> { generic }
 
     validates :slug, format: { with: /\A(errors|exceptions)\/.+\z/ }
 
