@@ -23,6 +23,11 @@ firstworldwar_translations:
   title: 'First World War'
   globalized_model: firstworldwar
 
+performing_arts_translations:
+  locale: en
+  title: 'Performing Arts'
+  globalized_model: performing_arts
+
 draft_translations:
   locale: en
   title: 'Draft'
