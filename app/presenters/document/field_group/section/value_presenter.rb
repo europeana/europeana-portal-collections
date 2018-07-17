@@ -37,7 +37,10 @@ module Document
             url: url,
             ga_data: section.ga_data,
             extra_info: extra_info,
-            raw: section.html_line_breaks?
+            raw: section.html_line_breaks?,
+            json_url: entity_url('json'),
+            entity: for_entity?,
+            europeana_entity: europeana_entity?
           }
         end
 
@@ -72,20 +75,14 @@ module Document
             %w(agents concepts).include?(section.entity_name) # while only agent & concept entity pages are implemented
         end
 
-        def entity_url
-          return nil unless entity.present?
+        def entity_url(format = 'html')
+          return nil unless europeana_entity?
+          portal_entity_path(entity.fetch('about'), slug: entity_url_slug(entity), format: format)
+        end
 
-          begin
-            entity_uri = URI.parse(entity.fetch('about'))
-            return nil unless entity_uri.host == 'data.europeana.eu'
-          rescue URI::Error
-            return nil
-          end
-
-          type, namespace, id = entity_uri.path.split('/')[1..-1]
-          return nil unless namespace == 'base'
-
-          controller.entity_path(type: entities_human_type(type), id: id, slug: entity_url_slug(entity), format: 'html')
+        def europeana_entity?
+          return @europeana_entity if instance_variable_defined?(:@europeana_entity)
+          @europeana_entity = for_entity? && europeana_entity_url?(entity.fetch('about'))
         end
 
         def search_path
