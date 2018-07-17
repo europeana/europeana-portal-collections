@@ -74,7 +74,7 @@ module Galleries
     end
 
     def gallery_topic_options
-      published_gallery_topic_options.tap do |options|
+      sorted_gallery_topic_options.tap do |options|
         options.unshift(label: t('global.actions.filter-all'), value: 'all')
         options.unshift(options.detect { |option| option[:value] == @selected_topic })
         options.uniq!
@@ -82,12 +82,17 @@ module Galleries
     end
 
     def published_gallery_topic_options
-      Topic.with_published_galleries.order(:label).map do |topic|
+      Topic.with_published_galleries.map do |topic|
         {
           label: topic.label,
           value: topic.to_param
         }
       end
+    end
+
+    # Sort all published gallery topic options by their translated labels.
+    def sorted_gallery_topic_options
+      published_gallery_topic_options.sort_by { |option| option[:label] }
     end
 
     def galleries_content
