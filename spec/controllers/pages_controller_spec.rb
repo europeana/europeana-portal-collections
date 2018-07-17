@@ -46,9 +46,16 @@ RSpec.describe PagesController do
         expect(response).to render_template('pages/browse/record_sets')
       end
 
-      it 'queries API for documents'
+      it 'queries API for documents' do
+        expect(an_api_search_request).to have_been_made.at_least_once
+      end
 
-      it 'stores documents in @items'
+      it 'stores documents in @items' do
+        expect(assigns[:items]).to be_a(Hash)
+        assigns[:items].each_key do |key|
+          expect(Europeana::Record.id?(key)).to be true
+        end
+      end
     end
   end
 end
