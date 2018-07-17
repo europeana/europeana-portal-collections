@@ -6,8 +6,6 @@ module Europeana
     #
     # TODO: store on the Sets API once implemented?
     class Set < ActiveRecord::Base
-      include HasSettingsAttribute
-
       self.table_name = 'europeana_record_sets'
 
       has_one :page_element, dependent: :destroy, as: :positionable
@@ -25,7 +23,7 @@ module Europeana
       validates :title, presence: true
       validate :validate_portal_urls_presence, :validate_portal_urls_format
 
-      has_settings :query_term
+      store_accessor :settings, :query_term
 
       def portal_urls
         europeana_ids&.map { |id| Europeana::Record.portal_url(id) }
@@ -51,7 +49,7 @@ module Europeana
       end
 
       def query_term
-        settings_query_term.present? ? settings_query_term : title
+        super.present? ? super : title
       end
 
       # Construct a full search query, with the page's base query
@@ -60,20 +58,20 @@ module Europeana
       # be blank.
       #
       # @return [String,Nil] portal search query string, or nil if
-      #   +settings_set_query+ is blank
+      #   +set_query+ is blank
       def full_query
-        [page.settings_base_query, formatted_query].compact.join('&')
+        [page.base_query, formatted_query].compact.join('&')
       end
 
       # Construct a per-set query, without the page's base query
       #
       # The per-set query is constructed by interpolating +#query_term+ into
-      # +page.settings_set_query+ if present, else falls back to +#default_query+.
+      # +page.set_query+ if present, else falls back to +#default_query+.
       #
       # @return [String] portal search query string for the set
       def formatted_query
-        if page.settings_set_query.present?
-          format(page.settings_set_query, set_query_term: CGI.escape(query_term))
+        if page.set_query.present?
+          format(page.set_query, set_query_term: CGI.escape(query_term))
         else
           default_query
         end

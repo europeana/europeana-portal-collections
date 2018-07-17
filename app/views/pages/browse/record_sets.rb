@@ -22,7 +22,7 @@ module Pages
 
       def content_browse_list_foot_link_text
         @content_browse_list_foot_link_text ||= begin
-          page.settings_link_text.present? ? page.settings_link_text : t('site.pages.browse.record_sets.link_text')
+          page.link_text.present? ? page.link_text : t('site.pages.browse.record_sets.link_text')
         end
       end
 

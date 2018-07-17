@@ -60,5 +60,5 @@ internal_server_error_translations:
 newspapers_a_to_z_browse_translations:
   locale: en
   title: 'Newspapers A-Z'
-  settings_link_text: 'See more titles beginning with %{set_title}'
+  link_text: 'See more titles beginning with %{set_title}'
   globalized_model: newspapers_a_to_z_browse

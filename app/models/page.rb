@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
+# TODO: remove settings column once replaced in production by config column
 class Page < ActiveRecord::Base
   include HasPublicationStates
-  include HasSettingsAttribute
 
   belongs_to :hero_image, inverse_of: :page
   belongs_to :banner, inverse_of: :pages
@@ -14,18 +14,23 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :hero_image, allow_destroy: true
   accepts_nested_attributes_for :browse_entries
 
-  has_settings :full_width
+  store_accessor :config, :full_width
+
+  # +link_text+ is only used by +Page::Browse::RecordSets+ but needs to be
+  # included here for globalize to be able to translate it
+  store_accessor :config, :link_text
+  translates :link_text, fallbacks_for_empty_translations: true
 
   delegate :file, to: :hero_image, prefix: true, allow_nil: true
-  delegate :settings_full_width_enum, to: :class
+  delegate :full_width_enum, to: :class
 
   class << self
-    def settings_full_width_enum
+    def full_width_enum
       %w(0 1)
     end
   end
 
-  validates :settings_full_width, inclusion: { in: settings_full_width_enum }, allow_nil: true
+  validates :full_width, inclusion: { in: full_width_enum }, allow_nil: true
 
   has_paper_trail
 

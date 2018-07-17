@@ -24,13 +24,9 @@ en:
         settings_class: CSS class
         settings_wide: Wide?
       page:
-        settings_full_width: Full width?
-        settings_layout_type: Layout
-      page/browse/record_sets:
-        settings_base_query: Base query
-        settings_link_text: Link text
-        settings_set_query: Set query
+        full_width: Full width?
       page/landing:
+        layout_type: Layout
         newsletter_url: Newsletter URL
         feeds: What's happening Feeds
       topic:

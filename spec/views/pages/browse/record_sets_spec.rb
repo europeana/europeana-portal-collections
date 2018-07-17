@@ -52,7 +52,7 @@ RSpec.describe 'pages/browse/record_sets.html.mustache', :common_view_components
 
     page.sets.each do |set|
       href = '/search?q=' + set.query_term
-      text = format(page.settings_link_text, set_title: set.title)
+      text = format(page.link_text, set_title: set.title)
       expect(rendered).to have_selector(%(a[href$="#{href}"]), text: text)
     end
   end

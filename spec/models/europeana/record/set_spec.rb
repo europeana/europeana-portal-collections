@@ -65,16 +65,16 @@ RSpec.describe Europeana::Record::Set do
   end
 
   describe '#query_term' do
-    context 'with settings_query_term present' do
+    context 'with query_term present' do
       it 'returns it' do
-        subject.settings_query_term = 'QT'
-        expect(subject.query_term).to eq(subject.settings_query_term)
+        subject.query_term = 'QT'
+        expect(subject.query_term).to eq(subject.query_term)
       end
     end
 
-    context 'without settings_query_term present' do
+    context 'without query_term present' do
       it 'returns title' do
-        subject.settings_query_term = nil
+        subject.query_term = nil
         expect(subject.query_term).to eq(subject.title)
       end
     end
@@ -82,8 +82,8 @@ RSpec.describe Europeana::Record::Set do
 
   describe '#full_query' do
     before do
-      page.settings_base_query = base_query
-      page.settings_set_query = set_query
+      page.base_query = base_query
+      page.set_query = set_query
     end
 
     context 'with page base query' do
@@ -129,7 +129,7 @@ RSpec.describe Europeana::Record::Set do
 
   describe '#formatted_query' do
     before do
-      page.settings_set_query = set_query
+      page.set_query = set_query
     end
 
     context 'when page has per-set query' do

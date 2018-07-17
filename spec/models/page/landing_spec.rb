@@ -20,7 +20,7 @@ RSpec.describe Page::Landing do
 
   it { is_expected.to delegate_method(:file).to(:hero_image).with_prefix(true) }
 
-  it { is_expected.to validate_inclusion_of(:settings_layout_type).in_array(%w(default browse)) }
+  it { is_expected.to validate_inclusion_of(:layout_type).in_array(%w(default browse)) }
   it { is_expected.to validate_presence_of(:collection) }
   it { is_expected.to validate_uniqueness_of(:collection) }
 

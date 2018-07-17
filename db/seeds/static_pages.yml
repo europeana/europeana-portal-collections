@@ -651,6 +651,6 @@ we will produce a version &ndash; post this prototype phase &ndash; for blind in
 - :slug: collections/newspapers/a-z
   :type: Page::Browse::RecordSets
   :title: Newspapers A-Z
-  :settings_link_text: "See more titles beginning with %{set_title}"
-  :settings_base_query: qf%5B%5D=proxy_dc_type%3A"http%3A%2F%2Fdata.europeana.eu%2Fconcept%2Fbase%2F18"&qf%5B%5D=proxy_dcterms_isPartOf%3A"Europeana+Newspapers"&qf%5B%5D=proxy_dcterms_hasPart%3Ahttp%5C%3A%2F%2Fdata.europeana.eu%2Fitem%2F*
-  :settings_set_query: q=proxy_dc_title:%{set_query_term}*
+  :link_text: "See more titles beginning with %{set_title}"
+  :base_query: qf%5B%5D=proxy_dc_type%3A"http%3A%2F%2Fdata.europeana.eu%2Fconcept%2Fbase%2F18"&qf%5B%5D=proxy_dcterms_isPartOf%3A"Europeana+Newspapers"&qf%5B%5D=proxy_dcterms_hasPart%3Ahttp%5C%3A%2F%2Fdata.europeana.eu%2Fitem%2F*
+  :set_query: q=proxy_dc_title:%{set_query_term}*

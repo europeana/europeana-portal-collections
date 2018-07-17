@@ -9,9 +9,8 @@ class Page
       validates :title, presence: true
 
       accepts_nested_attributes_for :sets, allow_destroy: true
-      has_settings :base_query, :set_query, :link_text
 
-      translates :settings_link_text, fallbacks_for_empty_translations: true
+      store_accessor :config, :base_query, :set_query
 
       def europeana_ids
         sets.map(&:europeana_ids).flatten.uniq

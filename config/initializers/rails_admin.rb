@@ -199,7 +199,7 @@ RailsAdmin.config do |config|
         required true
         html_attributes rows: 15, cols: 80
       end
-      field :settings_query_term
+      field :query_term
     end
   end
 
@@ -424,7 +424,7 @@ RailsAdmin.config do |config|
         nested_form false
       end
       field :banner
-      field :settings_full_width, :boolean
+      field :full_width, :boolean
     end
   end
 
@@ -447,9 +447,9 @@ RailsAdmin.config do |config|
     edit do
       field :slug
       field :title
-      field :settings_link_text
-      field :settings_base_query
-      field :settings_set_query
+      field :link_text
+      field :base_query
+      field :set_query
       field :sets
     end
   end
@@ -534,7 +534,7 @@ RailsAdmin.config do |config|
         end
       end
       field :title
-      field :settings_layout_type, :enum
+      field :layout_type, :enum
       field :body, :text do
         html_attributes rows: 15, cols: 80
       end
