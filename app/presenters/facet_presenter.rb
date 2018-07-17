@@ -237,7 +237,7 @@ class FacetPresenter < ApplicationPresenter
   end
 
   def apply_order_to_items?
-    true
+    false
   end
 
   def apply_splice_to_items?
@@ -258,7 +258,7 @@ class FacetPresenter < ApplicationPresenter
   end
 
   def apply_order_to_items(items, **_)
-    items
+    items.unshift(items.delete(items.detect { |item| facet_in_params?(facet_name, item) }))
   end
 
   def apply_splice_to_items(items, **_)

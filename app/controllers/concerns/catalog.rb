@@ -84,7 +84,6 @@ module Catalog
       Europeana::Blacklight::Response::Facets::FacetItem.new(value: collection.key)
     end
     items.unshift(Europeana::Blacklight::Response::Facets::FacetItem.new(value: 'all'))
-    items.unshift(items.delete(items.select { |item| item.value == params[:id] }.first)) if params[:controller] == 'collections'
     field = Europeana::Blacklight::Response::Facets::FacetField.new('COLLECTION', items)
     response.aggregations[field.name] = field
   end

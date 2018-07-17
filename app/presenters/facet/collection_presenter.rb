@@ -8,6 +8,10 @@ module Facet
       [base_url, facet_item_url_base_query].join('?')
     end
 
+    def apply_order_to_items?
+      true
+    end
+
     def remove_facet_url(_item)
       [search_url, facet_item_url_base_query].reject(&:blank?).join('?')
     end
