@@ -48,8 +48,8 @@ module Europeana
         self.portal_urls = value&.split(/\s+/)
       end
 
-      def query_term
-        super.present? ? super : title
+      def query_term_with_fallback
+        query_term.present? ? query_term : title || ''
       end
 
       # Construct a full search query, with the page's base query
@@ -71,7 +71,7 @@ module Europeana
       # @return [String] portal search query string for the set
       def formatted_query
         if page.set_query.present?
-          format(page.set_query, set_query_term: CGI.escape(query_term))
+          format(page.set_query, set_query_term: CGI.escape(query_term_with_fallback))
         else
           default_query
         end
@@ -84,7 +84,7 @@ module Europeana
       #
       # @return [String]
       def default_query
-        'q=' + CGI.escape(query_term)
+        'q=' + CGI.escape(query_term_with_fallback)
       end
 
       protected
