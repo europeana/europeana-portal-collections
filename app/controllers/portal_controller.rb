@@ -51,7 +51,7 @@ class PortalController < ApplicationController
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
-      format.html
+      format.html { render show_template_for_document }
       format.json { render json: { response: { document: @document } } }
     end
   end
@@ -130,5 +130,23 @@ class PortalController < ApplicationController
 
   def redirect_to_home
     redirect_to home_path
+  end
+
+  def show_template_for_document
+    if document_is_europeana_ancestor?
+      'portal/ancestor'
+    else
+      'portal/show'
+    end
+  end
+
+  # TODO: move to Europeana::Record?
+  def document_is_europeana_ancestor?
+    has_parts = @document.fetch('proxies.dctermsHasPart', []).compact
+    return false unless has_parts.present?
+
+    europeana_uri_count = has_parts.select { |hp| hp.to_s.start_with?('http://data.europeana.eu/item/') }.size
+    other_uri_count = has_parts.size - europeana_uri_count
+    europeana_uri_count > other_uri_count
   end
 end
