@@ -82,7 +82,7 @@ module Portal
           object: {
             annotations_later: true, # TODO: remove when styleguide assumes this
             creator: presenter.creator_title,
-            creators_info: presenter.creators_info,
+            creators: presenter.field_group(:creators),
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
             creation_date: field_value('proxies.dctermsCreated'),

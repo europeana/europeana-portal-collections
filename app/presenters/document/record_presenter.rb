@@ -7,6 +7,7 @@ module Document
     include ActionView::Helpers::TextHelper
     include BlacklightDocumentPresenter
     include Entities
+    include EntitiesHelper
     include Record::IIIF
     include Metadata::Rights
 
@@ -31,36 +32,6 @@ module Document
         document.fetch('agents.prefLabel', []).first ||
           field_value('dcCreator') ||
           field_value('proxies.dcCreator')
-      end
-    end
-
-    ##
-    # Looks up dc:Creators, if they are europeana entity agents returns them paired with
-    # the respective urls for retrieving thumbnails via JS.
-    #
-    # @return [Hash<Array<Hash>>,<Bool>>]
-    def creators_info
-      creator_entities = document_entities('agents', 'proxies.dcCreator').select do |entity|
-        begin
-          URI.parse(entity['about']).host == 'data.europeana.eu'
-        rescue URI::Error
-          false
-        end
-      end
-
-      {}.tap do |info|
-        if creator_entities.blank?
-          info[:creators] = [{ title: field_value('proxies.dcCreator') }]
-          info[:europeana_entities] = false
-        else
-          info[:creators] = creator_entities.map do |agent|
-            {
-              title: document.localize_lang_map(agent['prefLabel']).first,
-              url: agent['about']
-            }
-          end
-          info[:europeana_entities] = true
-        end
       end
     end
 
