@@ -69,7 +69,7 @@ module Portal
           label: t('site.object.meta-label.issued'),
           value: presenter.field_value('proxies.dctermsIssued')
         }
-      ]
+      ].reject { |hash| hash[:value].blank? }
     end
 
     def thumbnail

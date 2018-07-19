@@ -35,6 +35,7 @@ class PortalController < ApplicationController
   end
 
   # GET /record/:id
+  # TODO: run the search for Europeana ancestor records
   def show
     @response, @document = fetch(doc_id, api_query_params)
     @data_provider = document_data_provider(@document)
