@@ -33,6 +33,15 @@ copyright:
     fields:
     - proxies.dcRights
     ga_data: dimension5
+creators:
+  title: creators
+  sections:
+  - title: creator
+    entity:
+      name: agents
+      fallback: true
+    fields:
+    - proxies.dcCreator
 time:
   title: time
   sections:

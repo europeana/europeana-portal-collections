@@ -35,12 +35,6 @@ art_collection:
   type: 'Page::Landing'
   collection: art
 
-firstworldwar_collection:
-  slug: 'collections/world-war-I'
-  state: 1
-  type: 'Page::Landing'
-  collection: firstworldwar
-
 fashion_collection:
   slug: 'collections/fashion'
   collection: fashion
@@ -51,6 +45,18 @@ fashion_collection:
   feeds:
     - fashion_blog
     - fashion_tumblr
+
+firstworldwar_collection:
+  slug: 'collections/world-war-I'
+  state: 1
+  type: 'Page::Landing'
+  collection: firstworldwar
+
+performing_arts_collection:
+  slug: 'collections/performing_arts'
+  state: 1
+  type: 'Page::Landing'
+  collection: performing_arts
 
 grid_layout_collection:
   slug: 'collections/grid_layout'

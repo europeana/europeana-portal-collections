@@ -33,6 +33,12 @@ firstworldwar_collection_translations:
   body: 'About WWI'
   globalized_model: firstworldwar_collection
 
+performing_arts_collection_translations:
+  locale: en
+  title: 'Europeana Performing Arts'
+  body: 'About Performing Arts'
+  globalized_model: performing_arts_collection
+
 grid_layout_collection_translations:
   locale: en
   title: 'Europeana Grid Layout'

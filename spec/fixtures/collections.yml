@@ -24,6 +24,11 @@ firstworldwar:
   state: 1
   settings: "'--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ndefault_search_layout: ''\nfederated_providers:\n- trove\n- dpla\n- digitalnz\n'"
 
+performing_arts:
+  key: 'performing-arts'
+  api_params: 'qf=what:performing arts'
+  state: 1
+
 draft:
   key: 'draft'
   api_params: 'qf=what:ever'
