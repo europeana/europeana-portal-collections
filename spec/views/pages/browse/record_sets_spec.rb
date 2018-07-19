@@ -51,7 +51,7 @@ RSpec.describe 'pages/browse/record_sets.html.mustache', :common_view_components
     render
 
     page.sets.each do |set|
-      href = '/search?q=' + set.query_term
+      href = '/search?q=' + set.query_term_with_fallback
       text = format(page.link_text, set_title: set.title)
       expect(rendered).to have_selector(%(a[href$="#{href}"]), text: text)
     end
