@@ -64,18 +64,28 @@ RSpec.describe Europeana::Record::Set do
     end
   end
 
-  describe '#query_term' do
+  describe '#query_term_with_fallback' do
     context 'with query_term present' do
       it 'returns it' do
         subject.query_term = 'QT'
-        expect(subject.query_term).to eq(subject.query_term)
+        expect(subject.query_term_with_fallback).to eq(subject.query_term)
       end
     end
 
     context 'without query_term present' do
-      it 'returns title' do
-        subject.query_term = nil
-        expect(subject.query_term).to eq(subject.title)
+      context 'with title present' do
+        it 'returns it' do
+          subject.query_term = nil
+          expect(subject.query_term_with_fallback).to eq(subject.title)
+        end
+      end
+
+      context 'without title present' do
+        it 'returns empty string' do
+          subject.query_term = nil
+          subject.title = nil
+          expect(subject.query_term_with_fallback).to eq('')
+        end
       end
     end
   end
