@@ -53,7 +53,7 @@ module Europeana
     def search_results_for_dcterms_is_part_of(europeana_id)
       search_options = {
         api_url: api_url, rows: blacklight_config.default_per_page, sort: 'europeana_id asc',
-        query: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item#{europeana_id}"),
+        query: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item#{europeana_id}")
       }
       Europeana::API.record.search(search_options)
     end

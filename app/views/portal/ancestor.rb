@@ -64,10 +64,8 @@ module Portal
     end
 
     def descendent_search_url(**options)
-      options.merge!(
-        q: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item#{document.id}"),
-        sort: 'europeana_id asc'
-      )
+      options[:q] = %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item#{document.id}")
+      options[:sort] = 'europeana_id asc'
       search_url(options)
     end
 
