@@ -41,6 +41,7 @@ class Page < ActiveRecord::Base
   validates :slug, uniqueness: true
   validate :browse_entries_validation
 
+  scope :static, -> { where(type: nil) }
   scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', '%/%') }
 
   def to_param

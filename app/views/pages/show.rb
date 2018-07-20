@@ -32,11 +32,14 @@ module Pages
 
     def navigation
       mustache[:navigation] ||= begin
-        (hide_secondary_navigation? ? {} : {
-          secondary: {
-            items: secondary_navigation_items
-          }
-        }).reverse_merge(super)
+        {}.tap do |nav|
+          nav[:breadcrumbs] = breadcrumbs
+          unless hide_secondary_navigation?
+            nav[:secondary] = {
+              items: secondary_navigation_items
+            }
+          end
+        end.reverse_merge(super)
       end
     end
 
@@ -73,6 +76,16 @@ module Pages
           }
         }
       ]
+    end
+
+    def breadcrumbs
+      [{ label: @page.title }].tap do |crumbs|
+        context = @page
+        while context.parent.present?
+          crumbs.unshift({ url: static_page_path(context.parent, format: 'html'), label: context.parent.title })
+          context = context.parent
+        end
+      end
     end
   end
 end
