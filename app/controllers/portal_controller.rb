@@ -40,7 +40,6 @@ class PortalController < ApplicationController
     @response, @document = fetch(doc_id, api_query_params)
 
     if document_is_europeana_ancestor?
-      # TODO: make configurable, defaulting to off, e.g. by URL param
       show_ancestor
     else
       show_generic
@@ -156,6 +155,8 @@ class PortalController < ApplicationController
 
   # TODO: move to Europeana::Record?
   def document_is_europeana_ancestor?
+    return false unless params[:design] == 'entity'
+
     has_parts = @document.fetch('proxies.dctermsHasPart', []).compact
     return false unless has_parts.present?
 
