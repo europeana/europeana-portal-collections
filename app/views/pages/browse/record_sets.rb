@@ -3,12 +3,18 @@
 module Pages
   module Browse
     class RecordSets < Pages::Show
+      include SearchableView
+
       def js_var_page_name
         'portal/browse'
       end
 
       def bodyclass
         'channels-browse'
+      end
+
+      def include_nav_searchbar
+        true
       end
 
       def content

@@ -36,6 +36,15 @@ module SearchableView
     }
   end
 
+  # Whether or not to show the nav search bar
+  #
+  # Always returns false. Override in including view class if needed.
+  #
+  # @return [Boolean]
+  def include_nav_searchbar
+    false
+  end
+
   protected
 
   # @param keys [Symbol] keys of params to gather template input field data for
