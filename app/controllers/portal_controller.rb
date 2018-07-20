@@ -111,16 +111,8 @@ class PortalController < ApplicationController
   end
 
   def show_ancestor
-    @search_results = document_has_part_search_results
+    @search_results = search_results_for_dcterms_is_part_of(@document.id)
     @template = 'portal/ancestor'
-  end
-
-  def document_has_part_search_results
-    search_options = {
-      api_url: api_url, rows: blacklight_config.default_per_page, sort: 'europeana_id asc',
-      query: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item#{@document.id}"),
-    }
-    Europeana::API.record.search(search_options)
   end
 
   def document_annotations(id)
