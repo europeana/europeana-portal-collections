@@ -40,6 +40,7 @@ class PortalController < ApplicationController
     @response, @document = fetch(doc_id, api_query_params)
 
     if document_is_europeana_ancestor?
+      # TODO: make configurable, defaulting to off, e.g. by URL param
       show_ancestor
     else
       show_generic
