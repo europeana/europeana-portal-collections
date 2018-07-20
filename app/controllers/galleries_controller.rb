@@ -2,6 +2,7 @@
 
 class GalleriesController < ApplicationController
   include CacheHelper
+  include Europeana::SearchAPIConsumer
   include HomepageHeroImage
   include PaginatedController
 
@@ -28,7 +29,7 @@ class GalleriesController < ApplicationController
     authorize! :show, @gallery
 
     @body_cache_key = 'explore/' + @gallery.cache_key
-    @documents = search_api_for_image_metadata unless body_cached?
+    @documents = search_results_for_europeana_ids(@gallery.europeana_record_ids).values unless body_cached?
 
     respond_to do |format|
       format.html
@@ -40,16 +41,6 @@ class GalleriesController < ApplicationController
   def foyer_body_cache_key(topic:, per:, page:)
     last_galleries_edit_int = Gallery.order(updated_at: :desc).first.updated_at.to_i
     "explore/galleries.#{request.format.to_sym}/#{last_galleries_edit_int}/#{topic}/#{per}/#{page}/"
-  end
-
-  # @return [Array<Europeana::Blacklight::Document>]
-  def search_api_for_image_metadata
-    return [] if @gallery.images.blank?
-    search_results(blacklight_api_params_for_images).last
-  end
-
-  def blacklight_api_params_for_images
-    { q: @gallery.search_api_query_for_images, per_page: 100 }
   end
 
   def gallery_topic

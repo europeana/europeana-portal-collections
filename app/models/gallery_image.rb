@@ -9,7 +9,7 @@ class GalleryImage < ActiveRecord::Base
 
   validates :gallery, presence: true
   validates :europeana_record_id,
-            presence: true, format: { with: Europeana::Record::ID_PATTERN }
+            presence: true, format: { with: /\A#{Europeana::Record::ID_PATTERN}\z/ }
   validates :url, presence: true
 
   def portal_url

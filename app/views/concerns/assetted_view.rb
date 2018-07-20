@@ -14,15 +14,6 @@ module AssettedView
     ]
   end
 
-  def js_vars
-    page_name = (params[:controller] || '') + '/' + (params[:action] || '')
-    [
-      {
-        name: 'pageName', value: page_name
-      }
-    ]
-  end
-
   def js_files
     [
       {

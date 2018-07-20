@@ -11,13 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430075313) do
+ActiveRecord::Schema.define(version: 20180717122411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
-  enable_extension "pg_stat_statements"
-  enable_extension "unaccent"
 
   create_table "banner_translations", force: :cascade do |t|
     t.integer  "banner_id",              null: false
@@ -152,6 +149,24 @@ ActiveRecord::Schema.define(version: 20180430075313) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "europeana_record_set_translations", force: :cascade do |t|
+    t.integer  "europeana_record_set_id", null: false
+    t.string   "locale",                  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "title"
+  end
+
+  add_index "europeana_record_set_translations", ["europeana_record_set_id"], name: "index_4bd7ec28ca1ffda8471d95bf20197ac81b52dffa", using: :btree
+  add_index "europeana_record_set_translations", ["locale"], name: "index_europeana_record_set_translations_on_locale", using: :btree
+
+  create_table "europeana_record_sets", force: :cascade do |t|
+    t.string   "europeana_ids", null: false, array: true
+    t.jsonb    "settings"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "facet_link_groups", force: :cascade do |t|
     t.string   "facet_field"
@@ -296,6 +311,7 @@ ActiveRecord::Schema.define(version: 20180430075313) do
     t.string   "title",      limit: 255
     t.text     "body"
     t.string   "strapline"
+    t.string   "link_text"
   end
 
   add_index "page_translations", ["locale"], name: "index_page_translations_on_locale", using: :btree
@@ -314,6 +330,7 @@ ActiveRecord::Schema.define(version: 20180430075313) do
     t.string   "strapline"
     t.string   "newsletter_url"
     t.integer  "collection_id"
+    t.jsonb    "config"
   end
 
   add_index "pages", ["banner_id"], name: "index_pages_on_banner_id", using: :btree

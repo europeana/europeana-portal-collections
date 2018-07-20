@@ -4,8 +4,8 @@ en:
       collection:
         api_params: API parameters
         settings_default_search_layout: Default search layout
-      data_provider:
-        uri: URI
+      europeana/record/set:
+        settings_query_term: Query term
       gallery:
         image_portal_urls:
           Item URLs on the portal
@@ -19,16 +19,14 @@ en:
         settings_attribution_institution: Attribution institution
         settings_attribution_url: Attribution URL
         settings_attribution_text: Attribution text
-      link:
-        url: URL
       link/promotion:
         settings_category: Category
         settings_class: CSS class
         settings_wide: Wide?
       page:
-        settings_full_width: Full width?
-        settings_layout_type: Layout
+        full_width: Full width?
       page/landing:
+        layout_type: Layout
         newsletter_url: Newsletter URL
         feeds: What's happening Feeds
       topic:
@@ -38,8 +36,10 @@ en:
         permissionable_feed_ids: Permissions on What's Happening Feeds
         permissionable_gallery_ids: Permissions on Galleries
         permissionable_landing_page_ids: Permissions on Landing Pages
-
     models:
+      page/browse/record_sets:
+        one: Record Sets Browse Page
+        other: Record Sets Browse Pages
       page/error:
         one: Error Page
         other: Error Pages
@@ -48,4 +48,7 @@ en:
         one: Landing Page
         other: Landing Pages
         feeds: What's happening Feeds
-
+  attributes:
+    portal_urls_text: Portal URLs
+    uri: URI
+    url: URL

@@ -41,7 +41,7 @@ RSpec.describe GalleriesController do
     it 'paginates galleries' do
       (1..30).each do |gallery_num|
         urls = (1..6).map do |image_num|
-          "http://www.europeana.eu/portal/record/sample/record#{image_num}.html?view=http://www.example.org/media/#{image_num}.jpg"
+          "http://www.europeana.eu/portal/record/123/record#{image_num}.html?view=http://www.example.org/media/#{image_num}.jpg"
         end.join(' ')
         gallery = Gallery.create!(title: "Gallery #{gallery_num}", image_portal_urls_text: urls)
         gallery.set_images
