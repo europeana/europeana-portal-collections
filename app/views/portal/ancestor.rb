@@ -1,18 +1,10 @@
 # frozen_string_literal: true
 
 module Portal
+  # TODO: duplicates code from Entities::Show view; extract into a concern
   class Ancestor < ApplicationView
     include SearchableView
     include ThumbnailHelper
-
-    # TODO: remove when js_var_page_name observation implemented by
-    #   https://github.com/europeana/europeana-portal-collections/pull/1100
-    def js_vars
-      super.tap do |vars|
-        page_name_var = vars.detect { |var| var[:name] == 'pageName' }
-        page_name_var[:value] = js_var_page_name
-      end
-    end
 
     def js_var_page_name
       'entities/show'
@@ -30,6 +22,7 @@ module Portal
       true
     end
 
+    # TODO: change keys to be non-entity related
     def content
       mustache[:content] ||= begin
         {
@@ -50,9 +43,24 @@ module Portal
         {
           tab_title: t('site.object.meta-label.consists-of'),
           url: descendent_search_url(format: 'json'),
-          search_url: descendent_search_url
+          search_url: descendent_search_url,
+          referenced_records: referenced_records
         }
       ]
+    end
+
+    def referenced_records
+      {
+        search_results: @search_results[:items].map { |item| result_presenter(item).content },
+        total: {
+          value: @search_results[:totalResults],
+          formatted: number_with_delimiter(@search_results[:totalResults])
+        }
+      }
+    end
+
+    def result_presenter(item)
+      Document::SearchResultPresenter.new(item, self)
     end
 
     def descendent_search_url(**options)
