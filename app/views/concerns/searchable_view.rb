@@ -38,11 +38,11 @@ module SearchableView
 
   # Whether or not to show the nav search bar
   #
-  # Always returns true. Override in including view class if needed.
+  # Always returns false. Override in including view class if needed.
   #
   # @return [Boolean]
   def include_nav_searchbar
-    true
+    false
   end
 
   protected

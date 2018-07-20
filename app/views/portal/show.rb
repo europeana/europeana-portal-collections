@@ -73,6 +73,10 @@ module Portal
       end
     end
 
+    def include_nav_searchbar
+      true
+    end
+
     def content
       mustache[:content] ||= begin
         {

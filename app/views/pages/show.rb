@@ -82,7 +82,7 @@ module Pages
       [{ label: @page.title }].tap do |crumbs|
         context = @page
         while context.parent.present?
-          crumbs.unshift({ url: static_page_path(context.parent, format: 'html'), label: context.parent.title })
+          crumbs.unshift(url: static_page_path(context.parent, format: 'html'), label: context.parent.title)
           context = context.parent
         end
       end

@@ -12,6 +12,10 @@ module Entities
       @entity.pref_label
     end
 
+    def include_nav_searchbar
+      true
+    end
+
     def head_meta
       mustache[:head_meta] ||= begin
         head_meta = [
