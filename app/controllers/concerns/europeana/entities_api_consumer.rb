@@ -3,7 +3,7 @@
 module Europeana
   ##
   # Methods for working with the Europeana Entities API
-  module EntitiesApiConsumer
+  module EntitiesAPIConsumer
     extend ActiveSupport::Concern
 
     include EntitiesHelper

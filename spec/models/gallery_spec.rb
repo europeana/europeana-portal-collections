@@ -125,7 +125,7 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
         gallery.set_images
         gallery.images.reload
         (1..20).each do |number|
-          expect(gallery.images.detect { |image| image.europeana_record_id == "/sample/record#{number}" }).not_to be_blank
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/123/record#{number}" }).not_to be_blank
         end
       end
 
@@ -133,8 +133,8 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
         gallery.image_portal_urls_text = gallery_image_portal_urls(number: 2)
         gallery.set_images
         gallery.images.reload
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record1' }.position).to eq(1)
-        expect(gallery.images.detect { |image| image.europeana_record_id == '/sample/record2' }.position).to eq(2)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/123/record1' }.position).to eq(1)
+        expect(gallery.images.detect { |image| image.europeana_record_id == '/123/record2' }.position).to eq(2)
       end
 
       it 'should delete images for absent URLs' do
@@ -149,7 +149,7 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
         gallery.images.reload
         expect(gallery.images.size).to eq(8)
         (1..8).each do |number|
-          expect(gallery.images.detect { |image| image.europeana_record_id == "/sample/record#{number}" }&.url).
+          expect(gallery.images.detect { |image| image.europeana_record_id == "/123/record#{number}" }&.url).
             to eq("http://media.example.com/#{number}.jpg")
         end
       end

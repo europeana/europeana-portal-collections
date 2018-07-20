@@ -20,8 +20,8 @@ module Pages
       mustache[:content] ||= begin
         {
           title: @page.title,
-          text: @page.settings[:full_width] != '1' ? @page.body : nil,
-          text_full_width: @page.settings[:full_width] == '1' ? @page.body : nil,
+          text: @page.full_width != '1' ? @page.body : nil,
+          text_full_width: @page.full_width == '1' ? @page.body : nil,
           channel_entry: @page.browse_entries.published.blank? ? nil : {
             items: browse_entry_items(@page.browse_entries.published, @page)
           },
@@ -73,12 +73,6 @@ module Pages
           }
         }
       ]
-    end
-
-    private
-
-    def body_cache_key
-      @page.cache_key
     end
   end
 end

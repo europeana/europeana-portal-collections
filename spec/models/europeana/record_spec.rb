@@ -5,7 +5,7 @@ RSpec.describe Europeana::Record do
     expect(described_class).to include(Europeana::Record::Annotations)
   end
 
-  let(:id) { '/abc/123' }
+  let(:id) { '/123/abc' }
   subject { described_class.new(id) }
 
   let(:api_url) { "#{Europeana::API.url}/v2/record#{id}.json-ld" }
@@ -19,18 +19,39 @@ RSpec.describe Europeana::Record do
       to_return(status: api_response_status, headers: api_response_headers, body: api_response_body)
   end
 
+  describe '.id?' do
+    subject { described_class.id?(id) }
+
+    context 'with valid Europeana record ID' do
+      let(:id) { '/9200303/BibliographicResource_3000059947163' }
+      it { is_expected.to be true }
+    end
+
+    %w(
+      /9200303/BibliographicResource_3000059947163.html
+      9200303/BibliographicResource_3000059947163
+      /9200303a/BibliographicResource_3000059947163
+      /item/9200303/BibliographicResource_3000059947163
+    ).each do |id|
+      context %(with invalid Europeana record ID "#{id}") do
+        let(:id) { id }
+        it { is_expected.to be false }
+      end
+    end
+  end
+
   describe '.id_from_portal_url' do
     %w(
-      http://www.europeana.eu/portal/record/abc/123.html
-      http://www.europeana.eu/portal/record/abc/123
-      https://www.europeana.eu/portal/record/abc/123.html
-      https://www.europeana.eu/portal/record/abc/123
-      http://www.europeana.eu/portal/en/record/abc/123.html
-      https://www.europeana.eu/portal/de/record/abc/123
+      http://www.europeana.eu/portal/record/123/abc.html
+      http://www.europeana.eu/portal/record/123/abc
+      https://www.europeana.eu/portal/record/123/abc.html
+      https://www.europeana.eu/portal/record/123/abc
+      http://www.europeana.eu/portal/en/record/123/abc.html
+      https://www.europeana.eu/portal/de/record/123/abc
     ).each do |url|
       context %(when URL is "#{url}") do
         it 'should extract ID from URL' do
-          expect(described_class.id_from_portal_url(url)).to eq('/abc/123')
+          expect(described_class.id_from_portal_url(url)).to eq('/123/abc')
         end
       end
     end
@@ -38,16 +59,16 @@ RSpec.describe Europeana::Record do
 
   describe '.search_api_query_for_record_ids' do
     subject { described_class.search_api_query_for_record_ids(record_ids) }
-    let(:record_ids) { %w(/abc/123 /def/456) }
+    let(:record_ids) { %w(/123/abc /def/456) }
 
     it 'constructs an API search query term' do
-      expect(subject).to eq('europeana_id:("/abc/123" OR "/def/456")')
+      expect(subject).to eq('europeana_id:("/123/abc" OR "/def/456")')
     end
   end
 
   describe '#portal_url' do
     it 'should construct portal URL from Europeana ID' do
-      expect(subject.portal_url).to eq('https://www.europeana.eu/portal/record/abc/123.html')
+      expect(subject.portal_url).to eq('https://www.europeana.eu/portal/record/123/abc.html')
     end
   end
 

@@ -62,3 +62,9 @@ internal_server_error_translations:
   title: 'Internal Server Error'
   body: '500'
   globalized_model: internal_server_error
+
+newspapers_a_to_z_browse_translations:
+  locale: en
+  title: 'Newspapers A-Z'
+  link_text: 'See more titles beginning with %{set_title}'
+  globalized_model: newspapers_a_to_z_browse

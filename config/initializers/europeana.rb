@@ -20,5 +20,4 @@ if ENV['EDM_IS_SHOWN_BY_PROXY'] && !ENV['EUROPEANA_MEDIA_PROXY']
 end
 Rails.application.config.x.europeana_media_proxy = ENV['EUROPEANA_MEDIA_PROXY'] || 'http://proxy.europeana.eu'
 
-# TODO: As a default, put in the production URL for 1418 once it has been decided on, also update the .env.example file.
-Rails.application.config.x.europeana_1914_1918_url = ENV['EUROPEANA_1914_1918_URL'] || 'http://test.1418.eanadev.org'
+Rails.application.config.x.europeana_1914_1918_url = ENV['EUROPEANA_1914_1918_URL'] || 'https://1914-1918.europeana.eu'

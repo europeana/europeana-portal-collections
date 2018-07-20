@@ -52,7 +52,7 @@ module Collections
 
     def include_nav_searchbar
       mustache[:include_nav_searchbar] ||= begin
-        @landing_page.settings_layout_type == 'browse'
+        @landing_page.layout_type == 'browse'
       end
     end
 
@@ -74,10 +74,10 @@ module Collections
               items: @landing_page.credits.to_a
             }
           },
-          "layout_#{@landing_page.settings_layout_type}".to_sym => true,
+          "layout_#{@landing_page.layout_type}".to_sym => true,
           strapline: collection_strapline(@collection),
           hero_config: hero_config(@landing_page.hero_image),
-          entry_points: @landing_page.settings_layout_type == 'browse' ? facet_entry_items_grouped(@landing_page) : [],
+          entry_points: @landing_page.layout_type == 'browse' ? facet_entry_items_grouped(@landing_page) : [],
           preview_search_data: preview_search_data,
           preview_search_data_present: preview_search_data.present?,
           channel_entry: @landing_page.browse_entries.published.blank? ? nil : browse_entry_items_grouped(@landing_page.browse_entries.published, @landing_page),
@@ -126,7 +126,7 @@ module Collections
     end
 
     def carousel_data
-      case @landing_page.settings[:layout_type]
+      case @landing_page.layout_type
       when 'default'
         helpers.tumblr_feed_content(@landing_page)
       when 'browse'

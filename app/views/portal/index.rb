@@ -130,7 +130,7 @@ module Portal
     end
 
     def presenter(document)
-      Document::SearchResultPresenter.new(document, controller, response)
+      Document::BlacklightSearchResultPresenter.new(document, controller, response)
     end
 
     def navigation

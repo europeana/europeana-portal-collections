@@ -295,7 +295,7 @@ unless Page::Landing.find_by_slug('collections/fashion').present?
       collection: Collection.find_by_key('fashion'),
       slug: 'collections/fashion',
       title: 'Europeana Fashion',
-      settings_layout_type: 'browse',
+      layout_type: 'browse',
       strapline: 'Discover %{total_item_count} historical dresses, accessories and catwalk photographs from across Europe.',
       body: '<b>Europeana Fashion</b> brings together more than 30 public and private archives and museums from across Europe in order give public access to high quality digital fashion content, ranging from historical dresses to accessories, catwalk photographs, drawings, sketches, videos, and fashion catalogues. Records ranging from historical dresses to accessoires, catwalk photographs, drawings, sketches, video\'s and fashion catalogues.',
       newsletter_url: 'http://europeanafashion.us5.list-manage.com/subscribe?u=08acbb4918e78ab1b8b1cb158&id=eeaec60e70',

@@ -24,7 +24,7 @@ module PromotionLinkDisplayingView
   end
 
   def normalise_wide(promo_wide_setting)
-    if @landing_page.settings_layout_type == 'browse'
+    if @landing_page.layout_type == 'browse'
       false
     else
       promo_wide_setting == '1'
