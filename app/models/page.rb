@@ -41,7 +41,6 @@ class Page < ActiveRecord::Base
   validates :slug, uniqueness: true
   validate :browse_entries_validation
 
-  scope :static, -> { where(type: nil) }
   scope :primary, -> { static.where('slug <> ? AND slug NOT LIKE ?', '', '%/%') }
 
   def to_param
@@ -54,16 +53,16 @@ class Page < ActiveRecord::Base
 
   # Gets parent page by slug
   def parent
-    @parent ||= parent_slug.blank? ? nil : self.class.static.find_by_slug(parent_slug)
+    @parent ||= parent_slug.blank? ? nil : Page.find_by_slug(parent_slug)
   end
 
   # Gets child pages by slug
   def children
     @children ||= begin
       if slug.blank?
-        self.class.static.none
+        Page.none
       else
-        self.class.static.where('slug LIKE ? AND slug NOT LIKE ?', "#{slug}/%", "#{slug}/%/%")
+        Page.where('slug LIKE ? AND slug NOT LIKE ?', "#{slug}/%", "#{slug}/%/%")
       end
     end
   end
