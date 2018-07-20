@@ -153,15 +153,16 @@ class PortalController < ApplicationController
     redirect_to home_path
   end
 
-  # TODO: move to Europeana::Record?
+  # Is the document the ancestor of other Europeana records?
+  #
+  # Criteria:
+  # * +param[:design] == "entity"+
+  # * +Europeana::Record::Hierarchies.europeana_ancestor?+ returns true for proxy's dcterms:hasPart
+  #
+  # @return [Boolean]
   def document_is_europeana_ancestor?
     return false unless params[:design] == 'entity'
-
-    has_parts = @document.fetch('proxies.dctermsHasPart', []).compact
-    return false unless has_parts.present?
-
-    europeana_uri_count = has_parts.select { |hp| hp.to_s.start_with?('http://data.europeana.eu/item/') }.size
-    other_uri_count = has_parts.size - europeana_uri_count
-    europeana_uri_count > other_uri_count
+    dcterms_has_part = @document.fetch('proxies.dctermsHasPart', []).compact
+    Europeana::Record::Hierarchies.europeana_ancestor?(dcterms_has_part)
   end
 end
