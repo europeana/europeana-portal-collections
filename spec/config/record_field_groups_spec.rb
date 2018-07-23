@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'config/record_field_groups.yml' do
-  FIELD_GROUPS = %w(concepts copyright time description location people provenance properties refs_rels).freeze
+  FIELD_GROUPS = %w(concepts copyright creators time description location people provenance properties refs_rels).freeze
   FIELD_GROUP_KEYS = %w(title sections).freeze
   SECTION_KEYS = %w(title entity fields search_field quoted ga_data exclude_vals map_values capitalised format_date max html_line_breaks).freeze
   ENTITY_KEYS = %w(name fallback extra).freeze

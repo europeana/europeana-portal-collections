@@ -6,6 +6,8 @@ module Document
   # source fields
   module FieldGroup
     class SectionPresenter < ApplicationPresenter
+      include Entities
+
       attr_reader :document, :controller, :group, :definition
 
       delegate :search_field, :entity, :fields, :exclude_vals, :max, :title,
@@ -122,29 +124,6 @@ module Document
       def entity_presenter(entity)
         @entity_presenters ||= {}
         @entity_presenters[entity[:about]] ||= Document::EntityPresenter.new(entity)
-      end
-
-      ##
-      # Retrieves the document's entities
-      #
-      # @param type [String,Symbol] name of entity group, e.g. "timespans"
-      # @param field [String,Symbol] name of field in the document entities
-      #   are to be retrieved for, e.g. "proxies.dctermsTemporal"
-      # @return [Array] document's entities
-      def document_entities(type, field = nil)
-        @document_entities ||= {}
-        @document_entities[type] ||= {}
-        @document_entities[type][field] ||= document_entities_for_type(type, field)
-      end
-
-      # @param (see #document_entities)
-      def document_entities_for_type(type, field = nil)
-        typed_entities = document.fetch(type, [])
-        unless field.nil?
-          doc_field_values = document.fetch(field, [])
-          typed_entities.select! { |entity| doc_field_values.include?(entity[:about]) }
-        end
-        typed_entities || []
       end
 
       def value_presenter(field, content, entity = nil)

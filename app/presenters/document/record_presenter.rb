@@ -6,6 +6,8 @@ module Document
   class RecordPresenter < ApplicationPresenter
     include ActionView::Helpers::TextHelper
     include BlacklightDocumentPresenter
+    include Entities
+    include EntitiesHelper
     include Record::IIIF
     include Metadata::Rights
 

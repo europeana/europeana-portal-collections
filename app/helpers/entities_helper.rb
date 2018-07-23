@@ -41,4 +41,14 @@ module EntitiesHelper
     pref_label_en = [entity[:prefLabel][:en]].flatten.compact.first
     pref_label_en.nil? ? nil : pref_label_en.to_url
   end
+
+  def portal_entity_path(entity_url, slug: nil, format: 'html')
+    return nil unless europeana_entity_url?(entity_url)
+    entity_uri_parts = URI.parse(entity_url).path.split('/')[1..-1]
+    controller.entity_path(type: entities_human_type(entity_uri_parts[0]), id: entity_uri_parts.last, slug: slug, format: format)
+  end
+
+  def europeana_entity_url?(entity_url)
+    %r(\Ahttps?://data.europeana.eu/[a-z]+/(base/)?\d+\z).match?(entity_url)
+  end
 end

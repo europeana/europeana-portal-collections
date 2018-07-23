@@ -15,12 +15,14 @@ module Portal
       new_design? ? 'channels-item' : ''
     end
 
-    # TODO: remove when new design is default
     def js_vars
       return super unless new_design?
       super.tap do |vars|
+        # TODO: remove when new design is default
         page_name_var = vars.detect { |var| var[:name] == 'pageName' }
         page_name_var[:value] = page_name_var[:value] + '-new'
+
+        vars.push(name: 'enabledPromos', value: js_var_enabled_promos, unquoted: true)
       end
     end
 
@@ -80,6 +82,7 @@ module Portal
           object: {
             annotations_later: true, # TODO: remove when styleguide assumes this
             creator: presenter.creator_title,
+            creators: presenter.field_group(:creators),
             concepts: presenter.field_group(:concepts),
             copyright: presenter.field_group(:copyright),
             creation_date: field_value('proxies.dctermsCreated'),
@@ -381,6 +384,12 @@ module Portal
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
+    end
+
+    def js_var_enabled_promos
+      [
+        { id: 'gallery', url: document_galleries_url(document, format: 'json') }
+      ].to_json
     end
   end
 end

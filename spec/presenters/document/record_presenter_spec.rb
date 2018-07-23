@@ -4,7 +4,7 @@ RSpec.describe Document::RecordPresenter do
   let(:controller) { ActionView::TestCase::TestController.new }
   let(:bl_response) { Europeana::Blacklight::Response.new(api_response, {}) }
   let(:document) { bl_response.documents.first }
-  let(:basic_api_response) { JSON.parse(api_responses(:record, id: 'abc/123')) }
+  let(:basic_api_response) { JSON.parse(api_responses(:record, id: '123/abc')) }
   let(:api_response) { basic_api_response }
 
   describe '#media_rights' do
