@@ -38,5 +38,24 @@ module Europeana
         end
       end
     end
+
+    # Queries the Search API for Europeana records being part of another record
+    #
+    # Given two records:
+    # * A having ID "/123/abc"
+    # * B having ID "/123/def"
+    #
+    # Record B is part of record A if the EDM proxy for B has a dcterms:isPartOf
+    # value equal to A's Europeana item URI: "http://data.europeana.eu/item/123/abc".
+    #
+    # @param europeana_id [String] Europeana record ID to search for parts of
+    # @return see Europeana::API::Record.search
+    def search_results_for_dcterms_is_part_of(europeana_id)
+      search_options = {
+        api_url: api_url, rows: blacklight_config.default_per_page, sort: 'europeana_id asc',
+        query: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item#{europeana_id}")
+      }
+      Europeana::API.record.search(search_options)
+    end
   end
 end
