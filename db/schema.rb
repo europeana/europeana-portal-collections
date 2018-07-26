@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717122411) do
+ActiveRecord::Schema.define(version: 20180726085005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20180717122411) do
     t.string   "locale",                  null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.string   "title"
+    t.string   "pref_label"
   end
 
   add_index "europeana_record_set_translations", ["europeana_record_set_id"], name: "index_4bd7ec28ca1ffda8471d95bf20197ac81b52dffa", using: :btree

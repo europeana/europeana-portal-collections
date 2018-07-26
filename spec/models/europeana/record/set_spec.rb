@@ -5,12 +5,12 @@ RSpec.describe Europeana::Record::Set do
   let(:europeana_ids) { %w(/123/abc /456/def) }
   let(:valid_portal_urls) { %w(https://www.europeana.eu/portal/record/123/abc.html https://www.europeana.eu/portal/record/456/def.html) }
   let(:invalid_portal_url) { 'http://www.example.com/' }
-  subject { described_class.new(page: page, title: 'C', europeana_ids: europeana_ids) }
+  subject { described_class.new(page: page, pref_label: 'C', europeana_ids: europeana_ids) }
 
   it { is_expected.to have_one(:page_element) }
   it { is_expected.to have_one(:page).through(:page_element) }
   it { is_expected.to validate_presence_of(:europeana_ids) }
-  it { is_expected.to validate_presence_of(:title) }
+  it { is_expected.to validate_presence_of(:pref_label) }
 
   describe 'Portal URLs <=> Europeana IDs' do
     describe '#portal_urls' do
@@ -73,17 +73,17 @@ RSpec.describe Europeana::Record::Set do
     end
 
     context 'without query_term present' do
-      context 'with title present' do
+      context 'with pref_label present' do
         it 'returns it' do
           subject.query_term = nil
-          expect(subject.query_term_with_fallback).to eq(subject.title)
+          expect(subject.query_term_with_fallback).to eq(subject.pref_label)
         end
       end
 
-      context 'without title present' do
+      context 'without pref_label present' do
         it 'returns empty string' do
           subject.query_term = nil
-          subject.title = nil
+          subject.pref_label = nil
           expect(subject.query_term_with_fallback).to eq('')
         end
       end

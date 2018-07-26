@@ -36,11 +36,11 @@ module Pages
       def content_browse_list(set)
         {
           head: {
-            pref_label: set.title
+            pref_label: set.pref_label
           },
           foot: {
             link: {
-              text: format(content_browse_list_foot_link_text, set_title: set.title),
+              text: format(content_browse_list_foot_link_text, set_pref_label: set.pref_label),
               url: content_browse_list_foot_link_url(set)
             }
           },
