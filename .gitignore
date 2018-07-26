@@ -60,6 +60,9 @@
 # Ignore compiled assets
 /public/assets
 
+# Ignore compiled javascripts
+/public/javascripts
+
 # Ignore uploaded files
 /public/system
 
