@@ -50,5 +50,6 @@ en:
         feeds: What's happening Feeds
   attributes:
     portal_urls_text: Portal URLs
+    pref_label: Preferred label
     uri: URI
     url: URL

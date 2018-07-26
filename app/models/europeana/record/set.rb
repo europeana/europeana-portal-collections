@@ -15,12 +15,12 @@ module Europeana
         page_element&.touch
       end
 
-      translates :title, fallbacks_for_empty_translations: true
+      translates :pref_label, fallbacks_for_empty_translations: true
       accepts_nested_attributes_for :translations, allow_destroy: true
       default_scope { includes(:translations) }
 
       validates :europeana_ids, presence: true
-      validates :title, presence: true
+      validates :pref_label, presence: true
       validate :validate_portal_urls_presence, :validate_portal_urls_format
 
       store_accessor :settings, :query_term
@@ -49,7 +49,7 @@ module Europeana
       end
 
       def query_term_with_fallback
-        query_term.present? ? query_term : title || ''
+        query_term.present? ? query_term : pref_label || ''
       end
 
       # Construct a full search query, with the page's base query
@@ -96,7 +96,7 @@ module Europeana
       def validate_portal_urls_format
         return unless @portal_urls_to_europeana_ids.present?
         @portal_urls_to_europeana_ids.each_pair do |url, europeana_id|
-          errors.add(:portal_urls_text, %(on set "#{title}", invalid portal URL: #{url})) if europeana_id.nil?
+          errors.add(:portal_urls_text, %(on set "#{pref_label}", invalid portal URL: #{url})) if europeana_id.nil?
         end
       end
     end

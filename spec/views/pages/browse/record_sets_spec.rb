@@ -23,7 +23,7 @@ RSpec.describe 'pages/browse/record_sets.html.mustache', :common_view_components
     render
 
     page.sets.each do |set|
-      expect(rendered).to have_selector(%(.browse-list-title), text: set.title)
+      expect(rendered).to have_selector(%(.browse-list-title), text: set.pref_label)
     end
   end
 
@@ -31,8 +31,8 @@ RSpec.describe 'pages/browse/record_sets.html.mustache', :common_view_components
     render
 
     page.sets.each do |set|
-      href = '#' + set.title
-      text = set.title
+      href = '#' + set.pref_label
+      text = set.pref_label
       expect(rendered).to have_selector(%(a[href$="#{href}"]), text: text)
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe 'pages/browse/record_sets.html.mustache', :common_view_components
 
     page.sets.each do |set|
       href = '/search?q=' + set.query_term_with_fallback
-      text = format(page.link_text, set_title: set.title)
+      text = format(page.link_text, set_pref_label: set.pref_label)
       expect(rendered).to have_selector(%(a[href$="#{href}"]), text: text)
     end
   end

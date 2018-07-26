@@ -190,11 +190,11 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Europeana::Record::Set' do
-    object_label_method :title
+    object_label_method :pref_label
     visible false
 
     edit do
-      field :title
+      field :pref_label
       field :portal_urls_text, :text do
         required true
         html_attributes rows: 15, cols: 80
