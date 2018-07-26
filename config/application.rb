@@ -94,6 +94,8 @@ module Europeana
         {}
       end
 
+      config.middleware.use ::I18n::JS::Middleware
+
       # ActiveRecord observers
       config.active_record.observers = %i(nav_cache_invalidation_observer)
     end

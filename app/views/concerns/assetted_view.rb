@@ -22,4 +22,11 @@ module AssettedView
       }
     ]
   end
+
+  def js_application_requirements
+    [
+      asset_path('application.js'),
+      asset_path("/javascripts/i18n/#{I18n.locale}.js")
+    ]
+  end
 end

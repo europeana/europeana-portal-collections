@@ -33,7 +33,8 @@ class ApplicationView < Europeana::Styleguide::View
       { name: 'i18nDefaultLocale', value: I18n.default_locale },
       { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true },
       { name: 'googleAnalyticsLinkedDomains', value: google_analytics_linked_domains_js_var_value, unquoted: true },
-      { name: 'siteNotice', value: site_notice }
+      { name: 'siteNotice', value: site_notice },
+      { name: 'requirementsApplication', value: js_application_requirements, unquoted: true }
     ] + super
   end
 
