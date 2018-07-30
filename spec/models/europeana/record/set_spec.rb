@@ -12,6 +12,9 @@ RSpec.describe Europeana::Record::Set do
   it { is_expected.to validate_presence_of(:europeana_ids) }
   it { is_expected.to validate_presence_of(:pref_label) }
 
+  it { is_expected.to have_array_of_strings_attribute(:portal_urls) }
+  it { is_expected.to have_array_of_strings_attribute(:alt_label) }
+
   describe 'Portal URLs <=> Europeana IDs' do
     describe '#portal_urls' do
       it 'is an array of portal URLs derived from Europeana IDs' do

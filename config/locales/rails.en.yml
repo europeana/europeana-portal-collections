@@ -49,6 +49,7 @@ en:
         other: Landing Pages
         feeds: What's happening Feeds
   attributes:
+    alt_label_text: Alternative label
     portal_urls_text: Portal URLs
     pref_label: Preferred label
     uri: URI
