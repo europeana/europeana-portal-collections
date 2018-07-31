@@ -26,12 +26,12 @@ module HasArrayOfStringsAttribute
     def has_array_of_strings_attribute(*attributes, join: "\n\n", split: /\s+/)
       attributes.each do |attribute|
         define_method("#{attribute}_text") do
-          instance_variable_get(:"@#{attribute}_text") || send(attribute)&.join(join)
+          send(attribute)&.join(join)
         end
 
-        define_method("#{attribute}_text=") do |value|
-          instance_variable_set(:"@#{attribute}_text", value)
-          self.send(:"#{attribute}=", value&.split(split))
+        define_method("#{attribute}_text=") do |string|
+          array = string&.split(split)
+          send(:"#{attribute}=", array)
         end
       end
     end

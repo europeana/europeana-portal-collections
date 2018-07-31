@@ -3,10 +3,12 @@
 RSpec::Matchers.define :have_array_of_strings_attribute do |attribute|
   match do |actual|
     @attribute = attribute
-    @getter = :"#{attribute}_text"
-    @setter = :"#{attribute}_text="
-    @join = "\n\n"
-    @split = '  '
+    @attribute_setter = :"#{attribute}="
+    @text_getter = :"#{attribute}_text"
+    @text_setter = :"#{attribute}_text="
+    @join ||= "\n\n"
+    @split ||= '  '
+    @array_of_strings ||= %w(a b c)
 
     responds_to_setter?(actual) &&
       sets_array_from_text?(actual) &&
@@ -14,8 +16,8 @@ RSpec::Matchers.define :have_array_of_strings_attribute do |attribute|
       gets_text_from_array?(actual)
   end
 
+  chain :elements, :array_of_strings
   chain :joining, :join
-
   chain :splitting, :split
 
   failure_message do |_actual|
@@ -23,26 +25,32 @@ RSpec::Matchers.define :have_array_of_strings_attribute do |attribute|
   end
 
   def responds_to_setter?(actual)
-    return true if actual.respond_to?(@setter)
-    @failure_message = "expected #{actual} to respond to #{@setter}"
+    return true if actual.respond_to?(@text_setter)
+    @failure_message = "expected #{actual} to respond to #{@text_setter}"
     false
   end
 
   def sets_array_from_text?(actual)
-    actual.send(@setter, %w(a b).join(split))
-    return true if actual.instance_variable_get(:"@#{@attribute}") == %w(a b)
-    @failure_message = "expected @#{@attribute} to be array of values"
+    arg = @array_of_strings.join(split)
+    actual.send(@text_setter, arg)
+    value = actual.send(@attribute)
+    return true if value == @array_of_strings
+    @failure_message = %<expected #{@text_setter}(#{arg.inspect}) to set attribute "#{@attribute}" to #{@array_of_strings.inspect}, not #{value.inspect}>
+    false
   end
 
   def responds_to_getter?(actual)
-    return true if actual.respond_to?(@getter)
-    @failure_message = "expected #{actual} to respond to #{@getter}"
+    return true if actual.respond_to?(@text_getter)
+    @failure_message = "expected #{actual} to respond to #{@text_getter}"
     false
   end
 
   def gets_text_from_array?(actual)
-    actual.instance_variable_set(:"@#{@attribute}", %w(a b))
-    return true if actual.send(@getter) == %w(a b).join(join)
-    @failure_message = "expected @#{@attribute} to be array joined to text"
+    string = @array_of_strings.join(join)
+    actual.send(@attribute_setter, @array_of_strings)
+    value = actual.send(@text_getter)
+    return true if value == string
+    @failure_message = %(expected #{@text_getter} with attribute "#{@attribute}" == #{@array_of_strings.inspect} to return #{string.inspect}, not #{value.inspect})
+    false
   end
 end
