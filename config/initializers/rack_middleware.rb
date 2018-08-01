@@ -6,6 +6,6 @@ require 'rack/enforce_http_host'
 Rails.application.configure do
   config.middleware.use Rack::EnforceHttpHost if ENV.key?('HTTP_HOST')
 
-  # Compress HTTP responses
-  config.middleware.use Rack::Deflater unless ENV['DISABLE_RACK_HTML_DEFLATER']
+  # Gzip compress HTTP responses
+  config.middleware.use Rack::Deflater if ENV['ENABLE_RACK_HTML_DEFLATER']
 end
