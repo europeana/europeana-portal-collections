@@ -4,6 +4,7 @@
 # Pages with styleguide assets (CSS, JS, images)
 module AssettedView
   extend ActiveSupport::Concern
+  include Europeana::I18n::JsTranslationsHelper
 
   def css_files
     [
@@ -25,8 +26,7 @@ module AssettedView
 
   def js_application_requirements
     [
-      asset_path('application.js'),
-      asset_path("/javascripts/i18n/#{I18n.locale}.js")
-    ]
+      asset_path('application.js')
+    ] + js_translation_files
   end
 end

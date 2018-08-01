@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 6a98bafa8b8a8c8c71745274f379d33d9daa7e10
-  branch: develop
+  revision: 13749705b03721e0abac69c0fa5a2b22388a0152
+  branch: feat/EC-2965-js-translations
   specs:
-    europeana-i18n (0.0.1)
+    europeana-i18n (0.0.2)
+      i18n-js (>= 3.0, < 4.0)
       rails (>= 4.0, < 6.0)
 
 GIT
@@ -246,7 +247,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    i18n-js (3.0.5)
+    i18n-js (3.0.11)
       i18n (>= 0.6.6, < 2)
     i18n_data (0.8.0)
     ipaddress (0.8.3)
@@ -568,7 +569,6 @@ DEPENDENCIES
   foreman
   globalize (~> 5.0)
   globalize-versioning!
-  i18n-js
   i18n_data
   jbuilder (~> 2.6.0)
   json-ld
