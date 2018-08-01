@@ -4,7 +4,7 @@ RSpec.describe GalleryDisplayabilityMailer, :gallery_image_portal_urls do
   describe '#post' do
     let(:args) { { gallery: gallery, image_errors: image_errors } }
     let(:gallery) { Gallery.create(title: 'Broken gallery', image_portal_urls_text: image_portal_urls) }
-    let(:image_portal_urls) { gallery_image_portal_urls }
+    let(:image_portal_urls) { gallery_image_portal_urls_text }
     let(:image_errors) do
       gallery.image_portal_urls.each_with_object({}) do |portal_url, memo|
         memo[portal_url] = ['This one broke!']

@@ -7,8 +7,8 @@ en:
       europeana/record/set:
         settings_query_term: Query term
       gallery:
-        image_portal_urls:
-          Item URLs on the portal
+        image_portal_urls_text: Item URLs on the portal
+        topic_ids: Topics
       hero_image:
         settings_brand_colour: Brand colour
         settings_brand_opacity: Brand opacity
