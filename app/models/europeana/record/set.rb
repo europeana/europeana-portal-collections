@@ -29,6 +29,12 @@ module Europeana
         europeana_ids&.map { |id| Europeana::Record.portal_url(id) }
       end
 
+      delegate :position, to: :page_element, allow_nil: true
+
+      def position=(value)
+        page_element&.update_attribute(:position, value.to_i)
+      end
+
       # Set Europeana IDs from portal URLs
       #
       # @param value [Array<String>]

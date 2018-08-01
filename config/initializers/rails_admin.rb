@@ -195,6 +195,7 @@ RailsAdmin.config do |config|
 
     edit do
       field :pref_label
+      field :position, :hidden
       field :portal_urls_text, :text do
         required true
         html_attributes rows: 15, cols: 80
