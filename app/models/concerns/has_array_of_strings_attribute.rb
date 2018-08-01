@@ -23,7 +23,7 @@ module HasArrayOfStringsAttribute
     # @param attributes [Symbol] Attribute(s) to define text-based getter/setter for
     # @param join [String] Separator to join array of strings with when calling getter
     # @param split [String,Regexp] Separator to split text by when calling setter
-    def has_array_of_strings_attribute(*attributes, join: "\n\n", split: /\s+/)
+    def has_array_of_strings_attribute(*attributes, join: "\n\n", split: /\R+/)
       attributes.each do |attribute|
         define_method("#{attribute}_text") do
           send(attribute)&.join(join)

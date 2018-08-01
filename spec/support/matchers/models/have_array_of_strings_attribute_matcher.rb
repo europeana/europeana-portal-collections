@@ -7,7 +7,7 @@ RSpec::Matchers.define :have_array_of_strings_attribute do |attribute|
     @text_getter = :"#{attribute}_text"
     @text_setter = :"#{attribute}_text="
     @join ||= "\n\n"
-    @split ||= '  '
+    @split ||= "\n\n"
     @array_of_strings ||= %w(a b c)
 
     responds_to_setter?(actual) &&
