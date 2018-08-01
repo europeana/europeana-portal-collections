@@ -12,6 +12,8 @@ RSpec.describe Europeana::Record::Set do
   it { is_expected.to validate_presence_of(:europeana_ids) }
   it { is_expected.to validate_presence_of(:pref_label) }
 
+  it { is_expected.to delegate_method(:position).to(:page_element) }
+
   it { is_expected.to have_array_of_strings_attribute(:portal_urls).elements(valid_portal_urls) }
   it { is_expected.to have_array_of_strings_attribute(:alt_label) }
 
@@ -183,6 +185,15 @@ RSpec.describe Europeana::Record::Set do
       valid_portal_urls.each do |valid_portal_url|
         expect(subject.errors[:portal_urls_text].none? { |error| error.include?(valid_portal_url) }).to be true
       end
+    end
+  end
+
+  describe '#position=' do
+    it 'updates position on page element' do
+      subject.save!
+      old_position = subject.page_element.position
+      new_position = old_position + 1
+      expect { subject.position = new_position }.to change { subject.page_element.position }.to(new_position)
     end
   end
 end
