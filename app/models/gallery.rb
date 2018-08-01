@@ -7,6 +7,7 @@ class Gallery < ActiveRecord::Base
   define_callbacks :set_images
 
   include Gallery::Annotations
+  include HasArrayOfStringsAttribute
   include HasPublicationStates
   include IsCategorisable
   include IsPermissionable
@@ -24,6 +25,7 @@ class Gallery < ActiveRecord::Base
   translates :title, :description, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
 
+  has_array_of_strings_attribute :image_portal_urls, split: /\s+/
   has_paper_trail
 
   validates :title, presence: true, length: { maximum: 60 }
@@ -67,15 +69,6 @@ class Gallery < ActiveRecord::Base
 
   def to_param
     slug
-  end
-
-  def image_portal_urls_text
-    @image_portal_urls_text ||= image_portal_urls&.join("\n\n")
-  end
-
-  def image_portal_urls_text=(value)
-    self.image_portal_urls = value&.strip&.split(/\s+/)&.compact || []
-    @image_portal_urls_text = value
   end
 
   def image_portal_urls

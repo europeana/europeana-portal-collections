@@ -11,6 +11,7 @@ module Collections
     include PromotionLinkDisplayingView
     include SearchableView
     include UgcContentDisplayingView
+    include UrlHelper
 
     def head_meta
       mustache[:head_meta] ||= begin

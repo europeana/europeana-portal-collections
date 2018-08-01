@@ -195,6 +195,9 @@ RailsAdmin.config do |config|
 
     edit do
       field :pref_label
+      field :alt_label_text, :text do
+        html_attributes rows: 5, cols: 80
+      end
       field :portal_urls_text, :text do
         required true
         html_attributes rows: 15, cols: 80

@@ -74,7 +74,6 @@ end
 
 group :development, :profiling, :production do
   gem 'clockwork', '~> 1.2'
-  gem 'htmlcompressor', '0.3'
   gem 'newrelic_rpm'
   gem 'puma', '~> 3.9.1'
 end

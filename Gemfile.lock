@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: b2855b3f1ea24e463573267d5eb494e8ca7cfdd2
+  revision: e40ee9319a97630d22b29a00a2a0ee1f0aa86e78
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -236,7 +236,6 @@ GEM
       concurrent-ruby (~> 1.0)
     hashdiff (0.3.5)
     hashie (3.5.6)
-    htmlcompressor (0.3.0)
     httmultiparty (0.3.16)
       httparty (>= 0.7.3)
       mimemagic
@@ -569,7 +568,6 @@ DEPENDENCIES
   foreman
   globalize (~> 5.0)
   globalize-versioning!
-  htmlcompressor (= 0.3)
   i18n-js
   i18n_data
   jbuilder (~> 2.6.0)

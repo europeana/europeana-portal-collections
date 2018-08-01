@@ -36,7 +36,8 @@ module Pages
       def content_browse_list(set)
         {
           head: {
-            pref_label: set.pref_label
+            pref_label: set.pref_label,
+            alt_labels: set.alt_label
           },
           foot: {
             link: {
