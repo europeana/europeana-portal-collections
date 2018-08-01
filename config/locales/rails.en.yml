@@ -7,8 +7,8 @@ en:
       europeana/record/set:
         settings_query_term: Query term
       gallery:
-        image_portal_urls:
-          Item URLs on the portal
+        image_portal_urls_text: Item URLs on the portal
+        topic_ids: Topics
       hero_image:
         settings_brand_colour: Brand colour
         settings_brand_opacity: Brand opacity
@@ -49,6 +49,7 @@ en:
         other: Landing Pages
         feeds: What's happening Feeds
   attributes:
+    alt_label_text: Alternative label
     portal_urls_text: Portal URLs
     pref_label: Preferred label
     uri: URI

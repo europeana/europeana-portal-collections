@@ -10,6 +10,10 @@ RSpec.shared_context 'Gallery Image portal URLs', :gallery_image_portal_urls do
   end
 
   def gallery_image_portal_urls(number: 10, format: gallery_image_portal_url_format)
-    (1..number).map { |n| gallery_image_portal_url(number: n, format: format) }.join(' ')
+    (1..number).map { |n| gallery_image_portal_url(number: n, format: format) }
+  end
+
+  def gallery_image_portal_urls_text(**options)
+    gallery_image_portal_urls(options).join(' ')
   end
 end

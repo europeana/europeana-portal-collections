@@ -18,6 +18,8 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
   it { is_expected.to accept_nested_attributes_for(:images).allow_destroy(true) }
   it { is_expected.to accept_nested_attributes_for(:translations).allow_destroy(true) }
 
+  it { is_expected.to have_array_of_strings_attribute(:image_portal_urls).elements(gallery_image_portal_urls) }
+
   it 'should have publication states' do
     expect(described_class).to include(HasPublicationStates)
   end
@@ -76,9 +78,9 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
   end
 
   it 'should enforce unique titles' do
-    g1 = Gallery.create!(title: 'Stuff', image_portal_urls_text: gallery_image_portal_urls)
-    g2 = Gallery.create!(title: 'Stuff', image_portal_urls_text: gallery_image_portal_urls)
-    g3 = Gallery.create!(title: 'Stuff', image_portal_urls_text: gallery_image_portal_urls)
+    g1 = Gallery.create!(title: 'Stuff', image_portal_urls_text: gallery_image_portal_urls_text)
+    g2 = Gallery.create!(title: 'Stuff', image_portal_urls_text: gallery_image_portal_urls_text)
+    g3 = Gallery.create!(title: 'Stuff', image_portal_urls_text: gallery_image_portal_urls_text)
     expect(g1.reload.title).to eq('Stuff')
     expect(g2.reload.title).to eq('Stuff 1')
     expect(g3.reload.title).to eq('Stuff 2')
@@ -97,7 +99,7 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
 
   describe '#set_images' do
     context 'when creating' do
-      let(:gallery) { Gallery.new(title: 'Pictures', image_portal_urls_text: gallery_image_portal_urls(number: 10)) }
+      let(:gallery) { Gallery.new(title: 'Pictures', image_portal_urls_text: gallery_image_portal_urls_text(number: 10)) }
 
       it 'is not called' do
         expect(gallery).not_to receive(:set_images)
@@ -107,21 +109,21 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
     end
 
     context 'when updating' do
-      let(:gallery) { Gallery.create(title: 'Pictures', image_portal_urls_text: gallery_image_portal_urls(number: 10)) }
+      let(:gallery) { Gallery.create(title: 'Pictures', image_portal_urls_text: gallery_image_portal_urls_text(number: 10)) }
 
       it 'is not called' do
         expect(gallery).not_to receive(:set_images)
-        gallery.image_portal_urls_text = gallery_image_portal_urls(number: 20)
+        gallery.image_portal_urls_text = gallery_image_portal_urls_text(number: 20)
         gallery.save
         expect(gallery.images.reload.count).to be_zero
       end
     end
 
     context 'when called' do
-      let(:gallery) { Gallery.create(title: 'Pictures', image_portal_urls_text: gallery_image_portal_urls(number: 10)) }
+      let(:gallery) { Gallery.create(title: 'Pictures', image_portal_urls_text: gallery_image_portal_urls_text(number: 10)) }
 
       it 'should create images for new URLs' do
-        gallery.image_portal_urls_text = gallery_image_portal_urls(number: 20)
+        gallery.image_portal_urls_text = gallery_image_portal_urls_text(number: 20)
         gallery.set_images
         gallery.images.reload
         (1..20).each do |number|
@@ -130,7 +132,7 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
       end
 
       it 'should set image position' do
-        gallery.image_portal_urls_text = gallery_image_portal_urls(number: 2)
+        gallery.image_portal_urls_text = gallery_image_portal_urls_text(number: 2)
         gallery.set_images
         gallery.images.reload
         expect(gallery.images.detect { |image| image.europeana_record_id == '/123/record1' }.position).to eq(1)
@@ -138,13 +140,13 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
       end
 
       it 'should delete images for absent URLs' do
-        gallery.image_portal_urls_text = gallery_image_portal_urls(number: 8)
+        gallery.image_portal_urls_text = gallery_image_portal_urls_text(number: 8)
         gallery.set_images
         expect(gallery.images.reload.count).to eq(8)
       end
 
       it 'should set the URL for the images' do
-        gallery.image_portal_urls_text = gallery_image_portal_urls(number: 8)
+        gallery.image_portal_urls_text = gallery_image_portal_urls_text(number: 8)
         gallery.set_images
         gallery.images.reload
         expect(gallery.images.size).to eq(8)
@@ -159,7 +161,7 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
   describe 'validation' do
     it 'checks format of image URLs' do
       gallery = galleries(:empty)
-      gallery.image_portal_urls_text = gallery_image_portal_urls(format: 'http://www.example.com/%{number}')
+      gallery.image_portal_urls_text = gallery_image_portal_urls_text(format: 'http://www.example.com/%{number}')
       expect(gallery).not_to be_valid
       expect(gallery.errors[:image_portal_urls_text]).not_to be_none
     end
@@ -167,7 +169,7 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
     it 'requires 6-48 images' do
       gallery = galleries(:empty)
       (1..50).each do |number|
-        gallery.image_portal_urls_text = gallery_image_portal_urls(number: number)
+        gallery.image_portal_urls_text = gallery_image_portal_urls_text(number: number)
         if number < 6 || number > 48
           expect(gallery).not_to be_valid
           expect(gallery.errors[:image_portal_urls_text]).not_to be_none
@@ -188,58 +190,6 @@ RSpec.describe Gallery, :gallery_image_portal_urls, :gallery_image_request do
       gallery.topics.push(topics[3])
       gallery.validate
       expect(gallery.errors[:categorisations]).not_to be_blank
-    end
-  end
-
-  describe '#image_portal_urls_text' do
-    context 'with @image_portal_urls_text' do
-      let(:value) { 'urls' }
-
-      before do
-        subject.instance_variable_set(:@image_portal_urls_text, value)
-      end
-
-      it 'returns @image_portal_urls_text' do
-        expect(subject.image_portal_urls_text).to eq(value)
-      end
-    end
-
-    context 'without @image_portal_urls_text' do
-      context 'with attributes[:image_portal_urls]' do
-        let(:value) { ['url1', 'url2'] }
-
-        before do
-          subject.image_portal_urls = value
-        end
-
-        it 'returns joined attributes[:image_portal_urls]' do
-          expect(subject.image_portal_urls_text).to eq(value.join("\n\n"))
-        end
-      end
-
-      context 'without attributes[:image_portal_urls]' do
-        context 'with images' do
-          let(:image_portal_urls) do
-            [gallery_image_portal_url(number: 1), gallery_image_portal_url(number: 2)]
-          end
-
-          before do
-            image_portal_urls.each do |url|
-              subject.images.push(GalleryImage.from_portal_url(url))
-            end
-          end
-
-          it 'uses image portal URLs' do
-            expect(subject.image_portal_urls_text).to eq(image_portal_urls.join("\n\n"))
-          end
-        end
-
-        context 'without images' do
-          it 'returns ""' do
-            expect(subject.image_portal_urls_text).to eq('')
-          end
-        end
-      end
     end
   end
 
