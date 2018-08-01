@@ -6,6 +6,8 @@ module Europeana
     #
     # TODO: store on the Sets API once implemented?
     class Set < ActiveRecord::Base
+      include HasArrayOfStringsAttribute
+
       self.table_name = 'europeana_record_sets'
 
       has_one :page_element, dependent: :destroy, as: :positionable
@@ -15,7 +17,7 @@ module Europeana
         page_element&.touch
       end
 
-      translates :pref_label, fallbacks_for_empty_translations: true
+      translates :pref_label, :alt_label, fallbacks_for_empty_translations: true
       accepts_nested_attributes_for :translations, allow_destroy: true
       default_scope { includes(:translations) }
 
@@ -24,6 +26,8 @@ module Europeana
       validate :validate_portal_urls_presence, :validate_portal_urls_format
 
       store_accessor :settings, :query_term
+
+      has_array_of_strings_attribute :portal_urls, :alt_label
 
       def portal_urls
         europeana_ids&.map { |id| Europeana::Record.portal_url(id) }
@@ -43,15 +47,6 @@ module Europeana
           memo[url] = Europeana::Record.id_from_portal_url(url)
         end
         self.europeana_ids = @portal_urls_to_europeana_ids.values.compact
-      end
-
-      def portal_urls_text
-        @portal_urls_text || portal_urls&.join("\n\n")
-      end
-
-      def portal_urls_text=(value)
-        @portal_urls_text = value
-        self.portal_urls = value&.split(/\s+/)
       end
 
       def query_term_with_fallback
