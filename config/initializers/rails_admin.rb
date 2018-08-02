@@ -195,6 +195,7 @@ RailsAdmin.config do |config|
 
     edit do
       field :pref_label
+      field :position, :hidden
       field :alt_label_text, :text do
         html_attributes rows: 5, cols: 80
       end
