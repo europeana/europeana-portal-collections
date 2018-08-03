@@ -14,7 +14,7 @@ class GalleryImage
 
     def validate_http_image
       unless http_image_content_type?
-        errors.add(:url, %(HTTP response is not an image for "#{url}" #{europeana_record_id}))
+        errors.add(:url, %(HTTP response is not an image for "#{url}", on record "#{europeana_record_id}"))
       end
     end
 
