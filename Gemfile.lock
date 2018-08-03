@@ -1,11 +1,10 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 13749705b03721e0abac69c0fa5a2b22388a0152
-  branch: feat/EC-2965-js-translations
+  revision: 7d162a09867c0b25651ccccad7ce88452c6afc43
+  branch: develop
   specs:
-    europeana-i18n (0.0.2)
+    europeana-i18n (0.1.0)
       i18n-js (>= 3.0, < 4.0)
-      rails (>= 4.0, < 6.0)
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
