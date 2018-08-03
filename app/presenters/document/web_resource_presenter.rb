@@ -158,11 +158,10 @@ module Document
 
     def download_url
       return @download_url if instance_variable_defined?(:@download_url)
+
       @download_url = begin
         if downloadable?
           mime_type.present? ? media_proxy_url(@record.fetch('about', '/'), url) : url
-        else
-          nil
         end
       end
     end
