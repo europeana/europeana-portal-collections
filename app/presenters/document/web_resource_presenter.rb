@@ -35,7 +35,7 @@ module Document
         play_html: play_html,
         technical_metadata: media_metadata,
         download: {
-          url: downloadable? ? download_url : nil,
+          url: download_url,
           text: t('site.object.actions.download')
         },
         external_media: external_media_url
@@ -59,7 +59,8 @@ module Document
     end
 
     def play_url
-      @play_url ||= begin
+      return @play_url if instance_variable_defined?(:@play_url)
+      @play_url = begin
         @record_presenter.iiif_manifest || download_url
       end
     end
@@ -73,9 +74,18 @@ module Document
 
     def url
       @url ||= begin
-        url = document.fetch('about', nil)
-        @controller.url_conversions[url] || url
+        controller_url_conversions[uri] || uri
       end
+    end
+
+    def uri
+      @uri ||= begin
+        document.fetch('about', nil)
+      end
+    end
+
+    def controller_url_conversions
+      controller.respond_to?(:url_conversions) ? controller.url_conversions : {}
     end
 
     def media_rights
@@ -101,9 +111,13 @@ module Document
     def media_type_special_case
       if @record_presenter.iiif_manifest
         'iiif'
-      elsif @controller.oembed_html.key?(url)
+      elsif controller_oembed_html.key?(url)
         'oembed'
       end
+    end
+
+    def controller_oembed_html
+      controller.respond_to?(:oembed_html) ? controller.oembed_html : {}
     end
 
     def media_type_from_mime_type
@@ -143,7 +157,13 @@ module Document
     end
 
     def download_url
-      @download_url ||= mime_type.present? ? media_proxy_url(@record.fetch('about', '/'), url) : url
+      return @download_url if instance_variable_defined?(:@download_url)
+
+      @download_url = begin
+        if downloadable?
+          mime_type.present? ? media_proxy_url(@record.fetch('about', '/'), url) : url
+        end
+      end
     end
 
     def permit_unknown_image_size?
@@ -164,7 +184,11 @@ module Document
     end
 
     def media_http_headers
-      @media_http_headers ||= @controller.media_headers[url] || {}
+      @media_http_headers ||= controller_media_headers[url] || {}
+    end
+
+    def controller_media_headers
+      controller.respond_to?(:media_headers) ? controller.media_headers : {}
     end
 
     def media_metadata
@@ -229,7 +253,7 @@ module Document
     def displayable_tests
       [
         # TRUE if for edm:object and no other web resources are displayable
-        -> { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p == self }.none?(&:displayable?) ? true : nil },
+        -> { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p.uri == uri }.none?(&:displayable?) ? true : nil },
         # FALSE if for edm:object but edm:object is just a thumbnail of edm:isShownBy (which will be shown instead)
         -> { for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by? ? false : nil },
         # TRUE if for edm:isShownBy
@@ -244,7 +268,7 @@ module Document
     end
 
     def displayable?
-      return @displayable if defined?(@displayable)
+      return @displayable if instance_variable_defined?(:@displayable)
 
       displayable_tests.each do |test|
         unless defined?(@displayable)
@@ -257,7 +281,7 @@ module Document
     end
 
     def playable?
-      if url.blank? ||
+      if url.blank? || play_url.blank? ||
          (mime_type.blank? && !playable_without_mime_type?) ||
          (mime_type == 'video/mpeg') ||
          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
