@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: fe79256b82b7cd89e07970ce34d25be673828c02
-  branch: feat/EC-2965-precompiled-js
+  revision: ee250e0e6fa3fead279f2f1b93afb842daf0f252
+  branch: develop
   specs:
-    europeana-i18n (0.1.0)
+    europeana-i18n (0.1.1)
       i18n-js (>= 3.0, < 4.0)
 
 GIT
