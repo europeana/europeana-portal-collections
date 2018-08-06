@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 6a98bafa8b8a8c8c71745274f379d33d9daa7e10
+  revision: ee250e0e6fa3fead279f2f1b93afb842daf0f252
   branch: develop
   specs:
-    europeana-i18n (0.0.1)
-      rails (>= 4.0, < 6.0)
+    europeana-i18n (0.1.1)
+      i18n-js (>= 3.0, < 4.0)
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
@@ -246,6 +246,8 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    i18n-js (3.0.11)
+      i18n (>= 0.6.6, < 2)
     i18n_data (0.8.0)
     ipaddress (0.8.3)
     iso-639 (0.2.8)
