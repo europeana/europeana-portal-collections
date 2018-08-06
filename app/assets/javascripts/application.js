@@ -10,6 +10,4 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 // ...
-//= require europeana/i18n/i18n_initializer
-//= require i18n
-//= require europeana/i18n/i18n_translations
+//= require europeana/i18n
