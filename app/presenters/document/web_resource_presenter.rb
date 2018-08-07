@@ -252,6 +252,8 @@ module Document
     # @return [Array<Proc>] lambdas to test displayability
     def displayable_tests
       [
+        # FALSE if for edm:isShownAt
+        -> { for_edm_is_shown_at? ? false : nil },
         # TRUE if for edm:object and no other web resources are displayable
         -> { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p.uri == uri }.none?(&:displayable?) ? true : nil },
         # FALSE if for edm:object but edm:object is just a thumbnail of edm:isShownBy (which will be shown instead)
@@ -270,10 +272,11 @@ module Document
     def displayable?
       return @displayable if instance_variable_defined?(:@displayable)
 
-      displayable_tests.each do |test|
-        unless defined?(@displayable)
-          test_result = test.call
-          @displayable = test_result unless test_result.nil?
+      displayable_tests.each_with_index do |test, i|
+        test_result = test.call
+        unless test_result.nil?
+          @displayable = test_result
+          break
         end
       end
 
@@ -312,6 +315,10 @@ module Document
 
     def for_edm_object?
       url == @record_presenter.edm_object
+    end
+
+    def for_edm_is_shown_at?
+      url == @record_presenter.provider_edm_is_shown_at
     end
 
     def for_edm_is_shown_by?
