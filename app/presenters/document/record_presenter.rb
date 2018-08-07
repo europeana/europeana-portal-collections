@@ -39,6 +39,18 @@ module Document
       @edm_is_shown_at ||= aggregation.fetch('edmIsShownAt', nil)
     end
 
+    # Get the actual provider's edm:isShownAt, extracted from our redirection API
+    #
+    # @return [String]
+    def provider_edm_is_shown_at
+      @provider_edm_is_shown_at ||= begin
+        uri = URI.parse(edm_is_shown_at)
+        Rack::Utils.parse_query(uri.query)['shownAt']
+      end
+    rescue URI::InvalidURIError
+      nil
+    end
+
     def edm_is_shown_by
       @edm_is_shown_by ||= aggregation.fetch('edmIsShownBy', nil)
     end
