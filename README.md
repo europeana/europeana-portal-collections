@@ -1,6 +1,7 @@
 # Europeana Portal with Collections
 
 [![Build Status](https://travis-ci.org/europeana/europeana-portal-collections.svg?branch=develop)](https://travis-ci.org/europeana/europeana-portal-collections) [![Security](https://hakiri.io/github/europeana/europeana-portal-collections/develop.svg)](https://hakiri.io/github/europeana/europeana-portal-collections/develop) [![Maintainability](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/maintainability)](https://codeclimate.com/github/europeana/europeana-portal-collections/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/test_coverage)](https://codeclimate.com/github/europeana/europeana-portal-collections/test_coverage)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Feuropeana%2Feuropeana-portal-collections.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Feuropeana%2Feuropeana-portal-collections?ref=badge_shield)
 
 Europeana Portal with Collections as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
@@ -10,6 +11,9 @@ Europeana Portal with Collections as a Rails +
 Licensed under the EUPL V.1.1.
 
 For full details, see [LICENSE.md](LICENSE.md).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Feuropeana%2Feuropeana-portal-collections.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Feuropeana%2Feuropeana-portal-collections?ref=badge_large)
 
 ## Requirements
 
