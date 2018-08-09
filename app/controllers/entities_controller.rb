@@ -20,16 +20,26 @@ class EntitiesController < ApplicationController
       @entity = EDM::Entity.build_from_params(entity_params)
       @search_keys_search_results = search_keys_search_results
     end
+
     respond_to do |format|
       format.html
-      format.json { render json: @entity }
+      format.json do
+        if params[:profile] == 'promo'
+          @relation = params[:relation]
+          render :promo, layout: false
+        else
+          render json: @entity
+        end
+      end
     end
   end
 
   private
 
   def enforce_slug
-    redirect_to url_for(slug: slug, format: params[:format]) unless params[:slug] == slug
+    return if params[:slug] == slug
+    args = params.permit(:format, :profile, :relation).merge(slug: slug)
+    redirect_to url_for(args)
   end
 
   def entity

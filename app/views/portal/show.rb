@@ -3,6 +3,7 @@
 module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
+    include EntitiesHelper
     include SearchableView
     include UgcContentDisplayingView
 
@@ -388,9 +389,36 @@ module Portal
     end
 
     def js_var_enabled_promos
-      [
+      promos = [
         { id: 'gallery', url: document_galleries_url(document, format: 'json') }
-      ].to_json
+      ]
+      entity_promos.each_pair do |field, uris|
+        uris.each do |uri|
+          promos.push(id: 'entity', url: portal_entity_path(uri, format: 'json', profile: 'promo', relation: field))
+        end
+      end
+      promos.to_json
+    end
+
+    def entity_promos
+      document.proxies.each_with_object({}) do |proxy, memo|
+        proxy._source.each_pair do |field, value|
+          values = case value
+                   when Array
+                     value
+                   when Hash
+                     value.values
+                   else
+                     [value]
+                   end
+
+          ec_uris = values.flatten.compact.select { |val| europeana_entity_url?(val) }
+          if ec_uris.present?
+            memo[field] ||= []
+            memo[field] += ec_uris
+          end
+        end
+      end
     end
   end
 end
