@@ -388,9 +388,19 @@ module Portal
     end
 
     def js_var_enabled_promos
-      [
-        { id: 'gallery', url: document_galleries_url(document, format: 'json') }
-      ].to_json
+      promos = [
+        { id: 'gallery', url: document_galleries_url(document, format: 'json') },
+      ]
+      promos.push(id: 'generic', url: document_parent_url(document, format: 'json')) if document_has_europeana_parent?
+      promos.to_json
+    end
+
+    def document_has_europeana_parent?
+      # We need to use +#_source+ because +#fetch+ and +#field_value+ will
+      # perform lang map localisation, potentially missing URIs with key "def".
+      document.proxies.first._source['dctermsIsPartOf']&.values&.flatten&.any? do |val|
+        val.start_with?('http://data.europeana.eu/item/')
+      end
     end
   end
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'record/*id/annotations', to: 'portal#annotations', as: 'document_annotations'
       get 'record/*id/galleries', to: 'portal#galleries', as: 'document_galleries'
       get 'record/*id/media', to: 'portal#media', as: 'document_media'
+      get 'record/*id/parent', to: 'portal#parent', as: 'document_parent'
       get 'record/*id/similar', to: 'portal#similar', as: 'document_similar'
 
       get 'record/*id/hierarchy/self', to: 'hierarchy#self'

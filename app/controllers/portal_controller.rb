@@ -97,6 +97,15 @@ class PortalController < ApplicationController
     end
   end
 
+  def parent
+    # Search the API for the record with dcterms:hasPart data.europeana.eu/item/RECORD_ID
+    @parent = search_results_for_dcterms_has_part(doc_id)[:items]&.first
+
+    respond_to do |format|
+      format.json { render :parent, layout: false }
+    end
+  end
+
   protected
 
   def show_generic
