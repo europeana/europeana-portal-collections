@@ -240,14 +240,14 @@ module Portal
     def similar_items
       mustache[:similar_items] ||= begin
         # Don't load similar items on the new design.
-        unless new_design?
+        if new_design?
+          {}
+        else
           {
             title: t('site.object.similar-items'),
             more_items_load: document_similar_url(document, format: 'json', mlt_query: @mlt_query),
             more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
           }
-        else
-          {}
         end
       end
     end
@@ -259,16 +259,20 @@ module Portal
           {
             title: t('site.object.suggested-content'),
             tab_items: [
-              {
-                tab_title: t('site.object.items-similar-to-item'),
-                url: document_similar_url(document, format: 'json', mlt_query: @mlt_query)
-              }
+              suggestions_similar_items
             ]
           }
         else
           {}
         end
       end
+    end
+
+    def suggestions_similar_items
+      {
+        tab_title: t('site.object.items-similar-to-item'),
+        url: document_similar_url(document, format: 'json', mlt_query: @mlt_query)
+      }
     end
 
     def oembed_links
