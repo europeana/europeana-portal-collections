@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.url document_path(@parent['id'])
+json.url document_path(@parent['id'][1..-1])
 json.relation 'Parent item'
 json.title @parent['title']
 json.attribution @parent['dataProvider']
