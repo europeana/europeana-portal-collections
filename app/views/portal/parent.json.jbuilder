@@ -3,7 +3,7 @@
 json.url document_path(@parent['id'][1..-1])
 json.relation 'Parent item'
 json.title @parent['title']
-json.attribution @parent['dataProvider']
+# json.attribution @parent['dataProvider']
 json.excerpt do
   json.short Europeana::API::Record::LangMap.localise_lang_map(@parent['dcDescriptionLangAware'])
 end
