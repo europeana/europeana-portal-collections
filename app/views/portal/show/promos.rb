@@ -13,7 +13,6 @@ module Portal
         proxy_europeana_entities.each_pair do |uri, fields|
           promos.push(id: 'entity', url: portal_entity_path(uri, format: 'json', profile: 'promo'), relation: fields.join(', '))
         end
-        fail
         promos.to_json
       end
 
