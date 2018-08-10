@@ -10,6 +10,7 @@ module Portal
         promos = [
           { id: 'gallery', url: document_galleries_url(document, format: 'json') }
         ]
+
         proxy_europeana_entities.each_pair do |uri, fields|
           promos.push(id: 'entity', url: portal_entity_path(uri, format: 'json', profile: 'promo'), relation: fields.join(', '))
         end
@@ -34,12 +35,22 @@ module Portal
                        [value]
                      end
 
-            values.flatten.compact.select { |val| europeana_entity_url?(val) }.each do |ec_uri|
+            values.flatten.compact.select { |val| promotable_europeana_entity_uri?(val) }.each do |ec_uri|
               memo[ec_uri] ||= []
               memo[ec_uri].push(field) unless memo[ec_uri].include?(field)
             end
           end
         end
+      end
+
+      # Is an entity URI one which we want to show in a promo card?
+      #
+      # Criteria:
+      # * Must be a Europeana Entity Collection URI
+      # * Must be of type concept or agent
+      def promotable_europeana_entity_uri?(uri)
+        europeana_entity_url?(uri) &&
+          (uri.include?('concept') || uri.include?('agent'))
       end
     end
   end
