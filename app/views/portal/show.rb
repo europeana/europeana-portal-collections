@@ -81,6 +81,7 @@ module Portal
       mustache[:content] ||= begin
         {
           object: {
+            identifier: document.id,
             annotations_later: true, # TODO: remove when styleguide assumes this
             creator: presenter.creator_title,
             creators: presenter.field_group(:creators),
