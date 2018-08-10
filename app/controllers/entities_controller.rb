@@ -25,7 +25,6 @@ class EntitiesController < ApplicationController
       format.html
       format.json do
         if params[:profile] == 'promo'
-          @relation = params[:relation]
           render :promo, layout: false
         else
           render json: @entity

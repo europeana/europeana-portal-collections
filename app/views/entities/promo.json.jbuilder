@@ -7,7 +7,6 @@ json.title false
 json.img do
   json.src @entity.thumbnail_src
 end
-json.relation @relation
 json.overlay do
   json.title @entity.pref_label
   json.description @entity.description
