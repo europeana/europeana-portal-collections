@@ -90,7 +90,7 @@ module Portal
             dates: presenter.field_group(:time),
             description: presenter.field_group(:description),
             media: media_items,
-            meta_additional: meta_additional,
+            location: location,
             origin: origin,
             people: presenter.field_group(:people),
             provenance: presenter.field_group(:provenance),
@@ -201,26 +201,13 @@ module Portal
       search_path(f: { 'DATA_PROVIDER' => [edm_data_provider] })
     end
 
-    def meta_additional_present?
-      !document.fetch('proxies.dctermsSpatial', []).empty? ||
-        !document.fetch('proxies.dcCoverage', []).empty? ||
-        !document.fetch('proxies.edmCurrentLocation', []).empty? ||
-        (
-          !document.fetch('places.latitude', []).empty? &&
-          !document.fetch('places.longitude', []).empty?
-        )
-    end
-
-    def meta_additional
+    def location
       places = presenter.field_group(:location)
       {
-        present: meta_additional_present?,
+        present: places.present?,
         places: places,
         geo: {
-          latitude: '"' + (field_value('places.latitude') || '') + '"',
-          longitude: '"' + (field_value('places.longitude') || '') + '"',
-          long_and_lat: long_and_lat?,
-          placeName: places.present? ? places[:sections].first[:items].first[:text] : nil,
+          long_and_lat: long_and_lat?(places[:sections].first[:items]),
           labels: {
             longitude: t('site.object.meta-label.longitude') + ':',
             latitude: t('site.object.meta-label.latitude') + ':',
@@ -289,10 +276,12 @@ module Portal
       collect_values(fields).join(separator)
     end
 
-    def long_and_lat?
-      latitude = field_value('places.latitude')
-      longitude = field_value('places.longitude')
-      !latitude.nil? && !latitude.empty? && !longitude.nil? && !longitude.empty?
+    def long_and_lat?(places)
+      places.any? { |place|
+        place.key?(:extra_info) &&
+          place[:extra_info][:latitude].present? &&
+          place[:extra_info][:longitude].present?
+      }
     end
 
     def session_tracking_path_opts(counter)

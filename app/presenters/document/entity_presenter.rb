@@ -34,5 +34,34 @@ module Document
       begin_and_end = [entity.fetch('begin', nil), entity.fetch('end', nil)].compact
       begin_and_end.blank? ? nil : [begin_and_end.join('–')]
     end
+
+    # Extracts extra field values to display for this entity
+    #
+    # @param extras [Array<Hash>] Extra fields as defined in
+    #   `config/record_field_groups.yml`
+    # @return [Hash]
+    def extra(extras)
+      {}.tap do |hash|
+        extras.each do |extra|
+          val = entity.fetch(extra[:field], nil)
+          next unless val.present?
+
+          keys = (extra[:map_to] || extra[:field]).split('.')
+          last = keys.pop
+
+          context = hash
+          keys.each do |k|
+            context[k.to_sym] ||= {}
+            context = context[k.to_sym]
+          end
+
+          context[last.to_sym] = if extra[:format_date].present?
+                                   format_date(val, extra[:format_date])
+                                 else
+                                   val
+                                 end
+        end
+      end
+    end
   end
 end

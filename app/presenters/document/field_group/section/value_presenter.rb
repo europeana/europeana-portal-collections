@@ -47,7 +47,7 @@ module Document
         def extra_info
           return nil unless for_entity? && section.entity_extra.present?
           return nil unless entity.present?
-          nested_hash(section.entity_extra, entity)
+          EntityPresenter.new(entity).extra(section.entity_extra)
         end
 
         def for_entity?
@@ -100,28 +100,6 @@ module Document
             else
               search = content.gsub(/[()\[\]<>]/, '')
               parenthesise_and_escape(search)
-            end
-          end
-        end
-
-        ##
-        # Creates a nested hash of field values for Mustache template
-        def nested_hash(mappings, subject)
-          {}.tap do |hash|
-            mappings.each do |mapping|
-              val = subject.fetch(mapping[:field], nil)
-              val = render_field_value(val)
-              next unless val.present?
-
-              keys = (mapping[:map_to] || mapping[:field]).split('.')
-              last = keys.pop
-
-              context = hash
-              keys.each do |k|
-                context[k] ||= {}
-                context = context[k]
-              end
-              context[last] = format_date(val, mapping[:format_date])
             end
           end
         end
