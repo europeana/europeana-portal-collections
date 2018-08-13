@@ -4,34 +4,38 @@ module Document
   ##
   # Presenter for an entity on an item page
   class EntityPresenter < ApplicationPresenter
-    attr_reader :entity
+    include BlacklightDocumentPresenter
+    include DateHelper
 
-    def initialize(entity)
-      @entity = entity
+    attr_reader :document, :controller
+
+    def initialize(document, controller)
+      @document = document
+      @controller = controller
     end
 
     def label
-      pref_label || foaf_name || timespan_begin_end || alt_label || entity[:about]
+      pref_label || foaf_name || timespan_begin_end || alt_label || document[:about]
     end
 
     def potential_labels
-      [pref_label, foaf_name, timespan_begin_end, alt_label, entity[:about]].flatten
+      [pref_label, foaf_name, timespan_begin_end, alt_label, document[:about]].flatten
     end
 
     def alt_label
-      entity.fetch('altLabel', nil)
+      document.fetch('altLabel', nil)
     end
 
     def pref_label
-      entity.fetch('prefLabel', nil)
+      document.fetch('prefLabel', nil)
     end
 
     def foaf_name
-      entity.fetch('foafName', nil)
+      document.fetch('foafName', nil)
     end
 
     def timespan_begin_end
-      begin_and_end = [entity.fetch('begin', nil), entity.fetch('end', nil)].compact
+      begin_and_end = [document.fetch('begin', nil), document.fetch('end', nil)].compact
       begin_and_end.blank? ? nil : [begin_and_end.join('–')]
     end
 
@@ -43,25 +47,31 @@ module Document
     def extra(extras)
       {}.tap do |hash|
         extras.each do |extra|
-          val = entity.fetch(extra[:field], nil)
+          val = document.fetch(extra[:field], nil)
+          val = render_field_value(val)
           next unless val.present?
 
-          keys = (extra[:map_to] || extra[:field]).split('.')
-          last = keys.pop
+          context = extra_nested_context(extra, hash)
 
-          context = hash
-          keys.each do |k|
-            context[k.to_sym] ||= {}
-            context = context[k.to_sym]
-          end
-
-          context[last.to_sym] = if extra[:format_date].present?
-                                   format_date(val, extra[:format_date])
-                                 else
-                                   val
-                                 end
+          context[:scope][context[:key]] = if extra[:format_date].present?
+                                             format_date(val, extra[:format_date])
+                                           else
+                                             val
+                                           end
         end
       end
+    end
+
+    def extra_nested_context(extra, context)
+      keys = (extra[:map_to] || extra[:field]).split('.')
+      last = keys.pop
+
+      keys.each do |k|
+        context[k.to_sym] ||= {}
+        context = context[k.to_sym]
+      end
+
+      { key: last.to_sym, scope: context }
     end
   end
 end

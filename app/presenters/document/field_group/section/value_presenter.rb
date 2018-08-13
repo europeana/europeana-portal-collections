@@ -10,6 +10,7 @@ module Document
       #   maps, entity-linked values
       class ValuePresenter < ApplicationPresenter
         include BlacklightDocumentPresenter
+        include DateHelper
         include EntitiesHelper
         include UrlHelper
 
@@ -47,7 +48,7 @@ module Document
         def extra_info
           return nil unless for_entity? && section.entity_extra.present?
           return nil unless entity.present?
-          EntityPresenter.new(entity).extra(section.entity_extra)
+          EntityPresenter.new(entity, controller).extra(section.entity_extra)
         end
 
         def for_entity?
@@ -102,13 +103,6 @@ module Document
               parenthesise_and_escape(search)
             end
           end
-        end
-
-        def format_date(text, format)
-          return text if format.nil? || (text !~ /^.+-/)
-          Time.parse(text).strftime(format)
-        rescue ArgumentError
-          text
         end
 
         def text

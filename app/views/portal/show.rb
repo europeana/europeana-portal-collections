@@ -207,7 +207,7 @@ module Portal
         present: places.present?,
         places: places,
         geo: {
-          long_and_lat: long_and_lat?(places[:sections].first[:items]),
+          long_and_lat: long_and_lat?(places.present? ? places[:sections].first[:items] : []),
           labels: {
             longitude: t('site.object.meta-label.longitude') + ':',
             latitude: t('site.object.meta-label.latitude') + ':',
@@ -277,11 +277,11 @@ module Portal
     end
 
     def long_and_lat?(places)
-      places.any? { |place|
+      places.any? do |place|
         place.key?(:extra_info) &&
           place[:extra_info][:latitude].present? &&
           place[:extra_info][:longitude].present?
-      }
+      end
     end
 
     def session_tracking_path_opts(counter)
