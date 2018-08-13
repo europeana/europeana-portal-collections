@@ -83,7 +83,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
         it 'includes Pro JSON API blog post' do
           render
           expect(enabled_promos).to be_any do |promo|
-            promo['id'] == 'generic' &&
+            promo['id'] == 'blog' &&
               promo['url'] == pro_json_api_posts_for_record_url(record_id)
           end
         end
