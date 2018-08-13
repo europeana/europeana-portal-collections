@@ -13,7 +13,7 @@ module ProJsonApiConsumingView
           image_attribution_link: record_id
         },
         page: {
-          size: 6,
+          size: 6
         },
         sort: '-datepublish'
       )
