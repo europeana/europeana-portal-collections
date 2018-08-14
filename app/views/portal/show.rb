@@ -391,7 +391,7 @@ module Portal
     def js_var_enabled_promos
       [
         { id: 'gallery', url: document_galleries_url(document, format: 'json') },
-        { id: 'generic', url: pro_json_api_posts_for_record_url(document.id) }
+        { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
       ].to_json
     end
   end
