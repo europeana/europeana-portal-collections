@@ -51,7 +51,7 @@ module Portal
       # * Must be of type concept or agent
       def promotable_europeana_entity_uri?(uri)
         europeana_entity_url?(uri) &&
-          (uri.include?('concept') || uri.include?('agent'))
+          (uri.include?('/concept/') || uri.include?('/agent/'))
       end
     end
   end

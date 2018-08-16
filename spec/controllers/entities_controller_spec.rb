@@ -51,6 +51,7 @@ RSpec.describe EntitiesController do
     let(:slug_name) { 'david-hume' }
     let(:id) { '1234' }
     let(:description) { 'description' }
+
     before do
       stub_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
         with(query: hash_including(wskey: entities_api_key)).
@@ -90,6 +91,24 @@ RSpec.describe EntitiesController do
           a_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
           with(query: hash_including(wskey: entities_api_key))
         ).to have_been_made.once
+      end
+
+      context 'when format=json' do
+        let(:params) { { locale: 'en', type: 'people', id: id, slug: slug_name, format: 'json' } }
+
+        context 'without profile=promo param' do
+          it 'renders entity as JSON' do
+            get :show, params
+            expect(response.body).to eq(assigns(:entity).to_json)
+          end
+        end
+
+        context 'with profile=promo param' do
+          it 'renders entities/promo' do
+            get :show, params.merge(profile: 'promo')
+            expect(response).to render_template('entities/promo')
+          end
+        end
       end
     end
   end
