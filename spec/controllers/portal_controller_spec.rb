@@ -50,7 +50,7 @@ RSpec.describe PortalController, :annotations_api do
         end
 
         context 'with mlt param' do
-          let(:params) { { locale: 'en', mlt: '/abc/123' } }
+          let(:params) { { locale: 'en', mlt: '/123/abc' } }
           let(:record_id) { params[:mlt] }
           it_behaves_like 'a record API request'
           it_behaves_like 'a more like this API request'
@@ -91,7 +91,7 @@ RSpec.describe PortalController, :annotations_api do
   end
 
   describe 'GET show' do
-    let(:params) { { locale: 'en', id: 'abc/123' } }
+    let(:params) { { locale: 'en', id: '123/abc' } }
     let(:record_id) { '/' + params[:id] }
 
     context 'when record is not found' do
@@ -144,7 +144,7 @@ RSpec.describe PortalController, :annotations_api do
     it 'caches the mime-type response'
 
     context 'when format is HTML' do
-      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
 
       it 'renders the object display page' do
         get :show, params
@@ -159,7 +159,7 @@ RSpec.describe PortalController, :annotations_api do
       end
 
       context 'with param debug=json' do
-        let(:params) { { locale: 'en', id: 'abc/123', format: 'html', debug: 'json' } }
+        let(:params) { { locale: 'en', id: '123/abc', format: 'html', debug: 'json' } }
         it 'assigns pretty JSON document to @debug' do
           get :show, params
           expect(assigns(:debug)).to eq(JSON.pretty_generate(assigns(:document).as_json))
@@ -169,21 +169,21 @@ RSpec.describe PortalController, :annotations_api do
       describe 'URL conversions' do
         context 'when item has TEL newspaper' do
           context 'with query param' do
-            let(:params) { { locale: 'en', id: 'abc/123', format: 'html', q: 'paris' } }
+            let(:params) { { locale: 'en', id: '123/abc', format: 'html', q: 'paris' } }
             let(:api_response) { JSON.parse(api_responses(:record_with_tel_web_resource, id: params[:id])) }
             let(:bl_response) { Europeana::Blacklight::Response.new(api_response, {}) }
             let(:document) { bl_response.documents.first }
 
             it 'has a conversion for the TEL URL' do
-              stub_request(:get, 'http://oembed.europeana.eu/?format=json&url=http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/abc/123?query=paris')
+              stub_request(:get, 'http://oembed.europeana.eu/?format=json&url=http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/123/abc?query=paris')
 
               allow(controller).to receive(:fetch).and_return([bl_response, document])
               get :show, params
 
-              expect(an_api_record_request_for('/abc/123')).not_to have_been_made
+              expect(an_api_record_request_for('/123/abc')).not_to have_been_made
               expect(response.status).to eq(200)
 
-              expect(assigns[:url_conversions]).to have_key('http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/abc/123')
+              expect(assigns[:url_conversions]).to have_key('http://www.theeuropeanlibrary.org/tel4/newspapers/issue/fullscreen/123/abc')
             end
           end
         end
@@ -192,7 +192,7 @@ RSpec.describe PortalController, :annotations_api do
 
     describe 'URL param `design`' do
       context 'when "new"' do
-        let(:params) { { locale: 'en', id: 'abc/123', format: 'html', design: 'new' } }
+        let(:params) { { locale: 'en', id: '123/abc', format: 'html', design: 'new' } }
         it 'sets @new_design to true' do
           get :show, params
           expect(assigns(:new_design)).to be true
@@ -200,7 +200,7 @@ RSpec.describe PortalController, :annotations_api do
       end
 
       context 'when absent' do
-        let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+        let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
         it 'sets @new_design to false' do
           get :show, params
           expect(assigns(:new_design)).to be false
@@ -251,10 +251,10 @@ RSpec.describe PortalController, :annotations_api do
       before do
         get :similar, params
       end
-      let(:params) { { locale: 'en', id: 'abc/123', format: 'json', mlt_query: mlt_query } }
+      let(:params) { { locale: 'en', id: '123/abc', format: 'json', mlt_query: mlt_query } }
       let(:record_id) { '/' + params[:id] }
       context 'when a mlt_query is provided' do
-        let(:mlt_query) { '(what: ("Object Type\: print")^0.8 OR who: ("somebody")^0.5 NOT europeana_id:"/abc/123"' }
+        let(:mlt_query) { '(what: ("Object Type\: print")^0.8 OR who: ("somebody")^0.5 NOT europeana_id:"/123/abc"' }
 
         it_behaves_like 'no record API request'
         it_behaves_like 'a more like this API request'
@@ -269,7 +269,7 @@ RSpec.describe PortalController, :annotations_api do
           expect(response).to render_template('portal/similar')
         end
         context 'with page param' do
-          let(:params) { { locale: 'en', id: 'abc/123', format: 'json', mlt_query: mlt_query, page: 2 } }
+          let(:params) { { locale: 'en', id: '123/abc', format: 'json', mlt_query: mlt_query, page: 2 } }
           it 'paginates' do
             expect(an_api_search_request.with(query: hash_including(start: '5'))).
               to have_been_made
@@ -301,7 +301,7 @@ RSpec.describe PortalController, :annotations_api do
     end
 
     context 'when format is HTML' do
-      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
       it 'renders an error page' do
         get :similar, params
         expect(response.status).to eq(404)
@@ -315,7 +315,7 @@ RSpec.describe PortalController, :annotations_api do
       before do
         get :media, params
       end
-      let(:params) { { locale: 'en', id: 'abc/123', format: 'json' } }
+      let(:params) { { locale: 'en', id: '123/abc', format: 'json' } }
       let(:record_id) { '/' + params[:id] }
       it_behaves_like 'a record API request'
       it_behaves_like 'no hierarchy API request'
@@ -329,14 +329,14 @@ RSpec.describe PortalController, :annotations_api do
         expect(response).to render_template('portal/media')
       end
       context 'with page param' do
-        let(:params) { { locale: 'en', id: 'abc/123', format: 'json', page: 2 } }
+        let(:params) { { locale: 'en', id: '123/abc', format: 'json', page: 2 } }
         it 'paginates'
         it 'defaults per_page to 4'
       end
     end
 
     context 'when format is HTML' do
-      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
       it 'renders an error page' do
         get :media, params
         expect(response.status).to eq(404)
@@ -372,12 +372,45 @@ RSpec.describe PortalController, :annotations_api do
     end
 
     context 'when format is HTML' do
-      let(:params) { { locale: 'en', id: 'abc/123', format: 'html' } }
+      let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
 
       it 'renders an error page' do
         get :galleries, params
         expect(response.status).to eq(404)
         expect(response).to render_template('pages/custom/errors/not_found')
+      end
+    end
+  end
+
+  describe 'GET parent' do
+    before do
+      get :parent, params
+    end
+
+    context 'when format is JSON' do
+      let(:record_id) { '/123/abc' }
+      let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
+      
+      it 'responds with JSON' do
+        expect(response.content_type).to eq('application/json')
+      end
+
+      it 'has 200 status code' do
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders JSON ERB template' do
+        expect(response).to render_template('portal/parent')
+      end
+
+      it 'queries Search API for parent record' do
+        expect(an_api_search_request.with(
+          query: hash_including(query: %(proxy_dcterms_hasPart:"http://data.europeana.eu/item#{record_id}"))
+        )).to have_been_made.once
+      end
+
+      it 'assigns first result to @parent' do
+        expect(assigns[:parent]).to be_a(Hash)
       end
     end
   end
