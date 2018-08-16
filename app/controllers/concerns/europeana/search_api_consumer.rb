@@ -39,9 +39,14 @@ module Europeana
       end
     end
 
+    # Queries the Search API for Europeana records having another as part of them
+    #
+    # @param europeana_id [String] Europeana record ID to search for records
+    #   having is as part of them
+    # @return see Europeana::API::Record.search
     def search_results_for_dcterms_has_part(europeana_id)
       search_options = {
-        api_url: api_url, rows: blacklight_config.default_per_page, sort: 'europeana_id asc',
+        api_url: api_url, rows: blacklight_config.default_per_page,
         query: %(proxy_dcterms_hasPart:"http://data.europeana.eu/item#{europeana_id}")
       }
       Europeana::API.record.search(search_options)
