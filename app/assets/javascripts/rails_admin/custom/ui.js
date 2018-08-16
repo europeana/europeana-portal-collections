@@ -13,5 +13,5 @@ function makeHasManyAssociationTabsDraggable() {
   });
 }
 
-$(document).ready(makeHasManyAssociationTabsDraggable);
+$(makeHasManyAssociationTabsDraggable);
 $(document).on('pjax:end', makeHasManyAssociationTabsDraggable);
