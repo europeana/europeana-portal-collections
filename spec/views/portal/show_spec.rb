@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
+  include ProJsonApiConsumingView
+
+  let(:record_id) { '/123 /abc' }
+  let(:record_param) { record_id[1..-1] }
+
   let(:blacklight_document_source) do
-    # @todo Move to factory / fixture
-    id = '/abc/123'
+    # TODO: Move to factory / fixture
+    id = record_id
     {
       about: id,
       title: [id],
@@ -19,7 +24,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
     }
   end
   let(:blacklight_document) { Europeana::Blacklight::Document.new(blacklight_document_source.with_indifferent_access) }
-  let(:params) { { controller: 'portal', action: 'show', id: 'abc/123' } }
+  let(:params) { { controller: 'portal', action: 'show', id: record_param } }
 
   before(:each) do
     allow(view).to receive(:current_search_session).and_return nil
@@ -60,6 +65,28 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
       it 'sets pageName JS var to "portal/show-new"' do
         render
         expect(rendered).to include('var pageName = "portal/show-new";')
+      end
+
+      describe 'enabledPromos JS var' do
+        let(:enabled_promos) do
+          JSON.parse(rendered.match(/var enabledPromos = (.*);/)[1])
+        end
+
+        it 'includes gallery' do
+          render
+          expect(enabled_promos).to be_any do |promo|
+            promo['id'] == 'gallery' &&
+              promo['url'] == document_galleries_url(record_param, format: 'json')
+          end
+        end
+
+        it 'includes Pro JSON API blog post' do
+          render
+          expect(enabled_promos).to be_any do |promo|
+            promo['id'] == 'blog' &&
+              promo['url'] == pro_json_api_posts_for_record_url(record_id)
+          end
+        end
       end
 
       it 'sets body class to "channels-item"' do

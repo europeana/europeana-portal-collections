@@ -5,6 +5,7 @@ module Portal
     include NamedEntityDisplayingView
     include EntitiesHelper
     include Promos
+    include ProJsonApiConsumingView
     include SearchableView
     include UgcContentDisplayingView
 

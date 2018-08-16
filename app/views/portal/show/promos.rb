@@ -8,7 +8,8 @@ module Portal
 
       def js_var_enabled_promos
         promos = [
-          { id: 'gallery', url: document_galleries_url(document, format: 'json') }
+          { id: 'gallery', url: document_galleries_url(document, format: 'json') },
+          { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
         ]
 
         proxy_europeana_entities.each_pair do |uri, fields|
