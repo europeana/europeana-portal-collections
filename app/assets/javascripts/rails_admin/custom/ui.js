@@ -1,4 +1,4 @@
-$(function() {
+function makeHasManyAssociationTabsDraggable() {
   var tabs = $('body.rails_admin .has_many_association_type .nav-tabs');
 
   tabs.sortable({
@@ -11,4 +11,7 @@ $(function() {
       });
     }
   });
-});
+}
+
+$(document).ready(makeHasManyAssociationTabsDraggable);
+$(document).on('pjax:end', makeHasManyAssociationTabsDraggable);
