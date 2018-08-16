@@ -6,7 +6,7 @@
 # Europeana-centric configuration, e.g. APIs and other sites
 Rails.application.config.x.europeana = {}.tap do |europeana|
   europeana[:contribute_url] = ENV['EUROPEANA_CONTRIBUTE_URL'] || 'http://contribute.europeana.eu'
-  europeana[:pro_url] = ENV['EUROPEANA_PRO_URL'] || 'http://pro.europeana.eu'
+  europeana[:pro_url] = ENV['EUROPEANA_PRO_URL'] || 'https://pro.europeana.eu'
 
   europeana[:opensearch_host] = if ENV['EUROPEANA_OPENSEARCH_HOST']
                                   ENV['EUROPEANA_OPENSEARCH_HOST']

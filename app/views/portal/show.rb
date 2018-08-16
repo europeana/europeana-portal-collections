@@ -3,6 +3,7 @@
 module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
+    include ProJsonApiConsumingView
     include SearchableView
     include UgcContentDisplayingView
 
@@ -390,6 +391,7 @@ module Portal
     def js_var_enabled_promos
       promos = [
         { id: 'gallery', url: document_galleries_url(document, format: 'json') },
+        { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
       ]
       promos.push(id: 'generic', url: document_parent_url(document, format: 'json')) if document_has_europeana_parent?
       promos.to_json
