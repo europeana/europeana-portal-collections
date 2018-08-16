@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
+  include EntitiesHelper
   include ProJsonApiConsumingView
 
-  let(:record_id) { '/123 /abc' }
+  let(:record_id) { '/123/abc' }
   let(:record_param) { record_id[1..-1] }
 
   let(:blacklight_document_source) do
@@ -85,6 +86,74 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
           expect(enabled_promos).to be_any do |promo|
             promo['id'] == 'blog' &&
               promo['url'] == pro_json_api_posts_for_record_url(record_id)
+          end
+        end
+
+        context 'when record has entities' do
+          let(:concept_entity_property) { 'dcType' }
+          let(:concept_entity_uri) { 'http://data.europeana.eu/concept/base/123' }
+          let(:agent_entity_property) { 'dcCreator' }
+          let(:agent_entity_uri) { 'http://data.europeana.eu/agent/base/123' }
+          let(:place_entity_property) { 'dctermsSpatial' }
+          let(:place_entity_uri) { 'http://data.europeana.eu/place/base/123' }
+          let(:timespan_entity_property) { 'dctermsTemporal' }
+          let(:timespan_entity_uri) { 'http://data.europeana.eu/timespan/base/123' }
+
+          let(:blacklight_document_source) do
+            {
+              about: record_id,
+              title: ["Record #{record_id}"],
+              proxies: [
+                {
+                  'europeanaProxy': false
+                },
+                {
+                  'europeanaProxy': true,
+                  concept_entity_property => { 'def': concept_entity_uri },
+                  agent_entity_property => { 'def': agent_entity_uri },
+                  place_entity_property => { 'def': place_entity_uri },
+                  timespan_entity_property => { 'def': timespan_entity_uri }
+                }
+              ],
+              aggregations: [{}],
+              'type': 'IMAGE'
+            }
+          end
+
+          it 'includes concept entity' do
+            render
+            expect(enabled_promos).to be_any do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == portal_entity_path(concept_entity_uri, format: 'json', profile: 'promo') &&
+                promo['relation'] = concept_entity_property
+            end
+          end
+
+          it 'includes agent entity' do
+            render
+            expect(enabled_promos).to be_any do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == portal_entity_path(agent_entity_uri, format: 'json', profile: 'promo') &&
+                promo['relation'] = agent_entity_property
+            end
+          end
+
+          it 'excludes place entity' do
+            render
+            expect(enabled_promos).to be_none do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == portal_entity_path(place_entity_uri, format: 'json', profile: 'promo') &&
+                promo['relation'] = place_entity_property
+            end
+          end
+
+          it 'excludes timespan entity' do
+            render
+            expect(enabled_promos).to be_none do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == portal_entity_path(timespan_entity_uri, format: 'json', profile: 'promo') &&
+                promo['relation'] = timespan_entity_property
+            end
           end
         end
       end
