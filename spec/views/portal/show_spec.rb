@@ -3,7 +3,7 @@
 RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
   include ProJsonApiConsumingView
 
-  let(:record_id) { '/123 /abc' }
+  let(:record_id) { '/123/abc' }
   let(:record_param) { record_id[1..-1] }
 
   let(:blacklight_document_source) do
@@ -85,6 +85,49 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
           expect(enabled_promos).to be_any do |promo|
             promo['id'] == 'blog' &&
               promo['url'] == pro_json_api_posts_for_record_url(record_id)
+          end
+        end
+
+        context 'when record has dcterms:isPartOf' do
+          let(:blacklight_document_source) do
+            {
+              about: record_id,
+              title: ["Record #{record_id}"],
+              proxies: [
+                {
+                  'europeanaProxy': false,
+                  'dctermsIsPartOf': {
+                    'def': parent_uri
+                  }
+                }
+              ],
+              aggregations: [{}],
+              'type': 'IMAGE'
+            }
+          end
+
+          context 'which is a Europeana item URI' do
+            let(:parent_uri) { 'http://data.europeana.eu/item/123/def' }
+
+            it 'includes parent promo' do
+              render
+              expect(enabled_promos).to be_any do |promo|
+                promo['id'] == 'generic' &&
+                  promo['url'] == document_parent_url(record_id[1..-1], format: 'json')
+              end
+            end
+          end
+
+          context 'which is not a Europeana item URI' do
+            let(:parent_uri) { "http://data.example.org/item/123/def" }
+
+            it 'includes parent promo' do
+              render
+              expect(enabled_promos).not_to be_any do |promo|
+                promo['id'] == 'generic' &&
+                  promo['url'] == document_parent_url(record_id[1..-1], format: 'json')
+              end
+            end
           end
         end
       end
