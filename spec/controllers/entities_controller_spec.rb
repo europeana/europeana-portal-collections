@@ -3,6 +3,33 @@
 RSpec.describe EntitiesController do
   let(:entities_api_key) { 'apikey' }
   let(:headers) { { 'Content-Type' => 'application/ld+json' } }
+  let(:name) { 'David Hume' }
+  let(:slug_name) { 'david-hume' }
+  let(:id) { '1234' }
+  let(:type) { 'people' }
+  let(:description) { 'description' }
+
+  before do
+    stub_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
+      with(query: hash_including(wskey: entities_api_key)).
+      to_return(status: 200, body: api_responses(:entities_fetch_agent, name: name, description: description), headers:
+            headers)
+  end
+
+  shared_examples 'retrieves and assigns one entity' do
+    it 'queries API for entity' do
+      subject.call
+      expect(
+        a_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
+        with(query: hash_including(wskey: entities_api_key))
+      ).to have_been_made.once
+    end
+
+    it 'assigns entity to @entity' do
+      subject.call
+      expect(assigns(:entity)).to be_an(EDM::Entity::Base)
+    end
+  end
 
   before do
     Rails.application.config.x.europeana[:entities].api_key = entities_api_key
@@ -14,6 +41,8 @@ RSpec.describe EntitiesController do
   end
 
   describe 'GET #suggest' do
+    subject { -> { get :suggest, params } }
+
     before do
       stub_request(:get, Europeana::API.url + '/entities/suggest').
         with(query: hash_including(scope: 'europeana')).
@@ -21,32 +50,34 @@ RSpec.describe EntitiesController do
     end
 
     context 'without format' do
-      subject { -> { get :suggest, locale: 'en' } }
+      let(:params) { { locale: 'en' } }
       it { is_expected.to enforce_default_format('json') }
     end
 
     context 'with format=json' do
+      let(:params) { { locale: 'en', text: 'van', format: 'json' } }
+
       it 'returns http success' do
-        get :suggest, locale: 'en', format: 'json'
+        subject.call
         expect(response).to have_http_status(:success)
       end
 
       it 'queries the entity API' do
-        get :suggest, locale: 'en', text: 'van', format: 'json'
-
+        subject.call
         expect(
           a_request(:get, Europeana::API.url + '/entities/suggest').
-          with(query: hash_including(text: 'van', scope: 'europeana'))
+          with(query: hash_including(text: params[:text], scope: 'europeana'))
         ).to have_been_made.once
       end
 
       context 'when language param is present' do
-        it 'is sent to the entity API' do
-          get :suggest, locale: 'en', text: 'van', language: 'en,de', format: 'json'
+        let(:params) { { locale: 'en', text: 'van', language: 'en,de', format: 'json' } }
 
+        it 'is sent to the entity API' do
+          subject.call
           expect(
             a_request(:get, Europeana::API.url + '/entities/suggest').
-            with(query: hash_including(text: 'van', scope: 'europeana', language: 'en,de'))
+            with(query: hash_including(text: params[:text], scope: 'europeana', language: params[:language]))
           ).to have_been_made.once
         end
       end
@@ -54,38 +85,27 @@ RSpec.describe EntitiesController do
   end
 
   describe 'GET #show' do
-    let(:name) { 'David Hume' }
-    let(:slug_name) { 'david-hume' }
-    let(:id) { '1234' }
-    let(:type) { 'people' }
-    let(:description) { 'description' }
-
-    before do
-      stub_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
-        with(query: hash_including(wskey: entities_api_key)).
-        to_return(status: 200, body: api_responses(:entities_fetch_agent, name: name, description: description), headers:
-              headers)
-    end
+    subject { -> { get :show, params } }
 
     context 'without format' do
-      subject { -> { get :show, locale: 'en', type: type, id: id } }
+      let(:params) { { locale: 'en', type: type, id: id } }
       it { is_expected.to enforce_default_format('html') }
     end
 
     context 'with format' do
       context 'without slug in URL' do
         context 'when format=html' do
+          let(:params) { { locale: 'en', type: type, id: id, format: 'html' } }
           it 'redirects to URL with slug' do
-            get :show, locale: 'en', type: type, id: id, format: 'html'
-
+            subject.call
             expect(response).to redirect_to("/en/explore/people/#{id}-#{slug_name}.html")
           end
         end
 
         context 'when format=json' do
+          let(:params) { { locale: 'en', type: type, id: id, format: 'json' } }
           it 'does not redirect to URL with slug' do
-            get :show, locale: 'en', type: type, id: id, format: 'json'
-
+            subject.call
             expect(response).not_to redirect_to("/en/explore/people/#{id}-#{slug_name}.json")
           end
         end
@@ -93,17 +113,17 @@ RSpec.describe EntitiesController do
 
       context 'with wrong slug in URL' do
         context 'when format=html' do
+          let(:params) { { locale: 'en', type: type, id: id, slug: 'david', format: 'html' } }
           it 'redirects to URL with correct slug' do
-            get :show, locale: 'en', type: type, id: id, slug: 'david', format: 'html'
-
+            subject.call
             expect(response).to redirect_to("/en/explore/people/#{id}-#{slug_name}.html")
           end
         end
 
         context 'when format=json' do
+          let(:params) { { locale: 'en', type: type, id: id, slug: 'david', format: 'json' } }
           it 'does not redirect to URL with correct slug' do
-            get :show, locale: 'en', type: type, id: id, slug: 'david', format: 'json'
-
+            subject.call
             expect(response).not_to redirect_to("/en/explore/people/#{id}-#{slug_name}.json")
           end
         end
@@ -113,23 +133,15 @@ RSpec.describe EntitiesController do
         let(:params) { { locale: 'en', type: type, id: id, slug: slug_name, format: 'html' } }
 
         it 'returns http success' do
-          get :show, params
-
+          subject.call
           expect(response).to have_http_status(:success)
         end
 
-        it 'queries the entity API' do
-          get :show, params
-
-          expect(
-            a_request(:get, Europeana::API.url + "/entities/agent/base/#{id}").
-            with(query: hash_including(wskey: entities_api_key))
-          ).to have_been_made.once
-        end
+        include_examples 'retrieves and assigns one entity'
 
         context 'when format=html' do
           it 'renders entities/show' do
-            get :show, params
+            subject.call
             expect(response).to render_template('entities/show')
           end
         end
@@ -137,20 +149,31 @@ RSpec.describe EntitiesController do
         context 'when format=json' do
           let(:params) { { locale: 'en', type: type, id: id, slug: slug_name, format: 'json' } }
 
-          context 'without profile=promo param' do
-            it 'renders entity as JSON' do
-              get :show, params
-              expect(response.body).to eq(assigns(:entity).to_json)
-            end
-          end
-
-          context 'with profile=promo param' do
-            it 'renders entities/promo' do
-              get :show, params.merge(profile: 'promo')
-              expect(response).to render_template('entities/promo')
-            end
+          it 'renders entity as JSON' do
+            subject.call
+            expect(response.body).to eq(assigns(:entity).to_json)
           end
         end
+      end
+    end
+  end
+
+  describe 'GET #promo' do
+    subject { -> { get :promo, params } }
+
+    context 'without format' do
+      let(:params) { { locale: 'en', type: type, id: id } }
+      it { is_expected.to enforce_default_format('json') }
+    end
+
+    context 'with format=json' do
+      let(:params) { { locale: 'en', type: type, id: id, format: 'json' } }
+
+      include_examples 'retrieves and assigns one entity'
+
+      it 'renders entities/promo' do
+        subject.call
+        expect(response).to render_template('entities/promo')
       end
     end
   end

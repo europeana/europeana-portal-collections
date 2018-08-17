@@ -124,7 +124,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
             render
             expect(enabled_promos).to be_any do |promo|
               promo['id'] == 'entity' &&
-                promo['url'] == portal_entity_path(concept_entity_uri, format: 'json', profile: 'promo') &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(concept_entity_uri, format: 'json')) &&
                 promo['relation'] = concept_entity_property
             end
           end
@@ -133,7 +133,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
             render
             expect(enabled_promos).to be_any do |promo|
               promo['id'] == 'entity' &&
-                promo['url'] == portal_entity_path(agent_entity_uri, format: 'json', profile: 'promo') &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(agent_entity_uri, format: 'json')) &&
                 promo['relation'] = agent_entity_property
             end
           end
@@ -142,7 +142,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
             render
             expect(enabled_promos).to be_none do |promo|
               promo['id'] == 'entity' &&
-                promo['url'] == portal_entity_path(place_entity_uri, format: 'json', profile: 'promo') &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(place_entity_uri, format: 'json')) &&
                 promo['relation'] = place_entity_property
             end
           end
@@ -151,7 +151,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
             render
             expect(enabled_promos).to be_none do |promo|
               promo['id'] == 'entity' &&
-                promo['url'] == portal_entity_path(timespan_entity_uri, format: 'json', profile: 'promo') &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(timespan_entity_uri, format: 'json')) &&
                 promo['relation'] = timespan_entity_property
             end
           end

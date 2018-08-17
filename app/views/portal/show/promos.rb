@@ -13,7 +13,8 @@ module Portal
         ]
 
         proxy_europeana_entities.each_pair do |uri, fields|
-          promos.push(id: 'entity', url: portal_entity_path(uri, format: 'json', profile: 'promo'), relation: fields.join(', '))
+          path_options = portal_entity_path_options(uri, format: 'json')
+          promos.push(id: 'entity', url: entity_promo_path(path_options), relation: fields.join(', '))
         end
         promos.to_json
       end
@@ -25,23 +26,33 @@ module Portal
       #   { "http://data.europeana.eu/concept/base/46" => ["dcType", "dctermsMedium"] }
       def proxy_europeana_entities
         document.proxies.each_with_object({}) do |proxy, memo|
-          # Use +#_source+ to bypass localisation of langmap fields
-          proxy._source.each_pair do |field, value|
-            values = case value
-                     when Array
-                       value
-                     when Hash
-                       value.values
-                     else
-                       [value]
-                     end
-
-            values.flatten.compact.select { |val| promotable_europeana_entity_uri?(val) }.each do |ec_uri|
+          proxy_field_values(proxy) do |field, values|
+            promotable_europeana_entity_uris(values).each do |ec_uri|
               memo[ec_uri] ||= []
               memo[ec_uri].push(field) unless memo[ec_uri].include?(field)
             end
           end
         end
+      end
+
+      def proxy_field_values(proxy)
+        # Use +#_source+ to bypass localisation of langmap fields
+        proxy._source.each_pair do |field, value|
+          values = case value
+                   when Array
+                     value
+                   when Hash
+                     value.values
+                   else
+                     [value]
+                   end
+
+          yield field, values
+        end
+      end
+
+      def promotable_europeana_entity_uris(values)
+        values.flatten.compact.select { |value| promotable_europeana_entity_uri?(value) }
       end
 
       # Is an entity URI one which we want to show in a promo card?

@@ -9,7 +9,7 @@ class EntitiesController < ApplicationController
 
   before_action :enforce_slug, only: :show, if: proc { |c| c.params[:format] == 'html' }
 
-  enforces_default_format 'json', only: :suggest
+  enforces_default_format 'json', only: %i(promo suggest)
   enforces_default_format 'html', only: :show
 
   def suggest
@@ -27,13 +27,15 @@ class EntitiesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json do
-        if params[:profile] == 'promo'
-          render :promo, layout: false
-        else
-          render json: @entity
-        end
-      end
+      format.json { render json: @entity }
+    end
+  end
+
+  def promo
+    @entity = EDM::Entity.build_from_params(entity_params)
+
+    respond_to do |format|
+      format.json { render :promo, layout: false }
     end
   end
 

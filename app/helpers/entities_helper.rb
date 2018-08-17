@@ -43,15 +43,22 @@ module EntitiesHelper
   end
 
   def portal_entity_path(entity_url, slug: nil, format: 'html', **options)
+    entity_path_options = portal_entity_path_options(entity_url, slug: slug, format: format)
+    return nil if entity_path_options.nil?
+
+    controller.entity_path(options.merge(entity_path_options))
+  end
+
+  def portal_entity_path_options(entity_url, slug: nil, format: 'html')
     return nil unless europeana_entity_url?(entity_url)
     entity_uri_parts = URI.parse(entity_url).path.split('/')[1..-1]
 
-    options[:type] = entities_human_type(entity_uri_parts[0])
-    options[:id] = entity_uri_parts.last
-    options[:slug] = slug
-    options[:format] = format
-
-    controller.entity_path(options)
+    {
+      type: entities_human_type(entity_uri_parts[0]),
+      id: entity_uri_parts.last,
+      slug: slug,
+      format: format
+    }
   end
 
   def europeana_entity_url?(entity_url)
