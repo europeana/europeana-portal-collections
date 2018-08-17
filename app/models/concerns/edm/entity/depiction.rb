@@ -17,11 +17,11 @@ module EDM
       end
 
       def thumbnail_full
-        api_response.key?(:depiction) ? api_response[:depiction][:id] : nil
+        api_response.dig(:depiction, :id)
       end
 
       def depiction_source
-        api_response.key?(:depiction) ? api_response[:depiction][:source] : nil
+        api_response.dig(:depiction, :source)
       end
 
       def has_depiction?
