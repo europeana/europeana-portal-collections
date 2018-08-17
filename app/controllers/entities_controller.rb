@@ -2,11 +2,15 @@
 
 class EntitiesController < ApplicationController
   include CacheHelper
+  include EnforceDefaultFormat
   include Europeana::EntitiesAPIConsumer
 
   attr_reader :body_cache_key
 
   before_action :enforce_slug, only: :show, if: proc { |c| c.params[:format] == 'html' }
+
+  enforces_default_format 'json', only: :suggest
+  enforces_default_format 'html', only: :show
 
   def suggest
     api_params = entities_api_suggest_params(params.slice(:text, :language))

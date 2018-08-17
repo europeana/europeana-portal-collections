@@ -2,17 +2,26 @@
 
 RSpec.describe PagesController do
   describe 'GET show' do
+    subject { -> { get :show, params } }
+
     before do
-      get :show, params
+      subject.call
     end
 
     context 'with existent page param' do
       context 'without custom page template' do
-        let(:params) { { locale: 'en', format: 'html', page: 'about' } }
+        context 'without format' do
+          let(:params) { { locale: 'en', page: 'about' } }
+          it { is_expected.to enforce_default_format('html') }
+        end
 
-        it 'renders generic static page template' do
-          expect(response.status).to eq(200)
-          expect(response).to render_template('pages/show')
+        context 'with format=html' do
+          let(:params) { { locale: 'en', format: 'html', page: 'about' } }
+
+          it 'renders generic static page template' do
+            expect(response.status).to eq(200)
+            expect(response).to render_template('pages/show')
+          end
         end
       end
 

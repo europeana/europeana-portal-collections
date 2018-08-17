@@ -8,14 +8,18 @@
 module EnforceDefaultFormat
   extend ActiveSupport::Concern
 
-  included do
-    before_action :redirect_to_html_extension
-  end
+  class_methods do
+    def enforces_default_format(format, **options)
+      filter_method = :"redirect_to_#{format}_format"
 
-  protected
+      unless method_defined?(filter_method)
+        define_method filter_method do
+          return unless params[:format].blank?
+          redirect_to url_for(params.merge(format: format))
+        end
+      end
 
-  def redirect_to_html_extension
-    return unless params[:format].blank?
-    redirect_to url_for(params.merge(format: 'html'))
+      before_action filter_method, options
+    end
   end
 end

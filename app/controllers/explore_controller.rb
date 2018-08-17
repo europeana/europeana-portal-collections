@@ -5,6 +5,8 @@
 class ExploreController < ApplicationController
   include EnforceDefaultFormat
 
+  enforces_default_format 'html'
+
   # @todo Load @colours from view helper, to bypass if HTML cached
   def colours
     find_collection
