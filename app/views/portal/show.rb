@@ -278,7 +278,7 @@ module Portal
 
     def long_and_lat?(places)
       places.any? do |place|
-        place.key?(:extra_info) &&
+        place[:extra_info].present? &&
           place[:extra_info][:latitude].present? &&
           place[:extra_info][:longitude].present?
       end
