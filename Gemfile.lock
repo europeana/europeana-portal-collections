@@ -114,8 +114,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    childprocess (0.7.1)
-      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.2.0)
     cliver (0.3.2)
     clockwork (1.3.1)
@@ -462,7 +460,6 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-oembed (0.12.0)
     ruby-progressbar (1.9.0)
-    rubyzip (1.2.1)
     safe_yaml (1.0.4)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
@@ -476,9 +473,6 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sax-machine (1.3.2)
-    selenium-webdriver (3.4.4)
-      childprocess (~> 0.5)
-      rubyzip (~> 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simplecov (0.16.1)
@@ -603,7 +597,6 @@ DEPENDENCIES
   rubocop (~> 0.53)
   ruby-oembed (~> 0.9)
   sass-rails
-  selenium-webdriver
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)
