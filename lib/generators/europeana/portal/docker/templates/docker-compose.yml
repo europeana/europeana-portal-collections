@@ -11,12 +11,12 @@ services:
       MINIO_ACCESS_KEY: "<%= minio_access_key %>"
       MINIO_SECRET_KEY: "<%= minio_secret_key %>"
   postgres:
-    image: postgres
+    image: postgres:9.6.3
     ports:
     - "3002:5432"
     environment:
       POSTGRES_PASSWORD: "<%= postgres_password %>"
   redis:
-    image: redis
+    image: redis:3.2.12
     ports:
     - "3003:6379"
