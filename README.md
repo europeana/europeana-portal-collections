@@ -5,24 +5,28 @@
 Europeana Portal with Collections as a Rails + 
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
 
-## License
-
-Licensed under the EUPL V.1.1.
-
-For full details, see [LICENSE.md](LICENSE.md).
-
 ## Requirements
 
-* Ruby 2 (latest stable version recommended)
+* Ruby 2.5
+* PostgreSQL 9.4+
+* Redis
+* S3-compatible object storage
 * ImageMagick
 * A key for the Europeana REST API, available from:
   http://labs.europeana.eu/api/registration/
-* PostgreSQL 9.4+
 
 ## Installation
 
 * Download the source code
 * Run `bundle install`
+
+## Quick Start with Docker
+
+* Generate a Docker Compose config: `bundle exec rails g europeana:portal:docker`
+* Bring it up: `docker-compose up`
+* Setup the database: `bundle exec rake db:setup`
+* Start the app: `bundle exec foreman start`
+* Open the app: http://localhost:3000/
 
 ## Configuration
 
@@ -97,3 +101,9 @@ In development, you can launch the application with all processes using foreman:
 ## Contributing
 
 Follow the [Europeana Ruby development guide](https://github.com/europeana/europeana-dev-guides/blob/develop/ruby.md).
+
+## License
+
+Licensed under the EUPL V.1.1.
+
+For full details, see [LICENSE.md](LICENSE.md).

@@ -1,0 +1,22 @@
+version: "3"
+services:
+  minio:
+    image: minio/minio
+    ports:
+    - "3001:9000"
+    command: server /data
+    volumes:
+    - ../tmp/minio:/data
+    environment:
+      MINIO_ACCESS_KEY: "<%= minio_access_key %>"
+      MINIO_SECRET_KEY: "<%= minio_secret_key %>"
+  postgres:
+    image: postgres
+    ports:
+    - "3002:5432"
+    environment:
+      POSTGRES_PASSWORD: "<%= postgres_password %>"
+  redis:
+    image: redis
+    ports:
+    - "3003:6379"

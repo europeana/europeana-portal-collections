@@ -1,0 +1,9 @@
+---
+default: &default
+  url: <%= ENV['DATABASE_URL'] || 'postgres://localhost/europeana_portal' %>
+development:
+  <<: *default
+test:
+  <<: *default
+production:
+  <<: *default
