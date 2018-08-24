@@ -271,7 +271,7 @@ module Portal
     def suggestions_similar_items
       {
         tab_title: t('site.object.items-similar-to-item'),
-        url: document_similar_url(document, format: 'json', mlt_query: @mlt_query)
+        url: document_similar_url(document, format: 'json', mlt_query: @mlt_query, per_page: 12)
       }
     end
 
