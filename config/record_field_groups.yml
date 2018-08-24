@@ -93,6 +93,9 @@ location:
     entity:
       name: places
       fallback: true
+      extra:
+      - field: latitude
+      - field: longitude
     fields:
     - proxies.dctermsSpatial
   - title: place-time
