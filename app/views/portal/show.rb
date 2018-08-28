@@ -105,6 +105,7 @@ module Portal
           },
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
+          suggestions: suggestions,
           named_entities: named_entities,
           ugc_content: ugc_content(true)
         }.reverse_merge(super)
@@ -226,12 +227,40 @@ module Portal
 
     def similar_items
       mustache[:similar_items] ||= begin
-        {
-          title: t('site.object.similar-items'),
-          more_items_load: document_similar_url(document, format: 'json', mlt_query: @mlt_query),
-          more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
-        }
+        # Don't load similar items on the new design.
+        if new_design?
+          {}
+        else
+          {
+            title: t('site.object.similar-items'),
+            more_items_load: document_similar_url(document, format: 'json', mlt_query: @mlt_query),
+            more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
+          }
+        end
       end
+    end
+
+    def suggestions
+      mustache[:suggestions] ||= begin
+        # Only the new design uses suggestions.
+        if new_design?
+          {
+            title: t('site.object.suggested-content'),
+            tab_items: [
+              suggestions_similar_items
+            ]
+          }
+        else
+          {}
+        end
+      end
+    end
+
+    def suggestions_similar_items
+      {
+        tab_title: t('site.object.items-similar-to-item'),
+        url: document_similar_url(document, format: 'json', mlt_query: @mlt_query, per_page: 12)
+      }
     end
 
     def oembed_links
