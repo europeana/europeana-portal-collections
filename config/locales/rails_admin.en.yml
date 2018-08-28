@@ -26,7 +26,13 @@ en:
     help:
       browse_entry:
         query: 'Include everything after the ? in a search URL, e.g. "q=paris&f[TYPE][]=IMAGE". Do not include page or per_page.'
+      europeana/record/set:
+        settings_query_term: 'Optional. Search query term for this set. If omitted, preferred label will be used.'
+      page/browse/record_sets:
+        base_query: 'Optional. Portal search query for all record sets on this page, used for "more records" links, combined with set query, e.g. "f[TYPE][]=IMAGE".'
+        link_text: 'Optional. Customise the link text shown to search for more records in each set. Include "%%{set_pref_label}" where the set preferred label should go, e.g. "More records like %%{set_pref_label}...".'
+        set_query: 'Optional. Portal search query for each record set on this page, used for "more records" links. Include "%%{set_query_term}" where the set-specific query term should go, e.g. "q=proxy_dc_title:%%{set_query_term}*".'
       page/landing:
         strapline: 'Include "%%{total_item_count}" where the number of items should be displayed.'
       gallery:
-        image_portal_urls: 'Enter 6-48 URLs to record pages on Europeana, separated by any amount of white space. The edm:isShownBy for the record will be used for that image. Change the URL order to change the position of an image in the gallery.'
+        image_portal_urls_text: 'Enter 6-48 URLs to record pages on Europeana, separated by any amount of white space. The edm:isShownBy for the record will be used for that image, unless a web resource is specified with `?view=...`. Change the URL order to change the position of an image in the gallery.'

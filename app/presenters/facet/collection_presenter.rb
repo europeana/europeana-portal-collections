@@ -8,6 +8,14 @@ module Facet
       [base_url, facet_item_url_base_query].join('?')
     end
 
+    def apply_order_to_items?
+      true
+    end
+
+    def apply_order_to_items(items, **_)
+      items.unshift(items.delete(items.detect { |item| facet_in_params?(facet_name, item) }))
+    end
+
     def remove_facet_url(_item)
       [search_url, facet_item_url_base_query].reject(&:blank?).join('?')
     end

@@ -20,8 +20,8 @@ module Pages
       mustache[:content] ||= begin
         {
           title: @page.title,
-          text: @page.settings[:full_width] != '1' ? @page.body : nil,
-          text_full_width: @page.settings[:full_width] == '1' ? @page.body : nil,
+          text: @page.full_width != '1' ? @page.body : nil,
+          text_full_width: @page.full_width == '1' ? @page.body : nil,
           channel_entry: @page.browse_entries.published.blank? ? nil : {
             items: browse_entry_items(@page.browse_entries.published, @page)
           },
@@ -32,11 +32,14 @@ module Pages
 
     def navigation
       mustache[:navigation] ||= begin
-        (hide_secondary_navigation? ? {} : {
-          secondary: {
-            items: secondary_navigation_items
-          }
-        }).reverse_merge(super)
+        {}.tap do |nav|
+          nav[:breadcrumbs] = breadcrumbs
+          unless hide_secondary_navigation?
+            nav[:secondary] = {
+              items: secondary_navigation_items
+            }
+          end
+        end.reverse_merge(super)
       end
     end
 
@@ -75,10 +78,14 @@ module Pages
       ]
     end
 
-    private
-
-    def body_cache_key
-      @page.cache_key
+    def breadcrumbs
+      [{ label: @page.title }].tap do |crumbs|
+        context = @page
+        while context.parent.present?
+          crumbs.unshift(url: static_page_path(context.parent, format: 'html'), label: context.parent.title)
+          context = context.parent
+        end
+      end
     end
   end
 end

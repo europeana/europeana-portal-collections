@@ -1,0 +1,9 @@
+newspaper_titles_a_translations:
+  locale: en
+  pref_label: A
+  globalized_model: newspaper_titles_a
+
+newspaper_titles_b_translations:
+  locale: en
+  pref_label: B
+  globalized_model: newspaper_titles_b

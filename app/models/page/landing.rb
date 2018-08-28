@@ -20,17 +20,17 @@ class Page
     accepts_nested_attributes_for :translations, allow_destroy: true
     default_scope { includes(:translations) }
 
-    has_settings :layout_type
+    store_accessor :config, :layout_type
 
-    validates :settings_layout_type, inclusion: { in: :settings_layout_type_enum }
+    validates :layout_type, inclusion: { in: :layout_type_enum }
     validates :collection, presence: true, uniqueness: true
 
-    delegate :settings_layout_type_enum, to: :class
+    delegate :layout_type_enum, to: :class
 
     before_create :set_slug, if: :collection
 
     class << self
-      def settings_layout_type_enum
+      def layout_type_enum
         %w(default browse)
       end
 
@@ -39,8 +39,8 @@ class Page
       end
     end
 
-    def settings_layout_type
-      settings[:layout_type] ? settings[:layout_type] : 'default'
+    def layout_type
+      super || 'default'
     end
 
     def og_image
@@ -50,7 +50,7 @@ class Page
     private
 
     def og_image_from_promo
-      return unless settings_layout_type == 'browse'
+      return unless layout_type == 'browse'
       promo = promotions.find_by(position: 0)
       promo&.file.present? ? promo.file.url : nil
     end

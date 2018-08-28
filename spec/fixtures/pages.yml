@@ -35,22 +35,28 @@ art_collection:
   type: 'Page::Landing'
   collection: art
 
-firstworldwar_collection:
-  slug: 'collections/world-war-I'
-  state: 1
-  type: 'Page::Landing'
-  collection: firstworldwar
-
 fashion_collection:
   slug: 'collections/fashion'
   collection: fashion
   state: 1
   type: 'Page::Landing'
   newsletter_url: 'http://europeanafashion.us5.list-manage.com/subscribe?u=08acbb4918e78ab1b8b1cb158&id=eeaec60e70'
-  settings: "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nlayout_type: browse\n"
+  config: '{"layout_type": "browse"}'
   feeds:
     - fashion_blog
     - fashion_tumblr
+
+firstworldwar_collection:
+  slug: 'collections/world-war-I'
+  state: 1
+  type: 'Page::Landing'
+  collection: firstworldwar
+
+performing_arts_collection:
+  slug: 'collections/performing_arts'
+  state: 1
+  type: 'Page::Landing'
+  collection: performing_arts
 
 grid_layout_collection:
   slug: 'collections/grid_layout'
@@ -74,3 +80,8 @@ internal_server_error:
   state: 1
   type: 'Page::Error'
   http_code: 500
+
+newspapers_a_to_z_browse:
+  slug: 'collections/newspapers/a-z'
+  state: 1
+  type: 'Page::Browse::RecordSets'

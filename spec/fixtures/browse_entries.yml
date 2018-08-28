@@ -1,64 +1,64 @@
 opera_topic:
-  query: "what:opera"
+  query: "q=what:opera"
   state: 1
   subject_type: 0
 
 cinema_topic:
-  query: "what:cinema"
+  query: "q=what:cinema"
   state: 1
   subject_type: 0
 
 music_topic:
-    query: "what:music"
-    state: 1
-    subject_type: 0
+  query: "q=what:music"
+  state: 1
+  subject_type: 0
 
 harp_topic:
-    query: "what:harp"
-    state: 1
-    subject_type: 0
+  query: "q=what:harp"
+  state: 1
+  subject_type: 0
 
 manuscripts_topic:
-  query: "what:manuscripts"
+  query: "q=what:manuscripts"
   state: 1
   subject_type: 0
 
 books_topic:
-  query: "what:books"
+  query: "q=what:books"
   state: 1
   subject_type: 0
 
 paintings_topic:
-  query: "what:paintings"
+  query: "q=what:paintings"
   state: 1
   subject_type: 0
 
 van_gogh_person:
-  query: "who:(van gogh)"
+  query: "q=who:(van gogh)"
   state: 1
   subject_type: 1
 
 hokusai_person:
-  query: "who:hokusai"
+  query: "q=who:hokusai"
   state: 1
   subject_type: 1
 
 sandro_botticelli_person:
-  query: "who:sandro botticelli"
+  query: "q=who:sandro botticelli"
   state: 1
   subject_type: 1
 
 century_16_period:
-  query: "when:16??"
+  query: "q=when:16??"
   state: 1
   subject_type: 2
 
 century_17_period:
-  query: "when:17??"
+  query: "q=when:17??"
   state: 1
   subject_type: 2
 
 century_18_period:
-  query: "when:18??"
+  query: "q=when:18??"
   state: 1
   subject_type: 2

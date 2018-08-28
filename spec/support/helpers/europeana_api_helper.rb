@@ -94,6 +94,17 @@ module EuropeanaAPIHelper
           }
         end
 
+      # Record with dcterms:hasPart in proxy having mostly Europeana item URIs
+      stub_request(:get, %r{#{Europeana::API.url}/v2/record/with/europeana-ancestor-dcterms-hasPart.json}).
+        with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
+        to_return do |request|
+          {
+            body: api_responses(:record_with_europeana_ancestor_dcterms_has_part, id: record_id_from_request_uri(request)),
+            status: 200,
+            headers: { 'Content-Type' => 'application/json' }
+          }
+        end
+
       # Hierarchy API
       stub_request(:get, %r{#{Europeana::API.url}/v2/record/[^/]+/[^/]+/(self|parent|children|ancestor-self-siblings|precee?ding-siblings|following-siblings).json}).
         with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).

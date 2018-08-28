@@ -47,6 +47,9 @@
 # Local cache version override
 /config/initializers/cache_version.rb
 
+# Ignore generated js for translations.
+/app/assets/javascripts/i18n-js/*
+
 # Ignore rvm files.
 .ruby-gemset
 
@@ -59,6 +62,9 @@
 
 # Ignore compiled assets
 /public/assets
+
+# Ignore compiled javascripts
+/public/javascripts
 
 # Ignore uploaded files
 /public/system

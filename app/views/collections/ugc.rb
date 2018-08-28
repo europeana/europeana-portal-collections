@@ -7,12 +7,8 @@ module Collections
     include SearchableView
     include UgcContentDisplayingView
 
-    def js_vars
-      [
-        {
-          name: 'pageName', value: 'e7a_1418'
-        }
-      ]
+    def js_var_page_name
+      'e7a_1418'
     end
 
     def page_content_heading

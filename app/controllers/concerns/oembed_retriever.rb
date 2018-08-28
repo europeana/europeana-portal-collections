@@ -17,14 +17,12 @@ module OembedRetriever
       provider = OEmbed::Providers.find(url)
       next if provider.nil?
       benchmark("[OEmbed] #{url}", level: :info) do
-        begin
-          map[url] = {
-            html: provider.get(url).html,
-            link: provider.build(url)
-          }
-        rescue OEmbed::Error
-          # no oEmbed HTML available (for a number of possible reasons)
-        end
+        map[url] = {
+          html: provider.get(url).html,
+          link: provider.build(url)
+        }
+      rescue OEmbed::Error
+        # no oEmbed HTML available (for a number of possible reasons)
       end
     end
   end

@@ -7,6 +7,7 @@ class Gallery < ActiveRecord::Base
   define_callbacks :set_images
 
   include Gallery::Annotations
+  include HasArrayOfStringsAttribute
   include HasPublicationStates
   include IsCategorisable
   include IsPermissionable
@@ -24,6 +25,7 @@ class Gallery < ActiveRecord::Base
   translates :title, :description, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, allow_destroy: true
 
+  has_array_of_strings_attribute :image_portal_urls, split: /\s+/
   has_paper_trail
 
   validates :title, presence: true, length: { maximum: 60 }
@@ -55,37 +57,18 @@ class Gallery < ActiveRecord::Base
     end
   end
 
-  ##
-  # Constructs a Search API query for al set of gallery images.
-  #
-  # @param images [Enumerable<GalleryImage>]
-  # @return [String]
-  # @see Europeana::Record.search_api_query_for_record_ids
   class << self
-    def search_api_query_for_images(images)
-      Europeana::Record.search_api_query_for_record_ids(images.map(&:europeana_record_id))
-    end
-
     def valid_image_count?(count)
       NUMBER_OF_IMAGES.cover?(count)
     end
   end
 
-  def search_api_query_for_images
-    self.class.search_api_query_for_images(images)
+  def europeana_record_ids
+    images.map(&:europeana_record_id)
   end
 
   def to_param
     slug
-  end
-
-  def image_portal_urls_text
-    @image_portal_urls_text ||= image_portal_urls&.join("\n\n")
-  end
-
-  def image_portal_urls_text=(value)
-    self.image_portal_urls = value&.strip&.split(/\s+/)&.compact || []
-    @image_portal_urls_text = value
   end
 
   def image_portal_urls

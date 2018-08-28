@@ -1,11 +1,11 @@
 fashion_dresses_image1:
   gallery: fashion_dresses
-  europeana_record_id: /sample/record1
+  europeana_record_id: /123/record1
   position: 1
   url: http://www.example.com/media/sample/record1
 
 fashion_dresses_image2:
   gallery: fashion_dresses
-  europeana_record_id: /sample/record2
+  europeana_record_id: /123/record2
   position: 2
   url: http://www.example.com/media/sample/record2

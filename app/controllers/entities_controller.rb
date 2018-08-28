@@ -2,7 +2,7 @@
 
 class EntitiesController < ApplicationController
   include CacheHelper
-  include Europeana::EntitiesApiConsumer
+  include Europeana::EntitiesAPIConsumer
 
   attr_reader :body_cache_key
 

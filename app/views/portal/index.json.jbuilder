@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.search_results @document_list.map do |doc|
-  content = Document::SearchResultPresenter.new(doc, self, @response).content
+  content = Document::BlacklightSearchResultPresenter.new(doc, self, @response).content
   json.extract!(content, *content.keys)
 end
 json.total do

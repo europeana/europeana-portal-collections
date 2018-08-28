@@ -6,10 +6,11 @@
 # The portal is an interface to the Europeana REST API, with search and
 # browse functionality provided by {Blacklight}.
 class PortalController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   include Europeana::URIMappers
+  include Europeana::SearchAPIConsumer
   include OembedRetriever
   include SearchInteractionLogging
-  include ActionView::Helpers::NumberHelper
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
   before_action :log_search_interaction_on_show, only: :show
@@ -37,21 +38,17 @@ class PortalController < ApplicationController
   # GET /record/:id
   def show
     @response, @document = fetch(doc_id, api_query_params)
-    @data_provider = document_data_provider(@document)
 
-    @url_conversions = perform_url_conversions(@document)
-    @media_headers = perform_media_header_requests(@document)
-    @oembed_html = oembed_for_urls(@document, @url_conversions)
-
-    @mlt_query = @document.more_like_this_query
-
-    # TODO: remove when new design is default
-    @new_design = params[:design] == 'new'
+    if document_is_europeana_ancestor?
+      show_ancestor
+    else
+      show_generic
+    end
 
     @debug = JSON.pretty_generate(@document.as_json) if params[:debug] == 'json'
 
     respond_to do |format|
-      format.html
+      format.html { render @template || 'portal/show' }
       format.json { render json: { response: { document: @document } } }
     end
   end
@@ -102,6 +99,22 @@ class PortalController < ApplicationController
 
   protected
 
+  def show_generic
+    # TODO: remove when new design is default
+    @new_design = params[:design] == 'new'
+
+    @data_provider = document_data_provider(@document)
+    @url_conversions = perform_url_conversions(@document)
+    @media_headers = perform_media_header_requests(@document)
+    @oembed_html = oembed_for_urls(@document, @url_conversions)
+    @mlt_query = @document.more_like_this_query
+  end
+
+  def show_ancestor
+    @search_results = search_results_for_dcterms_is_part_of(@document.id)
+    @template = 'portal/ancestor'
+  end
+
   def document_annotations(id)
     Europeana::Record.new(id).annotations
   rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
@@ -130,5 +143,18 @@ class PortalController < ApplicationController
 
   def redirect_to_home
     redirect_to home_path
+  end
+
+  # Is the document the ancestor of other Europeana records?
+  #
+  # Criteria:
+  # * +param[:design] == "entity"+
+  # * +Europeana::Record::Hierarchies.europeana_ancestor?+ returns true for proxy's dcterms:hasPart
+  #
+  # @return [Boolean]
+  def document_is_europeana_ancestor?
+    return false unless params[:design] == 'entity'
+    dcterms_has_part = @document.fetch('proxies.dctermsHasPart', []).compact
+    Europeana::Record::Hierarchies.europeana_ancestor?(dcterms_has_part)
   end
 end

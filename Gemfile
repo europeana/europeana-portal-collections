@@ -4,9 +4,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.10'
 
-gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
-
 gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git', branch: 'develop'
+gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
 
 # Lock Mustache at 1.0.3 because > 1.0.3 kills item page performance with the commit
 # https://github.com/mustache/mustache/commit/3c7af8f33d0c3b04c159e10e73a2831cf1e56e02
@@ -30,8 +29,8 @@ gem 'cancancan', '~> 1.12'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise'
-gem 'europeana-api', '~> 1.0.0'
-gem 'europeana-blacklight', '~> 1.2.0'
+gem 'europeana-api', '~> 1.1.0'
+gem 'europeana-blacklight', '~> 1.2.2'
 gem 'europeana-feedback-button', '0.0.5'
 gem 'europeana-feeds'
 gem 'feedjira', '~> 2.0'
@@ -74,12 +73,13 @@ end
 
 group :development, :profiling, :production do
   gem 'clockwork', '~> 1.2'
-  gem 'htmlcompressor', '0.3'
   gem 'newrelic_rpm'
   gem 'puma', '~> 3.9.1'
 end
 
 group :development, :profiling, :test do
+  gem 'binding_of_caller'
+  gem 'byebug', platforms: %i(mri mingw x64_mingw)
   gem 'dotenv-rails', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'
   gem 'rubocop', '~> 0.53', require: false
@@ -91,6 +91,7 @@ group :development, :profiling do
 end
 
 group :development do
+  gem 'better_errors'
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'spring', '~> 1.6'
@@ -104,7 +105,6 @@ group :test do
   gem 'capybara'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'simplecov', require: false
   gem 'webmock'
