@@ -68,7 +68,7 @@ module Document
     def play_html
       @play_html ||= begin
         return nil unless media_type == 'oembed'
-        @controller.oembed_html[url][:html]
+        controller_oembed_html[url][:html]
       end
     end
 
