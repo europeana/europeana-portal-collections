@@ -4,19 +4,28 @@ module Portal
   class Show
     # Promo cards for the new item page
     module Promos
+      include EntitiesHelper
+
       protected
 
       def js_var_enabled_promos
         promos = [
           { id: 'gallery', url: document_galleries_url(document, format: 'json') },
           { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
-        ]
-
-        proxy_europeana_entities.each_pair do |uri, fields|
-          path_options = portal_entity_path_options(uri, format: 'json')
-          promos.push(id: 'entity', url: entity_promo_path(path_options), relation: fields.join(', '))
-        end
+        ] + entity_promos
         promos.to_json
+      end
+
+      def entity_promos
+        proxy_europeana_entities.map do |uri, fields|
+          path_options = portal_entity_path_options(uri, format: 'json')
+          relation = fields.map { |field| entity_promo_relation(field) }.join(', ')
+          { id: 'entity', url: entity_promo_path(path_options), relation: relation }
+        end
+      end
+
+      def entity_promo_relation(field)
+        t(field, scope: 'site.object.promotions.card-labels', default: field)
       end
 
       # Scan all proxy fields for data.europeana.eu entity URIs
