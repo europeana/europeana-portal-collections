@@ -123,7 +123,7 @@ module Document
 
       def entity_presenter(entity)
         @entity_presenters ||= {}
-        @entity_presenters[entity[:about]] ||= Document::EntityPresenter.new(entity)
+        @entity_presenters[entity[:about]] ||= Document::EntityPresenter.new(entity, controller)
       end
 
       def value_presenter(field, content, entity = nil)
