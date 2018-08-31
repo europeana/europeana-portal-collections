@@ -60,23 +60,23 @@ RSpec.describe Document::WebResourcePresenter do
 
         context 'when matching an oEmbed pattern' do
           before do
-            allow(subject).to receive(:controller_oembed_html) { { wr_url => {} } }
+            allow(subject).to receive(:controller_oembed_html) { { wr_url => { html: '<iframe/>' } } }
           end
 
           it { is_expected.to be_for_edm_is_shown_at }
-          it { is_expected.not_to be_displayable }
-          it { is_expected.not_to be_playable }
+          it { is_expected.to be_displayable }
+          it { is_expected.to be_playable }
           it { is_expected.not_to be_downloadable }
         end
       end
 
       context 'when matching an oEmbed pattern' do
         before do
-          allow(subject).to receive(:controller_oembed_html) { { wr_url => {} } }
+          allow(subject).to receive(:controller_oembed_html) { { wr_url => { html: '<iframe/>' } } }
         end
 
         it { is_expected.to be_displayable }
-        it { is_expected.not_to be_playable }
+        it { is_expected.to be_playable }
         it { is_expected.not_to be_downloadable }
       end
     end
