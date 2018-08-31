@@ -64,7 +64,7 @@ RSpec.feature 'Object page', :annotations_api do
       context (js ? 'with JS' : 'without JS'), js: js do
         context 'with recipient configured' do
           before do
-            Rails.application.config.x.feedback_mail_to = 'feedback@example.com'
+            Europeana::FeedbackButton.mail_to = 'feedback@example.com'
           end
           it 'is present' do
             visit '/en/record/abc/123'
@@ -75,7 +75,7 @@ RSpec.feature 'Object page', :annotations_api do
 
         context 'without recipient configured' do
           before do
-            Rails.application.config.x.feedback_mail_to = nil
+            Europeana::FeedbackButton.mail_to = nil
           end
           it 'is not present' do
             visit '/en/record/abc/123'
