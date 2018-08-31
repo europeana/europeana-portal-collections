@@ -103,9 +103,9 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
+  gem 'geckodriver-helper'
   gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'webmock'
 end

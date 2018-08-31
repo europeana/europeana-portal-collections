@@ -7,7 +7,7 @@ RSpec.feature 'Entity page' do
     let(:namespace) { 'base' }
     let(:id) { '1234' }
     let(:wskey) { Rails.application.config.x.europeana[:entities].api_key }
-    let(:url) { Europeana::API.url + "/entities/#{type}/#{namespace}/#{id}?wskey=#{wskey}" }
+    let(:url) { %r(#{Europeana::API.url}/entities/#{type}/#{namespace}/#{id}) }
     let(:headers) { { 'Content-Type' => 'application/ld+json' } }
 
     context 'type is agent' do
