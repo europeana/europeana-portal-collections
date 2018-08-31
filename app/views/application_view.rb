@@ -99,10 +99,10 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def feedback
-    super.tap do |f|
-      return if f.nil?
-      f[:url_privacy_policy] = static_page_path('rights/privacy', format: 'html')
-    end
+    f = super
+    return if f.nil?
+    f[:url_privacy_policy] = static_page_path('rights/privacy', format: 'html')
+    f
   end
 
   protected
