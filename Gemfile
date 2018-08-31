@@ -104,8 +104,8 @@ end
 group :test do
   gem 'capybara'
   gem 'geckodriver-helper'
-  gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'simplecov', require: false
   gem 'webmock'
 end
