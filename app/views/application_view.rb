@@ -98,6 +98,13 @@ class ApplicationView < Europeana::Styleguide::View
     display_site_notice? ? t('site.notice.outage-expected') : false
   end
 
+  def feedback
+    super.tap do |f|
+      return if f.nil?
+      f[:url_privacy_policy] = static_page_path('rights/privacy', format: 'html')
+    end
+  end
+
   protected
 
   def display_site_notice?

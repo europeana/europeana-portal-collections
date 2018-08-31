@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-feedback-button.git
-  revision: 9757cd09b97a80ae9e5fdcda0ed57a9b204b806a
+  revision: 2fc59abf96e91cf74fe670e44ccd9a36ddaf2680
   branch: feat/EC-2936-email-and-policy-fields
   specs:
     europeana-feedback-button (0.0.5)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 1a741856d07e7b0597515c21a275d4a59e08c6a8
+  revision: 41cf5dd1ee9b5072f2e52466da7f7745b2616656
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 5b7cb8249b4475443159cba5859251482ebbd8aa
+  revision: 595f3967c63bd6912a75c0742fb517e8b3ea33c7
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
