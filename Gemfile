@@ -33,8 +33,8 @@ gem 'europeana-api', '~> 1.1.0'
 gem 'europeana-blacklight', '~> 1.2.2'
 # TODO: temporarily use Github until new version released
 gem 'europeana-feedback-button', '0.0.5',
-  git: 'https://github.com/europeana/europeana-feedback-button.git', branch: 'feat/EC-2936-email-and-policy-fields',
-  require: 'europeana/feedback_button'
+    git: 'https://github.com/europeana/europeana-feedback-button.git',
+    branch: 'feat/EC-2936-email-and-policy-fields', require: 'europeana/feedback_button'
 gem 'europeana-feeds'
 gem 'feedjira', '~> 2.0'
 gem 'foederati', '~> 0.2.0'
