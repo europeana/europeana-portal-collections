@@ -82,3 +82,4 @@
 
 # Ignore generated Docker config
 /docker-compose.yml
+/docker-compose.*.yml

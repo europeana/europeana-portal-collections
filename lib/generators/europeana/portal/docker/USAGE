@@ -1,8 +1,0 @@
-Description:
-    Generates Docker Compose configuration for the Europeana Portal.
-
-Example:
-    rails generate docker
-
-    This will create:
-        docker-compose.yml: Docker Compose configuration

@@ -22,8 +22,10 @@ Europeana Portal with Collections as a Rails +
 
 ## Quick Start with Docker
 
-* Generate a Docker Compose config: `bundle exec rails g europeana:portal:docker`
-* Bring it up: `docker-compose up`
+* Install the gem bundle: `bundle install`
+* Generate Docker configuration files: `bundle exec bin/portal dockerize development`
+  You will be prompted to enter your Europeana API key.
+* Bring it up: `docker-compose -f docker-compose.services.yml up`
 * Setup the database: `bundle exec rake db:setup`
 * Start the app: `bundle exec foreman start`
 * Open the app: http://localhost:3000/
