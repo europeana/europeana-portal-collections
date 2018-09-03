@@ -10,7 +10,6 @@ cache:
 services:
   - docker
 addons:
-  postgresql: "9.4"
   firefox: latest
 before_script:
   - bundle exec bin/portal dockerize test --europeana_api_key=$EUROPEANA_API_KEY
