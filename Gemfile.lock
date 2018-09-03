@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 9cf77cf68e5c85853d3ea3fc5454ea550e499e54
+  revision: 1a741856d07e7b0597515c21a275d4a59e08c6a8
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: bd371e698046a29f83de18267816df11a2ef7d7e
+  revision: 595f3967c63bd6912a75c0742fb517e8b3ea33c7
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -77,6 +77,8 @@ GEM
       activerecord (>= 3.0)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
+    archive-zip (0.11.0)
+      io-like (~> 0.3.0)
     arel (6.0.4)
     ast (2.4.0)
     autoprefixer-rails (8.5.0)
@@ -114,8 +116,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.2.0)
-    cliver (0.3.2)
     clockwork (1.3.1)
       activesupport
       tzinfo
@@ -221,6 +224,8 @@ GEM
     foreman (0.84.0)
       thor (~> 0.19.1)
     formatador (0.2.5)
+    geckodriver-helper (0.21.0)
+      archive-zip (~> 0.7)
     gli (2.16.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -247,6 +252,7 @@ GEM
     i18n-js (3.0.11)
       i18n (>= 0.6.6, < 2)
     i18n_data (0.8.0)
+    io-like (0.3.0)
     ipaddress (0.8.3)
     iso-639 (0.2.8)
     jbuilder (2.6.4)
@@ -332,11 +338,6 @@ GEM
     parser (2.5.0.5)
       ast (~> 2.4.0)
     pg (0.21.0)
-    phantomjs (2.1.1.0)
-    poltergeist (1.16.0)
-      capybara (~> 2.1)
-      cliver (~> 0.3.1)
-      websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
     public_suffix (2.0.5)
     puma (3.9.1)
@@ -460,6 +461,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-oembed (0.12.0)
     ruby-progressbar (1.9.0)
+    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
@@ -473,6 +475,9 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sax-machine (1.3.2)
+    selenium-webdriver (3.14.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simplecov (0.16.1)
@@ -522,9 +527,6 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    websocket-driver (0.6.5)
-      websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.2)
     xpath (2.1.0)
       nokogiri (~> 1.3)
     ya2yaml (0.31)
@@ -560,6 +562,7 @@ DEPENDENCIES
   foederati (~> 0.2.0)
   fog-aws (~> 1.4.1)
   foreman
+  geckodriver-helper
   globalize (~> 5.0)
   globalize-versioning!
   i18n_data
@@ -577,8 +580,6 @@ DEPENDENCIES
   paper_trail (~> 4.0)
   paperclip (~> 5.2)
   pg (< 1.0)
-  phantomjs
-  poltergeist
   puma (~> 3.9.1)
   rack-cors
   rack-rewrite
@@ -597,6 +598,7 @@ DEPENDENCIES
   rubocop (~> 0.53)
   ruby-oembed (~> 0.9)
   sass-rails
+  selenium-webdriver
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)

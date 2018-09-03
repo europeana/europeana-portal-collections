@@ -53,8 +53,7 @@ Create a test database and initialise with `bundle exec rake db:test:prepare`
 Use the command `bundle exec rspec` from the project root to run the RSpec
 tests.
 
-The integration tests use the poltergeist gem which has an external dependency
-on PhantomJS. http://phantomjs.org/download.html
+The integration tests use Firefox in headless mode.
 
 ### File storage
 

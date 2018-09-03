@@ -648,9 +648,3 @@ we will produce a version &ndash; post this prototype phase &ndash; for blind in
 <p>In some jurisdictions moral rights of the author may persist beyond the term of copyright. These rights may include the right to be identified as the author and the right to object to derogatory treatments.</p>
 
 <p>When using this digital object please respect <a href=\"pd-usage-guide.html\" title=\"Read the Europeana's usage guidelines for public domain works\">Europeana's usage Guidelines for public domain works</a>.</p>"
-- :slug: collections/newspapers/a-z
-  :type: Page::Browse::RecordSets
-  :title: Newspapers A-Z
-  :link_text: "See more titles beginning with %{set_pref_label}"
-  :base_query: qf%5B%5D=proxy_dc_type%3A"http%3A%2F%2Fdata.europeana.eu%2Fconcept%2Fbase%2F18"&qf%5B%5D=proxy_dcterms_isPartOf%3A"Europeana+Newspapers"&qf%5B%5D=proxy_dcterms_hasPart%3Ahttp%5C%3A%2F%2Fdata.europeana.eu%2Fitem%2F*
-  :set_query: q=proxy_dc_title:%{set_query_term}*

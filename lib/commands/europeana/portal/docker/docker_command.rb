@@ -10,6 +10,7 @@ module Europeana
 
       argument :rails_env, type: :string, default: 'development', desc: 'Rails env'
 
+      class_option :europeana_api_key, type: :string, desc: 'Europeana API key'
       class_option :redis_db_index, type: :numeric, default: 0, desc: 'Redis database index'
 
       def copy_docker_compose
@@ -63,7 +64,7 @@ module Europeana
       end
 
       def europeana_api_key
-        @europeana_api_key ||= ask('Europeana API key:')
+        @europeana_api_key ||= options[:europeana_api_key] || ask('Europeana API key:')
       end
     end
   end
