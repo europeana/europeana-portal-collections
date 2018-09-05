@@ -59,6 +59,15 @@ module Document
       @edm_object ||= aggregation.fetch('edmObject', nil)
     end
 
+    def edm_landing_page
+      # Disabled as edm:landingPage has malformed URLs
+      # @edm_landing_page ||= field_value('europeanaAggregation.edmLandingPage')
+
+      # Temporary workaround until edm:landingPage is fixed upstream
+      # TODO: Remove this workaround
+      controller.document_url(document, format: 'html').sub("/#{I18n.locale}", '')
+    end
+
     def aggregation
       @first_aggregation ||= @document.aggregations.first
     end
