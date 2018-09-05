@@ -54,7 +54,11 @@ module Portal
           { meta_property: 'fb:appid', content: '185778248173748' }
         ]
         head_meta << { meta_property: 'og:image', content: preview } unless preview.nil?
-        head_meta << { meta_property: 'og:url', content: landing } unless landing.nil?
+        # Disabled as edm:landingPage has malformed URLs
+        # head_meta << { meta_property: 'og:url', content: landing } unless landing.nil?
+        # Temporary workaround until edm:landingPage is fixed upstream
+        # TODO: Remove this workaround
+        head_meta << { meta_property: 'og:url', content: url_without_params(current_url_without_locale) }
         head_meta + super
       end
     end
