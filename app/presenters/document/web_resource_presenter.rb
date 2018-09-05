@@ -225,8 +225,8 @@ module Document
       # Temporary workaround until textAttributionSnippet and htmlAttributionSnippet
       # are fixed upstream
       # TODO: Remove this workaround
-      snippet = field_value('textAttributionSnippet')
-      snippet.gsub(record_presenter.field_value('europeanaAggregation.edmLandingPage'), record_presenter.edm_landing_page)
+      snippet = field_value("#{format}AttributionSnippet")
+      snippet&.gsub(record_presenter.field_value('europeanaAggregation.edmLandingPage'), record_presenter.edm_landing_page)
     end
 
     def colour_search_url(colour)
