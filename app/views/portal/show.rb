@@ -42,7 +42,6 @@ module Portal
 
     def head_meta
       mustache[:head_meta] ||= begin
-        landing = field_value('europeanaAggregation.edmLandingPage')
         preview = helpers.thumbnail_url_for_edm_preview(field_value('europeanaAggregation.edmPreview'))
 
         head_meta = [
@@ -54,11 +53,7 @@ module Portal
           { meta_property: 'fb:appid', content: '185778248173748' }
         ]
         head_meta << { meta_property: 'og:image', content: preview } unless preview.nil?
-        # Disabled as edm:landingPage has malformed URLs
-        # head_meta << { meta_property: 'og:url', content: landing } unless landing.nil?
-        # Temporary workaround until edm:landingPage is fixed upstream
-        # TODO: Remove this workaround
-        head_meta << { meta_property: 'og:url', content: url_without_params(current_url_without_locale) }
+        head_meta << { meta_property: 'og:url', content: edm_landing_page }
         head_meta + super
       end
     end
@@ -172,9 +167,8 @@ module Portal
     end
 
     def social_share
-      url = field_value('europeanaAggregation.edmLandingPage')
       {
-        url: url ? URI.escape(url) : false,
+        url: edm_landing_page.present? ? URI.escape(edm_landing_page) : false,
         facebook: true,
         pinterest: true,
         twitter: true,
@@ -381,6 +375,15 @@ module Portal
     end
 
     protected
+
+    def edm_landing_page
+      # Disabled as edm:landingPage has malformed URLs
+      # @edm_landing_page ||= field_value('europeanaAggregation.edmLandingPage')
+
+      # Temporary workaround until edm:landingPage is fixed upstream
+      # TODO: Remove this workaround
+      @edm_landing_page ||= url_without_params(current_url_without_locale)
+    end
 
     def data_provider_logo_url
       return nil unless @data_provider.present? && @data_provider.image.present?
