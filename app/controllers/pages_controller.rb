@@ -13,6 +13,8 @@ class PagesController < ApplicationController
 
   attr_reader :body_cache_key
 
+  enforces_default_format 'html'
+
   def show
     authorize! :show, @page
 

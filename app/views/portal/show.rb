@@ -3,6 +3,7 @@
 module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
+    include Promos
     include ProJsonApiConsumingView
     include SearchableView
     include UgcContentDisplayingView
@@ -43,7 +44,6 @@ module Portal
 
     def head_meta
       mustache[:head_meta] ||= begin
-        landing = field_value('europeanaAggregation.edmLandingPage')
         preview = helpers.thumbnail_url_for_edm_preview(field_value('europeanaAggregation.edmPreview'))
 
         head_meta = [
@@ -55,7 +55,7 @@ module Portal
           { meta_property: 'fb:appid', content: '185778248173748' }
         ]
         head_meta << { meta_property: 'og:image', content: preview } unless preview.nil?
-        head_meta << { meta_property: 'og:url', content: landing } unless landing.nil?
+        head_meta << { meta_property: 'og:url', content: presenter.edm_landing_page }
         head_meta + super
       end
     end
@@ -170,9 +170,8 @@ module Portal
     end
 
     def social_share
-      url = field_value('europeanaAggregation.edmLandingPage')
       {
-        url: url ? URI.escape(url) : false,
+        url: presenter.edm_landing_page.present? ? URI.escape(presenter.edm_landing_page) : false,
         facebook: true,
         pinterest: true,
         twitter: true,
@@ -404,13 +403,6 @@ module Portal
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
-    end
-
-    def js_var_enabled_promos
-      [
-        { id: 'gallery', url: document_galleries_url(document, format: 'json') },
-        { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
-      ].to_json
     end
   end
 end
