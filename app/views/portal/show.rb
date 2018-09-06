@@ -3,6 +3,7 @@
 module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
+    include Promos
     include ProJsonApiConsumingView
     include SearchableView
     include UgcContentDisplayingView
@@ -402,13 +403,6 @@ module Portal
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
-    end
-
-    def js_var_enabled_promos
-      [
-        { id: 'gallery', url: document_galleries_url(document, format: 'json') },
-        { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
-      ].to_json
     end
   end
 end
