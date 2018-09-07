@@ -24,7 +24,7 @@ module Document
 
     def display_title
       field_value('proxies.dcTitle') ||
-        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ')
+        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ', escape: false)
     end
 
     def creator_title
