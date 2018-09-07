@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-feedback-button.git
-  revision: b4dbf9b5ef7f5f6599c2783b0ad6942a5a26b92a
+  revision: 256aef000dcc1186a7ab51507aad2c6e1d2855ea
   branch: feat/EC-2936-email-and-policy-fields
   specs:
     europeana-feedback-button (0.0.5)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 87afad854e1e56dd40ff0cf745b0944a91f951c6
+  revision: cfc1f75bfb90352b67846245a8db82edf6b95e8b
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -16,14 +16,14 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: cd2278c940d890b5d95489e91a3ffc1c25a0751d
+  revision: 70c36e19e6103d021f3689b9f2144f99d6677257
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
-      activesupport (~> 4.0)
+      activesupport (>= 4.0, < 6.0)
       europeana-i18n
       mustache (~> 1.0.1)
-      stache (~> 1.1.1)
+      stache (>= 1.1.1)
 
 GIT
   remote: https://github.com/europeana/stache.git
