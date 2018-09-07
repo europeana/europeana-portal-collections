@@ -7,8 +7,6 @@ rvm:
 bundler_args: --without development:production:doc:localeapp:profiling
 cache:
   bundler: true
-  directories:
-    - "travis_phantomjs"
 addons:
   postgresql: "9.4"
   firefox: latest
