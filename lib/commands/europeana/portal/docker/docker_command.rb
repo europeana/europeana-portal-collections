@@ -14,7 +14,7 @@ module Europeana
       class_option :redis_db_index, type: :numeric, default: 0, desc: 'Redis database index'
 
       def copy_docker_compose
-        template 'docker-compose.services.yml', 'docker-compose.services.yml'
+        template 'docker-compose.yml', 'docker-compose.yml'
       end
 
       def copy_docker_env
@@ -32,11 +32,15 @@ module Europeana
       protected
 
       def database_url
-        @database_url ||= "postgres://postgres:#{postgres_password}@localhost:3002/europeana_portal_#{rails_env}"
+        @database_url ||= "postgres://postgres:#{postgres_password}@localhost:#{postgres_port}/europeana_portal_#{rails_env}"
       end
 
       def redis_url
-        @redis_url ||= "redis://localhost:3003/#{options[:redis_db_index]}"
+        @redis_url ||= "redis://localhost:#{redis_port}/#{options[:redis_db_index]}"
+      end
+
+      def redis_port
+        '3013'
       end
 
       def s3_bucket
@@ -51,12 +55,20 @@ module Europeana
         @postgres_password ||= SecureRandom.hex(20)
       end
 
+      def postgres_port
+        '3012'
+      end
+
       def minio_access_key
         @minio_access_key ||= SecureRandom.hex(20)
       end
 
       def minio_secret_key
         @minio_secret_key ||= SecureRandom.hex(40)
+      end
+
+      def minio_port
+        '3011'
       end
 
       def secret_key_base

@@ -3,7 +3,7 @@ services:
   minio:
     image: minio/minio:RELEASE.2018-09-01T00-38-25Z
     ports:
-    - "3001:9000"
+    - "<%= minio_port %>:9000"
     command: server /data
     volumes:
     - ../tmp/minio:/data
@@ -11,9 +11,9 @@ services:
   postgres:
     image: postgres:9.6.3
     ports:
-    - "3002:5432"
+    - "<%= postgres_port %>:5432"
     env_file: .env.docker
   redis:
     image: redis:3.2.12
     ports:
-    - "3003:6379"
+    - "<%= redis_port %>:6379"
