@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'dotenv'
+
 module Europeana
   module Portal
     class DockerCommand < Thor::Group
@@ -31,6 +33,10 @@ module Europeana
 
       protected
 
+      def docker_env
+        @docker_env ||= Dotenv.load('.env.docker')
+      end
+
       def database_url
         @database_url ||= "postgres://postgres:#{postgres_password}@localhost:#{postgres_port}/europeana_portal_#{rails_env}"
       end
@@ -52,7 +58,7 @@ module Europeana
       end
 
       def postgres_password
-        @postgres_password ||= SecureRandom.hex(20)
+        @postgres_password ||= docker_env['POSTGRES_PASSWORD'] || SecureRandom.hex(20)
       end
 
       def postgres_port
@@ -60,11 +66,11 @@ module Europeana
       end
 
       def minio_access_key
-        @minio_access_key ||= SecureRandom.hex(20)
+        @minio_access_key ||= docker_env['MINIO_ACCESS_KEY'] || SecureRandom.hex(20)
       end
 
       def minio_secret_key
-        @minio_secret_key ||= SecureRandom.hex(40)
+        @minio_secret_key ||= docker_env['MINIO_SECRET_KEY'] || SecureRandom.hex(40)
       end
 
       def minio_port
