@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-feedback-button.git
-  revision: 256aef000dcc1186a7ab51507aad2c6e1d2855ea
+  revision: 3161874641bd6260ccf136246b06ad20b94d5253
   branch: feat/EC-2936-email-and-policy-fields
   specs:
     europeana-feedback-button (0.0.5)
