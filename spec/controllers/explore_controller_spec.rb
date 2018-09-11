@@ -12,36 +12,41 @@ end
 
 RSpec.describe ExploreController do
   describe 'GET colours' do
+    subject { -> { get :colours, params } }
+
     before(:each) do
       Rails.cache.write('explore/colours/facets', [])
-      get :colours, params
+      subject.call
     end
 
-    let(:params) { { locale: 'en', format: 'html' } }
-
-    it_behaves_like 'collection aware'
-
-    it 'should render the colour explore Mustache template' do
-      expect(response.status).to eq(200)
-      expect(response).to render_template('explore/colours')
+    context 'without format' do
+      let(:params) { { locale: 'en' } }
+      it { is_expected.to enforce_default_format('html') }
     end
 
-    it 'should not get colours from the API' do
-      expect(an_api_search_request).not_to have_been_made
-    end
+    context 'with format=html' do
+      let(:params) { { locale: 'en', format: 'html' } }
 
-    it 'should assign colours from COLOURPALETTE facet' do
-      expect(assigns[:colours]).to be_a(Array)
+      it_behaves_like 'collection aware'
+
+      it 'should render the colour explore Mustache template' do
+        expect(response.status).to eq(200)
+        expect(response).to render_template('explore/colours')
+      end
+
+      it 'should not get colours from the API' do
+        expect(an_api_search_request).not_to have_been_made
+      end
+
+      it 'should assign colours from COLOURPALETTE facet' do
+        expect(assigns[:colours]).to be_a(Array)
+      end
     end
   end
 
   describe 'GET new_content' do
-    before(:each) do
-      Rails.cache.write('browse/new_content/providers', providers)
-      get :new_content, params
-    end
+    subject { -> { get :new_content, params } }
 
-    let(:params) { { locale: 'en', format: 'html' } }
     let(:providers) do
       [
         { text: 'A Provider' },
@@ -50,25 +55,35 @@ RSpec.describe ExploreController do
       ]
     end
 
-    it 'should render the new content Mustache template' do
-      expect(response.status).to eq(200)
-      expect(response).to render_template('explore/new_content')
+    before(:each) do
+      Rails.cache.write('browse/new_content/providers', providers)
+      subject.call
     end
 
-    it 'should assign providers from cache' do
-      expect(assigns[:providers]).to eq(providers)
+    context 'without format' do
+      let(:params) { { locale: 'en' } }
+      it { is_expected.to enforce_default_format('html') }
     end
 
-    it_behaves_like 'collection aware'
+    context 'with format=html' do
+      let(:params) { { locale: 'en', format: 'html' } }
+
+      it 'should render the new content Mustache template' do
+        expect(response.status).to eq(200)
+        expect(response).to render_template('explore/new_content')
+      end
+
+      it 'should assign providers from cache' do
+        expect(assigns[:providers]).to eq(providers)
+      end
+
+      it_behaves_like 'collection aware'
+    end
   end
 
   describe 'GET sources' do
-    before(:each) do
-      Rails.cache.write('browse/sources/providers', providers)
-      get :sources, params
-    end
+    subject { -> { get :sources, params } }
 
-    let(:params) { { locale: 'en', format: 'html' } }
     let(:providers) do
       [
         { text: 'A Provider', count: 5000 },
@@ -77,84 +92,125 @@ RSpec.describe ExploreController do
       ]
     end
 
-    it 'should render the sources Mustache template' do
-      expect(response.status).to eq(200)
-      expect(response).to render_template('explore/sources')
+    before(:each) do
+      Rails.cache.write('browse/sources/providers', providers)
+      subject.call
     end
 
-    it 'should not get providers from the API' do
-      expect(an_api_search_request).not_to have_been_made
+    context 'without format' do
+      let(:params) { { locale: 'en' } }
+      it { is_expected.to enforce_default_format('html') }
     end
 
-    it 'should assign providers from cache' do
-      expect(assigns[:providers].size).to eq(providers.size)
-    end
+    context 'with format=html' do
+      let(:params) { { locale: 'en', format: 'html' } }
 
-    it 'should add URLs to providers' do
-      expect(assigns[:providers].all? { |p| p.key?(:url) }).to be(true)
-    end
+      it 'should render the sources Mustache template' do
+        expect(response.status).to eq(200)
+        expect(response).to render_template('explore/sources')
+      end
 
-    it 'should add data providers to providers' do
-      expect(assigns[:providers].all? { |p| p[:data_providers].is_a?(Array) }).to be(true)
-    end
+      it 'should not get providers from the API' do
+        expect(an_api_search_request).not_to have_been_made
+      end
 
-    it_behaves_like 'collection aware'
+      it 'should assign providers from cache' do
+        expect(assigns[:providers].size).to eq(providers.size)
+      end
+
+      it 'should add URLs to providers' do
+        expect(assigns[:providers].all? { |p| p.key?(:url) }).to be(true)
+      end
+
+      it 'should add data providers to providers' do
+        expect(assigns[:providers].all? { |p| p[:data_providers].is_a?(Array) }).to be(true)
+      end
+
+      it_behaves_like 'collection aware'
+    end
   end
 
   describe 'GET people' do
+    subject { -> { get :people, params } }
+
     before(:each) do
-      get :people, params
+      subject.call
     end
 
-    let(:params) { { locale: 'en', format: 'html' } }
-
-    it 'should render the Mustache template' do
-      expect(response.status).to eq(200)
-      expect(response).to render_template('explore/people')
+    context 'without format' do
+      let(:params) { { locale: 'en' } }
+      it { is_expected.to enforce_default_format('html') }
     end
 
-    it 'should assign explore entries from db' do
-      expect(assigns[:people].sort).to eq(BrowseEntry.person.sort)
-    end
+    context 'with format=html' do
+      let(:params) { { locale: 'en', format: 'html' } }
 
-    it_behaves_like 'collection aware'
+      it 'should render the Mustache template' do
+        expect(response.status).to eq(200)
+        expect(response).to render_template('explore/people')
+      end
+
+      it 'should assign explore entries from db' do
+        expect(assigns[:people].sort).to eq(BrowseEntry.person.sort)
+      end
+
+      it_behaves_like 'collection aware'
+    end
   end
 
   describe 'GET topics' do
+    subject { -> { get :topics, params } }
+
     before(:each) do
-      get :topics, params
+      subject.call
     end
 
-    let(:params) { { locale: 'en', format: 'html' } }
-
-    it 'should render the Mustache template' do
-      expect(response.status).to eq(200)
-      expect(response).to render_template('explore/topics')
+    context 'without format' do
+      let(:params) { { locale: 'en' } }
+      it { is_expected.to enforce_default_format('html') }
     end
 
-    it 'should assign explore entries from db' do
-      expect(assigns[:topics].sort).to eq(BrowseEntry.topic.sort)
-    end
+    context 'with format=html' do
+      let(:params) { { locale: 'en', format: 'html' } }
 
-    it_behaves_like 'collection aware'
+      it 'should render the Mustache template' do
+        expect(response.status).to eq(200)
+        expect(response).to render_template('explore/topics')
+      end
+
+      it 'should assign explore entries from db' do
+        expect(assigns[:topics].sort).to eq(BrowseEntry.topic.sort)
+      end
+
+      it_behaves_like 'collection aware'
+    end
   end
 
   describe 'GET periods' do
+    subject { -> { get :periods, params } }
+
     before(:each) do
-      get :periods, params
+      subject.call
     end
 
-    let(:params) { { locale: 'en', format: 'html' } }
-
-    it 'should render the Mustache template' do
-      expect(response.status).to eq(200)
-      expect(response).to render_template('explore/periods')
+    context 'without format' do
+      let(:params) { { locale: 'en' } }
+      it { is_expected.to enforce_default_format('html') }
     end
 
-    it 'should assign explore entries from db' do
-      expect(assigns[:periods].sort).to eq(BrowseEntry.period.sort)
-    end
+    context 'with format=html' do
+      let(:params) { { locale: 'en', format: 'html' } }
 
-    it_behaves_like 'collection aware'
+      it 'should render the Mustache template' do
+        expect(response.status).to eq(200)
+        expect(response).to render_template('explore/periods')
+      end
+
+      it 'should assign explore entries from db' do
+        expect(assigns[:periods].sort).to eq(BrowseEntry.period.sort)
+      end
+
+      it_behaves_like 'collection aware'
+    end
   end
 end

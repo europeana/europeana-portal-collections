@@ -36,6 +36,10 @@ module EDM
         end
       end
 
+      def uri
+        api_response[:id]
+      end
+
       def description
         nil
       end

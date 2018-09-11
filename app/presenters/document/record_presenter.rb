@@ -24,7 +24,7 @@ module Document
 
     def display_title
       field_value('proxies.dcTitle') ||
-        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ')
+        truncate(field_value('proxies.dcDescription'), length: 200, separator: ' ', escape: false)
     end
 
     def creator_title
@@ -57,6 +57,15 @@ module Document
 
     def edm_object
       @edm_object ||= aggregation.fetch('edmObject', nil)
+    end
+
+    def edm_landing_page
+      # Disabled as edm:landingPage has malformed URLs
+      # @edm_landing_page ||= field_value('europeanaAggregation.edmLandingPage')
+
+      # Temporary workaround until edm:landingPage is fixed upstream
+      # TODO: Remove this workaround
+      controller.document_url(document, format: 'html').sub("/#{I18n.locale}", '')
     end
 
     def aggregation
