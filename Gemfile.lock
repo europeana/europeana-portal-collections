@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/europeana/europeana-feedback-button.git
-  revision: 3161874641bd6260ccf136246b06ad20b94d5253
-  branch: feat/EC-2936-email-and-policy-fields
-  specs:
-    europeana-feedback-button (0.0.5)
-      rails (>= 4.2.7.1, < 6)
-
-GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
   revision: cfc1f75bfb90352b67846245a8db82edf6b95e8b
   branch: develop
@@ -185,6 +177,8 @@ GEM
       iso-639 (~> 0.2.5)
       kaminari (>= 1.0.0, < 2)
       rails (>= 4.2.2, < 5)
+    europeana-feedback-button (0.0.6)
+      rails (>= 4.2.7.1, < 6)
     europeana-feeds (0.0.1)
       feedjira (~> 2.0)
       rails (~> 4.2)
@@ -559,7 +553,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.0)
   europeana-api (~> 1.1.0)
   europeana-blacklight (~> 1.2.2)
-  europeana-feedback-button (= 0.0.5)!
+  europeana-feedback-button (= 0.0.6)
   europeana-feeds
   europeana-i18n!
   europeana-logging (~> 0.2.3)
