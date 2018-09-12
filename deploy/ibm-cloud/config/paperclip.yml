@@ -6,6 +6,9 @@ production:
     aws_secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
     region: <%= ENV['S3_REGION'] %>
     host: <%= ENV['S3_HOST'] %>
+<% if ENV.key?('S3_PORT') %>
+    port: <%= ENV['S3_PORT'] %>
+<% end %>
     endpoint: <%= ENV['S3_ENDPOINT'] %>
     path_style: <%= ENV['S3_PATH_STYLE'].to_i == 1 %>
   fog_directory: <%= ENV['S3_BUCKET'] %>
