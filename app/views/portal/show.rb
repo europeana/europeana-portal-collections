@@ -91,7 +91,7 @@ module Portal
             dates: presenter.field_group(:time),
             description: presenter.field_group(:description),
             media: media_items,
-            location: location,
+            location: presenter.field_group(:location),
             origin: origin,
             people: presenter.field_group(:people),
             provenance: presenter.field_group(:provenance),
@@ -117,7 +117,18 @@ module Portal
         {
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
-          rights: t('site.object.meta-label.rights-human')
+          rights: t('site.object.meta-label.rights-human'),
+          geo: {
+            longitude: t('site.object.meta-label.longitude') + ':',
+            latitude: t('site.object.meta-label.latitude') + ':',
+            map: t('site.object.meta-label.map'),
+            points: {
+              n: t('site.object.points.north'),
+              s: t('site.object.points.south'),
+              e: t('site.object.points.east'),
+              w: t('site.object.points.west')
+            }
+          }
         }
       end
     end
@@ -200,28 +211,6 @@ module Portal
       edm_data_provider = field_value('aggregations.edmDataProvider')
       return false if edm_data_provider.blank?
       search_path(f: { 'DATA_PROVIDER' => [edm_data_provider] })
-    end
-
-    def location
-      places = presenter.field_group(:location)
-      {
-        present: places.present?,
-        places: places,
-        geo: {
-          long_and_lat: long_and_lat?(places.present? ? places[:sections].first[:items] : []),
-          labels: {
-            longitude: t('site.object.meta-label.longitude') + ':',
-            latitude: t('site.object.meta-label.latitude') + ':',
-            map: t('site.object.meta-label.map'),
-            points: {
-              n: t('site.object.points.north'),
-              s: t('site.object.points.south'),
-              e: t('site.object.points.east'),
-              w: t('site.object.points.west')
-            }
-          }
-        }
-      }
     end
 
     def similar_items

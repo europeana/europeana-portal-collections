@@ -98,6 +98,7 @@ location:
       - field: longitude
     fields:
     - proxies.dctermsSpatial
+    geo: true
   - title: place-time
     fields:
     - proxies.dcCoverage
