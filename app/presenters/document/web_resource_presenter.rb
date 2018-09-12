@@ -205,8 +205,8 @@ module Document
         size_unit: 'pixels',
         runtime: field_value('ebucoreDuration'),
         runtime_unit: t('site.object.meta-label.runtime-unit-seconds'),
-        attribution_plain: attribution_snippet(:text),
-        attribution_html: attribution_snippet(:html),
+        attribution_plain: field_value('textAttributionSnippet'),
+        attribution_html: field_value('htmlAttributionSnippet'),
         colours: colour_palette_data,
         dc_description: field_value('dcDescription'),
         dc_creator: field_value('dcCreator'),
@@ -216,17 +216,6 @@ module Document
           model: simple_rights(EDM::Rights.normalise(field_value('webResourceEdmRights')))
         }.as_json.to_s.gsub!('=>', ': ').gsub!('nil', 'false')
       }
-    end
-
-    def attribution_snippet(format)
-      # Disabled as textAttributionSnippet and htmlAttributionSnippet have malformed URLs
-      # field_value("#{format}"AttributionSnippet")
-
-      # Temporary workaround until textAttributionSnippet and htmlAttributionSnippet
-      # are fixed upstream
-      # TODO: Remove this workaround
-      snippet = field_value("#{format}AttributionSnippet")
-      snippet&.gsub(record_presenter.field_value('europeanaAggregation.edmLandingPage'), record_presenter.edm_landing_page)
     end
 
     def colour_search_url(colour)
