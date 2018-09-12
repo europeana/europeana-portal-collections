@@ -13,7 +13,7 @@ module Document
 
     delegate :params, to: :controller
 
-    attr_reader :document, :controller, :record_presenter
+    attr_reader :document, :controller
 
     def initialize(document, controller, record = nil, record_presenter = nil)
       @document = document
