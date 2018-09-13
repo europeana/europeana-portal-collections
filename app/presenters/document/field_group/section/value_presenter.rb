@@ -46,9 +46,12 @@ module Document
         end
 
         def extra_info
-          return nil unless for_entity? && section.entity_extra.present?
-          return nil unless entity.present?
-          @extra_info ||= EntityPresenter.new(entity, controller).extra(section.entity_extra)
+          return @extra_info if instance_variable_defined?(:@extra_info)
+          @extra_info = if for_entity? && section.entity_extra.present?
+                          EntityPresenter.new(entity, controller).extra(section.entity_extra)
+                        else
+                          nil
+                        end
         end
 
         def for_entity?
