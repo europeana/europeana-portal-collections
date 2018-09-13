@@ -117,18 +117,7 @@ module Portal
         {
           show_more_meta: t('site.object.actions.show-more-data'),
           show_less_meta: t('site.object.actions.show-less-data'),
-          rights: t('site.object.meta-label.rights-human'),
-          geo: {
-            longitude: t('site.object.meta-label.longitude') + ':',
-            latitude: t('site.object.meta-label.latitude') + ':',
-            map: t('site.object.meta-label.map'),
-            points: {
-              n: t('site.object.points.north'),
-              s: t('site.object.points.south'),
-              e: t('site.object.points.east'),
-              w: t('site.object.points.west')
-            }
-          }
+          rights: t('site.object.meta-label.rights-human')
         }
       end
     end
