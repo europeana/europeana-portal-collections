@@ -5,7 +5,7 @@ module Document
   # Presenter for an entity on an item page
   class EntityPresenter < ApplicationPresenter
     include BlacklightDocumentPresenter
-    include DateHelper
+    include Document::Metadata::Formatter
 
     attr_reader :document, :controller
 
@@ -53,11 +53,7 @@ module Document
 
           context = extra_nested_context(extra, hash)
 
-          context[:scope][context[:key]] = if extra[:format_date].present?
-                                             format_date(val, extra[:format_date])
-                                           else
-                                             val
-                                           end
+          context[:scope][context[:key]] = format_text(val, extra[:format])
         end
       end
     end
