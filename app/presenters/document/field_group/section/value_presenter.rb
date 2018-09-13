@@ -116,7 +116,7 @@ module Document
 
         def format_text(text, format)
           if format == :geo && extra_info.present?
-            format("%{label} %{latitude}, %{longitude}",
+            format('%<label>s %<latitude>s, %<longitude>s',
                    label: text, latitude: format_latitude(extra_info[:latitude]),
                    longitude: format_longitude(extra_info[:longitude]))
           else

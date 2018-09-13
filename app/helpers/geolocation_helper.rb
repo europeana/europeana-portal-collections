@@ -12,7 +12,7 @@ module GeolocationHelper
   end
 
   def format_lat_or_long(lat_or_long, point)
-    format("%{distance} ° %{direction}",
+    format('%<distance>f ° %<direction>s',
            distance: lat_or_long.to_s,
            direction: I18n.t(point, scope: 'site.object.points'))
   end
