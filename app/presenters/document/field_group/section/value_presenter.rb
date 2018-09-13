@@ -49,8 +49,6 @@ module Document
           return @extra_info if instance_variable_defined?(:@extra_info)
           @extra_info = if for_entity? && section.entity_extra.present?
                           EntityPresenter.new(entity, controller).extra(section.entity_extra)
-                        else
-                          nil
                         end
         end
 
