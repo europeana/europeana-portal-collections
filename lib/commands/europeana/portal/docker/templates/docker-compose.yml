@@ -6,7 +6,7 @@ services:
     - "<%= minio_port %>:9000"
     command: server /data
     volumes:
-    - ../tmp/minio:/data
+    - ./tmp/minio:/data
     env_file: .env.docker
   postgres:
     image: postgres:9.6.3
