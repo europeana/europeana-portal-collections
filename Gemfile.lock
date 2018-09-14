@@ -606,6 +606,7 @@ DEPENDENCIES
   stache!
   stackprof
   stringex (~> 2.6)
+  thor (~> 0.19)
   uglifier (~> 2.7.2)
   webmock
   yard

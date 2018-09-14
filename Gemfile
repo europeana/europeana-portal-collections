@@ -64,6 +64,7 @@ gem 'ruby-oembed', '~> 0.9'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'stringex', '~> 2.6'
+gem 'thor', '~> 0.19'
 
 group :production do
   gem 'europeana-logging', '~> 0.2.3'
