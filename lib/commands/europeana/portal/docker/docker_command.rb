@@ -27,6 +27,10 @@ module Europeana
         template 'minio-s3-policy.json', minio_policy_path
       end
 
+      def make_bucket_dir
+        empty_directory(minio_bucket_dir)
+      end
+
       def copy_rails_env
         template '.env.rails', ".env.#{rails_env}"
       end
@@ -75,6 +79,10 @@ module Europeana
 
       def minio_port
         '3011'
+      end
+
+      def minio_bucket_dir
+        @minio_bucket_dir ||= "tmp/minio/#{s3_bucket}"
       end
 
       def secret_key_base
