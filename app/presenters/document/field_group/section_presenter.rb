@@ -10,8 +10,8 @@ module Document
 
       attr_reader :document, :controller, :group, :definition
 
-      delegate :search_field, :entity, :fields, :exclude_vals, :max, :title,
-               :ga_data, :map_values, :format_date, :html_line_breaks, to: :definition
+      delegate :search_field, :entity, :fields, :exclude_vals, :max, :title, :geo,
+               :ga_data, :map_values, :format, :html_line_breaks, to: :definition
 
       # @param document [Europeana::Blacklight::Document]
       # @param controller [ActionController::Base]
@@ -31,6 +31,7 @@ module Document
       def display
         {
           title: display_title,
+          geo: !!geo,
           items: display_items,
           is_desc: group.for_description?
         }
@@ -156,10 +157,6 @@ module Document
 
       def exclude_vals?
         exclude_vals.present?
-      end
-
-      def format_date?
-        format_date.present?
       end
 
       def html_line_breaks?

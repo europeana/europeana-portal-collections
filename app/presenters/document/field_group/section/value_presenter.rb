@@ -10,7 +10,7 @@ module Document
       #   maps, entity-linked values
       class ValuePresenter < ApplicationPresenter
         include BlacklightDocumentPresenter
-        include DateHelper
+        include Document::Metadata::Formatter
         include EntitiesHelper
         include UrlHelper
 
@@ -46,9 +46,10 @@ module Document
         end
 
         def extra_info
-          return nil unless for_entity? && section.entity_extra.present?
-          return nil unless entity.present?
-          EntityPresenter.new(entity, controller).extra(section.entity_extra)
+          return @extra_info if instance_variable_defined?(:@extra_info)
+          @extra_info = if for_entity? && section.entity_extra.present?
+                          EntityPresenter.new(entity, controller).extra(section.entity_extra)
+                        end
         end
 
         def for_entity?
@@ -109,9 +110,19 @@ module Document
           text = content.dup.to_s
           text = section.translate_value(text)
           text = text.titleize if text.present? && section.capitalised?
-          text = format_date(text, section.format_date) if section.format_date?
+          text = format_text(text, section.format)
           text = htmlify_line_breaks(text) if section.html_line_breaks?
           text
+        end
+
+        def format_text(text, format)
+          if format == :geo && extra_info.present?
+            format('%<label>s %<latitude>s, %<longitude>s',
+                   label: text, latitude: format_latitude(extra_info[:latitude]),
+                   longitude: format_longitude(extra_info[:longitude]))
+          else
+            super
+          end
         end
 
         def htmlify_line_breaks(text)

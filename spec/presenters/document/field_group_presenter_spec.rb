@@ -239,34 +239,36 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         end
       end
 
-      describe 'format_date' do
-        let(:field_definition) do
-          {
-            sections: [
-              {
-                fields: 'timestamp_update',
-                format_date: '%Y-%m-%d'
-              }
-            ]
-          }
-        end
-        let(:api_response) do
-          basic_api_response.tap do |record|
-            record['object']['timestamp_update'] = field_value
+      describe 'format' do
+        context 'when eq :date' do
+          let(:field_definition) do
+            {
+              sections: [
+                {
+                  fields: 'timestamp_update',
+                  format: :date
+                }
+              ]
+            }
           end
-        end
-
-        context 'with a timestamp value' do
-          let(:field_value) { '2017-09-11T14:15:03.328Z' }
-          it 'formats the date' do
-            expect(subject[:sections].first[:items].first[:text]).to eq('2017-09-11')
+          let(:api_response) do
+            basic_api_response.tap do |record|
+              record['object']['timestamp_update'] = field_value
+            end
           end
-        end
 
-        context 'with a non-date value' do
-          let(:field_value) { 'Whenever' }
-          it 'leaves it untouched' do
-            expect(subject[:sections].first[:items].first[:text]).to eq(field_value)
+          context 'with a timestamp value' do
+            let(:field_value) { '2017-09-11T14:15:03.328Z' }
+            it 'formats the date' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('2017-09-11')
+            end
+          end
+
+          context 'with a non-date value' do
+            let(:field_value) { 'Whenever' }
+            it 'leaves it untouched' do
+              expect(subject[:sections].first[:items].first[:text]).to eq(field_value)
+            end
           end
         end
       end

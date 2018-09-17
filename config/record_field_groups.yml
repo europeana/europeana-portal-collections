@@ -98,6 +98,8 @@ location:
       - field: longitude
     fields:
     - proxies.dctermsSpatial
+    geo: true
+    format: :geo
   - title: place-time
     fields:
     - proxies.dcCoverage
@@ -114,10 +116,10 @@ people:
       extra:
       - field: rdaGr2DateOfBirth
         map_to: life.from.short
-        format_date: "%Y-%m-%d"
+        format: :date
       - field: rdaGr2DateOfDeath
         map_to: life.to.short
-        format_date: "%Y-%m-%d"
+        format: :date
     fields:
     - proxies.dcCreator
     search_field: who
@@ -128,10 +130,10 @@ people:
       extra:
       - field: rdaGr2DateOfBirth
         map_to: life.from.short
-        format_date: "%Y-%m-%d"
+        format: :date
       - field: rdaGr2DateOfDeath
         map_to: life.to.short
-        format_date: "%Y-%m-%d"
+        format: :date
     fields:
     - proxies.dcContributor
     search_field: who
@@ -206,11 +208,11 @@ provenance:
   - title: timestamp-created
     fields:
     - timestamp_created
-    format_date: "%Y-%m-%d"
+    format: :date
   - title: timestamp-updated
     fields:
     - timestamp_update
-    format_date: "%Y-%m-%d"
+    format: :date
 properties:
   title: properties
   sections:
