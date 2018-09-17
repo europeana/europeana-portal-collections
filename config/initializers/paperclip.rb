@@ -12,7 +12,7 @@ Paperclip::Attachment.default_options.merge!(
   url_prefix: '',
   path: ':path_prefix:class/:id_partition/:attachment/:fingerprint.:style.:extension',
   url: ':url_prefix:class/:id_partition/:attachment/:fingerprint.:style.:extension',
-  image_optimizer: { jpegoptim: { allow_lossy: true, max_quality: 80 }, jpegrecompress: { allow_lossy: true, quality: 2 } },
+  image_optimizer: { jpegoptim: { allow_lossy: true, max_quality: 80 }, jpegrecompress: { allow_lossy: true, quality: 2 }, svgo: false, pngout: false },
   styles: { small: '200>', medium: '400>', large: '600>', xl: '1000>', full: '' }, # max-width
   default_style: :full
 )
