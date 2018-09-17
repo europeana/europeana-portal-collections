@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 7562419ead5e2efc7cc70c85694ac3e85c47bed9
+  revision: cfc1f75bfb90352b67846245a8db82edf6b95e8b
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -12,10 +12,10 @@ GIT
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
-      activesupport (~> 4.0)
+      activesupport (>= 4.0, < 6.0)
       europeana-i18n
       mustache (~> 1.0.1)
-      stache (~> 1.1.1)
+      stache (>= 1.1.1)
 
 GIT
   remote: https://github.com/europeana/stache.git
@@ -177,8 +177,8 @@ GEM
       iso-639 (~> 0.2.5)
       kaminari (>= 1.0.0, < 2)
       rails (>= 4.2.2, < 5)
-    europeana-feedback-button (0.0.5)
-      rails (~> 4.2, >= 4.2.7.1)
+    europeana-feedback-button (0.0.6)
+      rails (>= 4.2.7.1, < 6)
     europeana-feeds (0.0.1)
       feedjira (~> 2.0)
       rails (~> 4.2)
@@ -553,7 +553,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.0)
   europeana-api (~> 1.1.0)
   europeana-blacklight (~> 1.2.2)
-  europeana-feedback-button (= 0.0.5)
+  europeana-feedback-button (= 0.0.6)
   europeana-feeds
   europeana-i18n!
   europeana-logging (~> 0.2.3)
@@ -606,6 +606,7 @@ DEPENDENCIES
   stache!
   stackprof
   stringex (~> 2.6)
+  thor (~> 0.19)
   uglifier (~> 2.7.2)
   webmock
   yard

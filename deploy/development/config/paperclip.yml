@@ -1,4 +1,0 @@
-development:
-  storage: :filesystem
-  path_prefix: ":rails_root/public/system"
-  url_prefix: ":rails_relative_url_root/system"
