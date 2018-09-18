@@ -394,7 +394,7 @@ RSpec.describe PortalController, :annotations_api do
 
       it 'queries Search API for parent record' do
         expect(an_api_search_request.with(
-          query: hash_including(query: %(proxy_dcterms_hasPart:"http://data.europeana.eu/item#{record_id}"))
+          query: hash_including(query: %(proxy_dcterms_hasPart:"http://data.europeana.eu/item#{record_id}"), rows: '1')
         )).to have_been_made.once
       end
 
