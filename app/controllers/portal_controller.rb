@@ -157,12 +157,10 @@ class PortalController < ApplicationController
   # Is the document the ancestor of other Europeana records?
   #
   # Criteria:
-  # * +param[:design] == "entity"+
   # * +Europeana::Record::Hierarchies.europeana_ancestor?+ returns true for proxy's dcterms:hasPart
   #
   # @return [Boolean]
   def document_is_europeana_ancestor?
-    return false unless params[:design] == 'entity'
     dcterms_has_part = @document.fetch('proxies.dctermsHasPart', []).compact
     Europeana::Record::Hierarchies.europeana_ancestor?(dcterms_has_part)
   end

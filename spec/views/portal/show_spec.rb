@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
+  include EntitiesHelper
   include ProJsonApiConsumingView
 
   let(:record_id) { '/123/abc' }
@@ -88,6 +89,74 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
           end
         end
 
+        context 'when record has entities' do
+          let(:concept_entity_property) { 'dcType' }
+          let(:concept_entity_uri) { 'http://data.europeana.eu/concept/base/123' }
+          let(:agent_entity_property) { 'dcCreator' }
+          let(:agent_entity_uri) { 'http://data.europeana.eu/agent/base/123' }
+          let(:place_entity_property) { 'dctermsSpatial' }
+          let(:place_entity_uri) { 'http://data.europeana.eu/place/base/123' }
+          let(:timespan_entity_property) { 'dctermsTemporal' }
+          let(:timespan_entity_uri) { 'http://data.europeana.eu/timespan/base/123' }
+
+          let(:blacklight_document_source) do
+            {
+              about: record_id,
+              title: ["Record #{record_id}"],
+              proxies: [
+                {
+                  'europeanaProxy': false
+                },
+                {
+                  'europeanaProxy': true,
+                  concept_entity_property => { 'def': concept_entity_uri },
+                  agent_entity_property => { 'def': agent_entity_uri },
+                  place_entity_property => { 'def': place_entity_uri },
+                  timespan_entity_property => { 'def': timespan_entity_uri }
+                }
+              ],
+              aggregations: [{}],
+              'type': 'IMAGE'
+            }
+          end
+
+          it 'includes concept entity' do
+            render
+            expect(enabled_promos).to be_any do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(concept_entity_uri, format: 'json')) &&
+                promo['relation'] = concept_entity_property
+            end
+          end
+
+          it 'includes agent entity' do
+            render
+            expect(enabled_promos).to be_any do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(agent_entity_uri, format: 'json')) &&
+                promo['relation'] = agent_entity_property
+            end
+          end
+
+          it 'excludes place entity' do
+            render
+            expect(enabled_promos).to be_none do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(place_entity_uri, format: 'json')) &&
+                promo['relation'] = place_entity_property
+            end
+          end
+
+          it 'excludes timespan entity' do
+            render
+            expect(enabled_promos).to be_none do |promo|
+              promo['id'] == 'entity' &&
+                promo['url'] == entity_promo_path(portal_entity_path_options(timespan_entity_uri, format: 'json')) &&
+                promo['relation'] = timespan_entity_property
+            end
+          end
+        end
+
         context 'when record has dcterms:isPartOf' do
           let(:blacklight_document_source) do
             {
@@ -105,11 +174,9 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
               'type': 'IMAGE'
             }
           end
-
-          context 'which is a Europeana item URI' do
+           context 'which is a Europeana item URI' do
             let(:parent_uri) { 'http://data.europeana.eu/item/123/def' }
-
-            it 'includes parent promo' do
+             it 'includes parent promo' do
               render
               expect(enabled_promos).to be_any do |promo|
                 promo['id'] == 'generic' &&
@@ -117,11 +184,9 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
               end
             end
           end
-
-          context 'which is not a Europeana item URI' do
+           context 'which is not a Europeana item URI' do
             let(:parent_uri) { "http://data.example.org/item/123/def" }
-
-            it 'includes parent promo' do
+             it 'omits parent promo' do
               render
               expect(enabled_promos).not_to be_any do |promo|
                 promo['id'] == 'generic' &&
@@ -180,7 +245,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
   end
 
   context 'with colourpalette in API response' do
-    let(:blacklight_document_source) { JSON.parse(api_responses(:record_with_colourpalette, id: '/abc/123'))['object'] }
+    let(:blacklight_document_source) { JSON.parse(api_responses(:record_with_colourpalette, id: '/123/abc'))['object'] }
     it 'shows colour links' do
       render
       expect(rendered).to have_selector('.colour-data')
@@ -191,7 +256,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
   end
 
   context 'with q param' do
-    let(:params) { { id: 'abc/123', q: 'paris' } }
+    let(:params) { { id: '123/abc', q: 'paris' } }
     it 'should not have alternate links with q param' do
       render
       expect(rendered).not_to have_selector('link[rel="alternate"][hreflang="x-default"][href*="q=paris"]', visible: false)
@@ -200,7 +265,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
 
   context 'when record has an entity agent' do
     let(:identifier) { '1234' }
-    let(:api_response) { api_responses(:record_with_entity_agent, id: '/abc/123', identifier: identifier, proxy_field: 'dcCreator') }
+    let(:api_response) { api_responses(:record_with_entity_agent, id: '/123/abc', identifier: identifier, proxy_field: 'dcCreator') }
     let(:blacklight_document_source) { JSON.parse(api_response)['object'] }
 
     it 'should have person link pointing to entity page' do
@@ -211,7 +276,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
 
   context 'when record has an entity concept' do
     let(:identifier) { '1234' }
-    let(:api_response) { api_responses(:record_with_entity_concept, id: '/abc/123', identifier: identifier, proxy_field: 'dcFormat') }
+    let(:api_response) { api_responses(:record_with_entity_concept, id: '/123/abc', identifier: identifier, proxy_field: 'dcFormat') }
     let(:blacklight_document_source) { JSON.parse(api_response)['object'] }
 
     it 'should have topic link pointing to entity page' do
@@ -221,7 +286,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
   end
 
   context 'without q param' do
-    let(:params) { { id: 'abc/123' } }
+    let(:params) { { id: '123/abc' } }
     it 'should have a title "display_title | creator_title - Europeana Collections"' do
       render
       expect(rendered).to have_title(/(.*) | (.*) - #{t('site.name', default: 'Europeana Collections')}/)

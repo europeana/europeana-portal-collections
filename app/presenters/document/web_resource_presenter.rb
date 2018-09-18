@@ -68,7 +68,7 @@ module Document
     def play_html
       @play_html ||= begin
         return nil unless media_type == 'oembed'
-        @controller.oembed_html[url][:html]
+        controller_oembed_html[url][:html]
       end
     end
 
@@ -208,7 +208,6 @@ module Document
         attribution_plain: field_value('textAttributionSnippet'),
         attribution_html: field_value('htmlAttributionSnippet'),
         colours: colour_palette_data,
-
         dc_description: field_value('dcDescription'),
         dc_creator: field_value('dcCreator'),
         dc_source: field_value('dcSource'),
@@ -252,6 +251,8 @@ module Document
     # @return [Array<Proc>] lambdas to test displayability
     def displayable_tests
       [
+        # TRUE if for an oEmbed
+        -> { media_type == 'oembed' ? true : nil },
         # FALSE if for edm:isShownAt
         -> { for_edm_is_shown_at? ? false : nil },
         # TRUE if for edm:object and no other web resources are displayable
@@ -262,8 +263,6 @@ module Document
         -> { for_edm_is_shown_by? ? true : nil },
         # TRUE if for a hasView and MIME type is known
         -> { for_has_view? && mime_type.present? ? true : nil },
-        # TRUE if for an oEmbed
-        -> { media_type == 'oembed' ? true : nil },
         # FALSE otherwise
         -> { false }
       ]
@@ -284,7 +283,7 @@ module Document
     end
 
     def playable?
-      if url.blank? || play_url.blank? ||
+      if url.blank? || (play_url.blank? && play_html.blank?) ||
          (mime_type.blank? && !playable_without_mime_type?) ||
          (mime_type == 'video/mpeg') ||
          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||

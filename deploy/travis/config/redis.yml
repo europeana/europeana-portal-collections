@@ -1,6 +1,0 @@
-production:
-  host: localhost
-  port: 6379
-  name: redis
-  db: 0
-  namespace: cache

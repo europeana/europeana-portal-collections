@@ -2,11 +2,15 @@
 
 class EntitiesController < ApplicationController
   include CacheHelper
+  include EnforceDefaultFormat
   include Europeana::EntitiesAPIConsumer
 
   attr_reader :body_cache_key
 
-  before_action :enforce_slug, only: :show
+  before_action :enforce_slug, only: :show, if: proc { |c| c.params[:format] == 'html' }
+
+  enforces_default_format 'json', only: %i(promo suggest)
+  enforces_default_format 'html', only: :show
 
   def suggest
     api_params = entities_api_suggest_params(params.slice(:text, :language))
@@ -20,16 +24,27 @@ class EntitiesController < ApplicationController
       @entity = EDM::Entity.build_from_params(entity_params)
       @search_keys_search_results = search_keys_search_results
     end
+
     respond_to do |format|
       format.html
       format.json { render json: @entity }
     end
   end
 
+  def promo
+    @entity = EDM::Entity.build_from_params(entity_params)
+
+    respond_to do |format|
+      format.json { render :promo, layout: false }
+    end
+  end
+
   private
 
   def enforce_slug
-    redirect_to url_for(slug: slug, format: params[:format]) unless params[:slug] == slug
+    return if params[:slug] == slug
+    args = params.permit(:format, :profile, :relation).merge(slug: slug)
+    redirect_to url_for(args)
   end
 
   def entity

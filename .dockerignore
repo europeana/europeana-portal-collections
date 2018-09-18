@@ -1,0 +1,86 @@
+# Ignore Git
+.git
+.gitignore
+
+# Ignore self
+.dockerignore
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore db backups, etc.
+/db/backups/
+/db/data.yml
+
+# Ignore all logfiles and tempfiles.
+/log/*
+*.log
+/tmp
+
+# Ignore New Relic config file.
+/config/newrelic.yml
+
+# Ignore Spring config file.
+/config/spring.rb
+
+# Ignore SMTP config file
+/config/smtp.yml
+
+# Local cache version override
+/config/initializers/cache_version.rb
+
+# Ignore generated js for translations.
+/app/assets/javascripts/i18n-js/*
+
+# Ignore rvm files.
+.ruby-gemset
+
+# Ignore IDE files.
+*.komodoproject
+/.idea
+
+# Ignore os files.
+.DS_Store
+
+# Ignore compiled assets
+/public/assets
+
+# Ignore compiled javascripts
+/public/javascripts
+
+# Ignore uploaded files
+/public/system
+
+# Ignore robots.txt
+/public/robots.txt
+
+# Ignore dotenv config files.
+/.env
+/.env.*
+
+# Do not ignore dotenv example file.
+!/.env.example
+
+# Ignore code coverage analysis output.
+/coverage
+
+# Ignore Cloud Foundry manifests
+/manifest*.yml
+
+# Ignore Redis snapshot
+*.rdb
+
+# Ignore generated documentation
+/.yardoc
+/yardoc
+
+# Ignore media objects cache
+/media_objects
+
+# Ignore generated Docker config
+/docker-compose.yml
+/docker-compose.*.yml
