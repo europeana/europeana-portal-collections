@@ -102,7 +102,13 @@ class PortalController < ApplicationController
     @parent = search_results_for_dcterms_has_part(doc_id, rows: 1)[:items]&.first
 
     respond_to do |format|
-      format.json { render :parent, layout: false }
+      format.json do
+        if @parent.nil?
+          render json: nil
+        else
+          render :parent, layout: false
+        end
+      end
     end
   end
 

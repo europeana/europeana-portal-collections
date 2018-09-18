@@ -372,34 +372,66 @@ RSpec.describe PortalController, :annotations_api do
   end
 
   describe 'GET parent' do
-    before do
-      get :parent, params
-    end
-
     context 'when format is JSON' do
       let(:record_id) { '/123/abc' }
       let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
-      
-      it 'responds with JSON' do
-        expect(response.content_type).to eq('application/json')
-      end
-
-      it 'has 200 status code' do
-        expect(response.status).to eq(200)
-      end
-
-      it 'renders JSON ERB template' do
-        expect(response).to render_template('portal/parent')
-      end
 
       it 'queries Search API for parent record' do
+        get :parent, params
         expect(an_api_search_request.with(
           query: hash_including(query: %(proxy_dcterms_hasPart:"http://data.europeana.eu/item#{record_id}"), rows: '1')
         )).to have_been_made.once
       end
 
-      it 'assigns first result to @parent' do
-        expect(assigns[:parent]).to be_a(Hash)
+      context 'when parent is found' do
+        before do
+          get :parent, params
+        end
+
+        it 'responds with JSON' do
+          expect(response.content_type).to eq('application/json')
+        end
+
+        it 'has 200 status code' do
+          expect(response.status).to eq(200)
+        end
+
+        it 'renders JSON ERB template' do
+          expect(response).to render_template('portal/parent')
+        end
+
+        it 'assigns first result to @parent' do
+          expect(assigns[:parent]).to be_a(Hash)
+        end
+      end
+
+      context 'when parent is not found' do
+        let(:record_id) { '/123/parent_not_found' }
+
+        before do
+          stub_request(:get, Europeana::API.url + '/v2/search.json').
+            with(query: hash_including(
+              query: %(proxy_dcterms_hasPart:"http://data.europeana.eu/item#{record_id}")
+            )).
+            to_return(
+              body: api_responses(:search_zero_results),
+              status: 200,
+              headers: { 'Content-Type' => 'application/json' }
+            )
+            get :parent, params
+        end
+
+        it 'responds with JSON' do
+          expect(response.content_type).to eq('application/json')
+        end
+
+        it 'has 200 status code' do
+          expect(response.status).to eq(200)
+        end
+
+        it 'is "null"' do
+          expect(response.body).to eq('null')
+        end
       end
     end
   end
