@@ -52,11 +52,11 @@ class Page
     def og_image_from_promo
       return unless layout_type == 'browse'
       promo = promotions.find_by(position: 0)
-      promo&.file.present? ? promo.file.url : nil
+      promo&.file&.url
     end
 
     def og_image_from_hero
-      hero_image.present? && hero_image.file.present? ? hero_image.file.url : nil
+      hero_image&.file&.url
     end
 
     def set_slug
