@@ -10,7 +10,7 @@ module HeroImageDisplayingView
   def hero_config(hero_image)
     return nil unless hero_image.present?
     {
-      hero_image: hero_image.file.&.url,
+      hero_image: hero_image.file&.url,
       attribution_title: hero_image.settings_attribution_title,
       attribution_creator: hero_image.settings_attribution_creator,
       attribution_institution: hero_image.settings_attribution_institution,
