@@ -33,6 +33,7 @@ RSpec.describe MediaObject do
     full_url = mo.file.url(:full)
     full_image = Faraday.get(full_url)
     full_image_size = full_image.headers['content-length'].to_i
+    expect(full_image_size).to be_positive
     expect(full_image_size).to be < mo.file.size
   end
 end
