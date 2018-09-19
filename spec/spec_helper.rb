@@ -23,7 +23,7 @@ require 'simplecov'
 
 # Generate Simplecov report
 SimpleCov.start 'rails' do
-  add_filter %r{\A/lib/(?!(rack|rails_admin))}
+  add_filter %r{\A/lib/(?!(paperclip|rack|rails_admin))}
 
   add_group 'Presenters', 'app/presenters'
   add_group 'Validators', 'app/validators'
