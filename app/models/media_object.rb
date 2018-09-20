@@ -3,7 +3,7 @@
 require 'digest/md5'
 
 class MediaObject < ActiveRecord::Base
-  has_attached_file :file
+  has_attached_file :file, processors: %i(thumbnail image_optimizer)
   attr_accessor :delete_file
   before_validation { file.clear if delete_file == '1' }
 
