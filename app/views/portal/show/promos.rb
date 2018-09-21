@@ -13,6 +13,7 @@ module Portal
           { id: 'gallery', url: document_galleries_url(document, format: 'json') },
           { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
         ] + entity_promos
+        promos.push(id: 'generic', url: document_parent_url(document, format: 'json')) if document_has_europeana_parent?
         promos.to_json
       end
 
