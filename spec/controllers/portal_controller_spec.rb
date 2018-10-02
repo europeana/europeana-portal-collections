@@ -209,34 +209,23 @@ RSpec.describe PortalController, :annotations_api do
     end
 
     context 'when record is a Europeana ancestor' do
-      context 'without URL param `design=entity`' do
-        let(:params) { { locale: 'en', id: 'with/europeana-ancestor-dcterms-hasPart' } }
+      let(:params) { { locale: 'en', id: 'with/europeana-ancestor-dcterms-hasPart' } }
 
-        it 'renders portal/show template' do
-          get :show, params
-          expect(response).to render_template('portal/show')
-        end
+      it 'renders entities/show template' do
+        get :show, params
+        expect(response).to render_template('portal/ancestor')
       end
 
-      context 'with URL param `design=entity`' do
-        let(:params) { { locale: 'en', id: 'with/europeana-ancestor-dcterms-hasPart', design: 'entity' } }
+      it 'queries the Search API' do
+        get :show, params
+        expect(an_api_search_request.with(query: hash_including(
+          query: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item/#{params[:id]}")
+        ))).to have_been_made.once
+      end
 
-        it 'renders entities/show template' do
-          get :show, params
-          expect(response).to render_template('portal/ancestor')
-        end
-
-        it 'queries the Search API' do
-          get :show, params
-          expect(an_api_search_request.with(query: hash_including(
-            query: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item/#{params[:id]}")
-          ))).to have_been_made.once
-        end
-
-        it 'assigns results to @search_results' do
-          get :show, params
-          expect(assigns(:search_results)).to be_a(Hash)
-        end
+      it 'assigns results to @search_results' do
+        get :show, params
+        expect(assigns(:search_results)).to be_a(Hash)
       end
     end
 

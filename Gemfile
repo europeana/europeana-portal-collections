@@ -31,7 +31,7 @@ gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise'
 gem 'europeana-api', '~> 1.1.0'
 gem 'europeana-blacklight', '~> 1.2.2'
-gem 'europeana-feedback-button', '0.0.5'
+gem 'europeana-feedback-button', '0.0.6', require: 'europeana/feedback_button'
 gem 'europeana-feeds'
 gem 'feedjira', '~> 2.0'
 gem 'foederati', '~> 0.2.0'
@@ -64,6 +64,7 @@ gem 'ruby-oembed', '~> 0.9'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'stringex', '~> 2.6'
+gem 'thor', '~> 0.19'
 
 group :production do
   gem 'europeana-logging', '~> 0.2.3'
@@ -103,8 +104,8 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
+  gem 'geckodriver-helper'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'simplecov', require: false
   gem 'webmock'

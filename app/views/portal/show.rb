@@ -3,6 +3,8 @@
 module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
+    include Promos
+    include ProJsonApiConsumingView
     include SearchableView
     include UgcContentDisplayingView
 
@@ -89,7 +91,7 @@ module Portal
             dates: presenter.field_group(:time),
             description: presenter.field_group(:description),
             media: media_items,
-            meta_additional: meta_additional,
+            location: presenter.field_group(:location),
             origin: origin,
             people: presenter.field_group(:people),
             provenance: presenter.field_group(:provenance),
@@ -103,6 +105,7 @@ module Portal
           },
           refs_rels: presenter.field_group(:refs_rels),
           similar: similar_items,
+          suggestions: suggestions,
           named_entities: named_entities,
           ugc_content: ugc_content(true)
         }.reverse_merge(super)
@@ -199,49 +202,42 @@ module Portal
       search_path(f: { 'DATA_PROVIDER' => [edm_data_provider] })
     end
 
-    def meta_additional_present?
-      !document.fetch('proxies.dctermsSpatial', []).empty? ||
-        !document.fetch('proxies.dcCoverage', []).empty? ||
-        !document.fetch('proxies.edmCurrentLocation', []).empty? ||
-        (
-          !document.fetch('places.latitude', []).empty? &&
-          !document.fetch('places.longitude', []).empty?
-        )
-    end
-
-    def meta_additional
-      places = presenter.field_group(:location)
-      {
-        present: meta_additional_present?,
-        places: places,
-        geo: {
-          latitude: '"' + (field_value('places.latitude') || '') + '"',
-          longitude: '"' + (field_value('places.longitude') || '') + '"',
-          long_and_lat: long_and_lat?,
-          placeName: places.present? ? places[:sections].first[:items].first[:text] : nil,
-          labels: {
-            longitude: t('site.object.meta-label.longitude') + ':',
-            latitude: t('site.object.meta-label.latitude') + ':',
-            map: t('site.object.meta-label.map'),
-            points: {
-              n: t('site.object.points.north'),
-              s: t('site.object.points.south'),
-              e: t('site.object.points.east'),
-              w: t('site.object.points.west')
-            }
-          }
-        }
-      }
-    end
-
     def similar_items
       mustache[:similar_items] ||= begin
-        {
-          title: t('site.object.similar-items'),
-          more_items_load: document_similar_url(document, format: 'json', mlt_query: @mlt_query),
-          more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
-        }
+        # Don't load similar items on the new design.
+        if new_design?
+          {}
+        else
+          {
+            title: t('site.object.similar-items'),
+            more_items_load: document_similar_url(document, format: 'json', mlt_query: @mlt_query),
+            more_items_query: search_path(params.slice(:api_url).merge(mlt: document.id))
+          }
+        end
       end
+    end
+
+    def suggestions
+      mustache[:suggestions] ||= begin
+        # Only the new design uses suggestions.
+        if new_design?
+          {
+            title: t('site.object.suggested-content'),
+            tab_items: [
+              suggestions_similar_items
+            ]
+          }
+        else
+          {}
+        end
+      end
+    end
+
+    def suggestions_similar_items
+      {
+        tab_title: t('site.object.items-similar-to-item'),
+        url: document_similar_url(document, format: 'json', mlt_query: @mlt_query, per_page: 12)
+      }
     end
 
     def oembed_links
@@ -287,10 +283,12 @@ module Portal
       collect_values(fields).join(separator)
     end
 
-    def long_and_lat?
-      latitude = field_value('places.latitude')
-      longitude = field_value('places.longitude')
-      !latitude.nil? && !latitude.empty? && !longitude.nil? && !longitude.empty?
+    def long_and_lat?(places)
+      places.any? do |place|
+        place[:extra_info].present? &&
+          place[:extra_info][:latitude].present? &&
+          place[:extra_info][:longitude].present?
+      end
     end
 
     def session_tracking_path_opts(counter)
@@ -383,12 +381,6 @@ module Portal
 
     def presenter
       @presenter ||= Document::RecordPresenter.new(document, controller)
-    end
-
-    def js_var_enabled_promos
-      [
-        { id: 'gallery', url: document_galleries_url(document, format: 'json') }
-      ].to_json
     end
   end
 end

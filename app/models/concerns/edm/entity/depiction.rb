@@ -7,7 +7,7 @@ module EDM
 
       def thumbnail_filename
         @thumbnail_filename ||= begin
-          m = thumbnail_full.match(%r{^.*/Special:FilePath/(.*)$}i)
+          m = thumbnail_full&.match(%r{^.*/Special:FilePath/(.*)$}i)
           m.nil? ? nil : m[1]
         end
       end
@@ -17,11 +17,11 @@ module EDM
       end
 
       def thumbnail_full
-        api_response[:depiction][:id]
+        api_response.dig(:depiction, :id)
       end
 
       def depiction_source
-        api_response.key?(:depiction) ? api_response[:depiction][:source] : nil
+        api_response.dig(:depiction, :source)
       end
 
       def has_depiction?
@@ -46,6 +46,7 @@ module EDM
       # @return [String]
       # @see https://meta.wikimedia.org/wiki/Thumbnails#Dynamic_image_resizing_via_URL
       def wikimedia_thumbnail_url(image, size)
+        return nil unless image.is_a?(String)
         underscored_image = URI.unescape(image).tr(' ', '_')
         md5 = Digest::MD5.hexdigest(underscored_image)
         "https://upload.wikimedia.org/wikipedia/commons/thumb/#{md5[0]}/#{md5[0..1]}/#{underscored_image}/#{size}px-#{underscored_image}"

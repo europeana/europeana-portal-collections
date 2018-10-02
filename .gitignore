@@ -20,21 +20,6 @@
 *.log
 /tmp
 
-# Ignore database config file.
-/config/database.yml
-
-# Ignore Paperclip config file.
-/config/paperclip.yml
-
-# Ignore fog config file.
-/config/fog.yml
-
-# Ignore Redis config file.
-/config/redis.yml
-
-# Ignore MongoDB config file.
-/config/mongoid.yml
-
 # Ignore New Relic config file.
 /config/newrelic.yml
 
@@ -94,3 +79,7 @@
 
 # Ignore media objects cache
 /media_objects
+
+# Ignore generated Docker config
+/docker-compose.yml
+/docker-compose.*.yml

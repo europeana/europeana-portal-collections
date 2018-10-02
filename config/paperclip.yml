@@ -1,4 +1,4 @@
-production:
+default: &default
   storage: :fog
   fog_credentials:
     provider: AWS
@@ -10,3 +10,9 @@ production:
     path_style: <%= ENV['S3_PATH_STYLE'].to_i == 1 %>
   fog_directory: <%= ENV['S3_BUCKET'] %>
   fog_host: <%= ENV['S3_PUBLIC_URL'].present? ? ENV['S3_PUBLIC_URL'] : "#{ENV['S3_ENDPOINT']}/#{ENV['S3_BUCKET']}" %>
+development:
+  <<: *default
+test:
+  <<: *default
+production:
+  <<: *default
