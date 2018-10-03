@@ -18,7 +18,7 @@ module PromotionLinkDisplayingView
         title: promo.text,
         custom_class: promo.settings_class,
         wide: normalise_wide(promo.settings_wide),
-        bg_image: promo.file.nil? ? nil : promo.file.url
+        bg_image: promo&.file&.url(:xl)
       }
     end
   end

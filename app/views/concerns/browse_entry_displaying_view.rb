@@ -11,7 +11,7 @@ module BrowseEntryDisplayingView
     {
       title: entry.title,
       url: browse_entry_path(entry, page),
-      image: entry.file.nil? ? nil : entry.file.url,
+      image: entry.file&.url(:small),
       image_alt: nil
     }
   end

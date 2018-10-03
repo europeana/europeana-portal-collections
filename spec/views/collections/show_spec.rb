@@ -10,6 +10,7 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     assign(:params, id: collection.id)
     allow(controller).to receive(:blacklight_config).and_return(blacklight_config)
     allow(view).to receive(:blacklight_config).and_return(blacklight_config)
+    allow(view).to receive(:collection).and_return(collection)
     allow(view).to receive(:has_search_parameters?).and_return(false)
   end
 
@@ -21,7 +22,7 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
   it 'should have meta description' do
     render
     meta_content = truncate(ActionView::Base.full_sanitizer.sanitize(landing_page.body), length: 350, separator: ' ')
-    expect(subject).to have_selector("meta[name=\"description\"][content=\"#{meta_content}\"]", visible: false)
+    expect(subject).to have_selector(%(meta[name="description"][content="#{meta_content}"]), visible: false)
   end
 
   it 'should have meta HandheldFriendly' do
@@ -42,9 +43,44 @@ RSpec.describe 'collections/show.html.mustache', :common_view_components, :black
     expect(subject).not_to have_link('3D')
   end
 
-  it 'should have a title "Collection name - Europeana Collections"' do
+  it 'should have a title' do
     render
     expect(subject).to have_title('Music - ' + t('site.name', default: 'Europeana Collections'))
+  end
+
+  context 'when page has a hero image' do
+    before do
+      image_path = File.expand_path('../../support/media/image.jpg', __dir__)
+      file = File.open(image_path)
+      landing_page.build_hero_image
+      landing_page.hero_image.build_media_object(file: file)
+      landing_page.hero_image.save!
+    end
+
+    it 'should show it at "full" size' do
+      render
+      expect(subject).to have_selector('.search-hero[style*=".full."]')
+    end
+  end
+
+  context 'when page has browse entries' do
+    before do
+      image_path = File.expand_path('../../support/media/image.jpg', __dir__)
+      file = File.open(image_path)
+      media_object = MediaObject.create!(file: file)
+      3.times do
+        browse = BrowseEntry.new(subject_type: 'topic', media_object: media_object)
+        browse.save!
+        browse.publish!
+        landing_page.browse_entries.push(browse)
+      end
+      landing_page.save!
+    end
+
+    it 'should show them at "small" size' do
+      render
+      expect(subject).to have_selector('.browse-entry img[src*=".small."]')
+    end
   end
 
   context 'when the page is using the browse layout' do
