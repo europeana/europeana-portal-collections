@@ -88,9 +88,9 @@ class PortalController < ApplicationController
 
   # GET /record/:id/exhibitions
   def exhibitions
-    annotations = document_annotations(doc_id).select{ |annotation| annotation.creator == {"name"=>"Europeana.eu Exhibition"} }
-    # TODO filter to just the latest exhibition instead of using the first
-    exhibition_url = annotations.first.body.dig("@graph", "isGatheredInto")
+    annotations = document_annotations(doc_id).select { |annotation| annotation.creator == { 'name' => 'Europeana.eu Exhibition' } }
+    # TODO: filter to just the latest exhibition instead of using the first
+    exhibition_url = annotations.first.body.dig('@graph', 'isGatheredInto')
 
     @exhibition = Europeana::Exhibition.find(exhibition_url)
     respond_to do |format|

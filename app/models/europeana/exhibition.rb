@@ -24,10 +24,10 @@ module Europeana
 
       def find(url)
         return [] unless exhibition?(url)
-        # json_response = JSON.load(open(url))
-        # TODO get exhibition as json
+        # json_response = JSON.load(open(url + '.json'))
+        # TODO get exhibition as json once exhibitions supports it.
         # just fake it for now
-        json_response = JSON.load('{
+        json_response = JSON.parse('{
             "url":"' + url + '",
             "credit_image":"https://europeana-exhibitions-production.cdnedge.bluemix.net/images/versions/f4f67f17f93a9a7b06c5762fabf6c8d72809496f/Finnish_National_Gallery_logo.jpeg",
             "description":"Throughout the modern era, European artists have ventured abroad to study and work, seeking new inspiration and experiences. Their travels have often taken them beyond Europe’s borders, into diverse cultures and communities. Drawing on the rich collection of the Finnish National Gallery and other archival sources, this exhibition traces the journeys of Finnish artists from the 1880s to the 1930s, across north Africa and the Middle East to New York and New Mexico.",

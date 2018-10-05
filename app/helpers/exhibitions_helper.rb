@@ -25,19 +25,19 @@ module ExhibitionsHelper
         }
       },
       state_3_image: {
-        thumbnail:{
+        thumbnail: {
           url: exhibition.card_image
         }
       },
       excerpt: false,
-      icon: "multi-page",
+      icon: 'multi-page',
       title: exhibition.title,
-      relation: "???(Contains this item?)",
-      tags:{
+      relation: '???(Contains this item?)',
+      tags: {
         items: [
           {
-            url: "http://europeana.eu/portal/exhibitions",
-            text: "exhibition"
+            url: 'http://europeana.eu/portal/exhibitions',
+            text: 'exhibition'
           }
         ]
       }

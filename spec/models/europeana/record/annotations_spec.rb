@@ -45,7 +45,7 @@ RSpec.describe Europeana::Record::Annotations do
 
       it 'includes generator_name filter' do
         allow(instance).to receive(:annotations_api_generator_name) { 'Generator' }
-        expect(subject).to include('generator_name:Generator')
+        expect(subject).to include('generator_name:"Generator"')
       end
 
       it 'includes target_record_id filter' do
