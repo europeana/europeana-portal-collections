@@ -12,7 +12,7 @@ module Europeana
       def annotations_search_params
         {
           qf: [
-            %(generator_name:#{annotations_api_generator_name}),
+            %(generator_name:"#{annotations_api_generator_name}"),
             %(target_record_id:"#{id}")
           ]
         }
