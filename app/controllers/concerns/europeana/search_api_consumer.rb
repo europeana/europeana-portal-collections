@@ -14,8 +14,7 @@ module Europeana
     # requests if more than 100 are passed in.
     #
     # @param europeana_ids [Array<String>] Europeana record IDs
-    # @param options [Hash] Any other options are passed on to
-    #   +Europeana::API::Record.search+.
+    # @param options [Hash] Options are passed on to +Europeana::API::Record.search+.
     # @return [Hash{String => Hash} Search results keyed by Europeana record ID
     # TODO: make multiple requests in parallel?
     def search_results_for_europeana_ids(europeana_ids, **options)
@@ -30,13 +29,33 @@ module Europeana
         (0...pages).each do |page|
           page_of_ids = paged_ids[page]
           id_query = Europeana::Record.search_api_query_for_record_ids(page_of_ids)
-          response = Europeana::API.record.search(options.merge(api_url: api_url, rows: per_page, query: id_query))
+
+          search_options = {
+            api_url: api_url,
+            rows: per_page,
+            query: id_query
+          }.reverse_merge(options)
+          response = search_results_for_options(search_options)
 
           response[:items].each do |item|
             results[item['id']] = item
           end
         end
       end
+    end
+
+    # Queries the Search API for Europeana records having another as part of them
+    #
+    # @param europeana_id [String] Europeana record ID to search for records
+    #   having is as part of them
+    # @param options [Hash] Options are passed on to +Europeana::API::Record.search+.
+    # @return see Europeana::API::Record.search
+    def search_results_for_dcterms_has_part(europeana_id, **options)
+      search_options = {
+        api_url: api_url,
+        query: %(proxy_dcterms_hasPart:"http://data.europeana.eu/item#{europeana_id}")
+      }.reverse_merge(options)
+      search_results_for_options(search_options)
     end
 
     # Queries the Search API for Europeana records being part of another record
@@ -49,13 +68,19 @@ module Europeana
     # value equal to A's Europeana item URI: "http://data.europeana.eu/item/123/abc".
     #
     # @param europeana_id [String] Europeana record ID to search for parts of
+    # @param options [Hash] Options are passed on to +Europeana::API::Record.search+.
     # @return see Europeana::API::Record.search
-    def search_results_for_dcterms_is_part_of(europeana_id)
+    def search_results_for_dcterms_is_part_of(europeana_id, **options)
       search_options = {
-        api_url: api_url, rows: blacklight_config.default_per_page, sort: 'europeana_id asc',
+        api_url: api_url, sort: 'europeana_id asc',
         query: %(proxy_dcterms_isPartOf:"http://data.europeana.eu/item#{europeana_id}")
-      }
-      Europeana::API.record.search(search_options)
+      }.reverse_merge(options)
+      search_results_for_options(search_options)
+    end
+
+    def search_results_for_options(**options)
+      options[:rows] ||= blacklight_config.default_per_page
+      Europeana::API.record.search(options)
     end
   end
 end
