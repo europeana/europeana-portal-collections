@@ -24,10 +24,10 @@ module Europeana
       end
 
       def find(url)
-        return unless exhibition?(url)
-        json_response = JSON.load(open(url))
+        return unless self.exhibition?(url) && url.start_with?(ApplicationController.helpers.exhibitions_base_url)
+        json_response = JSON.load(open("#{url}.json"))
         new(json_response)
-      rescue JSON::ParserError, Net::HTTPBadResponse, Net::ProtocolError
+      rescue OpenURI::HTTPError, JSON::ParserError, Net::HTTPBadResponse, Net::ProtocolError, OpenSSL::SSL::SSLError
         nil
       end
     end

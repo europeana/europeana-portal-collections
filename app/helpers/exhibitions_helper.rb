@@ -4,7 +4,7 @@ module ExhibitionsHelper
   include UrlHelper
 
   def exhibition_content(exhibition)
-    return nil if exhibition.nil?
+    return {} if exhibition.nil?
 
     {
       url: exhibition.url,
