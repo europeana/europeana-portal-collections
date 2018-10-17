@@ -10,7 +10,6 @@ module Europeana
     # Regexp to match Europeana Exjibition urls
     URL_PATTERN = %r|https?://.+/portal/[a-z]{2}/exhibitions/.+|
 
-    # @return [String] Europeana ID of this record
     attr_accessor :card_image, :card_text, :credit_image, :depth, :description, :full_image, :labels, :lang_code,
                   :slug, :title, :url
 
