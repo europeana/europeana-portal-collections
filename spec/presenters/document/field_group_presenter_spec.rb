@@ -202,6 +202,20 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           it 'links to a search for the parenthesised field value' do
             expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:(Photography)')
           end
+
+          context 'with Lucene metacharacters in the value' do
+            let(:api_response) do
+              basic_api_response.tap do |record|
+                record['object']['proxies'].first['dcSubject'] = {
+                  def: ['Director: Anonymous']
+                }
+              end
+            end
+
+            it 'escapes them' do
+              expect(CGI.unescape(subject[:sections].first[:items].first[:url])).to eq('/en/search?q=what:(Director\\: Anonymous)')
+            end
+          end
         end
       end
 

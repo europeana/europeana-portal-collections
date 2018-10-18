@@ -12,7 +12,6 @@ module Document
         include BlacklightDocumentPresenter
         include Document::Metadata::Formatter
         include EntitiesHelper
-        include UrlHelper
 
         attr_reader :document, :controller, :section, :content, :field, :entity
         delegate :blank?, :nil?, :present?, :empty?, to: :text
@@ -97,12 +96,7 @@ module Document
           return nil unless content.is_a?(String)
 
           @search ||= begin
-            if section.quoted?
-              enquote_and_escape(content)
-            else
-              search = content.gsub(/[()\[\]<>]/, '')
-              parenthesise_and_escape(search)
-            end
+            section.quoted? ? enquoted_for_search : parenthesised_for_search
           end
         end
 
@@ -131,6 +125,14 @@ module Document
 
         def excluded?
           section.exclude_vals? && section.exclude_vals.include?(text)
+        end
+
+        def enquoted_for_search
+          '"' +  content.gsub('"', '\\"') + '"'
+        end
+
+        def parenthesised_for_search
+          '(' +  Europeana::API::Record.escape(content) + ')'
         end
       end
     end
