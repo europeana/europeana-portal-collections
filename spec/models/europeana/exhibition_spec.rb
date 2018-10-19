@@ -14,7 +14,7 @@ RSpec.describe Europeana::Exhibition, :exhibitions_json do
     let(:subject) { described_class.find(exhibition_url) }
 
     before do
-      Rails.application.config.x.exhibitions.host_url = configured_exhibitions_host
+      Rails.application.config.x.exhibitions.host = configured_exhibitions_host
       subject # Calling subject in order to run .find for shared examples which don't explicitly call anything.
     end
 

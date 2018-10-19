@@ -7,7 +7,7 @@ module Europeana
   class Exhibition
     include ActiveModel::Model
 
-    # Regexp to match Europeana Exjibition urls
+    # Regexp to match Europeana Exhibition urls
     URL_PATTERN = %r|https?://.+/portal/[a-z]{2}/exhibitions/.+|
 
     attr_accessor :card_image, :card_text, :credit_image, :depth, :description, :full_image, :labels, :lang_code,
@@ -23,10 +23,12 @@ module Europeana
       end
 
       def find(url)
-        return unless exhibition?(url) && url.start_with?(ApplicationController.helpers.exhibitions_base_url)
-        json_response = JSON.parse(open("#{url}.json").read)
+        return unless exhibition?(url) && url.start_with?(Rails.application.config.x.exhibitions.host)
+        response = Faraday.get("#{url}.json")
+        return unless response.success?
+        json_response = JSON.parse(response.body)
         new(json_response)
-      rescue OpenURI::HTTPError, JSON::ParserError, Net::HTTPBadResponse, Net::ProtocolError, OpenSSL::SSL::SSLError
+      rescue Errno::ECONNREFUSED, JSON::ParserError, OpenSSL::SSL::SSLError
         nil
       end
     end

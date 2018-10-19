@@ -29,15 +29,19 @@ RSpec.describe Europeana::Record::Annotations do
   end
 
   describe '#annotations_search_params' do
-    subject { instance.annotations_search_params }
+    subject { instance.annotations_search_params(creator_name: creator_name) }
+    let(:creator_name) { 'With Space' }
 
-    it 'is Hash with qf key' do
+    it 'is Hash with qf, sort, sortOrder and pageSize keys' do
       expect(subject).to be_a(Hash)
       expect(subject).to have_key(:qf)
+      expect(subject).to have_key(:sort)
+      expect(subject).to have_key(:sortOrder)
+      expect(subject).to have_key(:pageSize)
     end
 
     describe 'qf param' do
-      subject { instance.annotations_search_params[:qf] }
+      subject { instance.annotations_search_params(creator_name: creator_name)[:qf] }
 
       it 'is Array' do
         expect(subject).to be_a(Array)
@@ -45,11 +49,59 @@ RSpec.describe Europeana::Record::Annotations do
 
       it 'includes generator_name filter' do
         allow(instance).to receive(:annotations_api_generator_name) { 'Generator' }
-        expect(subject).to include('generator_name:"Generator"')
+        expect(subject).to include('generator_name:Generator')
+      end
+
+      it 'includes the escaped creator_name filter' do
+        expect(subject).to include(%(creator_name:With\\ Space))
       end
 
       it 'includes target_record_id filter' do
         expect(subject).to include(%(target_record_id:"#{instance_id}"))
+      end
+
+      context 'when no creator_name is supplied' do
+        subject { instance.annotations_search_params[:qf] }
+
+        it 'includes a wildcard creator_name filter' do
+          expect(subject).to include(%(creator_name:*))
+        end
+      end
+    end
+
+    describe 'sorting params' do
+      describe 'sort' do
+        subject { instance.annotations_search_params[:sort] }
+
+        it 'is "created"' do
+          expect(subject).to eq 'created'
+        end
+      end
+
+      describe 'sortOrder' do
+        subject { instance.annotations_search_params[:sortOrder] }
+
+        it 'is "desc"' do
+          expect(subject).to eq 'desc'
+        end
+      end
+    end
+
+    describe 'pageSize param' do
+      context 'when no limit is supplied' do
+        subject { instance.annotations_search_params[:pageSize] }
+
+        it 'is defaults to 100' do
+          expect(subject).to eq 100
+        end
+      end
+
+      context 'when a limit is supplied' do
+        subject { instance.annotations_search_params(limit: 1)[:pageSize] }
+
+        it 'is uses the limit' do
+          expect(subject).to eq 1
+        end
       end
     end
   end
@@ -83,6 +135,25 @@ RSpec.describe Europeana::Record::Annotations do
 
     it 'uses ID in data.europeana.eu URI' do
       expect(subject).to eq("http://data.europeana.eu/item#{instance_id}")
+    end
+  end
+
+  describe '#escape_query_value' do
+    subject { instance.escape_query_value(value) }
+    let(:value) { 'Simple' }
+
+    context 'whhen value is simple' do
+      it 'returns the value as was' do
+        expect(subject).to eq(value)
+      end
+    end
+
+    context 'when the value contains a space' do
+      let(:value) { 'With Space' }
+
+      it 'escapes the spaces' do
+        expect(subject).to eq('With\ Space')
+      end
     end
   end
 end

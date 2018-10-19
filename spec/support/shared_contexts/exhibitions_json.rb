@@ -10,7 +10,7 @@ RSpec.shared_context 'Exhibitions JSON', :exhibitions_json do
   let(:exhibition_response_body) { exhibtions_json_response }
 
   before do
-    Rails.application.config.x.exhibitions.host_url = configured_exhibitions_host
+    Rails.application.config.x.exhibitions.host = configured_exhibitions_host
 
     stub_request(:get, exhibitions_json_url).
       to_return(status: exhibition_response_status,

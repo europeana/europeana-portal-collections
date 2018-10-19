@@ -46,11 +46,7 @@ module ExhibitionsHelper
     }
   end
 
-  def exhibitions_base_url
-    Rails.application.config.x.exhibitions.host_url.present? ? Rails.application.config.x.exhibitions.host_url : root_url
-  end
-
   def exhibitions_url(lang_code: 'en', slug: 'foyer')
-    exhibitions_base_url + 'portal/' + lang_code + '/exhibitions/' + slug
+    Rails.application.config.x.exhibitions.host + '/portal/' + lang_code + '/exhibitions/' + slug
   end
 end

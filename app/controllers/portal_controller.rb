@@ -86,15 +86,15 @@ class PortalController < ApplicationController
     end
   end
 
-  # GET /record/:id/exhibitions
-  def exhibitions
-    annotations = document_annotations(doc_id).select { |annotation| annotation.creator == { 'name' => 'Europeana.eu Exhibition' } }
-    # TODO: filter to just the latest exhibition instead of using the first
+  # GET /record/:id/exhibition
+  def exhibition
+    annotations = document_annotations(doc_id, creator_name:
+      Rails.application.config.x.exhibitions.annotation_creator_name, limit: 1)
     exhibition_url = annotations&.first&.body&.dig('@graph', 'isGatheredInto')
 
     @exhibition = Europeana::Exhibition.find(exhibition_url)
     respond_to do |format|
-      format.json { render :exhibitions, layout: false }
+      format.json { render :exhibition, layout: false }
     end
   end
 
@@ -142,8 +142,8 @@ class PortalController < ApplicationController
     @template = 'portal/ancestor'
   end
 
-  def document_annotations(id)
-    Europeana::Record.new(id).annotations
+  def document_annotations(id, creator_name: nil, limit: nil)
+    Europeana::Record.new(id).annotations(creator_name: creator_name, limit: limit)
   rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
     # TODO: we may not want controller actions to fail if annotations are
     #   unavailable, but we should return something indicating that there

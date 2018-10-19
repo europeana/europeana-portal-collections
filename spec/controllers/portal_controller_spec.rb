@@ -235,7 +235,7 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
     end
   end
 
-  describe 'GET exhibitions' do
+  describe 'GET exhibition' do
     context 'when format is JSON' do
       render_views
 
@@ -247,7 +247,7 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
         stub_request(:get, annotations_api_search_method_url).
           to_return(annotation_return)
 
-        get :exhibitions, params
+        get :exhibition, params
       end
 
       let(:record_id) { '/' + params[:id] }
@@ -272,17 +272,17 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
           end
 
           it 'renders JSON ERB template' do
-            expect(response).to render_template('portal/exhibitions')
+            expect(response).to render_template('portal/exhibition')
           end
 
           it 'contains the JSON' do
             parsed_response = JSON.parse(response.body)
 
-            expect(parsed_response["exhibition_promo"]).to have_key("url")
-            expect(parsed_response["exhibition_promo"]).to have_key("title")
-            expect(parsed_response["exhibition_promo"]).to have_key("state_2_body")
-            expect(parsed_response["exhibition_promo"]).to have_key("state_3_logo")
-            expect(parsed_response["exhibition_promo"]).to have_key("state_1_image")
+            expect(parsed_response['exhibition_promo']).to have_key('url')
+            expect(parsed_response['exhibition_promo']).to have_key('title')
+            expect(parsed_response['exhibition_promo']).to have_key('state_2_body')
+            expect(parsed_response['exhibition_promo']).to have_key('state_3_logo')
+            expect(parsed_response['exhibition_promo']).to have_key('state_1_image')
           end
         end
 
@@ -299,7 +299,7 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
           end
 
           it 'renders JSON ERB template' do
-            expect(response).to render_template('portal/exhibitions')
+            expect(response).to render_template('portal/exhibition')
           end
 
           it 'is empty' do
