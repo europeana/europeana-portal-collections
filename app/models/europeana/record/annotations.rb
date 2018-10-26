@@ -13,8 +13,8 @@ module Europeana
       def annotations_search_params(creator_name: '*', limit: 100)
         {
           qf: [
-            %(generator_name:#{escape_query_value(annotations_api_generator_name)}),
-            %(creator_name:#{escape_query_value(creator_name)}),
+            %(generator_name:#{escape_annotation_query_value(annotations_api_generator_name)}),
+            %(creator_name:#{escape_annotation_query_value(creator_name)}),
             %(target_record_id:"#{id}")
           ],
           sort: 'created',
@@ -23,7 +23,7 @@ module Europeana
         }
       end
 
-      def escape_query_value(value)
+      def escape_annotation_query_value(value)
         value.gsub(' ', '\ ')
       end
 

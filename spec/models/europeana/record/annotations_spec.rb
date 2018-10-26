@@ -138,8 +138,8 @@ RSpec.describe Europeana::Record::Annotations do
     end
   end
 
-  describe '#escape_query_value' do
-    subject { instance.escape_query_value(value) }
+  describe '#escape_annotation_query_value' do
+    subject { instance.escape_annotation_query_value(value) }
     let(:value) { 'Simple' }
 
     context 'whhen value is simple' do
