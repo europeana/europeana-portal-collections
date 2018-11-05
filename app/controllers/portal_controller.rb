@@ -116,7 +116,7 @@ class PortalController < ApplicationController
 
   def show_generic
     # TODO: remove when new design is default
-    @new_design = params[:design] == 'new'
+    @new_design = Rails.application.config.x.enable.new_record_page_design ? params[:design] != 'old' : params[:design] == 'new'
 
     @data_provider = document_data_provider(@document)
     @url_conversions = perform_url_conversions(@document)
