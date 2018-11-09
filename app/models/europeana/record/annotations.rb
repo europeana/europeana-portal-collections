@@ -10,11 +10,11 @@ module Europeana
         @annotations ||= Annotation.find(annotations_search_params(creator_name: creator_name, limit: limit))
       end
 
-      def annotations_search_params(creator_name: '*', limit: 100)
+      def annotations_search_params(creator_name: nil, limit: 100)
         {
           qf: [
             %(generator_name:#{escape_annotation_query_value(annotations_api_generator_name)}),
-            %(creator_name:#{escape_annotation_query_value(creator_name)}),
+            %(creator_name:#{escape_annotation_query_value(creator_name || '*')}),
             %(target_record_id:"#{id}")
           ],
           sort: 'created',
