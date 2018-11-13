@@ -230,6 +230,10 @@ class FacetPresenter < ApplicationPresenter
     items
   end
 
+  def filter_facet?
+    !!facet_config.filter
+  end
+
   private
 
   def apply_only_to_items?

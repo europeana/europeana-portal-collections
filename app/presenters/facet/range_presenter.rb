@@ -11,7 +11,7 @@ module Facet
         filter_open: filter_open?,
         form: display_form,
         range: display_range,
-        data: display_data,
+        data: filter_facet? ? nil : display_data,
         date_start: range_min,
         date_middle: range_middle,
         date_end: range_max,
@@ -25,7 +25,7 @@ module Facet
     end
 
     def filter_open?
-      range_in_params?
+      filter_facet? || range_in_params?
     end
 
     def items_in_params
@@ -307,11 +307,23 @@ module Facet
     end
 
     def display_range_start
-      search_state_param.present? ? search_state_param[:begin] : range_min
+      if search_state_param.present?
+        search_state_param[:begin]
+      elsif filter_facet?
+        nil
+      else
+        range_min
+      end
     end
 
     def display_range_end
-      search_state_param.present? ? search_state_param[:end] : range_max
+      if search_state_param.present?
+        search_state_param[:end]
+      elsif filter_facet?
+        nil
+      else
+        range_max
+      end
     end
 
     def display_form
