@@ -138,6 +138,7 @@ RailsAdmin.config do |config|
       field :key
       field :title
       field :state
+      field :api_url
       field :api_params
       field :settings_default_search_layout, :enum
     end
@@ -148,6 +149,7 @@ RailsAdmin.config do |config|
         end
       end
       field :title
+      field :api_url
       field :api_params, :text do
         html_attributes rows: 15
       end

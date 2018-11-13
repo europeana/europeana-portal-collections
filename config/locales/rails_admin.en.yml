@@ -26,6 +26,8 @@ en:
     help:
       browse_entry:
         query: 'Include everything after the ? in a search URL, e.g. "q=paris&f[TYPE][]=IMAGE". Do not include page or per_page.'
+      collection:
+        api_url: 'Base URL of the API this collection uses when searched. If blank, uses the default.'
       europeana/record/set:
         settings_query_term: 'Optional. Search query term for this set. If omitted, preferred label will be used.'
       page/browse/record_sets:

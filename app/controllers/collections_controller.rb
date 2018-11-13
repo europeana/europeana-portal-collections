@@ -21,7 +21,7 @@ class CollectionsController < ApplicationController
     @landing_page = find_landing_page
 
     if has_search_parameters?
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_results(search_params)
       log_search_interaction_on_search(@response)
     else
       @collection_stats = collection_stats
@@ -46,6 +46,12 @@ class CollectionsController < ApplicationController
   end
 
   protected
+
+  def search_params
+    params.tap do |p|
+      p[:api_url] = @collection.api_url unless @collection.api_url.blank?
+    end
+  end
 
   def find_collection
     Collection.find_by_key!(params[:id]).tap do |collection|
