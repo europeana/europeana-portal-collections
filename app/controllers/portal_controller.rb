@@ -88,9 +88,11 @@ class PortalController < ApplicationController
 
   # GET /record/:id/exhibition
   def exhibition
-    annotations = document_annotations(doc_id, creator_name:
-      Rails.application.config.x.exhibitions.annotation_creator_name, limit: 1)
-    exhibition_url = annotations&.first&.body&.dig('@graph', 'isGatheredInto')
+    creator_name = Rails.application.config.x.exhibitions.annotation_creator_name
+    uri_query = "(#{exhibition_url_prefix(locale)}* OR #{exhibition_url_prefix(I18n.default_locale)}*)"
+    annotations = document_annotations(doc_id, creator_name: creator_name, link_resource_uri: uri_query, limit: 100)
+    lang_pref_annotation = annotations&.detect { |x| x.body&.dig('@graph', 'isGatheredInto')&.start_with?(exhibition_url_prefix(locale)) } || annotations&.first
+    exhibition_url = lang_pref_annotation&.body&.dig('@graph', 'isGatheredInto')
 
     @exhibition = Europeana::Exhibition.find(exhibition_url)
     respond_to do |format|
@@ -142,8 +144,8 @@ class PortalController < ApplicationController
     @template = 'portal/ancestor'
   end
 
-  def document_annotations(id, creator_name: nil, limit: nil)
-    Europeana::Record.new(id).annotations(creator_name: creator_name, limit: limit)
+  def document_annotations(id, **options)
+    Europeana::Record.new(id).annotations(**options)
   rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
     # TODO: we may not want controller actions to fail if annotations are
     #   unavailable, but we should return something indicating that there
@@ -156,6 +158,10 @@ class PortalController < ApplicationController
   def document_data_provider(document)
     data_provider_name = document.fetch('aggregations.edmDataProvider', []).first
     DataProvider.find_by_name(data_provider_name)
+  end
+
+  def exhibition_url_prefix(locale)
+    "#{Rails.application.config.x.exhibitions.host}/portal/#{locale}/"
   end
 
   def find_landing_page

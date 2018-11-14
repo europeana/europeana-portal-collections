@@ -239,7 +239,8 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
     context 'when format is JSON' do
       render_views
 
-      let(:params) { { locale: 'en', id: '123/abc', format: :json } }
+      let(:locale) { 'en' }
+      let(:params) { { locale: locale, id: '123/abc', format: :json } }
       let(:configured_exhibitions_host) { 'http://europeana.eu'}
 
       before do
@@ -283,6 +284,29 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
             expect(parsed_response['exhibition_promo']).to have_key('state_2_body')
             expect(parsed_response['exhibition_promo']).to have_key('state_3_logo')
             expect(parsed_response['exhibition_promo']).to have_key('state_1_image')
+          end
+
+          context 'when using another locale' do
+            let(:lang_code) { locale }
+
+            context 'when the alternative locale has a specific annotation' do
+              let(:locale) { 'fr' }
+
+              it 'contains the french URL' do
+                parsed_response = JSON.parse(response.body)
+                expect(parsed_response['exhibition_promo']['url']).to eq('http://europeana.eu/portal/fr/exhibitions/test-exhibition')
+              end
+            end
+
+            context 'when the alternative locale does NOT have a specific annotation' do
+              let(:locale) { 'de' }
+              let(:lang_code) { 'en' }
+
+              it 'contains the english URL' do
+                parsed_response = JSON.parse(response.body)
+                expect(parsed_response['exhibition_promo']['url']).to eq('http://europeana.eu/portal/en/exhibitions/test-exhibition')
+              end
+            end
           end
         end
 

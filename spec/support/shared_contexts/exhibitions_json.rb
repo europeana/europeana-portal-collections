@@ -24,7 +24,7 @@ RSpec.shared_context 'Exhibitions JSON', :exhibitions_json do
 
   def exhibtions_json_response
     {
-      url: 'https://europeana.eu/portal/en/exhibitions/test-exhibition',
+      url: "#{configured_exhibitions_host}/portal/#{lang_code}/exhibitions/test-exhibition",
       credit_image: 'https://fake-cdn/exhibitions/images/versions/abc/logo.jpeg',
       description: 'Fake description',
       full_image: 'https://fake-cdn/exhibitions/images/versions/abc/image.jpeg',
