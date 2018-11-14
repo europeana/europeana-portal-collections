@@ -48,7 +48,7 @@ class CollectionsController < ApplicationController
   protected
 
   def search_params
-    params.tap do |p|
+    params.dup.tap do |p|
       p[:api_url] = @collection.api_url unless @collection.api_url.blank?
     end
   end
