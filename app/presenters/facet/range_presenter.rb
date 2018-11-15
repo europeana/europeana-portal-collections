@@ -6,7 +6,6 @@ module Facet
 
     def display(**_)
       {
-        date: true,
         title: facet_label,
         filter_open: filter_open?,
         form: display_form,
@@ -17,7 +16,7 @@ module Facet
         date_end: range_max,
         show_bars: !single_value?,
         show_borders: display_data.length < 50
-      }
+      }.reverse_merge(facet_config.display_options)
     end
 
     def filter_item(_)
