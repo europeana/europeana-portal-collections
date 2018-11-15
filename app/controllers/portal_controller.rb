@@ -91,7 +91,9 @@ class PortalController < ApplicationController
     creator_name = Rails.application.config.x.exhibitions.annotation_creator_name
     uri_query = "(#{exhibition_url_prefix(locale)}* OR #{exhibition_url_prefix(I18n.default_locale)}*)"
     annotations = document_annotations(doc_id, creator_name: creator_name, link_resource_uri: uri_query, limit: 100)
-    lang_pref_annotation = annotations&.detect { |x| x.body&.dig('@graph', 'isGatheredInto')&.start_with?(exhibition_url_prefix(locale)) } || annotations&.first
+    lang_pref_annotation = annotations&.detect do |x|
+      x.body&.dig('@graph', 'isGatheredInto')&.start_with?(exhibition_url_prefix(locale))
+    end || annotations&.first
     exhibition_url = lang_pref_annotation&.body&.dig('@graph', 'isGatheredInto')
 
     @exhibition = Europeana::Exhibition.find(exhibition_url)

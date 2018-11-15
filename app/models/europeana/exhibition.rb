@@ -26,8 +26,7 @@ module Europeana
         return unless exhibition?(url) && url.start_with?(Rails.application.config.x.exhibitions.host)
         response = Faraday.get("#{url}.json")
         return unless response.success?
-        json_response = JSON.parse(response.body)
-        new(json_response)
+        new(JSON.parse(response.body))
       rescue Errno::ECONNREFUSED, JSON::ParserError, OpenSSL::SSL::SSLError
         nil
       end

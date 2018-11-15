@@ -26,7 +26,7 @@ module Europeana
       end
 
       def escape_annotation_query_value(value)
-        value.blank? ? '' : value.gsub(%r((?<!OR)\s(?!OR)), '\ ').gsub(':', '\:')
+        value.blank? ? '' : value.gsub(/(?<!OR)\s(?!OR)/, '\ ').gsub(':', '\:')
       end
 
       def annotations_api_generator_name
