@@ -133,7 +133,7 @@ class FacetPresenter < ApplicationPresenter
     {
       filter: facet_label,
       value: facet_item_label(item.value),
-      remove: facet_item_url(item),
+      remove: facet_config.single ? remove_facet_url(item) : facet_item_url(item),
       name: "f[#{facet_name}][]"
     }
   end
@@ -147,13 +147,17 @@ class FacetPresenter < ApplicationPresenter
   # them from the URL parameters.
   def items_from_params
     ips = items_in_params
-    fps = facet_params(facet_name)
+    fps = [facet_params(facet_name)].flatten
     extras = fps.nil? ? [] : fps.reject { |fp| ips.any? { |ip| ip.value == fp } }
     ips + extras.map { |e| Europeana::Blacklight::Response::Facets::FacetItem.new(value: e) }
   end
 
+  def facet_params(facet_name)
+    super || default_facet_value
+  end
+
   def filter_items
-    items_from_params.map { |item| filter_item(item) }
+    items_in_params.reject { |item| default_facet_value?(item.value) }.map { |item| filter_item(item) }
   end
 
   ##
@@ -165,24 +169,57 @@ class FacetPresenter < ApplicationPresenter
   # @param see {#facet_item}
   # @return [String] URL to add/remove the facet item from the search
   def facet_item_url(item)
-    facet_in_params?(facet_name, item) ? remove_facet_url(item) : add_facet_url(item)
+    if facet_config.single
+      replace_facet_url(item)
+    else
+      facet_in_params?(facet_name, item) ? remove_facet_url(item) : add_facet_url(item)
+    end
+  end
+
+  def add_facet_url(item)
+    construct_facet_url(:add, item)
   end
 
   def remove_facet_url(item)
-    [search_action_url, remove_facet_query(item)].reject(&:blank?).join('?')
+    construct_facet_url(:remove, item)
+  end
+
+  def replace_facet_url(item)
+    construct_facet_url(:replace, item)
+  end
+
+  def construct_facet_url(method, item)
+    query = send(:"#{method}_facet_query", item)
+    [search_action_url, query].reject(&:blank?).join('?')
+  end
+
+  # @return [String] Request query string with the given facet item added
+  def add_facet_query(item, base: facet_item_url_base_query)
+    item_query = facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item)
+    [base, add_facet_parent_query, item_query].reject(&:blank?).join('&')
   end
 
   ##
   # Removes a facet item from request's query string
   #
   # @return [String] Request query string without the given facet item
-  def remove_facet_query(item)
+  def remove_facet_query(item, base: facet_item_url_base_query)
     item_query = Regexp.escape(facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item))
-    facet_item_url_base_query.dup.sub(/#{item_query}&?/, '')
+    base.dup.sub(/#{item_query}&?/, '')
+  end
+
+  def replace_facet_query(item)
+    base = facet_item_url_base_query_params.deep_dup
+    base[:f].delete(facet_name) if base[:f]
+    add_facet_query(item, base: base.to_query)
+  end
+
+  def facet_item_url_base_query_params
+    @facet_item_url_base_query_params ||= params.slice(:q, :f, :per_page, :view, :range)
   end
 
   def facet_item_url_base_query
-    @facet_item_url_base_query ||= params.slice(:q, :f, :per_page, :view, :range).to_query
+    @facet_item_url_base_query ||= facet_item_url_base_query_params.to_query
   end
 
   def add_facet_parent_query
@@ -198,16 +235,6 @@ class FacetPresenter < ApplicationPresenter
 
   def parent_facet
     @parent_facet ||= facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
-  end
-
-  def add_facet_url(item)
-    [search_action_url, add_facet_query(item)].reject(&:blank?).join('?')
-  end
-
-  # @return [String] Request query string with the given facet item added
-  def add_facet_query(item)
-    item_query = facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item)
-    [facet_item_url_base_query, add_facet_parent_query, item_query].reject(&:blank?).join('&')
   end
 
   def facet_cgi_query(name, value)
@@ -228,6 +255,14 @@ class FacetPresenter < ApplicationPresenter
       items = send(:"apply_#{mod}_to_items", items, options) if send(:"apply_#{mod}_to_items?")
     end
     items
+  end
+
+  def default_facet_value?(value)
+    value == default_facet_value
+  end
+
+  def default_facet_value
+    facet_config.default
   end
 
   private

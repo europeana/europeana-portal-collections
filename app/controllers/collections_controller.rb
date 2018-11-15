@@ -4,6 +4,7 @@
 # Provides Blacklight search and browse, within a content Collection
 class CollectionsController < ApplicationController
   include Europeana::Collections
+  include FacetsHelper
   include RecordCountsHelper
   include SearchInteractionLogging
 
@@ -58,7 +59,9 @@ class CollectionsController < ApplicationController
   end
 
   def collection_api_url?
-    @collection.api_url.present?
+    return false unless @collection.api_url.present?
+    return false unless blacklight_config.facet_fields.key?('api')
+    !facet_in_params?('api', 'default')
   end
 
   def find_collection

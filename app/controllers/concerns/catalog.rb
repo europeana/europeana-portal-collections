@@ -36,7 +36,7 @@ module Catalog
   def search_results(user_params)
     response, documents = super
     response.max_pages(960 / response.limit_value)
-    add_collection_facet(response)
+    inject_pseudo_facets(response)
     [response, documents]
   end
 
@@ -79,12 +79,13 @@ module Catalog
     url_for params.merge(facet_url_params).merge(options).except(:page)
   end
 
-  def add_collection_facet(response)
-    items = displayable_collections.map do |collection|
-      Europeana::Blacklight::Response::Facets::FacetItem.new(value: collection.key)
+  def inject_pseudo_facets(response)
+    pseudo_facets = blacklight_config.facet_fields.values.select { |ff| !ff.include_in_request && ff.values.present? }
+    pseudo_facets.each do |ff|
+      values = ff.values.respond_to?(:call) ? ff.values.call(self) : ff.values
+      items = values.map { |value| Europeana::Blacklight::Response::Facets::FacetItem.new(value: value) }
+      field = Europeana::Blacklight::Response::Facets::FacetField.new(ff.key, items)
+      response.aggregations[field.name] = field
     end
-    items.unshift(Europeana::Blacklight::Response::Facets::FacetItem.new(value: 'all'))
-    field = Europeana::Blacklight::Response::Facets::FacetField.new('COLLECTION', items)
-    response.aggregations[field.name] = field
   end
 end
