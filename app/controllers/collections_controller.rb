@@ -49,7 +49,9 @@ class CollectionsController < ApplicationController
 
   def search_params
     params.dup.tap do |p|
-      p[:api_url] = @collection.api_url unless @collection.api_url.blank?
+      if p[:f].present? && p[:f][:api] == ['collection']
+        p[:api_url] = @collection.api_url unless @collection.api_url.blank?
+      end
     end
   end
 
