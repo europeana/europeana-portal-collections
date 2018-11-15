@@ -13,7 +13,7 @@ module ExhibitionsHelper
       image: card_image(exhibition),
       logo_url: exhibition.credit_image,
       type: I18n.t('site.object.promotions.exhibition'),
-      exhibtion_card: true,
+      exhibition_card: true,
       relation: I18n.t('site.object.promotions.card-labels.exhibition')
     }
   end

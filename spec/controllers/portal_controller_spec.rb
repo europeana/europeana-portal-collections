@@ -281,9 +281,12 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
 
             expect(parsed_response['exhibition_promo']).to have_key('url')
             expect(parsed_response['exhibition_promo']).to have_key('title')
-            expect(parsed_response['exhibition_promo']).to have_key('state_2_body')
-            expect(parsed_response['exhibition_promo']).to have_key('state_3_logo')
-            expect(parsed_response['exhibition_promo']).to have_key('state_1_image')
+            expect(parsed_response['exhibition_promo']).to have_key('description')
+            expect(parsed_response['exhibition_promo']).to have_key('image')
+            expect(parsed_response['exhibition_promo']).to have_key('logo_url')
+            expect(parsed_response['exhibition_promo']).to have_key('type')
+            expect(parsed_response['exhibition_promo']).to have_key('exhibition_card')
+            expect(parsed_response['exhibition_promo']).to have_key('relation')
           end
 
           context 'when using another locale' do
