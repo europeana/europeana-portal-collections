@@ -8,19 +8,12 @@ module ExhibitionsHelper
 
     {
       url: exhibition.url,
-      state_2_body: exhibition.card_text,
-      state_3_logo: {
-        thumbnail: {
-          url: exhibition.credit_image
-        }
-      },
-      state_1_label: false,
-      state_1_image: card_image(exhibition),
-      state_2_image: card_image(exhibition),
-      state_3_image: card_image(exhibition),
-      excerpt: false,
-      icon: 'multi-page',
       title: exhibition.title,
+      description: exhibition.card_text,
+      image: card_image(exhibition),
+      logo_url: exhibition.credit_image,
+      type: I18n.t('site.object.promotions.exhibition'),
+      exhibtion_card: true,
       relation: I18n.t('site.object.promotions.card-labels.exhibition')
     }
   end
