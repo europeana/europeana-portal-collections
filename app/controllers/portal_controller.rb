@@ -88,14 +88,6 @@ class PortalController < ApplicationController
 
   # GET /record/:id/exhibition
   def exhibition
-    creator_name = Rails.application.config.x.exhibitions.annotation_creator_name
-    uri_query = "(#{exhibition_url_prefix(locale)}* OR #{exhibition_url_prefix(I18n.default_locale)}*)"
-    annotations = document_annotations(doc_id, creator_name: creator_name, link_resource_uri: uri_query, limit: 100)
-    lang_pref_annotation = annotations&.detect do |x|
-      x.body&.dig('@graph', 'isGatheredInto')&.start_with?(exhibition_url_prefix(locale))
-    end || annotations&.first
-    exhibition_url = lang_pref_annotation&.body&.dig('@graph', 'isGatheredInto')
-
     @exhibition = Europeana::Exhibition.find(exhibition_url)
     respond_to do |format|
       format.json { render :exhibition, layout: false }
@@ -164,6 +156,16 @@ class PortalController < ApplicationController
 
   def exhibition_url_prefix(locale)
     "#{Rails.application.config.x.exhibitions.host}/portal/#{locale}/"
+  end
+
+  def exhibition_url
+    creator_name = Rails.application.config.x.exhibitions.annotation_creator_name
+    uri_query = "(#{exhibition_url_prefix(locale)}* OR #{exhibition_url_prefix(I18n.default_locale)}*)"
+    annotations = document_annotations(doc_id, creator_name: creator_name, link_resource_uri: uri_query, limit: 100)
+    lang_pref_annotation = annotations&.detect do |x|
+      x.body&.dig('@graph', 'isGatheredInto')&.start_with?(exhibition_url_prefix(locale))
+    end || annotations&.first
+    lang_pref_annotation&.body&.dig('@graph', 'isGatheredInto')
   end
 
   def find_landing_page

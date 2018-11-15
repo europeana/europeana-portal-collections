@@ -8,8 +8,7 @@ module ExhibitionsHelper
 
     {
       url: exhibition.url,
-      state_1_title: exhibition.title,
-      state_2_body: exhibition.description,
+      state_2_body: exhibition.card_text,
       state_3_logo: {
         thumbnail: {
           url: exhibition.credit_image
@@ -22,8 +21,7 @@ module ExhibitionsHelper
       excerpt: false,
       icon: 'multi-page',
       title: exhibition.title,
-      relation: 'Features this object', # Should be in localeapp once finalized
-      tags: tag_items(exhibition)
+      relation: I18n.t('site.object.promotions.card-labels.exhibition')
     }
   end
 
@@ -35,16 +33,17 @@ module ExhibitionsHelper
     }
   end
 
-  def tag_items(exhibition)
-    {
-      items: exhibition.labels.map do |label|
-        {
-          url: exhibition.url,
-          text: label
-        }
-      end + [{ url: exhibitions_url, text: I18n.t('global.promotions.exhibition') }]
-    }
-  end
+  # Tags are not supported at this point.
+  # def tag_items(exhibition)
+  #   {
+  #     items: exhibition.labels.map do |label|
+  #       {
+  #         url: exhibition.url,
+  #         text: label
+  #       }
+  #     end + [{ url: exhibitions_url, text: I18n.t('global.promotions.exhibition') }]
+  #   }
+  # end
 
   def exhibitions_url(lang_code: 'en', slug: 'foyer')
     Rails.application.config.x.exhibitions.host + '/portal/' + lang_code + '/exhibitions/' + slug
