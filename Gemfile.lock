@@ -332,7 +332,7 @@ GEM
     mustache (1.0.3)
     nested_form (0.3.2)
     netrc (0.11.0)
-    newrelic_rpm (4.3.0.335)
+    newrelic_rpm (5.2.0.345)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
@@ -491,6 +491,8 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    sentry-raven (2.7.4)
+      faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simplecov (0.16.1)
@@ -616,6 +618,7 @@ DEPENDENCIES
   ruby-oembed (~> 0.9)
   sass-rails
   selenium-webdriver
+  sentry-raven
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)
