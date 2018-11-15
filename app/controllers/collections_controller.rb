@@ -58,7 +58,7 @@ class CollectionsController < ApplicationController
   end
 
   def collection_api_url?
-    !@collection.api_url.blank?
+    @collection.api_url.present?
   end
 
   def find_collection
