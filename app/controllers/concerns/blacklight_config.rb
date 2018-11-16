@@ -62,7 +62,8 @@ module BlacklightConfig
 
       # Facet fields in the order they should be displayed.
       config.add_facet_field 'COLLECTION', include_in_request: false, single: true,
-                             values: ->(context) { context.displayable_collections.map { |collection| collection.key }.unshift('all') }
+                             values: ->(context) { context.displayable_collections.map { |collection| collection.key }.unshift('all') },
+                             default: 'all'
       config.add_facet_field 'api', include_in_request: false, single: true,
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'newspapers' },
                              values: %w(collection default),

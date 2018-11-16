@@ -35,6 +35,7 @@ module Facet
                   items: {
                     with: ->(item) { Collection.find_by_key(item).title }
                   }
+      label_facet 'api', items: { i18n: true }
       label_facet 'TYPE', items: { titleize: false, i18n: true }
       label_facet 'IMAGE_COLOUR', items: { titleize: true, i18n: true }
       label_facet 'IMAGE_ASPECTRATIO', items: { titleize: true, i18n: true }
