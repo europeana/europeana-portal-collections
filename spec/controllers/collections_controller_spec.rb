@@ -115,11 +115,21 @@ RSpec.describe CollectionsController do
 
               let(:collection) { collections(:newspapers) }
 
-              it 'is queried instead of default' do
-                get :show, params
-                expect(a_request(:get, "#{collection.api_url}/v2/search.json").
-                  with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))).
-                  to have_been_made.at_least_once
+              context 'without api="default" facet in URL' do
+                it 'queries custom' do
+                  get :show, params
+                  expect(a_request(:get, "#{collection.api_url}/v2/search.json").
+                    with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))).
+                    to have_been_made.at_least_once
+                end
+              end
+
+              context 'with api="default" facet in URL' do
+                let(:params) { { locale: 'en', id: collection.key, q: 'search', format: format, f: { api: ['default'] } } }
+                it 'queries default' do
+                  get :show, params
+                  expect(an_api_search_request).to have_been_made.at_least_once
+                end
               end
             end
           end
