@@ -105,14 +105,7 @@ RSpec.describe CollectionsController do
             end
 
             context 'when collection has custom API URL' do
-              before do
-                stub_request(:get, "#{collection.api_url}/v2/search.json").
-                  with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY'])).
-                  to_return(body: api_responses(:search),
-                            status: 200,
-                            headers: { 'Content-Type' => 'application/json' })
-              end
-
+              include_context :collection_with_custom_api_url
               let(:collection) { collections(:newspapers) }
 
               context 'without api="default" facet in URL' do
