@@ -2,7 +2,7 @@
 
 module Facet
   class CollectionPresenter < SimplePresenter
-    def add_facet_url(item)
+    def add_facet_url(_item)
       fail NotImplementedError
     end
 
@@ -14,7 +14,7 @@ module Facet
       default_facet_value?(item.value) ? search_path : collection_path(item.value)
     end
 
-    def add_facet_query(item, base: facet_item_url_base_query)
+    def add_facet_query(*_)
       fail NotImplementedError
     end
 
@@ -32,10 +32,6 @@ module Facet
 
     def apply_order_to_items(items, **_)
       items.unshift(items.delete(items.detect { |item| facet_in_params?(facet_name, item) }))
-    end
-
-    def remove_facet_query(_item)
-      facet_item_url_base_query
     end
 
     def facet_in_params?(field, item)

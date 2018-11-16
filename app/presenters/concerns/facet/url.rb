@@ -67,7 +67,7 @@ module Facet
 
     def replace_facet_query(item)
       base = facet_item_url_base_query_params.deep_dup
-      base[:f].delete(facet_name) if base[:f]
+      base[:f]&.delete(facet_name)
       add_facet_query(item, base: base.to_query)
     end
 

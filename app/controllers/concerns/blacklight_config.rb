@@ -62,12 +62,12 @@ module BlacklightConfig
 
       # Facet fields in the order they should be displayed.
       config.add_facet_field 'COLLECTION', include_in_request: false, single: true,
-                             values: ->(context) { context.displayable_collections.map { |collection| collection.key }.unshift('all') },
-                             default: 'all'
+                                           values: ->(context) { context.displayable_collections.map(&:key).unshift('all') },
+                                           default: 'all'
       config.add_facet_field 'api', include_in_request: false, single: true,
-                             when: ->(context) { context.within_collection? && context.current_collection.key == 'newspapers' },
-                             values: %w(collection default),
-                             default: 'collection'
+                                    when: ->(context) { context.within_collection? && context.current_collection.key == 'newspapers' },
+                                    values: %w(collection default),
+                                    default: 'collection'
       config.add_facet_field 'TYPE', hierarchical: true
       config.add_facet_field 'IMAGE_COLOUR', parent: %w(TYPE IMAGE)
       config.add_facet_field 'COLOURPALETTE', colour: true, hierarchical: true, parent: %w(TYPE IMAGE), limit: 20

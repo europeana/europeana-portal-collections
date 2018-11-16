@@ -192,6 +192,10 @@ class FacetPresenter < ApplicationPresenter
   ##
   # Sends missing method calls to the controller
   def method_missing(method, *args)
-    @controller.respond_to?(method, true) ? @controller.send(method, *args) : super
+    respond_to_missing?(method, true) ? @controller.send(method, *args) : super
+  end
+
+  def respond_to_missing?(method, _)
+    @controller.respond_to?(method, true) || super
   end
 end
