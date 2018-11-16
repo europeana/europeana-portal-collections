@@ -51,8 +51,9 @@ module Catalog
   end
 
   def search_action_path(options = {})
-    options[:only_path] = true
-    search_action_url(options)
+    opts = options.deep_symbolize_keys
+    opts[:only_path] = true
+    search_action_url(opts)
   end
 
   def search_action_url(options = {})
