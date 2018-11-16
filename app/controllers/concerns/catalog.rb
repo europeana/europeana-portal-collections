@@ -50,12 +50,9 @@ module Catalog
     fail "Do not use Blacklight's search tracking."
   end
 
-  def search_action_path(*args)
-    if args[0].is_a?(Hash)
-      args[0] = args.first.symbolize_keys
-      args[0][:only_path] = true
-    end
-    search_action_url(*args)
+  def search_action_path(options = {})
+    options[:only_path] = true
+    search_action_url(options)
   end
 
   def search_action_url(options = {})

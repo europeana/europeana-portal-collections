@@ -7,7 +7,7 @@ module SearchableView
 
   def form_search
     {
-      action: search_action_path(only_path: true)
+      action: search_action_path
     }.tap do |fs|
 
       # Auto-complete is not production ready. Only enable it on dev/test envs.
