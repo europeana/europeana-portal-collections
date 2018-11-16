@@ -28,7 +28,7 @@ module SearchableView
       input_name: params[:q].blank? ? 'q' : 'qf[]',
       has_original: !params[:q].blank?,
       input_original: {
-        value:  params[:q].blank? ? nil : params[:q],
+        value: params[:q].blank? ? nil : params[:q],
         remove: search_action_url(remove_q_param(params))
       },
       input_values: cacheable? ? nil : input_search_values(*search_param_keys),
