@@ -298,6 +298,7 @@ module Facet
         if params_for_search && apply_format_value_as_to_items?
           params_for_search.each { |k, v| params_for_search[k] = facet_config.format_value_as.call(v) }
         end
+        params_for_search
       end
     end
 
@@ -306,23 +307,11 @@ module Facet
     end
 
     def display_range_start
-      if search_state_param.present?
-        search_state_param[:begin]
-      elsif filter_facet?
-        nil
-      else
-        range_min
-      end
+      search_state_param.present? ? search_state_param[:begin] : range_min
     end
 
     def display_range_end
-      if search_state_param.present?
-        search_state_param[:end]
-      elsif filter_facet?
-        nil
-      else
-        range_max
-      end
+      search_state_param.present? ? search_state_param[:end] : range_max
     end
 
     def display_form
