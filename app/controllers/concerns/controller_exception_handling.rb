@@ -113,9 +113,24 @@ module ControllerExceptionHandling
         end
       end
     end
+
+    class SentryRavenNotifier
+      class << self
+        def enabled?
+          defined?(Raven) && ENV['SENTRY_DSN'].present?
+        end
+
+        def process(exception:, **_)
+          Raven.capture_exception(exception)
+        end
+      end
+    end
   end
 
-  ERROR_HANDLERS = [ErrorHandlers::Logger, ErrorHandlers::EmailReporter, ErrorHandlers::NewRelicNotifier].freeze
+  ERROR_HANDLERS = [
+    ErrorHandlers::Logger, ErrorHandlers::EmailReporter,
+    ErrorHandlers::NewRelicNotifier, ErrorHandlers::SentryRavenNotifier
+  ].freeze
 
   private
 

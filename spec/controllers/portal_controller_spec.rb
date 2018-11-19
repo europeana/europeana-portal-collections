@@ -191,19 +191,47 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
     end
 
     describe 'URL param `design`' do
-      context 'when "new"' do
-        let(:params) { { locale: 'en', id: '123/abc', format: 'html', design: 'new' } }
-        it 'sets @new_design to true' do
-          get :show, params
-          expect(assigns(:new_design)).to be true
+      context 'when the new design is enabled in the ENV setting' do
+        before do
+          Rails.application.config.x.enable.new_record_page_design = true
+        end
+
+        context 'when "old"' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html', design: 'old' } }
+          it 'sets @new_design to false' do
+            get :show, params
+            expect(assigns(:new_design)).to be false
+          end
+        end
+
+        context 'when absent' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
+          it 'sets @new_design to false' do
+            get :show, params
+            expect(assigns(:new_design)).to be true
+          end
         end
       end
 
-      context 'when absent' do
-        let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
-        it 'sets @new_design to false' do
-          get :show, params
-          expect(assigns(:new_design)).to be false
+      context 'when the new design is NOT enabled in the ENV setting' do
+        before do
+          Rails.application.config.x.enable.new_record_page_design = false
+        end
+
+        context 'when "new"' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html', design: 'new' } }
+          it 'sets @new_design to true' do
+            get :show, params
+            expect(assigns(:new_design)).to be true
+          end
+        end
+
+        context 'when absent' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
+          it 'sets @new_design to false' do
+            get :show, params
+            expect(assigns(:new_design)).to be false
+          end
         end
       end
     end

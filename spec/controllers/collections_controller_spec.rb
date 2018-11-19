@@ -58,9 +58,6 @@ RSpec.describe CollectionsController do
     end
 
     context 'with id=[known collection]' do
-      before do
-        get :show, params
-      end
       let(:collection) { Collection.find_by_key('music') }
       let(:landing_page) { Page::Landing.find_by_slug('collections/music') }
 
@@ -68,21 +65,25 @@ RSpec.describe CollectionsController do
         let(:params) { { locale: 'en', id: collection.key } }
 
         it 'should not query API for collection stats' do
+          get :show, params
           %w(TEXT VIDEO SOUND IMAGE 3D).each do |type|
             expect(an_api_search_request.with(query: hash_including(query: "TYPE:#{type}"))).not_to have_been_made
           end
         end
 
         it 'should not query API for recent additions' do
+          get :show, params
           expect(an_api_search_request.with(query: hash_including(query: /timestamp_created/))).not_to have_been_made
         end
 
         it 'renders collections landing template' do
+          get :show, params
           expect(response.status).to eq(200)
           expect(response).to render_template('collections/show')
         end
 
         it 'assigns @landing_page' do
+          get :show, params
           expect(assigns(:landing_page)).to eq(landing_page)
         end
       end
@@ -93,12 +94,36 @@ RSpec.describe CollectionsController do
             let(:params) { { locale: 'en', id: collection.key, q: 'search', format: format } }
 
             it 'queries API' do
+              get :show, params
               expect(an_api_search_request).to have_been_made.at_least_once
             end
 
             it 'renders search results template' do
+              get :show, params
               expect(response.status).to eq(200)
               expect(response).to render_template('portal/index')
+            end
+
+            context 'when collection has custom API URL' do
+              include_context :collection_with_custom_api_url
+              let(:collection) { collections(:newspapers) }
+
+              context 'without api="default" facet in URL' do
+                it 'queries custom' do
+                  get :show, params
+                  expect(a_request(:get, "#{collection.api_url}/v2/search.json").
+                    with(query: hash_including(wskey: ENV['EUROPEANA_API_KEY']))).
+                    to have_been_made.at_least_once
+                end
+              end
+
+              context 'with api="default" facet in URL' do
+                let(:params) { { locale: 'en', id: collection.key, q: 'search', format: format, f: { api: ['default'] } } }
+                it 'queries default' do
+                  get :show, params
+                  expect(an_api_search_request).to have_been_made.at_least_once
+                end
+              end
             end
           end
         end

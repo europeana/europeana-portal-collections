@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 48c3f85997a9e68ccd1ae03f1dfeece3718b2937
+  revision: 37f1d97c7b571cc16f296bb197cfe41731fa2316
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: a8e1528c84ed2ebc13bcd7640f4bf673c3237380
+  revision: 66b60de92e37896d6d3d71ec1a095f17f4012c26
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -314,7 +314,7 @@ GEM
     logstash-event (1.2.02)
     logstash-logger (0.25.1)
       logstash-event (~> 1.2)
-    loofah (2.2.2)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.6)
@@ -333,7 +333,7 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     newrelic_rpm (4.3.0.335)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     paper_trail (4.2.0)
@@ -491,6 +491,8 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    sentry-raven (2.7.4)
+      faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simplecov (0.16.1)
@@ -616,6 +618,7 @@ DEPENDENCIES
   ruby-oembed (~> 0.9)
   sass-rails
   selenium-webdriver
+  sentry-raven
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)

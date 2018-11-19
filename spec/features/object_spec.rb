@@ -59,30 +59,26 @@ RSpec.feature 'Object page', :annotations_api do
     end
   end
 
-  describe 'feedback form' do
-    [false, true].each do |js|
-      context (js ? 'with JS' : 'without JS'), js: js do
-        context 'with recipient configured' do
-          before do
-            Europeana::FeedbackButton.mail_to = 'feedback@example.com'
-          end
-          it 'is present' do
-            visit '/en/record/abc/123'
-            sleep 1 if js
-            expect(page).to have_css('#feedback-form')
-          end
-        end
+  describe 'feedback form', js: true do
+    context 'with recipient configured' do
+      before do
+        Europeana::FeedbackButton.mail_to = 'feedback@example.com'
+      end
+      it 'is present' do
+        visit '/en/record/abc/123'
+        sleep 1
+        expect(page).to have_css('#feedback-form')
+      end
+    end
 
-        context 'without recipient configured' do
-          before do
-            Europeana::FeedbackButton.mail_to = nil
-          end
-          it 'is not present' do
-            visit '/en/record/abc/123'
-            sleep 1 if js
-            expect(page).to_not have_css('#feedback-form')
-          end
-        end
+    context 'without recipient configured' do
+      before do
+        Europeana::FeedbackButton.mail_to = nil
+      end
+      it 'is not present' do
+        visit '/en/record/abc/123'
+        sleep 1
+        expect(page).to_not have_css('#feedback-form')
       end
     end
   end

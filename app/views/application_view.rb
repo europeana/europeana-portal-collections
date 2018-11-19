@@ -28,13 +28,14 @@ class ApplicationView < Europeana::Styleguide::View
     [
       { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
       { name: 'googleAnalyticsKey', value: config.x.google.analytics_key },
+      { name: 'googleAnalyticsLinkedDomains', value: google_analytics_linked_domains_js_var_value, unquoted: true },
       { name: 'googleOptimizeContainerID', value: config.x.google.optimize_container_id },
+      { name: 'googleTagManagerContainerID', value: config.x.google.tag_manager_container_id },
       { name: 'i18nLocale', value: I18n.locale },
       { name: 'i18nDefaultLocale', value: I18n.default_locale },
-      { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true },
-      { name: 'googleAnalyticsLinkedDomains', value: google_analytics_linked_domains_js_var_value, unquoted: true },
+      { name: 'requirementsApplication', value: js_application_requirements, unquoted: true },
       { name: 'siteNotice', value: site_notice },
-      { name: 'requirementsApplication', value: js_application_requirements, unquoted: true }
+      { name: 'ugcEnabledCollections', value: ugc_enabled_collections_js_var_value, unquoted: true }
     ] + super
   end
 

@@ -8,6 +8,7 @@ require 'oembed'
 # Custom providers (not included in ruby-oembed)
 sketchfab = OEmbed::Provider.new('https://sketchfab.com/oembed')
 sketchfab << 'https://sketchfab.com/models/*'
+sketchfab << 'https://skfb.ly/*'
 dismarc = OEmbed::Provider.new('http://www.dismarc.org/player/oembed')
 dismarc << 'http://eusounds.ait.co.at/player/*'
 dismarc << 'http://www.dismarc.org/player/*'
