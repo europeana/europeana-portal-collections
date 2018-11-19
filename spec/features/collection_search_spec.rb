@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.feature 'Collection search page' do
   [false, true].each do |js|
     context (js ? 'with JS' : 'without JS'), js: js do
