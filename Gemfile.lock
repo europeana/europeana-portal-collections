@@ -491,6 +491,8 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    sentry-raven (2.7.4)
+      faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simplecov (0.16.1)
@@ -616,6 +618,7 @@ DEPENDENCIES
   ruby-oembed (~> 0.9)
   sass-rails
   selenium-webdriver
+  sentry-raven
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)
