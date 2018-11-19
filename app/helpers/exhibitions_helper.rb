@@ -12,18 +12,13 @@ module ExhibitionsHelper
       description: exhibition.card_text,
       image: card_image(exhibition),
       logo_url: exhibition.credit_image,
-      type: I18n.t('site.object.promotions.exhibition'),
-      exhibition_card: true,
+      type: I18n.t('global.promotions.exhibition'),
       relation: I18n.t('site.object.promotions.card-labels.exhibition')
     }
   end
 
   def card_image(exhibition)
-    {
-      thumbnail: {
-        url: exhibition.card_image
-      }
-    }
+    exhibition.card_image
   end
 
   # Tags are not supported at this point.

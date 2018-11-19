@@ -279,14 +279,13 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
           it 'contains the JSON' do
             parsed_response = JSON.parse(response.body)
 
-            expect(parsed_response['exhibition_promo']).to have_key('url')
-            expect(parsed_response['exhibition_promo']).to have_key('title')
-            expect(parsed_response['exhibition_promo']).to have_key('description')
-            expect(parsed_response['exhibition_promo']).to have_key('image')
-            expect(parsed_response['exhibition_promo']).to have_key('logo_url')
-            expect(parsed_response['exhibition_promo']).to have_key('type')
-            expect(parsed_response['exhibition_promo']).to have_key('exhibition_card')
-            expect(parsed_response['exhibition_promo']).to have_key('relation')
+            expect(parsed_response).to have_key('url')
+            expect(parsed_response).to have_key('title')
+            expect(parsed_response).to have_key('description')
+            expect(parsed_response).to have_key('image')
+            expect(parsed_response).to have_key('logo_url')
+            expect(parsed_response).to have_key('type')
+            expect(parsed_response).to have_key('relation')
           end
 
           context 'when using another locale' do
@@ -297,7 +296,7 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
 
               it 'contains the french URL' do
                 parsed_response = JSON.parse(response.body)
-                expect(parsed_response['exhibition_promo']['url']).to eq('http://europeana.eu/portal/fr/exhibitions/test-exhibition')
+                expect(parsed_response['url']).to eq('http://europeana.eu/portal/fr/exhibitions/test-exhibition')
               end
             end
 
@@ -307,7 +306,7 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
 
               it 'contains the english URL' do
                 parsed_response = JSON.parse(response.body)
-                expect(parsed_response['exhibition_promo']['url']).to eq('http://europeana.eu/portal/en/exhibitions/test-exhibition')
+                expect(parsed_response['url']).to eq('http://europeana.eu/portal/en/exhibitions/test-exhibition')
               end
             end
           end
