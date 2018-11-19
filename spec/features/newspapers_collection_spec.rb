@@ -8,8 +8,8 @@ RSpec.feature 'Newspapers collection' do
     it 'has an API toggle' do
       visit collection_path(collection, locale: 'en', q: '')
 
-      expect(page).to have_css('.filter-list a.is-checked .filter-text', text: 'Fulltext')
-      expect(page).to have_css('.filter-list a:not(.is-checked) .filter-text', text: 'Metadata')
+      expect(page).to have_css('.filter-list a.is-checked .filter-text', text: I18n.t('global.facet.api.collection'))
+      expect(page).to have_css('.filter-list a:not(.is-checked) .filter-text', text: I18n.t('global.facet.api.default'))
     end
   end
 end
