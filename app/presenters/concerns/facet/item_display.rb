@@ -19,16 +19,16 @@ module Facet
     def items_to_show_and_hide(**options)
       options.reverse_merge!(count: 5)
 
-      unhidden_items = []
-      hidden_items = items_to_display
+      show = []
+      hide = items_to_display
 
       unless facet_config.single
-        hidden_items.select { |item| facet_in_params?(facet_name, item) }.each do |selected_item|
-          unhidden_items << hidden_items.delete(selected_item)
+        hide.select { |item| facet_in_params?(facet_name, item) }.each do |selected_item|
+          show << hide.delete(selected_item)
         end
       end
-      unhidden_items.push(hidden_items.shift) while (unhidden_items.size < options[:count]) && hidden_items.present?
-      [unhidden_items, hidden_items]
+      show.push(hide.shift) while (show.size < options[:count]) && hide.present?
+      [show, hide]
     end
 
     # @return [Array<Europeana::Blacklight::Response::Facets::FacetItem>]
