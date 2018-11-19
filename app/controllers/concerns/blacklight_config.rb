@@ -92,7 +92,7 @@ module BlacklightConfig
                                date: true,
                                input_type: 'number'
                              }
-     config.add_facet_field 'proxy_dcterms_issued',
+      config.add_facet_field 'proxy_dcterms_issued',
                              range: true,
                              when: ->(context) { context.within_collection? && context.current_collection.key == 'newspapers' },
                              filter: true,
