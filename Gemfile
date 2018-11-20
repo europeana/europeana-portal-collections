@@ -78,6 +78,7 @@ group :development, :profiling, :production do
   gem 'clockwork', '~> 1.2'
   gem 'newrelic_rpm'
   gem 'puma', '~> 3.9.1'
+  gem 'sentry-raven'
 end
 
 group :development, :profiling, :test do

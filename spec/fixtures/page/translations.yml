@@ -45,6 +45,12 @@ grid_layout_collection_translations:
   body: 'About Grid Layout'
   globalized_model: grid_layout_collection
 
+newspapers_collection_translations:
+  locale: en
+  title: 'Europeana Newspapers'
+  body: 'About Newspapers'
+  globalized_model: newspapers_collection
+
 draft_collection_translations:
   locale: en
   title: 'Europeana Draft'
