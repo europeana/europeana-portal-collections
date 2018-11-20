@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 908c3e5d284fc12d0f327a44802c15b2e253ebe0
+  revision: 238ff11c91ac3356d403fac58b41884bf3a6c500
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: ce12581bdfb54148a7ca33a121d468c004a6721d
+  revision: e5a0167efcc2dccaf69c81e93e7a993a53154552
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
