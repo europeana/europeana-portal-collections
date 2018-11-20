@@ -11,7 +11,7 @@ module Portal
       def js_var_enabled_promos
         promos = [
           { id: 'gallery', url: document_galleries_url(document, format: 'json') },
-          { id: 'news', url: document_news_url(document, format: 'json') },
+          { id: 'news', url: document_news_url(document, format: 'json') }
         ] + entity_promos
         promos.push(id: 'generic', url: document_parent_url(document, format: 'json')) if document_has_europeana_parent?
         promos.to_json

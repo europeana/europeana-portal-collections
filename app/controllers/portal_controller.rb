@@ -116,7 +116,7 @@ class PortalController < ApplicationController
   def news
     # Get a post featuring this record from Pro's JSON API
     post = Pro::Post.with_params(contains: { image_attribution_link: doc_id }).
-                     order(datepublish: :desc).per(1).first
+           order(datepublish: :desc).per(1).first
     content = news_promo_content(post)
 
     respond_to do |format|
