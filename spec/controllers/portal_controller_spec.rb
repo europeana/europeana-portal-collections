@@ -399,6 +399,109 @@ RSpec.describe PortalController, :annotations_api do
     end
   end
 
+  describe 'GET news' do
+    let(:record_id) { '/123/abc' }
+    let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
+    let(:api_url) { "#{Pro::Base.site}#{Pro::Post.table_name}" }
+    let(:api_query) do
+      {
+         contains: { image_attribution_link: record_id },
+         page: { number: 1, size: 1 },
+         sort: '-datepublish'
+       }
+    end
+    let(:api_response_body) do
+      <<~JSON
+        {
+          "meta": {
+            "count": 1,
+            "total": 1
+          },
+          "data": [
+            {
+              "attributes": {
+                "slug": "news-post",
+                "datepublish": "2018-08-14T00:00:00+02:00",
+                "title": "Title",
+                "teaser": "Post teaser",
+                "image": {
+                  "thumbnail": "https:\/\/www.example.org\/image.jpeg"
+                },
+                "image_attribution_holder": "Institution"
+              }
+            }
+          ]
+        }
+      JSON
+    end
+
+    before do
+      stub_request(:get, api_url).
+       with(query: api_query).
+       to_return(status: 200, body: api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
+    end
+
+    it 'queries Pro JSON API for post containing record' do
+      get :news, params
+      expect(a_request(:get, api_url).with(query: api_query)).to have_been_made
+    end
+
+    context 'when a post is found' do
+      it 'responds with JSON' do
+        get :news, params
+        expect(response.content_type).to eq('application/json')
+      end
+
+      it 'responds with 200' do
+        get :news, params
+        expect(response.status).to eq(200)
+      end
+
+      it 'returns promo card content' do
+        get :news, params
+        promo_card = {
+          'url' => "#{Rails.application.config.x.europeana[:pro_url]}/#{Pro::Post.table_name}/news-post",
+          'title' => 'Title',
+          'date' => '2018-08-14',
+          'attribution' => 'Institution',
+          'description' => 'Post teaser',
+          'type' => 'News',
+          'images' => %w(https://www.example.org/image.jpeg)
+        }
+        expect(JSON.parse(response.body)).to eq(promo_card)
+      end
+    end
+
+    context 'when no post is found' do
+      let(:api_response_body) do
+        <<~JSON
+          {
+            "meta": {
+              "count": 0,
+              "total": 0
+            },
+            "data": []
+          }
+        JSON
+      end
+
+      it 'responds with JSON' do
+        get :news, params
+        expect(response.content_type).to eq('application/json')
+      end
+
+      it 'responds with 200' do
+        get :news, params
+        expect(response.status).to eq(200)
+      end
+
+      it 'is an empty hash' do
+        get :news, params
+        expect(response.body).to eq('null')
+      end
+    end
+  end
+
   describe 'GET parent' do
     context 'when format is JSON' do
       let(:record_id) { '/123/abc' }
