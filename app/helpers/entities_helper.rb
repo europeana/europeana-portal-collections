@@ -28,6 +28,17 @@ module EntitiesHelper
     }[api_type.to_sym]
   end
 
+  def entity_promo_content(entity)
+    return nil if entity.blank?
+
+    {
+      url: entity_path(portal_entity_path_options(entity.uri, format: 'html')),
+      title: entity.pref_label,
+      description: entity.description,
+      images: [entity.thumbnail_src],
+      more_link_text: t('global.more.view-more')
+    }
+  end
   ##
   # Constructs a URL slug for an entity page from the English prefLabel
   #

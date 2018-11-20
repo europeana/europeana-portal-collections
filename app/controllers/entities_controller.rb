@@ -32,10 +32,10 @@ class EntitiesController < ApplicationController
   end
 
   def promo
-    @entity = EDM::Entity.build_from_params(entity_params)
+    promo_content = entity_promo_content(EDM::Entity.build_from_params(entity_params))
 
     respond_to do |format|
-      format.json { render :promo, layout: false }
+      format.json { render json: promo_content }
     end
   end
 

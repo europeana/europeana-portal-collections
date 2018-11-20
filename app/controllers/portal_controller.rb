@@ -9,6 +9,7 @@ class PortalController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include Europeana::URIMappers
   include Europeana::SearchAPIConsumer
+  include GalleryHelper
   include OembedRetriever
   include SearchInteractionLogging
 
@@ -86,29 +87,22 @@ class PortalController < ApplicationController
     end
   end
 
-  # GET /record/:id/galleries
-  def galleries
-    @galleries = Gallery.published.joins(:images).
-                 where(gallery_images: { europeana_record_id: doc_id }).
-                 order(published_at: :desc)
-
+  # GET /record/:id/gallery
+  def gallery
+    gallery = Gallery.published.joins(:images).where(gallery_images: { europeana_record_id: doc_id }).
+      order(published_at: :desc).first
+    promo_content = gallery_promo_content(gallery)
     respond_to do |format|
-      format.json { render :galleries, layout: false }
+      format.json { render json: promo_content }
     end
   end
 
   def parent
     # Search the API for the record with dcterms:hasPart data.europeana.eu/item/RECORD_ID
-    @parent = search_results_for_dcterms_has_part(doc_id, rows: 1)[:items]&.first
+    promo_content = parent_promo_content(search_results_for_dcterms_has_part(doc_id, rows: 1)[:items]&.first)
 
     respond_to do |format|
-      format.json do
-        if @parent.nil?
-          render json: nil
-        else
-          render :parent, layout: false
-        end
-      end
+      format.json { render json: promo_content }
     end
   end
 
