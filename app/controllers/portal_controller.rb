@@ -12,7 +12,9 @@ class PortalController < ApplicationController
   include GalleryHelper
   include NewsHelper
   include OembedRetriever
+  include ParentHelper
   include SearchInteractionLogging
+  include ThumbnailHelper
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
   before_action :log_search_interaction_on_show, only: :show
@@ -92,18 +94,18 @@ class PortalController < ApplicationController
   def gallery
     gallery = Gallery.published.joins(:images).where(gallery_images: { europeana_record_id: doc_id }).
       order(published_at: :desc).first
-    promo_content = gallery_promo_content(gallery)
+    @resource = gallery_promo_content(gallery)
     respond_to do |format|
-      format.json { render json: promo_content }
+      format.json { render :promo_card, layout: false }
     end
   end
 
   def parent
     # Search the API for the record with dcterms:hasPart data.europeana.eu/item/RECORD_ID
-    promo_content = parent_promo_content(search_results_for_dcterms_has_part(doc_id, rows: 1)[:items]&.first)
+    @resource = parent_promo_content(search_results_for_dcterms_has_part(doc_id, rows: 1)[:items]&.first)
 
     respond_to do |format|
-      format.json { render json: promo_content }
+      format.json { render :promo_card, layout: false }
     end
   end
 

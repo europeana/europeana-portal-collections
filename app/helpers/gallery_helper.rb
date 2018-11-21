@@ -20,7 +20,7 @@ module GalleryHelper
     {
         url: gallery_path(gallery),
         title: gallery.title,
-        description: Europeana::API::Record::LangMap.localise_lang_map(parent['dcDescriptionLangAware']),
+        description: gallery.description,
         images: gallery_promo_image_content(gallery),
         type: t('global.promotions.gallery'),
         count_label: t('site.object.promotions.card-labels.gallery-count', count: gallery.images.size)

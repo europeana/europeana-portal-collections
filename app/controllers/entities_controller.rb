@@ -32,10 +32,10 @@ class EntitiesController < ApplicationController
   end
 
   def promo
-    promo_content = entity_promo_content(EDM::Entity.build_from_params(entity_params))
+    @resource = entity_promo_content(EDM::Entity.build_from_params(entity_params))
 
     respond_to do |format|
-      format.json { render json: promo_content }
+      format.json { render 'portal/promo_card', layout: false }
     end
   end
 
