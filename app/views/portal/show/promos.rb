@@ -11,7 +11,7 @@ module Portal
       def js_var_enabled_promos
         promos = [
           { id: 'gallery', url: document_gallery_url(document, format: 'json'), relation: promo_relation('exhibition') },
-          { id: 'blog', url: pro_json_api_posts_for_record_url(document.id), relation: promo_relation('news') }
+          { id: 'news', url: document_news_url(document, format: 'json'), relation: promo_relation('news') }
         ] + entity_promos
         promos.push(id: 'generic', url: document_parent_url(document, format: 'json'), relation: promo_relation('dctermsIsPartOf'),) if document_has_europeana_parent?
         promos.to_json

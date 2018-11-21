@@ -10,6 +10,7 @@ class PortalController < ApplicationController
   include Europeana::URIMappers
   include Europeana::SearchAPIConsumer
   include GalleryHelper
+  include NewsHelper
   include OembedRetriever
   include SearchInteractionLogging
 
@@ -103,6 +104,17 @@ class PortalController < ApplicationController
 
     respond_to do |format|
       format.json { render json: promo_content }
+    end
+  end
+
+  def news
+    # Get a post featuring this record from Pro's JSON API
+    post = Pro::Post.with_params(contains: { image_attribution_link: doc_id }).
+           order(datepublish: :desc).per(1).first
+    @resource = news_promo_content(post)
+
+    respond_to do |format|
+      format.json { render :promo_card, layout: false }
     end
   end
 

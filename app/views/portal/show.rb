@@ -4,7 +4,6 @@ module Portal
   class Show < ApplicationView
     include NamedEntityDisplayingView
     include Promos
-    include ProJsonApiConsumingView
     include SearchableView
     include UgcContentDisplayingView
 
