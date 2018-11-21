@@ -402,15 +402,15 @@ RSpec.describe PortalController, :annotations_api do
   describe 'GET news' do
     let(:record_id) { '/123/abc' }
     let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
-    let(:api_url) { "#{Pro::Base.site}#{Pro::Post.table_name}" }
-    let(:api_query) do
+    let(:pro_api_url) { "#{Pro::Base.site}#{Pro::Post.table_name}" }
+    let(:pro_api_query) do
       {
          contains: { image_attribution_link: record_id },
          page: { number: 1, size: 1 },
          sort: '-datepublish'
        }
     end
-    let(:api_response_body) do
+    let(:pro_api_response_body) do
       <<~JSON
         {
           "meta": {
@@ -423,14 +423,14 @@ RSpec.describe PortalController, :annotations_api do
     end
 
     before do
-      stub_request(:get, api_url).
-       with(query: api_query).
-       to_return(status: 200, body: api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
+      stub_request(:get, pro_api_url).
+       with(query: pro_api_query).
+       to_return(status: 200, body: pro_api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
     end
 
     it 'queries Pro JSON API for post containing record' do
       get :news, params
-      expect(a_request(:get, api_url).with(query: api_query)).to have_been_made
+      expect(a_request(:get, pro_api_url).with(query: pro_api_query)).to have_been_made
     end
 
     it 'responds with JSON' do
