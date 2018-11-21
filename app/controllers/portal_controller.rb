@@ -117,10 +117,10 @@ class PortalController < ApplicationController
     # Get a post featuring this record from Pro's JSON API
     post = Pro::Post.with_params(contains: { image_attribution_link: doc_id }).
            order(datepublish: :desc).per(1).first
-    content = news_promo_content(post)
+    @resource = news_promo_content(post)
 
     respond_to do |format|
-      format.json { render json: content.to_json, layout: false }
+      format.json { render :promo_card, layout: false }
     end
   end
 
