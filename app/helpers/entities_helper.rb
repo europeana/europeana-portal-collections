@@ -31,14 +31,16 @@ module EntitiesHelper
   def entity_promo_content(entity)
     return nil if entity.blank?
 
+    type = entities_human_type(entity.api_response[:type])
     {
-      url: entity_path(id: entity.id, type: entities_human_type(entity.api_response[:type]), slug: entity.pref_label.to_url, format: 'html'),
+      url: entity_path(id: entity.id, type: type, slug: entity.pref_label.to_url, format: 'html'),
       title: entity.pref_label,
       description: entity.description,
       images: [entity.thumbnail_src],
       more_link_text: t('global.more.view-more')
     }
   end
+
   ##
   # Constructs a URL slug for an entity page from the English prefLabel
   #

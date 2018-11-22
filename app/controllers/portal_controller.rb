@@ -93,7 +93,7 @@ class PortalController < ApplicationController
   # GET /record/:id/gallery
   def gallery
     gallery = Gallery.published.joins(:images).where(gallery_images: { europeana_record_id: doc_id }).
-      order(published_at: :desc).first
+              order(published_at: :desc).first
     @resource = gallery_promo_content(gallery)
     respond_to do |format|
       format.json { render :promo_card, layout: false }

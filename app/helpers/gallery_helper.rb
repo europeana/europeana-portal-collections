@@ -18,12 +18,12 @@ module GalleryHelper
     return nil if gallery.blank?
 
     {
-        url: gallery_path(gallery),
-        title: gallery.title,
-        description: gallery.description,
-        images: gallery_promo_image_content(gallery),
-        type: t('global.promotions.gallery'),
-        count_label: t('site.object.promotions.card-labels.gallery-count', count: gallery.images.size)
+      url: gallery_path(gallery),
+      title: gallery.title,
+      description: gallery.description,
+      images: gallery_promo_image_content(gallery),
+      type: t('global.promotions.gallery'),
+      count_label: t('site.object.promotions.card-labels.gallery-count', count: gallery.images.size)
     }
   end
 

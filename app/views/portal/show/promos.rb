@@ -13,7 +13,9 @@ module Portal
           { id: 'gallery', url: document_gallery_url(document, format: 'json'), relation: promo_relation('exhibition') },
           { id: 'news', url: document_news_url(document, format: 'json'), relation: promo_relation('news') }
         ] + entity_promos
-        promos.push(id: 'generic', url: document_parent_url(document, format: 'json'), relation: promo_relation('dctermsIsPartOf'),) if document_has_europeana_parent?
+        if document_has_europeana_parent?
+          promos.push(id: 'generic', url: document_parent_url(document, format: 'json'), relation: promo_relation('dctermsIsPartOf'),)
+        end
         promos.to_json
       end
 
