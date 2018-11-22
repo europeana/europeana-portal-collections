@@ -18,7 +18,7 @@ module GalleryHelper
     return nil if gallery.blank?
 
     {
-      url: gallery_path(gallery),
+      url: gallery_url(gallery),
       title: gallery.title,
       description: gallery.description,
       images: gallery_promo_image_content(gallery),

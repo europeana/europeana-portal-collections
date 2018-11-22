@@ -414,18 +414,37 @@ RSpec.describe PortalController, :annotations_api do
       <<~JSON
         {
           "meta": {
-            "count": 0,
-            "total": 0
+            "count": 1,
+            "total": 1
           },
-          "data": []
+          "data": [
+            {
+              "id": "1",
+              "type": "posts",
+              "attributes": {
+                "slug": "test-news",
+                "status": "published",
+                "datecreated": "2018-08-15T13:57:19+02:00",
+                "datechanged": "2018-08-23T12:02:56+02:00",
+                "datepublish": "2018-08-15T13:51:03+02:00",
+                "title": "European Test - testing",
+                "posttype": "News",
+                "intro": "<p>Intro text</p>",
+                "body": "<h1>Test</h1><p>Body text</p>",
+                "links": {
+                  "self": "https:\/\/pro.europeana.eu\/json\/posts\/1"
+                }
+              }
+            }
+          ]
         }
       JSON
     end
 
     before do
       stub_request(:get, pro_api_url).
-       with(query: pro_api_query).
-       to_return(status: 200, body: pro_api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
+        with(query: pro_api_query).
+        to_return(status: 200, body: pro_api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
     end
 
     it 'queries Pro JSON API for post containing record' do
@@ -436,6 +455,11 @@ RSpec.describe PortalController, :annotations_api do
     it 'responds with JSON' do
       get :news, params
       expect(response.content_type).to eq('application/json')
+    end
+
+    it 'assigns @resource' do
+      get :news, params
+      expect(assigns[:resource][:title]).to include("European Test - testing")
     end
 
     it 'responds with 200' do
@@ -507,8 +531,8 @@ RSpec.describe PortalController, :annotations_api do
           expect(response.status).to eq(200)
         end
 
-        it 'is blank' do
-          expect(response.body).to eq('')
+        it 'renders JSON template' do
+          expect(response).to render_template('portal/promo_card')
         end
       end
     end

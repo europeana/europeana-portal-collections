@@ -10,7 +10,7 @@ module Portal
 
       def js_var_enabled_promos
         promos = [
-          { id: 'gallery', url: document_gallery_url(document, format: 'json'), relation: promo_relation('exhibition') },
+          { id: 'gallery', url: document_gallery_url(document, format: 'json'), relation: promo_relation('gallery') },
           { id: 'news', url: document_news_url(document, format: 'json'), relation: promo_relation('news') }
         ] + entity_promos
         if document_has_europeana_parent?
