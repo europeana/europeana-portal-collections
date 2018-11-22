@@ -301,7 +301,7 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
           end
 
           it 'renders JSON ERB template' do
-            expect(response).to render_template('portal/exhibition')
+            expect(response).to render_template('portal/promo_card')
           end
 
           it 'contains the JSON' do
@@ -310,10 +310,9 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
             expect(parsed_response).to have_key('url')
             expect(parsed_response).to have_key('title')
             expect(parsed_response).to have_key('description')
-            expect(parsed_response).to have_key('image')
-            expect(parsed_response).to have_key('logo_url')
+            expect(parsed_response).to have_key('images')
+            expect(parsed_response).to have_key('logo')
             expect(parsed_response).to have_key('type')
-            expect(parsed_response).to have_key('relation')
           end
 
           context 'when using another locale' do
@@ -353,11 +352,11 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
           end
 
           it 'renders JSON ERB template' do
-            expect(response).to render_template('portal/exhibition')
+            expect(response).to render_template('portal/promo_card')
           end
 
           it 'is empty' do
-            expect(response.body).to eq('{}')
+            expect(response.body).to eq('null')
           end
         end
       end
@@ -380,7 +379,7 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
         end
 
         it 'is empty' do
-          expect(response.body).to eq('{}')
+          expect(response.body).to eq('null')
         end
       end
     end

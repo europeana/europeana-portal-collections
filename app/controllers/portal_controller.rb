@@ -9,6 +9,7 @@ class PortalController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include Europeana::URIMappers
   include Europeana::SearchAPIConsumer
+  include ExhibitionsHelper
   include NewsHelper
   include OembedRetriever
   include SearchInteractionLogging
@@ -89,9 +90,9 @@ class PortalController < ApplicationController
 
   # GET /record/:id/exhibition
   def exhibition
-    @exhibition = Europeana::Exhibition.find(exhibition_url)
+    @resource = exhibition_promo_content(Europeana::Exhibition.find(exhibition_url))
     respond_to do |format|
-      format.json { render :exhibition, layout: false }
+      format.json { render :promo_card, layout: false }
     end
   end
 

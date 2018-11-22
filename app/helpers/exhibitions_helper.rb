@@ -1,24 +1,19 @@
 # frozen_string_literal: true
 
 module ExhibitionsHelper
-  include UrlHelper
 
-  def exhibition_content(exhibition)
-    return {} if exhibition.nil?
+
+  def exhibition_promo_content(exhibition)
+    return if exhibition.blank?
 
     {
       url: exhibition.url,
       title: exhibition.title,
       description: exhibition.card_text,
-      image: card_image(exhibition),
-      logo_url: exhibition.credit_image,
-      type: I18n.t('global.promotions.exhibition'),
-      relation: I18n.t('site.object.promotions.card-labels.exhibition')
+      images: [exhibition.card_image],
+      logo: exhibition.credit_image,
+      type: I18n.t('global.promotions.exhibition')
     }
-  end
-
-  def card_image(exhibition)
-    exhibition.card_image
   end
 
   # Tags are not supported at this point.
