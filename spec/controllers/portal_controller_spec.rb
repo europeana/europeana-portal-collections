@@ -531,6 +531,56 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
     end
   end
 
+  describe 'GET news' do
+    let(:record_id) { '/123/abc' }
+    let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
+    let(:pro_api_url) { "#{Pro::Base.site}#{Pro::Post.table_name}" }
+    let(:pro_api_query) do
+      {
+         contains: { image_attribution_link: record_id },
+         page: { number: 1, size: 1 },
+         sort: '-datepublish'
+       }
+    end
+    let(:pro_api_response_body) do
+      <<~JSON
+        {
+          "meta": {
+            "count": 0,
+            "total": 0
+          },
+          "data": []
+        }
+      JSON
+    end
+
+    before do
+      stub_request(:get, pro_api_url).
+       with(query: pro_api_query).
+       to_return(status: 200, body: pro_api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
+    end
+
+    it 'queries Pro JSON API for post containing record' do
+      get :news, params
+      expect(a_request(:get, pro_api_url).with(query: pro_api_query)).to have_been_made
+    end
+
+    it 'responds with JSON' do
+      get :news, params
+      expect(response.content_type).to eq('application/json')
+    end
+
+    it 'responds with 200' do
+      get :news, params
+      expect(response.status).to eq(200)
+    end
+
+    it 'renders JSON template' do
+      get :news, params
+      expect(response).to render_template('portal/promo_card')
+    end
+  end
+
   describe 'GET parent' do
     context 'when format is JSON' do
       let(:record_id) { '/123/abc' }

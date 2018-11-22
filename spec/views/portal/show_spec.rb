@@ -2,7 +2,6 @@
 
 RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight_config, :stable_version_view do
   include EntitiesHelper
-  include ProJsonApiConsumingView
 
   let(:record_id) { '/123/abc' }
   let(:record_param) { record_id[1..-1] }
@@ -81,11 +80,11 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
           end
         end
 
-        it 'includes Pro JSON API blog post' do
+        it 'includes news' do
           render
           expect(enabled_promos).to be_any do |promo|
-            promo['id'] == 'blog' &&
-              promo['url'] == pro_json_api_posts_for_record_url(record_id)
+            promo['id'] == 'news' &&
+              promo['url'] == document_news_url(record_param, format: 'json')
           end
         end
 
