@@ -25,14 +25,14 @@ module EntitiesHelper
       timespan: 'periods',
       place: 'places',
       concept: 'topics'
-    }[api_type.to_sym]
+    }[api_type.downcase.to_sym]
   end
 
   def entity_promo_content(entity)
     return nil if entity.blank?
 
     {
-      url: entity_path(portal_entity_path_options(entity.uri, format: 'html')),
+      url: entity_path(id: entity.id, type: entities_human_type(entity.api_response[:type]), slug: entity.pref_label.to_url, format: 'html'),
       title: entity.pref_label,
       description: entity.description,
       images: [entity.thumbnail_src],

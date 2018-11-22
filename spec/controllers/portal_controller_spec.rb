@@ -362,10 +362,10 @@ RSpec.describe PortalController, :annotations_api do
     end
   end
 
-  describe 'GET galleries' do
+  describe 'GET gallery' do
     context 'when format is JSON' do
       before do
-        get :galleries, params
+        get :gallery, params
       end
 
       let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
@@ -380,11 +380,11 @@ RSpec.describe PortalController, :annotations_api do
       end
 
       it 'renders JSON ERB template' do
-        expect(response).to render_template('portal/galleries')
+        expect(response).to render_template('portal/promo_card')
       end
 
-      it 'assigns @galleries' do
-        expect(assigns[:galleries]).to include(galleries(:fashion_dresses))
+      it 'assigns @resource' do
+        expect(assigns[:resource][:title]).to include(galleries(:fashion_dresses).title)
       end
     end
 
@@ -392,7 +392,7 @@ RSpec.describe PortalController, :annotations_api do
       let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
 
       it 'renders an error page' do
-        get :galleries, params
+        get :gallery, params
         expect(response.status).to eq(404)
         expect(response).to render_template('pages/custom/errors/not_found')
       end
@@ -475,11 +475,11 @@ RSpec.describe PortalController, :annotations_api do
         end
 
         it 'renders JSON ERB template' do
-          expect(response).to render_template('portal/parent')
+          expect(response).to render_template('portal/promo_card')
         end
 
-        it 'assigns first result to @parent' do
-          expect(assigns[:parent]).to be_a(Hash)
+        it 'assigns first result to @resource' do
+          expect(assigns[:resource]).to be_a(Hash)
         end
       end
 
@@ -507,8 +507,8 @@ RSpec.describe PortalController, :annotations_api do
           expect(response.status).to eq(200)
         end
 
-        it 'is "null"' do
-          expect(response.body).to eq('null')
+        it 'is blank' do
+          expect(response.body).to eq('')
         end
       end
     end

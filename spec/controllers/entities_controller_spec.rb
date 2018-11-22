@@ -169,11 +169,14 @@ RSpec.describe EntitiesController do
     context 'with format=json' do
       let(:params) { { locale: 'en', type: type, id: id, format: 'json' } }
 
-      include_examples 'retrieves and assigns one entity'
-
-      it 'renders entities/promo' do
+      it 'assigns entity to @resource' do
         subject.call
-        expect(response).to render_template('entities/promo')
+        expect(assigns(:resource)).to be_a(Hash)
+      end
+
+      it 'renders portal/promo_card' do
+        subject.call
+        expect(response).to render_template('portal/promo_card')
       end
     end
   end
