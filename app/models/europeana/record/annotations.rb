@@ -5,17 +5,28 @@ module Europeana
     # Annotations support for records
     module Annotations
       # TODO: handle pagination if more than 100 items
-      def annotations
-        @annotations ||= Annotation.find(annotations_search_params)
+      # TODO: allow overriding sort field/order
+      def annotations(**options)
+        options.slice!(:creator_name, :link_resource_uri, :limit)
+        @annotations ||= Annotation.find(annotations_search_params(**options))
       end
 
-      def annotations_search_params
+      def annotations_search_params(**options)
         {
           qf: [
-            %(generator_name:#{annotations_api_generator_name}),
+            %(generator_name:#{escape_annotation_query_value(annotations_api_generator_name)}),
+            %(creator_name:#{escape_annotation_query_value(options[:creator_name] || '*')}),
+            %(link_resource_uri:#{escape_annotation_query_value(options[:link_resource_uri] || '*')}),
             %(target_record_id:"#{id}")
-          ]
+          ],
+          sort: 'created',
+          sortOrder: 'desc',
+          pageSize: options[:limit] || 100
         }
+      end
+
+      def escape_annotation_query_value(value)
+        value.blank? ? '' : value.gsub(/(?<!OR)\s(?!OR)/, '\ ').gsub(':', '\:')
       end
 
       def annotations_api_generator_name

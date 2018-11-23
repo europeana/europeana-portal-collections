@@ -34,6 +34,10 @@ Rails.application.config.x.gallery = OpenStruct.new(
   validation_mail_to: ENV['GALLERY_VALIDATION_MAIL_TO']
 )
 
+Rails.application.config.x.exhibitions = OpenStruct.new(
+  host: ENV['EXHIBITIONS_HOST'] ||'https://' + (ENV['HTTP_HOST'] || 'www.europeana.eu'),
+  annotation_creator_name: ENV['EXHIBITIONS_ANNOTATION_CREATOR_NAME'] || 'Europeana.eu Exhibition'
+)
 
 # Google-centric configuration
 Rails.application.config.x.google = OpenStruct.new(

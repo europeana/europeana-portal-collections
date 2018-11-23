@@ -2,7 +2,7 @@
 
 require 'support/shared_examples/europeana_api_requests'
 
-RSpec.describe PortalController, :annotations_api do
+RSpec.describe PortalController, :exhibitions_json, :annotations_api do
   describe 'GET index' do
     context 'when the format is html' do
       context 'without q param' do
@@ -260,6 +260,137 @@ RSpec.describe PortalController, :annotations_api do
     context 'when format is JSON' do
       it 'requests JSON-LD from the API'
       it 'renders the API JSON-LD response'
+    end
+  end
+
+  describe 'GET exhibition' do
+    context 'when format is JSON' do
+      render_views
+
+      let(:locale) { 'en' }
+      let(:params) { { locale: locale, id: '123/abc', format: :json } }
+      let(:configured_exhibitions_host) { 'http://europeana.eu'}
+
+      before do
+        # Overriding Annotations API shared context stub.
+        stub_request(:get, annotations_api_search_method_url).
+          to_return(annotation_return)
+
+        get :exhibition, params
+      end
+
+      let(:record_id) { '/' + params[:id] }
+
+      context 'when there is an annotation present' do
+        let(:annotation_return) do  { status: 200, body: api_responses(:annotations_search, exhibition: true),
+                                      headers: { 'Content-Type' => 'application/ld+json' } }
+        end
+
+        context 'with the exhibition returning json' do
+          it_behaves_like 'no record API request'
+          it_behaves_like 'an annotations API request'
+          it_behaves_like 'an exhibitions JSON request'
+          it_behaves_like 'no hierarchy API request'
+
+          it 'responds with JSON' do
+            expect(response.content_type).to eq('application/json')
+          end
+
+          it 'has 200 status code' do
+            expect(response.status).to eq(200)
+          end
+
+          it 'renders JSON ERB template' do
+            expect(response).to render_template('portal/promo_card')
+          end
+
+          it 'contains the JSON' do
+            parsed_response = JSON.parse(response.body)
+
+            expect(parsed_response).to have_key('url')
+            expect(parsed_response).to have_key('title')
+            expect(parsed_response).to have_key('description')
+            expect(parsed_response).to have_key('images')
+            expect(parsed_response).to have_key('logo')
+            expect(parsed_response).to have_key('type')
+          end
+
+          context 'when using another locale' do
+            let(:lang_code) { locale }
+
+            context 'when the alternative locale has a specific annotation' do
+              let(:locale) { 'fr' }
+
+              it 'contains the french URL' do
+                parsed_response = JSON.parse(response.body)
+                expect(parsed_response['url']).to eq('http://europeana.eu/portal/fr/exhibitions/test-exhibition')
+              end
+            end
+
+            context 'when the alternative locale does NOT have a specific annotation' do
+              let(:locale) { 'de' }
+              let(:lang_code) { 'en' }
+
+              it 'contains the english URL' do
+                parsed_response = JSON.parse(response.body)
+                expect(parsed_response['url']).to eq('http://europeana.eu/portal/en/exhibitions/test-exhibition')
+              end
+            end
+          end
+        end
+
+        context 'with the exhibition not being found' do
+          let(:exhibition_response_status) { 404 }
+          let(:exhibition_response_body) { '{"status": "404", "error": "Not Found"}' }
+
+          it 'responds with JSON' do
+            expect(response.content_type).to eq('application/json')
+          end
+
+          it 'has 200 status code' do
+            expect(response.status).to eq(200)
+          end
+
+          it 'renders JSON ERB template' do
+            expect(response).to render_template('portal/promo_card')
+          end
+
+          it 'is empty' do
+            expect(response.body).to eq('null')
+          end
+        end
+      end
+
+      context 'when there is NO annotation present' do
+        let(:annotation_return) do  { status: 200, body: api_responses(:annotations_search),
+                                      headers: { 'Content-Type' => 'application/ld+json' } }
+        end
+
+        it_behaves_like 'no record API request'
+        it_behaves_like 'an annotations API request'
+        it_behaves_like 'no exhibitions JSON request'
+        it_behaves_like 'no hierarchy API request'
+
+        it 'responds with JSON' do
+          expect(response.content_type).to eq('application/json')
+        end
+        it 'has 200 status code' do
+          expect(response.status).to eq(200)
+        end
+
+        it 'is empty' do
+          expect(response.body).to eq('null')
+        end
+      end
+    end
+
+    context 'when format is HTML' do
+      let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
+      it 'renders an error page' do
+        get :similar, params
+        expect(response.status).to eq(404)
+        expect(response).to render_template('pages/custom/errors/not_found')
+      end
     end
   end
 

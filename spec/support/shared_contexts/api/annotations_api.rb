@@ -28,7 +28,7 @@ RSpec.shared_context 'Annotations API', :annotations_api do
     a_request(:get, annotations_api_search_method_url).
       with(query: hash_including(
         wskey: annotations_api_key,
-        qf: %(target_uri:"http://data.europeana.eu/item#{id}")
+        qf: %(target_record_id:"#{id}")
       ))
   end
 end
