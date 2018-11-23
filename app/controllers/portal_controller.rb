@@ -10,9 +10,12 @@ class PortalController < ApplicationController
   include Europeana::URIMappers
   include Europeana::SearchAPIConsumer
   include ExhibitionsHelper
+  include GalleryHelper
   include NewsHelper
   include OembedRetriever
+  include ParentRecordHelper
   include SearchInteractionLogging
+  include ThumbnailHelper
 
   before_action :redirect_to_home, only: :index, unless: :has_search_parameters?
   before_action :log_search_interaction_on_show, only: :show
@@ -96,29 +99,22 @@ class PortalController < ApplicationController
     end
   end
 
-  # GET /record/:id/galleries
-  def galleries
-    @galleries = Gallery.published.joins(:images).
-                 where(gallery_images: { europeana_record_id: doc_id }).
-                 order(published_at: :desc)
-
+  # GET /record/:id/gallery
+  def gallery
+    gallery = Gallery.published.joins(:images).where(gallery_images: { europeana_record_id: doc_id }).
+              order(published_at: :desc).first
+    @resource = gallery_promo_content(gallery)
     respond_to do |format|
-      format.json { render :galleries, layout: false }
+      format.json { render :promo_card, layout: false }
     end
   end
 
   def parent
     # Search the API for the record with dcterms:hasPart data.europeana.eu/item/RECORD_ID
-    @parent = search_results_for_dcterms_has_part(doc_id, rows: 1)[:items]&.first
+    @resource = parent_promo_content(search_results_for_dcterms_has_part(doc_id, rows: 1)[:items]&.first)
 
     respond_to do |format|
-      format.json do
-        if @parent.nil?
-          render json: nil
-        else
-          render :parent, layout: false
-        end
-      end
+      format.json { render :promo_card, layout: false }
     end
   end
 
@@ -126,8 +122,8 @@ class PortalController < ApplicationController
     # Get a post featuring this record from Pro's JSON API
     post = Pro::Post.with_params(contains: { image_attribution_link: doc_id }).
            order(datepublish: :desc).per(1).first
-    @resource = news_promo_content(post)
 
+    @resource = news_promo_content(post)
     respond_to do |format|
       format.json { render :promo_card, layout: false }
     end

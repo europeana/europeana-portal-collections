@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     constraints id: %r{[^/]+/[^/]+} do
       get 'record/*id/annotations', to: 'portal#annotations', as: 'document_annotations'
       get 'record/*id/exhibition', to: 'portal#exhibition', as: 'document_exhibition'
-      get 'record/*id/galleries', to: 'portal#galleries', as: 'document_galleries'
+      get 'record/*id/gallery', to: 'portal#gallery', as: 'document_gallery'
       get 'record/*id/media', to: 'portal#media', as: 'document_media'
       get 'record/*id/news', to: 'portal#news', as: 'document_news'
       get 'record/*id/parent', to: 'portal#parent', as: 'document_parent'
