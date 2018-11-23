@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module ExhibitionsHelper
-
-
   def exhibition_promo_content(exhibition)
     return if exhibition.blank?
 
