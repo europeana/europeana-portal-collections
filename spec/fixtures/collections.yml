@@ -44,3 +44,9 @@ grid_layout:
   api_params: 'qf=grid'
   state: 1
   settings: "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ndefault_search_layout: grid"
+
+newspapers:
+  key: 'newspapers'
+  api_params: 'qf=what:newspaper'
+  api_url: 'https://newspapers-api.example.org/api'
+  state: 1

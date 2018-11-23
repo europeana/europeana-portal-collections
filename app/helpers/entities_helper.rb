@@ -25,7 +25,20 @@ module EntitiesHelper
       timespan: 'periods',
       place: 'places',
       concept: 'topics'
-    }[api_type.to_sym]
+    }[api_type.downcase.to_sym]
+  end
+
+  def entity_promo_content(entity)
+    return nil if entity.blank?
+
+    type = entities_human_type(entity.api_response[:type])
+    {
+      url: entity_path(id: entity.id, type: type, slug: entity.pref_label.to_url, format: 'html'),
+      title: entity.pref_label,
+      description: entity.description,
+      images: [entity.thumbnail_src],
+      more_link_text: t('global.more.view-more')
+    }
   end
 
   ##

@@ -10,22 +10,24 @@ module Portal
 
       def js_var_enabled_promos
         promos = [
-          { id: 'gallery', url: document_galleries_url(document, format: 'json') },
-          { id: 'blog', url: pro_json_api_posts_for_record_url(document.id) }
+          { id: 'gallery', url: document_gallery_url(document, format: 'json'), relation: promo_relation('gallery') },
+          { id: 'news', url: document_news_url(document, format: 'json'), relation: promo_relation('news') }
         ] + entity_promos
-        promos.push(id: 'generic', url: document_parent_url(document, format: 'json')) if document_has_europeana_parent?
+        if document_has_europeana_parent?
+          promos.push(id: 'generic', url: document_parent_url(document, format: 'json'), relation: promo_relation('dctermsIsPartOf'),)
+        end
         promos.to_json
       end
 
       def entity_promos
         proxy_europeana_entities.map do |uri, fields|
           path_options = portal_entity_path_options(uri, format: 'json')
-          relation = fields.map { |field| entity_promo_relation(field) }.join(', ')
+          relation = fields.map { |field| promo_relation(field) }.join(', ')
           { id: 'entity', url: entity_promo_path(path_options), relation: relation }
         end
       end
 
-      def entity_promo_relation(field)
+      def promo_relation(field)
         t(field, scope: 'site.object.promotions.card-labels', default: field)
       end
 

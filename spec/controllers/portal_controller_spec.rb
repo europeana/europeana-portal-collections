@@ -362,10 +362,10 @@ RSpec.describe PortalController, :annotations_api do
     end
   end
 
-  describe 'GET galleries' do
+  describe 'GET gallery' do
     context 'when format is JSON' do
       before do
-        get :galleries, params
+        get :gallery, params
       end
 
       let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
@@ -380,11 +380,11 @@ RSpec.describe PortalController, :annotations_api do
       end
 
       it 'renders JSON ERB template' do
-        expect(response).to render_template('portal/galleries')
+        expect(response).to render_template('portal/promo_card')
       end
 
-      it 'assigns @galleries' do
-        expect(assigns[:galleries]).to include(galleries(:fashion_dresses))
+      it 'assigns @resource' do
+        expect(assigns[:resource][:title]).to include(galleries(:fashion_dresses).title)
       end
     end
 
@@ -392,10 +392,84 @@ RSpec.describe PortalController, :annotations_api do
       let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
 
       it 'renders an error page' do
-        get :galleries, params
+        get :gallery, params
         expect(response.status).to eq(404)
         expect(response).to render_template('pages/custom/errors/not_found')
       end
+    end
+  end
+
+  describe 'GET news' do
+    let(:record_id) { '/123/abc' }
+    let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
+    let(:pro_api_url) { "#{Pro::Base.site}#{Pro::Post.table_name}" }
+    let(:pro_api_query) do
+      {
+         contains: { image_attribution_link: record_id },
+         page: { number: 1, size: 1 },
+         sort: '-datepublish'
+       }
+    end
+    let(:pro_api_response_body) do
+      <<~JSON
+        {
+          "meta": {
+            "count": 1,
+            "total": 1
+          },
+          "data": [
+            {
+              "id": "1",
+              "type": "posts",
+              "attributes": {
+                "slug": "test-news",
+                "status": "published",
+                "datecreated": "2018-08-15T13:57:19+02:00",
+                "datechanged": "2018-08-23T12:02:56+02:00",
+                "datepublish": "2018-08-15T13:51:03+02:00",
+                "title": "European Test - testing",
+                "posttype": "News",
+                "intro": "<p>Intro text</p>",
+                "body": "<h1>Test</h1><p>Body text</p>",
+                "links": {
+                  "self": "https:\/\/pro.europeana.eu\/json\/posts\/1"
+                }
+              }
+            }
+          ]
+        }
+      JSON
+    end
+
+    before do
+      stub_request(:get, pro_api_url).
+        with(query: pro_api_query).
+        to_return(status: 200, body: pro_api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
+    end
+
+    it 'queries Pro JSON API for post containing record' do
+      get :news, params
+      expect(a_request(:get, pro_api_url).with(query: pro_api_query)).to have_been_made
+    end
+
+    it 'responds with JSON' do
+      get :news, params
+      expect(response.content_type).to eq('application/json')
+    end
+
+    it 'assigns @resource' do
+      get :news, params
+      expect(assigns[:resource][:title]).to include("European Test - testing")
+    end
+
+    it 'responds with 200' do
+      get :news, params
+      expect(response.status).to eq(200)
+    end
+
+    it 'renders JSON template' do
+      get :news, params
+      expect(response).to render_template('portal/promo_card')
     end
   end
 
@@ -425,11 +499,11 @@ RSpec.describe PortalController, :annotations_api do
         end
 
         it 'renders JSON ERB template' do
-          expect(response).to render_template('portal/parent')
+          expect(response).to render_template('portal/promo_card')
         end
 
-        it 'assigns first result to @parent' do
-          expect(assigns[:parent]).to be_a(Hash)
+        it 'assigns first result to @resource' do
+          expect(assigns[:resource]).to be_a(Hash)
         end
       end
 
@@ -457,8 +531,8 @@ RSpec.describe PortalController, :annotations_api do
           expect(response.status).to eq(200)
         end
 
-        it 'is "null"' do
-          expect(response.body).to eq('null')
+        it 'renders JSON template' do
+          expect(response).to render_template('portal/promo_card')
         end
       end
     end

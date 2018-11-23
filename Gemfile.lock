@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: af438d2544b8dddd8d64563c3124f1d88c82e9cd
+  revision: dad484b348dec091bb7b7e5618a1c8cf4353a414
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -197,7 +197,7 @@ GEM
       faraday_middleware (>= 0.9)
       loofah (>= 2.0)
       sax-machine (>= 1.0)
-    ffi (1.9.23)
+    ffi (1.9.25)
     foederati (0.2.0)
       activesupport (>= 4.2.2, < 6.0)
       faraday (~> 0)
@@ -354,7 +354,7 @@ GEM
     progress (3.4.0)
     public_suffix (2.0.5)
     puma (3.9.1)
-    rack (1.6.10)
+    rack (1.6.11)
     rack-cors (1.0.1)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -491,6 +491,8 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    sentry-raven (2.7.4)
+      faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simplecov (0.16.1)
@@ -616,6 +618,7 @@ DEPENDENCIES
   ruby-oembed (~> 0.9)
   sass-rails
   selenium-webdriver
+  sentry-raven
   shoulda-matchers (~> 3.0)
   simplecov
   soundcloud (~> 0.3)
