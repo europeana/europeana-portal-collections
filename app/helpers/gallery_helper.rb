@@ -14,6 +14,19 @@ module GalleryHelper
     }
   end
 
+  def gallery_promo_content(gallery)
+    return nil if gallery.blank?
+
+    {
+      url: gallery_url(gallery),
+      title: gallery.title,
+      description: gallery.description,
+      images: gallery_promo_image_content(gallery),
+      type: t('global.promotions.gallery'),
+      count_label: t('site.object.promotions.card-labels.gallery-count', count: gallery.images.size)
+    }
+  end
+
   def gallery_label(gallery)
     gallery.topics.map(&:label).sort.join(' | ').presence
   end
@@ -27,6 +40,10 @@ module GalleryHelper
       index: image.position,
       url: gallery_image_thumbnail(image)
     }
+  end
+
+  def gallery_promo_image_content(gallery)
+    gallery.images.first(3).map { |image| gallery_image_thumbnail(image) }
   end
 
   def gallery_image_thumbnail(image)

@@ -76,7 +76,7 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
           render
           expect(enabled_promos).to be_any do |promo|
             promo['id'] == 'gallery' &&
-              promo['url'] == document_galleries_url(record_param, format: 'json')
+              promo['url'] == document_gallery_url(record_param, format: 'json')
           end
         end
 
