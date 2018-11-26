@@ -11,13 +11,13 @@ module Facet
         form: display_form,
         range: display_range
       }.merge(filter_facet? ? {} : {
-        data: display_data,
-        date_start: range_min,
-        date_middle: range_middle,
-        date_end: range_max,
-        show_bars: !single_value?,
-        show_borders: display_data.length < 50
-      }).reverse_merge(facet_config.display_options)
+                data: display_data,
+                date_start: range_min,
+                date_middle: range_middle,
+                date_end: range_max,
+                show_bars: !single_value?,
+                show_borders: display_data.length < 50
+              }).reverse_merge(facet_config.display_options)
     end
 
     def filter_item(_)
