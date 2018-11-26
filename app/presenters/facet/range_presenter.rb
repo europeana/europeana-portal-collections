@@ -10,9 +10,9 @@ module Facet
         filter_open: filter_open?,
         form: display_form,
         range: display_range
-      }.tap do |data|
+      }.tap do |fields|
         unless filter_facet?
-          data.merge!(
+          fields.merge!(
             data: display_data,
             date_start: range_min,
             date_middle: range_middle,
@@ -21,7 +21,7 @@ module Facet
             show_borders: display_data.length < 50
           )
         end
-        data.reverse_merge!(facet_config.display_options)
+        fields.reverse_merge!(facet_config.display_options || {})
       end
     end
 
@@ -191,11 +191,11 @@ module Facet
     end
 
     def displayable_begin_value(items)
-      search_state_has_begin? ? search_state_param[:begin] : items.first[:value]
+      search_state_has_begin? ? search_state_param[:begin] : items.first&.dig(:value)
     end
 
     def displayable_end_value(items)
-      search_state_has_end? ? search_state_param[:end] : items.last[:value]
+      search_state_has_end? ? search_state_param[:end] : items.last&.dig(:value)
     end
 
     ##
