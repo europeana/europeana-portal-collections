@@ -9,6 +9,7 @@ class PortalController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include Europeana::URIMappers
   include Europeana::SearchAPIConsumer
+  include ExhibitionsHelper
   include GalleryHelper
   include NewsHelper
   include OembedRetriever
@@ -90,6 +91,14 @@ class PortalController < ApplicationController
     end
   end
 
+  # GET /record/:id/exhibition
+  def exhibition
+    @resource = exhibition_promo_content(Europeana::Exhibition.find(exhibition_url))
+    respond_to do |format|
+      format.json { render :promo_card, layout: false }
+    end
+  end
+
   # GET /record/:id/gallery
   def gallery
     gallery = Gallery.published.joins(:images).where(gallery_images: { europeana_record_id: doc_id }).
@@ -138,8 +147,8 @@ class PortalController < ApplicationController
     @template = 'portal/ancestor'
   end
 
-  def document_annotations(id)
-    Europeana::Record.new(id).annotations
+  def document_annotations(id, **options)
+    Europeana::Record.new(id).annotations(**options)
   rescue Europeana::API::Errors::ServerError, Europeana::API::Errors::ResponseError => error
     # TODO: we may not want controller actions to fail if annotations are
     #   unavailable, but we should return something indicating that there
@@ -152,6 +161,20 @@ class PortalController < ApplicationController
   def document_data_provider(document)
     data_provider_name = document.fetch('aggregations.edmDataProvider', []).first
     DataProvider.find_by_name(data_provider_name)
+  end
+
+  def exhibition_url_prefix(locale)
+    "#{Rails.application.config.x.exhibitions.host}/portal/#{locale}/"
+  end
+
+  def exhibition_url
+    creator_name = Rails.application.config.x.exhibitions.annotation_creator_name
+    uri_query = "(#{exhibition_url_prefix(locale)}* OR #{exhibition_url_prefix(I18n.default_locale)}*)"
+    annotations = document_annotations(doc_id, creator_name: creator_name, link_resource_uri: uri_query, limit: 100)
+    lang_pref_annotation = annotations&.detect do |x|
+      x.body&.dig('@graph', 'isGatheredInto')&.start_with?(exhibition_url_prefix(locale))
+    end || annotations&.first
+    lang_pref_annotation&.body&.dig('@graph', 'isGatheredInto')
   end
 
   def find_landing_page
