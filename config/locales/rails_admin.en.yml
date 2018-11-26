@@ -34,6 +34,7 @@ en:
         base_query: '%{help} Portal search query for all record sets on this page, used for "more records" links, combined with set query, e.g. "f[TYPE][]=IMAGE".'
         link_text: '%{help} Customise the link text shown to search for more records in each set. Include "%%{set_pref_label}" where the set preferred label should go, e.g. "More records like %%{set_pref_label}...".'
         set_query: '%{help} Portal search query for each record set on this page, used for "more records" links. Include "%%{set_query_term}" where the set-specific query term should go, e.g. "q=proxy_dc_title:%%{set_query_term}*".'
+        show_menu: '%{help} If checked, show a menu linking to each record set.'
       page/landing:
         strapline: '%{help} Include "%%{total_item_count}" where the number of items should be displayed.'
       gallery:

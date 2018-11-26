@@ -459,6 +459,7 @@ RailsAdmin.config do |config|
       field :link_text
       field :base_query
       field :set_query
+      field :show_menu, :boolean
       field :sets
     end
   end
