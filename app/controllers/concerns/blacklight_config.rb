@@ -86,14 +86,27 @@ module BlacklightConfig
                              when: ->(context) { context.within_collection? && %w(migration world-war-I).include?(context.current_collection.key) }
       config.add_facet_field 'YEAR',
                              range: true,
-                             when:  lambda { |context|
+                             when: lambda { |context|
                                year_facet_collections = Rails.application.config.x.blacklight.extra_year_facet_collections.dup
                                year_facet_collections += %w(fashion migration)
                                context.within_collection? && year_facet_collections.include?(context.current_collection.key)
                              },
                              limit: 2_000,
                              only: ->(item) { item.value =~ /\A-?\d{1,4}\z/ },
-                             format_value_as: ->(value) { value.to_i }
+                             format_value_as: ->(value) { value.to_i },
+                             display_options: {
+                               date: true,
+                               input_type: 'number'
+                             }
+      config.add_facet_field 'proxy_dcterms_issued',
+                             range: true,
+                             when: ->(context) { context.within_collection? && context.current_collection.key == 'newspapers' },
+                             filter: true,
+                             limit: 1,
+                             display_options: {
+                               date: true,
+                               input_type: 'date'
+                             }
       config.add_facet_field 'REUSABILITY',
                              hierarchical: true,
                              expandable: true,

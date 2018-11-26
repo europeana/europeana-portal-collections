@@ -6,18 +6,23 @@ module Facet
 
     def display(**_)
       {
-        date: true,
         title: facet_label,
         filter_open: filter_open?,
         form: display_form,
-        range: display_range,
-        data: display_data,
-        date_start: range_min,
-        date_middle: range_middle,
-        date_end: range_max,
-        show_bars: !single_value?,
-        show_borders: display_data.length < 50
-      }
+        range: display_range
+      }.tap do |fields|
+        unless filter_facet?
+          fields.merge!(
+            data: display_data,
+            date_start: range_min,
+            date_middle: range_middle,
+            date_end: range_max,
+            show_bars: !single_value?,
+            show_borders: display_data.length < 50
+          )
+        end
+        fields.reverse_merge!(facet_config.display_options || {})
+      end
     end
 
     def filter_item(_)
@@ -25,7 +30,7 @@ module Facet
     end
 
     def filter_open?
-      range_in_params?
+      filter_facet? || range_in_params?
     end
 
     def items_in_params
@@ -186,11 +191,11 @@ module Facet
     end
 
     def displayable_begin_value(items)
-      search_state_has_begin? ? search_state_param[:begin] : items.first[:value]
+      search_state_has_begin? ? search_state_param[:begin] : items.first&.dig(:value)
     end
 
     def displayable_end_value(items)
-      search_state_has_end? ? search_state_param[:end] : items.last[:value]
+      search_state_has_end? ? search_state_param[:end] : items.last&.dig(:value)
     end
 
     ##
@@ -299,6 +304,7 @@ module Facet
         if params_for_search && apply_format_value_as_to_items?
           params_for_search.each { |k, v| params_for_search[k] = facet_config.format_value_as.call(v) }
         end
+        params_for_search
       end
     end
 
@@ -307,11 +313,23 @@ module Facet
     end
 
     def display_range_start
-      search_state_param.present? ? search_state_param[:begin] : range_min
+      if search_state_param.present?
+        search_state_param[:begin]
+      elsif filter_facet?
+        nil
+      else
+        range_min
+      end
     end
 
     def display_range_end
-      search_state_param.present? ? search_state_param[:end] : range_max
+      if search_state_param.present?
+        search_state_param[:end]
+      elsif filter_facet?
+        nil
+      else
+        range_max
+      end
     end
 
     def display_form

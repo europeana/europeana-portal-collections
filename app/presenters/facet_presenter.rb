@@ -169,6 +169,10 @@ class FacetPresenter < ApplicationPresenter
     value == default_facet_value
   end
 
+  def filter_facet?
+    !!facet_config.filter
+  end
+
   def default_facet_value
     facet_config.default
   end
