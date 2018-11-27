@@ -10,7 +10,11 @@ class Page
 
       accepts_nested_attributes_for :sets, allow_destroy: true
 
-      store_accessor :config, :base_query, :set_query
+      store_accessor :config, :base_query, :set_query, :show_menu
+
+      def show_menu?
+        ActiveRecord::Type::Boolean.new.type_cast_from_user(show_menu)
+      end
 
       def europeana_ids
         sets.map(&:europeana_ids).flatten.uniq
