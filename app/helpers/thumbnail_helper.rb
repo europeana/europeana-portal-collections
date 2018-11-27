@@ -4,17 +4,12 @@ module ThumbnailHelper
   include ApiHelper
 
   def thumbnail_url_for_edm_preview(edm_preview, **options)
-    options.reverse_merge!(generic: false)
-    url_options = options.except(:generic)
-
-    return nil if edm_preview.blank? && !options[:generic]
-
-    api_thumbnail_url_for_edm_preview(edm_preview, **url_options)
+    api_thumbnail_url_for_edm_preview(edm_preview, options)
   end
 
   def api_thumbnail_url_for_edm_preview(edm_preview, **options)
     query = if edm_preview.blank?
-              {}
+              { uri: '' }
             else
               edm_preview_uri = URI.parse(edm_preview)
               Rack::Utils.parse_query(edm_preview_uri.query).symbolize_keys
