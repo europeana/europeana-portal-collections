@@ -20,8 +20,7 @@ module Pages
       def content
         {
           anchor_title: page.show_menu? && page.sets.present?,
-          browse_lists: page.sets&.map { |set| content_browse_list(set) },
-          helpbar_tip: t('site.helpbar-tip.browse-page')
+          browse_lists: page.sets&.map { |set| content_browse_list(set) }
         }
       end
 
