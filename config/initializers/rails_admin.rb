@@ -138,6 +138,7 @@ RailsAdmin.config do |config|
       field :key
       field :title
       field :state
+      field :api_url
       field :api_params
       field :settings_default_search_layout, :enum
     end
@@ -148,6 +149,9 @@ RailsAdmin.config do |config|
         end
       end
       field :title
+      field :api_url do
+        help I18n.t('admin.help.collection.api_url', help: generic_help, default_api_url: Europeana::API.url)
+      end
       field :api_params, :text do
         html_attributes rows: 15
       end
@@ -282,6 +286,7 @@ RailsAdmin.config do |config|
         multiple true
       end
       field :image_portal_urls_text, :text do
+        required true
         html_attributes rows: 15, cols: 80
       end
     end

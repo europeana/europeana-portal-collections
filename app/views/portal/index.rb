@@ -12,7 +12,8 @@ module Portal
 
     def js_vars
       super + [
-        { name: 'collectionName', value: within_collection? ? current_collection.key : '' }
+        { name: 'collectionName', value: within_collection? ? current_collection.key : '' },
+        { name: 'newRecordPageDesign', value: !!Rails.application.config.x.enable.new_record_page_design, unquoted: true }
       ]
     end
 

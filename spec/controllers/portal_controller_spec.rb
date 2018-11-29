@@ -2,7 +2,7 @@
 
 require 'support/shared_examples/europeana_api_requests'
 
-RSpec.describe PortalController, :annotations_api do
+RSpec.describe PortalController, :exhibitions_json, :annotations_api do
   describe 'GET index' do
     context 'when the format is html' do
       context 'without q param' do
@@ -191,19 +191,47 @@ RSpec.describe PortalController, :annotations_api do
     end
 
     describe 'URL param `design`' do
-      context 'when "new"' do
-        let(:params) { { locale: 'en', id: '123/abc', format: 'html', design: 'new' } }
-        it 'sets @new_design to true' do
-          get :show, params
-          expect(assigns(:new_design)).to be true
+      context 'when the new design is enabled in the ENV setting' do
+        before do
+          Rails.application.config.x.enable.new_record_page_design = true
+        end
+
+        context 'when "old"' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html', design: 'old' } }
+          it 'sets @new_design to false' do
+            get :show, params
+            expect(assigns(:new_design)).to be false
+          end
+        end
+
+        context 'when absent' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
+          it 'sets @new_design to false' do
+            get :show, params
+            expect(assigns(:new_design)).to be true
+          end
         end
       end
 
-      context 'when absent' do
-        let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
-        it 'sets @new_design to false' do
-          get :show, params
-          expect(assigns(:new_design)).to be false
+      context 'when the new design is NOT enabled in the ENV setting' do
+        before do
+          Rails.application.config.x.enable.new_record_page_design = false
+        end
+
+        context 'when "new"' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html', design: 'new' } }
+          it 'sets @new_design to true' do
+            get :show, params
+            expect(assigns(:new_design)).to be true
+          end
+        end
+
+        context 'when absent' do
+          let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
+          it 'sets @new_design to false' do
+            get :show, params
+            expect(assigns(:new_design)).to be false
+          end
         end
       end
     end
@@ -232,6 +260,137 @@ RSpec.describe PortalController, :annotations_api do
     context 'when format is JSON' do
       it 'requests JSON-LD from the API'
       it 'renders the API JSON-LD response'
+    end
+  end
+
+  describe 'GET exhibition' do
+    context 'when format is JSON' do
+      render_views
+
+      let(:locale) { 'en' }
+      let(:params) { { locale: locale, id: '123/abc', format: :json } }
+      let(:configured_exhibitions_host) { 'http://europeana.eu'}
+
+      before do
+        # Overriding Annotations API shared context stub.
+        stub_request(:get, annotations_api_search_method_url).
+          to_return(annotation_return)
+
+        get :exhibition, params
+      end
+
+      let(:record_id) { '/' + params[:id] }
+
+      context 'when there is an annotation present' do
+        let(:annotation_return) do  { status: 200, body: api_responses(:annotations_search, exhibition: true),
+                                      headers: { 'Content-Type' => 'application/ld+json' } }
+        end
+
+        context 'with the exhibition returning json' do
+          it_behaves_like 'no record API request'
+          it_behaves_like 'an annotations API request'
+          it_behaves_like 'an exhibitions JSON request'
+          it_behaves_like 'no hierarchy API request'
+
+          it 'responds with JSON' do
+            expect(response.content_type).to eq('application/json')
+          end
+
+          it 'has 200 status code' do
+            expect(response.status).to eq(200)
+          end
+
+          it 'renders JSON ERB template' do
+            expect(response).to render_template('portal/promo_card')
+          end
+
+          it 'contains the JSON' do
+            parsed_response = JSON.parse(response.body)
+
+            expect(parsed_response).to have_key('url')
+            expect(parsed_response).to have_key('title')
+            expect(parsed_response).to have_key('description')
+            expect(parsed_response).to have_key('images')
+            expect(parsed_response).to have_key('logo')
+            expect(parsed_response).to have_key('type')
+          end
+
+          context 'when using another locale' do
+            let(:lang_code) { locale }
+
+            context 'when the alternative locale has a specific annotation' do
+              let(:locale) { 'fr' }
+
+              it 'contains the french URL' do
+                parsed_response = JSON.parse(response.body)
+                expect(parsed_response['url']).to eq('http://europeana.eu/portal/fr/exhibitions/test-exhibition')
+              end
+            end
+
+            context 'when the alternative locale does NOT have a specific annotation' do
+              let(:locale) { 'de' }
+              let(:lang_code) { 'en' }
+
+              it 'contains the english URL' do
+                parsed_response = JSON.parse(response.body)
+                expect(parsed_response['url']).to eq('http://europeana.eu/portal/en/exhibitions/test-exhibition')
+              end
+            end
+          end
+        end
+
+        context 'with the exhibition not being found' do
+          let(:exhibition_response_status) { 404 }
+          let(:exhibition_response_body) { '{"status": "404", "error": "Not Found"}' }
+
+          it 'responds with JSON' do
+            expect(response.content_type).to eq('application/json')
+          end
+
+          it 'has 200 status code' do
+            expect(response.status).to eq(200)
+          end
+
+          it 'renders JSON ERB template' do
+            expect(response).to render_template('portal/promo_card')
+          end
+
+          it 'is empty' do
+            expect(response.body).to eq('null')
+          end
+        end
+      end
+
+      context 'when there is NO annotation present' do
+        let(:annotation_return) do  { status: 200, body: api_responses(:annotations_search),
+                                      headers: { 'Content-Type' => 'application/ld+json' } }
+        end
+
+        it_behaves_like 'no record API request'
+        it_behaves_like 'an annotations API request'
+        it_behaves_like 'no exhibitions JSON request'
+        it_behaves_like 'no hierarchy API request'
+
+        it 'responds with JSON' do
+          expect(response.content_type).to eq('application/json')
+        end
+        it 'has 200 status code' do
+          expect(response.status).to eq(200)
+        end
+
+        it 'is empty' do
+          expect(response.body).to eq('null')
+        end
+      end
+    end
+
+    context 'when format is HTML' do
+      let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
+      it 'renders an error page' do
+        get :similar, params
+        expect(response.status).to eq(404)
+        expect(response).to render_template('pages/custom/errors/not_found')
+      end
     end
   end
 
@@ -334,10 +493,10 @@ RSpec.describe PortalController, :annotations_api do
     end
   end
 
-  describe 'GET galleries' do
+  describe 'GET gallery' do
     context 'when format is JSON' do
       before do
-        get :galleries, params
+        get :gallery, params
       end
 
       let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
@@ -352,11 +511,11 @@ RSpec.describe PortalController, :annotations_api do
       end
 
       it 'renders JSON ERB template' do
-        expect(response).to render_template('portal/galleries')
+        expect(response).to render_template('portal/promo_card')
       end
 
-      it 'assigns @galleries' do
-        expect(assigns[:galleries]).to include(galleries(:fashion_dresses))
+      it 'assigns @resource' do
+        expect(assigns[:resource][:title]).to include(galleries(:fashion_dresses).title)
       end
     end
 
@@ -364,10 +523,84 @@ RSpec.describe PortalController, :annotations_api do
       let(:params) { { locale: 'en', id: '123/abc', format: 'html' } }
 
       it 'renders an error page' do
-        get :galleries, params
+        get :gallery, params
         expect(response.status).to eq(404)
         expect(response).to render_template('pages/custom/errors/not_found')
       end
+    end
+  end
+
+  describe 'GET news' do
+    let(:record_id) { '/123/abc' }
+    let(:params) { { locale: 'en', id: record_id.sub('/', ''), format: 'json' } }
+    let(:pro_api_url) { "#{Pro::Base.site}#{Pro::Post.table_name}" }
+    let(:pro_api_query) do
+      {
+         contains: { image_attribution_link: record_id },
+         page: { number: 1, size: 1 },
+         sort: '-datepublish'
+       }
+    end
+    let(:pro_api_response_body) do
+      <<~JSON
+        {
+          "meta": {
+            "count": 1,
+            "total": 1
+          },
+          "data": [
+            {
+              "id": "1",
+              "type": "posts",
+              "attributes": {
+                "slug": "test-news",
+                "status": "published",
+                "datecreated": "2018-08-15T13:57:19+02:00",
+                "datechanged": "2018-08-23T12:02:56+02:00",
+                "datepublish": "2018-08-15T13:51:03+02:00",
+                "title": "European Test - testing",
+                "posttype": "News",
+                "intro": "<p>Intro text</p>",
+                "body": "<h1>Test</h1><p>Body text</p>",
+                "links": {
+                  "self": "https:\/\/pro.europeana.eu\/json\/posts\/1"
+                }
+              }
+            }
+          ]
+        }
+      JSON
+    end
+
+    before do
+      stub_request(:get, pro_api_url).
+        with(query: pro_api_query).
+        to_return(status: 200, body: pro_api_response_body, headers: { 'Content-Type' => 'application/vnd.api+json' })
+    end
+
+    it 'queries Pro JSON API for post containing record' do
+      get :news, params
+      expect(a_request(:get, pro_api_url).with(query: pro_api_query)).to have_been_made
+    end
+
+    it 'responds with JSON' do
+      get :news, params
+      expect(response.content_type).to eq('application/json')
+    end
+
+    it 'assigns @resource' do
+      get :news, params
+      expect(assigns[:resource][:title]).to include("European Test - testing")
+    end
+
+    it 'responds with 200' do
+      get :news, params
+      expect(response.status).to eq(200)
+    end
+
+    it 'renders JSON template' do
+      get :news, params
+      expect(response).to render_template('portal/promo_card')
     end
   end
 
@@ -397,11 +630,11 @@ RSpec.describe PortalController, :annotations_api do
         end
 
         it 'renders JSON ERB template' do
-          expect(response).to render_template('portal/parent')
+          expect(response).to render_template('portal/promo_card')
         end
 
-        it 'assigns first result to @parent' do
-          expect(assigns[:parent]).to be_a(Hash)
+        it 'assigns first result to @resource' do
+          expect(assigns[:resource]).to be_a(Hash)
         end
       end
 
@@ -429,8 +662,8 @@ RSpec.describe PortalController, :annotations_api do
           expect(response.status).to eq(200)
         end
 
-        it 'is "null"' do
-          expect(response.body).to eq('null')
+        it 'renders JSON template' do
+          expect(response).to render_template('portal/promo_card')
         end
       end
     end

@@ -3,6 +3,7 @@ en:
     attributes:
       collection:
         api_params: API parameters
+        api_url: API URL
         settings_default_search_layout: Default search layout
       europeana/record/set:
         settings_query_term: Query term

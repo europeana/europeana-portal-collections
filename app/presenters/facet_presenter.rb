@@ -7,7 +7,9 @@
 # [Europeana's styleguide](https://github.com/europeana/europeana-styleguide-ruby)
 # to display search result facet data.
 class FacetPresenter < ApplicationPresenter
+  include Facet::ItemDisplay
   include Facet::Labelling
+  include Facet::URL
   include FacetsHelper
   include UrlHelper
   include ActionView::Helpers::NumberHelper
@@ -76,24 +78,15 @@ class FacetPresenter < ApplicationPresenter
   #  more will be hidden at first.
   # @return [Hash] display data for the facet
   def display(**options)
-    options.reverse_merge!(count: 5)
-
-    display_items = items_to_display(options)
-    if display_items.is_a?(Array)
-      unhidden_items = display_items.first
-      hidden_items = display_items.last
-    else
-      unhidden_items = display_items
-      hidden_items = nil
-    end
+    items = items_to_show_and_hide(options).map { |group| group.map { |item| facet_item(item) } }
 
     {
       name: facet_name,
       title: facet_title,
       filter_open: filter_open?,
       select_one: facet_config.single,
-      items: unhidden_items.map { |item| facet_item(item) },
-      extra_items: hidden_items.blank? ? nil : { items: hidden_items.map { |item| facet_item(item) } },
+      items: items.first,
+      extra_items: items.last.blank? ? nil : { items: items.last },
       tooltip: facet_tooltip,
       icon_link: facet_icon_link
     }
@@ -133,7 +126,7 @@ class FacetPresenter < ApplicationPresenter
     {
       filter: facet_label,
       value: facet_item_label(item.value),
-      remove: facet_item_url(item),
+      remove: remove_facet_url(item),
       name: "f[#{facet_name}][]"
     }
   end
@@ -147,71 +140,21 @@ class FacetPresenter < ApplicationPresenter
   # them from the URL parameters.
   def items_from_params
     ips = items_in_params
-    fps = facet_params(facet_name)
+    fps = [facet_params(facet_name)].flatten
     extras = fps.nil? ? [] : fps.reject { |fp| ips.any? { |ip| ip.value == fp } }
     ips + extras.map { |e| Europeana::Blacklight::Response::Facets::FacetItem.new(value: e) }
   end
 
+  def facet_params(facet_name)
+    super || default_facet_value
+  end
+
   def filter_items
-    items_from_params.map { |item| filter_item(item) }
-  end
-
-  ##
-  # URL for a facet item to link to
-  #
-  # If the facet item is already selected, this URL will remove it. If not, it
-  # will add it.
-  #
-  # @param see {#facet_item}
-  # @return [String] URL to add/remove the facet item from the search
-  def facet_item_url(item)
-    facet_in_params?(facet_name, item) ? remove_facet_url(item) : add_facet_url(item)
-  end
-
-  def remove_facet_url(item)
-    [search_action_url, remove_facet_query(item)].reject(&:blank?).join('?')
-  end
-
-  ##
-  # Removes a facet item from request's query string
-  #
-  # @return [String] Request query string without the given facet item
-  def remove_facet_query(item)
-    item_query = Regexp.escape(facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item))
-    facet_item_url_base_query.dup.sub(/#{item_query}&?/, '')
-  end
-
-  def facet_item_url_base_query
-    @facet_item_url_base_query ||= params.slice(:q, :f, :per_page, :view, :range).to_query
-  end
-
-  def add_facet_parent_query
-    return @add_facet_parent_query if instance_variable_defined?(:@add_facet_parent_query)
-    @add_facet_parent_query = build_add_facet_parent_query
-  end
-
-  def build_add_facet_parent_query
-    return nil unless parent_facet.present?
-
-    facet_in_params?(parent_facet, @parent) ? nil : facet_cgi_query(parent_facet, @parent.value)
+    items_in_params.reject { |item| default_facet_value?(item.value) }.map { |item| filter_item(item) }
   end
 
   def parent_facet
     @parent_facet ||= facet_config.parent.is_a?(Array) ? facet_config.parent.first : facet_config.parent
-  end
-
-  def add_facet_url(item)
-    [search_action_url, add_facet_query(item)].reject(&:blank?).join('?')
-  end
-
-  # @return [String] Request query string with the given facet item added
-  def add_facet_query(item)
-    item_query = facet_cgi_query(facet_name, item.respond_to?(:value) ? item.value : item)
-    [facet_item_url_base_query, add_facet_parent_query, item_query].reject(&:blank?).join('&')
-  end
-
-  def facet_cgi_query(name, value)
-    [CGI.escape("f[#{name}][]"), CGI.escape(value)].join('=')
   end
 
   ##
@@ -222,80 +165,19 @@ class FacetPresenter < ApplicationPresenter
     @facet_config ||= @blacklight_config.facet_fields[facet_name]
   end
 
-  def items_to_display(**options)
-    items = facet_items.dup
-    %i{only order splice split format_value_as}.each do |mod|
-      items = send(:"apply_#{mod}_to_items", items, options) if send(:"apply_#{mod}_to_items?")
-    end
-    items
+  def default_facet_value?(value)
+    value == default_facet_value
+  end
+
+  def filter_facet?
+    !!facet_config.filter
+  end
+
+  def default_facet_value
+    facet_config.default
   end
 
   private
-
-  def apply_only_to_items?
-    facet_config.only.present?
-  end
-
-  def apply_order_to_items?
-    false
-  end
-
-  def apply_splice_to_items?
-    facet_config.splice.present? && facet_config.parent.present?
-  end
-
-  def apply_split_to_items?
-    return true if facet_config.split.nil?
-    facet_config.split
-  end
-
-  def apply_format_value_as_to_items?
-    facet_config.format_value_as.present?
-  end
-
-  def apply_only_to_items(items, **_)
-    items.select { |item| facet_config.only.call(item) }
-  end
-
-  def apply_order_to_items(items, **_)
-    items
-  end
-
-  def apply_splice_to_items(items, **_)
-    items.select { |item| facet_config.splice.call(@parent, item) } if facet_config.splice.present?
-  end
-
-  def apply_format_value_as_to_items(items, **_)
-    items.map! do |item|
-      item.value = facet_config.format_value_as.call(item.value)
-      item
-    end
-  end
-
-  ##
-  # Splits the facet's items into two sets, one to be shown, the other hidden
-  #
-  # All currently selected facet items will be shown, regardless of the value of
-  # the `count` option.
-  #
-  # After all selected facet items, other non-selected facet items will be
-  # included in the set to show, up to a maximum set by the `count` option.
-  #
-  # All other items will be in the hidden set.
-  #
-  # @return [Array<Array>] Two arrays of facet items, first to show, last to hide
-  def apply_split_to_items(items, **options)
-    unhidden_items = []
-    hidden_items = items
-
-    unless facet_config.single
-      hidden_items.select { |item| facet_in_params?(facet_name, item) }.each do |selected_item|
-        unhidden_items << hidden_items.delete(selected_item)
-      end
-    end
-    unhidden_items.push(hidden_items.shift) while (unhidden_items.size < options[:count]) && hidden_items.present?
-    [unhidden_items, hidden_items]
-  end
 
   def facet_items
     @facet.items
@@ -314,6 +196,10 @@ class FacetPresenter < ApplicationPresenter
   ##
   # Sends missing method calls to the controller
   def method_missing(method, *args)
-    @controller.send(method, *args)
+    respond_to_missing?(method, true) ? @controller.send(method, *args) : super
+  end
+
+  def respond_to_missing?(method, _)
+    @controller.respond_to?(method, true) || super
   end
 end

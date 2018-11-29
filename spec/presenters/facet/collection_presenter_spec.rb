@@ -2,7 +2,7 @@
 
 RSpec.describe Facet::CollectionPresenter, presenter: :facet do
   let(:field_name) { 'COLLECTION' }
-  let(:field_options) { {} }
+  let(:field_options) { { single: true } }
   let(:params) { { id: 'performing-arts' } }
 
   it_behaves_like 'a text-labelled facet item presenter'

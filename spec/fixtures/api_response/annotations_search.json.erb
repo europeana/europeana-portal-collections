@@ -6,6 +6,48 @@
         "total": 2
     },
     "items": [
+      <% if local_assigns[:exhibition] %>
+        {
+          "@context": "http://www.w3.org/ns/anno.jsonld",
+          "id": "http://data.europeana.eu/annotation/abc/123",
+          "creator": {
+            "name": "Europeana.eu Exhibition"
+          },
+          "generator": {
+            "type": "Software",
+            "name": "collections- client",
+            "homepage": "/#europeanaAnnotationClient"
+          },
+          "body": {
+            "@graph": {
+              "@context": "http://www.europeana.eu/schemas/context/edm.jsonld",
+              "id": "http://data.europeana.eu/item/2063622/LUX_280_005",
+              "isGatheredInto": "http://europeana.eu/portal/en/exhibitions/test-exhibition"
+            }
+          },
+          "target": "http://data.europeana.eu/item/abc/123"
+        },
+        {
+          "@context":"http://www.w3.org/ns/anno.jsonld",
+          "id":"http://data.europeana.eu/annotation/abc/123",
+          "creator": {
+            "name": "Europeana.eu Exhibition"
+          },
+          "generator": {
+            "type": "Software",
+            "name": "collections- client",
+            "homepage": "/#europeanaAnnotationClient"
+          },
+          "body": {
+            "@graph": {
+              "@context": "http://www.europeana.eu/schemas/context/edm.jsonld",
+              "id": "http://data.europeana.eu/item/2063622/LUX_280_005",
+              "isGatheredInto": "http://europeana.eu/portal/fr/exhibitions/test-exhibition"
+            }
+          },
+          "target": "http://data.europeana.eu/item/abc/123"
+        }
+      <% else %>
         {
             "@context":"http://www.w3.org/ns/anno.jsonld",
             "id":"http://data.europeana.eu/annotation/abc/123",
@@ -30,7 +72,8 @@
               "target":"http://data.europeana.eu/item/abc/456"
             <% end %>
         }
+      <% end %>
     ],
-    "total": 2,
+    "total": <%= local_assigns[:exhibition] ? 2 : 2 %>,
     "type": "AnnotationPage"
 }
