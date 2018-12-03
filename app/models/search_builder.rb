@@ -44,6 +44,18 @@ class SearchBuilder < Europeana::Blacklight::SearchBuilder
     end
   end
 
+  # Overriding +Europeana::Blacklight::SearchBuilder::Ranges+ to add +next+
+  def add_range_qf_to_api(api_parameters)
+    return unless blacklight_params.key?(:range) && blacklight_params[:range].is_a?(Hash)
+    blacklight_params[:range].each_pair do |range_field, range_values|
+      next unless api_request_facet_fields.keys.include?(range_field)
+      range_begin = range_values[:begin].blank? ? '*' : range_values[:begin]
+      range_end = range_values[:end].blank? ? '*' : range_values[:end]
+      api_parameters[:qf] ||= []
+      api_parameters[:qf] << "#{range_field}:[#{range_begin} TO #{range_end}]"
+    end
+  end
+
   def search_api_query_field_for_entity_type(entity_type)
     case entity_type
     when 'agent'
