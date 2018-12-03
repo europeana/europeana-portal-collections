@@ -150,7 +150,7 @@ class FacetPresenter < ApplicationPresenter
   end
 
   def filter_items
-    items_in_params.reject { |item| default_facet_value?(item.value) }.map { |item| filter_item(item) }
+    items_from_params.reject { |item| default_facet_value?(item.value) }.map { |item| filter_item(item) }
   end
 
   def parent_facet
