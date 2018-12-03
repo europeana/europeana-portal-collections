@@ -4,7 +4,7 @@ RSpec.describe ThumbnailHelper do
   let(:api_url) { 'http://api.example.com' }
   let(:api_path) { '/v2/thumbnail-by-url.json' }
 
-  let(:cgi_escaped_uri) { 'http%3A%2F%2Fbodley30.bodley.ox.ac.uk%3A8081%2FMediaManager%2Fsrvr%3Fmediafile%3D%2FSize4%2FODLodl-1-NA%2F1020%2Fbodl_Mex.d.1_roll113_frame32.jpg%26userid%3D1%26username%3Dinsight%26resolution%3D1%26servertype%3DJVA%26cid%3D1%26iid%3DODLodl%26vcid%3DNA%26usergroup%3DARTstor%26profileid%3D4' }
+  let(:cgi_escaped_uri) { 'http%3A%2F%2Fwww.example.org%2Fimage.jpeg' }
   let(:edm_preview) { "http://europeanastatic.eu/image?uri=#{cgi_escaped_uri}&type=TEXT" }
 
   before do
@@ -12,10 +12,9 @@ RSpec.describe ThumbnailHelper do
   end
 
   describe '#thumbnail_url_for_edm_preview' do
-    subject { helper.thumbnail_url_for_edm_preview(edm_preview, options) }
+    subject { helper.thumbnail_url_for_edm_preview(edm_preview) }
 
-    context 'without source' do
-      let(:options) { {} }
+    context 'with edm:preview' do
       it 'builds a thumbnail API URL' do
         expect(helper).to receive(:api_thumbnail_url_for_edm_preview).with(edm_preview, {})
         subject
@@ -24,18 +23,9 @@ RSpec.describe ThumbnailHelper do
 
     context 'without edm:preview' do
       let(:edm_preview) { nil }
-
-      context 'with generic enabled' do
-        let(:options) { { generic: true } }
-        it 'makes a generic URL' do
-          expect(helper).to receive(:api_thumbnail_url_for_edm_preview)
-          subject
-        end
-      end
-
-      context 'with generic disabled' do
-        let(:options) { { generic: false } }
-        it { is_expected.to be_nil }
+      it 'makes a generic URL' do
+        expect(helper).to receive(:api_thumbnail_url_for_edm_preview)
+        subject
       end
     end
   end
@@ -49,7 +39,7 @@ RSpec.describe ThumbnailHelper do
       let(:options) { { type: 'IMAGE' } }
 
       it 'makes a generic URL' do
-        expect(subject).to eq(api_url + api_path + '?size=w400&type=IMAGE')
+        expect(subject).to eq(api_url + api_path + '?size=w400&type=IMAGE&uri=')
       end
     end
 
