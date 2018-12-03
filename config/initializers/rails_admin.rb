@@ -451,11 +451,15 @@ RailsAdmin.config do |config|
     show do
       field :slug
       field :title
+      field :body
       field :state
     end
     edit do
       field :slug
       field :title
+      field :body, :text do
+        html_attributes rows: 8, cols: 80
+      end
       field :link_text
       field :base_query
       field :set_query

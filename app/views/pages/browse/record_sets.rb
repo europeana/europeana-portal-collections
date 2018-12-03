@@ -19,6 +19,8 @@ module Pages
 
       def content
         {
+          title: page.title,
+          text: page.body,
           anchor_title: page.show_menu? && page.sets.present?,
           browse_lists: page.sets&.map { |set| content_browse_list(set) }
         }
