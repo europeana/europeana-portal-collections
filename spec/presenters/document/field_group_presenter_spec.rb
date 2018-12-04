@@ -90,6 +90,30 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         end
       end
 
+      describe 'translator' do
+        context 'when :language' do
+          let(:field_definition) do
+            {
+              sections: [
+                {
+                  fields: 'proxies.dcLanguage',
+                  translator: :language
+                }
+              ]
+            }
+          end
+          let(:api_response) do
+            basic_api_response.tap do |record|
+              record['object']['proxies'].first['dcLanguage'] = { def: ['de'] }
+            end
+          end
+
+          it 'is translated with I18nData.languages' do
+            expect(subject[:sections].first[:items].first[:text]).to eq('German')
+          end
+        end
+      end
+
       describe 'map_values' do
         let(:field_definition) do
           {
