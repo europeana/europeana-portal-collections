@@ -61,7 +61,13 @@ module Document
     def play_url
       return @play_url if instance_variable_defined?(:@play_url)
       @play_url = begin
-        @record_presenter.iiif_manifest || download_url
+        if @record_presenter.iiif_manifest.present?
+          @record_presenter.iiif_manifest
+        elsif downloadable?
+          media_proxy_url(@record.fetch('about', '/'), url, disposition: 'inline')
+        else
+          nil
+        end
       end
     end
 
