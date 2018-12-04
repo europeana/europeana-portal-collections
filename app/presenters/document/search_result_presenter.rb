@@ -86,8 +86,8 @@ module Document
       }
     end
 
-    def thumbnail_url(generic: false)
-      thumbnail_url_for_edm_preview(fv('edmPreview'), generic: generic, type: doc_type)
+    def thumbnail_url
+      thumbnail_url_for_edm_preview(fv('edmPreview'), type: doc_type)
     end
 
     def media_rights

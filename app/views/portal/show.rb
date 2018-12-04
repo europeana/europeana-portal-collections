@@ -25,6 +25,7 @@ module Portal
       return super unless new_design?
       super.tap do |vars|
         vars.push(name: 'enabledPromos', value: js_var_enabled_promos, unquoted: true)
+        vars.push(name: 'enableFulltext', value: fulltext_enabled?, unquoted: true)
       end
     end
 
@@ -235,7 +236,8 @@ module Portal
     def suggestions_similar_items
       {
         tab_title: t('site.object.items-similar-to-item'),
-        url: document_similar_url(document, format: 'json', mlt_query: @mlt_query, per_page: 12)
+        url: document_similar_url(document, format: 'json', mlt_query: @mlt_query, per_page: 12),
+        more_items_query: search_path(mlt: document.id)
       }
     end
 
@@ -372,6 +374,14 @@ module Portal
     end
 
     protected
+
+    def fulltext_enabled?
+      !Rails.application.config.x.fulltext.dataset_blacklist.include?(dataset_id)
+    end
+
+    def dataset_id
+      document.id.split('/')[1]
+    end
 
     def data_provider_logo_url
       return nil unless @data_provider.present? && @data_provider.image.present?

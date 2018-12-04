@@ -5,7 +5,6 @@
 
 # Europeana-centric configuration, e.g. APIs and other sites
 Rails.application.config.x.europeana = {}.tap do |europeana|
-  europeana[:contribute_url] = ENV['EUROPEANA_CONTRIBUTE_URL'] || 'http://contribute.europeana.eu'
   europeana[:pro_url] = ENV['EUROPEANA_PRO_URL'] || 'https://pro.europeana.eu'
 
   europeana[:opensearch_host] = if ENV['EUROPEANA_OPENSEARCH_HOST']
@@ -37,6 +36,10 @@ Rails.application.config.x.gallery = OpenStruct.new(
 Rails.application.config.x.exhibitions = OpenStruct.new(
   host: ENV['EXHIBITIONS_HOST'] ||'https://' + (ENV['HTTP_HOST'] || 'www.europeana.eu'),
   annotation_creator_name: ENV['EXHIBITIONS_ANNOTATION_CREATOR_NAME'] || 'Europeana.eu Exhibition'
+)
+
+Rails.application.config.x.fulltext = OpenStruct.new(
+  dataset_blacklist: ENV['FULLTEXT_DATASET_BLACKLIST'].to_s.split
 )
 
 # Google-centric configuration

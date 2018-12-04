@@ -27,13 +27,37 @@ RSpec.describe 'pages/browse/record_sets.html.mustache', :common_view_components
     end
   end
 
-  it 'should include anchors to each set' do
-    render
+  describe 'anchor list' do
+    context 'when show_menu is enabled' do
+      before do
+        page.show_menu = '1'
+      end
 
-    page.sets.each do |set|
-      href = '#' + set.pref_label
-      text = set.pref_label
-      expect(rendered).to have_selector(%(a[href$="#{href}"]), text: text)
+      it 'is shown' do
+        render
+
+        page.sets.each do |set|
+          href = '#' + set.pref_label
+          text = set.pref_label
+          expect(rendered).to have_selector(%(a[href$="#{href}"]), text: text)
+        end
+      end
+    end
+
+    context 'when show_menu is disabled' do
+      before do
+        page.show_menu = '0'
+      end
+
+      it 'is not shown' do
+        render
+
+        page.sets.each do |set|
+          href = '#' + set.pref_label
+          text = set.pref_label
+          expect(rendered).not_to have_selector(%(a[href$="#{href}"]), text: text)
+        end
+      end
     end
   end
 
