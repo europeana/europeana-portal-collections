@@ -13,16 +13,21 @@ module Europeana
 
       def annotations_search_params(**options)
         {
-          qf: [
-            %(generator_name:#{escape_annotation_query_value(annotations_api_generator_name)}),
-            %(creator_name:#{escape_annotation_query_value(options[:creator_name] || '*')}),
-            %(link_resource_uri:#{escape_annotation_query_value(options[:link_resource_uri] || '*')}),
-            %(target_record_id:"#{id}")
-          ],
+          qf: annotations_search_params_qf(**options),
           sort: 'created',
           sortOrder: 'desc',
           pageSize: options[:limit] || 100
         }
+      end
+
+      def annotations_search_params_qf(**options)
+        [
+          %(generator_name:#{escape_annotation_query_value(annotations_api_generator_name)}),
+          %(target_record_id:"#{id}")
+        ].tap do |qf|
+          qf.push(%(creator_name:#{escape_annotation_query_value(options[:creator_name])})) unless options[:creator_name].blank?
+          qf.push(%(link_resource_uri:#{escape_annotation_query_value(options[:link_resource_uri])})) unless options[:link_resource_uri].blank?
+        end
       end
 
       def escape_annotation_query_value(value)
