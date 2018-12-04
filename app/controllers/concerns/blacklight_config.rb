@@ -24,13 +24,6 @@ module BlacklightConfig
   end
 
   included do
-    def self.collections_query_facet
-      collections = Rails.application.config.x.collections.dup
-      collections.each_with_object({}) do |(k, v), hash|
-        hash[k] = { label: k, fq: v[:params] }
-      end
-    end
-
     configure_blacklight do |config|
       # Response models
       config.document_presenter_class = Document::RecordPresenter
@@ -62,7 +55,14 @@ module BlacklightConfig
 
       # Facet fields in the order they should be displayed.
       config.add_facet_field 'COLLECTION', include_in_request: false, single: true,
-                                           values: ->(context) { context.displayable_collections.map(&:key).unshift('all') },
+                                           values: lambda { |context|
+                                             collections = context.displayable_collections
+                                             current = context.current_collection
+                                             unless current.nil? || collections.any? { |c| c.key == current.key }
+                                               collections.unshift(current)
+                                             end
+                                             collections.uniq.map(&:key).unshift('all')
+                                           },
                                            default: 'all'
       config.add_facet_field 'api', include_in_request: false, single: true,
                                     when: ->(context) { context.within_collection? && context.current_collection.key == 'newspapers' },

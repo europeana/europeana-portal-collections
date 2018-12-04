@@ -40,7 +40,7 @@ module CollectionsHelper
   # @return [Collection]
   def current_collection
     return nil unless within_collection?
-    Collection.find_by_key!(params[:id])
+    @current_collection ||= Collection.find_by_key!(params[:id])
   end
 
   ##
