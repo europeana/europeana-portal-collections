@@ -63,8 +63,8 @@ RSpec.describe Europeana::Record::Annotations do
       context 'when no creator_name is supplied' do
         subject { instance.annotations_search_params[:qf] }
 
-        it 'includes a wildcard creator_name filter' do
-          expect(subject).to include(%(creator_name:*))
+        it 'has no creator_name filter' do
+          expect(subject).to be_none { |qf| qf.start_with?('creator_name:') }
         end
       end
     end
