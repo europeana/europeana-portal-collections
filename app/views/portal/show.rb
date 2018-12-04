@@ -25,6 +25,7 @@ module Portal
       return super unless new_design?
       super.tap do |vars|
         vars.push(name: 'enabledPromos', value: js_var_enabled_promos, unquoted: true)
+        vars.push(name: 'enableFulltext', value: fulltext_enabled?, unquoted: true)
       end
     end
 
@@ -373,6 +374,14 @@ module Portal
     end
 
     protected
+
+    def fulltext_enabled?
+      !Rails.application.config.x.fulltext.dataset_blacklist.include?(dataset_id)
+    end
+
+    def dataset_id
+      document.id.split('/')[1]
+    end
 
     def data_provider_logo_url
       return nil unless @data_provider.present? && @data_provider.image.present?

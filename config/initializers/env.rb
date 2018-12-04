@@ -38,6 +38,10 @@ Rails.application.config.x.exhibitions = OpenStruct.new(
   annotation_creator_name: ENV['EXHIBITIONS_ANNOTATION_CREATOR_NAME'] || 'Europeana.eu Exhibition'
 )
 
+Rails.application.config.x.fulltext = OpenStruct.new(
+  dataset_blacklist: ENV['FULLTEXT_DATASET_BLACKLIST'].to_s.split
+)
+
 # Google-centric configuration
 Rails.application.config.x.google = OpenStruct.new(
   analytics_key: ENV['GOOGLE_ANALYTICS_KEY'],
