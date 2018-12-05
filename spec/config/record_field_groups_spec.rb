@@ -3,7 +3,7 @@
 RSpec.describe 'config/record_field_groups.yml' do
   FIELD_GROUPS = %w(concepts copyright creators time description location people provenance properties refs_rels).freeze
   FIELD_GROUP_KEYS = %w(title sections).freeze
-  SECTION_KEYS = %w(title geo entity fields search_field quoted ga_data exclude_vals map_values capitalised format max html_line_breaks).freeze
+  SECTION_KEYS = %w(title geo entity fields search_field quoted ga_data exclude_vals map_values capitalised format max html_line_breaks translator).freeze
   ENTITY_KEYS = %w(name fallback extra).freeze
 
   let(:file_path) { File.join(Rails.root, 'config', 'record_field_groups.yml') }

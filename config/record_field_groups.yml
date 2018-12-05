@@ -237,6 +237,7 @@ properties:
     fields:
     - proxies.dcLanguage
     search_field: dc_language
+    translator: :language
     quoted: false
 refs_rels:
   title: refs-rels
