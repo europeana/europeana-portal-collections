@@ -13,7 +13,7 @@ module Europeana
 
       def annotations_search_params(**options)
         {
-          qf: annotations_search_params_qf(**options),
+          qf: annotations_search_params_qf(options),
           sort: 'created',
           sortOrder: 'desc',
           pageSize: options[:limit] || 100
