@@ -115,8 +115,10 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
           end
 
           context 'with other locale' do
-            before do
+            around do |example|
               I18n.locale = :fr
+              example.run
+              I18n.locale = I18n.default_locale
             end
 
             it 'is translated with I18nData.languages' do
