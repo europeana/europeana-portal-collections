@@ -288,9 +288,12 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
 
         context 'with the exhibition returning json' do
           it_behaves_like 'no record API request'
-          it_behaves_like 'an annotations API request'
           it_behaves_like 'an exhibitions JSON request'
           it_behaves_like 'no hierarchy API request'
+
+          it 'queries annotations API' do
+            expect(a_request(:get, annotations_api_search_method_url)).to have_been_made
+          end
 
           it 'responds with JSON' do
             expect(response.content_type).to eq('application/json')
@@ -367,9 +370,12 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
         end
 
         it_behaves_like 'no record API request'
-        it_behaves_like 'an annotations API request'
         it_behaves_like 'no exhibitions JSON request'
         it_behaves_like 'no hierarchy API request'
+
+        it 'queries annotations API' do
+          expect(a_request(:get, annotations_api_search_method_url)).to have_been_made
+        end
 
         it 'responds with JSON' do
           expect(response.content_type).to eq('application/json')
