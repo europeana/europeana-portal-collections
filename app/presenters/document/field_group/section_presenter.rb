@@ -178,7 +178,7 @@ module Document
       def translator
         case definition.translator
         when :language
-          ->(val) { I18nData.languages[val.to_s.upcase] }
+          ->(val) { I18nData.languages(I18n.locale.to_s.upcase)[val.to_s.upcase] }
         else
           ->(val) { I18n.t(map_values[val]) }
         end

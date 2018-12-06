@@ -108,8 +108,20 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
             end
           end
 
-          it 'is translated with I18nData.languages' do
-            expect(subject[:sections].first[:items].first[:text]).to eq('German')
+          context 'with default locale' do
+            it 'is translated with I18nData.languages' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('German')
+            end
+          end
+
+          context 'with other locale' do
+            before do
+              I18n.locale = :fr
+            end
+
+            it 'is translated with I18nData.languages' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('allemand')
+            end
           end
         end
       end
