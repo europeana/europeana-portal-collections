@@ -41,15 +41,10 @@ RSpec.describe Europeana::Record::Annotations do
     end
 
     describe 'qf param' do
-      subject { instance.annotations_search_params(creator_name: creator_name)[:qf] }
+      subject { instance.annotations_search_params(qf: { creator_name: creator_name })[:qf] }
 
       it 'is Array' do
         expect(subject).to be_a(Array)
-      end
-
-      it 'includes generator_name filter' do
-        allow(instance).to receive(:annotations_api_generator_name) { 'Generator' }
-        expect(subject).to include('generator_name:Generator')
       end
 
       it 'includes the escaped creator_name filter' do
@@ -102,30 +97,6 @@ RSpec.describe Europeana::Record::Annotations do
         it 'is uses the limit' do
           expect(subject).to eq 1
         end
-      end
-    end
-  end
-
-  describe '#annotations_api_generator_name' do
-    subject { instance.annotations_api_generator_name }
-
-    context 'when config is set' do
-      before do
-        Rails.application.config.x.europeana[:annotations].api_generator_name = 'Custom Generator'
-      end
-
-      it 'uses config' do
-        expect(subject).to eq('Custom Generator')
-      end
-    end
-
-    context 'when config is not set' do
-      before do
-        Rails.application.config.x.europeana[:annotations].api_generator_name = nil
-      end
-
-      it 'uses default' do
-        expect(subject).to eq('Europeana.eu*')
       end
     end
   end

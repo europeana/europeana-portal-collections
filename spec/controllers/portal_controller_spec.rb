@@ -674,4 +674,28 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
       end
     end
   end
+
+  describe '#annotations_api_generator_name' do
+    subject { controller.send(:annotations_api_generator_name) }
+
+    context 'when config is set' do
+      before do
+        Rails.application.config.x.europeana[:annotations].api_generator_name = 'Custom Generator'
+      end
+
+      it 'uses config' do
+        expect(subject).to eq('Custom Generator')
+      end
+    end
+
+    context 'when config is not set' do
+      before do
+        Rails.application.config.x.europeana[:annotations].api_generator_name = nil
+      end
+
+      it 'uses default' do
+        expect(subject).to eq('Europeana.eu*')
+      end
+    end
+  end
 end

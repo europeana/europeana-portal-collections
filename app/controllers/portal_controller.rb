@@ -84,7 +84,7 @@ class PortalController < ApplicationController
 
   # GET /record/:id/annotations
   def annotations
-    @annotations = document_annotations(doc_id)
+    @annotations = document_annotations(doc_id, qf: { generator_name: annotations_api_generator_name })
 
     respond_to do |format|
       format.json { render :annotations, layout: false }
@@ -158,6 +158,10 @@ class PortalController < ApplicationController
     nil
   end
 
+  def annotations_api_generator_name
+    Rails.application.config.x.europeana[:annotations].api_generator_name || 'Europeana.eu*'
+  end
+
   def document_data_provider(document)
     data_provider_name = document.fetch('aggregations.edmDataProvider', []).first
     DataProvider.find_by_name(data_provider_name)
@@ -170,7 +174,8 @@ class PortalController < ApplicationController
   def exhibition_url
     creator_name = Rails.application.config.x.exhibitions.annotation_creator_name
     uri_query = "(#{exhibition_url_prefix(locale)}* OR #{exhibition_url_prefix(I18n.default_locale)}*)"
-    annotations = document_annotations(doc_id, creator_name: creator_name, link_resource_uri: uri_query, limit: 100)
+    annotations = document_annotations(doc_id, limit: 100,
+                                       qf: { creator_name: creator_name, link_resource_uri: uri_query })
     lang_pref_annotation = annotations&.detect do |x|
       x.body&.dig('@graph', 'isGatheredInto')&.start_with?(exhibition_url_prefix(locale))
     end || annotations&.first
