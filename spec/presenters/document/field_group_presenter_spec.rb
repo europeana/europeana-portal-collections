@@ -126,15 +126,15 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
             end
           end
 
-          context 'with unknown locale' do
+          context 'with miscoded Norwegian locale' do
             around do |example|
               I18n.locale = :no
               example.run
               I18n.locale = I18n.default_locale
             end
 
-            it 'falls back to default locale, translated with I18nData.languages' do
-              expect(subject[:sections].first[:items].first[:text]).to eq('German')
+            it 'adapts locale and translates with I18nData.languages' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('Tysk')
             end
           end
         end
