@@ -288,9 +288,12 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
 
         context 'with the exhibition returning json' do
           it_behaves_like 'no record API request'
-          it_behaves_like 'an annotations API request'
           it_behaves_like 'an exhibitions JSON request'
           it_behaves_like 'no hierarchy API request'
+
+          it 'queries annotations API' do
+            expect(a_request(:get, annotations_api_search_method_url)).to have_been_made
+          end
 
           it 'responds with JSON' do
             expect(response.content_type).to eq('application/json')
@@ -367,9 +370,12 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
         end
 
         it_behaves_like 'no record API request'
-        it_behaves_like 'an annotations API request'
         it_behaves_like 'no exhibitions JSON request'
         it_behaves_like 'no hierarchy API request'
+
+        it 'queries annotations API' do
+          expect(a_request(:get, annotations_api_search_method_url)).to have_been_made
+        end
 
         it 'responds with JSON' do
           expect(response.content_type).to eq('application/json')
@@ -665,6 +671,30 @@ RSpec.describe PortalController, :exhibitions_json, :annotations_api do
         it 'renders JSON template' do
           expect(response).to render_template('portal/promo_card')
         end
+      end
+    end
+  end
+
+  describe '#annotations_api_generator_name' do
+    subject { controller.send(:annotations_api_generator_name) }
+
+    context 'when config is set' do
+      before do
+        Rails.application.config.x.europeana[:annotations].api_generator_name = 'Custom Generator'
+      end
+
+      it 'uses config' do
+        expect(subject).to eq('Custom Generator')
+      end
+    end
+
+    context 'when config is not set' do
+      before do
+        Rails.application.config.x.europeana[:annotations].api_generator_name = nil
+      end
+
+      it 'uses default' do
+        expect(subject).to eq('Europeana.eu*')
       end
     end
   end
