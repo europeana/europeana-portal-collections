@@ -8,7 +8,7 @@ module I18nData
 
     def normal_to_region_code(normal)
       {
-        'NO' => 'NN'
+        'NO' => 'NB'
       }[normal] || gem_normal_to_region_code(normal)
     end
   end

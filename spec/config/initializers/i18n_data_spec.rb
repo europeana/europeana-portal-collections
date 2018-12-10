@@ -6,7 +6,7 @@ RSpec.describe 'I18nData initializer' do
 
     context 'when param is "NO"' do
       let(:normal) { 'NO' }
-      it { is_expected.to eq('NN') }
+      it { is_expected.to eq('NB') }
     end
   end
 end
