@@ -102,9 +102,10 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
               ]
             }
           end
+          let(:dc_language) { 'de' }
           let(:api_response) do
             basic_api_response.tap do |record|
-              record['object']['proxies'].first['dcLanguage'] = { def: ['de'] }
+              record['object']['proxies'].first['dcLanguage'] = { def: [dc_language] }
             end
           end
 
@@ -126,15 +127,16 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
             end
           end
 
-          context 'with miscoded Norwegian locale' do
+          context 'with macrolanguage Norwegian locale' do
             around do |example|
               I18n.locale = :no
               example.run
               I18n.locale = I18n.default_locale
             end
+            let(:dc_language) { 'cs' }
 
             it 'adapts locale and translates with I18nData.languages' do
-              expect(subject[:sections].first[:items].first[:text]).to eq('Tysk')
+              expect(subject[:sections].first[:items].first[:text]).to eq('Tjekkisk')
             end
           end
         end
@@ -535,7 +537,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
             expect(subject[:sections].first[:items].first[:text]).to eq('Entity label')
           end
 
-          it 'doe' do
+          it 'does NOT link to the entity page' do
             expect(subject[:sections].first[:items].first[:url]).to eq(nil)
           end
 
