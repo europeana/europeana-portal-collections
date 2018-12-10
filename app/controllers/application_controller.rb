@@ -37,15 +37,27 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Set session & request locale
+  #
+  # 1. If locale is in URL, use that. If this locale is unsupported, 404.
+  # 2. Else if locale is already in session storage, use that.
+  # 3. Else if locale is in Accept-Language header, use that. If this locale is
+  #    unsupported, ignore the header.
+  # 4. Otherwise use the default locale, English.
   def set_locale
-    session[:locale] = params[:locale] if params.key?(:locale)
-    session[:locale] ||= extract_locale_from_accept_language_header
-    session[:locale] ||= I18n.default_locale
+    available_locales = I18n.available_locales.map(&:to_s)
 
-    unless I18n.available_locales.map(&:to_s).include?(session[:locale].to_s)
-      session.delete(:locale)
-      fail ActionController::RoutingError, "Unknown locale #{session[:locale]}"
+    if params.key?(:locale)
+      fail ActionController::RoutingError, "Unknown locale #{params[:locale]}" unless available_locales.include?(params[:locale].to_s)
+      session[:locale] = params[:locale]
     end
+
+    session[:locale] ||= extract_locale_from_accept_language_header
+    unless session[:locale].nil? || available_locales.include?(session[:locale].to_s)
+      session.delete(:locale)
+    end
+
+    session[:locale] ||= I18n.default_locale
 
     I18n.locale = session[:locale]
   end
