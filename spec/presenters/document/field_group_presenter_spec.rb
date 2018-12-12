@@ -90,6 +90,58 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
         end
       end
 
+      describe 'translator' do
+        context 'when :language' do
+          let(:field_definition) do
+            {
+              sections: [
+                {
+                  fields: 'proxies.dcLanguage',
+                  translator: :language
+                }
+              ]
+            }
+          end
+          let(:dc_language) { 'de' }
+          let(:api_response) do
+            basic_api_response.tap do |record|
+              record['object']['proxies'].first['dcLanguage'] = { def: [dc_language] }
+            end
+          end
+
+          context 'with default locale' do
+            it 'is translated with I18nData.languages' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('German')
+            end
+          end
+
+          context 'with other known locale' do
+            around do |example|
+              I18n.locale = :fr
+              example.run
+              I18n.locale = I18n.default_locale
+            end
+
+            it 'is translated with I18nData.languages' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('allemand')
+            end
+          end
+
+          context 'with macrolanguage Norwegian locale' do
+            around do |example|
+              I18n.locale = :no
+              example.run
+              I18n.locale = I18n.default_locale
+            end
+            let(:dc_language) { 'cs' }
+
+            it 'adapts locale and translates with I18nData.languages' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('Tjekkisk')
+            end
+          end
+        end
+      end
+
       describe 'map_values' do
         let(:field_definition) do
           {
@@ -485,7 +537,7 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
             expect(subject[:sections].first[:items].first[:text]).to eq('Entity label')
           end
 
-          it 'doe' do
+          it 'does NOT link to the entity page' do
             expect(subject[:sections].first[:items].first[:url]).to eq(nil)
           end
 

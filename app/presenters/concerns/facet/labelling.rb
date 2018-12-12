@@ -156,7 +156,7 @@ module Facet
       #
       # @return [String]
       def language_facet_item_label(item)
-        locale = i18n_locale
+        locale = I18n.locale
         language_code = item.upcase
 
         language_facet_item_labels[locale] ||= {}
@@ -185,7 +185,7 @@ module Facet
       # @return [String]
       def country_facet_item_label(item)
         country_name = item.dup
-        locale = i18n_locale
+        locale = I18n.locale
 
         country_facet_item_labels[locale] ||= {}
         country_facet_item_labels[locale][country_name] ||= begin
@@ -196,10 +196,6 @@ module Facet
             i18ndata_label
           end
         end
-      end
-
-      def i18n_locale
-        I18n.locale == :no ? 'NN' : I18n.locale # The norwegian language file is named 'NN' not 'NO'
       end
     end
 

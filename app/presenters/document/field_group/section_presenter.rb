@@ -164,15 +164,28 @@ module Document
       end
 
       def translate_values?
-        map_values.present?
+        definition.translator.present? || map_values.present?
       end
 
       def translate_value?(val)
-        translate_values? && map_values.key?(val)
+        definition.translator.present? || (translate_values? && map_values.key?(val))
       end
 
       def translate_value(val)
-        translate_value?(val) ? I18n.t(map_values[val]) : val
+        translate_value?(val) ? translator.call(val) : val
+      end
+
+      def translator
+        case definition.translator
+        when :language
+          lambda do |val|
+            I18nData.languages(I18n.locale)[val.to_s.upcase]
+          rescue I18nData::NoTranslationAvailable
+            I18nData.languages(I18n.default_locale)[val.to_s.upcase]
+          end
+        else
+          ->(val) { I18n.t(map_values[val]) }
+        end
       end
 
       def for_entity?

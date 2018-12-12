@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/europeana/europeana-i18n-ruby.git
-  revision: 0484db24bd8ea48fdb8b9d5ad5d0015fdb56039d
+  revision: 4d7b2e4acd0f6639fc755415434e9afcd2a042e8
   branch: develop
   specs:
     europeana-i18n (0.1.1)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 3b0ea4a276ad984798d12d56ed919c025937bbac
+  revision: 26f918a1d88a30337b0d0008c4c4a42942006d95
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -252,7 +252,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n-js (3.0.11)
       i18n (>= 0.6.6, < 2)
-    i18n_data (0.8.0)
+    i18n_data (0.9.1)
     image_optim (0.26.2)
       exifr (~> 1.2, >= 1.2.2)
       fspath (~> 3.0)
