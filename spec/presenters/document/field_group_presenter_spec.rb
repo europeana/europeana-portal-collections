@@ -109,6 +109,13 @@ RSpec.describe Document::FieldGroupPresenter, presenter: :field_group do
             end
           end
 
+          context 'when dc:language is not a two-letter language code' do
+            let(:dc_language) { 'eng' }
+            it 'is not translated' do
+              expect(subject[:sections].first[:items].first[:text]).to eq('eng')
+            end
+          end
+
           context 'with default locale' do
             it 'is translated with I18nData.languages' do
               expect(subject[:sections].first[:items].first[:text]).to eq('German')

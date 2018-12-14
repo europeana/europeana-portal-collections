@@ -172,7 +172,7 @@ module Document
       end
 
       def translate_value(val)
-        translate_value?(val) ? translator.call(val) : val
+        translate_value?(val) ? translator.call(val) || val : val
       end
 
       def translator
