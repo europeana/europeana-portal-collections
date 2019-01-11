@@ -13,12 +13,20 @@ module Rack
     end
 
     def call(env)
-      if enforced_host.present?
-        request = Rack::Request.new(env)
-        return redirect(url_on_enforced_host(request)) unless request_on_enforced_host?(request)
-      end
+      request = Rack::Request.new(env)
+      return redirect(url_on_enforced_host(request)) if enforce_host_for?(request)
 
       @app.call(env)
+    end
+
+    def enforce_host_for?(request)
+      enforced_host.present? &&
+        !skip_host_enforcement_on?(request) &&
+        !request_on_enforced_host?(request)
+    end
+
+    def skip_host_enforcement_on?(request)
+      request.path == (ENV['RAILS_RELATIVE_URL_ROOT'] || '') + '/status'
     end
 
     def request_on_enforced_host?(request)
