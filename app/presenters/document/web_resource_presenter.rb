@@ -61,7 +61,7 @@ module Document
     def play_url
       return @play_url if instance_variable_defined?(:@play_url)
       @play_url = begin
-        @record_presenter.iiif_manifest || download_url
+        iiif? && @record_presenter.iiif_manifest ? @record_presenter.iiif_manifest : download_url
       end
     end
 
@@ -109,10 +109,20 @@ module Document
     end
 
     def media_type_special_case
-      if @record_presenter.iiif_manifest
+      if iiif?
         'iiif'
       elsif controller_oembed_html.key?(url)
         'oembed'
+      end
+    end
+
+    def iiif?
+      @iiif ||= begin
+        @record.fetch('services', []).any? do |record_service|
+          next unless record_service['about'] == field_value('svcsHasService')
+          return true if record_service['dctermsConformsTo']&.include?('http://iiif.io/api/image')
+        end
+        false
       end
     end
 
@@ -298,7 +308,6 @@ module Document
     def downloadable?
       if url.blank? ||
          download_disabled? ||
-         media_type == 'iiif' ||
          media_type == 'oembed' ||
          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')

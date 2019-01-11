@@ -81,4 +81,32 @@ RSpec.describe Document::WebResourcePresenter do
       end
     end
   end
+
+  context 'record with iiif webresource' do
+    let(:iif_service) { 'http://iiif.example.org/iiif' }
+    let(:api_response) do
+      base_api_response.tap do |response|
+        response[:object][:services] = [
+          {
+            'about': iif_service,
+            'dctermsConformsTo': [
+              'http://iiif.io/api/image'
+            ]
+          }
+        ]
+        response[:object][:aggregations].first.tap do |agg|
+          agg[:edmIsShownBy] = wr_url
+          agg[:webResources].first.tap do |wr|
+            wr[:svcsHasService] = [iif_service]
+            wr[:ebucoreHasMimeType] = 'image/jpeg'
+          end
+        end
+      end
+    end
+
+    it { is_expected.to be_iiif }
+    it { is_expected.to be_displayable }
+    it { is_expected.to be_playable }
+    it { is_expected.to be_downloadable }
+  end
 end
