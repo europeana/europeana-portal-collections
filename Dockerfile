@@ -1,4 +1,4 @@
-FROM ruby:2.5.0-slim
+FROM ruby:2.5.3-slim
 
 MAINTAINER Europeana Foundation <development@europeana.eu>
 

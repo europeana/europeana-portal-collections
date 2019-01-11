@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def status
+    render plain: 'OK'
+  end
+
   def current_user
     super || User.new(guest: true)
   end

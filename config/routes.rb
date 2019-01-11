@@ -86,6 +86,7 @@ Rails.application.routes.draw do
   end
 
   get 'csrf', to: 'application#csrf'
+  get 'status', to: 'application#status'
 
   put 'locale', to: 'locale#update'
 
