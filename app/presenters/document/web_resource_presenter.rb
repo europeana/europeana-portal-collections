@@ -117,12 +117,12 @@ module Document
     end
 
     def iiif?
-      @iiif ||= begin
+      return @iiif if instance_variable_defined?(:@iiif)
+      @iiif = begin
         @record.fetch('services', []).any? do |record_service|
           next unless record_service['about'] == field_value('svcsHasService')
-          return true if record_service['dctermsConformsTo']&.include?('http://iiif.io/api/image')
+          true if record_service['dctermsConformsTo']&.include?('http://iiif.io/api/image')
         end
-        false
       end
     end
 
