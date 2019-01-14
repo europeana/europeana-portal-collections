@@ -118,11 +118,9 @@ module Document
 
     def iiif?
       return @iiif if instance_variable_defined?(:@iiif)
-      @iiif = begin
-        @record.fetch('services', []).any? do |record_service|
-          next unless record_service['about'] == field_value('svcsHasService')
-          true if record_service['dctermsConformsTo']&.include?('http://iiif.io/api/image')
-        end
+      @iiif = @record.fetch('services', []).any? do |record_service|
+        record_service['about'] == field_value('svcsHasService') &&
+          record_service['dctermsConformsTo']&.include?('http://iiif.io/api/image')
       end
     end
 
