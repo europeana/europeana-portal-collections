@@ -7,6 +7,7 @@ module Document
     include ActionView::Helpers::NumberHelper
     include ApiHelper
     include BlacklightDocumentPresenter
+    include IIIF
     include MediaProxyHelper
     include Metadata::Rights
     include ThumbnailHelper
@@ -61,7 +62,7 @@ module Document
     def play_url
       return @play_url if instance_variable_defined?(:@play_url)
       @play_url = begin
-        iiif? && @record_presenter.iiif_manifest ? @record_presenter.iiif_manifest : download_url
+        iiif_manifest ? iiif_manifest : download_url
       end
     end
 
@@ -113,14 +114,6 @@ module Document
         'iiif'
       elsif controller_oembed_html.key?(url)
         'oembed'
-      end
-    end
-
-    def iiif?
-      return @iiif if instance_variable_defined?(:@iiif)
-      @iiif = @record.fetch('services', []).any? do |record_service|
-        record_service['about'] == field_value('svcsHasService') &&
-          record_service['dctermsConformsTo']&.include?('http://iiif.io/api/image')
       end
     end
 
