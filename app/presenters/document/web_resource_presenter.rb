@@ -7,6 +7,7 @@ module Document
     include ActionView::Helpers::NumberHelper
     include ApiHelper
     include BlacklightDocumentPresenter
+    include IIIF
     include MediaProxyHelper
     include Metadata::Rights
     include ThumbnailHelper
@@ -61,7 +62,7 @@ module Document
     def play_url
       return @play_url if instance_variable_defined?(:@play_url)
       @play_url = begin
-        @record_presenter.iiif_manifest || download_url
+        iiif_manifest ? iiif_manifest : download_url
       end
     end
 
@@ -109,7 +110,7 @@ module Document
     end
 
     def media_type_special_case
-      if @record_presenter.iiif_manifest
+      if iiif?
         'iiif'
       elsif controller_oembed_html.key?(url)
         'oembed'
@@ -298,7 +299,6 @@ module Document
     def downloadable?
       if url.blank? ||
          download_disabled? ||
-         media_type == 'iiif' ||
          media_type == 'oembed' ||
          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
