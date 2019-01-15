@@ -185,6 +185,7 @@ module Facet
       # @return [String]
       def country_facet_item_label(item)
         country_name = item.dup
+        country_name = 'Czechia' if item == 'Czech Republic' # 'temporary fix until Czech Republic is renamed in EDM'
         locale = I18n.locale
 
         country_facet_item_labels[locale] ||= {}
