@@ -234,9 +234,18 @@ module Portal
       return @facets_selected_items unless @facets_selected_items.nil?
 
       @facets_selected_items = begin
-        facets_from_request.map do |facet|
+        items = facets_from_request.map do |facet|
           FacetPresenter.build(facet, controller).filter_items
-        end.flatten
+        end
+        facet_names_from_request = facets_from_request.map(&:name)
+        %i(f range).each do |param_key|
+          (params[param_key] || {}).each_pair do |facet_name, _|
+            next if facet_names_from_request.include?(facet_name)
+            presenter_class = param_key == :range ? Facet::RangePresenter : Facet::SimplePresenter
+            items.push(presenter_class.new(OpenStruct.new(name: facet_name), controller).filter_items)
+          end
+        end
+        items.flatten
       end
     end
 
