@@ -56,7 +56,7 @@ module Facet
     def remove_link_params
       p = search_state.params_for_search.deep_dup
       p[:range] = (p[:range] || {}).dup
-      p[:range].delete(facet_config.key)
+      p[:range].delete(facet_name)
       p.delete(:range) if p[:range].empty?
       p
     end

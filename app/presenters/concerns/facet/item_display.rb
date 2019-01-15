@@ -53,7 +53,7 @@ module Facet
     end
 
     def apply_format_value_as_to_items?
-      facet_config.format_value_as.present?
+      facet_config&.format_value_as.present?
     end
 
     def apply_only_to_items(items)
