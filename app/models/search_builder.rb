@@ -4,7 +4,9 @@ class SearchBuilder < Europeana::Blacklight::SearchBuilder
   self.default_processor_chain += %i(add_entity_query_to_api)
 
   def salient_facets_for_api_facet_qf
-    super.tap do |salient_facets|
+    (blacklight_params[:f] || {}).select do |k, _v|
+      !STANDALONE_FACETS.include?(k) && api_request_facet_fields.keys.include?(k)
+    end.tap do |salient_facets|
       aliased_facets_for_api_facet_qf.each_pair do |k, v|
         salient_facets[k] ||= []
         salient_facets[k] += v
@@ -14,7 +16,7 @@ class SearchBuilder < Europeana::Blacklight::SearchBuilder
 
   def aliased_facets_in_params
     blacklight_config.facet_fields.select do |field_name, facet|
-      blacklight_params[:f].key?(field_name) && facet.aliases.present?
+      (blacklight_params[:f] || {}).key?(field_name) && facet.aliases.present?
     end
   end
 
