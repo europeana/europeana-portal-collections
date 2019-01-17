@@ -237,14 +237,23 @@ module Portal
         items = facets_from_request.map do |facet|
           FacetPresenter.build(facet, controller).filter_items
         end
+
+        # Handle additional "facets" e.g. from switching collection with
+        # collection-specific facets selected, provided they are known to the API.
         facet_names_from_request = facets_from_request.map(&:name)
+        salient_facet_names = controller.search_builder.with(params).salient_facets_for_api_facet_qf
+
         %i(f range).each do |param_key|
           (params[param_key] || {}).each_pair do |facet_name, _|
             next if facet_names_from_request.include?(facet_name)
+            if param_key == :f
+              next unless salient_facet_names.include?(facet_name)
+            end
             presenter_class = param_key == :range ? Facet::RangePresenter : Facet::SimplePresenter
             items.push(presenter_class.new(OpenStruct.new(name: facet_name), controller).filter_items)
           end
         end
+
         items.flatten
       end
     end
