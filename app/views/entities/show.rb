@@ -140,7 +140,6 @@ module Entities
         twitter: true,
         facebook: true,
         pinterest: true,
-        googleplus: true,
         tumblr: true
       }
     end

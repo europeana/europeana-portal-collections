@@ -15,18 +15,6 @@ RSpec.describe Link::SocialMedia do
     end
   end
 
-  describe '#googleplus?' do
-    context 'when URL is for plus.google.com' do
-      subject { described_class.new(url: 'https://plus.google.com/+europeana').googleplus? }
-      it { is_expected.to be true }
-    end
-
-    context 'when URL is for europeana.eu' do
-      subject { described_class.new(url: 'https://www.europeana.eu/portal').googleplus? }
-      it { is_expected.to be false }
-    end
-  end
-
   describe '#instagram?' do
     context 'when URL is for instagram.com' do
       subject { described_class.new(url: 'https://instagram.com/europeanaeu').instagram? }

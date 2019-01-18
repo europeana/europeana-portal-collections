@@ -175,7 +175,6 @@ module Portal
         facebook: true,
         pinterest: true,
         twitter: true,
-        googleplus: true,
         tumblr: true
       }
     end
