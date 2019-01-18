@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SearchBuilder < Europeana::Blacklight::SearchBuilder
-  self.default_processor_chain += %i(add_entity_query_to_api)
+  self.default_processor_chain += %i(add_entity_query_to_api add_hit_highlighting_to_api)
 
   def salient_facets_for_api_facet_qf
     (blacklight_params[:f] || {}).select do |k, _v|
@@ -28,6 +28,16 @@ class SearchBuilder < Europeana::Blacklight::SearchBuilder
 
   def requestable_facet?(facet)
     super && !facet.aliases.present?
+  end
+
+  def add_profile_to_api(api_parameters)
+    super
+    api_parameters[:profile] << ' hits'
+  end
+
+  def add_hit_highlighting_to_api(api_parameters)
+    api_parameters['hit.selectors'] = 1
+    api_parameters['hit.fl'] = 'fulltext.*'
   end
 
   def add_entity_query_to_api(api_parameters)
