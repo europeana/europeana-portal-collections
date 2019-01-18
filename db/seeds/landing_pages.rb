@@ -305,7 +305,6 @@ unless Page::Landing.find_by_slug('collections/fashion').present?
       social_media: [
         Link::SocialMedia.new(url: 'http://www.twitter.com/europeanafashion', text: 'Twitter'),
         Link::SocialMedia.new(url: 'https://www.facebook.com/EuropeanaFashion', text: 'Facebook'),
-        Link::SocialMedia.new(url: 'https://plus.google.com/115879951963722227275/posts', text: 'Google Plus'),
         Link::SocialMedia.new(url: 'http://instagram.com/europeanafashionofficial', text: 'Instagram'),
         Link::SocialMedia.new(url: 'http://www.pinterest.com/eurfashion/', text: 'Pinterest'),
         Link::SocialMedia.new(url: 'http://europeanafashion.tumblr.com/', text: 'Tumblr'),
