@@ -147,7 +147,6 @@ module Collections
         facebook: social_media_link_for(:facebook),
         soundcloud: social_media_link_for(:soundcloud),
         pinterest: social_media_link_for(:pinterest),
-        googleplus: social_media_link_for(:googleplus),
         instagram: social_media_link_for(:instagram),
         tumblr: social_media_link_for(:tumblr),
         linkedin: social_media_link_for(:linkedin)
