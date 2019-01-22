@@ -11,10 +11,6 @@ module HasExternalUrls
     url_in_domain?('facebook.com')
   end
 
-  def googleplus?
-    url_in_domain?('plus.google.com')
-  end
-
   def instagram?
     url_in_domain?('instagram.com')
   end

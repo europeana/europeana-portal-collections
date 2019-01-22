@@ -46,8 +46,7 @@ module NavigableView
           social: {
             facebook: true,
             pinterest: true,
-            twitter: true,
-            googleplus: true
+            twitter: true
           }
         }
       }

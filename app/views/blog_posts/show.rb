@@ -56,9 +56,6 @@ module BlogPosts
         },
         pinterest: {
           text: 'Pinterest'
-        },
-        googleplus: {
-          text: 'Google Plus'
         }
       }
     end

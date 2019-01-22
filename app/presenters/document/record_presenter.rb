@@ -8,7 +8,6 @@ module Document
     include BlacklightDocumentPresenter
     include Entities
     include EntitiesHelper
-    include Record::IIIF
     include Metadata::Rights
 
     attr_reader :document, :controller

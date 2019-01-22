@@ -55,9 +55,6 @@ module GalleryDisplayingView
       pinterest: {
         text: 'Pinterest'
       },
-      googleplus: {
-        text: 'Google Plus'
-      },
       tumblr: {
         text: 'Tumblr'
       }
