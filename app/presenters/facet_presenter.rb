@@ -132,7 +132,7 @@ class FacetPresenter < ApplicationPresenter
   end
 
   def items_in_params
-    @facet.items.select { |item| facet_in_params?(facet_name, item) }
+    @facet.items&.select { |item| facet_in_params?(facet_name, item) } || []
   end
 
   ##
