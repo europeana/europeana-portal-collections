@@ -72,7 +72,7 @@ module Facet
     end
 
     def facet_item_url_base_query_params
-      @facet_item_url_base_query_params ||= params.slice(:q, :f, :per_page, :view, :range, :mlt)
+      @facet_item_url_base_query_params ||= params.slice(:q, :qf, :f, :per_page, :view, :range, :mlt)
     end
 
     def facet_item_url_base_query
