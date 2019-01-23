@@ -31,7 +31,7 @@ class GalleryImage
     # Will first attempt a HEAD request. If that fails, will attempt a GET request.
     #
     # @param force Force re-requesting the HTTP response.
-    # @return [RestClient::Response] The HTTP response, or nil if not retrievable.
+    # @return [Faraday::Response] The HTTP response, or nil if not retrievable.
     def http_response(force: false)
       return @http_response unless force || !instance_variable_defined?(:@http_response)
 
