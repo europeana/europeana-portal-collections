@@ -61,7 +61,6 @@ gem 'rdf'
 gem 'rdf-vocab'
 gem 'redis', '~> 3.3.3'
 gem 'redis-rails'
-gem 'rest-client'
 gem 'ruby-oembed', '~> 0.9'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
@@ -116,8 +115,4 @@ end
 
 group :doc do
   gem 'yard'
-end
-
-group :localeapp do
-  gem 'localeapp', '~> 1.0'
 end

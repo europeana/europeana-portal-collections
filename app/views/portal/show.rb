@@ -171,7 +171,7 @@ module Portal
 
     def social_share
       {
-        url: presenter.edm_landing_page.present? ? URI.escape(presenter.edm_landing_page) : false,
+        url: presenter.edm_landing_page.present? ? CGI.escape(presenter.edm_landing_page) : false,
         facebook: true,
         pinterest: true,
         twitter: true,

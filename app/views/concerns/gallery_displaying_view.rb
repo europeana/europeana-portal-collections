@@ -45,7 +45,7 @@ module GalleryDisplayingView
   def gallery_social_links
     {
       style_blue: true,
-      url: request.original_url,
+      url: CGI.escape(request.original_url),
       facebook: {
         text: 'Facebook'
       },
