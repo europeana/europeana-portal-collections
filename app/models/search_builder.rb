@@ -32,7 +32,7 @@ class SearchBuilder < Europeana::Blacklight::SearchBuilder
 
   def add_profile_to_api(api_parameters)
     super
-    api_parameters[:profile] << ' hits'
+    api_parameters[:profile] = api_parameters[:profile] + ' hits'
   end
 
   def add_hit_highlighting_to_api(api_parameters)
