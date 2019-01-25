@@ -20,17 +20,22 @@ class Ability
   protected
 
   def guest!
-    can :show, Banner.published
-    can :show, Collection.published
-    can :show, Gallery.published
-    can :show, Page.published
+    can :show, Banner do |banner|
+      banner.published?
+    end
+    can :show, Collection do |collection|
+      collection.published?
+    end
+    can :show, Gallery do |gallery|
+      gallery.published?
+    end
+    can :show, Page do |page|
+      page.published?
+    end
   end
 
   def user!
-    can :show, Banner.published
-    can :show, Collection.published
-    can :show, Gallery.published
-    can :show, Page.published
+    guest!
   end
 
   def editor!
@@ -41,13 +46,27 @@ class Ability
                 HeroImage, Link, MediaObject, Page, Topic, User]
     can :create, [BrowseEntry, Gallery]
     can :update, [DataProvider, HeroImage, MediaObject]
-    can :update, BrowseEntry.with_permissions_by(@user)
-    can :publish, BrowseEntry.with_permissions_by(@user)
-    can :unpublish, BrowseEntry.with_permissions_by(@user)
-    can :update, Gallery.with_permissions_by(@user)
-    can :publish, Gallery.with_permissions_by(@user)
-    can :unpublish, Gallery.with_permissions_by(@user)
-    can :update, Page::Landing.with_permissions_by(@user)
+    can :update, BrowseEntry do |entry|
+      entry.with_permissions_by?(@user)
+    end
+    can :publish, BrowseEntry do |entry|
+      entry.with_permissions_by?(@user)
+    end
+    can :unpublish, BrowseEntry do |entry|
+      entry.with_permissions_by?(@user)
+    end
+    can :update, Gallery do |gallery|
+      gallery.with_permissions_by?(@user)
+    end
+    can :publish, Gallery do |gallery|
+      gallery.with_permissions_by?(@user)
+    end
+    can :unpublish, Gallery do |gallery|
+      gallery.with_permissions_by?(@user)
+    end
+    can :update, Page::Landing do |page|
+      page.with_permissions_by?(@user)
+    end
   end
 
   def admin!
