@@ -4,7 +4,7 @@ sudo: false
 language: ruby
 rvm:
   - 2.6.0
-bundler_args: --without development:production:doc:localeapp:profiling
+bundler_args: --without development:production:doc:profiling
 cache:
   bundler: true
 services:
