@@ -20,18 +20,10 @@ class Ability
   protected
 
   def guest!
-    can :show, Banner do |banner|
-      banner.published?
-    end
-    can :show, Collection do |collection|
-      collection.published?
-    end
-    can :show, Gallery do |gallery|
-      gallery.published?
-    end
-    can :show, Page do |page|
-      page.published?
-    end
+    can :show, Banner, &:published?
+    can :show, Collection, &:published?
+    can :show, Gallery, &:published?
+    can :show, Page, &:published?
   end
 
   def user!
