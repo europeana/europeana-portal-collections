@@ -13,5 +13,10 @@ RSpec.describe FacetsHelper do
         expect(subject).to be true
       end
     end
+
+    it 'handles scalar values' do
+      allow(helper).to receive(:params) { { f: { field => 'portrait' } } }
+      expect(subject).to be true
+    end
   end
 end
