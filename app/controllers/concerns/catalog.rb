@@ -50,19 +50,31 @@ module Catalog
     fail "Do not use Blacklight's search tracking."
   end
 
+  def search_action_paths
+    @search_action_paths ||= {}
+  end
+
   def search_action_path(options = {})
-    opts = options.deep_symbolize_keys
-    opts[:only_path] = true
-    search_action_url(opts)
+    search_action_paths[options] ||= begin
+      opts = options.deep_symbolize_keys
+      opts[:only_path] = true
+      search_action_url(opts)
+    end
+  end
+
+  def search_action_urls
+    @search_action_urls ||= {}
   end
 
   def search_action_url(options = {})
-    if options[:controller]
-      url_for(options.except(:page))
-    elsif params[:controller] == 'collections'
-      url_for(options.merge(controller: 'collections', action: params[:action]))
-    else
-      search_url(options.except(:controller, :action))
+    search_action_urls[options] ||= begin
+      if options[:controller]
+        url_for(options.except(:page))
+      elsif params[:controller] == 'collections'
+        url_for(options.merge(controller: 'collections', action: params[:action]))
+      else
+        search_url(options.except(:controller, :action))
+      end
     end
   end
 
