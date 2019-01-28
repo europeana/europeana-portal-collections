@@ -25,6 +25,6 @@ module FacetsHelper
   def facet_in_params?(field, item)
     value = facet_value_for_facet_item(item)
 
-    Array((facet_params(field) || [])).map(&:downcase).include? value.downcase
+    Array((facet_params(field) || [])).map(&:downcase).include?(value.downcase)
   end
 end
