@@ -24,7 +24,7 @@ gem 'stache', git: 'https://github.com/europeana/stache.git', branch: 'europeana
 
 gem 'aasm', '~> 4.2'
 gem 'acts_as_list', '~> 0.7'
-gem 'blacklight', '~> 6.0.0', git: 'https://github.com/rwd/blacklight.git', branch: 'v6.0.2-minimal'
+gem 'blacklight', '~> 6.0.0', git: 'https://github.com/europeana/blacklight.git', branch: 'v6.0.2-minimal'
 gem 'cancancan', '~> 1.12'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
