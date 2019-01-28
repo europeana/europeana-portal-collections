@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+export RAILS_ENV="profiling"
+export SKIP_FILE_WRITE="1"
+export LOG_DIR=$(dirname "$0")/../log
+export ERROR_LOG="${LOG_DIR}/${RAILS_ENV}.err.log"
+
+bm_objects() {
+  echo_bold "$1: Objects"
+  echo ""
+  TEST_COUNT=10 PATH_TO_HIT="$2" bundle exec derailed exec perf:objects 2> ${ERROR_LOG} | head -n 5
+  echo ""
+}
+
+bm_ips() {
+  echo_bold "$1: IPS"
+  echo ""
+  TEST_COUNT=1_000 PATH_TO_HIT="$2" bundle exec derailed exec perf:ips 2> ${ERROR_LOG}
+  echo ""
+}
+
+bm_path() {
+  bm_objects "$1" "$2"
+  bm_ips "$1" "$2"
+}
+
+echo_bold() {
+  echo -e "\e[1m$1\e[0m"
+}
+
+bm_path "Search results page" "/en/search?q="
+bm_path "Record page" "/en/record/123/abc.html"
