@@ -3,7 +3,6 @@
 module FacetsHelper
   include Blacklight::FacetsHelperBehavior
 
-  ##
   # Overriding Blacklight's to account for our "aliased" fields
   def facet_by_field_name(field_or_field_name)
     case field_or_field_name
@@ -20,5 +19,12 @@ module FacetsHelper
       # is this really a useful case?
       field_or_field_name
     end
+  end
+
+  # Overriding Blacklight's for case-insensitive test
+  def facet_in_params?(field, item)
+    value = facet_value_for_facet_item(item)
+
+    Array((facet_params(field) || [])).map(&:downcase).include?(value.downcase)
   end
 end

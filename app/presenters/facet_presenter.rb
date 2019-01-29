@@ -141,7 +141,7 @@ class FacetPresenter < ApplicationPresenter
   def items_from_params
     ips = items_in_params
     fps = [facet_params(facet_name)].flatten
-    extras = fps.nil? ? [] : fps.reject { |fp| ips.any? { |ip| ip.value == fp } }
+    extras = fps.nil? ? [] : fps.reject { |fp| ips.any? { |ip| ip.value.downcase == fp.downcase } }
     ips + extras.map { |e| Europeana::Blacklight::Response::Facets::FacetItem.new(value: e) }
   end
 
