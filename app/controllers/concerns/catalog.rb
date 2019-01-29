@@ -55,7 +55,7 @@ module Catalog
   end
 
   def search_action_path(options = {})
-    search_action_paths[options] ||= begin
+    search_action_paths[options.to_s] ||= begin
       opts = options.deep_symbolize_keys
       opts[:only_path] = true
       search_action_url(opts)
@@ -67,7 +67,7 @@ module Catalog
   end
 
   def search_action_url(options = {})
-    search_action_urls[options] ||= begin
+    search_action_urls[options.to_s] ||= begin
       if options[:controller]
         url_for(options.except(:page))
       elsif params[:controller] == 'collections'
