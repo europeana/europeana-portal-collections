@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/stache.git
-  revision: 73bde02ce3d765ddf1827ba806785c79b3d7373a
+  revision: b4780353deb1c9d45777590a57fc0805b2ae3d2e
   branch: europeana-styleguide
   specs:
     stache (1.1.1)
