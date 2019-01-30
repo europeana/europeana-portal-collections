@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-export LOG_DIR=$(dirname "$0")/../log
+export DIR=$(dirname "$0")
+export API_DIR=${DIR}/../spec/support/fake_api
+export LOG_DIR=${DIR}/../log
 export ERROR_LOG="${LOG_DIR}/${RAILS_ENV}.err.log"
 export SKIP_FILE_WRITE="1"
+export EUROPEANA_API_URL="http://localhost:3014/api"
 
 bm_gems() {
   echo_bold "Bundled gems"
@@ -34,6 +37,11 @@ echo_bold() {
   echo -e "\e[1m$1\e[0m"
 }
 
+
+cd ${API_DIR} && docker-compose up -d && cd -
+
 bm_gems
 bm_path "Search results page" "/en/search?q="
 bm_path "Record page" "/en/record/123/abc.html"
+
+cd ${API_DIR} && docker-compose down && cd -

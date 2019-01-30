@@ -73,10 +73,6 @@ A Bash shell script is included to run various benchmarks from
 
 Run benchmarks with: `bin/benchmark`
 
-**NB:** search results and record pages make requests to the Europeana REST API.
-For IPS benchmarks to be indicative of performance of the Portal application
-alone, configure `EUROPEANA_API_URL` to point to a local deployment of the API.
-
 ### File storage
 
 Files are stored using Paperclip. To configure it, create config/paperclip.yml
