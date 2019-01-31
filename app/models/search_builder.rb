@@ -32,10 +32,12 @@ class SearchBuilder < Europeana::Blacklight::SearchBuilder
 
   def add_profile_to_api(api_parameters)
     super
+    return unless Rails.application.config.x.enable.hit_highlighting
     api_parameters[:profile] = api_parameters[:profile] + ' hits'
   end
 
   def add_hit_highlighting_to_api(api_parameters)
+    return unless Rails.application.config.x.enable.hit_highlighting
     api_parameters['hit.selectors'] = 1
     api_parameters['hit.fl'] = 'fulltext.*'
   end
