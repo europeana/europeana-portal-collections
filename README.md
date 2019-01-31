@@ -24,7 +24,8 @@ Europeana Portal with Collections as a Rails +
 
 1. Install the gem bundle: `bundle install`
 2. Generate Docker configuration files: `bundle exec bin/portal dockerize development`
-   You will be prompted to enter your Europeana API key.
+   You will be prompted to enter your Europeana API key. For another environment
+   than `development`, e.g. `profiling`, use its name in this command.
 3. Bring it up: `docker-compose up`
 4. Setup the database: `bundle exec rake db:setup`
 5. Start the app: `bundle exec foreman start`
@@ -70,6 +71,10 @@ A Bash shell script is included to run various benchmarks from
 [derailed_benchmarks](https://github.com/schneems/derailed_benchmarks):
 * Size of bundled gems in production environment
 * Memory allocation and IPS of search results and record pages
+
+First ensure that you have initialised a `profiling` environment, and have
+services running, e.g. by following the "Quick Start with Docker" instructions
+above.
 
 Run benchmarks with: `bin/benchmark`
 
