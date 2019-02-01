@@ -1,47 +1,71 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 
-export DIR=$(dirname "$0")
-export API_DIR=${DIR}/../spec/support/fake_api
-export LOG_DIR=${DIR}/../log
-export ERROR_LOG="${LOG_DIR}/${RAILS_ENV}.err.log"
-export SKIP_FILE_WRITE="1"
-export EUROPEANA_API_URL="http://localhost:3014/api"
+# Benchmark script using derailed_benchmarks and a fake API.
 
-bm_gems() {
-  echo_bold "Bundled gems"
-  echo ""
-  bundle exec derailed bundle:mem 2> ${ERROR_LOG} | head -n 1 | sed -r 's/TOP: (.*)/\1/'
-  echo ""
-}
+require_relative '../config/boot'
+require 'colorize'
+require 'open3'
 
-bm_objects() {
-  echo_bold "$1: Objects"
-  echo ""
-  RAILS_ENV=profiling TEST_COUNT=10 PATH_TO_HIT="$2" bundle exec derailed exec perf:objects 2> ${ERROR_LOG} | head -n 5
-  echo ""
-}
+def bm_common_env
+  'RAILS_ENV=profiling SKIP_FILE_WRITE=1 EUROPEANA_API_URL=http://localhost:3014/api'
+end
 
-bm_ips() {
-  echo_bold "$1: IPS"
-  echo ""
-  RAILS_ENV=profiling TEST_COUNT=1_000 PATH_TO_HIT="$2" bundle exec derailed exec perf:ips 2> ${ERROR_LOG}
-  echo ""
-}
+def bm_gems
+  puts 'Bundled gems'.bold
+  puts
+  stdout, _stderr, _status = Open3.capture3('bundle exec derailed bundle:mem')
+  puts stdout.split("\n").first.sub('TOP: ', '')
+  puts
+end
 
-bm_path() {
-  bm_objects "$1" "$2"
-  bm_ips "$1" "$2"
-}
+def bm_objects(name, path)
+  puts "#{name}: Objects".bold
+  puts
+  cmd = %(#{bm_common_env} TEST_COUNT=10 PATH_TO_HIT="#{path}" bundle exec derailed exec perf:objects)
+  stdout, stderr, status = Open3.capture3(cmd)
+  fail "Unable to benchmark objects\n#{stderr}" unless status.success?
+  puts stdout.split("\n")[0..4].join("\n")
+  puts
+end
 
-echo_bold() {
-  echo -e "\e[1m$1\e[0m"
-}
+def bm_ips(name, path)
+  puts "#{name}: IPS".bold
+  puts
+  cmd = %(#{bm_common_env} TEST_COUNT=1_000 PATH_TO_HIT="#{path}" bundle exec derailed exec perf:ips)
+  stdout, stderr, status = Open3.capture3(cmd)
+  fail "Unable to benchmark IPS\n#{stderr}" unless status.success?
+  puts stdout
+  puts
+end
 
+def bm_path(name, path)
+  bm_objects(name, path)
+  bm_ips(name, path)
+end
 
-cd ${API_DIR} && docker-compose up -d && cd -
+def fake_api_dir
+  @fake_api_dir ||= File.expand_path('../spec/support/fake_api', __dir__)
+end
 
-bm_gems
-bm_path "Search results page" "/en/search?q="
-bm_path "Record page" "/en/record/123/abc.html"
+def start_fake_api
+  _stdout, stderr, status = Open3.capture3("docker-compose -f #{fake_api_dir}/docker-compose.yml up -d")
+  fail "Unable to start Docker fake API\n#{stderr}" unless status.success?
+end
 
-cd ${API_DIR} && docker-compose down && cd -
+def stop_fake_api
+  _stdout, stderr, status = Open3.capture3("docker-compose -f #{fake_api_dir}/docker-compose.yml down")
+  fail "Unable to stop Docker fake API\n#{stderr}" unless status.success?
+end
+
+def with_fake_api
+  start_fake_api
+  yield
+  stop_fake_api
+end
+
+with_fake_api do
+  bm_gems
+  bm_path('Search results page', '/en/search?q=')
+  bm_path('Record page', '/en/record/123/abc.html')
+end
