@@ -67,7 +67,7 @@ The integration tests use Firefox in headless mode.
 
 ### Benchmarking
 
-A Bash shell script is included to run various benchmarks from
+A script is included to run various benchmarks from
 [derailed_benchmarks](https://github.com/schneems/derailed_benchmarks):
 * Size of bundled gems in production environment
 * Memory allocation and IPS of search results and record pages
