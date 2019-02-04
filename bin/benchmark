@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Benchmark script using derailed_benchmarks and a fake API.
+
+require_relative '../config/boot'
+require 'colorize'
+require 'open3'
+
+def bm_common_env
+  'RAILS_ENV=profiling SKIP_FILE_WRITE=1 EUROPEANA_API_URL=http://localhost:3014/api'
+end
+
+def bm_gems
+  puts 'Bundled gems'.bold
+  puts
+  stdout, _stderr, _status = Open3.capture3('bundle exec derailed bundle:mem')
+  puts stdout.split("\n").first.sub('TOP: ', '')
+  puts
+end
+
+def bm_objects(name, path)
+  puts "#{name}: Objects".bold
+  puts
+  cmd = %(#{bm_common_env} TEST_COUNT=10 PATH_TO_HIT="#{path}" bundle exec derailed exec perf:objects)
+  stdout, stderr, status = Open3.capture3(cmd)
+  fail "Unable to benchmark objects\n#{stderr}" unless status.success?
+  puts stdout.split("\n")[0..4].join("\n")
+  puts
+end
+
+def bm_ips(name, path)
+  puts "#{name}: IPS".bold
+  puts
+  cmd = %(#{bm_common_env} TEST_COUNT=1_000 PATH_TO_HIT="#{path}" bundle exec derailed exec perf:ips)
+  stdout, stderr, status = Open3.capture3(cmd)
+  fail "Unable to benchmark IPS\n#{stderr}" unless status.success?
+  puts stdout
+  puts
+end
+
+def bm_path(name, path)
+  bm_objects(name, path)
+  bm_ips(name, path)
+end
+
+def fake_api_dir
+  @fake_api_dir ||= File.expand_path('../spec/support/fake_api', __dir__)
+end
+
+def start_fake_api
+  _stdout, stderr, status = Open3.capture3("docker-compose -f #{fake_api_dir}/docker-compose.yml up -d")
+  fail "Unable to start Docker fake API\n#{stderr}" unless status.success?
+end
+
+def stop_fake_api
+  _stdout, stderr, status = Open3.capture3("docker-compose -f #{fake_api_dir}/docker-compose.yml down")
+  fail "Unable to stop Docker fake API\n#{stderr}" unless status.success?
+end
+
+def with_fake_api
+  start_fake_api
+  yield
+  stop_fake_api
+end
+
+with_fake_api do
+  bm_gems
+  bm_path('Search results page', '/en/search?q=')
+  bm_path('Record page', '/en/record/123/abc.html')
+end
