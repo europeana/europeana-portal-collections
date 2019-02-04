@@ -24,13 +24,13 @@ gem 'stache', git: 'https://github.com/europeana/stache.git', branch: 'europeana
 
 gem 'aasm', '~> 4.2'
 gem 'acts_as_list', '~> 0.7'
-gem 'blacklight', '~> 6.0.0'
+gem 'blacklight', '~> 6.0.0', git: 'https://github.com/europeana/blacklight.git', branch: 'v6.0.2-minimal'
 gem 'cancancan', '~> 1.12'
 gem 'colorize'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'devise'
-gem 'europeana-api', '~> 1.1.0'
-gem 'europeana-blacklight', '~> 1.2.2'
+gem 'europeana-api', '~> 1.2.0'
+gem 'europeana-blacklight', '1.3.1'
 gem 'europeana-feedback-button', '0.0.6', require: 'europeana/feedback_button'
 gem 'europeana-feeds'
 gem 'feedjira', '~> 2.0'
@@ -48,6 +48,7 @@ gem 'lograge'
 gem 'logstash-event'
 gem 'logstash-logger'
 gem 'mail', '~> 2.6.6'
+gem 'multi_json'
 gem 'nokogiri'
 gem 'paper_trail', '~> 4.0'
 gem 'paperclip', '~> 6.1'
@@ -61,12 +62,12 @@ gem 'rdf'
 gem 'rdf-vocab'
 gem 'redis', '~> 3.3.3'
 gem 'redis-rails'
-gem 'rest-client'
 gem 'ruby-oembed', '~> 0.9'
 gem 'sass-rails'
 gem 'soundcloud', '~> 0.3'
 gem 'stringex', '~> 2.6'
 gem 'thor', '~> 0.19'
+gem 'yajl-ruby', require: 'yajl'
 
 group :production do
   gem 'europeana-logging', '~> 0.2.3'
@@ -102,6 +103,7 @@ group :development do
 end
 
 group :profiling do
+  gem 'derailed_benchmarks'
   gem 'stackprof'
 end
 
@@ -116,8 +118,4 @@ end
 
 group :doc do
   gem 'yard'
-end
-
-group :localeapp do
-  gem 'localeapp', '~> 1.0'
 end

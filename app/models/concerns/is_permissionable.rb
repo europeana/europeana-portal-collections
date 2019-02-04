@@ -24,6 +24,10 @@ module IsPermissionable
     super(class_name.constantize.base_class.to_s)
   end
 
+  def with_permissions_by?(user)
+    user_ids.include?(user.id)
+  end
+
   # Automatically gives permissions to the creator if the creator needs them
   def set_permissions
     if ::PaperTrail.whodunnit

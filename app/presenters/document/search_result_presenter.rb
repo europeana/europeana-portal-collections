@@ -27,6 +27,7 @@ module Document
         object_url: controller.document_path(id: record_id[1..-1], format: 'html', q: params[:q], l: params_to_log),
         title: title,
         text: text,
+        hit: hit_selector,
         year: year,
         origin: origin,
         is_image: doc_type == 'IMAGE',
@@ -94,7 +95,15 @@ module Document
       @media_rights ||= fv('rights')
     end
 
+    def hit_selector
+      hit&.dig(:selectors)&.first
+    end
+
     protected
+
+    def hit
+      response[:hits]&.detect { |hit| hit[:scope] == record_id }
+    end
 
     def record_id
       document['id']

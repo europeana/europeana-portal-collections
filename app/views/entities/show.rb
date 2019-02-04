@@ -136,7 +136,7 @@ module Entities
 
     def social_share
       {
-        url: request.original_url,
+        url: CGI.escape(request.original_url),
         twitter: true,
         facebook: true,
         pinterest: true,

@@ -3,8 +3,8 @@ notifications:
 sudo: false
 language: ruby
 rvm:
-  - 2.5.3
-bundler_args: --without development:production:doc:localeapp:profiling
+  - 2.6.0
+bundler_args: --without development:production:doc:profiling
 cache:
   bundler: true
 services:
