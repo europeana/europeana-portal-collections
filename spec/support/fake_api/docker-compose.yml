@@ -1,0 +1,9 @@
+version: "3"
+services:
+  nginx:
+    image: nginx
+    ports:
+    - "3014:80"
+    volumes:
+    - ./data:/usr/share/nginx/html
+    - ./conf.d:/etc/nginx/conf.d
