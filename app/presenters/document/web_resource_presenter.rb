@@ -250,8 +250,6 @@ module Document
       [
         # TRUE if for an oEmbed
         -> { media_type == 'oembed' ? true : nil },
-        # FALSE if for edm:isShownAt
-        -> { for_edm_is_shown_at? ? false : nil },
         # TRUE if for edm:object and no other web resources are displayable
         -> { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p.uri == uri }.none?(&:displayable?) ? true : nil },
         # FALSE if for edm:object but edm:object is just a thumbnail of edm:isShownBy (which will be shown instead)
