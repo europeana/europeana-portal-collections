@@ -250,8 +250,6 @@ module Document
       [
         # TRUE if for an oEmbed
         -> { media_type == 'oembed' ? true : nil },
-        # FALSE if for edm:isShownAt
-        -> { for_edm_is_shown_at? ? false : nil },
         # TRUE if for edm:object and no other web resources are displayable
         -> { for_edm_object? && @record_presenter.media_web_resource_presenters.reject { |p| p.uri == uri }.none?(&:displayable?) ? true : nil },
         # FALSE if for edm:object but edm:object is just a thumbnail of edm:isShownBy (which will be shown instead)
@@ -298,7 +296,6 @@ module Document
 
     def downloadable?
       if url.blank? ||
-         download_disabled? ||
          media_type == 'oembed' ||
          (media_type == 'text' && mime_type == 'text/plain; charset=utf-8') ||
          (media_type == 'video' && mime_type == 'text/plain; charset=utf-8')
@@ -322,13 +319,6 @@ module Document
 
     def for_has_view?
       @record_presenter.has_views.include?(url)
-    end
-
-    def download_disabled?
-      # blacklisted1 = %w(http://www.europeana.eu/rights/rr-p/ http://www.europeana.eu/rights/rr-r/ http://www.europeana.eu/rights/rr-f/)
-      # blacklisted2 = %w(http://www.europeana.eu/rights/test-orphan http://www.europeana.eu/rights/unknown)
-      # blacklisted1.include?(media_rights) || blacklisted2.include?(media_rights)
-      false
     end
 
     def thumbnail

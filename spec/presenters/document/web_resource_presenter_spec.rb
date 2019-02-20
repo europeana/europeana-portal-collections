@@ -53,10 +53,14 @@ RSpec.describe Document::WebResourcePresenter do
           end
         end
 
-        it { is_expected.to be_for_edm_is_shown_at }
-        it { is_expected.not_to be_displayable }
-        it { is_expected.not_to be_playable }
-        it { is_expected.not_to be_downloadable }
+        context 'when identical to edm:isShownBy' do
+          before do
+            api_response[:object][:aggregations].first[:edmIsShownBy] = wr_url
+          end
+          it { is_expected.to be_for_edm_is_shown_at }
+          it { is_expected.to be_displayable }
+          it { is_expected.to be_downloadable }
+        end
 
         context 'when matching an oEmbed pattern' do
           before do
