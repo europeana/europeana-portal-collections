@@ -102,6 +102,7 @@ module Document
     protected
 
     def hit
+      return nil if response.nil?
       response[:hits]&.detect { |hit| hit[:scope] == record_id }
     end
 

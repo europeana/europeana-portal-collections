@@ -10,6 +10,15 @@ RSpec.describe Document::SearchResultPresenter do
   describe '#hit_selector' do
     subject { described_class.new(document, controller, api_response).hit_selector }
 
+    context 'without API response' do
+      let(:api_response) { nil }
+      it { is_expected.to be_nil }
+    end
+
+    context 'without hit in API response' do
+      it { is_expected.to be_nil }
+    end
+
     context 'with hit in API response' do
       let(:api_response) do
         basic_api_response.tap do |response|
