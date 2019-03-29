@@ -256,11 +256,17 @@ module Document
         -> { for_edm_object? && @record_presenter.edm_object_thumbnails_edm_is_shown_by? ? false : nil },
         # TRUE if for edm:isShownBy
         -> { for_edm_is_shown_by? ? true : nil },
+        # FALSE if for hasView and is for Europeana IIIF
+        -> { for_has_view? && europeana_iiif? ? false : nil },
         # TRUE if for a hasView and MIME type is known
         -> { for_has_view? && mime_type.present? ? true : nil },
         # FALSE otherwise
         -> { false }
       ]
+    end
+
+    def europeana_iiif?
+      field_value('dctermsIsReferencedBy') =~ %r(^http(s)?://iiif\.europeana\.eu/presentation/)
     end
 
     def displayable?
