@@ -150,5 +150,36 @@ RSpec.describe Document::WebResourcePresenter do
         expect(subject.iiif_manifest).to eq('https://www.example.org/iiif/manifest.json')
       end
     end
+
+    context 'when it refers to a page in a europeana IIIF manifest' do
+      let(:api_response) do
+        base_api_response.tap do |response|
+          response[:object][:services] = [
+            {
+              'about': iif_service,
+              'dctermsConformsTo': [
+                'http://iiif.io/api/image'
+              ]
+            }
+          ]
+          response[:object][:aggregations].first.tap do |agg|
+            agg[:webResources].first.tap do |wr|
+              wr[:svcsHasService] = [iif_service]
+              wr[:dctermsIsReferencedBy] = 'https://iiif.europeana.eu/presentation/123/abc/manifest'
+              wr[:ebucoreHasMimeType] = 'image/jpeg'
+            end
+          end
+        end
+      end
+
+      it { is_expected.to be_iiif }
+      it { is_expected.to be_playable }
+      it { is_expected.to_not be_displayable }
+      it { is_expected.to_not be_downloadable }
+
+      it 'should have the manifest' do
+        expect(subject.iiif_manifest).to eq('https://iiif.europeana.eu/presentation/123/abc/manifest')
+      end
+    end
   end
 end
