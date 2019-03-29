@@ -265,10 +265,6 @@ module Document
       ]
     end
 
-    def europeana_iiif?
-      field_value('dctermsIsReferencedBy') =~ %r(^http(s)?://iiif\.europeana\.eu/presentation/)
-    end
-
     def displayable?
       return @displayable if instance_variable_defined?(:@displayable)
 
@@ -325,6 +321,10 @@ module Document
 
     def for_has_view?
       @record_presenter.has_views.include?(url)
+    end
+
+    def europeana_iiif?
+      field_value('dctermsIsReferencedBy').start_with?('https://iiif.europeana.eu/presentation/')
     end
 
     def thumbnail
