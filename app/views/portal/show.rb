@@ -394,8 +394,10 @@ module Portal
     def document_has_europeana_parent?
       # We need to use +#_source+ because +#fetch+ and +#field_value+ will
       # perform lang map localisation, potentially missing URIs with key "def".
-      document.proxies.first._source['dctermsIsPartOf']&.values&.flatten&.any? do |val|
-        val.start_with?('http://data.europeana.eu/item/')
+      document.proxies.any? do |proxy|
+        proxy._source['dctermsIsPartOf']&.values&.flatten&.any? do |val|
+          val.start_with?('http://data.europeana.eu/item/')
+        end
       end
     end
   end
