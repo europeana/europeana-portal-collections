@@ -163,6 +163,9 @@ RSpec.describe 'portal/show.html.mustache', :common_view_components, :blacklight
               title: ["Record #{record_id}"],
               proxies: [
                 {
+                  'europeanaProxy': true
+                },
+                {
                   'europeanaProxy': false,
                   'dctermsIsPartOf': {
                     'def': parent_uri
