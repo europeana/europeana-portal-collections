@@ -9,7 +9,7 @@ notice immediately following the copyright notice for the Work:
                           Licensed under the EUPL
 or has expressed by any other means his willingness to license under the EUPL.
 
-## 1.Definitions
+## 1. Definitions
 In this Licence, the following terms have the following meaning:
 * *The Licence*:this Licence.
 * *The Original Work*:the work or software distributed or communicated by the Licensor under this Licence, available
@@ -32,7 +32,7 @@ Licence.
 transmitting, or otherwise making available, online or offline, copies of the Work or providing access to its essential
 functionalities at the disposal of any other natural or legal person.
 
-## 2.Scope of the rights granted by the Licence
+## 2. Scope of the rights granted by the Licence
 The Licensor hereby grants You a worldwide, royalty-free, non-exclusive, sublicensable licence to do the following, for
 the duration of copyright vested in the Original Work:
 * use the Work in any circumstance and for all usage,
@@ -50,19 +50,19 @@ by law in order to make effective the licence of the economic rights here above 
 The Licensor grants to the Licensee royalty-free, non-exclusive usage rights to any patents held by the Licensor, to the
 extent necessary to make use of the rights granted on the Work under this Licence.
 
-## 3.Communication of the Source Code
+## 3. Communication of the Source Code
 The Licensor may provide the Work either in its Source Code form, or as Executable Code. If the Work is provided as
 Executable Code, the Licensor provides in addition a machine-readable copy of the Source Code of the Work along with
 each copy of the Work that the Licensor distributes or indicates, in a notice following the copyright notice attached to
 the Work, a repository where the Source Code is easily and freely accessible for as long as the Licensor continues to
 distribute or communicate the Work.
 
-## 4.Limitations on copyright
+## 4. Limitations on copyright
 Nothing in this Licence is intended to deprive the Licensee of the benefits from any exception or limitation to the
 exclusive rights of the rights owners in the Work, of the exhaustion of those rights or of other applicable limitations
 thereto.
 
-## 5.Obligations of the Licensee
+## 5. Obligations of the Licensee
 The grant of the rights mentioned above is subject to some restrictions and obligations imposed on the Licensee. Those
 obligations are the following:
 
@@ -90,7 +90,7 @@ Legal Protection: This Licence does not grant permission to use the trade names,
 of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and
 reproducing the content of the copyright notice.
 
-## 6.Chain of Authorship
+## 6. Chain of Authorship
 The original Licensor warrants that the copyright in the Original Work granted hereunder is owned by him/her or
 licensed to him/her and that he/she has the power and authority to grant the Licence.
 Each Contributor warrants that the copyright in the modifications he/she brings to the Work are owned by him/her or
@@ -98,7 +98,7 @@ licensed to him/her and that he/she has the power and authority to grant the Lic
 Each time You accept the Licence, the original Licensor and subsequent Contributors grant You a licence to their contributions
 to the Work, under the terms of this Licence.
 
-## 7.Disclaimer of Warranty
+## 7. Disclaimer of Warranty
 The Work is a work in progress, which is continuously improved by numerous Contributors. It is not a finished work
 and may therefore contain defects or *bugs* inherent to this type of development.
 For the above reason, the Work is provided under the Licence on an *as is* basis and without warranties of any kind
@@ -107,21 +107,21 @@ errors, accuracy, non-infringement of intellectual property rights other than co
 Licence.
 This disclaimer of warranty is an essential part of the Licence and a condition for the grant of any rights to the Work.
 
-## 8.Disclaimer of Liability
+## 8. Disclaimer of Liability
 Except in the cases of wilful misconduct or damages directly caused to natural persons, the Licensor will in no event be
 liable for any direct or indirect, material or moral, damages of any kind, arising out of the Licence or of the use of the
 Work, including without limitation, damages for loss of goodwill, work stoppage, computer failure or malfunction, loss
 of data or any commercial damage, even if the Licensor has been advised of the possibility of such damage. However,
 the Licensor will be liable under statutory product liability laws as far such laws apply to the Work.
 
-## 9.Additional agreements
+## 9. Additional agreements
 While distributing the Work, You may choose to conclude an additional agreement, defining obligations or services
 consistent with this Licence. However, if accepting obligations, You may act only on your own behalf and on your sole
 responsibility, not on behalf of the original Licensor or any other Contributor, and only if You agree to indemnify,
 defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against such Contributor by
 the fact You have accepted any warranty or additional liability.
 
-## 10.Acceptance of the Licence
+## 10. Acceptance of the Licence
 The provisions of this Licence can be accepted by clicking on an icon *I agree* placed under the bottom of a window
 displaying the text of this Licence or by affirming consent in any other similar way, in accordance with the rules of
 applicable law. Clicking on that icon indicates your clear and irrevocable acceptance of this Licence and all of its terms
@@ -130,19 +130,19 @@ Similarly, you irrevocably accept this Licence and all of its terms and conditio
 by Article 2 of this Licence, such as the use of the Work, the creation by You of a Derivative Work or the Distribution
 or Communication by You of the Work or copies thereof.
 
-## 11.Information to the public
+## 11. Information to the public
 In case of any Distribution or Communication of the Work by means of electronic communication by You (for example,
 by offering to download the Work from a remote location) the distribution channel or media (for example, a website)
 must at least provide to the public the information requested by the applicable law regarding the Licensor, the Licence
 and the way it may be accessible, concluded, stored and reproduced by the Licensee.
 
-## 12.Termination of the Licence
+## 12. Termination of the Licence
 The Licence and the rights granted hereunder will terminate automatically upon any breach by the Licensee of the terms
 of the Licence.
 Such a termination will not terminate the licences of any person who has received the Work from the Licensee under
 the Licence, provided such persons remain in full compliance with the Licence.
 
-## 13.Miscellaneous
+## 13. Miscellaneous
 Without prejudice of Article 9 above, the Licence represents the complete agreement between the Parties as to the
 Work.
 If any provision of the Licence is invalid or unenforceable under applicable law, this will not affect the validity or
@@ -154,14 +154,14 @@ New versions of the Licence will be published with a unique version number.
 All linguistic versions of this Licence, approved by the European Commission, have identical value. Parties can take
 advantage of the linguistic version of their choice.
 
-## 14.JurisdictionWithout prejudice to specific agreement between parties,
+## 14. JurisdictionWithout prejudice to specific agreement between parties,
 * any litigation resulting from the interpretation of this License, arising between the European Union institutions,
 bodies, offices or agencies, as a Licensor, and any Licensee, will be subject to the jurisdiction of the Court of Justice
 of the European Union, as laid down in article 272 of the Treaty on the Functioning of the European Union,
 * any litigation arising between other parties and resulting from the interpretation of this License, will be subject to
 the exclusive jurisdiction of the competent court where the Licensor resides or conducts its primary business.
 
-## 15.Applicable Law
+## 15. Applicable Law
 Without prejudice to specific agreement between parties,
 * this Licence shall be governed by the law of the European Union Member State where the Licensor has his seat,
 resides or has his registered office,
