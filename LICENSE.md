@@ -1,4 +1,4 @@
-# EUROPEAN UNION PUBLIC LICENCE v. 1.2
+# European Union Public Licence v. 1.2
 EUPL © the European Union 2007, 2016
 
 This European Union Public Licence (the *EUPL*) applies to the Work (as defined below) which is provided under the
@@ -154,7 +154,8 @@ New versions of the Licence will be published with a unique version number.
 All linguistic versions of this Licence, approved by the European Commission, have identical value. Parties can take
 advantage of the linguistic version of their choice.
 
-## 14. JurisdictionWithout prejudice to specific agreement between parties,
+## 14. Jurisdiction
+Without prejudice to specific agreement between parties,
 * any litigation resulting from the interpretation of this License, arising between the European Union institutions,
 bodies, offices or agencies, as a Licensor, and any Licensee, will be subject to the jurisdiction of the Court of Justice
 of the European Union, as laid down in article 272 of the Treaty on the Functioning of the European Union,
