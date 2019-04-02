@@ -324,7 +324,7 @@ module Document
     end
 
     def europeana_iiif?
-      field_value('dctermsIsReferencedBy').start_with?('https://iiif.europeana.eu/presentation/')
+      field_value('dctermsIsReferencedBy')&.start_with?('https://iiif.europeana.eu/presentation/')
     end
 
     def thumbnail
