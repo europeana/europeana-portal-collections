@@ -33,6 +33,15 @@ module Entities
       end
     end
 
+    def js_files
+      [
+        {
+          path: @entity.schema_org_json_ld_url,
+          type: 'application/ld+json'
+        }
+      ] + super
+    end
+
     def head_meta_description
       mustache[:head_meta_description] ||= begin
         truncate(@entity.description, length: 350, separator: ' ')
@@ -173,6 +182,12 @@ module Entities
         ],
         href: @entity.depiction_source
       }
+    end
+
+    protected
+
+    def schema_org_json_ld_url
+
     end
   end
 end
