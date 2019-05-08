@@ -29,6 +29,10 @@ module EDM
           end
         end
 
+        def type
+          to_s.demodulize.downcase
+        end
+
         protected
 
         def humanized_as(human_type)
@@ -51,6 +55,10 @@ module EDM
           localised_pl = pl[locale] || pl[I18n.default_locale]
           [localised_pl].flatten.first
         end
+      end
+
+      def schema_org_json_ld_url
+        EDM::Entity.api_url + "/entities/#{self.class.type}/base/#{id}.schema.jsonld?wskey=#{EDM::Entity.api_key}"
       end
 
       private

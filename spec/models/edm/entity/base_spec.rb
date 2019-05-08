@@ -28,4 +28,20 @@ RSpec.describe EDM::Entity::Base do
       it { is_expected.to eq(EDM::Entity::Concept) }
     end
   end
+
+  describe '#schema_org_json_ld_url' do
+    let(:api_url) { 'http://www.example.org/api' }
+    let(:api_key) { 'SECRET_KEY' }
+
+    before do
+      allow(EDM::Entity).to receive(:api_url) { api_url }
+      allow(EDM::Entity).to receive(:api_key) { api_key }
+    end
+
+    it 'is JSON-LD schema.org URL' do
+      entity = described_class.new(id: 567)
+      expected = "#{api_url}/entities/base/base/567.schema.jsonld?wskey=#{api_key}"
+      expect(entity.schema_org_json_ld_url).to eq(expected)
+    end
+  end
 end
