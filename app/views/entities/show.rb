@@ -183,11 +183,5 @@ module Entities
         href: @entity.depiction_source
       }
     end
-
-    protected
-
-    def schema_org_json_ld_url
-
-    end
   end
 end
