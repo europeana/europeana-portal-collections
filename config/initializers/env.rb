@@ -51,6 +51,8 @@ Rails.application.config.x.google = OpenStruct.new(
   tag_manager_container_id: ENV['GOOGLE_TAG_MANAGER_CONTAINER_ID']
 )
 
+Rails.application.config.x.cache_version = ENV['CACHE_VERSION']
+
 # Grouped configuration settings
 #
 # Detects env vars with common prefixes and groups them into structured config
