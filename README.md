@@ -7,7 +7,7 @@ Europeana Portal with Collections as a Rails +
 
 ## Requirements
 
-* Ruby 2.5
+* Ruby 2.6.0
 * PostgreSQL 9.4+
 * Redis
 * S3-compatible object storage
