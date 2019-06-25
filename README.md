@@ -2,12 +2,12 @@
 
 [![Build Status](https://travis-ci.org/europeana/europeana-portal-collections.svg?branch=develop)](https://travis-ci.org/europeana/europeana-portal-collections) [![Security](https://hakiri.io/github/europeana/europeana-portal-collections/develop.svg)](https://hakiri.io/github/europeana/europeana-portal-collections/develop) [![Maintainability](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/maintainability)](https://codeclimate.com/github/europeana/europeana-portal-collections/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8510097c5de246ac62f9/test_coverage)](https://codeclimate.com/github/europeana/europeana-portal-collections/test_coverage)
 
-Europeana Portal with Collections as a Rails + 
+Europeana Portal with Collections as a Rails +
 [Blacklight](https://github.com/projectblacklight/blacklight) application.
 
 ## Requirements
 
-* Ruby 2.5
+* Ruby 2.6.0
 * PostgreSQL 9.4+
 * Redis
 * S3-compatible object storage
@@ -47,7 +47,7 @@ To add a test environment to Docker:
 Most configuration settings are read from environment variables, described in
 detail in [.env.example](.env.example).
 
-In development and test environments, these can be placed in a 
+In development and test environments, these can be placed in a
 [.env](https://github.com/bkeepers/dotenv) file in your application root.
 
 ### Database
@@ -121,6 +121,39 @@ Otherwise, you will need to configure deployment scripts to run each process.
 
 In development, you can launch the application with all processes using foreman:
 `foreman start`
+
+## Docker for production
+
+An additional Dockerfile is included, optimised for small image size, for
+publication to a Docker repository and use in production environments.
+
+### Configure version
+
+```shell
+export VERSION=3.7.0
+```
+
+### Build
+
+```shell
+docker build \
+       -f Dockerfile.production \
+       -t europeana/portal-collections:${VERSION} .
+```
+
+### Run
+
+```shell
+docker run \
+       -p 8080:80 \
+       --env-file=.env.production \
+       europeana/portal-collections:${VERSION}
+```
+
+### Publish
+```shell
+docker push europeana/portal-collections:${VERSION}
+```
 
 ## Contributing
 

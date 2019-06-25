@@ -2,8 +2,9 @@
 .git
 .gitignore
 
-# Ignore self
+# Ignore Docker files
 .dockerignore
+Dockerfile*
 
 # Ignore bundler config.
 /.bundle
@@ -84,3 +85,6 @@
 # Ignore generated Docker config
 /docker-compose.yml
 /docker-compose.*.yml
+
+# Ignore tests
+/spec

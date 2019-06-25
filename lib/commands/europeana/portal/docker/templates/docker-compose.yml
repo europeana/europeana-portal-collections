@@ -9,7 +9,7 @@ services:
     - ./tmp/minio:/data
     env_file: .env.docker
   postgres:
-    image: postgres:9.6.3
+    image: postgres:9.6.10
     ports:
     - "<%= postgres_port %>:5432"
     env_file: .env.docker

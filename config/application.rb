@@ -66,7 +66,7 @@ module Europeana
       # Load Redis config from config/redis.yml, if it exists
       config.cache_store = begin
         redis_config = Rails.application.config_for(:redis).deep_symbolize_keys
-        fail RuntimeError unless redis_config.present?
+        fail RuntimeError unless redis_config.present? && redis_config[:url].present?
 
         opts = {}
         if redis_config[:url].start_with?('rediss://')
