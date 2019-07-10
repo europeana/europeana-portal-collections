@@ -92,44 +92,10 @@ module ControllerExceptionHandling
         end
       end
     end
-
-    ##
-    # Notifies New Relic of the error
-    #
-    # New Relic notices unhandled exceptions by default, but not handled ones
-    # unless we explicitly notify it.
-    #
-    # Depends on existent configuration of New Relic Ruby Agent. See
-    # <https://docs.newrelic.com/docs/agents/ruby-agent>
-    class NewRelicNotifier
-      class << self
-        def enabled?
-          defined?(NewRelic) && NewRelic::Agent.instance.started?
-        end
-
-        def process(exception:, request:, **_)
-          NewRelic::Agent.notice_error(exception,
-                                       uri: request.original_url)
-        end
-      end
-    end
-
-    class SentryRavenNotifier
-      class << self
-        def enabled?
-          defined?(Raven) && ENV['SENTRY_DSN'].present?
-        end
-
-        def process(exception:, **_)
-          Raven.capture_exception(exception)
-        end
-      end
-    end
   end
 
   ERROR_HANDLERS = [
-    ErrorHandlers::Logger, ErrorHandlers::EmailReporter,
-    ErrorHandlers::NewRelicNotifier, ErrorHandlers::SentryRavenNotifier
+    ErrorHandlers::Logger, ErrorHandlers::EmailReporter
   ].freeze
 
   private
