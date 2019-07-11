@@ -22,9 +22,6 @@ Dockerfile*
 *.log
 /tmp
 
-# Ignore New Relic config file.
-/config/newrelic.yml
-
 # Ignore Spring config file.
 /config/spring.rb
 
