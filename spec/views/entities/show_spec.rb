@@ -77,4 +77,11 @@ RSpec.describe 'entities/show.html.mustache', :common_view_components do
       end
     end
   end
+
+  describe 'JS vars' do
+    it 'should include schema.org JSON-LD URL' do
+      render
+      expect(rendered).to have_selector('script', text: %(var entitySchemaOrgUrl = "#{entity.schema_org_json_ld_url}";), visible: false)
+    end
+  end
 end

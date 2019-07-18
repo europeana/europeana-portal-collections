@@ -39,6 +39,12 @@ module Entities
       end
     end
 
+    def js_vars
+      super.tap do |vars|
+        vars.push(name: 'entitySchemaOrgUrl', value: @entity.schema_org_json_ld_url)
+      end
+    end
+
     def og_image
       return mustache[:og_image] if mustache.key?(:og_image)
       mustache[:og_image] = thumbnail.present? ? thumbnail[:src] : nil
