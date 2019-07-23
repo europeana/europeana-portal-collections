@@ -76,7 +76,7 @@ group :production do
 end
 
 group :development, :profiling, :production do
-  gem 'clockwork', '~> 1.2'
+  gem 'clockwork', '~> 2.0'
   gem 'puma', '~> 3.9.1'
 end
 
