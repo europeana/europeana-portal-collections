@@ -8,6 +8,7 @@ elsif ENV.key?('VCAP_SERVICES')
     # Favour Databases for PostgreSQL service
     databases_config = services['databases-for-postgresql']
     uri = databases_config.first['credentials']['connection']['postgres']['composed'].first
+    uri = uri.sub('sslmode=verify-full', 'sslmode=require')
   else
     # Last resort: Compose for PostgreSQL service
     compose_config = services['compose-for-postgresql']
