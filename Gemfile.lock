@@ -19,6 +19,17 @@ GIT
       i18n-js (>= 3.0, < 4.0)
 
 GIT
+  remote: https://github.com/europeana/europeana-logging-ruby.git
+  revision: b62abf6536002b75e1fb7822fe251ee835ba8c08
+  ref: b62abf6536002b75e1fb7822fe251ee835ba8c08
+  specs:
+    europeana-logging (0.2.4)
+      lograge (~> 0.4)
+      logstash-event (~> 1.2)
+      logstash-logger (~> 0.19)
+      rails (> 4.2, < 6)
+
+GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
   revision: d8e24f6fd8e646bf6f3f8aea0e62a2af1473823d
   branch: develop
@@ -184,11 +195,6 @@ GEM
     europeana-feeds (0.0.1)
       feedjira (~> 2.0)
       rails (~> 4.2)
-    europeana-logging (0.2.3)
-      lograge (~> 0.4)
-      logstash-event (~> 1.2)
-      logstash-logger (~> 0.19)
-      rails (> 4.2, < 6)
     excon (0.62.0)
     execjs (2.7.0)
     exifr (1.3.4)
@@ -554,7 +560,7 @@ DEPENDENCIES
   europeana-feedback-button (= 0.0.6)
   europeana-feeds
   europeana-i18n!
-  europeana-logging (~> 0.2.3)
+  europeana-logging (~> 0.2.3)!
   europeana-styleguide!
   feedjira (~> 2.0)
   foederati (~> 0.2.0)
