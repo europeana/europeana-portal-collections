@@ -70,7 +70,7 @@ gem 'thor', '~> 0.19'
 gem 'yajl-ruby', require: 'yajl'
 
 group :production do
-  gem 'europeana-logging', '~> 0.2.3'
+  gem 'europeana-logging', '~> 0.2.6'
   gem 'rails_serve_static_assets'
   gem 'uglifier', '~> 2.7.2'
 end

@@ -184,7 +184,7 @@ GEM
     europeana-feeds (0.0.1)
       feedjira (~> 2.0)
       rails (~> 4.2)
-    europeana-logging (0.2.3)
+    europeana-logging (0.2.6)
       lograge (~> 0.4)
       logstash-event (~> 1.2)
       logstash-logger (~> 0.19)
@@ -554,7 +554,7 @@ DEPENDENCIES
   europeana-feedback-button (= 0.0.6)
   europeana-feeds
   europeana-i18n!
-  europeana-logging (~> 0.2.3)
+  europeana-logging (~> 0.2.6)
   europeana-styleguide!
   feedjira (~> 2.0)
   foederati (~> 0.2.0)
