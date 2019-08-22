@@ -44,4 +44,10 @@ unless ENV['DISABLE_SCHEDULED_JOBS']
   every(1.day, 'db.sweeper', at: ENV['SCHEDULE_DB_SWEEPER']) do
     DeleteOldSearchesJob.perform_later
   end
+
+  # This is in an effort to stop Clockwork losing its connection to PostgreSQL
+  # then failing to schedule any further jobs until restarted.
+  every(5.minutes, 'db.keepalive') do
+    ActiveRecord::Base.connection.verify!
+  end
 end
