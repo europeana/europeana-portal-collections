@@ -83,7 +83,7 @@ module BlacklightConfig
       config.add_facet_field 'THUMBNAIL', boolean: { on: 'true', off: nil, default: :off }
       config.add_facet_field 'edm_UGC',
                              boolean: { on: 'true', off: nil, default: :off },
-                             when: ->(context) { context.within_collection? && %w(migration world-war-I).include?(context.current_collection.key) }
+                             when: ->(context) { context.within_collection? && context.current_collection.contains_ugc? }
       config.add_facet_field 'YEAR',
                              range: true,
                              when: lambda { |context|

@@ -55,4 +55,28 @@ RSpec.describe Collection do
       it { is_expected.to be false }
     end
   end
+
+  describe '#contains_ugc?' do
+    subject { described_class.new(key: key).contains_ugc? }
+
+    context 'when key is "industrial-heritage"' do
+      let(:key) { 'industrial-heritage' }
+      it { is_expected.to be true }
+    end
+
+    context 'when key is "migration"' do
+      let(:key) { 'migration' }
+      it { is_expected.to be true }
+    end
+
+    context 'when key is "world-war-I"' do
+      let(:key) { 'world-war-I' }
+      it { is_expected.to be true }
+    end
+
+    context 'when key is something else' do
+      let(:key) { 'history' }
+      it { is_expected.to be false }
+    end
+  end
 end
