@@ -69,6 +69,10 @@ class Collection < ActiveRecord::Base
     self.class.ugc_acceptor_keys.include?(key)
   end
 
+  def contains_ugc?
+    self.class.ugc_containing_keys.include?(key)
+  end
+
   def for_all?
     key == 'all'
   end
@@ -76,5 +80,9 @@ class Collection < ActiveRecord::Base
   # TODO: do not hardcode this; make a db-stored attribute of the model?
   def self.ugc_acceptor_keys
     %w(world-war-I)
+  end
+
+  def self.ugc_containing_keys
+    %w(industrial-heritage migration world-war-I)
   end
 end
