@@ -349,7 +349,7 @@ GEM
     progress (3.4.0)
     public_suffix (3.0.3)
     puma (3.9.1)
-    rack (1.6.11)
+    rack (1.6.12)
     rack-cors (1.0.1)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
