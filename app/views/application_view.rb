@@ -24,6 +24,10 @@ class ApplicationView < Europeana::Styleguide::View
     ''
   end
 
+  def new_site_url
+    'https://www.europeana.eu' + request.original_fullpath
+  end
+
   def js_vars
     [
       { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },
