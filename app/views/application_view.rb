@@ -26,7 +26,7 @@ class ApplicationView < Europeana::Styleguide::View
 
   def new_site_url
     uri = URI.parse('https://www.europeana.eu' + request.original_fullpath)
-    params = URI.decode_www_form(uri.query || "").concat([['utm_source', 'old-website'], ['utm_medium', 'button']])
+    params = URI.decode_www_form(uri.query || '').concat([%w[utm_source old-website], %w[utm_medium button]])
     uri.query = URI.encode_www_form(params)
     uri.to_s
   rescue URI::InvalidURIError
