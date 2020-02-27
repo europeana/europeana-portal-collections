@@ -29,6 +29,8 @@ class ApplicationView < Europeana::Styleguide::View
     params = URI.decode_www_form(uri.query || "").concat([['utm_source', 'old-website'], ['utm_medium', 'button']])
     uri.query = URI.encode_www_form(params)
     uri.to_s
+  rescue URI::InvalidURIError
+    'https://www.europeana.eu'
   end
 
   def js_vars
