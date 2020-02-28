@@ -25,7 +25,10 @@ class ApplicationView < Europeana::Styleguide::View
   end
 
   def new_site_url
-    'https://www.europeana.eu' + request.original_fullpath
+    uri = URI.parse('https://www.europeana.eu' + @request_fullpath.to_s)
+    params = Rack::Utils.parse_query(uri.query).merge(utm_source: 'old-website', utm_medium: 'button')
+    uri.query = Rack::Utils.build_query(params)
+    uri.to_s
   end
 
   def js_vars
