@@ -77,7 +77,7 @@ end
 
 group :development, :profiling, :production do
   gem 'clockwork', '~> 2.0'
-  gem 'puma', '~> 3.9.1'
+  gem 'puma', '~> 3.12.4'
 end
 
 group :development, :profiling, :test do
