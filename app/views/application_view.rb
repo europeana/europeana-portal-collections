@@ -24,6 +24,13 @@ class ApplicationView < Europeana::Styleguide::View
     ''
   end
 
+  def new_site_url
+    uri = URI.parse('https://www.europeana.eu' + @request_fullpath.to_s)
+    params = Rack::Utils.parse_query(uri.query).merge(utm_source: 'old-website', utm_medium: 'button')
+    uri.query = Rack::Utils.build_query(params)
+    uri.to_s
+  end
+
   def js_vars
     [
       { name: 'enableCSRFWithoutSSL', value: config.x.enable[:csrf_without_ssl] },

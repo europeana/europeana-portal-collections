@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   delegate :available_locales, to: :class
 
-  before_action :permit_iframing
+  before_action :permit_iframing, :set_request_fullpath
 
   layout proc { is_a?(Europeana::Styleguide) ? false : 'application' }
 
@@ -55,5 +55,9 @@ class ApplicationController < ActionController::Base
   def redirect_to_home
     redirect_to home_url
     false
+  end
+
+  def set_request_fullpath
+    @request_fullpath = request.fullpath
   end
 end
