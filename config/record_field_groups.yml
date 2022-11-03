@@ -19,6 +19,9 @@ concepts:
     search_field: what
     quoted: true
   - title: has-type
+    entity:
+      name: concepts
+      fallback: true
     search_field: type
     fields:
     - proxies.edmHasType
@@ -104,6 +107,9 @@ location:
     fields:
     - proxies.dcCoverage
   - title: current-location
+    entity:
+      name: places
+      fallback: true
     fields:
     - proxies.edmCurrentLocation
 people:
